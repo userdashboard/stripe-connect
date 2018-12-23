@@ -1,0 +1,52 @@
+{
+  "name": "@userappstore/stripe-connect",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node main.js",
+    "test": "NODE_ENV=testing mocha src --recursive --timeout 240000 --slow 240000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://gitlab.com/userappstore/stripe-connect.git"
+  },
+  "license": "SPDX(MIT OR Unlicense)",
+  "main": "index.js",
+  "dependencies": {
+    "@userappstore/maxmind-geoip": "git+https://github.com/userappstore/maxmind-geoip.git",
+    "multiparty": "^4.2.0",
+    "stripe": "^6.20.0"
+  },
+  "devDependencies": {
+    "@userappstore/dashboard": "git+https://github.com/userappstore/dashboard.git"
+  },
+  "engines": {
+    "node": "8.12.0",
+    "npm": "6.4.1"
+  },
+  "dashboard": {
+    "modules": [
+      "@userappstore/dashboard",
+      "@userappstore/maxmind-geoip"
+    ],
+    "server": [
+      "/src/server/bind-stripekey.js",
+      "/src/server/stripe-file-upload.js"
+    ],
+    "menus": {
+      "administrator": [
+        {
+          "href": "/administrator/connect",
+          "text": "Stripe Connect module",
+          "object": "link"
+        }
+      ],
+      "account": [
+        {
+          "href": "/account/connect",
+          "text": "Stripe Connect accounts",
+          "object": "link"
+        }
+      ]
+    }
+  }
+}

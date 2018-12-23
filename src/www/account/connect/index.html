@@ -1,0 +1,116 @@
+<!doctype html>
+<html navbar="/account/connect/navbar.html">
+<head>
+  <title>Stripe Connect accounts</title>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <link rel="stylesheet" href="/public/pure-min.css" />
+  <link rel="stylesheet" href="/public/content.css" />
+  <base target="_top" href="/" />
+</head>
+<body>
+  <h1>Stripe Connect accounts</h1>
+  <p>Become a vendor by verifying your personal identity and company information through <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <table class="pure-table">
+    <thead>
+      <tr>
+        <th>Individual registration</th>
+        <th>Business registrations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div id="requirement-container">
+            <ol>
+              <li>Verified personal information</li>
+              <li>Resident of a supported country</li>
+              <li>Bank account in a supported country</li>
+            </ol>
+            <a id="create-individual-link" href="/account/connect/create-registration" class="pure-button pure-button-primary">Start individual registration</a>
+          </div>
+        </td>
+        <td>
+          <div id="requirement-container">
+            <ol>
+              <li>Verified personal information</li>
+              <li>Business registered in a supported country</li>
+              <li>Bank account in a supported country</li>
+            </ol>
+            <a href="/account/connect/create-registration" class="pure-button pure-button-primary">Start company registration</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="individual-container">
+    <h2>Individual registration</h2>
+    <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="company-container">
+    <h1>Company registrations</h1>
+    <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</body>
+<template id="stripe-account-row">
+  <tr id="${account.id}">
+    <td><a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+    <td id="registration-status-${account.id}"></td>
+    <td>${account.createdFormatted}</td>
+  </tr>
+</template>
+<template id="not-submitted">
+  <span>Not submitted yet</span>
+</template>
+<template id="verified">
+  <span>Registration has been accepted</span>
+</template>
+<template id="verified">
+  <span>Disabled by Stripe</span>
+</template>
+<template id="verified-requires-fields">
+  <span>Requires <a href="/account/connect/resubmit-registration?stripeid=${account.id}">resubmitting with additional information</a></span>
+</template>
+<template id="pending-submission">
+  <span>Pending submission</span>
+</template>
+<template id="rejected.fraud">
+  <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+</template>
+<template id="rejected.terms">
+  <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+</template>
+<template id="rejected.listed">
+  <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+</template>
+<template id="rejected.other">
+  <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+</template>
+<template id="fields_needed">
+  <span>More information is required</span>
+</template>
+<template id="listed">
+  <span>Under review by Stripe</span>
+</template>
+<template id="under-review">
+  <span>Under review by Stripe</span>
+</template>
+<template id="disabled">
+  <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+</template>
+</html>

@@ -1,0 +1,746 @@
+
+> @userappstore/stripe-connect@1.0.0 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
+> NODE_ENV=testing mocha src --recursive --timeout 240000 --slow 240000
+
+
+
+  server/bind-stripekey
+    BindStripeKey#AFTER
+      ✓ should bind stripekey data to req
+
+  /account/connect/additional-owners
+    AdditionalOwners#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual registration
+      ✓ should reject registration that doesn't require additional owners
+      ✓ should bind owners to req
+    AdditionalOwners#GET
+      ✓ should have row for each owner
+      ✓ should display submitted message with removed owners
+
+  /account/connect/create-additional-owner
+    CreateAdditionalOwner#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject registration with owners submitted
+      ✓ should reject submitted registration
+      ✓ should require own Stripe account
+    CreateAdditionalOwner#GET
+      ✓ should present the form
+      ✓ should present the Stripe account table
+    CreateAdditionalOwner#POST
+      ✓ should require each field
+      ✓ should require a document id upload
+      ✓ should reject fifth 25% owner
+      ✓ should create owner
+
+  /account/connect/create-registration
+    CreateRegistration#GET
+      ✓ should present the form
+    CreateRegistration#POST
+      ✓ should create authorized Stripe account
+
+  /account/connect/delete-additional-owner
+    DeleteAdditionalOwner#BEFORE
+      ✓ should reject invalid ownerid
+      ✓ should reject registration with owners submitted
+      ✓ should reject submitted registration
+      ✓ should require own Stripe account
+      ✓ should bind owner to req
+    DeleteAdditionalOwner#GET
+      ✓ should present the form
+      ✓ should present the owner table
+    DeleteAdditionalOwner#POST
+      ✓ should delete owner
+
+  /account/connect/delete-stripe-account
+    DeleteStripeAccount#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should require own Stripe account
+      ✓ should bind Stripe account to req
+    DeleteStripeAccount#GET
+      ✓ should present the form
+      ✓ should present the Stripe account table
+    DeleteStripeAccount#POST
+      ✓ should delete Stripe account
+
+  /account/connect/edit-additional-owner
+    EditAdditionalOwner#BEFORE
+      ✓ should reject invalid ownerid
+      ✓ should reject registration with owners submitted
+      ✓ should reject submitted registration
+      ✓ should require own Stripe account
+      ✓ should bind owner to req
+    EditAdditionalOwner#GET
+      ✓ should present the form
+    EditAdditionalOwner#POST
+      ✓ should require each field
+      ✓ should update owner
+
+  /account/connect/edit-company-registration
+    EditCompanyRegistration#BEFORE
+      ✓ should reject invalid registration
+      ✓ should reject individual registration
+      ✓ should reject invalid personal address country
+      ✓ should reject invalid company address country
+      ✓ should bind application CountrySpec to req
+      ✓ should bind personal address country to req
+      ✓ should bind company address country to req
+    EditCompanyRegistration#GET
+      ✓ should present the form
+      ✓ should have AT-required fields
+      ✓ should have AU-required fields
+      ✓ should have BE-required fields
+      ✓ should have CA-required fields
+      ✓ should have CH-required fields
+      ✓ should have DE-required fields
+      ✓ should have DK-required fields
+      ✓ should have ES-required fields
+      ✓ should have FI-required fields
+      ✓ should have FR-required fields
+      ✓ should have GB-required fields
+      ✓ should have HK-required fields
+      ✓ should have IE-required fields
+      ✓ should have IT-required fields
+      ✓ should have JP-required fields
+      ✓ should have LU-required fields
+      ✓ should have NL-required fields
+      ✓ should have NO-required fields
+      ✓ should have NZ-required fields
+      ✓ should have PT-required fields
+      ✓ should have SE-required fields
+      ✓ should have US-required fields
+    EditCompanyRegistration#POST
+      ✓ should refresh and load states for posted company address
+      ✓ should reject AT invalid fields
+      ✓ should update AT information
+      ✓ should reject AU invalid fields
+      ✓ should update AU information
+      ✓ should reject BE invalid fields
+      ✓ should update BE information
+      ✓ should reject CA invalid fields
+      ✓ should update CA information
+      ✓ should reject CH invalid fields
+      ✓ should update CH information
+      ✓ should reject DE invalid fields
+      ✓ should update DE information
+      ✓ should reject DK invalid fields
+      ✓ should update DK information
+      ✓ should reject ES invalid fields
+      ✓ should update ES information
+      ✓ should reject FI invalid fields
+      ✓ should update FI information
+      ✓ should reject FR invalid fields
+      ✓ should update FR information
+      ✓ should reject GB invalid fields
+      ✓ should update GB information
+      ✓ should reject HK invalid fields
+      ✓ should update HK information
+      ✓ should reject IE invalid fields
+      ✓ should update IE information
+      ✓ should reject IT invalid fields
+      ✓ should update IT information
+      ✓ should reject JP invalid fields
+      ✓ should update JP information
+      ✓ should reject LU invalid fields
+      ✓ should update LU information
+      ✓ should reject NL invalid fields
+      ✓ should update NL information
+      ✓ should reject NO invalid fields
+      ✓ should update NO information
+      ✓ should reject NZ invalid fields
+      ✓ should update NZ information
+      ✓ should reject PT invalid fields
+      ✓ should update PT information
+      ✓ should reject SE invalid fields
+      ✓ should update SE information
+      ✓ should reject US invalid fields
+      ✓ should update US information
+
+  /account/connect/edit-individual-registration
+    EditIndividualRegistration#BEFORE
+      ✓ should reject invalid registration
+      ✓ should reject company registration
+      ✓ should bind application CountrySpec to req
+      ✓ should bind address country to req
+    EditIndividualRegistration#GET
+      ✓ should present the form
+      ✓ should have AT-required fields
+      ✓ should have AU-required fields
+      ✓ should have BE-required fields
+      ✓ should have CA-required fields
+      ✓ should have CH-required fields
+      ✓ should have DE-required fields
+      ✓ should have DK-required fields
+      ✓ should have ES-required fields
+      ✓ should have FI-required fields
+      ✓ should have FR-required fields
+      ✓ should have GB-required fields
+      ✓ should have HK-required fields
+      ✓ should have IE-required fields
+      ✓ should have IT-required fields
+      ✓ should have JP-required fields
+      ✓ should have LU-required fields
+      ✓ should have NL-required fields
+      ✓ should have NO-required fields
+      ✓ should have NZ-required fields
+      ✓ should have PT-required fields
+      ✓ should have SE-required fields
+      ✓ should have US-required fields
+    EditIndividualRegistration#POST
+      ✓ should reject AT invalid fields
+      ✓ should update AT information
+      ✓ should reject AU invalid fields
+      ✓ should update AU information
+      ✓ should reject BE invalid fields
+      ✓ should update BE information
+      ✓ should reject CA invalid fields
+      ✓ should update CA information
+      ✓ should reject CH invalid fields
+      ✓ should update CH information
+      ✓ should reject DE invalid fields
+      ✓ should update DE information
+      ✓ should reject DK invalid fields
+      ✓ should update DK information
+      ✓ should reject ES invalid fields
+      ✓ should update ES information
+      ✓ should reject FI invalid fields
+      ✓ should update FI information
+      ✓ should reject FR invalid fields
+      ✓ should update FR information
+      ✓ should reject GB invalid fields
+      ✓ should update GB information
+      ✓ should reject HK invalid fields
+      ✓ should update HK information
+      ✓ should reject IE invalid fields
+      ✓ should update IE information
+      ✓ should reject IT invalid fields
+      ✓ should update IT information
+      ✓ should reject JP invalid fields
+      ✓ should update JP information
+      ✓ should reject LU invalid fields
+      ✓ should update LU information
+      ✓ should reject NL invalid fields
+      ✓ should update NL information
+      ✓ should reject NO invalid fields
+      ✓ should update NO information
+      ✓ should reject NZ invalid fields
+      ✓ should update NZ information
+      ✓ should reject PT invalid fields
+      ✓ should update PT information
+      ✓ should reject SE invalid fields
+      ✓ should update SE information
+      ✓ should reject US invalid fields
+      ✓ should update US information
+
+  /account/connect/edit-payment-information
+    EditPaymentInformation#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should bind Stripe account to req
+    EditPaymentInformation#GET
+      ✓ should present the form
+    EditPaymentInformation#POST
+      ✓ should reject AT invalid fields
+      ✓ should submit AT information
+      ✓ should reject AU invalid fields
+      ✓ should update AU information
+      ✓ should reject BE invalid fields
+      ✓ should update BE information
+      ✓ should reject CA invalid fields
+      ✓ should update CA information
+      ✓ should reject CH invalid fields
+      ✓ should update CH information
+      ✓ should reject DE invalid fields
+      ✓ should update DE information
+      ✓ should reject DK invalid fields
+      ✓ should update DK information
+      ✓ should reject ES invalid fields
+      ✓ should update ES information
+      ✓ should reject FI invalid fields
+      ✓ should update FI information
+      ✓ should reject GB invalid fields (account number, sort code)
+      ✓ should update GB information (account number, sort code)
+      ✓ should reject GB invalid fields (iban)
+      ✓ should update GB information (iban)
+      ✓ should reject HK invalid fields
+      ✓ should update HK information
+      ✓ should reject IE invalid fields
+      ✓ should update IE information
+      ✓ should reject IT invalid fields
+      ✓ should update IT information
+      ✓ should reject JP invalid fields
+      ✓ should update JP information
+      ✓ should reject LU invalid fields
+      ✓ should update LU information
+      ✓ should reject NL invalid fields
+      ✓ should update NL information
+      ✓ should reject NO invalid fields
+      ✓ should update NO information
+      ✓ should reject NZ invalid fields
+      ✓ should update NZ information
+      ✓ should reject PT invalid fields
+      ✓ should update PT information
+      ✓ should reject SE invalid fields
+      ✓ should update SE information
+      ✓ should reject US invalid fields
+      ✓ should update US information
+
+  /account/connect
+    Index#BEFORE
+      ✓ should bind Stripe accounts to req
+    Index#GET
+      ✓ should have row for each Stripe account
+
+  /account/connect/stripe-account
+    StripeAccount#BEFORE
+      ✓ should bind reject invalid stripeid
+      ✓ should reject other account's stripeid
+      ✓ should bind Stripe account to req
+    StripeAccount#GET
+      ✓ should show registration unstarted
+      ✓ should show registration completed
+      ✓ should hide registration after submitting registration
+      ✓ should show additional owner information required
+      ✓ should show additional owners submitted
+      ✓ should hide additional owners after submitting registration
+      ✓ should hide additional owners when not required
+      ✓ should show payment information required
+      ✓ should show payment information created
+      ✓ should show ready to submit
+      ✓ should show registration is submitted
+
+  /account/connect/stripe-accounts
+    StripeAccounts#BEFORE
+      ✓ should bind Stripe accounts to req
+    StripeAccounts#GET
+      ✓ should have row for each Stripe account
+
+  /account/connect/submit-additional-owners
+    SubmitAdditionalOwners#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual registration
+      ✓ should reject registration that doesn't require additional owners
+      ✓ should reject registration with submitted owners
+      ✓ should bind Stripe account to req
+    SubmitAdditionalOwners#GET
+      ✓ should present the form
+      ✓ should present the Stripe account table
+    SubmitAdditionalOwners#POST
+      ✓ should submit blank owners after authorization
+      ✓ should submit additional owners after authorization
+
+  /account/connect/submit-company-registration
+    SubmitCompanyRegistration#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual registration
+      ✓ should bind Stripe account to req
+    SubmitCompanyRegistration#GET
+      ✓ should present the form
+    SubmitCompanyRegistration#POST
+      ✓ should reject registration that hasn't submitted additional owners
+      ✓ should reject registration that hasn't submitted payment details
+      ✓ should submit after authorization
+
+  /account/connect/submit-individual-registration
+    SubmitIndividualRegistration#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject company registration
+      ✓ should bind Stripe account to req
+    SubmitIndividualRegistration#GET
+      ✓ should present the form
+    SubmitIndividualRegistration#POST
+      ✓ should reject registration that hasn't submitted payment details
+      ✓ should submit after authorization
+
+  /administrator/connect/delete-stripe-account
+    DeleteStripeAccount#BEFORE
+      ✓ should bind Stripe account to req
+    DeleteStripeAccount#GET
+      ✓ should present the form
+      ✓ should present the Stripe account table
+    DeleteStripeAccount#POST
+      ✓ should delete Stripe account
+
+  /administrator/connect
+    Index#BEFORE
+      ✓ should bind Stripe accounts to req
+    Index#GET
+      ✓ should have row for each Stripe account
+
+  /administrator/connect/reject-stripe-account
+    RejectStripeAccount#BEFORE
+      ✓ should bind Stripe account to req
+    RejectStripeAccount#GET
+      ✓ should present the form
+      ✓ should present the Stripe account table
+    RejectStripeAccount#POST
+      ✓ should update the Stripe account as rejected
+
+  /administrator/connect/stripe-account
+    StripeAccount#BEFORE
+      ✓ should bind reject invalid stripeid
+      ✓ should bind Stripe account to req
+    StripeAccount#GET
+      ✓ should have row for Stripe account
+
+  /administrator/connect/stripe-accounts
+    StripeAccounts#BEFORE
+      ✓ should bind Stripe accounts to req
+    StripeAccounts#GET
+      ✓ should have row for each Stripe account
+
+  /api/administrator/connect/account-stripe-accounts-count
+    AccountStripeAccountsCount#GET
+      ✓ should count all Stripe accounts on account
+
+  /api/administrator/connect/account-stripe-accounts
+    AccountStripeAccounts#GET
+      ✓ should limit Stripe accounts to one page
+      ✓ should enforce page size
+      ✓ should enforce specified offset
+      ✓ should return all records
+
+  /api/administrator/connect/delete-stripe-account
+    DeleteStripeAccount#BEFORE
+      ✓ should reject invalid stripeid
+    DeleteStripeAccount#DELETE
+      ✓ should delete Stripe account
+
+  /api/administrator/connect/set-stripe-account-rejected
+    RejectStripeAccount#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject invalid reason
+    RejectStripeAccount#PATCH
+      ✓ should update the Stripe account as rejected
+
+  /api/administrator/connect/stripe-account
+    StripeAccount#GET
+      ✓ should reject invalid stripeid
+      ✓ should return Stripe account data
+
+  /api/administrator/connect/stripe-accounts-count
+    StripeAccountsCount#GET
+      ✓ should count all Stripe accounts
+
+  /api/administrator/connect/stripe-accounts
+    StripeAccounts#GET
+      ✓ should limit Stripe accounts to one page
+      ✓ should enforce page size
+      ✓ should enforce specified offset
+      ✓ should return all records
+
+  /api/user/connect/additional-owners-count
+    AdditionalOwnersCount#GET
+      ✓ should reject invalid stripeid
+      ✓ should reject individual account
+      ✓ should reject company that doesn't require owner info
+      ✓ should reject other account's registration
+      ✓ should return count of owners
+
+  /api/user/connect/additional-owners
+    AdditionalOwners#GET
+      ✓ should reject invalid stripeid
+      ✓ should reject individual account
+      ✓ should reject company that doesn't require owner info
+      ✓ should reject other account's registration
+      ✓ should return owners
+
+  /api/user/connect/country-spec
+    CountrySpec#GET
+      ✓ should reject invalid country
+      ✓ should return stripe countrySpec data
+
+  /api/user/connect/country-specs
+    CountrySpecs#GET
+      ✓ should return stripe countrySpec list
+
+  /api/user/connect/create-additional-owner
+    CreateAdditionalOwner#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual account
+      ✓ should reject company that doesn't require owner info
+      ✓ should reject other account's Stripe account
+      ✓ should reject fifth 25% owner
+      ✓ should reject submitted account
+      ✓ should reject invalid fields
+    CreateAdditionalOwner#POST
+      ✓ should create authorized additional owner
+
+  /api/user/connect/create-stripe-account
+    CreateStripeAccount#BEFORE
+      ✓ should reject invalid account type
+      ✓ should reject invalid country
+    CreateStripeAccount#POST
+      ✓ should create authorized registration
+
+  /api/user/connect/delete-additional-owner
+    DeleteAdditionalOwner#BEFORE
+      ✓ should reject invalid ownerid
+      ✓ should reject other account's registration
+    DeleteAdditionalOwner#DELETE
+      ✓ should delete owner
+
+  /api/user/connect/delete-stripe-account
+    DeleteStripeAccount#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject other account's Stripe account
+    DeleteStripeAccount#DELETE
+      ✓ should delete Stripe account
+
+  /api/user/connect/set-additional-owners-submitted
+    SetAdditionalOwnersSubmitted#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual account
+      ✓ should reject other account's registration
+      ✓ should reject company that doesn't require owner info
+      ✓ should reject registration with owners already submitted
+    SetAdditionalOwnersSubmitted#PATCH
+      ✓ should submit blank owners
+      ✓ should submit owners
+
+  /api/user/connect/set-company-registration-submitted
+    SetCompanyRegistrationSubmitted#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual account
+      ✓ should reject submitted registration
+      ✓ should reject other account's registration
+      ✓ should require payment details
+      ✓ should require additional owners submitted
+    SetCompanyRegistrationSubmitted#PATCH
+      ✓ should submit AT-company registration
+      ✓ should submit AU-company registration
+      ✓ should submit BE-company registration
+      ✓ should submit CA-company registration
+      ✓ should submit CH-company registration
+      ✓ should submit DE-company registration
+      ✓ should submit DK-company registration
+      ✓ should submit ES-company registration
+      ✓ should submit FI-company registration
+      ✓ should submit FR-company registration
+      ✓ should submit GB-company registration
+      ✓ should submit HK-company registration
+      ✓ should submit IE-company registration
+      ✓ should submit IT-company registration
+      ✓ should submit JP-company registration
+      ✓ should submit LU-company registration
+      ✓ should submit NL-company registration
+      ✓ should submit NO-company registration
+      ✓ should submit NZ-company registration
+      ✓ should submit PT-company registration
+      ✓ should submit SE-company registration
+      ✓ should submit US-company registration
+
+  /api/user/connect/set-individual-registration-submitted
+    SetIndividualRegistrationSubmitted#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject company account
+      ✓ should reject submitted registration
+      ✓ should reject other account's registration
+      ✓ should require payment details
+    SetIndividualRegistrationSubmitted#PATCH
+      ✓ should submit AT-individual registration
+      ✓ should submit AU-individual registration
+      ✓ should submit BE-individual registration
+      ✓ should submit CA-individual registration
+      ✓ should submit CH-individual registration
+      ✓ should submit DE-individual registration
+      ✓ should submit DK-individual registration
+      ✓ should submit ES-individual registration
+      ✓ should submit FI-individual registration
+      ✓ should submit FR-individual registration
+      ✓ should submit GB-individual registration
+      ✓ should submit HK-individual registration
+      ✓ should submit IE-individual registration
+      ✓ should submit IT-individual registration
+      ✓ should submit JP-individual registration
+      ✓ should submit LU-individual registration
+      ✓ should submit NL-individual registration
+      ✓ should submit NO-individual registration
+      ✓ should submit NZ-individual registration
+      ✓ should submit PT-individual registration
+      ✓ should submit SE-individual registration
+      ✓ should submit US-individual registration
+
+  /api/user/connect/stripe-account
+    StripeAccount#GET
+      ✓ should reject invalid stripeid
+      ✓ should reject other account's Stripe account
+      ✓ should return Stripe account data
+
+  /api/user/connect/stripe-accounts-count
+    StripeAccountsCount#GET
+      ✓ should count Stripe accounts
+
+  /api/user/connect/stripe-accounts
+    AccountStripeAccounts#GET
+      ✓ should limit Stripe accounts to one page
+      ✓ should enforce page size
+      ✓ should enforce specified offset
+      ✓ should return all records
+
+  /api/user/connect/update-additional-owner
+    UpdateAdditionalOwner#BEFORE
+      ✓ should reject invalid ownerid
+      ✓ should reject other account's registration
+      ✓ should reject invalid fields
+    UpdateAdditionalOwner#PATCH
+      ✓ should update owner
+
+  /api/user/connect/update-company-registration
+    UpdateCompanyRegistration#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual Stripe account
+      ✓ should reject other account's Stripe account
+      ✓ should reject submitted Stripe account
+      ✓ should reject AT-company invalid fields
+      ✓ should reject AU-company invalid fields
+      ✓ should reject BE-company invalid fields
+      ✓ should reject CA-company invalid fields
+      ✓ should reject DE-company invalid fields
+      ✓ should reject DK-company invalid fields
+      ✓ should reject ES-company invalid fields
+      ✓ should reject FI-company invalid fields
+      ✓ should reject CH-company invalid fields
+      ✓ should reject FR-company invalid fields
+      ✓ should reject GB-company invalid fields
+      ✓ should reject HK-company invalid fields
+      ✓ should reject IE-company invalid fields
+      ✓ should reject IT-company invalid fields
+      ✓ should reject JP-company invalid fields
+      ✓ should reject LU-company invalid fields
+      ✓ should reject NL-company invalid fields
+      ✓ should reject NO-company invalid fields
+      ✓ should reject NZ-company invalid fields
+      ✓ should reject PT-company invalid fields
+      ✓ should reject SE-company invalid fields
+      ✓ should reject US-company invalid fields
+    UpdateCompanyRegistration#PATCH
+      ✓ should update AT-company registration
+      ✓ should update AU-company registration
+      ✓ should update BE-company registration
+      ✓ should update CA-company registration
+      ✓ should update CH-company registration
+      ✓ should update DE-company registration
+      ✓ should update DK-company registration
+      ✓ should update ES-company registration
+      ✓ should update FI-company registration
+      ✓ should update FR-company registration
+      ✓ should update GB-company registration
+      ✓ should update HK-company registration
+      ✓ should update IE-company registration
+      ✓ should update IT-company registration
+      ✓ should update JP-company registration
+      ✓ should update LU-company registration
+      ✓ should update NL-company registration
+      ✓ should update NO-company registration
+      ✓ should update NZ-company registration
+      ✓ should update PT-company registration
+      ✓ should update SE-company registration
+      ✓ should update US-company registration
+
+  /api/user/connect/update-individual-registration
+    UpdateIndividualRegistration#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject company Stripe account
+      ✓ should reject other account's Stripe account
+      ✓ should reject submitted Stripe account
+      ✓ should reject AT-individual invalid fields
+      ✓ should reject AU-individual invalid fields
+      ✓ should reject BE-individual invalid fields
+      ✓ should reject CA-individual invalid fields
+      ✓ should reject CH-individual invalid fields
+      ✓ should reject DE-individual invalid fields
+      ✓ should reject DK-individual invalid fields
+      ✓ should reject ES-individual invalid fields
+      ✓ should reject FI-individual invalid fields
+      ✓ should reject FR-individual invalid fields
+      ✓ should reject GB-individual invalid fields
+      ✓ should reject HK-individual invalid fields
+      ✓ should reject IE-individual invalid fields
+      ✓ should reject IT-individual invalid fields
+      ✓ should reject JP-individual invalid fields
+      ✓ should reject LU-individual invalid fields
+      ✓ should reject NL-individual invalid fields
+      ✓ should reject NO-individual invalid fields
+      ✓ should reject NZ-individual invalid fields
+      ✓ should reject PT-individual invalid fields
+      ✓ should reject SE-individual invalid fields
+      ✓ should reject US-individual invalid fields
+    UpdateIndividualRegistration#PATCH
+      ✓ should update AT-individual registration
+      ✓ should update AU-individual registration
+      ✓ should update BE-individual registration
+      ✓ should update CA-individual registration
+      ✓ should update CH-individual registration
+      ✓ should update DE-individual registration
+      ✓ should update DK-individual registration
+      ✓ should update ES-individual registration
+      ✓ should update FI-individual registration
+      ✓ should update FR-individual registration
+      ✓ should update GB-individual registration
+      ✓ should update HK-individual registration
+      ✓ should update IE-individual registration
+      ✓ should update IT-individual registration
+      ✓ should update JP-individual registration
+      ✓ should update LU-individual registration
+      ✓ should update NL-individual registration
+      ✓ should update NO-individual registration
+      ✓ should update NZ-individual registration
+      ✓ should update PT-individual registration
+      ✓ should update SE-individual registration
+      ✓ should update US-individual registration
+
+  /api/user/connect/update-payment-information
+    UpdatePaymentInformation#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject other account's Stripe account
+      ✓ should reject AT invalid fields
+      ✓ should reject AU invalid fields
+      ✓ should reject BE invalid fields
+      ✓ should reject CA invalid fields
+      ✓ should reject CH invalid fields
+      ✓ should reject DE invalid fields
+      ✓ should reject DK invalid fields
+      ✓ should reject ES invalid fields
+      ✓ should reject FI invalid fields
+      ✓ should reject FR invalid fields
+      ✓ should reject GB invalid fields (account number, sort code)
+      ✓ should reject GB invalid fields (iban)
+      ✓ should reject HK invalid fields
+      ✓ should reject IE invalid fields
+      ✓ should reject IT invalid fields
+      ✓ should reject JP invalid fields
+      ✓ should reject LU invalid fields
+      ✓ should reject NL invalid fields
+      ✓ should reject NO invalid fields
+      ✓ should reject NZ invalid fields
+      ✓ should reject PT invalid fields
+      ✓ should reject SE invalid fields
+      ✓ should reject US invalid fields
+    UpdatePaymentInformation#PATCH
+      ✓ should update AT information
+      ✓ should update AU information
+      ✓ should update BE information
+      ✓ should update CA information
+      ✓ should update CH information
+      ✓ should update DE information
+      ✓ should update DK information
+      ✓ should update ES information
+      ✓ should update FI information
+      ✓ should update FR information
+      ✓ should update GB information (account number, sort code)
+      ✓ should update GB information (iban)
+      ✓ should update HK information
+      ✓ should update IE information
+      ✓ should update IT information
+      ✓ should update JP information
+      ✓ should update LU information
+      ✓ should update NL information
+      ✓ should update NO information
+      ✓ should update NZ information
+      ✓ should update PT information
+      ✓ should update SE information
+      ✓ should update US information
+
+
+  554 passing (1h)
+

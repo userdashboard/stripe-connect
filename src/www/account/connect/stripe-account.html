@@ -1,0 +1,127 @@
+<!doctype html>
+<html navbar="/account/connect/navbar-stripe-account.html">
+  <head>
+    <title>View ${stripeAccount.id}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>View ${stripeAccount.id}</h1>
+    <div id="message-container"></div>
+    <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table data-table">
+      <tbody id="${stripeAccount.id}">
+        <tr>
+          <th>ID</th>
+          <td>${stripeAccount.id}</td>
+        </tr>
+        <tr>
+          <th>Type</th>
+          <td>${stripeAccount.legal_entity.type}</td>
+        </tr>
+        <tr>
+          <th>Status</th>
+          <td id="registration-status-${stripeAccount.id}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="registration-container">
+      <h2>Registration information</h2>
+      <div id="registration-status"></div>
+      <p class="pure-button-group" role="group" id="registration-options">
+        <a id="start-individual-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-individual-registration?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+        <a id="start-company-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+        <a id="update-individual-registration-link" class="pure-button" href="/account/connect/edit-individual-registration?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+        <a id="update-company-registration-link" class="pure-button" href="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+      </p>
+    </div>    
+    <div id="owners-container">
+      <h2>Company owners information</h2>
+      <div id="owners-status"></div>
+      <p class="pure-button-group" role="group" id="owner-options">
+        <a class="pure-button pure-button-primary" href="/account/connect/create-additional-owner?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add owner information</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/submit-additional-owners?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed owners</a>
+      </p>
+    </div>
+    <div id="payment-container">
+      <h2>Payment information</h2>
+      <div id="payment-information-status"></div>
+      <p id="payment-options">
+        <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
+        <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update payment information</a>
+      </p>
+    </div>
+    <div id="submission-container">
+      <h2>Submit registration</h2>
+      <div id="submission-status"></div>
+      <p id="submit-registration-link-container">
+        <a id="submit-individual-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-individual-registration?stripeid=${stripeAccount.id}">Submit registration</a>
+        <a id="submit-company-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-company-registration?stripeid=${stripeAccount.id}">Submit registration</a>
+      </p>
+    </div>
+  </body>
+  <template id="owners-submitted">
+    <span>Owner information has been submitted.</span>
+  </template>
+  <template id="owners-not-submitted">
+    <span>You must submit additional company owners due to incorporating within the <a href="https://en.wikipedia.org/wiki/Single_Euro_Payments_Area">Single Euro Payment Area</a>.</span>
+  </template>
+  <template id="payment-information">
+    <p>Funds are paid to account ${bank_account.bank_name}.</p>
+  </template>
+  <template id="no-payment-information">
+    <p>Banking details must be provided to receive funds.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p>The registration has not been submitted.</p>
+  </template>
+  <template id="submitted-information">
+    <p>The registration was submitted on ${account.date}.</p>
+  </template>
+  <template id="unstarted-registration">
+    <p>The registration information has not been provided.</p>
+  </template>
+  <template id="completed-registration">
+    <p>The registration information has been provided.</p>
+  </template>
+  <template id="status-not-submitted">
+    <span>Not submitted yet</span>
+  </template>
+  <template id="status-verified">
+    <span>Registration has been accepted</span>
+  </template>
+  <template id="status-verified">
+    <span>Disabled by Stripe</span>
+  </template>
+  <template id="status-verified-requires-fields">
+    <span>Requires additional information</span>
+  </template>
+  <template id="status-pending-submission">
+    <span>Pending submission</span>
+  </template>
+  <template id="status-rejected.fraud">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="status-rejected.terms">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="status-rejected.listed">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="status-rejected.other">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="status-fields_needed">
+    <span>More information is required.</span>
+  </template>
+  <template id="status-listed">
+    <span>Under review by Stripe</span>
+  </template>
+  <template id="status-under-review">
+    <span>Under review by Stripe</span>
+  </template>
+  <template id="status-disabled">
+    <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+</html>

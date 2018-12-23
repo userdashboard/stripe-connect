@@ -1,0 +1,207 @@
+@userappstore/dashboard 1.0.0
+https://stripe-connect.server7373.synology.me
+
+Administrator menu:
+/administrator/connect "Stripe Connect module"
+/administrator "Dashboard administration"
+
+Account menu:
+/account/connect "Stripe Connect accounts"
+/account "My account"
+/account/signout "Sign out"
+
+Special HTML files:
+@userappstore/dashboard/src/template.html
+@userappstore/dashboard/src/error.html
+@userappstore/dashboard/src/redirect.html
+
+Dashboard modules:
+@userappstore/dashboard
+@userappstore/maxmind-geoip
+
+Content handlers:
+@userappstore/dashboard/src/content/session-impersonation-header.js
+@userappstore/dashboard/src/content/session-unlocked-header.js
+
+Server handlers:
+@userappstore/maxmind-geoip/src/server/bind-country.js
+/src/server/bind-stripekey.js
+/src/server/stripe-file-upload.js
+
+URL ---------------------------------------------------- AUTH ---- LOCK --- TEMPLATE ----- HTTP REQUESTS - NODEJS ------------------------ HTML ----------------------
+/                                                        GUEST              FULLSCREEN     GET                                             /src/www                   
+/account                                                                                   GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/authorize                                                          FULLSCREEN     GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/change-password                                                                   GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/change-username                                                                   GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/connect                                                                           GET             /src/www                        /src/www                   
+/account/connect/additional-owners                                                         GET             /src/www                        /src/www                   
+/account/connect/create-additional-owner                                                   GET POST        /src/www                        /src/www                   
+/account/connect/create-registration                                                       GET POST        /src/www                        /src/www                   
+/account/connect/delete-additional-owner                                                   GET POST        /src/www                        /src/www                   
+/account/connect/delete-stripe-account                                                     GET POST        /src/www                        /src/www                   
+/account/connect/edit-additional-owner                                                     GET POST        /src/www                        /src/www                   
+/account/connect/edit-company-registration                                                 GET POST        /src/www                        /src/www                   
+/account/connect/edit-individual-registration                                              GET POST        /src/www                        /src/www                   
+/account/connect/edit-payment-information                                                  GET POST        /src/www                        /src/www                   
+/account/connect/resubmit-additional-owner-id                                              GET                                             /src/www                   
+/account/connect/resubmit-personal-id-scan                                                 GET                                             /src/www                   
+/account/connect/resubmit-registration                                                     GET                                             /src/www                   
+/account/connect/stripe-account                                                            GET             /src/www                        /src/www                   
+/account/connect/stripe-accounts                                                           GET             /src/www                        /src/www                   
+/account/connect/submit-additional-owners                                                  GET POST        /src/www                        /src/www                   
+/account/connect/submit-company-registration                                               GET POST        /src/www                        /src/www                   
+/account/connect/submit-individual-registration                                            GET POST        /src/www                        /src/www                   
+/account/create-profile                                                                    GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/create-reset-code                                                                 GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/delete-account                                                                    GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/delete-account-complete                         GUEST              FULLSCREEN     GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/delete-profile                                                                    GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/delete-reset-code                                                                 GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/edit-profile                                                                      GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/end-all-sessions                                                                  GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/end-session                                                                       GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/lock-session                                                                      GET             @userappstore/dashboard                                    
+/account/profile                                                                           GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/profiles                                                                          GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/register                                        GUEST              FULLSCREEN     GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/reset-account                                   GUEST              FULLSCREEN     GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/reset-code                                                                        GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/reset-codes                                                                       GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/restore-account                                 GUEST              FULLSCREEN     GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/session                                                                           GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/sessions                                                                          GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/set-default-profile                                                               GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/signin                                          GUEST              FULLSCREEN     GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/account/signout                                                            FULLSCREEN     GET             @userappstore/dashboard         @userappstore/dashboard    
+/account/signout-complete                                GUEST              FULLSCREEN     GET                                             @userappstore/dashboard    
+/administrator                                                                             GET                                             @userappstore/dashboard    
+/administrator/account                                                                     GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/account-profiles                                                            GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/account-reset-codes                                                         GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/account-sessions                                                            GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/accounts                                                                    GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/administrators                                                              GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/assign-administrator                                                        GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/administrator/connect                                                                     GET             /src/www                        /src/www                   
+/administrator/connect/delete-stripe-account                                               GET POST        /src/www                        /src/www                   
+/administrator/connect/payout                                                              GET             /src/www                        /src/www                   
+/administrator/connect/payouts                                                             GET             /src/www                        /src/www                   
+/administrator/connect/reject-stripe-account                                               GET POST        /src/www                        /src/www                   
+/administrator/connect/stripe-account                                                      GET             /src/www                        /src/www                   
+/administrator/connect/stripe-accounts                                                     GET             /src/www                        /src/www                   
+/administrator/create-reset-code                                                           GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/administrator/delete-account                                                              GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/administrator/delete-schedule                                                             GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/end-impersonation                                                           GET             @userappstore/dashboard                                    
+/administrator/impersonate-account                                                         GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/administrator/profile                                                                     GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/profiles                                                                    GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/reset-code                                                                  GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/reset-codes                                                                 GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/reset-session-key                                                           GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/administrator/revoke-administrator                                                        GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/administrator/schedule-account-delete                                                     GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/administrator/session                                                                     GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/sessions                                                                    GET             @userappstore/dashboard         @userappstore/dashboard    
+/administrator/transfer-ownership                                                          GET POST        @userappstore/dashboard         @userappstore/dashboard    
+/api/administrator/account                                                                 GET             @userappstore/dashboard                                    
+/api/administrator/account-profiles                                                        GET             @userappstore/dashboard                                    
+/api/administrator/account-profiles-count                                                  GET             @userappstore/dashboard                                    
+/api/administrator/account-reset-codes                                                     GET             @userappstore/dashboard                                    
+/api/administrator/account-reset-codes-count                                               GET             @userappstore/dashboard                                    
+/api/administrator/account-sessions                                                        GET             @userappstore/dashboard                                    
+/api/administrator/account-sessions-count                                                  GET             @userappstore/dashboard                                    
+/api/administrator/accounts                                                                GET             @userappstore/dashboard                                    
+/api/administrator/accounts-count                                                          GET             @userappstore/dashboard                                    
+/api/administrator/administrator-accounts                                                  GET             @userappstore/dashboard                                    
+/api/administrator/administrator-accounts-count                                            GET             @userappstore/dashboard                                    
+/api/administrator/connect/account-stripe-accounts                                         GET             /src/www                                                   
+/api/administrator/connect/account-stripe-accounts-count                                   GET             /src/www                                                   
+/api/administrator/connect/delete-stripe-account                   LOCK                    DELETE          /src/www                                                   
+/api/administrator/connect/payout                                                          GET             /src/www                                                   
+/api/administrator/connect/payouts                                                         GET             /src/www                                                   
+/api/administrator/connect/payouts-count                                                   GET             /src/www                                                   
+/api/administrator/connect/set-stripe-account-rejected             LOCK                    PATCH           /src/www                                                   
+/api/administrator/connect/stripe-account                                                  GET             /src/www                                                   
+/api/administrator/connect/stripe-account-payouts                                          GET             /src/www                                                   
+/api/administrator/connect/stripe-account-payouts-count                                    GET             /src/www                                                   
+/api/administrator/connect/stripe-accounts                                                 GET             /src/www                                                   
+/api/administrator/connect/stripe-accounts-count                                           GET             /src/www                                                   
+/api/administrator/create-reset-code                               LOCK                    POST            @userappstore/dashboard                                    
+/api/administrator/delete-account                                  LOCK                    DELETE          @userappstore/dashboard                                    
+/api/administrator/deleted-accounts                                                        GET             @userappstore/dashboard                                    
+/api/administrator/deleted-accounts-count                                                  GET             @userappstore/dashboard                                    
+/api/administrator/profile                                                                 GET             @userappstore/dashboard                                    
+/api/administrator/profiles                                                                GET             @userappstore/dashboard                                    
+/api/administrator/profiles-count                                                          GET             @userappstore/dashboard                                    
+/api/administrator/reset-account-administrator                     LOCK                    PATCH           @userappstore/dashboard                                    
+/api/administrator/reset-code                                                              GET             @userappstore/dashboard                                    
+/api/administrator/reset-codes                                                             GET             @userappstore/dashboard                                    
+/api/administrator/reset-codes-count                                                       GET             @userappstore/dashboard                                    
+/api/administrator/reset-session-impersonate                                               PATCH           @userappstore/dashboard                                    
+/api/administrator/reset-session-key                               LOCK                    PATCH           @userappstore/dashboard                                    
+/api/administrator/session                                                                 GET             @userappstore/dashboard                                    
+/api/administrator/sessions                                                                GET             @userappstore/dashboard                                    
+/api/administrator/sessions-count                                                          GET             @userappstore/dashboard                                    
+/api/administrator/set-account-administrator                       LOCK                    PATCH           @userappstore/dashboard                                    
+/api/administrator/set-account-deleted                             LOCK                    PATCH           @userappstore/dashboard                                    
+/api/administrator/set-owner-account                               LOCK                    PATCH           @userappstore/dashboard                                    
+/api/administrator/set-session-impersonate                         LOCK                    PATCH           @userappstore/dashboard                                    
+/api/user/account                                                                          GET             @userappstore/dashboard                                    
+/api/user/connect/additional-owner                                                         GET             /src/www                                                   
+/api/user/connect/additional-owners                                                        GET             /src/www                                                   
+/api/user/connect/additional-owners-count                                                  GET             /src/www                                                   
+/api/user/connect/country-spec                                                             GET             /src/www                                                   
+/api/user/connect/country-specs                                                            GET             /src/www                                                   
+/api/user/connect/create-additional-owner                          LOCK                    POST            /src/www                                                   
+/api/user/connect/create-stripe-account                            LOCK                    POST            /src/www                                                   
+/api/user/connect/delete-additional-owner                          LOCK                    DELETE          /src/www                                                   
+/api/user/connect/delete-stripe-account                            LOCK                    DELETE          /src/www                                                   
+/api/user/connect/payout                                                                   GET             /src/www                                                   
+/api/user/connect/payouts                                                                  GET             /src/www                                                   
+/api/user/connect/payouts-count                                                            GET             /src/www                                                   
+/api/user/connect/resubmit-required-information                    LOCK                    PATCH           /src/www                                                   
+/api/user/connect/reupload-identity-document                       LOCK                    PATCH           /src/www                                                   
+/api/user/connect/reupload-owner-identity-document                 LOCK                    PATCH           /src/www                                                   
+/api/user/connect/set-additional-owners-submitted                  LOCK                    PATCH           /src/www                                                   
+/api/user/connect/set-company-registration-submitted               LOCK                    PATCH           /src/www                                                   
+/api/user/connect/set-individual-registration-submitted            LOCK                    PATCH           /src/www                                                   
+/api/user/connect/stripe-account                                                           GET             /src/www                                                   
+/api/user/connect/stripe-account-payouts                                                   GET             /src/www                                                   
+/api/user/connect/stripe-account-payouts-count                                             GET             /src/www                                                   
+/api/user/connect/stripe-accounts                                                          GET             /src/www                                                   
+/api/user/connect/stripe-accounts-count                                                    GET             /src/www                                                   
+/api/user/connect/update-additional-owner                          LOCK                    PATCH           /src/www                                                   
+/api/user/connect/update-company-registration                      LOCK                    PATCH           /src/www                                                   
+/api/user/connect/update-individual-registration                   LOCK                    PATCH           /src/www                                                   
+/api/user/connect/update-payment-information                       LOCK                    PATCH           /src/www                                                   
+/api/user/create-account                                 GUEST                             POST            @userappstore/dashboard                                    
+/api/user/create-profile                                           LOCK                    POST            @userappstore/dashboard                                    
+/api/user/create-reset-code                                        LOCK                    POST            @userappstore/dashboard                                    
+/api/user/create-session                                 GUEST                             POST            @userappstore/dashboard                                    
+/api/user/delete-profile                                           LOCK                    DELETE          @userappstore/dashboard                                    
+/api/user/delete-reset-code                                        LOCK                    DELETE          @userappstore/dashboard                                    
+/api/user/maxmind/country                                GUEST                             GET             @userappstore/maxmind-geoip                                
+/api/user/profile                                                                          GET             @userappstore/dashboard                                    
+/api/user/profiles                                                                         GET             @userappstore/dashboard                                    
+/api/user/profiles-count                                                                   GET             @userappstore/dashboard                                    
+/api/user/reset-account-deleted                          GUEST                             PATCH           @userappstore/dashboard                                    
+/api/user/reset-account-password                         GUEST                             PATCH           @userappstore/dashboard                                    
+/api/user/reset-code                                                                       GET             @userappstore/dashboard                                    
+/api/user/reset-codes                                                                      GET             @userappstore/dashboard                                    
+/api/user/reset-codes-count                                                                GET             @userappstore/dashboard                                    
+/api/user/reset-session-key                                        LOCK                    PATCH           @userappstore/dashboard                                    
+/api/user/reset-session-unlocked                                                           PATCH           @userappstore/dashboard                                    
+/api/user/session                                                                          GET             @userappstore/dashboard                                    
+/api/user/sessions                                                                         GET             @userappstore/dashboard                                    
+/api/user/sessions-count                                                                   GET             @userappstore/dashboard                                    
+/api/user/set-account-deleted                                      LOCK                    PATCH           @userappstore/dashboard                                    
+/api/user/set-account-password                                     LOCK                    PATCH           @userappstore/dashboard                                    
+/api/user/set-account-profile                                      LOCK                    PATCH           @userappstore/dashboard                                    
+/api/user/set-account-username                                     LOCK                    PATCH           @userappstore/dashboard                                    
+/api/user/set-session-ended                                                                PATCH           @userappstore/dashboard                                    
+/api/user/set-session-unlocked                                                             PATCH           @userappstore/dashboard                                    
+/api/user/update-profile                                           LOCK                    PATCH           @userappstore/dashboard                                    
+/home                                                                                      GET                                             @userappstore/dashboard    
+/webhooks/connect/index-payout-data                      GUEST                             POST            /src/www                                                   

@@ -1,0 +1,134 @@
+<!doctype html>
+<html navbar="/account/connect/navbar.html">
+  <head>
+    <title>Stripe accounts</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Stripe accounts</h1>
+    <p>Become a vendor by verifying your personal identity and company information through <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+    <div id="no-stripe-accounts">
+      <p>No Stripe accounts have been created yet.</p>
+    </div>
+    <table id="stripe-accounts-table" class="pure-table">
+      <thead>
+        <tr>
+          <th>Individual registration</th>
+          <th>Company registrations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div id="requirement-container">
+              <ol>
+                <li>Verified personal information</li>
+                <li>Resident of a supported country</li>
+                <li>Bank account in a supported country</li>
+              </ol>
+              <a id="create-individual-link" href="/account/connect/create-registration" class="pure-button pure-button-primary">Start individual registration</a>
+            </div>
+          </td>
+          <td>
+            <div id="requirement-container">
+              <ol>
+                <li>Verified personal information</li>
+                <li>Business registered in a supported country</li>
+                <li>Bank account in a supported country</li>
+              </ol>
+              <a href="/account/connect/create-registration" class="pure-button pure-button-primary">Start company registration</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="registrations-container">
+      <div id="Individual-container">
+        <h2>Individual registration</h2>
+        <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div id="company-container">
+        <h1>Company registrations</h1>
+        <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </body>
+  <ul id="page-links" class="pagination"></ul>
+</body>
+<template id='page-link'>
+  <li><a href="/account/connect/stripe-accounts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a></li>
+</template>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td><a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>
+      <td id="individual-name-${account.id}">${account.legal_entity.first_name} ${account.legal_entity.last_name}</td>
+      <td id="business-name-${account.id}">${account.legal_entity.business_name}</td>
+      <td id="registration-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td class="pure-button-group" role="group">
+        <a href="/account/connect/stripe-account?stripeid=${account.id}" class="pure-button">Stripe account</a>
+        <a href="/account/connect/edit-payment-information?stripeid=${account.id}" class="pure-button">Edit payment information</a>
+      </td>
+    </tr>
+  </template>
+  <template id="status-not-submitted">
+    <span>Not submitted yet</span>
+  </template>
+  <template id="status-verified">
+    <span>Registration has been accepted</span>
+  </template>
+  <template id="status-verified">
+    <span>Disabled by Stripe</span>
+  </template>
+  <template id="status-verified-requires-fields">
+    <span>Requires additional information</span>
+  </template>
+  <template id="status-pending-submission">
+    <span>Pending submission</span>
+  </template>
+  <template id="status-rejected.fraud">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="status-rejected.terms">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="status-rejected.listed">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="status-rejected.other">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="status-fields_needed">
+    <span>More information is required</span>
+  </template>
+  <template id="status-listed">
+    <span>Under review by Stripe</span>
+  </template>
+  <template id="status-under-review">
+    <span>Under review by Stripe</span>
+  </template>
+  <template id="status-disabled">
+    <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</html>

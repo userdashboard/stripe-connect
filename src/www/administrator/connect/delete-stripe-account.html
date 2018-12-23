@@ -1,0 +1,38 @@
+<!doctype html>
+<html navbar="/administrator/connect/navbar-stripe-account.html">
+  <head>
+    <title>Delete ${stripeAccount.id}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Delete ${stripeAccount.id}</h1>
+    <div id="message-container"></div>
+    <table id="stripe-accounts-table" class="pure-table object-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tr id="${stripeAccount.id}">
+        <td><a href="/account/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a></td>
+        <td id="individual-name-${stripeAccount.id}">${stripeAccount.legal_entity.first_name} ${stripeAccount.legal_entity.last_name}</td>
+        <td id="business-name-${stripeAccount.id}">${stripeAccount.legal_entity.business_name}</td>
+        <td id="registration-status-${stripeAccount.id}"></td>
+      </tr>
+    </table>
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked">
+      <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
+    </form>
+  </body>
+  <template id="success">
+    <div class="success message">Success! The Stripe account has been deleted.</div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message">Error! An error ocurred deleting the Stripe account.</div>
+  </template>
+</html>

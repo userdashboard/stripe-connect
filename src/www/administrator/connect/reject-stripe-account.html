@@ -1,0 +1,50 @@
+<!doctype html>
+<html navbar="/administrator/connect/navbar-stripe-account.html">
+  <head>
+    <title>Reject ${stripeAccount.id}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>Reject ${stripeAccount.id}</h1>
+    <div id="message-container"></div>
+    <table id="stripe-accounts-table" class="pure-table object-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr id="${stripeAccount.id}">
+        <td><a href="/administrator/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a></td>
+        <td id="individual-name-${stripeAccount.id}">${stripeAccount.legal_entity.first_name} ${stripeAccount.legal_entity.last_name}</td>
+        <td id="business-name-${stripeAccount.id}">${stripeAccount.legal_entity.business_name}</td>
+        <td id="registration-status-${stripeAccount.id}"></td>
+      </tr>
+    </table>
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked">
+      <div class="pure-control-group">
+        <label for="reason">Rejection reason</label>
+        <select id="reason" name="reason">
+          <option>Select reason</option>
+          <option value="fraud">Fraud</option>
+          <option value="terms_of_service">Terms of service violation</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
+    </form>
+  </body>
+  <template id="success">
+    <div class="success message">Success! The Stripe account has been rejected.</div>
+  </template>
+  <template id="balance-error">
+    <div class="error message">Error! The account must have a $0 balance before rejecting.</div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message">Error! An error ocurred rejecting the Stripe account.</div>
+  </template>
+</html>
