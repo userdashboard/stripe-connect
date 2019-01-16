@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
-const TestHelper = require('../../../..//test-helper.js')
+const TestHelper = require('../../../../test-helper.js')
 
 describe(`/account/connect/delete-stripe-account`, async () => {
   describe('DeleteStripeAccount#BEFORE', () => {

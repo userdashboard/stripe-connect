@@ -1,6 +1,6 @@
 // /* eslint-env mocha */
 // const assert = require('assert')
-// const TestHelper = require('../../../../..//test-helper.js')
+// const TestHelper = require('../../../../../test-helper.js')
 
 // describe(`/api/user/connect/stripe-account-payouts`, () => {
 //   describe('StripeAccountPayouts#GET', () => {

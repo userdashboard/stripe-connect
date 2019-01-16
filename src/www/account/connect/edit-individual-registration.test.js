@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
-const TestHelper = require('../../../..//test-helper.js')
+const TestHelper = require('../../../../test-helper.js')
 
 describe(`/account/connect/edit-individual-registration`, async () => {
   describe('EditIndividualRegistration#BEFORE', () => {

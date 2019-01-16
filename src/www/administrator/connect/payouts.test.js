@@ -1,6 +1,6 @@
 // /* eslint-env mocha */
 // const assert = require('assert')
-// const TestHelper = require('../../../..//test-helper.js')
+// const TestHelper = require('../../../../test-helper.js')
 
 // describe(`/administrator/connect/payouts`, () => {
 //   describe('Payouts#BEFORE', () => {
