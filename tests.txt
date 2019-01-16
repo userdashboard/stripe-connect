@@ -742,5 +742,5 @@
       ✓ should update US information
 
 
-  554 passing (1h)
+  554 passing (49m)
 

@@ -11,12 +11,12 @@ module.exports = {
       throw new Error('invalid-ownerid')
     }
     req.query.stripeid = stripeid
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (!stripeAccount) {
       throw new Error('invalid-account')
     }
     req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+    const countrySpec = await global.api.user.connect.CountrySpec._get(req)
     if (countrySpec.verification_fields.company.minimum.indexOf('legal_entity.additional_owners') === -1 &&
         countrySpec.verification_fields.company.additional.indexOf('legal_entity.additional_owners') === -1) {
       throw new Error('invalid-stripe-account')

@@ -5,7 +5,7 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
     }
@@ -22,7 +22,7 @@ module.exports = {
     const payouts = []
     for (const payoutid of payoutids) {
       req.query.payoutid = payoutid
-      const payout = await global.api.administrator.connect.Payout.get(req)
+      const payout = await global.api.administrator.connect.Payout._get(req)
       payouts.push(payout)
     }
     return payouts

@@ -8,7 +8,7 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
@@ -17,7 +17,7 @@ module.exports = {
   delete: async (req) => {
     try {
       if (req.stripeAccount.metadata.owners) {
-        const owners = await global.api.user.connect.AdditionalOwners.get(req)
+        const owners = await global.api.user.connect.AdditionalOwners._get(req)
         for (const owner of owners) {
           await dashboard.Storage.deleteFile(`${req.appid}/map/ownerid/stripeid/${owner.ownerid}`)
         }

@@ -10,18 +10,18 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
   if (stripeAccount.legal_entity.type === 'individual' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
   req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+  const countrySpec = await global.api.user.connect.CountrySpec._get(req)
   if (countrySpec.verification_fields.company.minimum.indexOf('legal_entity.additional_owners') === -1 &&
     countrySpec.verification_fields.company.additional.indexOf('legal_entity.additional_owners') === -1) {
     throw new Error('invalid-stripe-account')
   }
-  const owners = await global.api.user.connect.AdditionalOwners.get(req)
+  const owners = await global.api.user.connect.AdditionalOwners._get(req)
   req.data = { stripeAccount, owners, countrySpec }
 }
 

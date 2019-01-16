@@ -7,7 +7,7 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.administrator.connect.StripeAccount._get(req)
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
     }

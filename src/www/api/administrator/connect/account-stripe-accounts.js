@@ -18,7 +18,7 @@ module.exports = {
     const stripeAccounts = []
     for (const stripeid of stripeids) {
       req.query.stripeid = stripeid
-      const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
+      const stripeAccount = await global.api.administrator.connect.StripeAccount._get(req)
       stripeAccounts.push(stripeAccount)
     }
     return stripeAccounts

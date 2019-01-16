@@ -9,7 +9,7 @@ module.exports = {
     if (!req.file) {
       throw new Error('invalid-upload')
     }
-    const stripeAccounts = await global.api.user.connect.StripeAccounts.get(req)
+    const stripeAccounts = await global.api.user.connect.StripeAccounts._get(req)
     if (!stripeAccounts || !stripeAccounts.length) {
       throw new Error('invalid-ownerid')
     }
@@ -33,7 +33,7 @@ module.exports = {
         throw new Error('invalid-stripe-account')
       }
       // verify the registration information ownerid
-      const owners = await global.api.user.connect.AdditionalOwners.get(req)
+      const owners = await global.api.user.connect.AdditionalOwners._get(req)
       if (owners && owners.length) {
         for (const i in owners) {
           if (owners[i].ownerid !== req.query.ownerid) {

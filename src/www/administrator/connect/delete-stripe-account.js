@@ -12,12 +12,12 @@ async function beforeRequest (req) {
   }
   if (req.session.lockURL === req.url && req.session.unlocked) {
     try {
-      return global.api.administrator.connect.DeleteStripeAccount.delete(req)
+      return global.api.administrator.connect.DeleteStripeAccount._delete(req)
     } catch (error) {
       req.error = error.message
     }
   }
-  const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.administrator.connect.StripeAccount._get(req)
   req.data = { stripeAccount }
 }
 
@@ -45,7 +45,7 @@ async function renderPage (req, res, messageTemplate) {
 
 async function submitForm (req, res) {
   try {
-    await global.api.administrator.connect.DeleteStripeAccount.delete(req)
+    await global.api.administrator.connect.DeleteStripeAccount._delete(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

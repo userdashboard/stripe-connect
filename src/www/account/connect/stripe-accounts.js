@@ -8,7 +8,7 @@ module.exports = {
 async function beforeRequest (req) {
   req.query = req.query || {}
   req.query.accountid = req.account.accountid
-  const stripeAccounts = await global.api.user.connect.StripeAccounts.get(req)
+  const stripeAccounts = await global.api.user.connect.StripeAccounts._get(req)
   if (!stripeAccounts || !stripeAccounts.length) {
     req.data = {}
     return

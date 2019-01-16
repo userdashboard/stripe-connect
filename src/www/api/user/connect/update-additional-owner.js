@@ -38,9 +38,9 @@ module.exports = {
     if (req.file) {
       req.body.documentid = req.file.id
     }
-    const owner = await global.api.user.connect.AdditionalOwner.get(req)
+    const owner = await global.api.user.connect.AdditionalOwner._get(req)
     req.query.stripeid = owner.stripeid
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (stripeAccount.metadata.submitted || stripeAccount.metadata.submittedOwners) {
       throw new Error('invalid-stripe-account')
     }

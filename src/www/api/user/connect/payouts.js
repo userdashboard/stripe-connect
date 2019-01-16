@@ -21,7 +21,7 @@ module.exports = {
     const payouts = []
     for (const payoutid of payoutids) {
       req.query.payoutid = payoutid
-      const payout = await global.api.user.connect.Payout.get(req)
+      const payout = await global.api.user.connect.Payout._get(req)
       payouts.push(payout)
     }
     if (!payouts || !payouts.length) {

@@ -12,12 +12,12 @@ async function beforeRequest (req) {
   }
   if (req.session.lockURL === req.url && req.session.unlocked) {
     try {
-      await global.api.user.connect.SetAdditionalOwnersSubmitted.patch(req)
+      await global.api.user.connect.SetAdditionalOwnersSubmitted._patch(req)
     } catch (error) {
       req.error = error.message
     }
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-account')
   }
@@ -28,7 +28,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripe-account')
   }
   req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+  const countrySpec = await global.api.user.connect.CountrySpec._get(req)
   if (countrySpec.verification_fields.company.minimum.indexOf('legal_entity.additional_owners') === -1 &&
     countrySpec.verification_fields.company.additional.indexOf('legal_entity.additional_owners') === -1) {
     throw new Error('invalid-stripe-account')
@@ -61,7 +61,7 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   try {
-    await global.api.user.connect.SetAdditionalOwnersSubmitted.patch(req)
+    await global.api.user.connect.SetAdditionalOwnersSubmitted._patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

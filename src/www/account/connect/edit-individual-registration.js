@@ -16,12 +16,12 @@ async function beforeRequest (req) {
   }
   if (req.session.lockURL === req.url && req.session.unlocked) {
     try {
-      await global.api.user.connect.UpdateIndividualRegistration.patch(req)
+      await global.api.user.connect.UpdateIndividualRegistration._patch(req)
     } catch (error) {
       req.error = error.message
     }
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
   if (!stripeAccount) {
     throw new Error('invalid-stripeid')
   }
@@ -31,7 +31,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripe-account')
   }
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  const countrySpecs = await global.api.user.connect.CountrySpecs.get(req)
+  const countrySpecs = await global.api.user.connect.CountrySpecs._get(req)
   let applicationCountry, addressCountry
   for (const countrySpec of countrySpecs) {
     if (countrySpec.id === stripeAccount.country) {
@@ -185,7 +185,7 @@ async function submitForm (req, res) {
     }
   }
   try {
-    await global.api.user.connect.UpdateIndividualRegistration.patch(req)
+    await global.api.user.connect.UpdateIndividualRegistration._patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

@@ -9,7 +9,7 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
-  const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.administrator.connect.StripeAccount._get(req)
   if (stripeAccount.legal_entity.type === 'individual') {
     stripeAccount.first_name = stripeAccount.legal_entity.first_name
     stripeAccount.last_name = stripeAccount.legal_entity.last_name

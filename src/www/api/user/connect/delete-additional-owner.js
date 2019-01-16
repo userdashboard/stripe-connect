@@ -9,13 +9,13 @@ module.exports = {
     if (!req.query || !req.query.ownerid) {
       throw new Error('invalid-ownerid')
     }
-    const owner = await global.api.user.connect.AdditionalOwner.get(req)
+    const owner = await global.api.user.connect.AdditionalOwner._get(req)
     req.query.stripeid = owner.stripeid
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (stripeAccount.metadata.submitted || stripeAccount.metadata.submittedOwners) {
       throw new Error('invalid-stripe-account')
     }
-    const owners = await global.api.user.connect.AdditionalOwners.get(req)
+    const owners = await global.api.user.connect.AdditionalOwners._get(req)
     for (const i in owners) {
       if (owners[i].ownerid !== req.query.ownerid) {
         continue

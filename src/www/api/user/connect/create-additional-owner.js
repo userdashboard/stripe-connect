@@ -43,14 +43,14 @@ module.exports = {
       throw new Error('invalid-upload')
     }
     req.body.documentid = req.file.id
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (stripeAccount.legal_entity.type === 'individual' ||
       stripeAccount.metadata.submitted ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
     req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+    const countrySpec = await global.api.user.connect.CountrySpec._get(req)
     if (countrySpec.verification_fields.company.minimum.indexOf('legal_entity.additional_owners') === -1 &&
         countrySpec.verification_fields.company.additional.indexOf('legal_entity.additional_owners') === -1) {
       throw new Error('invalid-stripe-account')
@@ -62,7 +62,7 @@ module.exports = {
     req.data = { stripeAccount }
   },
   post: async (req) => {
-    let owners = await global.api.user.connect.AdditionalOwners.get(req)
+    let owners = await global.api.user.connect.AdditionalOwners._get(req)
     owners = owners || []
     if (owners.length === 4) {
       throw new Error('maximum-owners')

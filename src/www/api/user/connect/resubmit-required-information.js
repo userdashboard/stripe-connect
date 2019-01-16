@@ -6,7 +6,7 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (!stripeAccount.metadata.submitted ||
         stripeAccount.metadata.accountid !== req.account.accountid ||
         !stripeAccount.verification.fields_needed ||

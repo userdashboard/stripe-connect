@@ -12,12 +12,12 @@ async function beforeRequest (req) {
   }
   if (req.session.lockURL === req.url && req.session.unlocked) {
     try {
-      await global.api.administrator.connect.SetStripeAccountRejected.patch(req)
+      await global.api.administrator.connect.SetStripeAccountRejected._patch(req)
     } catch (error) {
       req.error = error.message
     }
   }
-  const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.administrator.connect.StripeAccount._get(req)
   req.data = { stripeAccount }
 }
 
@@ -45,7 +45,7 @@ async function renderPage (req, res, messageTemplate) {
 
 async function submitForm (req, res) {
   try {
-    await global.api.administrator.connect.SetStripeAccountRejected.patch(req)
+    await global.api.administrator.connect.SetStripeAccountRejected._patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

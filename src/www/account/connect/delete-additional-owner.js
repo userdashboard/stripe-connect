@@ -12,16 +12,16 @@ async function beforeRequest (req) {
   }
   if (req.session.lockURL === req.url && req.session.unlocked) {
     try {
-      const stripeAccount = await global.api.user.connect.DeleteAdditionalOwner.delete(req)
+      const stripeAccount = await global.api.user.connect.DeleteAdditionalOwner._delete(req)
       req.data = { stripeAccount }
       return
     } catch (error) {
       req.error = error.message
     }
   }
-  const owner = await global.api.user.connect.AdditionalOwner.get(req)
+  const owner = await global.api.user.connect.AdditionalOwner._get(req)
   req.query.stripeid = owner.stripeid
-  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
   if (stripeAccount.metadata.submitted || stripeAccount.metadata.submittedOwners) {
     throw new Error('invalid-stripe-account')
   }
@@ -50,7 +50,7 @@ async function renderPage (req, res, messageTemplate) {
 
 async function submitForm (req, res) {
   try {
-    await global.api.user.connect.DeleteAdditionalOwner.delete(req)
+    await global.api.user.connect.DeleteAdditionalOwner._delete(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

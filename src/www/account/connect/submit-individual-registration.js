@@ -14,18 +14,18 @@ async function beforeRequest (req) {
   }
   if (req.session.lockURL === req.url && req.session.unlocked) {
     try {
-      await global.api.user.connect.SetIndividualRegistrationSubmitted.patch(req)
+      await global.api.user.connect.SetIndividualRegistrationSubmitted._patch(req)
     } catch (error) {
       req.error = error.message
     }
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
   if (stripeAccount.legal_entity.type === 'company' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
   req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+  const countrySpec = await global.api.user.connect.CountrySpec._get(req)
   const fieldsNeeded = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
   const completedPayment = stripeAccount.external_accounts &&
                            stripeAccount.external_accounts.data && stripeAccount.external_accounts.data.length
@@ -85,7 +85,7 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   try {
-    await global.api.user.connect.SetIndividualRegistrationSubmitted.patch(req)
+    await global.api.user.connect.SetIndividualRegistrationSubmitted._patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

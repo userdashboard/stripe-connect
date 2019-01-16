@@ -16,12 +16,12 @@ async function beforeRequest (req) {
   }
   if (req.session.lockURL === req.url && req.session.unlocked) {
     try {
-      await global.api.user.connect.UpdateCompanyRegistration.patch(req)
+      await global.api.user.connect.UpdateCompanyRegistration._patch(req)
     } catch (error) {
       req.error = error.message
     }
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
   if (!stripeAccount) {
     throw new Error('invalid-stripeid')
   }
@@ -30,7 +30,7 @@ async function beforeRequest (req) {
       stripeAccount.metadata.submittedOwners) {
     throw new Error('invalid-stripe-account')
   }
-  const countrySpecs = await global.api.user.connect.CountrySpecs.get(req)
+  const countrySpecs = await global.api.user.connect.CountrySpecs._get(req)
   let applicationCountry, personalAddressCountry, companyAddressCountry
   for (const countrySpec of countrySpecs) {
     if (countrySpec.id === stripeAccount.country) {
@@ -270,7 +270,7 @@ async function submitForm (req, res) {
     }
   }
   try {
-    await global.api.user.connect.UpdateCompanyRegistration.patch(req)
+    await global.api.user.connect.UpdateCompanyRegistration._patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

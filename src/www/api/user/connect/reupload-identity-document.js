@@ -9,7 +9,7 @@ module.exports = {
     if (!req.file || !req.file.id) {
       throw new Error('invalid-upload')
     }
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (!stripeAccount.metadata.submitted ||
       stripeAccount.metadata.accountid !== req.account.accountid ||
       !stripeAccount.legal_entity.verification.details_code) {

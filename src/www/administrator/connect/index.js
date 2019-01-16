@@ -6,7 +6,7 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
-  const stripeAccounts = await global.api.administrator.connect.StripeAccounts.get(req)
+  const stripeAccounts = await global.api.administrator.connect.StripeAccounts._get(req)
   for (const stripeAccount of stripeAccounts) {
     stripeAccount.createdFormatted = dashboard.Timestamp.date(stripeAccount.metadata.created)
     if (stripeAccount.payouts_enabled) {
