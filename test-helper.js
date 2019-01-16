@@ -1,7 +1,6 @@
 /* eslint-env mocha */
-global.applicationPath = __dirname
+global.applicationPath = global.applicationPath || __dirname
 
-const dashboard = require('@userappstore/dashboard')
 const fs = require('fs')
 const stripe = require('stripe')(  )
 const testData = require('@userappstore/dashboard/test-data.json')
@@ -11,11 +10,27 @@ const stripeKey = {
   api_key: process.env.STRIPE_KEY
 }
 
-const TestHelper = module.exports = dashboard.loadTestHelper()
+const TestHelper = require('@userappstore/dashboard/test-helper.js')
 
-const createRequestWas = module.exports.createRequest
+module.exports = {
+  createAdditionalOwner,
+  createExternalAccount,
+  createMultiPart,
+  createPayout,
+  createStripeAccount,
+  createStripeRegistration,
+  submitAdditionalOwners,
+  submitStripeAccount,
+  triggerVerification,
+  waitForPayout: util.promisify(waitForPayout)
+}
+
+for (const x in TestHelper) {
+  module.exports[x] = TestHelper[x]
+}
+
 module.exports.createRequest = (rawURL, method) => {
-  const req = createRequestWas(rawURL, method)
+  const req = TestHelper.createRequest(rawURL, method)
   req.stripeKey = stripeKey
   req.userAgent = 'A web browser user agent'
   req.ip = '8.8.8.8'
@@ -26,17 +41,6 @@ module.exports.createRequest = (rawURL, method) => {
   }
   return req
 }
-
-module.exports.createAdditionalOwner = createAdditionalOwner
-module.exports.createExternalAccount = createExternalAccount
-module.exports.createMultiPart = createMultiPart
-module.exports.createPayout = createPayout
-module.exports.createStripeAccount = createStripeAccount
-module.exports.createStripeRegistration = createStripeRegistration
-module.exports.submitAdditionalOwners = submitAdditionalOwners
-module.exports.submitStripeAccount = submitStripeAccount
-module.exports.triggerVerification = triggerVerification
-module.exports.waitForPayout = util.promisify(waitForPayout)
 
 async function createStripeAccount(user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
@@ -73,7 +77,7 @@ async function createStripeRegistration (user, properties) {
   // via https://github.com/coolaj86/node-examples-js/blob/master/http-and-html5/http-upload.js
   // creating a stripe account requires posting an id image in a multipart payload
 async function createMultiPart (req, body) {
-  const boundary = '-----------------' + dashboard.Timestamp.now
+  const boundary = '-----------------' + global.testNumber
   const delimiter = `\r\n--${boundary}`
   const closeDelimiter = delimiter + "--"
   const headers = [
@@ -201,7 +205,8 @@ async function waitForPayout(stripeid, previousid, callback) {
     if (global.testEnded) {
       return
     }
-    const itemids = await dashboard.StorageList.list(`${global.appid}/stripeAccount/payouts/${stripeid}`, 0, 1)
+    const req = module.exports.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${stripeid}`)
+    const itemids = await req.route.api._get(req)
     if (!itemids || !itemids.length) {
       return setTimeout(wait, 10)
     }
