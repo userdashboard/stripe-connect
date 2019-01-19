@@ -4,7 +4,7 @@
 
 // describe(`/administrator/connect/payout`, () => {
 //   describe('Payout#BEFORE', () => {
-//     it('should bind reject invalid payoutid', async () => {
+//     it('should reject invalid payoutid', async () => {
 //       const administrator = await TestHelper.createAdministrator()
 //       const req = TestHelper.createRequest(`/administrator/connect/payout?payoutid=invalid`)
 //       req.account = administrator.account
