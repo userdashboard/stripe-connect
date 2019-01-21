@@ -41,7 +41,7 @@ async function renderPage (req, res, messageTemplate) {
     if (req.query && req.query.returnURL) {
       return dashboard.Response.redirect(req, res, req.query.returnURL)
     }
-    messageTemplate = 'success'
+    return dashboard.Response.redirect(req, res, `/account/connect/stripe-account?stripeid=${req.query.stripeid}`)
   } else if (req.error) {
     messageTemplate = req.error
   }
