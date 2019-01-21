@@ -14,7 +14,8 @@ async function beforeRequest (req) {
   }
   if (req.session.lockURL === req.url && req.session.unlocked) {
     try {
-      await global.api.user.connect.CreateAdditionalOwner._post(req)
+      const owner = await global.api.user.connect.CreateAdditionalOwner._post(req)
+      req.data = { owner }
     } catch (error) {
       req.error = error.message
     }
@@ -58,7 +59,7 @@ async function renderPage (req, res, messageTemplate) {
     if (req.query && req.query.returnURL) {
       return dashboard.Response.redirect(req, res, req.query.returnURL)
     }
-    messageTemplate = 'success'
+    return dashboard.Response.redirect(req, res, `/account/connect/additional-owner?ownerid=${req.data.owner.ownerid}`)
   } else if (req.error) {
     messageTemplate = req.error
   }
@@ -147,8 +148,9 @@ async function submitForm (req, res) {
     }
   }
   try {
-    await global.api.user.connect.CreateAdditionalOwner._post(req)
+    const owner = await global.api.user.connect.CreateAdditionalOwner._post(req)
     if (req.success) {
+      req.data = { owner }
       return renderPage(req, res, 'success')
     }
     return dashboard.Response.redirect(req, res, '/account/authorize')
