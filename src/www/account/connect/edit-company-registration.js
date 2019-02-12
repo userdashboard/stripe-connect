@@ -154,7 +154,6 @@ async function renderPage (req, res, messageTemplate) {
     'legal_entity.address.city',
     'legal_entity.address.state',
     'legal_entity.address.postal_code',
-    'legal_entity.address.country',
     'legal_entity.personal_address.line1',
     'legal_entity.personal_address.line2',
     'legal_entity.personal_address.city',
@@ -173,16 +172,6 @@ async function renderPage (req, res, messageTemplate) {
     removableFields.splice(index, 1)
   }
 
-  let noPersonalAddress = doc.getElementById('personal_line1') === null &&
-                          doc.getElementById('personal_line2') === null &&
-                          doc.getElementById('personal_city') === null &&
-                          doc.getElementById('personal_state') === null &&
-                          doc.getElementById('personal_postal_code') === null &&
-                          doc.getElementById('personal_country') === null
-  if (noPersonalAddress) {
-    const container = doc.getElementById('personal-address-container')
-    container.parentNode.removeChild(container)
-  }
   for (const field of removableFields) {
     const parts = field.split('.')
     const name = parts[parts.length - 1]
@@ -222,6 +211,16 @@ async function renderPage (req, res, messageTemplate) {
       continue
     }
     element.parentNode.removeChild(element)
+  }
+  const noPersonalAddress = doc.getElementById('personal_line1') === null &&
+    doc.getElementById('personal_line2') === null &&
+    doc.getElementById('personal_city') === null &&
+    doc.getElementById('personal_state') === null &&
+    doc.getElementById('personal_postal_code') === null &&
+    doc.getElementById('personal_country') === null
+  if (noPersonalAddress) {
+    const container = doc.getElementById('personal-address-container')
+    container.parentNode.removeChild(container)
   }
   for (const field in req.data.registration) {
     const element = doc.getElementById(field)
