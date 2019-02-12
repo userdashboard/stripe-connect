@@ -58,7 +58,7 @@ async function beforeRequest (req) {
       return
     }
     for (const countryItem of countriesDivisions) {
-      if (countryItem.code === req.country.country.iso_code) {
+      if (countryItem.code === stripeAccount.country) {
         personalAddressCountry = countryItem
         break
       }
@@ -70,7 +70,7 @@ async function beforeRequest (req) {
       return
     }
     for (const countryItem of countriesDivisions) {
-      if (countryItem.code === req.country.country.iso_code) {
+      if (countryItem.code === stripeAccount.country) {
         companyAddressCountry = countryItem
         break
       }
