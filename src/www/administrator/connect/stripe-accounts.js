@@ -16,9 +16,9 @@ async function beforeRequest (req) {
     }
     if (stripeAccount.payouts_enabled) {
       stripeAccount.statusMessage = 'verified'
-    } else if (stripeAccount.verification && stripeAccount.verification.disabled_reason) {
+    } else if (stripeAccount.verification.disabled_reason) {
       stripeAccount.statusMessage = `${stripeAccount.verification.disabled_reason}`
-    } else if (stripeAccount.verification && stripeAccount.verification.details_code) {
+    } else if (stripeAccount.verification.details_code) {
       stripeAccount.statusMessage = `${stripeAccount.verification.details_code}`
     } else if (stripeAccount.metadata.submitted) {
       stripeAccount.statusMessage = 'under-review'
