@@ -20,9 +20,9 @@ async function beforeRequest (req) {
       stripeAccount.createdFormatted = dashboard.Timestamp.date(stripeAccount.created)
       if (stripeAccount.payouts_enabled) {
         stripeAccount.statusMessage = 'status-verified'
-      } else if (stripeAccount.verification.disabled_reason) {
+      } else if (stripeAccount.verification && stripeAccount.verification.disabled_reason) {
         stripeAccount.statusMessage = `status-${stripeAccount.verification.disabled_reason}`
-      } else if (stripeAccount.verification.details_code) {
+      } else if (stripeAccount.verification && stripeAccount.verification.details_code) {
         stripeAccount.statusMessage = `status-${stripeAccount.verification.details_code}`
       } else if (stripeAccount.metadata.submitted) {
         stripeAccount.statusMessage = 'status-under-review'
