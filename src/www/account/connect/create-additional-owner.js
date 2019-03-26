@@ -23,7 +23,7 @@ async function beforeRequest (req) {
   const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
   if (stripeAccount.metadata.submitted ||
     stripeAccount.metadata.submittedOwners ||
-    stripeAccount.individual ||
+    stripeAccount.legal_entity.type === 'individual' ||
     stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }

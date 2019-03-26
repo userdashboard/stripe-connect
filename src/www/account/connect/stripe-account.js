@@ -29,7 +29,7 @@ async function beforeRequest (req) {
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec._get(req)
   let verificationFields
-  if (stripeAccount.individual) {
+  if (stripeAccount.legal_entity.type === 'individual') {
     verificationFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
   } else {
     verificationFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.additional)
@@ -90,7 +90,7 @@ async function renderPage (req, res, messageTemplate) {
     updateIndividualLink.parentNode.removeChild(updateIndividualLink)
     const updateCompanyLink = doc.getElementById('update-company-registration-link')
     updateCompanyLink.parentNode.removeChild(updateCompanyLink)
-    if (req.data.stripeAccount.individual) {
+    if (req.data.stripeAccount.legal_entity.type === 'individual') {
       const startCompanyLink = doc.getElementById('start-company-registration-link')
       startCompanyLink.parentNode.removeChild(startCompanyLink)
     } else {
@@ -128,7 +128,7 @@ async function renderPage (req, res, messageTemplate) {
   }
   // submission status
   let registrationLink
-  if (req.data.stripeAccount.individual) {
+  if (req.data.stripeAccount.legal_entity.type === 'individual') {
     const submitCompanyLink = doc.getElementById('submit-company-registration-link')
     submitCompanyLink.parentNode.removeChild(submitCompanyLink)
     registrationLink = doc.getElementById('submit-individual-registration-link')

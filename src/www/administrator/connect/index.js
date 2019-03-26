@@ -29,7 +29,7 @@ async function renderPage (req, res) {
   if (req.data.stripeAccounts && req.data.stripeAccounts.length) {
     dashboard.HTML.renderTable(doc, req.data.stripeAccounts, 'stripe-account-row', 'stripe-accounts-table')
     for (const stripeAccount of req.data.stripeAccounts) {
-      if (stripeAccount.individual) {
+      if (stripeAccount.legal_entity.type === 'individual') {
         const businessName = doc.getElementById(`business-name-${stripeAccount.id}`)
         businessName.parentNode.removeChild(businessName)
       } else {

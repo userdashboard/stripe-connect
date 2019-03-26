@@ -21,7 +21,7 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-account')
   }
-  if (stripeAccount.individual) {
+  if (stripeAccount.legal_entity.type === 'individual') {
     throw new Error('invalid-stripe-account')
   }
   if (!req.success && stripeAccount.metadata.submittedOwners) {

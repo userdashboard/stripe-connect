@@ -25,7 +25,7 @@ async function beforeRequest (req) {
       } else {
         stripeAccount.statusMessage = 'not-submitted'
       }
-      if (stripeAccount.individual) {
+      if (stripeAccount.legal_entity.type === 'individual') {
         individual = stripeAccount
       } else {
         company.push(stripeAccount)
