@@ -29,7 +29,7 @@ async function beforeRequest (req) {
       } else {
         stripeAccount.statusMessage = 'status-not-submitted'
       }
-      if (stripeAccount.legal_entity.type === 'individual') {
+      if (stripeAccount.individual) {
         individual = stripeAccount
       } else {
         company.push(stripeAccount)

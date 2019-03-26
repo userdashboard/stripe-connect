@@ -10,7 +10,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripeid')
   }
   const stripeAccount = await global.api.administrator.connect.StripeAccount._get(req)
-  if (stripeAccount.legal_entity.type === 'individual') {
+  if (stripeAccount.individual) {
     stripeAccount.first_name = stripeAccount.legal_entity.first_name
     stripeAccount.last_name = stripeAccount.legal_entity.last_name
   } else {
@@ -32,7 +32,7 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res, messageTemplate) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-  if (req.data.stripeAccount.legal_entity.type === 'individual') {
+  if (req.data.stripeAccount.individual) {
     const businessName = doc.getElementById(`business-name-${req.data.stripeAccount.id}`)
     businessName.parentNode.removeChild(businessName)
   } else {

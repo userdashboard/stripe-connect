@@ -16,7 +16,7 @@ module.exports = {
     for (const stripeAccount of stripeAccounts) {
       if (!stripeAccount.metadata.submitted ||
           !stripeAccount.metadata.submittedOwners ||
-          stripeAccount.legal_entity.type === 'individual') {
+          stripeAccount.individual) {
         continue
       }
       // find an owner that needs reuploading

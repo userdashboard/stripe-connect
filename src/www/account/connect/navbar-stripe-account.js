@@ -16,7 +16,7 @@ module.exports = {
       return
     }
     // in progress
-    if (stripeAccount.legal_entity.type === 'individual') {
+    if (stripeAccount.individual) {
       const editCompany = template.getElementById('navbar-edit-company')
       editCompany.parentNode.removeChild(editCompany)
       const submitCompany = template.getElementById('navbar-submit-company')

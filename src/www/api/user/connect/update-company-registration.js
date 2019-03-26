@@ -10,7 +10,7 @@ module.exports = {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (stripeAccount.metadata.submitted ||
-        stripeAccount.legal_entity.type === 'individual' ||
+        stripeAccount.individual ||
         stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
