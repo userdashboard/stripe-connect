@@ -14,7 +14,7 @@ module.exports = {
     }
     let stripeEvent
     try {
-      stripeEvent = stripe.webhooks.constructEvent(req.bodyRaw, req.headers['stripe-signature'], process.env.SUBSCRIPTIONS_ENDPOINT_SECRET)
+      stripeEvent = stripe.webhooks.constructEvent(req.bodyRaw, req.headers['stripe-signature'], process.env.CONNECT_ENDPOINT_SECRET)
     } catch (error) {
     }
     if (!stripeEvent) {
