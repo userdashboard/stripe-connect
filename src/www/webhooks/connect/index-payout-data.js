@@ -8,10 +8,6 @@ const stripeCache = require('../../../stripe-cache.js')
 module.exports = {
   auth: false,
   post: async (req, res) => {
-    if (global.testNumber && req.bodyRaw.indexOf(global.testNumber) === -1) {
-      res.statusCode = 200
-      return res.end()
-    }
     let stripeEvent
     try {
       stripeEvent = stripe.webhooks.constructEvent(req.bodyRaw, req.headers['stripe-signature'], process.env.CONNECT_ENDPOINT_SECRET)
