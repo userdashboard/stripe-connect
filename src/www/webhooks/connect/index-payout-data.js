@@ -10,7 +10,7 @@ module.exports = {
   post: async (req, res) => {
     let stripeEvent
     try {
-      stripeEvent = stripe.webhooks.constructEvent(req.bodyRaw, req.headers['stripe-signature'], process.env.CONNECT_ENDPOINT_SECRET)
+      stripeEvent = stripe.webhooks.constructEvent(req.bodyRaw, req.headers['stripe-signature'], req.endpointSecret || process.env.CONNECT_ENDPOINT_SECRET)
     } catch (error) {
     }
     if (!stripeEvent) {
