@@ -6,9 +6,6 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    if (!req.file || !req.file.id) {
-      throw new Error('invalid-upload')
-    }
     const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (!stripeAccount.metadata.submitted ||
       stripeAccount.metadata.accountid !== req.account.accountid ||
@@ -17,13 +14,27 @@ module.exports = {
     }
   },
   patch: async (req) => {
-    if (!req.file) {
-      throw new Error('invalid-upload')
+    const uploadData = {
+      purpose: 'identity_document',
+      file: {
+        type: 'application/octet-stream'
+      }
+    }
+    if (req.uploads['id_scan.jpg']) {
+      uploadData.file.name = 'id_scan.jpg'
+      uploadData.file.data = req.uploads['id_scan.jpg'].buffer
+    } else {
+      uploadData.file.name = 'id_scan.png'
+      uploadData.file.data = req.uploads['id_scan.png'].buffer
     }
     const accountInfo = {
-      legal_entity: {
-        document: req.file.id
-      }
+      legal_entity: {}
+    }
+    try {
+      const file = await stripe.files.create(uploadData, req.stripeKey)
+      accountInfo.legal_entity.document = file.id
+    } catch (error) {
+      throw new Error('invalid-upload')
     }
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)

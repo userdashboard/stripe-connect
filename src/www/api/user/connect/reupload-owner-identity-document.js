@@ -6,9 +6,6 @@ module.exports = {
     if (!req.query || !req.query.ownerid) {
       throw new Error('invalid-ownerid')
     }
-    if (!req.file) {
-      throw new Error('invalid-upload')
-    }
     const stripeAccounts = await global.api.user.connect.StripeAccounts._get(req)
     if (!stripeAccounts || !stripeAccounts.length) {
       throw new Error('invalid-ownerid')
@@ -55,8 +52,28 @@ module.exports = {
         }
       }
     }
-    accountInfo.legal_entity.additional_owners[req.body.index] = {
-      document: req.file.id
+    if (req.uploads && (req.uploads['id_scan.jpg'] || req.uploads['id_scan.png'])) {
+      const uploadData = {
+        purpose: 'identity_document',
+        file: {
+          type: 'application/octet-stream'
+        }
+      }
+      if (req.uploads['id_scan.jpg']) {
+        uploadData.file.name = 'id_scan.jpg'
+        uploadData.file.data = req.uploads['id_scan.jpg'].buffer
+      } else {
+        uploadData.file.name = 'id_scan.png'
+        uploadData.file.data = req.uploads['id_scan.png'].buffer
+      }
+      try {
+        const file = await stripe.files.create(uploadData, req.stripeKey)
+        accountInfo.legal_entity.additional_owners[req.body.index] = {
+          document: file.id
+        }
+      } catch (error) {
+        throw new Error('invalid-upload')
+      }
     }
     try {
       const accountNow = await stripe.accounts.update(req.stripeAccount.id, accountInfo, req.stripeKey)

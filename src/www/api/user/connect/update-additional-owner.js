@@ -35,8 +35,26 @@ module.exports = {
     if (!req.body.last_name) {
       throw new Error('invalid-last_name')
     }
-    if (req.file) {
-      req.body.documentid = req.file.id
+    if (req.uploads && (req.uploads['id_scan.jpg'] || req.uploads['id_scan.png'])) {
+      const uploadData = {
+        purpose: 'identity_document',
+        file: {
+          type: 'application/octet-stream'
+        }
+      }
+      if (req.uploads['id_scan.jpg']) {
+        uploadData.file.name = 'id_scan.jpg'
+        uploadData.file.data = req.uploads['id_scan.jpg'].buffer
+      } else {
+        uploadData.file.name = 'id_scan.png'
+        uploadData.file.data = req.uploads['id_scan.png'].buffer
+      }
+      try {
+        const file = await stripe.files.create(uploadData, req.stripeKey)
+        req.body.documentid = file.id
+      } catch (error) {
+        throw new Error('invalid-upload')
+      }
     }
     const owner = await global.api.user.connect.AdditionalOwner._get(req)
     req.query.stripeid = owner.stripeid

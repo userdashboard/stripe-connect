@@ -18,9 +18,26 @@ module.exports = {
     const countrySpec = await global.api.user.connect.CountrySpec._get(req)
     const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
     req.data = { countrySpec, stripeAccount }
-    if (req.file) {
-      req.body = req.body || {}
-      req.body.documentid = req.file.id
+    if (req.uploads && (req.uploads['id_scan.jpg'] || req.uploads['id_scan.png'])) {
+      const uploadData = {
+        purpose: 'identity_document',
+        file: {
+          type: 'application/octet-stream'
+        }
+      }
+      if (req.uploads['id_scan.jpg']) {
+        uploadData.file.name = 'id_scan.jpg'
+        uploadData.file.data = req.uploads['id_scan.jpg'].buffer
+      } else {
+        uploadData.file.name = 'id_scan.png'
+        uploadData.file.data = req.uploads['id_scan.png'].buffer
+      }
+      try {
+        const file = await stripe.files.create(uploadData, req.stripeKey)
+        req.body.documentid = file.id
+      } catch (error) {
+        throw new Error('invalid-upload')
+      }
     }
     for (const pathAndField of requiredFields) {
       let field = pathAndField.split('.').pop()

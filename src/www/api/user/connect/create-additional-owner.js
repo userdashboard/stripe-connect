@@ -39,10 +39,25 @@ module.exports = {
     if (req.body.documentid) {
       return
     }
-    if (!req.file) {
-      throw new Error('invalid-upload')
+    const uploadData = {
+      purpose: 'identity_document',
+      file: {
+        type: 'application/octet-stream'
+      }
     }
-    req.body.documentid = req.file.id
+    if (req.uploads['id_scan.jpg']) {
+      uploadData.file.name = 'id_scan.jpg'
+      uploadData.file.data = req.uploads['id_scan.jpg'].buffer
+    } else {
+      uploadData.file.name = 'id_scan.png'
+      uploadData.file.data = req.uploads['id_scan.png'].buffer
+    }
+    try {
+      const file = await stripe.files.create(uploadData, req.stripeKey)
+      req.body.documentid = file.id
+    } catch (error) {
+      throw new Error('invalid-upload')
+    }    
     const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (stripeAccount.legal_entity.type === 'individual' ||
       stripeAccount.metadata.submitted ||
