@@ -25,7 +25,7 @@
         <td id="registration-status-${stripeAccount.id}"></td>
       </tr>
     </table>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked">
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}">
       <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
     </form>
   </body>

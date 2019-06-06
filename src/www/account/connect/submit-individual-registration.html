@@ -11,7 +11,7 @@
     <h1>Submit ${stripeAccount.id}</h1>
     <p>This will verify your personal information through <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
     <div id="message-container"></div>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked">
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/submit-individual-registration?stripeid=${stripeAccount.id}">
       <div class="pure-g">
         <div class="pure-u-1-1">
           <div id="represent-note" class="pure-control-group">

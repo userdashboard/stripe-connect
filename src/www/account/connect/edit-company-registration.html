@@ -12,7 +12,7 @@
     <h1>Edit ${stripeAccount.id}</h1>
     <p>Company registration information must be accurate and completely provided.</p>
     <div id="message-container"></div>
-    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked">
+    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked" action="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}">
       <h2>Company information</h2>
       <div id="business_name-container" class="pure-control-group">
         <label for="business_name">Business name</label>

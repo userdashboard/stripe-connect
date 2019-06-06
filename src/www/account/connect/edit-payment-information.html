@@ -18,7 +18,7 @@
     <h1>Payment information for ${stripeAccount.id}</h1>
     <p>Update the bank account that will receive your revenue payouts.</p>
     <div id="message-container"></div>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked">
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">
       <input type="submit" />
       <div class="country pure-control-group">
         <label for="country">Country of bank</label>

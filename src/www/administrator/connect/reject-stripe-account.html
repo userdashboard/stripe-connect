@@ -25,7 +25,7 @@
         <td id="registration-status-${stripeAccount.id}"></td>
       </tr>
     </table>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked">
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}">
       <div class="pure-control-group">
         <label for="reason">Rejection reason</label>
         <select id="reason" name="reason">

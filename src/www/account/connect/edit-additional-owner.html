@@ -12,7 +12,7 @@
     <h1>Edit ${owner.ownerid}</h1>
     <p>This information must be accurate and completely provided.</p>
     <div id="message-container"></div>
-    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked">
+    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked" action="/account/connect/edit-additional-owner?ownerid=${owner.ownerid}">
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div class="pure-control-group">
