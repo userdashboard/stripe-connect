@@ -13,7 +13,7 @@
   "main": "index.js",
   "dependencies": {
     "@userappstore/maxmind-geoip": "git+https://github.com/userappstore/maxmind-geoip.git",
-    "stripe": "^6.20.0"
+    "stripe": "^6.36.0"
   },
   "devDependencies": {
     "@userappstore/dashboard": "git+https://github.com/userappstore/dashboard.git"
