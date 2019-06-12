@@ -56,8 +56,8 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res, messageTemplate) {
   if (req.success) {
-    if (req.query && req.query.returnURL) {
-      return dashboard.Response.redirect(req, res, req.query.returnURL)
+    if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
+      return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
     }
     return dashboard.Response.redirect(req, res, `/account/connect/additional-owner?ownerid=${req.data.owner.ownerid}`)
   } else if (req.error) {
