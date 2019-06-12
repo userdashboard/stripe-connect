@@ -46,6 +46,11 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  if (!messageTemplate && req.method === 'GET' && req.query && req.query.returnURL) {
+    const submitForm = doc.getElementById('submit-form')
+    const divider = submitForm.attr.action.indexOf('?') > -1 ? '&' : '?'
+    submitForm.attr.action += `${divider}returnURL=${req.query.returnURL}`
+  }
   if (req.data.stripeAccount.metadata.submittedOwners || messageTemplate === 'success') {
     dashboard.HTML.renderTemplate(doc, null, 'success', 'message-container')
     const submitForm = doc.getElementById('submit-form')

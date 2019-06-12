@@ -68,6 +68,11 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  if (!messageTemplate && req.method === 'GET' && req.query && req.query.returnURL) {
+    const submitForm = doc.getElementById('submit-form')
+    const divider = submitForm.attr.action.indexOf('?') > -1 ? '&' : '?'
+    submitForm.attr.action += `${divider}returnURL=${req.query.returnURL}`
+  }
   navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
