@@ -292,7 +292,7 @@
 
   /account/connect/stripe-account
     StripeAccount#BEFORE
-      ✓ should bind reject invalid stripeid
+      ✓ should reject invalid stripeid
       ✓ should reject other account's stripeid
       ✓ should bind Stripe account to req
     StripeAccount#GET
@@ -377,7 +377,7 @@
 
   /administrator/connect/stripe-account
     StripeAccount#BEFORE
-      ✓ should bind reject invalid stripeid
+      ✓ should reject invalid stripeid
       ✓ should bind Stripe account to req
     StripeAccount#GET
       ✓ should have row for Stripe account
@@ -742,5 +742,5 @@
       ✓ should update US information
 
 
-  554 passing (49m)
+  554 passing (52m)
 
