@@ -88,10 +88,8 @@ describe(`/account/connect/submit-individual-registration`, async () => {
       req.session = user.session
       req.body = {}
       const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(page)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
   })
 })

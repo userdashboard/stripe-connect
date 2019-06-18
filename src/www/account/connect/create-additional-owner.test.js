@@ -197,10 +197,8 @@ describe(`/account/connect/create-additional-owner`, async () => {
         year: '1950'
       })
       const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(page)
+      assert.strictEqual(true, redirectURL.startsWith(`/account/connect/additional-owner?ownerid=`))
     })
   })
 })
