@@ -45,10 +45,10 @@ module.exports = {
         type: 'application/octet-stream'
       }
     }
-    if (req.uploads['id_scan.jpg']) {
+    if (req.uploads && req.uploads['id_scan.jpg']) {
       uploadData.file.name = 'id_scan.jpg'
       uploadData.file.data = req.uploads['id_scan.jpg'].buffer
-    } else {
+    } else if (req.uploads && req.uploads['id_scan.png']) {
       uploadData.file.name = 'id_scan.png'
       uploadData.file.data = req.uploads['id_scan.png'].buffer
     }

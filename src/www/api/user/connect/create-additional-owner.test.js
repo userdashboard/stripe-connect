@@ -1,7 +1,10 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const connect = require('../../../../../index.js')
+const fs = require('fs')
+const path = require('path')
 const TestHelper = require('../../../../../test-helper.js')
+const idscan = fs.readFileSync(path.join(__dirname, '../../../../../test-documentid-success.png'))
 
 describe(`/api/user/connect/create-additional-owner`, async () => {
   describe('CreateAdditionalOwner#BEFORE', () => {
@@ -21,8 +24,10 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         month: '1',
         year: '1950'
       }
-      req.file = {
-        id: 'fake'
+      req.uploads = {
+        'id_scan.png': { 
+          buffer: idscan
+        }
       }
       let errorMessage
       try {
@@ -50,8 +55,8 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         month: '1',
         year: '1950'
       }
-      req.file = {
-        id: 'fake'
+      req.uploads = {
+        'id_scan.png': { buffer: idscan }
       }
       let errorMessage
       try {
@@ -79,8 +84,8 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         month: '1',
         year: '1950'
       }
-      req.file = {
-        id: 'fake'
+      req.uploads = {
+        'id_scan.png': { buffer: idscan }
       }
       let errorMessage
       try {
@@ -109,8 +114,8 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         month: '1',
         year: '1950'
       }
-      req.file = {
-        id: 'fake'
+      req.uploads = {
+        'id_scan.png': { buffer: idscan }
       }
       let errorMessage
       try {
@@ -142,8 +147,8 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         month: '1',
         year: '1950'
       }
-      req.file = {
-        id: 'fake'
+      req.uploads = {
+        'id_scan.png': { buffer: idscan }
       }
       let errorMessage
       try {
@@ -175,8 +180,8 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         month: '1',
         year: '1950'
       }
-      req.file = {
-        id: 'fake'
+      req.uploads = {
+        'id_scan.png': { buffer: idscan }
       }
       let errorMessage
       try {
@@ -204,8 +209,8 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         month: '1',
         year: '1950'
       }
-      req.file = {
-        id: 'fake'
+      req.uploads = {
+        'id_scan.png': { buffer: idscan }
       }
       let errors = 0
       for (const field in req.body) {
