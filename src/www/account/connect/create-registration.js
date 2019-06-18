@@ -70,7 +70,7 @@ async function submitForm (req, res) {
     req.query.accountid = req.account.accountid
     const stripeAccount = await global.api.user.connect.CreateStripeAccount._post(req)
     if (req.success) {
-      req.stripeAccount = stripeAccount
+      req.data = { stripeAccount }
       return renderPage(req, res, 'success')
     }
     return dashboard.Response.redirect(req, res, '/account/authorize')
