@@ -90,6 +90,28 @@
 |/api/user/connect/UpdateIndividualRegistration.patch(req)        | stripeid=      | Country-specific identity & address |
 |/api/user/connect/UpdatePaymentInformation.patch(req)            | stripeid=      | Country-specific banking fields |
 
+# Dashboard
+
+Dashboard is a NodeJS project that provides a reusable account management system for web applications. 
+
+Dashboard proxies your application server to create a single website where pages like signing in or changing your password are provided by Dashboard.  Your application server can be anything you want, and use Dashboard's API to access data as required.
+
+Using modules you can expand Dashboard to include organizations, subscriptions powered by Stripe, or a Stripe Connect platform.
+
+Application servers written for Dashboard can be published on websites running our [app store](https://github.com/userappstore/app-store-dashboard-server) software like [UserAppStore](https://userappstore.com).
+
+- [Introduction](https://github.com/userappstore/dashboard/wiki)
+- [Configuring Dashboard](https://github.com/userappstore/dashboard/wiki/Configuring-Dashboard)
+- [Dashboard code structure](https://github.com/userappstore/dashboard/wiki/Dashboard-code-structure)
+- [Server request lifecycle](https://github.com/userappstore/dashboard/wiki/Server-Request-Lifecycle)
+
+### Demonstrations
+
+- [Dashboard](https://dashboard-demo-2344.herokuapp.com)
+- [Dashboard + Organizations module](https://organizations-demo-7933.herokuapp.com)
+- [Dashboard + Stripe Subscriptions module](https://stripe-subscriptions-5701.herokuapp.com)
+- [Dashboard + Stripe Connect module](https://stripe-connect-8509.herokuapp.com)
+
  #### License
 
 This is free and unencumbered software released into the public domain.  The MIT License is provided for countries that have not established a public domain.
