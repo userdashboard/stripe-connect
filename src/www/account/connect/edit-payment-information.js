@@ -83,7 +83,9 @@ async function renderPage (req, res, messageTemplate) {
   for (const country of req.data.stripeCountries) {
     if (country.id !== selectedCountry) {
       const countryContainer = doc.getElementById(`${country.id}-container`)
-      countryContainer.parentNode.removeChild(countryContainer)
+      if (countryContainer) {
+        countryContainer.parentNode.removeChild(countryContainer)
+      }
     }
   }
   dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'country')
