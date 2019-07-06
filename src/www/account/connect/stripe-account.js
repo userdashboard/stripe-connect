@@ -127,20 +127,23 @@ async function renderPage (req, res, messageTemplate) {
     ownersContainer.parentNode.removeChild(ownersContainer)
   }
   // submission status
-  let registrationLink
-  if (req.data.stripeAccount.legal_entity.type === 'individual') {
-    const submitCompanyLink = doc.getElementById('submit-company-registration-link')
-    submitCompanyLink.parentNode.removeChild(submitCompanyLink)
-    registrationLink = doc.getElementById('submit-individual-registration-link')
-  } else {
-    const submitIndividualLink = doc.getElementById('submit-individual-registration-link')
-    submitIndividualLink.parentNode.removeChild(submitIndividualLink)
-    registrationLink = doc.getElementById('submit-company-registration-link')
-  }
   if (req.data.stripeAccount.metadata.submitted) {
+    req.data.stripeAccount.date = dashboard.Timestamp.date(req.data.stripeAccount.metadata.submitted)
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'submitted-information', 'submission-status')
+    const registrationLinks = doc.getElementById('submit-registration-link-container')
+    registrationLinks.parentNode.removeChild(registrationLinks)
   } else {
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'not-submitted-information', 'submission-status')
+    let registrationLink
+    if (req.data.stripeAccount.legal_entity.type === 'individual') {
+      const submitCompanyLink = doc.getElementById('submit-company-registration-link')
+      submitCompanyLink.parentNode.removeChild(submitCompanyLink)
+      registrationLink = doc.getElementById('submit-individual-registration-link')
+    } else {
+      const submitIndividualLink = doc.getElementById('submit-individual-registration-link')
+      submitIndividualLink.parentNode.removeChild(submitIndividualLink)
+      registrationLink = doc.getElementById('submit-company-registration-link')
+    }
     if (!req.data.registrationComplete || !req.data.stripeAccount.metadata.submittedOwners || !completedPaymentInformation) {
       registrationLink.setAttribute('disabled', 'disabled')
     }
