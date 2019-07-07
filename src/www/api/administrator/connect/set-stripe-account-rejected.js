@@ -2,8 +2,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -17,8 +16,6 @@ module.exports = {
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
     }
-  },
-  patch: async (req) => {
     const updateInfo = {
       reason: req.body.reason
     }

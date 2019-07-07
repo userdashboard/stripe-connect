@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/administrator/connect/delete-stripe-account`, async () => {
-  describe('DeleteStripeAccount#BEFORE', () => {
+  describe('DeleteStripeAccount#DELETE', () => {
     it('should reject invalid stripeid', async () => {
       const administrator = await TestHelper.createAdministrator()
       const req = TestHelper.createRequest(`/api/administrator/connect/delete-stripe-account?stripeid=invalid`)
@@ -11,15 +11,13 @@ describe(`/api/administrator/connect/delete-stripe-account`, async () => {
       req.session = administrator.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.delete(req)
       } catch (error) {
         errorMessage = error.message
       }
       assert.strictEqual(errorMessage, 'invalid-stripeid')
     })
-  })
-
-  describe('DeleteStripeAccount#DELETE', () => {
+    
     it('should delete Stripe account', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()

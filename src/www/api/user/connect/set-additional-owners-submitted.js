@@ -4,8 +4,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -24,38 +23,34 @@ module.exports = {
     if (!requireOwners) {
       throw new Error('invalid-stripe-account')
     }
-    req.owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-    req.stripeAccount = stripeAccount
-    req.registration = registration
-  },
-  patch: async (req) => {
+    const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
     const accountInfo = {
       legal_entity: {},
       metadata: {
         submittedOwners: dashboard.Timestamp.now
       }
     }
-    if (!req.owners || !req.owners.length) {
+    if (!owners || !owners.length) {
       accountInfo.legal_entity.additional_owners = ''
     } else {
       accountInfo.legal_entity.additional_owners = {}
-      for (const i in req.owners) {
+      for (const i in owners) {
         accountInfo.legal_entity.additional_owners[i] = {
-          first_name: req.owners[i].first_name,
-          last_name: req.owners[i].last_name,
+          first_name: owners[i].first_name,
+          last_name: owners[i].last_name,
           address: {
-            city: req.owners[i].city,
-            country: req.owners[i].country,
-            line1: req.owners[i].line1,
-            postal_code: req.owners[i].postal_code
+            city: owners[i].city,
+            country: owners[i].country,
+            line1: owners[i].line1,
+            postal_code: owners[i].postal_code
           },
           dob: {
-            day: req.owners[i].day,
-            month: req.owners[i].month,
-            year: req.owners[i].year
+            day: owners[i].day,
+            month: owners[i].month,
+            year: owners[i].year
           },
           verification: {
-            document: req.owners[i].documentid
+            document: owners[i].documentid
           }
         }
       }

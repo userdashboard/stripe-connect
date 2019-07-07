@@ -1,25 +1,21 @@
 const stripe = require('stripe')()
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (!stripeAccount.metadata.submitted ||
-        stripeAccount.metadata.accountid !== req.account.accountid ||
-        !stripeAccount.verification.fields_needed ||
-        !stripeAccount.verification.fields_needed.length) {
+      stripeAccount.metadata.accountid !== req.account.accountid ||
+      !stripeAccount.verification.fields_needed ||
+      !stripeAccount.verification.fields_needed.length) {
       throw new Error('invalid-stripe-account')
     }
-    req.stripeAccount = stripeAccount
-  },
-  patch: async (req) => {
     const updateInfo = {
       legal_entity: {}
     }
-    for (const pathAndField of req.stripeAcount.verification.fields_needed) {
+    for (const pathAndField of stripeAcount.verification.fields_needed) {
       const parts = pathAndField.split('.')
       const secondObject = parts[1]
       const field = parts[parts.length - 1]

@@ -2,8 +2,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  delete: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -11,8 +10,6 @@ module.exports = {
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
     }
-  },
-  delete: async (req) => {
     try {
       await stripe.accounts.del(req.query.stripeid, req.stripeKey)
       req.success = true

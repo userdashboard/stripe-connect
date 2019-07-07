@@ -3,8 +3,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.ownerid) {
       throw new Error('invalid-ownerid')
     }
@@ -63,32 +62,29 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
     const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-    req.data = { owner, owners, stripeAccount }
-  },
-  patch: async (req) => {
     for (const field in req.body) {
-      req.data.owner[field] = req.body[field]
+      owner[field] = req.body[field]
     }
-    if (req.data.owners && req.data.owners.length) {
-      for (const i in req.data.owners) {
-        if (req.data.owners[i].ownerid === req.query.ownerid) {
-          req.data.owners[i] = req.data.owner
+    if (owners && owners.length) {
+      for (const i in owners) {
+        if (owners[i].ownerid === req.query.ownerid) {
+          owners[i] = owner
           break
         }
       }
     } else {
-      req.data.owners = [req.data.owner]
+      owners = [owner]
     }
     const accountInfo = {
       metadata: {
       }
     }
-    connect.MetaData.store(accountInfo.metadata, 'owners', req.data.owners)
+    connect.MetaData.store(accountInfo.metadata, 'owners', owners)
     try {
-      const accountNow = await stripe.accounts.update(req.data.stripeAccount.id, accountInfo, req.stripeKey)
+      const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
       await stripeCache.update(accountNow, req.stripeKey)
       req.success = true
-      return req.data.owner
+      return owner
     } catch (error) {
       if (error.message.startsWith('invalid-')) {
         throw error

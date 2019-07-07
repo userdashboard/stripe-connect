@@ -3,15 +3,15 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/user/connect/set-individual-registration-submitted`, async () => {
-  describe('SetIndividualRegistrationSubmitted#BEFORE', () => {
-    it('should reject invalid stripeid', async () => {
+  describe('SetIndividualRegistrationSubmitted#PATCH', () => {
+        it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/set-individual-registration-submitted?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -26,7 +26,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -44,7 +44,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -60,7 +60,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       req.session = user2.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -76,15 +76,13 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
       assert.strictEqual(errorMessage, 'invalid-payment-details')
     })
-  })
 
-  describe('SetIndividualRegistrationSubmitted#PATCH', () => {
     it(`should submit AT-individual registration`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AT' })

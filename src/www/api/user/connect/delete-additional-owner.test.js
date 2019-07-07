@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/user/connect/delete-additional-owner`, async () => {
-  describe('DeleteAdditionalOwner#BEFORE', () => {
+  describe('DeleteAdditionalOwner#DELETE', () => {
     it('should reject invalid ownerid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/api/user/connect/delete-additional-owner?ownerid=invalid`)
@@ -11,7 +11,7 @@ describe(`/api/user/connect/delete-additional-owner`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.delete(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -29,15 +29,13 @@ describe(`/api/user/connect/delete-additional-owner`, async () => {
       req.session = user2.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.delete(req)
       } catch (error) {
         errorMessage = error.message
       }
       assert.strictEqual(errorMessage, 'invalid-account')
     })
-  })
 
-  describe('DeleteAdditionalOwner#DELETE', () => {
     it('should delete owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })

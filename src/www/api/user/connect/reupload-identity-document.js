@@ -1,8 +1,7 @@
 const stripe = require('stripe')()
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -12,8 +11,6 @@ module.exports = {
       !stripeAccount.legal_entity.verification.details_code) {
       throw new Error('invalid-stripe-account')
     }
-  },
-  patch: async (req) => {
     const uploadData = {
       purpose: 'identity_document',
       file: {

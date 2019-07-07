@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/user/connect/set-additional-owners-submitted`, async () => {
-  describe('SetAdditionalOwnersSubmitted#BEFORE', () => {
+  describe('SetAdditionalOwnersSubmitted#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/set-additional-owners-submitted?stripeid=invalid')
@@ -11,7 +11,7 @@ describe(`/api/user/connect/set-additional-owners-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -26,7 +26,7 @@ describe(`/api/user/connect/set-additional-owners-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -42,7 +42,7 @@ describe(`/api/user/connect/set-additional-owners-submitted`, async () => {
       req.session = user2.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -57,7 +57,7 @@ describe(`/api/user/connect/set-additional-owners-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -73,15 +73,13 @@ describe(`/api/user/connect/set-additional-owners-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
       assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
-  })
 
-  describe('SetAdditionalOwnersSubmitted#PATCH', () => {
     it('should submit blank owners', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })

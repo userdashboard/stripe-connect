@@ -4,8 +4,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -43,10 +42,10 @@ module.exports = {
       }
       if (stripeAccount.country === 'JP') {
         if (pathAndField.startsWith('legal_entity.address_kana.') ||
-            pathAndField.startsWith('legal_entity.personal_address_kana.')) {
+          pathAndField.startsWith('legal_entity.personal_address_kana.')) {
           field += '_kana'
         } else if (pathAndField.startsWith('legal_entity.address_kanji.') ||
-                   pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
+          pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
           field += '_kanji'
         }
       }
@@ -59,13 +58,9 @@ module.exports = {
         throw new Error(`invalid-registration`)
       }
     }
-    req.stripeAccount = stripeAccount
-    req.registration = registration
-  },
-  patch: async (req) => {
     const testInfo = {
       type: 'custom',
-      country: req.stripeAccount.country,
+      country: stripeAccount.country,
       legal_entity: {
         type: 'company',
         address: {},
@@ -89,28 +84,28 @@ module.exports = {
       }
     }
     let fieldName
-    for (const field in req.registration) {
+    for (const field in registration) {
       switch (field) {
         case 'documentid':
-          accountInfo.legal_entity.verification.document = req.registration[field]
+          accountInfo.legal_entity.verification.document = registration[field]
           continue
         case 'first_name':
         case 'last_name':
         case 'business_name':
         case 'gender':
-          accountInfo.legal_entity[field] = req.registration[field]
+          accountInfo.legal_entity[field] = registration[field]
           continue
         case 'business_tax_id':
         case 'personal_id_number':
         case 'phone_number':
         case 'ssn_last_4':
-          testInfo.legal_entity[field] = req.registration[field]
-          accountInfo.legal_entity[field] = req.registration[field]
+          testInfo.legal_entity[field] = registration[field]
+          accountInfo.legal_entity[field] = registration[field]
           continue
         case 'day':
         case 'month':
         case 'year':
-          accountInfo.legal_entity.dob[field] = req.registration[field]
+          accountInfo.legal_entity.dob[field] = registration[field]
           continue
         case 'business_name_kana':
         case 'business_name_kanji':
@@ -118,15 +113,15 @@ module.exports = {
         case 'first_name_kanji':
         case 'last_name_kana':
         case 'last_name_kanji':
-          accountInfo.legal_entity[field] = req.registration[field]
+          accountInfo.legal_entity[field] = registration[field]
           continue
         case 'company_city':
         case 'company_state':
         case 'company_postal_code':
         case 'company_line1':
-          if (req.stripeAccount.country !== 'JP') {
+          if (stripeAccount.country !== 'JP') {
             fieldName = field.substring('company_'.length)
-            accountInfo.legal_entity.address[fieldName] = req.registration[field]
+            accountInfo.legal_entity.address[fieldName] = registration[field]
           }
           continue
         case 'company_city_kana':
@@ -137,7 +132,7 @@ module.exports = {
           fieldName = field.substring('company_'.length)
           fieldName = fieldName.substring(0, fieldName.lastIndexOf('_'))
           accountInfo.legal_entity.address_kana = accountInfo.legal_entity.address_kana || {}
-          accountInfo.legal_entity.address_kana[fieldName] = req.registration[field]
+          accountInfo.legal_entity.address_kana[fieldName] = registration[field]
           continue
         case 'company_city_kanji':
         case 'company_town_kanji':
@@ -147,24 +142,24 @@ module.exports = {
           fieldName = field.substring('company_'.length)
           fieldName = fieldName.substring(0, fieldName.lastIndexOf('_'))
           accountInfo.legal_entity.address_kanji = accountInfo.legal_entity.address_kanji || {}
-          accountInfo.legal_entity.address_kanji[fieldName] = req.registration[field]
+          accountInfo.legal_entity.address_kanji[fieldName] = registration[field]
           continue
         case 'personal_city':
         case 'personal_state':
         case 'personal_line1':
-          if (req.stripeAccount.country !== 'JP') {
+          if (stripeAccount.country !== 'JP') {
             fieldName = field.substring('personal_'.length)
             accountInfo.legal_entity.personal_address = accountInfo.legal_entity.personal_address || {}
-            accountInfo.legal_entity.personal_address[fieldName] = req.registration[field]
+            accountInfo.legal_entity.personal_address[fieldName] = registration[field]
           }
           continue
         case 'personal_postal_code':
-          if (req.stripeAccount.country !== 'JP') {
+          if (stripeAccount.country !== 'JP') {
             fieldName = field.substring('personal_'.length)
             testInfo.legal_entity.personal_address = testInfo.legal_entity.personal_address || {}
-            testInfo.legal_entity.personal_address[fieldName] = req.registration[field]
+            testInfo.legal_entity.personal_address[fieldName] = registration[field]
             accountInfo.legal_entity.personal_address = accountInfo.legal_entity.personal_address || {}
-            accountInfo.legal_entity.personal_address[fieldName] = req.registration[field]
+            accountInfo.legal_entity.personal_address[fieldName] = registration[field]
           }
           continue
         case 'personal_city_kana':
@@ -175,7 +170,7 @@ module.exports = {
           fieldName = field.substring('personal_'.length)
           fieldName = fieldName.substring(0, fieldName.lastIndexOf('_'))
           accountInfo.legal_entity.personal_address_kana = accountInfo.legal_entity.personal_address_kana || {}
-          accountInfo.legal_entity.personal_address_kana[fieldName] = req.registration[field]
+          accountInfo.legal_entity.personal_address_kana[fieldName] = registration[field]
           continue
         case 'personal_city_kanji':
         case 'personal_town_kanji':
@@ -185,7 +180,7 @@ module.exports = {
           fieldName = field.substring('personal_'.length)
           fieldName = fieldName.substring(0, fieldName.lastIndexOf('_'))
           accountInfo.legal_entity.personal_address_kanji = accountInfo.legal_entity.personal_address_kanji || {}
-          accountInfo.legal_entity.personal_address_kanji[fieldName] = req.registration[field]
+          accountInfo.legal_entity.personal_address_kanji[fieldName] = registration[field]
           continue
       }
     }
@@ -227,7 +222,7 @@ module.exports = {
       }
       throw new Error('unkonwn-error')
     }
-    const accountNow = await stripe.accounts.update(req.stripeAccount.id, accountInfo, req.stripeKey)
+    const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
     req.success = true
     await stripeCache.update(accountNow, req.stripeKey)
     return accountNow

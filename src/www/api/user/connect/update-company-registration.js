@@ -3,20 +3,18 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (stripeAccount.metadata.submitted ||
-        stripeAccount.legal_entity.type === 'individual' ||
-        stripeAccount.metadata.accountid !== req.account.accountid) {
+      stripeAccount.legal_entity.type === 'individual' ||
+      stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
     req.query.country = stripeAccount.country
     const countrySpec = await global.api.user.connect.CountrySpec._get(req)
-    req.data = { countrySpec, stripeAccount }
     if (req.uploads && (req.uploads['id_scan.jpg'] || req.uploads['id_scan.png'])) {
       const uploadData = {
         purpose: 'identity_document',
@@ -51,10 +49,10 @@ module.exports = {
       }
       if (stripeAccount.country === 'JP') {
         if (pathAndField.startsWith('legal_entity.address_kana.') ||
-            pathAndField.startsWith('legal_entity.personal_address_kana.')) {
+          pathAndField.startsWith('legal_entity.personal_address_kana.')) {
           field += '_kana'
         } else if (pathAndField.startsWith('legal_entity.address_kanji.') ||
-                   pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
+          pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
           field += '_kanji'
         }
       }
@@ -67,10 +65,7 @@ module.exports = {
         throw new Error(`invalid-${field}`)
       }
     }
-  },
-  patch: async (req) => {
-    const registration = connect.MetaData.parse(req.data.stripeAccount.metadata, 'registration') || {}
-    const requiredFields = req.data.countrySpec.verification_fields.company.minimum.concat(req.data.countrySpec.verification_fields.company.additional)
+    const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
     for (const pathAndField of requiredFields) {
       let field = pathAndField.split('.').pop()
       if (field === 'external_account' ||
@@ -81,7 +76,7 @@ module.exports = {
         field === 'document') {
         continue
       }
-      if (req.data.stripeAccount.country === 'JP') {
+      if (stripeAccount.country === 'JP') {
         if (pathAndField.startsWith('legal_entity.address_kana.') ||
             pathAndField.startsWith('legal_entity.personal_address_kana.')) {
           field += '_kana'

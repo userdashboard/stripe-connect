@@ -11,16 +11,6 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.ownerid) {
     throw new Error('invalid-ownerid')
   }
-  if (req.session.lockURL === req.url && req.session.unlocked) {
-    try {
-      await global.api.user.connect.UpdateAdditionalOwner._patch(req)
-    } catch (error) {
-      throw error
-    }
-    if (req.success) {
-      return
-    }
-  }
   const owner = await global.api.user.connect.AdditionalOwner._get(req)
   req.query.stripeid = owner.stripeid
   const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
@@ -137,7 +127,7 @@ async function submitForm (req, res) {
     if (req.success) {
       return renderPage(req, res, 'success')
     }
-    return dashboard.Response.redirect(req, res, '/account/authorize')
+    return renderPage(req, res, 'unknown-error')
   } catch (error) {
     return renderPage(req, res, error.message)
   }

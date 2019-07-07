@@ -8,17 +8,6 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
-  if (req.session.lockURL === req.url && req.session.unlocked) {
-    req.query = req.query || {}
-    req.query.accountid = req.account.accountid
-    try {
-      const stripeAccount = await global.api.user.connect.CreateStripeAccount._post(req)
-      req.data = { stripeAccount }
-      return
-    } catch (error) {
-      req.error = error.message
-    }
-  }
   const countrySpecs = await global.api.user.connect.CountrySpecs._get(req)
   const countries = []
   for (const countrySpec of countrySpecs) {
@@ -73,7 +62,7 @@ async function submitForm (req, res) {
       req.data = { stripeAccount }
       return renderPage(req, res, 'success')
     }
-    return dashboard.Response.redirect(req, res, '/account/authorize')
+    return renderPage(req, res, 'unknown-error')
   } catch (error) {
     return renderPage(req, res, error.message)
   }

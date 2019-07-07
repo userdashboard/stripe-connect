@@ -3,8 +3,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -62,8 +61,6 @@ module.exports = {
     if (stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-  },
-  patch: async (req) => {
     const stripeData = {
       external_account: {
         object: 'bank_account',
@@ -73,52 +70,42 @@ module.exports = {
         account_type: req.body.account_type
       }
     }
-    let requiredFields
     switch (req.body.country) {
       case 'AU':
-        requiredFields = ['account_number', 'bsb_number']
         stripeData.external_account.account_number = req.body.account_number
         stripeData.external_account.routing_number = req.body.bsb_number
         break
       case 'GB':
         if (req.body.currency === 'gbp') {
-          requiredFields = ['account_number', 'sort_code']
           stripeData.external_account.account_number = req.body.account_number
           stripeData.external_account.routing_number = req.body.sort_code
         } else {
-          requiredFields = ['iban']
           stripeData.external_account.account_number = req.body.iban
         }
         break
       case 'CA':
-        requiredFields = ['account_number', 'institution_number', 'transit_number']
         stripeData.external_account.account_number = req.body.account_number
         stripeData.external_account.routing_number = req.body.transit_number + '-' + req.body.institution_number
         break
       case 'US':
-        requiredFields = ['account_number', 'routing_number']
         stripeData.external_account.account_number = req.body.account_number
         stripeData.external_account.routing_number = req.body.routing_number
         break
       case 'HK':
-        requiredFields = ['account_number', 'clearing_code', 'branch_code']
         stripeData.external_account.account_number = req.body.account_number
         stripeData.external_account.routing_number = req.body.clearing_code + '-' + req.body.branch_code
         break
       case 'JP':
       case 'SG':
       case 'BR':
-        requiredFields = ['account_number', 'bank_code', 'branch_code']
         stripeData.external_account.account_number = req.body.account_number
         stripeData.external_account.routing_number = req.body.bank_code + '' + req.body.branch_code
         break
       case 'NZ':
-        requiredFields = ['account_number', 'routing_number']
         stripeData.external_account.account_number = req.body.account_number
         stripeData.external_account.routing_number = req.body.routing_number
         break
       default:
-        requiredFields = ['iban']
         stripeData.external_account.account_number = req.body.iban
         break
     }

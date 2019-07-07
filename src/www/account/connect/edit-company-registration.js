@@ -14,13 +14,6 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
-  if (req.session.lockURL === req.url && req.session.unlocked) {
-    try {
-      await global.api.user.connect.UpdateCompanyRegistration._patch(req)
-    } catch (error) {
-      req.error = error.message
-    }
-  }
   const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
   if (!stripeAccount) {
     throw new Error('invalid-stripeid')
@@ -278,7 +271,7 @@ async function submitForm (req, res) {
     if (req.success) {
       return renderPage(req, res, 'success')
     }
-    return dashboard.Response.redirect(req, res, '/account/authorize')
+    return renderPage(req, res, 'unknown-error')
   } catch (error) {
     if (error.message.startsWith('invalid-')) {
       return renderPage(req, res, error.message)

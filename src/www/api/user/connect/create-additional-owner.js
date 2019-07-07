@@ -4,8 +4,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  post: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -35,7 +34,7 @@ module.exports = {
     }
     if (!req.body.last_name) {
       throw new Error('invalid-last_name')
-      }
+    }
     if (req.body.documentid) {
       return
     }
@@ -57,7 +56,7 @@ module.exports = {
       req.body.documentid = file.id
     } catch (error) {
       throw new Error('invalid-upload')
-    }    
+    }
     const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
     if (stripeAccount.legal_entity.type === 'individual' ||
       stripeAccount.metadata.submitted ||
@@ -67,16 +66,9 @@ module.exports = {
     req.query.country = stripeAccount.country
     const countrySpec = await global.api.user.connect.CountrySpec._get(req)
     if (countrySpec.verification_fields.company.minimum.indexOf('legal_entity.additional_owners') === -1 &&
-        countrySpec.verification_fields.company.additional.indexOf('legal_entity.additional_owners') === -1) {
+      countrySpec.verification_fields.company.additional.indexOf('legal_entity.additional_owners') === -1) {
       throw new Error('invalid-stripe-account')
     }
-    const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-    if (owners && owners.length === 4) {
-      throw new Error('maximum-owners')
-    }
-    req.data = { stripeAccount }
-  },
-  post: async (req) => {
     let owners = await global.api.user.connect.AdditionalOwners._get(req)
     owners = owners || []
     if (owners.length === 4) {

@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/user/connect/set-company-registration-submitted`, async () => {
-  describe('SetCompanyRegistrationSubmitted#BEFORE', () => {
+  describe('SetCompanyRegistrationSubmitted#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/set-company-registration-submitted?stripeid=invalid')
@@ -11,7 +11,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -26,7 +26,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -44,7 +44,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -60,7 +60,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
       req.session = user2.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -76,7 +76,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -93,15 +93,13 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
       assert.strictEqual(errorMessage, 'invalid-additional-owners')
     })
-  })
 
-  describe('SetCompanyRegistrationSubmitted#PATCH', () => {
     it(`should submit AT-company registration`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'AT' })

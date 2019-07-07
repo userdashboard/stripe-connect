@@ -7,7 +7,7 @@ const TestHelper = require('../../../../../test-helper.js')
 const idscan = fs.readFileSync(path.join(__dirname, '../../../../../test-documentid-success.png'))
 
 describe(`/api/user/connect/create-additional-owner`, async () => {
-  describe('CreateAdditionalOwner#BEFORE', () => {
+  describe('CreateAdditionalOwner#POST', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/create-additional-owner?stripeid=invalid')
@@ -25,13 +25,13 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         year: '1950'
       }
       req.uploads = {
-        'id_scan.png': { 
+        'id_scan.png': {
           buffer: idscan
         }
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.post(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -60,7 +60,7 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.post(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -89,7 +89,7 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.post(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -119,7 +119,7 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.post(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -152,7 +152,7 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.post(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -185,7 +185,7 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.post(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -217,7 +217,7 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
         const valueWas = req.body[field]
         req.body[field] = null
         try {
-          await req.route.api.before(req)
+          await req.route.api.post(req)
         } catch (error) {
           assert.strictEqual(error.message, `invalid-${field}`)
           errors++
@@ -226,9 +226,7 @@ describe(`/api/user/connect/create-additional-owner`, async () => {
       }
       assert.strictEqual(errors, Object.keys(req.body).length)
     })
-  })
-
-  describe('CreateAdditionalOwner#POST', () => {
+    
     it('should create authorized additional owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })

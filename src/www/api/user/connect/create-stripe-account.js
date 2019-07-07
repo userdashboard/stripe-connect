@@ -3,8 +3,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  post: async (req) => {
     if (!req.query || !req.query.accountid) {
       throw new Error('invalid-accountid')
     }
@@ -22,8 +21,6 @@ module.exports = {
     if (!countrySpec) {
       throw new Error('invalid-country')
     }
-  },
-  post: async (req) => {
     const accountInfo = {
       type: 'custom',
       country: req.body.country,

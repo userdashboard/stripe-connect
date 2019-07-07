@@ -1,8 +1,7 @@
 const stripe = require('stripe')()
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  patch: async (req) => {
     if (!req.query || !req.query.ownerid) {
       throw new Error('invalid-ownerid')
     }
@@ -10,10 +9,11 @@ module.exports = {
     if (!stripeAccounts || !stripeAccounts.length) {
       throw new Error('invalid-ownerid')
     }
+    let owner
     for (const stripeAccount of stripeAccounts) {
       if (!stripeAccount.metadata.submitted ||
-          !stripeAccount.metadata.submittedOwners ||
-          stripeAccount.legal_entity.type === 'individual') {
+        !stripeAccount.metadata.submittedOwners ||
+        stripeAccount.legal_entity.type === 'individual') {
         continue
       }
       // find an owner that needs reuploading
@@ -36,16 +36,17 @@ module.exports = {
           if (owners[i].ownerid !== req.query.ownerid) {
             continue
           }
-          req.stripeAccount = stripeAccount
-          req.body = req.body || {}
-          req.body.index = ownerIndex
-          return
+          owner = owners[i]
+          break
         }
       }
+      if (owner) {
+        break
+      }
     }
-    throw new Error('invalid-ownerid')
-  },
-  patch: async (req) => {
+    if (!owner) {
+      throw new Error('invalid-ownerid')
+    }
     const accountInfo = {
       legal_entity: {
         additional_owners: {

@@ -4,8 +4,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  delete: async (req) => {
     if (!req.query || !req.query.ownerid) {
       throw new Error('invalid-ownerid')
     }
@@ -23,16 +22,13 @@ module.exports = {
       owners.splice(i, 1)
       break
     }
-    req.data = { stripeAccount, owners }
-  },
-  delete: async (req) => {
     const accountInfo = {
       metadata: {
       }
     }
-    connect.MetaData.store(accountInfo.metadata, 'owners', req.data.owners)
+    connect.MetaData.store(accountInfo.metadata, 'owners', owners)
     try {
-      const accountNow = await stripe.accounts.update(req.data.stripeAccount.id, accountInfo, req.stripeKey)
+      const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
       await dashboard.Storage.deleteFile(`${req.appid}/map/ownerid/stripeid/${req.query.ownerid}`)
       req.success = true
       await stripeCache.update(accountNow, req.stripeKey)

@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/user/connect/update-additional-owner`, async () => {
-  describe('UpdateAdditionalOwner#BEFORE', () => {
+  describe('UpdateAdditionalOwner#PATCH', () => {
     it('should reject invalid ownerid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/update-additional-owner?ownerid=invalid')
@@ -22,7 +22,7 @@ describe(`/api/user/connect/update-additional-owner`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -50,7 +50,7 @@ describe(`/api/user/connect/update-additional-owner`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -80,7 +80,7 @@ describe(`/api/user/connect/update-additional-owner`, async () => {
         const valueWas = req.body[field]
         req.body[field] = null
         try {
-          await req.route.api.before(req)
+          await req.route.api.patch(req)
         } catch (error) {
           assert.strictEqual(error.message, `invalid-${field}`)
           errors++
@@ -89,9 +89,7 @@ describe(`/api/user/connect/update-additional-owner`, async () => {
       }
       assert.strictEqual(errors, Object.keys(req.body).length)
     })
-  })
-
-  describe('UpdateAdditionalOwner#PATCH', () => {
+    
     it('should update owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'GB' })

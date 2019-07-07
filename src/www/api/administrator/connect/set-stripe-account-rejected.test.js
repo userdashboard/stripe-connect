@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/administrator/connect/set-stripe-account-rejected`, async () => {
-  describe('RejectStripeAccount#BEFORE', () => {
+  describe('RejectStripeAccount#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const administrator = await TestHelper.createAdministrator()
       const req = TestHelper.createRequest(`/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid`)
@@ -14,7 +14,7 @@ describe(`/api/administrator/connect/set-stripe-account-rejected`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -31,15 +31,13 @@ describe(`/api/administrator/connect/set-stripe-account-rejected`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
       assert.strictEqual(errorMessage, 'invalid-reason')
     })
-  })
 
-  describe('RejectStripeAccount#PATCH', () => {
     it('should update the Stripe account as rejected', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()

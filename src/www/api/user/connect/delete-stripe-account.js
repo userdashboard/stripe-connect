@@ -3,8 +3,7 @@ const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
-  lock: true,
-  before: async (req) => {
+  delete: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -12,11 +11,8 @@ module.exports = {
     if (stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    req.stripeAccount = stripeAccount
-  },
-  delete: async (req) => {
     try {
-      if (req.stripeAccount.metadata.owners) {
+      if (stripeAccount.metadata.owners) {
         const owners = await global.api.user.connect.AdditionalOwners._get(req)
         for (const owner of owners) {
           await dashboard.Storage.deleteFile(`${req.appid}/map/ownerid/stripeid/${owner.ownerid}`)

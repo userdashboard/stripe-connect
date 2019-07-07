@@ -8,7 +8,7 @@ async function testEachFieldAsNull (req) {
     const valueWas = req.body[field]
     req.body[field] = null
     try {
-      await req.route.api.before(req)
+      await req.route.api.patch(req)
     } catch (error) {
       assert.strictEqual(error.message, `invalid-${field}`)
       errors++
@@ -19,7 +19,7 @@ async function testEachFieldAsNull (req) {
 }
 
 describe('/api/user/connect/update-individual-registration', () => {
-  describe('UpdateIndividualRegistration#BEFORE', () => {
+  describe('UpdateIndividualRegistration#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=invalid`)
@@ -28,7 +28,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -47,7 +47,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -64,7 +64,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -86,7 +86,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -181,7 +181,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       await testEachFieldAsNull(req)
     })
-    
+
     it(`should reject DE-individual invalid fields`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'individual', country: 'DE' })
@@ -229,7 +229,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       await testEachFieldAsNull(req)
     })
-    
+
     it(`should reject FI-individual invalid fields`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'individual', country: 'FI' })
@@ -390,7 +390,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       await testEachFieldAsNull(req)
     })
-    
+
     it(`should reject NO-individual invalid fields`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NO' })
@@ -499,9 +499,6 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       await testEachFieldAsNull(req)
     })
-  })
-
-  describe('UpdateIndividualRegistration#PATCH', () => {
 
     it(`should update AT-individual registration`, async () => {
       const user = await TestHelper.createUser()

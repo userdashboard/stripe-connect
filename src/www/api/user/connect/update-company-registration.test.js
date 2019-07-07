@@ -9,7 +9,7 @@ async function testEachFieldAsNull (req) {
     const valueWas = req.body[field]
     req.body[field] = null
     try {
-      await req.route.api.before(req)
+      await req.route.api.patch(req)
     } catch (error) {
       assert.strictEqual(error.message, `invalid-${field}`)
       errors++
@@ -20,7 +20,7 @@ async function testEachFieldAsNull (req) {
 }
 
 describe('/api/user/connect/update-company-registration', () => {
-  describe('UpdateCompanyRegistration#BEFORE', () => {
+  describe('UpdateCompanyRegistration#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=invalid`)
@@ -29,7 +29,7 @@ describe('/api/user/connect/update-company-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -48,7 +48,7 @@ describe('/api/user/connect/update-company-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -65,7 +65,7 @@ describe('/api/user/connect/update-company-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -87,7 +87,7 @@ describe('/api/user/connect/update-company-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -424,8 +424,8 @@ describe('/api/user/connect/update-company-registration', () => {
         last_name: 'Person'
       }
       await testEachFieldAsNull(req)
-    })    
-    
+    })
+
     it(`should reject JP-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'JP' })
@@ -634,7 +634,7 @@ describe('/api/user/connect/update-company-registration', () => {
     //   }
     //   await testEachFieldAsNull(req)
     // })    
-    
+
     it(`should reject US-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
@@ -658,9 +658,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       await testEachFieldAsNull(req)
     })
-  })
 
-  describe('UpdateCompanyRegistration#PATCH', () => {
     it(`should update AT-company registration`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'AT' })

@@ -8,7 +8,7 @@
 // })
 
 // describe('/api/user/connect/resubmit-required-information', () => {
-//   describe('ResubmitRequiredInformation#BEFORE', () => {
+//   describe('ResubmitRequiredInformation#patch', () => {
 //     it('should reject invalid stripeid', async () => {
 //       const user = await TestHelper.createUser()
 //       const req = TestHelper.createRequest(`/api/user/connect/resubmit-required-information?stripeid=invalid`)
@@ -20,7 +20,7 @@
 //       req.body = {}
 //       let errorMessage
 //       try {
-//         await req.route.api.before(req)
+//         await req.route.api.patch(req)
 //       } catch (error) {
 //         errorMessage = error.message
 //       }
@@ -41,7 +41,7 @@
 //       req.body = {}
 //       let errorMessage
 //       try {
-//         await req.route.api.before(req)
+//         await req.route.api.patch(req)
 //       } catch (error) {
 //         errorMessage = error.message
 //       }
@@ -58,7 +58,7 @@
 //       req.body = {}
 //       let errorMessage
 //       try {
-//         await req.route.api.before(req)
+//         await req.route.api.patch(req)
 //       } catch (error) {
 //         errorMessage = error.message
 //       }
@@ -80,7 +80,7 @@
 //       req2.body = {}
 //       let errorMessage
 //       try {
-//         await req2.route.api.before(req2)
+//         await req2.route.api.patch(req2)
 //       } catch (error) {
 //         errorMessage = error.message
 //       }

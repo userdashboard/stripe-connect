@@ -8,7 +8,7 @@
 // })
 
 // describe('/api/user/connect/reupload-owner-identity-document', () => {
-//   describe('ReuploadOwnerIdentityDocument#BEFORE', () => {
+//   describe('ReuploadOwnerIdentityDocument#patch', () => {
 //     it('should reject invalid ownerid', async () => {
 //       const user = await TestHelper.createUser()
 //       const req = TestHelper.createRequest(`/api/user/connect/reupload-owner-identity-document?ownerid=invalid`)
@@ -19,7 +19,7 @@
 //       }
 //       let errorMessage
 //       try {
-//         await req.route.api.before(req)
+//         await req.route.api.patch(req)
 //       } catch (error) {
 //         errorMessage = error.message
 //       }
@@ -36,7 +36,7 @@
 //       req.session = user.session
 //       let errorMessage
 //       try {
-//         await req.route.api.before(req)
+//         await req.route.api.patch(req)
 //       } catch (error) {
 //         errorMessage = error.message
 //       }
@@ -44,7 +44,7 @@
 //     })
 //   })
 
-//   describe('ReuploadOwnerIdentityDocument#BEFORE', () => {
+//   describe('ReuploadOwnerIdentityDocument#patch', () => {
 //     it('should update authorized document', async () => {
 //       const user = await TestHelper.createUser()
 //       await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })

@@ -8,7 +8,7 @@ async function testEachFieldAsNull (req) {
     const valueWas = req.body[field]
     req.body[field] = null
     try {
-      await req.route.api.before(req)
+      await req.route.api.patch(req)
     } catch (error) {
       assert.strictEqual(error.message, `invalid-${field}`)
       errors++
@@ -19,7 +19,7 @@ async function testEachFieldAsNull (req) {
 }
 
 describe('/api/user/connect/update-payment-information', () => {
-  describe('UpdatePaymentInformation#BEFORE', () => {
+  describe('UpdatePaymentInformation#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=invalid`)
@@ -35,7 +35,7 @@ describe('/api/user/connect/update-payment-information', () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -59,7 +59,7 @@ describe('/api/user/connect/update-payment-information', () => {
       }
       let errorMessage
       try {
-        await req.route.api.before(req)
+        await req.route.api.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -329,7 +329,7 @@ describe('/api/user/connect/update-payment-information', () => {
       }
       await testEachFieldAsNull(req)
     })
-    
+
     it(`should reject LU invalid fields`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'LU' })
@@ -462,9 +462,7 @@ describe('/api/user/connect/update-payment-information', () => {
       }
       await testEachFieldAsNull(req)
     })
-  })
 
-  describe('UpdatePaymentInformation#PATCH', () => {
     it(`should update AT information`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'AT' })
