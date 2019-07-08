@@ -1,4 +1,4 @@
-const dashboard = require('@userappstore/dashboard')
+const dashboard = require('@userdashboard/dashboard')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {

@@ -1,5 +1,5 @@
 const connect = require('../../../../../index.js')
-const dashboard = require('@userappstore/dashboard')
+const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 const stripeCache = require('../../../../stripe-cache.js')
 

@@ -1,5 +1,5 @@
 {
-  "name": "@userappstore/stripe-connect",
+  "name": "@userdashboard/stripe-connect",
   "version": "1.0.0",
   "scripts": {
     "start": "node main.js",
@@ -7,16 +7,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/userappstore/stripe-connect.git"
+    "url": "git://github.com/userdashboard/stripe-connect.git"
   },
   "license": "SPDX(MIT OR Unlicense)",
   "main": "index.js",
   "dependencies": {
-    "@userappstore/maxmind-geoip": "git+https://github.com/userappstore/maxmind-geoip.git",
+    "@userdashboard/maxmind-geoip": "git+https://github.com/userdashboard/maxmind-geoip.git",
     "stripe": "^6.36.0"
   },
   "devDependencies": {
-    "@userappstore/dashboard": "git+https://github.com/userappstore/dashboard.git"
+    "@userdashboard/dashboard": "git+https://github.com/userdashboard/dashboard.git"
   },
   "engines": {
     "node": "8.12.0",
@@ -24,8 +24,8 @@
   },
   "dashboard": {
     "modules": [
-      "@userappstore/dashboard",
-      "@userappstore/maxmind-geoip"
+      "@userdashboard/dashboard",
+      "@userdashboard/maxmind-geoip"
     ],
     "server": [
       "/src/server/bind-stripekey.js"

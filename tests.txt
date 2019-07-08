@@ -1,5 +1,5 @@
 
-> @userappstore/stripe-connect@1.0.0 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
+> @userdashboard/stripe-connect@1.0.0 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
 > NODE_ENV=testing mocha src --recursive --timeout 240000 --slow 240000
 
 

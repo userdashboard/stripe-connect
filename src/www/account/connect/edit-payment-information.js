@@ -1,5 +1,5 @@
 const countriesIndex = require('../../../../countries-index.json')
-const dashboard = require('@userappstore/dashboard')
+const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
 
 module.exports = {

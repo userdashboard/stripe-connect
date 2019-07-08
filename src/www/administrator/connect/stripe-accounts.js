@@ -1,4 +1,4 @@
-const dashboard = require('@userappstore/dashboard')
+const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
   before: beforeRequest,

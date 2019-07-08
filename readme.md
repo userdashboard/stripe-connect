@@ -1,6 +1,6 @@
 # Stripe Connect for Dashboard
 
-[Dashboard](https://github.com/userappstore/dashboard) is a NodeJS project that provides a reusable account management system for web applications.  This module adds a complete user and administrator `Private API` and `Web UI` for a [Stripe Connect](https://stripe.com/connect) custom integration.
+[Dashboard](https://github.com/userdashboard/dashboard) is a NodeJS project that provides a reusable account management system for web applications.  This module adds a complete user and administrator `Private API` and `Web UI` for a [Stripe Connect](https://stripe.com/connect) custom integration.
 
 ## Access Connect information from your application server
 
@@ -98,12 +98,12 @@ Dashboard proxies your application server to create a single website where pages
 
 Using modules you can expand Dashboard to include organizations, subscriptions powered by Stripe, or a Stripe Connect platform.
 
-Application servers written for Dashboard can be published on websites running our [app store](https://github.com/userappstore/app-store-dashboard-server) software like [UserAppStore](https://userappstore.com).
+Application servers written for Dashboard can be published on websites running our [app store](https://github.com/userdashboard/app-store-dashboard-server) software like [UserAppStore](https://userappstore.com).
 
-- [Introduction](https://github.com/userappstore/dashboard/wiki)
-- [Configuring Dashboard](https://github.com/userappstore/dashboard/wiki/Configuring-Dashboard)
-- [Dashboard code structure](https://github.com/userappstore/dashboard/wiki/Dashboard-code-structure)
-- [Server request lifecycle](https://github.com/userappstore/dashboard/wiki/Server-Request-Lifecycle)
+- [Introduction](https://github.com/userdashboard/dashboard/wiki)
+- [Configuring Dashboard](https://github.com/userdashboard/dashboard/wiki/Configuring-Dashboard)
+- [Dashboard code structure](https://github.com/userdashboard/dashboard/wiki/Dashboard-code-structure)
+- [Server request lifecycle](https://github.com/userdashboard/dashboard/wiki/Server-Request-Lifecycle)
 
 ### Demonstrations
 
@@ -111,6 +111,10 @@ Application servers written for Dashboard can be published on websites running o
 - [Dashboard + Organizations module](https://organizations-demo-7933.herokuapp.com)
 - [Dashboard + Stripe Subscriptions module](https://stripe-subscriptions-5701.herokuapp.com)
 - [Dashboard + Stripe Connect module](https://stripe-connect-8509.herokuapp.com)
+
+#### Development
+
+Development takes place on [Github](https://github.com/userdashboard/stripe-connect) with releases on [NPM](https://www.npmjs.com/package/@userdashboard/stripe-connect).
 
  #### License
 

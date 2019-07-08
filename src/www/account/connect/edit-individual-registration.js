@@ -1,7 +1,7 @@
 const connect = require('../../../../index.js')
 const countries = require('../../../../countries.json')
 const countriesDivisions = require('../../../../countries-divisions.json')
-const dashboard = require('@userappstore/dashboard')
+const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
 
 module.exports = {

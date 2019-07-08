@@ -3,14 +3,14 @@ global.applicationPath = global.applicationPath || __dirname
 
 const fs = require('fs')
 const stripe = require('stripe')(  )
-const testData = require('@userappstore/dashboard/test-data.json')
+const testData = require('@userdashboard/dashboard/test-data.json')
 const util = require('util')
 
 const stripeKey = {
   api_key: process.env.STRIPE_KEY
 }
 
-const TestHelper = require('@userappstore/dashboard/test-helper.js')
+const TestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 module.exports = {
   createAdditionalOwner,

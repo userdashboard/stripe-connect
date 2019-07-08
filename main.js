@@ -1,2 +1,2 @@
-const dashboard = require('@userappstore/dashboard')
+const dashboard = require('@userdashboard/dashboard')
 dashboard.start(__dirname)
