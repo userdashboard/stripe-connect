@@ -12,11 +12,11 @@
   "license": "SPDX(MIT OR Unlicense)",
   "main": "index.js",
   "dependencies": {
-    "@userdashboard/maxmind-geoip": "git+https://github.com/userdashboard/maxmind-geoip.git",
+    "@userdashboard/maxmind-geoip": "^1.0.0",
     "stripe": "^6.36.0"
   },
   "devDependencies": {
-    "@userdashboard/dashboard": "git+https://github.com/userdashboard/dashboard.git"
+    "@userdashboard/dashboard": "^1.0.0"
   },
   "engines": {
     "node": "8.12.0",
