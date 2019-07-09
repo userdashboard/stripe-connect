@@ -6,10 +6,16 @@
 
 Dashboard proxies your application server to create a single website where pages like signing in or changing your password are provided by Dashboard.  Your application server can be anything you want, and use Dashboard's API to access data as required.  Using modules you can expand Dashboard to include organizations, subscriptions powered by Stripe, or a Stripe Connect platform.
 
-- [Introduction](https://github.com/userdashboard/dashboard/wiki)
+- [Dashboard Wiki](https://github.com/userdashboard/dashboard/wiki)
 - [Configuring Dashboard](https://github.com/userdashboard/dashboard/wiki/Configuring-Dashboard)
 - [Dashboard code structure](https://github.com/userdashboard/dashboard/wiki/Dashboard-code-structure)
 - [Server request lifecycle](https://github.com/userdashboard/dashboard/wiki/Server-Request-Lifecycle)
+- [API access from application server](https://github.com/userdashboard/dashboard/wiki/API-access-from-application-server)
+- [API access from module](https://github.com/userdashboard/dashboard/wiki/API-access-from-module)
+- [API access from web browser](https://github.com/userdashboard/dashboard/wiki/API-access-from-web-browser)
+- [Creating web applications with Dashboard](https://github.com/userdashboard/dashboard/wiki/Creating-web-applications-with-Dashboard)
+- [Integrating Dashboard with existing web applications](https://github.com/userdashboard/dashboard/wiki/Integrating-Dashboard-with-existing-web-applications)
+- [Creating modules for Dashboard](https://github.com/userdashboard/dashboard/wiki/Creating-modules-for-Dashboard)
 
 ### Case studies 
 
