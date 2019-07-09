@@ -118,7 +118,7 @@ module.exports = {
       const accountNow = await stripe.accounts.update(req.query.stripeid, stripeData, req.stripeKey)
       req.success = true
       const bankAccount = accountNow.external_accounts.data[0]
-      await dashboard.StorageList.add(`${req.appid}/stripeAccount:bankAccounts/${req.query.stripeid}`, bankAccount.id)
+      await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
       await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
       await stripeCache.update(accountNow, req.stripeKey)
       return accountNow
