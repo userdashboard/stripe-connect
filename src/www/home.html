@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Web application powered by Dashboard with Stripe Connect</title>
+    <link href="/public/pure-min.css" rel="stylesheet" />
+    <link href="/public/content.css" rel="stylesheet" />
+    <template id="navbar">
+      <a href="home">Home</a>
+    </template>
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Web application powered by Dashboard with Stripe Connect</h1>
+    <p>Your Dashboard server is ready.  You just registered and signed in on it.  On the top right you will see your account menu, and if you were the first user to register you will be the owner and the administrator menu will be visible too.</p>  
+    <p>Your Dashboard server needs to be configured to point to your application server. It will fetch content from your application server to serve to users.</p>
+<pre>$ APPLICATION_SERVER_TOKEN="this is the token" \
+  APPLICATION_SERVER="http://localhost:3000" \
+  DASHBOARD_SERVER="http://localhost:8001" \
+  node main.js</pre>
+    <h2>About the Stripe Connect module</h2>
+    <p>This module allows users to create <a href="https://stripe.com/connect">Stripe Connect</a> registrations.  You can use their registered Connect accounts to build platforms where your users earn money through Stripe transactions and subscrpitions.</p>
+    <h2>Setting up your application server</h2>
+    <ul>
+      <li>Verify requests come from your Dashboard, yourself or using eg <a href="https://github.com/userdashboard/express-application-server">Express application server middleware</a>.</li>
+      <li>Replace this page with your application server providing content for <code>/home</code>.</li>
+      <li>Replace this page with your application server providing guest content for <code>/</code>.</li>
+    </ul>
+    <h2>Dashboard documentation links</h2>
+    <ul>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki">Dashboard wiki</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/Creating-web-applications-with-Dashboard">Creating web applications with Dashboard</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/Integrating-Dashboard-with-existing-web-applications">Integrating Dashboard with existing web applications</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/Creating-modules-for-Dashboard">Creating modules for Dashboard</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/API-access-from-application-server">API access from your application server</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/API-access-from-module">API access from modules</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/API-access-from-web-browser">API access from web browsers</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/Server-request-lifecycle">Server request lifecycle</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/Sitemap-and-URL-structure">Sitemap and URL structure</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/Dashboard-code-structure">Dashboard code structure</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/Content-template-settings">Content template settings</a></li>
+      <li><a href="https://github.com/userdashboard/dashboard/wiki/Configuring-Dashboard">Configuring Dashboard</a></li> 
+    </ul>
+    <h2>Dashboard integration examples</h2>
+    <p><a href="https://github.com/seejohnrun/haste-server">Hastebin</a> is an open source pastebin web application.  It started as a service for anonymous guests only, and was transformed with Dashboard and modules into a web application for registered users, with support for sharing posts with organizations and paid subscriptions.</p>
+    <ul>
+      <li><a href="https://github.com/userdashboard/integration-examples/blob/master/hastebin/hastebin-saas-free.md">Free website</a></li>
+      <li><a href="https://github.com/userdashboard/integration-examples/blob/master/hastebin/hastebin-saas-subscription.md">Paid subscription website</a></li>
+    </ul>
+  </body> 
+</html>
