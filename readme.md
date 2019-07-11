@@ -2,6 +2,38 @@
 
 [Dashboard](https://github.com/userdashboard/dashboard) is a NodeJS project that provides a reusable account management system for web applications.  This module adds a complete user and administrator `Private API` and `Web UI` for a [Stripe Connect](https://stripe.com/connect) custom integration.
 
+## Import this module
+
+Edit your `package.json` to activate the module:
+
+    "dashboard": {
+      "modules": [
+        "@userdashboard/stripe-connect
+      ]
+    }
+
+Install the module with NPM:
+
+    $ npm install @userdashboard/stripe-connect
+
+## Setting up your Stripe credentials
+
+You will need to retrieve various keys from [Stripe](https://stripe.com).
+
+- create your Stripe account 
+- find your API credentials
+- create a webhook for https://your_domain/webhooks/connect/index-payout-data
+- find your webhook signing secret
+
+## Startup configuration variables
+
+Check `start-dev.sh` to see the rest of the `env` variables that configure Dashboard:
+
+    $ STRIPE_KEY=sk_test_xxxxx \
+      STRIPE_PUBLISHABLE_KEY=pk_test_xxxx \
+      CONNECT_ENDPOINT_SECRET=whsec_xxxxxx \
+      node main.js
+
 # Dashboard
 
 Dashboard proxies your application server to create a single website where pages like signing in or changing your password are provided by Dashboard.  Your application server can be anything you want, and use Dashboard's API to access data as required.  Using modules you can expand Dashboard to include organizations, subscriptions powered by Stripe, or a Stripe Connect platform.
