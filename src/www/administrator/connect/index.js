@@ -7,6 +7,9 @@ module.exports = {
 
 async function beforeRequest (req) {
   const stripeAccounts = await global.api.administrator.connect.StripeAccounts._get(req)
+  if (!stripeAccounts || !stripeAccounts.length) {
+    return
+  }
   for (const stripeAccount of stripeAccounts) {
     stripeAccount.createdFormatted = dashboard.Timestamp.date(stripeAccount.metadata.created)
     if (stripeAccount.payouts_enabled) {
@@ -26,7 +29,7 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html)
-  if (req.data.stripeAccounts && req.data.stripeAccounts.length) {
+  if (req.data && req.data.stripeAccounts && req.data.stripeAccounts.length) {
     dashboard.HTML.renderTable(doc, req.data.stripeAccounts, 'stripe-account-row', 'stripe-accounts-table')
     for (const stripeAccount of req.data.stripeAccounts) {
       if (stripeAccount.legal_entity.type === 'individual') {
