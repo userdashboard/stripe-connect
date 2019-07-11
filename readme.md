@@ -24,6 +24,20 @@ Dashboard proxies your application server to create a single website where pages
 - [Hastebin - free web application](https://github.com/userdashboard/integration-examples/blob/master/hastebin/hastebin-saas-free.md)
 - [Hastebin - subscription web application](https://github.com/userdashboard/integration-examples/blob/master/hastebin/hastebin-saas-subscription.md)
 
+## Screenshots of Dashboard with Stripe Connect
+
+| ![Guest landing page](./src/www/public/1-connect-landing-page.png?raw=true) | 
+|:---------------------------------------------------------------------------------------------------------------:|
+| Guest landing page that you replace with your own `/` route on your application server |
+
+| ![Signed in home page](./src/www/public/2-connect-signed-in.png?raw=true) |
+|:---------------------------------------------------------------------------------------------------------------:|
+| Signed in home page that you replace with your own `/home` route on your application server |
+
+| ![Organization administration ](./src/www/public/3-connect-administration.png?raw=true) |
+|:---------------------------------------------------------------------------------------------------------------:|
+| Connect administration |
+
 ## Dashboard modules
 
 Additional APIs, content and functionality can be added by `npm install` and nominating Dashboard modules in your `package.json`.  You can read more about this on the [Dashboard configuration wiki page](https://github.com/userdashboard/dashboard/wiki/Configuring-Dashboard)
