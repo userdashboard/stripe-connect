@@ -18,7 +18,6 @@
             <th>Name</th>
             <th>Status</th>
             <th>Created</th>
-            <th></th>
           </tr>
         </thead>
       </table>
@@ -31,9 +30,6 @@
       <td id="business-name-${account.id}">${account.legal_entity.business_name}</td>
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
-      <td class="pure-button-group" role="group">
-        <a href="/administrator/${account.id}/subscriptions/customers" class="pure-button">View dashboard as</a>
-      </td>
     </tr>
   </template>
   <template id="not-submitted">
