@@ -32,6 +32,29 @@ node main.js
 # production | development | testing
 # when in production strict configuration is required
 
+# APPLICATION_SERVER=http://localhost:3000
+# string
+# the URL to your application server
+
+# APPLICATION_SERVER_TOKEN="a secret"
+# string
+# shared secret for signing requests between application/dashboard server
+
+# BCRYPT_WORKLOAD_FACTOR
+# integer 4+ in production 10+
+# the strength with which to protect passwords
+
+# BCRYPT_FIXED_SALT
+# string
+# make a fixed-salt like this:
+# $ node
+# $ const bcrypt = require('./node_modules/bcryptjs')
+# $ bcrypt.genSaltSync(BCRYPT_WORKLOAD_FACTOR)
+
+# ENCRYPTION_SECRET
+# string
+# 32-character secret encryption key for data at rest
+
 # PAGE_SIZE=3 
 # number
 # the number of rows of data on object list pages
@@ -42,7 +65,7 @@ node main.js
 
 # DOMAIN=localhost 
 # web domain
-# the domain of your application server
+# the domain you are using
 
 # IP=0.0.0.0 
 # ip default localhost
