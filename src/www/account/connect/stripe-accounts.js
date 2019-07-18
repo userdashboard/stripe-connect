@@ -57,6 +57,18 @@ async function renderPage (req, res) {
     }
     noStripeAccounts = doc.getElementById('no-stripe-accounts')
     noStripeAccounts.parentNode.removeChild(noStripeAccounts)
+    for (const stripeAccount of req.data.stripeAccounts) {
+      if (stripeAccount.statusMessage) {
+        dashboard.HTML.renderTemplate(doc, null, stripeAccount.statusMessage, `registration-status-${stripeAccount.id}`)
+      }
+      if (stripeAccount.legal_entity.type === 'individual') {
+        const businessNameContainer = doc.getElementById(`business-name-${stripeAccount.id}`)
+        businessNameContainer.parentNode.removeChild(businessNameContainer)
+      } else {
+        const individualNameContainer = doc.getElementById(`individual-name-${stripeAccount.id}`)
+        individualNameContainer.parentNode.removeChild(individualNameContainer)
+      }
+    }
   } else {
     const stripeAccountsTable = doc.getElementById('stripe-accounts-table')
     stripeAccountsTable.parentNode.removeChild(stripeAccountsTable)
