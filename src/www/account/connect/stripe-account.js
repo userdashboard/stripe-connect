@@ -117,6 +117,8 @@ async function renderPage (req, res, messageTemplate) {
     } else {
       if (req.data.stripeAccount.metadata.submittedOwners) {
         dashboard.HTML.renderTemplate(doc, null, 'owners-submitted', 'owners-status')
+        const ownerOptions = doc.getElementById('owner-options')
+        ownerOptions.parentNode.removeChild(ownerOptions)
       } else {
         dashboard.HTML.renderTemplate(doc, null, 'owners-not-submitted', 'owners-status')
       }

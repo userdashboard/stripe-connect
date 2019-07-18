@@ -29,10 +29,10 @@
         </div>
       </div>
       <div class="pure-control-group">
-        <label for="dob_day">Date of birth</label>
-        <input class="adjacent" require="require" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
-        <input class="adjacent" require="require" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
-        <input require="require" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
+        <label for="day">Date of birth</label>
+        <input class="adjacent" require="require" id="day" name="day" type="text" size="2" maxlength="2" placeholder="DD" />
+        <input class="adjacent" require="require" id="month" name="month" type="text" size="2" maxlength="2" placeholder="MM" />
+        <input require="require" id="year" name="year" type="text" size="4" maxlength="4" placeholder="YYYY" />
       </div>
       <div id="personal_id_number-container" class="pure-g">
         <div class="pure-u-1-2">
@@ -53,7 +53,7 @@
       </div>
       <div class="pure-control-group">
         <label for="line2">Line 2</label>
-        <input class="full-width" require="require" id="line2" name="line2" type="text" maxlength="100" />
+        <input class="full-width" id="line2" name="line2" type="text" maxlength="100" />
       </div>
       <div class="pure-control-group">
         <label for="city">City</label>
@@ -95,7 +95,7 @@
     <option value="${option.value}">${option.text}</option>
   </template>
   <template id="country-option">
-    <option value="${country.value}">${country.text}</option>
+    <option value="${country.value}">${country.name}</option>
   </template>
   <template id="success">
     <div class="success message">Success! The owner's information has been updated.</div>
