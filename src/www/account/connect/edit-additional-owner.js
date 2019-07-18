@@ -63,15 +63,16 @@ async function renderPage (req, res, messageTemplate) {
     const stateContainer = doc.getElementById('state-container')
     stateContainer.parentNode.removeChild(stateContainer)
   }
-  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'country')
+  const country = doc.getElementById('country')
+  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', country)
   if (!req.body) {
-    for (const field of ['first_name', 'last_name', 'day', 'month', 'year', 'personal_id_number', 'line1', 'line2', 'city']) {
+    for (const field of ['first_name', 'last_name', 'day', 'month', 'year', 'personal_id_number', 'line1', 'line2', 'city', 'postal_code']) {
       doc.getElementById(field).setAttribute('value', req.data.owner[field])
     }
     if (req.data.owner.state) {
       dashboard.HTML.setSelectedOptionByValue(doc, 'state', req.data.owner.state)
     }
-    dashboard.HTML.setSelectedOptionByValue(doc, 'country', req.data.owner.country)
+    dashboard.HTML.setSelectedOptionByValue(doc, country, req.data.owner.country)
     return dashboard.Response.end(req, res, doc)
   }
   for (const fieldName in req.body) {

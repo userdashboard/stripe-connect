@@ -84,7 +84,7 @@
       </div>
       </div>
       <div class="pure-controls spaced-buttons">
-        <button id="submit-button" class="pure-button pure-button-primary">Create owner</button>
+        <button id="submit-button" class="pure-button pure-button-primary">Update owner</button>
       </div>
     </form>
   </body>
@@ -92,10 +92,10 @@
     <option value="${option.value}">${option.text}</option>
   </template>
   <template id="state-option">
-    <option value="${option.value}">${option.text}</option>
+    <option value="${option.code}">${option.name}</option>
   </template>
   <template id="country-option">
-    <option value="${country.value}">${country.name}</option>
+    <option value="${country.code}">${country.name}</option>
   </template>
   <template id="success">
     <div class="success message">Success! The owner's information has been updated.</div>
