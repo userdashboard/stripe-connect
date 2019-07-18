@@ -70,8 +70,10 @@ async function renderPage (req, res) {
       }
     }
   } else {
-    const stripeAccountsTable = doc.getElementById('stripe-accounts-table')
-    stripeAccountsTable.parentNode.removeChild(stripeAccountsTable)
+    const individualContainer = doc.getElementById('individual-container')
+    individualContainer.parentNode.removeChild(individualContainer)
+    const companyContainer = doc.getElementById('company-container')
+    companyContainer.parentNode.removeChild(companyContainer)
   }
   return dashboard.Response.end(req, res, doc)
 }

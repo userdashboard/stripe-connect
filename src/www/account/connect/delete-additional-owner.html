@@ -14,10 +14,12 @@
     <table id="owners-table" class="pure-table object-table">
       <thead>
         <tr>
-          <td>ID</td>
+          <th>ID</th>
           <th>Name</th>
         </tr>
-        <tr id="${owner.ownerid}">
+      </thead>
+      <tbody id="${owner.ownerid}">
+        <tr>
           <td>${owner.ownerid}</td>
           <td>${owner.first_name} ${owner.last_name}</td>
         </tr>
