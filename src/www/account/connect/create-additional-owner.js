@@ -40,7 +40,7 @@ async function beforeRequest (req) {
     states.push({ value: code, text: name, object: 'option' })
   }
   const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-  if (!req.success && owners && owners.length === 4) {
+  if (owners && owners.length === 4) {
     req.error = 'maximum-owners'
   }
   req.data = { stripeAccount, owners, countries, country, countrySpec, states }
