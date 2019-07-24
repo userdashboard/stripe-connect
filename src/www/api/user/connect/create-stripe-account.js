@@ -17,7 +17,7 @@ module.exports = {
       throw new Error('invalid-country')
     }
     req.query.country = req.body.country
-    const countrySpec = await global.api.user.connect.CountrySpec._get(req)
+    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     if (!countrySpec) {
       throw new Error('invalid-country')
     }

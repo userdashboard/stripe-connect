@@ -10,7 +10,7 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
-  const stripeAccount = await global.api.administrator.connect.StripeAccount._get(req)
+  const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
   req.data = { stripeAccount }
 }
 
@@ -45,7 +45,7 @@ async function renderPage (req, res, messageTemplate) {
 
 async function submitForm (req, res) {
   try {
-    await global.api.administrator.connect.SetStripeAccountRejected._patch(req)
+    await global.api.administrator.connect.SetStripeAccountRejected.patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

@@ -8,7 +8,7 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
-  const countrySpecs = await global.api.user.connect.CountrySpecs._get(req)
+  const countrySpecs = await global.api.user.connect.CountrySpecs.get(req)
   const countries = []
   for (const countrySpec of countrySpecs) {
     countries.push({
@@ -57,7 +57,7 @@ async function submitForm (req, res) {
   try {
     req.query = req.query || {}
     req.query.accountid = req.account.accountid
-    const stripeAccount = await global.api.user.connect.CreateStripeAccount._post(req)
+    const stripeAccount = await global.api.user.connect.CreateStripeAccount.post(req)
     if (req.success) {
       req.data = { stripeAccount }
       return renderPage(req, res, 'success')

@@ -206,7 +206,7 @@ async function waitForPayout(stripeid, previousid, callback) {
       return
     }
     const req = module.exports.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${stripeid}`)
-    const itemids = await req.route.api._get(req)
+    const itemids = await req.route.api.get(req)
     if (!itemids || !itemids.length) {
       return setTimeout(wait, 10)
     }

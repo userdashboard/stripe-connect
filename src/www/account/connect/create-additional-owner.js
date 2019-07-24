@@ -12,7 +12,7 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted ||
     stripeAccount.metadata.submittedOwners ||
     stripeAccount.legal_entity.type === 'individual' ||
@@ -20,7 +20,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripe-account')
   }
   req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec._get(req)
+  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   const verificationFields = countrySpec.verification_fields.company
   if (verificationFields.minimum.indexOf('legal_entity.additional_owners') === -1 &&
       verificationFields.additional.indexOf('legal_entity.additional_owners') === -1) {
@@ -145,7 +145,7 @@ async function submitForm (req, res) {
     }
   }
   try {
-    const owner = await global.api.user.connect.CreateAdditionalOwner._post(req)
+    const owner = await global.api.user.connect.CreateAdditionalOwner.post(req)
     if (req.success) {
       req.data = { owner }
       return renderPage(req, res, 'success')

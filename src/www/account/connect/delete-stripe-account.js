@@ -11,12 +11,12 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
   req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec._get(req)
+  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   req.data = { stripeAccount, countrySpec }
 }
 
@@ -48,7 +48,7 @@ async function renderPage (req, res, messageTemplate) {
 
 async function submitForm (req, res) {
   try {
-    await global.api.user.connect.DeleteStripeAccount._delete(req)
+    await global.api.user.connect.DeleteStripeAccount.delete(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

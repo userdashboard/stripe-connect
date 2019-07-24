@@ -8,7 +8,7 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted ||
       stripeAccount.legal_entity.type !== 'company' ||
       stripeAccount.metadata.submittedOwners ||
@@ -17,7 +17,7 @@ module.exports = {
     }
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration')
     req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec._get(req)
+    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     const requiredFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
     const requireOwners = requiredFields.indexOf('legal_entity.additional_owners') > -1
     if (!requireOwners) {

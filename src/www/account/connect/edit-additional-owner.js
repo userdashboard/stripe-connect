@@ -11,9 +11,9 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.ownerid) {
     throw new Error('invalid-ownerid')
   }
-  const owner = await global.api.user.connect.AdditionalOwner._get(req)
+  const owner = await global.api.user.connect.AdditionalOwner.get(req)
   req.query.stripeid = owner.stripeid
-  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted || stripeAccount.metadata.submittedOwners) {
     throw new Error('invalid-stripe-account')
   }
@@ -30,7 +30,7 @@ async function beforeRequest (req) {
     states.push({ code, name, object: 'option' })
   }
   req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec._get(req)
+  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   req.data = { owner, countries, country, countrySpec, states }
 }
 
@@ -131,7 +131,7 @@ async function submitForm (req, res) {
     return renderPage(req, res, 'invalid-last_name')
   }
   try {
-    await global.api.user.connect.UpdateAdditionalOwner._patch(req)
+    await global.api.user.connect.UpdateAdditionalOwner.patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

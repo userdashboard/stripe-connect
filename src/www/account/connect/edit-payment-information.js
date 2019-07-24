@@ -12,11 +12,11 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  const stripeCountries = await global.api.user.connect.CountrySpecs._get(req)
+  const stripeCountries = await global.api.user.connect.CountrySpecs.get(req)
   let countrySpec
   for (const country of stripeCountries) {
     country.name = countriesIndex[country.id]
@@ -121,7 +121,7 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   try {
-    await global.api.user.connect.UpdatePaymentInformation._patch(req)
+    await global.api.user.connect.UpdatePaymentInformation.patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

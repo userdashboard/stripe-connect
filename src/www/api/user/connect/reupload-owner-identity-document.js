@@ -5,7 +5,7 @@ module.exports = {
     if (!req.query || !req.query.ownerid) {
       throw new Error('invalid-ownerid')
     }
-    const stripeAccounts = await global.api.user.connect.StripeAccounts._get(req)
+    const stripeAccounts = await global.api.user.connect.StripeAccounts.get(req)
     if (!stripeAccounts || !stripeAccounts.length) {
       throw new Error('invalid-ownerid')
     }
@@ -30,7 +30,7 @@ module.exports = {
         throw new Error('invalid-stripe-account')
       }
       // verify the registration information ownerid
-      const owners = await global.api.user.connect.AdditionalOwners._get(req)
+      const owners = await global.api.user.connect.AdditionalOwners.get(req)
       if (owners && owners.length) {
         for (const i in owners) {
           if (owners[i].ownerid !== req.query.ownerid) {

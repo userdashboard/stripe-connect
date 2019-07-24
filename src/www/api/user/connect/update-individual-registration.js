@@ -7,14 +7,14 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted ||
       stripeAccount.legal_entity.type !== 'individual' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
     req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec._get(req)
+    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
     if (req.uploads && (req.uploads['id_scan.jpg'] || req.uploads['id_scan.png'])) {
       const uploadData = {

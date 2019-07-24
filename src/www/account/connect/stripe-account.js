@@ -11,7 +11,7 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
-  const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
+  const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
@@ -27,7 +27,7 @@ async function beforeRequest (req) {
     stripeAccount.statusMessage = 'status-not-submitted'
   }
   req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec._get(req)
+  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   let verificationFields
   if (stripeAccount.legal_entity.type === 'individual') {
     verificationFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)

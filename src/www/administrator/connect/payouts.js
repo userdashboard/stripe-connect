@@ -6,8 +6,8 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
-  const total = await global.api.administrator.connect.PayoutsCount._get(req)
-  const payouts = await global.api.administrator.connect.Payouts._get(req)
+  const total = await global.api.administrator.connect.PayoutsCount.get(req)
+  const payouts = await global.api.administrator.connect.Payouts.get(req)
   const offset = req.query ? req.query.offset || 0 : 0
   req.data = { payouts, total, offset }
 }

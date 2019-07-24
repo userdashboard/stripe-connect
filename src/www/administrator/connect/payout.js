@@ -9,7 +9,7 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.payoutid) {
     throw new Error('invalid-payoutid')
   }
-  const payout = await global.api.administrator.connect.Payout._get(req)
+  const payout = await global.api.administrator.connect.Payout.get(req)
   req.data = { payout }
 }
 

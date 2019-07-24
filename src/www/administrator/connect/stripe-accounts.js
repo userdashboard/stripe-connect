@@ -6,7 +6,7 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
-  const stripeAccounts = await global.api.administrator.connect.StripeAccounts._get(req)
+  const stripeAccounts = await global.api.administrator.connect.StripeAccounts.get(req)
   for (const stripeAccount of stripeAccounts) {
     if (stripeAccount.legal_entity.type === 'individual') {
       stripeAccount.first_name = stripeAccount.legal_entity.first_name

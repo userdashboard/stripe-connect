@@ -21,7 +21,7 @@ module.exports = {
     const stripeAccounts = []
     for (const stripeid of stripeids) {
       req.query.stripeid = stripeid
-      const stripeAccount = await global.api.user.connect.StripeAccount._get(req)
+      const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       if (!stripeAccount) {
         throw new Error('invalid-stripeid')
       }

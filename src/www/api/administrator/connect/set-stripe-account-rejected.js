@@ -12,7 +12,7 @@ module.exports = {
     if (req.body.reason !== 'fraud' && req.body.reason !== 'other' && req.body.reason !== 'terms_of_service') {
       throw new Error('invalid-reason')
     }
-    const stripeAccount = await global.api.administrator.connect.StripeAccount._get(req)
+    const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
     }

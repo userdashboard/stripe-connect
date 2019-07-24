@@ -6,7 +6,7 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
-  const stripeAccounts = await global.api.administrator.connect.StripeAccounts._get(req)
+  const stripeAccounts = await global.api.administrator.connect.StripeAccounts.get(req)
   if (!stripeAccounts || !stripeAccounts.length) {
     return
   }
