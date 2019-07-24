@@ -40,7 +40,6 @@ async function renderPage (req, res) {
         individualName.parentNode.removeChild(individualName)
       }
       if (stripeAccount.statusMessage) {
-        console.log(stripeAccount.statusMessage)
         dashboard.HTML.renderTemplate(doc, null, stripeAccount.statusMessage, `account-status-${stripeAccount.id}`)
       }
     }
