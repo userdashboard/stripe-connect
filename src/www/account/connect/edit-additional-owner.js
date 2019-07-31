@@ -19,7 +19,8 @@ async function beforeRequest (req) {
   }
   let country
   for (const countryItem of countries) {
-    if (countryItem.code === owner.country) {
+    if (countryItem.code === owner.country ||
+        (req.body && req.body.country === countryItem.code)) {
       country = countryItem
       break
     }

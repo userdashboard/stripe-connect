@@ -61,6 +61,7 @@ module.exports = {
       req.success = true
       return accountNow
     } catch (error) {
+      console.log(error)
       throw new Error('unknown-error')
     }
   }

@@ -39,6 +39,15 @@
     <div id="owners-container">
       <h2>Company owners information</h2>
       <div id="owners-status"></div>
+      <table id="owners-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
       <p class="pure-button-group" role="group" id="owner-options">
         <a class="pure-button pure-button-primary" href="/account/connect/create-additional-owner?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add owner information</a>
         <a class="pure-button pure-button-primary" href="/account/connect/submit-additional-owners?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed owners</a>
@@ -49,7 +58,7 @@
       <div id="payment-information-status"></div>
       <p id="payment-options">
         <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
-        <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update payment information</a>
+        <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a>
       </p>
     </div>
     <div id="submission-container">
@@ -61,6 +70,15 @@
       </p>
     </div>
   </body>
+  <template id="owner-row">
+    <tr id="${owner.ownerid}">
+      <td><a href="/account/connect/edit-additional-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
+      <td>${owner.first_name} ${owner.last_name}</td>
+      <td class="pure-button-group" role="group">
+        <a class="pure-button" href="/account/connect/delete-additional-owner?ownerid=${owner.ownerid}">Delete</a>
+      </td>
+    </tr>
+  </template>
   <template id="owners-submitted">
     <p>Owner information has been submitted.</p>
   </template>

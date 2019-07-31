@@ -34,6 +34,8 @@ async function renderPage (req, res, messageTemplate) {
       dashboard.HTML.renderTemplate(doc, null, 'success', 'message-container')
       const submitForm = doc.getElementById('submit-form')
       submitForm.parentNode.removeChild(submitForm)
+      const accountTable = doc.getElementById('stripe-accounts-table')
+      accountTable.parentNode.removeChild(accountTable)
       return dashboard.Response.end(req, res, doc)
     }
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')

@@ -23,6 +23,7 @@
     "npm": "6.4.1"
   },
   "dashboard": {
+    "title": "Dashboard",
     "modules": [
       "@userdashboard/dashboard",
       "@userdashboard/maxmind-geoip"

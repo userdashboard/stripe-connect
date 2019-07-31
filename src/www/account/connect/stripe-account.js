@@ -28,11 +28,15 @@ async function beforeRequest (req) {
   }
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+  let owners
   let verificationFields
   if (stripeAccount.legal_entity.type === 'individual') {
     verificationFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
   } else {
-    verificationFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.additional)
+    verificationFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
+    if (verificationFields && verificationFields.indexOf('legal_entity.additional_owners') > -1) {
+      owners = await global.api.user.connect.AdditionalOwners.get(req)
+    }
   }
   let registrationComplete = true
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
@@ -40,6 +44,7 @@ async function beforeRequest (req) {
     for (const pathAndField of verificationFields) {
       const field = pathAndField.split('.').pop()
       if (field === 'external_account' ||
+          field === 'additional_owners' ||
           field === 'type' ||
           field === 'ip' ||
           field === 'date') {
@@ -53,15 +58,22 @@ async function beforeRequest (req) {
         continue
       }
       if (!registration[field]) {
+        if (stripeAccount.legal_entity.type === 'company') {
+          if (!registration[`company_${field}`] && !registration[`personal_${field}`]) {
+            registrationComplete = false
+            break    
+          }
+          continue
+        }
         registrationComplete = false
         break
       }
     }
   }
-  req.data = { stripeAccount, countrySpec, verificationFields, registration, registrationComplete }
+  req.data = { stripeAccount, owners, countrySpec, verificationFields, registration, registrationComplete }
 }
 
-async function renderPage (req, res, messageTemplate) {
+async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
   if (req.data.stripeAccount.statusMessage) {
@@ -119,8 +131,16 @@ async function renderPage (req, res, messageTemplate) {
         dashboard.HTML.renderTemplate(doc, null, 'owners-submitted', 'owners-status')
         const ownerOptions = doc.getElementById('owner-options')
         ownerOptions.parentNode.removeChild(ownerOptions)
+        const ownerTable = doc.getElementById('owners-table')
+        ownerTable.parentNode.removeChild(ownerTable)
       } else {
         dashboard.HTML.renderTemplate(doc, null, 'owners-not-submitted', 'owners-status')
+        if (req.data.owners && req.data.owners.length) {
+          dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
+        } else {
+          const ownerTable = doc.getElementById('owners-table')
+          ownerTable.parentNode.removeChild(ownerTable)
+        }
       }
     }
   } else {
