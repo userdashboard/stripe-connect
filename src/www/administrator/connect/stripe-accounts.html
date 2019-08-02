@@ -17,29 +17,27 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>Type</th>
           <th>Name</th>
           <th>Status</th>
-          <th></th>
+          <th>Created</th>
+          <th>Submitted</th>
         </tr>
       </thead>
     </table>
+    <ul id="page-links" class="pagination"></ul>
   </body>
   <template id="stripe-account-row">
     <tr id="${account.id}">
       <td><a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>
-      <td id="individual-name-${account.id}">${account.first_name} ${account.last_name}</td>
-      <td id="business-name-${account.id}">${account.business_name}</td>
+      <td>${account.legal_entity.type}</td>
+      <td id="individual-name-${account.id}">${account.legal_entity.first_name} ${account.legal_entity.last_name}</td>
+      <td id="business-name-${account.id}">${account.legal_entity.business_name}</td>
       <td id="registration-status-${account.id}"></td>
-      <td class="pure-button-group" role="group">
-        <a href="/account/connect/${account.id}/customers" class="pure-button">Customers</a>
-        <a href="/account/connect/${account.id}/subscriptions" class="pure-button">Subscriptions</a>
-        <a href="/account/connect/${account.id}/charges" class="pure-button">Charges</a>
-        <a href="/account/connect/${account.id}/plans" class="pure-button">Plans</a>
-        <a href="/administrator/connect/delete-stripe-account?stripeid=${account.id}" class="pure-button">Delete registration</a>
-      </td>
+      <td>${account.createdFormatted}</td>
+      <td>${account.metadata.submittedFormatted}</td>
     </tr>
-    <ul id="page-links" class="pagination"></ul>
-  </body>
+  </template>
   <template id='page-link'>
     <li><a href="/administrator/connect/stripe-accounts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a></li>
   </template>
@@ -53,7 +51,7 @@
     <p>The registration has not been submitted.</p>
   </template>
   <template id="submitted-information">
-      <p>The registration was submitted on ${account.date}.</p>
+      <p>The registration was submitted on ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
     <span>Not submitted yet</span>

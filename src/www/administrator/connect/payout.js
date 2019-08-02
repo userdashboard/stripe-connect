@@ -10,6 +10,8 @@ async function beforeRequest (req) {
     throw new Error('invalid-payoutid')
   }
   const payout = await global.api.administrator.connect.Payout.get(req)
+  payout.createdFormatted = dashboard.Format.date(payout.created)
+  payout.amountFormatted = dashboard.Format.money(payout.amount, payout.currency)
   req.data = { payout }
 }
 

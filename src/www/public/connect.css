@@ -1,9 +1,0 @@
-.pure-form { max-width: 24rem; padding: 0 }
-.pure-form select { display: inline-block; width: 100% }
-.pure-form input[type="text"] { display: inline-block }
-.pure-control-group label { display: block; padding: 0; margin: 0; text-indent: 0; text-align: left }
-.pure-form input.adjacent { margin-right: 0.5rem }
-.pure-form input.full-width { width: 100% }
-.pure-controls { text-align: left; margin-bottom: 1rem }
-.pure-controls .pure-button { margin-left: 1rem }
-.pure-controls .pure-button:first-of-type { margin: 0 }

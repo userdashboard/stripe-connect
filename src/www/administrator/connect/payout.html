@@ -11,16 +11,6 @@
     <h1>View ${payout.id}</h1>
     <div id="message-container"></div>
     <table id="payouts-table" class="pure-table pure-table-striped list-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Amount</th>
-          <th>Stripe account</th> 
-          <th>Status</th>
-          <th>Description</th>
-          <th></th>
-        </tr>
-      </thead>
       <tbody id="${payout.id}">
         <tr>
           <th>ID</th>
@@ -28,7 +18,7 @@
         </tr>
         <tr>
           <th>Amount</th>
-          <td>${payout.amount}</td>
+          <td>${payout.amountFormatted}</td>
         </tr>
         <tr>
           <th>Stripe acount</th>
@@ -41,6 +31,10 @@
         <tr>
           <th>Description</th>
           <td>${payout.description}</td>
+        </tr>
+        <tr>
+          <th>Created</th>
+          <td>${payout.createdFormatted}</td>
         </tr>
       </tbody>
     </table>

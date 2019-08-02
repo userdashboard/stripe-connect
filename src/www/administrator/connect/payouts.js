@@ -8,6 +8,12 @@ module.exports = {
 async function beforeRequest (req) {
   const total = await global.api.administrator.connect.PayoutsCount.get(req)
   const payouts = await global.api.administrator.connect.Payouts.get(req)
+  if (payouts && payouts.length) {
+    for (const payout of payouts) {
+      payout.createdFormatted = dashboard.Format.date(payout.created)
+      payout.amountFormatted = dashboard.Format.money(payout.amount, payout.currency)
+    }
+  }
   const offset = req.query ? req.query.offset || 0 : 0
   req.data = { payouts, total, offset }
 }

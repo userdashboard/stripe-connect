@@ -11,7 +11,7 @@ async function beforeRequest (req) {
     return
   }
   for (const stripeAccount of stripeAccounts) {
-    stripeAccount.createdFormatted = dashboard.Timestamp.date(stripeAccount.metadata.created)
+    stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
     if (stripeAccount.payouts_enabled) {
       stripeAccount.statusMessage = 'verified'
     } else if (stripeAccount.verification.disabled_reason) {

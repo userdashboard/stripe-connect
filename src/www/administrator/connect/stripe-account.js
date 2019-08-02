@@ -10,11 +10,11 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripeid')
   }
   const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
-  if (stripeAccount.legal_entity.type === 'individual') {
-    stripeAccount.first_name = stripeAccount.legal_entity.first_name
-    stripeAccount.last_name = stripeAccount.legal_entity.last_name
+  stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
+  if (stripeAccount.metadata.submitted) {
+    stripeAccount.metadata.submittedFormatted = dashboard.Format.date(stripeAccount.metadata.submitted)
   } else {
-    stripeAccount.business_name = stripeAccount.legal_entity.business_name
+    stripeAccount.metadata.submittedFormatted = ''
   }
   if (stripeAccount.payouts_enabled) {
     stripeAccount.statusMessage = 'verified'

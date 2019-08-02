@@ -11,26 +11,15 @@
     <h1>Additional owner ${owner.ownerid}</h1>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <tbody id="${owner.ownerid}">
-        <th>ID</th>
-        <td>${owner.ownerid}</td>
-        <th>Name</th>
-        <td>${owner.first_name} ${owner.last_name}</td>
-        <td class="pure-button-group" role="group">
-          <a class="pure-button" href="/account/connect/delete-additional-owner?ownerid=${owner.ownerid}">Delete</a>
-        </td>
+        <tr>
+          <th>ID</th>
+          <td>${owner.ownerid}</td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <td>${owner.first_name} ${owner.last_name}</td>
+        </tr>
       </body>
     </table>
   </body>
-  <template id="submitted-owners">
-    <div class="success message">Success! Owner information has been submitted.</div>
-  </template>
-  <template id="owner-row">
-    <tr id="${owner.ownerid}">
-      <td>${owner.ownerid}</td>
-      <td>${owner.first_name} ${owner.last_name}</td>
-      <td class="pure-button-group" role="group">
-        <a class="pure-button" href="/account/connect/delete-additional-owner?ownerid=${owner.ownerid}">Delete</a>
-      </td>
-    </tr>
-  </template>
 </html>

@@ -1,5 +1,4 @@
 const dashboard = require('@userdashboard/dashboard')
-const navbar = require('./navbar-stripe-account.js')
 
 module.exports = {
   before: beforeRequest,
@@ -22,6 +21,5 @@ async function beforeRequest(req) {
 
 async function renderPage(req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'owner')
-  navbar.setup(doc, req.data.owner)
   return dashboard.Response.end(req, res, doc)
 }

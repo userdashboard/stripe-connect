@@ -26,10 +26,12 @@
           <td id="registration-status-${stripeAccount.id}"></td>
         </tr>
         <tr>
-          <th></th>
-          <td class="pure-button-group" role="group">
-            <a href="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" class="pure-button">Delete Stripe account</a>
-          </td>
+          <th>Created</th>
+          <td>${stripeAccount.createdFormatted}</td>
+        </tr>
+        <tr>
+          <th>Submitted</th>
+          <td>${stripeAccount.metadata.submittedFormatted}</td>
         </tr>
       </tbody>
     </table>
@@ -54,7 +56,7 @@
     <p>The registration has not been submitted.</p>
   </template>
   <template id="submitted-information">
-    <p>The registration was submitted on ${stripeAccount.date}.</p>
+    <p>The registration was submitted on ${stripeAccount.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
     <span>Not submitted yet</span>

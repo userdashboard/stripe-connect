@@ -55,7 +55,7 @@
               <th>Name</th>
               <th>Status</th>
               <th>Created</th>
-              <th></th>
+              <th>Submitted</th>
             </tr>
           </thead>
         </table>
@@ -69,7 +69,7 @@
               <th>Business name</th>
               <th>Status</th>
               <th>Created</th>
-              <th></th>
+              <th>Submitted</th>
             </tr>
           </thead>
         </table>
@@ -88,10 +88,7 @@
       <td id="business-name-${account.id}">${account.legal_entity.business_name}</td>
       <td id="registration-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
-      <td class="pure-button-group" role="group">
-        <a href="/account/connect/stripe-account?stripeid=${account.id}" class="pure-button">Stripe account</a>
-        <a href="/account/connect/edit-payment-information?stripeid=${account.id}" class="pure-button">Edit payment information</a>
-      </td>
+      <td>${account.submittedFormatted}</td>
     </tr>
   </template>
   <template id="status-not-submitted">

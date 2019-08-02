@@ -49,19 +49,21 @@ Dashboard proxies your application server to create a single website where pages
 - [Hastebin - free web application](https://userdashboard.github.io/integrations/hastebin-free-saas.html)
 - [Hastebin - subscription web application](https://userdashboard.github.io/integrations/hastebin-saas-subscription.html)
 
-## Screenshots of Dashboard with Stripe Connect
+## Screenshots of Dashboard
 
-| ![Guest landing page](./src/www/public/1-connect-landing-page.png?raw=true) | 
-|:---------------------------------------------------------------------------------------------------------------:|
-| Guest landing page that you replace with your own `/` route on your application server |
+The user and administration documentation contain screenshots demonstrating Dashboard and its modules in use. 
 
-| ![Signed in home page](./src/www/public/2-connect-signed-in.png?raw=true) |
+| ![Guest landing page](https://userdashboard.github.io/developers/integrations/hastebin-subscription-saas/1-index-page.png?raw=true) | 
 |:---------------------------------------------------------------------------------------------------------------:|
-| Signed in home page that you replace with your own `/home` route on your application server |
+| Example app integrating Dashboard with `/` served by its application server |
 
-| ![Organization administration ](./src/www/public/3-connect-administration.png?raw=true) |
+| ![Administration page](https://userdashboard.github.io/developers/integrations/hastebin-subscription-saas/3-owner-views-subscription-administration.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
-| Connect administration |
+| Administration page provided by Dashboard |
+
+| ![Example app integrating Dashboard ](https://userdashboard.github.io/developers/integrations/hastebin-subscription-saas/14-second-user-creates-shared-post.png?raw=true) |
+|:---------------------------------------------------------------------------------------------------------------:|
+| Example app integrating Dashboard with `/home` served by its application server |
 
 ## Dashboard modules
 

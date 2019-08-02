@@ -8,11 +8,11 @@ module.exports = {
 async function beforeRequest (req) {
   const stripeAccounts = await global.api.administrator.connect.StripeAccounts.get(req)
   for (const stripeAccount of stripeAccounts) {
-    if (stripeAccount.legal_entity.type === 'individual') {
-      stripeAccount.first_name = stripeAccount.legal_entity.first_name
-      stripeAccount.last_name = stripeAccount.legal_entity.last_name
+    stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
+    if (stripeAccount.metadata.submitted) {
+      stripeAccount.metadata.submittedFormatted = dashboard.Format.date(stripeAccount.metadata.submitted)
     } else {
-      stripeAccount.business_name = stripeAccount.legal_entity.business_name
+      stripeAccount.metadata.submittedFormatted = ''
     }
     if (stripeAccount.payouts_enabled) {
       stripeAccount.statusMessage = 'verified'
@@ -29,7 +29,7 @@ async function beforeRequest (req) {
   req.data = { stripeAccounts }
 }
 
-async function renderPage (req, res, messageTemplate) {
+async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html)
   if (req.data.stripeAccounts && req.data.stripeAccounts.length) {
     dashboard.HTML.renderTable(doc, req.data.stripeAccounts, 'stripe-account-row', 'stripe-accounts-table')

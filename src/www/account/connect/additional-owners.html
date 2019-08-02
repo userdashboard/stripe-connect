@@ -23,7 +23,6 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th></th>
         </tr>
       </thead>
     </table>
@@ -33,11 +32,8 @@
   </template>
   <template id="owner-row">
     <tr id="${owner.ownerid}">
-      <td><a href="/account/connect/edit-additional-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
+      <td><a href="/account/connect/additional-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
       <td>${owner.first_name} ${owner.last_name}</td>
-      <td class="pure-button-group" role="group">
-        <a class="pure-button" href="/account/connect/delete-additional-owner?ownerid=${owner.ownerid}">Delete</a>
-      </td>
     </tr>
   </template>
 </html>

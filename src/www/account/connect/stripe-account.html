@@ -44,7 +44,6 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th></th>
           </tr>
         </thead>
       </table>
@@ -73,11 +72,8 @@
   <template id="owner-row">
     <tr id="${owner.ownerid}">
       <td><a href="/account/connect/edit-additional-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
-      <td>${owner.first_name} ${owner.last_name}</td>
-      <td class="pure-button-group" role="group">
-        <a class="pure-button" href="/account/connect/delete-additional-owner?ownerid=${owner.ownerid}">Delete</a>
-      </td>
-    </tr>
+owner.first_name} ${owner.last_name}</td>
+owner
   </template>
   <template id="owners-submitted">
     <p>Owner information has been submitted.</p>
@@ -95,7 +91,7 @@
     <p>The registration has not been submitted.</p>
   </template>
   <template id="submitted-information">
-    <p>The registration was submitted on ${account.date}.</p>
+    <p>The registration was submitted on ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
     <p>The registration information has not been provided.</p>

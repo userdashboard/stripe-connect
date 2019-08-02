@@ -21,7 +21,7 @@
           <th>Stripe account</th>
           <th>Status</th>
           <th>Description</th>
-          <th></th>
+          <th>Created</th>
         </tr>
       </thead>
     </table>
@@ -33,12 +33,11 @@
   <template id="payout-row">
     <tr id="${payout.id}">
       <td><a href="/administrator/connect/payout?payoutid=${payout.id}">${payout.id}</a></td>
-      <td>${payout.amount}</td>
+      <td>${payout.amountFormatted}</td>
       <td><a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a></td>
       <td id="status-${payout.id}"></td>
       <td>${payout.description}</td>
-      <td class="pure-button-group" role="group">
-      </td>
+      <td>${payout.createdFormatted}</td>
     </tr>
   </template>
   <template id="unsupported_card">

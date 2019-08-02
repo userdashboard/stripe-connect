@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.0 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
+> @userdashboard/stripe-connect@1.0.2 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
 > NODE_ENV=testing mocha src --recursive --timeout 240000 --slow 240000
 
 
@@ -400,16 +400,14 @@
       ✓ should return all records
 
   /api/administrator/connect/delete-stripe-account
-    DeleteStripeAccount#BEFORE
-      ✓ should reject invalid stripeid
     DeleteStripeAccount#DELETE
+      ✓ should reject invalid stripeid
       ✓ should delete Stripe account
 
   /api/administrator/connect/set-stripe-account-rejected
-    RejectStripeAccount#BEFORE
+    RejectStripeAccount#PATCH
       ✓ should reject invalid stripeid
       ✓ should reject invalid reason
-    RejectStripeAccount#PATCH
       ✓ should update the Stripe account as rejected
 
   /api/administrator/connect/stripe-account
@@ -454,7 +452,7 @@
       ✓ should return stripe countrySpec list
 
   /api/user/connect/create-additional-owner
-    CreateAdditionalOwner#BEFORE
+    CreateAdditionalOwner#POST
       ✓ should reject invalid stripeid
       ✓ should reject individual account
       ✓ should reject company that doesn't require owner info
@@ -462,50 +460,44 @@
       ✓ should reject fifth 25% owner
       ✓ should reject submitted account
       ✓ should reject invalid fields
-    CreateAdditionalOwner#POST
       ✓ should create authorized additional owner
 
   /api/user/connect/create-stripe-account
-    CreateStripeAccount#BEFORE
+    CreateStripeAccount#POST
       ✓ should reject invalid account type
       ✓ should reject invalid country
-    CreateStripeAccount#POST
       ✓ should create authorized registration
 
   /api/user/connect/delete-additional-owner
-    DeleteAdditionalOwner#BEFORE
+    DeleteAdditionalOwner#DELETE
       ✓ should reject invalid ownerid
       ✓ should reject other account's registration
-    DeleteAdditionalOwner#DELETE
       ✓ should delete owner
 
   /api/user/connect/delete-stripe-account
-    DeleteStripeAccount#BEFORE
+    DeleteStripeAccount#DELETE
       ✓ should reject invalid stripeid
       ✓ should reject other account's Stripe account
-    DeleteStripeAccount#DELETE
       ✓ should delete Stripe account
 
   /api/user/connect/set-additional-owners-submitted
-    SetAdditionalOwnersSubmitted#BEFORE
+    SetAdditionalOwnersSubmitted#PATCH
       ✓ should reject invalid stripeid
       ✓ should reject individual account
       ✓ should reject other account's registration
       ✓ should reject company that doesn't require owner info
       ✓ should reject registration with owners already submitted
-    SetAdditionalOwnersSubmitted#PATCH
       ✓ should submit blank owners
       ✓ should submit owners
 
   /api/user/connect/set-company-registration-submitted
-    SetCompanyRegistrationSubmitted#BEFORE
+    SetCompanyRegistrationSubmitted#PATCH
       ✓ should reject invalid stripeid
       ✓ should reject individual account
       ✓ should reject submitted registration
       ✓ should reject other account's registration
       ✓ should require payment details
       ✓ should require additional owners submitted
-    SetCompanyRegistrationSubmitted#PATCH
       ✓ should submit AT-company registration
       ✓ should submit AU-company registration
       ✓ should submit BE-company registration
@@ -530,13 +522,12 @@
       ✓ should submit US-company registration
 
   /api/user/connect/set-individual-registration-submitted
-    SetIndividualRegistrationSubmitted#BEFORE
+    SetIndividualRegistrationSubmitted#PATCH
       ✓ should reject invalid stripeid
       ✓ should reject company account
       ✓ should reject submitted registration
       ✓ should reject other account's registration
       ✓ should require payment details
-    SetIndividualRegistrationSubmitted#PATCH
       ✓ should submit AT-individual registration
       ✓ should submit AU-individual registration
       ✓ should submit BE-individual registration
@@ -578,15 +569,14 @@
       ✓ should return all records
 
   /api/user/connect/update-additional-owner
-    UpdateAdditionalOwner#BEFORE
+    UpdateAdditionalOwner#PATCH
       ✓ should reject invalid ownerid
       ✓ should reject other account's registration
       ✓ should reject invalid fields
-    UpdateAdditionalOwner#PATCH
       ✓ should update owner
 
   /api/user/connect/update-company-registration
-    UpdateCompanyRegistration#BEFORE
+    UpdateCompanyRegistration#PATCH
       ✓ should reject invalid stripeid
       ✓ should reject individual Stripe account
       ✓ should reject other account's Stripe account
@@ -613,7 +603,6 @@
       ✓ should reject PT-company invalid fields
       ✓ should reject SE-company invalid fields
       ✓ should reject US-company invalid fields
-    UpdateCompanyRegistration#PATCH
       ✓ should update AT-company registration
       ✓ should update AU-company registration
       ✓ should update BE-company registration
@@ -638,7 +627,7 @@
       ✓ should update US-company registration
 
   /api/user/connect/update-individual-registration
-    UpdateIndividualRegistration#BEFORE
+    UpdateIndividualRegistration#PATCH
       ✓ should reject invalid stripeid
       ✓ should reject company Stripe account
       ✓ should reject other account's Stripe account
@@ -665,7 +654,6 @@
       ✓ should reject PT-individual invalid fields
       ✓ should reject SE-individual invalid fields
       ✓ should reject US-individual invalid fields
-    UpdateIndividualRegistration#PATCH
       ✓ should update AT-individual registration
       ✓ should update AU-individual registration
       ✓ should update BE-individual registration
@@ -690,7 +678,7 @@
       ✓ should update US-individual registration
 
   /api/user/connect/update-payment-information
-    UpdatePaymentInformation#BEFORE
+    UpdatePaymentInformation#PATCH
       ✓ should reject invalid stripeid
       ✓ should reject other account's Stripe account
       ✓ should reject AT invalid fields
@@ -716,7 +704,6 @@
       ✓ should reject PT invalid fields
       ✓ should reject SE invalid fields
       ✓ should reject US invalid fields
-    UpdatePaymentInformation#PATCH
       ✓ should update AT information
       ✓ should update AU information
       ✓ should update BE information
@@ -742,5 +729,5 @@
       ✓ should update US information
 
 
-  554 passing (52m)
+  554 passing (56m)
 

@@ -17,7 +17,10 @@ async function beforeRequest (req) {
   let individual
   if (stripeAccounts && stripeAccounts.length) {
     for (const stripeAccount of stripeAccounts) {
-      stripeAccount.createdFormatted = dashboard.Timestamp.date(stripeAccount.created)
+      stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
+      if (stripeAccount.metadata.submitted) {
+        stripeAccount.metadata.submittedFormatted = dashboard.Format.date(stripeAccount.metadata.submitted)
+      }
       if (stripeAccount.payouts_enabled) {
         stripeAccount.statusMessage = 'status-verified'
       } else if (stripeAccount.verification.disabled_reason) {
