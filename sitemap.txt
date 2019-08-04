@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.0
+@userdashboard/dashboard 1.0.7
 https://stripe-connect.server7373.synology.me
 
 Administrator menu:
@@ -69,6 +69,7 @@ URL ---------------------------------------------------- AUTH ---- TEMPLATE ----
 /account/signin                                          GUEST     FULLSCREEN     GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/signout                                                   FULLSCREEN     GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/signout-complete                                GUEST     FULLSCREEN     GET                                              @userdashboard/dashboard    
+/account/verify                                          GUEST     FULLSCREEN     GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /administrator                                                                    GET                                              @userdashboard/dashboard    
 /administrator/account                                                            GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /administrator/account-profiles                                                   GET             @userdashboard/dashboard         @userdashboard/dashboard    
@@ -190,6 +191,7 @@ URL ---------------------------------------------------- AUTH ---- TEMPLATE ----
 /api/user/set-account-profile                                                     PATCH           @userdashboard/dashboard                                     
 /api/user/set-account-username                                                    PATCH           @userdashboard/dashboard                                     
 /api/user/set-session-ended                                                       PATCH           @userdashboard/dashboard                                     
+/api/user/set-session-verified                                                    PATCH           @userdashboard/dashboard                                     
 /api/user/update-profile                                                          PATCH           @userdashboard/dashboard                                     
 /home                                                                             GET                                              /src/www                    
 /webhooks/connect/index-payout-data                      GUEST                    POST            /src/www                                                     
