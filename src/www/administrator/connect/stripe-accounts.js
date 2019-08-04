@@ -41,6 +41,9 @@ async function renderPage (req, res) {
         const individualName = doc.getElementById(`individual-name-${stripeAccount.id}`)
         individualName.parentNode.removeChild(individualName)
       }
+      if (stripeAccount.statusMessage) {
+        dashboard.HTML.renderTemplate(doc, null, stripeAccount.statusMessage, `account-status-${stripeAccount.id}`)
+      }
     }
     noStripeAccounts = doc.getElementById('no-stripe-accounts')
     noStripeAccounts.parentNode.removeChild(noStripeAccounts)

@@ -21,14 +21,23 @@
           <td>${stripeAccount.legal_entity.type}</td>
         </tr>
         <tr>
+          <th>Name</th>
+          <td id="individual-name">${stripeAccount.legal_entity.first_name || ""} ${stripeAccount.legal_entity.last_name || ""}</td>
+          <td id="business-name">${stripeAccount.legal_entity.business_name || ""}</td>
+        </tr>
+        <tr>
+          <th>Country</th>
+          <td>${stripeAccount.country}</td>
+        </tr>
+        <tr>
           <th>Status</th>
-          <td id="registration-status-${stripeAccount.id}"></td>
+          <td id="account-status-${stripeAccount.id}"></td>
         </tr>
       </tbody>
     </table>
     <div id="registration-container">
       <h2>Registration information</h2>
-      <div id="registration-status"></div>
+      <div id="account-status"></div>
       <p class="pure-button-group" role="group" id="registration-options">
         <a id="start-individual-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-individual-registration?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
         <a id="start-company-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -72,8 +81,7 @@
   <template id="owner-row">
     <tr id="${owner.ownerid}">
       <td><a href="/account/connect/edit-additional-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
-owner.first_name} ${owner.last_name}</td>
-owner
+      <td>${owner.first_name} ${owner.last_name}</td>
   </template>
   <template id="owners-submitted">
     <p>Owner information has been submitted.</p>

@@ -62,7 +62,7 @@ async function renderPage (req, res) {
     noStripeAccounts.parentNode.removeChild(noStripeAccounts)
     for (const stripeAccount of req.data.stripeAccounts) {
       if (stripeAccount.statusMessage) {
-        dashboard.HTML.renderTemplate(doc, null, stripeAccount.statusMessage, `registration-status-${stripeAccount.id}`)
+        dashboard.HTML.renderTemplate(doc, null, stripeAccount.statusMessage, `account-status-${stripeAccount.id}`)
       }
       if (stripeAccount.legal_entity.type === 'individual') {
         const businessNameContainer = doc.getElementById(`business-name-${stripeAccount.id}`)

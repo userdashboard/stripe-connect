@@ -76,99 +76,91 @@ async function beforeRequest (req) {
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
+  const removeElements = []
   if (req.data.stripeAccount.statusMessage) {
-    dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, `registration-status-${req.data.stripeAccount.id}`)
+    dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, `account-status-${req.data.stripeAccount.id}`)
+  }
+  if (req.data.stripeAccount.legal_entity.type === 'individual') {
+    removeElements.push('business-name')
+    
+  } else {
+    removeElements.push('individual-name')
   }
   // registration can be submitted, ready to submit, or not started
   if (req.data.stripeAccount.metadata.submitted) {
-    const registrationContainer = doc.getElementById('registration-container')
-    registrationContainer.parentNode.removeChild(registrationContainer)
+    removeElements.push('registration-container')
   } else if (req.data.registrationComplete) {
-    dashboard.HTML.renderTemplate(doc, null, 'completed-registration', 'registration-status')
-    const startIndividualLink = doc.getElementById('start-individual-registration-link')
-    startIndividualLink.parentNode.removeChild(startIndividualLink)
-    const startCompanyLink = doc.getElementById('start-company-registration-link')
-    startCompanyLink.parentNode.removeChild(startCompanyLink)
+    dashboard.HTML.renderTemplate(doc, null, 'completed-registration', 'account-status')
+    removeElements.push('start-individual-registration-link', 'start-company-registration-link')
     if (req.data.stripeAccount.legal_entity.type !== 'individual') {
-      const updateIndividualLink = doc.getElementById('update-individual-registration-link')
-      updateIndividualLink.parentNode.removeChild(updateIndividualLink)
+      removeElements.push('update-individual-registration-link')
     } else {
-      const updateCompanyLink = doc.getElementById('update-company-registration-link')
-      updateCompanyLink.parentNode.removeChild(updateCompanyLink)
+      removeElements.push('update-company-registration-link')
     }
   } else {
-    dashboard.HTML.renderTemplate(doc, null, 'unstarted-registration', 'registration-status')
-    const updateIndividualLink = doc.getElementById('update-individual-registration-link')
-    updateIndividualLink.parentNode.removeChild(updateIndividualLink)
-    const updateCompanyLink = doc.getElementById('update-company-registration-link')
-    updateCompanyLink.parentNode.removeChild(updateCompanyLink)
+    dashboard.HTML.renderTemplate(doc, null, 'unstarted-registration', 'account-status')
+    removeElements.push('update-individual-registration-link',  'update-company-registration-link')
     if (req.data.stripeAccount.legal_entity.type === 'individual') {
-      const startCompanyLink = doc.getElementById('start-company-registration-link')
-      startCompanyLink.parentNode.removeChild(startCompanyLink)
+      removeElements.push('start-company-registration-link')
     } else {
-      const startIndividualLink = doc.getElementById('start-individual-registration-link')
-      startIndividualLink.parentNode.removeChild(startIndividualLink)
+      removeElements.push('start-individual-registration-link')
     }
   }
   // payment details
   const completedPaymentInformation = req.data.stripeAccount.external_accounts.data.length
   if (completedPaymentInformation) {
-    const setupPayment = doc.getElementById('setup-payment')
-    setupPayment.parentNode.removeChild(setupPayment)
+    removeElements.push('setup-payment')
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount.external_accounts.data[0], 'payment-information', 'payment-information-status')
   } else {
-    const updatePayment = doc.getElementById('update-payment')
-    updatePayment.parentNode.removeChild(updatePayment)
+    removeElements.push('update-payment')
     dashboard.HTML.renderTemplate(doc, null, 'no-payment-information', 'payment-information-status')
   }
   // additional owners
   if (req.data.verificationFields && req.data.verificationFields.indexOf('legal_entity.additional_owners') > -1) {
     if (req.data.stripeAccount.metadata.submitted) {
-      const ownersContainer = doc.getElementById('owners-container')
-      ownersContainer.parentNode.removeChild(ownersContainer)
+      removeElements.push('owners-container')
     } else {
       if (req.data.stripeAccount.metadata.submittedOwners) {
         dashboard.HTML.renderTemplate(doc, null, 'owners-submitted', 'owners-status')
-        const ownerOptions = doc.getElementById('owner-options')
-        ownerOptions.parentNode.removeChild(ownerOptions)
-        const ownerTable = doc.getElementById('owners-table')
-        ownerTable.parentNode.removeChild(ownerTable)
+        removeElements.push('owner-options', 'owners-table')
       } else {
         dashboard.HTML.renderTemplate(doc, null, 'owners-not-submitted', 'owners-status')
         if (req.data.owners && req.data.owners.length) {
           dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
         } else {
-          const ownerTable = doc.getElementById('owners-table')
-          ownerTable.parentNode.removeChild(ownerTable)
+          removeElements.push('owners-table')
         }
       }
     }
   } else {
     req.data.stripeAccount.metadata.submittedOwners = true
-    const ownersContainer = doc.getElementById('owners-container')
-    ownersContainer.parentNode.removeChild(ownersContainer)
+    removeElements.push('owners-container')
   }
   // submission status
   if (req.data.stripeAccount.metadata.submitted) {
     req.data.stripeAccount.date = dashboard.Timestamp.date(req.data.stripeAccount.metadata.submitted)
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'submitted-information', 'submission-status')
-    const registrationLinks = doc.getElementById('submit-registration-link-container')
-    registrationLinks.parentNode.removeChild(registrationLinks)
+    removeElements.push('submit-registration-link-container')
   } else {
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'not-submitted-information', 'submission-status')
     let registrationLink
     if (req.data.stripeAccount.legal_entity.type === 'individual') {
-      const submitCompanyLink = doc.getElementById('submit-company-registration-link')
-      submitCompanyLink.parentNode.removeChild(submitCompanyLink)
+      removeElements.push('submit-company-registration-link')
       registrationLink = doc.getElementById('submit-individual-registration-link')
     } else {
-      const submitIndividualLink = doc.getElementById('submit-individual-registration-link')
-      submitIndividualLink.parentNode.removeChild(submitIndividualLink)
+      removeElements.push('submit-individual-registration-link')
       registrationLink = doc.getElementById('submit-company-registration-link')
     }
     if (!req.data.registrationComplete || !req.data.stripeAccount.metadata.submittedOwners || !completedPaymentInformation) {
       registrationLink.setAttribute('disabled', 'disabled')
     }
+  }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    if (!element || !element.parentNode) {
+      continue
+    }
+    element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }

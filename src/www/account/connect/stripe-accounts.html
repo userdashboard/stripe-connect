@@ -5,6 +5,7 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="/public/pure-min.css" />
     <link rel="stylesheet" href="/public/content.css" />
+    <link rel="stylesheet" href="/public/connect.css" />
     <base target="_top" href="/" />
   </head>
   <body>
@@ -13,38 +14,30 @@
     <div id="no-stripe-accounts">
       <p>No Stripe accounts have been created yet.</p>
     </div>
-    <table id="stripe-accounts-table" class="pure-table">
-      <thead>
-        <tr>
-          <th>Individual registration</th>
-          <th>Company registrations</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div id="requirement-container">
-              <ol>
-                <li>Verified personal information</li>
-                <li>Resident of a supported country</li>
-                <li>Bank account in a supported country</li>
-              </ol>
-              <a id="create-individual-link" href="/account/connect/create-registration" class="pure-button pure-button-primary">Start individual registration</a>
-            </div>
-          </td>
-          <td>
-            <div id="requirement-container">
-              <ol>
-                <li>Verified personal information</li>
-                <li>Business registered in a supported country</li>
-                <li>Bank account in a supported country</li>
-              </ol>
-              <a href="/account/connect/create-registration" class="pure-button pure-button-primary">Start company registration</a>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="pure-g">
+      <div class="pure-u-1-2 requirements-container">
+        <div class="requirements">
+          <h2>Individual requirements</h2>
+          <ol>
+            <li>Verified personal information</li>
+            <li>Resident of a supported country</li>
+            <li>Bank account in a supported country</li>
+          </ol>
+          <a id="create-individual-link" href="/account/connect/create-registration?type=individual" class="pure-button pure-button-primary">Start individual registration</a>
+        </div>
+      </div>
+      <div class="pure-u-1-2 requirements-container">
+        <div class="requirements">
+          <h2>Business requirements</h2>
+          <ol>
+            <li>Verified personal information</li>
+            <li>Business registered in a supported country</li>
+            <li>Bank account in a supported country</li>
+          </ol>
+          <a href="/account/connect/create-registration?type=company" class="pure-button pure-button-primary">Start company registration</a>
+        </div>
+      </div>
+    </div>
     <div id="registrations-container">
       <div id="individual-container">
         <h2>Individual registration</h2>
@@ -84,9 +77,9 @@
   <template id="stripe-account-row">
     <tr id="${account.id}">
       <td><a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>
-      <td id="individual-name-${account.id}">${account.legal_entity.first_name} ${account.legal_entity.last_name}</td>
-      <td id="business-name-${account.id}">${account.legal_entity.business_name}</td>
-      <td id="registration-status-${account.id}"></td>
+      <td id="individual-name-${account.id}">${account.legal_entity.first_name || ""} ${account.legal_entity.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.legal_entity.business_name || ""}</td>
+      <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td>${account.submittedFormatted}</td>
     </tr>

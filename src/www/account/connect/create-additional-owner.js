@@ -74,6 +74,8 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     const stateContainer = doc.getElementById('state-container')
     stateContainer.parentNode.removeChild(stateContainer)
+    const stateContainerBridge = doc.getElementById('state-container-bridge')
+    stateContainerBridge.parentNode.removeChild(stateContainerBridge)
   }
   dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'country')
   if (!req.body) {

@@ -63,6 +63,8 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     const stateContainer = doc.getElementById('state-container')
     stateContainer.parentNode.removeChild(stateContainer)
+    const stateContainerBridge = doc.getElementById('state-container-bridge')
+    stateContainerBridge.parentNode.removeChild(stateContainerBridge)
   }
   const country = doc.getElementById('country')
   dashboard.HTML.renderList(doc, req.data.countries, 'country-option', country)

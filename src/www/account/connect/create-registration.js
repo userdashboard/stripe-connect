@@ -17,6 +17,9 @@ async function beforeRequest (req) {
       name: countriesIndex[countrySpec.id]
     })
   }
+  countries.sort((a, b) => {
+    return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+  })
   req.data = { countries }
 }
 
@@ -51,6 +54,14 @@ async function renderPage (req, res, messageTemplate) {
       const individual = doc.getElementById('individual')
       individual.setAttribute('checked', 'checked')
     }
+  }
+  if (req.method === 'GET' && req.country) {
+    for (const country of req.data.countries) {
+      if (country.id === req.country.id) {
+        await dashboard.HTML.setSelectedOptionByValue(doc, 'country', req.country.id)
+        break
+      }
+    }    
   }
   dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'country')
   return dashboard.Response.end(req, res, doc)

@@ -12,33 +12,19 @@
     <h1>Add company owner for ${stripeAccount.id}</h1>
     <p>Singapore and the EU requires anyone else owning 25% or more of this company submit their personal information.</p>
     <div id="message-container"></div>
-    <table id="stripe-accounts-table" class="pure-table object-table">
-      <thead>
-        <tr>
-          <th>Stripe account</th>
-          <th>Name</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tr id="${stripeAccount.id}">
-        <td>${stripeAccount.id}</td>
-        <td>${stripeAccount.legal_entity.business_name}</td>
-        <td id="registration-status-${stripeAccount.id}"></td>
-      </tr>
-    </table>
     <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked" action="/account/connect/create-additional-owner?stripeid=${stripeAccount.id}">
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div class="pure-control-group">
             <label for="first_name">First name</label>
-            <input require="require" id="first_name" name="first_name" type="text" maxlength="50" />
+            <input class="full-width" require="require" id="first_name" name="first_name" type="text" maxlength="50" />
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div class="pure-control-group">
             <label for="last_name">Last name</label>
-            <input require="require" id="last_name" name="last_name" type="text" maxlength="50" />
+            <input class="full-width" require="require" id="last_name" name="last_name" type="text" maxlength="50" />
           </div>
         </div>
       </div>
@@ -46,7 +32,7 @@
         <label for="day">Date of birth</label>
         <input class="adjacent" require="require" id="day" name="day" type="text" size="2" maxlength="2" placeholder="DD" />
         <input class="adjacent" require="require" id="month" name="month" type="text" size="2" maxlength="2" placeholder="MM" />
-        <input require="require" id="year" name="year" type="text" size="4" maxlength="4" placeholder="YYYY" />
+        <input class="adjacent" require="require" id="year" name="year" type="text" size="4" maxlength="4" placeholder="YYYY" />
       </div>
       <div id="personal_id_number-container" class="pure-g">
         <div class="pure-u-1-2">
@@ -81,7 +67,7 @@
               <option>Select state</option>
             </select>
           </div>
-          <div class="pure-u-1-24"></div>
+          <div id="state-container-bridge" class="pure-u-1-24"></div>
           <div class="pure-u-6-24">
             <div class="pure-control-group">
               <label for="postal_code">ZIP</label>

@@ -17,21 +17,22 @@ async function beforeRequest (req) {
     stripeAccount.metadata.submittedFormatted = ''
   }
   if (stripeAccount.payouts_enabled) {
-    stripeAccount.statusMessage = 'verified'
+    stripeAccount.statusMessage = 'status-verified'
   } else if (stripeAccount.verification.disabled_reason) {
-    stripeAccount.statusMessage = `${stripeAccount.verification.disabled_reason}`
+    stripeAccount.statusMessage = `status-${stripeAccount.verification.disabled_reason}`
   } else if (stripeAccount.verification.details_code) {
-    stripeAccount.statusMessage = `${stripeAccount.verification.details_code}`
+    stripeAccount.statusMessage = `status-${stripeAccount.verification.details_code}`
   } else if (stripeAccount.metadata.submitted) {
-    stripeAccount.statusMessage = 'under-review'
+    stripeAccount.statusMessage = 'status-under-review'
   } else {
-    stripeAccount.statusMessage = 'not-submitted'
+    stripeAccount.statusMessage = 'status-not-submitted'
   }
   req.data = { stripeAccount }
 }
 
-async function renderPage (req, res, messageTemplate) {
+async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, `account-status`)
   if (req.data.stripeAccount.legal_entity.type === 'individual') {
     const businessName = doc.getElementById(`business-name-${req.data.stripeAccount.id}`)
     businessName.parentNode.removeChild(businessName)

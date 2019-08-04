@@ -22,7 +22,7 @@
       <tbody id="${stripeAccount.id}">
         <td>${stripeAccount.id}</td>
         <td>${stripeAccount.legal_entity.type}</td>
-        <td id="registration-status-${stripeAccount.id}"></td>
+        <td id="account-status-${stripeAccount.id}"></td>
       </tbody>
     </table>
     <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}">

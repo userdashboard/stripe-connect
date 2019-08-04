@@ -18,12 +18,12 @@
         </tr>
         <tr>
           <th>Name</th>
-          <td id="individual-name-${stripeAccount.id}">${stripeAccount.legal_entity.first_name} ${stripeAccount.legal_entity.last_name}</td>
-          <td id="business-name-${stripeAccount.id}">${stripeAccount.legal_entity.business_name}</td>
+          <td id="individual-name-${stripeAccount.id}">${stripeAccount.legal_entity.first_name || ""} ${stripeAccount.legal_entity.last_name || ""}</td>
+          <td id="business-name-${stripeAccount.id}">${stripeAccount.legal_entity.business_name || ""}</td>
         </tr>
         <tr>
           <th>Status</th>
-          <td id="registration-status-${stripeAccount.id}"></td>
+          <td id="account-status"></td>
         </tr>
         <tr>
           <th>Created</th>
@@ -35,66 +35,44 @@
         </tr>
       </tbody>
     </table>
-    <div id="payment-container">
-      <h2>Payment information</h2>
-      <div id="payment-information-status"></div>
-      <p id="payment-options"></p>
-    </div>
-    <div id="submission-container">
-      <h2>Submit registration</h2>
-      <div id="submission-status"></div>
-      <p id="submit-registration-link-container"></p>
-    </div>
   </body>
-  <template id="payment-information">
-    <p>Funds are paid to account x</p>
-  </template>
-  <template id="no-payment-information">
-    <p>Banking details must be provided to receive funds.</p>
-  </template>
-  <template id="not-submitted-information">
-    <p>The registration has not been submitted.</p>
-  </template>
-  <template id="submitted-information">
-    <p>The registration was submitted on ${stripeAccount.dateFormatted}.</p>
-  </template>
-  <template id="not-submitted">
+  <template id="status-not-submitted">
     <span>Not submitted yet</span>
   </template>
-  <template id="verified">
+  <template id="status-verified">
     <span>Registration has been accepted</span>
   </template>
-  <template id="verified">
+  <template id="status-verified">
     <span>Disabled by Stripe</span>
   </template>
-  <template id="verified-requires-fields">
+  <template id="status-verified-requires-fields">
     <span>Requires additional information</span>
   </template>
-  <template id="pending-submission">
+  <template id="status-pending-submission">
     <span>Pending submission</span>
   </template>
-  <template id="rejected.fraud">
+  <template id="status-rejected.fraud">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
-  <template id="rejected.terms">
+  <template id="status-rejected.terms">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
-  <template id="rejected.listed">
+  <template id="status-rejected.listed">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
-  <template id="rejected.other">
+  <template id="status-rejected.other">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
-  <template id="fields_needed">
+  <template id="status-fields_needed">
     <span>More information is required</span>
   </template>
-  <template id="listed">
+  <template id="status-listed">
     <span>Under review by Stripe</span>
   </template>
-  <template id="under-review">
+  <template id="status-under-review">
     <span>Under review by Stripe</span>
   </template>
-  <template id="disabled">
+  <template id="status-disabled">
     <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </html>

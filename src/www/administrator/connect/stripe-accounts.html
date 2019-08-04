@@ -31,9 +31,9 @@
     <tr id="${account.id}">
       <td><a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>
       <td>${account.legal_entity.type}</td>
-      <td id="individual-name-${account.id}">${account.legal_entity.first_name} ${account.legal_entity.last_name}</td>
-      <td id="business-name-${account.id}">${account.legal_entity.business_name}</td>
-      <td id="registration-status-${account.id}"></td>
+      <td id="individual-name-${account.id}">${account.legal_entity.first_name || ""} ${account.legal_entity.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.legal_entity.business_name || ""}</td>
+      <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td>${account.metadata.submittedFormatted}</td>
     </tr>
@@ -51,7 +51,7 @@
     <p>The registration has not been submitted.</p>
   </template>
   <template id="submitted-information">
-      <p>The registration was submitted on ${account.dateFormatted}.</p>
+    <p>The registration was submitted on ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
     <span>Not submitted yet</span>

@@ -56,7 +56,7 @@ describe(`/account/connect/stripe-account`, () => {
       req.session = user.session
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('registration-status')
+      const messageContainer = doc.getElementById('account-status')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'unstarted-registration')
     })
@@ -70,7 +70,7 @@ describe(`/account/connect/stripe-account`, () => {
       req.session = user.session
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('registration-status')
+      const messageContainer = doc.getElementById('account-status')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'completed-registration')
     })

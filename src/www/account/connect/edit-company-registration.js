@@ -209,6 +209,10 @@ async function renderPage (req, res, messageTemplate) {
       continue
     }
     element.parentNode.removeChild(element)
+    if (field === 'personal_state') {
+      const element2 = doc.getElementById('personal_state_bridge')
+      element2.parentNode.removeChild(element2)
+    }
   }
   const noPersonalAddress = doc.getElementById('personal_line1') === null &&
     doc.getElementById('personal_line2') === null &&

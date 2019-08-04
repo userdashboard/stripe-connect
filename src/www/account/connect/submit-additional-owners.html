@@ -21,9 +21,9 @@
       </thead>
       <tr id="${stripeAccount.id}">
         <td><a href="/account/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a></td>
-        <td id="individual-name-${stripeAccount.id}">${stripeAccount.legal_entity.first_name} ${stripeAccount.legal_entity.last_name}</td>
-        <td id="business-name-${stripeAccount.id}">${stripeAccount.legal_entity.business_name}</td>
-        <td id="registration-status-${stripeAccount.id}"></td>
+        <td id="individual-name-${stripeAccount.id}">${stripeAccount.legal_entity.first_name || ""} ${stripeAccount.legal_entity.last_name || ""}</td>
+        <td id="business-name-${stripeAccount.id}">${stripeAccount.legal_entity.business_name || ""}</td>
+        <td id="account-status-${stripeAccount.id}"></td>
       </tr>
     </table>
     <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/submit-additional-owners?stripeid=${stripeAccount.id}">
