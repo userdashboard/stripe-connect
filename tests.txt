@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.2 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
+> @userdashboard/stripe-connect@1.0.3 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
 > NODE_ENV=testing mocha src --recursive --timeout 240000 --slow 240000
 
 
@@ -26,7 +26,6 @@
       ✓ should require own Stripe account
     CreateAdditionalOwner#GET
       ✓ should present the form
-      ✓ should present the Stripe account table
     CreateAdditionalOwner#POST
       ✓ should require each field
       ✓ should require a document id upload
@@ -729,5 +728,5 @@
       ✓ should update US information
 
 
-  554 passing (56m)
+  553 passing (56m)
 
