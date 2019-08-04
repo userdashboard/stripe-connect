@@ -82,18 +82,6 @@ describe(`/account/connect/create-additional-owner`, async () => {
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
-
-    it('should present the Stripe account table', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })
-      const req = TestHelper.createRequest(`/account/connect/create-additional-owner?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.stripeAccount.id)
-      assert.strictEqual(row.tag, 'tr')
-    })
   })
 
   describe('CreateAdditionalOwner#POST', () => {
