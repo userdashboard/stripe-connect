@@ -1049,8 +1049,6 @@ describe('/api/user/connect/update-company-registration', () => {
       }
     })
 
-
-
     it(`should update JP-company registration`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, { type: 'company', country: 'JP' })
