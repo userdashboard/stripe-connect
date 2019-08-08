@@ -26,6 +26,9 @@ async function beforeRequest (req) {
   } else {
     stripeAccount.statusMessage = 'status-not-submitted'
   }
+  if (stripeAccount.metadata && stripeAccount.metadata.submitted) {
+    stripeAccount.metadata.submittedFormatted = dashboard.Timestamp.date(stripeAccount.metadata.submitted)
+  }
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   let owners
@@ -138,7 +141,7 @@ async function renderPage (req, res) {
   }
   // submission status
   if (req.data.stripeAccount.metadata.submitted) {
-    req.data.stripeAccount.date = dashboard.Timestamp.date(req.data.stripeAccount.metadata.submitted)
+    
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'submitted-information', 'submission-status')
     removeElements.push('submit-registration-link-container')
   } else {
