@@ -16,7 +16,7 @@
     "stripe": "^6.36.0"
   },
   "devDependencies": {
-    "@userdashboard/dashboard": "^1.0.7"
+    "@userdashboard/dashboard": "^1.0.8"
   },
   "engines": {
     "node": "8.12.0",
