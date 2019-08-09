@@ -1,6 +1,7 @@
 const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
+stripe.setApiVersion(global.stripeAPIVersion)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {

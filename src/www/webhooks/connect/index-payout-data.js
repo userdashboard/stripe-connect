@@ -1,5 +1,6 @@
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
+stripe.setApiVersion(global.stripeAPIVersion)
 const stripeCache = require('../../../stripe-cache.js')
 
 // The creation of objects like charges and invoices that happen

@@ -1,4 +1,5 @@
 const stripe = require('stripe')()
+stripe.setApiVersion(global.stripeAPIVersion)
 
 module.exports = {
   patch: async (req) => {

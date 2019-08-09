@@ -2,7 +2,8 @@
 global.applicationPath = global.applicationPath || __dirname
 
 const fs = require('fs')
-const stripe = require('stripe')(  )
+const stripe = require('stripe')()
+stripe.setApiVersion(global.stripeAPIVersion)
 const testData = require('@userdashboard/dashboard/test-data.json')
 const util = require('util')
 

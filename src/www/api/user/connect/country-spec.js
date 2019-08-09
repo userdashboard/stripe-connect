@@ -1,4 +1,5 @@
 const stripe = require('stripe')()
+stripe.setApiVersion(global.stripeAPIVersion)
 const cache = {}
 
 module.exports = {

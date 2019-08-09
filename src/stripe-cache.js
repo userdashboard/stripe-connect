@@ -1,5 +1,6 @@
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
+stripe.setApiVersion(global.stripeAPIVersion)
 
 module.exports = {
   retrieve: async (id, group, stripeKey) => {
