@@ -728,5 +728,5 @@
       ✓ should update US information
 
 
-  553 passing (59m)
+  553 passing (1h)
 
