@@ -29,6 +29,12 @@ module.exports = {
     if (!id) {
       throw new Error('invalid-id', id)
     }
-    return dashboard.Storage.deleteFile(`stripe/${id}`)
+    try {
+      await dashboard.Storage.deleteFile(`stripe/${id}`)
+    } catch (error) {
+      if (error !== 'invalid-file') {
+        throw error
+      }
+    }
   }
 }
