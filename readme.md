@@ -2,6 +2,8 @@
 
 [Dashboard](https://github.com/userdashboard/dashboard) is a NodeJS project that provides a reusable account management system for web applications.  This module adds a complete user and administrator `Private API` and `Web UI` for a [Stripe Connect](https://stripe.com/connect) custom integration.
 
+Current supported Stripe API version is 2019-05-16.
+
 ## Import this module
 
 Edit your `package.json` to activate the module:
