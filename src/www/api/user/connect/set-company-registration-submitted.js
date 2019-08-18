@@ -3,6 +3,7 @@ const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 const stripeCache = require('../../../../stripe-cache.js')
+const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
 
 module.exports = {
   patch: async (req) => {
@@ -53,6 +54,9 @@ module.exports = {
         user_agent: req.userAgent,
         date: dashboard.Timestamp.now
       }
+    }
+    if (euCountries.indexOf(stripeAccount.country)) {
+      accountInfo.company.directors_provided = true
     }
     const accountOpener = {
       relationship: {
@@ -119,6 +123,55 @@ module.exports = {
     }    
     try {
       await stripe.accounts.createPerson(req.query.stripeid, accountOpener, req.stripeKey)
+      const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
+      if (owners && owners.length) {
+        for (const owner of owners) {
+          const ownerInfo = {
+            first_name: owner.relationship_owner_first_name,
+            last_name: owner.relationship_owner_last_name,
+            address: {
+              country: owner.relationship_owner_address_country,
+              city: owner.relationship_owner_address_city,
+              line1: owner.relationship_owner_address_line1,
+              postal_code: owner.relationship_owner_address_postal_code
+            },            
+            dob: {
+              day: owner.relationship_owner_dob_day,
+              month: owner.relationship_owner_dob_month,
+              year: owner.relationship_owner_dob_year
+            },
+            relationship: {
+              owner: true
+            },
+            verification: {
+              document: {
+                front: owner.relationship_owner_verification_document_front,
+                back: owner.relationship_owner_verification_document_back
+              }
+            },
+          }
+          await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
+        }
+      }
+      const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+      if (directors && directors.length) {
+        for (const director of directors) {
+          const directorInfo = {
+            first_name: director.relationship_director_first_name,
+            last_name: director.relationship_director_last_name,
+            relationship: {
+              director: true
+            },
+            verification: {
+              document: {
+                front: director.relationship_director_verification_document_front,
+                back: director.relationship_director_verification_document_back
+              }
+            },
+          }
+          await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripeKey)
+        }
+      }
       stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       req.success = true
       await stripeCache.update(stripeAccount, req.stripeKey)
@@ -146,6 +199,7 @@ module.exports = {
         field = field.substring(0, field.length - 1)
         throw new Error(`invalid-${field}`)
       }
+      console.log(error)
       throw new Error('unknown-error')
     }
   }
