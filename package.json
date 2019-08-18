@@ -1,6 +1,6 @@
 {
   "name": "@userdashboard/stripe-connect",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "start": "node main.js",
     "test": "NODE_ENV=testing mocha src --recursive --timeout 240000 --slow 240000"
