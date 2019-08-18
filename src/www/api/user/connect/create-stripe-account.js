@@ -34,7 +34,7 @@ module.exports = {
       }
     }
     if (req.body.country === 'US') {
-      accountInfo.requested_capabilities = [ 'card_payments' ]
+      accountInfo.requested_capabilities = [ 'card_payments', 'transfers' ]
     }
     try {
       const stripeAccount = await stripe.accounts.create(accountInfo, req.stripeKey)
