@@ -12,16 +12,18 @@ async function beforeRequest (req) {
   }
   const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
   if (stripeAccount.payouts_enabled) {
-    stripeAccount.statusMessage = 'status-verified'
-  } else if (stripeAccount.verification.disabled_reason) {
-    stripeAccount.statusMessage = `status-${stripeAccount.verification.disabled_reason}`
-  } else if (stripeAccount.verification.details_code) {
-    stripeAccount.statusMessage = `status-${stripeAccount.verification.details_code}`
+    stripeAccount.statusMessage = 'verified'
+  } else if (stripeAccount.requirements.disabled_reason) {
+    stripeAccount.statusMessage = stripeAccount.requirements.disabled_reason
+  } else if (stripeAccount.requirements.details_code) {
+    stripeAccount.statusMessage = stripeAccount.requirements.details_code
   } else if (stripeAccount.metadata.submitted) {
-    stripeAccount.statusMessage = 'status-under-review'
+    stripeAccount.statusMessage = 'under-review'
   } else {
-    stripeAccount.statusMessage = 'status-not-submitted'
+    stripeAccount.statusMessage = 'not-submitted'
   }
+  stripeAccount.individual = stripeAccount.individual || {}
+  stripeAccount.company = stripeAccount.company || {}
   req.data = { stripeAccount }
 }
 
@@ -36,7 +38,7 @@ async function renderPage (req, res, messageTemplate) {
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, `account-status`)
-  if (req.data.stripeAccount.legal_entity.type === 'individual') {
+  if (req.data.stripeAccount.business_type === 'individual') {
     const businessName = doc.getElementById('business-name')
     businessName.parentNode.removeChild(businessName)
   } else {

@@ -46,11 +46,11 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  if (req.method === 'GET' && req.query && req.query.type){
+  if (req.method === 'GET' && req.query && req.query.type) {
     if (req.query.type === 'company') {
       const company = doc.getElementById('company')
       company.setAttribute('checked', 'checked')
-    } else if(req.query.type === 'individual') {
+    } else if (req.query.type === 'individual') {
       const individual = doc.getElementById('individual')
       individual.setAttribute('checked', 'checked')
     }
@@ -61,7 +61,7 @@ async function renderPage (req, res, messageTemplate) {
         await dashboard.HTML.setSelectedOptionByValue(doc, 'country', req.country.id)
         break
       }
-    }    
+    }
   }
   dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'country')
   return dashboard.Response.end(req, res, doc)

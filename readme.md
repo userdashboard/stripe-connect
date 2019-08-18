@@ -22,8 +22,9 @@ You will need to retrieve various keys from [Stripe](https://stripe.com).
 
 - create your Stripe account 
 - find your API credentials
-- create a webhook for https://your_domain/webhooks/connect/index-payout-data
-- find your webhook signing secret
+- create a webhook for https://your_domain/webhooks/connect/index-connect-data 
+- receive events for capability.updated and payout.created
+- note the webhook signing secret `whsec_`
 
 ## Startup configuration variables
 

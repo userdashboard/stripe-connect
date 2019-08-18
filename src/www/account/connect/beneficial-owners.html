@@ -1,0 +1,35 @@
+<!doctype html>
+<html navbar="/account/connect/navbar-stripe-account.html">
+  <head>
+    <title>Beneficial owners for ${stripeAccount.id}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <link rel="stylesheet" href="/public/content-additional.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Beneficial owners</h1>
+    <div id="submitted-container">
+      <span>Beneficial owners cannot be revised after submission.</span>
+    </div>
+    <div id="owners-container">
+      <p>You must provide documentation for anyone else owning a substantial (25+) percent of the company or in charge of the company, finances or operations.</p>
+      <p><a class="pure-button pure-button-primary" href="/account/connect/create-beneficial-owner?stripeid=${stripeAccount.id}">Add owner</a></p>
+      <table id="owners-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </body>
+  <template id="owner-row">
+    <tr id="${owner.ownerid}">
+      <td><a href="/account/connect/beneficial-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
+      <td>${owner.first_name} ${owner.last_name}</td>
+    </tr>
+  </template>
+</html>

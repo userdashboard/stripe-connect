@@ -9,18 +9,18 @@ module.exports = {
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.metadata.submitted ||
       stripeAccount.metadata.accountid !== req.account.accountid ||
-      !stripeAccount.verification.fields_needed ||
-      !stripeAccount.verification.fields_needed.length) {
+      !stripeAccount.requirements.fields_needed ||
+      !stripeAccount.requirements.fields_needed.length) {
       throw new Error('invalid-stripe-account')
     }
     const updateInfo = {
       legal_entity: {}
     }
-    for (const pathAndField of stripeAcount.verification.fields_needed) {
-      const parts = pathAndField.split('.')
-      const secondObject = parts[1]
-      const field = parts[parts.length - 1]
-      switch (secondObject) {
+    req.query.country = stripeAccount.country
+    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+    const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
+    for (const field of requiredFields) {
+      switch (field) {
         case 'address':
         case 'address_kana':
         case 'address_kanji':

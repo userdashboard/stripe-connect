@@ -7,8 +7,27 @@ describe(`/administrator/connect/stripe-account`, () => {
     it('should reject invalid stripeid', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', state: 'New York', ssn_last_4: '0000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '7997',
+        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        individual_address_city: 'New York',
+        individual_address_line1: '285 Fulton St',
+        individual_address_postal_code: '10007',
+        individual_id_number: '000000000',
+        individual_address_state: 'NY',
+        individual_ssn_last_4: '0000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_phone: '456-123-7890',
+        individual_email: user.profile.email,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
+      })
       const req = TestHelper.createRequest(`/administrator/connect/stripe-account?stripeid=invalid`)
       req.account = administrator.account
       req.session = administrator.session
@@ -24,8 +43,27 @@ describe(`/administrator/connect/stripe-account`, () => {
     it('should bind Stripe account to req', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', state: 'New York', ssn_last_4: '0000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '7997',
+        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        individual_address_city: 'New York',
+        individual_address_line1: '285 Fulton St',
+        individual_address_postal_code: '10007',
+        individual_id_number: '000000000',
+        individual_address_state: 'NY',
+        individual_ssn_last_4: '0000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_phone: '456-123-7890',
+        individual_email: user.profile.email,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
+      })
       const req = TestHelper.createRequest(`/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session
@@ -38,8 +76,27 @@ describe(`/administrator/connect/stripe-account`, () => {
     it('should have row for Stripe account', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', state: 'New York', ssn_last_4: '0000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '7997',
+        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        individual_address_city: 'New York',
+        individual_address_line1: '285 Fulton St',
+        individual_address_postal_code: '10007',
+        individual_id_number: '000000000',
+        individual_address_state: 'NY',
+        individual_ssn_last_4: '0000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_phone: '456-123-7890',
+        individual_email: user.profile.email,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
+      })
       const req = TestHelper.createRequest(`/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session

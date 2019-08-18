@@ -12,11 +12,11 @@
   "license": "SPDX(MIT OR Unlicense)",
   "main": "index.js",
   "dependencies": {
-    "@userdashboard/maxmind-geoip": "^1.0.3",
+    "@userdashboard/maxmind-geoip": "^1.0.13",
     "stripe": "^6.36.0"
   },
   "devDependencies": {
-    "@userdashboard/dashboard": "^1.0.8"
+    "@userdashboard/dashboard": "^1.0.18"
   },
   "engines": {
     "node": "8.12.0",
@@ -25,7 +25,7 @@
   "dashboard": {
     "title": "Dashboard",
     "modules": [
-      "@userdashboard/dashboard",
+      "@userdashboard/stripe-connect",
       "@userdashboard/maxmind-geoip"
     ],
     "server": [

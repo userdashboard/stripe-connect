@@ -13,19 +13,21 @@ async function beforeRequest (req) {
   let individual
   if (stripeAccounts && stripeAccounts.length) {
     for (const stripeAccount of stripeAccounts) {
-    stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
+      stripeAccount.company = stripeAccount.company || {}
+      stripeAccount.individual = stripeAccount.individual || {}
+      stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
       if (stripeAccount.payouts_enabled) {
         stripeAccount.statusMessage = 'verified'
-      } else if (stripeAccount.verification.disabled_reason) {
-        stripeAccount.statusMessage = `${stripeAccount.verification.disabled_reason}`
-      } else if (stripeAccount.verification.details_code) {
-        stripeAccount.statusMessage = `${stripeAccount.verification.details_code}`
+      } else if (stripeAccount.requirements.disabled_reason) {
+        stripeAccount.statusMessage = stripeAccount.requirements.disabled_reason
+      } else if (stripeAccount.requirements.details_code) {
+        stripeAccount.statusMessage = stripeAccount.requirements.details_code
       } else if (stripeAccount.metadata.submitted) {
         stripeAccount.statusMessage = 'under-review'
       } else {
         stripeAccount.statusMessage = 'not-submitted'
       }
-      if (stripeAccount.legal_entity.type === 'individual') {
+      if (stripeAccount.business_type === 'individual') {
         individual = stripeAccount
       } else {
         company.push(stripeAccount)
@@ -44,6 +46,16 @@ async function renderPage (req, res) {
       dashboard.HTML.renderTemplate(doc, null, req.data.individual.statusMessage, `account-status-${req.data.individual.id}`)
       doc.getElementById('create-individual-link').setAttribute('disabled', 'disabled')
       removeElements.push('business-name-' + req.data.individual.id)
+      if (req.data.individual.metadata.submitted) {
+        removeElements.push(`not-submitted-${req.data.individual.id}`)
+      } else {
+        removeElements.push(`submitted-${req.data.individual.id}`)
+      }
+      if (req.data.individual.individual.first_name) {
+        removeElements.push(`blank-name-${req.data.individual.id}`)
+      } else {
+        removeElements.push(`individual-name-${req.data.individual.id}`)
+      }
     } else {
       removeElements.push('individual-container')
     }
@@ -51,8 +63,17 @@ async function renderPage (req, res) {
       dashboard.HTML.renderTable(doc, req.data.company, 'stripe-account-row', 'company-accounts-table')
       for (const account of req.data.company) {
         dashboard.HTML.renderTemplate(doc, null, account.statusMessage, `account-status-${account.id}`)
-        const individualName = doc.getElementById('individual-name-' + account.id)
-        individualName.parentNode.removeChild(individualName)
+        removeElements.push(`individual-name-${account.id}`)
+        if (account.metadata.submitted) {
+          removeElements.push(`not-submitted-${account.id}`)
+        } else {
+          removeElements.push(`submitted-${account.id}`)
+        }
+        if (account.company.name) {
+          removeElements.push(`blank-name-${account.id}`)
+        } else {
+          removeElements.push(`business-name-${account.id}`)
+        }
       }
     } else {
       removeElements.push('company-container')

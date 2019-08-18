@@ -9,7 +9,7 @@ module.exports = {
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.metadata.submitted ||
       stripeAccount.metadata.accountid !== req.account.accountid ||
-      !stripeAccount.legal_entity.verification.details_code) {
+      !stripeAccount.legal_entity.requirements.details_code) {
       throw new Error('invalid-stripe-account')
     }
     const uploadData = {

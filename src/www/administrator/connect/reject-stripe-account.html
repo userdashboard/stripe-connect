@@ -21,8 +21,8 @@
       </thead>
       <tr id="${stripeAccount.id}">
         <td><a href="/administrator/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a></td>
-        <td id="individual-name">${stripeAccount.legal_entity.first_name || ""} ${stripeAccount.legal_entity.last_name || ""}</td>
-        <td id="business-name">${stripeAccount.legal_entity.business_name || ""}</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
         <td id="account-status"></td>
       </tr>
     </table>
@@ -48,43 +48,46 @@
   <template id="unknown-error">
     <div class="error message">Error! An error ocurred rejecting the Stripe account.</div>
   </template>
-  <template id="status-not-submitted">
+  <template id="not-submitted">
     <span>Not submitted yet</span>
   </template>
-  <template id="status-verified">
+  <template id="verified">
     <span>Registration has been accepted</span>
   </template>
-  <template id="status-verified">
+  <template id="verified">
     <span>Disabled by Stripe</span>
   </template>
-  <template id="status-verified-requires-fields">
+  <template id="requirements.past_due">
     <span>Requires additional information</span>
   </template>
-  <template id="status-pending-submission">
+  <template id="verified-requires-fields">
+    <span>Requires additional information</span>
+  </template>
+  <template id="pending-submission">
     <span>Pending submission</span>
   </template>
-  <template id="status-rejected.fraud">
+  <template id="rejected.fraud">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
-  <template id="status-rejected.terms">
+  <template id="rejected.terms">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
-  <template id="status-rejected.listed">
+  <template id="rejected.listed">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
-  <template id="status-rejected.other">
+  <template id="rejected.other">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
-  <template id="status-fields_needed">
+  <template id="fields_needed">
     <span>More information is required</span>
   </template>
-  <template id="status-listed">
+  <template id="listed">
     <span>Under review by Stripe</span>
   </template>
-  <template id="status-under-review">
+  <template id="under-review">
     <span>Under review by Stripe</span>
   </template>
-  <template id="status-disabled">
+  <template id="disabled">
     <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </html>

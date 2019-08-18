@@ -1,0 +1,39 @@
+<!doctype html>
+<html navbar="/account/connect/navbar-beneficial-owner.html">
+  <head>
+    <title>Delete ${owner.ownerid}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <link rel="stylesheet" href="/public/content-additional.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Delete ${owner.ownerid}</h1>
+    <p>The owner information will be deleted immediately and cannot be recovered.</p>
+    <div id="message-container"></div>
+    <table id="owners-table" class="pure-table object-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="${owner.ownerid}">
+          <td>${owner.ownerid}</td>
+          <td>${owner.first_name} ${owner.last_name}</td>
+        </tr>
+      </thead>
+    </table>
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/delete-company-owner?ownerid=${owner.ownerid}">
+      <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
+    </form>
+  </body>
+  <template id="success">
+    <div class="success message">Success! The company owner has been deleted.</div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message">Error! An error ocurred deleting the company owner.</div>
+  </template>
+</html>

@@ -9,74 +9,44 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    let stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted ||
-      stripeAccount.legal_entity.type !== 'company' ||
+      stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
     if (!stripeAccount.external_accounts.data.length) {
       throw new Error('invalid-payment-details')
     }
-    // validation
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration')
-    if (!registration || !registration.documentid) {
-      throw new Error('invalid-documentid')
+    if (!registration) {
+      throw new Error('invalid-registration')
     }
     req.query.country = stripeAccount.country
     const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     const requiredFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
-    const requireOwners = requiredFields.indexOf('legal_entity.additional_owners') > -1
-    if (requireOwners && !stripeAccount.metadata.submittedOwners) {
-      throw new Error('invalid-additional-owners')
-    }
-    for (const pathAndField of requiredFields) {
-      let field = pathAndField.split('.').pop()
-      if (
+    for (const field of requiredFields) {
+      if (field === 'business_type' ||
         field === 'external_account' ||
-        field === 'document' ||
-        field === 'type' ||
-        field === 'additional_owners' ||
-        field === 'ip' ||
-        field === 'date') {
+        field === 'relationship.account_opener' ||
+        field === 'relationship.owner' ||
+        field === 'tos_acceptance.date' ||
+        field === 'tos_acceptance.ip') {
         continue
       }
-      if (stripeAccount.country === 'JP') {
-        if (pathAndField.startsWith('legal_entity.address_kana.') ||
-          pathAndField.startsWith('legal_entity.personal_address_kana.')) {
-          field += '_kana'
-        } else if (pathAndField.startsWith('legal_entity.address_kanji.') ||
-          pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
-          field += '_kanji'
-        }
-      }
-      if (pathAndField.startsWith('legal_entity.personal_address')) {
-        field = `personal_${field}`
-      } else if (pathAndField.startsWith('legal_entity.address')) {
-        field = `company_${field}`
-      }
-      if (!registration[field]) {
+      const posted = field.split('.').join('_')
+      if (!registration[posted]) {
         throw new Error(`invalid-registration`)
-      }
-    }
-    const testInfo = {
-      type: 'custom',
-      country: stripeAccount.country,
-      legal_entity: {
-        type: 'company',
-        address: {},
-        personal_address: {},
-        dob: {}
       }
     }
     const accountInfo = {
       metadata: {
         submitted: dashboard.Timestamp.now
       },
-      legal_entity: {
+      business_profile: {},
+      company: {
         address: {},
-        dob: {},
-        verification: {}
+        owners_provided: true
       },
       tos_acceptance: {
         ip: req.ip,
@@ -84,148 +54,99 @@ module.exports = {
         date: dashboard.Timestamp.now
       }
     }
-    let fieldName
+    const accountOpener = {
+      relationship: {
+        account_opener: true,
+        owner: true,
+        title: 'Account opener'
+      },
+      verification: {
+        document: {}
+      },
+      address: {},
+      dob: {}
+    }
     for (const field in registration) {
-      switch (field) {
-        case 'documentid':
-          accountInfo.legal_entity.verification.document = registration[field]
-          continue
-        case 'first_name':
-        case 'last_name':
-        case 'business_name':
-        case 'gender':
-          accountInfo.legal_entity[field] = registration[field]
-          continue
-        case 'business_tax_id':
-        case 'personal_id_number':
-        case 'phone_number':
-        case 'ssn_last_4':
-          testInfo.legal_entity[field] = registration[field]
-          accountInfo.legal_entity[field] = registration[field]
-          continue
-        case 'day':
-        case 'month':
-        case 'year':
-          accountInfo.legal_entity.dob[field] = registration[field]
-          continue
-        case 'business_name_kana':
-        case 'business_name_kanji':
-        case 'first_name_kana':
-        case 'first_name_kanji':
-        case 'last_name_kana':
-        case 'last_name_kanji':
-          accountInfo.legal_entity[field] = registration[field]
-          continue
-        case 'company_city':
-        case 'company_state':
-        case 'company_postal_code':
-        case 'company_line1':
-          if (stripeAccount.country !== 'JP') {
-            fieldName = field.substring('company_'.length)
-            accountInfo.legal_entity.address[fieldName] = registration[field]
-          }
-          continue
-        case 'company_city_kana':
-        case 'company_town_kana':
-        case 'company_state_kana':
-        case 'company_line1_kana':
-        case 'company_postal_code_kana':
-          fieldName = field.substring('company_'.length)
-          fieldName = fieldName.substring(0, fieldName.lastIndexOf('_'))
-          accountInfo.legal_entity.address_kana = accountInfo.legal_entity.address_kana || {}
-          accountInfo.legal_entity.address_kana[fieldName] = registration[field]
-          continue
-        case 'company_city_kanji':
-        case 'company_town_kanji':
-        case 'company_state_kanji':
-        case 'company_line1_kanji':
-        case 'company_postal_code_kanji':
-          fieldName = field.substring('company_'.length)
-          fieldName = fieldName.substring(0, fieldName.lastIndexOf('_'))
-          accountInfo.legal_entity.address_kanji = accountInfo.legal_entity.address_kanji || {}
-          accountInfo.legal_entity.address_kanji[fieldName] = registration[field]
-          continue
-        case 'personal_city':
-        case 'personal_state':
-        case 'personal_line1':
-          if (stripeAccount.country !== 'JP') {
-            fieldName = field.substring('personal_'.length)
-            accountInfo.legal_entity.personal_address = accountInfo.legal_entity.personal_address || {}
-            accountInfo.legal_entity.personal_address[fieldName] = registration[field]
-          }
-          continue
-        case 'personal_postal_code':
-          if (stripeAccount.country !== 'JP') {
-            fieldName = field.substring('personal_'.length)
-            testInfo.legal_entity.personal_address = testInfo.legal_entity.personal_address || {}
-            testInfo.legal_entity.personal_address[fieldName] = registration[field]
-            accountInfo.legal_entity.personal_address = accountInfo.legal_entity.personal_address || {}
-            accountInfo.legal_entity.personal_address[fieldName] = registration[field]
-          }
-          continue
-        case 'personal_city_kana':
-        case 'personal_town_kana':
-        case 'personal_state_kana':
-        case 'personal_line1_kana':
-        case 'personal_postal_code_kana':
-          fieldName = field.substring('personal_'.length)
-          fieldName = fieldName.substring(0, fieldName.lastIndexOf('_'))
-          accountInfo.legal_entity.personal_address_kana = accountInfo.legal_entity.personal_address_kana || {}
-          accountInfo.legal_entity.personal_address_kana[fieldName] = registration[field]
-          continue
-        case 'personal_city_kanji':
-        case 'personal_town_kanji':
-        case 'personal_state_kanji':
-        case 'personal_line1_kanji':
-        case 'personal_postal_code_kanji':
-          fieldName = field.substring('personal_'.length)
-          fieldName = fieldName.substring(0, fieldName.lastIndexOf('_'))
-          accountInfo.legal_entity.personal_address_kanji = accountInfo.legal_entity.personal_address_kanji || {}
-          accountInfo.legal_entity.personal_address_kanji[fieldName] = registration[field]
-          continue
+      if(field.startsWith('business_profile_')) {
+        const property = field.substring('business_profile_'.length)
+        accountInfo.business_profile[property] = registration[field]
+        continue
       }
-    }
-    // Some fields are validated by Stripe like postal codes, and
-    // when there is an issue other fields become read-only while
-    // the identity checks are perfomed and that may take days.
-    //
-    // A test submission is made to catch those validation errors
-    // and allows the registration to be updated prior to submission.
-    let temp
+      if (field.startsWith('company_')) {
+        if (field.startsWith('company_address_kanji_')) {
+          const property = field.substring('company_address_kanji_'.length)
+          accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
+          accountInfo.company.address_kanji[property] = registration[field]
+        } else if (field.startsWith('company_address_kana_')) {
+          const property = field.substring('company_address_kana_'.length)
+          accountInfo.company.address_kana = accountInfo.company.address_kana || {}
+          accountInfo.company.address_kana[property] = registration[field]
+        } else if (field.startsWith('company_address_')) {
+          const property = field.substring('company_address_'.length)
+          accountInfo.company.address[property] = registration[field]
+        } else if (field.startsWith('company_business_name_')) {
+          let property = field.substring('company_business_name_'.length)
+          accountInfo.company[`name_${property}`] = registration[field]
+        } else {
+          const property = field.substring('company_'.length)
+          accountInfo.company[property] = registration[field]
+        }
+        continue
+      } 
+      if (field.startsWith('relationship_account_opener_')) {
+        if (field.startsWith('relationship_account_opener_address_kanji_')) {
+          const property = field.substring('relationship_account_opener_address_kanji_'.length)
+          accountOpener.address_kanji = accountOpener.address_kanji || {}
+          accountOpener.address_kanji[property] = registration[field]
+        } else if (field.startsWith('relationship_account_opener_address_kana_')) {
+          const property = field.substring('relationship_account_opener_address_kana_'.length)
+          accountOpener.address_kana = accountOpener.address_kana || {}
+          accountOpener.address_kana[property] = registration[field]
+        } else if (field.startsWith('relationship_account_opener_address_')) {
+          const property = field.substring('relationship_account_opener_address_'.length)
+          accountOpener.address[property] = registration[field]
+        } else if (field.startsWith('relationship_account_opener_verification_document_')) {
+          const property = field.substring('relationship_account_opener_verification_document_'.length)
+          accountOpener.verification.document[property] = registration[field]
+        } else if(field.startsWith('relationship_account_opener_dob_')) {
+          const property = field.substring('relationship_account_opener_dob_'.length)
+          accountOpener.dob[property] = registration[field]
+        } else {
+          const property = field.substring('relationship_account_opener_'.length)
+          accountOpener[property] = registration[field]
+        }
+      }
+    }    
     try {
-      temp = await stripe.accounts.create(testInfo, req.stripeKey)
-      await stripe.accounts.del(temp.id, req.stripeKey)
+      await stripe.accounts.createPerson(req.query.stripeid, accountOpener, req.stripeKey)
+      stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+      req.success = true
+      await stripeCache.update(stripeAccount, req.stripeKey)
+      return stripeAccount
     } catch (error) {
-      if (temp && temp.id) {
-        await stripe.accounts.del(temp.id, req.stripeKey)
-      }
       const errorMessage = error.param ? error.raw.param : error.message
-      if (errorMessage.startsWith('legal_entity[address]')) {
-        let field = errorMessage.substring('legal_entity[address]['.length)
+      if (errorMessage.startsWith('company[address]')) {
+        let field = errorMessage.substring('company[address]['.length)
         field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-company_${field}`)
-      } else if (errorMessage.startsWith('legal_entity[personal_address]')) {
-        let field = errorMessage.substring('legal_entity[personal_address]['.length)
+        throw new Error(`invalid-company_address_${field}`)
+      } else if (errorMessage.startsWith('company[personal_address]')) {
+        let field = errorMessage.substring('company[personal_address]['.length)
         field = field.substring(0, field.length - 1)
         throw new Error(`invalid-${field}`)
-      } else if (errorMessage.startsWith('legal_entity[address_kana]')) {
-        let field = errorMessage.substring('legal_entity[address_kana]['.length)
+      } else if (errorMessage.startsWith('company[address_kana]')) {
+        let field = errorMessage.substring('company[address_kana]['.length)
         field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-company_${field}_kana`)
-      } else if (errorMessage.startsWith('legal_entity[address_kanji]')) {
-        let field = errorMessage.substring('legal_entity[address_kanji]['.length)
+        throw new Error(`invalid-company_address_${field}_kana`)
+      } else if (errorMessage.startsWith('company[address_kanji]')) {
+        let field = errorMessage.substring('company[address_kanji]['.length)
         field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-company_${field}_kanji`)
-      } else if (errorMessage.startsWith('legal_entity')) {
-        let field = errorMessage.substring('legal_entity['.length)
+        throw new Error(`invalid-company_address_${field}_kanji`)
+      } else if (errorMessage.startsWith('company')) {
+        let field = errorMessage.substring('company['.length)
         field = field.substring(0, field.length - 1)
         throw new Error(`invalid-${field}`)
       }
-      throw new Error('unkonwn-error')
+      throw new Error('unknown-error')
     }
-    const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
-    req.success = true
-    await stripeCache.update(accountNow, req.stripeKey)
-    return accountNow
   }
 }

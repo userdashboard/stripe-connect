@@ -1,6 +1,7 @@
 const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
+const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
 
 module.exports = {
   before: beforeRequest,
@@ -16,55 +17,47 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripe-account')
   }
   if (stripeAccount.payouts_enabled) {
-    stripeAccount.statusMessage = 'status-verified'
-  } else if (stripeAccount.verification.disabled_reason) {
-    stripeAccount.statusMessage = `status-${stripeAccount.verification.disabled_reason}`
-  } else if (stripeAccount.verification.details_code) {
-    stripeAccount.statusMessage = `status-${stripeAccount.verification.details_code}`
+    stripeAccount.statusMessage = 'verified'
+  } else if (stripeAccount.verification && stripeAccount.requirements.disabled_reason) {
+    stripeAccount.statusMessage = stripeAccount.requirements.disabled_reason
+  } else if (stripeAccount.verification && stripeAccount.requirements.details_code) {
+    stripeAccount.statusMessage = stripeAccount.requirements.details_code
   } else if (stripeAccount.metadata.submitted) {
-    stripeAccount.statusMessage = 'status-under-review'
+    stripeAccount.statusMessage = 'under-review'
   } else {
-    stripeAccount.statusMessage = 'status-not-submitted'
+    stripeAccount.statusMessage = 'not-submitted'
   }
   if (stripeAccount.metadata && stripeAccount.metadata.submitted) {
-    stripeAccount.metadata.submittedFormatted = dashboard.Timestamp.date(stripeAccount.metadata.submitted)
+    stripeAccount.metadata.submittedFormatted = dashboard.Format.date(stripeAccount.metadata.submitted)
   }
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   let owners
   let verificationFields
-  if (stripeAccount.legal_entity.type === 'individual') {
+  if (stripeAccount.business_type === 'individual') {
     verificationFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
   } else {
     verificationFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
-    if (verificationFields && verificationFields.indexOf('legal_entity.additional_owners') > -1) {
-      owners = await global.api.user.connect.AdditionalOwners.get(req)
+    if (verificationFields.indexOf('relationship.owner') > -1) {
+      owners = await global.api.user.connect.BeneficialOwners.get(req)
     }
   }
   let registrationComplete = true
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
   if (verificationFields) {
-    for (const pathAndField of verificationFields) {
-      const field = pathAndField.split('.').pop()
+    for (const field of verificationFields) {
       if (field === 'external_account' ||
-          field === 'additional_owners' ||
-          field === 'type' ||
-          field === 'ip' ||
-          field === 'date') {
+          field === 'business_type' ||
+          field === 'tos_acceptance.ip' ||
+          field === 'tos_acceptance.date') {
         continue
       }
-      if (field === 'document') {
-        if (!registration.documentid) {
-          registrationComplete = false
-          break
-        }
-        continue
-      }
-      if (!registration[field]) {
-        if (stripeAccount.legal_entity.type === 'company') {
-          if (!registration[`company_${field}`] && !registration[`personal_${field}`]) {
+      const posted = field.split('.').join('_')
+      if (!registration[posted]) {
+        if (stripeAccount.business_type === 'company') {
+          if (!registration[`company_${posted}`] && !registration[`personal_${posted}`]) {
             registrationComplete = false
-            break    
+            break
           }
           continue
         }
@@ -73,6 +66,8 @@ async function beforeRequest (req) {
       }
     }
   }
+  stripeAccount.company = stripeAccount.company || {}
+  stripeAccount.individual = stripeAccount.individual || {}
   req.data = { stripeAccount, owners, countrySpec, verificationFields, registration, registrationComplete }
 }
 
@@ -83,11 +78,25 @@ async function renderPage (req, res) {
   if (req.data.stripeAccount.statusMessage) {
     dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, `account-status-${req.data.stripeAccount.id}`)
   }
-  if (req.data.stripeAccount.legal_entity.type === 'individual') {
-    removeElements.push('business-name')
-    
+  if (req.data.stripeAccount.metadata.submitted) {
+    removeElements.push('not-submitted2')
   } else {
-    removeElements.push('individual-name')
+    removeElements.push('submitted')
+  }
+  if (req.data.stripeAccount.business_type === 'individual') {
+    removeElements.push(`business-name`)
+    if (req.data.stripeAccount.individual.first_name) {
+      removeElements.push(`blank-name`)
+    } else {
+      removeElements.push(`individual-name`)
+    }
+  } else {
+    removeElements.push(`individual-name`)
+    if (req.data.stripeAccount.company.name) {
+      removeElements.push(`blank-name`)
+    } else {
+      removeElements.push(`business-name`)
+    }
   }
   // registration can be submitted, ready to submit, or not started
   if (req.data.stripeAccount.metadata.submitted) {
@@ -95,15 +104,15 @@ async function renderPage (req, res) {
   } else if (req.data.registrationComplete) {
     dashboard.HTML.renderTemplate(doc, null, 'completed-registration', 'account-status')
     removeElements.push('start-individual-registration-link', 'start-company-registration-link')
-    if (req.data.stripeAccount.legal_entity.type !== 'individual') {
+    if (req.data.stripeAccount.business_type !== 'individual') {
       removeElements.push('update-individual-registration-link')
     } else {
       removeElements.push('update-company-registration-link')
     }
   } else {
     dashboard.HTML.renderTemplate(doc, null, 'unstarted-registration', 'account-status')
-    removeElements.push('update-individual-registration-link',  'update-company-registration-link')
-    if (req.data.stripeAccount.legal_entity.type === 'individual') {
+    removeElements.push('update-individual-registration-link', 'update-company-registration-link')
+    if (req.data.stripeAccount.business_type === 'individual') {
       removeElements.push('start-company-registration-link')
     } else {
       removeElements.push('start-individual-registration-link')
@@ -118,16 +127,14 @@ async function renderPage (req, res) {
     removeElements.push('update-payment')
     dashboard.HTML.renderTemplate(doc, null, 'no-payment-information', 'payment-information-status')
   }
-  // additional owners
-  if (req.data.verificationFields && req.data.verificationFields.indexOf('legal_entity.additional_owners') > -1) {
+  // company owners
+  if (req.data.verificationFields && req.data.verificationFields.indexOf('relationship.owner') > -1) {
     if (req.data.stripeAccount.metadata.submitted) {
       removeElements.push('owners-container')
     } else {
-      if (req.data.stripeAccount.metadata.submittedOwners) {
-        dashboard.HTML.renderTemplate(doc, null, 'owners-submitted', 'owners-status')
+      if (req.data.stripeAccount.metadata.submitted) {
         removeElements.push('owner-options', 'owners-table')
       } else {
-        dashboard.HTML.renderTemplate(doc, null, 'owners-not-submitted', 'owners-status')
         if (req.data.owners && req.data.owners.length) {
           dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
         } else {
@@ -136,33 +143,46 @@ async function renderPage (req, res) {
       }
     }
   } else {
-    req.data.stripeAccount.metadata.submittedOwners = true
     removeElements.push('owners-container')
+  }
+  // company directors
+  if (req.data.stripeAccount.business_type === 'company' && euCountries.indexOf(req.data.stripeAccount.country) > -1) {
+    if (req.data.stripeAccount.metadata.submitted) {
+      removeElements.push('directors-container')
+    } else {
+      if (req.data.stripeAccount.metadata.submitted) {
+        removeElements.push('director-options', 'directors-table')
+      } else {
+        if (req.data.directors && req.data.directors.length) {
+          dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
+        } else {
+          removeElements.push('directors-table')
+        }
+      }
+    }
+  } else {
+    removeElements.push('directors-container')
   }
   // submission status
   if (req.data.stripeAccount.metadata.submitted) {
-    
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'submitted-information', 'submission-status')
     removeElements.push('submit-registration-link-container')
   } else {
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'not-submitted-information', 'submission-status')
     let registrationLink
-    if (req.data.stripeAccount.legal_entity.type === 'individual') {
+    if (req.data.stripeAccount.business_type === 'individual') {
       removeElements.push('submit-company-registration-link')
       registrationLink = doc.getElementById('submit-individual-registration-link')
     } else {
       removeElements.push('submit-individual-registration-link')
       registrationLink = doc.getElementById('submit-company-registration-link')
     }
-    if (!req.data.registrationComplete || !req.data.stripeAccount.metadata.submittedOwners || !completedPaymentInformation) {
+    if (!req.data.registrationComplete || !completedPaymentInformation) {
       registrationLink.setAttribute('disabled', 'disabled')
     }
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
-    if (!element || !element.parentNode) {
-      continue
-    }
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)

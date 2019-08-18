@@ -10,77 +10,65 @@ module.exports = {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted ||
-      stripeAccount.legal_entity.type !== 'individual' ||
+      stripeAccount.business_type !== 'individual' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-    const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
-    if (req.uploads && (req.uploads['id_scan.jpg'] || req.uploads['id_scan.png'])) {
+    if (req.uploads && req.uploads['individual_verification_document_front']) {
       const uploadData = {
         purpose: 'identity_document',
         file: {
-          type: 'application/octet-stream'
+          type: 'application/octet-stream',
+          name: req.uploads['individual_verification_document_back'].name,
+          data: req.uploads['individual_verification_document_back'].buffer
         }
-      }
-      if (req.uploads['id_scan.jpg']) {
-        uploadData.file.name = 'id_scan.jpg'
-        uploadData.file.data = req.uploads['id_scan.jpg'].buffer
-      } else {
-        uploadData.file.name = 'id_scan.png'
-        uploadData.file.data = req.uploads['id_scan.png'].buffer
       }
       try {
         const file = await stripe.files.create(uploadData, req.stripeKey)
-        req.body.documentid = file.id
+        req.body['individual_verification_document_front'] = file.id
+      } catch (error) {
+        throw new Error('invalid-individual_verification_document_front')
+      }
+    }
+    if (req.uploads && req.uploads['individual_verification_document_back']) {
+      const uploadData = {
+        purpose: 'identity_document',
+        file: {
+          type: 'application/octet-stream',
+          name: req.uploads['individual_verification_document_back'].name,
+          data: req.uploads['individual_verification_document_back'].buffer
+        }
+      }
+      try {
+        const file = await stripe.files.create(uploadData, req.stripeKey)
+        req.body['individual_verification_document_back'] = file.id
       } catch (error) {
         throw new Error('invalid-upload')
       }
     }
-    for (const pathAndField of requiredFields) {
-      let field = pathAndField.split('.').pop()
-      if (field === 'external_account' ||
-        field === 'type' ||
-        field === 'ip' ||
-        field === 'date' ||
-        field === 'document') {
-        continue
-      }
-      if (stripeAccount.country === 'JP') {
-        if (pathAndField.startsWith('legal_entity.address_kana.')) {
-          field += '_kana'
-        } else if (pathAndField.startsWith('legal_entity.address_kanji.')) {
-          field += '_kanji'
-        }
-      }
-      if (!req.body[field]) {
-        throw new Error(`invalid-${field}`)
-      }
-    }
+    req.query.country = stripeAccount.country
+    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+    const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-    for (const pathAndField of requiredFields) {
-      let field = pathAndField.split('.').pop()
-      if (field === 'external_account' ||
-        field === 'type' ||
-        field === 'ip' ||
-        field === 'date' ||
-        field === 'document') {
+    if (req.body['individual_verification_document_back']) {
+      registration['individual_verification_document_back'] = req.body['individual_verification_document_back']
+    }
+    if (req.body['individual_verification_document_front']) {
+      registration['individual_verification_document_front'] = req.body['individual_verification_document_front']
+    }
+    for (const field of requiredFields) {
+      if (field === 'business_type' ||
+        field === 'external_account' ||
+        field === 'individual.verification.document' ||
+        field === 'tos_acceptance.date' ||
+        field === 'tos_acceptance.ip') {
         continue
       }
-      if (stripeAccount.country === 'JP') {
-        if (pathAndField.startsWith('legal_entity.address_kana.')) {
-          field += '_kana'
-        } else if (pathAndField.startsWith('legal_entity.address_kanji.')) {
-          field += '_kanji'
-        }
+      const posted = field.split('.').join('_')
+      if (!req.body[posted]) {
+        throw new Error(`invalid-${posted}`)
       }
-      for (const field in req.body) {
-        registration[field] = req.body[field]
-      }
-    }
-    if (req.body.documentid) {
-      registration.documentid = req.body.documentid
+      registration[posted] = req.body[posted]
     }
     const accountInfo = {
       metadata: {}

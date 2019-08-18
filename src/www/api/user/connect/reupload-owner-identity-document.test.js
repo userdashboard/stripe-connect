@@ -1,4 +1,5 @@
 // /* eslint-env mocha */
+// TODO: Stripe test API currently has a bug failing verifications
 // const assert = require('assert')
 // const TestHelper = require('../../../../../test-helper.js')
 // const util = require('util')
@@ -28,9 +29,26 @@
 
 //     it('should reject invalid upload', async () => {
 //       const user = await TestHelper.createUser()
-//       await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })
-//       await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'DE', day: '1', month: '1', year: '1950', company_city: 'Berlin', company_line1: 'First Street', company_postal_code: '01067', personal_city: 'Berlin', personal_line1: 'First Street', personal_postal_code: '01067' })
-//       const owner = await TestHelper.createAdditionalOwner(user)
+//       await TestHelper.createStripeAccount(user, {
+//         type: 'company',
+//         country: 'DE'
+//       })
+//       await TestHelper.createStripeRegistration(user, {
+//         company_address_city: 'Berlin',
+//         company_address_line1: '123 Park Lane',
+//         company_address_postal_code: '01067',
+//         company_name: 'Company',
+//         company_tax_id: '8',
+//         relationship_account_opener_address_city: 'Berlin',
+//         relationship_account_opener_address_line1: '123 Sesame St',
+//         relationship_account_opener_address_postal_code: '01067',
+//         relationship_account_opener_dob_day: '1',
+//         relationship_account_opener_dob_month: '1',
+//         relationship_account_opener_dob_year: '1950',
+//         relationship_account_opener_first_name: user.profile.firstName,
+//         relationship_account_opener_last_name: user.profile.lastName
+//       })
+//       const owner = await TestHelper.createBeneficialOwner(user)
 //       const req = TestHelper.createRequest(`/api/user/connect/reupload-owner-identity-document?ownerid=${owner.ownerid}`)
 //       req.account = user.account
 //       req.session = user.session
@@ -45,24 +63,47 @@
 //   })
 
 //   describe('ReuploadOwnerIdentityDocument#patch', () => {
-//     it('should update authorized document', async () => {
+//     it('should update document', async () => {
 //       const user = await TestHelper.createUser()
-//       await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })
-//       await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'DE', day: '1', month: '1', year: '1950', company_city: 'Berlin', company_line1: 'First Street', company_postal_code: '01067', personal_city: 'Berlin', personal_line1: 'First Street', personal_postal_code: '01067' })
-//       await TestHelper.createExternalAccount(user, { currency: 'eur', country: 'DE', account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`, account_type: 'individual', iban: 'DE89370400440532013000' })
-//       const owner = await TestHelper.createAdditionalOwner(user, {
-//         first_name: 'First name',
-//         last_name: 'First name',
-//         country: 'GB',
-//         city: 'London',
-//         line1: 'A building',
-//         postal_code: 'EC1A 1AA',
-//         day: '1',
-//         month: '1',
-//         year: '1950',
-//         documentid: ownerUpload.id
+//       await TestHelper.createStripeAccount(user, {
+//         type: 'company',
+//         country: 'DE'
 //       })
-//       const req = TestHelper.createRequest(`/api/user/connect/set-additional-owners-submitted?stripeid=${user.stripeAccount.id}`)
+//       await TestHelper.createStripeRegistration(user, {
+//         company_address_city: 'Berlin',
+//         company_address_line1: '123 Park Lane',
+//         company_address_postal_code: '01067',
+//         company_name: 'Company',
+//         company_tax_id: '8',
+//         relationship_account_opener_address_city: 'Berlin',
+//         relationship_account_opener_address_line1: '123 Sesame St',
+//         relationship_account_opener_address_postal_code: '01067',
+//         relationship_account_opener_dob_day: '1',
+//         relationship_account_opener_dob_month: '1',
+//         relationship_account_opener_dob_year: '1950',
+//         relationship_account_opener_first_name: user.profile.firstName,
+//         relationship_account_opener_last_name: user.profile.lastName
+//       })
+//       await TestHelper.createExternalAccount(user, {
+//         currency: 'eur',
+//         country: 'DE',
+//         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+//         account_type: 'individual',
+//         iban: 'DE89370400440532013000'
+//       })
+//       const person = TestHelper.nextIdentity()
+//       const owner = await TestHelper.createBeneficialOwner(user, {
+//         relationship_owner_first_name: person.firstName,
+//         relationship_owner_last_name: person.lastName,
+//         relationship_owner_address_country: 'GB',
+//         relationship_owner_address_city: 'London',
+//         relationship_owner_address_line1: 'A building',
+//         relationship_owner_address_postal_code: 'EC1A 1AA',
+//         relationship_owner_dob_day: '1',
+//         relationship_owner_dob_month: '1',
+//         relationship_owner_dob_year: '1950'
+//       })
+//       const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
 //       req.account = user.account
 //       req.session = user.session
 //       user.stripeAccount = await req.patch()
@@ -76,15 +117,13 @@
 //       req3.session = req.session
 //       while (true) {
 //         user.stripeAccount = await req3.route.api.get(req3)
-//         if (user.stripeAccount.legal_entity.additional_owners[0].verification.status !== 'pending') {
+//         if (user.stripeAccount.legal_entity.additional_owners[0].requirements.status !== 'pending') {
 //           const req4 = TestHelper.createRequest(`/api/user/connect/reupload-owner-identity-document?ownerid=${owner.ownerid}`)
 //           req4.account = req2.account
 //           req4.session = req2.session
 //           const accountNow = await req4.route.api.patch(req4)
-//           console.log(accountNow.legal_entity.additional_owners)
 //           return
 //         } else {
-//           console.log(user.stripeAccount.id, user.stripeAccount.verification, user.stripeAccount.legal_entity.additional_owners[0].verification.status)
 //           await wait()
 //         }
 //       }

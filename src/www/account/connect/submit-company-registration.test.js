@@ -20,8 +20,27 @@ describe(`/account/connect/submit-company-registration`, async () => {
 
     it('should reject individual registration', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', state: 'New York', ssn_last_4: '0000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        business_profile_mcc: '7333',
+        individual_address_city: 'New York',
+        individual_address_line1: '285 Fulton St',
+        individual_address_postal_code: '10007',
+        individual_address_state: 'NY',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_ssn_last_4: '0000',
+        individual_email: user.profile.email,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-123-7890',
+        individual_id_number: '000000000'
+      })
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -36,9 +55,41 @@ describe(`/account/connect/submit-company-registration`, async () => {
 
     it('should bind Stripe account to req', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'US', city: 'New York City', personal_city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', company_city: 'New York City', company_state: 'New York', company_line1: 'First Street', company_postal_code: '10001', ssn_last_4: '0000' })
-      await TestHelper.createExternalAccount(user, { currency: 'usd', country: 'US', account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`, account_type: 'individual', account_number: '000123456789', routing_number: '110000000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '10001',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_ssn_last_4: '0000',
+        relationship_account_opener_address_city: 'New York',
+        relationship_account_opener_address_state: 'NY',
+        relationship_account_opener_address_line1: '285 Fulton St',
+        relationship_account_opener_address_postal_code: '10007'
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'usd',
+        country: 'US',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        account_number: '000123456789',
+        routing_number: '110000000'
+      })
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -50,9 +101,41 @@ describe(`/account/connect/submit-company-registration`, async () => {
   describe('SubmitCompanyRegistration#GET', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'US', city: 'New York City', personal_city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', company_city: 'New York City', company_state: 'New York', company_line1: 'First Street', company_postal_code: '10001', ssn_last_4: '0000' })
-      await TestHelper.createExternalAccount(user, { currency: 'usd', country: 'US', account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`, account_type: 'individual', account_number: '000123456789', routing_number: '110000000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '10001',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_ssn_last_4: '0000',
+        relationship_account_opener_address_city: 'New York',
+        relationship_account_opener_address_state: 'NY',
+        relationship_account_opener_address_line1: '285 Fulton St',
+        relationship_account_opener_address_postal_code: '10007'
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'usd',
+        country: 'US',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        account_number: '000123456789',
+        routing_number: '110000000'
+      })
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -64,25 +147,35 @@ describe(`/account/connect/submit-company-registration`, async () => {
   })
 
   describe('SubmitCompanyRegistration#POST', () => {
-    it('should reject registration that hasn\'t submitted additional owners', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })
-      await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'DE', day: '1', month: '1', year: '1950', company_city: 'Berlin', company_line1: 'First Street', company_postal_code: '01067', personal_city: 'Berlin', personal_line1: 'First Street', personal_postal_code: '01067' })
-      await TestHelper.createExternalAccount(user, { currency: 'eur', country: 'DE', account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`, account_type: 'individual', iban: 'DE89370400440532013000' })
-      const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'invalid-additional-owners')
-    })
-
     it('should reject registration that hasn\'t submitted payment details', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'US', city: 'New York City', personal_city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', company_city: 'New York City', company_state: 'New York', company_line1: 'First Street', company_postal_code: '10001', ssn_last_4: '0000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '10001',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_ssn_last_4: '0000',
+        relationship_account_opener_address_city: 'New York',
+        relationship_account_opener_address_state: 'NY',
+        relationship_account_opener_address_line1: '285 Fulton St',
+        relationship_account_opener_address_postal_code: '10007'
+      })
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -93,18 +186,52 @@ describe(`/account/connect/submit-company-registration`, async () => {
       assert.strictEqual(message.attr.template, 'invalid-payment-details')
     })
 
-    it('should submit after authorization', async () => {
+    it('should submit registration', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'US', city: 'New York City', personal_city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', company_city: 'New York City', company_state: 'New York', company_line1: 'First Street', company_postal_code: '10001', ssn_last_4: '0000' })
-      await TestHelper.createExternalAccount(user, { currency: 'usd', country: 'US', account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`, account_type: 'individual', account_number: '000123456789', routing_number: '110000000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '10001',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_ssn_last_4: '0000',
+        relationship_account_opener_address_city: 'New York',
+        relationship_account_opener_address_state: 'NY',
+        relationship_account_opener_address_line1: '285 Fulton St',
+        relationship_account_opener_address_postal_code: '10007'
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'usd',
+        country: 'US',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        account_number: '000123456789',
+        routing_number: '110000000'
+      })
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {}
       const page = await req.post()
-      const redirectURL = TestHelper.extractRedirectURL(page)
-      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      const doc = TestHelper.extractDoc(page)
+      const messageContainer = doc.getElementById('message-container')
+      const message = messageContainer.child[0]
+      assert.strictEqual(message.attr.template, 'success')
     })
   })
 })

@@ -13,15 +13,14 @@ module.exports = {
     let owner
     for (const stripeAccount of stripeAccounts) {
       if (!stripeAccount.metadata.submitted ||
-        !stripeAccount.metadata.submittedOwners ||
-        stripeAccount.legal_entity.type === 'individual') {
+        stripeAccount.business_type === 'individual') {
         continue
       }
       // find an owner that needs reuploading
       let ownerIndex = -1
       for (const i in stripeAccount.legal_entity.additional_owners) {
         const owner = stripeAccount.legal_entity.additional_owners[i]
-        if (!owner.verification.details_code) {
+        if (!owner.requirements.details_code) {
           continue
         }
         ownerIndex = i
@@ -31,7 +30,7 @@ module.exports = {
         throw new Error('invalid-stripe-account')
       }
       // verify the registration information ownerid
-      const owners = await global.api.user.connect.AdditionalOwners.get(req)
+      const owners = await global.api.user.connect.BeneficialOwners.get(req)
       if (owners && owners.length) {
         for (const i in owners) {
           if (owners[i].ownerid !== req.query.ownerid) {

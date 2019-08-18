@@ -25,7 +25,6 @@ module.exports = {
       req.success = true
       await stripeCache.update(accountNow, req.stripeKey)
       return accountNow
-      return accountNow
     } catch (error) {
       throw new Error('unknown-error')
     }

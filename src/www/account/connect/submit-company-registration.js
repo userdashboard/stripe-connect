@@ -13,7 +13,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripeid')
   }
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-  if (stripeAccount.legal_entity.type === 'individual' ||
+  if (stripeAccount.business_type === 'individual' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
@@ -21,29 +21,28 @@ async function beforeRequest (req) {
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   const fieldsNeeded = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
   const completedPayment = stripeAccount.external_accounts &&
-                           stripeAccount.external_accounts.data && stripeAccount.external_accounts.data.length
+                           stripeAccount.external_accounts.data &&
+                           stripeAccount.external_accounts.data.length
   if (!completedPayment) {
     req.error = req.error || 'invalid-payment-details'
   }
-  const completedBusinessOwners = stripeAccount.metadata.submittedOwners || fieldsNeeded.indexOf('legal_entity.additional_owners') === -1
-  if (!completedBusinessOwners) {
-    req.error = req.error || 'invalid-additional-owners'
-  }
   let registrationComplete = true
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  if (!registration.documentid) {
+  if (!registration['relationship_account_opener_verification_document_front'] ||
+    !registration['relationship_account_opener_verification_document_back']) {
     registrationComplete = false
   } else {
-    for (const pathAndField of stripeAccount.verification.fields_needed) {
-      const field = pathAndField.split('.').pop()
+    for (const field of fieldsNeeded) {
       if (field === 'external_account' ||
-        field === 'type' ||
-        field === 'ip' ||
-        field === 'date' ||
-        field === 'document') {
+        field === 'tos_acceptance.ip' ||
+        field === 'tos_acceptance.date' ||
+        field === 'business_type' ||
+        field === 'relationship.owner' ||
+        field === 'relationship.account_opener') {
         continue
       }
-      if (!registration[field]) {
+      const posted = field.split('.').join('_')
+      if (!registration[posted]) {
         registrationComplete = false
         break
       }
@@ -60,7 +59,6 @@ async function renderPage (req, res, messageTemplate) {
     if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
       return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
     }
-    return dashboard.Response.redirect(req, res, `/account/connect/stripe-account?stripeid=${req.query.stripeid}`)
   } else if (req.error) {
     messageTemplate = req.error
   }
@@ -86,7 +84,7 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   try {
-    await global.api.user.connect.SetCompanyRegistrationSubmitted.patch(req)
+    req.data.stripeAccount = await global.api.user.connect.SetCompanyRegistrationSubmitted.patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

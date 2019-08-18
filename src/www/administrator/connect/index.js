@@ -12,12 +12,14 @@ async function beforeRequest (req) {
   }
   for (const stripeAccount of stripeAccounts) {
     stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
+    stripeAccount.individual = stripeAccount.individual || {}
+    stripeAccount.company = stripeAccount.company || {}
     if (stripeAccount.payouts_enabled) {
       stripeAccount.statusMessage = 'verified'
-    } else if (stripeAccount.verification.disabled_reason) {
-      stripeAccount.statusMessage = `${stripeAccount.verification.disabled_reason}`
-    } else if (stripeAccount.verification.details_code) {
-      stripeAccount.statusMessage = `${stripeAccount.verification.details_code}`
+    } else if (stripeAccount.requirements.disabled_reason) {
+      stripeAccount.statusMessage = stripeAccount.requirements.disabled_reason
+    } else if (stripeAccount.requirements.details_code) {
+      stripeAccount.statusMessage = stripeAccount.requirements.details_code
     } else if (stripeAccount.metadata.submitted) {
       stripeAccount.statusMessage = 'under-review'
     } else {
@@ -32,7 +34,7 @@ async function renderPage (req, res) {
   if (req.data && req.data.stripeAccounts && req.data.stripeAccounts.length) {
     dashboard.HTML.renderTable(doc, req.data.stripeAccounts, 'stripe-account-row', 'stripe-accounts-table')
     for (const stripeAccount of req.data.stripeAccounts) {
-      if (stripeAccount.legal_entity.type === 'individual') {
+      if (stripeAccount.business_type === 'individual') {
         const businessName = doc.getElementById(`business-name-${stripeAccount.id}`)
         businessName.parentNode.removeChild(businessName)
       } else {

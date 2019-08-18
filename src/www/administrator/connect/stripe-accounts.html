@@ -31,9 +31,9 @@
   <template id="stripe-account-row">
     <tr id="${account.id}">
       <td><a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>
-      <td>${account.legal_entity.type}</td>
-      <td id="individual-name-${account.id}">${account.legal_entity.first_name || ""} ${account.legal_entity.last_name || ""}</td>
-      <td id="business-name-${account.id}">${account.legal_entity.business_name || ""}</td>
+      <td>${account.business_type}</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td>${account.metadata.submittedFormatted}</td>
@@ -68,6 +68,9 @@
   </template>
   <template id="pending-submission">
     <span>Pending submission</span>
+  </template>
+  <template id="requirements.past_due">
+    <span>Requires additional information</span>
   </template>
   <template id="rejected.fraud">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

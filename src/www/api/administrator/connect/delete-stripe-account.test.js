@@ -21,8 +21,28 @@ describe(`/api/administrator/connect/delete-stripe-account`, async () => {
     it('should delete Stripe account', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })
-      await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'DE', day: '1', month: '1', year: '1950', company_city: 'Berlin', company_line1: 'First Street', company_postal_code: '01067', personal_city: 'Berlin', personal_line1: 'First Street', personal_postal_code: '01067' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_tax_id: '00000000',
+        company_name: user.profile.firstName + '\'s company',
+        company_address_country: 'DE',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        company_address_city: 'Berlin', 
+        company_address_line1: 'First Street',
+        company_address_postal_code: '01067',
+        relationship_account_opener_address_city: 'Berlin',
+        relationship_account_opener_address_line1: 'First Street',
+        relationship_account_opener_address_postal_code: '01067'
+      })
       const req = TestHelper.createRequest(`/api/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session

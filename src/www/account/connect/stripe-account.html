@@ -19,12 +19,13 @@
         </tr>
         <tr>
           <th>Type</th>
-          <td>${stripeAccount.legal_entity.type}</td>
+          <td>${stripeAccount.business_type}</td>
         </tr>
         <tr>
           <th>Name</th>
-          <td id="individual-name">${stripeAccount.legal_entity.first_name || ""} ${stripeAccount.legal_entity.last_name || ""}</td>
-          <td id="business-name">${stripeAccount.legal_entity.business_name || ""}</td>
+          <td id="blank-name">Not yet provided</td>
+          <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+          <td id="business-name">${stripeAccount.company.name || ""}</td>
         </tr>
         <tr>
           <th>Country</th>
@@ -33,6 +34,11 @@
         <tr>
           <th>Status</th>
           <td id="account-status-${stripeAccount.id}"></td>
+        </tr>
+        <tr>
+          <th>Submitted</th>
+          <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
+          <td id="not-submitted2">Not submitted yet</td>
         </tr>
       </tbody>
     </table>
@@ -47,9 +53,9 @@
       </p>
     </div>    
     <div id="owners-container">
-      <h2>Company owners information</h2>
-      <div id="owners-status"></div>
-      <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <h2>Other beneficial owners information</h2>
+      <p>You must provide documentation for anyone else owning a substantial (25+) percent of the company or in charge of the company, finances or operations.</p>
+      <table id="owners-table" class="pure-table pure-table-striped data-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -58,8 +64,22 @@
         </thead>
       </table>
       <p class="pure-button-group" role="group" id="owner-options">
-        <a class="pure-button pure-button-primary" href="/account/connect/create-additional-owner?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add owner information</a>
-        <a class="pure-button pure-button-primary" href="/account/connect/submit-additional-owners?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed owners</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/create-beneficial-owner?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+      </p>
+    </div>
+    <div id="directors-container">
+      <h2>Company directors information</h2>
+      <p>You must provide full names of your company's governing board and/or people responsible for maintaining regulatory compliance.</p>
+      <table id="directors-table" class="pure-table pure-table-striped data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+      </table>
+      <p class="pure-button-group" role="group" id="owner-options">
+        <a class="pure-button pure-button-primary" href="/account/connect/create-company-director?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add director</a>
       </p>
     </div>
     <div id="payment-container">
@@ -81,14 +101,15 @@
   </body>
   <template id="owner-row">
     <tr id="${owner.ownerid}">
-      <td><a href="/account/connect/edit-additional-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
+      <td><a href="/account/connect/edit-company-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
       <td>${owner.first_name} ${owner.last_name}</td>
+    </tr>
   </template>
-  <template id="owners-submitted">
-    <p>Owner information has been submitted.</p>
-  </template>
-  <template id="owners-not-submitted">
-    <p>You must submit additional company owners due to incorporating within the <a href="https://en.wikipedia.org/wiki/Single_Euro_Payments_Area">Single Euro Payment Area</a>.</p>
+  <template id="director-row">
+    <tr id="${director.directorid}">
+      <td><a href="/account/connect/edit-company-director?directorid=${director.directorid}">${director.directorid}</a></td>
+      <td>${director.first_name} ${director.last_name}</td>
+    </tr>
   </template>
   <template id="payment-information">
     <p>Funds are paid to account ${bank_account.bank_name}.</p>
@@ -108,43 +129,43 @@
   <template id="completed-registration">
     <p>The registration information has been provided.</p>
   </template>
-  <template id="status-not-submitted">
+  <template id="not-submitted">
     <span>Not submitted yet</span>
   </template>
-  <template id="status-verified">
+  <template id="verified">
     <span>Registration has been accepted</span>
   </template>
-  <template id="status-verified">
-    <span>Disabled by Stripe</span>
-  </template>
-  <template id="status-verified-requires-fields">
+  <template id="verified-requires-fields">
     <span>Requires additional information</span>
   </template>
-  <template id="status-pending-submission">
+  <template id="pending-submission">
     <span>Pending submission</span>
   </template>
-  <template id="status-rejected.fraud">
+  <template id="rejected.fraud">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
   </template>
-  <template id="status-rejected.terms">
+  <template id="rejected.terms">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
   </template>
-  <template id="status-rejected.listed">
+  <template id="rejected.listed">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
   </template>
-  <template id="status-rejected.other">
+  <template id="rejected.other">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
   </template>
-  <template id="status-fields_needed">
+  <template id="fields_needed">
     <span>More information is required.</span>
   </template>
-  <template id="status-listed">
+  <template id="listed">
     <span>Under review by Stripe</span>
   </template>
-  <template id="status-under-review">
+  <template id="under-review">
     <span>Under review by Stripe</span>
   </template>
-  <template id="status-disabled">
+  <template id="disabled">
     <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span>Requires additional information</span>
   </template>
 </html>

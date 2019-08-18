@@ -18,9 +18,8 @@ async function beforeRequest (req) {
   if (!stripeAccount) {
     throw new Error('invalid-stripeid')
   }
-  if (stripeAccount.legal_entity.type === 'company' ||
-      stripeAccount.metadata.submitted ||
-      stripeAccount.metadata.submittedOwners) {
+  if (stripeAccount.business_type === 'company' ||
+      stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
   }
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
@@ -74,8 +73,8 @@ async function renderPage (req, res, messageTemplate) {
     }
   }
   if (req.data.addressCountry) {
-    dashboard.HTML.renderList(doc, formatStateData(req.data.addressCountry.divisions), 'state-option', 'state')
-    dashboard.HTML.setSelectedOptionByValue(doc, 'state', req.body ? req.body.state : req.data.registration.state)
+    dashboard.HTML.renderList(doc, formatStateData(req.data.addressCountry.divisions), 'state-option', 'individual_address_state')
+    dashboard.HTML.setSelectedOptionByValue(doc, 'individual_address_state', req.body ? req.body.state : req.data.registration.state)
   }
   const removeElements = []
   if (req.data.applicationCountry.id !== 'JP') {
@@ -93,19 +92,21 @@ async function renderPage (req, res, messageTemplate) {
   }
   // remove unrequired fields
   const removableFields = [
-    'legal_entity.email',
-    'legal_entity.phone_number',
-    'legal_entity.gender',
-    'legal_entity.personal_id_number',
-    'legal_entity.ssn_last_4',
-    'legal_entity.address.line1',
-    'legal_entity.address.line2',
-    'legal_entity.address.city',
-    'legal_entity.address.state',
-    'legal_entity.address.postal_code',
-    'legal_entity.dob.day',
-    'legal_entity.dob.month',
-    'legal_entity.dob.year'
+    'business_profile_url',
+    'business_profile_mcc',
+    'individual.email',
+    'individual.phone',
+    'individual.gender',
+    'individual.id_number',
+    'individual.ssn_last_4',
+    'individual.address.line1',
+    'individual.address.line2',
+    'individual.address.city',
+    'individual.address.state',
+    'individual.address.postal_code',
+    'individual.dob.day',
+    'individual.dob.month',
+    'individual.dob.year'
   ]
   for (const field of req.data.fieldsNeeded) {
     const index = removableFields.indexOf(field)
@@ -124,9 +125,9 @@ async function renderPage (req, res, messageTemplate) {
         removeElements.push(`dob-container`)
         continue
       case 'email':
-      case 'phone_number':
+      case 'phone':
       case 'gender':
-      case 'personal_id_number':
+      case 'id_number':
       case 'ssn_last_4':
         removeElements.push(`${name}-container`)
         continue
@@ -141,15 +142,29 @@ async function renderPage (req, res, messageTemplate) {
     const element = doc.getElementById(field)
     element.parentNode.removeChild(element)
   }
-  for (const field in req.data.registration) {
-    const element = doc.getElementById(field)
-    if (!element) {
-      continue
+  if (req.method === 'GET') {
+    for (const field in req.data.registration) {
+      const element = doc.getElementById(field)
+      if (!element) {
+        continue
+      }
+      if (element.tag === 'input') {
+        element.setAttribute('value', req.data.registration[field] || '')
+      } else if (element.tag === 'select') {
+        dashboard.HTML.setSelectedOptionByValue(doc, field, req.data.registration[field] || '')
+      }
     }
-    if (element.tag === 'input') {
-      element.setAttribute('value', req.body ? req.body[field] : req.data.registration[field] || '')
-    } else if (element.tag === 'select') {
-      dashboard.HTML.setSelectedOptionByValue(doc, field, req.body ? req.body[field]: req.data.registration[field] || '')
+  } else if (req.body) {
+    for (const field in req.body) {
+      const element = doc.getElementById(field)
+      if (!element) {
+        continue
+      }
+      if (element.tag === 'input') {
+        element.setAttribute('value', req.body[field] || '')
+      } else if (element.tag === 'select') {
+        dashboard.HTML.setSelectedOptionByValue(doc, field, req.body[field] || '')
+      }
     }
   }
   return dashboard.Response.end(req, res, doc)
@@ -159,27 +174,18 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  for (const pathAndField of req.data.fieldsNeeded) {
-    let field = pathAndField.split('.').pop()
+  for (const field of req.data.fieldsNeeded) {
     if (field === 'external_account' ||
-      field === 'additional_owners' ||
-      field === 'type' ||
-      field === 'ip' ||
-      field === 'date' ||
-      field === 'document') {
+      field === 'business_type' ||
+      field === 'tos_acceptance.date' ||
+      field === 'tos_acceptance.ip' ||
+      field === 'tos_acceptance.user_agent' ||
+      field === 'individual.verification.document') {
       continue
     }
-    if (req.data.applicationCountry.id === 'JP') {
-      if (pathAndField.startsWith('legal_entity.address_kana.') ||
-          pathAndField.startsWith('legal_entity.personal_address_kana.')) {
-        field += '_kana'
-      } else if (pathAndField.startsWith('legal_entity.address_kanji.') ||
-                 pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
-        field += '_kanji'
-      }
-    }
-    if (!req.body[field]) {
-      return renderPage(req, res, `invalid-${field}`)
+    const posted = field.split('.').join('_')
+    if (!req.body[posted]) {
+      return renderPage(req, res, `invalid-${posted}`)
     }
   }
   try {
@@ -189,7 +195,7 @@ async function submitForm (req, res) {
     }
     return renderPage(req, res, 'unknown-error')
   } catch (error) {
-    return renderPage(req, res, error.message)                                                                     
+    return renderPage(req, res, error.message)
   }
 }
 

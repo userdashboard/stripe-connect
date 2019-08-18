@@ -9,92 +9,117 @@ module.exports = {
       throw new Error('invalid-stripeid')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (stripeAccount.metadata.submitted ||
-      stripeAccount.legal_entity.type === 'individual' ||
-      stripeAccount.metadata.accountid !== req.account.accountid) {
+    if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
     }
-    req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-    if (req.uploads && (req.uploads['id_scan.jpg'] || req.uploads['id_scan.png'])) {
+    if (req.uploads && req.uploads['relationship_account_opener_verification_document_front']) {
       const uploadData = {
         purpose: 'identity_document',
         file: {
-          type: 'application/octet-stream'
+          type: 'application/octet-stream',
+          name: req.uploads['relationship_account_opener_verification_document_front'].name,
+          data: req.uploads['relationship_account_opener_verification_document_front'].buffer
         }
-      }
-      if (req.uploads['id_scan.jpg']) {
-        uploadData.file.name = 'id_scan.jpg'
-        uploadData.file.data = req.uploads['id_scan.jpg'].buffer
-      } else {
-        uploadData.file.name = 'id_scan.png'
-        uploadData.file.data = req.uploads['id_scan.png'].buffer
       }
       try {
         const file = await stripe.files.create(uploadData, req.stripeKey)
-        req.body.documentid = file.id
+        req.body['relationship_account_opener_verification_document_front'] = file.id
+      } catch (error) {
+        throw new Error('invalid-relationship_account_opener_verification_document_front')
+      }
+    }
+    if (req.uploads && req.uploads['relationship_account_opener_verification_document_back']) {
+      const uploadData = {
+        purpose: 'identity_document',
+        file: {
+          type: 'application/octet-stream',
+          name: req.uploads['relationship_account_opener_verification_document_back'].name,
+          data: req.uploads['relationship_account_opener_verification_document_back'].buffer
+        }
+      }
+      try {
+        const file = await stripe.files.create(uploadData, req.stripeKey)
+        req.body['relationship_account_opener_verification_document_back'] = file.id
       } catch (error) {
         throw new Error('invalid-upload')
       }
     }
+    req.query.country = stripeAccount.country
+    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     const requiredFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
-    for (const pathAndField of requiredFields) {
-      let field = pathAndField.split('.').pop()
-      if (field === 'external_account' ||
-        field === 'type' ||
-        field === 'additional_owners' ||
-        field === 'ip' ||
-        field === 'date' ||
-        field === 'document') {
-        continue
-      }
-      if (stripeAccount.country === 'JP') {
-        if (pathAndField.startsWith('legal_entity.address_kana.') ||
-          pathAndField.startsWith('legal_entity.personal_address_kana.')) {
-          field += '_kana'
-        } else if (pathAndField.startsWith('legal_entity.address_kanji.') ||
-          pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
-          field += '_kanji'
-        }
-      }
-      if (pathAndField.startsWith('legal_entity.personal_address')) {
-        field = `personal_${field}`
-      } else if (pathAndField.startsWith('legal_entity.address')) {
-        field = `company_${field}`
-      }
-      if (!req.body[field]) {
-        throw new Error(`invalid-${field}`)
-      }
+    const openerFields = [ 'first_name', 'last_name', 'email', 'phone', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code' ]
+    const openerOptional = [ 'address_line2', 'address_state', 'address_country']
+    const ownerFields = ['first_name', 'last_name', 'email', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code']
+    const ownerOptional = ['address_line2', 'address_state', 'address_country']
+    if (stripeAccount.country === 'US') {
+      openerFields.push('ssn_last_4')
+    }
+    if (stripeAccount.country === 'JP') {
+      openerFields.splice(openerFields.indexOf('address_city'), 1)
+      openerFields.splice(openerFields.indexOf('address_state'), 1)
+      openerFields.splice(openerFields.indexOf('address_country'), 1)
+      openerFields.push('gender' )
+      openerFields.push('first_name_kana', 'last_name_kana', 'address_kana_state', 'address_kana_city', 'address_kana_town', 'address_kana_line1', 'address_kana_postal_code')
+      openerFields.push('first_name_kanji', 'last_name_kanji', 'address_kanji_state', 'address_kanji_city', 'address_kanji_town', 'address_kanji_line1', 'address_kanji_postal_code')
     }
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-    for (const pathAndField of requiredFields) {
-      let field = pathAndField.split('.').pop()
-      if (field === 'external_account' ||
-        field === 'type' ||
-        field === 'additional_owners' ||
-        field === 'ip' ||
-        field === 'date' ||
-        field === 'document') {
+    for (const field of requiredFields) {
+      if (field === 'business_type' ||
+        field === 'external_account' ||
+        field === 'relationship.owner' ||
+        field === 'tos_acceptance.date' ||
+        field === 'tos_acceptance.ip') {
         continue
       }
-      if (stripeAccount.country === 'JP') {
-        if (pathAndField.startsWith('legal_entity.address_kana.') ||
-            pathAndField.startsWith('legal_entity.personal_address_kana.')) {
-          field += '_kana'
-        } else if (pathAndField.startsWith('legal_entity.address_kanji.') ||
-                   pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
-          field += '_kanji'
+      if (field === 'relationship.account_opener') {
+        for (const personField of openerFields) {
+          const posted = `relationship_account_opener_${personField}`
+          if (!req.body[posted]) {
+            throw new Error(`invalid-${posted}`)
+          }
+          registration[posted] = req.body[posted]
         }
+        for (const personField of openerOptional) {
+          const posted = `relationship_account_opener_${personField}`
+          if (req.body[posted]) {
+            registration[posted] = req.body[posted]
+          }
+        }
+        if (req.body['relationship_account_opener_verification_document_front']) {
+          registration['relationship_account_opener_verification_document_front'] = req.body['relationship_account_opener_verification_document_front']
+        }
+        if (req.body['relationship_account_opener_verification_document_back']) {
+          registration['relationship_account_opener_verification_document_back'] = req.body['relationship_account_opener_verification_document_back']
+        }       
+        continue
       }
-      if (pathAndField.startsWith('legal_entity.personal_address')) {
-        field = `personal_${field}`
-      } else if (pathAndField.startsWith('legal_entity.address')) {
-        field = `company_${field}`
+      if (field === 'relationship.owner') {
+        for (const personField of ownerFields) {
+          const posted = `relationship_owner_${personField}`
+          if (!req.body[posted]) {
+            throw new Error(`invalid-${posted}`)
+          }
+          registration[posted] = req.body[posted]
+        }
+        for (const personField of ownerOptional) {
+          const posted = `relationship_owner_${personField}`
+          if (req.body[posted]) {
+            registration[posted] = req.body[posted]
+          }
+        }
+        if (req.body['relationship_owner_verification_document_front']) {
+          registration['relationship_owner_verification_document_front'] = req.body['relationship_owner_verification_document_front']
+        }
+        if (req.body['relationship_owner_verification_document_back']) {
+          registration['relationship_owner_verification_document_back'] = req.body['relationship_owner_verification_document_back']
+        }
+        continue
       }
-      registration[field] = req.body[field]
-    }
-    if (req.body.documentid) {
-      registration.documentid = req.body.documentid
+      const posted = field.split('.').join('_')
+      if (!req.body[posted]) {
+        throw new Error(`invalid-${posted}`)
+      }
+      registration[posted] = req.body[posted]
     }
     const accountInfo = {
       metadata: {

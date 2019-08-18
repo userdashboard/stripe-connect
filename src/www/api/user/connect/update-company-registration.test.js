@@ -38,7 +38,10 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it('should reject individual Stripe account', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -57,7 +60,10 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it('should reject other account\'s Stripe account', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
       const user2 = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user2.account
@@ -74,9 +80,41 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it('should reject submitted Stripe account', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
-      await TestHelper.createStripeRegistration(user, { country: 'US', business_name: 'Company name', business_tax_id: '1', city: 'New York City', personal_city: 'New York City', postal_code: '10001', personal_id_number: '000000000', line1: 'First Street', day: '1', month: '1', year: '1950', company_city: 'New York City', company_state: 'New York', company_line1: 'First Street', company_postal_code: '10001', ssn_last_4: '0000' })
-      await TestHelper.createExternalAccount(user, { currency: 'usd', country: 'US', account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`, account_type: 'individual', account_number: '000123456789', routing_number: '110000000' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '10001',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_ssn_last_4: '0000',
+        relationship_account_opener_address_city: 'New York',
+        relationship_account_opener_address_state: 'NY',
+        relationship_account_opener_address_line1: '285 Fulton St',
+        relationship_account_opener_address_postal_code: '10007'
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'usd',
+        country: 'US',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        account_number: '000123456789',
+        routing_number: '110000000'
+      })
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -96,592 +134,728 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should reject AT-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'AT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AT'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Vienna',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1020',
-        company_city: 'Vienna',
-        company_line1: 'Address First Line',
-        company_postal_code: '1020',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1020',
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_address_city: 'Vienna',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Vienna',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1020'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject AU-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'AU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AU'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_city: 'Brisbane',
-        company_state: 'QLD',
-        company_line1: 'Address First Line',
-        company_postal_code: '4000',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Australian',
-        last_name: 'Person'
+        company_address_city: 'Brisbane',
+        company_address_state: 'QLD',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '4000',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Brisbane',
+        relationship_account_opener_address_line1: '845 Oxford St',
+        relationship_account_opener_address_postal_code: '4000'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject BE-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'BE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'BE'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Brussels',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1020',
-        company_city: 'Brussels',
-        company_line1: 'Address First Line',
-        company_postal_code: '1020',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Brussels',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1020',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Brussels',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1020',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject CA-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'CA' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_city: 'Vancouver',
-        company_state: 'BC',
-        company_line1: 'Address First Line',
-        company_postal_code: 'V5K 0A1',
-        business_name: 'Company',
-        business_tax_id: '8',
-        personal_id_number: '7',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Canadian',
-        last_name: 'Person'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it(`should reject DE-company invalid fields`, async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        personal_city: 'Berlin',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '01067',
-        company_city: 'Berlin',
-        company_line1: 'Address First Line',
-        company_postal_code: '01067',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it(`should reject DK-company invalid fields`, async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'DK' })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        personal_city: 'Copenhagen',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1000',
-        company_city: 'Copenhagen',
-        company_line1: 'Address First Line',
-        company_postal_code: '1000',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it(`should reject ES-company invalid fields`, async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'ES' })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        personal_city: 'Madrid',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '03179',
-        company_city: 'Madrid',
-        company_line1: 'Address First Line',
-        company_postal_code: '03179',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it(`should reject FI-company invalid fields`, async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'FI' })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        personal_city: 'Helsinki',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '00990',
-        company_city: 'Helsinki',
-        company_line1: 'Address First Line',
-        company_postal_code: '00990',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Vancouver',
+        company_address_state: 'BC',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: 'V5K 0A1',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Vancouver',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: 'V5K 0A1'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject CH-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'CH' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CH'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Bern',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1020',
-        company_city: 'Bern',
-        company_line1: 'Address First Line',
-        company_postal_code: '1020',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Bern',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1020',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Bern',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1020',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
+      }
+      await testEachFieldAsNull(req)
+    })
+
+
+    it(`should reject DE-company invalid fields`, async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_address_city: 'Bern',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1020',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Bern',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1020',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it(`should reject DK-company invalid fields`, async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DK'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_address_city: 'Copenhagen',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1000',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Copenhagen',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1000',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it(`should reject ES-company invalid fields`, async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'ES'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_address_city: 'Madrid',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '03179',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Madrid',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '03179',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it(`should reject FI-company invalid fields`, async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'FI'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_address_city: 'Helsinki',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '00990',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Helsinki',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '00990',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject FR-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'FR' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'FR'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Paris',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '75001',
-        company_city: 'Paris',
-        company_line1: 'Address First Line',
-        company_postal_code: '75001',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Paris',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '75001',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Paris',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '75001',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject GB-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'GB' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'GB'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'London',
-        personal_line1: 'Address First Line',
-        personal_postal_code: 'EC1A 1AA',
-        company_city: 'London',
-        company_line1: 'Address First Line',
-        company_postal_code: 'EC1A 1AA',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'London',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: 'EC1A 1AA',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'London',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: 'EC1A 1AA',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject HK-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'HK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'HK'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Hong Kong',
-        personal_line1: 'Address First Line',
-        company_city: 'Hong Kong',
-        company_line1: 'Address First Line',
-        business_name: 'Company',
-        business_tax_id: '8',
-        personal_id_number: '7',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Hongkonger',
-        last_name: 'Person'
+        company_address_city: 'Hong Kong',
+        company_address_line1: '123 Park Lane',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Hong Kong',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '999077'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject IE-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'IE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'IE'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Dublin',
-        personal_line1: 'Address First Line',
-        personal_state: 'Dublin',
-        company_city: 'Dublin',
-        company_state: 'Dublin',
-        company_line1: 'Address First Line',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Dublin',
+        company_address_state: 'Dublin',
+        company_address_line1: '123 Park Lane',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Dublin',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_postal_code: 'Dublin 1'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject IT-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'IT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'IT'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Rome',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '00010',
-        company_city: 'Rome',
-        company_line1: 'Address First Line',
-        company_postal_code: '00010',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Rome',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '00010',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Rome',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '00010',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject JP-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'JP' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'JP'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        gender: 'female',
-        first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        first_name_kanji: '東京都',
-        last_name_kanji: '東京都',
-        phone_number: '0859-076500',
-        business_name: 'Company',
-        business_name_kana: 'ﾄｳｷﾖｳﾄ',
-        business_name_kanji: '東京都',
-        business_tax_id: '8',
-        company_postal_code_kana: '1500001',
-        company_state_kana: 'ﾄｳｷﾖｳﾄ',
-        company_city_kana: 'ｼﾌﾞﾔ',
-        company_town_kana: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_line1_kana: '27-15',
-        company_postal_code_kanji: '１５００００１',
-        company_state_kanji: '東京都',
-        company_city_kanji: '渋谷区',
-        company_town_kanji: '神宮前　３丁目',
-        company_line1_kanji: '２７－１５',
-        personal_state_kana: 'ﾄｳｷﾖｳﾄ',
-        personal_city_kana: 'ｼﾌﾞﾔ',
-        personal_town_kana: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        personal_line1_kana: '27-15',
-        personal_postal_code_kana: '1500001',
-        personal_postal_code_kanji: '１５００００１',
-        personal_state_kanji: '東京都',
-        personal_city_kanji: '渋谷区',
-        personal_town_kanji: '神宮前　３丁目',
-        personal_line1_kanji: '２７－１５'
+        company_tax_id: '8',
+        company_name: 'Company',
+        company_phone: '011-271-6677',
+        company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_business_name_kanji: '東京都',
+        company_address_kana_postal_code: '1500001',
+        company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        company_address_kana_line1: '27-15',
+        company_address_kanji_postal_code: '1500001',
+        company_address_kanji_state: '東京都',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_town: '神宮前　３丁目',
+        company_address_kanji_line1: '２７－１５',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_gender: 'female',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_account_opener_address_kana_line1: '27-15',
+        relationship_account_opener_address_kana_postal_code: '1500001',
+        relationship_account_opener_first_name_kanji: '東京都',
+        relationship_account_opener_last_name_kanji: '東京都',
+        relationship_account_opener_address_kanji_postal_code: '1500001',
+        relationship_account_opener_address_kanji_state: '東京都',
+        relationship_account_opener_address_kanji_city: '渋谷区',
+        relationship_account_opener_address_kanji_town: '神宮前　３丁目',
+        relationship_account_opener_address_kanji_line1: '２７－１５'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject LU-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'LU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'LU'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Luxemburg',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1623',
-        company_city: 'Luxemburg',
-        company_line1: 'Address First Line',
-        company_postal_code: '1623',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Luxemburg',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1623',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Luxemburg',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1623',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject NL-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'NL' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NL'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Amsterdam',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1071 JA',
-        company_city: 'Amsterdam',
-        company_line1: 'Address First Line',
-        company_postal_code: '1071 JA',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Amsterdam',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1071 JA',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Amsterdam',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1071 JA',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject NO-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'NO' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NO'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Oslo',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '0001',
-        company_city: 'Oslo',
-        company_line1: 'Address First Line',
-        company_postal_code: '0001',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Oslo',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '0001',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Oslo',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '0001',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject NZ-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'NZ' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NZ'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_city: 'Auckland',
-        company_line1: 'Address First Line',
-        company_postal_code: '123601145',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Auckland',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '6011',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Auckland',
+        relationship_account_opener_address_postal_code: '6011',
+        relationship_account_opener_address_line1: '844 Fleet Street'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject PT-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'PT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'PT'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Lisbon',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '4520',
-        company_city: 'Lisbon',
-        company_line1: 'Address First Line',
-        company_postal_code: '4520',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Lisbon',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '4520',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Lisbon',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '4520',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should reject SE-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'SE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SE'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Stockholm',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '00150',
-        company_city: 'Stockholm',
-        company_line1: 'Address First Line',
-        company_postal_code: '00150',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Stockholm',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '00150',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Stockholm',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '00150',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
 
-    // these tests only work if your Stripe account is SG
-    // it(`should reject SG-company invalid fields`, async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user, { type: 'company', country: 'SG' })
-    //   const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   req.body = {
-    //     personal_line1: 'Address First Line',
-    //     personal_postal_code: '339696',
-    //     company_line1: 'Address First Line',
-    //     company_postal_code: '339696',
-    //     business_name: 'Company',
-    //     business_tax_id: '8',
-    //     personal_id_number: '7',
-    //     day: '1',
-    //     month: '1',
-    //     year: '1950',
-    //     first_name: 'Singaporean',
-    //     last_name: 'Person'
-    //   }
-    //   await testEachFieldAsNull(req)
-    // })    
-
-    it(`should reject US-company invalid fields`, async () => {
+    it(`should reject SG-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SG'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        business_name: 'Company',
-        business_tax_id: '8',
-        company_city: 'New York City',
-        company_line1: 'Address First Line',
-        company_postal_code: '10001',
-        company_state: 'NY',
-        ssn_last_4: '1234',
-        personal_id_number: '10001',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'American',
-        last_name: 'Person'
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '339696',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '339696',
+        relationship_account_opener_address_city: 'Singapore'
+      }
+      await testEachFieldAsNull(req)
+    })    
+
+    it(`should reject US-company invalid fields`, async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '285 Fulton St',
+        company_address_postal_code: '10007',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_ssn_last_4: '0000',
+        relationship_account_opener_address_city: 'New York',
+        // relationship_account_opener_address_state: 'NY',
+        relationship_account_opener_address_line1: '285 Fulton St',
+        relationship_account_opener_address_postal_code: '10007'
       }
       await testEachFieldAsNull(req)
     })
 
     it(`should update AT-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'AT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AT'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Vienna',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1020',
-        company_city: 'Vienna',
-        company_line1: 'Address First Line',
-        company_postal_code: '1020',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1020',
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_address_city: 'Vienna',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Vienna',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1020'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -689,25 +863,33 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update AU-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'AU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AU'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_city: 'Brisbane',
-        company_state: 'QLD',
-        company_line1: 'Address First Line',
-        company_postal_code: '4000',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Australian',
-        last_name: 'Person'
+        company_address_city: 'Brisbane',
+        company_address_state: 'QLD',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '4000',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Brisbane',
+        relationship_account_opener_address_line1: '845 Oxford St',
+        relationship_account_opener_address_postal_code: '4000'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -715,27 +897,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update BE-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'BE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'BE'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Brussels',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1020',
-        company_city: 'Brussels',
-        company_line1: 'Address First Line',
-        company_postal_code: '1020',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Brussels',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1020',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Brussels',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1020',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -743,26 +930,33 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update CA-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'CA' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_city: 'Vancouver',
-        company_state: 'BC',
-        company_line1: 'Address First Line',
-        company_postal_code: 'V5K 0A1',
-        business_name: 'Company',
-        business_tax_id: '8',
-        personal_id_number: '7',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Canadian',
-        last_name: 'Person'
+        company_address_city: 'Vancouver',
+        company_address_state: 'BC',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: 'V5K 0A1',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Vancouver',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: 'V5K 0A1'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -770,27 +964,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update CH-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'CH' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CH'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Bern',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1020',
-        company_city: 'Bern',
-        company_line1: 'Address First Line',
-        company_postal_code: '1020',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Bern',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1020',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Bern',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1020',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -798,27 +997,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update DE-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Berlin',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '01067',
-        company_city: 'Berlin',
-        company_line1: 'Address First Line',
-        company_postal_code: '01067',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Berlin',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '01067',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Berlin',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '01067',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -826,27 +1030,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update DK-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'DK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DK'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Copenhagen',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1000',
-        company_city: 'Copenhagen',
-        company_line1: 'Address First Line',
-        company_postal_code: '1000',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Copenhagen',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1000',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Copenhagen',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1000',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -854,27 +1063,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update ES-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'ES' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'ES'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Madrid',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '03179',
-        company_city: 'Madrid',
-        company_line1: 'Address First Line',
-        company_postal_code: '03179',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Madrid',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '03179',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Madrid',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '03179',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -882,54 +1096,64 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update FI-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'FI' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'FI'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Helsinki',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '00990',
-        company_city: 'Helsinki',
-        company_line1: 'Address First Line',
-        company_postal_code: '00990',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Helsinki',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '00990',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Helsinki',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '00990',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
     })
     it(`should update FR-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'FR' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'FR'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Paris',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '75001',
-        company_city: 'Paris',
-        company_line1: 'Address First Line',
-        company_postal_code: '75001',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Paris',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '75001',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Paris',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '75001',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -937,27 +1161,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update GB-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'GB' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'GB'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'London',
-        personal_line1: 'Address First Line',
-        personal_postal_code: 'EC1A 1AA',
-        company_city: 'London',
-        company_line1: 'Address First Line',
-        company_postal_code: 'EC1A 1AA',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'London',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: 'EC1A 1AA',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'London',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: 'EC1A 1AA',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -966,26 +1195,31 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update HK-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'HK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'HK'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Hong Kong',
-        personal_line1: 'Address First Line',
-        company_city: 'Hong Kong',
-        company_line1: 'Address First Line',
-        business_name: 'Company',
-        business_tax_id: '8',
-        personal_id_number: '7',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Hongkonger',
-        last_name: 'Person'
+        company_address_city: 'Hong Kong',
+        company_address_line1: '123 Park Lane',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_address_city: 'Hong Kong',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '999077',
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -994,27 +1228,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update IE-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'IE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'IE'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Dublin',
-        personal_line1: 'Address First Line',
-        personal_state: 'Dublin',
-        company_city: 'Dublin',
-        company_state: 'Dublin',
-        company_line1: 'Address First Line',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Dublin',
+        company_address_state: 'Dublin',
+        company_address_line1: '123 Park Lane',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Dublin',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_postal_code: 'Dublin 1'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -1023,27 +1262,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update IT-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'IT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'IT'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Rome',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '00010',
-        company_city: 'Rome',
-        company_line1: 'Address First Line',
-        company_postal_code: '00010',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Rome',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '00010',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Rome',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '00010',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -1051,44 +1295,51 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update JP-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'JP' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'JP'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        gender: 'female',
-        first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        first_name_kanji: '東京都',
-        last_name_kanji: '東京都',
-        phone_number: '0859-076500',
-        business_name: 'Company',
-        business_name_kana: 'ﾄｳｷﾖｳﾄ',
-        business_name_kanji: '東京都',
-        business_tax_id: '8',
-        company_postal_code_kana: '1500001',
-        company_state_kana: 'ﾄｳｷﾖｳﾄ',
-        company_city_kana: 'ｼﾌﾞﾔ',
-        company_town_kana: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_line1_kana: '27-15',
-        company_postal_code_kanji: '１５００００１',
-        company_state_kanji: '東京都',
-        company_city_kanji: '渋谷区',
-        company_town_kanji: '神宮前　３丁目',
-        company_line1_kanji: '２７－１５',
-        personal_state_kana: 'ﾄｳｷﾖｳﾄ',
-        personal_city_kana: 'ｼﾌﾞﾔ',
-        personal_town_kana: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        personal_line1_kana: '27-15',
-        personal_postal_code_kana: '1500001',
-        personal_postal_code_kanji: '１５００００１',
-        personal_state_kanji: '東京都',
-        personal_city_kanji: '渋谷区',
-        personal_town_kanji: '神宮前　３丁目',
-        personal_line1_kanji: '２７－１５'
+        company_tax_id: '8',
+        company_name: 'Company',
+        company_phone: '011-271-6677',
+        company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_business_name_kanji: '東京都',
+        company_address_kana_postal_code: '1500001',
+        company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        company_address_kana_line1: '27-15',
+        company_address_kanji_postal_code: '1500001',
+        company_address_kanji_state: '東京都',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_town: '神宮前　３丁目',
+        company_address_kanji_line1: '２７－１５',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_gender: 'female',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_account_opener_address_kana_line1: '27-15',
+        relationship_account_opener_address_kana_postal_code: '1500001',
+        relationship_account_opener_first_name_kanji: '東京都',
+        relationship_account_opener_last_name_kanji: '東京都',
+        relationship_account_opener_address_kanji_postal_code: '1500001',
+        relationship_account_opener_address_kanji_state: '東京都',
+        relationship_account_opener_address_kanji_city: '渋谷区',
+        relationship_account_opener_address_kanji_town: '神宮前　３丁目',
+        relationship_account_opener_address_kanji_line1: '２７－１５'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1099,27 +1350,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update LU-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'LU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'LU'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Luxemburg',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1623',
-        company_city: 'Luxemburg',
-        company_line1: 'Address First Line',
-        company_postal_code: '1623',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Luxemburg',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1623',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Luxemburg',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1623',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -1127,54 +1383,64 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update NL-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'NL' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NL'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Amsterdam',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '1071 JA',
-        company_city: 'Amsterdam',
-        company_line1: 'Address First Line',
-        company_postal_code: '1071 JA',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Amsterdam',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1071 JA',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Amsterdam',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1071 JA',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
     })
     it(`should update NO-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'NO' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NO'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Oslo',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '0001',
-        company_city: 'Oslo',
-        company_line1: 'Address First Line',
-        company_postal_code: '0001',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Oslo',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '0001',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Oslo',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '0001',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -1182,24 +1448,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update NZ-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'NZ' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NZ'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_city: 'Auckland',
-        company_line1: 'Address First Line',
-        company_postal_code: '6011',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Auckland',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '6011',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_address_city: 'Auckland',
+        relationship_account_opener_address_postal_code: '6011',
+        relationship_account_opener_address_line1: '844 Fleet Street'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -1207,27 +1481,32 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update PT-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'PT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'PT'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Lisbon',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '4520',
-        company_city: 'Lisbon',
-        company_line1: 'Address First Line',
-        company_postal_code: '4520',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Lisbon',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '4520',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Lisbon',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '4520',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
@@ -1235,83 +1514,103 @@ describe('/api/user/connect/update-company-registration', () => {
 
     it(`should update SE-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'SE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SE'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        personal_city: 'Stockholm',
-        personal_line1: 'Address First Line',
-        personal_postal_code: '00150',
-        company_city: 'Stockholm',
-        company_line1: 'Address First Line',
-        company_postal_code: '00150',
-        business_name: 'Company',
-        business_tax_id: '8',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        company_address_city: 'Stockholm',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '00150',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Stockholm',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '00150',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
     })
 
-    // these tests only work if your Stripe account is SG
-    // it(`should update SG-company registration`, async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user, { type: 'company', country: 'SG' })
-    //   const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   req.body = {
-    //     personal_line1: 'Address First Line',
-    //     personal_postal_code: '339696',
-    //     company_line1: 'Address First Line',
-    //     company_postal_code: '339696',
-    //     business_name: 'Company',
-    //     business_tax_id: '8',
-    //     personal_id_number: '7',
-    //     day: '1',
-    //     month: '1',
-    //     year: '1950',
-    //     first_name: 'Singaporean',
-    //     last_name: 'Person'
-    //   }
-    //   const accountNow = await req.patch()
-    //   const registrationNow = JSON.parse(accountNow.metadata.registration)
-    //   for (const field in req.body) {
-    //     assert.strictEqual(registrationNow[field], req.body[field])
-    //   }
-    // })
-
-    it(`should update US-company registration`, async () => {
+    it(`should update SG-company registration`, async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SG'
+      })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        business_name: 'Company',
-        business_tax_id: '8',
-        company_city: 'New York City',
-        company_line1: 'Address First Line',
-        company_postal_code: '10001',
-        company_state: 'NY',
-        ssn_last_4: '1234',
-        personal_id_number: '10001',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'American',
-        last_name: 'Person'
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '339696',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '339696',
+        relationship_account_opener_address_city: 'Singapore',
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
-      const registrationNow = JSON.parse(accountNow.metadata.registration)
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
+      for (const field in req.body) {
+        assert.strictEqual(registrationNow[field], req.body[field])
+      }
+    })
+
+    it(`should update US-company registration`, async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '285 Fulton St',
+        company_address_postal_code: '10007',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_ssn_last_4: '0000',
+        relationship_account_opener_address_city: 'New York',
+        relationship_account_opener_address_state: 'NY',
+        relationship_account_opener_address_line1: '285 Fulton St',
+        relationship_account_opener_address_postal_code: '10007'
+      }
+      const accountNow = await req.patch()
+      const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
       for (const field in req.body) {
         assert.strictEqual(registrationNow[field], req.body[field])
       }

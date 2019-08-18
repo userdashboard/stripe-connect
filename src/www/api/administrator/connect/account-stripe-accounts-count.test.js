@@ -7,8 +7,14 @@ describe('/api/administrator/connect/account-stripe-accounts-count', async () =>
     it('should count all Stripe accounts on account', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts-count?accountid=${user.account.accountid}`)
       req.account = administrator.account
       req.session = administrator.session

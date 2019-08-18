@@ -15,25 +15,319 @@
     <div id="message-container"></div>
     <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked" action="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}">
       <h2>Company information</h2>
-      <div id="business_name-container" class="pure-control-group">
-        <label for="business_name">Business name</label>
-        <input require="require" id="business_name" name="business_name" type="text" maxlength="50" />
+      <div id="company_name-container" class="pure-control-group">
+        <label for="company_name">Business name</label>
+        <input require="require" id="company_name" name="company_name" type="text" maxlength="50" />
       </div>
-      <div id="business_tax_id-container" class="pure-control-group">
-        <label for="business_tax_id">Tax ID number</label>
-        <input require="require" id="business_tax_id" name="business_tax_id" type="text" maxlength="50" />
+      <div id="company_tax_id-container" class="pure-control-group">
+        <label for="company_tax_id">Tax ID number</label>
+        <input require="require" id="company_tax_id" name="company_tax_id" type="text" maxlength="50" />
       </div>
-      <div id="tax_registrar-container" class="pure-control-group">
-        <label for="tax_registrar">Tax registrar</label>
-        <input require="require" id="tax_registrar" name="tax_registrar" type="text" maxlength="50" />
+      <div id="company_phone-container" class="pure-control-group">
+        <label for="company_phone">Phone number</label>
+        <input require="require" id="company_phone" name="company_phone" type="text" maxlength="50" />
+      </div>
+      <div id="business_profile_url-container" class="pure-control-group">
+        <label for="business_profile_url">Website URL</label>
+        <input require="require" id="business_profile_url" name="business_profile_url" type="text" maxlength="50" />
+      </div>
+      <div id="business_profile_mcc-container" class="pure-control-group">
+        <label for="business_profile_mcc">Merchant category code</label>
+        <select id="business_profile_mcc" name="business_profile_mcc">
+          <option value="">Select the code for your</option>business</option>
+          <option value="7623">A/C, Refrigeration Repair</option>
+          <option value="8931">Accounting/Bookkeeping Services</option>
+          <option value="7311">Advertising Services</option>
+          <option value="0763">Agricultural Cooperative</option>
+          <option value="4511">Airlines, Air Carriers</option>
+          <option value="4582">Airports, Flying Fields</option>
+          <option value="4119">Ambulance Services</option>
+          <option value="7996">Amusement Parks/Carnivals</option>
+          <option value="5937">Antique Reproductions</option>
+          <option value="5932">Antique Shops</option>
+          <option value="7998">Aquariums</option>
+          <option value="8911">Architectural/Surveying Services</option>
+          <option value="5971">Art Dealers and Galleries</option>
+          <option value="5970">Artists Supply and Craft Shops</option>
+          <option value="7531">Auto Body Repair Shops</option>
+          <option value="7535">Auto Paint Shops</option>
+          <option value="7538">Auto Service Shops</option>
+          <option value="5531">Auto and Home Supply Stores</option>
+          <option value="6011">Automated Cash Disburse</option>
+          <option value="5542">Automated Fuel Dispensers</option>
+          <option value="8675">Automobile Associations</option>
+          <option value="5533">Automotive Parts and Accessories Stores</option>
+          <option value="5532">Automotive Tire Stores</option>
+          <option value="9223">Bail and Bond Payments (payment to the surety for the bond, not the actual bond paid to the government agency)</option>
+          <option value="5462">Bakeries</option>
+          <option value="7929">Bands, Orchestras</option>
+          <option value="7230">Barber and Beauty Shops</option>
+          <option value="7995">Betting/Casino Gambling</option>
+          <option value="5940">Bicycle Shops</option>
+          <option value="7932">Billiard/Pool Establishments</option>
+          <option value="5551">Boat Dealers</option>
+          <option value="4457">Boat Rentals and Leases</option>
+          <option value="5942">Book Stores</option>
+          <option value="5192">Books, Periodicals, and Newspapers</option>
+          <option value="7933">Bowling Alleys</option>
+          <option value="4131">Bus Lines</option>
+          <option value="8244">Business/Secretarial Schools</option>
+          <option value="7278">Buying/Shopping Services</option>
+          <option value="4899">Cable, Satellite, and Other Pay Television and Radio</option>
+          <option value="5946">Camera and Photographic Supply Stores</option>
+          <option value="5441">Candy, Nut, and Confectionery Stores</option>
+          <option value="7512">Car Rental Agencies</option>
+          <option value="7542">Car Washes</option>
+          <option value="">Car and Truck Dealers (New</option>& Used) Sales, Service, Repairs Parts and Leasing 5511
+          <option value="5521">Car and Truck Dealers (Used Only) Sales, Service, Repairs Parts and Leasing</option>
+          <option value="1750">Carpentry Services</option>
+          <option value="7217">Carpet/Upholstery Cleaning</option>
+          <option value="5811">Caterers</option>
+          <option value="8398">Charitable and Social Service Organizations - Fundraising</option>
+          <option value="5169">Chemicals and Allied Products (Not Elsewhere Classified)</option>
+          <option value="5641">Chidrens and Infants Wear Stores</option>
+          <option value="8351">Child Care Services</option>
+          <option value="8049">Chiropodists, Podiatrists</option>
+          <option value="8041">Chiropractors</option>
+          <option value="5993">Cigar Stores and Stands</option>
+          <option value="8641">Civic, Social, Fraternal Associations</option>
+          <option value="7349">Cleaning and Maintenance</option>
+          <option value="7296">Clothing Rental</option>
+          <option value="8220">Colleges, Universities</option>
+          <option value="5046">Commercial Equipment (Not Elsewhere Classified)</option>
+          <option value="5139">Commercial Footwear</option>
+          <option value="7333">Commercial Photography, Art and Graphics</option>
+          <option value="4111">Commuter Transport, Ferries</option>
+          <option value="4816">Computer Network Services</option>
+          <option value="7372">Computer Programming</option>
+          <option value="7379">Computer Repair</option>
+          <option value="5734">Computer Software Stores</option>
+          <option value="5045">Computers, Peripherals, and Software</option>
+          <option value="1771">Concrete Work Services</option>
+          <option value="5039">Construction Materials (Not Elsewhere Classified)</option>
+          <option value="7392">Consulting, Public Relations</option>
+          <option value="8241">Correspondence Schools</option>
+          <option value="5977">Cosmetic Stores</option>
+          <option value="7277">Counseling Services</option>
+          <option value="7997">Country Clubs</option>
+          <option value="4215">Courier Services</option>
+          <option value="9211">Court Costs, Including Alimony and Child Support - Courts of Law</option>
+          <option value="7321">Credit Reporting Agencies</option>
+          <option value="4411">Cruise Lines</option>
+          <option value="5451">Dairy Products Stores</option>
+          <option value="7911">Dance Hall, Studios, Schools</option>
+          <option value="7273">Dating/Escort Services</option>
+          <option value="8021">Dentists, Orthodontists</option>
+          <option value="5311">Department Stores</option>
+          <option value="7393">Detective Agencies</option>
+          <option value="">Digital Goods</option>– Applications (Excludes Games) 5817
+          <option value="5964">Direct Marketing - Catalog Merchant</option>
+          <option value="5965">Direct Marketing - Combination Catalog and Retail Merchant</option>
+          <option value="5967">Direct Marketing - Inbound Telemarketing</option>
+          <option value="5960">Direct Marketing - Insurance Services</option>
+          <option value="5969">Direct Marketing - Other</option>
+          <option value="5966">Direct Marketing - Outbound Telemarketing</option>
+          <option value="5968">Direct Marketing - Subscription</option>
+          <option value="5962">Direct Marketing - Travel</option>
+          <option value="5310">Discount Stores</option>
+          <option value="8011">Doctors</option>
+          <option value="5963">Door-To-Door Sales</option>
+          <option value="5714">Drapery, Window Covering, and Upholstery Stores</option>
+          <option value="5813">Drinking Places</option>
+          <option value="5912">Drug Stores and Pharmacies</option>
+          <option value="5122">Drugs, Drug Proprietaries, and Druggist Sundries</option>
+          <option value="7216">Dry Cleaners</option>
+          <option value="5099">Durable Goods (Not Elsewhere Classified)</option>
+          <option value="5309">Duty Free Stores</option>
+          <option value="5812">Eating Places, Restaurants</option>
+          <option value="8299">Educational Services</option>
+          <option value="5997">Electric Razor Stores</option>
+          <option value="5065">Electrical Parts and Equipment</option>
+          <option value="1731">Electrical Services</option>
+          <option value="7622">Electronics Repair Shops</option>
+          <option value="5732">Electronics Stores</option>
+          <option value="8211">Elementary, Secondary Schools</option>
+          <option value="7361">Employment/Temp Agencies</option>
+          <option value="7394">Equipment Rental</option>
+          <option value="7342">Exterminating Services</option>
+          <option value="5651">Family Clothing Stores</option>
+          <option value="5814">Fast Food Restaurants</option>
+          <option value="6012">Financial Institutions</option>
+          <option value="9222">Fines - Government Administrative Entities</option>
+          <option value="5718">Fireplace, Fireplace Screens, and Accessories Stores</option>
+          <option value="5713">Floor Covering Stores</option>
+          <option value="5992">Florists</option>
+          <option value="5193">Florists Supplies, Nursery Stock, and Flowers</option>
+          <option value="5422">Freezer and Locker Meat Provisioners</option>
+          <option value="5983">Fuel Dealers (Non Automotive)</option>
+          <option value="7261">Funeral Services, Crematories</option>
+          <option value="7641">Furniture Repair, Refinishing</option>
+          <option value="5712">Furniture, Home Furnishings, and Equipment Stores, Except Appliances</option>
+          <option value="5681">Furriers and Fur Shops</option>
+          <option value="1520">General Services</option>
+          <option value="5947">Gift, Card, Novelty, and Souvenir Shops</option>
+          <option value="5231">Glass, Paint, and Wallpaper Stores</option>
+          <option value="5950">Glassware, Crystal Stores</option>
+          <option value="7992">Golf Courses - Public</option>
+          <option value="9399">Government Services (Not Elsewhere Classified)</option>
+          <option value="5411">Grocery Stores, Supermarkets</option>
+          <option value="5251">Hardware Stores</option>
+          <option value="5072">Hardware, Equipment, and Supplies</option>
+          <option value="7298">Health and Beauty Spas</option>
+          <option value="5975">Hearing Aids Sales and Supplies</option>
+          <option value="1711">Heating, Plumbing, A/C</option>
+          <option value="5945">Hobby, Toy, and Game Shops</option>
+          <option value="5200">Home Supply Warehouse Stores</option>
+          <option value="8062">Hospitals</option>
+          <option value="7011">Hotels, Motels, and Resorts</option>
+          <option value="5722">Household Appliance Stores</option>
+          <option value="5085">Industrial Supplies (Not Elsewhere Classified)</option>
+          <option value="7375">Information Retrieval Services</option>
+          <option value="6399">Insurance - Default</option>
+          <option value="6300">Insurance Underwriting, Premiums</option>
+          <option value="9950">Intra-Company Purchases</option>
+          <option value="5944">Jewelry Stores, Watches, Clocks, and Silverware Stores</option>
+          <option value="0780">Landscaping Services</option>
+          <option value="7211">Laundries</option>
+          <option value="7210">Laundry, Cleaning Services</option>
+          <option value="8111">Legal Services, Attorneys</option>
+          <option value="5948">Luggage and Leather Goods Stores</option>
+          <option value="5211">Lumber, Building Materials Stores</option>
+          <option value="6010">Manual Cash Disburse</option>
+          <option value="4468">Marinas, Service and Supplies</option>
+          <option value="1740">Masonry, Stonework, and Plaster</option>
+          <option value="7297">Massage Parlors</option>
+          <option value="8099">Medical Services</option>
+          <option value="8071">Medical and Dental Labs</option>
+          <option value="5047">Medical, Dental, Ophthalmic, and Hospital Equipment and Supplies</option>
+          <option value="8699">Membership Organizations</option>
+          <option value="5611">Mens and Boys Clothing and Accessories Stores</option>
+          <option value="5691">Mens, Womens Clothing Stores</option>
+          <option value="5051">Metal Service Centers</option>
+          <option value="5699">Miscellaneous Apparel and Accessory Shops</option>
+          <option value="5599">Miscellaneous Auto Dealers</option>
+          <option value="7399">Miscellaneous Business Services</option>
+          <option value="5499">Miscellaneous Food Stores - Convenience Stores and Specialty Markets</option>
+          <option value="5399">Miscellaneous General Merchandise</option>
+          <option value="7299">Miscellaneous General Services</option>
+          <option value="5719">Miscellaneous Home Furnishing Specialty Stores</option>
+          <option value="2741">Miscellaneous Publishing and Printing</option>
+          <option value="7999">Miscellaneous Recreation Services</option>
+          <option value="7699">Miscellaneous Repair Shops</option>
+          <option value="5999">Miscellaneous Specialty Retail</option>
+          <option value="5271">Mobile Home Dealers</option>
+          <option value="7832">Motion Picture Theaters</option>
+          <option value="4214">Motor Freight Carriers and Trucking - Local and Long Distance, Moving and Storage Companies, and Local Delivery Services</option>
+          <option value="5592">Motor Homes Dealers</option>
+          <option value="5013">Motor Vehicle Supplies and New Parts</option>
+          <option value="5571">Motorcycle Shops and Dealers</option>
+          <option value="5561">Motorcycle Shops, Dealers</option>
+          <option value="5733">Music Stores-Musical Instruments, Pianos, and Sheet Music</option>
+          <option value="5994">News Dealers and Newsstands</option>
+          <option value="6051">Non-FI, Money Orders</option>
+          <option value="6540">Non-FI, Stored Value Card Purchase/Load</option>
+          <option value="5199">Nondurable Goods (Not Elsewhere Classified)</option>
+          <option value="5261">Nurseries, Lawn and Garden Supply Stores</option>
+          <option value="8050">Nursing/Personal Care</option>
+          <option value="5021">Office and Commercial Furniture</option>
+          <option value="8043">Opticians, Eyeglasses</option>
+          <option value="8042">Optometrists, Ophthalmologist</option>
+          <option value="5976">Orthopedic Goods - Prosthetic Devices</option>
+          <option value="8031">Osteopaths</option>
+          <option value="5921">Package Stores-Beer, Wine, and Liquor</option>
+          <option value="5198">Paints, Varnishes, and Supplies</option>
+          <option value="7523">Parking Lots, Garages</option>
+          <option value="4112">Passenger Railways</option>
+          <option value="5933">Pawn Shops</option>
+          <option value="5995">Pet Shops, Pet Food, and Supplies</option>
+          <option value="5172">Petroleum and Petroleum Products</option>
+          <option value="7395">Photo Developing</option>
+          <option value="7221">Photographic Studios</option>
+          <option value="5044">Photographic, Photocopy, Microfilm Equipment, and Supplies</option>
+          <option value="7829">Picture/Video Production</option>
+          <option value="5131">Piece Goods, Notions, and Other Dry Goods</option>
+          <option value="5074">Plumbing, Heating Equipment, and Supplies</option>
+          <option value="8651">Political Organizations</option>
+          <option value="9402">Postal Services - Government Only</option>
+          <option value="5094">Precious Stones and Metals, Watches and Jewelry</option>
+          <option value="8999">Professional Services</option>
+          <option value="4225">Public Warehousing and Storage - Farm Products, Refrigerated Goods, Household Goods, and Storage</option>
+          <option value="7338">Quick Copy, Repro, and Blueprint</option>
+          <option value="4011">Railroads</option>
+          <option value="6513">Real Estate Agents and Managers - Rentals</option>
+          <option value="5735">Record Stores</option>
+          <option value="7519">Recreational Vehicle Rentals</option>
+          <option value="5973">Religious Goods Stores</option>
+          <option value="8661">Religious Organizations</option>
+          <option value="1761">Roofing/Siding, Sheet Metal</option>
+          <option value="7339">Secretarial Support Services</option>
+          <option value="6211">Security Brokers/Dealers</option>
+          <option value="5541">Service Stations</option>
+          <option value="5949">Sewing, Needlework, Fabric, and Piece Goods Stores</option>
+          <option value="7251">Shoe Repair/Hat Cleaning</option>
+          <option value="5661">Shoe Stores</option>
+          <option value="7629">Small Appliance Repair</option>
+          <option value="5598">Snowmobile Dealers</option>
+          <option value="1799">Special Trade Services</option>
+          <option value="2842">Specialty Cleaning</option>
+          <option value="5941">Sporting Goods Stores</option>
+          <option value="7032">Sporting/Recreation Camps</option>
+          <option value="7941">Sports Clubs/Fields</option>
+          <option value="5655">Sports and Riding Apparel Stores</option>
+          <option value="5972">Stamp and Coin Stores</option>
+          <option value="5111">Stationary, Office Supplies, Printing and Writing Paper</option>
+          <option value="5943">Stationery Stores, Office, and School Supply Stores</option>
+          <option value="5996">Swimming Pools Sales</option>
+          <option value="4723">TUI Travel - Germany</option>
+          <option value="5697">Tailors, Alterations</option>
+          <option value="9311">Tax Payments - Government Agencies</option>
+          <option value="7276">Tax Preparation Services</option>
+          <option value="4121">Taxicabs/Limousines</option>
+          <option value="4812">Telecommunication Equipment and Telephone Sales</option>
+          <option value="4814">Telecommunication Services</option>
+          <option value="4821">Telegraph Services</option>
+          <option value="5998">Tent and Awning Shops</option>
+          <option value="8734">Testing Laboratories</option>
+          <option value="7922">Theatrical Ticket Agencies</option>
+          <option value="7012">Timeshares</option>
+          <option value="7534">Tire Retreading and Repair</option>
+          <option value="4784">Tolls/Bridge Fees</option>
+          <option value="7991">Tourist Attractions and Exhibits</option>
+          <option value="7549">Towing Services</option>
+          <option value="7033">Trailer Parks, Campgrounds</option>
+          <option value="4789">Transportation Services (Not Elsewhere Classified)</option>
+          <option value="4722">Travel Agencies, Tour Operators</option>
+          <option value="7511">Truck StopIteration</option>
+          <option value="7513">Truck/Utility Trailer Rentals</option>
+          <option value="2791">Typesetting, Plate Making, and Related Services</option>
+          <option value="5978">Typewriter Stores</option>
+          <option value="9405">U.S. Federal Government Agencies or Departments</option>
+          <option value="5137">Uniforms, Commercial Clothing</option>
+          <option value="5931">Used Merchandise and Secondhand Stores</option>
+          <option value="4900">Utilities</option>
+          <option value="5331">Variety Stores</option>
+          <option value="0742">Veterinary Services</option>
+          <option value="7993">Video Amusement Game Supplies</option>
+          <option value="7994">Video Game Arcades</option>
+          <option value="7841">Video Tape Rental Stores</option>
+          <option value="8249">Vocational/Trade Schools</option>
+          <option value="7631">Watch/Jewelry Repair</option>
+          <option value="7692">Welding Repair</option>
+          <option value="5300">Wholesale Clubs</option>
+          <option value="5698">Wig and Toupee Stores</option>
+          <option value="4829">Wires, Money Orders</option>
+          <option value="5631">Womens Accessory and Specialty Shops</option>
+          <option value="5621">Womens Ready-To-Wear Stores</option>
+          <option value="5935">Wrecking and Salvage Yards</option>
+        </select>
       </div>
       <div id="kana-company-information-container">
         <h2>Kana company information</h2>
         <div class="pure-g">
           <div class="pure-u-1-2">
             <div class="pure-control-group">
-              <label for="business_name_kana">Business name</label>
-              <input require="require" id="business_name_kana" name="business_name_kana" type="text" maxlength="50" />
+              <label for="company_business_name_kana">Business name</label>
+              <input require="require" id="company_business_name_kana" name="company_business_name_kana" type="text" maxlength="50" />
             </div>
           </div>
         </div>
@@ -43,275 +337,305 @@
         <div class="pure-g">
           <div class="pure-u-1-2">
             <div class="pure-control-group">
-              <label for="business_name_kanji">Business name</label>
-              <input require="require" id="business_name_kanji" name="business_name_kanji" type="text" maxlength="50" />
+              <label for="company_business_name_kanji">Business name</label>
+              <input require="require" id="company_business_name_kanji" name="company_business_name_kanji" type="text" maxlength="50" />
             </div>
           </div>
         </div>
       </div>
       <div id="company-address-container">
         <h2>Company address</h2>
-        <div id="company_line1-container" class="pure-control-group">
-          <label for="company_line1">Line 1</label>
-          <input class="full-width" require="require" id="company_line1" name="company_line1" type="text" maxlength="100" />
+        <div id="company_address_line1-container" class="pure-control-group">
+          <label for="company_address_line1">Line 1</label>
+          <input class="full-width" require="require" id="company_address_line1" name="company_address_line1" type="text" maxlength="100" />
         </div>
-        <div id="company_line2-container" class="pure-control-group">
-          <label for="company_line2">Line 2</label>
-          <input class="full-width" require="require" id="company_line2" name="company_line2" type="text" maxlength="100" />
+        <div id="company_address_line2-container" class="pure-control-group">
+          <label for="company_address_line2">Line 2</label>
+          <input class="full-width" require="require" id="company_address_line2" name="company_address_line2" type="text" maxlength="100" />
         </div>
-        <div id="company_city-container" class="pure-control-group">
-          <label for="company_city">City</label>
-          <input class="full-width" require="require" id="company_city" name="company_city" type="text" maxlength="100" />
+        <div id="company_address_city-container" class="pure-control-group">
+          <label for="company_address_city">City</label>
+          <input class="full-width" require="require" id="company_address_city" name="company_address_city" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
           <div class="pure-g">
-            <div id="company_state-container" class="pure-u-17-24">
-              <label for="company_state">State or province</label>
-              <select id="company_state" name="company_state">
-                <option>Select state</option>
+            <div id="company_address_state-container" class="pure-u-16-24">
+              <label for="company_address_state">State or province</label>
+              <select id="company_address_state" name="company_address_state">
+                <option value="">Select</option>state</option>
               </select>
             </div>
             <div class="pure-u-1-24"></div>
-            <div id="company_postal_code-container" class="pure-u-6-24">
+            <div id="company_address_postal_code-container" class="pure-u-7-24">
               <div class="pure-control-group">
-                <label for="company_postal_code">ZIP</label>
-                <input class="full-width" require="require" id="company_postal_code" name="company_postal_code" type="text" maxlength="50" />
+                <label for="company_address_postal_code">ZIP</label>
+                <input class="full-width" require="require" id="company_address_postal_code" name="company_address_postal_code" type="text" maxlength="50" />
               </div>
             </div>
           </div>
         </div>
-        <div id="company_country-container" class="pure-control-group">
-          <label for="company_country">Country</label>
-          <select name="company_country" id="company_country">
-            <option value="">Select country</option>
-          </select>
-          <button name="refresh" value="true" class="pure-button">Load state/province list</button>
+        <div id="company_address_country-container" class="pure-control-group">
+          <div class="pure-g">
+            <div class="pure-u-16-24">
+              <label for="company_address_country">Country</label>
+              <select name="company_address_country" id="company_address_country">
+                <option value="">Select country</option>
+              </select>
+            </div>
+            <div class="pure-u-1-24"></div>
+            <div class="pure-u-7-24">
+              <label>&nbsp;</label>
+              <button name="refresh" value="true" class="pure-button">Reload states</button>
+            </div>
+          </div>
         </div>
       </div>
       <div id="kana-company-address-container">
         <h2>Kana company address</h2>
         <div class="pure-control-group">
-          <label for="company_line1_kana">Line 1</label>
-          <input class="full-width" require="require" id="company_line1_kana" name="company_line1_kana" type="text" maxlength="100" />
+          <label for="company_address_kana_line1">Line 1</label>
+          <input class="full-width" require="require" id="company_address_kana_line1" name="company_address_kana_line1" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="company_city_kana">City</label>
-          <input class="full-width" require="require" id="company_city_kana" name="company_city_kana" type="text" maxlength="100" />
+          <label for="company_address_kana_city">City</label>
+          <input class="full-width" require="require" id="company_address_kana_city" name="company_address_kana_city" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="company_town_kana">Town</label>
-          <input class="full-width" require="require" id="company_town_kana" name="company_town_kana" type="text" maxlength="100" />
+          <label for="company_address_kana_town">Town</label>
+          <input class="full-width" require="require" id="company_address_kana_town" name="company_address_kana_town" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="company_state_kana">State</label>
-          <input class="full-width" require="require" id="company_state_kana" name="company_state_kana" type="text" maxlength="100" />
+          <label for="company_address_kana_state">State</label>
+          <input class="full-width" require="require" id="company_address_kana_state" name="company_address_kana_state" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="company_postal_code_kana">Postal code</label>
-          <input class="full-width" require="require" id="company_postal_code_kana" name="company_postal_code_kana" type="text" maxlength="100" />
+          <label for="company_address_kana_postal_code">Postal code</label>
+          <input class="full-width" require="require" id="company_address_kana_postal_code" name="company_address_kana_postal_code" type="text" maxlength="100" />
         </div>
       </div>
       <div id="kanji-company-address-container">
         <h2>Kanji company address</h2>
         <div class="pure-control-group">
-          <label for="company_line1_kanji">Line 1</label>
-          <input class="full-width" require="require" id="company_line1_kanji" name="company_line1_kanji" type="text" maxlength="100" />
+          <label for="company_address_kanji_line1">Line 1</label>
+          <input class="full-width" require="require" id="company_address_kanji_line1" name="company_address_kanji_line1" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="company_city_kanji">City</label>
-          <input class="full-width" require="require" id="company_city_kanji" name="company_city_kanji" type="text" maxlength="100" />
+          <label for="company_address_kanji_city">City</label>
+          <input class="full-width" require="require" id="company_address_kanji_city" name="company_address_kanji_city" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="company_town_kanji">Town</label>
-          <input class="full-width" require="require" id="company_town_kanji" name="company_town_kanji" type="text" maxlength="100" />
+          <label for="company_address_kanji_town">Town</label>
+          <input class="full-width" require="require" id="company_address_kanji_town" name="company_address_kanji_town" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="company_state_kanji">State</label>
-          <input class="full-width" require="require" id="company_state_kanji" name="company_state_kanji" type="text" maxlength="100" />
+          <label for="company_address_kanji_state">State</label>
+          <input class="full-width" require="require" id="company_address_kanji_state" name="company_address_kanji_state" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="company_postal_code_kanji">Postal code</label>
-          <input class="full-width" require="require" id="company_postal_code_kanji" name="company_postal_code_kanji" type="text" maxlength="100" />
+          <label for="company_address_kanji_postal_code">Postal code</label>
+          <input class="full-width" require="require" id="company_address_kanji_postal_code" name="company_address_kanji_postal_code" type="text" maxlength="100" />
         </div>
       </div>
       <h2>Personal information</h2>
       <div id="personal-information-container">
         <div class="pure-g">
-          <div class="pure-u-11-24">
-            <div id="first_name-container" class="pure-control-group">
-              <label for="first_name">First name</label>
-              <input class="full-width" require="require" id="first_name" name="first_name" type="text" maxlength="50" />
+          <div class="pure-u-12-24">
+            <div id="relationship_account_opener_first_name-container" class="pure-control-group">
+              <label for="relationship_account_opener_first_name">First name</label>
+              <input class="full-width" require="require" id="relationship_account_opener_first_name" name="relationship_account_opener_first_name" type="text" maxlength="50" />
             </div>
           </div>
-          <div class="pure-u-2-24"></div>
+          <div class="pure-u-1-24"></div>
           <div class="pure-u-11-24">
-            <div id="last_name-container" class="pure-control-group">
-              <label for="last_name">Last name</label>
-              <input class="full-width" require="require" id="last_name" name="last_name" type="text" maxlength="50" />
+            <div id="relationship_account_opener_last_name-container" class="pure-control-group">
+              <label for="relationship_account_opener_last_name">Last name</label>
+              <input class="full-width" require="require" id="relationship_account_opener_last_name" name="relationship_account_opener_last_name" type="text" maxlength="50" />
             </div>
           </div>
         </div>
+        <div class="pure-control-group">
+          <label for="relationship_account_opener_email">Email address</label>
+          <input class="full-width" require="require" id="relationship_account_opener_email" name="relationship_account_opener_email" type="text" maxlength="100" />
+        </div>
+        <div class="pure-control-group">
+          <label for="relationship_account_opener_phone">Phone</label>
+          <input class="full-width" require="require" id="relationship_account_opener_phone" name="relationship_account_opener_phone" type="text" maxlength="100" />
+        </div>
       </div>
       <div id="kana-personal-information-container">
-        <h2>Kana personal information</h2>
+        <h2>Kana Personal information</h2>
         <div class="pure-g">
-          <div class="pure-u-11-24">
+          <div class="pure-u-12-24">
             <div class="pure-control-group">
-              <label for="first_name_kana">First name</label>
-              <input require="require" id="first_name_kana" name="first_name_kana" type="text" maxlength="50" />
+              <label for="relationship_account_opener_first_name_kana">First name</label>
+              <input require="require" id="relationship_account_opener_first_name_kana" name="relationship_account_opener_first_name_kana" type="text" maxlength="50" />
             </div>
           </div>
-          <div class="pure-u-2-24"></div>
+          <div class="pure-u-1-24"></div>
           <div class="pure-u-11-24">
             <div class="pure-control-group">
-              <label for="last_name_kana">Last name</label>
-              <input require="require" id="last_name_kana" name="last_name_kana" type="text" maxlength="50" />
+              <label for="relationship_account_opener_last_name_kana">Last name</label>
+              <input require="require" id="relationship_account_opener_last_name_kana" name="relationship_account_opener_last_name_kana" type="text" maxlength="50" />
             </div>
           </div>
         </div>
       </div>
       <div id="kanji-personal-information-container">
-        <h2>Kanji personal information</h2>
+        <h2>Kanji Personal information</h2>
         <div class="pure-g">
-          <div class="pure-u-11-24">
+          <div class="pure-u-12-24">
             <div class="pure-control-group">
-              <label for="first_name_kanji">First name</label>
-              <input require="require" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50" />
+              <label for="relationship_account_opener_first_name_kanji">First name</label>
+              <input require="require" id="relationship_account_opener_first_name_kanji" name="relationship_account_opener_first_name_kanji" type="text" maxlength="50" />
             </div>
           </div>
-          <div class="pure-u-2-24"></div>
+          <div class="pure-u-1-24"></div>
           <div class="pure-u-11-24">
             <div class="pure-control-group">
-              <label for="last_name_kanji">Last name</label>
-              <input require="require" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50" />
+              <label for="relationship_account_opener_last_name_kanji">Last name</label>
+              <input require="require" id="relationship_account_opener_last_name_kanji" name="relationship_account_opener_last_name_kanji" type="text" maxlength="50" />
             </div>
           </div>
         </div>
       </div>
       <div id="dob-container" class="pure-control-group">
-        <label for="day">Date of birth</label>
-        <input class="adjacent" require="require" id="day" name="day" type="text" size="2" maxlength="2" placeholder="DD" />
-        <input class="adjacent" require="require" id="month" name="month" type="text" size="2" maxlength="2" placeholder="MM" />
-        <input class="adjacent" require="require" id="year" name="year" type="text" size="4" maxlength="4" placeholder="YYYY" />
+        <label for="relationship_account_opener_dob_day">Date of birth</label>
+        <input class="adjacent" require="require" id="relationship_account_opener_dob_day" name="relationship_account_opener_dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
+        <input class="adjacent" require="require" id="relationship_account_opener_dob_month" name="relationship_account_opener_dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
+        <input class="adjacent" require="require" id="relationship_account_opener_dob_year" name="relationship_account_opener_dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
       </div>
-      <div id="personal_id_number-container" class="pure-g">
+      <div id="id_number-container" class="pure-g">
         <div class="pure-u-1-2">
           <div class="pure-control-group">
-            <label for="personal_id_number">Passport or ID number</label>
-            <input require="require" id="personal_id_number" name="personal_id_number" type="text" maxlength="50" />
+            <label for="relationship_account_opener_id_number">Passport or ID number</label>
+            <input require="require" id="relationship_account_opener_id_number" name="relationship_account_opener_id_number" type="text" maxlength="50" />
           </div>
         </div>
       </div>
-      <div id="email-container" class="pure-control-group">
-        <label for="email">Contact email</label>
-        <input class="full-width" require="require" id="email" name="email" type="text" maxlength="100" />
+      <div id="relationship_account_opener_phone_email-container" class="pure-control-group">
+        <label for="relationship_account_opener_phone_email">Contact email</label>
+        <input class="full-width" require="require" id="relationship_account_opener_phone_email" name="relationship_account_opener_phone_email" type="text" maxlength="100" />
       </div>
-      <div id="phone_number-container" class="pure-control-group">
-        <label for="phone_number">Phone number</label>
-        <input require="require" id="phone_number" name="phone_number" type="text" maxlength="100" />
+      <div id="relationship_account_opener_phone-container" class="pure-control-group">
+        <label for="relationship_account_opener_phone">Phone number</label>
+        <input require="require" id="relationship_account_opener_phone" name="relationship_account_opener_phone" type="text" maxlength="100" />
       </div>
-      <div id="ssn_last_4-container" class="pure-control-group">
-        <label for="ssn_last_4">SSN last 4 digits</label>
-        <input require="require" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100" />
+      <div id="relationship_account_opener_ssn_last_4-container" class="pure-control-group">
+        <label for="relationship_account_opener_ssn_last_4">SSN last 4 digits</label>
+        <input require="require" id="relationship_account_opener_ssn_last_4" name="relationship_account_opener_ssn_last_4" type="text" maxlength="100" />
       </div>
-      <div id="gender-container" class="pure-control-group">
-        <label>Gender</label>
-        <div id="gender" class="pure-checkbox">
-          <label><input name="gender" type="radio" name="type" value="female" /> Female</label>
-          <label><input name="gender" type="radio" name="type" value="male" /> Male</label>
+      <div id="relationship_account_opener_gender-container" class="pure-control-group">
+        <label for="relationship_account_opener_gender">Gender</label>
+        <div id="relationship_account_opener_gender" class="pure-checkbox">
+          <label><input name="relationship_account_opener_gender" type="radio" name="type" value="female" /> Female</label>
+          <label><input name="relationship_account_opener_gender" type="radio" name="type" value="male" /> Male</label>
         </div>
       </div>
-      <div id="first-upload-container" class="pure-control-group">
-        <label for="id_scan">Upload photo or scan of personal ID</label>
-        <input name="id_scan" id="id_scan" type="file" />
+      <div id="relationship_account_opener_first-upload-container" class="pure-control-group">
+        <label for="relationship_account_opener_id_scan_front">Personal ID or passport</label>
+        <label for="relationship_account_opener_id_scan_front">Front scan/photo</label>
+        <input name="relationship_account_opener_id_scan_front" id="relationship_account_opener_id_scan_front" type="file" />
+        <label for="relationship_account_opener_id_scan_back">Back scan/photo</label>
+        <input name="relationship_account_opener_id_scan_back" id="relationship_account_opener_id_scan_back" type="file" />
       </div>
       <div id="replace-upload-container" class="pure-control-group">
-        <label for="id_scan">Reupload photo or scan of personal ID</label>
-        <input name="id_scan" id="id_scan" type="file" />
+        <label for="relationship_account_opener_id_scan_front">Reupload ID or passport</label>
+        <label for="relationship_account_opener_id_scan_front">Front scan/photo</label>
+        <input name="relationship_account_opener_id_scan_front" id="relationship_account_opener_id_scan_front" type="file" />
+        <label for="relationship_account_opener_id_scan_back">Back scan/photo</label>
+        <input name="relationship_account_opener_id_scan_back" id="relationship_account_opener_id_scan_back" type="file" />
       </div>
       <div id="personal-address-container">
         <h2>Personal address</h2>
-        <div id="personal_line1-container" class="pure-control-group">
-          <label for="personal_line1">Line 1</label>
-          <input class="full-width" require="require" id="personal_line1" name="personal_line1" type="text" maxlength="100" />
+        <div id="relationship_account_opener_address_line1-container" class="pure-control-group">
+          <label for="relationship_account_opener_address_line1">Line 1</label>
+          <input class="full-width" require="require" id="relationship_account_opener_address_line1" name="relationship_account_opener_address_line1" type="text" maxlength="100" />
         </div>
-        <div id="personal_line2-container" class="pure-control-group">
-          <label for="personal_line2">Line 2</label>
-          <input class="full-width" require="require" id="personal_line2" name="personal_line2" type="text" maxlength="100" />
+        <div id="relationship_account_opener_address_line2-container" class="pure-control-group">
+          <label for="relationship_account_opener_address_line2">Line 2</label>
+          <input class="full-width" require="require" id="relationship_account_opener_address_line2" name="relationship_account_opener_address_line2" type="text" maxlength="100" />
         </div>
-        <div id="personal_city-container" class="pure-control-group">
-          <label for="personal_city">City</label>
-          <input class="full-width" require="require" id="personal_city" name="personal_city" type="text" maxlength="100" />
+        <div id="relationship_account_opener_address_city-container" class="pure-control-group">
+          <label for="relationship_account_opener_address_city">City</label>
+          <input class="full-width" require="require" id="relationship_account_opener_address_city" name="relationship_account_opener_address_city" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
           <div class="pure-g">
-            <div id="personal_state-container" class="pure-u-17-24">
-              <label for="personal_state">State or province</label>
-              <select id="personal_state" name="personal_state">
-                <option>Select state</option>
+            <div id="relationship_account_opener_address_state-container" class="pure-u-16-24">
+              <label for="relationship_account_opener_address_state">State or province</label>
+              <select id="relationship_account_opener_address_state" name="relationship_account_opener_address_state">
+                <option value="">Select</option>state</option>
               </select>
             </div>
             <div class="pure-u-1-24"></div>
-            <div id="personal_postal_code-container" class="pure-u-6-24">
+            <div id="relationship_account_opener_address_postal_code-container" class="pure-u-7-24">
               <div class="pure-control-group">
-                <label for="personal_postal_code">ZIP</label>
-                <input class="full-width" require="require" id="personal_postal_code" name="personal_postal_code" type="text" maxlength="50" />
+                <label for="relationship_account_opener_address_postal_code">ZIP</label>
+                <input class="full-width" require="require" id="relationship_account_opener_address_postal_code" name="relationship_account_opener_address_postal_code" type="text" maxlength="50" />
               </div>
             </div>
           </div>
         </div>
-        <div id="personal_country-container" class="pure-control-group">
-          <label for="personal_country">Country</label>
-          <select name="personal_country" id="personal_country">
-            <option value="">Select country</option>
-          </select>
-          <button name="refresh" value="true" class="pure-button">Load state/province list</button>
+        <div id="relationship_account_opener_address_country-container" class="pure-control-group">
+          <div class="pure-g">
+            <div id="relationship_account_opener_address_country-container" class="pure-u-16-24">
+              <label for="relationship_account_opener_address_country">Country</label>
+              <select name="relationship_account_opener_address_country" id="relationship_account_opener_address_country">
+                <option value="">Select country</option>
+              </select>
+            </div>
+            <div class="pure-u-1-24"></div>
+            <div id="relationship_account_opener_address_postal_code-container" class="pure-u-7-24">
+              <label>&nbsp;</label>
+              <button name="refresh" value="true" class="pure-button">Reload states</button>
+            </div>
+          </div>
         </div>
       </div>
       <div id="kana-personal-address-container">
         <h2>Kana personal address</h2>
         <div class="pure-control-group">
-          <label for="personal_line1_kana">Line 1</label>
-          <input class="full-width" require="require" id="personal_line1_kana" name="personal_line1_kana" type="text" maxlength="100" />
+          <label for="relationship_account_opener_kana_line1">Line 1</label>
+          <input class="full-width" require="require" id="relationship_account_opener_kana_line1" name="relationship_account_opener_kana_line1" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="personal_city_kana">City</label>
-          <input class="full-width" require="require" id="personal_city_kana" name="personal_city_kana" type="text" maxlength="100" />
+          <label for="relationship_account_opener_kana_city">City</label>
+          <input class="full-width" require="require" id="relationship_account_opener_kana_city" name="relationship_account_opener_kana_city" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="personal_town_kana">Town</label>
-          <input class="full-width" require="require" id="personal_town_kana" name="personal_town_kana" type="text" maxlength="100" />
+          <label for="relationship_account_opener_kana_town">Town</label>
+          <input class="full-width" require="require" id="relationship_account_opener_kana_town" name="relationship_account_opener_kana_town" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="personal_state_kana">State</label>
-          <input class="full-width" require="require" id="personal_state_kana" name="personal_state_kana" type="text" maxlength="100" />
+          <label for="relationship_account_opener_kana_state">State</label>
+          <input class="full-width" require="require" id="relationship_account_opener_kana_state" name="relationship_account_opener_kana_state" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="personal_postal_code_kana">Postal code</label>
-          <input class="full-width" require="require" id="personal_postal_code_kana" name="personal_postal_code_kana" type="text" maxlength="100" />
+          <label for="relationship_account_opener_postal_kana_code">Postal code</label>
+          <input class="full-width" require="require" id="relationship_account_opener_postal_kana_code" name="relationship_account_opener_postal_kana_code" type="text" maxlength="100" />
         </div>
       </div>
       <div id="kanji-personal-address-container">
         <h2>Kanji personal address</h2>
         <div class="pure-control-group">
-          <label for="personal_line1_kanji">Line 1</label>
-          <input class="full-width" require="require" id="personal_line1_kanji" name="personal_line1_kanji" type="text" maxlength="100" />
+          <label for="relationship_account_opener_kanji_line1">Line 1</label>
+          <input class="full-width" require="require" id="relationship_account_opener_kanji_line1" name="relationship_account_opener_kanji_line1" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="personal_city_kanji">City</label>
-          <input class="full-width" require="require" id="personal_city_kanji" name="personal_city_kanji" type="text" maxlength="100" />
+          <label for="relationship_account_opener_kanji_city">City</label>
+          <input class="full-width" require="require" id="relationship_account_opener_kanji_city" name="relationship_account_opener_kanji_city" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="personal_town_kanji">Town</label>
-          <input class="full-width" require="require" id="personal_town_kanji" name="personal_town_kanji" type="text" maxlength="100" />
+          <label for="relationship_account_opener_kanji_town">Town</label>
+          <input class="full-width" require="require" id="relationship_account_opener_kanji_town" name="relationship_account_opener_kanji_town" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="personal_state_kanji">State</label>
-          <input class="full-width" require="require" id="personal_state_kanji" name="personal_state_kanji" type="text" maxlength="100" />
+          <label for="relationship_account_opener_kanji_state">State</label>
+          <input class="full-width" require="require" id="relationship_account_opener_kanji_state" name="relationship_account_opener_kanji_state" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
-          <label for="personal_postal_code_kanji">Postal code</label>
-          <input class="full-width" require="require" id="personal_postal_code_kanji" name="personal_postal_code_kanji" type="text" maxlength="100" />
+          <label for="relationship_account_opener_postal_kanji_code">Postal code</label>
+          <input class="full-width" require="require" id="relationship_account_opener_postal_kanji_code" name="relationship_account_opener_postal_kanji_code" type="text" maxlength="100" />
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
@@ -331,154 +655,166 @@
   <template id="unknown-error">
     <div class="error message">Error! An error occurred creating the registration.</div>
   </template>
-  <template id="invalid-business_name">
+  <template id="invalid-company_name">
     <div class="error message">Error! Invalid or missing business name.</div>
   </template>
-  <template id="invalid-business_name_kana">
+  <template id="invalid-business_profile_url">
+    <div class="error message">Error! Invalid or missing business URL.</div>
+  </template>
+  <template id="invalid-business_profile_mcc">
+    <div class="error message">Error! Invalid or missing business Merchant Category Code.</div>
+  </template>
+  <template id="invalid-company_phone">
+    <div class="error message">Error! Invalid or missing company phone number.</div>
+  </template>
+  <template id="invalid-company_business_name_kana">
     <div class="error message">Error! Invalid or missing Kana business name.</div>
   </template>
-  <template id="invalid-business_name_kanji">
+  <template id="invalid-company_business_name_kanji">
     <div class="error message">Error! Invalid or missing Kanji business name.</div>
   </template>
-  <template id="invalid-business_tax_id">
+  <template id="invalid-company_tax_id">
     <div class="error message">Error! Invalid or missing business tax id.</div>
   </template>
-  <template id="invalid-personal_id_number">
-    <div class="error message">Error! Invalid or missing personal ID number.</div>
-  </template>
-  <template id="invalid-phone_number">
-    <div class="error message">Error! Invalid or missing telephone number.</div>
-  </template>
-  <template id="invalid-gender">
-    <div class="error message">Error! Invalid or missing gender.</div>
-  </template>
-  <template id="invalid-ssn_last_4">
-    <div class="error message">Error! Invalid or missing last 4 digits of Social Security Number.</div>
-  </template>
-  <template id="invalid-day">
-    <div class="error message">Error! Invalid or missing date of birth.</div>
-  </template>
-  <template id="invalid-month">
-    <div class="error message">Error! Invalid or missing date of birth.</div>
-  </template>
-  <template id="invalid-year">
-    <div class="error message">Error! Invalid or missing date of birth.</div>
-  </template>
-  <template id="invalid-first_name">
-    <div class="error message">Error! Invalid or missing first name.</div>
-  </template>
-  <template id="invalid-first_name_kana">
-    <div class="error message">Error! Invalid or missing Kana first name.</div>
-  </template>
-  <template id="invalid-first_name_kanji">
-    <div class="error message">Error! Invalid or missing Kanjifirst name.</div>
-  </template>
-  <template id="invalid-last_name">
-    <div class="error message">Error! Invalid or missing last name.</div>
-  </template>
-  <template id="invalid-last_name_kana">
-    <div class="error message">Error! Invalid or missing last name.</div>
-  </template>
-  <template id="invalid-last_name_kanji">
-    <div class="error message">Error! Invalid or missing last name.</div>
-  </template>
-  <template id="invalid-email">
-    <div class="error message">Error! Invalid or missing email.</div>
-  </template>
-  <template id="invalid-personal_country">
-    <div class="error message">Error! Invalid or missing personal address country.</div>
-  </template>
-  <template id="invalid-company_country">
+  <template id="invalid-company_address_country">
     <div class="error message">Error! Invalid or missing company address country.</div>
   </template>
-  <template id="invalid-personal_city">
-    <div class="error message">Error! Invalid or missing personal address city.</div>
-  </template>
-  <template id="invalid-personal_state">
-    <div class="error message">Error! Invalid or missing personal address state.</div>
-  </template>
-  <template id="invalid-personal_line1">
-    <div class="error message">Error! Invalid or missing personal address line 1.</div>
-  </template>
-  <template id="invalid-personal_postal_code">
-    <div class="error message">Error! Invalid or missing personal postal code.</div>
-  </template>
-  <template id="invalid-company_line1">
+  <template id="invalid-company_address_line1">
     <div class="error message">Error! Invalid or missing company address line 1.</div>
   </template>
-  <template id="invalid-company_city">
+  <template id="invalid-company_address_city">
     <div class="error message">Error! Invalid or missing company address city.</div>
   </template>
-  <template id="invalid-company_state">
+  <template id="invalid-company_address_state">
     <div class="error message">Error! Invalid or missing company address state.</div>
   </template>
-  <template id="invalid-company_postal_code">
+  <template id="invalid-company_address_postal_code">
     <div class="error message">Error! Invalid or missing company postal code.</div>
   </template>
-  <template id="invalid-personal_city_kana">
-    <div class="error message">Error! Invalid or missing Kana personal address city.</div>
-  </template>
-  <template id="invalid-personal_state_kana">
-    <div class="error message">Error! Invalid or missing Kana personal address state.</div>
-  </template>
-  <template id="invalid-personal_town_kana">
-    <div class="error message">Error! Invalid or missing Kana personal address town.</div>
-  </template>
-  <template id="invalid-personal_line1_kana">
-    <div class="error message">Error! Invalid or missing Kana personal address line 1.</div>
-  </template>
-  <template id="invalid-personal_postal_code_kana">
-    <div class="error message">Error! Invalid or missing Kana personal address postal code.</div>
-  </template>
-  <template id="invalid-personal_city_kanji">
-    <div class="error message">Error! Invalid or missing Kanji personal address city.</div>
-  </template>
-  <template id="invalid-personal_state_kanji">
-    <div class="error message">Error! Invalid or missing Kanji personal address state.</div>
-  </template>
-  <template id="invalid-personal_town_kanji">
-    <div class="error message">Error! Invalid or missing Kanji personal address town.</div>
-  </template>
-  <template id="invalid-personal_line1_kanji">
-    <div class="error message">Error! Invalid or missing Kanji personal address line 1.</div>
-  </template>
-  <template id="invalid-personal_postal_code_kanji">
-    <div class="error message">Error! Invalid or missing Kanji personal address postal code.</div>
-  </template>
-  <template id="invalid-company_line1_kana">
+  <template id="invalid-company_address_kana_line1">
     <div class="error message">Error! Invalid or missing Kana company address line 1.</div>
   </template>
-  <template id="invalid-company_city_kana">
+  <template id="invalid-company_address_kana_city">
     <div class="error message">Error! Invalid or missing Kana company address city.</div>
   </template>
-  <template id="invalid-company_state_kana">
+  <template id="invalid-company_address_kana_state">
     <div class="error message">Error! Invalid or missing Kana company address state.</div>
   </template>
-  <template id="invalid-company_town_kana">
+  <template id="invalid-company_address_kana_town">
     <div class="error message">Error! Invalid or missing Kana company address town.</div>
   </template>
-  <template id="invalid-company_postal_code_kana">
+  <template id="invalid-company_address_kana_postal_code">
     <div class="error message">Error! Invalid or missing Kana company address postalcode.</div>
   </template>
-  <template id="invalid-personal_state_kanji">
-    <div class="error message">Error! Invalid or missing Kanji personal address state.</div>
-  </template>
-  <template id="invalid-personal_line1_kanji">
-    <div class="error message">Error! Invalid or missing Kanji personal address line 1.</div>
-  </template>
-  <template id="invalid-company_line1_kanji">
+  <template id="invalid-company_address_kanji_line1">
     <div class="error message">Error! Invalid or missing Kanji company address line 1.</div>
   </template>
-  <template id="invalid-company_city_kanji">
+  <template id="invalid-company_address_kanji_city">
     <div class="error message">Error! Invalid or missing Kanji company address city.</div>
   </template>
-  <template id="invalid-company_state_kanji">
+  <template id="invalid-company_address_kanji_state">
     <div class="error message">Error! Invalid or missing Kanji company address state.</div>
   </template>
-  <template id="invalid-company_town_kanji">
+  <template id="invalid-company_address_kanji_town">
     <div class="error message">Error! Invalid or missing Kanji company address town.</div>
   </template>
-  <template id="invalid-company_postal_code_kanji">
+  <template id="invalid-company_address_kanji_postal_code">
     <div class="error message">Error! Invalid or missing Kanji company address postal code.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_id_number">
+    <div class="error message">Error! Invalid or missing personal ID number.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_phone">
+    <div class="error message">Error! Invalid or missing telephone number.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_gender">
+    <div class="error message">Error! Invalid or missing gender.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_ssn_last_4">
+    <div class="error message">Error! Invalid or missing last 4 digits of Social Security Number.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_dob_day">
+    <div class="error message">Error! Invalid or missing date of birth.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_dob_month">
+    <div class="error message">Error! Invalid or missing date of birth.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_dob_year">
+    <div class="error message">Error! Invalid or missing date of birth.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_first_name">
+    <div class="error message">Error! Invalid or missing first name.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_first_name_kana">
+    <div class="error message">Error! Invalid or missing Kana first name.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_first_name_kanji">
+    <div class="error message">Error! Invalid or missing Kanjifirst name.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_last_name">
+    <div class="error message">Error! Invalid or missing last name.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_last_name_kana">
+    <div class="error message">Error! Invalid or missing last name.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_last_name_kanji">
+    <div class="error message">Error! Invalid or missing last name.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_email">
+    <div class="error message">Error! Invalid or missing email.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_phone">
+    <div class="error message">Error! Invalid or missing phone number.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_country">
+    <div class="error message">Error! Invalid or missing personal address country.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_city">
+    <div class="error message">Error! Invalid or missing personal address city.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_state">
+    <div class="error message">Error! Invalid or missing personal address state.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_line1">
+    <div class="error message">Error! Invalid or missing personal address line 1.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_postal_code">
+    <div class="error message">Error! Invalid or missing personal postal code.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kana_city">
+    <div class="error message">Error! Invalid or missing Kana personal address city.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kana_state">
+    <div class="error message">Error! Invalid or missing Kana personal address state.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kana_town">
+    <div class="error message">Error! Invalid or missing Kana personal address town.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kana_line1">
+    <div class="error message">Error! Invalid or missing Kana personal address line 1.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kana_postal_code">
+    <div class="error message">Error! Invalid or missing Kana personal address postal code.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kanji_city">
+    <div class="error message">Error! Invalid or missing Kanji personal address city.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kanji_state">
+    <div class="error message">Error! Invalid or missing Kanji personal address state.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kanji_town">
+    <div class="error message">Error! Invalid or missing Kanji personal address town.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kanji_line1">
+    <div class="error message">Error! Invalid or missing Kanji personal address line 1.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_address_kanji_postal_code">
+    <div class="error message">Error! Invalid or missing Kanji personal address postal code.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_kanji_state">
+    <div class="error message">Error! Invalid or missing Kanji personal address state.</div>
+  </template>
+  <template id="invalid-relationship_account_opener_kanji_line1">
+    <div class="error message">Error! Invalid or missing Kanji personal address line 1.</div>
   </template>
 </html>

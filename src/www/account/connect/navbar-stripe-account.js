@@ -1,5 +1,7 @@
+const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
+
 module.exports = {
-  setup: (doc, stripeAccount, countrySpec) => {
+  setup: (doc, stripeAccount) => {
     const template = doc.getElementById('navbar')
     // completed registration
     if (stripeAccount.metadata.submitted) {
@@ -11,27 +13,26 @@ module.exports = {
       editIndividual.parentNode.removeChild(editIndividual)
       const submitIndividual = template.getElementById('navbar-submit-individual')
       submitIndividual.parentNode.removeChild(submitIndividual)
-      const additionalOwners = template.getElementById('navbar-additional-owners')
-      additionalOwners.parentNode.removeChild(additionalOwners)
+      const companyOwners = template.getElementById('navbar-beneficial-owners')
+      companyOwners.parentNode.removeChild(companyOwners)
       return
     }
     // in progress
-    if (stripeAccount.legal_entity.type === 'individual') {
+    if (stripeAccount.business_type === 'individual') {
       const editCompany = template.getElementById('navbar-edit-company')
       editCompany.parentNode.removeChild(editCompany)
       const submitCompany = template.getElementById('navbar-submit-company')
       submitCompany.parentNode.removeChild(submitCompany)
-      const additionalOwners = template.getElementById('navbar-additional-owners')
-      additionalOwners.parentNode.removeChild(additionalOwners)
+      const companyOwners = template.getElementById('navbar-beneficial-owners')
+      companyOwners.parentNode.removeChild(companyOwners)
     } else {
       const editIndividual = template.getElementById('navbar-edit-individual')
       editIndividual.parentNode.removeChild(editIndividual)
       const submitIndividual = template.getElementById('navbar-submit-individual')
       submitIndividual.parentNode.removeChild(submitIndividual)
-      if (countrySpec.verification_fields.company.minimum.indexOf('legal_entity.additional_owners') === -1 &&
-          countrySpec.verification_fields.company.additional.indexOf('legal_entity.additional_owners') === -1) {
-        const additionalOwners = template.getElementById('navbar-additional-owners')
-        additionalOwners.parentNode.removeChild(additionalOwners)
+      if (euCountries.indexOf(stripeAccount.country) === -1) {
+        const companyOwners = template.getElementById('navbar-beneficial-owners')
+        companyOwners.parentNode.removeChild(companyOwners)
       }
     }
   }

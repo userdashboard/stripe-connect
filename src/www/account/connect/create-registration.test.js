@@ -17,7 +17,7 @@ describe(`/account/connect/create-registration`, async () => {
   })
 
   describe('CreateRegistration#POST', () => {
-    it('should create authorized Stripe account', async () => {
+    it('should create Stripe account', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/account/connect/create-registration`)
       req.account = user.account

@@ -62,17 +62,7 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  req.body = req.body || {}
-  if (req.data.stripeAccount.legal_entity.type === 'company') {
-    if (!req.body.company) {
-      doc.getElementById('company').setAttribute('checked', 'checked')
-    }
-  } else {
-    if (!req.body.individual) {
-      doc.getElementById('individual').setAttribute('checked', 'checked')
-    }
-  }
-  const selectedCountry = req.body.country || req.data.countrySpec.id
+  const selectedCountry = req.body ? req.body.country : req.data.countrySpec.id
   for (const country of req.data.stripeCountries) {
     if (country.id !== selectedCountry) {
       const countryContainer = doc.getElementById(`${country.id}-container`)
@@ -83,35 +73,23 @@ async function renderPage (req, res, messageTemplate) {
   }
   dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'country')
   dashboard.HTML.renderList(doc, req.data.currencies, 'currency-option', 'currency')
-  for (const fieldName in req.body) {
-    const el = doc.getElementById(fieldName)
-    if (!el) {
-      continue
-    }
-    switch (el.tag) {
-      case 'select':
-        if (fieldName === 'country') {
-          dashboard.HTML.setSelectedOptionByValue(doc, el.attr.id, req.body[fieldName] || req.data.countrySpec.id)
-        } else {
-          dashboard.HTML.setSelectedOptionByValue(doc, el.attr.id, req.body[fieldName])
-        }
+  if (req.body) {
+    for (const field in req.body) {
+      const element = doc.getElementById(field)
+      if (!element) {
         continue
-      case 'input':
-        if (el.attr.type === 'radio' || el.attr.type === 'checkbox') {
-          el.attr.checked = 'checked'
+      }
+      if (element.tag === 'input') {
+        if (element.attr &&
+          (element.attr.type === 'checkbox' || element.attr.type === 'radio')) {
+          element.setAttribute('checked', 'checked')
         } else {
-          el.attr.value = req.body[fieldName]
+          element.setAttribute('value', req.body[field] || '')
         }
-        continue
+      } else if (element.tag === 'select') {
+        dashboard.HTML.setSelectedOptionByValue(doc, field, req.body[field] || '')
+      }
     }
-  }
-  if (!req.body.account_type || req.body.account_type === 'individual') {
-    doc.getElementById('individual').setAttribute('checked', 'checked')
-  } else {
-    doc.getElementById('company').setAttribute('checked', 'checked')
-  }
-  if (req.data.countrySpec && !req.body.country) {
-    dashboard.HTML.setSelectedOptionByValue(doc, 'country', req.data.countrySpec.id)
   }
   return dashboard.Response.end(req, res, doc)
 }

@@ -97,10 +97,13 @@ module.exports = {
         stripeData.external_account.routing_number = req.body.clearing_code + '-' + req.body.branch_code
         break
       case 'JP':
-      case 'SG':
       case 'BR':
         stripeData.external_account.account_number = req.body.account_number
         stripeData.external_account.routing_number = req.body.bank_code + '' + req.body.branch_code
+        break
+      case 'SG':
+        stripeData.external_account.account_number = req.body.account_number
+        stripeData.external_account.routing_number = req.body.bank_code + '-' + req.body.branch_code
         break
       case 'NZ':
         stripeData.external_account.account_number = req.body.account_number

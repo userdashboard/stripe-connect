@@ -24,15 +24,17 @@ module.exports = {
     }
     const accountInfo = {
       type: 'custom',
+      business_type: req.body.type,
       country: req.body.country,
       metadata: {
+        appid: req.appid,
         accountid: req.query.accountid,
         ip: req.ip,
         userAgent: req.userAgent
-      },
-      legal_entity: {
-        type: req.body.type
       }
+    }
+    if (req.body.country === 'US') {
+      accountInfo.requested_capabilities = [ 'card_payments' ]
     }
     try {
       const stripeAccount = await stripe.accounts.create(accountInfo, req.stripeKey)

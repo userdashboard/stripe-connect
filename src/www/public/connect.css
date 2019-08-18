@@ -1,13 +1,14 @@
+.requirements-wrapper { margin-bottom: 2rem }
 .requirements-container { width: 40%; max-width: 30rem; margin-right: 1rem }
 .requirements-container:last-of-type { margin-right: 0 }
 .requirements { border: 1px solid #CCC; padding: 1rem; margin-right: 1rem }
 .requirements:last-of-type { margin-right: 0 }
-form.pure-form { max-width: 30rem }
+form.pure-form { max-width: 40rem }
 div.pure-u-2-24 { width: 0.5rem }
 div.pure-u-11-24 { width: 14.75rem }
 input.full-width { width: 100%; max-width: 40rem }
 input.adjacent { display: inline-block !important; margin-right: 0.5rem !important }
-select { max-width: 100% }
+select { width: 100%; margin-right: 1rem; max-width: 100% !important }
 
 @media (max-width: 960px) {
   .requirements-container { width: 100%; margin-bottom: 2rem; margin-right: 0 }

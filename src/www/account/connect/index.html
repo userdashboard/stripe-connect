@@ -12,7 +12,7 @@
   <body>
     <h1>Stripe Connect accounts</h1>
     <p>Become a vendor by verifying your personal identity and company information through <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
-    <div class="pure-g">
+    <div class="pure-g requirements-wrapper">
       <div class="pure-u-1-2 requirements-container">
         <div class="requirements">
           <h2>Individual requirements</h2>
@@ -45,12 +45,13 @@
             <th>Name</th>
             <th>Status</th>
             <th>Created</th>
+            <th>Submitted</th>
           </tr>
         </thead>
       </table>
     </div>
     <div id="company-container">
-      <h1>Company registrations</h1>
+      <h2>Company registrations</h2>
       <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
@@ -58,6 +59,7 @@
             <th>Name</th>
             <th>Status</th>
             <th>Created</th>
+            <th>Submitted</th>
           </tr>
         </thead>
       </table>
@@ -66,10 +68,13 @@
   <template id="stripe-account-row">
     <tr id="${account.id}">
       <td><a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
-      <td id="individual-name-${account.id}">${account.legal_entity.first_name} ${account.legal_entity.last_name}</td>
-      <td id="business-name-${account.id}">${account.legal_entity.business_name}</td>
+      <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
+      <td id="business-name-${account.id}">${account.company.name}</td>
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
+      <td id="submitted-${account.id}">${account.submittedFormatted}</td>
+      <td id="not-submitted-${account.id}">No</td>
     </tr>
   </template>
   <template id="not-submitted">
@@ -110,5 +115,8 @@
   </template>
   <template id="disabled">
     <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span>Requires additional information</span>
   </template>
 </html>

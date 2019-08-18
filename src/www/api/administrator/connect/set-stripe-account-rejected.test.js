@@ -41,8 +41,27 @@ describe(`/api/administrator/connect/set-stripe-account-rejected`, async () => {
     it('should update the Stripe account as rejected', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'DE' })
-      await TestHelper.createStripeRegistration(user, { business_tax_id: 1, business_name: user.profile.firstName + '\'s company', country: 'DE', day: '1', month: '1', year: '1950', company_city: 'Berlin', company_line1: 'First Street', company_postal_code: '01067', personal_city: 'Berlin', personal_line1: 'First Street', personal_postal_code: '01067' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_address_city: 'Bern',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '1020',
+        company_name: 'Company',
+        company_tax_id: '8',
+        relationship_account_opener_address_city: 'Bern',
+        relationship_account_opener_address_line1: '123 Sesame St',
+        relationship_account_opener_address_postal_code: '1020',
+        relationship_account_opener_dob_day: '1',
+        relationship_account_opener_dob_month: '1',
+        relationship_account_opener_dob_year: '1950',
+        relationship_account_opener_first_name: user.profile.firstName,
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_phone: '456-789-1230'
+      })
       const req = TestHelper.createRequest(`/api/administrator/connect/set-stripe-account-rejected?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session
@@ -50,7 +69,7 @@ describe(`/api/administrator/connect/set-stripe-account-rejected`, async () => {
         reason: 'fraud'
       }
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.verification.disabled_reason, 'rejected.fraud')
+      assert.strictEqual(accountNow.requirements.disabled_reason, 'rejected.fraud')
     })
   })
 })

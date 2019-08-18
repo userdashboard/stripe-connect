@@ -40,7 +40,7 @@ describe(`/api/user/connect/create-stripe-account`, async () => {
       assert.strictEqual(errorMessage, 'invalid-country')
     })
 
-    it('should create authorized registration', async () => {
+    it('should create registration', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
       req.account = user.account
@@ -50,7 +50,7 @@ describe(`/api/user/connect/create-stripe-account`, async () => {
         country: 'US'
       }
       const stripeAccount = await req.post()
-      assert.strictEqual(stripeAccount.legal_entity.type, 'individual')
+      assert.strictEqual(stripeAccount.business_type, 'individual')
     })
   })
 })

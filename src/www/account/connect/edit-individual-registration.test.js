@@ -20,7 +20,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject company registration', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'company', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -35,7 +38,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should bind application CountrySpec to req', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AU'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -45,7 +51,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should bind address country to req', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AU'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -63,28 +72,27 @@ describe(`/account/connect/edit-individual-registration`, async () => {
       const fieldsNeeded = country.verification_fields.individual.minimum.concat(country.verification_fields.individual.additional)
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      for (const pathAndField of fieldsNeeded) {
-        if (pathAndField === 'external_account' ||
-          pathAndField === 'legal_entity.type' ||
-          pathAndField === 'tos_acceptance.date' ||
-          pathAndField === 'tos_acceptance.ip' ||
-          pathAndField === 'tos_acceptance.user_agent' ||
-          pathAndField === 'legal_entity.verification.document') {
+      for (const field of fieldsNeeded) {
+        if (field === 'external_account' ||
+          field === 'business_type' ||
+          field === 'tos_acceptance.date' ||
+          field === 'tos_acceptance.ip' ||
+          field === 'tos_acceptance.user_agent') {
           continue
         }
-        const field = pathAndField.split('.').pop()
-        let inputName = field
-        if (country.id === 'JP') {
-          if (pathAndField.indexOf('kana') > -1 && !pathAndField.endsWith('_kana')) {
-            inputName += '_kana'
-          } else if (pathAndField.indexOf('kanji') > -1 && !pathAndField.endsWith('_kanji')) {
-            inputName += '_kanji'
-          }
+        if (field === 'individual.verification.document') {
+          const front = doc.getElementById(field.split('.').join('_') + '_front')
+          assert.strictEqual(front.tag, 'input')
+          const back = doc.getElementById(field.split('.').join('_') + '_back')
+          assert.strictEqual(back.tag, 'input')
+          continue
         }
-        const input = doc.getElementById(inputName)
-        if (input.attr.name === 'state' || input.attr.name === 'country') {
+        const input = doc.getElementById(field.split('.').join('_'))
+        if (input.attr.name === 'individual_address_state' || 
+            input.attr.name === 'individual_address_country' ||
+            input.attr.name === 'business_profile_mcc') {
           assert.strictEqual(input.tag, 'select')
-        } else if (input.attr.id === 'gender') {
+        } else if (input.attr.id === 'individual_gender') {
           assert.strictEqual(input.tag, 'div')
         } else {
           assert.strictEqual(input.tag, 'input')
@@ -94,7 +102,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -106,7 +117,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have AT-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -115,7 +129,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have AU-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AU'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -124,7 +141,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have BE-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'BE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'BE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -133,7 +153,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have CA-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'CA' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'CA'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -142,7 +165,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have CH-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'CH' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'CH'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -151,7 +177,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have DE-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'DE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'DE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -160,7 +189,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have DK-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'DK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'DK'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -168,7 +200,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
     })
     it('should have ES-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'ES' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'ES'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -177,7 +212,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have FI-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'FI' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'FI'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -186,7 +224,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have FR-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'FR' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'FR'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -195,7 +236,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have GB-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'GB' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'GB'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -204,7 +248,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have HK-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'HK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'HK'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -213,7 +260,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have IE-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'IE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'IE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -222,7 +272,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have IT-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'IT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'IT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -231,7 +284,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have JP-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'JP' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -240,7 +296,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have LU-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'LU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'LU'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -249,7 +308,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have NL-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NL' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NL'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -258,7 +320,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have NO-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NO' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NO'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -267,7 +332,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have NZ-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NZ' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -276,7 +344,10 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have PT-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'PT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'PT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -285,26 +356,34 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should have SE-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'SE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       return testRequiredFieldInputsExist(req, user.stripeAccount)
     })
 
-    // these tests only work if your Stripe account is SG
-    // it('should have SG-required fields', async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user, { type: 'individual', country: 'SG' })
-    //   const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   return testRequiredFieldInputsExist(req, user.stripeAccount)
-    // })
+    it('should have SG-required fields', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SG'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      return testRequiredFieldInputsExist(req, user.stripeAccount)
+    })
 
     it('should have US-required fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -313,7 +392,7 @@ describe(`/account/connect/edit-individual-registration`, async () => {
   })
 
   describe('EditIndividualRegistration#POST', () => {
-    async function testEachFieldAsNull(req) {
+    async function testEachFieldAsNull (req) {
       for (const field in req.body) {
         const value = req.body[field]
         req.body[field] = null
@@ -328,32 +407,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject AT invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update AT information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -364,40 +449,46 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject AU invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AU'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'Brisbane',
-        state: 'QLD',
-        line1: 'Address First Line',
-        postal_code: '4000',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Australian',
-        last_name: 'Person'
+        individual_address_city: 'Brisbane',
+        individual_address_state: 'QLD',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '4000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update AU information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'AU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'AU'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'Brisbane',
-        state: 'QLD',
-        line1: 'Address First Line',
-        postal_code: '4000',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Australian',
-        last_name: 'Person'
+        individual_address_city: 'Brisbane',
+        individual_address_state: 'QLD',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '4000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -408,32 +499,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject BE invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'BE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'BE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update BE information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'BE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'BE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -444,42 +541,48 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject CA invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'CA' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'CA'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'Vancouver',
-        state: 'BC',
-        line1: 'Address First Line',
-        postal_code: 'V5K 0A1',
-        personal_id_number: '7',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Canadian',
-        last_name: 'Person'
+        individual_address_city: 'Vancouver',
+        individual_address_state: 'BC',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'V5K 0A1',
+        individual_id_number: '000000000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update CA information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'CA' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'CA'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'Vancouver',
-        state: 'BC',
-        line1: 'Address First Line',
-        postal_code: 'V5K 0A1',
-        personal_id_number: '7',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Canadian',
-        last_name: 'Person'
+        individual_address_city: 'Vancouver',
+        individual_address_state: 'BC',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'V5K 0A1',
+        individual_id_number: '000000000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -490,32 +593,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject CH invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'CH' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'CH'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update CH information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'CH' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'CH'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -526,32 +635,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject DE invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'DE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'DE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update DE information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'DE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'DE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -562,32 +677,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject DK invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'DK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'DK'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update DK information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'DK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'DK'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -598,32 +719,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject ES invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'ES' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'ES'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update ES information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'ES' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'ES'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -634,32 +761,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject FI invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'FI' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'FI'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update FI information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'FI' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'FI'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -670,32 +803,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject FR invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'FR' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'FR'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update FR information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'FR' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'FR'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -706,32 +845,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject GB invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'GB' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'GB'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update GB information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'GB' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'GB'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -742,38 +887,44 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject HK invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'HK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'HK'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'Hong Kong',
-        line1: 'Address First Line',
-        personal_id_number: '7',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Hongkonger',
-        last_name: 'Person'
+        individual_address_city: 'Hong Kong',
+        individual_address_line1: '123 Sesame St',
+        individual_id_number: '00000000000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update HK information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'HK' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'HK'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'Hong Kong',
-        line1: 'Address First Line',
-        personal_id_number: '7',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Hongkonger',
-        last_name: 'Person'
+        individual_address_city: 'Hong Kong',
+        individual_address_line1: '123 Sesame St',
+        individual_id_number: '00000000000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -784,32 +935,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject IE invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'IE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'IE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update IE information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'IE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'IE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -820,32 +977,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject IT invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'IT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'IT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update IT information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'IT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'IT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -856,60 +1019,66 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject JP invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'JP' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        gender: 'female',
-        first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        first_name_kanji: '東京都',
-        last_name_kanji: '東京都',
-        phone_number: '0859-076500',
-        postal_code_kana: '1500001',
-        state_kana: 'ﾄｳｷﾖｳﾄ',
-        city_kana: 'ｼﾌﾞﾔ',
-        town_kana: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        line1_kana: '27-15',
-        postal_code_kanji: '１５００００１',
-        state_kanji: '東京都',
-        city_kanji: '渋谷区',
-        town_kanji: '神宮前　３丁目',
-        line1_kanji: '２７－１５'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '0859-076500',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update JP information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'JP' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        gender: 'female',
-        first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        first_name_kanji: '東京都',
-        last_name_kanji: '東京都',
-        phone_number: '0859-076500',
-        postal_code_kana: '1500001',
-        state_kana: 'ﾄｳｷﾖｳﾄ',
-        city_kana: 'ｼﾌﾞﾔ',
-        town_kana: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        line1_kana: '27-15',
-        postal_code_kanji: '１５００００１',
-        state_kanji: '東京都',
-        city_kanji: '渋谷区',
-        town_kanji: '神宮前　３丁目',
-        line1_kanji: '２７－１５'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '0859-076500',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -920,32 +1089,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject LU invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'LU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'LU'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update LU information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'LU' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'LU'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -956,32 +1131,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject NL invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NL' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NL'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update NL information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NL' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NL'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -992,32 +1173,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject NO invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NO' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NO'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update NO information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NO' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NO'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1028,38 +1215,44 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject NZ invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NZ' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'Auckland',
-        line1: 'Address First Line',
-        postal_code: '6011',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_address_city: 'Auckland',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '6011',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update NZ information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'NZ' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'Auckland',
-        line1: 'Address First Line',
-        postal_code: '6011',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_address_city: 'Auckland',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '6011',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1070,32 +1263,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject PT invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'PT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'PT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update PT information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'PT' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'PT'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1106,32 +1305,38 @@ describe(`/account/connect/edit-individual-registration`, async () => {
 
     it('should reject SE invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'SE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update SE information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'SE' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SE'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'Person',
-        last_name: 'Person'
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1140,89 +1345,108 @@ describe(`/account/connect/edit-individual-registration`, async () => {
       assert.strictEqual(message.attr.template, 'success')
     })
 
-    // these tests only work if your Stripe account is SG
-    // it('should reject SG invalid fields', async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user, { type: 'individual', country: 'SG' })
-    //   const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   req.body = {
-    //     line1: 'Address First Line',
-    //     postal_code: '339696',
-    //     personal_id_number: '7',
-    //     day: '1',
-    //     month: '1',
-    //     year: '1950',
-    //     first_name: 'Singaporean',
-    //     last_name: 'Person'
-    //   }
-    //   await testEachFieldAsNull(req)
-    // })
-
-    // it('should update SG information', async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user, { type: 'individual', country: 'SG' })
-    //   const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   req.body = {
-    //     line1: 'Address First Line',
-    //     postal_code: '339696',
-    //     personal_id_number: '7',
-    //     day: '1',
-    //     month: '1',
-    //     year: '1950',
-    //     first_name: 'Singaporean',
-    //     last_name: 'Person'
-    //   }
-    //   const page = await req.post()
-    //   const doc = TestHelper.extractDoc(page)
-    //   const messageContainer = doc.getElementById('message-container')
-    //   const message = messageContainer.child[0]
-    //   assert.strictEqual(message.attr.template, 'success')
-    // })
-
-    it('should reject US invalid fields', async () => {
+    it('should reject SG invalid fields', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SG'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'New York City',
-        line1: 'Address First Line',
-        postal_code: '10001',
-        personal_id_number: '000000000',
-        state: 'NY',
-        ssn_last_4: '1234',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'American',
-        last_name: 'Person'
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '339696',
+        individual_id_number: '00000000000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it('should update SG information', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SG'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '339696',
+        individual_id_number: '00000000000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
+      }
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      const messageContainer = doc.getElementById('message-container')
+      const message = messageContainer.child[0]
+      assert.strictEqual(message.attr.template, 'success')
+    })
+
+    it('should reject US invalid fields', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '7997',
+        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        individual_address_city: 'New York',
+        individual_address_line1: '285 Fulton St',
+        individual_address_postal_code: '10007',
+        individual_id_number: '000000000',
+        individual_address_state: 'NY',
+        individual_ssn_last_4: '0000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_phone: '456-123-7890',
+        individual_email: user.profile.email,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
 
     it('should update US information', async () => {
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, { type: 'individual', country: 'US' })
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        city: 'New York City',
-        line1: 'Address First Line',
-        postal_code: '10001',
-        personal_id_number: '000000000',
-        state: 'NY',
-        ssn_last_4: '1234',
-        day: '1',
-        month: '1',
-        year: '1950',
-        first_name: 'American',
-        last_name: 'Person'
+        business_profile_mcc: '7997',
+        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        individual_address_city: 'New York',
+        individual_address_line1: '285 Fulton St',
+        individual_address_postal_code: '10007',
+        individual_id_number: '000000000',
+        individual_address_state: 'NY',
+        individual_ssn_last_4: '0000',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_phone: '456-123-7890',
+        individual_email: user.profile.email,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

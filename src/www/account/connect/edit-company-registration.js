@@ -18,13 +18,12 @@ async function beforeRequest (req) {
   if (!stripeAccount) {
     throw new Error('invalid-stripeid')
   }
-  if (stripeAccount.legal_entity.type === 'individual' ||
-      stripeAccount.metadata.submitted ||
-      stripeAccount.metadata.submittedOwners) {
+  if (stripeAccount.business_type === 'individual' ||
+      stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
   }
   const countrySpecs = await global.api.user.connect.CountrySpecs.get(req)
-  let applicationCountry, personalAddressCountry, companyAddressCountry
+  let applicationCountry, personalAddress, companyAddressCountry
   for (const countrySpec of countrySpecs) {
     if (countrySpec.id === stripeAccount.country) {
       applicationCountry = countrySpec
@@ -34,32 +33,32 @@ async function beforeRequest (req) {
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
   if (req.body) {
     for (const countryItem of countriesDivisions) {
-      if (countryItem.code === req.body.personal_country) {
-        personalAddressCountry = countryItem
+      if (countryItem.code === req.body.relationship_account_opener_address_country) {
+        personalAddress = countryItem
       }
-      if (countryItem.code === req.body.company_country) {
+      if (countryItem.code === req.body.company_address_country) {
         companyAddressCountry = countryItem
       }
-      if (companyAddressCountry && personalAddressCountry) {
+      if (companyAddressCountry && personalAddress) {
         break
       }
     }
   }
-  if (!personalAddressCountry) {
-    if (req.body && req.body.personal_country) {
-      req.error = 'invalid-personal_country'
+  if (!personalAddress) {
+    if (req.body && req.body.relationship_account_opener_address_country) {
+      req.error = 'invalid-relationship_account_opener_address_country'
       return
     }
     for (const countryItem of countriesDivisions) {
       if (countryItem.code === stripeAccount.country) {
-        personalAddressCountry = countryItem
+        personalAddress = countryItem
         break
       }
     }
   }
   if (!companyAddressCountry) {
-    if (req.body && req.body.company_country) {
-      req.error = 'invalid-company_country'
+    if (req.body && req.body.company_address_country) {
+      req.error = 'invalid-company_address_country'
       return
     }
     for (const countryItem of countriesDivisions) {
@@ -77,7 +76,7 @@ async function beforeRequest (req) {
     }
   }
   const fieldsNeeded = applicationCountry.verification_fields.company.minimum.concat(applicationCountry.verification_fields.company.additional)
-  req.data = { stripeAccount, countries, countrySpec, countrySpecs, applicationCountry, personalAddressCountry, companyAddressCountry, registration, fieldsNeeded }
+  req.data = { stripeAccount, countries, countrySpec, countrySpecs, applicationCountry, personalAddress, companyAddressCountry, registration, fieldsNeeded }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -104,98 +103,34 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'personal_country')
-  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'company_country')
-  if (req.data.personalAddressCountry) {
-    const states = formatStateData(req.data.personalAddressCountry.divisions)
-    dashboard.HTML.setSelectedOptionByValue(doc, 'personal_country', req.data.personalAddressCountry.code)
-    dashboard.HTML.renderList(doc, states, 'state-option', 'personal_state')
-    dashboard.HTML.setSelectedOptionByValue(doc, 'personal_state', req.data.personalAddressCountry.code)
+  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'relationship_account_opener_address_country')
+  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'company_address_country')
+  if (req.data.personalAddress) {
+    const states = formatStateData(req.data.personalAddress.divisions)
+    dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_account_opener_address_country', req.data.personalAddress.code)
+    dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_account_opener_address_state')
+    dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_account_opener_address_state', req.data.personalAddress.code)
   }
   if (req.data.companyAddressCountry) {
     const states = formatStateData(req.data.companyAddressCountry.divisions)
-    dashboard.HTML.setSelectedOptionByValue(doc, 'company_country', req.data.companyAddressCountry.code)
-    dashboard.HTML.renderList(doc, states, 'state-option', 'company_state')
-    dashboard.HTML.setSelectedOptionByValue(doc, 'company_state', req.data.personalAddressCountry.code)
+    dashboard.HTML.setSelectedOptionByValue(doc, 'company_address_country', req.data.companyAddressCountry.code)
+    dashboard.HTML.renderList(doc, states, 'state-option', 'company_address_state')
+    dashboard.HTML.setSelectedOptionByValue(doc, 'company_address_state', req.data.personalAddress.code)
   }
   const removeElements = []
-  if (req.data.applicationCountry.id === 'JP') {
+  if (req.data.applicationCountry.id !== 'JP') {
     removeElements.push(
-      'company-address-container',
-      'personal-information-container',
-      'personal-address-container'
-    )
-  } else {
-    removeElements.push(
-      'kana-company-information-container',
-      'kanji-company-information-container',
-      'kana-company-address-container',
-      'kanji-company-address-container',
-      'kana-personal-information-container',
-      'kanji-personal-information-container',
-      'kana-personal-address-container',
-      'kanji-personal-address-container'
+      'relationship_account_opener_gender',
+      'kana-company-information-container', 'kana-company-address-container', 
+      'kana-personal-information-container', 'kana-personal-address-container',
+      'kanji-company-information-container', 'kanji-company-address-container',
+      'kanji-personal-information-container', 'kanji-personal-address-container'
     )
   }
-  // remove unrequired fields
-  const removableFields = [
-    'legal_entity.business_name',
-    'legal_entity.business_tax_id',
-    'legal_entity.tax_registrar',
-    'legal_entity.email',
-    'legal_entity.phone_number',
-    'legal_entity.gender',
-    'legal_entity.personal_id_number',
-    'legal_entity.ssn_last_4',
-    'legal_entity.address.line1',
-    'legal_entity.address.line2',
-    'legal_entity.address.city',
-    'legal_entity.address.state',
-    'legal_entity.address.postal_code',
-    'legal_entity.personal_address.line1',
-    'legal_entity.personal_address.line2',
-    'legal_entity.personal_address.city',
-    'legal_entity.personal_address.state',
-    'legal_entity.personal_address.postal_code',
-    'legal_entity.personal_address.country',
-    'legal_entity.dob.day',
-    'legal_entity.dob.month',
-    'legal_entity.dob.year'
-  ]
-  for (const field of req.data.fieldsNeeded) {
-    const index = removableFields.indexOf(field)
-    if (index === -1) {
-      continue
-    }
-    removableFields.splice(index, 1)
-  }
-
-  for (const field of removableFields) {
-    const parts = field.split('.')
-    const name = parts[parts.length - 1]
-    switch (field) {
-      case 'day':
-      // case 'month':
-      // case 'year':
-        removeElements.push(`dob-container`)
-        continue
-      case 'legal_entity.business_name':
-      case 'legal_entity.business_tax_id':
-      case 'legal_entity.tax_registrar':
-      case 'legal_entity.email':
-      case 'legal_entity.phone_number':
-      case 'legal_entity.gender':
-      case 'legal_entity.personal_id_number':
-      case 'legal_entity.ssn_last_4':
-        removeElements.push(`${name}-container`)
-        continue
-      default:
-        if (parts[1] === 'personal_address') {
-          removeElements.push(`personal_${name}-container`)
-        } else {
-          removeElements.push(`company_${name}-container`)
-        }
-        continue
+  for (const field of ['company.address.city', 'company.address.line1', 'company.address.line2', 'company.address.postal_code', 'company.name', 'company.tax_id', 'business_profile.url', 'business_profile.mcc', 'company.phone']) {
+    if (req.data.fieldsNeeded.indexOf(field) === -1) {
+      const id = field.split('.').join('_')
+      removeElements.push(`${id}-container`)
     }
   }
   if (req.data.registration.document) {
@@ -203,36 +138,51 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     removeElements.push('replace-upload-container')
   }
+  const noPersonalAddress = removeElements.indexOf('relationship_account_opener_line1-container') > -1 &&
+    removeElements.indexOf('relationship_account_opener_line2-container') > -1 &&
+    removeElements.indexOf('relationship_account_opener_city-container') > -1 &&
+    removeElements.indexOf('relationship_account_opener_address_state-container') > -1 &&
+    removeElements.indexOf('relationship_account_opener_postal_code-container') > -1 &&
+    removeElements.indexOf('relationship_account_opener_address_country-container') > -1
+  if (noPersonalAddress) {
+    removeElements.push('personal-information-address-container')
+  }
+  const noCompanyAddress = removeElements.indexOf('company_address_line1-container') > -1 &&
+    removeElements.indexOf('company_address_line2-container') > -1 &&
+    removeElements.indexOf('company_address_city-container') > -1 &&
+    removeElements.indexOf('company_address_state-container') > -1 &&
+    removeElements.indexOf('company_address_postal_code-container') > -1 &&
+    removeElements.indexOf('company_address_country-container') > -1
+  if (noCompanyAddress) {
+    removeElements.push('company-address-container')
+  }
   for (const field of removeElements) {
     const element = doc.getElementById(field)
-    if (!element) {
-      continue
-    }
     element.parentNode.removeChild(element)
-    if (field === 'personal_state') {
-      const element2 = doc.getElementById('personal_state_bridge')
-      element2.parentNode.removeChild(element2)
-    }
   }
-  const noPersonalAddress = doc.getElementById('personal_line1') === null &&
-    doc.getElementById('personal_line2') === null &&
-    doc.getElementById('personal_city') === null &&
-    doc.getElementById('personal_state') === null &&
-    doc.getElementById('personal_postal_code') === null &&
-    doc.getElementById('personal_country') === null
-  if (noPersonalAddress) {
-    const container = doc.getElementById('personal-address-container')
-    container.parentNode.removeChild(container)
-  }
-  for (const field in req.data.registration) {
-    const element = doc.getElementById(field)
-    if (!element) {
-      continue
+  if (req.method === 'GET') {
+    for (const field in req.data.registration) {
+      const element = doc.getElementById(field)
+      if (!element) {
+        continue
+      }
+      if (element.tag === 'input') {
+        element.setAttribute('value', req.data.registration[field] || '')
+      } else if (element.tag === 'select') {
+        dashboard.HTML.setSelectedOptionByValue(doc, field, req.data.registration[field] || '')
+      }
     }
-    if (element.tag === 'input') {
-      element.setAttribute('value', req.body ? req.body[field] : req.data.registration[field] || '')
-    } else if (element.tag === 'select') {
-      dashboard.HTML.setSelectedOptionByValue(doc, field, req.body ? req.body[field] : req.data.registration[field] || '')
+  } else if (req.body) {
+    for (const field in req.body) {
+      const element = doc.getElementById(field)
+      if (!element) {
+        continue
+      }
+      if (element.tag === 'input') {
+        element.setAttribute('value', req.body[field] || '')
+      } else if (element.tag === 'select') {
+        dashboard.HTML.setSelectedOptionByValue(doc, field, req.body[field] || '')
+      }
     }
   }
   return dashboard.Response.end(req, res, doc)
@@ -242,32 +192,19 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  for (const pathAndField of req.data.fieldsNeeded) {
-    let field = pathAndField.split('.').pop()
+  for (const field of req.data.fieldsNeeded) {
     if (field === 'external_account' ||
-      field === 'additional_owners' ||
       field === 'type' ||
-      field === 'ip' ||
-      field === 'date' ||
-      field === 'document') {
+      field === 'tos_acceptance.ip' ||
+      field === 'tos_acceptance.date' ||
+      field === 'business_type' ||
+      field === 'relationship.owner' ||
+      field === 'relationship.account_opener') {
       continue
     }
-    if (req.data.applicationCountry.id === 'JP') {
-      if (pathAndField.startsWith('legal_entity.address_kana.') ||
-          pathAndField.startsWith('legal_entity.personal_address_kana.')) {
-        field += '_kana'
-      } else if (pathAndField.startsWith('legal_entity.address_kanji.') ||
-                 pathAndField.startsWith('legal_entity.personal_address_kanji.')) {
-        field += '_kanji'
-      }
-    }
-    if (pathAndField.startsWith('legal_entity.personal_address')) {
-      field = `personal_${field}`
-    } else if (pathAndField.startsWith('legal_entity.address')) {
-      field = `company_${field}`
-    }
-    if (!req.body[field]) {
-      return renderPage(req, res, `invalid-${field}`)
+    const posted = field.split('.').join('_')
+    if (!req.body[posted]) {
+      return renderPage(req, res, `invalid-${posted}`)
     }
   }
   try {
