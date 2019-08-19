@@ -50,7 +50,7 @@ async function beforeRequest (req) {
         continue
       }
       const posted = field.split('.').join('_')
-      if (!registrataion[posted]) {
+      if (!registration[posted]) {
         registrationComplete = false
         break
       }
