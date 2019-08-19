@@ -139,8 +139,8 @@ async function renderPage (req, res, messageTemplate) {
     removeElements.push('replace-upload-container')
   }
   const noPersonalAddress = removeElements.indexOf('relationship_account_opener_line1-container') > -1 &&
-    removeElements.indexOf('relationship_account_opener_line2-container') > -1 &&
-    removeElements.indexOf('relationship_account_opener_city-container') > -1 &&
+    removeElements.indexOf('relationship_account_opener_address_line2-container') > -1 &&
+    removeElements.indexOf('relationship_account_opener_address_city-container') > -1 &&
     removeElements.indexOf('relationship_account_opener_address_state-container') > -1 &&
     removeElements.indexOf('relationship_account_opener_postal_code-container') > -1 &&
     removeElements.indexOf('relationship_account_opener_address_country-container') > -1
