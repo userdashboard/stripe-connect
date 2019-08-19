@@ -20,7 +20,7 @@ async function beforeRequest (req) {
   let country
   for (const countryItem of countries) {
     if (countryItem.code === owner.country ||
-        (req.body && req.body.country === countryItem.code)) {
+      (req.body && req.body.country === countryItem.code)) {
       country = countryItem
       break
     }
@@ -68,17 +68,17 @@ async function renderPage (req, res, messageTemplate) {
     const stateContainerBridge = doc.getElementById('relationship_owner_address_state-container-bridge')
     stateContainerBridge.parentNode.removeChild(stateContainerBridge)
   }
-  const country = doc.getElementById('country')
+  const country = doc.getElementById('relationship_owner_address_country')
   dashboard.HTML.renderList(doc, req.data.countries, 'country-option', country)
   if (!req.body) {
     for (const field of ['first_name', 'last_name', 'dob_day', 'dob_month', 'dob_year', 'id_number', 'address_line1', 'address_line2', 'address_city', 'address_postal_code']) {
-      const element  = doc.getElementById(`relationship_owner_${field}`)
+      const element = doc.getElementById(`relationship_owner_${field}`)
       element.setAttribute('value', req.data.owner[field])
     }
-    if (req.data.owner.state) {
-      dashboard.HTML.setSelectedOptionByValue(doc, 'state', req.data.owner.state)
+    if (req.data.owner.relationship_owner_address_state) {
+      dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_state', req.data.owner.relationship_owner_address_state)
     }
-    dashboard.HTML.setSelectedOptionByValue(doc, country, req.data.owner.country)
+    dashboard.HTML.setSelectedOptionByValue(doc, country, req.data.owner.relationship_owner_address_country)
     return dashboard.Response.end(req, res, doc)
   }
   for (const fieldName in req.body) {
@@ -99,8 +99,8 @@ async function renderPage (req, res, messageTemplate) {
         continue
     }
   }
-  if (req.data.country && !req.body.country) {
-    dashboard.HTML.setSelectedOptionByValue(doc, 'country', req.data.country.code)
+  if (req.data.country && !req.body.relationship_owner_address_country) {
+    dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', req.data.country.code)
   }
   return dashboard.Response.end(req, res, doc)
 }
