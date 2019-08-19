@@ -199,6 +199,7 @@ async function submitForm (req, res) {
       field === 'tos_acceptance.date' ||
       field === 'business_type' ||
       field === 'relationship.owner' ||
+      field === 'relationship.director' ||
       field === 'relationship.account_opener') {
       continue
     }
