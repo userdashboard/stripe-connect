@@ -203,7 +203,7 @@ describe(`/account/connect/edit-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_first_name: person.firstName,
@@ -231,7 +231,7 @@ describe(`/account/connect/edit-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_first_name: person.firstName,

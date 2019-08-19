@@ -12,8 +12,8 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_owner_first_name: person.firstName,
@@ -46,8 +46,8 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_owner_first_name: person.firstName,
@@ -81,8 +81,8 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
       req.account = user2.account
       req.session = user2.session
       req.uploads = {
-        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_owner_first_name: person.firstName,
@@ -141,8 +141,8 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_owner_first_name: person.firstName,
@@ -175,8 +175,8 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_owner_first_name: person.firstName,
@@ -214,8 +214,8 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_first_name: person.firstName,

@@ -110,13 +110,13 @@ describe(`/account/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       const fields = [
-        'relationship_director_verification_documentation_front',
-        'relationship_director_verification_documentation_back'
+        'relationship_director_verification_document_front',
+        'relationship_director_verification_document_back'
       ]
       for (const field of fields) {
         const uploads = {
-          relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png'],
-          relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         }
         const person = TestHelper.nextIdentity()
         const body = {
@@ -149,7 +149,7 @@ describe(`/account/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const person = TestHelper.nextIdentity()
       req.body = TestHelper.createMultiPart(req, {
@@ -160,7 +160,7 @@ describe(`/account/connect/create-company-director`, async () => {
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
       const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'invalid-relationship_director_verification_documentation_front')
+      assert.strictEqual(message.attr.template, 'invalid-relationship_director_verification_document_front')
     })
 
     it('should require a document id back upload', async () => {
@@ -173,7 +173,7 @@ describe(`/account/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png']
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const person = TestHelper.nextIdentity()
       req.body = TestHelper.createMultiPart(req, {
@@ -184,7 +184,7 @@ describe(`/account/connect/create-company-director`, async () => {
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
       const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'invalid-relationship_director_verification_documentation_back')
+      assert.strictEqual(message.attr.template, 'invalid-relationship_director_verification_document_back')
     })
 
     it('should create director', async () => {
@@ -197,8 +197,8 @@ describe(`/account/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const person = TestHelper.nextIdentity()
       req.body = TestHelper.createMultiPart(req, {
