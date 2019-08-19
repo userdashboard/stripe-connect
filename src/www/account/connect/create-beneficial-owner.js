@@ -124,8 +124,8 @@ async function submitForm (req, res) {
   }
   if (req.data && req.data.owners && req.data.owners.length) {
     for (const owner of req.data.owners) {
-      if (relationship_owner_first_name === req.body.relationship_owner_first_name &&
-          relationship_owner_last_name === req.body.relationship_owner_last_name) {
+      if (owner.relationship_owner_first_name === req.body.relationship_owner_first_name &&
+          owner.relationship_owner_last_name === req.body.relationship_owner_last_name) {
         return renderPage(req, res, 'duplicate-name')
       }
     }
