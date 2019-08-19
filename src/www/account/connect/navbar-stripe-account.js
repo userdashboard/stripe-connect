@@ -25,14 +25,16 @@ module.exports = {
       submitCompany.parentNode.removeChild(submitCompany)
       const companyOwners = template.getElementById('navbar-beneficial-owners')
       companyOwners.parentNode.removeChild(companyOwners)
+      const companyOwners = template.getElementById('navbar-company-directors')
+      companyOwners.parentNode.removeChild(companyOwners)
     } else {
       const editIndividual = template.getElementById('navbar-edit-individual')
       editIndividual.parentNode.removeChild(editIndividual)
       const submitIndividual = template.getElementById('navbar-submit-individual')
       submitIndividual.parentNode.removeChild(submitIndividual)
       if (euCountries.indexOf(stripeAccount.country) === -1) {
-        const companyOwners = template.getElementById('navbar-beneficial-owners')
-        companyOwners.parentNode.removeChild(companyOwners)
+        const companyDirectors = template.getElementById('navbar-company-directors')
+        companyDirectors.parentNode.removeChild(companyDirectors)
       }
     }
   }
