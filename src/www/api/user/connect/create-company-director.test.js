@@ -12,8 +12,8 @@ describe(`/api/user/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_director_first_name: person.firstName,
@@ -39,8 +39,8 @@ describe(`/api/user/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_director_first_name: person.firstName,
@@ -67,8 +67,8 @@ describe(`/api/user/connect/create-company-director`, async () => {
       req.account = user2.account
       req.session = user2.session
       req.uploads = {
-        relationship_director_verification_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_director_first_name: person.firstName,
@@ -120,8 +120,8 @@ describe(`/api/user/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_director_first_name: person.firstName,
@@ -147,8 +147,8 @@ describe(`/api/user/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
         relationship_director_first_name: person.firstName,
@@ -180,8 +180,8 @@ describe(`/api/user/connect/create-company-director`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_documentation_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_first_name: person.firstName,

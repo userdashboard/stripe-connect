@@ -266,7 +266,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_front: TestHelper['success_id_scan_front.png']
+        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_first_name: person.firstName,
@@ -308,7 +308,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_first_name: person.firstName,

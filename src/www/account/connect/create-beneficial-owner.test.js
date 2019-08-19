@@ -110,8 +110,8 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       const fields = [
-        'relationship_owner_verification_front',
-        'relationship_owner_verification_back',
+        'relationship_owner_verification_documentation_front',
+        'relationship_owner_verification_documentation_back',
         'relationship_owner_first_name',
         'relationship_owner_last_name',
         'relationship_owner_address_country',
@@ -124,8 +124,8 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
       ]
       for (const field of fields) {
         const uploads = {
-          relationship_owner_verification_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
         }
         const person = TestHelper.nextIdentity()
         const body = {
@@ -165,7 +165,7 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       const person = TestHelper.nextIdentity()
       req.body = TestHelper.createMultiPart(req, {
@@ -183,7 +183,7 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
       const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'invalid-relationship_owner_verification_front')
+      assert.strictEqual(message.attr.template, 'invalid-relationship_owner_verification_documentation_front')
     })
 
     it('should require a document id back upload', async () => {
@@ -196,7 +196,7 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_front: TestHelper['success_id_scan_front.png']
+        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png']
       }
       const person = TestHelper.nextIdentity()
       req.body = TestHelper.createMultiPart(req, {
@@ -214,7 +214,7 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
       const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'invalid-relationship_owner_verification_back')
+      assert.strictEqual(message.attr.template, 'invalid-relationship_owner_verification_documentation_back')
     })
 
     it('should create owner', async () => {
@@ -227,8 +227,8 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_documentation_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_documentation_back: TestHelper['success_id_scan_back.png']
       }
       const person = TestHelper.nextIdentity()
       req.body = TestHelper.createMultiPart(req, {

@@ -35,36 +35,36 @@ module.exports = {
     if (!req.body.relationship_owner_last_name) {
       throw new Error('invalid-relationship_owner_last_name')
     }
-    if (req.uploads && req.uploads['relationship_owner_verification_front']) {
+    if (req.uploads && req.uploads['relationship_owner_verification_documentation_front']) {
       const frontData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['relationship_owner_verification_front'].name,
-          data: req.uploads['relationship_owner_verification_front'].buffer
+          name: req.uploads['relationship_owner_verification_documentation_front'].name,
+          data: req.uploads['relationship_owner_verification_documentation_front'].buffer
         }
       }
       try {
         const front = await stripe.files.create(frontData, req.stripeKey)
         req.body.relationship_owner_verification_document_front = front.id
       } catch (error) {
-        throw new Error('invalid-relationship_owner_verification_front')
+        throw new Error('invalid-relationship_owner_verification_documentation_front')
       }
     }
-    if (req.uploads && req.uploads['relationship_owner_verification_back']) {
+    if (req.uploads && req.uploads['relationship_owner_verification_documentation_back']) {
       const backData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['relationship_owner_verification_back'].name,
-          data: req.uploads['relationship_owner_verification_back'].buffer
+          name: req.uploads['relationship_owner_verification_documentation_back'].name,
+          data: req.uploads['relationship_owner_verification_documentation_back'].buffer
         }
       }
       try {
         const back = await stripe.files.create(backData, req.stripeKey)
         req.body.relationship_owner_verification_document_back = back.id
       } catch (error) {
-        throw new Error('invalid-relationship_owner_verification_back')
+        throw new Error('invalid-relationship_owner_verification_documentation_back')
       }
     }
     const owner = await global.api.user.connect.BeneficialOwner.get(req)
