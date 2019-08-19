@@ -217,7 +217,7 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
       assert.strictEqual(message.attr.template, 'invalid-relationship_owner_verification_document_back')
     })
 
-    it('should create owner', async () => {
+    it('should create beneficial owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
