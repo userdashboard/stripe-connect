@@ -32,15 +32,11 @@ async function beforeRequest (req) {
   }
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-  let owners
   let verificationFields
   if (stripeAccount.business_type === 'individual') {
     verificationFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
   } else {
     verificationFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
-    if (verificationFields.indexOf('relationship.owner') > -1) {
-      owners = await global.api.user.connect.BeneficialOwners.get(req)
-    }
   }
   let registrationComplete = true
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
@@ -68,7 +64,9 @@ async function beforeRequest (req) {
   }
   stripeAccount.company = stripeAccount.company || {}
   stripeAccount.individual = stripeAccount.individual || {}
-  req.data = { stripeAccount, owners, countrySpec, verificationFields, registration, registrationComplete }
+  const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
+  const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+  req.data = { owners, directors, stripeAccount, countrySpec, verificationFields, registration, registrationComplete }
 }
 
 async function renderPage (req, res) {
@@ -127,41 +125,23 @@ async function renderPage (req, res) {
     removeElements.push('update-payment')
     dashboard.HTML.renderTemplate(doc, null, 'no-payment-information', 'payment-information-status')
   }
-  // company owners
-  if (req.data.verificationFields && req.data.verificationFields.indexOf('relationship.owner') > -1) {
-    if (req.data.stripeAccount.metadata.submitted) {
+  if (req.data.owners && req.data.owners.length) {
+    dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
+  } else {
+    if (req.data.stripeAccount.business_type === 'individual') {
       removeElements.push('owners-container')
     } else {
-      if (req.data.stripeAccount.metadata.submitted) {
-        removeElements.push('owner-options', 'owners-table')
-      } else {
-        if (req.data.owners && req.data.owners.length) {
-          dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
-        } else {
-          removeElements.push('owners-table')
-        }
-      }
-    }
-  } else {
-    removeElements.push('owners-container')
+      removeElements.push('owners-table')
+    }    
   }
-  // company directors
-  if (req.data.stripeAccount.business_type === 'company' && euCountries.indexOf(req.data.stripeAccount.country) > -1) {
-    if (req.data.stripeAccount.metadata.submitted) {
+  if (req.data.directors && req.data.directors.length) {
+    dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
+  } else {
+    if (req.data.stripeAccount.business_type === 'individual' || euCountries.indexOf(req.data.stripeAccount.country) === -1) {
       removeElements.push('directors-container')
     } else {
-      if (req.data.stripeAccount.metadata.submitted) {
-        removeElements.push('director-options', 'directors-table')
-      } else {
-        if (req.data.directors && req.data.directors.length) {
-          dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
-        } else {
-          removeElements.push('directors-table')
-        }
-      }
+      removeElements.push('directors-table')
     }
-  } else {
-    removeElements.push('directors-container')
   }
   // submission status
   if (req.data.stripeAccount.metadata.submitted) {

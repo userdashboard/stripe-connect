@@ -17,6 +17,8 @@ async function beforeRequest (req) {
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
+  stripeAccount.company = stripeAccount.company || {}
+  stripeAccount.individual = stripeAccount.individual || {}
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   const fieldsNeeded = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
@@ -51,7 +53,9 @@ async function beforeRequest (req) {
   if (!registrationComplete) {
     req.error = req.error || 'invalid-registration'
   }
-  req.data = { stripeAccount, countrySpec, fieldsNeeded }
+  const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
+  const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+  req.data = { stripeAccount, countrySpec, fieldsNeeded, owners, directors }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -75,6 +79,18 @@ async function renderPage (req, res, messageTemplate) {
       const submitForm = doc.getElementById('submit-form')
       submitForm.parentNode.removeChild(submitForm)
     }
+  }
+  if (req.data.owners && req.data.owners.length) {
+    dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
+  } else {
+    const ownersContainer = doc.getElementById('owners-container')
+    ownersContainer.parentNode.removeChild(ownersContainer)
+  }
+  if (req.data.directors && req.data.directors.length) {
+    dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
+  } else {
+    const directorsContainer = doc.getElementById('directors-container')
+    directorsContainer.parentNode.removeChild(directorsContainer)
   }
   return dashboard.Response.end(req, res, doc)
 }
