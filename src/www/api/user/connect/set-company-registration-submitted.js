@@ -32,6 +32,7 @@ module.exports = {
         field === 'relationship.account_opener' ||
         field === 'relationship.owner' ||
         field === 'tos_acceptance.date' ||
+        field === 'relationship.director' ||
         field === 'tos_acceptance.ip') {
         continue
       }

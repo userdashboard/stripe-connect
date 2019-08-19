@@ -45,18 +45,12 @@ async function beforeRequest (req) {
       if (field === 'external_account' ||
           field === 'business_type' ||
           field === 'tos_acceptance.ip' ||
+          field === 'individual.verification.document' ||
           field === 'tos_acceptance.date') {
         continue
       }
       const posted = field.split('.').join('_')
-      if (!registration[posted]) {
-        if (stripeAccount.business_type === 'company') {
-          if (!registration[`company_${posted}`] && !registration[`personal_${posted}`]) {
-            registrationComplete = false
-            break
-          }
-          continue
-        }
+      if (!registrataion[posted]) {
         registrationComplete = false
         break
       }

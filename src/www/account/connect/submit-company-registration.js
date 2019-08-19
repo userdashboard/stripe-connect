@@ -40,6 +40,7 @@ async function beforeRequest (req) {
         field === 'tos_acceptance.date' ||
         field === 'business_type' ||
         field === 'relationship.owner' ||
+        field === 'relationship.director' ||
         field === 'relationship.account_opener') {
         continue
       }
@@ -80,13 +81,13 @@ async function renderPage (req, res, messageTemplate) {
       submitForm.parentNode.removeChild(submitForm)
     }
   }
-  if (req.data.owners && req.data.owners.length) {
+  if (!req.success && req.data.owners && req.data.owners.length) {
     dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
   } else {
     const ownersContainer = doc.getElementById('owners-container')
     ownersContainer.parentNode.removeChild(ownersContainer)
   }
-  if (req.data.directors && req.data.directors.length) {
+  if (!req.success && req.data.directors && req.data.directors.length) {
     dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
   } else {
     const directorsContainer = doc.getElementById('directors-container')

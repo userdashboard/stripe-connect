@@ -38,7 +38,7 @@ async function beforeRequest (req) {
         field === 'tos_acceptance.ip' ||
         field === 'tos_acceptance.date' ||
         field === 'tos_acceptance.document' ||
-        field === 'individual_verification_document') {
+        field === 'individual.verification.document') {
         continue
       }
       const posted = field.split('.').join('_')

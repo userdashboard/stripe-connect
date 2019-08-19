@@ -70,8 +70,8 @@ async function submitForm (req, res) {
   }
   if (req.data && req.data.directors && req.data.directors.length) {
     for (const director of req.data.directors) {
-      if (relationship_director_first_name === req.body.relationship_director_first_name &&
-          relationship_director_last_name === req.body.relationship_director_last_name) {
+      if (director.first_name === req.body.relationship_director_first_name &&
+        director.last_name === req.body.relationship_director_last_name) {
         return renderPage(req, res, 'duplicate-name')
       }
     }
@@ -79,7 +79,7 @@ async function submitForm (req, res) {
   try {
     const director = await global.api.user.connect.CreateCompanyDirector.post(req)
     if (req.success) {
-      req.data = { director }
+      req.data.director = director
       return renderPage(req, res, 'success')
     }
     return renderPage(req, res, 'unknown-error')
