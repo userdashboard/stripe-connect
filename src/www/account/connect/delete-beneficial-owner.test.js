@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect/delete-company-owner`, async () => {
+describe(`/account/connect/delete-beneficial-owner`, async () => {
   describe('DeleteBeneficialOwner#BEFORE', () => {
     it('should reject invalid ownerid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/delete-company-owner?ownerid=invalid`)
+      const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=invalid`)
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -62,7 +62,7 @@ describe(`/account/connect/delete-company-owner`, async () => {
         relationship_owner_dob_year: '1950'
       })
       await TestHelper.submitStripeAccount(user)
-      const req = TestHelper.createRequest(`/account/connect/delete-company-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -93,7 +93,7 @@ describe(`/account/connect/delete-company-owner`, async () => {
         relationship_owner_dob_year: '1950' 
       })
       const user2 = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/delete-company-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user2.account
       req.session = user2.session
       let errorMessage
@@ -123,7 +123,7 @@ describe(`/account/connect/delete-company-owner`, async () => {
         relationship_owner_dob_month: '1', 
         relationship_owner_dob_year: '1950' 
       })
-      const req = TestHelper.createRequest(`/account/connect/delete-company-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
@@ -150,7 +150,7 @@ describe(`/account/connect/delete-company-owner`, async () => {
         relationship_owner_dob_month: '1', 
         relationship_owner_dob_year: '1950' 
       })
-      const req = TestHelper.createRequest(`/account/connect/delete-company-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
       req.session = user.session
       const page = await req.get()
@@ -177,7 +177,7 @@ describe(`/account/connect/delete-company-owner`, async () => {
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950' 
       })
-      const req = TestHelper.createRequest(`/account/connect/delete-company-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
       req.session = user.session
       const page = await req.get()
@@ -206,7 +206,7 @@ describe(`/account/connect/delete-company-owner`, async () => {
         relationship_owner_dob_month: '1', 
         relationship_owner_dob_year: '1950' 
       })
-      const req = TestHelper.createRequest(`/account/connect/delete-company-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
       req.session = user.session
       await req.post()

@@ -24,7 +24,7 @@ async function renderPage (req, res, messageTemplate) {
     if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
       return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
     }
-    return dashboard.Response.redirect(req, res, `/account/connect/beneficial-directors?stripeid=${req.data.stripeAccount.id}`)
+    return dashboard.Response.redirect(req, res, `/account/connect/company-directors?stripeid=${req.data.stripeAccount.id}`)
   } else if (req.error) {
     messageTemplate = req.error
   }

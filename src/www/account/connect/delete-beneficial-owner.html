@@ -1,5 +1,5 @@
 <!doctype html>
-<html navbar="/account/connect/navbar-beneficial-owner.html">
+<html navbar="/account/connect/navbar-company-owner.html">
   <head>
     <title>Delete ${owner.ownerid}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -26,7 +26,7 @@
         </tr>
       </thead>
     </table>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/delete-company-owner?ownerid=${owner.ownerid}">
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/delete-beneficial-owner?ownerid=${owner.ownerid}">
       <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
     </form>
   </body>
