@@ -93,13 +93,13 @@ async function createStripeRegistration (user, properties) {
   req.account = user.account
   if (user.stripeAccount.business_type === 'individual') {
     req.uploads = {
-      individual_verification_document_front: module.exports['success_id_scan_front.png'],
-      individual_verification_document_back: module.exports['success_id_scan_back.png']
+      individual_verification_document_document_front: module.exports['success_id_scan_front.png'],
+      individual_verification_document_document_back: module.exports['success_id_scan_back.png']
     }
   } else {
     req.uploads = {
-      relationship_account_opener_verification_document_front: module.exports['success_id_scan_front.png'],
-      relationship_account_opener_verification_document_back: module.exports['success_id_scan_back.png']
+      relationship_account_opener_verification_document_document_front: module.exports['success_id_scan_front.png'],
+      relationship_account_opener_verification_document_document_back: module.exports['success_id_scan_back.png']
     }
   }
   req.body = createMultiPart(req, properties)
@@ -150,8 +150,8 @@ async function createBeneficialOwner(user, properties) {
   req.session = user.session
   req.account = user.account
   req.uploads = {
-    relationship_owner_verification_front: module.exports['success_id_scan_front.png'],
-    relationship_owner_verification_back: module.exports['success_id_scan_back.png']
+    relationship_owner_verification_document_front: module.exports['success_id_scan_front.png'],
+    relationship_owner_verification_document_back: module.exports['success_id_scan_back.png']
   }
   req.body = createMultiPart(req, properties)
   const owner = await req.post(req)
@@ -164,8 +164,8 @@ async function createCompanyDirector(user, properties) {
   req.session = user.session
   req.account = user.account
   req.uploads = {
-    relationship_director_verification_front: module.exports['success_id_scan_front.png'],
-    relationship_director_verification_back: module.exports['success_id_scan_back.png']
+    relationship_director_verification_document_front: module.exports['success_id_scan_front.png'],
+    relationship_director_verification_document_back: module.exports['success_id_scan_back.png']
   }
   req.body = createMultiPart(req, properties)
   const director = await req.post(req)
