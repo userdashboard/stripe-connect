@@ -49,8 +49,6 @@ module.exports = {
     const requiredFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
     const openerFields = [ 'first_name', 'last_name', 'email', 'phone', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code' ]
     const openerOptional = [ 'address_line2', 'address_state', 'address_country']
-    const ownerFields = ['first_name', 'last_name', 'email', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code']
-    const ownerOptional = ['address_line2', 'address_state', 'address_country']
     if (stripeAccount.country === 'US') {
       openerFields.push('ssn_last_4')
     }
@@ -58,7 +56,7 @@ module.exports = {
       openerFields.splice(openerFields.indexOf('address_city'), 1)
       openerFields.splice(openerFields.indexOf('address_state'), 1)
       openerFields.splice(openerFields.indexOf('address_country'), 1)
-      openerFields.push('gender' )
+      openerFields.push('gender')
       openerFields.push('first_name_kana', 'last_name_kana', 'address_kana_state', 'address_kana_city', 'address_kana_town', 'address_kana_line1', 'address_kana_postal_code')
       openerFields.push('first_name_kanji', 'last_name_kanji', 'address_kanji_state', 'address_kanji_city', 'address_kanji_town', 'address_kanji_line1', 'address_kanji_postal_code')
     }
@@ -67,6 +65,7 @@ module.exports = {
       if (field === 'business_type' ||
         field === 'external_account' ||
         field === 'relationship.owner' ||
+        field === 'relationship.director' ||
         field === 'tos_acceptance.date' ||
         field === 'tos_acceptance.ip') {
         continue
@@ -91,28 +90,6 @@ module.exports = {
         if (req.body['relationship_account_opener_verification_document_back']) {
           registration['relationship_account_opener_verification_document_back'] = req.body['relationship_account_opener_verification_document_back']
         }       
-        continue
-      }
-      if (field === 'relationship.owner') {
-        for (const personField of ownerFields) {
-          const posted = `relationship_owner_${personField}`
-          if (!req.body[posted]) {
-            throw new Error(`invalid-${posted}`)
-          }
-          registration[posted] = req.body[posted]
-        }
-        for (const personField of ownerOptional) {
-          const posted = `relationship_owner_${personField}`
-          if (req.body[posted]) {
-            registration[posted] = req.body[posted]
-          }
-        }
-        if (req.body['relationship_owner_verification_document_front']) {
-          registration['relationship_owner_verification_document_front'] = req.body['relationship_owner_verification_document_front']
-        }
-        if (req.body['relationship_owner_verification_document_back']) {
-          registration['relationship_owner_verification_document_back'] = req.body['relationship_owner_verification_document_back']
-        }
         continue
       }
       const posted = field.split('.').join('_')
