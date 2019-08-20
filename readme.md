@@ -56,15 +56,15 @@ Dashboard proxies your application server to create a single website where pages
 
 The user and administration documentation contain screenshots demonstrating Dashboard and its modules in use. 
 
-| ![Guest landing page](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/1-index-page.png?raw=true) | 
+| ![Guest landing page](https://userdashboard.github.io/outline.png?raw=true) | 
 |:---------------------------------------------------------------------------------------------------------------:|
 | Example app integrating Dashboard with `/` served by its application server |
 
-| ![Administration page](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/3-owner-views-subscription-administration.png?raw=true) |
+| ![Administration page](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/12-owner-views-customers-subscriptions.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
 | Administration page provided by Dashboard |
 
-| ![Example app integrating Dashboard ](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/14-second-user-creates-shared-post.png?raw=true) |
+| ![Example app integrating Dashboard ](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/9-second-customer-creating-post-shared-with-organization.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
 | Example app integrating Dashboard with `/home` served by its application server |
 
