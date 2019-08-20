@@ -41,9 +41,9 @@ Check `start-dev.sh` to see the rest of the `env` variables that configure Dashb
 
 Dashboard proxies your application server to create a single website where pages like signing in or changing your password are provided by Dashboard.  Your application server can be anything you want, and use Dashboard's API to access data as required.  Using modules you can expand Dashboard to include organizations, subscriptions powered by Stripe, or a Stripe Connect platform.
 
-- [Developer documentation home](https://userdashboard.github.io/developers/)
-- [Administrator documentation home](https://userdashboard.github.io/administrators/)
-- [User documentation home](https://userdashboard.github.io/users/)
+- [Developer documentation home](https://userdashboard.github.io/home)
+- [Administrator documentation home](https://userdashboard.github.io/administrators/home)
+- [User documentation home](https://userdashboard.github.io/users/home)
 
 ### Case studies 
 
@@ -56,21 +56,21 @@ Dashboard proxies your application server to create a single website where pages
 
 The user and administration documentation contain screenshots demonstrating Dashboard and its modules in use. 
 
-| ![Guest landing page](https://userdashboard.github.io/developers/integrations/hastebin-subscription-saas/1-index-page.png?raw=true) | 
+| ![Guest landing page](https://userdashboard.github.io/integrations/hastebin-subscription-saas/1-index-page.png?raw=true) | 
 |:---------------------------------------------------------------------------------------------------------------:|
 | Example app integrating Dashboard with `/` served by its application server |
 
-| ![Administration page](https://userdashboard.github.io/developers/integrations/hastebin-subscription-saas/3-owner-views-subscription-administration.png?raw=true) |
+| ![Administration page](https://userdashboard.github.io/integrations/hastebin-subscription-saas/3-owner-views-subscription-administration.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
 | Administration page provided by Dashboard |
 
-| ![Example app integrating Dashboard ](https://userdashboard.github.io/developers/integrations/hastebin-subscription-saas/14-second-user-creates-shared-post.png?raw=true) |
+| ![Example app integrating Dashboard ](https://userdashboard.github.io/integrations/hastebin-subscription-saas/14-second-user-creates-shared-post.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
 | Example app integrating Dashboard with `/home` served by its application server |
 
 ## Dashboard modules
 
-Additional APIs, content and functionality can be added by `npm install` and nominating Dashboard modules in your `package.json`.  You can read more about this on the [Dashboard package.json documentation](https://userdashboard.github.io/developers/dashboard-package-json.html)
+Additional APIs, content and functionality can be added by `npm install` and nominating Dashboard modules in your `package.json`.  You can read more about this on the [Dashboard package.json documentation](https://userdashboard.github.io/dashboard-package-json.html)
 
     "dashboard": {
       "modules": [ "package", "package2" ]
