@@ -49,22 +49,22 @@ Dashboard proxies your application server to create a single website where pages
 
 `Hastebin` is an open source pastebin web application.  It started as a service for anonymous guests only, and was transformed with Dashboard and modules into a web application for registered users, with support for sharing posts with organizations and paid subscriptions.
 
-- [Hastebin - free web application](https://userdashboard.github.io/integrations/hastebin-free-saas.html)
-- [Hastebin - subscription web application](https://userdashboard.github.io/integrations/hastebin-saas-subscription.html)
+- [Hastebin - free web application](https://userdashboard.github.io/integrations/convert-hastebin-free-saas.html)
+- [Hastebin - subscription web application](https://userdashboard.github.io/integrations/convert-hastebin-saas-subscription.html)
 
 ## Screenshots of Dashboard
 
 The user and administration documentation contain screenshots demonstrating Dashboard and its modules in use. 
 
-| ![Guest landing page](https://userdashboard.github.io/integrations/hastebin-subscription-saas/1-index-page.png?raw=true) | 
+| ![Guest landing page](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/1-index-page.png?raw=true) | 
 |:---------------------------------------------------------------------------------------------------------------:|
 | Example app integrating Dashboard with `/` served by its application server |
 
-| ![Administration page](https://userdashboard.github.io/integrations/hastebin-subscription-saas/3-owner-views-subscription-administration.png?raw=true) |
+| ![Administration page](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/3-owner-views-subscription-administration.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
 | Administration page provided by Dashboard |
 
-| ![Example app integrating Dashboard ](https://userdashboard.github.io/integrations/hastebin-subscription-saas/14-second-user-creates-shared-post.png?raw=true) |
+| ![Example app integrating Dashboard ](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/14-second-user-creates-shared-post.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
 | Example app integrating Dashboard with `/home` served by its application server |
 
