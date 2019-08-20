@@ -534,50 +534,49 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    // TODO: Stripe test API currently has a bug validating phone numbers for JP individuals
-    // it(`should submit JP-individual registration`, async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user, {
-    //     type: 'individual',
-    //     country: 'JP'
-    //   })
-    //   await TestHelper.createStripeRegistration(user, {
-    //     individual_dob_day: '1',
-    //     individual_dob_month: '1',
-    //     individual_dob_year: '1950',
-    //     individual_gender: 'female',
-    //     individual_phone: '+81000000000',
-    //     individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-    //     individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-    //     individual_first_name_kanji: '東京都',
-    //     individual_last_name_kanji: '東京都',
-    //     individual_address_kana_postal_code: '1500001',
-    //     individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-    //     individual_address_kana_city: 'ｼﾌﾞﾔ',
-    //     individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-    //     individual_address_kana_line1: '27-15',
-    //     individual_address_kanji_postal_code: '1500001',
-    //     individual_address_kanji_state: '東京都',
-    //     individual_address_kanji_city: '渋谷区',
-    //     individual_address_kanji_town: '神宮前　３丁目',
-    //     individual_address_kanji_line1: '２７－１５'
-    //   })
-    //   await TestHelper.createExternalAccount(user, {
-    //     currency: 'jpy',
-    //     country: 'JP',
-    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_type: 'individual',
-    //     account_number: '00012345',
-    //     bank_code: '1100',
-    //     branch_code: '000'
-    //   })
-    //   const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   const accountNow = await req.patch()
-    //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
-    //   assert.notStrictEqual(accountNow.metadata.submitted, null)
-    // })
+    it(`should submit JP-individual registration`, async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_phone: '+81112345678',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'jpy',
+        country: 'JP',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        account_number: '00012345',
+        bank_code: '1100',
+        branch_code: '000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
 
     it(`should submit LU-individual registration`, async () => {
       const user = await TestHelper.createUser()
