@@ -19,8 +19,10 @@ module.exports = {
       throw new Error('invalid-payment-details')
     }
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration')
-    if (!registration || !registration['individual_verification_document_front'] || !registration['individual_verification_document_back']) {
-      throw new Error('invalid-documentid')
+    if (!registration || !registration['individual_verification_document_front']) {
+      throw new Error('invalid-individual_verification_document_front')
+    } if (!registration['individual_verification_document_back']) {
+      throw new Error('invalid-individual_verification_document_back')
     }
     req.query.country = stripeAccount.country
     const countrySpec = await global.api.user.connect.CountrySpec.get(req)
