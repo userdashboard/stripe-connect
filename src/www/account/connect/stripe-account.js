@@ -119,19 +119,22 @@ async function renderPage (req, res) {
     removeElements.push('update-payment')
     dashboard.HTML.renderTemplate(doc, null, 'no-payment-information', 'payment-information-status')
   }
-  if (req.data.owners && req.data.owners.length) {
+  if (!req.data.stripeAccount.metadata.submitted && req.data.owners && req.data.owners.length) {
     dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
   } else {
-    if (req.data.stripeAccount.business_type === 'individual') {
+    if (req.data.stripeAccount.metadata.submitted ||
+        req.data.stripeAccount.business_type === 'individual') {
       removeElements.push('owners-container')
     } else {
       removeElements.push('owners-table')
     }    
   }
-  if (req.data.directors && req.data.directors.length) {
+  if (!req.data.stripeAccount.metadata.submitted && req.data.directors && req.data.directors.length) {
     dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
   } else {
-    if (req.data.stripeAccount.business_type === 'individual' || euCountries.indexOf(req.data.stripeAccount.country) === -1) {
+    if (req.data.stripeAccount.metadata.submitted ||
+        req.data.stripeAccount.business_type === 'individual' || 
+        euCountries.indexOf(req.data.stripeAccount.country) === -1) {
       removeElements.push('directors-container')
     } else {
       removeElements.push('directors-table')
