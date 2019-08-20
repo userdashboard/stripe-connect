@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.18
+@userdashboard/dashboard 1.0.20
 https://stripe-connect.server7373.synology.me
 
 Administrator menu:
@@ -16,7 +16,7 @@ Special HTML files:
 @userdashboard/dashboard/src/redirect.html
 
 Dashboard modules:
-@userdashboard/stripe-connect (1.0.8)
+@userdashboard/stripe-connect (1.0.9)
 @userdashboard/maxmind-geoip (1.0.13)
 
 Server handlers:
@@ -36,8 +36,8 @@ URL ---------------------------------------------------- AUTH ---- TEMPLATE ----
 /account/connect/create-beneficial-owner                                          GET POST        /src/www                         /src/www                    
 /account/connect/create-company-director                                          GET POST        /src/www                         /src/www                    
 /account/connect/create-registration                                              GET POST        /src/www                         /src/www                    
+/account/connect/delete-beneficial-owner                                          GET POST        /src/www                         /src/www                    
 /account/connect/delete-company-director                                          GET POST        /src/www                         /src/www                    
-/account/connect/delete-company-owner                                             GET POST        /src/www                         /src/www                    
 /account/connect/delete-stripe-account                                            GET POST        /src/www                         /src/www                    
 /account/connect/edit-beneficial-owner                                            GET POST        /src/www                         /src/www                    
 /account/connect/edit-company-director                                            GET POST        /src/www                         /src/www                    
