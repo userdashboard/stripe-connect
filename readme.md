@@ -4,6 +4,14 @@
 
 Current supported Stripe API version is 2019-05-16.
 
+## Support and documentation
+
+Join the freenode IRC #dashboard chatroom for support.  [Web IRC client](https://kiwiirc.com/nextclient/)
+
+- [Developer documentation home](https://userdashboard.github.io/home)
+- [Administrator documentation home](https://userdashboard.github.io/administrators/home)
+- [User documentation home](https://userdashboard.github.io/users/home)
+
 ## Import this module
 
 Edit your `package.json` to activate the module:
