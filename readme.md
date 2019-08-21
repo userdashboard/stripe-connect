@@ -4,14 +4,6 @@
 
 Current supported Stripe API version is 2019-05-16.
 
-## Support and documentation
-
-Join the freenode IRC #dashboard chatroom for support.  [Web IRC client](https://kiwiirc.com/nextclient/)
-
-- [Developer documentation home](https://userdashboard.github.io/home)
-- [Administrator documentation home](https://userdashboard.github.io/administrators/home)
-- [User documentation home](https://userdashboard.github.io/users/home)
-
 ## Import this module
 
 Edit your `package.json` to activate the module:
@@ -48,6 +40,10 @@ Check `start-dev.sh` to see the rest of the `env` variables that configure Dashb
 # Dashboard
 
 Dashboard proxies your application server to create a single website where pages like signing in or changing your password are provided by Dashboard.  Your application server can be anything you want, and use Dashboard's API to access data as required.  Using modules you can expand Dashboard to include organizations, subscriptions powered by Stripe, or a Stripe Connect platform.
+
+## Support and documentation
+
+Join the freenode IRC #dashboard chatroom for support.  [Web IRC client](https://kiwiirc.com/nextclient/)
 
 - [Developer documentation home](https://userdashboard.github.io/home)
 - [Administrator documentation home](https://userdashboard.github.io/administrators/home)
