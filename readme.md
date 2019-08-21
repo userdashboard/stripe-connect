@@ -49,8 +49,8 @@ Dashboard proxies your application server to create a single website where pages
 
 `Hastebin` is an open source pastebin web application.  It started as a service for anonymous guests only, and was transformed with Dashboard and modules into a web application for registered users, with support for sharing posts with organizations and paid subscriptions.
 
-- [Hastebin - free web application](https://userdashboard.github.io/integrations/convert-hastebin-free-saas.html)
-- [Hastebin - subscription web application](https://userdashboard.github.io/integrations/convert-hastebin-saas-subscription.html)
+- [Hastebin - free web application](https://userdashboard.github.io/integrations/converting-hastebin-free-saas.html)
+- [Hastebin - subscription web application](https://userdashboard.github.io/integrations/converting-hastebin-subscription-saas.html)
 
 ## Screenshots of Dashboard
 
@@ -58,7 +58,7 @@ The user and administration documentation contain screenshots demonstrating Dash
 
 | ![Guest landing page](https://userdashboard.github.io/outline.png?raw=true) | 
 |:---------------------------------------------------------------------------------------------------------------:|
-| Example app integrating Dashboard with `/` served by its application server |
+| How content is separated between dashboard and application servers |
 
 | ![Administration page](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/12-owner-views-customers-subscriptions.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
@@ -66,7 +66,7 @@ The user and administration documentation contain screenshots demonstrating Dash
 
 | ![Example app integrating Dashboard ](https://userdashboard.github.io/integrations/convert-hastebin-subscription-saas/9-second-customer-creating-post-shared-with-organization.png?raw=true) |
 |:---------------------------------------------------------------------------------------------------------------:|
-| Example app integrating Dashboard with `/home` served by its application server |
+| Dashboard's header with content served by application server |
 
 ## Dashboard modules
 
