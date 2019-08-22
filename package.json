@@ -12,8 +12,8 @@
   "license": "SPDX(MIT OR Unlicense)",
   "main": "index.js",
   "dependencies": {
-    "@userdashboard/maxmind-geoip": "^1.0.15",
-    "stripe": "^6.36.0"
+    "@userdashboard/maxmind-geoip": "^1.0.16",
+    "stripe": "^7.8.0"
   },
   "devDependencies": {
     "@userdashboard/dashboard": "^1.0.22"
