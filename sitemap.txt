@@ -16,8 +16,8 @@ Special HTML files:
 @userdashboard/dashboard/src/redirect.html
 
 Dashboard modules:
-@userdashboard/stripe-connect (1.0.11)
-@userdashboard/maxmind-geoip (1.0.15)
+@userdashboard/stripe-connect (1.0.12)
+@userdashboard/maxmind-geoip (1.0.16)
 
 Server handlers:
 @userdashboard/maxmind-geoip/src/server/bind-country.js
