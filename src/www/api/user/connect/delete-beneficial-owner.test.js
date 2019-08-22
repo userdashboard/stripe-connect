@@ -35,7 +35,7 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
-        company_address_city: 'Berlin', 
+        company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         relationship_account_opener_address_city: 'Berlin',
@@ -84,7 +84,7 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
-        company_address_city: 'Berlin', 
+        company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         relationship_account_opener_address_city: 'Berlin',
@@ -92,7 +92,7 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
         relationship_account_opener_address_postal_code: '01067'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, { 
+      const owner = await TestHelper.createBeneficialOwner(user, {
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'GB',
@@ -114,4 +114,4 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
       assert.strictEqual(ownerNow.message, 'invalid-ownerid')
     })
   })
-      })
+})

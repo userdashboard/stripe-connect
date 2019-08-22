@@ -26,10 +26,10 @@ module.exports = {
     }
     if (stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.submitted ||
-      stripeAccount.metadata.accountid !== req.account.accountid ) {
+      stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    if (euCountries.indexOf(stripeAccount.country) === -1) { 
+    if (euCountries.indexOf(stripeAccount.country) === -1) {
       throw new Error('invalid-stripe-account')
     }
     if (req.uploads && req.uploads['relationship_director_verification_document_front']) {

@@ -1,4 +1,3 @@
-const countries = require('../../../../countries.json')
 const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
@@ -7,7 +6,7 @@ module.exports = {
   post: submitForm
 }
 
-async function beforeRequest(req) {
+async function beforeRequest (req) {
   if (!req.query || !req.query.directorid) {
     throw new Error('invalid-directorid')
   }
@@ -20,7 +19,7 @@ async function beforeRequest(req) {
   req.data = { director, stripeAccount }
 }
 
-async function renderPage(req, res, messageTemplate) {
+async function renderPage (req, res, messageTemplate) {
   if (req.success) {
     if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
       return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
@@ -60,7 +59,7 @@ async function renderPage(req, res, messageTemplate) {
   return dashboard.Response.end(req, res, doc)
 }
 
-async function submitForm(req, res) {
+async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }

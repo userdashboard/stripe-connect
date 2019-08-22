@@ -47,7 +47,7 @@ async function renderPage (req, res) {
         dashboard.HTML.renderTemplate(doc, null, stripeAccount.statusMessage, `account-status-${stripeAccount.id}`)
       }
     }
-    noStripeAccounts = doc.getElementById('no-stripe-accounts')
+    const noStripeAccounts = doc.getElementById('no-stripe-accounts')
     noStripeAccounts.parentNode.removeChild(noStripeAccounts)
   } else {
     const stripeAccountsTable = doc.getElementById('stripe-accounts-table')

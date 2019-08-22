@@ -22,4 +22,4 @@ describe('/api/user/connect/country-spec', () => {
       assert.strictEqual(countrySpec.id, 'US')
     })
   })
-      })
+})

@@ -12,9 +12,9 @@ const stripeKey = {
 }
 
 const TestHelper = require('@userdashboard/dashboard/test-helper.js')
-let testDataIndex= 0
+let testDataIndex = 0
 
-function nextIdentity() {
+function nextIdentity () {
   testDataIndex++
   return testData[testDataIndex]
 }
@@ -37,7 +37,7 @@ module.exports = {
   waitForVerification: util.promisify(waitForVerification),
   waitForVerificationFailure: util.promisify(waitForVerificationFailure),
   waitForPayout: util.promisify(waitForPayout),
-  'success_id_scan_front.png': { 
+  'success_id_scan_front.png': {
     filename: 'id_scan_front.png',
     buffer: fs.readFileSync(`${__dirname}/test-documentid-success.png`)
   },
@@ -52,7 +52,7 @@ module.exports = {
   'fail_id_scan_back.png': {
     filename: 'id_scan_back.png',
     buffer: fs.readFileSync(`${__dirname}/test-documentid-failed.png`)
-  },
+  }
 }
 
 for (const x in TestHelper) {
@@ -78,7 +78,7 @@ module.exports.createRequest = (rawURL, method) => {
   return req
 }
 
-async function createStripeAccount(user, properties) {
+async function createStripeAccount (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
   req.session = user.session
   req.account = user.account
@@ -107,12 +107,12 @@ async function createStripeRegistration (user, properties) {
   return user.stripeAccount
 }
 
-  // via https://github.com/coolaj86/node-examples-js/blob/master/http-and-html5/http-upload.js
-  // creating a stripe account requires posting an id image in a multipart payload
+// via https://github.com/coolaj86/node-examples-js/blob/master/http-and-html5/http-upload.js
+// creating a stripe account requires posting an id image in a multipart payload
 function createMultiPart (req, body) {
   const boundary = '-----------------test' + global.testNumber
   const delimiter = `\r\n--${boundary}`
-  const closeDelimiter = delimiter + "--"
+  const closeDelimiter = delimiter + '--'
   const buffers = []
   for (const field in req.uploads) {
     const filename = req.uploads[field].filename
@@ -123,12 +123,12 @@ function createMultiPart (req, body) {
       `Content-Type: ${type}`,
       '\r\n'
     ]
-    buffers.push(new Buffer(segment.join('\r\n')), req.uploads[field].buffer, new Buffer('\r\n'))
+    buffers.push(Buffer.from(segment.join('\r\n')), req.uploads[field].buffer, Buffer.from('\r\n'))
   }
   for (const field in body) {
-    buffers.push(new Buffer(`${delimiter}\r\nContent-Disposition: form-data; name="${field}"\r\n\r\n${body[field]}`))
+    buffers.push(Buffer.from(`${delimiter}\r\nContent-Disposition: form-data; name="${field}"\r\n\r\n${body[field]}`))
   }
-  buffers.push(new Buffer(closeDelimiter))
+  buffers.push(Buffer.from(closeDelimiter))
   const multipartBody = Buffer.concat(buffers)
   req.headers = req.headers || {}
   req.headers['Content-Type'] = `multipart/form-data; boundary=${boundary}`
@@ -136,7 +136,7 @@ function createMultiPart (req, body) {
   return multipartBody
 }
 
-async function createExternalAccount(user, details) {
+async function createExternalAccount (user, details) {
   const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
@@ -145,7 +145,7 @@ async function createExternalAccount(user, details) {
   return user.stripeAccount.external_accounts.data[0]
 }
 
-async function createBeneficialOwner(user, properties) {
+async function createBeneficialOwner (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
@@ -159,7 +159,7 @@ async function createBeneficialOwner(user, properties) {
   return owner
 }
 
-async function createCompanyDirector(user, properties) {
+async function createCompanyDirector (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
@@ -173,7 +173,7 @@ async function createCompanyDirector(user, properties) {
   return director
 }
 
-async function createPayout(user) {
+async function createPayout (user) {
   const req = TestHelper.createRequest(`/fake-payout?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
@@ -197,7 +197,7 @@ async function createPayout(user) {
   return user.payout
 }
 
-async function submitStripeAccount(user) {
+async function submitStripeAccount (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-${user.stripeAccount.business_type}-registration-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
@@ -206,12 +206,12 @@ async function submitStripeAccount(user) {
   return stripeAccount
 }
 
-async function waitForPayout(stripeid, previousid, callback) {
+async function waitForPayout (stripeid, previousid, callback) {
   callback = callback || previousid
   if (callback === previousid) {
     previousid = null
   }
-  async function wait() {
+  async function wait () {
     if (global.testEnded) {
       return
     }
@@ -222,7 +222,7 @@ async function waitForPayout(stripeid, previousid, callback) {
     }
     if (previousid && previousid === itemids[0].id) {
       return setTimeout(wait, 100)
-    } 
+    }
     return setTimeout(() => {
       callback(null, itemids[0])
     }, 100)
@@ -230,12 +230,12 @@ async function waitForPayout(stripeid, previousid, callback) {
   return setTimeout(wait, 100)
 }
 
-async function waitForVerification(stripeid, callback) {
-  async function wait() {
+async function waitForVerification (stripeid, callback) {
+  async function wait () {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey) //await req.route.api.get(req)
+    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey) // await req.route.api.get(req)
     if (stripeAccount.business_type === 'individual') {
       if (!stripeAccount.payouts_enabled ||
           !stripeAccount.individual.verification ||
@@ -257,11 +257,11 @@ async function waitForVerification(stripeid, callback) {
 }
 
 async function waitForVerificationFailure (stripeid, callback) {
-  async function wait() {
+  async function wait () {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey) //await req.route.api.get(req)
+    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey) // await req.route.api.get(req)
     if (stripeAccount.business_type === 'individual') {
       if (stripeAccount.payouts_enabled ||
         stripeAccount.individual.disabled_reason.status !== 'requirements.pending_verification') {

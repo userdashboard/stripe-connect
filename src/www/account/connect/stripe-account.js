@@ -127,13 +127,13 @@ async function renderPage (req, res) {
       removeElements.push('owners-container')
     } else {
       removeElements.push('owners-table')
-    }    
+    }
   }
   if (!req.data.stripeAccount.metadata.submitted && req.data.directors && req.data.directors.length) {
     dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
   } else {
     if (req.data.stripeAccount.metadata.submitted ||
-        req.data.stripeAccount.business_type === 'individual' || 
+        req.data.stripeAccount.business_type === 'individual' ||
         euCountries.indexOf(req.data.stripeAccount.country) === -1) {
       removeElements.push('directors-container')
     } else {

@@ -43,16 +43,16 @@ describe(`/account/connect/beneficial-owners`, () => {
         country: 'DE'
       })
       const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, { 
+      await TestHelper.createBeneficialOwner(user, {
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067', 
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1', 
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -70,16 +70,16 @@ describe(`/account/connect/beneficial-owners`, () => {
         country: 'DE'
       })
       const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, { 
+      await TestHelper.createBeneficialOwner(user, {
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067', 
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1', 
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -107,7 +107,7 @@ describe(`/account/connect/beneficial-owners`, () => {
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
-        company_address_city: 'Berlin', 
+        company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         relationship_account_opener_address_city: 'Berlin',

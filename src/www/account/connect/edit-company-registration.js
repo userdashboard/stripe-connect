@@ -121,7 +121,7 @@ async function renderPage (req, res, messageTemplate) {
   if (req.data.applicationCountry.id !== 'JP') {
     removeElements.push(
       'relationship_account_opener_gender',
-      'kana-company-information-container', 'kana-company-address-container', 
+      'kana-company-information-container', 'kana-company-address-container',
       'kana-personal-information-container', 'kana-personal-address-container',
       'kanji-company-information-container', 'kanji-company-address-container',
       'kanji-personal-information-container', 'kanji-personal-address-container'

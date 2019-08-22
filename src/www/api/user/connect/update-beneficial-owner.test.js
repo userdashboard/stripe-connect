@@ -118,7 +118,7 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
       }
       assert.strictEqual(errors, Object.keys(req.body).length)
     })
-    
+
     it('should update owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

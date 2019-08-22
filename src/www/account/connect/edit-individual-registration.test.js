@@ -88,7 +88,7 @@ describe(`/account/connect/edit-individual-registration`, async () => {
           continue
         }
         const input = doc.getElementById(field.split('.').join('_'))
-        if (input.attr.name === 'individual_address_state' || 
+        if (input.attr.name === 'individual_address_state' ||
             input.attr.name === 'individual_address_country' ||
             input.attr.name === 'business_profile_mcc') {
           assert.strictEqual(input.tag, 'select')

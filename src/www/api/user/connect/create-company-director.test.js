@@ -17,7 +17,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       req.body = {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
+        relationship_director_last_name: person.lastName
       }
       let errorMessage
       try {
@@ -44,7 +44,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       req.body = {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
+        relationship_director_last_name: person.lastName
       }
       let errorMessage
       try {
@@ -72,7 +72,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       req.body = {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
+        relationship_director_last_name: person.lastName
       }
       let errorMessage
       try {
@@ -125,7 +125,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       req.body = {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
+        relationship_director_last_name: person.lastName
       }
       let errorMessage
       try {
@@ -152,7 +152,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       req.body = {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
+        relationship_director_last_name: person.lastName
       }
       let errors = 0
       for (const field in req.body) {
@@ -185,7 +185,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
+        relationship_director_last_name: person.lastName
       })
       await req.post(req)
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)

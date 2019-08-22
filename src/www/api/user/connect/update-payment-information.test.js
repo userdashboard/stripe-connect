@@ -578,7 +578,6 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-
     it(`should update BE information`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

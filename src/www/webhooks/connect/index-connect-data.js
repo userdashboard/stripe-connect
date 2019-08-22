@@ -70,7 +70,7 @@ module.exports = {
       default:
         if (stripeEvent.account) {
           const stripeAccount = await stripe.accounts.retrieve(stripeEvent.account, req.stripeKey)
-          stripeCache.update(stripeAccount, req.stripeKey)       
+          stripeCache.update(stripeAccount, req.stripeKey)
         }
         break
     }

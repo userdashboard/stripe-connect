@@ -35,7 +35,7 @@ describe(`/account/connect/delete-beneficial-owner`, async () => {
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
-        company_address_city: 'Berlin', 
+        company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         relationship_account_opener_address_city: 'Berlin',
@@ -86,11 +86,11 @@ describe(`/account/connect/delete-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067', 
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1', 
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
       })
       const user2 = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
@@ -120,8 +120,8 @@ describe(`/account/connect/delete-beneficial-owner`, async () => {
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1', 
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
@@ -144,11 +144,11 @@ describe(`/account/connect/delete-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067', 
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1', 
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
@@ -171,11 +171,11 @@ describe(`/account/connect/delete-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067', 
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
@@ -200,11 +200,11 @@ describe(`/account/connect/delete-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067', 
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1', 
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account

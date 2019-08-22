@@ -13,4 +13,4 @@ describe('/api/user/connect/country-specs', () => {
       assert.strictEqual(countrySpecs[0].object, 'country_spec')
     })
   })
-      })
+})

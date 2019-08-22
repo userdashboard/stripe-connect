@@ -84,7 +84,7 @@ describe('/api/user/connect/beneficial-owners-count', () => {
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
         relationship_account_opener_email: user.profile.email,
-        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_phone: '456-789-0123'
       })
       const person1 = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {

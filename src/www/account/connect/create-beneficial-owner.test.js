@@ -142,7 +142,7 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
         if (uploads[field]) {
           delete (uploads[field])
         }
-        if (body [field]) {
+        if (body[field]) {
           delete (body[field])
         }
         req.uploads = uploads

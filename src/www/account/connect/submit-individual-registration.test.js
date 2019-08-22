@@ -32,7 +32,6 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         company_phone: '456-123-7890',
         company_address_country: 'US',
         company_address_city: 'New York',
-        company_address_city: 'New York',
         company_address_state: 'New York',
         company_address_line1: 'First Street',
         company_address_postal_code: '10001',
@@ -46,7 +45,6 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         relationship_account_opener_last_name: user.profile.lastName,
         relationship_account_opener_email: user.profile.email,
         relationship_account_opener_phone: '456-123-7890',
-        relationship_account_opener_ssn_last_4: '0000',
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950'
@@ -83,7 +81,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_address_state: 'NY', 
+        individual_address_state: 'NY',
         individual_ssn_last_4: '0000'
       })
       await TestHelper.createExternalAccount(user, {
@@ -123,7 +121,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_address_state: 'NY', 
+        individual_address_state: 'NY',
         individual_ssn_last_4: '0000'
       })
       await TestHelper.createExternalAccount(user, {
@@ -165,7 +163,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_address_state: 'NY', 
+        individual_address_state: 'NY',
         individual_ssn_last_4: '0000'
       })
       const req = TestHelper.createRequest(`/account/connect/submit-individual-registration?stripeid=${user.stripeAccount.id}`)

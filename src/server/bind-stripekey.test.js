@@ -16,4 +16,4 @@ describe('server/bind-stripekey', async () => {
       assert.notStrictEqual(req.stripeKey.api_key, null)
     })
   })
-      })
+})

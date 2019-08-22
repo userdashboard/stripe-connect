@@ -52,7 +52,7 @@ module.exports = {
     if (stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')
     }
-    const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+    let directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
     for (const field in req.body) {
       director[field] = req.body[field]
     }

@@ -16,25 +16,25 @@ module.exports = {
     const updateInfo = {
       legal_entity: {}
     }
-    req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-    const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
-    for (const field of requiredFields) {
-      switch (field) {
-        case 'address':
-        case 'address_kana':
-        case 'address_kanji':
-        case 'personal_address':
-        case 'personal_address_kana':
-        case 'personal_address_kanji':
-          updateInfo.legal_entity[secondObject] = updateInfo.legal_entity[secondObject] || {}
-          updateInfo.legal_entity[secondObject][field] = req.body[field]
-          break
-        default:
-          updateInfo.legal_entity[field] = req.body[field]
-          break
-      }
-    }
+    // req.query.country = stripeAccount.country
+    // const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+    // const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
+    // for (const field of requiredFields) {
+    //   switch (field) {
+    //     case 'address':
+    //     case 'address_kana':
+    //     case 'address_kanji':
+    //     case 'personal_address':
+    //     case 'personal_address_kana':
+    //     case 'personal_address_kanji':
+    //       updateInfo.legal_entity[secondObject] = updateInfo.legal_entity[secondObject] || {}
+    //       updateInfo.legal_entity[secondObject][field] = req.body[field]
+    //       break
+    //     default:
+    //       updateInfo.legal_entity[field] = req.body[field]
+    //       break
+    //   }
+    // }
     try {
       await stripe.accounts.update(req.query.stripeid, updateInfo, req.stripeKey)
       req.success = true

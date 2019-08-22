@@ -35,7 +35,7 @@ describe(`/account/connect/delete-company-director`, async () => {
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
-        company_address_city: 'Berlin', 
+        company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         relationship_account_opener_address_city: 'Berlin',

@@ -16,7 +16,7 @@ describe(`/account/connect`, () => {
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
-        individual_address_state: 'NY', 
+        individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',

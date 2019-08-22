@@ -48,7 +48,7 @@ module.exports = {
     const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     const requiredFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
     const openerFields = [ 'first_name', 'last_name', 'email', 'phone', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code' ]
-    const openerOptional = [ 'address_line2', 'address_state', 'address_country']
+    const openerOptional = [ 'address_line2', 'address_state', 'address_country' ]
     if (stripeAccount.country === 'US') {
       openerFields.push('ssn_last_4')
     }
@@ -89,7 +89,7 @@ module.exports = {
         }
         if (req.body['relationship_account_opener_verification_document_back']) {
           registration['relationship_account_opener_verification_document_back'] = req.body['relationship_account_opener_verification_document_back']
-        }       
+        }
         continue
       }
       const posted = field.split('.').join('_')

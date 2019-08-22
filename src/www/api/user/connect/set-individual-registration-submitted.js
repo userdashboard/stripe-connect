@@ -55,7 +55,7 @@ module.exports = {
           document: {}
         },
         address: {},
-        dob: {},
+        dob: {}
       }
     }
     for (const field in registration) {

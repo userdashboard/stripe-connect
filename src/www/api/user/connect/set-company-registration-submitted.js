@@ -72,7 +72,7 @@ module.exports = {
       dob: {}
     }
     for (const field in registration) {
-      if(field.startsWith('business_profile_')) {
+      if (field.startsWith('business_profile_')) {
         const property = field.substring('business_profile_'.length)
         accountInfo.business_profile[property] = registration[field]
         continue
@@ -97,7 +97,7 @@ module.exports = {
           accountInfo.company[property] = registration[field]
         }
         continue
-      } 
+      }
       if (field.startsWith('relationship_account_opener_')) {
         if (field.startsWith('relationship_account_opener_address_kanji_')) {
           const property = field.substring('relationship_account_opener_address_kanji_'.length)
@@ -113,7 +113,7 @@ module.exports = {
         } else if (field.startsWith('relationship_account_opener_verification_document_')) {
           const property = field.substring('relationship_account_opener_verification_document_'.length)
           accountOpener.verification.document[property] = registration[field]
-        } else if(field.startsWith('relationship_account_opener_dob_')) {
+        } else if (field.startsWith('relationship_account_opener_dob_')) {
           const property = field.substring('relationship_account_opener_dob_'.length)
           accountOpener.dob[property] = registration[field]
         } else {
@@ -121,7 +121,7 @@ module.exports = {
           accountOpener[property] = registration[field]
         }
       }
-    }    
+    }
     try {
       await stripe.accounts.createPerson(req.query.stripeid, accountOpener, req.stripeKey)
       const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
@@ -135,7 +135,7 @@ module.exports = {
               city: owner.relationship_owner_address_city,
               line1: owner.relationship_owner_address_line1,
               postal_code: owner.relationship_owner_address_postal_code
-            },            
+            },
             dob: {
               day: owner.relationship_owner_dob_day,
               month: owner.relationship_owner_dob_month,
@@ -149,7 +149,7 @@ module.exports = {
                 front: owner.relationship_owner_verification_document_front,
                 back: owner.relationship_owner_verification_document_back
               }
-            },
+            }
           }
           await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
         }
@@ -168,7 +168,7 @@ module.exports = {
                 front: director.relationship_director_verification_document_front,
                 back: director.relationship_director_verification_document_back
               }
-            },
+            }
           }
           await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripeKey)
         }

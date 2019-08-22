@@ -121,7 +121,7 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
-        company_address_city: 'Berlin', 
+        company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         relationship_account_opener_address_city: 'Berlin',
@@ -202,7 +202,7 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
       }
       assert.strictEqual(errors, Object.keys(req.body).length)
     })
-    
+
     it('should create beneficial owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

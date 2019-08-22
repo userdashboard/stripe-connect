@@ -1,6 +1,6 @@
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
-const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE' ]
+const euCountries = [ 'AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE' ]
 
 module.exports = {
   before: beforeRequest,

@@ -215,7 +215,7 @@ describe('/api/user/connect/update-company-registration', () => {
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
         relationship_account_opener_email: user.profile.email,
-        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -278,7 +278,6 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       await testEachFieldAsNull(req)
     })
-
 
     it(`should reject DE-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
@@ -535,7 +534,7 @@ describe('/api/user/connect/update-company-registration', () => {
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
         relationship_account_opener_email: user.profile.email,
-        relationship_account_opener_phone: '456-789-0123',
+        relationship_account_opener_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -791,7 +790,7 @@ describe('/api/user/connect/update-company-registration', () => {
         relationship_account_opener_address_city: 'Singapore'
       }
       await testEachFieldAsNull(req)
-    })    
+    })
 
     it(`should reject US-company invalid fields`, async () => {
       const user = await TestHelper.createUser()
@@ -1192,7 +1191,6 @@ describe('/api/user/connect/update-company-registration', () => {
       }
     })
 
-
     it(`should update HK-company registration`, async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -1224,7 +1222,6 @@ describe('/api/user/connect/update-company-registration', () => {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
     })
-
 
     it(`should update IE-company registration`, async () => {
       const user = await TestHelper.createUser()
@@ -1258,7 +1255,6 @@ describe('/api/user/connect/update-company-registration', () => {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
     })
-
 
     it(`should update IT-company registration`, async () => {
       const user = await TestHelper.createUser()

@@ -101,4 +101,4 @@ describe(`/account/connect/delete-stripe-account`, async () => {
       assert.strictEqual(stripeAccount.message, 'invalid-stripeid')
     })
   })
-      })
+})

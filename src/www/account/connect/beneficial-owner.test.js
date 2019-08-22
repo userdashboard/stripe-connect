@@ -34,7 +34,7 @@ describe(`/account/connect/beneficial-owner`, () => {
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
@@ -61,7 +61,7 @@ describe(`/account/connect/beneficial-owner`, () => {
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account

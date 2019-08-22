@@ -7,7 +7,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
   describe('StripeAccounts#GET', () => {
     it('should limit Stripe accounts to one page', async () => {
       const administrator = await TestHelper.createAdministrator()
-       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -31,7 +31,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           relationship_account_opener_email: user.profile.email,
           relationship_account_opener_phone: '456-789-0123',
           relationship_account_opener_address_city: 'New York',
-        //  relationship_account_opener_address_state: 'New York',
+          //  relationship_account_opener_address_state: 'New York',
           relationship_account_opener_address_line1: '285 Fulton St',
           relationship_account_opener_address_postal_code: '10007'
         })
@@ -73,7 +73,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           relationship_account_opener_address_state: 'NY',
           relationship_account_opener_address_line1: '285 Fulton St',
           relationship_account_opener_address_postal_code: '10007'
-      })
+        })
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-accounts`)
       req.account = administrator.account

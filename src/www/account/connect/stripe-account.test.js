@@ -168,7 +168,7 @@ describe(`/account/connect/stripe-account`, () => {
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_address_city: 'Vienna',
-        relationship_account_opener_address_line1: 'First Street', 
+        relationship_account_opener_address_line1: 'First Street',
         relationship_account_opener_address_postal_code: '1020'
       })
       await TestHelper.createExternalAccount(user, {

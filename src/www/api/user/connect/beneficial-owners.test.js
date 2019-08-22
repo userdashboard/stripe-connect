@@ -97,7 +97,7 @@ describe('/api/user/connect/beneficial-owners', () => {
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
-        company_address_city: 'Berlin', 
+        company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         relationship_account_opener_address_city: 'Berlin',
@@ -105,16 +105,16 @@ describe('/api/user/connect/beneficial-owners', () => {
         relationship_account_opener_address_postal_code: '01067'
       })
       const person1 = TestHelper.nextIdentity()
-      const owner1 = await TestHelper.createBeneficialOwner(user, { 
+      const owner1 = await TestHelper.createBeneficialOwner(user, {
         relationship_owner_first_name: person1.firstName,
         relationship_owner_last_name: person1.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067', 
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1', 
-        relationship_owner_dob_year: '1950' 
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
       })
       const person2 = TestHelper.nextIdentity()
       const owner2 = await TestHelper.createBeneficialOwner(user, {

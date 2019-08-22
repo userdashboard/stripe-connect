@@ -91,7 +91,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
-        individual_ssn_last_4: '0000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
