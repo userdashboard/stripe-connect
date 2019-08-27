@@ -200,7 +200,6 @@ module.exports = {
         field = field.substring(0, field.length - 1)
         throw new Error(`invalid-${field}`)
       }
-      console.log(error)
       throw new Error('unknown-error')
     }
   }

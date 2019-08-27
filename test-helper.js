@@ -295,8 +295,6 @@ async function triggerVerification (user) {
   try {
     charge = await stripe.charges.create(chargeInfo, accountKey)
   } catch (error) {
-    const acc = await stripe.accounts.retrieve(user.stripeAccount.id, accountKey)
-    console.log('failed making verification charge', error, acc)
   }
   user.charge = charge
   return charge
