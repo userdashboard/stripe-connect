@@ -26,7 +26,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
       })
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '7542',
-        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
         company_phone: '456-123-7890',
@@ -43,7 +43,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         relationship_account_opener_id_number: '000000000',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-123-7890',
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
@@ -69,10 +69,10 @@ describe(`/account/connect/submit-individual-registration`, async () => {
       })
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '7542',
-        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName,
-        individual_email: user.profile.email,
+        individual_email: user.profile.contactEmail,
         individual_phone: '456-789-0123',
         individual_address_city: 'New York',
         individual_id_number: '000000000',
@@ -109,10 +109,10 @@ describe(`/account/connect/submit-individual-registration`, async () => {
       })
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '7542',
-        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName,
-        individual_email: user.profile.email,
+        individual_email: user.profile.contactEmail,
         individual_phone: '456-789-0123',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
@@ -151,10 +151,10 @@ describe(`/account/connect/submit-individual-registration`, async () => {
       })
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '7542',
-        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName,
-        individual_email: user.profile.email,
+        individual_email: user.profile.contactEmail,
         individual_phone: '456-789-0123',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
@@ -184,10 +184,10 @@ describe(`/account/connect/submit-individual-registration`, async () => {
       })
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '7542',
-        business_profile_url: 'https://www.' + user.profile.email.split('@')[1],
+        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName,
-        individual_email: user.profile.email,
+        individual_email: user.profile.contactEmail,
         individual_phone: '456-789-0123',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',

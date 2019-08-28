@@ -31,7 +31,7 @@ describe(`/api/administrator/connect/delete-stripe-account`, async () => {
         company_address_country: 'DE',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',

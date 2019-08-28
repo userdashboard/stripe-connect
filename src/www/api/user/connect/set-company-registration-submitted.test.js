@@ -51,13 +51,13 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         company_address_postal_code: '10001',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_ssn_last_4: '0000',
         relationship_account_opener_address_city: 'New York',
@@ -126,7 +126,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email
+        relationship_account_opener_email: user.profile.contactEmail
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -158,7 +158,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_country: 'AT',
         relationship_account_opener_address_city: 'Vienna',
@@ -198,7 +198,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Brisbane',
         relationship_account_opener_address_line1: '845 Oxford St',
@@ -241,7 +241,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email
+        relationship_account_opener_email: user.profile.contactEmail
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -277,7 +277,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Vancouver',
         relationship_account_opener_address_line1: '123 Sesame St',
@@ -320,7 +320,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -358,7 +358,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -396,7 +396,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -434,7 +434,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -472,7 +472,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -510,7 +510,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -548,7 +548,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -582,7 +582,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Hong Kong',
         relationship_account_opener_address_line1: '123 Sesame St',
@@ -624,7 +624,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_postal_code: 'Dublin 1'
       })
@@ -664,7 +664,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -706,7 +706,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         company_address_kanji_line1: '２７－１５',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_gender: 'female',
         relationship_account_opener_dob_day: '1',
@@ -764,7 +764,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -802,7 +802,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -840,7 +840,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -875,7 +875,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Auckland',
         relationship_account_opener_address_postal_code: '6011',
@@ -917,7 +917,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -955,7 +955,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       })
       await TestHelper.createExternalAccount(user, {
@@ -989,7 +989,7 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_address_line1: '123 Sesame St',
         relationship_account_opener_address_postal_code: '339696',
         relationship_account_opener_address_city: 'Singapore',
@@ -1027,14 +1027,14 @@ describe(`/api/user/connect/set-company-registration-submitted`, async () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.email.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_ssn_last_4: '0000',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.email,
+        relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'New York',
         relationship_account_opener_address_state: 'NY',
