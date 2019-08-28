@@ -44,7 +44,7 @@ describe('/api/administrator/connect/stripe-accounts-count', async () => {
       })
       await TestHelper.createStripeRegistration(user2, {
         business_profile_mcc: '7997',
-        business_profile_url: 'https://www.' + user2.profile.email.split('@')[1],
+        business_profile_url: 'https://www.' + user2.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
@@ -55,7 +55,7 @@ describe('/api/administrator/connect/stripe-accounts-count', async () => {
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_phone: '456-123-7890',
-        individual_email: user2.profile.email,
+        individual_email: user2.profile.contactEmail,
         individual_first_name: user2.profile.firstName,
         individual_last_name: user2.profile.lastName
       })
