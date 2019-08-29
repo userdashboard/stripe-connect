@@ -14,17 +14,11 @@ const stripeKey = {
 const TestHelper = require('@userdashboard/dashboard/test-helper.js')
 let testDataIndex = 0
 
-function nextIdentity () {
-  testDataIndex++
-  return testData[testDataIndex]
-}
-
 const wait = util.promisify((callback) => {
   return setTimeout(callback, 100)
 })
 
 module.exports = {
-  nextIdentity,
   createBeneficialOwner,
   createCompanyDirector,
   createExternalAccount,
