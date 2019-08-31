@@ -14,6 +14,16 @@
     <p>This person owns a substantial (25+) percent of the company or is in charge of the company, finances or operations.</p>
     <div id="message-container"></div>
     <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked" action="/account/connect/create-beneficial-owner?stripeid=${stripeAccount.id}">
+      <h2>Relationship to company</h2>
+      <div class="pure-control-group">
+        <label><input type="checkbox" name="relationship_owner_executive" value="true" /> Executive</label>
+        <label><input type="checkbox" name="relationship_owner_director" value="true" /> Director</label>
+        <label><input type="checkbox" name="relationship_owner_owner" value="true" /> Owner</label>
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_owner_title">Title (if any)</label>
+        <input class="full-width" require="require" id="relationship_owner_title" name="relationship_owner_title" type="text" maxlength="100" />
+      </div>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div class="pure-control-group">

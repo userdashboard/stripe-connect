@@ -29,13 +29,13 @@ module.exports = {
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    if (req.uploads && req.uploads['relationship_owner_verification_document_front']) {
+    if (req.uploads && req.uploads.relationship_owner_verification_document_front) {
       const frontData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['relationship_owner_verification_document_front'].name,
-          data: req.uploads['relationship_owner_verification_document_front'].buffer
+          name: req.uploads.relationship_owner_verification_document_front.name,
+          data: req.uploads.relationship_owner_verification_document_front.buffer
         }
       }
       try {
@@ -47,13 +47,13 @@ module.exports = {
     } else {
       throw new Error('invalid-relationship_owner_verification_document_front')
     }
-    if (req.uploads && req.uploads['relationship_owner_verification_document_back']) {
+    if (req.uploads && req.uploads.relationship_owner_verification_document_back) {
       const backData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['relationship_owner_verification_document_back'].name,
-          data: req.uploads['relationship_owner_verification_document_back'].buffer
+          name: req.uploads.relationship_owner_verification_document_back.name,
+          data: req.uploads.relationship_owner_verification_document_back.buffer
         }
       }
       try {
@@ -83,6 +83,24 @@ module.exports = {
       if (req.body[posted]) {
         owner[posted] = req.body[posted]
       }
+    }
+    if (req.body.relationship_owner_title) {
+      owner.relationship_owner_title = req.body.relationship_owner_title
+    }
+    if (req.body.relationship_owner_executive) {
+      owner.relationship_owner_executive = true
+    }
+    if (req.body.relationship_owner_director) {
+      owner.relationship_owner_director = true
+    }
+    if (req.body.relationship_owner_owner) {
+      owner.relationship_owner_owner = true
+    }
+    if (req.body.relationship_owner_verification_document_front) {
+      owner.relationship_owner_verification_document_front = req.body.relationship_owner_verification_document_front
+    }
+    if (req.body.relationship_owner_verification_document_back) {
+      owner.relationship_owner_verification_document_back = req.body.relationship_owner_verification_document_back
     }
     owners.unshift(owner)
     const accountInfo = {

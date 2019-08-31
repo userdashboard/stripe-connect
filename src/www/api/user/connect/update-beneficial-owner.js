@@ -77,6 +77,18 @@ module.exports = {
     for (const field in req.body) {
       owner[field] = req.body[field]
     }
+    if (req.body.relationship_owner_title) {
+      owner.relationship_owner_title = req.body.relationship_owner_title
+    }
+    if (req.body.relationship_owner_executive) {
+      owner.relationship_owner_executive = true
+    }
+    if (req.body.relationship_owner_director) {
+      owner.relationship_owner_director = true
+    }
+    if (req.body.relationship_owner_owner) {
+      owner.relationship_owner_owner = true
+    }
     if (owners && owners.length) {
       for (const i in owners) {
         if (owners[i].ownerid === req.query.ownerid) {

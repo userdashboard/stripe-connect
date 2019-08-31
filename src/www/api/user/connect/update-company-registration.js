@@ -84,11 +84,20 @@ module.exports = {
             registration[posted] = req.body[posted]
           }
         }
-        if (req.body['relationship_account_opener_verification_document_front']) {
-          registration['relationship_account_opener_verification_document_front'] = req.body['relationship_account_opener_verification_document_front']
+        if (req.body.relationship_account_opener_verification_document_front) {
+          registration.relationship_account_opener_verification_document_front = req.body.relationship_account_opener_verification_document_front
         }
-        if (req.body['relationship_account_opener_verification_document_back']) {
-          registration['relationship_account_opener_verification_document_back'] = req.body['relationship_account_opener_verification_document_back']
+        if (req.body.relationship_account_opener_verification_document_back) {
+          registration.relationship_account_opener_verification_document_back = req.body.relationship_account_opener_verification_document_back
+        } 
+        if (req.body.relationship_account_opener_title) {
+          registration.relationship_account_opener_title = req.body.relationship_account_opener_title
+        }
+        if (req.body.relationship_account_opener_executive) {
+          registration.relationship_account_opener_executive = true
+        }
+        if (req.body.relationship_account_opener_director) {
+          registration.relationship_account_opener_director = true
         }
         continue
       }

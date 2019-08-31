@@ -61,15 +61,22 @@ module.exports = {
     }
     const accountOpener = {
       relationship: {
-        account_opener: true,
-        owner: true,
-        title: 'Account opener'
+        account_opener: true
       },
       verification: {
         document: {}
       },
       address: {},
       dob: {}
+    }
+    if (registration['relationship_account_opener_title']) {
+      accountOpener.relationship.title = registration['relationship_account_opener_title']
+    }
+    if (registration['relationship_account_opener_executive']) {
+      accountOpener.relationship.executive = true
+    }
+    if (registration['relationship_account_opener_director']) {
+      accountOpener.relationship.director = true
     }
     for (const field in registration) {
       if (field.startsWith('business_profile_')) {
@@ -118,6 +125,9 @@ module.exports = {
           accountOpener.dob[property] = registration[field]
         } else {
           const property = field.substring('relationship_account_opener_'.length)
+          if (property === 'title' || property === 'executive' || property === 'director') {
+            continue
+          }
           accountOpener[property] = registration[field]
         }
       }
@@ -150,6 +160,15 @@ module.exports = {
                 back: owner.relationship_owner_verification_document_back
               }
             }
+          }
+          if (owner.relationship_owner_title) {
+            ownerInfo.relationship.title = owner.relationship_owner_title
+          }
+          if (owner.relationship_owner_executive) {
+            ownerInfo.relationship.executive = true
+          }
+          if (owner.relationship_owner_director) {
+            ownerInfo.relationship.director = true
           }
           await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
         }
