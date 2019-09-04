@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.28
+@userdashboard/dashboard 1.0.29
 https://stripe-connect.server7373.synology.me
 
 Administrator menu:
@@ -17,7 +17,7 @@ Special HTML files:
 
 Dashboard modules:
 @userdashboard/stripe-connect (1.0.17)
-@userdashboard/maxmind-geoip (1.0.20)
+@userdashboard/maxmind-geoip (1.0.22)
 
 Server handlers:
 @userdashboard/maxmind-geoip/src/server/bind-country.js
