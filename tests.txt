@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.16 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
+> @userdashboard/stripe-connect@1.0.17 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
 > NODE_ENV=testing mocha src --recursive --timeout 240000 --slow 240000
 
 
@@ -877,5 +877,5 @@
       ✓ should update US information
 
 
-  624 passing (1h)
+  624 passing (45m)
 
