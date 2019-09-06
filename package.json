@@ -16,7 +16,8 @@
     "stripe": "^7.8.0"
   },
   "devDependencies": {
-    "@userdashboard/dashboard": "^1.0.30"
+    "@userdashboard/dashboard": "^1.0.30",
+    "puppeteer": "^1.19.0"
   },
   "engines": {
     "node": "8.12.0",
