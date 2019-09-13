@@ -26,7 +26,7 @@ describe('/api/user/connect/beneficial-owner', () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -39,7 +39,7 @@ describe('/api/user/connect/beneficial-owner', () => {
       assert.strictEqual(owner.message, 'invalid-account')
     })
 
-    it('should return owner data', async () => {
+    it('array', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -52,7 +52,7 @@ describe('/api/user/connect/beneficial-owner', () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'

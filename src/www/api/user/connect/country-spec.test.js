@@ -13,7 +13,7 @@ describe('/api/user/connect/country-spec', () => {
       assert.strictEqual(countrySpec.message, 'invalid-country')
     })
 
-    it('should return stripe countrySpec data', async () => {
+    it('array', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/api/user/connect/country-spec?country=US`)
       req.account = user.account

@@ -89,11 +89,7 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-  if (req.query && req.query.returnURL) {
-    const submitForm = doc.getElementById('submit-form')
-    const divider = submitForm.attr.action.indexOf('?') > -1 ? '&' : '?'
-    submitForm.attr.action += `${divider}returnURL=${encodeURI(req.query.returnURL).split('?').join('%3F')}`
-  }
+
   navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
@@ -120,12 +116,14 @@ async function renderPage (req, res, messageTemplate) {
   const removeElements = []
   if (req.data.applicationCountry.id !== 'JP') {
     removeElements.push(
-      'relationship_account_opener_gender',
+      'relationship_account_opener_gender-container',
       'kana-company-information-container', 'kana-company-address-container',
       'kana-personal-information-container', 'kana-personal-address-container',
       'kanji-company-information-container', 'kanji-company-address-container',
       'kanji-personal-information-container', 'kanji-personal-address-container'
     )
+  } else {
+    removeElements.push('personal-address-container')
   }
   for (const field of ['company.address.city', 'company.address.line1', 'company.address.line2', 'company.address.postal_code', 'company.name', 'company.tax_id', 'business_profile.url', 'business_profile.mcc', 'company.phone']) {
     if (req.data.fieldsNeeded.indexOf(field) === -1) {
@@ -137,15 +135,6 @@ async function renderPage (req, res, messageTemplate) {
     removeElements.push('first-upload-container')
   } else {
     removeElements.push('replace-upload-container')
-  }
-  const noPersonalAddress = removeElements.indexOf('relationship_account_opener_line1-container') > -1 &&
-    removeElements.indexOf('relationship_account_opener_address_line2-container') > -1 &&
-    removeElements.indexOf('relationship_account_opener_address_city-container') > -1 &&
-    removeElements.indexOf('relationship_account_opener_address_state-container') > -1 &&
-    removeElements.indexOf('relationship_account_opener_address_postal_code-container') > -1 &&
-    removeElements.indexOf('relationship_account_opener_address_country-container') > -1
-  if (noPersonalAddress) {
-    removeElements.push('personal-information-address-container')
   }
   const noCompanyAddress = removeElements.indexOf('company_address_line1-container') > -1 &&
     removeElements.indexOf('company_address_line2-container') > -1 &&
@@ -225,7 +214,8 @@ async function submitForm (req, res) {
 function formatStateData (divisions) {
   const states = []
   for (const division in divisions) {
-    states.push({ value: division, text: divisions[division], object: 'option' })
+    const code = division.split('-')[1]
+    states.push({ value: code, text: divisions[division], object: 'option' })
   }
   return states
 }

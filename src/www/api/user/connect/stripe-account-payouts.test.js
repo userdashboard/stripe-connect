@@ -1,10 +1,10 @@
-// /* eslint-env mocha */
+/* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/user/connect/stripe-account-payouts`, () => {
   describe('StripeAccountPayouts#GET', () => {
-    it('should return all payouts on Stripe account', async () => {
+    it('array', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -13,7 +13,7 @@ describe(`/api/user/connect/stripe-account-payouts`, () => {
       await TestHelper.createStripeRegistration(user, {
         individual_address_city: 'Auckland',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '6011',
+        individual_address_postal_'secret-code': '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',

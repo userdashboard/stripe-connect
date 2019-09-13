@@ -51,9 +51,11 @@ describe(`/account/connect/edit-payment-information`, async () => {
 
   describe('EditPaymentInformation#POST', () => {
     async function testEachFieldAsNull (req) {
+      const body = JSON.stringify(req.body)
       for (const field in req.body) {
         const value = req.body[field]
-        req.body[field] = null
+        req.body = JSON.parse(body)
+        req.body[field] = ''
         const page = await req.post()
         req.body[field] = value
         const doc = TestHelper.extractDoc(page)
@@ -462,7 +464,7 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_code: '108800'
+        sort_'secret-code': '108800'
       }
       await testEachFieldAsNull(req)
     })
@@ -482,7 +484,7 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_code: '108800'
+        sort_'secret-code': '108800'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -502,7 +504,7 @@ describe(`/account/connect/edit-payment-information`, async () => {
       req.session = user.session
       req.body = {
         currency: 'eur',
-        country: 'EU',
+        country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         iban: 'GB89370400440532013000'
@@ -548,8 +550,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_code: '110',
-        branch_code: '000'
+        clearing_'secret-code': '110',
+        branch_'secret-code': '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -569,8 +571,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_code: '110',
-        branch_code: '000'
+        clearing_'secret-code': '110',
+        branch_'secret-code': '000'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -678,8 +680,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_code: '1100',
-        branch_code: '000'
+        bank_'secret-code': '1100',
+        branch_'secret-code': '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -699,8 +701,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_code: '1100',
-        branch_code: '000'
+        bank_'secret-code': '1100',
+        branch_'secret-code': '000'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -978,8 +980,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_code: '1100',
-        branch_code: '000'
+        bank_'secret-code': '1100',
+        branch_'secret-code': '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -999,8 +1001,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_code: '1100',
-        branch_code: '000'
+        bank_'secret-code': '1100',
+        branch_'secret-code': '000'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

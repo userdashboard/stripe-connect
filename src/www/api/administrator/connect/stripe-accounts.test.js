@@ -5,7 +5,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe(`/api/administrator/connect/stripe-accounts`, () => {
   describe('StripeAccounts#GET', () => {
-    it('should limit Stripe accounts to one page', async () => {
+    it('array', async () => {
       const administrator = await TestHelper.createAdministrator()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const user = await TestHelper.createUser()
@@ -19,7 +19,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           company_phone: '456-123-7890',
           company_address_city: 'New York',
           company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
+          company_address_postal_'secret-code': '10001',
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -31,9 +31,8 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           relationship_account_opener_email: user.profile.contactEmail,
           relationship_account_opener_phone: '456-789-0123',
           relationship_account_opener_address_city: 'New York',
-          //  relationship_account_opener_address_state: 'New York',
           relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_account_opener_address_postal_'secret-code': '10007'
         })
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-accounts`)
@@ -43,7 +42,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
       assert.strictEqual(stripeAccounts.length, global.pageSize)
     })
 
-    it('should enforce page size', async () => {
+    it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
       const administrator = await TestHelper.createAdministrator()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
@@ -58,7 +57,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           company_phone: '456-123-7890',
           company_address_city: 'New York',
           company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
+          company_address_postal_'secret-code': '10001',
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -72,7 +71,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           relationship_account_opener_address_city: 'New York',
           relationship_account_opener_address_state: 'NY',
           relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_account_opener_address_postal_'secret-code': '10007'
         })
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-accounts`)
@@ -82,7 +81,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
       assert.strictEqual(stripeAccounts.length, global.pageSize)
     })
 
-    it('should enforce specified offset', async () => {
+    it('optional querystring offset (integer)', async () => {
       const offset = 1
       const stripeAccounts = []
       const administrator = await TestHelper.createAdministrator()
@@ -98,7 +97,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           company_phone: '456-123-7890',
           company_address_city: 'New York',
           company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
+          company_address_postal_'secret-code': '10001',
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -112,7 +111,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           relationship_account_opener_address_city: 'New York',
           relationship_account_opener_address_state: 'NY',
           relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_account_opener_address_postal_'secret-code': '10007'
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -125,7 +124,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
       }
     })
 
-    it('should return all records', async () => {
+    it('optional querystring all (boolean)', async () => {
       const administrator = await TestHelper.createAdministrator()
       const stripeAccounts = []
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
@@ -140,7 +139,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           company_phone: '456-123-7890',
           company_address_city: 'New York',
           company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
+          company_address_postal_'secret-code': '10001',
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -154,7 +153,7 @@ describe(`/api/administrator/connect/stripe-accounts`, () => {
           relationship_account_opener_address_city: 'New York',
           relationship_account_opener_address_state: 'NY',
           relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_account_opener_address_postal_'secret-code': '10007'
         })
         stripeAccounts.unshift(stripeAccount)
       }

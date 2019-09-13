@@ -1,0 +1,26 @@
+<!doctype html>
+  <html navbar="/account/connect/navbar-company-director.html">
+  <head>
+    <title>Beneficial director ${director.directorid}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <link rel="stylesheet" href="/public/content-additional.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Beneficial director ${director.directorid}</h1>
+    <table id="directors-table" class="pure-table pure-table-striped data-table">
+      <tbody id="${director.directorid}">
+        <tr>
+          <th>ID</th>
+          <td>${director.directorid}</td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <td>${director.relationship_director_first_name} ${director.relationship_director_last_name}</td>
+        </tr>
+      </body>
+    </table>
+  </body>
+</html>

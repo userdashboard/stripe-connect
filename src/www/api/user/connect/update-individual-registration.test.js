@@ -8,7 +8,7 @@ async function testEachFieldAsNull (req) {
     const valueWas = req.body[field]
     req.body[field] = null
     try {
-      await req.route.api.patch(req)
+      await req.patch(req)
     } catch (error) {
       assert.strictEqual(error.message, `invalid-${field}`)
       errors++
@@ -28,7 +28,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -50,7 +50,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -70,7 +70,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -88,7 +88,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
+        individual_address_postal_'secret-code': '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_dob_day: '1',
@@ -118,7 +118,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {}
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -157,7 +157,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Brisbane',
         individual_address_state: 'QLD',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '4000',
+        individual_address_postal_'secret-code': '4000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -199,7 +199,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Vancouver',
         individual_address_state: 'BC',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: 'V5K 0A1',
+        individual_address_postal_'secret-code': 'V5K 0A1',
         individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -422,12 +422,12 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_first_name_kanji: '東京都',
         individual_last_name_kanji: '東京都',
         individual_phone: '011-6789-0123',
-        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_postal_'secret-code': '1500001',
         individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         individual_address_kana_city: 'ｼﾌﾞﾔ',
         individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         individual_address_kana_line1: '27-15',
-        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_postal_'secret-code': '1500001',
         individual_address_kanji_state: '東京都',
         individual_address_kanji_city: '渋谷区',
         individual_address_kanji_town: '神宮前　３丁目',
@@ -505,7 +505,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {
         individual_address_city: 'Auckland',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '6011',
+        individual_address_postal_'secret-code': '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -564,7 +564,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.session = user.session
       req.body = {
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '339696',
+        individual_address_postal_'secret-code': '339696',
         individual_id_number: '00000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -589,7 +589,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
+        individual_address_postal_'secret-code': '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
@@ -640,7 +640,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Brisbane',
         individual_address_state: 'QLD',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '4000',
+        individual_address_postal_'secret-code': '4000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -690,7 +690,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Vancouver',
         individual_address_state: 'BC',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: 'V5K 0A1',
+        individual_address_postal_'secret-code': 'V5K 0A1',
         individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -956,12 +956,12 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_first_name_kanji: '東京都',
         individual_last_name_kanji: '東京都',
         individual_phone: '011-6789-0123',
-        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_postal_'secret-code': '1500001',
         individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         individual_address_kana_city: 'ｼﾌﾞﾔ',
         individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         individual_address_kana_line1: '27-15',
-        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_postal_'secret-code': '1500001',
         individual_address_kanji_state: '東京都',
         individual_address_kanji_city: '渋谷区',
         individual_address_kanji_town: '神宮前　３丁目',
@@ -1055,7 +1055,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {
         individual_address_city: 'Auckland',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '6011',
+        individual_address_postal_'secret-code': '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1126,7 +1126,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.session = user.session
       req.body = {
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '339696',
+        individual_address_postal_'secret-code': '339696',
         individual_id_number: '00000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -1155,7 +1155,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
+        individual_address_postal_'secret-code': '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',

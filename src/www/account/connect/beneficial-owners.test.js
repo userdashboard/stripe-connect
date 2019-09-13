@@ -48,7 +48,7 @@ describe(`/account/connect/beneficial-owners`, () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_postal_'secret-code': '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -75,7 +75,7 @@ describe(`/account/connect/beneficial-owners`, () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_postal_'secret-code': '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -109,10 +109,10 @@ describe(`/account/connect/beneficial-owners`, () => {
         relationship_account_opener_dob_year: '1950',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
+        company_address_postal_'secret-code': '01067',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_code: '01067'
+        relationship_account_opener_address_postal_'secret-code': '01067'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',

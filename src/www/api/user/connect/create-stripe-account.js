@@ -1,6 +1,7 @@
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
+stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -8,7 +9,8 @@ module.exports = {
     if (!req.query || !req.query.accountid) {
       throw new Error('invalid-accountid')
     }
-    if (req.query.accountid !== req.account.accountid) {
+    const account = await global.api.user.Account.get(req)
+    if (!account) {
       throw new Error('invalid-account')
     }
     if (!req.body || (req.body.type !== 'individual' && req.body.type !== 'company')) {

@@ -1,19 +1,19 @@
 /* eslint-env mocha */
 global.applicationPath = global.applicationPath || __dirname
+global.stripeAPIVersion = '2019-08-14'
+global.maximumStripeRetries = 2
+global.connectWebhookEndPointSecret = true
 
 const fs = require('fs')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-const testData = require('@userdashboard/dashboard/test-data.json')
+stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 const util = require('util')
-
 const stripeKey = {
   api_key: process.env.STRIPE_KEY
 }
 
 const TestHelper = require('@userdashboard/dashboard/test-helper.js')
-let testDataIndex = 0
-
 const wait = util.promisify((callback) => {
   return setTimeout(callback, 100)
 })
@@ -33,19 +33,23 @@ module.exports = {
   waitForPayout: util.promisify(waitForPayout),
   'success_id_scan_front.png': {
     filename: 'id_scan_front.png',
-    buffer: fs.readFileSync(`${__dirname}/test-documentid-success.png`)
+    name: 'id_scan_front.png',
+    path: `${__dirname}/test-documentid-success.png`
   },
   'fail_id_scan_front.png': {
     filename: 'id_scan_front.png',
-    buffer: fs.readFileSync(`${__dirname}/test-documentid-failed.png`)
+    name: 'id_scan_front.png',
+    path: `${__dirname}/test-documentid-failed.png`
   },
   'success_id_scan_back.png': {
     filename: 'id_scan_back.png',
-    buffer: fs.readFileSync(`${__dirname}/test-documentid-success.png`)
+    name: 'id_scan_back.png',
+    path: `${__dirname}/test-documentid-success.png`
   },
   'fail_id_scan_back.png': {
     filename: 'id_scan_back.png',
-    buffer: fs.readFileSync(`${__dirname}/test-documentid-failed.png`)
+    name: 'id_scan_back.png',
+    path: `${__dirname}/test-documentid-failed.png`
   }
 }
 
@@ -53,9 +57,30 @@ for (const x in TestHelper) {
   module.exports[x] = TestHelper[x]
 }
 
+before (async () =>{
+  const webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  if (webhooks.data && webhooks.data.length) {
+    for (const webhook of webhooks.data) {
+      await stripe.webhookEndpoints.del(webhook.id, stripeKey)
+    }
+  }
+  const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
+  const eventList = []
+  for (const event of events) {
+    eventList.push(event.substring(0, event.indexOf('.js')))
+  }
+  const webhook = await stripe.webhookEndpoints.create({
+    connect: true,
+    url: `${global.dashboardServer}/webhooks/connect/index-connect-data`,
+    enabled_events: eventList
+  }, stripeKey)
+  global.connectWebhookEndPointSecret = webhook.secret
+})
+
 const helperRoutes = require('./test-helper-routes.js')
+
 beforeEach((callback) => {
-  global.sitemap['/fake-payout'] = helperRoutes.fakePayout
+  global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   return callback()
 })
 
@@ -77,7 +102,7 @@ async function createStripeAccount (user, properties) {
   req.session = user.session
   req.account = user.account
   req.body = properties
-  user.stripeAccount = await req.post(req)
+  user.stripeAccount = await req.post()
   return user.stripeAccount
 }
 
@@ -92,17 +117,15 @@ async function createStripeRegistration (user, properties) {
     }
   } else {
     req.uploads = {
-      relationship_account_opener_verification_document_front: module.exports['success_id_scan_front.png'],
-      relationship_account_opener_verification_document_back: module.exports['success_id_scan_back.png']
+      account_opener_verification_document_front: module.exports['success_id_scan_front.png'],
+      account_opener_verification_document_back: module.exports['success_id_scan_back.png']
     }
   }
   req.body = createMultiPart(req, properties)
-  user.stripeAccount = await req.patch(req)
+  user.stripeAccount = await req.patch()
   return user.stripeAccount
 }
 
-// via https://github.com/coolaj86/node-examples-js/blob/master/http-and-html5/http-upload.js
-// creating a stripe account requires posting an id image in a multipart payload
 function createMultiPart (req, body) {
   const boundary = '-----------------test' + global.testNumber
   const delimiter = `\r\n--${boundary}`
@@ -117,7 +140,7 @@ function createMultiPart (req, body) {
       `Content-Type: ${type}`,
       '\r\n'
     ]
-    buffers.push(Buffer.from(segment.join('\r\n')), req.uploads[field].buffer, Buffer.from('\r\n'))
+    buffers.push(Buffer.from(segment.join('\r\n')), fs.readFileSync(req.uploads[field].path), Buffer.from('\r\n'))
   }
   for (const field in body) {
     buffers.push(Buffer.from(`${delimiter}\r\nContent-Disposition: form-data; name="${field}"\r\n\r\n${body[field]}`))
@@ -135,7 +158,7 @@ async function createExternalAccount (user, details) {
   req.session = user.session
   req.account = user.account
   req.body = details
-  user.stripeAccount = await req.patch(req)
+  user.stripeAccount = await req.patch()
   return user.stripeAccount.external_accounts.data[0]
 }
 
@@ -148,7 +171,7 @@ async function createBeneficialOwner (user, properties) {
     relationship_owner_verification_document_back: module.exports['success_id_scan_back.png']
   }
   req.body = createMultiPart(req, properties)
-  const owner = await req.post(req)
+  const owner = await req.post()
   user.owner = owner
   return owner
 }
@@ -162,13 +185,13 @@ async function createCompanyDirector (user, properties) {
     relationship_director_verification_document_back: module.exports['success_id_scan_back.png']
   }
   req.body = createMultiPart(req, properties)
-  const director = await req.post(req)
+  const director = await req.post()
   user.director = director
   return director
 }
 
 async function createPayout (user) {
-  const req = TestHelper.createRequest(`/fake-payout?stripeid=${user.stripeAccount.id}`)
+  const req = TestHelper.createRequest(`/api/fake-payout?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   await req.get()
@@ -195,7 +218,7 @@ async function submitStripeAccount (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-${user.stripeAccount.business_type}-registration-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  const stripeAccount = await req.patch(req)
+  const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
   return stripeAccount
 }
@@ -210,7 +233,7 @@ async function waitForPayout (stripeid, previousid, callback) {
       return
     }
     const req = module.exports.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${stripeid}&limit=1`)
-    const itemids = await req.route.api.get(req)
+    const itemids = await req.get()
     if (!itemids || !itemids.length) {
       return setTimeout(wait, 100)
     }
@@ -229,7 +252,7 @@ async function waitForVerification (stripeid, callback) {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey) // await req.route.api.get(req)
+    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey)
     if (stripeAccount.business_type === 'individual') {
       if (!stripeAccount.payouts_enabled ||
           !stripeAccount.individual.verification ||
@@ -255,7 +278,7 @@ async function waitForVerificationFailure (stripeid, callback) {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey) // await req.route.api.get(req)
+    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey)
     if (stripeAccount.business_type === 'individual') {
       if (stripeAccount.payouts_enabled ||
         stripeAccount.individual.disabled_reason.status !== 'requirements.pending_verification') {

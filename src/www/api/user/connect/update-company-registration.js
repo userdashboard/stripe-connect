@@ -1,6 +1,7 @@
 const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
+stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -56,9 +57,9 @@ module.exports = {
       openerFields.splice(openerFields.indexOf('address_city'), 1)
       openerFields.splice(openerFields.indexOf('address_state'), 1)
       openerFields.splice(openerFields.indexOf('address_country'), 1)
-      openerFields.push('gender')
-      openerFields.push('first_name_kana', 'last_name_kana', 'address_kana_state', 'address_kana_city', 'address_kana_town', 'address_kana_line1', 'address_kana_postal_code')
-      openerFields.push('first_name_kanji', 'last_name_kanji', 'address_kanji_state', 'address_kanji_city', 'address_kanji_town', 'address_kanji_line1', 'address_kanji_postal_code')
+      openerFields.push('gender',
+                        'first_name_kana', 'last_name_kana', 'address_kana_state', 'address_kana_city', 'address_kana_town', 'address_kana_line1', 'address_kana_postal_code',
+                        'first_name_kanji', 'last_name_kanji', 'address_kanji_state', 'address_kanji_city', 'address_kanji_town', 'address_kanji_line1', 'address_kanji_postal_code')
     }
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
     for (const field of requiredFields) {
@@ -89,7 +90,7 @@ module.exports = {
         }
         if (req.body.relationship_account_opener_verification_document_back) {
           registration.relationship_account_opener_verification_document_back = req.body.relationship_account_opener_verification_document_back
-        } 
+        }
         if (req.body.relationship_account_opener_title) {
           registration.relationship_account_opener_title = req.body.relationship_account_opener_title
         }

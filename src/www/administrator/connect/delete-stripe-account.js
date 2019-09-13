@@ -45,11 +45,7 @@ async function renderPage (req, res, messageTemplate) {
     const individualName = doc.getElementById('individual-name')
     individualName.parentNode.removeChild(individualName)
   }
-  if (req.query && req.query.returnURL) {
-    const submitForm = doc.getElementById('submit-form')
-    const divider = submitForm.attr.action.indexOf('?') > -1 ? '&' : '?'
-    submitForm.attr.action += `${divider}returnURL=${encodeURI(req.query.returnURL).split('?').join('%3F')}`
-  }
+
   if (messageTemplate) {
     if (messageTemplate === 'success') {
       dashboard.HTML.renderTemplate(doc, null, 'success', 'message-container')

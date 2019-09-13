@@ -32,7 +32,7 @@ describe('/api/user/connect/company-director', () => {
       assert.strictEqual(director.message, 'invalid-account')
     })
 
-    it('should return director data', async () => {
+    it('array', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',

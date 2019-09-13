@@ -1,0 +1,39 @@
+<!doctype html>
+<html navbar="/account/connect/navbar-company-director.html">
+  <head>
+    <title>Delete ${director.directorid}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <link rel="stylesheet" href="/public/content-additional.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Delete ${director.directorid}</h1>
+    <p>The director information will be deleted immediately and cannot be recovered.</p>
+    <div id="message-container"></div>
+    <table id="directors-table" class="pure-table object-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="${director.directorid}">
+          <td>${director.directorid}</td>
+          <td>${director.relationship_director_first_name} ${director.relationship_director_last_name}</td>
+        </tr>
+      </thead>
+    </table>
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/delete-company-director?directorid=${director.directorid}">
+      <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
+    </form>
+  </body>
+  <template id="success">
+    <div class="success message">Success! The company director has been deleted</div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message">Error! An error ocurred deleting the company director</div>
+  </template>
+</html>

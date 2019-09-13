@@ -16,14 +16,14 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -43,7 +43,7 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -58,14 +58,14 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -85,7 +85,7 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -99,7 +99,7 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -109,7 +109,7 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
         const valueWas = req.body[field]
         req.body[field] = null
         try {
-          await req.route.api.patch(req)
+          await req.patch(req)
         } catch (error) {
           assert.strictEqual(error.message, `invalid-${field}`)
           errors++
@@ -132,7 +132,7 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -146,12 +146,12 @@ describe(`/api/user/connect/update-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
-      const ownerNow = await req.patch(req)
+      const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_first_name, 'Modified name')
     })
   })

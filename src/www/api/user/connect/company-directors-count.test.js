@@ -40,7 +40,7 @@ describe('/api/user/connect/company-directors-count', () => {
       assert.strictEqual(directors.message, 'invalid-account')
     })
 
-    it('should return count of directors', async () => {
+    it('integer', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',

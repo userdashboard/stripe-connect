@@ -11,7 +11,7 @@ describe(`/api/user/connect/delete-company-director`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.delete(req)
+        await req.delete()
       } catch (error) {
         errorMessage = error.message
       }
@@ -35,7 +35,7 @@ describe(`/api/user/connect/delete-company-director`, async () => {
       req.session = user2.session
       let errorMessage
       try {
-        await req.route.api.delete(req)
+        await req.delete()
       } catch (error) {
         errorMessage = error.message
       }
@@ -56,7 +56,7 @@ describe(`/api/user/connect/delete-company-director`, async () => {
       const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)
       req.account = user.account
       req.session = user.session
-      await req.delete(req)
+      await req.delete()
       const req2 = TestHelper.createRequest(`/api/user/connect/company-director?directorid=${director.directorid}`)
       req2.account = user.account
       req2.session = user.session

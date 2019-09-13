@@ -16,7 +16,7 @@ describe(`/api/user/connect/update-company-director`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -44,7 +44,7 @@ describe(`/api/user/connect/update-company-director`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -74,7 +74,7 @@ describe(`/api/user/connect/update-company-director`, async () => {
         const valueWas = req.body[field]
         req.body[field] = null
         try {
-          await req.route.api.patch(req)
+          await req.patch(req)
         } catch (error) {
           assert.strictEqual(error.message, `invalid-${field}`)
           errors++
@@ -102,7 +102,7 @@ describe(`/api/user/connect/update-company-director`, async () => {
         relationship_director_first_name: 'Modified name',
         relationship_director_last_name: person.lastName
       }
-      const directorNow = await req.patch(req)
+      const directorNow = await req.patch()
       assert.strictEqual(directorNow.relationship_director_first_name, 'Modified name')
     })
   })

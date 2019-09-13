@@ -8,7 +8,7 @@ async function testEachFieldAsNull (req) {
     const valueWas = req.body[field]
     req.body[field] = null
     try {
-      await req.route.api.patch(req)
+      await req.patch(req)
     } catch (error) {
       assert.strictEqual(error.message, `invalid-${field}`)
       errors++
@@ -31,11 +31,11 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_code: '108800'
+        sort_'secret-code': '108800'
       }
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -58,11 +58,11 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_code: '108800'
+        sort_'secret-code': '108800'
       }
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -277,7 +277,7 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_code: '108800'
+        sort_'secret-code': '108800'
       }
       await testEachFieldAsNull(req)
     })
@@ -316,8 +316,8 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_code: '110',
-        branch_code: '000'
+        clearing_'secret-code': '110',
+        branch_'secret-code': '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -375,8 +375,8 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_code: '1100',
-        branch_code: '000'
+        bank_'secret-code': '1100',
+        branch_'secret-code': '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -511,8 +511,8 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_code: '1100',
-        branch_code: '000'
+        bank_'secret-code': '1100',
+        branch_'secret-code': '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -755,7 +755,7 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_code: '108800'
+        sort_'secret-code': '108800'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
@@ -796,8 +796,8 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_code: '110',
-        branch_code: '000'
+        clearing_'secret-code': '110',
+        branch_'secret-code': '000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
@@ -858,8 +858,8 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_code: '1100',
-        branch_code: '000'
+        bank_'secret-code': '1100',
+        branch_'secret-code': '000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
@@ -1000,8 +1000,8 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_code: '1100',
-        branch_code: '000'
+        bank_'secret-code': '1100',
+        branch_'secret-code': '000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)

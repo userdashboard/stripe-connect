@@ -15,7 +15,7 @@ describe(`/api/user/connect/create-stripe-account`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -33,7 +33,7 @@ describe(`/api/user/connect/create-stripe-account`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }

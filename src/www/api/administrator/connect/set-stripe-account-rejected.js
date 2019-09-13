@@ -1,5 +1,6 @@
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
+stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {

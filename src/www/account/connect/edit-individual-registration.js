@@ -58,11 +58,7 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-  if (req.query && req.query.returnURL) {
-    const submitForm = doc.getElementById('submit-form')
-    const divider = submitForm.attr.action.indexOf('?') > -1 ? '&' : '?'
-    submitForm.attr.action += `${divider}returnURL=${encodeURI(req.query.returnURL).split('?').join('%3F')}`
-  }
+
   navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
@@ -79,6 +75,7 @@ async function renderPage (req, res, messageTemplate) {
   const removeElements = []
   if (req.data.applicationCountry.id !== 'JP') {
     removeElements.push(
+      'individual_gender-container',
       'kana-personal-information-container',
       'kanji-personal-information-container',
       'kana-personal-address-container',
@@ -90,7 +87,6 @@ async function renderPage (req, res, messageTemplate) {
       'personal-address-container'
     )
   }
-  // remove unrequired fields
   const removableFields = [
     'business_profile_url',
     'business_profile_mcc',
@@ -120,13 +116,10 @@ async function renderPage (req, res, messageTemplate) {
     const name = parts[parts.length - 1]
     switch (name) {
       case 'day':
-      // case 'month':
-      // case 'year':
         removeElements.push(`dob-container`)
         continue
       case 'email':
       case 'phone':
-      case 'gender':
       case 'id_number':
       case 'ssn_last_4':
         removeElements.push(`${name}-container`)
@@ -202,7 +195,8 @@ async function submitForm (req, res) {
 function formatStateData (divisions) {
   const states = []
   for (const division in divisions) {
-    states.push({ value: division, text: divisions[division], object: 'option' })
+    const code = division.split('-')[1]
+    states.push({ value: code, text: divisions[division], object: 'option' })
   }
   return states
 }

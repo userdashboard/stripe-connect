@@ -20,7 +20,7 @@ describe(`/api/user/connect/stripe-accounts`, () => {
       assert.strictEqual(stripeAccounts.length, global.pageSize)
     })
 
-    it('should enforce page size', async () => {
+    it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
@@ -36,7 +36,7 @@ describe(`/api/user/connect/stripe-accounts`, () => {
       assert.strictEqual(stripeAccounts.length, global.pageSize)
     })
 
-    it('should enforce specified offset', async () => {
+    it('optional querystring offset (integer)', async () => {
       const offset = 1
       const stripeAccounts = []
       const user = await TestHelper.createUser()
@@ -56,7 +56,7 @@ describe(`/api/user/connect/stripe-accounts`, () => {
       }
     })
 
-    it('should return all records', async () => {
+    it('optional querystring all (boolean)', async () => {
       const user = await TestHelper.createUser()
       const stripeAccounts = []
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {

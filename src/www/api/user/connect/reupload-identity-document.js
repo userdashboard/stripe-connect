@@ -1,5 +1,6 @@
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
+stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 
 module.exports = {
   patch: async (req) => {

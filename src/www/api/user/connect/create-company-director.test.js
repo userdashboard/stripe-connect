@@ -21,7 +21,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -48,7 +48,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -76,7 +76,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -102,10 +102,10 @@ describe(`/api/user/connect/create-company-director`, async () => {
         relationship_account_opener_dob_year: '1950',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
+        company_address_postal_'secret-code': '01067',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_code: '01067'
+        relationship_account_opener_address_postal_'secret-code': '01067'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -129,7 +129,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -159,7 +159,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
         const valueWas = req.body[field]
         req.body[field] = null
         try {
-          await req.route.api.post(req)
+          await req.post()
         } catch (error) {
           assert.strictEqual(error.message, `invalid-${field}`)
           errors++
@@ -187,7 +187,7 @@ describe(`/api/user/connect/create-company-director`, async () => {
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName
       })
-      await req.post(req)
+      await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
       const directorsNow = connect.MetaData.parse(stripeAccountNow.metadata, 'directors')
       assert.strictEqual(directorsNow.length, 1)

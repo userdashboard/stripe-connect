@@ -5,7 +5,8 @@ module.exports = {
     if (!req.query || !req.query.accountid) {
       throw new Error('invalid-accountid')
     }
-    if (req.query.accountid !== req.account.accountid) {
+    const account = await global.api.user.Account.get(req)
+    if (!account) {
       throw new Error('invalid-account')
     }
     return dashboard.StorageList.count(`${req.appid}/account/stripeAccounts/${req.query.accountid}`)

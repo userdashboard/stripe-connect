@@ -34,7 +34,7 @@ Check `start-dev.sh` to see the rest of the `env` variables that configure Dashb
 
     $ STRIPE_KEY=sk_test_xxxxx \
       STRIPE_PUBLISHABLE_KEY=pk_test_xxxx \
-      CONNECT_ENDPOINT_SECRET=whsec_xxxxxx \
+      CONNECT_WEBHOOK_ENDPOINT_SECRET=whsec_xxxxxx \
       node main.js
 
 # Dashboard

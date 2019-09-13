@@ -3,7 +3,6 @@ const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU',
 module.exports = {
   setup: (doc, stripeAccount) => {
     const template = doc.getElementById('navbar')
-    // completed registration
     if (stripeAccount.metadata.submitted) {
       const editCompany = template.getElementById('navbar-edit-company')
       editCompany.parentNode.removeChild(editCompany)
@@ -17,7 +16,6 @@ module.exports = {
       companyOwners.parentNode.removeChild(companyOwners)
       return
     }
-    // in progress
     if (stripeAccount.business_type === 'individual') {
       const editCompany = template.getElementById('navbar-edit-company')
       editCompany.parentNode.removeChild(editCompany)

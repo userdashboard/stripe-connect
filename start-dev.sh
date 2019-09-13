@@ -4,16 +4,15 @@ PORT=$CONNECT_DASHBOARD_SERVER_PORT \
 DOMAIN="$CONNECT_DOMAIN" \
 STRIPE_KEY="$CONNECT_STRIPE_KEY" \
 STRIPE_PUBLISHABLE_KEY="$CONNECT_STRIPE_PUBLISHABLE_KEY" \
-CONNECT_ENDPOINT_SECRET="$CONNECT_CONNECT_ENDPOINT_SECRET" \
 STRIPE_JS="false" \
 IP="0.0.0.0" \
 STORAGE_PATH=/tmp/connect \
-node main.js
+node main.js --debug-brk=5858
 
 # Connect module startup parameters
 # These ENV variables let you tweak certain parts of the Connect module to your preference.
 
-# CONNECT_ENDPOINT_SECRET=whsec_xxxxxxx
+# CONNECT_WEBHOOK_ENDPOINT_SECRET=whsec_xxxxxxx
 # string received from Stripe
 # used to verify webhooks received from stripe
 

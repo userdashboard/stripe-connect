@@ -30,11 +30,7 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-  if (req.query && req.query.returnURL) {
-    const submitForm = doc.getElementById('submit-form')
-    const divider = submitForm.attr.action.indexOf('?') > -1 ? '&' : '?'
-    submitForm.attr.action += `${divider}returnURL=${encodeURI(req.query.returnURL).split('?').join('%3F')}`
-  }
+
   navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
   if (!req.data.stripeAccount || messageTemplate === 'success') {
     dashboard.HTML.renderTemplate(doc, null, 'success', 'message-container')

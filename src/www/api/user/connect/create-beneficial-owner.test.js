@@ -21,14 +21,14 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -55,14 +55,14 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -90,14 +90,14 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -123,10 +123,10 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         relationship_account_opener_dob_year: '1950',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
+        company_address_postal_'secret-code': '01067',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_code: '01067'
+        relationship_account_opener_address_postal_'secret-code': '01067'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -150,14 +150,14 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
       let errorMessage
       try {
-        await req.route.api.post(req)
+        await req.post()
       } catch (error) {
         errorMessage = error.message
       }
@@ -183,7 +183,7 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -193,7 +193,7 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         const valueWas = req.body[field]
         req.body[field] = null
         try {
-          await req.route.api.post(req)
+          await req.post()
         } catch (error) {
           assert.strictEqual(error.message, `invalid-${field}`)
           errors++
@@ -223,12 +223,12 @@ describe(`/api/user/connect/create-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       })
-      await req.post(req)
+      await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
       const ownersNow = connect.MetaData.parse(stripeAccountNow.metadata, 'owners')
       assert.strictEqual(ownersNow.length, 1)

@@ -90,7 +90,6 @@ async function renderPage (req, res) {
       removeElements.push(`business-name`)
     }
   }
-  // registration can be submitted, ready to submit, or not started
   if (req.data.stripeAccount.metadata.submitted) {
     removeElements.push('registration-container')
   } else if (req.data.registrationComplete) {
@@ -110,7 +109,6 @@ async function renderPage (req, res) {
       removeElements.push('start-individual-registration-link')
     }
   }
-  // payment details
   const completedPaymentInformation = req.data.stripeAccount.external_accounts.data.length
   if (completedPaymentInformation) {
     removeElements.push('setup-payment')
@@ -140,7 +138,6 @@ async function renderPage (req, res) {
       removeElements.push('directors-table')
     }
   }
-  // submission status
   if (req.data.stripeAccount.metadata.submitted) {
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'submitted-information', 'submission-status')
     removeElements.push('submit-registration-link-container')

@@ -30,7 +30,7 @@ describe(`/account/connect/create-company-director`, async () => {
         company_address_country: 'DE',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
+        company_address_postal_'secret-code': '01067',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
         relationship_account_opener_email: user.profile.contactEmail,
@@ -40,7 +40,7 @@ describe(`/account/connect/create-company-director`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_code: '01067'
+        relationship_account_opener_address_postal_'secret-code': '01067'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -114,23 +114,21 @@ describe(`/account/connect/create-company-director`, async () => {
         'relationship_director_verification_document_back'
       ]
       for (const field of fields) {
-        const uploads = {
+        req.uploads = {
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         }
         const person = TestHelper.nextIdentity()
-        const body = {
+        req.body = {
           relationship_director_first_name: person.firstName,
           relationship_director_last_name: person.lastName
         }
-        if (uploads[field]) {
-          delete (uploads[field])
+        if (req.uploads[field]) {
+          delete (req.uploads[field])
         }
-        if (body[field]) {
-          delete (body[field])
+        if (req.body[field]) {
+          delete (req.body[field])
         }
-        req.uploads = uploads
-        req.body = TestHelper.createMultiPart(req, body)
         const page = await req.post()
         const doc = TestHelper.extractDoc(page)
         const messageContainer = doc.getElementById('message-container')
@@ -152,10 +150,10 @@ describe(`/account/connect/create-company-director`, async () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const person = TestHelper.nextIdentity()
-      req.body = TestHelper.createMultiPart(req, {
+      req.body = {
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName
-      })
+      }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
@@ -176,10 +174,10 @@ describe(`/account/connect/create-company-director`, async () => {
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const person = TestHelper.nextIdentity()
-      req.body = TestHelper.createMultiPart(req, {
+      req.body = {
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName
-      })
+      }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
@@ -201,10 +199,10 @@ describe(`/account/connect/create-company-director`, async () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const person = TestHelper.nextIdentity()
-      req.body = TestHelper.createMultiPart(req, {
+      req.body = {
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName
-      })
+      }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')

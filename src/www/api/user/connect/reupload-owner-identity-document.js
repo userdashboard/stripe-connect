@@ -1,5 +1,6 @@
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
+stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 
 module.exports = {
   patch: async (req) => {
@@ -16,7 +17,6 @@ module.exports = {
         stripeAccount.business_type === 'individual') {
         continue
       }
-      // find an owner that needs reuploading
       let ownerIndex = -1
       for (const i in stripeAccount.legal_entity.additional_owners) {
         const owner = stripeAccount.legal_entity.additional_owners[i]
@@ -29,7 +29,6 @@ module.exports = {
       if (ownerIndex === -1) {
         throw new Error('invalid-stripe-account')
       }
-      // verify the registration information ownerid
       const owners = await global.api.user.connect.BeneficialOwners.get(req)
       if (owners && owners.length) {
         for (const i in owners) {

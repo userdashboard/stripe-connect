@@ -11,7 +11,7 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
       req.session = user.session
       let errorMessage
       try {
-        await req.route.api.delete(req)
+        await req.delete()
       } catch (error) {
         errorMessage = error.message
       }
@@ -37,10 +37,10 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
         relationship_account_opener_dob_year: '1950',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
+        company_address_postal_'secret-code': '01067',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_code: '01067'
+        relationship_account_opener_address_postal_'secret-code': '01067'
       })
       const person = TestHelper.nextIdentity()
       const owner = await TestHelper.createBeneficialOwner(user, {
@@ -49,7 +49,7 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -60,7 +60,7 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
       req.session = user2.session
       let errorMessage
       try {
-        await req.route.api.delete(req)
+        await req.delete()
       } catch (error) {
         errorMessage = error.message
       }
@@ -86,10 +86,10 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
         relationship_account_opener_dob_year: '1950',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
+        company_address_postal_'secret-code': '01067',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_code: '01067'
+        relationship_account_opener_address_postal_'secret-code': '01067'
       })
       const person = TestHelper.nextIdentity()
       const owner = await TestHelper.createBeneficialOwner(user, {
@@ -98,7 +98,7 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -106,7 +106,7 @@ describe(`/api/user/connect/delete-beneficial-owner`, async () => {
       const req = TestHelper.createRequest(`/api/user/connect/delete-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
       req.session = user.session
-      await req.delete(req)
+      await req.delete()
       const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?ownerid=${owner.ownerid}`)
       req2.account = user.account
       req2.session = user.session

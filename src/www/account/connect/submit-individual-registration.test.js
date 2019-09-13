@@ -34,11 +34,11 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         company_address_city: 'New York',
         company_address_state: 'New York',
         company_address_line1: 'First Street',
-        company_address_postal_code: '10001',
+        company_address_postal_'secret-code': '10001',
         relationship_account_opener_ssn_last_4: '0000',
         relationship_account_opener_address_city: 'New York',
         relationship_account_opener_address_state: 'NY',
-        relationship_account_opener_address_postal_code: '10007',
+        relationship_account_opener_address_postal_'secret-code': '10007',
         relationship_account_opener_address_line1: 'First Street',
         relationship_account_opener_id_number: '000000000',
         relationship_account_opener_first_name: user.profile.firstName,
@@ -77,7 +77,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         individual_address_city: 'New York',
         individual_id_number: '000000000',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
+        individual_address_postal_'secret-code': '10007',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -116,7 +116,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         individual_phone: '456-789-0123',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
+        individual_address_postal_'secret-code': '10007',
         individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -140,9 +140,8 @@ describe(`/account/connect/submit-individual-registration`, async () => {
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
-  })
 
-  describe('SubmitIndividualRegistration#POST', () => {
+
     it('should reject registration that hasn\'t submitted payment details', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -158,7 +157,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         individual_phone: '456-789-0123',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
+        individual_address_postal_'secret-code': '10007',
         individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -169,13 +168,15 @@ describe(`/account/connect/submit-individual-registration`, async () => {
       const req = TestHelper.createRequest(`/account/connect/submit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.post()
+      const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'invalid-payment-details')
     })
+  })
 
+  describe('SubmitIndividualRegistration#POST', () => {
     it('should submit registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -191,7 +192,7 @@ describe(`/account/connect/submit-individual-registration`, async () => {
         individual_phone: '456-789-0123',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
+        individual_address_postal_'secret-code': '10007',
         individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',

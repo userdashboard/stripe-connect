@@ -29,7 +29,7 @@ describe(`/account/connect/submit-company-registration`, async () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
+        individual_address_postal_'secret-code': '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -65,7 +65,7 @@ describe(`/account/connect/submit-company-registration`, async () => {
         company_phone: '456-123-7890',
         company_address_city: 'New York',
         company_address_line1: '123 Park Lane',
-        company_address_postal_code: '10001',
+        company_address_postal_'secret-code': '10001',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -80,7 +80,7 @@ describe(`/account/connect/submit-company-registration`, async () => {
         relationship_account_opener_address_city: 'New York',
         relationship_account_opener_address_state: 'NY',
         relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
+        relationship_account_opener_address_postal_'secret-code': '10007'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'usd',
@@ -111,7 +111,7 @@ describe(`/account/connect/submit-company-registration`, async () => {
         company_phone: '456-123-7890',
         company_address_city: 'New York',
         company_address_line1: '123 Park Lane',
-        company_address_postal_code: '10001',
+        company_address_postal_'secret-code': '10001',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -126,7 +126,7 @@ describe(`/account/connect/submit-company-registration`, async () => {
         relationship_account_opener_address_city: 'New York',
         relationship_account_opener_address_state: 'NY',
         relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
+        relationship_account_opener_address_postal_'secret-code': '10007'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'usd',
@@ -144,9 +144,7 @@ describe(`/account/connect/submit-company-registration`, async () => {
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
-  })
 
-  describe('SubmitCompanyRegistration#POST', () => {
     it('should reject registration that hasn\'t submitted payment details', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -159,7 +157,7 @@ describe(`/account/connect/submit-company-registration`, async () => {
         company_phone: '456-123-7890',
         company_address_city: 'New York',
         company_address_line1: '123 Park Lane',
-        company_address_postal_code: '10001',
+        company_address_postal_'secret-code': '10001',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -174,18 +172,20 @@ describe(`/account/connect/submit-company-registration`, async () => {
         relationship_account_opener_address_city: 'New York',
         relationship_account_opener_address_state: 'NY',
         relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
+        relationship_account_opener_address_postal_'secret-code': '10007'
       })
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.post()
+      const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'invalid-payment-details')
     })
+  })
 
+  describe('SubmitCompanyRegistration#POST', () => {
     it('should submit registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -197,8 +197,8 @@ describe(`/account/connect/submit-company-registration`, async () => {
         company_tax_id: '8',
         company_phone: '456-123-7890',
         company_address_city: 'New York',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '10001',
+        company_address_line1: '285 Fulton St',
+        company_address_postal_'secret-code': '10007',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -211,9 +211,8 @@ describe(`/account/connect/submit-company-registration`, async () => {
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_ssn_last_4: '0000',
         relationship_account_opener_address_city: 'New York',
-        relationship_account_opener_address_state: 'NY',
         relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
+        relationship_account_opener_address_postal_'secret-code': '10007'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'usd',

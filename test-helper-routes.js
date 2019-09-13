@@ -1,10 +1,7 @@
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
+stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 
-// Generating an amount owed when creating documentation screenshots
-// and tests require the user have an outstanding balance sometimes
-// which isn't possible until a subscription bill comes due so this
-// creates a contrived amount
 module.exports = {
   fakePayout: {
     api: {

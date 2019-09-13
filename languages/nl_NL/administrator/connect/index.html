@@ -1,0 +1,78 @@
+<!doctype html>
+<html navbar="/administrator/connect/navbar.html">
+  <head>
+    <title>Connect administration</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <link rel="stylesheet" href="/public/content-additional.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Connect administration</h1>
+    <div id="registrations-container">
+      <h2>Recent registrations</h2>
+      <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </body>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td><a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+    </tr>
+  </template>
+  <template id="not-submitted">
+    <span>Not submitted yet</span>
+  </template>
+  <template id="verified">
+    <span>Registration has been accepted</span>
+  </template>
+  <template id="verified">
+    <span>Disabled by Stripe</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span>Requires additional information</span>
+  </template>
+  <template id="requirements.past_due">
+    <span>Requires additional information</span>
+  </template>
+  <template id="pending-submission">
+    <span>Pending submission</span>
+  </template>
+  <template id="rejected.fraud">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms_of_service">
+    <span>Rejected for terms of service violation</span>
+  </template>
+  <template id="rejected.listed">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span>More information is required</span>
+  </template>
+  <template id="listed">
+    <span>Under review by Stripe</span>
+  </template>
+  <template id="under-review">
+    <span>Under review by Stripe</span>
+  </template>
+  <template id="disabled">
+    <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</html>

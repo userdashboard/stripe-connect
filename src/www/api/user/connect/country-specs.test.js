@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/country-specs', () => {
   describe('CountrySpecs#GET', () => {
-    it('should return stripe countrySpec list', async () => {
+    it('array', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/api/user/connect/country-specs`)
       req.account = user.account

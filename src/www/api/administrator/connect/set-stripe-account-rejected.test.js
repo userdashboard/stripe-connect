@@ -14,7 +14,7 @@ describe(`/api/administrator/connect/set-stripe-account-rejected`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -31,7 +31,7 @@ describe(`/api/administrator/connect/set-stripe-account-rejected`, async () => {
       }
       let errorMessage
       try {
-        await req.route.api.patch(req)
+        await req.patch(req)
       } catch (error) {
         errorMessage = error.message
       }
@@ -48,12 +48,12 @@ describe(`/api/administrator/connect/set-stripe-account-rejected`, async () => {
       await TestHelper.createStripeRegistration(user, {
         company_address_city: 'Bern',
         company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
+        company_address_postal_'secret-code': '1020',
         company_name: 'Company',
         company_tax_id: '8',
         relationship_account_opener_address_city: 'Bern',
         relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020',
+        relationship_account_opener_address_postal_'secret-code': '1020',
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
