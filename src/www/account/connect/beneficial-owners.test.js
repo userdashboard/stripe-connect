@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect/beneficial-owners`, () => {
+describe('/account/connect/beneficial-owners', () => {
   describe('BeneficialOwners#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=invalid`)
+      const req = TestHelper.createRequest('/account/connect/beneficial-owners?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage

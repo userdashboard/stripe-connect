@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect/create-beneficial-owner`, async () => {
+describe('/account/connect/create-beneficial-owner', async () => {
   describe('CreateBeneficialOwner#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=invalid`)
+      const req = TestHelper.createRequest('/account/connect/create-beneficial-owner?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -40,7 +40,7 @@ describe(`/account/connect/create-beneficial-owner`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_'secret-code': '01067'
+        relationship_account_opener_address_postal_code: '01067'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
