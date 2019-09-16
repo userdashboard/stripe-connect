@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe(`/api/user/connect/set-individual-registration-submitted`, async () => {
+describe('/api/user/connect/set-individual-registration-submitted', async () => {
   describe('SetIndividualRegistrationSubmitted#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
@@ -47,7 +47,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
@@ -124,7 +124,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.strictEqual(errorMessage, 'invalid-payment-details')
     })
 
-    it(`should submit AT-individual registration`, async () => {
+    it('should submit AT-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -152,7 +152,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit AU-individual registration`, async () => {
+    it('should submit AU-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -162,7 +162,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
         individual_address_city: 'Brisbane',
         individual_address_state: 'QLD',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '4000',
+        individual_address_postal_code: '4000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -185,7 +185,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit BE-individual registration`, async () => {
+    it('should submit BE-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -213,7 +213,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit CA-individual registration`, async () => {
+    it('should submit CA-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -223,7 +223,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
         individual_address_city: 'Vancouver',
         individual_address_state: 'BC',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': 'V5K 0A1',
+        individual_address_postal_code: 'V5K 0A1',
         individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -248,7 +248,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit CH-individual registration`, async () => {
+    it('should submit CH-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -276,7 +276,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit DE-individual registration`, async () => {
+    it('should submit DE-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -304,7 +304,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit DK-individual registration`, async () => {
+    it('should submit DK-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -332,7 +332,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit ES-individual registration`, async () => {
+    it('should submit ES-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -360,7 +360,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit FI-individual registration`, async () => {
+    it('should submit FI-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -388,7 +388,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit FR-individual registration`, async () => {
+    it('should submit FR-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -416,7 +416,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit GB-individual registration`, async () => {
+    it('should submit GB-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -444,7 +444,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit HK-individual registration`, async () => {
+    it('should submit HK-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -466,8 +466,8 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_'secret-code': '110',
-        branch_'secret-code': '000'
+        clearing_code: '110',
+        branch_code: '000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -477,7 +477,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit IE-individual registration`, async () => {
+    it('should submit IE-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -506,7 +506,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit IT-individual registration`, async () => {
+    it('should submit IT-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -534,7 +534,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit JP-individual registration`, async () => {
+    it('should submit JP-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -550,12 +550,12 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
         individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         individual_first_name_kanji: '東京都',
         individual_last_name_kanji: '東京都',
-        individual_address_kana_postal_'secret-code': '1500001',
+        individual_address_kana_postal_code: '1500001',
         individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         individual_address_kana_city: 'ｼﾌﾞﾔ',
         individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         individual_address_kana_line1: '27-15',
-        individual_address_kanji_postal_'secret-code': '1500001',
+        individual_address_kanji_postal_code: '1500001',
         individual_address_kanji_state: '東京都',
         individual_address_kanji_city: '渋谷区',
         individual_address_kanji_town: '神宮前　３丁目',
@@ -567,8 +567,8 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -578,7 +578,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit LU-individual registration`, async () => {
+    it('should submit LU-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -606,7 +606,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit NL-individual registration`, async () => {
+    it('should submit NL-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -634,7 +634,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit NO-individual registration`, async () => {
+    it('should submit NO-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -662,7 +662,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit NZ-individual registration`, async () => {
+    it('should submit NZ-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -671,7 +671,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       await TestHelper.createStripeRegistration(user, {
         individual_address_city: 'Auckland',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '6011',
+        individual_address_postal_code: '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -694,7 +694,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit PT-individual registration`, async () => {
+    it('should submit PT-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -722,7 +722,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit SE-individual registration`, async () => {
+    it('should submit SE-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -750,7 +750,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit SG-individual registration`, async () => {
+    it('should submit SG-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -758,7 +758,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       })
       await TestHelper.createStripeRegistration(user, {
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '339696',
+        individual_address_postal_code: '339696',
         individual_id_number: '00000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -772,8 +772,8 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -783,7 +783,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it(`should submit US-individual registration`, async () => {
+    it('should submit US-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -794,7 +794,7 @@ describe(`/api/user/connect/set-individual-registration-submitted`, async () => 
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',

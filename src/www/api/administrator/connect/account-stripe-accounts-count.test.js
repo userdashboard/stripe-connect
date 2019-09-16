@@ -3,8 +3,8 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/account-stripe-accounts-count', async () => {
-  describe('AccountStripeAccountsCount#GET', () => {
-    it('should count all Stripe accounts on account', async () => {
+  describe('returns', () => {
+    it('integer', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

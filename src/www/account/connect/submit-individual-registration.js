@@ -28,8 +28,8 @@ async function beforeRequest (req) {
   }
   let registrationComplete = true
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  if (!registration['individual_verification_document_front'] ||
-    !registration['individual_verification_document_back']) {
+  if (!registration.individual_verification_document_front ||
+    !registration.individual_verification_document_back) {
     registrationComplete = false
   } else {
     for (const field of fieldsNeeded) {

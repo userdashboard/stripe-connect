@@ -41,7 +41,7 @@
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
-//         company_address_postal_'secret-code': '10007',
+//         company_address_postal_code: '10007',
 //         company_address_state: 'NY',
 //         business_profile_mcc: '8931',
 //         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -56,7 +56,7 @@
 //         relationship_account_opener_address_city: 'New York',
 //         relationship_account_opener_address_state: 'NY',
 //         relationship_account_opener_address_line1: '285 Fulton St',
-//         relationship_account_opener_address_postal_'secret-code': '10007'
+//         relationship_account_opener_address_postal_code: '10007'
 //       })
 //       await TestHelper.createExternalAccount(user, {
 //         currency: 'usd',
@@ -95,7 +95,7 @@
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
-//         company_address_postal_'secret-code': '10007',
+//         company_address_postal_code: '10007',
 //         company_address_state: 'NY',
 //         business_profile_mcc: '8931',
 //         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -110,7 +110,7 @@
 //         relationship_account_opener_address_city: 'New York',
 //         relationship_account_opener_address_state: 'NY',
 //         relationship_account_opener_address_line1: '285 Fulton St',
-//         relationship_account_opener_address_postal_'secret-code': '10007'
+//         relationship_account_opener_address_postal_code: '10007'
 //       })
 //       await TestHelper.createExternalAccount(user, {
 //         currency: 'usd',
@@ -145,7 +145,7 @@
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
-//         company_address_postal_'secret-code': '10007',
+//         company_address_postal_code: '10007',
 //         company_address_state: 'NY',
 //         business_profile_mcc: '8931',
 //         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -160,7 +160,7 @@
 //         relationship_account_opener_address_city: 'New York',
 //         relationship_account_opener_address_state: 'NY',
 //         relationship_account_opener_address_line1: '285 Fulton St',
-//         relationship_account_opener_address_postal_'secret-code': '10007'
+//         relationship_account_opener_address_postal_code: '10007'
 //       })
 //       await TestHelper.createExternalAccount(user, {
 //         currency: 'usd',
@@ -199,7 +199,7 @@
 //         individual_address_city: 'Vancouver',
 //         individual_address_state: 'BC',
 //         individual_address_line1: '123 Sesame St',
-//         individual_address_postal_'secret-code': 'V5K 0A1',
+//         individual_address_postal_code: 'V5K 0A1',
 //         individual_id_number: '111111111',
 //         individual_dob_day: '1',
 //         individual_dob_month: '1',
@@ -258,7 +258,7 @@
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
-//         company_address_postal_'secret-code': '10007',
+//         company_address_postal_code: '10007',
 //         company_address_state: 'NY',
 //         business_profile_mcc: '8931',
 //         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -273,7 +273,7 @@
 //         relationship_account_opener_address_city: 'New York',
 //         relationship_account_opener_address_state: 'NY',
 //         relationship_account_opener_address_line1: '285 Fulton St',
-//         relationship_account_opener_address_postal_'secret-code': '10007'
+//         relationship_account_opener_address_postal_code: '10007'
 //       })
 //       await TestHelper.createExternalAccount(user, {
 //         currency: 'usd',
@@ -307,7 +307,7 @@
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
-//         company_address_postal_'secret-code': '10007',
+//         company_address_postal_code: '10007',
 //         company_address_state: 'NY',
 //         business_profile_mcc: '8931',
 //         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -322,7 +322,7 @@
 //         relationship_account_opener_address_city: 'New York',
 //         relationship_account_opener_address_state: 'NY',
 //         relationship_account_opener_address_line1: '285 Fulton St',
-//         relationship_account_opener_address_postal_'secret-code': '10007'
+//         relationship_account_opener_address_postal_code: '10007'
 //       })
 //       await TestHelper.createExternalAccount(user, {
 //         currency: 'usd',
@@ -371,7 +371,7 @@
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
-//         company_address_postal_'secret-code': '10007',
+//         company_address_postal_code: '10007',
 //         company_address_state: 'NY',
 //         business_profile_mcc: '8931',
 //         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -386,7 +386,7 @@
 //         relationship_account_opener_address_city: 'New York',
 //         relationship_account_opener_address_state: 'NY',
 //         relationship_account_opener_address_line1: '285 Fulton St',
-//         relationship_account_opener_address_postal_'secret-code': '10007'
+//         relationship_account_opener_address_postal_code: '10007'
 //       })
 //       await TestHelper.createExternalAccount(user, {
 //         currency: 'usd',

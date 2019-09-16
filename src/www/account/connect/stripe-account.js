@@ -76,18 +76,18 @@ async function renderPage (req, res) {
     removeElements.push('submitted')
   }
   if (req.data.stripeAccount.business_type === 'individual') {
-    removeElements.push(`business-name`)
+    removeElements.push('business-name')
     if (req.data.stripeAccount.individual.first_name) {
-      removeElements.push(`blank-name`)
+      removeElements.push('blank-name')
     } else {
-      removeElements.push(`individual-name`)
+      removeElements.push('individual-name')
     }
   } else {
-    removeElements.push(`individual-name`)
+    removeElements.push('individual-name')
     if (req.data.stripeAccount.company.name) {
-      removeElements.push(`blank-name`)
+      removeElements.push('blank-name')
     } else {
-      removeElements.push(`business-name`)
+      removeElements.push('business-name')
     }
   }
   if (req.data.stripeAccount.metadata.submitted) {

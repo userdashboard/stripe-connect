@@ -2,8 +2,8 @@
   "name": "@userdashboard/stripe-connect",
   "version": "1.0.18",
   "scripts": {
-    "test": "mocha src --recursive --no-colors --retries 3 --timeout 120000 --slow 120000",
-    "test2": "mocha src --recursive --no-colors --full-trace --retries 3 --timeout 120000 --slow 120000"
+    "test": "mocha src --recursive --no-colors --retries 0 --timeout 120000 --slow 120000",
+    "test2": "mocha src --recursive --no-colors --full-trace --retries 0 --timeout 120000 --slow 120000"
   },
   "repository": {
     "type": "git",
@@ -12,11 +12,11 @@
   "license": "SPDX(MIT OR Unlicense)",
   "main": "index.js",
   "dependencies": {
-    "@userdashboard/maxmind-geoip": "^1.0.32",
+    "@userdashboard/maxmind-geoip": "^1.0.35",
     "stripe": "^7.9.0"
   },
   "devDependencies": {
-    "@userdashboard/dashboard": "^1.0.40",
+    "@userdashboard/dashboard": "^1.0.45",
     "puppeteer": "^1.20.0"
   },
   "engines": {

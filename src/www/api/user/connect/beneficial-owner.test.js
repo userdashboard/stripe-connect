@@ -3,10 +3,10 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/beneficial-owner', () => {
-  describe('BeneficialOwner#GET', () => {
+  describe('returns', () => {
     it('should reject invalid ownerid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?ownerid=invalid`)
+      const req = TestHelper.createRequest('/api/user/connect/beneficial-owner?ownerid=invalid')
       req.account = user.account
       req.session = user.session
       const owner = await req.get()
@@ -26,7 +26,7 @@ describe('/api/user/connect/beneficial-owner', () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -52,7 +52,7 @@ describe('/api/user/connect/beneficial-owner', () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'

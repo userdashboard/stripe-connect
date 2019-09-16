@@ -25,7 +25,7 @@ async function renderPage (req, res, messageTemplate) {
     if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
       return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
     }
-    return dashboard.Response.redirect(req, res, `/account/connect/stripe-accounts`)
+    return dashboard.Response.redirect(req, res, '/account/connect/stripe-accounts')
   } else if (req.error) {
     messageTemplate = req.error
   }

@@ -39,7 +39,7 @@ module.exports = {
       }
       const posted = field.split('.').join('_')
       if (!registration[posted]) {
-        throw new Error(`invalid-registration`)
+        throw new Error('invalid-registration')
       }
     }
     const accountInfo = {
@@ -70,13 +70,13 @@ module.exports = {
       address: {},
       dob: {}
     }
-    if (registration['relationship_account_opener_title']) {
-      accountOpener.relationship.title = registration['relationship_account_opener_title']
+    if (registration.relationship_account_opener_title) {
+      accountOpener.relationship.title = registration.relationship_account_opener_title
     }
-    if (registration['relationship_account_opener_executive']) {
+    if (registration.relationship_account_opener_executive) {
       accountOpener.relationship.executive = true
     }
-    if (registration['relationship_account_opener_director']) {
+    if (registration.relationship_account_opener_director) {
       accountOpener.relationship.director = true
     }
     for (const field in registration) {
@@ -98,7 +98,7 @@ module.exports = {
           const property = field.substring('company_address_'.length)
           accountInfo.company.address[property] = registration[field]
         } else if (field.startsWith('company_business_name_')) {
-          let property = field.substring('company_business_name_'.length)
+          const property = field.substring('company_business_name_'.length)
           accountInfo.company[`name_${property}`] = registration[field]
         } else {
           const property = field.substring('company_'.length)

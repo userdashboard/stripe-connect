@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe(`/api/user/connect/delete-company-director`, async () => {
+describe('/api/user/connect/delete-company-director', async () => {
   describe('DeleteBeneficialOwner#DELETE', () => {
     it('should reject invalid directorid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=invalid`)
+      const req = TestHelper.createRequest('/api/user/connect/delete-company-director?directorid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage

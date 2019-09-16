@@ -37,7 +37,7 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-  dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, `account-status`)
+  dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, 'account-status')
   if (req.data.stripeAccount.business_type === 'individual') {
     const businessName = doc.getElementById('business-name')
     businessName.parentNode.removeChild(businessName)

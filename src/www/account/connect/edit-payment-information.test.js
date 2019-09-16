@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect/edit-payment-information`, async () => {
+describe('/account/connect/edit-payment-information', async () => {
   describe('EditPaymentInformation#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=invalid`)
+      const req = TestHelper.createRequest('/account/connect/edit-payment-information?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -464,7 +464,7 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_'secret-code': '108800'
+        sort_code: '108800'
       }
       await testEachFieldAsNull(req)
     })
@@ -484,7 +484,7 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_'secret-code': '108800'
+        sort_code: '108800'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -550,8 +550,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_'secret-code': '110',
-        branch_'secret-code': '000'
+        clearing_code: '110',
+        branch_code: '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -571,8 +571,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_'secret-code': '110',
-        branch_'secret-code': '000'
+        clearing_code: '110',
+        branch_code: '000'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -680,8 +680,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -701,8 +701,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -980,8 +980,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       }
       await testEachFieldAsNull(req)
     })
@@ -1001,8 +1001,8 @@ describe(`/account/connect/edit-payment-information`, async () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

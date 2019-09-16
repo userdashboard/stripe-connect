@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/stripe-accounts-count', async () => {
-  describe('StripeAccountsCount#GET', () => {
+  describe('returns', () => {
     it('should count all Stripe accounts', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
@@ -16,7 +16,7 @@ describe('/api/administrator/connect/stripe-accounts-count', async () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
@@ -47,7 +47,7 @@ describe('/api/administrator/connect/stripe-accounts-count', async () => {
         business_profile_url: 'https://www.' + user2.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
@@ -68,7 +68,7 @@ describe('/api/administrator/connect/stripe-accounts-count', async () => {
         routing_number: '110000000'
       })
       await TestHelper.submitStripeAccount(user2)
-      const req = TestHelper.createRequest(`/api/administrator/connect/stripe-accounts-count`)
+      const req = TestHelper.createRequest('/api/administrator/connect/stripe-accounts-count')
       req.account = administrator.account
       req.session = administrator.session
       const result = await req.get()

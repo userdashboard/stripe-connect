@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect/delete-stripe-account`, async () => {
+describe('/account/connect/delete-stripe-account', async () => {
   describe('DeleteStripeAccount#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/delete-stripe-account?stripeid=invalid`)
+      const req = TestHelper.createRequest('/account/connect/delete-stripe-account?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage

@@ -7,7 +7,7 @@ describe('server/bind-stripekey', async () => {
   describe('BindStripeKey#AFTER', () => {
     it('should bind stripekey data to req', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/change-username`)
+      const req = TestHelper.createRequest('/account/change-username')
       delete (req.stripeKey)
       req.account = user.account
       req.session = user.session

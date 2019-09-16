@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect/beneficial-owner`, () => {
+describe('/account/connect/beneficial-owner', () => {
   describe('BeneficialOwner#BEFORE', () => {
     it('should reject invalid ownerid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=invalid`)
+      const req = TestHelper.createRequest('/account/connect/beneficial-owner?ownerid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -30,7 +30,7 @@ describe(`/account/connect/beneficial-owner`, () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -45,7 +45,7 @@ describe(`/account/connect/beneficial-owner`, () => {
   })
 
   describe('BeneficialOwner#GET', () => {
-    it('should show table for owner', async () => {
+    it.only('should show table for owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -57,12 +57,13 @@ describe(`/account/connect/beneficial-owner`, () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       })
+      console.log(person, user)
       const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
       req.session = user.session

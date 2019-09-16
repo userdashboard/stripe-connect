@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/stripe-accounts-count', async () => {
-  describe('StripeAccountsCount#GET', () => {
+  describe('returns', () => {
     it('should count Stripe accounts', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

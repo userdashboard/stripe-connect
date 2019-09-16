@@ -22,7 +22,7 @@ describe('/api/user/connect/update-individual-registration', () => {
   describe('UpdateIndividualRegistration#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=invalid`)
+      const req = TestHelper.createRequest('/api/user/connect/update-individual-registration?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       req.body = {}
@@ -88,7 +88,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_dob_day: '1',
@@ -125,7 +125,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
 
-    it(`should reject AT-individual invalid fields`, async () => {
+    it('should reject AT-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -144,7 +144,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject AU-individual invalid fields`, async () => {
+    it('should reject AU-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -157,7 +157,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Brisbane',
         individual_address_state: 'QLD',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '4000',
+        individual_address_postal_code: '4000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -167,7 +167,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject BE-individual invalid fields`, async () => {
+    it('should reject BE-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -186,7 +186,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject CA-individual invalid fields`, async () => {
+    it('should reject CA-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -199,7 +199,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Vancouver',
         individual_address_state: 'BC',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': 'V5K 0A1',
+        individual_address_postal_code: 'V5K 0A1',
         individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -210,7 +210,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject CH-individual invalid fields`, async () => {
+    it('should reject CH-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -229,7 +229,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject DE-individual invalid fields`, async () => {
+    it('should reject DE-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -248,7 +248,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject DK-individual invalid fields`, async () => {
+    it('should reject DK-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -267,7 +267,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject ES-individual invalid fields`, async () => {
+    it('should reject ES-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -286,7 +286,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject FI-individual invalid fields`, async () => {
+    it('should reject FI-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -305,7 +305,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject FR-individual invalid fields`, async () => {
+    it('should reject FR-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -324,7 +324,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject GB-individual invalid fields`, async () => {
+    it('should reject GB-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -343,7 +343,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject HK-individual invalid fields`, async () => {
+    it('should reject HK-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -365,7 +365,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject IE-individual invalid fields`, async () => {
+    it('should reject IE-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -384,7 +384,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject IT-individual invalid fields`, async () => {
+    it('should reject IT-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -403,7 +403,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject JP-individual invalid fields`, async () => {
+    it('should reject JP-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -422,12 +422,12 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_first_name_kanji: '東京都',
         individual_last_name_kanji: '東京都',
         individual_phone: '011-6789-0123',
-        individual_address_kana_postal_'secret-code': '1500001',
+        individual_address_kana_postal_code: '1500001',
         individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         individual_address_kana_city: 'ｼﾌﾞﾔ',
         individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         individual_address_kana_line1: '27-15',
-        individual_address_kanji_postal_'secret-code': '1500001',
+        individual_address_kanji_postal_code: '1500001',
         individual_address_kanji_state: '東京都',
         individual_address_kanji_city: '渋谷区',
         individual_address_kanji_town: '神宮前　３丁目',
@@ -436,7 +436,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject LU-individual invalid fields`, async () => {
+    it('should reject LU-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -455,7 +455,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject NL-individual invalid fields`, async () => {
+    it('should reject NL-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -474,7 +474,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject NO-individual invalid fields`, async () => {
+    it('should reject NO-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -493,7 +493,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject NZ-individual invalid fields`, async () => {
+    it('should reject NZ-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -505,7 +505,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {
         individual_address_city: 'Auckland',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '6011',
+        individual_address_postal_code: '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -515,7 +515,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject PT-individual invalid fields`, async () => {
+    it('should reject PT-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -534,7 +534,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject SE-individual invalid fields`, async () => {
+    it('should reject SE-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -553,7 +553,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject SG-individual invalid fields`, async () => {
+    it('should reject SG-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -564,7 +564,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.session = user.session
       req.body = {
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '339696',
+        individual_address_postal_code: '339696',
         individual_id_number: '00000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -575,7 +575,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject US-individual invalid fields`, async () => {
+    it('should reject US-individual invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -589,7 +589,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
@@ -604,7 +604,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should update AT-individual registration`, async () => {
+    it('should update AT-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -627,7 +627,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update AU-individual registration`, async () => {
+    it('should update AU-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -640,7 +640,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Brisbane',
         individual_address_state: 'QLD',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '4000',
+        individual_address_postal_code: '4000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -654,7 +654,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update BE-individual registration`, async () => {
+    it('should update BE-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -677,7 +677,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update CA-individual registration`, async () => {
+    it('should update CA-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -690,7 +690,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Vancouver',
         individual_address_state: 'BC',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': 'V5K 0A1',
+        individual_address_postal_code: 'V5K 0A1',
         individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -705,7 +705,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update CH-individual registration`, async () => {
+    it('should update CH-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -728,7 +728,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update DE-individual registration`, async () => {
+    it('should update DE-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -751,7 +751,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update DK-individual registration`, async () => {
+    it('should update DK-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -774,7 +774,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update ES-individual registration`, async () => {
+    it('should update ES-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -797,7 +797,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update FI-individual registration`, async () => {
+    it('should update FI-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -820,7 +820,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update FR-individual registration`, async () => {
+    it('should update FR-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -843,7 +843,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update GB-individual registration`, async () => {
+    it('should update GB-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -866,7 +866,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update HK-individual registration`, async () => {
+    it('should update HK-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -892,7 +892,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update IE-individual registration`, async () => {
+    it('should update IE-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -914,7 +914,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         assert.strictEqual(registrationNow[field], req.body[field])
       }
     })
-    it(`should update IT-individual registration`, async () => {
+    it('should update IT-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -937,7 +937,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update JP-individual registration`, async () => {
+    it('should update JP-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -956,12 +956,12 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_first_name_kanji: '東京都',
         individual_last_name_kanji: '東京都',
         individual_phone: '011-6789-0123',
-        individual_address_kana_postal_'secret-code': '1500001',
+        individual_address_kana_postal_code: '1500001',
         individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         individual_address_kana_city: 'ｼﾌﾞﾔ',
         individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         individual_address_kana_line1: '27-15',
-        individual_address_kanji_postal_'secret-code': '1500001',
+        individual_address_kanji_postal_code: '1500001',
         individual_address_kanji_state: '東京都',
         individual_address_kanji_city: '渋谷区',
         individual_address_kanji_town: '神宮前　３丁目',
@@ -974,7 +974,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update LU-individual registration`, async () => {
+    it('should update LU-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -997,7 +997,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update NL-individual registration`, async () => {
+    it('should update NL-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -1020,7 +1020,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update NO-individual registration`, async () => {
+    it('should update NO-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -1043,7 +1043,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update NZ-individual registration`, async () => {
+    it('should update NZ-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -1055,7 +1055,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = {
         individual_address_city: 'Auckland',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '6011',
+        individual_address_postal_code: '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1069,7 +1069,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update PT-individual registration`, async () => {
+    it('should update PT-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -1092,7 +1092,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update SE-individual registration`, async () => {
+    it('should update SE-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -1115,7 +1115,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update SG-individual registration`, async () => {
+    it('should update SG-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -1126,7 +1126,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.session = user.session
       req.body = {
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '339696',
+        individual_address_postal_code: '339696',
         individual_id_number: '00000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -1141,7 +1141,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
-    it(`should update US-individual registration`, async () => {
+    it('should update US-individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -1155,7 +1155,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',

@@ -116,7 +116,7 @@ async function renderPage (req, res, messageTemplate) {
     const name = parts[parts.length - 1]
     switch (name) {
       case 'day':
-        removeElements.push(`dob-container`)
+        removeElements.push('dob-container')
         continue
       case 'email':
       case 'phone':

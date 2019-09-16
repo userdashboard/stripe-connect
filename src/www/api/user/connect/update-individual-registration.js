@@ -15,34 +15,34 @@ module.exports = {
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    if (req.uploads && req.uploads['individual_verification_document_front']) {
+    if (req.uploads && req.uploads.individual_verification_document_front) {
       const uploadData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['individual_verification_document_back'].name,
-          data: req.uploads['individual_verification_document_back'].buffer
+          name: req.uploads.individual_verification_document_back.name,
+          data: req.uploads.individual_verification_document_back.buffer
         }
       }
       try {
         const file = await stripe.files.create(uploadData, req.stripeKey)
-        req.body['individual_verification_document_front'] = file.id
+        req.body.individual_verification_document_front = file.id
       } catch (error) {
         throw new Error('invalid-individual_verification_document_front')
       }
     }
-    if (req.uploads && req.uploads['individual_verification_document_back']) {
+    if (req.uploads && req.uploads.individual_verification_document_back) {
       const uploadData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['individual_verification_document_back'].name,
-          data: req.uploads['individual_verification_document_back'].buffer
+          name: req.uploads.individual_verification_document_back.name,
+          data: req.uploads.individual_verification_document_back.buffer
         }
       }
       try {
         const file = await stripe.files.create(uploadData, req.stripeKey)
-        req.body['individual_verification_document_back'] = file.id
+        req.body.individual_verification_document_back = file.id
       } catch (error) {
         throw new Error('invalid-upload')
       }
@@ -51,11 +51,11 @@ module.exports = {
     const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-    if (req.body['individual_verification_document_back']) {
-      registration['individual_verification_document_back'] = req.body['individual_verification_document_back']
+    if (req.body.individual_verification_document_back) {
+      registration.individual_verification_document_back = req.body.individual_verification_document_back
     }
-    if (req.body['individual_verification_document_front']) {
-      registration['individual_verification_document_front'] = req.body['individual_verification_document_front']
+    if (req.body.individual_verification_document_front) {
+      registration.individual_verification_document_front = req.body.individual_verification_document_front
     }
     for (const field of requiredFields) {
       if (field === 'business_type' ||

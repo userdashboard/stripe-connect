@@ -3,8 +3,8 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe(`/api/user/connect/stripe-accounts`, () => {
-  describe('AccountStripeAccounts#GET', () => {
+describe('/api/user/connect/stripe-accounts', () => {
+  describe('returns', () => {
     it('should limit Stripe accounts to one page', async () => {
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {

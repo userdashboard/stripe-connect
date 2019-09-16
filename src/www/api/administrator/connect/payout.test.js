@@ -3,10 +3,10 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/payout', () => {
-  describe('Payout#GET', () => {
+  describe('returns', () => {
     it('should reject invalid payoutid', async () => {
       const administrator = await TestHelper.createAdministrator()
-      const req = TestHelper.createRequest(`/api/administrator/connect/payout?payoutid=invalid`)
+      const req = TestHelper.createRequest('/api/administrator/connect/payout?payoutid=invalid')
       req.account = administrator.account
       req.session = administrator.session
       const payout = await req.get()
@@ -23,7 +23,7 @@ describe('/api/administrator/connect/payout', () => {
       await TestHelper.createStripeRegistration(user, {
         individual_address_city: 'Auckland',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '6011',
+        individual_address_postal_code: '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',

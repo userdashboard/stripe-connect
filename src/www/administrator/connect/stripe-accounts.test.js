@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/administrator/connect/stripe-accounts`, () => {
+describe('/administrator/connect/stripe-accounts', () => {
   describe('StripeAccounts#BEFORE', () => {
     it('should bind Stripe accounts to req', async () => {
       const administrator = await TestHelper.createAdministrator()
@@ -16,7 +16,7 @@ describe(`/administrator/connect/stripe-accounts`, () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
@@ -28,7 +28,7 @@ describe(`/administrator/connect/stripe-accounts`, () => {
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName
       })
-      const req = TestHelper.createRequest(`/administrator/connect/stripe-accounts`)
+      const req = TestHelper.createRequest('/administrator/connect/stripe-accounts')
       req.account = administrator.account
       req.session = administrator.session
       await req.route.api.before(req)
@@ -36,7 +36,7 @@ describe(`/administrator/connect/stripe-accounts`, () => {
     })
   })
 
-  describe('StripeAccounts#GET', () => {
+  describe('returns', () => {
     it('should have row for each Stripe account', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
@@ -49,7 +49,7 @@ describe(`/administrator/connect/stripe-accounts`, () => {
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
@@ -61,7 +61,7 @@ describe(`/administrator/connect/stripe-accounts`, () => {
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName
       })
-      const req = TestHelper.createRequest(`/administrator/connect/stripe-accounts`)
+      const req = TestHelper.createRequest('/administrator/connect/stripe-accounts')
       req.account = administrator.account
       req.session = administrator.session
       const page = await req.get()

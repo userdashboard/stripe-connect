@@ -13,34 +13,34 @@ module.exports = {
     if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
     }
-    if (req.uploads && req.uploads['relationship_account_opener_verification_document_front']) {
+    if (req.uploads && req.uploads.relationship_account_opener_verification_document_front) {
       const uploadData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['relationship_account_opener_verification_document_front'].name,
-          data: req.uploads['relationship_account_opener_verification_document_front'].buffer
+          name: req.uploads.relationship_account_opener_verification_document_front.name,
+          data: req.uploads.relationship_account_opener_verification_document_front.buffer
         }
       }
       try {
         const file = await stripe.files.create(uploadData, req.stripeKey)
-        req.body['relationship_account_opener_verification_document_front'] = file.id
+        req.body.relationship_account_opener_verification_document_front = file.id
       } catch (error) {
         throw new Error('invalid-relationship_account_opener_verification_document_front')
       }
     }
-    if (req.uploads && req.uploads['relationship_account_opener_verification_document_back']) {
+    if (req.uploads && req.uploads.relationship_account_opener_verification_document_back) {
       const uploadData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['relationship_account_opener_verification_document_back'].name,
-          data: req.uploads['relationship_account_opener_verification_document_back'].buffer
+          name: req.uploads.relationship_account_opener_verification_document_back.name,
+          data: req.uploads.relationship_account_opener_verification_document_back.buffer
         }
       }
       try {
         const file = await stripe.files.create(uploadData, req.stripeKey)
-        req.body['relationship_account_opener_verification_document_back'] = file.id
+        req.body.relationship_account_opener_verification_document_back = file.id
       } catch (error) {
         throw new Error('invalid-upload')
       }
@@ -48,8 +48,8 @@ module.exports = {
     req.query.country = stripeAccount.country
     const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     const requiredFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
-    const openerFields = [ 'first_name', 'last_name', 'email', 'phone', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code' ]
-    const openerOptional = [ 'address_line2', 'address_state', 'address_country' ]
+    const openerFields = ['first_name', 'last_name', 'email', 'phone', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code']
+    const openerOptional = ['address_line2', 'address_state', 'address_country']
     if (stripeAccount.country === 'US') {
       openerFields.push('ssn_last_4')
     }
@@ -58,8 +58,8 @@ module.exports = {
       openerFields.splice(openerFields.indexOf('address_state'), 1)
       openerFields.splice(openerFields.indexOf('address_country'), 1)
       openerFields.push('gender',
-                        'first_name_kana', 'last_name_kana', 'address_kana_state', 'address_kana_city', 'address_kana_town', 'address_kana_line1', 'address_kana_postal_code',
-                        'first_name_kanji', 'last_name_kanji', 'address_kanji_state', 'address_kanji_city', 'address_kanji_town', 'address_kanji_line1', 'address_kanji_postal_code')
+        'first_name_kana', 'last_name_kana', 'address_kana_state', 'address_kana_city', 'address_kana_town', 'address_kana_line1', 'address_kana_postal_code',
+        'first_name_kanji', 'last_name_kanji', 'address_kanji_state', 'address_kanji_city', 'address_kanji_town', 'address_kanji_line1', 'address_kanji_postal_code')
     }
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
     for (const field of requiredFields) {

@@ -14,8 +14,8 @@
       url: `${process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
       enabled_events: eventList
     }, {
-        api_key: process.env.STRIPE_KEY
-      })
+      api_key: process.env.STRIPE_KEY
+    })
     global.connectWebhookEndPointSecret = webhook.secret
   }
   require('./index.js')

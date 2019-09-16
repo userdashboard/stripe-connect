@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe(`/api/user/connect/create-stripe-account`, async () => {
+describe('/api/user/connect/create-stripe-account', async () => {
   describe('CreateStripeAccount#POST', () => {
     it('should reject invalid account type', async () => {
       const user = await TestHelper.createUser()

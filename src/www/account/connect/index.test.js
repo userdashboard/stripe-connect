@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect`, () => {
+describe('/account/connect', () => {
   describe('Index#BEFORE', () => {
     it('should bind Stripe accounts to req', async () => {
       const user = await TestHelper.createUser()
@@ -15,7 +15,7 @@ describe(`/account/connect`, () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -27,7 +27,7 @@ describe(`/account/connect`, () => {
         individual_phone: '456-123-7890',
         individual_id_number: '000000000'
       })
-      const req = TestHelper.createRequest(`/account/connect`)
+      const req = TestHelper.createRequest('/account/connect')
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
@@ -47,7 +47,7 @@ describe(`/account/connect`, () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -59,7 +59,7 @@ describe(`/account/connect`, () => {
         individual_phone: '456-123-7890',
         individual_id_number: '000000000'
       })
-      const req = TestHelper.createRequest(`/account/connect`)
+      const req = TestHelper.createRequest('/account/connect')
       req.account = user.account
       req.session = user.session
       const page = await req.get()

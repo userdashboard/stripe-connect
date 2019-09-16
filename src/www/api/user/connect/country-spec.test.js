@@ -3,10 +3,10 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/country-spec', () => {
-  describe('CountrySpec#GET', () => {
+  describe('returns', () => {
     it('should reject invalid country', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/country-spec?country=invalid`)
+      const req = TestHelper.createRequest('/api/user/connect/country-spec?country=invalid')
       req.account = user.account
       req.session = user.session
       const countrySpec = await req.get()
@@ -15,7 +15,7 @@ describe('/api/user/connect/country-spec', () => {
 
     it('array', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/country-spec?country=US`)
+      const req = TestHelper.createRequest('/api/user/connect/country-spec?country=US')
       req.account = user.account
       req.session = user.session
       const countrySpec = await req.get()

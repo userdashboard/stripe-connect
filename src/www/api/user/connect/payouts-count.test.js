@@ -13,7 +13,7 @@ describe('/api/user/connect/payouts-count', async () => {
       await TestHelper.createStripeRegistration(user, {
         individual_address_city: 'Auckland',
         individual_address_line1: '123 Sesame St',
-        individual_address_postal_'secret-code': '6011',
+        individual_address_postal_code: '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',

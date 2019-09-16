@@ -57,7 +57,7 @@ for (const x in TestHelper) {
   module.exports[x] = TestHelper[x]
 }
 
-before (async () =>{
+before(async () => {
   const webhooks = await stripe.webhookEndpoints.list(stripeKey)
   if (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {

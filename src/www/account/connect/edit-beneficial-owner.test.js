@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect/edit-beneficial-owner`, async () => {
+describe('/account/connect/edit-beneficial-owner', async () => {
   describe('EditBeneficialOwner#BEFORE', () => {
     it('should reject invalid ownerid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?ownerid=invalid`)
+      const req = TestHelper.createRequest('/account/connect/edit-beneficial-owner?ownerid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -30,7 +30,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         company_address_country: 'DE',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_'secret-code': '01067',
+        company_address_postal_code: '01067',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
         relationship_account_opener_email: user.profile.contactEmail,
@@ -40,7 +40,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_'secret-code': '01067'
+        relationship_account_opener_address_postal_code: '01067'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -55,7 +55,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -86,7 +86,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -117,7 +117,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -144,7 +144,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -173,7 +173,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -187,7 +187,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -216,7 +216,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -231,7 +231,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -255,7 +255,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -273,7 +273,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
@@ -285,7 +285,8 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
       assert.strictEqual(message.attr.template, 'success')
     })
 
-    it('should update document back upload', async () => {      const user = await TestHelper.createUser()
+    it('should update document back upload', async () => {
+      const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
         country: 'DE'
@@ -296,7 +297,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_'secret-code': '01067',
+        relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
@@ -314,7 +315,7 @@ describe(`/account/connect/edit-beneficial-owner`, async () => {
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_'secret-code': 'EC1A 1AA',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'

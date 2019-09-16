@@ -15,13 +15,13 @@ module.exports = {
     if (!req.body.relationship_director_last_name) {
       throw new Error('invalid-relationship_director_last_name')
     }
-    if (req.uploads && req.uploads['relationship_director_verification_document_front']) {
+    if (req.uploads && req.uploads.relationship_director_verification_document_front) {
       const frontData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['relationship_director_verification_document_front'].name,
-          data: req.uploads['relationship_director_verification_document_front'].buffer
+          name: req.uploads.relationship_director_verification_document_front.name,
+          data: req.uploads.relationship_director_verification_document_front.buffer
         }
       }
       try {
@@ -31,13 +31,13 @@ module.exports = {
         throw new Error('invalid-relationship_director_verification_document_front')
       }
     }
-    if (req.uploads && req.uploads['relationship_director_verification_document_back']) {
+    if (req.uploads && req.uploads.relationship_director_verification_document_back) {
       const backData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads['relationship_director_verification_document_back'].name,
-          data: req.uploads['relationship_director_verification_document_back'].buffer
+          name: req.uploads.relationship_director_verification_document_back.name,
+          data: req.uploads.relationship_director_verification_document_back.buffer
         }
       }
       try {

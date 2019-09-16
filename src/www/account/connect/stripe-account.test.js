@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe(`/account/connect/stripe-account`, () => {
+describe('/account/connect/stripe-account', () => {
   describe('StripeAccount#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const administrator = await TestHelper.createAdministrator()
@@ -11,7 +11,7 @@ describe(`/account/connect/stripe-account`, () => {
         type: 'individual',
         country: 'US'
       })
-      const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=invalid`)
+      const req = TestHelper.createRequest('/account/connect/stripe-account?stripeid=invalid')
       req.account = administrator.account
       req.session = administrator.session
       let errorMessage
@@ -84,7 +84,7 @@ describe(`/account/connect/stripe-account`, () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -117,7 +117,7 @@ describe(`/account/connect/stripe-account`, () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -158,7 +158,7 @@ describe(`/account/connect/stripe-account`, () => {
         company_name: user.profile.firstName + '\'s company',
         company_address_country: 'AT',
         company_address_city: 'Vienna',
-        company_address_postal_'secret-code': '1020',
+        company_address_postal_code: '1020',
         company_address_line1: 'First Street',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
@@ -169,7 +169,7 @@ describe(`/account/connect/stripe-account`, () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_address_city: 'Vienna',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_'secret-code': '1020'
+        relationship_account_opener_address_postal_code: '1020'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -199,7 +199,7 @@ describe(`/account/connect/stripe-account`, () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -232,7 +232,7 @@ describe(`/account/connect/stripe-account`, () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -273,7 +273,7 @@ describe(`/account/connect/stripe-account`, () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -306,7 +306,7 @@ describe(`/account/connect/stripe-account`, () => {
         business_profile_mcc: '7333',
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
-        individual_address_postal_'secret-code': '10007',
+        individual_address_postal_code: '10007',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',

@@ -3,10 +3,10 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/stripe-account', () => {
-  describe('StripeAccount#GET', () => {
+  describe('returns', () => {
     it('should reject invalid stripeid', async () => {
       const administrator = await TestHelper.createAdministrator()
-      const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account?stripeid=invalid`)
+      const req = TestHelper.createRequest('/api/administrator/connect/stripe-account?stripeid=invalid')
       req.account = administrator.account
       req.session = administrator.session
       const stripeAccount = await req.get()
@@ -26,7 +26,7 @@ describe('/api/administrator/connect/stripe-account', () => {
         company_phone: '456-123-7890',
         company_address_city: 'New York',
         company_address_line1: '123 Park Lane',
-        company_address_postal_'secret-code': '10001',
+        company_address_postal_code: '10001',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
@@ -40,7 +40,7 @@ describe('/api/administrator/connect/stripe-account', () => {
         relationship_account_opener_address_city: 'New York',
         relationship_account_opener_address_state: 'NY',
         relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_'secret-code': '10007'
+        relationship_account_opener_address_postal_code: '10007'
       })
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account

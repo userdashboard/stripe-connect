@@ -3,7 +3,7 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe(`/api/user/connect/create-company-director`, async () => {
+describe('/api/user/connect/create-company-director', async () => {
   describe('CreateBeneficialOwner#POST', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
@@ -102,10 +102,10 @@ describe(`/api/user/connect/create-company-director`, async () => {
         relationship_account_opener_dob_year: '1950',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_'secret-code': '01067',
+        company_address_postal_code: '01067',
         relationship_account_opener_address_city: 'Berlin',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_'secret-code': '01067'
+        relationship_account_opener_address_postal_code: '01067'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',

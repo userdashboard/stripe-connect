@@ -3,10 +3,10 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/country-specs', () => {
-  describe('CountrySpecs#GET', () => {
+  describe('returns', () => {
     it('array', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/country-specs`)
+      const req = TestHelper.createRequest('/api/user/connect/country-specs')
       req.account = user.account
       req.session = user.session
       const countrySpecs = await req.get()

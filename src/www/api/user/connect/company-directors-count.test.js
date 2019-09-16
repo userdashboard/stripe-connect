@@ -3,10 +3,10 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/company-directors-count', () => {
-  describe('CompanyDirectorsCount#GET', () => {
+  describe('returns', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/company-directors-count?stripeid=invalid`)
+      const req = TestHelper.createRequest('/api/user/connect/company-directors-count?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       const directors = await req.get()

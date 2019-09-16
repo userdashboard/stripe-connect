@@ -22,7 +22,7 @@ describe('/api/user/connect/update-payment-information', () => {
   describe('UpdatePaymentInformation#PATCH', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=invalid`)
+      const req = TestHelper.createRequest('/api/user/connect/update-payment-information?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -31,7 +31,7 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_'secret-code': '108800'
+        sort_code: '108800'
       }
       let errorMessage
       try {
@@ -58,7 +58,7 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_'secret-code': '108800'
+        sort_code: '108800'
       }
       let errorMessage
       try {
@@ -69,7 +69,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(errorMessage, 'invalid-account')
     })
 
-    it(`should reject AT invalid fields`, async () => {
+    it('should reject AT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -88,7 +88,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject AU invalid fields`, async () => {
+    it('should reject AU invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -108,7 +108,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject BE invalid fields`, async () => {
+    it('should reject BE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -127,7 +127,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject CA invalid fields`, async () => {
+    it('should reject CA invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -148,7 +148,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject CH invalid fields`, async () => {
+    it('should reject CH invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -167,7 +167,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject DE invalid fields`, async () => {
+    it('should reject DE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -186,7 +186,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject DK invalid fields`, async () => {
+    it('should reject DK invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -205,7 +205,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject ES invalid fields`, async () => {
+    it('should reject ES invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -224,7 +224,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject FI invalid fields`, async () => {
+    it('should reject FI invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -243,7 +243,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject FR invalid fields`, async () => {
+    it('should reject FR invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -262,7 +262,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject GB invalid fields (account number, sort code)`, async () => {
+    it('should reject GB invalid fields (account number, sort code)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -277,12 +277,12 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_'secret-code': '108800'
+        sort_code: '108800'
       }
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject GB invalid fields (iban)`, async () => {
+    it('should reject GB invalid fields (iban)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -301,7 +301,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject HK invalid fields`, async () => {
+    it('should reject HK invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -316,13 +316,13 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_'secret-code': '110',
-        branch_'secret-code': '000'
+        clearing_code: '110',
+        branch_code: '000'
       }
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject IE invalid fields`, async () => {
+    it('should reject IE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -341,7 +341,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject IT invalid fields`, async () => {
+    it('should reject IT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -360,7 +360,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject JP invalid fields`, async () => {
+    it('should reject JP invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -375,13 +375,13 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       }
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject LU invalid fields`, async () => {
+    it('should reject LU invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -400,7 +400,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject NL invalid fields`, async () => {
+    it('should reject NL invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -419,7 +419,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject NO invalid fields`, async () => {
+    it('should reject NO invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -438,7 +438,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject NZ invalid fields`, async () => {
+    it('should reject NZ invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -458,7 +458,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject PT invalid fields`, async () => {
+    it('should reject PT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -477,7 +477,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject SE invalid fields`, async () => {
+    it('should reject SE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -496,7 +496,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject SG invalid fields`, async () => {
+    it('should reject SG invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -511,13 +511,13 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       }
       await testEachFieldAsNull(req)
     })
 
-    it(`should reject US invalid fields`, async () => {
+    it('should reject US invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -537,7 +537,7 @@ describe('/api/user/connect/update-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    it(`should update AT information`, async () => {
+    it('should update AT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -557,7 +557,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update AU information`, async () => {
+    it('should update AU information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -578,7 +578,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update BE information`, async () => {
+    it('should update BE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -598,7 +598,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update CA information`, async () => {
+    it('should update CA information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -620,7 +620,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update CH information`, async () => {
+    it('should update CH information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -640,7 +640,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update DE information`, async () => {
+    it('should update DE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -660,7 +660,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update DK information`, async () => {
+    it('should update DK information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -680,7 +680,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update ES information`, async () => {
+    it('should update ES information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -700,7 +700,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update FI information`, async () => {
+    it('should update FI information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -720,7 +720,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update FR information`, async () => {
+    it('should update FR information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -740,7 +740,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update GB information (account number, sort code)`, async () => {
+    it('should update GB information (account number, sort code)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -755,13 +755,13 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        sort_'secret-code': '108800'
+        sort_code: '108800'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update GB information (iban)`, async () => {
+    it('should update GB information (iban)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -781,7 +781,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update HK information`, async () => {
+    it('should update HK information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -796,14 +796,14 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123-456',
-        clearing_'secret-code': '110',
-        branch_'secret-code': '000'
+        clearing_code: '110',
+        branch_code: '000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update IE information`, async () => {
+    it('should update IE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -823,7 +823,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update IT information`, async () => {
+    it('should update IT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -843,7 +843,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update JP information`, async () => {
+    it('should update JP information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -858,13 +858,13 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '00012345',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
-    it(`should update LU information`, async () => {
+    it('should update LU information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -884,7 +884,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update NL information`, async () => {
+    it('should update NL information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -904,7 +904,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update NO information`, async () => {
+    it('should update NO information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -924,7 +924,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update NZ information`, async () => {
+    it('should update NZ information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -945,7 +945,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update PT information`, async () => {
+    it('should update PT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -965,7 +965,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update SE information`, async () => {
+    it('should update SE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -985,7 +985,7 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update SG information`, async () => {
+    it('should update SG information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -1000,14 +1000,14 @@ describe('/api/user/connect/update-payment-information', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         account_number: '000123456',
-        bank_'secret-code': '1100',
-        branch_'secret-code': '000'
+        bank_code: '1100',
+        branch_code: '000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it(`should update US information`, async () => {
+    it('should update US information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',

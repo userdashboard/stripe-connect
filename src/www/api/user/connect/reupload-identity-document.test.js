@@ -49,7 +49,7 @@
 //         company_address_city: 'New York',
 //         company_state: 'New York',
 //         company_address_line1: 'First Street',
-//         company_address_postal_'secret-code': '10001',
+//         company_address_postal_code: '10001',
 //         ssn_last_4: '0000'
 //       })
 //       const user2 = await TestHelper.createUser()
@@ -94,7 +94,7 @@
 //         company_address_city: 'New York',
 //         company_state: 'New York',
 //         company_address_line1: 'First Street',
-//         company_address_postal_'secret-code': '10001',
+//         company_address_postal_code: '10001',
 //         ssn_last_4: '0000'
 //       })
 //       const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
@@ -135,7 +135,7 @@
 //         company_address_city: 'New York',
 //         company_state: 'New York',
 //         company_address_line1: 'First Street',
-//         company_address_postal_'secret-code': '10001',
+//         company_address_postal_code: '10001',
 //         ssn_last_4: '0000'
 //       })
 //       const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
@@ -176,7 +176,7 @@
 //         company_address_city: 'New York',
 //         company_state: 'New York',
 //         company_address_line1: 'First Street',
-//         company_address_postal_'secret-code': '10001',
+//         company_address_postal_code: '10001',
 //         ssn_last_4: '0000'
 //       })
 //       const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
