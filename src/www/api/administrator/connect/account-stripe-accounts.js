@@ -7,7 +7,7 @@ module.exports = {
     }
     const account = await global.api.administrator.Account.get(req)
     if (!account) {
-      throw new Error('invalid-account')
+      throw new Error('invalid-accountid')
     }
     let stripeids
     if (req.query.all) {
