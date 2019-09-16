@@ -3,8 +3,17 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/country-spec', () => {
-  describe('returns', () => {
-    it('should reject invalid country', async () => {
+  describe('exceptions', () => {
+    it('missing querystring country', async () => {
+      const user = await TestHelper.createUser()
+      const req = TestHelper.createRequest('/api/user/connect/country-spec')
+      req.account = user.account
+      req.session = user.session
+      const countrySpec = await req.get()
+      assert.strictEqual(countrySpec.message, 'invalid-country')
+    })
+
+    it('invalid querystring country', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/country-spec?country=invalid')
       req.account = user.account
@@ -12,7 +21,9 @@ describe('/api/user/connect/country-spec', () => {
       const countrySpec = await req.get()
       assert.strictEqual(countrySpec.message, 'invalid-country')
     })
+  })
 
+  describe('returns', () => {
     it('array', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/country-spec?country=US')

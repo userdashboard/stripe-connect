@@ -3,17 +3,30 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/payout', () => {
-  describe('returns', () => {
-    it('should reject invalid payoutid', async () => {
-      const administrator = await TestHelper.createAdministrator()
-      const req = TestHelper.createRequest('/api/administrator/connect/payout?payoutid=invalid')
-      req.account = administrator.account
-      req.session = administrator.session
-      const payout = await req.get()
-      assert.strictEqual(payout.message, 'invalid-payoutid')
-    })
+  describe('exceptions', () => {
+    describe('invalid-payoputid', () => {
+      it('missing querystring payoutid', async () => {
+        const administrator = await TestHelper.createAdministrator()
+        const req = TestHelper.createRequest('/api/administrator/connect/payout')
+        req.account = administrator.account
+        req.session = administrator.session
+        const payout = await req.get()
+        assert.strictEqual(payout.message, 'invalid-payoutid')
+      })
 
-    it('array', async () => {
+      it('invalid querystring payoutid', async () => {
+        const administrator = await TestHelper.createAdministrator()
+        const req = TestHelper.createRequest('/api/administrator/connect/payout?payoutid=invalid')
+        req.account = administrator.account
+        req.session = administrator.session
+        const payout = await req.get()
+        assert.strictEqual(payout.message, 'invalid-payoutid')
+      })
+    })
+  })
+
+  describe('returns', () => {
+    it('object', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

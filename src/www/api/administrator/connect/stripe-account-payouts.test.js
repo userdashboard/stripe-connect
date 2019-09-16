@@ -3,6 +3,38 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/stripe-account-payouts', () => {
+  describe('exceptions', () => {
+    describe('invalid-stripeid', () => {
+      it('missing querystring stripeid', async () => {
+        const administrator = await TestHelper.createAdministrator()
+        const req = TestHelper.createRequest('/api/administrator/connect/stripe-account-payouts')
+        req.account = administrator.account
+        req.session = administrator.session
+        let errorMessage
+        try {
+          await req.get(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
+      })
+
+      it('invalid querystring stripeid', async () => {
+        const administrator = await TestHelper.createAdministrator()
+        const req = TestHelper.createRequest('/api/administrator/connect/stripe-account-payouts?stripeid=invalid')
+        req.account = administrator.account
+        req.session = administrator.session
+        let errorMessage
+        try {
+          await req.get(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
+      })
+    })
+  })
+
   describe('returns', () => {
     it('array', async () => {
       const administrator = await TestHelper.createAdministrator()

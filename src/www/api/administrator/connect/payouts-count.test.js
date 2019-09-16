@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/payouts-count', async () => {
   describe('returns', () => {
-    it('should count all payouts', async () => {
+    it('integer', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/stripe-accounts-count', async () => {
   describe('returns', () => {
-    it('should count Stripe accounts', async () => {
+    it('integer', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',

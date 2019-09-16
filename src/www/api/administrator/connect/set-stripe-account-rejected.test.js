@@ -3,42 +3,82 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/set-stripe-account-rejected', async () => {
-  describe('RejectStripeAccount#PATCH', () => {
-    it('should reject invalid stripeid', async () => {
-      const administrator = await TestHelper.createAdministrator()
-      const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid')
-      req.account = administrator.account
-      req.session = administrator.session
-      req.body = {
-        reason: 'fraud'
-      }
-      let errorMessage
-      try {
-        await req.patch(req)
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-stripeid')
+  describe('exceptions', () => {
+    describe('invalid-stripeid', () => {
+      it('missing querystring stripeid', async () => {
+        const administrator = await TestHelper.createAdministrator()
+        const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected')
+        req.account = administrator.account
+        req.session = administrator.session
+        req.body = {
+          reason: 'fraud'
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
+      })
+
+      it('invalid querystring stripeid', async () => {
+        const administrator = await TestHelper.createAdministrator()
+        const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid')
+        req.account = administrator.account
+        req.session = administrator.session
+        req.body = {
+          reason: 'fraud'
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
+      })
     })
 
-    it('should reject invalid reason', async () => {
-      const administrator = await TestHelper.createAdministrator()
-      const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid')
-      req.account = administrator.account
-      req.session = administrator.session
-      req.body = {
-        reason: 'invalid'
-      }
-      let errorMessage
-      try {
-        await req.patch(req)
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-reason')
-    })
+    describe('invalid-reason', () => {
+      it('missing posted reason', async () => {
+        const administrator = await TestHelper.createAdministrator()
+        const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid')
+        req.account = administrator.account
+        req.session = administrator.session
+        req.body = {
+          reason: ''
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-reason')
+      })
 
-    it('should update the Stripe account as rejected', async () => {
+      it('invalid posted reason', async () => {
+        const administrator = await TestHelper.createAdministrator()
+        const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid')
+        req.account = administrator.account
+        req.session = administrator.session
+        req.body = {
+          reason: 'invalid'
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-reason')
+      })
+    })
+  })
+
+  describe('returns', () => {
+    it('boolean', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
