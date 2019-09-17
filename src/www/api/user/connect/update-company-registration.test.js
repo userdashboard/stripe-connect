@@ -3,7 +3,7 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe.only('/api/user/connect/update-company-registration', () => {
+describe('/api/user/connect/update-company-registration', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -1062,12 +1062,12 @@ describe.only('/api/user/connect/update-company-registration', () => {
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
-          company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          company_address_kana_town: '',
           company_address_kana_line1: '27-15',
           company_address_kanji_postal_code: '1500001',
           company_address_kanji_state: '東京都',
           company_address_kanji_city: '渋谷区',
-          company_address_kanji_town: '',
+          company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
           relationship_account_opener_first_name: user.profile.firstName,
           relationship_account_opener_last_name: user.profile.lastName,

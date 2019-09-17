@@ -77,7 +77,7 @@ module.exports = {
           if (!req.body[posted]) {
             throw new Error(`invalid-${posted}`)
           }
-          if (personField === 'gender' && req.body.individual_gender !== 'female' && req.body.individual_gender !== 'male') {
+          if (personField === 'gender' && req.body.relationship_account_opener_gender !== 'female' && req.body.relationship_account_opener_gender !== 'male') {
             throw new Error(`invalid-${posted}`)
           }
           registration[posted] = req.body[posted]
