@@ -37,7 +37,7 @@ describe('/api/user/connect/stripe-account', () => {
       assert.strictEqual(errorMessage, 'invalid-account')
     })
 
-    it('array', async () => {
+    it('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',

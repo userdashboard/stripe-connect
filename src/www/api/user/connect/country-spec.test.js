@@ -34,7 +34,7 @@ describe('/api/user/connect/country-spec', () => {
   })
 
   describe('returns', () => {
-    it('array', async () => {
+    it('object', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/country-spec?country=US')
       req.account = user.account

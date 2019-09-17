@@ -69,7 +69,7 @@ describe('/api/user/connect/beneficial-owner', () => {
   })
 
   describe('returns', () => {
-    it('array', async () => {
+    it('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
