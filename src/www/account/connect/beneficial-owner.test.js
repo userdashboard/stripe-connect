@@ -45,7 +45,7 @@ describe('/account/connect/beneficial-owner', () => {
   })
 
   describe('BeneficialOwner#GET', () => {
-    it.only('should show table for owner', async () => {
+    it('should show table for owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -63,7 +63,6 @@ describe('/account/connect/beneficial-owner', () => {
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       })
-      console.log(person, user)
       const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
       req.session = user.session

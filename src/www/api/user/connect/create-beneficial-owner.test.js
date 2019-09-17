@@ -65,7 +65,7 @@ describe('/api/user/connect/create-beneficial-owner', async () => {
     })
 
     describe('invalid-stripe-account', () => {
-      it('should reject individual account', async () => {
+      it('ineligible stripe account for individual', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'individual',

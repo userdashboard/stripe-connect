@@ -4,6 +4,55 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/stripe-accounts', () => {
+  describe('exception', () => {
+    describe('invalid-payoutid', () => {
+      it('missing querystring payoutid', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/connect/stripe-acounts')
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-accountid')
+      })
+
+      it('invalid querystring payoutid', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/connect/stripe-acounts?accountid=invalid')
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-accountid')
+      })
+    })
+
+    describe('invalid-account', () => {
+      it('ineligible accessing account', async () => {
+        const user = await TestHelper.createUser()
+        const user2 = await TestHelper.createUser()
+        const req = TestHelper.createRequest(`/api/user/connect/stripe-acounts?accountid=${user.account.accountid}`)
+        req.account = user2.account
+        req.session = user2.session
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account')
+      })
+    })
+  })
+
   describe('returns', () => {
     it('should limit Stripe accounts to one page', async () => {
       const user = await TestHelper.createUser()

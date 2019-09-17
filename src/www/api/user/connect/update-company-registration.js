@@ -77,6 +77,9 @@ module.exports = {
           if (!req.body[posted]) {
             throw new Error(`invalid-${posted}`)
           }
+          if (personField === 'gender' && req.body.individual_gender !== 'female' && req.body.individual_gender !== 'male') {
+            throw new Error(`invalid-${posted}`)
+          }
           registration[posted] = req.body[posted]
         }
         for (const personField of openerOptional) {

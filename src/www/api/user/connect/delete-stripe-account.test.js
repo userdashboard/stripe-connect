@@ -3,64 +3,84 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/delete-stripe-account', async () => {
-  describe('DeleteStripeAccount#DELETE', () => {
-    it('should reject invalid stripeid', async () => {
-      const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/api/user/connect/delete-stripe-account?stripeid=invalid')
-      req.account = user.account
-      req.session = user.session
-      let errorMessage
-      try {
-        await req.delete()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-stripeid')
+  describe('exceptions', () => {
+    describe('exceptions', () => {
+      it('should reject invalid stripeid', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/connect/delete-stripe-account')
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.delete()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
+      })
+
+      it('should reject invalid stripeid', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/connect/delete-stripe-account?stripeid=invalid')
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.delete()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
+      })
     })
 
-    it('should reject other account\'s Stripe account', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+    describe('invalid-account', () => {
+      it('ineligible accessing account', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'US'
+        })
+        await TestHelper.createStripeRegistration(user, {
+          company_name: 'Company',
+          company_tax_id: '8',
+          company_phone: '456-123-7890',
+          company_address_city: 'New York',
+          company_address_line1: '123 Park Lane',
+          company_address_postal_code: '10001',
+          company_address_state: 'NY',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+          relationship_account_opener_dob_day: '1',
+          relationship_account_opener_dob_month: '1',
+          relationship_account_opener_dob_year: '1950',
+          relationship_account_opener_first_name: user.profile.firstName,
+          relationship_account_opener_last_name: user.profile.lastName,
+          relationship_account_opener_email: user.profile.contactEmail,
+          relationship_account_opener_ssn_last_4: '0000',
+          relationship_account_opener_phone: '456-789-0123',
+          relationship_account_opener_address_city: 'New York',
+          relationship_account_opener_address_state: 'NY',
+          relationship_account_opener_address_line1: '285 Fulton St',
+          relationship_account_opener_address_postal_code: '10007'
+        })
+        const user2 = await TestHelper.createUser()
+        const req = TestHelper.createRequest(`/api/user/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
+        req.account = user2.account
+        req.session = user2.session
+        let errorMessage
+        try {
+          await req.delete()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account')
       })
-      await TestHelper.createStripeRegistration(user, {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
-        company_address_city: 'New York',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '10001',
-        company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_ssn_last_4: '0000',
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'New York',
-        relationship_account_opener_address_state: 'NY',
-        relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
-      })
-      const user2 = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
-      req.account = user2.account
-      req.session = user2.session
-      let errorMessage
-      try {
-        await req.delete()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-account')
     })
+  })
 
-    it('should delete Stripe account', async () => {
+  describe('returns', () => {
+    it('boolean', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -84,12 +104,8 @@ describe('/api/user/connect/delete-stripe-account', async () => {
       const req = TestHelper.createRequest(`/api/user/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      await req.delete()
-      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-      req2.account = user.account
-      req2.session = user.session
-      const stripeAccount = await req2.get()
-      assert.strictEqual(stripeAccount.message, 'invalid-stripeid')
+      const deleted = await req.delete()
+      assert.strictEqual(deleted)
     })
   })
 })

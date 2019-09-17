@@ -3,22 +3,40 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/delete-company-director', async () => {
-  describe('DeleteBeneficialOwner#DELETE', () => {
-    it('should reject invalid directorid', async () => {
-      const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/api/user/connect/delete-company-director?directorid=invalid')
-      req.account = user.account
-      req.session = user.session
-      let errorMessage
-      try {
-        await req.delete()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-directorid')
-    })
+  describe('exception', () => {
+    describe('exception', () => {
+      it('missing querystring directorid', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/connect/delete-company-director')
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.delete()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-directorid')
+      })
 
-    it('should reject other account\'s registration', async () => {
+      it('invalid querystring directorid', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/connect/delete-company-director?directorid=invalid')
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.delete()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-directorid')
+      })
+    })
+  })
+
+  describe('invalid-account', () => {
+    it('ineligible accessing account', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -41,8 +59,10 @@ describe('/api/user/connect/delete-company-director', async () => {
       }
       assert.strictEqual(errorMessage, 'invalid-account')
     })
+  })
 
-    it('should delete director', async () => {
+  describe('returns', () => {
+    it('boolean', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -56,12 +76,8 @@ describe('/api/user/connect/delete-company-director', async () => {
       const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)
       req.account = user.account
       req.session = user.session
-      await req.delete()
-      const req2 = TestHelper.createRequest(`/api/user/connect/company-director?directorid=${director.directorid}`)
-      req2.account = user.account
-      req2.session = user.session
-      const directorNow = await req2.get()
-      assert.strictEqual(directorNow.message, 'invalid-directorid')
+      const deleted = await req.delete()
+      assert.strictEqual(deleted)
     })
   })
 })

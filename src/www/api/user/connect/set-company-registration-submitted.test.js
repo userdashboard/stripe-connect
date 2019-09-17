@@ -3,144 +3,168 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/set-company-registration-submitted', async () => {
-  describe('SetCompanyRegistrationSubmitted#PATCH', () => {
-    it('should reject invalid stripeid', async () => {
-      const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/api/user/connect/set-company-registration-submitted?stripeid=invalid')
-      req.account = user.account
-      req.session = user.session
-      let errorMessage
-      try {
-        await req.patch(req)
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-stripeid')
+  describe('exceptions', () => {
+    describe('invalid-stripeid', () => {
+      it('missing querystring stripeid', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/connect/set-company-registration-submitted')
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
+      })
+
+      it('invalid querystring stripeid', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/connect/set-company-registration-submitted?stripeid=invalid')
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
+      })
     })
 
-    it('should reject individual account', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+    describe('invalid-stripe-account', () => {
+      it('ineligible stripe account for individual', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'individual',
+          country: 'US'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripe-account')
       })
-      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      let errorMessage
-      try {
-        await req.patch(req)
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-stripe-account')
+
+      it('ineligible stripe account is submitted', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'US'
+        })
+        await TestHelper.createStripeRegistration(user, {
+          company_name: 'Company',
+          company_tax_id: '8',
+          company_phone: '456-123-7890',
+          company_address_city: 'New York',
+          company_address_line1: '123 Park Lane',
+          company_address_postal_code: '10001',
+          company_address_state: 'NY',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+          relationship_account_opener_dob_day: '1',
+          relationship_account_opener_dob_month: '1',
+          relationship_account_opener_dob_year: '1950',
+          relationship_account_opener_first_name: user.profile.firstName,
+          relationship_account_opener_last_name: user.profile.lastName,
+          relationship_account_opener_email: user.profile.contactEmail,
+          relationship_account_opener_phone: '456-789-0123',
+          relationship_account_opener_ssn_last_4: '0000',
+          relationship_account_opener_address_city: 'New York',
+          relationship_account_opener_address_state: 'NY',
+          relationship_account_opener_address_line1: '285 Fulton St',
+          relationship_account_opener_address_postal_code: '10007'
+        })
+        await TestHelper.createExternalAccount(user, {
+          currency: 'usd',
+          country: 'US',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_type: 'individual',
+          account_number: '000123456789',
+          routing_number: '110000000'
+        })
+        await TestHelper.submitStripeAccount(user)
+        const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripe-account')
+      })
     })
 
-    it('should reject submitted registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+    describe('invalid-account', () => {
+      it('ineligible accessing account', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'DE'
+        })
+        const user2 = await TestHelper.createUser()
+        const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+        req.account = user2.account
+        req.session = user2.session
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account')
       })
-      await TestHelper.createStripeRegistration(user, {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
-        company_address_city: 'New York',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '10001',
-        company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_ssn_last_4: '0000',
-        relationship_account_opener_address_city: 'New York',
-        relationship_account_opener_address_state: 'NY',
-        relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
-      })
-      await TestHelper.createExternalAccount(user, {
-        currency: 'usd',
-        country: 'US',
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
-        account_number: '000123456789',
-        routing_number: '110000000'
-      })
-      await TestHelper.submitStripeAccount(user)
-      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      let errorMessage
-      try {
-        await req.patch(req)
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
 
-    it('should reject other account\'s registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+    describe('invalid-payment-details', () => {
+      it('should require payment details', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'DE'
+        })
+        await TestHelper.createStripeRegistration(user, {
+          company_address_city: 'Berlin',
+          company_address_line1: '123 Park Lane',
+          company_address_postal_code: '01067',
+          company_name: 'Company',
+          company_tax_id: '8',
+          relationship_account_opener_address_city: 'Berlin',
+          relationship_account_opener_address_line1: '123 Sesame St',
+          relationship_account_opener_address_postal_code: '01067',
+          relationship_account_opener_phone: '456-789-0123',
+          relationship_account_opener_dob_day: '1',
+          relationship_account_opener_dob_month: '1',
+          relationship_account_opener_dob_year: '1950',
+          relationship_account_opener_first_name: user.profile.firstName,
+          relationship_account_opener_last_name: user.profile.lastName,
+          relationship_account_opener_email: user.profile.contactEmail
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-payment-details')
       })
-      const user2 = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user2.account
-      req.session = user2.session
-      let errorMessage
-      try {
-        await req.patch(req)
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-account')
     })
+  })
 
-    it('should require payment details', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
-      })
-      await TestHelper.createStripeRegistration(user, {
-        company_address_city: 'Berlin',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '01067',
-        company_name: 'Company',
-        company_tax_id: '8',
-        relationship_account_opener_address_city: 'Berlin',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '01067',
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_email: user.profile.contactEmail
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      let errorMessage
-      try {
-        await req.patch(req)
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-payment-details')
-    })
-
-    it('should submit AT-company registration', async () => {
+  describe('returns', () => {
+    it('object for AT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -180,7 +204,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit AU-company registration', async () => {
+    it('object for AU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -220,7 +244,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit BE-company registration', async () => {
+    it('object for BE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -258,7 +282,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit CA-company registration', async () => {
+    it('object for CA registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -300,7 +324,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit CH-company registration', async () => {
+    it('object for CH registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -338,7 +362,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit DE-company registration', async () => {
+    it('object for DE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -376,7 +400,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit DK-company registration', async () => {
+    it('object for DK registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -414,7 +438,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit ES-company registration', async () => {
+    it('object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -452,7 +476,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit FI-company registration', async () => {
+    it('object for FI registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -490,7 +514,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit FR-company registration', async () => {
+    it('object for FR registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -528,7 +552,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit GB-company registration', async () => {
+    it('object for GB registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -566,7 +590,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit HK-company registration', async () => {
+    it('object for HK registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -605,7 +629,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit IE-company registration', async () => {
+    it('object for IE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -644,7 +668,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit IT-company registration', async () => {
+    it('object for IT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -682,7 +706,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit JP-company registration', async () => {
+    it('object for JP registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -744,7 +768,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit LU-company registration', async () => {
+    it('object for LU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -782,7 +806,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit NL-company registration', async () => {
+    it('object for NL registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -820,7 +844,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit NO-company registration', async () => {
+    it('object for NO registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -858,7 +882,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit NZ-company registration', async () => {
+    it('object for NZ registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -897,7 +921,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit PT-company registration', async () => {
+    it('object for PT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -935,7 +959,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit SE-company registration', async () => {
+    it('object for SE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -973,7 +997,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit SG-company registration', async () => {
+    it('object for SG registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -1012,7 +1036,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    it('should submit US-company registration', async () => {
+    it('object for US registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
