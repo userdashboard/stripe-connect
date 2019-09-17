@@ -72,7 +72,7 @@ describe('/administrator/connect/stripe-account', () => {
     })
   })
 
-  describe('returns', () => {
+  describe('StripeAccount#GET', () => {
     it('should have row for Stripe account', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()

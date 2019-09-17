@@ -36,7 +36,7 @@ describe('/administrator/connect/delete-stripe-account', async () => {
     })
   })
 
-  describe('returns', () => {
+  describe('DeleteStripeAccount#GET', () => {
     it('should present the form', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()

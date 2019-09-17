@@ -69,7 +69,7 @@ describe('/administrator/connect/payouts', () => {
     })
   })
 
-  describe('returns', () => {
+  describe('Payouts#GET', () => {
     it('should have row for each payout', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()

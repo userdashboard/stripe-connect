@@ -36,7 +36,7 @@ describe('/administrator/connect/reject-stripe-account', async () => {
     })
   })
 
-  describe('returns', () => {
+  describe('RejectStripeAccount#GET', () => {
     it('should present the form', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()

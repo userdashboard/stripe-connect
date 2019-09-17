@@ -36,7 +36,7 @@ describe('/administrator/connect', () => {
     })
   })
 
-  describe('returns', () => {
+  describe('Index#GET', () => {
     it('should have row for each Stripe account', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
