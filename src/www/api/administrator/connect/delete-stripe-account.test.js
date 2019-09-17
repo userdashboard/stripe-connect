@@ -67,8 +67,13 @@ describe('/api/administrator/connect/delete-stripe-account', async () => {
         const req2 = TestHelper.createRequest(`/api/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
         req2.account = administrator.account
         req2.session = administrator.session
-        const stripeAccount = await req2.get()
-        assert.strictEqual(stripeAccount.message, 'invalid-stripeid')
+        let errorMessage
+        try {
+          await req2.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
     })
   })

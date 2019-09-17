@@ -9,8 +9,13 @@ describe('/api/user/connect/country-spec', () => {
       const req = TestHelper.createRequest('/api/user/connect/country-spec')
       req.account = user.account
       req.session = user.session
-      const countrySpec = await req.get()
-      assert.strictEqual(countrySpec.message, 'invalid-country')
+      let errorMessage
+      try {
+        await req.get()
+      } catch (error) {
+        errorMessage = error.message
+      }
+      assert.strictEqual(errorMessage, 'invalid-country')
     })
 
     it('invalid querystring country', async () => {
@@ -18,8 +23,13 @@ describe('/api/user/connect/country-spec', () => {
       const req = TestHelper.createRequest('/api/user/connect/country-spec?country=invalid')
       req.account = user.account
       req.session = user.session
-      const countrySpec = await req.get()
-      assert.strictEqual(countrySpec.message, 'invalid-country')
+      let errorMessage
+      try {
+        await req.get()
+      } catch (error) {
+        errorMessage = error.message
+      }
+      assert.strictEqual(errorMessage, 'invalid-country')
     })
   })
 

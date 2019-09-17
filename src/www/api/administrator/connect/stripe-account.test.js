@@ -41,8 +41,13 @@ describe('/api/administrator/connect/stripe-account', () => {
       const req = TestHelper.createRequest('/api/administrator/connect/stripe-account?stripeid=invalid')
       req.account = administrator.account
       req.session = administrator.session
-      const stripeAccount = await req.get()
-      assert.strictEqual(stripeAccount.message, 'invalid-stripeid')
+      let errorMessage
+      try {
+        await req.get()
+      } catch (error) {
+        errorMessage = error.message
+      }
+      assert.strictEqual(errorMessage, 'invalid-stripeid')
     })
 
     it('object', async () => {

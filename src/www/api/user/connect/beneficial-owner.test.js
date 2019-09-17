@@ -10,8 +10,13 @@ describe('/api/user/connect/beneficial-owner', () => {
         const req = TestHelper.createRequest('/api/user/connect/beneficial-owner')
         req.account = user.account
         req.session = user.session
-        const owner = await req.get()
-        assert.strictEqual(owner.message, 'invalid-ownerid')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-ownerid')
       })
 
       it('invalid querystring ownerid', async () => {
@@ -19,8 +24,13 @@ describe('/api/user/connect/beneficial-owner', () => {
         const req = TestHelper.createRequest('/api/user/connect/beneficial-owner?ownerid=invalid')
         req.account = user.account
         req.session = user.session
-        const owner = await req.get()
-        assert.strictEqual(owner.message, 'invalid-ownerid')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-ownerid')
       })
     })
 
@@ -47,8 +57,13 @@ describe('/api/user/connect/beneficial-owner', () => {
         const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
         req.account = user2.account
         req.session = user2.session
-        const owner = await req.get()
-        assert.strictEqual(owner.message, 'invalid-account')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account')
       })
     })
   })

@@ -10,8 +10,13 @@ describe('/api/user/connect/company-director', () => {
         const req = TestHelper.createRequest('/api/user/connect/company-director')
         req.account = user.account
         req.session = user.session
-        const owner = await req.get()
-        assert.strictEqual(owner.message, 'invalid-directorid')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-directorid')
       })
 
       it('invalid querystring directorid', async () => {
@@ -19,8 +24,13 @@ describe('/api/user/connect/company-director', () => {
         const req = TestHelper.createRequest('/api/user/connect/company-director?directorid=invalid')
         req.account = user.account
         req.session = user.session
-        const owner = await req.get()
-        assert.strictEqual(owner.message, 'invalid-directorid')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-directorid')
       })
     })
 
@@ -40,8 +50,13 @@ describe('/api/user/connect/company-director', () => {
         const req = TestHelper.createRequest(`/api/user/connect/company-director?directorid=${user.owner.directorid}`)
         req.account = user2.account
         req.session = user2.session
-        const owner = await req.get()
-        assert.strictEqual(owner.message, 'invalid-account')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account')
       })
     })
   })

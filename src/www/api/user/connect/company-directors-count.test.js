@@ -14,8 +14,13 @@ describe('/api/user/connect/company-directors-count', () => {
         const req = TestHelper.createRequest('/api/user/connect/company-directors-count')
         req.account = user.account
         req.session = user.session
-        const owners = await req.get()
-        assert.strictEqual(owners.message, 'invalid-stripe-account')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripe-account')
       })
 
       it('invalid querystring stripeid', async () => {
@@ -23,8 +28,13 @@ describe('/api/user/connect/company-directors-count', () => {
         const req = TestHelper.createRequest('/api/user/connect/company-directors-count?stripeid=invalid')
         req.account = user.account
         req.session = user.session
-        const owners = await req.get()
-        assert.strictEqual(owners.message, 'invalid-stripe-account')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripe-account')
       })
     })
 
@@ -62,8 +72,13 @@ describe('/api/user/connect/company-directors-count', () => {
         const req = TestHelper.createRequest(`/api/user/connect/company-directors-count?stripeid=${user.stripeAccount.id}`)
         req.account = user2.account
         req.session = user2.session
-        const owners = await req.get()
-        assert.strictEqual(owners.message, 'invalid-account')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account')
       })
     })
 
@@ -77,8 +92,13 @@ describe('/api/user/connect/company-directors-count', () => {
         const req = TestHelper.createRequest(`/api/user/connect/company-directors-count?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        const owners = await req.get()
-        assert.strictEqual(owners.message, 'invalid-stripe-account')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripe-account')
       })
     })
   })

@@ -10,17 +10,27 @@ describe('/api/user/connect/create-stripe-account', async () => {
         const req = TestHelper.createRequest('/api/user/connect/create-stripe-account')
         req.account = user.account
         req.session = user.session
-        const owner = await req.post()
-        assert.strictEqual(owner.message, 'invalid-accountid')
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-accountid')
       })
 
       it('invalid querystring accountid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/create-stripe-account?ownerid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/create-stripe-account?accountid=invalid')
         req.account = user.account
         req.session = user.session
-        const owner = await req.post()
-        assert.strictEqual(owner.message, 'invalid-accountid')
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-accountid')
       })
     })
 

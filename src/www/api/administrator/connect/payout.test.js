@@ -10,8 +10,13 @@ describe('/api/administrator/connect/payout', () => {
         const req = TestHelper.createRequest('/api/administrator/connect/payout')
         req.account = administrator.account
         req.session = administrator.session
-        const payout = await req.get()
-        assert.strictEqual(payout.message, 'invalid-payoutid')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-payoutid')
       })
 
       it('invalid querystring payoutid', async () => {
@@ -19,8 +24,13 @@ describe('/api/administrator/connect/payout', () => {
         const req = TestHelper.createRequest('/api/administrator/connect/payout?payoutid=invalid')
         req.account = administrator.account
         req.session = administrator.session
-        const payout = await req.get()
-        assert.strictEqual(payout.message, 'invalid-payoutid')
+        let errorMessage
+        try {
+          await req.get()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-payoutid')
       })
     })
   })
