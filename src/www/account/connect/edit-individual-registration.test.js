@@ -87,6 +87,13 @@ describe('/account/connect/edit-individual-registration', async () => {
           assert.strictEqual(back.tag, 'input')
           continue
         }
+        if (field === 'individual.gender') {
+          const female = doc.getElementById('female')
+          assert.strictEqual(female.tag, 'input')
+          const male = doc.getElementById('male')
+          assert.strictEqual(male.tag, 'input')
+          continue
+        }
         const input = doc.getElementById(field.split('.').join('_'))
         if (input.attr.name === 'individual_address_state' ||
             input.attr.name === 'individual_address_country' ||
@@ -1409,11 +1416,12 @@ describe('/account/connect/edit-individual-registration', async () => {
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
-        individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_ssn_last_4: '0000',
+        individual_id_number: '00000000000',
         individual_phone: '456-123-7890',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
@@ -1437,7 +1445,8 @@ describe('/account/connect/edit-individual-registration', async () => {
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
-        individual_id_number: '000000000',
+        individual_ssn_last_4: '0000',
+        individual_id_number: '00000000000',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',

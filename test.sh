@@ -10,4 +10,4 @@ STRIPE_PUBLISHABLE_KEY="$CONNECT_STRIPE_PUBLISHABLE_KEY" \
 STRIPE_JS="false" \
 IP="0.0.0.0" \
 STORAGE_PATH=/tmp/connect \
-npm run test2
+npm run test

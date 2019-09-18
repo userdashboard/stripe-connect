@@ -123,6 +123,7 @@ describe('/account/connect/submit-company-registration', async () => {
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_ssn_last_4: '0000',
+        relationship_account_opener_id_number: '000000000',
         relationship_account_opener_address_city: 'New York',
         relationship_account_opener_address_state: 'NY',
         relationship_account_opener_address_line1: '285 Fulton St',

@@ -117,8 +117,8 @@ async function createStripeRegistration (user, properties) {
     }
   } else {
     req.uploads = {
-      account_opener_verification_document_front: module.exports['success_id_scan_front.png'],
-      account_opener_verification_document_back: module.exports['success_id_scan_back.png']
+      relationship_account_opener_verification_document_front: module.exports['success_id_scan_front.png'],
+      relationship_account_opener_verification_document_back: module.exports['success_id_scan_back.png']
     }
   }
   req.body = createMultiPart(req, properties)
