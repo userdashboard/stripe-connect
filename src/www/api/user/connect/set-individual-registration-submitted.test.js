@@ -76,6 +76,7 @@ describe('/api/user/connect/set-individual-registration-submitted', async () => 
           relationship_account_opener_last_name: user.profile.lastName,
           relationship_account_opener_email: user.profile.contactEmail,
           relationship_account_opener_phone: '456-789-0123',
+          relationship_account_opener_id_number: '000000000',
           relationship_account_opener_ssn_last_4: '0000',
           relationship_account_opener_address_city: 'New York',
           relationship_account_opener_address_state: 'NY',
