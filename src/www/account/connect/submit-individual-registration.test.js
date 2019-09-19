@@ -40,7 +40,7 @@ describe('/account/connect/submit-individual-registration', async () => {
         relationship_account_opener_address_state: 'NY',
         relationship_account_opener_address_postal_code: '10007',
         relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_id_number: '000000000',
+        // relationship_account_opener_id_number: '000000000',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
         relationship_account_opener_email: user.profile.contactEmail,

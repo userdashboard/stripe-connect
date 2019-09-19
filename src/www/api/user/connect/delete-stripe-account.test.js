@@ -57,7 +57,7 @@ describe('/api/user/connect/delete-stripe-account', async () => {
           relationship_account_opener_first_name: user.profile.firstName,
           relationship_account_opener_last_name: user.profile.lastName,
           relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_id_number: '000000000',
+          // relationship_account_opener_id_number: '000000000',
           relationship_account_opener_ssn_last_4: '0000',
           relationship_account_opener_phone: '456-789-0123',
           relationship_account_opener_address_city: 'New York',
@@ -100,7 +100,8 @@ describe('/api/user/connect/delete-stripe-account', async () => {
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName
+        relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_email: user.profile.contactEmail
       })
       const req = TestHelper.createRequest(`/api/user/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

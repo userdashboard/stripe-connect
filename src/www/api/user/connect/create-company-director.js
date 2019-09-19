@@ -14,16 +14,16 @@ module.exports = {
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount) {
+      throw new Error('invalid-stripeid')
+    }
     const personFields = ['first_name', 'last_name']
     for (const field of personFields) {
       const posted = `relationship_director_${field}`
       if (!req.body[posted]) {
         throw new Error(`invalid-${posted}`)
       }
-    }
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (!stripeAccount) {
-      throw new Error('invalid-stripeid')
     }
     if (stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.submitted ||

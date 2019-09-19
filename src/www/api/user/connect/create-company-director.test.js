@@ -58,7 +58,7 @@ describe('/api/user/connect/create-company-director', async () => {
           relationship_account_opener_first_name: user.profile.firstName,
           relationship_account_opener_last_name: user.profile.lastName,
           relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_id_number: '000000000',
+          // relationship_account_opener_id_number: '000000000',
           relationship_account_opener_ssn_last_4: '0000',
           relationship_account_opener_phone: '456-789-0123',
           relationship_account_opener_address_city: 'New York',
@@ -179,7 +179,7 @@ describe('/api/user/connect/create-company-director', async () => {
         relationship_director_last_name: person.lastName
       })
       await req.post()
-      const stripeAccountNow = await global.api.user.connect.StripeAccount.post(req)
+      const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
       const ownersNow = connect.MetaData.parse(stripeAccountNow.metadata, 'owners')
       assert.strictEqual(ownersNow.length, 1)
       assert.strictEqual(ownersNow[0].relationship_director_first_name, person.firstName)

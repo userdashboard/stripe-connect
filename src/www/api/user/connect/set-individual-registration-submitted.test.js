@@ -60,28 +60,21 @@ describe('/api/user/connect/set-individual-registration-submitted', async () => 
           country: 'US'
         })
         await TestHelper.createStripeRegistration(user, {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
-          company_address_city: 'New York',
-          company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
-          company_address_state: 'NY',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_state: 'NY',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          business_profile_mcc: '7997',
+          business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
+          individual_address_city: 'New York',
+          individual_address_line1: '285 Fulton St',
+          individual_address_postal_code: '10007',
+          individual_id_number: '000000000',
+          individual_address_state: 'NY',
+          individual_ssn_last_4: '0000',
+          individual_dob_day: '1',
+          individual_dob_month: '1',
+          individual_dob_year: '1950',
+          individual_phone: '456-123-7890',
+          individual_email: user.profile.contactEmail,
+          individual_first_name: user.profile.firstName,
+          individual_last_name: user.profile.lastName
         })
         await TestHelper.createExternalAccount(user, {
           currency: 'usd',

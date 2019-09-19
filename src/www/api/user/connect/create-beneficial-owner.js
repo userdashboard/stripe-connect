@@ -13,6 +13,10 @@ module.exports = {
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount) {
+      throw new Error('invalid-stripeid')
+    }
     const personFields = ['first_name', 'last_name', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code']
     const personOptional = ['address_line2', 'address_state', 'address_country']
     for (const field of personFields) {
@@ -20,10 +24,6 @@ module.exports = {
       if (!req.body[posted]) {
         throw new Error(`invalid-${posted}`)
       }
-    }
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (!stripeAccount) {
-      throw new Error('invalid-stripeid')
     }
     if (stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.submitted ||

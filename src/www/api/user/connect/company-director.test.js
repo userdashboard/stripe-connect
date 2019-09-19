@@ -43,8 +43,8 @@ describe('/api/user/connect/company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         await TestHelper.createCompanyDirector(user, {
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/company-director?directorid=${user.owner.directorid}`)

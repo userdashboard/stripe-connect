@@ -20,7 +20,7 @@ describe('/api/user/connect/company-directors', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
 
       it('invalid querystring stripeid', async () => {
@@ -34,7 +34,7 @@ describe('/api/user/connect/company-directors', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
     })
 
@@ -61,7 +61,7 @@ describe('/api/user/connect/company-directors', () => {
           relationship_account_opener_first_name: user.profile.firstName,
           relationship_account_opener_last_name: user.profile.lastName,
           relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_id_number: '000000000',
+          // relationship_account_opener_id_number: '000000000',
           relationship_account_opener_ssn_last_4: '0000',
           relationship_account_opener_phone: '456-789-0123',
           relationship_account_opener_address_city: 'New York',
