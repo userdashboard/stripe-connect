@@ -48,8 +48,8 @@ module.exports = {
       }
     }
     req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-    const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
+    // const countrySpec = await global.api.user.connect.CountrySpec.get(req)
+    const requiredFields = stripeAccount.requirements.currently_due.concat(stripeAccount.requirements.eventually_due)
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
     if (req.body.individual_verification_document_back) {
       registration.individual_verification_document_back = req.body.individual_verification_document_back

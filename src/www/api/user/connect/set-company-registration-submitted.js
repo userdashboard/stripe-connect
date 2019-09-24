@@ -24,9 +24,7 @@ module.exports = {
     if (!registration) {
       throw new Error('invalid-registration')
     }
-    req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-    const requiredFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
+    const requiredFields = stripeAccount.requirements.currently_due.concat(stripeAccount.requirements.eventually_due)
     for (const field of requiredFields) {
       if (field === 'business_type' ||
         field === 'external_account' ||

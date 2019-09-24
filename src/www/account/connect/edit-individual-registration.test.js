@@ -65,11 +65,7 @@ describe('/account/connect/edit-individual-registration', async () => {
 
   describe('EditIndividualRegistration#GET', () => {
     async function testRequiredFieldInputsExist (req, stripeAccount) {
-      const req2 = TestHelper.createRequest(`/api/user/connect/country-spec?country=${stripeAccount.country}`)
-      req2.account = req.account
-      req2.session = req.session
-      const country = await req2.get()
-      const fieldsNeeded = country.verification_fields.individual.minimum.concat(country.verification_fields.individual.additional)
+      const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       for (const field of fieldsNeeded) {
@@ -905,7 +901,7 @@ describe('/account/connect/edit-individual-registration', async () => {
       req.body = {
         individual_address_city: 'Hong Kong',
         individual_address_line1: '123 Sesame St',
-        individual_id_number: '00000000000',
+        individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -927,7 +923,7 @@ describe('/account/connect/edit-individual-registration', async () => {
       req.body = {
         individual_address_city: 'Hong Kong',
         individual_address_line1: '123 Sesame St',
-        individual_id_number: '00000000000',
+        individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1365,7 +1361,7 @@ describe('/account/connect/edit-individual-registration', async () => {
       req.body = {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '339696',
-        individual_id_number: '00000000000',
+        individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1387,7 +1383,7 @@ describe('/account/connect/edit-individual-registration', async () => {
       req.body = {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '339696',
-        individual_id_number: '00000000000',
+        individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1421,7 +1417,7 @@ describe('/account/connect/edit-individual-registration', async () => {
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_ssn_last_4: '0000',
-        individual_id_number: '00000000000',
+        individual_id_number: '000000000',
         individual_phone: '456-123-7890',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
@@ -1446,7 +1442,7 @@ describe('/account/connect/edit-individual-registration', async () => {
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
         individual_ssn_last_4: '0000',
-        individual_id_number: '00000000000',
+        individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',

@@ -32,16 +32,11 @@ async function beforeRequest (req) {
   }
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-  let verificationFields
-  if (stripeAccount.business_type === 'individual') {
-    verificationFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
-  } else {
-    verificationFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
-  }
+  const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
   let registrationComplete = true
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  if (verificationFields) {
-    for (const field of verificationFields) {
+  if (fieldsNeeded) {
+    for (const field of fieldsNeeded) {
       if (field === 'external_account' ||
           field === 'business_type' ||
           field === 'tos_acceptance.ip' ||

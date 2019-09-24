@@ -223,7 +223,7 @@ async function submitStripeAccount (user) {
   return stripeAccount
 }
 
-async function waitForPayout (stripeid, previousid, callback) {
+async function waitForPayout (administrator, stripeid, previousid, callback) {
   callback = callback || previousid
   if (callback === previousid) {
     previousid = null
@@ -233,6 +233,8 @@ async function waitForPayout (stripeid, previousid, callback) {
       return
     }
     const req = module.exports.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${stripeid}&limit=1`)
+    req.account = administrator.account
+    req.session = administrator.session
     const itemids = await req.get()
     if (!itemids || !itemids.length) {
       return setTimeout(wait, 100)

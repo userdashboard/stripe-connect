@@ -64,7 +64,7 @@ describe('/api/administrator/connect/payout', () => {
       await TestHelper.submitStripeAccount(user)
       await TestHelper.waitForVerification(user.stripeAccount.id)
       await TestHelper.createPayout(user)
-      await TestHelper.waitForPayout(user.stripeAccount.id, null)
+      await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/api/administrator/connect/payout?payoutid=${user.payout.id}`)
       req.account = administrator.account
       req.session = administrator.session

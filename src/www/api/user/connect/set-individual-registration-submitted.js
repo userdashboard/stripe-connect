@@ -25,9 +25,7 @@ module.exports = {
     } if (!registration.individual_verification_document_back) {
       throw new Error('invalid-individual_verification_document_back')
     }
-    req.query.country = stripeAccount.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-    const requiredFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
+    const requiredFields = stripeAccount.requirements.currently_due.concat(stripeAccount.requirements.eventually_due)
     for (const field of requiredFields) {
       if (field === 'external_account' ||
         field === 'individual.verification.document' ||
@@ -38,7 +36,7 @@ module.exports = {
       }
       const posted = field.split('.').join('_')
       if (!registration[posted]) {
-        throw new Error('invalid-registration')
+        throw new Error('invalid-reegistration')
       }
     }
     const accountInfo = {

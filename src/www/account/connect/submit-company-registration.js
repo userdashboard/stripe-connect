@@ -21,7 +21,7 @@ async function beforeRequest (req) {
   stripeAccount.individual = stripeAccount.individual || {}
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-  const fieldsNeeded = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
+  const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
   const completedPayment = stripeAccount.external_accounts &&
                            stripeAccount.external_accounts.data &&
                            stripeAccount.external_accounts.data.length
@@ -68,7 +68,6 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-
   navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')

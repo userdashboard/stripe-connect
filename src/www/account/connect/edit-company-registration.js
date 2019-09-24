@@ -75,7 +75,7 @@ async function beforeRequest (req) {
       break
     }
   }
-  const fieldsNeeded = applicationCountry.verification_fields.company.minimum.concat(applicationCountry.verification_fields.company.additional)
+  const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
   req.data = { stripeAccount, countries, countrySpec, countrySpecs, applicationCountry, personalAddress, companyAddressCountry, registration, fieldsNeeded }
 }
 

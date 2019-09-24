@@ -19,7 +19,7 @@ async function beforeRequest (req) {
   }
   req.query.country = stripeAccount.country
   const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-  const fieldsNeeded = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
+  const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
   const completedPayment = stripeAccount.external_accounts &&
                            stripeAccount.external_accounts.data &&
                            stripeAccount.external_accounts.data.length

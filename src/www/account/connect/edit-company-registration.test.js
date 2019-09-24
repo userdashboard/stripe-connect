@@ -142,11 +142,7 @@ describe('/account/connect/edit-company-registration', async () => {
 
   describe('EditCompanyRegistration#GET', () => {
     async function testRequiredFieldInputsExist (req, stripeAccount) {
-      const req2 = TestHelper.createRequest(`/api/user/connect/country-spec?country=${stripeAccount.country}`)
-      req2.account = req.account
-      req2.session = req.session
-      const country = await req2.get()
-      const fieldsNeeded = country.verification_fields.company.minimum.concat(country.verification_fields.company.additional)
+      const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       for (const field of fieldsNeeded) {

@@ -80,9 +80,9 @@ describe('/api/user/connect/payouts-count', async () => {
       await TestHelper.submitStripeAccount(user)
       await TestHelper.waitForVerification(user.stripeAccount.id)
       const payout1 = await TestHelper.createPayout(user)
-      await TestHelper.waitForPayout(user.stripeAccount.id)
+      await TestHelper.waitForPayout(administrator, user.stripeAccount.id)
       await TestHelper.createPayout(user)
-      await TestHelper.waitForPayout(user.stripeAccount.id, payout1.id)
+      await TestHelper.waitForPayout(administrator, user.stripeAccount.id, payout1.id)
       const req = TestHelper.createRequest(`/api/user/connect/payouts-count?accountid=${user.account.accountid}`)
       req.account = user.account
       req.session = user.session

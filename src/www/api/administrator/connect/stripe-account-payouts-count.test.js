@@ -64,7 +64,7 @@ describe('/api/administrator/connect/stripe-account-payouts-count', async () => 
       await TestHelper.submitStripeAccount(user)
       await TestHelper.waitForVerification(user.stripeAccount.id)
       await TestHelper.createPayout(user)
-      await TestHelper.waitForPayout(user.stripeAccount.id, null)
+      await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const user2 = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user2, {
         type: 'individual',
@@ -91,7 +91,7 @@ describe('/api/administrator/connect/stripe-account-payouts-count', async () => 
       await TestHelper.submitStripeAccount(user2)
       await TestHelper.waitForVerification(user2.stripeAccount.id)
       await TestHelper.createPayout(user2)
-      await TestHelper.waitForPayout(user2.stripeAccount.id, null)
+      await TestHelper.waitForPayout(administrator, user2.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts-count?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session

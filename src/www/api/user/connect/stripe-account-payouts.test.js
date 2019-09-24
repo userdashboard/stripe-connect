@@ -80,7 +80,7 @@ describe('/api/user/connect/stripe-account-payouts', () => {
       await TestHelper.submitStripeAccount(user)
       await TestHelper.waitForVerification(user.stripeAccount.id)
       const payout1 = await TestHelper.createPayout(user)
-      await TestHelper.waitForPayout(user.stripeAccount.id, null)
+      await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/api/user/connect/stripe-account-payouts?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
