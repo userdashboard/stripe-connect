@@ -193,7 +193,7 @@ module.exports = {
       }
       stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       req.success = true
-      await stripeCache.update(stripeAccount, req.stripeKey)
+      await stripeCache.update(stripeAccount)
       return stripeAccount
     } catch (error) {
       const errorMessage = error.param ? error.raw.param : error.message

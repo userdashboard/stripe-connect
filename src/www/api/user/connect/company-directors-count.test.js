@@ -20,7 +20,7 @@ describe('/api/user/connect/company-directors-count', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
 
       it('invalid querystring stripeid', async () => {
@@ -34,7 +34,7 @@ describe('/api/user/connect/company-directors-count', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
     })
 

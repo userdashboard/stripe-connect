@@ -44,7 +44,7 @@ module.exports = {
       await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
       await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
       req.success = true
-      await stripeCache.update(stripeAccount, req.stripeKey)
+      await stripeCache.update(stripeAccount)
       return stripeAccount
     } catch (error) {
       throw new Error('unknown-error')

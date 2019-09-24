@@ -24,7 +24,7 @@ module.exports = {
     try {
       const accountNow = await stripe.accounts.reject(req.query.stripeid, updateInfo, req.stripeKey)
       req.success = true
-      await stripeCache.update(accountNow, req.stripeKey)
+      await stripeCache.update(accountNow)
       return accountNow
     } catch (error) {
       throw new Error('unknown-error')

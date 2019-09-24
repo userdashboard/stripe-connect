@@ -16,6 +16,7 @@ module.exports = {
       await stripe.accounts.del(req.query.stripeid, req.stripeKey)
       req.success = true
       await stripeCache.delete(req.query.stripeid)
+      return true
     } catch (error) {
       throw new Error('unknown-error')
     }

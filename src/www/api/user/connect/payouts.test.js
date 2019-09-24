@@ -54,6 +54,7 @@ describe('/api/user/connect/payouts', () => {
 
   describe('returns', () => {
     it('array', async () => {
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',

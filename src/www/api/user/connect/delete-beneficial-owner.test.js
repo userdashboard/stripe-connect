@@ -127,7 +127,7 @@ describe('/api/user/connect/delete-beneficial-owner', async () => {
       req.account = user.account
       req.session = user.session
       const deleted = await req.delete()
-      assert.strictEqual(deleted)
+      assert.strictEqual(deleted, true)
     })
   })
 })

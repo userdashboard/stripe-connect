@@ -358,21 +358,19 @@ describe('/api/user/connect/update-individual-registration', () => {
       })
     })
 
-    describe('invalid-indvidual_id_number', () => {
+    describe('invalid-individual_id_number', () => {
       it('missing posted indvidual_id_number', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'individual',
-          country: 'CA'
+          country: 'HK'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          individual_address_city: 'Vancouver',
-          individual_address_state: 'BC',
+          individual_address_city: 'Hong Kong',
           individual_address_line1: '123 Sesame St',
-          individual_address_postal_code: 'V5K 0A1',
           individual_id_number: '',
           individual_dob_day: '1',
           individual_dob_month: '1',

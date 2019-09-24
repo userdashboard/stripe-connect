@@ -1,6 +1,5 @@
 /* eslint-env mocha */
 const assert = require('assert')
-const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/create-beneficial-owner', async () => {
@@ -172,42 +171,6 @@ describe('/api/user/connect/create-beneficial-owner', async () => {
       })
     })
 
-    describe('invalid-relationship_owner_address_country', () => {
-      it('missing posted relationship_owner_address_country', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
-        })
-        const person = TestHelper.nextIdentity()
-        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
-        }
-        req.body = TestHelper.createMultiPart(req, {
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: '',
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
-        })
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_country')
-      })
-    })
-
     describe('invalid-relationship_owner_address_city', () => {
       it('missing posted relationship_owner_address_city', async () => {
         const user = await TestHelper.createUser()
@@ -281,7 +244,7 @@ describe('/api/user/connect/create-beneficial-owner', async () => {
     })
 
     describe('invalid-relationship_owner_address_postal_code', () => {
-      it('missing posted relationship_owner_postal_code', async () => {
+      it('missing posted relationship_owner_address_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -312,7 +275,7 @@ describe('/api/user/connect/create-beneficial-owner', async () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_postal_code')
+        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_postal_code')
       })
     })
 
@@ -451,11 +414,8 @@ describe('/api/user/connect/create-beneficial-owner', async () => {
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       })
-      await req.post()
-      const stripeAccountNow = await global.api.user.connect.StripeAccount.post(req)
-      const ownersNow = connect.MetaData.parse(stripeAccountNow.metadata, 'owners')
-      assert.strictEqual(ownersNow.length, 1)
-      assert.strictEqual(ownersNow[0].relationship_owner_first_name, person.firstName)
+      const owner = await req.post()
+      assert.strictEqual(owner.object, 'owner')
     })
   })
 })

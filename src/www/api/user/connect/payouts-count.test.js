@@ -54,6 +54,7 @@ describe('/api/user/connect/payouts-count', async () => {
 
   describe('returns', () => {
     it('integer', async () => {
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',

@@ -47,7 +47,7 @@ describe('/api/user/connect/company-director', () => {
           relationship_director_last_name: person.lastName
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/company-director?directorid=${user.owner.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/company-director?directorid=${user.director.directorid}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage

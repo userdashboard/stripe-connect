@@ -74,7 +74,7 @@ module.exports = {
     connect.MetaData.store(accountInfo.metadata, 'directors', directors)
     try {
       const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
-      await stripeCache.update(accountNow, req.stripeKey)
+      await stripeCache.update(accountNow)
       req.success = true
       return director
     } catch (error) {

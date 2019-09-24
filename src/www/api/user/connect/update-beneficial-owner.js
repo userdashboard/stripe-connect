@@ -107,7 +107,7 @@ module.exports = {
     connect.MetaData.store(accountInfo.metadata, 'owners', owners)
     try {
       const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
-      await stripeCache.update(accountNow, req.stripeKey)
+      await stripeCache.update(accountNow)
       req.success = true
       return owner
     } catch (error) {

@@ -31,10 +31,10 @@ module.exports = {
     connect.MetaData.store(accountInfo.metadata, 'owners', owners)
     try {
       const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
+      await stripeCache.update(accountNow)
       await dashboard.Storage.deleteFile(`${req.appid}/map/ownerid/stripeid/${req.query.ownerid}`)
       req.success = true
-      await stripeCache.update(accountNow, req.stripeKey)
-      return accountNow
+      return true
     } catch (error) {
       throw new Error('unknown-error')
     }

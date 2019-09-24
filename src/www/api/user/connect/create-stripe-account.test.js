@@ -51,7 +51,7 @@ describe('/api/user/connect/create-stripe-account', async () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-type')
+        assert.strictEqual(errorMessage, 'invalid-account')
       })
     })
 

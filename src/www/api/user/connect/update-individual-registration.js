@@ -81,7 +81,7 @@ module.exports = {
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       req.success = true
-      await stripeCache.update(accountNow, req.stripeKey)
+      await stripeCache.update(accountNow)
       return accountNow
     } catch (error) {
       if (error.message.startsWith('invalid-')) {

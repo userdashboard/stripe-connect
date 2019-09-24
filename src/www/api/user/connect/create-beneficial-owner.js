@@ -10,12 +10,12 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    if (!req.body) {
-      throw new Error('invalid-first_name')
-    }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
+    }
+    if (!req.body) {
+      throw new Error('invalid-first_name')
     }
     const personFields = ['first_name', 'last_name', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code']
     const personOptional = ['address_line2', 'address_state', 'address_country']
@@ -111,7 +111,7 @@ module.exports = {
     connect.MetaData.store(accountInfo.metadata, 'owners', owners)
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-      await stripeCache.update(accountNow, req.stripeKey)
+      await stripeCache.update(accountNow)
       await dashboard.Storage.write(`${req.appid}/map/ownerid/stripeid/${owner.ownerid}`, req.query.stripeid)
       req.success = true
       return owner

@@ -23,10 +23,11 @@ module.exports = {
         }
       }
       await stripe.accounts.del(req.query.stripeid, req.stripeKey)
+      await stripeCache.delete(req.query.stripeid)
       await dashboard.StorageList.remove(`${req.appid}/stripeAccounts`, req.query.stripeid)
       await dashboard.StorageList.remove(`${req.appid}/account/stripeAccounts/${req.account.accountid}`, req.query.stripeid)
       req.success = true
-      await stripeCache.delete(req.query.stripeid)
+      return true
     } catch (error) {
       throw new Error('unknown-error')
     }

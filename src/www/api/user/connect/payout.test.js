@@ -36,6 +36,7 @@ describe('/api/user/connect/payout', () => {
 
     describe('invalid-account', () => {
       it('ineligible accessing account', async () => {
+        const administrator = await TestHelper.createOwner()
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'individual',
@@ -80,6 +81,7 @@ describe('/api/user/connect/payout', () => {
 
   describe('returns', () => {
     it('array', async () => {
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
