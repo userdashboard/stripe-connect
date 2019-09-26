@@ -55,7 +55,7 @@ async function beforeRequest (req) {
   stripeAccount.individual = stripeAccount.individual || {}
   const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
   const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
-  req.data = { owners, directors, stripeAccount, countrySpec, verificationFields, registration, registrationComplete }
+  req.data = { owners, directors, stripeAccount, countrySpec, registration, registrationComplete }
 }
 
 async function renderPage (req, res) {

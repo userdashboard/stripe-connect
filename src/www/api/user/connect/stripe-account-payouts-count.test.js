@@ -7,7 +7,7 @@ describe('/api/user/connect/stripe-account-payouts-count', async () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/stripe-acount-payout')
+        const req = TestHelper.createRequest('/api/user/connect/stripe-acount-payouts-count')
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -16,12 +16,12 @@ describe('/api/user/connect/stripe-account-payouts-count', async () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-accountid')
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
 
       it('invalid querystring payoutid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/stripe-acount-payouts-count?accountid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/stripe-acount-payouts-count?stripeid=invalid')
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -30,15 +30,19 @@ describe('/api/user/connect/stripe-account-payouts-count', async () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-accountid')
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
     })
 
     describe('invalid-account', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'individual',
+          country: 'NZ'
+        })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/stripe-acount-payouts-count?accountid=${user.account.accountid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/stripe-acount-payouts-count?stripeid=${user.stripeAccount.id}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
@@ -54,6 +58,7 @@ describe('/api/user/connect/stripe-account-payouts-count', async () => {
 
   describe('returns', () => {
     it('integer', async () => {
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',

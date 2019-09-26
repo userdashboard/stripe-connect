@@ -5,6 +5,10 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
+    const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
+    if (!stripeAccount) {
+      throw new Error('invalid-stripeid')
+    }
     let payoutids
     if (req.query.all) {
       payoutids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/payouts/${req.query.stripeid}`)

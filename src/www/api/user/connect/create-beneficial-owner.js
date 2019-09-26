@@ -14,6 +14,11 @@ module.exports = {
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
     }
+    if (stripeAccount.business_type !== 'company' ||
+      stripeAccount.metadata.submitted ||
+      stripeAccount.metadata.accountid !== req.account.accountid) {
+      throw new Error('invalid-stripe-account')
+    }
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
@@ -24,11 +29,6 @@ module.exports = {
       if (!req.body[posted]) {
         throw new Error(`invalid-${posted}`)
       }
-    }
-    if (stripeAccount.business_type !== 'company' ||
-      stripeAccount.metadata.submitted ||
-      stripeAccount.metadata.accountid !== req.account.accountid) {
-      throw new Error('invalid-stripe-account')
     }
     if (req.uploads && req.uploads.relationship_owner_verification_document_front) {
       const frontData = {
