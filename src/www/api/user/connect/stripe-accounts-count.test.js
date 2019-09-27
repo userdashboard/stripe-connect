@@ -7,7 +7,7 @@ describe('/api/user/connect/stripe-accounts-count', async () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/stripe-acounts-count')
+        const req = TestHelper.createRequest('/api/user/connect/stripe-accounts-count')
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -21,7 +21,7 @@ describe('/api/user/connect/stripe-accounts-count', async () => {
 
       it('invalid querystring payoutid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/stripe-acounts-count?accountid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/stripe-accounts-count?accountid=invalid')
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -38,7 +38,7 @@ describe('/api/user/connect/stripe-accounts-count', async () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/stripe-acounts-count?accountid=${user.account.accountid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts-count?accountid=${user.account.accountid}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage

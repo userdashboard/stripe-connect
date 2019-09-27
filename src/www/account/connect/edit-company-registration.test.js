@@ -156,6 +156,7 @@ describe('/account/connect/edit-company-registration', async () => {
           field === 'company.requirements.document') {
           continue
         }
+        await TestHelper.cycleBrowserObject()
         const input = doc.getElementById(field.split('.').join('_'))
         if (input.attr.name === 'relationship_account_opener_address_state' || input.attr.name === 'relationship_account_opener_address_country' ||
           input.attr.name === 'company_address_state' || input.attr.name === 'company_address_country' ||

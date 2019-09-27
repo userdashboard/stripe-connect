@@ -127,7 +127,7 @@ describe('/api/user/connect/set-company-registration-submitted', async () => {
     })
 
     describe('invalid-payment-details', () => {
-      it('should require payment details', async () => {
+      it('ineligible registration missing payment details', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',

@@ -8,7 +8,7 @@ describe('/api/user/connect/stripe-accounts', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/stripe-acounts')
+        const req = TestHelper.createRequest('/api/user/connect/stripe-accounts')
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -22,7 +22,7 @@ describe('/api/user/connect/stripe-accounts', () => {
 
       it('invalid querystring payoutid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/stripe-acounts?accountid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/stripe-accounts?accountid=invalid')
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -39,7 +39,7 @@ describe('/api/user/connect/stripe-accounts', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/stripe-acounts?accountid=${user.account.accountid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
@@ -53,38 +53,7 @@ describe('/api/user/connect/stripe-accounts', () => {
     })
   })
 
-  describe('returns', () => {
-    it('should limit Stripe accounts to one page', async () => {
-      const user = await TestHelper.createUser()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
-        })
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
-      req.account = user.account
-      req.session = user.session
-      const stripeAccounts = await req.get()
-      assert.strictEqual(stripeAccounts.length, global.pageSize)
-    })
-
-    it('environment PAGE_SIZE', async () => {
-      global.pageSize = 3
-      const user = await TestHelper.createUser()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
-        })
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
-      req.account = user.account
-      req.session = user.session
-      const stripeAccounts = await req.get()
-      assert.strictEqual(stripeAccounts.length, global.pageSize)
-    })
-
+  describe('receives', () => {
     it('optional querystring offset (integer)', async () => {
       const offset = 1
       const stripeAccounts = []
@@ -122,6 +91,41 @@ describe('/api/user/connect/stripe-accounts', () => {
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         assert.strictEqual(stripeAccountsNow[i].id, stripeAccounts[i].id)
       }
+    })
+  })
+
+  describe('returns', () => {
+    it('array', async () => {
+      const user = await TestHelper.createUser()
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'US'
+        })
+      }
+      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
+      req.account = user.account
+      req.session = user.session
+      const stripeAccounts = await req.get()
+      assert.strictEqual(stripeAccounts.length, global.pageSize)
+    })
+  })
+
+  describe('configuration', () => {
+    it('environment PAGE_SIZE', async () => {
+      global.pageSize = 3
+      const user = await TestHelper.createUser()
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'US'
+        })
+      }
+      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
+      req.account = user.account
+      req.session = user.session
+      const stripeAccounts = await req.get()
+      assert.strictEqual(stripeAccounts.length, global.pageSize)
     })
   })
 })

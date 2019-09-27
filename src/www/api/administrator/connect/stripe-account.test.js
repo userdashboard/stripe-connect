@@ -36,20 +36,6 @@ describe('/api/administrator/connect/stripe-account', () => {
   })
 
   describe('returns', () => {
-    it('should reject invalid stripeid', async () => {
-      const administrator = await TestHelper.createAdministrator()
-      const req = TestHelper.createRequest('/api/administrator/connect/stripe-account?stripeid=invalid')
-      req.account = administrator.account
-      req.session = administrator.session
-      let errorMessage
-      try {
-        await req.get()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-stripeid')
-    })
-
     it('object', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()

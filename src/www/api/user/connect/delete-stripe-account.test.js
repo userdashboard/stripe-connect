@@ -5,7 +5,7 @@ const TestHelper = require('../../../../../test-helper.js')
 describe('/api/user/connect/delete-stripe-account', async () => {
   describe('exceptions', () => {
     describe('exceptions', () => {
-      it('should reject invalid stripeid', async () => {
+      it('missing querystring stripeid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/delete-stripe-account')
         req.account = user.account
@@ -19,7 +19,7 @@ describe('/api/user/connect/delete-stripe-account', async () => {
         assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
 
-      it('should reject invalid stripeid', async () => {
+      it('invalid querystring stripeid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/delete-stripe-account?stripeid=invalid')
         req.account = user.account
