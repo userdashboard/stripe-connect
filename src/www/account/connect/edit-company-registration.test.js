@@ -734,7 +734,7 @@ describe('/account/connect/edit-company-registration', async () => {
         company_address_postal_code: 'V5K 0A1',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_id_number: '7',
+        // relationship_account_opener_id_number: '000000000',
         relationship_account_opener_dob_day: '1',
         relationship_account_opener_dob_month: '1',
         relationship_account_opener_dob_year: '1950',
