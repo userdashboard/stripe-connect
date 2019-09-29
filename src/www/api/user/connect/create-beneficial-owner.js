@@ -23,7 +23,7 @@ module.exports = {
       throw new Error('invalid-first_name')
     }
     const personFields = ['first_name', 'last_name', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code']
-    const personOptional = ['address_line2', 'address_state', 'address_country']
+    const personOptional = ['address_line2', 'address_state', 'address_country', 'title', 'percent']
     for (const field of personFields) {
       const posted = `relationship_owner_${field}`
       if (!req.body[posted]) {
