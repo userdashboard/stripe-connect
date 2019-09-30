@@ -14,7 +14,8 @@ module.exports = {
       payoutids = await dashboard.StorageList.listAll(`${req.appid}/account/payouts/${req.query.accountid}`)
     } else {
       const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0
-      payoutids = await dashboard.StorageList.list(`${req.appid}/account/payouts/${req.query.accountid}`, offset)
+      const limit = req.query.limit ? parseInt(req.query.limit, 10) : global.pageSize
+      payoutids = await dashboard.StorageList.list(`${req.appid}/account/payouts/${req.query.accountid}`, offset, limit)
     }
     if (!payoutids || !payoutids.length) {
       return

@@ -74,6 +74,24 @@ describe('/api/user/connect/stripe-accounts', () => {
       }
     })
 
+    it('optional querystring limit (integer)', async () => {
+      const limit = 1
+      const stripeAccounts = []
+      const user = await TestHelper.createUser()
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+        const stripeAccount = await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'US'
+        })
+        stripeAccounts.unshift(stripeAccount)
+      }
+      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}&limit=${limit}`)
+      req.account = user.account
+      req.session = user.session
+      const stripeAccountsNow = await req.get()
+      assert.strictEqual(stripeAccountsNow.length, limit)
+    })
+
     it('optional querystring all (boolean)', async () => {
       const user = await TestHelper.createUser()
       const stripeAccounts = []
