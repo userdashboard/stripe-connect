@@ -225,7 +225,9 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       const stripeAccounts = await req.get()
       assert.strictEqual(stripeAccounts.length, global.pageSize)
     })
+  })
 
+  describe('configuration', () => {
     it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
       const administrator = await TestHelper.createAdministrator()

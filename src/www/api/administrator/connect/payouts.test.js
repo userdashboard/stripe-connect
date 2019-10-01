@@ -35,14 +35,14 @@ describe('/api/administrator/connect/payouts', () => {
         await TestHelper.submitStripeAccount(user)
         await TestHelper.waitForVerification(user.stripeAccount.id)
         await TestHelper.createPayout(user)
-        payouts.unshift(administrator.payout.id)
+        payouts.unshift(user.payout.id)
       }
-      const req = TestHelper.createRequest(`/api/administrator/payouts?offset=${offset}`)
+      const req = TestHelper.createRequest(`/api/administrator/connect/payouts?offset=${offset}`)
       req.account = administrator.account
       req.session = administrator.session
-      const productsNow = await req.get()
+      const payoutsNow = await req.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(productsNow[i].id, payouts[offset + i])
+        assert.strictEqual(payoutsNow[i].id, payouts[offset + i])
       }
     })
 
@@ -77,11 +77,11 @@ describe('/api/administrator/connect/payouts', () => {
         await TestHelper.waitForVerification(user.stripeAccount.id)
         await TestHelper.createPayout(user)
       }
-      const req = TestHelper.createRequest(`/api/administrator/payouts?limit=${limit}`)
+      const req = TestHelper.createRequest(`/api/administrator/connect/payouts?limit=${limit}`)
       req.account = administrator.account
       req.session = administrator.session
-      const productsNow = await req.get()
-      assert.strictEqual(productsNow.length, limit)
+      const payoutsNow = await req.get()
+      assert.strictEqual(payoutsNow.length, limit)
     })
 
     it('optional querystring all (boolean)', async () => {
@@ -114,11 +114,11 @@ describe('/api/administrator/connect/payouts', () => {
         await TestHelper.waitForVerification(user.stripeAccount.id)
         await TestHelper.createPayout(user)
       }
-      const req = TestHelper.createRequest(`/api/administrator/payouts?all=true`)
+      const req = TestHelper.createRequest(`/api/administrator/connect/payouts?all=true`)
       req.account = administrator.account
       req.session = administrator.session
-      const productsNow = await req.get()
-      assert.strictEqual(productsNow.length, global.pageSize + 1)
+      const payoutsNow = await req.get()
+      assert.strictEqual(payoutsNow.length, global.pageSize + 1)
     })
   })
 

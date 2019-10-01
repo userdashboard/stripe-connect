@@ -6,7 +6,7 @@ describe('/api/user/connect/country-specs', () => {
   describe('receives', () => {
     it('optional querystring offset (integer)', async () => {
       const offset = 1
-      const req = TestHelper.createRequest(`/api/administrator/country-specs?all=true`)
+      const req = TestHelper.createRequest('/api/administrator/country-specs?all=true')
       const countries = await req.get()
       const req2 = TestHelper.createRequest(`/api/administrator/country-specs?offset=${offset}`)
       const countriesNow = await req2.get()
