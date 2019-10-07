@@ -33,7 +33,6 @@ describe('/api/user/connect/country-specs', () => {
 
   describe('returns', () => {
     it('array', async () => {
-      const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/country-specs')
       const countrySpecs = await req.get()
       assert.strictEqual(countrySpecs.length, global.pageSize)
@@ -43,7 +42,6 @@ describe('/api/user/connect/country-specs', () => {
   describe('configuration', () => {
     it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
-      const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/api/user/connect/country-specs')
       const countrySpecs = await req.get()
       assert.strictEqual(countrySpecs.length, global.pageSize)
