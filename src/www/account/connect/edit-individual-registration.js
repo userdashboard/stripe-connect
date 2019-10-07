@@ -23,6 +23,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripe-account')
   }
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
+  req.query.all = true
   const countrySpecs = await global.api.user.connect.CountrySpecs.get(req)
   let applicationCountry, addressCountry
   for (const countrySpec of countrySpecs) {

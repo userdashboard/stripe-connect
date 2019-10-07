@@ -8,6 +8,8 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
+  req.query = req.query || {}
+  req.query.all = true
   const countrySpecs = await global.api.user.connect.CountrySpecs.get(req)
   const countries = []
   for (const countrySpec of countrySpecs) {

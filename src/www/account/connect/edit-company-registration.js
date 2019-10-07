@@ -22,6 +22,7 @@ async function beforeRequest (req) {
       stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
   }
+  req.query.all = true
   const countrySpecs = await global.api.user.connect.CountrySpecs.get(req)
   let applicationCountry, personalAddress, companyAddressCountry
   for (const countrySpec of countrySpecs) {

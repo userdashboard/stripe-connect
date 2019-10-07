@@ -16,6 +16,7 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
+  req.query.all = true
   const stripeCountries = await global.api.user.connect.CountrySpecs.get(req)
   let countrySpec
   for (const country of stripeCountries) {
@@ -48,7 +49,6 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-
   navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
