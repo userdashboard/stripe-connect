@@ -3,7 +3,7 @@ const assert = require('assert')
 const BindStripeKey = require('./bind-stripekey.js')
 const TestHelper = require('../../test-helper.js')
 
-describe('server/bind-stripekey', async () => {
+describe('server/bind-stripekey', () => {
   describe('BindStripeKey#AFTER', () => {
     it('should bind stripekey data to req', async () => {
       const user = await TestHelper.createUser()

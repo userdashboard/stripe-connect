@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/update-beneficial-owner', async () => {
+describe('/api/user/connect/update-beneficial-owner', () => {
   describe('exceptions', () => {
     describe('invalid-ownerid', () => {
       it('missing querystring ownerid', async () => {

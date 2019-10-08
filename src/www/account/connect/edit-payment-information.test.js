@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/edit-payment-information', async () => {
+describe('/account/connect/edit-payment-information', () => {
   describe('EditPaymentInformation#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()

@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/edit-beneficial-owner', async () => {
+describe('/account/connect/edit-beneficial-owner', () => {
   describe('EditBeneficialOwner#BEFORE', () => {
     it('should reject invalid ownerid', async () => {
       const user = await TestHelper.createUser()

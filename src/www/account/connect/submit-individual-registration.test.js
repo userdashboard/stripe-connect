@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/submit-individual-registration', async () => {
+describe('/account/connect/submit-individual-registration', () => {
   describe('SubmitIndividualRegistration#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()

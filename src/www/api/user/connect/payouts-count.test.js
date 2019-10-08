@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/payouts-count', async () => {
+describe('/api/user/connect/payouts-count', () => {
   describe('exception', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {

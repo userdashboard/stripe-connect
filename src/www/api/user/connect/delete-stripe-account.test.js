@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/delete-stripe-account', async () => {
+describe('/api/user/connect/delete-stripe-account', () => {
   describe('exceptions', () => {
     describe('exceptions', () => {
       it('missing querystring stripeid', async () => {

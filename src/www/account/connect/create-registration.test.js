@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/create-registration', async () => {
+describe('/account/connect/create-registration', () => {
   describe('CreateRegistration#GET', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()

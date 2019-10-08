@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/delete-company-director', async () => {
+describe('/account/connect/delete-company-director', () => {
   describe('DeleteCompanyDirector#BEFORE', () => {
     it('should reject invalid directorid', async () => {
       const user = await TestHelper.createUser()

@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/delete-company-director', async () => {
+describe('/api/user/connect/delete-company-director', () => {
   describe('exception', () => {
     describe('exception', () => {
       it('missing querystring directorid', async () => {

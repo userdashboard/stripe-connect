@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/administrator/connect/reject-stripe-account', async () => {
+describe('/administrator/connect/reject-stripe-account', () => {
   describe('RejectStripeAccount#BEFORE', () => {
     it('should bind Stripe account to req', async () => {
       const administrator = await TestHelper.createAdministrator()

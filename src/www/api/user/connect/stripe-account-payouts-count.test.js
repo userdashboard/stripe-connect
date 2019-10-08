@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/stripe-account-payouts-count', async () => {
+describe('/api/user/connect/stripe-account-payouts-count', () => {
   describe('exception', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {

@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/create-beneficial-owner', async () => {
+describe('/account/connect/create-beneficial-owner', () => {
   describe('CreateBeneficialOwner#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
