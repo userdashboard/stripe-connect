@@ -4,6 +4,7 @@ LATEST="${LATEST/: /}"
 PACKAGE=`cat package.json | grep version`
 PACKAGE="${PACKAGE/\"version\": \"/}"
 PACKAGE="${PACKAGE/\",/}"
+PACKAGE="${PACKAGE/  /}"
 if [ "$LATEST" = "$PACKAGE" ]; then
   VERSION=`npm version patch` || exit 1
 else
