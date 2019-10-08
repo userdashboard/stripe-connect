@@ -14,7 +14,7 @@ module.exports = {
       stripeids = await dashboard.StorageList.listAll(`${req.appid}/account/stripeAccounts/${req.query.accountid}`)
     } else {
       const offset = req.query.offset ? parseInt(req.query.offset, 10) || 0 : 0
-      const limit = req.query.limit ? parseInt(req.query.limit, 10) || 0 : 0
+      const limit = req.query.limit ? parseInt(req.query.limit, 10) : global.pageSize
       stripeids = await dashboard.StorageList.list(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, offset, limit)
     }
     if (!stripeids || !stripeids.length) {

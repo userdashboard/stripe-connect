@@ -4,6 +4,7 @@ stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 let cache
 
 module.exports = {
+  auth: false,
   get: async (req) => {
     if (!cache) {
       cache = await stripe.countrySpecs.list({ limit: 100 }, req.stripeKey)

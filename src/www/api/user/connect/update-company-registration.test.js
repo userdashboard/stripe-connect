@@ -753,8 +753,8 @@ describe('/api/user/connect/update-company-registration', () => {
       })
     })
 
-    describe('invalid-company_business_name_kana', () => {
-      it('missing posted company_business_name_kana', async () => {
+    describe('invalid-company_name_kana', () => {
+      it('missing posted company_name_kana', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -767,8 +767,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: '',
-          company_business_name_kanji: '東京都',
+          company_name_kana: '',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -808,12 +808,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-company_business_name_kana')
+        assert.strictEqual(errorMessage, 'invalid-company_name_kana')
       })
     })
 
-    describe('invalid-company_business_name_kanji', () => {
-      it('missing posted company_business_name_kanji', async () => {
+    describe('invalid-company_name_kanji', () => {
+      it('missing posted company_name_kanji', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -826,8 +826,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -867,7 +867,7 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-company_business_name_kanji')
+        assert.strictEqual(errorMessage, 'invalid-company_name_kanji')
       })
     })
 
@@ -885,8 +885,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -944,8 +944,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: '',
@@ -1003,8 +1003,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: '',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1062,8 +1062,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1121,8 +1121,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1180,8 +1180,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1239,8 +1239,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1298,8 +1298,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1357,8 +1357,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1416,8 +1416,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1475,8 +1475,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1534,8 +1534,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1593,8 +1593,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1652,8 +1652,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1711,8 +1711,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1770,8 +1770,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1829,8 +1829,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1888,8 +1888,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1947,8 +1947,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -2006,8 +2006,8 @@ describe('/api/user/connect/update-company-registration', () => {
           company_tax_id: '8',
           company_name: 'Company',
           company_phone: '011-271-6677',
-          company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-          company_business_name_kanji: '東京都',
+          company_name_kana: 'ﾄｳｷﾖｳﾄ',
+          company_name_kanji: '東京都',
           company_address_kana_postal_code: '1500001',
           company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
           company_address_kana_city: 'ｼﾌﾞﾔ',
@@ -2528,8 +2528,8 @@ describe('/api/user/connect/update-company-registration', () => {
         company_tax_id: '8',
         company_name: 'Company',
         company_phone: '011-271-6677',
-        company_business_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_business_name_kanji: '東京都',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         company_address_kana_city: 'ｼﾌﾞﾔ',
