@@ -95,7 +95,6 @@ async function createStripeAccount (user, properties) {
   req.session = user.session
   req.account = user.account
   req.body = properties
-  req.retry = false
   user.stripeAccount = await req.post()
   return user.stripeAccount
 }
@@ -104,7 +103,6 @@ async function createStripeRegistration (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/update-${user.stripeAccount.business_type}-registration?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.retry = false
   if (user.stripeAccount.business_type === 'individual') {
     req.uploads = {
       individual_verification_document_front: module.exports['success_id_scan_front.png'],
@@ -152,7 +150,6 @@ async function createExternalAccount (user, details) {
   const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.retry = false
   req.body = details
   user.stripeAccount = await req.patch()
   return user.stripeAccount.external_accounts.data[0]
@@ -162,7 +159,6 @@ async function createBeneficialOwner (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.retry = false
   req.uploads = {
     relationship_owner_verification_document_front: module.exports['success_id_scan_front.png'],
     relationship_owner_verification_document_back: module.exports['success_id_scan_back.png']
@@ -177,7 +173,6 @@ async function createCompanyDirector (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.retry = false
   req.uploads = {
     relationship_director_verification_document_front: module.exports['success_id_scan_front.png'],
     relationship_director_verification_document_back: module.exports['success_id_scan_back.png']
@@ -192,7 +187,6 @@ async function createPayout (user) {
   const req = TestHelper.createRequest(`/api/fake-payout?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.retry = false
   await req.get()
   while (true) {
     const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
@@ -217,7 +211,6 @@ async function submitStripeAccount (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-${user.stripeAccount.business_type}-registration-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.retry = false
   const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
   return stripeAccount
@@ -235,7 +228,6 @@ async function waitForPayout (administrator, stripeid, previousid, callback) {
     const req = module.exports.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${stripeid}&limit=1`)
     req.account = administrator.account
     req.session = administrator.session
-    req.retry = false
     const itemids = await req.get()
     if (!itemids || !itemids.length) {
       return setTimeout(wait, 100)
