@@ -7,19 +7,17 @@ describe('/api/administrator/connect/account-stripe-accounts-count', () => {
     it('integer', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
-      })
-      await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
-      })
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+        await TestHelper.createStripeAccount(user, {
+          type: 'individual',
+          country: 'US'
+        })
+      }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts-count?accountid=${user.account.accountid}`)
       req.account = administrator.account
       req.session = administrator.session
       const result = await req.get()
-      assert.strictEqual(result, 2)
+      assert.strictEqual(result, global.pageSize + 1)
     })
   })
 })
