@@ -54,7 +54,6 @@ describe('/api/user/connect/payouts-count', () => {
 
   describe('returns', () => {
     it('integer', async () => {
-      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -82,13 +81,12 @@ describe('/api/user/connect/payouts-count', () => {
       await TestHelper.waitForVerification(user.stripeAccount.id)
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPayout(user)
-        await TestHelper.waitForPayout(administrator, user.stripeAccount.id, user.payout ? user.payout.id : null)
       }
       const req = TestHelper.createRequest(`/api/user/connect/payouts-count?accountid=${user.account.accountid}`)
       req.account = user.account
       req.session = user.session
       const result = await req.get()
-      assert.strictEqual(result, global.pageSize)
+      assert.strictEqual(result, global.pageSize + 1)
     })
   })
 })
