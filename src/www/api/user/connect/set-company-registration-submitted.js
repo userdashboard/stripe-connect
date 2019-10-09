@@ -95,8 +95,8 @@ module.exports = {
         } else if (field.startsWith('company_address_')) {
           const property = field.substring('company_address_'.length)
           accountInfo.company.address[property] = registration[field]
-        } else if (field.startsWith('company_business_name_')) {
-          const property = field.substring('company_business_name_'.length)
+        } else if (field.startsWith('company_name_')) {
+          const property = field.substring('company_name_'.length)
           accountInfo.company[`name_${property}`] = registration[field]
         } else {
           const property = field.substring('company_'.length)
