@@ -189,7 +189,7 @@ async function createPayout (user) {
   req.account = user.account
   await req.get()
   while (true) {
-    const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
+    const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
     req2.session = user.session
     req2.account = user.account
     const payouts = await req2.get(req2)
@@ -197,7 +197,7 @@ async function createPayout (user) {
       await wait()
       continue
     }
-    if (user.payout && user.payout.id === payouts[0]) {
+    if (user.payout && user.payout.id === payouts[0].id) {
       await wait()
       continue
     }
