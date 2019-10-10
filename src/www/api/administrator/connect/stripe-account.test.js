@@ -58,6 +58,8 @@ describe('/api/administrator/connect/stripe-account', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'New York',

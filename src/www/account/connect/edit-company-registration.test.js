@@ -517,6 +517,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Vienna',
@@ -547,6 +549,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_country: 'AT',
@@ -582,6 +586,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Brisbane',
@@ -612,6 +618,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Brisbane',
@@ -648,6 +656,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -677,6 +687,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -708,6 +720,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Vancouver',
@@ -739,6 +753,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Vancouver',
@@ -775,6 +791,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -804,6 +822,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -837,6 +857,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -866,6 +888,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -899,6 +923,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -928,6 +954,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -961,6 +989,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -990,6 +1020,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1023,6 +1055,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1052,6 +1086,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1085,6 +1121,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1114,6 +1152,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1147,6 +1187,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1176,6 +1218,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1205,6 +1249,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Hong Kong',
@@ -1233,6 +1279,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Hong Kong',
@@ -1268,6 +1316,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_postal_code: 'Dublin 1'
@@ -1297,6 +1347,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_postal_code: 'Dublin 1'
@@ -1331,6 +1383,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1360,6 +1414,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1397,6 +1453,8 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_kanji_line1: '２７－１５',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_gender: 'female',
@@ -1448,6 +1506,8 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_kanji_line1: '２７－１５',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_gender: 'female',
@@ -1499,6 +1559,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1528,6 +1590,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1561,6 +1625,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1590,6 +1656,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1623,6 +1691,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1652,6 +1722,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1682,6 +1754,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Auckland',
@@ -1711,6 +1785,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_city: 'Auckland',
@@ -1747,6 +1823,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1776,6 +1854,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1809,6 +1889,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1838,6 +1920,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123'
       }
@@ -1867,6 +1951,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_line1: '123 Sesame St',
@@ -1895,6 +1981,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_address_line1: '123 Sesame St',
@@ -1932,6 +2020,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         // relationship_account_opener_id_number: '000000000',
@@ -1967,6 +2057,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_account_opener_dob_year: '1950',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         // relationship_account_opener_id_number: '000000000',

@@ -57,6 +57,8 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_account_opener_dob_year: '1950',
           relationship_account_opener_first_name: user.profile.firstName,
           relationship_account_opener_last_name: user.profile.lastName,
+          relationship_account_opener_executive: 'true',
+          relationship_account_opener_title: 'Owner',
           relationship_account_opener_email: user.profile.contactEmail,
           // relationship_account_opener_id_number: '000000000',
           relationship_account_opener_ssn_last_4: '0000',

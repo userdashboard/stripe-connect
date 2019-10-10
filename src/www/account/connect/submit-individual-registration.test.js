@@ -43,6 +43,8 @@ describe('/account/connect/submit-individual-registration', () => {
         // relationship_account_opener_id_number: '000000000',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-123-7890',
         relationship_account_opener_dob_day: '1',

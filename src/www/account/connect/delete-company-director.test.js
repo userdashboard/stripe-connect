@@ -30,6 +30,8 @@ describe('/account/connect/delete-company-director', () => {
         company_address_country: 'DE',
         relationship_account_opener_first_name: user.profile.firstName,
         relationship_account_opener_last_name: user.profile.lastName,
+        relationship_account_opener_executive: 'true',
+        relationship_account_opener_title: 'Owner',
         relationship_account_opener_email: user.profile.contactEmail,
         relationship_account_opener_phone: '456-789-0123',
         relationship_account_opener_dob_day: '1',
