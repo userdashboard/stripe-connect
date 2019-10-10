@@ -10,33 +10,78 @@ module.exports = {
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.metadata.submitted ||
       stripeAccount.metadata.accountid !== req.account.accountid ||
-      !stripeAccount.legal_entity.requirements.details_code) {
+      !stripeAccount.requirements.details_code) {
       throw new Error('invalid-stripe-account')
     }
-    const uploadData = {
-      purpose: 'identity_document',
-      file: {
-        type: 'application/octet-stream'
+    if (req.uploads.document_front) {
+      const uploadData = {
+        purpose: 'identity_document',
+        file: {
+          type: 'application/octet-stream',
+          name: req.uploads.document_front.name,
+          data: req.uploads.document_front.buffer
+        }
+      }
+      try {
+        const file = await stripe.files.create(uploadData, req.stripeKey)
+        req.body.document_front = file.id
+      } catch (error) {
+        throw new Error('invalid-upload')
       }
     }
-    if (req.uploads['id_scan.jpg']) {
-      uploadData.file.name = 'id_scan.jpg'
-      uploadData.file.data = req.uploads['id_scan.jpg'].buffer
-    } else {
-      uploadData.file.name = 'id_scan.png'
-      uploadData.file.data = req.uploads['id_scan.png'].buffer
+    if (req.uploads.document_back) {
+      const uploadData = {
+        purpose: 'identity_document',
+        file: {
+          type: 'application/octet-stream',
+          name: req.uploads.document_back.name,
+          data: req.uploads.document_back.buffer
+        }
+      }
+      try {
+        const file = await stripe.files.create(uploadData, req.stripeKey)
+        req.body.document_back = file.id
+      } catch (error) {
+        throw new Error('invalid-upload')
+      }
     }
-    const accountInfo = {
-      legal_entity: {}
-    }
-    try {
-      const file = await stripe.files.create(uploadData, req.stripeKey)
-      accountInfo.legal_entity.document = file.id
-    } catch (error) {
+    if (!req.body.document_front && !req.body.document.back) {
       throw new Error('invalid-upload')
     }
+    if (stripeAccount.business_type === 'individual') {
+      const accountInfo = {
+        individual: {
+          verification: {
+            document: {
+              front: req.body.document_front,
+              back: req.body.document_back
+            }
+          }
+        }
+      }
+      console.log('updating stripe account', accountInfo)
+      try {
+        const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        req.success = true
+        return accountNow
+      } catch (error) {
+        if (error.message.startsWith('invalid-')) {
+          throw error
+        }
+        throw new Error('unknown-error')
+      }
+    }
+    const accountOpenerInfo = {
+      verification: {
+        document: {
+          front: req.body.document_front,
+          back: req.body.document_back
+        }
+      }
+    }
+    console.log('updating person', accountOpenerInfo)
     try {
-      const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+      const accountNow = await stripe.accounts.updatePerson(req.query.stripeid, accountOpenerInfo, req.stripeKey)
       req.success = true
       return accountNow
     } catch (error) {

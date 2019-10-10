@@ -1,222 +1,286 @@
 // /* eslint-env mocha */
-// TODO: Stripe test API currently has a bug failing verifications
 // const assert = require('assert')
 // const TestHelper = require('../../../../../test-helper.js')
 // const util = require('util')
 
-// describe('/api/user/connect/reupload-identity-document', () => {
-//   describe('ReuploadIdentityDocument#BEFORE', () => {
-//     it('should reject invalid stripeid', async () => {
-//       const user = await TestHelper.createUser()
-//       const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=invalid`)
-//       req.account = user.account
-//       req.session = user.session
-//       req.file = {
-//         id: 'fileid'
-//       }
-//       req.body = {}
-//       let errorMessage
-//       try {
-//         await req.route.api.before(req)
-//       } catch (error) {
-//         errorMessage = error.message
-//       }
-//       assert.strictEqual(errorMessage, 'invalid-stripeid')
+// describe.only('/api/user/connect/reupload-identity-document', () => {
+//   describe('exceptions', () => {
+//     describe('invalid-stripeid', () => {
+//       it('missing querystring stripeid', async () => {
+//         const user = await TestHelper.createUser()
+//         const req = TestHelper.createRequest('/api/user/connect/reupload-identity-document')
+//         req.account = user.account
+//         req.session = user.session
+//         req.file = {
+//           id: 'fileid'
+//         }
+//         req.body = {}
+//         let errorMessage
+//         try {
+//           await req.route.api.patch(req)
+//         } catch (error) {
+//           errorMessage = error.message
+//         }
+//         assert.strictEqual(errorMessage, 'invalid-stripeid')
+//       })
+
+//       it('invalid querystring stripeid', async () => {
+//         const user = await TestHelper.createUser()
+//         const req = TestHelper.createRequest('/api/user/connect/reupload-identity-document?stripeid=invalid')
+//         req.account = user.account
+//         req.session = user.session
+//         req.file = {
+//           id: 'fileid'
+//         }
+//         req.body = {}
+//         let errorMessage
+//         try {
+//           await req.route.api.patch(req)
+//         } catch (error) {
+//           errorMessage = error.message
+//         }
+//         assert.strictEqual(errorMessage, 'invalid-stripeid')
+//       })
 //     })
 
-//     it('should reject other account\'s Stripe account', async () => {
-//       const user = await TestHelper.createUser()
-//       await TestHelper.createStripeAccount(user, {
-//         type: 'company',
-//         country: 'US'
+//     describe('invalid-account', () => {
+//       it('ineligible accessing account', async () => {
+//         const user = await TestHelper.createUser()
+//         await TestHelper.createStripeAccount(user, {
+//           type: 'company',
+//           country: 'US'
+//         })
+//         await TestHelper.createStripeRegistration(user, {
+//           company_name: 'Company',
+//           company_tax_id: '8',
+//           company_phone: '456-123-7890',
+//           company_address_city: 'New York',
+//           company_address_line1: '123 Park Lane',
+//           company_address_postal_code: '10001',
+//           company_address_state: 'NY',
+//           business_profile_mcc: '8931',
+//           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+//           relationship_account_opener_dob_day: '1',
+//           relationship_account_opener_dob_month: '1',
+//           relationship_account_opener_dob_year: '1950',
+//           relationship_account_opener_first_name: user.profile.firstName,
+//           relationship_account_opener_last_name: user.profile.lastName,
+//           relationship_account_opener_executive: 'true',
+//           relationship_account_opener_title: 'Owner',
+//           relationship_account_opener_email: user.profile.contactEmail,
+//           relationship_account_opener_phone: '456-789-0123',
+//           // relationship_account_opener_id_number: '000000000',
+//           relationship_account_opener_ssn_last_4: '0000',
+//           relationship_account_opener_address_city: 'New York',
+//           relationship_account_opener_address_state: 'NY',
+//           relationship_account_opener_address_line1: '285 Fulton St',
+//           relationship_account_opener_address_postal_code: '10007'
+//         })
+//         const user2 = await TestHelper.createUser()
+//         const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
+//         req.account = user2.account
+//         req.session = user2.session
+//         req.file = {
+//           id: 'fileid'
+//         }
+//         req.body = {}
+//         let errorMessage
+//         try {
+//           await req.route.api.patch(req)
+//         } catch (error) {
+//           errorMessage = error.message
+//         }
+//         assert.strictEqual(errorMessage, 'invalid-account')
 //       })
-//       await TestHelper.createStripeRegistration(user, {
-//         company_tax_id: '00000000',
-//         company_name: user.profile.firstName + '\'s company',
-//         company_address_country: 'US',
-//         city: 'New York',
-//         individual_address_city: 'New York',
-//         postal_code: '10001',
-//         individual_address_id_number: '000000000',
-//        individual_address_line1: 'First Street',
-//         relationship_account_opener_first_name: user.profile.firstName,
-//         relationship_account_opener_last_name: user.profile.lastName,
-//         relationship_account_opener_email: user.profile.contactEmail,
-//         relationship_account_opener_phone: '456-789-0123',
-//         relationship_account_opener_dob_day: '1',
-//         relationship_account_opener_dob_month: '1',
-//         relationship_account_opener_dob_year: '1950',
-//         company_address_city: 'New York',
-//         company_state: 'New York',
-//         company_address_line1: 'First Street',
-//         company_address_postal_code: '10001',
-//         ssn_last_4: '0000'
-//       })
-//       const user2 = await TestHelper.createUser()
-//       const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
-//       req.account = user2.account
-//       req.session = user2.session
-//       req.file = {
-//         id: 'fileid'
-//       }
-//       req.body = {}
-//       let errorMessage
-//       try {
-//         await req.route.api.before(req)
-//       } catch (error) {
-//         errorMessage = error.message
-//       }
-//       assert.strictEqual(errorMessage, 'invalid-stripe-account')
 //     })
 
-//     it('should reject unsubmitted registration', async () => {
-//       const user = await TestHelper.createUser()
-//       await TestHelper.createStripeAccount(user, {
-//         type: 'company',
-//         country: 'US'
+//     describe('invalid-stripe-account', () => {
+//       it('ineligible querystring Stripe account is unsubmitted', async () => {
+//         const user = await TestHelper.createUser()
+//         await TestHelper.createStripeAccount(user, {
+//           type: 'company',
+//           country: 'US'
+//         })
+//         await TestHelper.createStripeRegistration(user, {
+//           company_name: 'Company',
+//           company_tax_id: '8',
+//           company_phone: '456-123-7890',
+//           company_address_city: 'New York',
+//           company_address_line1: '123 Park Lane',
+//           company_address_postal_code: '10001',
+//           company_address_state: 'NY',
+//           business_profile_mcc: '8931',
+//           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+//           relationship_account_opener_dob_day: '1',
+//           relationship_account_opener_dob_month: '1',
+//           relationship_account_opener_dob_year: '1950',
+//           relationship_account_opener_first_name: user.profile.firstName,
+//           relationship_account_opener_last_name: user.profile.lastName,
+//           relationship_account_opener_executive: 'true',
+//           relationship_account_opener_title: 'Owner',
+//           relationship_account_opener_email: user.profile.contactEmail,
+//           relationship_account_opener_phone: '456-789-0123',
+//           // relationship_account_opener_id_number: '000000000',
+//           relationship_account_opener_ssn_last_4: '0000',
+//           relationship_account_opener_address_city: 'New York',
+//           relationship_account_opener_address_state: 'NY',
+//           relationship_account_opener_address_line1: '285 Fulton St',
+//           relationship_account_opener_address_postal_code: '10007'
+//         })
+//         const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
+//         req.account = user.account
+//         req.session = user.session
+//         req.body = {}
+//         let errorMessage
+//         try {
+//           await req.route.api.patch(req)
+//         } catch (error) {
+//           errorMessage = error.message
+//         }
+//         assert.strictEqual(errorMessage, 'invalid-stripe-account')
 //       })
-//       await TestHelper.createStripeRegistration(user, {
-//         company_tax_id: '00000000',
-//         company_name: user.profile.firstName + '\'s company',
-//         company_address_country: 'US',
-//         city: 'New York',
-//         individual_address_city: 'New York',
-//         postal_code: '10001',
-//         individual_address_id_number: '000000000',
-//        individual_address_line1: 'First Street',
-//         relationship_account_opener_first_name: user.profile.firstName,
-//         relationship_account_opener_last_name: user.profile.lastName,
-//         relationship_account_opener_email: user.profile.contactEmail,
-//         relationship_account_opener_phone: '456-789-0123',
-//         relationship_account_opener_dob_day: '1',
-//         relationship_account_opener_dob_month: '1',
-//         relationship_account_opener_dob_year: '1950',
-//         company_address_city: 'New York',
-//         company_state: 'New York',
-//         company_address_line1: 'First Street',
-//         company_address_postal_code: '10001',
-//         ssn_last_4: '0000'
+
+//       it('ineligible querystring Stripe account does not require new upload', async () => {
+//         const user = await TestHelper.createUser()
+//         await TestHelper.createStripeAccount(user, {
+//           type: 'company',
+//           country: 'US'
+//         })
+//         await TestHelper.createStripeRegistration(user, {
+//           company_name: 'Company',
+//           company_tax_id: '8',
+//           company_phone: '456-123-7890',
+//           company_address_city: 'New York',
+//           company_address_line1: '123 Park Lane',
+//           company_address_postal_code: '10001',
+//           company_address_state: 'NY',
+//           business_profile_mcc: '8931',
+//           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+//           relationship_account_opener_dob_day: '1',
+//           relationship_account_opener_dob_month: '1',
+//           relationship_account_opener_dob_year: '1950',
+//           relationship_account_opener_first_name: user.profile.firstName,
+//           relationship_account_opener_last_name: user.profile.lastName,
+//           relationship_account_opener_executive: 'true',
+//           relationship_account_opener_title: 'Owner',
+//           relationship_account_opener_email: user.profile.contactEmail,
+//           relationship_account_opener_phone: '456-789-0123',
+//           // relationship_account_opener_id_number: '000000000',
+//           relationship_account_opener_ssn_last_4: '0000',
+//           relationship_account_opener_address_city: 'New York',
+//           relationship_account_opener_address_state: 'NY',
+//           relationship_account_opener_address_line1: '285 Fulton St',
+//           relationship_account_opener_address_postal_code: '10007'
+//         })
+//         const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
+//         req.account = user.account
+//         req.session = user.session
+//         req.body = {}
+//         let errorMessage
+//         try {
+//           await req.route.api.patch(req)
+//         } catch (error) {
+//           errorMessage = error.message
+//         }
+//         assert.strictEqual(errorMessage, 'invalid-stripe-account')
 //       })
-//       const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
-//       req.account = user.account
-//       req.session = user.session
-//       req.body = {}
-//       let errorMessage
-//       try {
-//         await req.route.api.before(req)
-//       } catch (error) {
-//         errorMessage = error.message
-//       }
-//       assert.strictEqual(errorMessage, 'invalid-upload')
 //     })
 
-//     it('should reject Stripe accounts that don\'t require reuploading', async () => {
-//       const user = await TestHelper.createUser()
-//       await TestHelper.createStripeAccount(user, {
-//         type: 'company',
-//         country: 'US'
+//     describe('invalid-upload', () => {
+//       it.only('should reject invalid upload', async () => {
+//         const user = await TestHelper.createUser()
+//         await TestHelper.createStripeAccount(user, {
+//           type: 'company',
+//           country: 'US'
+//         })
+//         const req = TestHelper.createRequest(`/api/substitute-failed-document-front?token=file_identity_document_failure`)
+//         req.session = user.session
+//         req.account = user.account
+//         await req.get()
+//         await TestHelper.createStripeRegistration(user, {
+//           company_name: 'Company',
+//           company_tax_id: '8',
+//           company_phone: '456-123-7890',
+//           company_address_city: 'New York',
+//           company_address_line1: '123 Park Lane',
+//           company_address_postal_code: '10001',
+//           company_address_state: 'NY',
+//           business_profile_mcc: '8931',
+//           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+//           relationship_account_opener_dob_day: '1',
+//           relationship_account_opener_dob_month: '1',
+//           relationship_account_opener_dob_year: '1950',
+//           relationship_account_opener_first_name: user.profile.firstName,
+//           relationship_account_opener_last_name: user.profile.lastName,
+//           relationship_account_opener_executive: 'true',
+//           relationship_account_opener_title: 'Owner',
+//           relationship_account_opener_email: user.profile.contactEmail,
+//           relationship_account_opener_phone: '456-789-0123',
+//           // relationship_account_opener_id_number: '000000000',
+//           relationship_account_opener_ssn_last_4: '0000',
+//           relationship_account_opener_address_city: 'New York',
+//           relationship_account_opener_address_state: 'NY',
+//           relationship_account_opener_address_line1: '285 Fulton St',
+//           relationship_account_opener_address_postal_code: '10007'
+//         })
+//         await TestHelper.createExternalAccount(user, {
+//           currency: 'usd',
+//           country: 'US',
+//           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+//           account_type: 'individual',
+//           account_number: '000123456789',
+//           routing_number: '110000000'
+//         })
+//         await TestHelper.submitStripeAccount(user)
+//         await TestHelper.triggerVerification(user)
+//         await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
+//         const req2 = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
+//         req2.account = user.account
+//         req2.session = user.session
+//         req2.body = {}
+//         let errorMessage
+//         try {
+//           await req2.patch()
+//         } catch (error) {
+//           errorMessage = error.message
+//         }
+//         assert.strictEqual(errorMessage, 'invalid-upload')
 //       })
-//       await TestHelper.createStripeRegistration(user, {
-//         company_tax_id: '00000000',
-//         company_name: user.profile.firstName + '\'s company',
-//         company_address_country: 'US',
-//         city: 'New York',
-//         individual_address_city: 'New York',
-//         postal_code: '10001',
-//         relationship_account_opener_address_id_number: '000000000',
-//         relationship_account_opener_address_line1: 'First Street',
-//         relationship_account_opener_first_name: user.profile.firstName,
-//         relationship_account_opener_last_name: user.profile.lastName,
-//         relationship_account_opener_email: user.profile.contactEmail,
-//         relationship_account_opener_phone: '456-789-0123',
-//         relationship_account_opener_dob_day: '1',
-//         relationship_account_opener_dob_month: '1',
-//         relationship_account_opener_dob_year: '1950',
-//         company_address_city: 'New York',
-//         company_state: 'New York',
-//         company_address_line1: 'First Street',
-//         company_address_postal_code: '10001',
-//         ssn_last_4: '0000'
-//       })
-//       const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
-//       req.account = user.account
-//       req.session = user.session
-//       req.body = {}
-//       let errorMessage
-//       try {
-//         await req.route.api.before(req)
-//       } catch (error) {
-//         errorMessage = error.message
-//       }
-//       assert.strictEqual(errorMessage, 'invalid-upload')
-//     })
-
-//     it('should reject invalid upload', async () => {
-//       const user = await TestHelper.createUser()
-//       await TestHelper.createStripeAccount(user, {
-//         type: 'company',
-//         country: 'US'
-//       })
-//       await TestHelper.createStripeRegistration(user, {
-//         company_tax_id: '00000000',
-//         company_name: user.profile.firstName + '\'s company',
-//         company_address_country: 'US',
-//         city: 'New York',
-//         individual_address_city: 'New York',
-//         postal_code: '10001',
-//         individual_address_id_number: '000000000',
-//        individual_address_line1: 'First Street',
-//         relationship_account_opener_first_name: user.profile.firstName,
-//         relationship_account_opener_last_name: user.profile.lastName,
-//         relationship_account_opener_email: user.profile.contactEmail,
-//         relationship_account_opener_phone: '456-789-0123',
-//         relationship_account_opener_dob_day: '1',
-//         relationship_account_opener_dob_month: '1',
-//         relationship_account_opener_dob_year: '1950',
-//         company_address_city: 'New York',
-//         company_state: 'New York',
-//         company_address_line1: 'First Street',
-//         company_address_postal_code: '10001',
-//         ssn_last_4: '0000'
-//       })
-//       const req = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
-//       req.account = user.account
-//       req.session = user.session
-//       req.body = {}
-//       let errorMessage
-//       try {
-//         await req.route.api.before(req)
-//       } catch (error) {
-//         errorMessage = error.message
-//       }
-//       assert.strictEqual(errorMessage, 'invalid-upload')
 //     })
 //   })
 
-//   describe('ReuploadIdentityDocument#PATCH', () => {
-//     it('should update the identity document', async () => {
+//   describe('returns', () => {
+//     it('object', async () => {
 //       const user = await TestHelper.createUser()
 //       await TestHelper.createStripeAccount(user, {
-//         type: 'individual',
+//         type: 'company',
 //         country: 'US'
 //       })
 //       await TestHelper.createStripeRegistration(user, {
-//         city: 'New York',
-//         postal_code: '10001',
-//         individual_address_id_number: '000000000',
-//        individual_address_line1: 'First Street',
-//         individual_dob_day: '1',
-//         individual_dob_month: '1',
-//         individual_dob_year: '1950',
-//         state: 'New York', ssn_last_4: '0000'
-//       })
-//       await TestHelper.createExternalAccount(user, {
-//         currency: 'usd',
-//         country: 'US',
-//         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-//         account_type: 'individual',
-//         account_number: '000123456789',
-//         routing_number: '110000000'
+//         company_name: 'Company',
+//         company_tax_id: '8',
+//         company_phone: '456-123-7890',
+//         company_address_city: 'New York',
+//         company_address_line1: '123 Park Lane',
+//         company_address_postal_code: '10001',
+//         company_address_state: 'NY',
+//         business_profile_mcc: '8931',
+//         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+//         relationship_account_opener_dob_day: '1',
+//         relationship_account_opener_dob_month: '1',
+//         relationship_account_opener_dob_year: '1950',
+//         relationship_account_opener_first_name: user.profile.firstName,
+//         relationship_account_opener_last_name: user.profile.lastName,
+//         relationship_account_opener_executive: 'true',
+//         relationship_account_opener_title: 'Owner',
+//         relationship_account_opener_email: user.profile.contactEmail,
+//         relationship_account_opener_phone: '456-789-0123',
+//         // relationship_account_opener_id_number: '000000000',
+//         relationship_account_opener_ssn_last_4: '0000',
+//         relationship_account_opener_address_city: 'New York',
+//         relationship_account_opener_address_state: 'NY',
+//         relationship_account_opener_address_line1: '285 Fulton St',
+//         relationship_account_opener_address_postal_code: '10007'
 //       })
 //       await TestHelper.submitStripeAccount(user)
 //       await TestHelper.triggerVerification(user)
@@ -230,13 +294,13 @@
 //           await wait()
 //           continue
 //         }
-//         if (user.stripeAccount.legal_entity.requirements.status !== 'pending' &&
-//             user.stripeAccount.legal_entity.requirements.status !== 'verified') {
+//         if (user.stripeAccount.requirements.status !== 'pending' &&
+//             user.stripeAccount.requirements.status !== 'verified') {
 //           const req3 = TestHelper.createRequest(`/api/user/connect/reupload-identity-document?stripeid=${user.stripeAccount.id}`)
 //           req3.account = req.account
 //           req3.session = req.session
 //           const accountNow = await req3.route.api.patch(req3)
-//           assert.strictEqual(-1, accountNow.requirements.fields_needed.indexOf('legal_entity.requirements.document'))
+//           assert.strictEqual(-1, accountNow.requirements.fields_needed.indexOf('requirements.document'))
 //           return
 //         } else {
 //           await wait()
