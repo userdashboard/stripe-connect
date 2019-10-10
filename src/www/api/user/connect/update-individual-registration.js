@@ -47,8 +47,6 @@ module.exports = {
         throw new Error('invalid-upload')
       }
     }
-    req.query.country = stripeAccount.country
-    // const countrySpec = await global.api.user.connect.CountrySpec.get(req)
     const requiredFields = stripeAccount.requirements.currently_due.concat(stripeAccount.requirements.eventually_due)
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
     if (req.body.individual_verification_document_back) {

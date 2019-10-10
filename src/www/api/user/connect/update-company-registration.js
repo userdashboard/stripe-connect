@@ -46,8 +46,6 @@ module.exports = {
       }
     }
     req.query.country = stripeAccount.country
-    // const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-    // const requiredFields = countrySpec.verification_fields.company.minimum.concat(countrySpec.verification_fields.company.additional)
     const requiredFields = stripeAccount.requirements.currently_due.concat(stripeAccount.requirements.eventually_due)
     const openerFields = ['first_name', 'last_name', 'email', 'phone', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code']
     const openerOptional = ['address_line2', 'address_state', 'address_country']
