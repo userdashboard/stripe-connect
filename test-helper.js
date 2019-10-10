@@ -81,6 +81,8 @@ const helperRoutes = require('./test-helper-routes.js')
 
 beforeEach((callback) => {
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
+  global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
+  global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
   return callback()
 })
 module.exports.createRequest = (rawURL, method) => {
@@ -99,20 +101,17 @@ async function createStripeAccount (user, properties) {
   return user.stripeAccount
 }
 
-async function createStripeRegistration (user, properties) {
+async function createStripeRegistration (user, properties, uploads) {
   const req = TestHelper.createRequest(`/api/user/connect/update-${user.stripeAccount.business_type}-registration?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
+  req.uploads = req.uploads || {}
   if (user.stripeAccount.business_type === 'individual') {
-    req.uploads = {
-      individual_verification_document_front: module.exports['success_id_scan_front.png'],
-      individual_verification_document_back: module.exports['success_id_scan_back.png']
-    }
+    req.uploads.individual_verification_document_front = req.uploads.individual_verification_document_front || module.exports['success_id_scan_front.png']
+    req.uploads.individual_verification_document_back = req.uploads.individual_verification_document_back || module.exports['success_id_scan_back.png']
   } else {
-    req.uploads = {
-      relationship_account_opener_verification_document_front: module.exports['success_id_scan_front.png'],
-      relationship_account_opener_verification_document_back: module.exports['success_id_scan_back.png']
-    }
+    req.uploads.relationship_account_opener_verification_document_front = req.uploads.relationship_account_opener_verification_document_front || module.exports['success_id_scan_front.png']
+    req.uploads.relationship_account_opener_verification_document_back = req.uploads.relationship_account_opener_verification_document_back || module.exports['success_id_scan_back.png']
   }
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()
@@ -280,14 +279,16 @@ async function waitForVerificationFailure (stripeid, callback) {
         return setTimeout(wait, 100)
       }
     } else {
-      if (stripeAccount.payouts_enabled ||
-          stripeAccount.requirements.disabled_reason !== 'requirements.pending_verification') {
+      if (stripeAccount.requirements.pending_verification.length ||
+        stripeAccount.requirements.past_due.length ||
+          stripeAccount.requirements.disabled_reason === 'requirements.pending_verification') {
         return setTimeout(wait, 100)
       }
     }
-    return setTimeout(() => {
-      return callback(null, stripeAccount)
-    }, 1000)
+    return setTimeout(wait, 100)
+    // return setTimeout(() => {
+    //   return callback(null, stripeAccount)
+    // }, 1000)
   }
   return setTimeout(wait, 100)
 }

@@ -3,9 +3,71 @@ stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 
 module.exports = {
+  substituteFailedDocumentFront: {
+    api: {
+      get: async (req, res) => {
+        res.statusCode = 200
+        res.end()
+        if (process.env.NODE_ENV !== 'testing') {
+          throw new Error('invalid-route')
+        }
+        if (!req.query || !req.query.token) {
+          throw new Error('invalid-token')
+        }
+        const testNumber = global.testNumber
+        const token = req.query.token
+        return global.packageJSON.dashboard.server.push({
+          after: (req, res) => {
+            if (req.method !== 'PATCH' ||
+                !req.body ||
+                !req.uploads ||
+                global.testNumber !== testNumber) {
+              return
+            }
+            if (req.body && req.uploads && req.uploads.individual_verification_document_front) {
+              req.body.individual_verification_document_front = token
+              delete (req.uploads.individual_verification_document_front)
+            }
+            if (req.body && req.uploads && req.uploads.relationship_account_opener_verification_document_front) {
+              req.body.relationship_account_opener_verification_document_front = token
+              delete (req.uploads.relationship_account_opener_verification_document_front)
+            }
+          }
+        })
+      }
+    }
+  },
+  substituteFailedDocumentBack: {
+    api: {
+      get: async (req, res) => {
+        res.statusCode = 200
+        res.end()
+        if (process.env.NODE_ENV !== 'testing') {
+          throw new Error('invalid-route')
+        }
+        if (!req.query || !req.query.token) {
+          throw new Error('invalid-token')
+        }
+        const testNumber = global.testNumber
+        const token = req.query.token
+        return global.packageJSON.dashboard.server.push((req, res) => {
+          if (global.testNumber !== testNumber) {
+            return
+          }
+          if (!req.body || !req.uploads || !req.uploads.individual_verification_document_front) {
+            return
+          }
+          req.body.individual_verification_document_back = token
+          delete (req.uploads.individual_verification_document_back)
+        })
+      }
+    }
+  },
   fakePayout: {
     api: {
       get: async (req, res) => {
+        res.statusCode = 200
+        res.end()
         if (process.env.NODE_ENV !== 'testing') {
           throw new Error('invalid-route')
         }
@@ -32,8 +94,6 @@ module.exports = {
           }
         }
         await stripe.payouts.create(payoutInfo, req.stripeKey)
-        res.statusCode = 200
-        return res.end()
       }
     }
   }

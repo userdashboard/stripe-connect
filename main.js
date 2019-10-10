@@ -24,5 +24,7 @@
   if (process.env.NODE_ENV === 'testing') {
     const helperRoutes = require('./test-helper-routes.js')
     global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
+    global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
+    global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
   }
 })()
