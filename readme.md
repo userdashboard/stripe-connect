@@ -9,8 +9,9 @@ Dashboard is a parallel web application that accompanies your web app, subscript
 Stripe Connect module is ready-ish to use.  The following work remains:
 
 - translations required for everything in /languages please help
+- administrator UI is very minimal
 - confirm tests pass since adding optional stripe.js support
-- there is no "resubmission" flow for rejected/erroneous registrations pending a reliable way to trigger such errors in tests
+- there is no "resubmission" flow for rejected/erroneous data pending a reliable way to trigger it on Stripe API
 
 ## Import this module
 
