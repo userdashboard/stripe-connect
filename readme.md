@@ -4,6 +4,14 @@
 
 Dashboard is a parallel web application that accompanies your web app, subscription service, or Stripe Connect platform to provide all the "boilerplate" a modern web app requires to serve its users.  Use Dashboard instead of rewriting user account and login systems.  This module adds UI and APIs for a complete [Stripe Connect](https://stripe.com/connect) custom integration.
 
+## Development status
+
+Stripe Connect module is ready-ish to use.  The following work remains:
+
+- translations required for everything in /languages please help
+- confirm tests pass since adding optional stripe.js support
+- there is no "resubmission" flow for rejected/erroneous registrations pending a reliable way to trigger such errors in tests
+
 ## Import this module
 
 Edit your `package.json` to activate the module:
