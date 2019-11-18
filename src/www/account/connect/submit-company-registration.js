@@ -19,8 +19,6 @@ async function beforeRequest (req) {
   }
   stripeAccount.company = stripeAccount.company || {}
   stripeAccount.individual = stripeAccount.individual || {}
-  req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
   const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
   const completedPayment = stripeAccount.external_accounts &&
                            stripeAccount.external_accounts.data &&
@@ -56,7 +54,7 @@ async function beforeRequest (req) {
   }
   const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
   const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
-  req.data = { stripeAccount, countrySpec, fieldsNeeded, owners, directors }
+  req.data = { stripeAccount, fieldsNeeded, owners, directors }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -68,7 +66,7 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-  navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
+  navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success' || req.error) {

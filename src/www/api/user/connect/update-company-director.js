@@ -48,15 +48,17 @@ module.exports = {
       }
     }
     const director = await global.api.user.connect.CompanyDirector.get(req)
+    director.relationship_director_first_name = req.body.relationship_director_first_name
+    director.relationship_director_last_name = req.body.relationship_director_last_name
+    if (req.body.token) {
+      director.personToken = req.body.token
+    }
     req.query.stripeid = director.stripeid
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')
     }
     let directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
-    for (const field in req.body) {
-      director[field] = req.body[field]
-    }
     if (directors && directors.length) {
       for (const i in directors) {
         if (directors[i].directorid === req.query.directorid) {

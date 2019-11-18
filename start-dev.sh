@@ -1,15 +1,17 @@
 NODE_ENV=development \
 GENERATE_SITEMAP_TXT="false" \
 GENERATE_API_TXT="false" \
-DASHBOARD_SERVER="https://stripe-connect-12311.serveo.net" \
+DEBUG_REQUESTS="true" \
+DEBUG_ERRORS="true" \
+DASHBOARD_SERVER="$CONNECT_DASHBOARD_SERVER" \
 PORT=$CONNECT_DASHBOARD_SERVER_PORT \
 DOMAIN="$CONNECT_DOMAIN" \
 STRIPE_KEY="$CONNECT_STRIPE_KEY" \
 STRIPE_PUBLISHABLE_KEY="$CONNECT_STRIPE_PUBLISHABLE_KEY" \
-STRIPE_JS="false" \
+STRIPE_JS="3" \
 IP="0.0.0.0" \
 STORAGE_PATH=/tmp/connect \
-node main.js --debug-brk=5858
+node --inspect main.js
 
 # Connect module startup parameters
 # These ENV variables let you tweak certain parts of the Connect module to your preference.

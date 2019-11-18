@@ -1,3 +1,4 @@
+const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
@@ -20,6 +21,7 @@ async function beforeRequest (req) {
       stripeAccount.company = stripeAccount.company || {}
       stripeAccount.individual = stripeAccount.individual || {}
       stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
+      stripeAccount.registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
       if (stripeAccount.metadata.submitted) {
         stripeAccount.metadata.submittedFormatted = dashboard.Format.date(stripeAccount.metadata.submitted)
       }
@@ -70,18 +72,28 @@ async function renderPage (req, res) {
         removeElements.push(`submitted-${stripeAccount.id}`)
       }
       if (stripeAccount.business_type === 'individual') {
-        removeElements.push(`business-name-${stripeAccount.id}`)
+        removeElements.push(`business-name-${stripeAccount.id}`, `business-registration-name-${stripeAccount.id}`)
         if (stripeAccount.individual.first_name) {
-          removeElements.push(`blank-name-${stripeAccount.id}`)
+          removeElements.push(`blank-name-${stripeAccount.id}`, `individual-registration-name-${stripeAccount.id}`)
         } else {
           removeElements.push(`individual-name-${stripeAccount.id}`)
+          if (stripeAccount.registration.individual_first_name) {
+            removeElements.push(`blank-name-${stripeAccount.id}`)
+          } else {
+            removeElements.push(`individual-registration-name-${stripeAccount.id}`)
+          }
         }
       } else {
-        removeElements.push(`individual-name-${stripeAccount.id}`)
+        removeElements.push(`individual-name-${stripeAccount.id}`, `individual-registration-name-${stripeAccount.id}`)
         if (stripeAccount.company.name) {
-          removeElements.push(`blank-name-${stripeAccount.id}`)
+          removeElements.push(`blank-name-${stripeAccount.id}`, `business-registration-name-${stripeAccount.id}`)
         } else {
           removeElements.push(`business-name-${stripeAccount.id}`)
+          if (stripeAccount.registration.company_name) {
+            removeElements.push(`blank-name-${stripeAccount.id}`)
+          } else {
+            removeElements.push(`business-registration-name-${stripeAccount.id}`)
+          }
         }
       }
     }

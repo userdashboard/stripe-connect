@@ -1,4 +1,4 @@
-const countries = require('../../../../countries.json')
+const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
@@ -17,24 +17,7 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
   }
-  let country
-  for (const countryItem of countries) {
-    if (countryItem.code === owner.country ||
-      (req.body && req.body.country === countryItem.code)) {
-      country = countryItem
-      break
-    }
-  }
-  const states = []
-  if (country) {
-    for (const code in country.divisions) {
-      const name = country.divisions[code]
-      states.push({ code, name, object: 'option' })
-    }
-  }
-  req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-  req.data = { owner, countries, country, countrySpec, states }
+  req.data = { owner }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -47,7 +30,23 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'owner')
-
+  if (global.stripeJS !== 3) {
+    const stripeJS = doc.getElementById('stripe-v3')
+    stripeJS.parentNode.removeChild(stripeJS)
+    const clientJS = doc.getElementById('client-v3')
+    clientJS.parentNode.removeChild(clientJS)
+    const connectJS = doc.getElementById('connect-js')
+    connectJS.parentNode.removeChild(connectJS)
+    const handlerJS = doc.getElementById('handler-js')
+    handlerJS.parentNode.removeChild(handlerJS)
+  } else {
+    res.setHeader('content-security-policy',
+    'default-src * \'unsafe-inline\'; ' +
+    `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
+    `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/stripe-helper.js 'unsafe-inline' 'unsafe-eval'; ` +
+    'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
+    'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
+  }
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
@@ -56,17 +55,13 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  if (req.data.states && req.data.states.length) {
-    dashboard.HTML.renderList(doc, req.data.states, 'state-option', 'relationship_owner_address_state')
-  } else {
-    const stateContainer = doc.getElementById('relationship_owner_address_state-container')
-    stateContainer.parentNode.removeChild(stateContainer)
-    const stateContainerBridge = doc.getElementById('relationship_owner_address_state-container-bridge')
-    stateContainerBridge.parentNode.removeChild(stateContainerBridge)
-  }
+  const selectedCountry = req.body ? req.body.relationship_owner_address_country || req.data.owner.country : req.data.owner.country
+  const states = connect.countryDivisions[selectedCountry]
+  dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
   const country = doc.getElementById('relationship_owner_address_country')
-  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', country)
-  if (!req.body) {
+  dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
+  dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
+  if (req.method === 'GET') {
     for (const field of ['first_name', 'last_name', 'dob_day', 'dob_month', 'dob_year', 'id_number', 'address_line1', 'address_line2', 'address_city', 'address_postal_code']) {
       const element = doc.getElementById(`relationship_owner_${field}`)
       element.setAttribute('value', req.data.owner[field])
@@ -75,28 +70,25 @@ async function renderPage (req, res, messageTemplate) {
       dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_state', req.data.owner.relationship_owner_address_state)
     }
     dashboard.HTML.setSelectedOptionByValue(doc, country, req.data.owner.relationship_owner_address_country)
-    return dashboard.Response.end(req, res, doc)
-  }
-  for (const fieldName in req.body) {
-    const el = doc.getElementById(fieldName)
-    if (!el) {
-      continue
-    }
-    switch (el.tag) {
-      case 'select':
-        dashboard.HTML.setSelectedOptionByValue(doc, el.attr.id, req.body[fieldName])
+  } else if (req.body) {
+    for (const fieldName in req.body) {
+      const el = doc.getElementById(fieldName)
+      if (!el) {
         continue
-      case 'input':
-        if (el.attr.type === 'radio') {
-          el.attr.checked = 'checked'
-        } else {
-          el.attr.value = req.body[fieldName]
-        }
-        continue
+      }
+      switch (el.tag) {
+        case 'select':
+          dashboard.HTML.setSelectedOptionByValue(doc, el.attr.id, req.body[fieldName])
+          continue
+        case 'input':
+          if (el.attr.type === 'radio') {
+            el.attr.checked = 'checked'
+          } else {
+            el.attr.value = req.body[fieldName]
+          }
+          continue
+      }
     }
-  }
-  if (req.data.country && !req.body.relationship_owner_address_country) {
-    dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', req.data.country.code)
   }
   return dashboard.Response.end(req, res, doc)
 }

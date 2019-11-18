@@ -15,7 +15,6 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
   }
-  req.query.country = stripeAccount.country
   req.data = { director }
 }
 

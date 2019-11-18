@@ -4,7 +4,6 @@ const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 const stripeCache = require('../../../../stripe-cache.js')
-const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
 
 module.exports = {
   patch: async (req) => {
@@ -55,7 +54,7 @@ module.exports = {
         date: dashboard.Timestamp.now
       }
     }
-    if (euCountries.indexOf(stripeAccount.country)) {
+    if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
       accountInfo.company.directors_provided = true
     }
     const accountOpener = {

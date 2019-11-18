@@ -79,7 +79,9 @@
     <tr id="${account.id}">
       <td><a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>
       <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="individual-registration-name-${account.id}">${account.registration.individual_first_name} ${account.registration.individual_last_name}</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-registration-name-${account.id}">${account.registration.company_name}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>

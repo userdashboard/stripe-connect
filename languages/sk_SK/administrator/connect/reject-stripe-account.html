@@ -1,7 +1,7 @@
 <!doctype html>
 <html navbar="/administrator/connect/navbar-stripe-account.html">
   <head>
-    <title>Delete ${stripeAccount.id}</title>
+    <title>Reject ${stripeAccount.id}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="/public/pure-min.css" />
     <link rel="stylesheet" href="/public/content.css" />
@@ -9,7 +9,7 @@
     <base target="_top" href="/" />
   </head>
   <body>
-    <h1>Delete ${stripeAccount.id}</h1>
+    <h1>Reject ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <table id="stripe-accounts-table" class="pure-table object-table">
       <thead>
@@ -20,21 +20,37 @@
         </tr>
       </thead>
       <tr id="${stripeAccount.id}">
-        <td><a href="/account/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a></td>
+        <td><a href="/administrator/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a></td>
+        <td id="blank-name">Not yet provided</td>
+        <td id="individual-registration-name">${stripeAccount.registration.individual_first_name} ${stripeAccount.registration.individual_last_name}</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-registration-name">${stripeAccount.registration.company_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
+        <td id="mcc-description"></td>
         <td id="account-status"></td>
       </tr>
     </table>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}">
-      <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}">
+      <div class="pure-control-group">
+        <label for="reason">Rejection reason</label>
+        <select id="reason" name="reason">
+          <option>Select reason</option>
+          <option value="fraud">Fraud</option>
+          <option value="terms_of_service">Terms of service violation</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <button id="submit-button" class="pure-button pure-button-primary">Reject</button>
     </form>
   </body>
   <template id="success">
-    <div class="success message">Success! The Stripe account has been deleted</div>
+    <div class="success message">Success! The Stripe account has been rejected</div>
+  </template>
+  <template id="balance-error">
+    <div class="error message">Error! The account must have a $0 balance before rejecting</div>
   </template>
   <template id="unknown-error">
-    <div class="error message">Error! An error ocurred deleting the Stripe account</div>
+    <div class="error message">Error! An error ocurred rejecting the Stripe account</div>
   </template>
   <template id="not-submitted">
     <span>Not submitted yet</span>
@@ -45,15 +61,15 @@
   <template id="verified">
     <span>Disabled by Stripe</span>
   </template>
+  <template id="requirements.past_due">
+    <span>Requires additional information</span>
+  </template>
   <template id="verified-requires-fields">
     <span>Requires additional information</span>
   </template>
   <template id="pending-submission">
     <span>Pending submission</span>
   </template>
-    <template id="requirements.past_due">
-      <span>Pending submission</span>
-    </template>
   <template id="rejected.fraud">
     <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>

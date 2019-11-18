@@ -1,6 +1,6 @@
+const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
-const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
 
 module.exports = {
   before: beforeRequest,
@@ -18,7 +18,7 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type !== 'company') {
     throw new Error('invalid-stripe-account')
   }
-  if (euCountries.indexOf(stripeAccount.country) === -1) {
+  if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
     throw new Error('invalid-stripe-account')
   }
   const directors = await global.api.user.connect.CompanyDirectors.get(req)

@@ -1,4 +1,4 @@
-const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
+const connect = require('../../../../index.js')
 
 module.exports = {
   setup: (doc, stripeAccount) => {
@@ -30,7 +30,7 @@ module.exports = {
       editIndividual.parentNode.removeChild(editIndividual)
       const submitIndividual = template.getElementById('navbar-submit-individual')
       submitIndividual.parentNode.removeChild(submitIndividual)
-      if (euCountries.indexOf(stripeAccount.country) === -1) {
+      if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
         const companyDirectors = template.getElementById('navbar-company-directors')
         companyDirectors.parentNode.removeChild(companyDirectors)
       }

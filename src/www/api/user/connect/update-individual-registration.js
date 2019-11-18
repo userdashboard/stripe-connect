@@ -72,6 +72,9 @@ module.exports = {
       }
       registration[posted] = req.body[posted]
     }
+    if (req.body.token) {
+      registration.accountToken = req.body.token
+    }
     const accountInfo = {
       metadata: {}
     }

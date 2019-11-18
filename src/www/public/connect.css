@@ -4,12 +4,21 @@
 .requirements { border: 1px solid #CCC; padding: 1rem; margin-right: 1rem }
 .requirements:last-of-type { margin-right: 0 }
 form.pure-form { max-width: 40rem }
-div.pure-u-2-24 { width: 0.5rem }
-div.pure-u-11-24 { width: 14.75rem }
-input.full-width { width: 100%; max-width: 40rem }
-input.adjacent { display: inline-block !important; margin-right: 0.5rem !important }
-select { width: 100%; margin-right: 1rem; max-width: 100% !important }
-
+form.connect-form input[type="text"] { width: auto }
+form.connect-form input[type="file"] { margin-bottom: 0.5rem }
+form.connect-form input.full-width { width: 100%; max-width: 100% }
+form.connect-form input.adjacent { display: inline-block !important; margin-right: 0.5rem !important }
+form.connect-form h2 { color: rgba(255, 255, 255, 0.6); font-size: 1rem }
+form.connect-form input[type="file"] { margin-top: 0.5rem; color: rgba(255, 255, 255, 0.5) }
+form.connect-form select { width: 100%; margin-right: 1rem; max-width: 100% !important }
+form.connect-form h1,
+form.connect-form h2,
+form.connect-form label,
+form.connect-form .pure-controls,
+form.connect-form .pure-control-group { text-align: left }
+form.connect-form .pure-controls { margin-top: 1rem }
+form.connect-form .error.message { color: #FFF; background-color: #900; border: 2px solid #F00; padding: 0.25rem; text-align: left; border-radius: 0.2rem; }
+form.hidden-form { display: none }
 @media (max-width: 960px) {
   .requirements-container { width: 100%; margin-bottom: 2rem; margin-right: 0 }
   .pure-u-2-24 { width: 0.5rem }

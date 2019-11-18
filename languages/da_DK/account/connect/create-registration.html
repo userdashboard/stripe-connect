@@ -16,7 +16,7 @@
       <div class="pure-control-group">
         <label for="individual">Account type</label>
         <div class="pure-checkbox">
-        <label><input id="individual" type="radio" name="type" value="individual" /> Individual</label>
+          <label><input id="individual" type="radio" name="type" value="individual" /> Individual</label>
           <label><input id="company" type="radio" name="type" value="company" /> Company</label>
         </div>
       </div>
@@ -32,7 +32,7 @@
     </form>
   </body>
   <template id="country-option">
-    <option value="${country.code}">${country.name}</option>
+    <option value="${country.id}">${country.name}</option>
   </template>
   <template id="unknown-error">
     <div class="error message">Error! An error occurred creating the registration</div>

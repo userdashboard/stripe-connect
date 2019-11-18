@@ -1,5 +1,4 @@
 const connect = require('../../../../../index.js')
-const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
 
 module.exports = {
   get: async (req) => {
@@ -13,7 +12,7 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    if (euCountries.indexOf(stripeAccount.country) === -1) {
+    if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
       throw new Error('invalid-stripe-account')
     }
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {

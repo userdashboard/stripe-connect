@@ -1,3 +1,4 @@
+const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
@@ -16,6 +17,7 @@ async function beforeRequest (req) {
       stripeAccount.company = stripeAccount.company || {}
       stripeAccount.individual = stripeAccount.individual || {}
       stripeAccount.createdFormatted = dashboard.Format.date(stripeAccount.created)
+      stripeAccount.registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
       if (stripeAccount.payouts_enabled) {
         stripeAccount.statusMessage = 'verified'
       } else if (stripeAccount.requirements.disabled_reason) {
@@ -45,16 +47,21 @@ async function renderPage (req, res) {
       dashboard.HTML.renderTemplate(doc, req.data.individual, 'stripe-account-row', 'individual-accounts-table')
       dashboard.HTML.renderTemplate(doc, null, req.data.individual.statusMessage, `account-status-${req.data.individual.id}`)
       doc.getElementById('create-individual-link').setAttribute('disabled', 'disabled')
-      removeElements.push('business-name-' + req.data.individual.id)
+      removeElements.push(`business-name-${req.data.individual.id}`, `business-registration-name-${req.data.individual.id}`)
       if (req.data.individual.metadata.submitted) {
         removeElements.push(`not-submitted-${req.data.individual.id}`)
       } else {
         removeElements.push(`submitted-${req.data.individual.id}`)
       }
-      if (req.data.individual.individual.first_name) {
-        removeElements.push(`blank-name-${req.data.individual.id}`)
+      if (req.data.individual.first_name) {
+        removeElements.push(`blank-name-${req.data.individual.id}`, `individual-registration-name-${req.data.individual.id}`)
       } else {
         removeElements.push(`individual-name-${req.data.individual.id}`)
+        if (req.data.individual.registration.individual_first_name) {
+          removeElements.push(`blank-name-${req.data.individual.id}`)
+        } else {
+          removeElements.push(`individual-registration-name-${req.data.individual.id}`) 
+        }
       }
     } else {
       removeElements.push('individual-container')
@@ -63,7 +70,7 @@ async function renderPage (req, res) {
       dashboard.HTML.renderTable(doc, req.data.company, 'stripe-account-row', 'company-accounts-table')
       for (const account of req.data.company) {
         dashboard.HTML.renderTemplate(doc, null, account.statusMessage, `account-status-${account.id}`)
-        removeElements.push(`individual-name-${account.id}`)
+        removeElements.push(`individual-name-${account.id}`, `individual-registration-name-${account.id}`)
         if (account.metadata.submitted) {
           removeElements.push(`not-submitted-${account.id}`)
         } else {
@@ -73,6 +80,11 @@ async function renderPage (req, res) {
           removeElements.push(`blank-name-${account.id}`)
         } else {
           removeElements.push(`business-name-${account.id}`)
+          if (account.registration.company_name) {
+            removeElements.push(`blank-name-${account.id}`)
+          } else {
+            removeElements.push(`business-registration-name-${account.id}`)
+          }          
         }
       }
     } else {

@@ -18,9 +18,16 @@
           <td>${stripeAccount.id}</td>
         </tr>
         <tr>
+          <th>MCC</th>
+          <td id="mcc-description"></td>
+        </tr>
+        <tr>
           <th>Name</th>
-          <td id="individual-name-${stripeAccount.id}">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
-          <td id="business-name-${stripeAccount.id}">${stripeAccount.company.name || ""}</td>
+          <td id="blank-name">Not yet provided</td>
+          <td id="individual-registration-name">${stripeAccount.registration.individual_first_name} ${stripeAccount.registration.individual_last_name}</td>
+          <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+          <td id="business-registration-name">${stripeAccount.registration.company_name || ""}</td>
+          <td id="business-name">${stripeAccount.company.name || ""}</td>
         </tr>
         <tr>
           <th>Status</th>

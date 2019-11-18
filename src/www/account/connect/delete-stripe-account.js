@@ -15,9 +15,7 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  req.query.country = stripeAccount.country
-  const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-  req.data = { stripeAccount, countrySpec }
+  req.data = { stripeAccount }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -31,7 +29,7 @@ async function renderPage (req, res, messageTemplate) {
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
 
-  navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
+  navbar.setup(doc, req.data.stripeAccount)
   if (!req.data.stripeAccount || messageTemplate === 'success') {
     dashboard.HTML.renderTemplate(doc, null, 'success', 'message-container')
     const submitForm = doc.getElementById('submit-form')

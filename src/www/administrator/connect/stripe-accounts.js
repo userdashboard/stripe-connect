@@ -33,25 +33,54 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html)
+  const removeElements = []
   if (req.data.stripeAccounts && req.data.stripeAccounts.length) {
     dashboard.HTML.renderTable(doc, req.data.stripeAccounts, 'stripe-account-row', 'stripe-accounts-table')
     for (const stripeAccount of req.data.stripeAccounts) {
       if (stripeAccount.business_type === 'individual') {
-        const businessName = doc.getElementById(`business-name-${stripeAccount.id}`)
-        businessName.parentNode.removeChild(businessName)
+        removeElements.push(`business-name-${stripeAccount.id}`, `business-registration-name-${stripeAccount.id}`)
+        if (stripeAccount.individual.first_name) {
+          removeElements.push(`blank-name-${stripeAccount.id}`, `individual-registration-name-${stripeAccount.id}`)
+        } else {
+          removeElements.push(`individual-name-${stripeAccount.id}`)
+          if (stripeAccount.registration.individual_first_name) {
+            removeElements.push(`blank-name-${stripeAccount.id}`)
+          } else {
+            removeElements.push(`individual-registration-name-${stripeAccount.id}`)
+          }
+        }
       } else {
-        const individualName = doc.getElementById(`individual-name-${stripeAccount.id}`)
-        individualName.parentNode.removeChild(individualName)
+        removeElements.push(`individual-name-${stripeAccount.id}`, `individual-registration-name-${stripeAccount.id}`)
+        if (stripeAccount.company.name) {
+          removeElements.push(`blank-name-${stripeAccount.id}`, `business-registration-name-${stripeAccount.id}`)
+        } else {
+          removeElements.push(`business-name-${stripeAccount.id}`)
+          if (stripeAccount.registration.company_name) {
+            removeElements.push(`blank-name-${stripeAccount.id}`)
+          } else {
+            removeElements.push(`business-registration-name-${stripeAccount.id}`)
+          }
+        }
       }
       if (stripeAccount.statusMessage) {
         dashboard.HTML.renderTemplate(doc, null, stripeAccount.statusMessage, `account-status-${stripeAccount.id}`)
       }
+      const mccCodes = connect.getMerchantCategoryCodes(req.language)
+      const mccDescription = doc.getElementById(`mcc-description-${stripeAccount.id}`)
+      for (const code of mccCodes) {
+        if (code.code === req.data.stripeAccount.business_profile.mcc) {
+          mccDescription.innerHTML = code.description
+          break
+        }
+      }
     }
-    const noStripeAccounts = doc.getElementById('no-stripe-accounts')
-    noStripeAccounts.parentNode.removeChild(noStripeAccounts)
+    removeElements.push('no-stripe-accounts')
   } else {
-    const stripeAccountsTable = doc.getElementById('stripe-accounts-table')
-    stripeAccountsTable.parentNode.removeChild(stripeAccountsTable)
+    removeElements.push('stripe-accounts-table')
+  }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }

@@ -45,7 +45,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-relationship_owner_verification_document_front')
       }
-    } else {
+    } else if (!req.body.token) {
       throw new Error('invalid-relationship_owner_verification_document_front')
     }
     if (req.uploads && req.uploads.relationship_owner_verification_document_back) {
@@ -63,7 +63,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-relationship_owner_verification_document_back')
       }
-    } else {
+    } else if (!req.body.token) {
       throw new Error('invalid-relationship_owner_verification_document_back')
     }
     let owners = await global.api.user.connect.BeneficialOwners.get(req)
@@ -102,6 +102,9 @@ module.exports = {
     }
     if (req.body.relationship_owner_verification_document_back) {
       owner.relationship_owner_verification_document_back = req.body.relationship_owner_verification_document_back
+    }
+    if (req.body.token) {
+      owner.personToken = req.body.token
     }
     owners.unshift(owner)
     const accountInfo = {

@@ -1,6 +1,6 @@
 const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
-const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
+
 
 module.exports = {
   before: beforeRequest,
@@ -18,7 +18,7 @@ async function beforeRequest (req) {
     stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  if (euCountries.indexOf(stripeAccount.country) === -1) {
+  if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
     throw new Error('invalid-stripe-account')
   }
   const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
@@ -29,10 +29,29 @@ async function renderPage (req, res, messageTemplate) {
   if (req.success) {
     if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
       return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
+    } else {
+      return dashboard.Response.redirect(req, res, `/account/connect/stripe-account?stripeid=${req.query.stripeid}`)
     }
   }
+  req.data.stripeAccount.stripePublishableKey = global.stripePublishableKey
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-
+  if (global.stripeJS !== 3) {
+    const stripeJS = doc.getElementById('stripe-v3')
+    stripeJS.parentNode.removeChild(stripeJS)
+    const clientJS = doc.getElementById('client-v3')
+    clientJS.parentNode.removeChild(clientJS)
+    const connectJS = doc.getElementById('connect-js')
+    connectJS.parentNode.removeChild(connectJS)
+    const handlerJS = doc.getElementById('handler-js')
+    handlerJS.parentNode.removeChild(handlerJS)
+  } else {
+    res.setHeader('content-security-policy',
+    'default-src * \'unsafe-inline\'; ' +
+    `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
+    `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/stripe-helper.js 'unsafe-inline' 'unsafe-eval'; ` +
+    'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
+    'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
+  }
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
@@ -55,6 +74,7 @@ async function renderPage (req, res, messageTemplate) {
 }
 
 async function submitForm (req, res) {
+  console.log(req.body)
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }

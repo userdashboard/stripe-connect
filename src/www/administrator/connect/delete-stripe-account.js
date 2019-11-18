@@ -38,24 +38,49 @@ async function renderPage (req, res, messageTemplate) {
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, 'account-status')
-  if (req.data.stripeAccount.business_type === 'individual') {
-    const businessName = doc.getElementById('business-name')
-    businessName.parentNode.removeChild(businessName)
-  } else {
-    const individualName = doc.getElementById('individual-name')
-    individualName.parentNode.removeChild(individualName)
+  const mccCodes = connect.getMerchantCategoryCodes(req.language)
+  const mccDescription = doc.getElementById('mcc-description')
+  for (const code of mccCodes) {
+    if (code.code === req.data.stripeAccount.business_profile.mcc) {
+      mccDescription.innerHTML = code.description
+      break
+    }
   }
-
+  const removeElements = []
+  if (req.data.stripeAccount.business_type === 'individual') {
+    removeElements.push('company', 'business-name', 'business-registration-name')
+    if (req.data.stripeAccount.individual.first_name) {
+      removeElements.push('blank-name', 'individual-registration-name')
+    } else {
+      removeElements.push('individual-name')
+      if (req.data.registration.individual_first_name) {
+        removeElements.push('blank-name')
+      } else {
+        removeElements.push('individual-registration-name')
+      }
+    }
+  } else {
+    removeElements.push('individual', 'individual-name', 'individual-registration-name')
+    if (req.data.stripeAccount.company.name) {
+      removeElements.push('blank-name', 'business-registration-name')
+    } else {
+      removeElements.push('business-name')
+      if(req.data.registration.company_name) {
+        removeElements.push('blank-name')
+      } else {
+        removeElements.push('business-registration-name')
+      }
+    }
+  }
   if (messageTemplate) {
     if (messageTemplate === 'success') {
-      dashboard.HTML.renderTemplate(doc, null, 'success', 'message-container')
-      const submitForm = doc.getElementById('submit-form')
-      submitForm.parentNode.removeChild(submitForm)
-      const accountTable = doc.getElementById('stripe-accounts-table')
-      accountTable.parentNode.removeChild(accountTable)
-      return dashboard.Response.end(req, res, doc)
+      removeElements.push('submit-form', 'stripe-accounts-table')
     }
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
+  }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }

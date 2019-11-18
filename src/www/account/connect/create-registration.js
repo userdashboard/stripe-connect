@@ -1,28 +1,9 @@
-const countriesIndex = require('../../../../countries-index.json')
+const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
-  before: beforeRequest,
   get: renderPage,
   post: submitForm
-}
-
-async function beforeRequest (req) {
-  req.query = req.query || {}
-  req.query.all = true
-  const countrySpecs = await global.api.user.connect.CountrySpecs.get(req)
-  const countries = []
-  for (const countrySpec of countrySpecs) {
-    countries.push({
-      object: 'country',
-      code: countrySpec.id,
-      name: countriesIndex[countrySpec.id]
-    })
-  }
-  countries.sort((a, b) => {
-    return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-  })
-  req.data = { countries }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -57,15 +38,7 @@ async function renderPage (req, res, messageTemplate) {
       individual.setAttribute('checked', 'checked')
     }
   }
-  if (req.method === 'GET' && req.country) {
-    for (const country of req.data.countries) {
-      if (country.id === req.country.id) {
-        await dashboard.HTML.setSelectedOptionByValue(doc, 'country', req.country.id)
-        break
-      }
-    }
-  }
-  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'country')
+  dashboard.HTML.renderList(doc, connect.countrySpecs, 'country-option', 'country')
   return dashboard.Response.end(req, res, doc)
 }
 
@@ -74,6 +47,10 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   if (!req.body.country) {
+    return renderPage(req, res, 'invalid-country')
+  }
+  const found = connect.countrySpecIndex[req.body.country] && connect.countrySpecIndex[req.body.country].object
+  if (!found) {
     return renderPage(req, res, 'invalid-country')
   }
   try {

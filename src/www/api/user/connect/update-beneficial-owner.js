@@ -90,6 +90,9 @@ module.exports = {
     if (req.body.relationship_owner_owner) {
       owner.relationship_owner_owner = true
     }
+    if (req.body.token) {
+      owner.personToken = req.body.token
+    }
     if (owners && owners.length) {
       for (const i in owners) {
         if (owners[i].ownerid === req.query.ownerid) {

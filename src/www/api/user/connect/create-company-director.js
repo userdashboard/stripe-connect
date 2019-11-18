@@ -4,7 +4,6 @@ const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 const stripeCache = require('../../../../stripe-cache.js')
-const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
 
 module.exports = {
   post: async (req) => {
@@ -23,15 +22,11 @@ module.exports = {
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
-    const personFields = ['first_name', 'last_name']
-    for (const field of personFields) {
-      const posted = `relationship_director_${field}`
-      if (!req.body[posted]) {
-        throw new Error(`invalid-${posted}`)
-      }
+    if (!req.body.relationship_director_first_name) {
+      throw new Error('invalid-relationship_director_first_name')
     }
-    if (euCountries.indexOf(stripeAccount.country) === -1) {
-      throw new Error('invalid-stripe-account')
+    if (!req.body.relationship_director_last_name) {
+      throw new Error('invalid-relationship_director_last_name')
     }
     if (req.uploads && req.uploads.relationship_director_verification_document_front) {
       const frontData = {
@@ -48,7 +43,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-relationship_director_verification_document_front')
       }
-    } else {
+    } else if (!req.body.token) {
       throw new Error('invalid-relationship_director_verification_document_front')
     }
     if (req.uploads && req.uploads.relationship_director_verification_document_back) {
@@ -66,7 +61,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-relationship_director_verification_document_back')
       }
-    } else {
+    } else if (!req.body.token) {
       throw new Error('invalid-relationship_director_verification_document_back')
     }
     let directors = await global.api.user.connect.CompanyDirectors.get(req)
@@ -76,11 +71,12 @@ module.exports = {
       directorid: `director_${id}`,
       object: 'director',
       created: dashboard.Timestamp.now,
-      stripeid: req.query.stripeid
+      stripeid: req.query.stripeid,
+      relationship_director_first_name: req.body.relationship_director_first_name,
+      relationship_director_last_name: req.body.relationship_director_last_name
     }
-    for (const field of personFields) {
-      const posted = `relationship_director_${field}`
-      director[posted] = req.body[posted]
+    if (req.body.token) {
+      director.personToken = req.body.token
     }
     directors.unshift(director)
     const accountInfo = {

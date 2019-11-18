@@ -35,12 +35,43 @@ async function beforeRequest (req) {
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, 'account-status')
+  const mccCodes = connect.getMerchantCategoryCodes(req.language)
+  const mccDescription = doc.getElementById('mcc-description')
+  for (const code of mccCodes) {
+    if (code.code === req.data.stripeAccount.business_profile.mcc) {
+      mccDescription.innerHTML = code.description
+      break
+    }
+  }
+  const removeElements = []
   if (req.data.stripeAccount.business_type === 'individual') {
-    const businessName = doc.getElementById(`business-name-${req.data.stripeAccount.id}`)
-    businessName.parentNode.removeChild(businessName)
+    removeElements.push('company', 'business-name', 'business-registration-name')
+    if (req.data.stripeAccount.individual.first_name) {
+      removeElements.push('blank-name', 'individual-registration-name')
+    } else {
+      removeElements.push('individual-name')
+      if (req.data.registration.individual_first_name) {
+        removeElements.push('blank-name')
+      } else {
+        removeElements.push('individual-registration-name')
+      }
+    }
   } else {
-    const individualName = doc.getElementById(`individual-name-${req.data.stripeAccount.id}`)
-    individualName.parentNode.removeChild(individualName)
+    removeElements.push('individual', 'individual-name', 'individual-registration-name')
+    if (req.data.stripeAccount.company.name) {
+      removeElements.push('blank-name', 'business-registration-name')
+    } else {
+      removeElements.push('business-name')
+      if(req.data.registration.company_name) {
+        removeElements.push('blank-name')
+      } else {
+        removeElements.push('business-registration-name')
+      }
+    }
+  }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }

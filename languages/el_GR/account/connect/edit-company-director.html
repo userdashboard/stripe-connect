@@ -1,5 +1,5 @@
 <!doctype html>
-<html navbar="/account/connect/navbar-company-director.html">
+<html template="false">
   <head>
     <title>Edit ${director.directorid}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="/public/content.css" />
     <link rel="stylesheet" href="/public/content-additional.css" />
     <link rel="stylesheet" href="/public/connect.css" />
-    <base target="_top" href="/" />
+    <script id="stripe-v3" src="https://js.stripe.com/v3/"></script>
+    <script id="connect-js" src="/public/connect.js"></script>
+    <script id="handler-v3" src="/public/stripe-v3-edit-company-director.js"></script>
+    <script id="client-v3">
+      window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
+    </script>
   </head>
-  <body>
-    <h1>Edit ${director.directorid}</h1>
-    <p>This information must be accurate and completely provided.</p>
-    <div id="message-container"></div>
-    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked" action="/account/connect/edit-company-director?directorid=${director.directorid}">
+  <body class="entry">
+    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-company-director?directorid=${director.directorid}">
+      <input type="hidden" id="token" name="token" />
+      <h1>Edit ${director.directorid}</h1>
+      <div id="message-container"></div>
       <div class="pure-g">
         <div class="pure-u-12-24">
           <div class="pure-control-group">
@@ -29,13 +34,13 @@
           </div>
         </div>
       </div>
-      <h2>Government-issued ID card or passport</h2>
+      <h2>Personal identification</h2>
       <div class="pure-control-group">
-        <label for="relationship_director_verification_document_front">Front scan or photo</label>
+        <label for="relationship_director_verification_document_front">Front scan/photo</label>
         <input name="relationship_director_verification_document_front" id="relationship_director_verification_document_front" type="file" />
       </div>
       <div class="pure-control-group">
-        <label for="relationship_director_verification_document_back">Back scan or photo</label>
+        <label for="relationship_director_verification_document_back">Back scan/photo</label>
         <input name="relationship_director_verification_document_back" id="relationship_director_verification_document_back" type="file" />
       </div>
       <div class="pure-controls spaced-buttons">
@@ -48,6 +53,9 @@
   </template>
   <template id="unknown-error">
     <div class="error message">Error! An error occurred submitting the director's information</div>
+  </template>
+  <template id="upload-error">
+    <div class="error message">Error! An error occurred uploading document images</div>
   </template>
   <template id="invalid-relationship_director_verification_document_front">
     <div class="error message">Error! Invalid or missing document ID front scan</div>

@@ -1,4 +1,4 @@
-const countriesIndex = require('../../../../countries-index.json')
+const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
 
@@ -16,27 +16,7 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  req.query.all = true
-  const stripeCountries = await global.api.user.connect.CountrySpecs.get(req)
-  let countrySpec
-  for (const country of stripeCountries) {
-    country.name = countriesIndex[country.id]
-    if (country.id === stripeAccount.country) {
-      countrySpec = country
-    }
-  }
-  if (!countrySpec) {
-    throw new Error(`invalid-country-${stripeAccount.country}`)
-  }
-  const currencies = []
-  for (const currency in countrySpec.supported_bank_account_currencies) {
-    currencies.push({ name: currency.toUpperCase(), currency, object: 'currency' })
-  }
-  const countries = []
-  for (const country of stripeCountries) {
-    countries.push({ name: countriesIndex[country.id], code: country.id, object: 'country' })
-  }
-  req.data = { stripeAccount, stripeCountries, countries, currencies, countrySpec }
+  req.data = { stripeAccount }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -49,7 +29,7 @@ async function renderPage (req, res, messageTemplate) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-  navbar.setup(doc, req.data.stripeAccount, req.data.countrySpec)
+  navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
@@ -58,17 +38,18 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const selectedCountry = req.body ? req.body.country : req.data.countrySpec.id
-  for (const country of req.data.stripeCountries) {
-    if (country.id !== selectedCountry) {
-      const countryContainer = doc.getElementById(`${country.id}-container`)
+  const selectedCountry = req.body ? req.body.country : req.data.stripeAccount.country.toUpperCase()
+  for (const countrySpec of connect.countrySpecs) {
+    if (countrySpec.id !== selectedCountry) {
+      const countryContainer = doc.getElementById(`${countrySpec.id}-container`)
       if (countryContainer) {
         countryContainer.parentNode.removeChild(countryContainer)
       }
     }
   }
-  dashboard.HTML.renderList(doc, req.data.countries, 'country-option', 'country')
-  dashboard.HTML.renderList(doc, req.data.currencies, 'currency-option', 'currency')
+  dashboard.HTML.renderList(doc, connect.countrySpecs, 'country-option', 'country')
+  const currencies = connect.countryCurrencyIndex[selectedCountry]
+  dashboard.HTML.renderList(doc, currencies, 'currency-option', 'currency')
   if (req.body) {
     for (const field in req.body) {
       const element = doc.getElementById(field)
