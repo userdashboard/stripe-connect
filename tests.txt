@@ -718,18 +718,18 @@
       ✓ boolean
 
   /api/user/connect/delete-company-director
-    exception
-      exception
+    exceptions
+      invalid-directorid
         ✓ missing querystring directorid
         ✓ invalid querystring directorid
-    invalid-account
-      ✓ ineligible accessing account
+      invalid-account
+        ✓ ineligible accessing account
     returns
       ✓ boolean
 
   /api/user/connect/delete-stripe-account
     exceptions
-      exceptions
+      invalid-stripeid
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
@@ -738,7 +738,7 @@
       ✓ boolean
 
   /api/user/connect/payout
-    exception
+    exceptions
       invalid-payoutid
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
@@ -748,7 +748,7 @@
       ✓ array
 
   /api/user/connect/payouts-count
-    exception
+    exceptions
       invalid-payoutid
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
@@ -758,7 +758,7 @@
       ✓ integer
 
   /api/user/connect/payouts
-    exception
+    exceptions
       invalid-payoutid
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
@@ -842,7 +842,7 @@
       ✓ returns object for US registration
 
   /api/user/connect/stripe-account-payouts-count
-    exception
+    exceptions
       invalid-payoutid
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
@@ -852,7 +852,7 @@
       ✓ integer
 
   /api/user/connect/stripe-account-payouts
-    exception
+    exceptions
       invalid-payoutid
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
@@ -872,7 +872,7 @@
       ✓ object
 
   /api/user/connect/stripe-accounts-count
-    exception
+    exceptions
       invalid-payoutid
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
@@ -882,7 +882,7 @@
       ✓ integer
 
   /api/user/connect/stripe-accounts
-    exception
+    exceptions
       invalid-payoutid
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
