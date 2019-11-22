@@ -4,14 +4,15 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/country-specs', () => {
   describe('receives', () => {
-    it('optional querystring offset (integer)', async () => {
+     it('optional querystring offset (integer)', async () => {
       const offset = 1
+      global.delayDiskWrites = true
       const req = TestHelper.createRequest('/api/user/connect/country-specs?all=true')
       const countries = await req.get()
       const req2 = TestHelper.createRequest(`/api/user/connect/country-specs?offset=${offset}`)
       const countriesNow = await req2.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(countriesNow[i].id, countries[offset + i].id)
+        assert.strictEqual(countriesNow[i].id, countries[offset + i])
       }
     })
 

@@ -53,8 +53,9 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
   })
 
   describe('receives', () => {
-    it('optional querystring offset (integer)', async () => {
+     it('optional querystring offset (integer)', async () => {
       const offset = 1
+      global.delayDiskWrites = true
       const stripeAccounts = []
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
@@ -96,7 +97,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       req.session = administrator.session
       const stripeAccountsNow = await req.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(stripeAccountsNow[i].id, stripeAccounts[offset + i].id)
+        assert.strictEqual(stripeAccountsNow[i].id, stripeAccounts[offset + i])
       }
     })
 
@@ -186,9 +187,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       req.account = administrator.account
       req.session = administrator.session
       const stripeAccountsNow = await req.get()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        assert.strictEqual(stripeAccountsNow[i].id, stripeAccounts[i].id)
-      }
+      assert.strictEqual(stripeAccountsNow.length, stripeAccounts.length)
     })
   })
   describe('returns', () => {

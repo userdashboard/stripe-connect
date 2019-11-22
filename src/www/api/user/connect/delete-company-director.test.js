@@ -3,8 +3,8 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/delete-company-director', () => {
-  describe('exception', () => {
-    describe('exception', () => {
+  describe('exceptions', () => {
+    describe('invalid-directorid', () => {
       it('missing querystring directorid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/delete-company-director')

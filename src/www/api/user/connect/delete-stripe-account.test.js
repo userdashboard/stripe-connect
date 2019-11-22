@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/delete-stripe-account', () => {
   describe('exceptions', () => {
-    describe('exceptions', () => {
+    describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/delete-stripe-account')

@@ -4,8 +4,9 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/payouts', () => {
   describe('receives', () => {
-    it('optional querystring offset (integer)', async () => {
+     it('optional querystring offset (integer)', async () => {
       const offset = 1
+      global.delayDiskWrites = true
       const administrator = await TestHelper.createOwner()
       const payouts = []
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
@@ -42,7 +43,7 @@ describe('/api/administrator/connect/payouts', () => {
       req.session = administrator.session
       const payoutsNow = await req.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(payoutsNow[i].id, payouts[offset + i])
+        assert.strictEqual(payoutsNow[i], payouts[offset + i])
       }
     })
 
@@ -118,7 +119,7 @@ describe('/api/administrator/connect/payouts', () => {
       req.account = administrator.account
       req.session = administrator.session
       const payoutsNow = await req.get()
-      assert.strictEqual(payoutsNow.length, global.pageSize + 1)
+      assert.strictEqual(payoutsNow.length, payouts.length)
     })
   })
 

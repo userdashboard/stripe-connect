@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/stripe-accounts-count', () => {
-  describe('exception', () => {
+  describe('exceptions', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {
         const user = await TestHelper.createUser()

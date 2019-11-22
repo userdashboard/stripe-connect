@@ -4,7 +4,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/stripe-accounts', () => {
-  describe('exception', () => {
+  describe('exceptions', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {
         const user = await TestHelper.createUser()
@@ -54,8 +54,9 @@ describe('/api/user/connect/stripe-accounts', () => {
   })
 
   describe('receives', () => {
-    it('optional querystring offset (integer)', async () => {
+     it('optional querystring offset (integer)', async () => {
       const offset = 1
+      global.delayDiskWrites = true
       const stripeAccounts = []
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
@@ -70,7 +71,7 @@ describe('/api/user/connect/stripe-accounts', () => {
       req.session = user.session
       const stripeAccountsNow = await req.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(stripeAccountsNow[i].id, stripeAccounts[offset + i].id)
+        assert.strictEqual(stripeAccountsNow[i].id, stripeAccounts[offset + i])
       }
     })
 
@@ -106,9 +107,7 @@ describe('/api/user/connect/stripe-accounts', () => {
       req.account = user.account
       req.session = user.session
       const stripeAccountsNow = await req.get()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        assert.strictEqual(stripeAccountsNow[i].id, stripeAccounts[i].id)
-      }
+      assert.strictEqual(stripeAccountsNow.length, stripeAccounts.length)
     })
   })
 
