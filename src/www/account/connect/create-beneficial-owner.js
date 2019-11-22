@@ -56,13 +56,13 @@ async function renderPage (req, res, messageTemplate) {
   }
   dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
   if (req.method === 'GET') {
-    const selectedCountry = req.data.stripeAccount.country.toUpperCase()
+    const selectedCountry = req.data.stripeAccount.country
     const states = connect.countryDivisions[selectedCountry]
     dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
     dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
     return dashboard.Response.end(req, res, doc)
   } else if (req.body) {
-    const selectedCountry = req.body.relationship_owner_address_country || req.data.stripeAccount.country.toUpperCase()
+    const selectedCountry = req.body.relationship_owner_address_country || req.data.stripeAccount.country
     const states = connect.countryDivisions[selectedCountry]
     dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
     if (req.body.relationship_owner_address_state) {

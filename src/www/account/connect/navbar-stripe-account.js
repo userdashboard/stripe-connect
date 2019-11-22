@@ -30,7 +30,7 @@ module.exports = {
       editIndividual.parentNode.removeChild(editIndividual)
       const submitIndividual = template.getElementById('navbar-submit-individual')
       submitIndividual.parentNode.removeChild(submitIndividual)
-      if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
+      if (connect.euCountries.indexOf(stripeAccount.country) === -1) {
         const companyDirectors = template.getElementById('navbar-company-directors')
         companyDirectors.parentNode.removeChild(companyDirectors)
       }

@@ -12,7 +12,7 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
+    if (connect.euCountries.indexOf(stripeAccount.country) === -1) {
       throw new Error('invalid-stripe-account')
     }
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {

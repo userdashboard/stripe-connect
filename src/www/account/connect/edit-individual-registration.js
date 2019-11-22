@@ -115,7 +115,7 @@ async function renderPage (req, res, messageTemplate) {
   dashboard.HTML.renderList(doc, mccList, 'mcc-option', 'business_profile_mcc')
   dashboard.HTML.renderList(doc, connect.countryList, 'state-option', 'individual_address_country')
   if (req.method === 'GET') {
-    const selectedCountry = req.data.registration.country || req.data.stripeAccount.country.toUpperCase()
+    const selectedCountry = req.data.registration.country || req.data.stripeAccount.country
     const states = connect.countryDivisions[selectedCountry]
     dashboard.HTML.renderList(doc, states, 'state-option', 'individual_address_state')
     if (req.data.registration.individual_address_state) {

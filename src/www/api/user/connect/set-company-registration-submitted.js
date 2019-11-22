@@ -54,7 +54,7 @@ module.exports = {
         date: dashboard.Timestamp.now
       }
     }
-    if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
+    if (connect.euCountries.indexOf(stripeAccount.country) === -1) {
       accountInfo.company.directors_provided = true
     }
     const accountOpener = {

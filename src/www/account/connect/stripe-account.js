@@ -138,7 +138,7 @@ async function renderPage (req, res) {
   } else {
     if (req.data.stripeAccount.metadata.submitted ||
         req.data.stripeAccount.business_type === 'individual' ||
-        !euCountries[req.data.stripeAccount.country.toUpperCase()]) {
+        !euCountries[req.data.stripeAccount.country]) {
       removeElements.push('directors-container')
     } else {
       removeElements.push('directors-table')

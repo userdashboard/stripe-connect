@@ -18,7 +18,7 @@ async function beforeRequest (req) {
     stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  if (!connect.euCountries[stripeAccount.country.toUpperCase()]) {
+  if (connect.euCountries.indexOf(stripeAccount.country) === -1) {
     throw new Error('invalid-stripe-account')
   }
   const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')

@@ -38,7 +38,7 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const selectedCountry = req.body ? req.body.country : req.data.stripeAccount.country.toUpperCase()
+  const selectedCountry = req.body ? req.body.country : req.data.stripeAccount.country
   for (const countrySpec of connect.countrySpecs) {
     if (countrySpec.id !== selectedCountry) {
       const countryContainer = doc.getElementById(`${countrySpec.id}-container`)

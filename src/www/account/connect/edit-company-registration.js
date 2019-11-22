@@ -106,10 +106,10 @@ async function renderPage (req, res, messageTemplate) {
   if (req.method === 'GET') {
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_account_opener_address_country')
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'company_address_country')
-    const personalCountry = req.data.registration.relationship_account_opener_address_country || req.data.stripeAccount.country.toUpperCase()
+    const personalCountry = req.data.registration.relationship_account_opener_address_country || req.data.stripeAccount.country
     const personalStates = connect.countryDivisions[personalCountry]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_account_opener_address_state')
-    const companyCountry = req.data.registration.company_address_country || req.data.stripeAccount.country.toUpperCase()
+    const companyCountry = req.data.registration.company_address_country || req.data.stripeAccount.country
     const companyStates = connect.countryDivisions[companyCountry]
     dashboard.HTML.renderList(doc, companyStates, 'state-option', 'company_address_state')
     for (const field in req.data.registration) {
@@ -139,10 +139,10 @@ async function renderPage (req, res, messageTemplate) {
       doc.getElementById('relationship_account_opener_owner').setAttribute('checked', true)
     }
   } else if (req.body) {
-    const personalCountry = req.body.relationship_account_opener_address_country || req.data.registration.relationship_account_opener_address_country || req.data.stripeAccount.country.toUpperCase()
+    const personalCountry = req.body.relationship_account_opener_address_country || req.data.registration.relationship_account_opener_address_country || req.data.stripeAccount.country
     const personalStates = connect.countryDivisions[personalCountry]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_account_opener_address_state')
-    const companyCountry = req.body.company_address_country || req.data.stripeAccount.country.toUpperCase()
+    const companyCountry = req.body.company_address_country || req.data.stripeAccount.country
     const companyStates = connect.countryDivisions[companyCountry]
     dashboard.HTML.renderList(doc, companyStates, 'state-option', 'company_address_state')
     for (const field in req.body) {
