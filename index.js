@@ -35,15 +35,15 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
   } else {
     countrySpecs = await stripe.countrySpecs.list({ limit: 100 }, { api_key: process.env.STRIPE_KEY })
     countrySpecs = countrySpecs.data
-    countrySpecs.sort((a, b) => {
-      a.name = countryNameIndex[a.id]
-      b.name = countryNameIndex[b.id]
-      countrySpecIndex[a.id] = a
-      countrySpecIndex[b.id] = b
-      return a.id.toLowerCase() > b.id.toLowerCase() ? 1 : -1
-    })
     fs.writeFileSync(cachedCountrySpecs, JSON.stringify(countrySpecs))
   }
+  countrySpecs.sort((a, b) => {
+    a.name = countryNameIndex[a.id]
+    b.name = countryNameIndex[b.id]
+    countrySpecIndex[a.id] = a
+    countrySpecIndex[b.id] = b
+    return a.id.toLowerCase() > b.id.toLowerCase() ? 1 : -1
+  })
   const countryCurrencyIndex = {}
   for (const countrySpec of countrySpecs) {
     countryCurrencyIndex[countrySpec.id] = []
