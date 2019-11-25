@@ -27,6 +27,7 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
   }
   const fs = require('fs')
   const os = require('os')
+  const path = require('path')
   const cachedCountrySpecs = os.tmpdir() + '/stripe_country_specs.json'
   const countrySpecIndex = {}
   let countrySpecs
@@ -45,11 +46,17 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
     return a.id.toLowerCase() > b.id.toLowerCase() ? 1 : -1
   })
   const countryCurrencyIndex = {}
+  const kycRequirements = {}
   for (const countrySpec of countrySpecs) {
     countryCurrencyIndex[countrySpec.id] = []
     for (const currency in countrySpec.supported_bank_account_currencies) {
       countryCurrencyIndex[countrySpec.id].push({ name: currency.toUpperCase(), currency, object: 'currency' })
     }
+    const filePath = path.join(__dirname, `/kyc-requirements/${countrySpec.id}.json`)
+    if (!fs.existsSync(filePath)) {
+      continue
+    }
+    kycRequirements[countrySpec.id] = JSON.parse(fs.readFileSync(filePath).toString())
   }
   const countryDivisions = {}
   const raw = require('./countries-divisions.json')
@@ -68,7 +75,6 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
   }
 
   const merchantCategoryCodes = require('./merchant-category-codes.json')
-  
   module.exports = {
     countryList,
     countryDivisions,
@@ -76,10 +82,11 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
     countrySpecs,
     countrySpecIndex,
     countryCurrencyIndex,
+    kycRequirements,
     euCountries: ['AT', 'BE', 'DE', 'EE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PT', 'SE', 'SI', 'SK'],
     getMerchantCategoryCodes: (language) => {
       return merchantCategoryCodes[language || global.language] || merchantCategoryCodes.en
     },
-    MetaData: require('./src/meta-data.js')    
+    MetaData: require('./src/meta-data.js')
   }
 })()
