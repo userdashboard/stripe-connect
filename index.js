@@ -76,7 +76,7 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
     countrySpecs,
     countrySpecIndex,
     countryCurrencyIndex,
-    euCountries: ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE'],
+    euCountries: ['AT', 'BE', 'DE', 'EE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PT', 'SE', 'SI', 'SK'],
     getMerchantCategoryCodes: (language) => {
       return merchantCategoryCodes[language || global.language] || merchantCategoryCodes.en
     },
