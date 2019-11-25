@@ -1,4 +1,4 @@
-global.stripeAPIVersion = '2019-08-14'
+global.stripeAPIVersion = '2019-11-05'
 global.stripeJS = process.env.STRIPE_JS === 'false' ? false : parseInt(process.env.STRIPE_JS, 10)
 global.maximumStripeRetries = parseInt(process.env.MAXIMUM_STRIPE_RETRIES || '2', 10)
 global.connectWebhookEndPointSecret = global.connectWebhookEndPointSecret || process.env.CONNECT_WEBHOOK_ENDPOINT_SECRET

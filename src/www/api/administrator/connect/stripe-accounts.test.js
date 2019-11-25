@@ -5,7 +5,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/stripe-accounts', () => {
   describe('receives', () => {
-     it('optional querystring offset (integer)', async () => {
+    it('optional querystring offset (integer)', async () => {
       const offset = 1
       global.delayDiskWrites = true
       const stripeAccounts = []
@@ -26,21 +26,21 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_state: 'NY',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_state: 'NY',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -73,21 +73,21 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_state: 'NY',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_state: 'NY',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -117,21 +117,21 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_state: 'NY',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_state: 'NY',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -162,20 +162,20 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         })
       }
       const req = TestHelper.createRequest('/api/administrator/connect/stripe-accounts')
@@ -206,21 +206,21 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_state: 'NY',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_state: 'NY',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         })
       }
       const req = TestHelper.createRequest('/api/administrator/connect/stripe-accounts')

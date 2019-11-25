@@ -39,14 +39,14 @@
 //         company_address_postal_code: '01067',
 //         company_name: 'Company',
 //         company_tax_id: '8',
-//         relationship_account_opener_address_city: 'Berlin',
-//         relationship_account_opener_address_line1: '123 Sesame St',
-//         relationship_account_opener_address_postal_code: '01067',
-//         relationship_account_opener_dob_day: '1',
-//         relationship_account_opener_dob_month: '1',
-//         relationship_account_opener_dob_year: '1950',
-//         relationship_account_opener_first_name: user.profile.firstName,
-//         relationship_account_opener_last_name: user.profile.lastName
+//         relationship_representative_address_city: 'Berlin',
+//         relationship_representative_address_line1: '123 Sesame St',
+//         relationship_representative_address_postal_code: '01067',
+//         relationship_representative_dob_day: '1',
+//         relationship_representative_dob_month: '1',
+//         relationship_representative_dob_year: '1950',
+//         relationship_representative_first_name: user.profile.firstName,
+//         relationship_representative_last_name: user.profile.lastName
 //       })
 //       const owner = await TestHelper.createBeneficialOwner(user)
 //       const req = TestHelper.createRequest(`/api/user/connect/reupload-owner-identity-document?ownerid=${owner.ownerid}`)
@@ -75,14 +75,14 @@
 //         company_address_postal_code: '01067',
 //         company_name: 'Company',
 //         company_tax_id: '8',
-//         relationship_account_opener_address_city: 'Berlin',
-//         relationship_account_opener_address_line1: '123 Sesame St',
-//         relationship_account_opener_address_postal_code: '01067',
-//         relationship_account_opener_dob_day: '1',
-//         relationship_account_opener_dob_month: '1',
-//         relationship_account_opener_dob_year: '1950',
-//         relationship_account_opener_first_name: user.profile.firstName,
-//         relationship_account_opener_last_name: user.profile.lastName
+//         relationship_representative_address_city: 'Berlin',
+//         relationship_representative_address_line1: '123 Sesame St',
+//         relationship_representative_address_postal_code: '01067',
+//         relationship_representative_dob_day: '1',
+//         relationship_representative_dob_month: '1',
+//         relationship_representative_dob_year: '1950',
+//         relationship_representative_first_name: user.profile.firstName,
+//         relationship_representative_last_name: user.profile.lastName
 //       })
 //       await TestHelper.createExternalAccount(user, {
 //         currency: 'eur',

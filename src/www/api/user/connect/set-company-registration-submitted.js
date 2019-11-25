@@ -27,7 +27,7 @@ module.exports = {
     for (const field of requiredFields) {
       if (field === 'business_type' ||
         field === 'external_account' ||
-        field === 'relationship.account_opener' ||
+        field === 'relationship.representative' ||
         field === 'relationship.owner' ||
         field === 'tos_acceptance.date' ||
         field === 'relationship.director' ||
@@ -59,7 +59,7 @@ module.exports = {
     }
     const accountOpener = {
       relationship: {
-        account_opener: true
+        representative: true
       },
       verification: {
         document: {}
@@ -67,13 +67,13 @@ module.exports = {
       address: {},
       dob: {}
     }
-    if (registration.relationship_account_opener_title) {
-      accountOpener.relationship.title = registration.relationship_account_opener_title
+    if (registration.relationship_representative_title) {
+      accountOpener.relationship.title = registration.relationship_representative_title
     }
-    if (registration.relationship_account_opener_executive) {
+    if (registration.relationship_representative_executive) {
       accountOpener.relationship.executive = true
     }
-    if (registration.relationship_account_opener_director) {
+    if (registration.relationship_representative_director) {
       accountOpener.relationship.director = true
     }
     for (const field in registration) {
@@ -103,26 +103,26 @@ module.exports = {
         }
         continue
       }
-      if (field.startsWith('relationship_account_opener_')) {
-        if (field.startsWith('relationship_account_opener_address_kanji_')) {
-          const property = field.substring('relationship_account_opener_address_kanji_'.length)
+      if (field.startsWith('relationship_representative_')) {
+        if (field.startsWith('relationship_representative_address_kanji_')) {
+          const property = field.substring('relationship_representative_address_kanji_'.length)
           accountOpener.address_kanji = accountOpener.address_kanji || {}
           accountOpener.address_kanji[property] = registration[field]
-        } else if (field.startsWith('relationship_account_opener_address_kana_')) {
-          const property = field.substring('relationship_account_opener_address_kana_'.length)
+        } else if (field.startsWith('relationship_representative_address_kana_')) {
+          const property = field.substring('relationship_representative_address_kana_'.length)
           accountOpener.address_kana = accountOpener.address_kana || {}
           accountOpener.address_kana[property] = registration[field]
-        } else if (field.startsWith('relationship_account_opener_address_')) {
-          const property = field.substring('relationship_account_opener_address_'.length)
+        } else if (field.startsWith('relationship_representative_address_')) {
+          const property = field.substring('relationship_representative_address_'.length)
           accountOpener.address[property] = registration[field]
-        } else if (field.startsWith('relationship_account_opener_verification_document_')) {
-          const property = field.substring('relationship_account_opener_verification_document_'.length)
+        } else if (field.startsWith('relationship_representative_verification_document_')) {
+          const property = field.substring('relationship_representative_verification_document_'.length)
           accountOpener.verification.document[property] = registration[field]
-        } else if (field.startsWith('relationship_account_opener_dob_')) {
-          const property = field.substring('relationship_account_opener_dob_'.length)
+        } else if (field.startsWith('relationship_representative_dob_')) {
+          const property = field.substring('relationship_representative_dob_'.length)
           accountOpener.dob[property] = registration[field]
         } else {
-          const property = field.substring('relationship_account_opener_'.length)
+          const property = field.substring('relationship_representative_'.length)
           if (property === 'title' || property === 'executive' || property === 'director') {
             continue
           }

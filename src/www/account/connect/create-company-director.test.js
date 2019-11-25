@@ -31,18 +31,18 @@ describe('/account/connect/create-company-director', () => {
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_address_city: 'Berlin',
-        relationship_account_opener_address_line1: 'First Street',
-        relationship_account_opener_address_postal_code: '01067'
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_line1: 'First Street',
+        relationship_representative_address_postal_code: '01067'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -129,7 +129,7 @@ describe('/account/connect/create-company-director', () => {
           delete (req.uploads[field])
         }
         if (req.body[field]) {
-          delete (req.body[field])
+          req.body[field] = ''
         }
         const page = await req.post()
         const doc = TestHelper.extractDoc(page)
@@ -207,9 +207,8 @@ describe('/account/connect/create-company-director', () => {
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
   })
 })

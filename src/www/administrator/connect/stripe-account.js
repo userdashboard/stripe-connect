@@ -1,3 +1,4 @@
+const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
@@ -62,7 +63,7 @@ async function renderPage (req, res) {
       removeElements.push('blank-name', 'business-registration-name')
     } else {
       removeElements.push('business-name')
-      if(req.data.registration.company_name) {
+      if (req.data.registration.company_name) {
         removeElements.push('blank-name')
       } else {
         removeElements.push('business-registration-name')

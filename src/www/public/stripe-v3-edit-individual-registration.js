@@ -32,7 +32,7 @@ function updateAccount (e) {
   }
   var accountOpener = {
     relationship: {
-      account_opener: true
+      representative: true
     },
     address: {
       line1: document.getElementById('individual_address_line1').value,
@@ -57,11 +57,11 @@ function updateAccount (e) {
       return window.renderError('invalid-individual_' + field)
     }
   }
-  var idNumberField = document.getElementById('relationship_account_opener_id_number')
+  var idNumberField = document.getElementById('relationship_representative_id_number')
   if (idNumberField) {
     accountOpener.id_number = idNumberField.value
   } else if (idNumberField.getAttribute('data-existing') !== 'true') {
-    return window.renderError('invalid-relationship_account_opener_id_number')
+    return window.renderError('invalid-relationship_representative_id_number')
   }
   for (field in accountOpener.address) {
     if (!accountOpener.address[field]) {

@@ -1,7 +1,6 @@
 const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 
-
 module.exports = {
   before: beforeRequest,
   get: renderPage,
@@ -40,13 +39,13 @@ async function renderPage (req, res, messageTemplate) {
     stripeJS.parentNode.removeChild(stripeJS)
     const clientJS = doc.getElementById('client-v3')
     clientJS.parentNode.removeChild(clientJS)
-    const connectJS = doc.getElementById('connect-js')
+    const connectJS = doc.getElementById('connect-v3')
     connectJS.parentNode.removeChild(connectJS)
-    const handlerJS = doc.getElementById('handler-js')
+    const handlerJS = doc.getElementById('handler-v3')
     handlerJS.parentNode.removeChild(handlerJS)
   } else {
     res.setHeader('content-security-policy',
-    'default-src * \'unsafe-inline\'; ' +
+      'default-src * \'unsafe-inline\'; ' +
     `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
     `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/stripe-helper.js 'unsafe-inline' 'unsafe-eval'; ` +
     'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
@@ -74,7 +73,6 @@ async function renderPage (req, res, messageTemplate) {
 }
 
 async function submitForm (req, res) {
-  console.log(req.body)
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }

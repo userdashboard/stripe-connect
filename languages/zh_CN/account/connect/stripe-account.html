@@ -55,6 +55,14 @@
         <a id="update-company-registration-link" class="pure-button" href="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
       </p>
     </div>    
+    <div id="company-representative-container">
+      <h2>Company representative</h2>
+      <p>You must submit new representative information if the specified person leaves or no longer represents the company.  New representatives are subject to identify verification.</p>
+      <p class="pure-button-group" role="group" id="registration-options">
+        <a id="start-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/edit-company-representative?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add representative</a>
+        <a id="update-company-representative-link" class="pure-button" href="/account/connect/edit-company-representative?stripeid=${stripeAccount.id}&returnURL=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Change representative</a>
+      </p>
+    </div>
     <div id="owners-container">
       <h2>Other beneficial owners information</h2>
       <p>You must provide documentation for anyone else owning a substantial (25+) percent of the company or in charge of the company, finances or operations.</p>

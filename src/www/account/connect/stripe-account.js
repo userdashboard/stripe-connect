@@ -36,7 +36,7 @@ async function beforeRequest (req) {
   if (fieldsNeeded) {
     for (const field of fieldsNeeded) {
       if (field === 'external_account' ||
-          field === 'relationship.account_opener' ||
+          field === 'relationship.representative' ||
           field === 'relationship.owner' ||
           field === 'business_type' ||
           field === 'tos_acceptance.ip' ||
@@ -89,7 +89,7 @@ async function renderPage (req, res) {
       removeElements.push('blank-name', 'business-registration-name')
     } else {
       removeElements.push('business-name')
-      if(req.data.registration.company_name) {
+      if (req.data.registration.company_name) {
         removeElements.push('blank-name')
       } else {
         removeElements.push('business-registration-name')

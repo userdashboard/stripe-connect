@@ -12,6 +12,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-ownerid')
   }
   const owner = await global.api.user.connect.BeneficialOwner.get(req)
+  owner.stripePublishableKey = global.stripePublishableKey
   req.query.stripeid = owner.stripeid
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted) {
@@ -35,13 +36,13 @@ async function renderPage (req, res, messageTemplate) {
     stripeJS.parentNode.removeChild(stripeJS)
     const clientJS = doc.getElementById('client-v3')
     clientJS.parentNode.removeChild(clientJS)
-    const connectJS = doc.getElementById('connect-js')
+    const connectJS = doc.getElementById('connect-v3')
     connectJS.parentNode.removeChild(connectJS)
-    const handlerJS = doc.getElementById('handler-js')
+    const handlerJS = doc.getElementById('handler-v3')
     handlerJS.parentNode.removeChild(handlerJS)
   } else {
     res.setHeader('content-security-policy',
-    'default-src * \'unsafe-inline\'; ' +
+      'default-src * \'unsafe-inline\'; ' +
     `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
     `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/stripe-helper.js 'unsafe-inline' 'unsafe-eval'; ` +
     'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
@@ -50,12 +51,12 @@ async function renderPage (req, res, messageTemplate) {
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
-      const submitForm = doc.getElementById('submit-form')
+      const submitForm = doc.getElementById('form-container')
       submitForm.parentNode.removeChild(submitForm)
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const selectedCountry = req.body ? req.body.relationship_owner_address_country || req.data.owner.country : req.data.owner.country
+  const selectedCountry = req.body ? req.body.relationship_owner_address_country || req.data.owner.relationship_owner_address_country : req.data.owner.relationship_owner_address_country
   const states = connect.countryDivisions[selectedCountry]
   dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
   const country = doc.getElementById('relationship_owner_address_country')

@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
+const connect = require('../../../../index.js')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/edit-company-registration', () => {
@@ -35,120 +36,26 @@ describe('/account/connect/edit-company-registration', () => {
       }
       assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
-
-    it('should reject invalid personal address country', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        relationship_account_opener_address_country: 'invalid'
-      }
-      await req.route.api.before(req)
-      assert.strictEqual(req.error, 'invalid-relationship_account_opener_address_country')
-    })
-
-    it('should reject invalid company address country', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        company_address_country: 'invalid'
-      }
-      await req.route.api.before(req)
-      assert.strictEqual(req.error, 'invalid-company_address_country')
-    })
-
-    it('should bind application CountrySpec to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AU'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.applicationCountry.id, 'AU')
-    })
-
-    it('should bind personal address country to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AU'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.personalAddress.code, 'AU')
-    })
-
-    it('should bind posted personal address country to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AU'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        relationship_account_opener_address_country: 'CA'
-      }
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.personalAddress.code, 'CA')
-    })
-
-    it('should bind company address country to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AU'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.companyAddressCountry.code, 'AU')
-    })
-
-    it('should bind posted company address country to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AU'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        company_address_country: 'GB'
-      }
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.companyAddressCountry.code, 'GB')
-    })
   })
 
   describe('EditCompanyRegistration#GET', () => {
     async function testRequiredFieldInputsExist (req, stripeAccount) {
       const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
+      const countrySpec = await connect.countrySpecIndex[stripeAccount.country]
+      const individualFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
+      for (const field of individualFields) {
+        if (field === 'individual.verification.document') {
+          fieldsNeeded.push('relationship.representative.verification.document.front', 'relationship.representative.verification.document.back')
+          continue
+        }
+        fieldsNeeded.push(field.replace('individual.', 'relationship.representative.'))
+      }
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       for (const field of fieldsNeeded) {
         if (field === 'external_account' ||
           field === 'relationship.owner' ||
-          field === 'relationship.account_opener' ||
+          field === 'relationship.representative' ||
           field === 'business_type' ||
           field === 'tos_acceptance.date' ||
           field === 'tos_acceptance.ip' ||
@@ -157,8 +64,10 @@ describe('/account/connect/edit-company-registration', () => {
           continue
         }
         const input = doc.getElementById(field.split('.').join('_'))
-        if (input.attr.name === 'relationship_account_opener_address_state' || input.attr.name === 'relationship_account_opener_address_country' ||
-          input.attr.name === 'company_address_state' || input.attr.name === 'company_address_country' ||
+        if (input.attr.name === 'relationship_representative_address_state' ||
+          input.attr.name === 'relationship_representative_address_country' ||
+          input.attr.name === 'company_address_state' ||
+          input.attr.name === 'company_address_country' ||
           input.attr.name === 'business_profile_mcc') {
           assert.strictEqual(input.tag, 'select')
         } else if (input.attr.id === 'gender') {
@@ -466,6 +375,12 @@ describe('/account/connect/edit-company-registration', () => {
       const body = JSON.stringify(req.body)
       const fields = Object.keys(req.body)
       for (const field of fields) {
+        if (field.endsWith('_title') ||
+            field.endsWith('_executive') ||
+            field.endsWith('_owner') ||
+            field.endsWith('_director')) {
+          continue
+        }
         req.body = JSON.parse(body)
         req.body[field] = ''
         const page = await req.post()
@@ -512,18 +427,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_name: 'Company',
         company_tax_id: '8',
         company_address_city: 'Vienna',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Vienna',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vienna',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020'
       }
       await testEachFieldAsNull(req)
     })
@@ -544,25 +459,24 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_country: 'AT',
-        relationship_account_opener_address_city: 'Vienna',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_country: 'AT',
+        relationship_representative_address_city: 'Vienna',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject AU invalid fields', async () => {
@@ -581,18 +495,19 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '4000',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Brisbane',
-        relationship_account_opener_address_line1: '845 Oxford St',
-        relationship_account_opener_address_postal_code: '4000'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Brisbane',
+        relationship_representative_address_state: 'QLD',
+        relationship_representative_address_line1: '845 Oxford St',
+        relationship_representative_address_postal_code: '4000'
       }
       await testEachFieldAsNull(req)
     })
@@ -613,24 +528,24 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '4000',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Brisbane',
-        relationship_account_opener_address_line1: '845 Oxford St',
-        relationship_account_opener_address_postal_code: '4000'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Brisbane',
+        relationship_representative_address_state: 'QLD',
+        relationship_representative_address_line1: '845 Oxford St',
+        relationship_representative_address_postal_code: '4000'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject BE invalid fields', async () => {
@@ -648,18 +563,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Brussels',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Brussels',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -679,24 +594,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Brussels',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Brussels',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject CA invalid fields', async () => {
@@ -715,18 +629,20 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: 'V5K 0A1',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Vancouver',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: 'V5K 0A1'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_id_number: '000000000',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_state: 'BC',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1'
       }
       await testEachFieldAsNull(req)
     })
@@ -747,25 +663,25 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: 'V5K 0A1',
         company_name: 'Company',
         company_tax_id: '8',
-        // relationship_account_opener_id_number: '000000000',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Vancouver',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: 'V5K 0A1'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_state: 'BC',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject CH invalid fields', async () => {
@@ -783,18 +699,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Bern',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Bern',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -814,24 +730,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Bern',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Bern',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject DE invalid fields', async () => {
@@ -849,18 +764,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '01067',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Berlin',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '01067',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '01067',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -880,24 +795,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '01067',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Berlin',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '01067',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '01067',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject DK invalid fields', async () => {
@@ -915,18 +829,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1000',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Copenhagen',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1000',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Copenhagen',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1000',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -946,24 +860,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1000',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Copenhagen',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1000',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Copenhagen',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1000',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject ES invalid fields', async () => {
@@ -981,18 +894,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '03179',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Madrid',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '03179',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Madrid',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '03179',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1012,24 +925,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '03179',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Madrid',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '03179',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Madrid',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '03179',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject FI invalid fields', async () => {
@@ -1047,18 +959,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '00990',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Helsinki',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00990',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Helsinki',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00990',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1078,24 +990,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '00990',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Helsinki',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00990',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Helsinki',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00990',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject FR invalid fields', async () => {
@@ -1113,18 +1024,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '75001',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Paris',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '75001',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Paris',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '75001',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1144,24 +1055,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '75001',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Paris',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '75001',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Paris',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '75001',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject GB invalid fields', async () => {
@@ -1179,18 +1089,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: 'EC1A 1AA',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'London',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: 'EC1A 1AA',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'London',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'EC1A 1AA',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1210,24 +1120,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: 'EC1A 1AA',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'London',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: 'EC1A 1AA',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'London',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'EC1A 1AA',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject HK invalid fields', async () => {
@@ -1244,18 +1153,19 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Hong Kong',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '999077'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Hong Kong',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '999077'
       }
       await testEachFieldAsNull(req)
     })
@@ -1274,24 +1184,24 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Hong Kong',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '999077'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Hong Kong',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '999077'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject IE invalid fields', async () => {
@@ -1309,18 +1219,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Dublin',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_postal_code: 'Dublin 1'
+        relationship_representative_address_city: 'Dublin',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_postal_code: 'Dublin 1'
       }
       await testEachFieldAsNull(req)
     })
@@ -1340,24 +1250,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Dublin',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_postal_code: 'Dublin 1'
+        relationship_representative_address_city: 'Dublin',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_postal_code: 'Dublin 1'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject IT invalid fields', async () => {
@@ -1375,18 +1284,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '00010',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Rome',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00010',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Rome',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00010',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1406,24 +1315,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '00010',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Rome',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00010',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Rome',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00010',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject JP invalid fields', async () => {
@@ -1451,30 +1359,30 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
         company_address_kanji_line1: '２７－１５',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_gender: 'female',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_account_opener_address_kana_line1: '27-15',
-        relationship_account_opener_address_kana_postal_code: '1500001',
-        relationship_account_opener_first_name_kanji: '東京都',
-        relationship_account_opener_last_name_kanji: '東京都',
-        relationship_account_opener_address_kanji_postal_code: '1500001',
-        relationship_account_opener_address_kanji_state: '東京都',
-        relationship_account_opener_address_kanji_city: '渋谷区',
-        relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-        relationship_account_opener_address_kanji_line1: '２７－１５'
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_gender: 'female',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_last_name_kanji: '東京都',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
+        relationship_representative_address_kanji_line1: '２７－１５'
       }
       await testEachFieldAsNull(req)
     })
@@ -1504,36 +1412,35 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
         company_address_kanji_line1: '２７－１５',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_gender: 'female',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_account_opener_address_kana_line1: '27-15',
-        relationship_account_opener_address_kana_postal_code: '1500001',
-        relationship_account_opener_first_name_kanji: '東京都',
-        relationship_account_opener_last_name_kanji: '東京都',
-        relationship_account_opener_address_kanji_postal_code: '1500001',
-        relationship_account_opener_address_kanji_state: '東京都',
-        relationship_account_opener_address_kanji_city: '渋谷区',
-        relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-        relationship_account_opener_address_kanji_line1: '２７－１５'
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_gender: 'female',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_last_name_kanji: '東京都',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
+        relationship_representative_address_kanji_line1: '２７－１５'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject LU invalid fields', async () => {
@@ -1551,18 +1458,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1623',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Luxemburg',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1623',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Luxemburg',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1623',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1582,24 +1489,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1623',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Luxemburg',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1623',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Luxemburg',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1623',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject NL invalid fields', async () => {
@@ -1617,18 +1523,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1071 JA',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Amsterdam',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1071 JA',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Amsterdam',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1071 JA',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1648,24 +1554,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1071 JA',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Amsterdam',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1071 JA',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Amsterdam',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1071 JA',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject NO invalid fields', async () => {
@@ -1683,18 +1588,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '0001',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Oslo',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '0001',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Oslo',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '0001',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1714,24 +1619,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '0001',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Oslo',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '0001',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Oslo',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '0001',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject NZ invalid fields', async () => {
@@ -1749,18 +1653,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '6011',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Auckland',
-        relationship_account_opener_address_postal_code: '6011',
-        relationship_account_opener_address_line1: '844 Fleet Street'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Auckland',
+        relationship_representative_address_postal_code: '6011',
+        relationship_representative_address_line1: '844 Fleet Street'
       }
       await testEachFieldAsNull(req)
     })
@@ -1780,24 +1684,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '6011',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Auckland',
-        relationship_account_opener_address_postal_code: '6011',
-        relationship_account_opener_address_line1: '844 Fleet Street'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Auckland',
+        relationship_representative_address_postal_code: '6011',
+        relationship_representative_address_line1: '844 Fleet Street'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject PT invalid fields', async () => {
@@ -1815,18 +1718,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '4520',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Lisbon',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '4520',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Lisbon',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '4520',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1846,24 +1749,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '4520',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Lisbon',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '4520',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Lisbon',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '4520',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject SE invalid fields', async () => {
@@ -1881,18 +1783,18 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '00150',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Stockholm',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00150',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Stockholm',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00150',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       await testEachFieldAsNull(req)
     })
@@ -1912,24 +1814,23 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '00150',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Stockholm',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00150',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Stockholm',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00150',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject SG invalid fields', async () => {
@@ -1946,18 +1847,19 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '339696',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '339696',
-        relationship_account_opener_address_city: 'Singapore'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '339696',
+        relationship_representative_address_city: 'Singapore'
       }
       await testEachFieldAsNull(req)
     })
@@ -1976,24 +1878,24 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '339696',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '339696',
-        relationship_account_opener_address_city: 'Singapore'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '339696',
+        relationship_representative_address_city: 'Singapore'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject US invalid fields', async () => {
@@ -2015,20 +1917,21 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_state: 'NY',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        // relationship_account_opener_id_number: '000000000',
-        relationship_account_opener_ssn_last_4: '0000',
-        relationship_account_opener_address_city: 'New York',
-        relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_id_number: '000000000',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
       }
       await testEachFieldAsNull(req)
     })
@@ -2052,26 +1955,26 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_state: 'NY',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        // relationship_account_opener_id_number: '000000000',
-        relationship_account_opener_ssn_last_4: '0000',
-        relationship_account_opener_address_city: 'New York',
-        relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_id_number: '000000000',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
   })
 })

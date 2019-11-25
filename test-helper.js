@@ -110,8 +110,8 @@ async function createStripeRegistration (user, properties, uploads) {
     req.uploads.individual_verification_document_front = req.uploads.individual_verification_document_front || module.exports['success_id_scan_front.png']
     req.uploads.individual_verification_document_back = req.uploads.individual_verification_document_back || module.exports['success_id_scan_back.png']
   } else {
-    req.uploads.relationship_account_opener_verification_document_front = req.uploads.relationship_account_opener_verification_document_front || module.exports['success_id_scan_front.png']
-    req.uploads.relationship_account_opener_verification_document_back = req.uploads.relationship_account_opener_verification_document_back || module.exports['success_id_scan_back.png']
+    req.uploads.relationship_representative_verification_document_front = req.uploads.relationship_representative_verification_document_front || module.exports['success_id_scan_front.png']
+    req.uploads.relationship_representative_verification_document_back = req.uploads.relationship_representative_verification_document_back || module.exports['success_id_scan_back.png']
   }
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()

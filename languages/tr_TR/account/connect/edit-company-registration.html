@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/public/content-additional.css" />
     <link rel="stylesheet" href="/public/connect.css?999" />
     <script id="stripe-v3" src="https://js.stripe.com/v3/"></script>
-    <script id="connect-js" src="/public/connect.js"></script>
+    <script id="connect-v3" src="/public/connect.js"></script>
     <script id="handler-v3" src="/public/stripe-v3-edit-company-registration.js"></script>
     <script id="client-v3">
       window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
@@ -17,433 +17,174 @@
   <body class="entry"> 
     <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}">
       <input type="hidden" name="token" id="token" />
-      <h1>Stripe Connect registration</h1>
+      <h1>Edit company registration</h1>
       <div id="message-container"></div>
-      <h2>Company information</h2>
-      <div class="pure-g">
-        <div class="pure-u-12-24">
-          <div id="company_name-container" class="pure-control-group">
-            <a name="company_name-anchor"></a>
-            <label for="company_name">Business name</label>
-            <input require="require" id="company_name" name="company_name" type="text" maxlength="50" />
-          </div>
-        </div>
-        <div class="pure-u-1-24"></div>
-        <div class="pure-u-11-24">
-          <div id="company_tax_id-container" class="pure-control-group">
-            <a name="company_tax_id-anchor"></a>
-            <label for="company_tax_id">Tax ID number</label>
-            <input require="require" id="company_tax_id" name="company_tax_id" type="text" maxlength="50" />
-          </div>
-        </div>
-      </div>
-      <div class="pure-g">
-        <div class="pure-u-12-24">
-          <div id="business_profile_url-container" class="pure-control-group">
-            <a name="business_profile_url-anchor"></a>
-            <label for="business_profile_url">Website URL</label>
-            <input require="require" id="business_profile_url" name="business_profile_url" type="text" maxlength="50" />
-          </div>
-        </div>
-        <div class="pure-u-1-24"></div>
-        <div class="pure-u-11-24">
-          <div id="company_phone-container" class="pure-control-group">
-            <a name="company_phone-anchor"></a>
-            <label for="company_phone">Phone number</label>
-            <input require="require" id="company_phone" name="company_phone" type="text" maxlength="50" />
-          </div>
-        </div>
-      </div>
-      <div id="business_profile_mcc-container" class="pure-control-group">
-        <a name="business_profile_mcc-anchor"></a>
-        <label for="business_profile_mcc">Merchant category code</label>
-        <select id="business_profile_mcc" name="business_profile_mcc">
-          <option value="">Select the code for your business</option>
-        </select>
-      </div>
-      <div id="kana-company-information-container">
-        <h2>Kana company information</h2>
+      <div id="form-container">
         <div class="pure-g">
-          <div class="pure-u-1-2">
-            <div class="pure-control-group">
-              <a name="company_name_kana-anchor"></a>
-              <label for="company_name_kana">Business name</label>
-              <input require="require" id="company_name_kana" name="company_name_kana" type="text" maxlength="50" />
+          <div class="pure-u-12-24">
+            <div id="company_name-container" class="pure-control-group">
+              <a name="company_name-anchor"></a>
+              <label for="company_name">Business name</label>
+              <input require="require" id="company_name" name="company_name" type="text" maxlength="50" />
+            </div>
+          </div>
+          <div class="pure-u-1-24"></div>
+          <div class="pure-u-11-24">
+            <div id="company_tax_id-container" class="pure-control-group">
+              <a name="company_tax_id-anchor"></a>
+              <label for="company_tax_id">Tax ID number</label>
+              <input require="require" id="company_tax_id" name="company_tax_id" type="text" maxlength="50" />
             </div>
           </div>
         </div>
-      </div>
-      <div id="kanji-company-information-container">
-        <h2>Kanji company information</h2>
-        <div class="pure-g">
+        <div id="JP-company-name-container" class="pure-g">
+          <div class="pure-u-1-2">
+            <div class="pure-control-group">
+              <a name="company_name_kana-anchor"></a>
+              <label for="company_name_kana">Kana business name</label>
+              <input require="require" id="company_name_kana" name="company_name_kana" type="text" maxlength="50" />
+            </div>
+          </div>
           <div class="pure-u-1-2">
             <div class="pure-control-group">
               <a name="company_name_kanji-anchor"></a>
-              <label for="company_name_kanji">Business name</label>
+              <label for="company_name_kanji">Kanji business name</label>
               <input require="require" id="company_name_kanji" name="company_name_kanji" type="text" maxlength="50" />
             </div>
           </div>
         </div>
-      </div>
-      <div id="company-address-container">
-        <h2>Company address</h2>
-        <div id="company_address_line1-container" class="pure-control-group">
-          <a name="company_address_line1-anchor"></a>
-          <label for="company_address_line1">Line 1</label>
-          <input class="full-width" require="require" id="company_address_line1" name="company_address_line1" type="text" maxlength="100" />
-        </div>
-        <div id="company_address_line2-container" class="pure-control-group">
-          <a name="company_address_line2-anchor"></a>
-          <label for="company_address_line2">Line 2</label>
-          <input class="full-width" require="require" id="company_address_line2" name="company_address_line2" type="text" maxlength="100" />
-        </div>
-        <div id="company_address_city-container" class="pure-control-group">
-          <a name="company_address_city-anchor"></a>
-          <label for="company_address_city">City</label>
-          <input class="full-width" require="require" id="company_address_city" name="company_address_city" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <div class="pure-g">
-            <div id="company_address_state-container" class="pure-u-16-24">
-              <a name="company_address_state-anchor"></a>
-              <label for="company_address_state">State or province</label>
-              <select id="company_address_state" name="company_address_state">
-                <option value="">Select</option>
-              </select>
-            </div>
-            <div class="pure-u-1-24"></div>
-            <div id="company_address_postal_code-container" class="pure-u-7-24">
-              <a name="company_address_postal_code-anchor"></a>
-              <label for="company_address_postal_code">ZIP</label>
-              <input class="full-width" require="require" id="company_address_postal_code" name="company_address_postal_code" type="text" maxlength="50" />
-            </div>
-          </div>
-        </div>
-        <div id="company_address_country-container" class="pure-control-group">
-          <div class="pure-g">
-            <div class="pure-u-16-24">
-              <a name="company_address_country-anchor"></a>
-              <label for="company_address_country">Country</label>
-              <select name="company_address_country" id="company_address_country">
-                <option value="">Select country</option>
-              </select>
-            </div>
-            <div class="pure-u-1-24"></div>
-            <div class="pure-u-7-24">
-              <label>&nbsp;</label>
-              <button name="refresh" value="true" class="pure-button">Reload states</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="kana-company-address-container">
-        <h2>Kana company address</h2>
-        <div class="pure-control-group">
-          <a name="company_address_kana_line1-anchor"></a>
-          <label for="company_address_kana_line1">Line 1</label>
-          <input class="full-width" require="require" id="company_address_kana_line1" name="company_address_kana_line1" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="company_address_kana_city-anchor"></a>
-          <label for="company_address_kana_city">City</label>
-          <input class="full-width" require="require" id="company_address_kana_city" name="company_address_kana_city" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="company_address_kana_town-anchor"></a>
-          <label for="company_address_kana_town">Town</label>
-          <input class="full-width" require="require" id="company_address_kana_town" name="company_address_kana_town" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="company_address_kana_state-anchor"></a>
-          <label for="company_address_kana_state">State</label>
-          <input class="full-width" require="require" id="company_address_kana_state" name="company_address_kana_state" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="company_address_kana_postal_code-anchor"></a>
-          <label for="company_address_kana_postal_code">Postal code</label>
-          <input class="full-width" require="require" id="company_address_kana_postal_code" name="company_address_kana_postal_code" type="text" maxlength="100" />
-        </div>
-      </div>
-      <div id="kanji-company-address-container">
-        <h2>Kanji company address</h2>
-        <div class="pure-control-group">
-          <a name="company_address_kanji_line1-anchor"></a>
-          <label for="company_address_kanji_line1">Line 1</label>
-          <input class="full-width" require="require" id="company_address_kanji_line1" name="company_address_kanji_line1" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <label for="company_address_kana_line1">City</label>
-          <a name="company_address_kana_line1-anchor"></a>
-          <input class="full-width" require="require" id="company_address_kanji_city" name="company_address_kanji_city" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <label for="company_address_kana_line1">Town</label>
-          <a name="company_address_kana_line1-anchor"></a>
-          <input class="full-width" require="require" id="company_address_kanji_town" name="company_address_kanji_town" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <label for="company_address_kana_line1">State</label>
-          <a name="company_address_kana_line1-anchor"></a>
-          <input class="full-width" require="require" id="company_address_kanji_state" name="company_address_kanji_state" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <label for="company_address_kana_line1">Postal code</label>
-          <a name="company_address_kana_line1-anchor"></a>
-          <input class="full-width" require="require" id="company_address_kanji_postal_code" name="company_address_kanji_postal_code" type="text" maxlength="100" />
-        </div>
-      </div>
-      <h2>Relationship to company</h2>
-      <div class="pure-control-group">
-        <a name="relationship_account_opener_executive-anchor"></a>
-        <a name="relationship_account_opener_director-anchor"></a>
-        <a name="relationship_account_opener_owner-anchor"></a>
-        <div class="pure-checkbox">
-          <label>
-            <span>
-              <input type="checkbox" id="relationship_account_opener_executive" name="relationship_account_opener_executive" value="true" />
-            </span> 
-            Executive
-          </label>
-        </div>
-        <div class="pure-checkbox">
-          <label>
-            <span>
-             <input type="checkbox" id="relationship_account_opener_director" name="relationship_account_opener_director" value="true" /> 
-            </span>
-            Director
-          </label>
-        </div>
-        <div class="pure-checkbox">
-          <label>
-            <span>
-              <input type="checkbox" id="relationship_account_opener_owner" name="relationship_account_opener_owner" value="true" />
-            </span> 
-            Owner
-          </label>
-        </div>
-      </div> 
-      <div class="pure-control-group">
-        <a name="relationship_account_opener_title-anchor"></a>
-        <label for="relationship_account_opener_title">Title (if any)</label>
-        <input class="full-width" require="require" id="relationship_account_opener_title" name="relationship_account_opener_title" type="text" maxlength="100" />
-      </div>
-      <h2>Personal information</h2>
-      <div id="personal-information-container">
         <div class="pure-g">
           <div class="pure-u-12-24">
-            <div id="relationship_account_opener_first_name-container" class="pure-control-group">
-              <a name="relationship_account_opener_first_name-anchor"></a>
-              <label for="relationship_account_opener_first_name">First name</label>
-              <input class="full-width" require="require" id="relationship_account_opener_first_name" name="relationship_account_opener_first_name" type="text" maxlength="50" />
+            <div id="business_profile_url-container" class="pure-control-group">
+              <a name="business_profile_url-anchor"></a>
+              <label for="business_profile_url">Website URL</label>
+              <input require="require" id="business_profile_url" name="business_profile_url" type="text" maxlength="50" />
             </div>
           </div>
           <div class="pure-u-1-24"></div>
           <div class="pure-u-11-24">
-            <div id="relationship_account_opener_last_name-container" class="pure-control-group">
-              <a name="relationship_account_opener_last_name-anchor"></a>
-              <label for="relationship_account_opener_last_name">Last name</label>
-              <input class="full-width" require="require" id="relationship_account_opener_last_name" name="relationship_account_opener_last_name" type="text" maxlength="50" />
+            <div id="company_phone-container" class="pure-control-group">
+              <a name="company_phone-anchor"></a>
+              <label for="company_phone">Phone number</label>
+              <input require="require" id="company_phone" name="company_phone" type="text" maxlength="50" />
             </div>
           </div>
         </div>
-        <div class="pure-g">
-          <div class="pure-u-12-24">
-            <div class="pure-control-group">
-              <a name="relationship_account_opener_email-anchor"></a>
-              <label for="relationship_account_opener_email">Email address</label>
-              <input class="full-width" require="require" id="relationship_account_opener_email" name="relationship_account_opener_email" type="text" maxlength="100" />
+        <div id="business_profile_mcc-container" class="pure-control-group">
+          <a name="business_profile_mcc-anchor"></a>
+          <label for="business_profile_mcc">Merchant category code</label>
+          <select id="business_profile_mcc" name="business_profile_mcc">
+            <option value="">Select the code for your business</option>
+          </select>
+        </div>
+        <div id="company-address-container">
+          <h2>Company address</h2>
+          <div id="company_address_line1-container" class="pure-control-group">
+            <a name="company_address_line1-anchor"></a>
+            <label for="company_address_line1">Line 1</label>
+            <input class="full-width" require="require" id="company_address_line1" name="company_address_line1" type="text" maxlength="100" />
+          </div>
+          <div id="company_address_line2-container" class="pure-control-group">
+            <a name="company_address_line2-anchor"></a>
+            <label for="company_address_line2">Line 2</label>
+            <input class="full-width" require="require" id="company_address_line2" name="company_address_line2" type="text" maxlength="100" />
+          </div>
+          <div id="company_address_city-container" class="pure-control-group">
+            <a name="company_address_city-anchor"></a>
+            <label for="company_address_city">City</label>
+            <input class="full-width" require="require" id="company_address_city" name="company_address_city" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <div class="pure-g">
+              <div id="company_address_state-container" class="pure-u-16-24">
+                <a name="company_address_state-anchor"></a>
+                <label for="company_address_state">State or province</label>
+                <select id="company_address_state" name="company_address_state">
+                  <option value="">Select</option>
+                </select>
+              </div>
+              <div class="pure-u-1-24"></div>
+              <div id="company_address_postal_code-container" class="pure-u-7-24">
+                <a name="company_address_postal_code-anchor"></a>
+                <label for="company_address_postal_code">ZIP</label>
+                <input class="full-width" require="require" id="company_address_postal_code" name="company_address_postal_code" type="text" maxlength="50" />
+              </div>
             </div>
           </div>
-          <div class="pure-u-1-24"></div>
-          <div class="pure-u-11-24">
-            <div class="pure-control-group">
-              <a name="relationship_account_opener_phone-anchor"></a>
-              <label for="relationship_account_opener_phone">Phone</label>
-              <input class="full-width" require="require" id="relationship_account_opener_phone" name="relationship_account_opener_phone" type="text" maxlength="100" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="kana-personal-information-container">
-        <h2>Kana Personal information</h2>
-        <div class="pure-g">
-          <div class="pure-u-12-24">
-            <div class="pure-control-group">
-              <a name="relationship_account_opener_first_name_kana-anchor"></a>
-              <label for="relationship_account_opener_first_name_kana">First name</label>
-              <input require="require" id="relationship_account_opener_first_name_kana" name="relationship_account_opener_first_name_kana" type="text" maxlength="50" />
-            </div>
-          </div>
-          <div class="pure-u-1-24"></div>
-          <div class="pure-u-11-24">
-            <div class="pure-control-group">
-              <a name="relationship_account_opener_last_name_kana-anchor"></a>
-              <label for="relationship_account_opener_last_name_kana">Last name</label>
-              <input require="require" id="relationship_account_opener_last_name_kana" name="relationship_account_opener_last_name_kana" type="text" maxlength="50" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="kanji-personal-information-container">
-        <h2>Kanji Personal information</h2>
-        <div class="pure-g">
-          <div class="pure-u-12-24">
-            <div class="pure-control-group">
-              <a name="relationship_account_opener_first_name_kanji-anchor"></a>
-              <label for="relationship_account_opener_first_name_kanji">First name</label>
-              <input require="require" id="relationship_account_opener_first_name_kanji" name="relationship_account_opener_first_name_kanji" type="text" maxlength="50" />
-            </div>
-          </div>
-          <div class="pure-u-1-24"></div>
-          <div class="pure-u-11-24">
-            <div class="pure-control-group">
-              <a name="relationship_account_opener_last_name_kanji-anchor"></a>
-              <label for="relationship_account_opener_last_name_kanji">Last name</label>
-              <input require="require" id="relationship_account_opener_last_name_kanji" name="relationship_account_opener_last_name_kanji" type="text" maxlength="50" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="dob-container" class="pure-control-group">
-        <a name="relationship_account_opener_dob_day-anchor"></a>
-        <a name="relationship_account_opener_dob_month-anchor"></a>
-        <a name="relationship_account_opener_dob_year-anchor"></a>
-        <label for="relationship_account_opener_dob_day">Date of birth</label>
-        <input class="adjacent" require="require" id="relationship_account_opener_dob_day" name="relationship_account_opener_dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
-        <input class="adjacent" require="require" id="relationship_account_opener_dob_month" name="relationship_account_opener_dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
-        <input class="adjacent" require="require" id="relationship_account_opener_dob_year" name="relationship_account_opener_dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
-      </div>
-      <div id="gender-container" class="pure-control-group">
-        <a name="relationship_account_opener_gender-anchor"></a>
-        <label for="female">Gender</label>
-        <div class="pure-checkbox">
-          <label><input id="female" name="relationship_account_opener_gender" type="radio" value="female" /> Female</label>
-          <label><input id="male" name="relationship_account_opener_gender" type="radio" value="male" /> Male</label>
-        </div>
-      </div>
-      <div id="id_number-container" class="pure-control-group">
-        <h2>Personal identification</h2>
-        <a name="relationship_account_opener_id_number-anchor"></a>
-        <label for="relationship_account_opener_id_number">Passport or ID number</label>
-        <input class="full-width" require="require" id="relationship_account_opener_id_number" name="relationship_account_opener_id_number" type="text" maxlength="50" />
-      </div>
-      <div id="upload-container" class="pure-control-group">
-        <a name="relationship_account_opener_verification_document_front-anchor"></a>
-        <a name="relationship_account_opener_verification_document_back-anchor"></a>
-        <label for="relationship_account_opener_verification_document_front">Front scan/photo</label>
-        <input name="relationship_account_opener_verification_document_front" id="relationship_account_opener_verification_document_front" type="file" />
-        <label for="relationship_account_opener_verification_document_back">Back scan/photo</label>
-        <input name="relationship_account_opener_verification_document_back" id="relationship_account_opener_verification_document_back" type="file" />
-      </div>
-      <div id="personal-address-container">
-        <h2>Personal address</h2>
-        <div id="relationship_account_opener_address_line1-container" class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_line1">Line 1</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_line1" name="relationship_account_opener_address_line1" type="text" maxlength="100" />
-        </div>
-        <div id="relationship_account_opener_address_line2-container" class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_line2">Line 2</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_line2" name="relationship_account_opener_address_line2" type="text" maxlength="100" />
-        </div>
-        <div id="relationship_account_opener_address_city-container" class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_city">City</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_city" name="relationship_account_opener_address_city" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <div class="pure-g">
-            <div id="relationship_account_opener_address_state-container" class="pure-u-16-24">
-              <a name="relationship_account_opener_verification_document_back-anchor"></a>
-              <label for="relationship_account_opener_address_state">State or province</label>
-              <select id="relationship_account_opener_address_state" name="relationship_account_opener_address_state">
-                <option value="">Select</option>
-              </select>
-            </div>
-            <div class="pure-u-1-24"></div>
-            <div id="relationship_account_opener_address_postal_code-container" class="pure-u-7-24">
-              <a name="relationship_account_opener_verification_document_back-anchor"></a>
-              <label for="relationship_account_opener_address_postal_code">ZIP</label>
-              <input class="full-width" require="require" id="relationship_account_opener_address_postal_code" name="relationship_account_opener_address_postal_code" type="text" maxlength="50" />
+          <div id="company_address_country-container" class="pure-control-group">
+            <div class="pure-g">
+              <div class="pure-u-16-24">
+                <a name="company_address_country-anchor"></a>
+                <label for="company_address_country">Country</label>
+                <select name="company_address_country" id="company_address_country">
+                  <option value="">Select country</option>
+                </select>
+              </div>
+              <div class="pure-u-1-24"></div>
+              <div class="pure-u-7-24">
+                <label>&nbsp;</label>
+                <button name="refresh" value="true" class="pure-button">Reload states</button>
+              </div>
             </div>
           </div>
         </div>
-        <div id="relationship_account_opener_address_country-container">
-          <div class="pure-g">
-            <div id="relationship_account_opener_address_country-container" class="pure-u-16-24">
-              <a name="relationship_account_opener_verification_document_back-anchor"></a>
-              <label for="relationship_account_opener_address_country">Country</label>
-              <select name="relationship_account_opener_address_country" id="relationship_account_opener_address_country">
-                <option value="">Select country</option>
-              </select>
-            </div>
-            <div class="pure-u-1-24"></div>
-            <div id="relationship_account_opener_address_postal_code-container" class="pure-u-7-24">
-              <label>&nbsp;</label>
-              <button name="refresh" value="true" class="pure-button">Reload states</button>
-            </div>
+        <div id="JP-company-address-container">
+          <h2>Kana company address</h2>
+          <div class="pure-control-group">
+            <a name="company_address_kana_line1-anchor"></a>
+            <label for="company_address_kana_line1">Line 1</label>
+            <input class="full-width" require="require" id="company_address_kana_line1" name="company_address_kana_line1" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <a name="company_address_kana_city-anchor"></a>
+            <label for="company_address_kana_city">City</label>
+            <input class="full-width" require="require" id="company_address_kana_city" name="company_address_kana_city" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <a name="company_address_kana_town-anchor"></a>
+            <label for="company_address_kana_town">Town</label>
+            <input class="full-width" require="require" id="company_address_kana_town" name="company_address_kana_town" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <a name="company_address_kana_state-anchor"></a>
+            <label for="company_address_kana_state">State</label>
+            <input class="full-width" require="require" id="company_address_kana_state" name="company_address_kana_state" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <a name="company_address_kana_postal_code-anchor"></a>
+            <label for="company_address_kana_postal_code">Postal code</label>
+            <input class="full-width" require="require" id="company_address_kana_postal_code" name="company_address_kana_postal_code" type="text" maxlength="100" />
+          </div>
+          <h2>Kanji company address</h2>
+          <div class="pure-control-group">
+            <a name="company_address_kanji_line1-anchor"></a>
+            <label for="company_address_kanji_line1">Line 1</label>
+            <input class="full-width" require="require" id="company_address_kanji_line1" name="company_address_kanji_line1" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <label for="company_address_kana_line1">City</label>
+            <a name="company_address_kana_line1-anchor"></a>
+            <input class="full-width" require="require" id="company_address_kanji_city" name="company_address_kanji_city" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <label for="company_address_kana_line1">Town</label>
+            <a name="company_address_kana_line1-anchor"></a>
+            <input class="full-width" require="require" id="company_address_kanji_town" name="company_address_kanji_town" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <label for="company_address_kana_line1">State</label>
+            <a name="company_address_kana_line1-anchor"></a>
+            <input class="full-width" require="require" id="company_address_kanji_state" name="company_address_kanji_state" type="text" maxlength="100" />
+          </div>
+          <div class="pure-control-group">
+            <label for="company_address_kana_line1">Postal code</label>
+            <a name="company_address_kana_line1-anchor"></a>
+            <input class="full-width" require="require" id="company_address_kanji_postal_code" name="company_address_kanji_postal_code" type="text" maxlength="100" />
           </div>
         </div>
-      </div>
-      <div id="kana-personal-address-container">
-        <h2>Kana personal address</h2>
-        <div class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_kana_line1">Line 1</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kana_line1" name="relationship_account_opener_address_kana_line1" type="text" maxlength="100" />
+        <div id="submit-container" class="pure-controls">
+          <button id="submit-button" class="pure-button pure-button-primary">Update registration</button>
         </div>
-        <div class="pure-control-group">
-          <label for="relationship_account_opener_address_kana_city">City</label>
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kana_city" name="relationship_account_opener_address_kana_city" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <label for="relationship_account_opener_address_kana_town">Town</label>
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kana_town" name="relationship_account_opener_address_kana_town" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_kana_state">State</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kana_state" name="relationship_account_opener_address_kana_state" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_kana_postal_code">Postal code</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kana_postal_code" name="relationship_account_opener_address_kana_postal_code" type="text" maxlength="100" />
-        </div>
-      </div>
-      <div id="kanji-personal-address-container">
-        <h2>Kanji personal address</h2>
-        <div class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_kanji_line1">Line 1</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kanji_line1" name="relationship_account_opener_address_kanji_line1" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_kanji_city">City</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kanji_city" name="relationship_account_opener_address_kanji_city" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_kanji_town">Town</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kanji_town" name="relationship_account_opener_address_kanji_town" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_kanji_state">State</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kanji_state" name="relationship_account_opener_address_kanji_state" type="text" maxlength="100" />
-        </div>
-        <div class="pure-control-group">
-          <a name="relationship_account_opener_verification_document_back-anchor"></a>
-          <label for="relationship_account_opener_address_kanji_postal_code">Postal code</label>
-          <input class="full-width" require="require" id="relationship_account_opener_address_kanji_postal_code" name="relationship_account_opener_address_kanji_postal_code" type="text" maxlength="100" />
-        </div>
-      </div>
-      <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary">Update registration</button>
       </div>
     </form>
   </body>
@@ -473,6 +214,9 @@
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message">Error! Invalid or missing business Merchant Category Code</div>
+  </template>
+  <template id="invalid-business_profile_url">
+    <div class="error message">Error! Invalid or missing business URL</div>
   </template>
   <template id="invalid-company_phone">
     <div class="error message">Error! Invalid or missing company phone number</div>
@@ -533,104 +277,5 @@
   </template>
   <template id="invalid-company_address_kanji_postal_code">
     <div class="error message">Error! Invalid or missing Kanji company address postal code</div>
-  </template>
-  <template id="invalid-relationship_account_opener_id_number">
-    <div class="error message">Error! Invalid or missing personal ID number</div>
-  </template>
-  <template id="invalid-relationship_account_opener_gender">
-    <div class="error message">Error! Invalid or missing gender</div>
-  </template>
-  <template id="invalid-relationship_account_opener_ssn_last_4">
-    <div class="error message">Error! Invalid or missing last 4 digits of Social Security Number</div>
-  </template>
-  <template id="invalid-relationship_account_opener_dob_day">
-    <div class="error message">Error! Invalid or missing date of birth</div>
-  </template>
-  <template id="invalid-relationship_account_opener_dob_month">
-    <div class="error message">Error! Invalid or missing date of birth</div>
-  </template>
-  <template id="invalid-relationship_account_opener_dob_year">
-    <div class="error message">Error! Invalid or missing date of birth</div>
-  </template>
-  <template id="invalid-relationship_account_opener_first_name">
-    <div class="error message">Error! Invalid or missing first name</div>
-  </template>
-  <template id="invalid-relationship_account_opener_first_name_kana">
-    <div class="error message">Error! Invalid or missing Kana first name</div>
-  </template>
-  <template id="invalid-relationship_account_opener_first_name_kanji">
-    <div class="error message">Error! Invalid or missing Kanjifirst name</div>
-  </template>
-  <template id="invalid-relationship_account_opener_last_name">
-    <div class="error message">Error! Invalid or missing last name</div>
-  </template>
-  <template id="invalid-relationship_account_opener_last_name_kana">
-    <div class="error message">Error! Invalid or missing last name</div>
-  </template>
-  <template id="invalid-relationship_account_opener_last_name_kanji">
-    <div class="error message">Error! Invalid or missing last name</div>
-  </template>
-  <template id="invalid-relationship_account_opener_email">
-    <div class="error message">Error! Invalid or missing email</div>
-  </template>
-  <template id="invalid-relationship_account_opener_phone">
-    <div class="error message">Error! Invalid or missing phone number</div>
-  </template>
-  <template id="invalid-relationship_account_opener_verification_document_front">
-    <div class="error message">Error! Invalid or missing document front scan or photo</div>
-  </template>
-  <template id="invalid-relationship_account_opener_verification_document_back">
-    <div class="error message">Error! Invalid or missing document back scan or photo</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_country">
-    <div class="error message">Error! Invalid or missing personal address country</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_city">
-    <div class="error message">Error! Invalid or missing personal address city</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_state">
-    <div class="error message">Error! Invalid or missing personal address state</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_line1">
-    <div class="error message">Error! Invalid or missing personal address line 1</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_postal_code">
-    <div class="error message">Error! Invalid or missing personal postal code</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kana_city">
-    <div class="error message">Error! Invalid or missing Kana personal address city</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kana_state">
-    <div class="error message">Error! Invalid or missing Kana personal address state</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kana_town">
-    <div class="error message">Error! Invalid or missing Kana personal address town</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kana_line1">
-    <div class="error message">Error! Invalid or missing Kana personal address line 1</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kana_postal_code">
-    <div class="error message">Error! Invalid or missing Kana personal address postal code</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kanji_city">
-    <div class="error message">Error! Invalid or missing Kanji personal address city</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kanji_state">
-    <div class="error message">Error! Invalid or missing Kanji personal address state</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kanji_town">
-    <div class="error message">Error! Invalid or missing Kanji personal address town</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kanji_line1">
-    <div class="error message">Error! Invalid or missing Kanji personal address line 1</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kanji_postal_code">
-    <div class="error message">Error! Invalid or missing Kanji personal address postal code</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kanji_state">
-    <div class="error message">Error! Invalid or missing Kanji personal address state</div>
-  </template>
-  <template id="invalid-relationship_account_opener_address_kanji_line1">
-    <div class="error message">Error! Invalid or missing Kanji personal address line 1</div>
   </template>
 </html>

@@ -91,18 +91,18 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Bern',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-1230'
+        relationship_representative_address_city: 'Bern',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-1230'
       })
       const req = TestHelper.createRequest(`/api/administrator/connect/set-stripe-account-rejected?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account

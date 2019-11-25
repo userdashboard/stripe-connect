@@ -28,9 +28,9 @@ module.exports = {
               req.body.individual_verification_document_front = token
               delete (req.uploads.individual_verification_document_front)
             }
-            if (req.body && req.uploads && req.uploads.relationship_account_opener_verification_document_front) {
-              req.body.relationship_account_opener_verification_document_front = token
-              delete (req.uploads.relationship_account_opener_verification_document_front)
+            if (req.body && req.uploads && req.uploads.relationship_representative_verification_document_front) {
+              req.body.relationship_representative_verification_document_front = token
+              delete (req.uploads.relationship_representative_verification_document_front)
             }
           }
         })

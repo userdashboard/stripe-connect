@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/public/content-additional.css" />
     <link rel="stylesheet" href="/public/connect.css" />
     <script id="stripe-v3" src="https://js.stripe.com/v3/"></script>
-    <script id="connect-js" src="/public/connect.js"></script>
+    <script id="connect-v3" src="/public/connect.js"></script>
     <script id="handler-v3" src="/public/stripe-v3-create-beneficial-owner.js"></script>
     <script id="client-v3">
       window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
@@ -93,7 +93,7 @@
           <div id="relationship_owner_address_state-container" class="pure-u-17-24">
             <label for="relationship_owner_address_state">State or province</label>
             <select id="relationship_owner_address_state" name="relationship_owner_address_state">
-              <option>Select state</option>
+              <option value="">Select state</option>
             </select>
           </div>
           <div id="relationship_owner_address_state-container-bridge" class="pure-u-1-24"></div>

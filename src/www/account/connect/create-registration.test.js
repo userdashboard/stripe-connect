@@ -27,11 +27,10 @@ describe('/account/connect/create-registration', () => {
         country: 'AT'
       }
       await req.post()
-      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
-      req2.account = user.account
-      req2.session = user.session
-      const stripeAccounts = await req2.get()
-      assert.strictEqual(stripeAccounts.length, 1)
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(true, redirectURL.startsWith('/account/connect/stripe-account?'))
     })
   })
 })

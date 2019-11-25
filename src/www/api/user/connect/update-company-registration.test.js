@@ -76,20 +76,20 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         })
         await TestHelper.createExternalAccount(user, {
           currency: 'usd',
@@ -155,18 +155,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -194,18 +194,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -233,18 +233,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: '',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -272,18 +272,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -311,18 +311,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: '',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -354,20 +354,20 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_state: '',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         }
         let errorMessage
         try {
@@ -399,20 +399,20 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_state: 'NY',
           business_profile_mcc: '',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         }
         let errorMessage
         try {
@@ -444,20 +444,20 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: '',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          // relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '0000',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          // relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         }
         let errorMessage
         try {
@@ -469,8 +469,8 @@ describe('/api/user/connect/update-company-registration', () => {
       })
     })
 
-    describe('invalid-relationship_account_opener_dob_day', () => {
-      it('missing posted relationship_account_opener_dob_day', async () => {
+    describe('invalid-relationship_representative_dob_day', () => {
+      it('missing posted relationship_representative_dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -485,18 +485,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -504,12 +504,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_dob_day')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_dob_day')
       })
     })
 
-    describe('invalid-relationship_account_opener_dob_month', () => {
-      it('missing posted relationship_account_opener_dob_month', async () => {
+    describe('invalid-relationship_representative_dob_month', () => {
+      it('missing posted relationship_representative_dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -524,18 +524,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -543,12 +543,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_dob_month')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_dob_month')
       })
     })
 
-    describe('invalid-relationship_account_opener_dob_year', () => {
-      it('missing posted relationship_account_opener_dob_year', async () => {
+    describe('invalid-relationship_representative_dob_year', () => {
+      it('missing posted relationship_representative_dob_year', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -563,18 +563,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -582,12 +582,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_dob_year')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_dob_year')
       })
     })
 
-    describe('invalid-relationship_account_opener_first_name', () => {
-      it('missing posted relationship_account_opener_first_name', async () => {
+    describe('invalid-relationship_representative_first_name', () => {
+      it('missing posted relationship_representative_first_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -602,18 +602,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: '',
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: '',
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -621,12 +621,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_first_name')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_first_name')
       })
     })
 
-    describe('invalid-relationship_account_opener_last_name', () => {
-      it('missing posted relationship_account_opener_last_name', async () => {
+    describe('invalid-relationship_representative_last_name', () => {
+      it('missing posted relationship_representative_last_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -641,16 +641,16 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: '',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: '',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -658,12 +658,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_last_name')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_last_name')
       })
     })
 
-    describe('invalid-relationship_account_opener_email', () => {
-      it('missing posted relationship_account_opener_email', async () => {
+    describe('invalid-relationship_representative_email', () => {
+      it('missing posted relationship_representative_email', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -678,18 +678,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: '',
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: '',
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -697,12 +697,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_email')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_email')
       })
     })
 
-    describe('invalid-relationship_account_opener_phone', () => {
-      it('missing posted relationship_account_opener_phone', async () => {
+    describe('invalid-relationship_representative_phone', () => {
+      it('missing posted relationship_representative_phone', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -717,18 +717,18 @@ describe('/api/user/connect/update-company-registration', () => {
           company_name: 'Company',
           company_tax_id: '8',
           company_address_city: 'Vienna',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '',
-          relationship_account_opener_address_city: 'Vienna',
-          relationship_account_opener_address_line1: '123 Sesame St',
-          relationship_account_opener_address_postal_code: '1020'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '',
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020'
         }
         let errorMessage
         try {
@@ -736,12 +736,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_phone')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_phone')
       })
     })
 
-    describe('invalid-relationship_account_opener_ssn_last_4', () => {
-      it('missing posted relationship_account_opener_ssn_last_4', async () => {
+    describe('invalid-relationship_representative_ssn_last_4', () => {
+      it('missing posted relationship_representative_ssn_last_4', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -760,20 +760,20 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_state: 'NY',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_id_number: '000000000',
-          relationship_account_opener_ssn_last_4: '',
-          relationship_account_opener_address_city: 'New York',
-          relationship_account_opener_address_line1: '285 Fulton St',
-          relationship_account_opener_address_postal_code: '10007'
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_id_number: '000000000',
+          relationship_representative_ssn_last_4: '',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
         }
         let errorMessage
         try {
@@ -781,7 +781,7 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_ssn_last_4')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_ssn_last_4')
       })
     })
 
@@ -811,30 +811,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -872,30 +872,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -933,30 +933,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -994,30 +994,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1055,30 +1055,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1116,30 +1116,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1177,30 +1177,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1238,30 +1238,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1299,30 +1299,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1360,30 +1360,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1421,30 +1421,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1482,30 +1482,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1517,8 +1517,8 @@ describe('/api/user/connect/update-company-registration', () => {
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kana_postal_code', () => {
-      it('missing posted relationship_account_opener_address_kana_postal_code', async () => {
+    describe('invalid-relationship_representative_address_kana_postal_code', () => {
+      it('missing posted relationship_representative_address_kana_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -1543,30 +1543,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1574,12 +1574,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kana_postal_code')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_postal_code')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kana_city', () => {
-      it('missing posted relationship_account_opener_address_kana_city', async () => {
+    describe('invalid-relationship_representative_address_kana_city', () => {
+      it('missing posted relationship_representative_address_kana_city', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -1604,30 +1604,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: '',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: '',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1635,12 +1635,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kana_city')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_city')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kana_state', () => {
-      it('missing posted relationship_account_opener_address_kana_state', async () => {
+    describe('invalid-relationship_representative_address_kana_state', () => {
+      it('missing posted relationship_representative_address_kana_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -1665,30 +1665,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: '',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: '',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1696,12 +1696,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kana_state')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_state')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kana_town', () => {
-      it('missing posted relationship_account_opener_address_kana_town', async () => {
+    describe('invalid-relationship_representative_address_kana_town', () => {
+      it('missing posted relationship_representative_address_kana_town', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -1726,30 +1726,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: '',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: '',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1757,12 +1757,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kana_town')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_town')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kana_line1', () => {
-      it('missing posted relationship_account_opener_address_kana_line1', async () => {
+    describe('invalid-relationship_representative_address_kana_line1', () => {
+      it('missing posted relationship_representative_address_kana_line1', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -1787,30 +1787,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1818,12 +1818,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kana_line1')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_line1')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kanji_postal_code', () => {
-      it('missing posted relationship_account_opener_address_kanji_postal_code', async () => {
+    describe('invalid-relationship_representative_address_kanji_postal_code', () => {
+      it('missing posted relationship_representative_address_kanji_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -1848,30 +1848,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1879,12 +1879,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kanji_postal_code')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_postal_code')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kanji_city', () => {
-      it('missing posted relationship_account_opener_address_kanji_city', async () => {
+    describe('invalid-relationship_representative_address_kanji_city', () => {
+      it('missing posted relationship_representative_address_kanji_city', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -1909,30 +1909,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -1940,12 +1940,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kanji_city')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_city')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kanji_state', () => {
-      it('missing posted relationship_account_opener_address_kanji_state', async () => {
+    describe('invalid-relationship_representative_address_kanji_state', () => {
+      it('missing posted relationship_representative_address_kanji_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -1970,30 +1970,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -2001,12 +2001,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kanji_state')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_state')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kanji_town', () => {
-      it('missing posted relationship_account_opener_address_kanji_town', async () => {
+    describe('invalid-relationship_representative_address_kanji_town', () => {
+      it('missing posted relationship_representative_address_kanji_town', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -2031,30 +2031,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '',
-          relationship_account_opener_address_kanji_line1: '２７－１５'
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '',
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         let errorMessage
         try {
@@ -2062,12 +2062,12 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kanji_town')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_town')
       })
     })
 
-    describe('invalid-relationship_account_opener_address_kanji_line1', () => {
-      it('missing posted relationship_account_opener_address_kanji_line1', async () => {
+    describe('invalid-relationship_representative_address_kanji_line1', () => {
+      it('missing posted relationship_representative_address_kanji_line1', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -2092,30 +2092,30 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_kanji_city: '渋谷区',
           company_address_kanji_town: '神宮前　３丁目',
           company_address_kanji_line1: '２７－１５',
-          relationship_account_opener_first_name: user.profile.firstName,
-          relationship_account_opener_last_name: user.profile.lastName,
-          relationship_account_opener_executive: 'true',
-          relationship_account_opener_title: 'Owner',
-          relationship_account_opener_email: user.profile.contactEmail,
-          relationship_account_opener_phone: '456-789-0123',
-          relationship_account_opener_gender: 'female',
-          relationship_account_opener_dob_day: '1',
-          relationship_account_opener_dob_month: '1',
-          relationship_account_opener_dob_year: '1950',
-          relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_account_opener_address_kana_line1: '27-15',
-          relationship_account_opener_address_kana_postal_code: '1500001',
-          relationship_account_opener_first_name_kanji: '東京都',
-          relationship_account_opener_last_name_kanji: '東京都',
-          relationship_account_opener_address_kanji_postal_code: '1500001',
-          relationship_account_opener_address_kanji_state: '東京都',
-          relationship_account_opener_address_kanji_city: '渋谷区',
-          relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-          relationship_account_opener_address_kanji_line1: ''
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_gender: 'female',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_first_name_kanji: '東京都',
+          relationship_representative_last_name_kanji: '東京都',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
+          relationship_representative_address_kanji_line1: ''
         }
         let errorMessage
         try {
@@ -2123,7 +2123,7 @@ describe('/api/user/connect/update-company-registration', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_account_opener_address_kanji_line1')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_line1')
       })
     })
   })
@@ -2144,18 +2144,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_name: 'Company',
         company_tax_id: '8',
         company_address_city: 'Vienna',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Vienna',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vienna',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2180,18 +2180,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '4000',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Brisbane',
-        relationship_account_opener_address_line1: '845 Oxford St',
-        relationship_account_opener_address_postal_code: '4000'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Brisbane',
+        relationship_representative_address_line1: '845 Oxford St',
+        relationship_representative_address_postal_code: '4000'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2215,18 +2215,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Brussels',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Brussels',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2251,18 +2251,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: 'V5K 0A1',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Vancouver',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: 'V5K 0A1'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2286,18 +2286,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Bern',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1020',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Bern',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2321,18 +2321,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '01067',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Berlin',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '01067',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '01067',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2356,18 +2356,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1000',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Copenhagen',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1000',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Copenhagen',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1000',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2391,18 +2391,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '03179',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Madrid',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '03179',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Madrid',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '03179',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2426,18 +2426,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '00990',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Helsinki',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00990',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Helsinki',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00990',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2460,18 +2460,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '75001',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Paris',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '75001',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Paris',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '75001',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2495,18 +2495,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: 'EC1A 1AA',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'London',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: 'EC1A 1AA',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'London',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'EC1A 1AA',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2529,18 +2529,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_address_city: 'Hong Kong',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '999077',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_address_city: 'Hong Kong',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '999077',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2564,18 +2564,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Dublin',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_postal_code: 'Dublin 1'
+        relationship_representative_address_city: 'Dublin',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_postal_code: 'Dublin 1'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2599,18 +2599,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '00010',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Rome',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00010',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Rome',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00010',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2644,30 +2644,30 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
         company_address_kanji_line1: '２７－１５',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_gender: 'female',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_account_opener_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_account_opener_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_account_opener_address_kana_line1: '27-15',
-        relationship_account_opener_address_kana_postal_code: '1500001',
-        relationship_account_opener_first_name_kanji: '東京都',
-        relationship_account_opener_last_name_kanji: '東京都',
-        relationship_account_opener_address_kanji_postal_code: '1500001',
-        relationship_account_opener_address_kanji_state: '東京都',
-        relationship_account_opener_address_kanji_city: '渋谷区',
-        relationship_account_opener_address_kanji_town: '神宮前　３丁目',
-        relationship_account_opener_address_kanji_line1: '２７－１５'
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_gender: 'female',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_last_name_kanji: '東京都',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
+        relationship_representative_address_kanji_line1: '２７－１５'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -2691,18 +2691,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1623',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Luxemburg',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1623',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Luxemburg',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1623',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2726,18 +2726,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1071 JA',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Amsterdam',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '1071 JA',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Amsterdam',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1071 JA',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2760,18 +2760,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '0001',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Oslo',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '0001',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Oslo',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '0001',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2795,18 +2795,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '6011',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        relationship_account_opener_address_city: 'Auckland',
-        relationship_account_opener_address_postal_code: '6011',
-        relationship_account_opener_address_line1: '844 Fleet Street'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Auckland',
+        relationship_representative_address_postal_code: '6011',
+        relationship_representative_address_line1: '844 Fleet Street'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2830,18 +2830,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '4520',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Lisbon',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '4520',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Lisbon',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '4520',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2865,18 +2865,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '00150',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_address_city: 'Stockholm',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '00150',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_address_city: 'Stockholm',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00150',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2899,18 +2899,18 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '339696',
         company_name: 'Company',
         company_tax_id: '8',
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_address_line1: '123 Sesame St',
-        relationship_account_opener_address_postal_code: '339696',
-        relationship_account_opener_address_city: 'Singapore',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '339696',
+        relationship_representative_address_city: 'Singapore',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))
@@ -2938,20 +2938,20 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_state: 'NY',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        relationship_account_opener_dob_day: '1',
-        relationship_account_opener_dob_month: '1',
-        relationship_account_opener_dob_year: '1950',
-        relationship_account_opener_first_name: user.profile.firstName,
-        relationship_account_opener_last_name: user.profile.lastName,
-        relationship_account_opener_executive: 'true',
-        relationship_account_opener_title: 'Owner',
-        relationship_account_opener_email: user.profile.contactEmail,
-        relationship_account_opener_phone: '456-789-0123',
-        // relationship_account_opener_id_number: '000000000',
-        relationship_account_opener_ssn_last_4: '0000',
-        relationship_account_opener_address_city: 'New York',
-        relationship_account_opener_address_line1: '285 Fulton St',
-        relationship_account_opener_address_postal_code: '10007'
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        // relationship_representative_id_number: '000000000',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
       }
       const accountNow = await req.patch()
       const registrationNow = JSON.parse(accountNow.metadata.registration + (accountNow.metadata.registration2 || ''))

@@ -54,7 +54,7 @@ describe('/api/user/connect/stripe-accounts', () => {
   })
 
   describe('receives', () => {
-     it('optional querystring offset (integer)', async () => {
+    it('optional querystring offset (integer)', async () => {
       const offset = 1
       global.delayDiskWrites = true
       const stripeAccounts = []

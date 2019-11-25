@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/administrator/connect/payouts', () => {
   describe('receives', () => {
-     it('optional querystring offset (integer)', async () => {
+    it('optional querystring offset (integer)', async () => {
       const offset = 1
       global.delayDiskWrites = true
       const administrator = await TestHelper.createOwner()
@@ -87,6 +87,7 @@ describe('/api/administrator/connect/payouts', () => {
 
     it('optional querystring all (boolean)', async () => {
       const administrator = await TestHelper.createOwner()
+      const payouts = []
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
@@ -114,8 +115,9 @@ describe('/api/administrator/connect/payouts', () => {
         await TestHelper.submitStripeAccount(user)
         await TestHelper.waitForVerification(user.stripeAccount.id)
         await TestHelper.createPayout(user)
+        payouts.unshift(user.payout.id)
       }
-      const req = TestHelper.createRequest(`/api/administrator/connect/payouts?all=true`)
+      const req = TestHelper.createRequest('/api/administrator/connect/payouts?all=true')
       req.account = administrator.account
       req.session = administrator.session
       const payoutsNow = await req.get()

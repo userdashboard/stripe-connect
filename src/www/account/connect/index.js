@@ -60,7 +60,7 @@ async function renderPage (req, res) {
         if (req.data.individual.registration.individual_first_name) {
           removeElements.push(`blank-name-${req.data.individual.id}`)
         } else {
-          removeElements.push(`individual-registration-name-${req.data.individual.id}`) 
+          removeElements.push(`individual-registration-name-${req.data.individual.id}`)
         }
       }
     } else {
@@ -84,7 +84,7 @@ async function renderPage (req, res) {
             removeElements.push(`blank-name-${account.id}`)
           } else {
             removeElements.push(`business-registration-name-${account.id}`)
-          }          
+          }
         }
       }
     } else {

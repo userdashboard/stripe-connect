@@ -21,26 +21,98 @@ async function beforeRequest (req) {
   }
   stripeAccount.stripePublishableKey = global.stripePublishableKey
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
-  req.data = { stripeAccount, fieldsNeeded, registration }
+  const requiredFields = []
+  switch (req.data.stripeAccount.country) {
+    case 'AU':
+      requiredFields.push()
+      break
+    case 'AT':
+      requiredFields.push()
+      break
+    case 'BE':
+      requiredFields.push()
+      break
+    case 'CA':
+      requiredFields.push()
+      break
+    case 'CH':
+      requiredFields.push()
+      break
+    case 'DE':
+      requiredFields.push()
+      break
+    case 'DK':
+      requiredFields.push()
+      break
+    case 'ES':
+      requiredFields.push()
+      break
+    case 'FI':
+      requiredFields.push()
+      break
+    case 'FR':
+      requiredFields.push()
+      break
+    case 'GB':
+      requiredFields.push()
+      break
+    case 'HK':
+      requiredFields.push()
+      break
+    case 'IE':
+      requiredFields.push()
+      break
+    case 'IT':
+      requiredFields.push()
+      break
+    case 'JP':
+      requiredFields.push()
+      break
+    case 'LU':
+      requiredFields.push()
+      break
+    case 'NL':
+      requiredFields.push()
+      break
+    case 'NZ':
+      requiredFields.push()
+      break
+    case 'NO':
+      requiredFields.push()
+      break
+    case 'PT':
+      requiredFields.push()
+      break
+    case 'SG':
+      requiredFields.push()
+      break
+    case 'SE':
+      requiredFields.push()
+      break
+    case 'US':
+      requiredFields.push()
+      break
+  }
+  req.data = { stripeAccount, registration, requiredFields }
 }
 
 async function renderPage (req, res, messageTemplate) {
   if (req.success) {
     if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
       return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
+    } else {
+      return dashboard.Response.redirect(req, res, `/account/connect/stripe-account?stripeid=${req.query.stripeid}`)
     }
-    messageTemplate = 'success'
   } else if (req.error) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   const removeElements = []
   if (global.stripeJS !== 3) {
-    removeElements.push('form-v3', 'stripe-v3', 'cient-v3', 'connect-js', 'handler')
+    removeElements.push('stripe-v3', 'client-v3', 'connect-v3', 'handler-v3')
   } else {
     res.setHeader('content-security-policy',
-    'default-src * \'unsafe-inline\'; ' +
+      'default-src * \'unsafe-inline\'; ' +
     `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
     `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/stripe-helper.js 'unsafe-inline' 'unsafe-eval'; ` +
     'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
@@ -49,78 +121,50 @@ async function renderPage (req, res, messageTemplate) {
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success' || req.error) {
-      const submitForm = doc.getElementById('submit-form')
-      submitForm.parentNode.removeChild(submitForm)
+      removeElements.push('form-container')
+      for (const id of removeElements) {
+        const element = doc.getElementById(id)
+        element.parentNode.removeChild(element)
+      }
       return dashboard.Response.end(req, res, doc)
     }
   }
-  if (req.data.stripeAccount.country !== 'jp') {
-    removeElements.push(
-      'individual_gender-container',
-      'kana-personal-information-container',
-      'kanji-personal-information-container',
-      'kana-personal-address-container',
-      'kanji-personal-address-container'
-    )
-  } else {
-    removeElements.push(
-      'personal-information-container',
-      'personal-address-container'
-    )
-  }
-  const removableFields = [
-    'business_profile_url',
-    'business_profile_mcc',
-    'individual.email',
-    'individual.phone',
-    'individual.gender',
-    'individual.id_number',
-    'individual.ssn_last_4',
-    'individual.address.line1',
-    'individual.address.line2',
-    'individual.address.city',
-    'individual.address.state',
-    'individual.address.postal_code',
-    'individual.dob.day',
-    'individual.dob.month',
-    'individual.dob.year'
-  ]
-  for (const field of req.data.fieldsNeeded) {
-    const index = removableFields.indexOf(field)
-    if (index === -1) {
+  const allFields = []
+  for (const field of allFields) {
+    if (req.data.requiredFields.indexOf(field) > -1) {
       continue
     }
-    removableFields.splice(index, 1)
-  }
-  for (const field of removableFields) {
-    const parts = field.split('.')
-    const name = parts[parts.length - 1]
-    switch (name) {
-      case 'day':
-        removeElements.push('dob-container')
-        continue
-      case 'email':
-      case 'phone':
-      case 'id_number':
-      case 'ssn_last_4':
-        removeElements.push(`${name}-container`)
-        continue
-    }
-  }
-  for (const field of removeElements) {
     const element = doc.getElementById(field)
     element.parentNode.removeChild(element)
   }
-  const mccList = connect.getMerchantCategoryCodes(req.language)
-  dashboard.HTML.renderList(doc, mccList, 'mcc-option', 'business_profile_mcc')
-  dashboard.HTML.renderList(doc, connect.countryList, 'state-option', 'individual_address_country')
-  if (req.method === 'GET') {
-    const selectedCountry = req.data.registration.country || req.data.stripeAccount.country
-    const states = connect.countryDivisions[selectedCountry]
-    dashboard.HTML.renderList(doc, states, 'state-option', 'individual_address_state')
-    if (req.data.registration.individual_address_state) {
-      dashboard.HTML.setSelectedOptionByValue(doc, 'individual_address_state', req.data.registration.individual_address_state)
+  if (req.data.requiredFields.indexOf('business_profile.mcc') > -1) {
+    const mccList = connect.getMerchantCategoryCodes(req.language)
+    dashboard.HTML.renderList(doc, mccList, 'mcc-option', 'business_profile_mcc')
+  }
+  if (req.data.requiredFields.indexOf('individual_address_country') > -1) {
+    let personalCountry
+    if (req.body) {
+      personalCountry = req.body.individual_address_country
     }
+    personalCountry = personalCountry || req.data.registration.individual_address_country
+    personalCountry = personalCountry || req.data.stripeAccount.country
+    const personalStates = connect.countryDivisions[personalCountry]
+    dashboard.HTML.renderList(doc, personalStates, 'state-option', 'individual_address_state')
+    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'individual_address_country')
+  }
+  if (req.data.registration.individual_id_number || req.data.registration.accountToken) {
+    const uploadFront = doc.getElementById('individual_id_number')
+    uploadFront.setAttribute('data-existing', true)
+  }
+  if (req.data.registration.individual_verification_document_front) {
+    const uploadFront = doc.getElementById('individual_verification_document_front')
+    uploadFront.setAttribute('data-existing', true)
+  }
+  if (req.data.registration.individual_verification_document_back) {
+    const uploadBack = doc.getElementById('individual_verification_document_back')
+    uploadBack.setAttribute('data-existing', true)
+  }
+  if (req.method === 'GET') {
     for (const field in req.data.registration) {
       const element = doc.getElementById(field)
       if (!element) {
@@ -130,6 +174,16 @@ async function renderPage (req, res, messageTemplate) {
         element.setAttribute('value', req.data.registration[field] || '')
       } else if (element.tag === 'select') {
         dashboard.HTML.setSelectedOptionByValue(doc, field, req.data.registration[field] || '')
+      }
+    }
+    for (const selectid of ['individual_address_state', 'individual_address_country']) {
+      if (req.data.registration[selectid]) {
+        dashboard.HTML.setSelectedOptionByValue(doc, selectid, req.data.registration[selectid])
+      }
+    }
+    for (const checkboxid of ['individual_executive', 'individual_director', 'individual_owner']) {
+      if (req.data.registration[checkboxid]) {
+        doc.getElementById(checkboxid).setAttribute('checked', true)
       }
     }
   } else if (req.body) {
@@ -145,18 +199,6 @@ async function renderPage (req, res, messageTemplate) {
       }
     }
   }
-  if (req.data.registration.individual_id_number || req.data.registration.accountToken) {
-    const uploadFront = doc.getElementById('individual_id_number')
-    uploadFront.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.individual_verification_document_front) {
-    const uploadFront = doc.getElementById('individual_verification_document_front')
-    uploadFront.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.individual_verification_document_back) {
-    const uploadBack = doc.getElementById('individual_verification_document_back')
-    uploadBack.setAttribute('data-existing', true)
-  }
   return dashboard.Response.end(req, res, doc)
 }
 
@@ -164,15 +206,7 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  for (const field of req.data.fieldsNeeded) {
-    if (field === 'external_account' ||
-      field === 'business_type' ||
-      field === 'tos_acceptance.date' ||
-      field === 'tos_acceptance.ip' ||
-      field === 'tos_acceptance.user_agent' ||
-      field === 'individual.verification.document') {
-      continue
-    }
+  for (const field of req.data.requiredFields) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       return renderPage(req, res, `invalid-${posted}`)

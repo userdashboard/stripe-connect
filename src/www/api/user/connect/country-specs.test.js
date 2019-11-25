@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/country-specs', () => {
   describe('receives', () => {
-     it('optional querystring offset (integer)', async () => {
+    it('optional querystring offset (integer)', async () => {
       const offset = 1
       global.delayDiskWrites = true
       const req = TestHelper.createRequest('/api/user/connect/country-specs?all=true')
@@ -25,7 +25,7 @@ describe('/api/user/connect/country-specs', () => {
 
     it('optional querystring all (boolean)', async () => {
       global.pageSize = 1
-      const req = TestHelper.createRequest(`/api/user/connect/country-specs?all=true`)
+      const req = TestHelper.createRequest('/api/user/connect/country-specs?all=true')
       const countriesNow = await req.get()
       assert.notStrictEqual(countriesNow.length, 0)
       assert.notStrictEqual(countriesNow.length, global.pageSize)

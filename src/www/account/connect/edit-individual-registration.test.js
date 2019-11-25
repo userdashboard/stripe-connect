@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
+const connect = require('../../../../index.js')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/edit-individual-registration', () => {
@@ -35,40 +36,24 @@ describe('/account/connect/edit-individual-registration', () => {
       }
       assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
-
-    it('should bind application CountrySpec to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AU'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.applicationCountry.id, 'AU')
-    })
-
-    it('should bind address country to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AU'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.addressCountry.name, 'Australia')
-    })
   })
 
   describe('EditIndividualRegistration#GET', () => {
     async function testRequiredFieldInputsExist (req, stripeAccount) {
       const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
+      const countrySpec = await connect.countrySpecIndex[stripeAccount.country]
+      const individualFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
+      for (const field of individualFields) {
+        if (field === 'individual.verification.document') {
+          fieldsNeeded.push('individual.verification.document.front', 'individual.verification.document.back')
+          continue
+        }
+        fieldsNeeded.push(field)
+      }
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       for (const field of fieldsNeeded) {
+        console.log(field)
         if (field === 'external_account' ||
           field === 'business_type' ||
           field === 'tos_acceptance.date' ||
@@ -285,7 +270,7 @@ describe('/account/connect/edit-individual-registration', () => {
       return testRequiredFieldInputsExist(req, user.stripeAccount)
     })
 
-    it('should have JP-required fields', async () => {
+    it.only('should have JP-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -399,6 +384,7 @@ describe('/account/connect/edit-individual-registration', () => {
       const body = JSON.stringify(req.body)
       const fields = Object.keys(req.body)
       for (const field of fields) {
+        console.log(field)
         req.body = JSON.parse(body)
         req.body[field] = ''
         const page = await req.post()
@@ -423,7 +409,8 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail
       }
       await testEachFieldAsNull(req)
     })
@@ -442,13 +429,13 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject AU invalid fields', async () => {
@@ -469,12 +456,13 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail
       }
       await testEachFieldAsNull(req)
     })
 
-    it('should update AU information', async () => {
+    it.only('should update AU information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -492,7 +480,8 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -515,7 +504,8 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail
       }
       await testEachFieldAsNull(req)
     })

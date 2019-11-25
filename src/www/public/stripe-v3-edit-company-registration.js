@@ -21,6 +21,20 @@ function updateAccount (e) {
     return window.renderError('invalid-company_name')
   }
   accountData.company.name = companyName.value
+  var companyPhone = document.getElementById('company_phone')
+  if (companyPhone) {
+    if (!companyPhone.value) {
+      return window.renderError('invalid-company_phone')
+    }
+    accountData.company.phone = companyPhone.value
+  }
+  var companyTaxID = document.getElementById('company_tax_id')
+  if (companyTaxID) {
+    if (!companyTaxID.value) {
+      return window.renderError('invalid-company_tax_id')
+    }
+    accountData.company.tax_id = companyTaxID.value
+  }
   var businessProfileURL = document.getElementById('business_profile_url')
   if (businessProfileURL) {
     if (!businessProfileURL.value) {
@@ -78,81 +92,13 @@ function updateAccount (e) {
       }
     }
   }
-  var accountOpener = {
-    relationship: {
-      account_opener: true
-    },
-    address: {
-      line1: document.getElementById('relationship_account_opener_address_line1').value,
-      state: document.getElementById('relationship_account_opener_address_state').value,
-      country: document.getElementById('relationship_account_opener_address_country').value,
-      postal_code: document.getElementById('relationship_account_opener_address_postal_code').value
-    },
-    dob: {
-      day: document.getElementById('relationship_account_opener_dob_day').value,
-      month: document.getElementById('relationship_account_opener_dob_month').value,
-      year: document.getElementById('relationship_account_opener_dob_year').value
+  return stripe.createToken('account', accountData).then(function (result) {
+    if (!result || result.error) {
+      return window.renderError(result.error)
     }
-  }
-  for (field in accountOpener) {
-    if (!accountOpener[field]) {
-      return window.renderError('invalid-relationship_account_opener_' + field)
-    }
-  }
-  var idNumberField = document.getElementById('relationship_account_opener_id_number')
-  if (idNumberField) {
-    accountOpener.id_number = idNumberField.value
-  } else if (idNumberField.getAttribute('data-existing') !== 'true') {
-    return window.renderError('invalid-relationship_account_opener_id_number')
-  }
-  var genderField = document.getElementById('gender-container')
-  if (genderField) {
-    accountOpener.gender = document.getElementById('female').checked ? 'female' : 'male'
-  }
-  for (field in accountOpener.address) {
-    if (!accountOpener.address[field]) {
-      return window.renderError('invalid-relationship_account_opener_address_' + field)
-    }
-  }
-  var personalAddressLine2 = document.getElementById('relationship_account_opener_address_line2')
-  if (personalAddressLine2 && personalAddressLine2.value) {
-    accountOpener.address.line2 = personalAddressLine2.value
-  }
-  for (field in accountOpener.dob) {
-    if (!accountOpener.dob[field]) {
-      return window.renderError('invalid-relationship_account_opener_dob_' + field)
-    }
-  }
-  var documentFront = document.getElementById('relationship_account_opener_verification_document_front')
-  var documentBack = document.getElementById('relationship_account_opener_verification_document_back')
-  return window.uploadDocumentFiles(documentFront, documentBack, function (error, front, back) {
-    if (error) {
-      return window.renderError(error.message)
-    }
-    if (front && front.id) {
-      accountOpener.verification = {
-        document: {
-          front: front.id
-        }
-      }
-    } else if (documentFront.getAttribute('data-existing') !== 'true') {
-      return window.renderError('invalid-relationship_account_opener_verification_document_front')
-    }
-    if (back && back.id) {
-      accountOpener.verification = accountOpener.verification || {}
-      accountOpener.verification.document = accountOpener.verification.document || {}
-      accountOpener.verification.document.back = back.id
-    } else if (documentBack.getAttribute('data-existing') !== 'true') {
-      return window.renderError('invalid-relationship_account_opener_verification_document_back')
-    }
-    return stripe.createToken('account', accountData).then(function (result) {
-      if (!result || result.error) {
-        return window.renderError(result.error)
-      }
-      var token = document.getElementById('token')
-      token.value = result.token.id
-      var form = document.getElementById('submit-form')
-      return form.submit()
-    })
+    var token = document.getElementById('token')
+    token.value = result.token.id
+    var form = document.getElementById('submit-form')
+    return form.submit()
   })
 }

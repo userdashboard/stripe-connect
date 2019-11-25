@@ -965,22 +965,22 @@
         ✓ missing posted business_profile_mcc
       invalid-business_profile_url
         ✓ missing posted business_profile_url
-      invalid-relationship_account_opener_dob_day
-        ✓ missing posted relationship_account_opener_dob_day
-      invalid-relationship_account_opener_dob_month
-        ✓ missing posted relationship_account_opener_dob_month
-      invalid-relationship_account_opener_dob_year
-        ✓ missing posted relationship_account_opener_dob_year
-      invalid-relationship_account_opener_first_name
-        ✓ missing posted relationship_account_opener_first_name
-      invalid-relationship_account_opener_last_name
-        ✓ missing posted relationship_account_opener_last_name
-      invalid-relationship_account_opener_email
-        ✓ missing posted relationship_account_opener_email
-      invalid-relationship_account_opener_phone
-        ✓ missing posted relationship_account_opener_phone
-      invalid-relationship_account_opener_ssn_last_4
-        ✓ missing posted relationship_account_opener_ssn_last_4
+      invalid-relationship_representative_dob_day
+        ✓ missing posted relationship_representative_dob_day
+      invalid-relationship_representative_dob_month
+        ✓ missing posted relationship_representative_dob_month
+      invalid-relationship_representative_dob_year
+        ✓ missing posted relationship_representative_dob_year
+      invalid-relationship_representative_first_name
+        ✓ missing posted relationship_representative_first_name
+      invalid-relationship_representative_last_name
+        ✓ missing posted relationship_representative_last_name
+      invalid-relationship_representative_email
+        ✓ missing posted relationship_representative_email
+      invalid-relationship_representative_phone
+        ✓ missing posted relationship_representative_phone
+      invalid-relationship_representative_ssn_last_4
+        ✓ missing posted relationship_representative_ssn_last_4
       invalid-company_name_kana
         ✓ missing posted company_name_kana
       invalid-company_name_kanji
@@ -1005,26 +1005,26 @@
         ✓ missing posted company_address_kanji_town
       invalid-company_address_kanji_line1
         ✓ missing posted company_address_kanji_line1
-      invalid-relationship_account_opener_address_kana_postal_code
-        ✓ missing posted relationship_account_opener_address_kana_postal_code
-      invalid-relationship_account_opener_address_kana_city
-        ✓ missing posted relationship_account_opener_address_kana_city
-      invalid-relationship_account_opener_address_kana_state
-        ✓ missing posted relationship_account_opener_address_kana_state
-      invalid-relationship_account_opener_address_kana_town
-        ✓ missing posted relationship_account_opener_address_kana_town
-      invalid-relationship_account_opener_address_kana_line1
-        ✓ missing posted relationship_account_opener_address_kana_line1
-      invalid-relationship_account_opener_address_kanji_postal_code
-        ✓ missing posted relationship_account_opener_address_kanji_postal_code
-      invalid-relationship_account_opener_address_kanji_city
-        ✓ missing posted relationship_account_opener_address_kanji_city
-      invalid-relationship_account_opener_address_kanji_state
-        ✓ missing posted relationship_account_opener_address_kanji_state
-      invalid-relationship_account_opener_address_kanji_town
-        ✓ missing posted relationship_account_opener_address_kanji_town
-      invalid-relationship_account_opener_address_kanji_line1
-        ✓ missing posted relationship_account_opener_address_kanji_line1
+      invalid-relationship_representative_address_kana_postal_code
+        ✓ missing posted relationship_representative_address_kana_postal_code
+      invalid-relationship_representative_address_kana_city
+        ✓ missing posted relationship_representative_address_kana_city
+      invalid-relationship_representative_address_kana_state
+        ✓ missing posted relationship_representative_address_kana_state
+      invalid-relationship_representative_address_kana_town
+        ✓ missing posted relationship_representative_address_kana_town
+      invalid-relationship_representative_address_kana_line1
+        ✓ missing posted relationship_representative_address_kana_line1
+      invalid-relationship_representative_address_kanji_postal_code
+        ✓ missing posted relationship_representative_address_kanji_postal_code
+      invalid-relationship_representative_address_kanji_city
+        ✓ missing posted relationship_representative_address_kanji_city
+      invalid-relationship_representative_address_kanji_state
+        ✓ missing posted relationship_representative_address_kanji_state
+      invalid-relationship_representative_address_kanji_town
+        ✓ missing posted relationship_representative_address_kanji_town
+      invalid-relationship_representative_address_kanji_line1
+        ✓ missing posted relationship_representative_address_kanji_line1
     returns
       ✓ object for AT registration
       ✓ object for AU registration

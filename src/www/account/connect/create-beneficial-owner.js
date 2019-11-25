@@ -36,11 +36,11 @@ async function renderPage (req, res, messageTemplate) {
     stripeJS.parentNode.removeChild(stripeJS)
     const clientJS = doc.getElementById('client-v3')
     clientJS.parentNode.removeChild(clientJS)
-    const connectJS = doc.getElementById('connect-js')
+    const connectJS = doc.getElementById('connect-v3')
     connectJS.parentNode.removeChild(connectJS)
   } else {
     res.setHeader('content-security-policy',
-    'default-src * \'unsafe-inline\'; ' +
+      'default-src * \'unsafe-inline\'; ' +
     `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
     `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/stripe-helper.js 'unsafe-inline' 'unsafe-eval'; ` +
     'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
