@@ -125,7 +125,7 @@ async function createCompanyRepresentative (user, properties, uploads) {
   req.uploads = uploads || {}
   req.uploads.relationship_representative_verification_document_front = req.uploads.individual_verification_document_front || module.exports['success_id_scan_front.png']
   req.uploads.relationship_representative_verification_document_back = req.uploads.individual_verification_document_back || module.exports['success_id_scan_back.png']
-  req.body = createMultiPart(req2, properties)
+  req.body = createMultiPart(req, properties)
   await req.patch()
   return user.stripeAccount
 }
