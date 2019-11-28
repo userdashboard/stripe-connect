@@ -549,6 +549,57 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
+    it('object for EE registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'EE'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_address_city: 'Talin',
+        company_address_state: '37',
+        company_address_country: 'EE',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '10128',
+        company_name: 'Company',
+        company_tax_id: '8',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_city: 'Tallinn',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_state: '37',
+        relationship_representative_address_country: 'EE',
+        relationship_representative_address_postal_code: '10128',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
+      }, {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'EE',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'EE89370400440532013000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
     it('object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -989,6 +1040,57 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //   assert.notStrictEqual(accountNow.metadata.submitted, null)
     // })
 
+    it('object for LT registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'LT'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_address_city: 'Vilnius',
+        company_address_line1: '123 Sesame St',
+        company_address_postal_code: 'LT-00000',
+        company_address_state: 'AL',
+        company_address_country: 'LT',
+        company_name: 'Company',
+        company_tax_id: '8',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_city: 'Vilnius',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'LT-00000',
+        relationship_representative_address_state: 'AL',
+        relationship_representative_address_country: 'LT',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
+      }, {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'LT',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'LT89370400440532013000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
     it('object for LU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -1031,6 +1133,57 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_type: 'individual',
         iban: 'LU89370400440532013000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
+    it('object for LV registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'LV'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_address_city: 'Riga',
+        company_address_line1: '123 Sesame St',
+        company_address_postal_code: 'LV–1073',
+        company_address_state: 'AI',
+        company_address_country: 'LV',
+        company_name: 'Company',
+        company_tax_id: '8',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_city: 'Riga',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'LV–1073',
+        relationship_representative_address_state: 'AI',
+        relationship_representative_address_country: 'LV',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
+      }, {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'LV',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'LV89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1090,6 +1243,57 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
+
+    // it.only('object for MX registration', async () => {
+    //   const user = await TestHelper.createUser()
+    //   await TestHelper.createStripeAccount(user, {
+    //     type: 'company',
+    //     country: 'MX'
+    //   })
+    //   await TestHelper.createStripeRegistration(user, {
+    //     company_address_city: 'Talin',
+    //     company_address_state: '37',
+    //     company_address_country: 'MX',
+    //     company_address_line1: '123 Park Lane',
+    //     company_address_postal_code: '10128',
+    //     company_name: 'Company',
+    //     company_tax_id: '8',
+    //     business_profile_mcc: '8931',
+    //     business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+    //   })
+    //   await TestHelper.createCompanyRepresentative(user, {
+        //     relationship_representative_address_city: 'Mexico City',
+    //     relationship_representative_address_line1: '123 Sesame St',
+    //     relationship_representative_address_postal_code: '11000',
+    //     relationship_representative_address_state: 'DIF',
+    //     relationship_representative_address_country: 'MX',
+    //     relationship_representative_dob_day: '1',
+    //     relationship_representative_dob_month: '1',
+    //     relationship_representative_dob_year: '1950',
+    //     relationship_representative_first_name: user.profile.firstName,
+    //     relationship_representative_last_name: user.profile.lastName,
+    //     relationship_representative_executive: 'true',
+    //     relationship_representative_relationship_title: 'Owner',
+    //     relationship_representative_email: user.profile.contactEmail,
+    //     relationship_representative_phone: '456-789-0123'
+    //   }, {
+    //     relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+    //     relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+    //   })
+    //   await TestHelper.createExternalAccount(user, {
+    //     currency: 'eur',
+    //     country: 'MX',
+    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+    //     account_type: 'individual',
+    //     iban: 'MX89370400440532013000'
+    //   })
+    //   const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+    //   req.account = user.account
+    //   req.session = user.session
+    //   const accountNow = await req.patch()
+    //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+    //   assert.notStrictEqual(accountNow.metadata.submitted, null)
+    // })
 
     it('object for NO registration', async () => {
       const user = await TestHelper.createUser()
@@ -1343,6 +1547,109 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_number: '000123456',
         bank_code: '1100',
         branch_code: '000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
+
+    it('object for SI registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SI'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_address_city: 'Ljubljana',
+        company_address_line1: '123 Sesame St',
+        company_address_postal_code: '1210',
+        company_address_state: '07',
+        company_address_country: 'SI',
+        company_name: 'Company',
+        company_tax_id: '8',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_city: 'Ljubljana',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1210',
+        relationship_representative_address_state: '07',
+        relationship_representative_address_country: 'SI',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
+      }, {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'SI',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'SI89370400440532013000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
+    it('object for SK registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SK'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        company_address_city: 'Slovakia',
+        company_address_line1: '123 Sesame St',
+        company_address_postal_code: '00102',
+        company_address_state: 'BC',
+        company_address_country: 'SK',
+        company_name: 'Company',
+        company_tax_id: '8',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_city: 'Slovakia',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '00102',
+        relationship_representative_address_state: 'BC',
+        relationship_representative_address_country: 'SK',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
+      }, {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'SK',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'SK89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

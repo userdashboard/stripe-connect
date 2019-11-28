@@ -616,6 +616,26 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
+    it('object for EE registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'EE'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'eur',
+        country: 'EE',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'company',
+        iban: 'EE89370400440532013000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    })
+
     it('object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -635,7 +655,7 @@ describe('/api/user/connect/update-payment-information', () => {
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
-
+    
     it('object for FI registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -801,6 +821,28 @@ describe('/api/user/connect/update-payment-information', () => {
     //   assert.strictEqual(accountNow.external_accounts.data.length, 1)
     // })
     
+    
+    it('object for LT registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'LT'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'eur',
+        country: 'LT',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'company',
+        iban: 'LT89370400440532013000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    })
+
+
     it('object for LU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -820,6 +862,47 @@ describe('/api/user/connect/update-payment-information', () => {
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
+
+    
+    it('object for LV registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'LV'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'eur',
+        country: 'LV',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'company',
+        iban: 'LV89370400440532013000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    })
+
+    // it.only('object for MX registration', async () => {
+    //   const user = await TestHelper.createUser()
+    //   await TestHelper.createStripeAccount(user, {
+    //     type: 'company',
+    //     country: 'MX'
+    //   })
+    //   const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+    //   req.account = user.account
+    //   req.session = user.session
+    //   req.body = {
+    //     currency: 'eur',
+    //     country: 'MX',
+    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+    //     account_type: 'company',
+    //     iban: 'MX89370400440532013000'
+    //   }
+    //   const accountNow = await req.patch()
+    //   assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    // })
 
     it('object for NL registration', async () => {
       const user = await TestHelper.createUser()
@@ -939,6 +1022,46 @@ describe('/api/user/connect/update-payment-information', () => {
         account_number: '000123456',
         bank_code: '1100',
         branch_code: '000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    })
+
+    it('object for SI registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SI'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'eur',
+        country: 'SI',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'company',
+        iban: 'SI89370400440532013000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    })
+
+    it('object for SK registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SK'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'eur',
+        country: 'SK',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'company',
+        iban: 'SK89370400440532013000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)

@@ -1933,6 +1933,43 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
+    it('returns object for EE registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'EE'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Tallinn',
+        individual_address_line1: '123 Sesame St',
+        individual_address_state: '37',
+        individual_address_country: 'EE',
+        individual_address_postal_code: '10128',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      for (const field in req.body) {
+        assert.strictEqual(registrationNow[field], body[field])
+      }
+    })
+
     it('returns object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -2240,6 +2277,43 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
+    it('returns object for LT registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'LT'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Vilnius',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'LT-00000',
+        individual_address_state: 'AL',
+        individual_address_country: 'LT',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      for (const field in req.body) {
+        assert.strictEqual(registrationNow[field], body[field])
+      }
+    })
+
     it('returns object for LU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -2276,6 +2350,81 @@ describe('/api/user/connect/update-individual-registration', () => {
         assert.strictEqual(registrationNow[field], body[field])
       }
     })
+
+    
+    it('returns object for LV registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'LV'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Riga',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'LV–1073',
+        individual_address_state: 'AI',
+        individual_address_country: 'LV',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      for (const field in req.body) {
+        assert.strictEqual(registrationNow[field], body[field])
+      }
+    })
+    
+    // it.only('returns object for MX registration', async () => {
+    //   const user = await TestHelper.createUser()
+    //   await TestHelper.createStripeAccount(user, {
+    //     type: 'individual',
+    //     country: 'MX'
+    //   })
+    //   const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+    //   req.account = user.account
+    //   req.session = user.session
+    //   const body = {
+    //     business_profile_mcc: '8931',
+    //     business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+    //     individual_address_city: 'Mexico City',
+    //     individual_address_line1: '123 Sesame St',
+    //     individual_address_postal_code: '11000',
+    //     individual_address_state: 'DIF',
+    //     individual_address_country: 'MX',
+    //     individual_dob_day: '1',
+    //     individual_dob_month: '1',
+    //     individual_dob_year: '1950',
+    //     individual_first_name: user.profile.firstName,
+    //     individual_last_name: user.profile.lastName,
+    //     individual_email: user.profile.contactEmail,
+    //     individual_phone: '456-789-0123'
+    //   }
+    //   req.uploads = {
+    //     individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+    //     individual_verification_document_back: TestHelper['success_id_scan_back.png']
+    //   }
+    //   req.body = TestHelper.createMultiPart(req, body)
+    //   const accountNow = await req.patch()
+    //   const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+    //   for (const field in req.body) {
+    //     assert.strictEqual(registrationNow[field], body[field])
+    //   }
+    // })
 
     it('returns object for NL registration', async () => {
       const user = await TestHelper.createUser()
@@ -2464,6 +2613,43 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
 
+    it('returns object for SI registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SI'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Ljubljana',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1210',
+        individual_address_state: '07',
+        individual_address_country: 'SI',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      for (const field in req.body) {
+        assert.strictEqual(registrationNow[field], body[field])
+      }
+    })
+
     it('returns object for SG registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -2489,6 +2675,43 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_country: 'SG',
         individual_phone: '456-789-0123',
         individual_id_number: '000000000'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      for (const field in req.body) {
+        assert.strictEqual(registrationNow[field], body[field])
+      }
+    })
+
+    it('returns object for SK registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SK'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Slovakia',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00102',
+        individual_address_state: 'BC',
+        individual_address_country: 'SK',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
       }
       req.uploads = {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],

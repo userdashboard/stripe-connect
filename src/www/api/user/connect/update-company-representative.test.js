@@ -1141,6 +1141,43 @@ describe('/api/user/connect/update-company-representative', () => {
       }
     })
 
+    it('object for EE registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'EE'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_address_city: 'Talinn',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_state: '37',
+        relationship_representative_address_country: 'EE',
+        relationship_representative_address_postal_code: '10128',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      for (const field in req.body) {
+        assert.strictEqual(registrationNow[field], body[field])
+      }
+    })
+
     it('object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

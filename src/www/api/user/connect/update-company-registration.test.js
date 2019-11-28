@@ -590,6 +590,33 @@ describe('/api/user/connect/update-company-registration', () => {
       }
     })
 
+    it('object for EE registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'EE'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_address_city: 'Tallinn',
+        company_address_state: '37',
+        company_address_country: 'EE',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '10128',
+        company_name: 'Company',
+        company_tax_id: '8',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      }
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      for (const field in req.body) {
+        assert.strictEqual(registrationNow[field], req.body[field])
+      }
+    })
+
     it('object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

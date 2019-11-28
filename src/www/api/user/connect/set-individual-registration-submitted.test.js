@@ -442,6 +442,46 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
+    it('returns object for EE registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'EE'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Tallinn',
+        individual_address_line1: '123 Sesame St',
+        individual_address_state: '37',
+        individual_address_country: 'EE',
+        individual_address_postal_code: '10128',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'EE',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'EE89370400440532013000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
     it('returns object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -770,6 +810,46 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
     //   assert.notStrictEqual(accountNow.metadata.submitted, null)
     // })
 
+    it('returns object for LT registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'LT'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Vilnius',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'LT-00000',
+        individual_address_state: 'AL',
+        individual_address_country: 'LT',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'LT',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'LT89370400440532013000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
     it('returns object for LU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -809,6 +889,86 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
+
+    it('returns object for LV registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'LV'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Riga',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'LV–1073',
+        individual_address_state: 'AI',
+        individual_address_country: 'LV',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'LV',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'LV89370400440532013000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
+    // it.only('returns object for MX registration', async () => {
+    //   const user = await TestHelper.createUser()
+    //   await TestHelper.createStripeAccount(user, {
+    //     type: 'individual',
+    //     country: 'MX'
+    //   })
+    //   await TestHelper.createStripeRegistration(user, {
+    //     business_profile_mcc: '8931',
+    //     business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+    //     individual_address_city: 'Mexico City',
+    //     individual_address_line1: '123 Sesame St',
+    //     individual_address_postal_code: '11000',
+    //     individual_address_state: 'DIF',
+    //     individual_address_country: 'MX',
+    //     individual_dob_day: '1',
+    //     individual_dob_month: '1',
+    //     individual_dob_year: '1950',
+    //     individual_first_name: user.profile.firstName,
+    //     individual_last_name: user.profile.lastName,
+    //     individual_email: user.profile.contactEmail,
+    //     individual_phone: '456-789-0123',
+    //   }, {
+    //     individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+    //     individual_verification_document_back: TestHelper['success_id_scan_back.png']
+    //   })
+    //   await TestHelper.createExternalAccount(user, {
+    //     currency: 'eur',
+    //     country: 'MX',
+    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+    //     account_type: 'individual',
+    //     iban: 'MX89370400440532013000'
+    //   })
+    //   const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+    //   req.account = user.account
+    //   req.session = user.session
+    //   const accountNow = await req.patch()
+    //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+    //   assert.notStrictEqual(accountNow.metadata.submitted, null)
+    // })
 
     it('returns object for NL registration', async () => {
       const user = await TestHelper.createUser()
@@ -1047,6 +1207,86 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         account_number: '000123456',
         bank_code: '1100',
         branch_code: '000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
+    it('returns object for SI registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SI'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Ljubljana',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1210',
+        individual_address_state: '07',
+        individual_address_country: 'SI',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'SI',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'SI89370400440532013000'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+
+    it('returns object for SK registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'SK'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Slovakia',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00102',
+        individual_address_state: 'BC',
+        individual_address_country: 'SK',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123'
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        currency: 'eur',
+        country: 'SK',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_type: 'individual',
+        iban: 'SK89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
