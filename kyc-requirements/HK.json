@@ -1,5 +1,8 @@
 {
   "individual": [
+    "business_profile.mcc",
+    "business_profile.url",
+    "business_profile.product_description",
     "individual.email",
     "individual.phone",
     "individual.id_number",
@@ -22,8 +25,10 @@
     "company.address.state",
     "company.address.country",
     "company.address.postal_code",
+    "company.name",
     "company.tax_id",
     "company.phone",
+    "business_profile.mcc",
     "business_profile.url",
     "business_profile.product_description"
   ],
@@ -42,8 +47,6 @@
     "relationship.representative.address.state",
     "relationship.representative.address.country",
     "relationship.representative.address.postal_code",
-    "relationship.representative.verification.additional_document.front",
-    "relationship.representative.verification.additional_document.back",
     "relationship.representative.verification.document.front",
     "relationship.representative.verification.document.back"
   ]

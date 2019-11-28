@@ -1,5 +1,8 @@
 {
   "individual": [
+    "business_profile.mcc",
+    "business_profile.url",
+    "business_profile.product_description",
     "individual.first_name",
     "individual.last_name",
     "individual.dob.day",
@@ -13,7 +16,9 @@
     "company.address.state",
     "company.address.country",
     "company.address.postal_code",
+    "company.name",
     "company.tax_id",
+    "business_profile.mcc",
     "business_profile.url",
     "business_profile.product_description"
   ],

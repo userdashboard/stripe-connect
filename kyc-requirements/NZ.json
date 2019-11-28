@@ -5,7 +5,7 @@
     "business_profile.product_description",
     "individual.email",
     "individual.phone",
-    "individual.last_name",
+    "individual.first_name",
     "individual.last_name",
     "individual.dob.day",
     "individual.dob.month",
@@ -15,9 +15,15 @@
     "individual.address.city",
     "individual.address.state",
     "individual.address.country",
-    "individual.address.postal_code"
+    "individual.address.postal_code",
+    "individual.verification.document.front",
+    "individual.verification.document.back",
+    "individual.verification.additional_document.front",
+    "individual.verification.additional_document.back"
   ],
   "company": [
+    "business_profile.mcc",
+    "business_profile.url",
     "company.address.line1",
     "company.address.line2",
     "company.address.city",
@@ -26,7 +32,6 @@
     "company.address.postal_code",
     "company.name",
     "company.tax_id",
-    "company.phone",
     "business_profile.mcc",
     "business_profile.url",
     "business_profile.product_description"
@@ -77,8 +82,6 @@
     "relationship.director.dob.month",
     "relationship.director.dob.year",
     "relationship.director.verification.document.front",
-    "relationship.director.verification.document.back",
-    "relationship.director.relationship.title",
-    "relationship.director.email"
+    "relationship.director.verification.document.back"
   ]
 }
