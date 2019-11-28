@@ -57,7 +57,7 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requiredFields = connect.kycRequirements[stripeAccount.country].countryRepresentative
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].countryRepresentative
   if (requiredFields.indexOf('relationship_representative_address_country') > -1) {
     let personalCountry
     if (req.body) {
@@ -81,6 +81,14 @@ async function renderPage (req, res, messageTemplate) {
     const uploadBack = doc.getElementById('relationship_representative_verification_document_back')
     uploadBack.setAttribute('data-existing', true)
   }
+  if (req.data.registration.relationship_representative_verification_additional_document_front) {
+    const uploadFront = doc.getElementById('relationship_representative_verification_additional_document_front')
+    uploadFront.setAttribute('data-existing', true)
+  }
+  if (req.data.registration.relationship_representative_verification_additional_document_back) {
+    const uploadBack = doc.getElementById('relationship_representative_verification_additional_document_back')
+    uploadBack.setAttribute('data-existing', true)
+  }
   if (req.method === 'GET') {
     for (const field in req.data.registration) {
       const element = doc.getElementById(field)
@@ -89,7 +97,7 @@ async function renderPage (req, res, messageTemplate) {
       }
       if (element.tag === 'input') {
         element.setAttribute('value', req.data.registration[field] || '')
-      } else if(element.tag === 'select') {
+      } else if (element.tag === 'select') {
         dashboard.HTML.setSelectedOptionByValue(doc, element, req.data.registration[field] || '')
       }
     }
@@ -123,7 +131,7 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  const requiredFields = connect.kycRequirements[stripeAccount.country].countryRepresentative
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].countryRepresentative
   for (const field of requiredFields) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {

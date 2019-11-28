@@ -57,7 +57,7 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requiredFields = connect.kycRequirements[stripeAccount.country].company
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].company
   if (requiredFields.indexOf('company.tax_id') === -1) {
     removeElements.push('company_tax_id-container')
   }
@@ -67,14 +67,14 @@ async function renderPage (req, res, messageTemplate) {
   if (requiredFields.indexOf('business_profile.url') === -1) {
     removeElements.push('business_profile_url-container')
   }
-  
+
   if (requiredFields.indexOf('business_profile.mcc') === -1) {
     removeElements.push('business_profile_mcc-container')
   } else {
     const mccList = connect.getMerchantCategoryCodes(req.language)
     dashboard.HTML.renderList(doc, mccList, 'mcc-option', 'business_profile_mcc')
   }
-  if (stripeAccount.country !== 'JP') {
+  if (req.data.stripeAccount.country !== 'JP') {
     removeElements.push('JP-company-name-container', 'JP-company-address-container')
   }
   if (requiredFields.indexOf('company_address.country') > -1) {
@@ -120,7 +120,7 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  const requiredFields = connect.kycRequirements[stripeAccount.country].company
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].company
   for (const field of requiredFields) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {

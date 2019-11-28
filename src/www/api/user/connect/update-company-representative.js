@@ -13,6 +13,56 @@ module.exports = {
     if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
     }
+    let validateDOB = false
+    if (req.body.relationship_representative_dob_day) {
+      validateDOB = true
+      try {
+        const day = parseInt(req.body.relationship_representative_dob_day, 10)
+        if (!day || day < 1 || day > 31) {
+          throw new Error('invalid-relationship_representative_dob_day')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_representative_dob_day')
+      }
+    }
+    if (req.body.relationship_representative_dob_month) {
+      validateDOB = true
+      try {
+        const month = parseInt(req.body.relationship_representative_dob_month, 10)
+        if (!month || month < 1 || month > 12) {
+          throw new Error('invalid-relationship_representative_dob_month')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_representative_dob_month')
+      }
+    }
+    if (req.body.relationship_representative_dob_year) {
+      validateDOB = true
+      try {
+        const year = parseInt(req.body.relationship_representative_dob_year, 10)
+        if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
+          throw new Error('invalid-relationship_representative_dob_year')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_representative_dob_year')
+      }
+    }
+    if (validateDOB) {
+      if (!req.body.relationship_representative_dob_day) {
+        throw new Error('invalid-relationship_representative_dob_day')
+      }
+      if (!req.body.relationship_representative_dob_month) {
+        throw new Error('invalid-relationship_representative_dob_month')
+      }
+      if (!req.body.relationship_representative_dob_year) {
+        throw new Error('invalid-relationship_representative_dob_year')
+      }
+      try {
+        new Date(req.body.relationship_representative_dob_year, req.body.relationship_representative_dob_month, req.body.relationship_representative_dob_day)
+      } catch (error) {
+        throw new Error('invalid-relationship_representative_dob_day')
+      }
+    }
     if (req.uploads) {
       if (req.uploads.relationship_representative_verification_document_front) {
         const uploadData = {
@@ -46,42 +96,39 @@ module.exports = {
           throw new Error('invalid-relationship_representative_verification_document_back')
         }
       }
-
-
-
-      if (req.uploads.relationship_representative_verification_document_front) {
+      if (req.uploads.relationship_representative_verification_additional_document_front) {
         const uploadData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.relationship_representative_verification_document_front.name,
-            data: req.uploads.relationship_representative_verification_document_front.buffer
+            name: req.uploads.relationship_representative_verification_additional_document_front.name,
+            data: req.uploads.relationship_representative_verification_additional_document_front.buffer
           }
         }
         try {
           const file = await stripe.files.create(uploadData, req.stripeKey)
-          req.body.relationship_representative_verification_document_front = file.id
+          req.body.relationship_representative_verification_additional_document_front = file.id
         } catch (error) {
-          throw new Error('invalid-relationship_representative_verification_document_front')
+          throw new Error('invalid-relationship_representative_verification_additional_document_front')
         }
       }
-      if (req.uploads.relationship_representative_verification_document_back) {
+      if (req.uploads.relationship_representative_verification_additional_document_back) {
         const uploadData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.relationship_representative_verification_document_back.name,
-            data: req.uploads.relationship_representative_verification_document_back.buffer
+            name: req.uploads.relationship_representative_verification_additional_document_back.name,
+            data: req.uploads.relationship_representative_verification_additional_document_back.buffer
           }
         }
         try {
           const file = await stripe.files.create(uploadData, req.stripeKey)
-          req.body.relationship_representative_verification_document_back = file.id
+          req.body.relationship_representative_verification_additional_document_back = file.id
         } catch (error) {
-          throw new Error('invalid-relationship_representative_verification_document_back')
+          throw new Error('invalid-relationship_representative_verification_additional_document_back')
         }
       }
-    } 
+    }
     const requiredFields = connect.kycRequirements[stripeAccount.country].companyRepresentative
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
     for (const field of requiredFields) {
@@ -97,44 +144,6 @@ module.exports = {
         throw new Error(`invalid-${posted}`)
       }
       registration[posted] = req.body[posted]
-    }
-    if (req.body.company_address_state) {
-      registration.company_address_state = req.body.company_address_state
-    }
-    if (req.body.company_address_line2) {
-      registration.company_address_line2 = req.body.company_address_line2
-    }
-    const openerFields = ['first_name', 'last_name', 'email', 'phone', 'dob_day', 'dob_month', 'dob_year']
-    const openerOptional = ['address_line2', 'address_state', 'address_country']
-    if (stripeAccount.country === 'US') {
-      openerFields.push('ssn_last_4')
-    }
-    if (stripeAccount.country !== 'JP') {
-      openerFields.push('address_city', 'address_line1', 'address_postal_code')
-    } else {
-      openerFields.push('gender', 'first_name_kana', 'last_name_kana', 'address_kana_state', 'address_kana_city', 'address_kana_town', 'address_kana_line1', 'address_kana_postal_code', 'first_name_kanji', 'last_name_kanji', 'address_kanji_state', 'address_kanji_city', 'address_kanji_town', 'address_kanji_line1', 'address_kanji_postal_code')
-    }
-    for (const personField of openerFields) {
-      const posted = `relationship_representative_${personField}`
-      if (!req.body[posted]) {
-        throw new Error(`invalid-${posted}`)
-      }
-      if (personField === 'gender' && req.body.relationship_representative_gender !== 'female' && req.body.relationship_representative_gender !== 'male') {
-        throw new Error(`invalid-${posted}`)
-      }
-      registration[posted] = req.body[posted]
-    }
-    for (const personField of openerOptional) {
-      const posted = `relationship_representative_${personField}`
-      if (req.body[posted]) {
-        registration[posted] = req.body[posted]
-      }
-    }
-    if (req.body.relationship_representative_verification_document_front) {
-      registration.relationship_representative_verification_document_front = req.body.relationship_representative_verification_document_front
-    }
-    if (req.body.relationship_representative_verification_document_back) {
-      registration.relationship_representative_verification_document_back = req.body.relationship_representative_verification_document_back
     }
     if (req.body.relationship_representative_title) {
       registration.relationship_representative_title = req.body.relationship_representative_title

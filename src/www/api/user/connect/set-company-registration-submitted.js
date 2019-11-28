@@ -23,19 +23,15 @@ module.exports = {
     if (!registration) {
       throw new Error('invalid-registration')
     }
-    const requiredFields = stripeAccount.requirements.currently_due.concat(stripeAccount.requirements.eventually_due)
+    const requiredFields = connect.kycRequirements[stripeAccount.country].company
     for (const field of requiredFields) {
-      if (field === 'business_type' ||
-        field === 'external_account' ||
-        field === 'relationship.representative' ||
-        field === 'relationship.owner' ||
-        field === 'tos_acceptance.date' ||
-        field === 'relationship.director' ||
-        field === 'tos_acceptance.ip') {
-        continue
-      }
       const posted = field.split('.').join('_')
       if (!registration[posted]) {
+        if (field === 'company.address.line2' ||
+          (field === 'business_profile.url' && registration.business_profile_product_description) ||
+          (field === 'business_profile.product_description' && registration.business_profile_url)) {
+          continue
+        }
         throw new Error('invalid-registration')
       }
     }
@@ -57,7 +53,7 @@ module.exports = {
     if (connect.euCountries.indexOf(stripeAccount.country) === -1) {
       accountInfo.company.directors_provided = true
     }
-    const accountOpener = {
+    const representative = {
       relationship: {
         representative: true
       },
@@ -67,14 +63,14 @@ module.exports = {
       address: {},
       dob: {}
     }
-    if (registration.relationship_representative_title) {
-      accountOpener.relationship.title = registration.relationship_representative_title
+    if (registration.relationship_representative_relationship_title) {
+      representative.relationship.title = registration.relationship_representative_relationship_title
     }
     if (registration.relationship_representative_executive) {
-      accountOpener.relationship.executive = true
+      representative.relationship.executive = true
     }
     if (registration.relationship_representative_director) {
-      accountOpener.relationship.director = true
+      representative.relationship.director = true
     }
     for (const field in registration) {
       if (field.startsWith('business_profile_')) {
@@ -106,32 +102,38 @@ module.exports = {
       if (field.startsWith('relationship_representative_')) {
         if (field.startsWith('relationship_representative_address_kanji_')) {
           const property = field.substring('relationship_representative_address_kanji_'.length)
-          accountOpener.address_kanji = accountOpener.address_kanji || {}
-          accountOpener.address_kanji[property] = registration[field]
+          representative.address_kanji = representative.address_kanji || {}
+          representative.address_kanji[property] = registration[field]
         } else if (field.startsWith('relationship_representative_address_kana_')) {
           const property = field.substring('relationship_representative_address_kana_'.length)
-          accountOpener.address_kana = accountOpener.address_kana || {}
-          accountOpener.address_kana[property] = registration[field]
+          representative.address_kana = representative.address_kana || {}
+          representative.address_kana[property] = registration[field]
         } else if (field.startsWith('relationship_representative_address_')) {
           const property = field.substring('relationship_representative_address_'.length)
-          accountOpener.address[property] = registration[field]
+          representative.address[property] = registration[field]
         } else if (field.startsWith('relationship_representative_verification_document_')) {
           const property = field.substring('relationship_representative_verification_document_'.length)
-          accountOpener.verification.document[property] = registration[field]
+          representative.verification.document[property] = registration[field]
         } else if (field.startsWith('relationship_representative_dob_')) {
           const property = field.substring('relationship_representative_dob_'.length)
-          accountOpener.dob[property] = registration[field]
+          representative.dob[property] = registration[field]
         } else {
-          const property = field.substring('relationship_representative_'.length)
-          if (property === 'title' || property === 'executive' || property === 'director') {
+          if (field === 'relationship_representative_relationship_title') {
+            representative.relationship = {
+              title: registration[field]
+            }
             continue
           }
-          accountOpener[property] = registration[field]
+          const property = field.substring('relationship_representative_'.length)
+          if (property === 'relationship_title' || property === 'executive' || property === 'director') {
+            continue
+          }
+          representative[property] = registration[field]
         }
       }
     }
     try {
-      await stripe.accounts.createPerson(req.query.stripeid, accountOpener, req.stripeKey)
+      await stripe.accounts.createPerson(req.query.stripeid, representative, req.stripeKey)
       const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
       if (owners && owners.length) {
         for (const owner of owners) {

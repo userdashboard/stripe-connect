@@ -20,23 +20,29 @@ module.exports = {
       throw new Error('invalid-payment-details')
     }
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration')
-    if (!registration || !registration.individual_verification_document_front) {
+    if (!registration) {
+      throw new Error('invalid-registration')
+    }
+    if (!registration.individual_verification_document_front) {
       throw new Error('invalid-individual_verification_document_front')
-    } if (!registration.individual_verification_document_back) {
+    }
+    if (!registration.individual_verification_document_back) {
       throw new Error('invalid-individual_verification_document_back')
     }
-    const requiredFields = stripeAccount.requirements.currently_due.concat(stripeAccount.requirements.eventually_due)
+    const requiredFields = connect.kycRequirements[stripeAccount.country].individual
     for (const field of requiredFields) {
-      if (field === 'external_account' ||
-        field === 'individual.verification.document' ||
-        field === 'business_type' ||
-        field === 'tos_acceptance.ip' ||
-        field === 'tos_acceptance.date') {
-        continue
-      }
       const posted = field.split('.').join('_')
       if (!registration[posted]) {
-        throw new Error('invalid-reegistration')
+        if (field === 'individual.address.line2' ||
+            field === 'individual.verification.document.front' ||
+            field === 'individual.verification.document.back' ||
+            field === 'individual.verification.additional_document.front' ||
+            field === 'individual.verification.additional_document.back' ||
+          (field === 'business_profile.url' && registration.business_profile_product_description) ||
+          (field === 'business_profile.product_description' && registration.business_profile_url)) {
+          continue
+        }
+        throw new Error('invalid-registration')
       }
     }
     const accountInfo = {
@@ -50,9 +56,7 @@ module.exports = {
       },
       business_profile: {},
       individual: {
-        verification: {
-          document: {}
-        },
+        verification: {},
         address: {},
         dob: {}
       }
@@ -75,8 +79,13 @@ module.exports = {
         const property = field.substring('individual_dob_'.length)
         accountInfo.individual.dob[property] = registration[field]
       } else if (field.startsWith('individual_verification_document_')) {
+        accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
         const property = field.substring('individual_verification_document_'.length)
         accountInfo.individual.verification.document[property] = registration[field]
+      } else if (field.startsWith('individual_verification_additional_document_')) {
+        accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+        const property = field.substring('individual_verification_additional_document_'.length)
+        accountInfo.individual.verification.additional_document[property] = registration[field]
       } else if (field.startsWith('individual_')) {
         const property = field.substring('individual_'.length)
         accountInfo.individual[property] = registration[field]

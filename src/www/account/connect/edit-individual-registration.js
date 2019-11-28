@@ -21,79 +21,7 @@ async function beforeRequest (req) {
   }
   stripeAccount.stripePublishableKey = global.stripePublishableKey
   const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  const requiredFields = []
-  switch (req.data.stripeAccount.country) {
-    case 'AU':
-      requiredFields.push()
-      break
-    case 'AT':
-      requiredFields.push()
-      break
-    case 'BE':
-      requiredFields.push()
-      break
-    case 'CA':
-      requiredFields.push()
-      break
-    case 'CH':
-      requiredFields.push()
-      break
-    case 'DE':
-      requiredFields.push()
-      break
-    case 'DK':
-      requiredFields.push()
-      break
-    case 'ES':
-      requiredFields.push()
-      break
-    case 'FI':
-      requiredFields.push()
-      break
-    case 'FR':
-      requiredFields.push()
-      break
-    case 'GB':
-      requiredFields.push()
-      break
-    case 'HK':
-      requiredFields.push()
-      break
-    case 'IE':
-      requiredFields.push()
-      break
-    case 'IT':
-      requiredFields.push()
-      break
-    case 'JP':
-      requiredFields.push()
-      break
-    case 'LU':
-      requiredFields.push()
-      break
-    case 'NL':
-      requiredFields.push()
-      break
-    case 'NZ':
-      requiredFields.push()
-      break
-    case 'NO':
-      requiredFields.push()
-      break
-    case 'PT':
-      requiredFields.push()
-      break
-    case 'SG':
-      requiredFields.push()
-      break
-    case 'SE':
-      requiredFields.push()
-      break
-    case 'US':
-      requiredFields.push()
-      break
-  }
-  req.data = { stripeAccount, registration, requiredFields }
+  req.data = { stripeAccount, registration }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -129,19 +57,12 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const allFields = []
-  for (const field of allFields) {
-    if (req.data.requiredFields.indexOf(field) > -1) {
-      continue
-    }
-    const element = doc.getElementById(field)
-    element.parentNode.removeChild(element)
-  }
-  if (req.data.requiredFields.indexOf('business_profile.mcc') > -1) {
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].individual
+  if (requiredFields.indexOf('business_profile.mcc') > -1) {
     const mccList = connect.getMerchantCategoryCodes(req.language)
     dashboard.HTML.renderList(doc, mccList, 'mcc-option', 'business_profile_mcc')
   }
-  if (req.data.requiredFields.indexOf('individual_address_country') > -1) {
+  if (requiredFields.indexOf('individual_address.country') > -1) {
     let personalCountry
     if (req.body) {
       personalCountry = req.body.individual_address_country
@@ -162,6 +83,14 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.data.registration.individual_verification_document_back) {
     const uploadBack = doc.getElementById('individual_verification_document_back')
+    uploadBack.setAttribute('data-existing', true)
+  }
+  if (req.data.registration.individual_verification_additional_document_front) {
+    const uploadFront = doc.getElementById('individual_verification_additional_document_front')
+    uploadFront.setAttribute('data-existing', true)
+  }
+  if (req.data.registration.individual_verification_additional_document_back) {
+    const uploadBack = doc.getElementById('individual_verification_additional_document_back')
     uploadBack.setAttribute('data-existing', true)
   }
   if (req.method === 'GET') {
@@ -206,7 +135,8 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  for (const field of req.data.requiredFields) {
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].individual
+  for (const field of requiredFields) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       return renderPage(req, res, `invalid-${posted}`)

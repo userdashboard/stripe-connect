@@ -20,7 +20,7 @@ module.exports = {
       if (!req.body[posted]) {
         if (field === 'company.address.line2' ||
            (field === 'business_profile.url' && req.body.business_profile_product_description) ||
-           (field === 'business_profile.product_description' && req.body.business_profile.url)) {
+           (field === 'business_profile.product_description' && req.body.business_profile_url)) {
           continue
         }
         throw new Error(`invalid-${posted}`)
