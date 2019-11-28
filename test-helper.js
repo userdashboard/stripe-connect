@@ -26,6 +26,7 @@ module.exports = {
   createPayout,
   createStripeAccount,
   createStripeRegistration,
+  createCompanyRepresentative
   submitStripeAccount,
   triggerVerification,
   waitForVerification: util.promisify(waitForVerification),
@@ -105,16 +106,27 @@ async function createStripeRegistration (user, properties, uploads) {
   const req = TestHelper.createRequest(`/api/user/connect/update-${user.stripeAccount.business_type}-registration?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.uploads = req.uploads || {}
+  req.uploads = uploads || {}
   if (user.stripeAccount.business_type === 'individual') {
     req.uploads.individual_verification_document_front = req.uploads.individual_verification_document_front || module.exports['success_id_scan_front.png']
     req.uploads.individual_verification_document_back = req.uploads.individual_verification_document_back || module.exports['success_id_scan_back.png']
   } else {
-    req.uploads.relationship_representative_verification_document_front = req.uploads.relationship_representative_verification_document_front || module.exports['success_id_scan_front.png']
-    req.uploads.relationship_representative_verification_document_back = req.uploads.relationship_representative_verification_document_back || module.exports['success_id_scan_back.png']
+    delete (req.uploads)
   }
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()
+  return user.stripeAccount
+}
+
+async function createCompanyRepresentative (user, properties, uploads) {
+  const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+  req.session = user.session
+  req.account = user.account
+  req.uploads = uploads || {}
+  req.uploads.relationship_representative_verification_document_front = req.uploads.individual_verification_document_front || module.exports['success_id_scan_front.png']
+  req.uploads.relationship_representative_verification_document_back = req.uploads.individual_verification_document_back || module.exports['success_id_scan_back.png']
+  req.body = createMultiPart(req2, properties)
+  await req.patch()
   return user.stripeAccount
 }
 
