@@ -159,7 +159,9 @@ describe('/account/connect/stripe-account', () => {
         company_address_country: 'AT',
         company_address_city: 'Vienna',
         company_address_postal_code: '1020',
-        company_address_line1: 'First Street',
+        company_address_line1: 'First Street'
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_executive: 'true',

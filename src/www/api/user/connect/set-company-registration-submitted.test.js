@@ -149,7 +149,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '1020',
           company_name: 'Company',
-          company_tax_id: '8',
+          company_tax_id: '8'
+        })
+        await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'Frederiksberg',
           relationship_representative_address_state: '147',
           relationship_representative_address_country: 'DE',
@@ -198,7 +200,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -248,7 +252,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_tax_id: '8',
         company_phone: '456-789-0123',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -298,7 +304,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Brussels',
         relationship_representative_address_state: 'BRU',
         relationship_representative_address_country: 'BE',
@@ -348,7 +356,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_phone: '456-789-0123',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_id_number: '7',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
@@ -401,7 +411,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Bern',
         relationship_representative_address_state: 'BE',
         relationship_representative_address_country: 'CH',
@@ -450,7 +462,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Berlin',
         relationship_representative_address_state: 'BE',
         relationship_representative_address_country: 'DE',
@@ -499,7 +513,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Copenhagen',
         relationship_representative_address_state: '147',
         relationship_representative_address_country: 'DK',
@@ -548,7 +564,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Madrid',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_state: 'AN',
@@ -597,7 +615,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Helsinki',
         relationship_representative_address_state: 'AL',
         relationship_representative_address_country: 'FI',
@@ -646,7 +666,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Paris',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_state: 'A',
@@ -695,7 +717,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'London',
         relationship_representative_address_state: 'LND',
         relationship_representative_address_country: 'GB',
@@ -745,7 +769,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -798,7 +824,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Dublin',
         relationship_representative_address_state: 'D',
         relationship_representative_address_country: 'IE',
@@ -848,7 +876,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Rome',
         relationship_representative_address_state: '65',
         relationship_representative_address_country: 'IT',
@@ -906,7 +936,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //     company_address_kanji_state: '東京都',
     //     company_address_kanji_city: '渋谷区',
     //     company_address_kanji_town: '神宮前 ３丁目',
-    //     company_address_kanji_line1: '２７－１５',
+    //     company_address_kanji_line1: '２７－１５'
+    //   })
+    //   await TestHelper.createCompanyRepresentative(user, {
     //     relationship_representative_percent_ownership: '0',
     //     relationship_representative_first_name: user.profile.firstName,
     //     relationship_representative_last_name: user.profile.lastName,
@@ -972,7 +1004,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Luxemburg',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1623',
@@ -1021,7 +1055,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Amsterdam',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1071 JA',
@@ -1070,7 +1106,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Oslo',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '0001',
@@ -1119,7 +1157,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1169,7 +1209,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Lisbon',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '4520',
@@ -1218,7 +1260,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Stockholm',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00150',
@@ -1268,7 +1312,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1322,7 +1368,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_state: 'NY',
         company_address_country: 'US',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',

@@ -97,9 +97,14 @@ describe('/account/connect/beneficial-owners', () => {
         country: 'DE'
       })
       await TestHelper.createStripeRegistration(user, {
+        company_address_city: 'Berlin',
+        company_address_line1: 'First Street',
+        company_address_postal_code: '01067',
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
         company_address_country: 'DE',
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_owner_first_name: user.profile.firstName,
         relationship_owner_last_name: user.profile.lastName,
         relationship_owner_executive: 'true',
@@ -109,9 +114,6 @@ describe('/account/connect/beneficial-owners', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950',
-        company_address_city: 'Berlin',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_address_postal_code: '01067'

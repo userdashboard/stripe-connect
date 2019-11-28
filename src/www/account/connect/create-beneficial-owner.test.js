@@ -30,7 +30,9 @@ describe('/account/connect/create-beneficial-owner', () => {
         company_address_country: 'DE',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
+        company_address_postal_code: '01067'
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_executive: 'true',

@@ -34,7 +34,9 @@ describe('/account/connect/submit-individual-registration', () => {
         company_address_city: 'New York',
         company_address_state: 'New York',
         company_address_line1: 'First Street',
-        company_address_postal_code: '10001',
+        company_address_postal_code: '10001'
+      })
+      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_ssn_last_4: '0000',
         relationship_representative_address_city: 'New York',
         relationship_representative_address_state: 'NY',

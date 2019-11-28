@@ -426,19 +426,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
-        company_address_city: 'Vienna',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vienna',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020'
+        company_address_city: 'Vienna'
       }
       await testEachFieldAsNull(req)
     })
@@ -458,20 +446,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_country: 'AT',
-        relationship_representative_address_city: 'Vienna',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -494,20 +469,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '4000',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Brisbane',
-        relationship_representative_address_state: 'QLD',
-        relationship_representative_address_line1: '845 Oxford St',
-        relationship_representative_address_postal_code: '4000'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -527,20 +489,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '4000',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Brisbane',
-        relationship_representative_address_state: 'QLD',
-        relationship_representative_address_line1: '845 Oxford St',
-        relationship_representative_address_postal_code: '4000'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -562,19 +511,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Brussels',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -593,19 +530,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Brussels',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -628,21 +553,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: 'V5K 0A1',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_id_number: '000000000',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'V5K 0A1'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -662,21 +573,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: 'V5K 0A1',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_id_number: '000000000',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'V5K 0A1'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -700,21 +597,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Bern',
-        relationship_representative_address_state: 'BE',
-        relationship_representative_address_country: 'CH',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -735,21 +618,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Bern',
-        relationship_representative_address_state: 'BE',
-        relationship_representative_address_country: 'CH',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -771,19 +640,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '01067',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Berlin',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '01067',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -802,19 +659,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '01067',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Berlin',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '01067',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -836,19 +681,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1000',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Copenhagen',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1000',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -867,19 +700,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1000',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Copenhagen',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1000',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -901,19 +722,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '03179',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Madrid',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '03179',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -932,19 +741,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '03179',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Madrid',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '03179',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -966,19 +763,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00990',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Helsinki',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00990',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -997,19 +782,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00990',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Helsinki',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00990',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1031,19 +804,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '75001',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Paris',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '75001',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1062,19 +823,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '75001',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Paris',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '75001',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1096,19 +845,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: 'EC1A 1AA',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'London',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'EC1A 1AA',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1127,19 +864,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: 'EC1A 1AA',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'London',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'EC1A 1AA',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1160,20 +885,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_city: 'Hong Kong',
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_id_number: '000000000',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Hong Kong',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '999077'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1191,20 +903,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_city: 'Hong Kong',
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_id_number: '000000000',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Hong Kong',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '999077'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1226,19 +925,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_state: 'Dublin',
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Dublin',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_postal_code: 'Dublin 1'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1257,19 +944,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_state: 'Dublin',
         company_address_line1: '123 Park Lane',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Dublin',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_postal_code: 'Dublin 1'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1291,19 +966,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00010',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Rome',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00010',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1322,19 +985,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00010',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Rome',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00010',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1366,31 +1017,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_kanji_state: '東京都',
         company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
-        relationship_representative_first_name_kanji: '東京都',
-        relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        company_address_kanji_line1: '２７－１５'
       }
       await testEachFieldAsNull(req)
     })
@@ -1419,31 +1046,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_kanji_state: '東京都',
         company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
-        relationship_representative_first_name_kanji: '東京都',
-        relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        company_address_kanji_line1: '２７－１５'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1465,19 +1068,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1623',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Luxemburg',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1623',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1496,19 +1087,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1623',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Luxemburg',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1623',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1530,19 +1109,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1071 JA',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Amsterdam',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1071 JA',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1561,19 +1128,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1071 JA',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Amsterdam',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1071 JA',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1595,19 +1150,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '0001',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Oslo',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '0001',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1626,19 +1169,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '0001',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Oslo',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '0001',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1660,19 +1191,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '6011',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Auckland',
-        relationship_representative_address_postal_code: '6011',
-        relationship_representative_address_line1: '844 Fleet Street'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1691,19 +1210,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '6011',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Auckland',
-        relationship_representative_address_postal_code: '6011',
-        relationship_representative_address_line1: '844 Fleet Street'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1725,19 +1232,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '4520',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Lisbon',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '4520',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1756,19 +1251,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '4520',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Lisbon',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '4520',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1790,19 +1273,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00150',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Stockholm',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00150',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1821,19 +1292,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00150',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Stockholm',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00150',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1854,20 +1313,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '339696',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_id_number: '000000000',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '339696',
-        relationship_representative_address_city: 'Singapore'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1885,20 +1331,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '339696',
         company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_id_number: '000000000',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '339696',
-        relationship_representative_address_city: 'Singapore'
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1924,22 +1357,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_id_number: '000000000',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
       await testEachFieldAsNull(req)
     })
@@ -1962,22 +1380,7 @@ describe('/account/connect/edit-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_id_number: '000000000',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

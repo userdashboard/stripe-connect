@@ -422,11 +422,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_address_city: 'Vienna',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -453,12 +448,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_country: 'AT',
-        company_address_city: 'Vienna',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -489,12 +478,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Brisbane',
-        company_address_state: 'QLD',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '4000',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -522,12 +505,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Brisbane',
-        company_address_state: 'QLD',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '4000',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -558,11 +535,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Brussels',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Brussels',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1020',
@@ -589,11 +561,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Brussels',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Brussels',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1020',
@@ -623,12 +590,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Vancouver',
-        company_address_state: 'BC',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: 'V5K 0A1',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -657,12 +618,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Vancouver',
-        company_address_state: 'BC',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: 'V5K 0A1',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -694,13 +649,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Bern',
-        company_address_state: 'BE',
-        company_address_country: 'CH',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Bern',
         relationship_representative_address_state: 'BE',
         relationship_representative_address_country: 'CH',
@@ -729,13 +677,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Bern',
-        company_address_state: 'BE',
-        company_address_country: 'CH',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Bern',
         relationship_representative_address_state: 'BE',
         relationship_representative_address_country: 'CH',
@@ -767,11 +708,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Berlin',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '01067',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Berlin',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '01067',
@@ -798,11 +734,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Berlin',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '01067',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Berlin',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '01067',
@@ -832,11 +763,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Copenhagen',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1000',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Copenhagen',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1000',
@@ -863,11 +789,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Copenhagen',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1000',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Copenhagen',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1000',
@@ -897,11 +818,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Madrid',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '03179',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Madrid',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '03179',
@@ -928,11 +844,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Madrid',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '03179',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Madrid',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '03179',
@@ -962,11 +873,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Helsinki',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00990',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Helsinki',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00990',
@@ -993,11 +899,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Helsinki',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00990',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Helsinki',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00990',
@@ -1027,11 +928,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Paris',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '75001',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Paris',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '75001',
@@ -1058,11 +954,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Paris',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '75001',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Paris',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '75001',
@@ -1092,11 +983,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'London',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: 'EC1A 1AA',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'London',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: 'EC1A 1AA',
@@ -1123,11 +1009,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'London',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: 'EC1A 1AA',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'London',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: 'EC1A 1AA',
@@ -1157,10 +1038,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Hong Kong',
-        company_address_line1: '123 Park Lane',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1188,10 +1065,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Hong Kong',
-        company_address_line1: '123 Park Lane',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1222,11 +1095,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Dublin',
-        company_address_state: 'Dublin',
-        company_address_line1: '123 Park Lane',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Dublin',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_dob_day: '1',
@@ -1253,11 +1121,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Dublin',
-        company_address_state: 'Dublin',
-        company_address_line1: '123 Park Lane',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Dublin',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_dob_day: '1',
@@ -1287,11 +1150,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Rome',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00010',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Rome',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00010',
@@ -1318,11 +1176,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Rome',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00010',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Rome',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00010',
@@ -1352,21 +1205,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
-        company_address_kana_postal_code: '1500001',
-        company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
-        company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
-        company_address_kanji_postal_code: '1500001',
-        company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
-        company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_executive: 'true',
@@ -1405,21 +1243,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
-        company_address_kana_postal_code: '1500001',
-        company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
-        company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
-        company_address_kanji_postal_code: '1500001',
-        company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
-        company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_executive: 'true',
@@ -1461,11 +1284,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Luxemburg',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1623',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Luxemburg',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1623',
@@ -1492,11 +1310,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Luxemburg',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1623',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Luxemburg',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1623',
@@ -1526,11 +1339,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Amsterdam',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1071 JA',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Amsterdam',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1071 JA',
@@ -1557,11 +1365,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Amsterdam',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1071 JA',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Amsterdam',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1071 JA',
@@ -1591,11 +1394,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Oslo',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '0001',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Oslo',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '0001',
@@ -1622,11 +1420,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Oslo',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '0001',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Oslo',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '0001',
@@ -1656,11 +1449,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Auckland',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '6011',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1687,11 +1475,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Auckland',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '6011',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1721,11 +1504,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Lisbon',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '4520',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Lisbon',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '4520',
@@ -1752,11 +1530,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Lisbon',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '4520',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Lisbon',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '4520',
@@ -1786,11 +1559,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Stockholm',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00150',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Stockholm',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00150',
@@ -1817,11 +1585,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Stockholm',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00150',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_address_city: 'Stockholm',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00150',
@@ -1851,10 +1614,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '339696',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1882,10 +1641,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '339696',
-        company_name: 'Company',
-        company_tax_id: '8',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1916,15 +1671,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
-        company_address_city: 'New York',
-        company_address_line1: '285 Fulton St',
-        company_address_postal_code: '10007',
-        company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -1954,15 +1700,6 @@ describe('/account/connect/edit-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
-        company_address_city: 'New York',
-        company_address_line1: '285 Fulton St',
-        company_address_postal_code: '10007',
-        company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
