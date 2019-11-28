@@ -71,6 +71,9 @@ describe('/api/administrator/connect/stripe-account', () => {
         relationship_representative_address_country: 'US',
         relationship_representative_address_line1: '285 Fulton St',
         relationship_representative_address_postal_code: '10007'
+      }, {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account

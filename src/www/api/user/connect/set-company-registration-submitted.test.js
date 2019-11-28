@@ -709,11 +709,11 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         country: 'GB'
       })
       await TestHelper.createStripeRegistration(user, {
-        company_address_city: 'Paris',
-        company_address_state: 'A',
-        company_address_country: 'FR',
+        company_address_city: 'London',
+        company_address_state: 'LND',
+        company_address_country: 'GB',
         company_address_line1: '123 Park Lane',
-        company_address_postal_code: '75001',
+        company_address_postal_code: 'EC1A 1AA',
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',

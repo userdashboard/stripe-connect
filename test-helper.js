@@ -26,7 +26,7 @@ module.exports = {
   createPayout,
   createStripeAccount,
   createStripeRegistration,
-  createCompanyRepresentative
+  createCompanyRepresentative,
   submitStripeAccount,
   triggerVerification,
   waitForVerification: util.promisify(waitForVerification),

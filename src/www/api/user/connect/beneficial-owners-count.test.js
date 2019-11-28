@@ -73,6 +73,9 @@ describe('/api/user/connect/beneficial-owners-count', () => {
           relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
+        }, {
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/beneficial-owners-count?stripeid=${user.stripeAccount.id}`)

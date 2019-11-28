@@ -174,6 +174,9 @@ describe('/account/connect/stripe-account', () => {
         relationship_representative_address_city: 'Vienna',
         relationship_representative_address_line1: 'First Street',
         relationship_representative_address_postal_code: '1020'
+      }, {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',

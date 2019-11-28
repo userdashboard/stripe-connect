@@ -127,6 +127,8 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
           country: 'DE'
         })
         await TestHelper.createStripeRegistration(user, {
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           individual_address_city: 'Berlin',
           individual_address_state: 'BE',
           individual_address_country: 'DE',
@@ -284,6 +286,8 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         country: 'CA'
       })
       await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -405,6 +409,8 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         country: 'DK'
       })
       await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Copenhagen',
         individual_address_state: '147',
         individual_address_country: 'DK',
@@ -1014,6 +1020,8 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         country: 'SG'
       })
       await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',

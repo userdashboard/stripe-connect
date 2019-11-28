@@ -44,6 +44,9 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
+        }, {
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         stripeAccounts.unshift(stripeAccount.id)
       }
@@ -94,6 +97,9 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
+        }, {
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -141,6 +147,9 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
+        }, {
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -169,6 +178,7 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
+          company_address_country: 'US',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         })
@@ -188,6 +198,9 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
+        }, {
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
         })
       }
       const req = TestHelper.createRequest('/api/administrator/connect/stripe-accounts')
@@ -236,6 +249,9 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
+        }, {
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
         })
       }
       const req = TestHelper.createRequest('/api/administrator/connect/stripe-accounts')
