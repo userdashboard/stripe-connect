@@ -8,10 +8,21 @@ Dashboard is a parallel web application that accompanies your web app, subscript
 
 Stripe Connect module is ready-ish to use.  The following work remains:
 
-- translations required for everything in /languages please help
-- administrator UI is very minimal
-- confirm tests pass since adding optional stripe.js support
-- there is no "resubmission" flow for rejected/erroneous data pending a reliable way to trigger it on Stripe API
+- translations required for everything in /languages [(please help)](https://github.com/userdashboard/stripe-connect)
+- there is no "resubmission" flow for rejected/erroneous data pending a reliable way to trigger it on Stripe API, until there is users who fail validation can delete and start new registrations
+- some fields in `update-x-registration` have a 'missing' test but no accompanying 'invalid' test that verifies the information is correct or correctly-structured or correctly-sized or whatever
+- JP tests for `update-payment-information` and `set-x-registration-submitted` is throwing an error that you can't use live bank account numbers
+- individual, company representative and companys'  beneficial owner addresses have selectable countries, need to verify which countries can have an application in x living in y
+
+## Adding countries
+
+Periodically Stripe Connect adds support for new countries.  When this happens:
+
+1) Add new 'kyc-requirements/XX.json' documenting all the required fields
+
+2) Update the UI `edit-payment-details` page and the API `update-payment-information` to support whatever bank account fields
+
+3) Update the UI `edit-individual-registration` + `edit-company-registration` and the API `update-individual-registration` + `update-company-registration` with any new fields or conditions
 
 ## Import this module
 
