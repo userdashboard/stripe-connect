@@ -12,7 +12,7 @@ describe('/api/user/connect/country-specs', () => {
       const req2 = TestHelper.createRequest(`/api/user/connect/country-specs?offset=${offset}`)
       const countriesNow = await req2.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(countriesNow[i].id, countries[offset + i])
+        assert.strictEqual(countriesNow[i].id, countries[offset + i].id)
       }
     })
 

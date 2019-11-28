@@ -41,26 +41,6 @@ describe('/api/user/connect/delete-beneficial-owner', () => {
           type: 'company',
           country: 'DE'
         })
-        await TestHelper.createStripeRegistration(user, {
-          company_tax_id: '00000000',
-          company_name: user.profile.firstName + '\'s company',
-          company_address_country: 'DE',
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          company_address_city: 'Berlin',
-          company_address_line1: 'First Street',
-          company_address_postal_code: '01067',
-          relationship_representative_address_city: 'Berlin',
-          relationship_representative_address_line1: 'First Street',
-          relationship_representative_address_postal_code: '01067'
-        })
         const person = TestHelper.nextIdentity()
         const owner = await TestHelper.createBeneficialOwner(user, {
           relationship_owner_first_name: person.firstName,
@@ -94,26 +74,6 @@ describe('/api/user/connect/delete-beneficial-owner', () => {
       await TestHelper.createStripeAccount(user, {
         type: 'company',
         country: 'DE'
-      })
-      await TestHelper.createStripeRegistration(user, {
-        company_tax_id: '00000000',
-        company_name: user.profile.firstName + '\'s company',
-        company_address_country: 'DE',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        company_address_city: 'Berlin',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
-        relationship_representative_address_city: 'Berlin',
-        relationship_representative_address_line1: 'First Street',
-        relationship_representative_address_postal_code: '01067'
       })
       const person = TestHelper.nextIdentity()
       const owner = await TestHelper.createBeneficialOwner(user, {

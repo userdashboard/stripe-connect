@@ -53,7 +53,6 @@ describe('/account/connect/edit-individual-registration', () => {
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       for (const field of fieldsNeeded) {
-        console.log(field)
         if (field === 'external_account' ||
           field === 'business_type' ||
           field === 'tos_acceptance.date' ||
@@ -270,7 +269,7 @@ describe('/account/connect/edit-individual-registration', () => {
       return testRequiredFieldInputsExist(req, user.stripeAccount)
     })
 
-    it.only('should have JP-required fields', async () => {
+    it('should have JP-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',
@@ -384,7 +383,6 @@ describe('/account/connect/edit-individual-registration', () => {
       const body = JSON.stringify(req.body)
       const fields = Object.keys(req.body)
       for (const field of fields) {
-        console.log(field)
         req.body = JSON.parse(body)
         req.body[field] = ''
         const page = await req.post()
@@ -462,7 +460,7 @@ describe('/account/connect/edit-individual-registration', () => {
       await testEachFieldAsNull(req)
     })
 
-    it.only('should update AU information', async () => {
+    it('should update AU information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'individual',

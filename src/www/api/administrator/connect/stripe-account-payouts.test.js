@@ -44,14 +44,25 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
         country: 'NZ'
       })
       await TestHelper.createStripeRegistration(user, {
+        business_profile_url: 'https://www.abcde.com',
+        business_profile_mcc: '7531',
         individual_address_city: 'Auckland',
+        individual_address_state: 'AUK',
+        individual_address_country: 'NZ',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456 789 0123'
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'nzd',
@@ -71,14 +82,25 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
         country: 'NZ'
       })
       await TestHelper.createStripeRegistration(user2, {
+        business_profile_url: 'https://www.abcde.com',
+        business_profile_mcc: '7531',
         individual_address_city: 'Auckland',
+        individual_address_state: 'AUK',
+        individual_address_country: 'NZ',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '6011',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_first_name: user2.profile.firstName,
-        individual_last_name: user2.profile.lastName
+        individual_last_name: user2.profile.lastName,
+        individual_email: user2.profile.contactEmail,
+        individual_phone: '456 789 0123'
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user2, {
         currency: 'nzd',

@@ -24,6 +24,7 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
+          company_address_country: 'US',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           relationship_representative_dob_day: '1',
@@ -35,14 +36,14 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          // relationship_representative_id_number: '000000000',
           relationship_representative_ssn_last_4: '0000',
           relationship_representative_address_city: 'New York',
           relationship_representative_address_state: 'NY',
+          relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
         })
-        stripeAccounts.unshift(stripeAccount)
+        stripeAccounts.unshift(stripeAccount.id)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-accounts?offset=${offset}`)
       req.account = administrator.account
@@ -71,6 +72,7 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
+          company_address_country: 'US',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           relationship_representative_dob_day: '1',
@@ -82,10 +84,10 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          // relationship_representative_id_number: '000000000',
           relationship_representative_ssn_last_4: '0000',
           relationship_representative_address_city: 'New York',
           relationship_representative_address_state: 'NY',
+          relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
         })
@@ -115,6 +117,7 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
+          company_address_country: 'US',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           relationship_representative_dob_day: '1',
@@ -126,10 +129,10 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          // relationship_representative_id_number: '000000000',
           relationship_representative_ssn_last_4: '0000',
           relationship_representative_address_city: 'New York',
           relationship_representative_address_state: 'NY',
+          relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
         })
@@ -171,9 +174,10 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          // relationship_representative_id_number: '000000000',
           relationship_representative_ssn_last_4: '0000',
           relationship_representative_address_city: 'New York',
+          relationship_representative_address_state: 'NY',
+          relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
         })
@@ -204,6 +208,7 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
+          company_address_country: 'US',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           relationship_representative_dob_day: '1',
@@ -215,10 +220,10 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           relationship_representative_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          // relationship_representative_id_number: '000000000',
           relationship_representative_ssn_last_4: '0000',
           relationship_representative_address_city: 'New York',
           relationship_representative_address_state: 'NY',
+          relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
         })

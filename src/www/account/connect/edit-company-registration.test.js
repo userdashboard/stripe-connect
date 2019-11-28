@@ -695,11 +695,15 @@ describe('/account/connect/edit-company-registration', () => {
       req.session = user.session
       req.body = {
         company_address_city: 'Bern',
+        company_address_state: 'BE',
+        company_address_country: 'CH',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
         relationship_representative_address_city: 'Bern',
+        relationship_representative_address_state: 'BE',
+        relationship_representative_address_country: 'CH',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1020',
         relationship_representative_dob_day: '1',
@@ -726,11 +730,15 @@ describe('/account/connect/edit-company-registration', () => {
       req.session = user.session
       req.body = {
         company_address_city: 'Bern',
+        company_address_state: 'BE',
+        company_address_country: 'CH',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
         relationship_representative_address_city: 'Bern',
+        relationship_representative_address_state: 'BE',
+        relationship_representative_address_country: 'CH',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1020',
         relationship_representative_dob_day: '1',

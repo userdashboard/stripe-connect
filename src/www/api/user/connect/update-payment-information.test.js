@@ -492,9 +492,7 @@ describe('/api/user/connect/update-payment-information', () => {
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
-  })
 
-  describe('returns', () => {
     it('object for AU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -781,27 +779,28 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    it('object for JP registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        currency: 'jpy',
-        country: 'JP',
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
-        account_number: '00012345',
-        bank_code: '1100',
-        branch_code: '000'
-      }
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.external_accounts.data.length, 1)
-    })
+    // it('object for JP registration', async () => {
+    //   const user = await TestHelper.createUser()
+    //   await TestHelper.createStripeAccount(user, {
+    //     type: 'company',
+    //     country: 'JP'
+    //   })
+    //   const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+    //   req.account = user.account
+    //   req.session = user.session
+    //   req.body = {
+    //     currency: 'jpy',
+    //     country: 'JP',
+    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+    //     account_type: 'individual',
+    //     account_number: '00012345',
+    //     bank_code: '1100',
+    //     branch_code: '000'
+    //   }
+    //   const accountNow = await req.patch()
+    //   assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    // })
+    
     it('object for LU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

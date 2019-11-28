@@ -53,6 +53,7 @@ describe('/api/user/connect/beneficial-owners-count', () => {
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
+          company_address_country: 'US',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           relationship_representative_dob_day: '1',
@@ -63,11 +64,11 @@ describe('/api/user/connect/beneficial-owners-count', () => {
           relationship_representative_executive: 'true',
           relationship_representative_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
-          // relationship_representative_id_number: '000000000',
           relationship_representative_ssn_last_4: '0000',
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'New York',
           relationship_representative_address_state: 'NY',
+          relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007'
         })
@@ -112,25 +113,6 @@ describe('/api/user/connect/beneficial-owners-count', () => {
       await TestHelper.createStripeAccount(user, {
         type: 'company',
         country: 'DE'
-      })
-      await TestHelper.createStripeRegistration(user, {
-        company_address_city: 'Bern',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Bern',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
       })
       const person1 = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {

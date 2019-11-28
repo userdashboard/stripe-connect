@@ -40,7 +40,6 @@ describe('/account/connect/submit-individual-registration', () => {
         relationship_representative_address_state: 'NY',
         relationship_representative_address_postal_code: '10007',
         relationship_representative_address_line1: 'First Street',
-        // relationship_representative_id_number: '000000000',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_executive: 'true',

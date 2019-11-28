@@ -85,25 +85,6 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
         type: 'company',
         country: 'DE'
       })
-      await TestHelper.createStripeRegistration(user, {
-        company_address_city: 'Bern',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_name: 'Company',
-        company_tax_id: '8',
-        relationship_representative_address_city: 'Bern',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-1230'
-      })
       const req = TestHelper.createRequest(`/api/administrator/connect/set-stripe-account-rejected?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session
