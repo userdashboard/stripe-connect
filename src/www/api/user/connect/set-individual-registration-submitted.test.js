@@ -80,7 +80,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
           currency: 'usd',
           country: 'US',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '000123456789',
           routing_number: '110000000'
         })
@@ -187,7 +187,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'AT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'AT89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -227,7 +227,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'aud',
         country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456',
         bsb_number: '110000'
       })
@@ -268,7 +268,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'BE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'BE89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -309,7 +309,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'cad',
         country: 'CA',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456789',
         transit_number: '11000',
         institution_number: '000'
@@ -351,7 +351,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'CH',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'CH89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -391,7 +391,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'DE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'DE89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -431,7 +431,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'DK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'DK89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -471,7 +471,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'EE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'EE89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -511,7 +511,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'ES',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'ES89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -551,7 +551,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'FI',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'FI89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -591,7 +591,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'FR',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'FR89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -631,7 +631,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'GB89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -672,7 +672,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'hkd',
         country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123-456',
         clearing_code: '110',
         branch_code: '000'
@@ -715,7 +715,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         country: 'IE',
         state: 'Dublin',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'IE89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -755,7 +755,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'IT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'IT89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -797,7 +797,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
     //     currency: 'jpy',
     //     country: 'JP',
     //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_type: 'individual',
+    //     account_holder_type: 'individual',
     //     account_number: '00012345',
     //     bank_code: '1100',
     //     branch_code: '000'
@@ -839,7 +839,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'LT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'LT89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -879,7 +879,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'LU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'LU89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -919,7 +919,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'LV',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'LV89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -959,7 +959,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
     //     currency: 'eur',
     //     country: 'MX',
     //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_type: 'individual',
+    //     account_holder_type: 'individual',
     //     iban: 'MX89370400440532013000'
     //   })
     //   const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -999,7 +999,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'NL',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'NL89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1039,7 +1039,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'NO',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'NO89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1081,7 +1081,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'nzd',
         country: 'NZ',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '0000000010',
         routing_number: '110000'
       })
@@ -1122,7 +1122,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'PT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'PT89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1162,7 +1162,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'SE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'SE89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1203,7 +1203,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'sgd',
         country: 'SG',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456',
         bank_code: '1100',
         branch_code: '000'
@@ -1245,7 +1245,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'SI',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'SI89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1285,7 +1285,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'eur',
         country: 'SK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'SK89370400440532013000'
       })
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1326,7 +1326,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         currency: 'usd',
         country: 'US',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456789',
         routing_number: '110000000'
       })

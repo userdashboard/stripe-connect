@@ -48,7 +48,7 @@ describe('/account/connect/delete-company-director', () => {
         currency: 'eur',
         country: 'DE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'DE89370400440532013000'
       })
       const person = TestHelper.nextIdentity()

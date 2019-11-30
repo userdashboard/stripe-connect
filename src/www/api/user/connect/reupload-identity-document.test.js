@@ -227,7 +227,7 @@
 //           currency: 'usd',
 //           country: 'US',
 //           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-//           account_type: 'individual',
+//           account_holder_type: 'individual',
 //           account_number: '000123456789',
 //           routing_number: '110000000'
 //         })

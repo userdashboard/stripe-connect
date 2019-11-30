@@ -89,7 +89,7 @@ describe('/api/user/connect/stripe-account-payouts-count', () => {
         currency: 'nzd',
         country: 'NZ',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '0000000010',
         routing_number: '110000'
       })

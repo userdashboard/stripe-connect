@@ -78,7 +78,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'AT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'AT89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -97,7 +97,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'AT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'AT89370400440532013000'
       }
       const page = await req.post()
@@ -120,7 +120,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'aud',
         country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456',
         bsb_number: '110000'
       }
@@ -140,7 +140,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'aud',
         country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456',
         bsb_number: '110000'
       }
@@ -164,7 +164,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'BE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'BE89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -183,7 +183,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'BE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'BE89370400440532013000'
       }
       const page = await req.post()
@@ -206,7 +206,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'cad',
         country: 'CA',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456789',
         institution_number: '000',
         transit_number: '11000'
@@ -227,7 +227,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'cad',
         country: 'CA',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456789',
         institution_number: '000',
         transit_number: '11000'
@@ -252,7 +252,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'CH',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'CH89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -271,7 +271,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'CH',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'CH89370400440532013000'
       }
       const page = await req.post()
@@ -294,7 +294,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'DE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'DE89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -313,7 +313,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'DE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'DE89370400440532013000'
       }
       const page = await req.post()
@@ -336,7 +336,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'DK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'DK89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -355,7 +355,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'DK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'DK89370400440532013000'
       }
       const page = await req.post()
@@ -378,7 +378,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'ES',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'ES89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -397,7 +397,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'ES',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'ES89370400440532013000'
       }
       const page = await req.post()
@@ -420,7 +420,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'FI',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'FI89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -439,7 +439,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'FI',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'FI89370400440532013000'
       }
       const page = await req.post()
@@ -462,7 +462,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'gbp',
         country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '00012345',
         sort_code: '108800'
       }
@@ -482,7 +482,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'gbp',
         country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '00012345',
         sort_code: '108800'
       }
@@ -506,7 +506,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'GB89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -525,7 +525,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'GB89370400440532013000'
       }
       const page = await req.post()
@@ -548,7 +548,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'hkd',
         country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123-456',
         clearing_code: '110',
         branch_code: '000'
@@ -569,7 +569,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'hkd',
         country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123-456',
         clearing_code: '110',
         branch_code: '000'
@@ -594,7 +594,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'IE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'IE89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -613,7 +613,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'IE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'IE89370400440532013000'
       }
       const page = await req.post()
@@ -636,7 +636,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'IT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'IT89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -655,7 +655,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'IT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'IT89370400440532013000'
       }
       const page = await req.post()
@@ -678,7 +678,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'jpy',
         country: 'JP',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '00012345',
         bank_code: '1100',
         branch_code: '000'
@@ -699,7 +699,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'jpy',
         country: 'JP',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '00012345',
         bank_code: '1100',
         branch_code: '000'
@@ -724,7 +724,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'LU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'LU89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -743,7 +743,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'LU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'LU89370400440532013000'
       }
       const page = await req.post()
@@ -766,7 +766,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'NL',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'NL89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -785,7 +785,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'NL',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'NL89370400440532013000'
       }
       const page = await req.post()
@@ -808,7 +808,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'NO',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'NO89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -827,7 +827,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'NO',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'NO89370400440532013000'
       }
       const page = await req.post()
@@ -850,7 +850,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'nzd',
         country: 'NZ',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '0000000010',
         routing_number: '110000'
       }
@@ -870,7 +870,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'nzd',
         country: 'NZ',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '0000000010',
         routing_number: '110000'
       }
@@ -894,7 +894,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'PT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'PT89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -913,7 +913,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'PT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'PT89370400440532013000'
       }
       const page = await req.post()
@@ -936,7 +936,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'SE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'SE89370400440532013000'
       }
       await testEachFieldAsNull(req)
@@ -955,7 +955,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         country: 'SE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'SE89370400440532013000'
       }
       const page = await req.post()
@@ -978,7 +978,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'sgd',
         country: 'SG',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456',
         bank_code: '1100',
         branch_code: '000'
@@ -999,7 +999,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'sgd',
         country: 'SG',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456',
         bank_code: '1100',
         branch_code: '000'
@@ -1024,7 +1024,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'usd',
         country: 'US',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456789',
         routing_number: '110000000'
       }
@@ -1044,7 +1044,7 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'usd',
         country: 'US',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456789',
         routing_number: '110000000'
       }
