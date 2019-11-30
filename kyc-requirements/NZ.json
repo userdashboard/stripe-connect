@@ -49,7 +49,9 @@
     "relationship.owner.address.country",
     "relationship.owner.address.postal_code",
     "relationship.owner.verification.document.front",
-    "relationship.owner.verification.document.back"
+    "relationship.owner.verification.document.back",
+    "relationship.owner.verification.additional_document.front",
+    "relationship.owner.verification.additional_document.back"
   ],
   "companyRepresentative": [
     "relationship.representative.executive",
@@ -70,7 +72,9 @@
     "relationship.representative.address.country",
     "relationship.representative.address.postal_code",
     "relationship.representative.verification.document.front",
-    "relationship.representative.verification.document.back"
+    "relationship.representative.verification.document.back",
+    "relationship.representative.verification.additional_document.front",
+    "relationship.representative.verification.additional_document.back"
   ],
   "companyDirector": [
     "relationship.director.first_name",
