@@ -81,7 +81,7 @@ describe('/api/user/connect/update-individual-registration', () => {
           currency: 'usd',
           country: 'US',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '000123456789',
           routing_number: '110000000'
         })
@@ -1672,6 +1672,1373 @@ describe('/api/user/connect/update-individual-registration', () => {
     })
   })
 
+  describe('recieves', () => {
+    it('required posted business_profile_mcc', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.business_profile_mcc, '8931')
+    })
+    
+    it('optionally-required posted business_profile_url', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.business_profile_url, 'https://' + user.profile.contactEmail.split('@')[1])
+    })
+
+    it('optionally-required posted business_profile_product_description', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_product_description: 'Things',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.business_profile_product_description, 'Things')
+    })
+
+    it('required posted individual_dob_day', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_dob_day, '1')
+    })
+
+    it('required posted individual_dob_month', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '2',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_dob_month, '2')
+    })
+
+    it('required posted individual_dob_year', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_dob_year, '1950')
+    })
+
+    it('required posted individual_first_name', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_first_name, user.profile.firstName)
+    })
+
+    it('required posted individual_last_name', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_last_name, user.profile.lastName)
+    })
+
+    it('optionally-required posted individual_email', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_email, user.profile.contactEmail)
+    })
+    
+    it('optionally-required posted individual_phone', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_phone, '456-789-0123')
+    })
+
+    it('optionally-required posted individual_gender', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_gender, 'female')
+    })
+
+    it('optionally-required posted individual_ssn_last_4', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'New York',
+        individual_ssn_last_4: '0000',
+        individual_address_state: 'NY',
+        individual_address_country: 'US',
+        individual_address_line1: '285 Fulton St',
+        individual_address_postal_code: '10007'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_ssn_last_4, '0000')
+    })
+
+    it('optionally-required posted individual_id_number', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Vancouver',
+        individual_address_line1: '123 Sesame St',
+        individual_address_state: 'BC',
+        individual_address_country: 'CA',
+        individual_address_postal_code: 'V5K 0A1',
+        individual_id_number: '000000000'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_id_number, '000000000')
+    })
+
+    it('optionally-required posted individual_address_country', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_country, 'NZ')
+    })
+
+    it('optionally-required posted individual_address_state', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_state, 'N')
+    })
+
+    it('optionally-required posted individual_address_postal_code', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_postal_code, '6011')
+    })
+
+    it('optionally-required posted individual_address_line1', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_line1, '844 Fleet Street') 
+    })
+
+    it('optional posted individual_address_line2', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_line2: 'More details',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_line2, 'More details')
+    })
+
+    it('optionally-required posted individual_first_name_kana', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_first_name_kana, 'ﾄｳｷﾖｳﾄ')
+    })
+
+    it('optionally-required posted individual_last_name_kana', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_last_name_kana, 'ﾄｳｷﾖｳﾄ')
+    })
+
+    it('optionally-required posted individual_address_kana_town', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
+    })
+
+    it('optionally-required posted individual_address_kana_state', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_kana_state, 'ﾄｳｷﾖｳﾄ')
+    })
+
+    it('optionally-required posted individual_address_kana_postal_code', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_kana_postal_code, '1500001')
+    })
+
+    it('optionally-required posted individual_address_kana_line1', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_kana_line1, '27-15')
+    })
+
+    it('optionally-required posted individual_first_name_kanji', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_first_name_kanji, '東京都')
+    })
+
+    it('optionally-required posted individual_last_name_kanji', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_last_name_kanji, '東京都')
+    })
+
+    it('optionally-required posted individual_address_kanji_state', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_kanji_state, '東京都')
+    })
+
+    it('optionally-required posted individual_address_kanji_postal_code', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_kanji_postal_code, '1500001')
+    })
+
+    it('optionally-required posted individual_address_kanji_line1', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_kanji_line1, '２７－１５')
+    })
+
+    it('optionally-required posted individual_address_kanji_town', async () =>{ 
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_gender: 'female',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '011-6789-0123',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kana_line1: '27-15',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_town: '神宮前　３丁目',
+        individual_address_kanji_line1: '２７－１５'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registrationNow.individual_address_kanji_town, '神宮前　３丁目')
+    })
+
+    it('optionally-required posted file individual_verification_document_front', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registrationNow.individual_verification_document_front, null)
+      assert.notStrictEqual(registrationNow.individual_verification_document_front, undefined)
+    })
+
+    it('optionally-required posted file individual_verification_document_back', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registrationNow.individual_verification_document_back, null)
+      assert.notStrictEqual(registrationNow.individual_verification_document_back, undefined)
+    })
+
+    it('optionally-required posted file individual_verification_additional_document_front', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registrationNow.individual_verification_additional_document_front, null)
+      assert.notStrictEqual(registrationNow.individual_verification_additional_document_front, undefined)
+    })
+
+    it('optionally-required posted file individual_verification_additional_document_back', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'Auckland',
+        individual_address_postal_code: '6011',
+        individual_address_line1: '844 Fleet Street',
+        individual_address_state: 'N',
+        individual_address_country: 'NZ'
+      }
+      req.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body) 
+      const accountNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registrationNow.individual_verification_additional_document_back, null)
+      assert.notStrictEqual(registrationNow.individual_verification_additional_document_back, undefined)
+    })
+  })
+
   describe('returns', () => {
     it('returns object for AT registration', async () => {
       const user = await TestHelper.createUser()
@@ -2389,7 +3756,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
     })
     
-    // it.only('returns object for MX registration', async () => {
+    // it('returns object for MX registration', async () => {
     //   const user = await TestHelper.createUser()
     //   await TestHelper.createStripeAccount(user, {
     //     type: 'individual',

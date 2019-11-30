@@ -14,7 +14,7 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'gbp',
           country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '00012345',
           sort_code: '108800'
         }
@@ -36,7 +36,7 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'gbp',
           country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '00012345',
           sort_code: '108800'
         }
@@ -65,7 +65,7 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'gbp',
           country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '00012345',
           sort_code: '108800'
         }
@@ -93,7 +93,32 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: '',
           country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'company',
+          account_holder_type: 'company',
+          iban: 'AT89370400440532013000'
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-currency')
+      })
+
+      it('invalid posted currency', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'AT'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'invalid',
+          country: 'AT',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'company',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -120,7 +145,32 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'eur',
           country: '',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'company',
+          account_holder_type: 'company',
+          iban: 'AT89370400440532013000'
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-country')
+      })
+
+      it('invalid posted country', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'individual',
+          country: 'AT'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'eur',
+          country: 'invalid',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'company',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -147,7 +197,7 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'eur',
           country: 'AT',
           account_holder_name: '',
-          account_type: 'company',
+          account_holder_type: 'company',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -160,8 +210,8 @@ describe('/api/user/connect/update-payment-information', () => {
       })
     })
 
-    describe('invalid-account_type', () => {
-      it('missing posted account_type', async () => {
+    describe('invalid-account_holder_type', () => {
+      it('missing posted account_holder_type', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
@@ -174,7 +224,7 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'eur',
           country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: '',
+          account_holder_type: '',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -183,7 +233,32 @@ describe('/api/user/connect/update-payment-information', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-account_type')
+        assert.strictEqual(errorMessage, 'invalid-account_holder_type')
+      })
+
+      it('invalid posted account_holder_type', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'AT'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'eur',
+          country: 'AT',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'invalid',
+          iban: 'AT89370400440532013000'
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account_holder_type')
       })
     })
 
@@ -201,8 +276,33 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'eur',
           country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'company',
+          account_holder_type: 'company',
           iban: ''
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-iban')
+      })
+
+      it('invalid posted iban', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'AT'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'eur',
+          country: 'AT',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'company',
+          iban: 'invalid'
         }
         let errorMessage
         try {
@@ -228,9 +328,35 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'aud',
           country: 'AU',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '000123456',
           bsb_number: ''
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-bsb_number')
+      })
+
+      it('invalid posted bsb_number', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'AU'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'aud',
+          country: 'AU',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: '000123456',
+          bsb_number: 'invalid'
         }
         let errorMessage
         try {
@@ -256,8 +382,34 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'aud',
           country: 'AU',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '',
+          bsb_number: '110000'
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account_number')
+      })
+
+      it('invalid posted account_number', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'AU'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'aud',
+          country: 'AU',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: 'invalid',
           bsb_number: '110000'
         }
         let errorMessage
@@ -284,9 +436,36 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'cad',
           country: 'CA',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '000123456789',
           institution_number: '',
+          transit_number: '11000'
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-institution_number')
+      })
+
+      it('invalid posted institution_number', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'CA'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'cad',
+          country: 'CA',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: '000123456789',
+          institution_number: 'invalid',
           transit_number: '11000'
         }
         let errorMessage
@@ -313,10 +492,37 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'cad',
           country: 'CA',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '000123456789',
           institution_number: '000',
           transit_number: ''
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-transit_number')
+      })
+
+      it('invalid posted transit_number', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'CA'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'cad',
+          country: 'CA',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: '000123456789',
+          institution_number: '000',
+          transit_number: 'invalid'
         }
         let errorMessage
         try {
@@ -342,9 +548,35 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'gbp',
           country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '00012345',
           sort_code: ''
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-sort_code')
+      })
+
+      it('invalid posted sort_code', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'GB'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'gbp',
+          country: 'GB',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: '00012345',
+          sort_code: 'invalid'
         }
         let errorMessage
         try {
@@ -370,9 +602,36 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'hkd',
           country: 'HK',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
-          account_number: '000123-456',
+          account_holder_type: 'individual',
+          account_number: '000123456',
           clearing_code: '',
+          branch_code: '000'
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-clearing_code')
+      })
+
+      it('missing posted clearing_code', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'HK'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'hkd',
+          country: 'HK',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: '000123456',
+          clearing_code: 'invalid',
           branch_code: '000'
         }
         let errorMessage
@@ -399,10 +658,37 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'hkd',
           country: 'HK',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
-          account_number: '000123-456',
+          account_holder_type: 'individual',
+          account_number: '000123456',
           clearing_code: '110',
           branch_code: ''
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-branch_code')
+      })
+
+      it('invalid posted branch_code', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'HK'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'hkd',
+          country: 'HK',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: '000123456',
+          clearing_code: '110',
+          branch_code: 'invalid'
         }
         let errorMessage
         try {
@@ -428,9 +714,36 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'jpy',
           country: 'JP',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '00012345',
           bank_code: '',
+          branch_code: '000'
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-bank_code')
+      })
+
+      it('invalid posted bank_code', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'JP'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'jpy',
+          country: 'JP',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: '00012345',
+          bank_code: 'invalid',
           branch_code: '000'
         }
         let errorMessage
@@ -457,7 +770,7 @@ describe('/api/user/connect/update-payment-information', () => {
           currency: 'nzd',
           country: 'NZ',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '000123456',
           routing_number: ''
         }
@@ -469,6 +782,312 @@ describe('/api/user/connect/update-payment-information', () => {
         }
         assert.strictEqual(errorMessage, 'invalid-routing_number')
       })
+
+      it('invalid posted routing_number', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'NZ'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          currency: 'nzd',
+          country: 'NZ',
+          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+          account_holder_type: 'individual',
+          account_number: '000123456',
+          routing_number: 'invalid'
+        }
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-routing_number')
+      })
+    })
+  })
+
+  describe('receives', () => {
+    it('required posted currency', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AU'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'aud',
+        country: 'AU',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456',
+        bsb_number: '110000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].currency, 'aud')
+    })
+
+    it('required posted account_holder_type', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AU'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'aud',
+        country: 'AU',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456',
+        bsb_number: '110000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].account_holder_type, 'individual')
+      
+    })
+
+    it('required posted account_holder_name', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AU'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'aud',
+        country: 'AU',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456',
+        bsb_number: '110000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].account_holder_name, `${user.profile.firstName} ${user.profile.lastName}`)
+    })
+
+    it('required posted country', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AU'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'aud',
+        country: 'AU',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456',
+        bsb_number: '110000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].country, 'AU')
+    })
+
+    it('optionally-required posted iban', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'EE'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'eur',
+        country: 'EE',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'company',
+        iban: 'EE89370400440532013000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].last4, '3000')
+    })
+
+    it('optionally-required posted sort_code', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'GB'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'gbp',
+        country: 'GB',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '00012345',
+        sort_code: '108800'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].routing_number, '10-88-00')
+    })
+
+    it('optionally-required posted bank_code', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SG'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'sgd',
+        country: 'SG',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456',
+        bank_code: '1100',
+        branch_code: '000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].routing_number, '1100-000')
+    })
+
+    it('optionally-required posted routing_number', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'nzd',
+        country: 'NZ',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '0000000010',
+        routing_number: '110000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].routing_number, '110000')
+    })
+
+    it('optionally-required posted branch_code', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'SG'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'sgd',
+        country: 'SG',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456',
+        bank_code: '1100',
+        branch_code: '000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    })
+
+    it('optionally-required posted bsb_number', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'AU'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'aud',
+        country: 'AU',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456',
+        bsb_number: '110000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].routing_number, '11 0000')
+    })
+
+    it('optionally-required posted transit_number', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'cad',
+        country: 'CA',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456789',
+        institution_number: '000',
+        transit_number: '11000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].routing_number, '11000-000')
+    })
+
+    it('optionally-required posted institution_number', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'cad',
+        country: 'CA',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456789',
+        institution_number: '000',
+        transit_number: '11000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].routing_number, '11000-000')
+    })
+
+    it('optionally-required posted account_number', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        currency: 'cad',
+        country: 'CA',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456789',
+        institution_number: '000',
+        transit_number: '11000'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data[0].last4, '6789')
     })
   })
 
@@ -486,7 +1105,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'AT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'AT89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -506,7 +1125,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'aud',
         country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456',
         bsb_number: '110000'
       }
@@ -527,7 +1146,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'BE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'BE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -547,7 +1166,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'cad',
         country: 'CA',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456789',
         institution_number: '000',
         transit_number: '11000'
@@ -569,7 +1188,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'CH',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'CH89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -589,7 +1208,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'DE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'DE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -609,7 +1228,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'DK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'DK89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -629,7 +1248,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'EE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'EE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -649,7 +1268,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'ES',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'ES89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -669,7 +1288,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'FI',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'FI89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -689,7 +1308,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'FR',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'FR89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -709,7 +1328,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'gbp',
         country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '00012345',
         sort_code: '108800'
       }
@@ -730,7 +1349,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         iban: 'GB89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -750,8 +1369,8 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'hkd',
         country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
-        account_number: '000123-456',
+        account_holder_type: 'individual',
+        account_number: '000123456',
         clearing_code: '110',
         branch_code: '000'
       }
@@ -772,7 +1391,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'IE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'IE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -792,7 +1411,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'IT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'IT89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -812,7 +1431,7 @@ describe('/api/user/connect/update-payment-information', () => {
     //     currency: 'jpy',
     //     country: 'JP',
     //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_type: 'individual',
+    //     account_holder_type: 'individual',
     //     account_number: '00012345',
     //     bank_code: '1100',
     //     branch_code: '000'
@@ -820,7 +1439,6 @@ describe('/api/user/connect/update-payment-information', () => {
     //   const accountNow = await req.patch()
     //   assert.strictEqual(accountNow.external_accounts.data.length, 1)
     // })
-    
     
     it('object for LT registration', async () => {
       const user = await TestHelper.createUser()
@@ -835,13 +1453,12 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'LT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'LT89370400440532013000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
-
 
     it('object for LU registration', async () => {
       const user = await TestHelper.createUser()
@@ -856,14 +1473,13 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'LU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'LU89370400440532013000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    
     it('object for LV registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -877,14 +1493,14 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'LV',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'LV89370400440532013000'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    // it.only('object for MX registration', async () => {
+    // it('object for MX registration', async () => {
     //   const user = await TestHelper.createUser()
     //   await TestHelper.createStripeAccount(user, {
     //     type: 'company',
@@ -897,7 +1513,7 @@ describe('/api/user/connect/update-payment-information', () => {
     //     currency: 'eur',
     //     country: 'MX',
     //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_type: 'company',
+    //     account_holder_type: 'company',
     //     iban: 'MX89370400440532013000'
     //   }
     //   const accountNow = await req.patch()
@@ -917,7 +1533,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'NL',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'NL89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -937,7 +1553,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'NO',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'NO89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -957,7 +1573,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'nzd',
         country: 'NZ',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '0000000010',
         routing_number: '110000'
       }
@@ -978,7 +1594,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'PT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'PT89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -998,7 +1614,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'SE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'SE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1018,7 +1634,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'sgd',
         country: 'SG',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456',
         bank_code: '1100',
         branch_code: '000'
@@ -1040,7 +1656,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'SI',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'SI89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1060,7 +1676,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'eur',
         country: 'SK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'company',
+        account_holder_type: 'company',
         iban: 'SK89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1080,7 +1696,7 @@ describe('/api/user/connect/update-payment-information', () => {
         currency: 'usd',
         country: 'US',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_type: 'individual',
+        account_holder_type: 'individual',
         account_number: '000123456789',
         routing_number: '110000000'
       }

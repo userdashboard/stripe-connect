@@ -3,7 +3,7 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe.only('/api/user/connect/update-company-representative', () => {
+describe('/api/user/connect/update-company-representative', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -96,7 +96,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
           currency: 'usd',
           country: 'US',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_type: 'individual',
+          account_holder_type: 'individual',
           account_number: '000123456789',
           routing_number: '110000000'
         })
@@ -132,6 +132,49 @@ describe.only('/api/user/connect/update-company-representative', () => {
           errorMessage = error.message
         }
         assert.strictEqual(errorMessage, 'invalid-account')
+      })
+    })
+
+    describe('invalid-relationship_representative_percent_owned', () => {
+      it('invalid posted relationship_representative_percent_owned', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'US'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        }
+        const body = {
+          relationship_representative_percent_owned: 'invalid',
+          relationship_representative_dob_day: '7',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1951',
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_ssn_last_4: '0000',
+          relationship_representative_address_state: 'NY',
+          relationship_representative_address_country: 'US',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007'
+        }
+        req.body = TestHelper.createMultiPart(req, body)
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_percent_owned')
       })
     })
 
@@ -1267,7 +1310,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
     })
   })
 
-  describe.only('receives', () => {
+  describe('receives', () => {
     it('optionally-required posted token', async () => {
       global.stripeJS = 3
       const user = await TestHelper.createUser()
@@ -1339,7 +1382,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.representative_dob_day, '7')
+      assert.strictEqual(registration.relationship_representative_dob_day, '7')
     })
 
     it('required posted relationship_representative_dob_month', async () => {
@@ -1375,7 +1418,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.representative_dob_month, '11')
+      assert.strictEqual(registration.relationship_representative_dob_month, '11')
     })
 
     it('required posted relationship_representative_dob_year', async () => {
@@ -1411,7 +1454,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.representative_dob_year, '1951')
+      assert.strictEqual(registration.relationship_representative_dob_year, '1951')
     })
 
     it('optionally-required posted file relationship_representative_verification_document_front', async () => {
@@ -1424,6 +1467,44 @@ describe.only('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registration.relationship_representative_verification_document_front, null)
+      assert.notStrictEqual(registration.relationship_representative_verification_document_front, undefined)
+    })
+
+    it('optionally-required posted file relationship_representative_verification_document_back', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
@@ -1450,7 +1531,83 @@ describe.only('/api/user/connect/update-company-representative', () => {
       assert.notStrictEqual(registration.relationship_representative_verification_document_back, undefined)
     })
 
-    it('optionally-required posted file relationship_representative_verification_document_back', async () => {
+    it('optionally-required posted file relationship_representative_verification_additional_document_front', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Auckland',
+        relationship_representative_address_postal_code: '6011',
+        relationship_representative_address_line1: '844 Fleet Street',
+        relationship_representative_address_state: 'N',
+        relationship_representative_address_country: 'NZ'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registration.relationship_representative_verification_additional_document_front, null)
+      assert.notStrictEqual(registration.relationship_representative_verification_additional_document_front, undefined)
+    })
+
+    it('optionally-required posted file relationship_representative_verification_additional_document_back', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'NZ'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Auckland',
+        relationship_representative_address_postal_code: '6011',
+        relationship_representative_address_line1: '844 Fleet Street',
+        relationship_representative_address_state: 'N',
+        relationship_representative_address_country: 'NZ'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registration.relationship_representative_verification_additional_document_back, null)
+      assert.notStrictEqual(registration.relationship_representative_verification_additional_document_back, undefined)
+    })
+
+    it('optionally-required posted relationship_representative_first_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -1460,7 +1617,8 @@ describe.only('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_dob_day: '7',
@@ -1482,67 +1640,595 @@ describe.only('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.representative_dob_year, '1951')
-    })
-
-    it('optionally-required posted file relationship_representative_verification_additional_document_front', async () => {
-      
-    })
-
-    it('optionally-required posted file relationship_representative_verification_additional_document_back', async () => {
-      
-    })
-
-    it('optionally-required posted relationship_representative_first_name', async () => {
-      
+      assert.strictEqual(registration.relationship_representative_first_name, user.profile.firstName)
     })
 
     it('optionally-required posted relationship_representative_last_name', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_last_name, user.profile.lastName)
     })
 
     it('optionally-required posted relationship_representative_email', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_email, user.profile.contactEmail)
     })
 
     it('optionally-required posted relationship_representative_phone', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_phone, '456-789-0123')
     })
 
     it('optionally-required posted relationship_representative_gender', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_gender: 'female',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_last_name_kanji: '東京都',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
+        relationship_representative_address_kanji_line1: '２７－１５'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_gender, 'female')
     })
 
     it('optionally-required posted relationship_representative_ssn_last_4', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_ssn_last_4, '0000')
     })
 
     it('optionally-required posted relationship_representative_id_number', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_id_number: '000000000',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_state: 'BC',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_id_number, '000000000')
     })
 
     it('optionally-required posted relationship_representative_address_city', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_city, 'New York')
     })
 
     it('optionally-required posted relationship_representative_address_state', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_state, 'NY')
     })
 
     it('optionally-required posted relationship_representative_address_postal_code', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_postal_code, '10007')
     })
 
     it('optionally-required posted relationship_representative_address_country', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_country, 'US')
     })
 
     it('optionally-required posted relationship_representative_address_line1', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_line1, '285 Fulton St')
     })
 
     it('optional posted relationship_representative_address_line2', async () => {
-      
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_line2: 'Another detail',
+        relationship_representative_address_postal_code: '10007'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_line2, 'Another detail')
+    })
+
+    it('optional posted relationship_representative_percent_owned', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_percent_owned: 100,
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_id_number: '000000000',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_state: 'BC',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_percent_owned, '100')
+    })
+
+    it('optional posted relationship_representative_title', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_percent_owned: 100,
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_id_number: '000000000',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_state: 'BC',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_title, 'Owner')
+    })
+
+    it('optional posted relationship_representative_director', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_percent_owned: 100,
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_director: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_id_number: '000000000',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_state: 'BC',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_director, true)
+    })
+
+    it('optional posted relationship_representative_executive', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'CA'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_percent_owned: 100,
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_id_number: '000000000',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_state: 'BC',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_executive, true)
     })
 
     it('optionally-required posted relationship_representative_first_name_kana', async () => {
@@ -1580,16 +2266,12 @@ describe.only('/api/user/connect/update-company-representative', () => {
           relationship_representative_address_kanji_state: '東京都',
           relationship_representative_address_kanji_city: '渋谷区',
           relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: ''
+          relationship_representative_address_kanji_line1: '２７－１５'
         }
         req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_line1')
+        const accountNow = await req.patch()
+        const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+        assert.strictEqual(registration.relationship_representative_address_kanji_line1, '２７－１５')
     })
 
     it('optionally-required posted relationship_representative_last_name_kana', async () => {
@@ -1615,7 +2297,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: '',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
         relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
@@ -1630,13 +2312,9 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_last_name_kana')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_last_name_kana, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted relationship_representative_address_kana_city', async () => {
@@ -1664,7 +2342,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: '',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
         relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         relationship_representative_address_kana_line1: '27-15',
         relationship_representative_address_kana_postal_code: '1500001',
@@ -1677,13 +2355,9 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_city')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kana_city, 'ｼﾌﾞﾔ')
     })
 
     it('optionally-required posted relationship_representative_address_kana_state', async () => {
@@ -1710,7 +2384,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: '',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
         relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         relationship_representative_address_kana_line1: '27-15',
@@ -1724,13 +2398,9 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_state')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kana_state, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted relationship_representative_address_kana_postal_code', async () => {
@@ -1761,7 +2431,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
         relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '',
+        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
         relationship_representative_last_name_kanji: '東京都',
         relationship_representative_address_kanji_postal_code: '1500001',
@@ -1771,13 +2441,9 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_postal_code')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kana_postal_code, '1500001')
     })
 
     it('optionally-required posted relationship_representative_address_kana_town', async () => {
@@ -1806,7 +2472,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: '',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         relationship_representative_address_kana_line1: '27-15',
         relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
@@ -1818,16 +2484,12 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_town')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
     })
 
-    it('optionally-required posted relationship_representative_address_kana__line1', async () => {
+    it('optionally-required posted relationship_representative_address_kana_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -1854,7 +2516,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
         relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '',
+        relationship_representative_address_kana_line1: '27-15',
         relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
         relationship_representative_last_name_kanji: '東京都',
@@ -1865,13 +2527,9 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kana_line1')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kana_line1, '27-15')
     })
 
     it('optionally-required posted relationship_representative_first_name_kanji', async () => {
@@ -1903,7 +2561,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         relationship_representative_address_kana_line1: '27-15',
         relationship_representative_address_kana_postal_code: '1500001',
-        relationship_representative_first_name_kanji: '',
+        relationship_representative_first_name_kanji: '東京都',
         relationship_representative_last_name_kanji: '東京都',
         relationship_representative_address_kanji_postal_code: '1500001',
         relationship_representative_address_kanji_state: '東京都',
@@ -1912,13 +2570,9 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_first_name_kanji')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_first_name_kanji, '東京都')
     })
 
     it('optionally-required posted relationship_representative_last_name_kanji', async () => {
@@ -1951,7 +2605,7 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kana_line1: '27-15',
         relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
-        relationship_representative_last_name_kanji: '',
+        relationship_representative_last_name_kanji: '東京都',
         relationship_representative_address_kanji_postal_code: '1500001',
         relationship_representative_address_kanji_state: '東京都',
         relationship_representative_address_kanji_city: '渋谷区',
@@ -1959,13 +2613,9 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_last_name_kanji')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_last_name_kanji, '東京都')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_city', async () => {
@@ -2001,18 +2651,14 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_last_name_kanji: '東京都',
         relationship_representative_address_kanji_postal_code: '1500001',
         relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '',
+        relationship_representative_address_kanji_city: '渋谷区',
         relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_city')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kanji_city, '渋谷区')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_state', async () => {
@@ -2047,19 +2693,15 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_first_name_kanji: '東京都',
         relationship_representative_last_name_kanji: '東京都',
         relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '',
+        relationship_representative_address_kanji_state: '東京都',
         relationship_representative_address_kanji_city: '渋谷区',
         relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_state')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kanji_state, '東京都')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_postal_code', async () => {
@@ -2093,20 +2735,16 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '',
+        relationship_representative_address_kanji_postal_code: '1500001',
         relationship_representative_address_kanji_state: '東京都',
         relationship_representative_address_kanji_city: '渋谷区',
         relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_postal_code')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kanji_postal_code, '1500001')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_town', async () => {
@@ -2143,20 +2781,16 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_postal_code: '1500001',
         relationship_representative_address_kanji_state: '東京都',
         relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_town')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kanji_town, '神宮前　３丁目')
     })
 
-    it('optionally-required posted relationship_representative_address_kanji__line1', async () => {
+    it('optionally-required posted relationship_representative_address_kanji_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -2191,16 +2825,12 @@ describe.only('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_kanji_state: '東京都',
         relationship_representative_address_kanji_city: '渋谷区',
         relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: ''
+        relationship_representative_address_kanji_line1: '２７－１５'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-relationship_representative_address_kanji_line1')
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kanji_line1, '２７－１５')
     })
   })
 
@@ -2927,7 +3557,9 @@ describe.only('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_dob_day: '1',

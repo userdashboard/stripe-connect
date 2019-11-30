@@ -172,6 +172,17 @@ module.exports = {
       }
       registration[posted] = req.body[posted]
     }
+    if (req.body.relationship_representative_percent_owned) {
+      try {
+        const percent = parseInt(req.body.relationship_representative_percent_owned, 10)
+        if ((!percent && percent !==0) || percent > 100 || percent < 0) {
+          throw new Error('invalid-relationship_representative_percent_owned')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_representative_percent_owned')
+      }
+      registration.relationship_representative_percent_owned = req.body.relationship_representative_percent_owned
+    }
     if (req.body.relationship_representative_title) {
       registration.relationship_representative_title = req.body.relationship_representative_title
     }
