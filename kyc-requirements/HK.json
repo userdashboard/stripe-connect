@@ -23,7 +23,6 @@
     "company.address.line2",
     "company.address.city",
     "company.address.state",
-    "company.address.country",
     "company.address.postal_code",
     "company.name",
     "company.tax_id",

@@ -22,7 +22,6 @@
     "company.address.line2",
     "company.address.city",
     "company.address.state",
-    "company.address.country",
     "company.address.postal_code",
     "company.name",
     "company.tax_id",
@@ -45,8 +44,8 @@
     "relationship.owner.address.postal_code",
     "relationship.owner.additional_document.front",
     "relationship.owner.additional_document.back",
-    "relationship.owner.document.front",
-    "relationship.owner.document.back"
+    "relationship.owner.verification.document.front",
+    "relationship.owner.verification.document.back"
   ],
   "companyRepresentative": [
     "relationship.representative.executive",
@@ -70,8 +69,6 @@
     "relationship.representative.verification.document.back"
   ],
   "companyDirector": [
-    "relationship.director.email",
-    "relationship.director.phone",
     "relationship.director.first_name",
     "relationship.director.last_name",
     "relationship.director.dob.day",
