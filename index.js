@@ -41,13 +41,12 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
   countrySpecs.sort((a, b) => {
     a.name = countryNameIndex[a.id]
     b.name = countryNameIndex[b.id]
-    countrySpecIndex[a.id] = a
-    countrySpecIndex[b.id] = b
     return a.id.toLowerCase() > b.id.toLowerCase() ? 1 : -1
   })
   const countryCurrencyIndex = {}
   const kycRequirements = {}
   for (const countrySpec of countrySpecs) {
+    countrySpecIndex[countrySpec.id] = countrySpec
     countryCurrencyIndex[countrySpec.id] = []
     for (const currency in countrySpec.supported_bank_account_currencies) {
       countryCurrencyIndex[countrySpec.id].push({ name: currency.toUpperCase(), currency, object: 'currency' })
@@ -83,7 +82,7 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
     countrySpecIndex,
     countryCurrencyIndex,
     kycRequirements,
-    euCountries: ['AT', 'BE', 'DE', 'EE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PT', 'SE', 'SI', 'SK'],
+    euCountries: ['AT', 'BE', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PT', 'SE', 'SI', 'SK'],
     getMerchantCategoryCodes: (language) => {
       return merchantCategoryCodes[language || global.language] || merchantCategoryCodes.en
     },
