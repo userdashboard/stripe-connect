@@ -1696,8 +1696,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
-      })
-      
+      }) 
       await TestHelper.createExternalAccount(user, {
         currency: 'usd',
         country: 'US',

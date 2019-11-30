@@ -75,8 +75,8 @@ module.exports = {
       relationship_director_first_name: req.body.relationship_director_first_name,
       relationship_director_last_name: req.body.relationship_director_last_name
     }
-    if (req.body.token) {
-      director.personToken = req.body.token
+    if (global.stripeJS === 3 && req.body.token) {
+      director.token = req.body.token
     }
     directors.unshift(director)
     const accountInfo = {

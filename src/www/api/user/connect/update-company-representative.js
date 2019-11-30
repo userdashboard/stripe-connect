@@ -9,6 +9,9 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
+    if (global.stripeJS === 3 && !req.body.token) {
+      throw new Error('invalid-token')
+    }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
@@ -61,6 +64,30 @@ module.exports = {
         new Date(req.body.relationship_representative_dob_year, req.body.relationship_representative_dob_month, req.body.relationship_representative_dob_day)
       } catch (error) {
         throw new Error('invalid-relationship_representative_dob_day')
+      }
+    }
+    if (req.body.relationship_representative_address_country) {
+       if (!connect.countryNameIndex[req.body.relationship_representative_address_country]) {
+        throw new Error('invalid-relationship_representative_address_country')
+      }
+    }
+    if (req.body.relationship_representative_address_state) {
+      if (!req.body.relationship_representative_address_country) {
+        throw new Error('invalid-relationship_representative_address_country')
+      }
+      const states = connect.countryDivisions[req.body.relationship_representative_address_country]
+      if (!states || !states.length) {
+        throw new Error('invalid-relationship_representative_address_state')
+      }
+      let found = false
+      for (const state of states) {
+        found = state.value === req.body.relationship_representative_address_state
+        if (found) {
+          break
+        }
+      }
+      if (!found) {
+        throw new Error('invalid-relationship_representative_address_state')
       }
     }
     if (req.uploads) {
@@ -158,8 +185,8 @@ module.exports = {
       metadata: {
       }
     }
-    if (req.body.token) {
-      registration.accountToken = req.body.token
+    if (global.stripeJS === 3 && req.body.token) {
+      registration.representative_token = req.body.token
     }
     connect.MetaData.store(accountInfo.metadata, 'registration', registration)
     try {

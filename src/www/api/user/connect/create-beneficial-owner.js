@@ -103,8 +103,8 @@ module.exports = {
     if (req.body.relationship_owner_verification_document_back) {
       owner.relationship_owner_verification_document_back = req.body.relationship_owner_verification_document_back
     }
-    if (req.body.token) {
-      owner.personToken = req.body.token
+    if (global.stripeJS === 3 && req.body.token) {
+      owner.token = req.body.token
     }
     owners.unshift(owner)
     const accountInfo = {

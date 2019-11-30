@@ -9,6 +9,9 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
+    if (global.stripeJS === 3 && !req.body.token) {
+      throw new Error('invalid-token')
+    }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
@@ -27,18 +30,47 @@ module.exports = {
       }
       registration[posted] = req.body[posted]
     }
-    if (req.body.company_address_state) {
-      registration.company_address_state = req.body.company_address_state
+    if (req.body.business_profile_mcc) {
+      const mccList = connect.getMerchantCategoryCodes(req.language)
+      let found = false
+      for (const mcc of mccList) {
+        found = mcc.code === req.body.business_profile_mcc
+        if (found) {
+          break
+        }
+      }
+      if (!found) {
+        throw new Error('invalid-business_profile_mcc')
+      }
     }
-    if (req.body.company_address_line2) {
-      registration.company_address_line2 = req.body.company_address_line2
+    if (req.body.business_profile_url) {
+      if (!req.body.business_profile_url.startsWith('http://') &&
+          !req.body.business_profile_url.startsWith('https://')) {
+        throw new Error('invalid-business_profile_url')
+      }
+    }
+    if (req.body.company_address_state) {
+      const states = connect.countryDivisions[stripeAccount.country]
+      if (!states || !states.length) {
+        throw new Error('invalid-company_address_state')
+      }
+      let found = false
+      for (const state of states) {
+        found = state.value === req.body.company_address_state
+        if (found) {
+          break
+        }
+      }
+      if (!found) {
+        throw new Error('invalid-company_address_state')
+      }
     }
     const accountInfo = {
       metadata: {
       }
     }
-    if (req.body.token) {
-      registration.accountToken = req.body.token
+    if (global.stripeJS === 3 && req.body.token) {
+      registration.company_token = req.body.token
     }
     connect.MetaData.store(accountInfo.metadata, 'registration', registration)
     try {

@@ -59,7 +59,7 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
     kycRequirements[countrySpec.id] = JSON.parse(fs.readFileSync(filePath).toString())
   }
   const countryDivisions = {}
-  const raw = require('./countries-divisions.json')
+  const raw = require('./country-divisions.json')
   for (const object in raw) {
     countryDivisions[raw[object].code] = []
     for (const item in raw[object].divisions) {

@@ -84,6 +84,7 @@ beforeEach((callback) => {
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
+  global.stripeJS = false
   return callback()
 })
 module.exports.createRequest = (rawURL, method) => {

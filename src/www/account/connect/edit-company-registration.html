@@ -111,22 +111,6 @@
               </div>
             </div>
           </div>
-          <div id="company_address_country-container" class="pure-control-group">
-            <div class="pure-g">
-              <div class="pure-u-16-24">
-                <a name="company_address_country-anchor"></a>
-                <label for="company_address_country">Country</label>
-                <select name="company_address_country" id="company_address_country">
-                  <option value="">Select country</option>
-                </select>
-              </div>
-              <div class="pure-u-1-24"></div>
-              <div class="pure-u-7-24">
-                <label>&nbsp;</label>
-                <button name="refresh" value="true" class="pure-button">Reload states</button>
-              </div>
-            </div>
-          </div>
         </div>
         <div id="JP-company-address-container">
           <h2>Kana company address</h2>
@@ -191,9 +175,6 @@
   <template id="mcc-option">
     <option value="${mcc.code}">${mcc.description}</option>
   </template>
-  <template id="country-option">
-    <option value="${country.code}">${country.name}</option>
-  </template>
   <template id="state-option">
     <option value="${option.value}">${option.text}</option>
   </template>
@@ -229,9 +210,6 @@
   </template>
   <template id="invalid-company_tax_id">
     <div class="error message">Error! Invalid or missing business tax id</div>
-  </template>
-  <template id="invalid-company_address_country">
-    <div class="error message">Error! Invalid or missing company address country</div>
   </template>
   <template id="invalid-company_address_line1">
     <div class="error message">Error! Invalid or missing company address line 1</div>

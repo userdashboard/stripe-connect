@@ -9,6 +9,9 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
+    if (global.stripeJS === 3 && !req.body.token) {
+      throw new Error('invalid-token')
+    }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted ||
       stripeAccount.business_type !== 'individual' ||
@@ -183,8 +186,8 @@ module.exports = {
       }
       registration[posted] = req.body[posted]
     }
-    if (req.body.token) {
-      registration.accountToken = req.body.token
+    if (global.stripeJS === 3 && req.body.token) {
+      registration.individual_token = req.body.token
     }
     if (req.body.individual_verification_document_front) {
       registration.individual_verification_document_front = req.body.individual_verification_document_front

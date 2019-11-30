@@ -10,10 +10,9 @@ Stripe Connect module is ready-ish to use.  The following work remains:
 
 - translations required for everything in /languages [(please help)](https://github.com/userdashboard/stripe-connect)
 - there is no "resubmission" flow for rejected/erroneous data pending a reliable way to trigger it on Stripe API, until there is users who fail validation can delete and start new registrations
-- some fields in `update-x-registration` have a 'missing' test but no accompanying 'invalid' test that verifies the information is correct or correctly-structured or correctly-sized or whatever
+- some fields in `update-x` have a 'missing' test but no accompanying 'invalid' test that verifies the information is correct or correctly-structured or correctly-sized or whatever, such as `line1`, `city`, `postal_code`, `first_name`, `last_name` 
 - JP tests for `update-payment-information` and `set-x-registration-submitted` is throwing an error that you can't use live bank account numbers
-- MX tests are in place but not available yet
-- individual, company representative and companys'  beneficial owner addresses have selectable countries, need to verify which countries can have an application in x living in y
+- MX tests are in place but it is not available for all accounts
 
 ## Adding countries
 
