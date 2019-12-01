@@ -3,7 +3,7 @@
 // const TestHelper = require('../../../../../test-helper.js')
 // const util = require('util')
 
-// describe.only('/api/user/connect/reupload-identity-document', () => {
+// describe('/api/user/connect/reupload-identity-document', () => {
 //   describe('exceptions', () => {
 //     describe('invalid-stripeid', () => {
 //       it('missing querystring stripeid', async () => {
@@ -187,7 +187,7 @@
 //     })
 
 //     describe('invalid-upload', () => {
-//       it.only('should reject invalid upload', async () => {
+//       it('should reject invalid upload', async () => {
 //         const user = await TestHelper.createUser()
 //         await TestHelper.createStripeAccount(user, {
 //           type: 'company',

@@ -673,7 +673,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
-        account_number: '000123-456',
+        account_number: '000123456',
         clearing_code: '110',
         branch_code: '000'
       })
@@ -930,7 +930,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
 
-    // it.only('returns object for MX registration', async () => {
+    // it('returns object for MX registration', async () => {
     //   const user = await TestHelper.createUser()
     //   await TestHelper.createStripeAccount(user, {
     //     type: 'individual',

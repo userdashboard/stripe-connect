@@ -144,7 +144,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           business_profile_url: 'https://www.abcde.com',
           business_profile_mcc: '7531',
           company_address_city: 'Frederiksberg',
-          company_address_state: '147',
+          company_address_state: 'BW',
           company_address_country: 'DE',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '1020',
@@ -153,7 +153,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'Frederiksberg',
-          relationship_representative_address_state: '147',
+          relationship_representative_address_state: 'BW',
           relationship_representative_address_country: 'DE',
           relationship_representative_address_line1: '123 Sesame St',
           relationship_representative_address_postal_code: '1020',
@@ -848,7 +848,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
-        account_number: '000123-456',
+        account_number: '000123456',
         clearing_code: '110',
         branch_code: '000'
       })
@@ -969,7 +969,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //     type: 'company',
     //     country: 'JP'
     //   })
-    //   console.log('creating')
     //   await TestHelper.createStripeRegistration(user, {
     //     company_tax_id: '8',
     //     company_name: 'Company',
@@ -1021,7 +1020,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //     relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
     //     relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
     //   })
-    //   console.log('making external account')
     //   await TestHelper.createExternalAccount(user, {
     //     currency: 'jpy',
     //     country: 'JP',
@@ -1031,7 +1029,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //     bank_code: '110',
     //     branch_code: '0000'
     //   })
-    //   console.log('submitting')
     //   const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
@@ -1380,9 +1377,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_address_country: 'NZ'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'nzd',

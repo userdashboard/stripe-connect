@@ -549,7 +549,7 @@ describe('/account/connect/edit-payment-information', () => {
         country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
-        account_number: '000123-456',
+        account_number: '000123456',
         clearing_code: '110',
         branch_code: '000'
       }
@@ -570,7 +570,7 @@ describe('/account/connect/edit-payment-information', () => {
         country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
-        account_number: '000123-456',
+        account_number: '000123456',
         clearing_code: '110',
         branch_code: '000'
       }

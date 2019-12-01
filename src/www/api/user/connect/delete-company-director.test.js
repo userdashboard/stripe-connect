@@ -33,32 +33,32 @@ describe('/api/user/connect/delete-company-director', () => {
         assert.strictEqual(errorMessage, 'invalid-directorid')
       })
     })
-  })
 
-  describe('invalid-account', () => {
-    it('ineligible accessing account', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'FI'
+    describe('invalid-account', () => {
+      it('ineligible accessing account', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'FI'
+        })
+        const person = TestHelper.nextIdentity()
+        const director = await TestHelper.createCompanyDirector(user, {
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
+        })
+        const user2 = await TestHelper.createUser()
+        const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)
+        req.account = user2.account
+        req.session = user2.session
+        let errorMessage
+        try {
+          await req.delete()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-account')
       })
-      const person = TestHelper.nextIdentity()
-      const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
-      })
-      const user2 = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)
-      req.account = user2.account
-      req.session = user2.session
-      let errorMessage
-      try {
-        await req.delete()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-account')
-    })
+    })  
   })
 
   describe('returns', () => {
