@@ -29,7 +29,7 @@
     "business_profile.url",
     "business_profile.product_description"
   ],
-  "beneficialOwners": [
+  "beneficialOwner": [
     "relationship.owner.email",
     "relationship.owner.first_name",
     "relationship.owner.last_name",

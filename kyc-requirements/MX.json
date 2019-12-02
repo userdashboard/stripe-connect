@@ -51,7 +51,7 @@
     "relationship.representative.verification.document.front",
     "relationship.representative.verification.document.back"
   ],
-  "beneficialOwners": [
+  "beneficialOwner": [
     "relationship.owner.email",
     "relationship.owner.id_number",
     "relationship.owner.first_name",
