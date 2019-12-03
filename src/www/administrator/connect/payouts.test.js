@@ -49,7 +49,7 @@ describe('/administrator/connect/payouts', () => {
         type: 'individual',
         country: 'NZ'
       })
-      await TestHelper.createStripeRegistration(user, {
+      await TestHelper.createStripeRegistration(user2, {
         business_profile_url: 'https://www.abcde.com',
         business_profile_mcc: '7531',
         individual_address_city: 'Auckland',
@@ -60,9 +60,9 @@ describe('/administrator/connect/payouts', () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_email: user.profile.contactEmail,
+        individual_first_name: user2.profile.firstName,
+        individual_last_name: user2.profile.lastName,
+        individual_email: user2.profile.contactEmail,
         individual_phone: '456 789 0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
@@ -137,7 +137,7 @@ describe('/administrator/connect/payouts', () => {
         type: 'individual',
         country: 'NZ'
       })
-      await TestHelper.createStripeRegistration(user, {
+      await TestHelper.createStripeRegistration(user2, {
         business_profile_url: 'https://www.abcde.com',
         business_profile_mcc: '7531',
         individual_address_city: 'Auckland',
@@ -148,9 +148,9 @@ describe('/administrator/connect/payouts', () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_email: user.profile.contactEmail,
+        individual_first_name: user2.profile.firstName,
+        individual_last_name: user2.profile.lastName,
+        individual_email: user2.profile.contactEmail,
         individual_phone: '456 789 0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],

@@ -102,7 +102,7 @@ module.exports = {
       await stripeCache.update(accountNow)
       return accountNow
     } catch (error) {
-      const errorMessage = error.param ? error.raw.param : error.message
+      const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
       if (errorMessage.startsWith('individual[address]')) {
         let field = errorMessage.substring('individual[address]['.length)
         field = field.substring(0, field.length - 1)

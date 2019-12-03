@@ -33,10 +33,10 @@
       <td><a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>
       <td>${account.business_type}</td>
       <td id="blank-name-${account.id}">Not yet provided</td>
-      <td id="individual-registration-name-${account.id}">${stripeAccount.registration.individual_first_name} ${stripeAccount.registration.individual_last_name}</td>
-      <td id="individual-name-${account.id}">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
-      <td id="business-registration-name-${account.id}">${stripeAccount.registration.company_name || ""}</td>
-      <td id="business-name-${account.id}">${stripeAccount.company.name || ""}</td>
+      <td id="individual-registration-name-${account.id}">${account.registration.individual_first_name} ${account.registration.individual_last_name}</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-registration-name-${account.id}">${account.registration.company_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
       <td id="mcc-description-${account.id}"></td>
       <td>${account.createdFormatted}</td>

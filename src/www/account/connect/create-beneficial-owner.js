@@ -23,6 +23,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
+  console.log('render', messageTemplate)
   if (req.success) {
     if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
       return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
@@ -95,6 +96,7 @@ async function renderPage (req, res, messageTemplate) {
 }
 
 async function submitForm (req, res) {
+  console.log('submit', req.body)
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }

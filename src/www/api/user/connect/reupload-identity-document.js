@@ -59,7 +59,6 @@ module.exports = {
           }
         }
       }
-      console.log('updating stripe account', accountInfo)
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         req.success = true
@@ -79,7 +78,6 @@ module.exports = {
         }
       }
     }
-    console.log('updating person', accountOpenerInfo)
     try {
       const accountNow = await stripe.accounts.updatePerson(req.query.stripeid, accountOpenerInfo, req.stripeKey)
       req.success = true

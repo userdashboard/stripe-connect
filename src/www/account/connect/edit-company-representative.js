@@ -57,7 +57,7 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].countryRepresentative
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
   if (requiredFields.indexOf('relationship_representative_address_country') > -1) {
     let personalCountry
     if (req.body) {
@@ -131,10 +131,13 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].countryRepresentative
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
   for (const field of requiredFields) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
+      if (field === 'relationship.representative.address.line2') {
+        continue
+      }
       return renderPage(req, res, `invalid-${posted}`)
     }
   }

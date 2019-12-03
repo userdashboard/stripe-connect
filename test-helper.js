@@ -27,6 +27,8 @@ module.exports = {
   createStripeAccount,
   createStripeRegistration,
   createCompanyRepresentative,
+  submitBeneficialOwners,
+  submitCompanyDirectors,
   submitStripeAccount,
   triggerVerification,
   waitForVerification: util.promisify(waitForVerification),
@@ -219,6 +221,23 @@ async function createPayout (user) {
   return user.payout
 }
 
+async function submitBeneficialOwners (user) {
+  const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
+  req.session = user.session
+  req.account = user.account
+  const stripeAccount = await req.patch()
+  user.stripeAccount = stripeAccount
+  return stripeAccount
+}
+
+async function submitCompanyDirectors (user) {
+  const req = TestHelper.createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
+  req.session = user.session
+  req.account = user.account
+  const stripeAccount = await req.patch()
+  user.stripeAccount = stripeAccount
+  return stripeAccount
+}
 async function submitStripeAccount (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-${user.stripeAccount.business_type}-registration-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session

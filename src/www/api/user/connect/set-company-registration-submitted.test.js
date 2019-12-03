@@ -70,6 +70,8 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           company_address_country: 'US',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        })
+        await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
@@ -1706,6 +1708,77 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
+  })
+
+  describe('configuration', () => {
+    it('environment STRIPE_JS', async () => {
+      global.stripeJS = 3
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'US'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.waitOnSubmit = true
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '285 Fulton St',
+        company_address_postal_code: '10007',
+        company_address_state: 'NY',
+        company_address_country: 'US',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      }
+      await req.post()
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      req2.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req2.body = {
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_ssn_last_4: '0000',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007'
+      }
+      await req2.post()
+      const req3 = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
+      req3.account = user.account
+      req3.session = user.session
+      req3.body = {
+        currency: 'usd',
+        country: 'US',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456789',
+        routing_number: '110000000'
+      }
+      await req3.post()      
+      const req4 = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req4.account = user.account
+      req4.session = user.session
+      const accountNow = await req4.patch()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })

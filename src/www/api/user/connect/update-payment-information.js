@@ -79,7 +79,6 @@ module.exports = {
         const integers = '0123456789'
         for (let i = 0, len = numericPart.length; i < len; i++) {
           if (integers.indexOf(numericPart.charAt(i)) === -1) {
-            console.log('missing char', numericPart.charAt(i), integers)
             throw new Error('invalid-iban')
           }
         }

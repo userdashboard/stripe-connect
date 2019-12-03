@@ -28,6 +28,8 @@ async function beforeRequest (req) {
     } else {
       stripeAccount.statusMessage = 'not-submitted'
     }
+    const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
+    stripeAccount.registration = registration
   }
   req.data = { stripeAccounts }
 }
@@ -69,7 +71,7 @@ async function renderPage (req, res) {
       const mccCodes = connect.getMerchantCategoryCodes(req.language)
       const mccDescription = doc.getElementById(`mcc-description-${stripeAccount.id}`)
       for (const code of mccCodes) {
-        if (code.code === req.data.stripeAccount.business_profile.mcc) {
+        if (code.code === stripeAccount.business_profile.mcc) {
           mccDescription.innerHTML = code.description
           break
         }

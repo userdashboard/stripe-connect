@@ -38,7 +38,13 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const selectedCountry = req.body ? req.body.country : req.data.stripeAccount.country
+  const selectedCountry = req.data.stripeAccount.country
+  if (req.body && req.body.country) {
+    selectedCountry = req.body.country
+    if (!connect.countryNameIndex[selectedCountry]) {
+      throw new Error('invalid-country')
+    }
+  }
   for (const countrySpec of connect.countrySpecs) {
     if (countrySpec.id !== selectedCountry) {
       const countryContainer = doc.getElementById(`${countrySpec.id}-container`)

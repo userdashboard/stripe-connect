@@ -19,6 +19,7 @@ describe('/administrator/connect/reject-stripe-account', () => {
         individual_address_postal_code: '10007',
         individual_id_number: '000000000',
         individual_address_state: 'NY',
+        individual_address_country: 'US',
         individual_ssn_last_4: '0000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -50,7 +51,7 @@ describe('/administrator/connect/reject-stripe-account', () => {
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
-        // individual_id_number: '000000000',
+        individual_address_country: 'US',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
         individual_dob_day: '1',
@@ -60,6 +61,9 @@ describe('/administrator/connect/reject-stripe-account', () => {
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/administrator/connect/reject-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
@@ -83,7 +87,7 @@ describe('/administrator/connect/reject-stripe-account', () => {
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
-        // individual_id_number: '000000000',
+        individual_address_country: 'US',
         individual_address_state: 'NY',
         individual_ssn_last_4: '0000',
         individual_dob_day: '1',
@@ -93,6 +97,9 @@ describe('/administrator/connect/reject-stripe-account', () => {
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/administrator/connect/reject-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
@@ -118,8 +125,8 @@ describe('/administrator/connect/reject-stripe-account', () => {
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
-        // individual_id_number: '000000000',
         individual_address_state: 'NY',
+        individual_address_country: 'US',
         individual_ssn_last_4: '0000',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -128,6 +135,9 @@ describe('/administrator/connect/reject-stripe-account', () => {
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName
+      }, {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/administrator/connect/reject-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account

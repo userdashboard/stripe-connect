@@ -77,16 +77,9 @@ async function renderPage (req, res, messageTemplate) {
   if (req.data.stripeAccount.country !== 'JP') {
     removeElements.push('JP-company-name-container', 'JP-company-address-container')
   }
-  if (requiredFields.indexOf('company_address.country') > -1) {
-    let companyCountry
-    if (req.body) {
-      companyCountry = req.body.company_address_country
-    }
-    companyCountry = companyCountry || req.data.registration.company_address_country
-    companyCountry = companyCountry || req.data.stripeAccount.country
-    const companyStates = connect.countryDivisions[companyCountry]
+  if (requiredFields.indexOf('company.address.state') > -1) {
+    const companyStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, companyStates, 'state-option', 'company_address_state')
-    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'company_address_country')
   }
   if (req.method === 'GET') {
     for (const field in req.data.registration) {
@@ -124,6 +117,11 @@ async function submitForm (req, res) {
   for (const field of requiredFields) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
+      if (field === 'company.address.line2' ||
+        (field === 'business_profile.url' && req.body.business_profile_product_description) ||
+        (field === 'business_profile.product_description' && req.body.business_profile_url)) {
+        continue
+      }
       return renderPage(req, res, `invalid-${posted}`)
     }
   }

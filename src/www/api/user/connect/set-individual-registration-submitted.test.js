@@ -1338,4 +1338,10 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
   })
+
+  describe('configuration', () => {
+    it('environment STRIPE_JS', async () => {
+
+    })
+  })
 })

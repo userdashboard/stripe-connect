@@ -56,6 +56,8 @@ describe('/api/user/connect/company-directors-count', () => {
           company_address_country: 'US',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        })
+        await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',

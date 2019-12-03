@@ -30,7 +30,9 @@ async function beforeRequest (req) {
   } else {
     stripeAccount.statusMessage = 'not-submitted'
   }
-  req.data = { stripeAccount }
+  const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
+  stripeAccount.registration = registration
+  req.data = { stripeAccount, registration }
 }
 
 async function renderPage (req, res) {
@@ -46,7 +48,7 @@ async function renderPage (req, res) {
   }
   const removeElements = []
   if (req.data.stripeAccount.business_type === 'individual') {
-    removeElements.push('company', 'business-name', 'business-registration-name')
+    removeElements.push('business-name', 'business-registration-name')
     if (req.data.stripeAccount.individual.first_name) {
       removeElements.push('blank-name', 'individual-registration-name')
     } else {
@@ -58,7 +60,7 @@ async function renderPage (req, res) {
       }
     }
   } else {
-    removeElements.push('individual', 'individual-name', 'individual-registration-name')
+    removeElements.push('individual-name', 'individual-registration-name')
     if (req.data.stripeAccount.company.name) {
       removeElements.push('blank-name', 'business-registration-name')
     } else {

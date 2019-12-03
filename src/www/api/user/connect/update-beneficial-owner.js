@@ -140,7 +140,7 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
     const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-    const requiredFields = connect.kycRequirements[stripeAccount.country].beneficialOwners
+    const requiredFields = connect.kycRequirements[stripeAccount.country].beneficialOwner
     for (const field of requiredFields) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
