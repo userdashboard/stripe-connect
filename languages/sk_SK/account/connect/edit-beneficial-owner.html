@@ -24,22 +24,22 @@
           <div class="pure-u-12-24">
             <div class="pure-control-group">
               <label for="relationship_owner_first_name">First name</label>
-              <input class="full-width" require="require" id="relationship_owner_first_name" name="relationship_owner_first_name" type="text" maxlength="50" />
+              <input class="full-width" required="required" id="relationship_owner_first_name" name="relationship_owner_first_name" type="text" maxlength="50" />
             </div>
           </div>
           <div class="pure-u-1-24"></div>
           <div class="pure-u-11-24">
             <div class="pure-control-group">
               <label for="relationship_owner_last_name">Last name</label>
-              <input class="full-width" require="require" id="relationship_owner_last_name" name="relationship_owner_last_name" type="text" maxlength="50" />
+              <input class="full-width" required="required" id="relationship_owner_last_name" name="relationship_owner_last_name" type="text" maxlength="50" />
             </div>
           </div>
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_dob_day">Date of birth</label>
-          <input class="adjacent" require="require" id="relationship_owner_dob_day" name="relationship_owner_dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
-          <input class="adjacent" require="require" id="relationship_owner_dob_month" name="relationship_owner_dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
-          <input require="require" id="relationship_owner_dob_year" name="relationship_owner_dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
+          <input class="adjacent" required="required" id="relationship_owner_dob_day" name="relationship_owner_dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
+          <input class="adjacent" required="required" id="relationship_owner_dob_month" name="relationship_owner_dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
+          <input required="required" id="relationship_owner_dob_year" name="relationship_owner_dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
         </div>
         <h2>Relationship to company</h2>
         <div class="pure-control-group">
@@ -50,12 +50,12 @@
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_title">Job title</label>
-          <input class="full-width" require="require" id="relationship_owner_title" name="relationship_owner_title" type="text" maxlength="100" />
+          <input class="full-width" required="required" id="relationship_owner_title" name="relationship_owner_title" type="text" maxlength="100" />
         </div>
         <div id="relationship_owner_id_number-container" class="pure-control-group">
           <h2>Personal identification</h2>
           <label for="relationship_owner_id_number">Passport or ID number</label>
-          <input require="require" id="relationship_owner_id_number" name="relationship_owner_id_number" type="text" maxlength="50" />
+          <input required="required" id="relationship_owner_id_number" name="relationship_owner_id_number" type="text" maxlength="50" />
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_verification_document_front">Front scan/photo</label>
@@ -68,7 +68,7 @@
         <h2>Address</h2>
         <div class="pure-control-group">
           <label for="relationship_owner_address_line1">Line 1</label>
-          <input class="full-width" require="require" id="relationship_owner_address_line1" name="relationship_owner_address_line1" type="text" maxlength="100" />
+          <input class="full-width" required="required" id="relationship_owner_address_line1" name="relationship_owner_address_line1" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_address_line2">Line 2</label>
@@ -76,7 +76,7 @@
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_address_city">City</label>
-          <input class="full-width" require="require" id="relationship_owner_address_city" name="relationship_owner_address_city" type="text" maxlength="100" />
+          <input class="full-width" required="required" id="relationship_owner_address_city" name="relationship_owner_address_city" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
           <div class="pure-g">
@@ -90,7 +90,7 @@
             <div class="pure-u-6-24">
               <div class="pure-control-group">
                 <label for="relationship_owner_address_postal_code">ZIP</label>
-                <input class="full-width" require="require" id="relationship_owner_address_postal_code" name="relationship_owner_address_postal_code" type="text" maxlength="50" />
+                <input class="full-width" required="required" id="relationship_owner_address_postal_code" name="relationship_owner_address_postal_code" type="text" maxlength="50" />
               </div>
             </div>
           </div>
@@ -114,10 +114,7 @@
       </div>
     </form>
   </body>
-  <template id="dob-option">
-    <option value="${option.value}">${option.text}</option>
-  </template>
-  <template id="state-option">
+    <template id="state-option">
     <option value="${option.code}">${option.name}</option>
   </template>
   <template id="country-option">

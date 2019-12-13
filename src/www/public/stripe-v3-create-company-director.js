@@ -11,13 +11,47 @@ function convertDirector (e) {
   setTimeout(function () {
     e.target.disabled = false
   }, 1000)
-  var companyDirector = {
-    first_name: document.getElementById('relationship_director_first_name').value,
-    last_name: document.getElementById('relationship_director_last_name').value
+  var director = {}
+  var firstName = document.getElementById('relationship_director_first_name')
+  if (firstName.value && firstName.value.length) {
+    director.first_name = firstName.value
+  } else {
+    return window.renderError('invalid-relationship_director_first_name')
   }
-  for (var field in companyDirector) {
-    if (!companyDirector[field]) {
-      return window.renderError('invalid-relationship_director_' + field)
+  var lastName = document.getElementById('relationship_director_last_name')
+  if (lastName.value && lastName.value.length) {
+    director.last_name = lastName.value
+  } else {
+    return window.renderError('invalid-relationship_director_last_name')
+  }
+  var email = document.getElementById('relationship_director_email')
+  if (email && email.value) {
+    director.email = email.value
+  }
+  var relationshipTitle = document.getElementById('relationship_director_relationship_title')
+  if (relationshipTitle && relationshipTitle.value) {
+    director.relationship_title = relationshipTitle.value
+  }
+  var dobDay = document.getElementById('relationship_director_dob_day')
+  if (dobDay) {
+    director.dob = {
+      day: dobDay.value,
+      month: document.getElementById('relationship_director_dob_month').value,
+      year: document.getElementById('relationship_director_dob_year').value
+    }
+    if (!director.dob.day) {
+      return window.renderError('invalid-relationship_director_dob_day')
+    }
+    if (!director.dob.month) {
+      return window.renderError('invalid-relationship_director_dob_month')
+    }
+    if (!director.dob.year) {
+      return window.renderError('invalid-relationship_director_dob_year')
+    }
+    try {
+      Date.parse(director.dob.year + '/' + director.dob.month + '/' + director.dob.day)
+    } catch (eror) {
+      return window.renderError('invalid-relationship_director_dob_day')
     }
   }
   var documentFront = document.getElementById('relationship_director_verification_document_front')
@@ -27,7 +61,7 @@ function convertDirector (e) {
       return window.renderError(error.message)
     }
     if (front && front.id) {
-      companyDirector.verification = {
+      director.verification = {
         document: {
           front: front.id
         }
@@ -36,13 +70,13 @@ function convertDirector (e) {
       return window.renderError('invalid-relationship_director_verification_document_front')
     }
     if (back && back.id) {
-      companyDirector.verification = companyDirector.verification || {}
-      companyDirector.verification.document = companyDirector.verification.document || {}
-      companyDirector.verification.document.back = back.id
+      director.verification = director.verification || {}
+      director.verification.document = director.verification.document || {}
+      director.verification.document.back = back.id
     } else {
       return window.renderError('invalid-relationship_director_verification_document_back')
     }
-    return stripe.createToken('person', companyDirector).then(function (result) {
+    return stripe.createToken('person', director).then(function (result) {
       if (result.error) {
         return window.renderError(result.error)
       }

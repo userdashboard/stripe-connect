@@ -251,7 +251,7 @@ describe('/api/user/connect/update-company-representative', () => {
           errorMessage = error.message
         }
         assert.strictEqual(errorMessage, 'invalid-relationship_representative_dob_day')
-      })      
+      })
     })
 
     describe('invalid-relationship_representative_dob_month', () => {
@@ -2157,45 +2157,45 @@ describe('/api/user/connect/update-company-representative', () => {
 
     it('optionally-required posted relationship_representative_first_name_kana', async () => {
       const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'JP'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
-        }
-        const body = {
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_gender: 'female',
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
-          relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        const accountNow = await req.patch()
-        const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-        assert.strictEqual(registration.relationship_representative_address_kanji_line1, '２７－１５')
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'JP'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const body = {
+        relationship_representative_executive: 'true',
+        relationship_representative_title: 'Owner',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_gender: 'female',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_last_name_kanji: '東京都',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
+        relationship_representative_address_kanji_line1: '２７－１５'
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const accountNow = await req.patch()
+      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.strictEqual(registration.relationship_representative_address_kanji_line1, '２７－１５')
     })
 
     it('optionally-required posted relationship_representative_last_name_kana', async () => {

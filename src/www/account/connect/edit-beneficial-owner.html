@@ -1,7 +1,7 @@
 <!doctype html>
 <html template="false">
   <head>
-    <title>Edit ${owner.ownerid}</title>
+    <title>Edit beneficial owner ${owner.relationship_owner_first_name} ${owner.relationship_owner_last_name}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="/public/pure-min.css" />
     <link rel="stylesheet" href="/public/content.css" />
@@ -16,46 +16,63 @@
   </head>
   <body class="entry">
     <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-beneficial-owner?ownerid=${owner.ownerid}">
-      <input type="hidden" id="token" name="token" />
-      <h1>Edit ${owner.ownerid}</h1>
+      <input type="hidden" name="token" id="token" />
+      <h1>Edit beneficial owner</h1>
       <div id="message-container"></div>
       <div id="form-container">
+        <h2>Relationship to company</h2>
+        <div class="pure-control-group">
+          <label><input type="checkbox" id="relationship_owner_executive" name="relationship_owner_executive" value="true" /> Executive</label>
+          <label><input type="checkbox" id="relationship_owner_director" name="relationship_owner_director" value="true" /> Director</label>
+        </div>
         <div class="pure-g">
-          <div class="pure-u-12-24">
+          <div class="pure-u-11-24">
             <div class="pure-control-group">
               <label for="relationship_owner_first_name">First name</label>
-              <input class="full-width" require="require" id="relationship_owner_first_name" name="relationship_owner_first_name" type="text" maxlength="50" />
+              <input class="full-width" required="required" id="relationship_owner_first_name" name="relationship_owner_first_name" type="text" maxlength="50" />
             </div>
           </div>
-          <div class="pure-u-1-24"></div>
+          <div class="pure-u-2-24"></div>
           <div class="pure-u-11-24">
             <div class="pure-control-group">
               <label for="relationship_owner_last_name">Last name</label>
-              <input class="full-width" require="require" id="relationship_owner_last_name" name="relationship_owner_last_name" type="text" maxlength="50" />
+              <input class="full-width" required="required" id="relationship_owner_last_name" name="relationship_owner_last_name" type="text" maxlength="50" />
+            </div>
+          </div>
+        </div>
+        <div id="relationship_owner_email-container">
+          <div class="pure-control-group">
+            <label for="relationship_owner_email">Contact email</label>
+            <input class="full-width" required="required" id="relationship_owner_email" name="relationship_owner_email" type="text" maxlength="50" />
+          </div>
+        </div>
+        <div class="pure-g">
+          <div class="pure-u-11-24">
+            <div class="pure-control-group">
+              <label for="relationship_owner_title">Title / Role</label>
+              <input class="full-width" required="required" id="relationship_owner_title" name="relationship_owner_title" type="text" maxlength="50" />
+            </div>
+          </div>
+          <div class="pure-u-2-24"></div>
+          <div class="pure-u-11-24">
+            <div class="pure-control-group">
+              <label for="relationship_owner_percent_ownership">Percent ownership</label>
+              <input class="full-width" required="required" id="relationship_owner_percent_ownership" name="relationship_owner_percent_ownership" type="text" maxlength="50" />
             </div>
           </div>
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_dob_day">Date of birth</label>
-          <input class="adjacent" require="require" id="relationship_owner_dob_day" name="relationship_owner_dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
-          <input class="adjacent" require="require" id="relationship_owner_dob_month" name="relationship_owner_dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
-          <input require="require" id="relationship_owner_dob_year" name="relationship_owner_dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
+          <input class="adjacent" required="required" id="relationship_owner_dob_day" name="relationship_owner_dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
+          <input class="adjacent" required="required" id="relationship_owner_dob_month" name="relationship_owner_dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
+          <input class="adjacent" required="required" id="relationship_owner_dob_year" name="relationship_owner_dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
         </div>
-        <h2>Relationship to company</h2>
-        <div class="pure-control-group">
-          <label for="relationship_owner_title">Job title</label>
-          <label><input type="checkbox" name="relationship_owner_executive" value="true" /> Executive</label>
-          <label><input type="checkbox" name="relationship_owner_director" value="true" /> Director</label>
-          <label><input type="checkbox" name="relationship_owner_owner" value="true" /> Owner</label>
-        </div>
-        <div class="pure-control-group">
-          <label for="relationship_owner_title">Job title</label>
-          <input class="full-width" require="require" id="relationship_owner_title" name="relationship_owner_title" type="text" maxlength="100" />
-        </div>
-        <div id="relationship_owner_id_number-container" class="pure-control-group">
-          <h2>Personal identification</h2>
-          <label for="relationship_owner_id_number">Passport or ID number</label>
-          <input require="require" id="relationship_owner_id_number" name="relationship_owner_id_number" type="text" maxlength="50" />
+        <div id="relationship_owner_id_number-container">
+          <div class="pure-control-group">
+              <h2>Personal identification</h2>
+            <label for="relationship_owner_id_number">Passport or ID number</label>
+            <input class="full-width" required="required" id="relationship_owner_id_number" name="relationship_owner_personal_id_number" type="text" maxlength="50" />
+          </div>
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_verification_document_front">Front scan/photo</label>
@@ -68,15 +85,15 @@
         <h2>Address</h2>
         <div class="pure-control-group">
           <label for="relationship_owner_address_line1">Line 1</label>
-          <input class="full-width" require="require" id="relationship_owner_address_line1" name="relationship_owner_address_line1" type="text" maxlength="100" />
+          <input class="full-width" required="required" id="relationship_owner_address_line1" name="relationship_owner_address_line1" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_address_line2">Line 2</label>
-          <input class="full-width" id="relationship_owner_address_line2" name="relationship_owner_address_line2" type="text" maxlength="100" />
+          <input class="full-width" required="required" id="relationship_owner_address_line2" name="relationship_owner_address_line2" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
           <label for="relationship_owner_address_city">City</label>
-          <input class="full-width" require="require" id="relationship_owner_address_city" name="relationship_owner_address_city" type="text" maxlength="100" />
+          <input class="full-width" required="required" id="relationship_owner_address_city" name="relationship_owner_address_city" type="text" maxlength="100" />
         </div>
         <div class="pure-control-group">
           <div class="pure-g">
@@ -90,53 +107,54 @@
             <div class="pure-u-6-24">
               <div class="pure-control-group">
                 <label for="relationship_owner_address_postal_code">ZIP</label>
-                <input class="full-width" require="require" id="relationship_owner_address_postal_code" name="relationship_owner_address_postal_code" type="text" maxlength="50" />
+                <input class="full-width" required="required" id="relationship_owner_address_postal_code" name="relationship_owner_address_postal_code" type="text" maxlength="50" />
               </div>
             </div>
           </div>
         </div>
         <div class="pure-g">
-          <div id="relationship_owner_address_country-container" class="pure-u-16-24">
-            <label for="relationship_owner_address_country">Country</label>
-            <select name="relationship_owner_address_country" id="relationship_owner_address_country">
-              <option value="">Select country</option>
-            </select>
-          </div>
-          <div class="pure-u-1-24"></div>
-          <div id="relationship_owner_address_postal_code-container" class="pure-u-7-24">
-            <label>&nbsp;</label>
-            <button name="refresh" value="true" class="pure-button">Reload states</button>
+            <div class="pure-u-16-24">
+              <label for="relationship_owner_address_country">Country</label>
+              <select name="relationship_owner_address_country" id="relationship_owner_address_country">
+                <option value="">Select country</option>
+              </select>
+            </div>
+            <div class="pure-u-1-24"></div>
+            <div class="pure-u-7-24">
+              <label>&nbsp;</label>
+              <button name="refresh" value="true" class="pure-button">Reload states</button>
+            </div>
           </div>
         </div>
-        <div class="pure-controls spaced-buttons">
+        <div class="pure-controls">
           <button id="submit-button" class="pure-button pure-button-primary">Update beneficial owner</button>
         </div>
       </div>
     </form>
   </body>
-  <template id="dob-option">
-    <option value="${option.value}">${option.text}</option>
+  <template id="invalid-token">
+    <div class="error message">Error! An error occurred submitting the form</div>
   </template>
   <template id="state-option">
-    <option value="${option.code}">${option.name}</option>
+    <option value="${option.value}">${option.text}</option>
   </template>
   <template id="country-option">
     <option value="${country.code}">${country.name}</option>
   </template>
   <template id="success">
-    <div class="success message">Success! The owner's information has been updated</div>
+    <div class="success message">Success! The owner"s information has been updated</div>
   </template>
   <template id="unknown-error">
-    <div class="error message">Error! An error occurred submitting the owner's information</div>
+    <div class="error message">Error! An error occurred updating the owner's information</div>
   </template>
   <template id="upload-error">
     <div class="error message">Error! An error occurred uploading document images</div>
   </template>
   <template id="invalid-relationship_owner_verification_document_front">
-    <div class="error message">Error! Invalid or missing document ID front scan</div>
+    <div class="error message">Error! Invalid or missing document ID front scan or photo</div>
   </template>
   <template id="invalid-relationship_owner_verification_document_back">
-    <div class="error message">Error! Invalid or missing document ID back scan</div>
+    <div class="error message">Error! Invalid or missing document ID back scan or photo</div>
   </template>
   <template id="invalid-relationship_owner_first_name">
     <div class="error message">Error! Invalid or missing first name</div>
@@ -144,7 +162,10 @@
   <template id="invalid-relationship_owner_last_name">
     <div class="error message">Error! Invalid or missing last name</div>
   </template>
-  <template id="duplicate-name">
+  <template id="invalid-relationship_owner_email">
+    <div class="error message">Error! Invalid or missing email</div>
+  </template>
+  <template id="relationship_owner_duplicate-name">
     <div class="error message">Error! This owner has already been added</div>
   </template>
   <template id="invalid-relationship_owner_address_line1">

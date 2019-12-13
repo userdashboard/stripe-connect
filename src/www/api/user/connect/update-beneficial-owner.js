@@ -9,6 +9,12 @@ module.exports = {
     if (!req.query || !req.query.ownerid) {
       throw new Error('invalid-ownerid')
     }
+    if (!req.body) {
+      throw new Error('relationship_owner_first_name')
+    }
+    if (global.stripeJS === 3 && !req.body.token) {
+      throw new Error('invalid-token')
+    }
     const owner = await global.api.user.connect.BeneficialOwner.get(req)
     if (!req.body || !req.body.relationship_owner_address_city) {
       throw new Error('invalid-relationship_owner_address_city')
@@ -88,7 +94,7 @@ module.exports = {
         throw new Error('invalid-relationship_owner_dob_year')
       }
       try {
-        new Date(req.body.relationship_owner_dob_year, req.body.relationship_owner_dob_month, req.body.relationship_owner_dob_day)
+        Date.parse(`${req.body.relationship_owner_dob_year}/${req.body.relationship_owner_dob_month}/${req.body.relationship_owner_dob_day}`)
       } catch (error) {
         throw new Error('invalid-relationship_owner_dob_day')
       }
@@ -165,7 +171,7 @@ module.exports = {
     if (req.body.relationship_owner_owner) {
       owner.relationship_owner_owner = true
     }
-    if (global.stripeJS === 3 && req.body.token) {
+    if (global.stripeJS === 3) {
       owner.token = req.body.token
     }
     for (const i in owners) {

@@ -14,7 +14,6 @@
     "individual.address.line2",
     "individual.address.city",
     "individual.address.state",
-    "individual.address.country",
     "individual.address.postal_code"
   ],
   "company": [

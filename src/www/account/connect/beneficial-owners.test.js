@@ -102,7 +102,7 @@ describe('/account/connect/beneficial-owners', () => {
         company_address_postal_code: '01067',
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
-        company_address_country: 'DE',
+        company_address_country: 'DE'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_owner_first_name: user.profile.firstName,

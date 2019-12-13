@@ -54,7 +54,10 @@ describe('/account/connect/delete-company-director', () => {
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       })
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
@@ -78,7 +81,10 @@ describe('/account/connect/delete-company-director', () => {
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       })
       const user2 = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
@@ -102,7 +108,10 @@ describe('/account/connect/delete-company-director', () => {
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
       req.account = user.account
@@ -122,7 +131,10 @@ describe('/account/connect/delete-company-director', () => {
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
       req.account = user.account
@@ -142,7 +154,10 @@ describe('/account/connect/delete-company-director', () => {
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
       req.account = user.account
@@ -164,7 +179,10 @@ describe('/account/connect/delete-company-director', () => {
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
       req.account = user.account

@@ -32,11 +32,6 @@ function updateAccount (e) {
       year: document.getElementById('relationship_representative_dob_year').value
     }
   }
-  for (field in companyRepresentative) {
-    if (!companyRepresentative[field]) {
-      return window.renderError('invalid-relationship_representative_' + field)
-    }
-  }
   var idNumberField = document.getElementById('relationship_representative_id_number')
   if (idNumberField) {
     companyRepresentative.id_number = idNumberField.value
@@ -47,19 +42,9 @@ function updateAccount (e) {
   if (genderField) {
     companyRepresentative.gender = document.getElementById('female').checked ? 'female' : 'male'
   }
-  for (field in companyRepresentative.address) {
-    if (!companyRepresentative.address[field]) {
-      return window.renderError('invalid-relationship_representative_address_' + field)
-    }
-  }
   var personalAddressLine2 = document.getElementById('relationship_representative_address_line2')
   if (personalAddressLine2 && personalAddressLine2.value) {
     companyRepresentative.address.line2 = personalAddressLine2.value
-  }
-  for (field in companyRepresentative.dob) {
-    if (!companyRepresentative.dob[field]) {
-      return window.renderError('invalid-relationship_representative_dob_' + field)
-    }
   }
   var documentFront = document.getElementById('relationship_representative_verification_document_front')
   var documentBack = document.getElementById('relationship_representative_verification_document_back')

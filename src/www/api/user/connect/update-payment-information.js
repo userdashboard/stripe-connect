@@ -29,7 +29,7 @@ module.exports = {
     if (!req.body.account_holder_type || !req.body.account_holder_type.length) {
       throw new Error('invalid-account_holder_type')
     }
-    if (req.body.account_holder_type !== 'individual' && 
+    if (req.body.account_holder_type !== 'individual' &&
         req.body.account_holder_type !== 'company') {
       throw new Error('invalid-account_holder_type')
     }

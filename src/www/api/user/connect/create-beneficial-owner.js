@@ -22,12 +22,79 @@ module.exports = {
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
-    const personFields = ['first_name', 'last_name', 'dob_day', 'dob_month', 'dob_year', 'address_city', 'address_line1', 'address_postal_code']
-    const personOptional = ['address_line2', 'address_state', 'address_country', 'title', 'percent']
-    for (const field of personFields) {
-      const posted = `relationship_owner_${field}`
+    if (!req.body.relationship_owner_address_country || !connect.countryNameIndex[req.body.relationship_owner_address_country]) {
+      throw new Error('invalid-relationship_owner_address_country')
+    }
+    if (!req.body.relationship_owner_address_state) {
+      throw new Error('invalid-relationship_owner_address_state')
+    }
+    const states = connect.countryDivisions[req.body.relationship_owner_address_country]
+    let found
+    for (const state of states) {
+      found = state.value === req.body.relationship_owner_address_state
+      if (found) {
+        break
+      }
+    }
+    if (!found) {
+      throw new Error('invalid-relationship_owner_address_state')
+    }
+    if (global.stripeJS === 3 && !req.body.token) {
+      throw new Error('invalid-token')
+    }
+    const requiredFields = connect.kycRequirements[stripeAccount.country].beneficialOwner
+    for (const field of requiredFields) {
+      const posted = field.split('.').join('_')
       if (!req.body[posted]) {
+        if (field === 'relationship.owner.address.line2' ||
+            field === 'relationship.owner.relationship.title' ||
+            field === 'relationship.owner.executive' ||
+            field === 'relationship.owner.director' ||
+            field === 'relationship.owner.verification.document.front' ||
+            field === 'relationship.owner.verification.document.back' ||
+            field === 'relationship.owner.owner') {
+          continue
+        }
         throw new Error(`invalid-${posted}`)
+      }
+    }
+    let validateDOB
+    if (req.body.relationship_owner_dob_month) {
+      validateDOB = true
+      try {
+        const month = parseInt(req.body.relationship_owner_dob_month, 10)
+        if (!month || month < 1 || month > 12) {
+          throw new Error('invalid-relationship_owner_dob_month')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_owner_dob_month')
+      }
+    }
+    if (req.body.relationship_owner_dob_year) {
+      validateDOB = true
+      try {
+        const year = parseInt(req.body.relationship_owner_dob_year, 10)
+        if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
+          throw new Error('invalid-relationship_owner_dob_year')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_owner_dob_year')
+      }
+    }
+    if (validateDOB) {
+      if (!req.body.relationship_owner_dob_day) {
+        throw new Error('invalid-relationship_owner_dob_day')
+      }
+      if (!req.body.relationship_owner_dob_month) {
+        throw new Error('invalid-relationship_owner_dob_month')
+      }
+      if (!req.body.relationship_owner_dob_year) {
+        throw new Error('invalid-relationship_owner_dob_year')
+      }
+      try {
+        Date.parse(`${req.body.relationship_owner_dob_year}/${req.body.relationship_owner_dob_month}/${req.body.relationship_owner_dob_day}`)
+      } catch (error) {
+        throw new Error('invalid-relationship_owner_dob_day')
       }
     }
     if (req.uploads && req.uploads.relationship_owner_verification_document_front) {
@@ -75,12 +142,8 @@ module.exports = {
       created: dashboard.Timestamp.now,
       stripeid: req.query.stripeid
     }
-    for (const field of personFields) {
-      const posted = `relationship_owner_${field}`
-      owner[posted] = req.body[posted]
-    }
-    for (const field of personOptional) {
-      const posted = `relationship_owner_${field}`
+    for (const field of requiredFields) {
+      const posted = field.split('.').join('_')
       if (req.body[posted]) {
         owner[posted] = req.body[posted]
       }
@@ -103,7 +166,7 @@ module.exports = {
     if (req.body.relationship_owner_verification_document_back) {
       owner.relationship_owner_verification_document_back = req.body.relationship_owner_verification_document_back
     }
-    if (global.stripeJS === 3 && req.body.token) {
+    if (global.stripeJS === 3) {
       owner.token = req.body.token
     }
     owners.unshift(owner)

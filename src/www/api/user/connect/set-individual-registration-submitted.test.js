@@ -141,7 +141,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
           individual_last_name: user.profile.lastName,
           individual_email: user.profile.contactEmail,
           individual_phone: '456-789-0123'
-
         })
         const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -174,7 +173,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_last_name: user.profile.lastName,
         individual_email: user.profile.contactEmail,
         individual_phone: '456-789-0123',
-        individual_address_country: 'AT',
         individual_address_city: 'Vienna',
         individual_address_state: '1',
         individual_address_line1: '123 Sesame St',
@@ -216,7 +214,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123',
         individual_address_city: 'Brisbane',
         individual_address_state: 'QLD',
-        individual_address_country: 'AU',
         individual_address_line1: '845 Oxford St',
         individual_address_postal_code: '4000'
       }, {
@@ -250,7 +247,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Brussels',
         individual_address_state: 'BRU',
-        individual_address_country: 'BE',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '1020',
         individual_dob_day: '1',
@@ -298,7 +294,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_city: 'Vancouver',
         individual_address_line1: '123 Sesame St',
         individual_address_state: 'BC',
-        individual_address_country: 'CA',
         individual_address_postal_code: 'V5K 0A1',
         individual_id_number: '000000000'
       }, {
@@ -333,7 +328,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Bern',
         individual_address_state: 'BE',
-        individual_address_country: 'CH',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '1020',
         individual_dob_day: '1',
@@ -373,7 +367,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Berlin',
         individual_address_state: 'BE',
-        individual_address_country: 'DE',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '01067',
         individual_dob_day: '1',
@@ -413,7 +406,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Copenhagen',
         individual_address_state: '147',
-        individual_address_country: 'DK',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '1000',
         individual_dob_day: '1',
@@ -454,7 +446,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_city: 'Tallinn',
         individual_address_line1: '123 Sesame St',
         individual_address_state: '37',
-        individual_address_country: 'EE',
         individual_address_postal_code: '10128',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -494,7 +485,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_city: 'Madrid',
         individual_address_line1: '123 Sesame St',
         individual_address_state: 'AN',
-        individual_address_country: 'ES',
         individual_address_postal_code: '03179',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -533,7 +523,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Helsinki',
         individual_address_state: 'AL',
-        individual_address_country: 'FI',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '00990',
         individual_dob_day: '1',
@@ -574,7 +563,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_city: 'Paris',
         individual_address_line1: '123 Sesame St',
         individual_address_state: 'A',
-        individual_address_country: 'FR',
         individual_address_postal_code: '75001',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -613,7 +601,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'London',
         individual_address_state: 'LND',
-        individual_address_country: 'GB',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: 'EC1A 1AA',
         individual_dob_day: '1',
@@ -696,7 +683,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Dublin',
         individual_address_state: 'D',
-        individual_address_country: 'IE',
         individual_address_line1: '123 Sesame St',
         individual_dob_day: '1',
         individual_dob_month: '1',
@@ -737,7 +723,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Rome',
         individual_address_state: '65',
-        individual_address_country: 'IT',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '00010',
         individual_dob_day: '1',
@@ -823,7 +808,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: 'LT-00000',
         individual_address_state: 'AL',
-        individual_address_country: 'LT',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -863,7 +847,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '1623',
         individual_address_state: 'L',
-        individual_address_country: 'LU',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -903,7 +886,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: 'LV–1073',
         individual_address_state: 'AI',
-        individual_address_country: 'LV',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -983,7 +965,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '1071 JA',
         individual_address_state: 'DR',
-        individual_address_country: 'NL',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1023,7 +1004,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '0001',
         individual_address_state: '02',
-        individual_address_country: 'NO',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1106,7 +1086,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '4520',
         individual_address_state: '01',
-        individual_address_country: 'PT',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1146,7 +1125,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '00150',
         individual_address_state: 'K',
-        individual_address_country: 'SE',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1192,7 +1170,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_postal_code: '339696',
         individual_address_city: 'Singapore',
         individual_address_state: 'SG',
-        individual_address_country: 'SG',
         individual_phone: '456-789-0123',
         individual_id_number: '000000000'
       }, {
@@ -1229,7 +1206,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '1210',
         individual_address_state: '07',
-        individual_address_country: 'SI',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1269,7 +1245,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '00102',
         individual_address_state: 'BC',
-        individual_address_country: 'SK',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1315,7 +1290,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_city: 'New York',
         individual_ssn_last_4: '0000',
         individual_address_state: 'NY',
-        individual_address_country: 'US',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007'
       }, {
@@ -1341,7 +1315,55 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
 
   describe('configuration', () => {
     it('environment STRIPE_JS', async () => {
-
+      global.stripeJS = 3
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'individual',
+        country: 'US'
+      })
+      const req2 = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req2.waitOnSubmit = true
+      req2.account = user.account
+      req2.session = user.session
+      req2.uploads = {
+        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req2.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_email: user.profile.contactEmail,
+        individual_phone: '456-789-0123',
+        individual_address_city: 'New York',
+        individual_ssn_last_4: '0000',
+        individual_address_state: 'NY',
+        individual_address_line1: '285 Fulton St',
+        individual_address_postal_code: '10007'
+      }
+      await req2.post()
+      const req3 = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
+      req3.account = user.account
+      req3.session = user.session
+      req3.body = {
+        currency: 'usd',
+        country: 'US',
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456789',
+        routing_number: '110000000'
+      }
+      await req3.post()
+      const req6 = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req6.account = user.account
+      req6.session = user.session
+      const accountNow = await req6.patch()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
     })
   })
 })

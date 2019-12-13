@@ -61,13 +61,13 @@ module.exports = {
         throw new Error('invalid-relationship_representative_dob_year')
       }
       try {
-        new Date(req.body.relationship_representative_dob_year, req.body.relationship_representative_dob_month, req.body.relationship_representative_dob_day)
+        Date.parse(`${req.body.relationship_representative_dob_year}/${req.body.relationship_representative_dob_month}/${req.body.relationship_representative_dob_day}`)
       } catch (error) {
         throw new Error('invalid-relationship_representative_dob_day')
       }
     }
     if (req.body.relationship_representative_address_country) {
-       if (!connect.countryNameIndex[req.body.relationship_representative_address_country]) {
+      if (!connect.countryNameIndex[req.body.relationship_representative_address_country]) {
         throw new Error('invalid-relationship_representative_address_country')
       }
     }
@@ -175,7 +175,7 @@ module.exports = {
     if (req.body.relationship_representative_percent_owned) {
       try {
         const percent = parseInt(req.body.relationship_representative_percent_owned, 10)
-        if ((!percent && percent !==0) || percent > 100 || percent < 0) {
+        if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
           throw new Error('invalid-relationship_representative_percent_owned')
         }
       } catch (s) {
@@ -196,8 +196,8 @@ module.exports = {
       metadata: {
       }
     }
-    if (global.stripeJS === 3 && req.body.token) {
-      registration.representative_token = req.body.token
+    if (global.stripeJS === 3) {
+      registration.representativeToken = req.body.token
     }
     connect.MetaData.store(accountInfo.metadata, 'registration', registration)
     try {

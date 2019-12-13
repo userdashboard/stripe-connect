@@ -38,15 +38,8 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const selectedCountry = req.data.stripeAccount.country
-  if (req.body && req.body.country) {
-    selectedCountry = req.body.country
-    if (!connect.countryNameIndex[selectedCountry]) {
-      throw new Error('invalid-country')
-    }
-  }
   for (const countrySpec of connect.countrySpecs) {
-    if (countrySpec.id !== selectedCountry) {
+    if (countrySpec.id !== req.data.stripeAccount.country) {
       const countryContainer = doc.getElementById(`${countrySpec.id}-container`)
       if (countryContainer) {
         countryContainer.parentNode.removeChild(countryContainer)
@@ -54,7 +47,7 @@ async function renderPage (req, res, messageTemplate) {
     }
   }
   dashboard.HTML.renderList(doc, connect.countrySpecs, 'country-option', 'country')
-  const currencies = connect.countryCurrencyIndex[selectedCountry]
+  const currencies = connect.countryCurrencyIndex[req.data.stripeAccount.country]
   dashboard.HTML.renderList(doc, currencies, 'currency-option', 'currency')
   if (req.body) {
     for (const field in req.body) {

@@ -125,8 +125,10 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_first_name: '',
           relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
+          relationship_owner_address_state: 'LND',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
           relationship_owner_dob_day: '1',
@@ -161,8 +163,10 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_first_name: person.firstName,
           relationship_owner_last_name: '',
+          relationship_owner_email: person.email,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
+          relationship_owner_address_state: 'LND',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
           relationship_owner_dob_day: '1',
@@ -176,6 +180,44 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           errorMessage = error.message
         }
         assert.strictEqual(errorMessage, 'invalid-relationship_owner_last_name')
+      })
+    })
+
+    describe('invalid-relationship_owner_email', () => {
+      it('missing posted relationship_owner_email', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'DE'
+        })
+        const person = TestHelper.nextIdentity()
+        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        }
+        req.body = TestHelper.createMultiPart(req, {
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: '',
+          relationship_owner_email: '',
+          relationship_owner_address_country: 'GB',
+          relationship_owner_address_city: 'London',
+          relationship_owner_address_state: 'LND',
+          relationship_owner_address_line1: 'A building',
+          relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_dob_day: '1',
+          relationship_owner_dob_month: '1',
+          relationship_owner_dob_year: '1950'
+        })
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-relationship_owner_email')
       })
     })
 
@@ -197,8 +239,10 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_first_name: person.firstName,
           relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: '',
+          relationship_owner_address_state: 'LND',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
           relationship_owner_dob_day: '1',
@@ -233,9 +277,11 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_first_name: person.firstName,
           relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
           relationship_owner_address_line1: '',
+          relationship_owner_address_state: 'LND',
           relationship_owner_address_postal_code: 'EC1A 1AA',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
@@ -269,10 +315,12 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_first_name: person.firstName,
           relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: '',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
@@ -284,6 +332,44 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           errorMessage = error.message
         }
         assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_postal_code')
+      })
+    })
+
+    describe('invalid-relationship_owner_address_state', () => {
+      it('missing posted relationship_owner_address_state', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'DE'
+        })
+        const person = TestHelper.nextIdentity()
+        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        }
+        req.body = TestHelper.createMultiPart(req, {
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
+          relationship_owner_address_country: 'GB',
+          relationship_owner_address_city: 'London',
+          relationship_owner_address_line1: 'A building',
+          relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: '',
+          relationship_owner_dob_day: '1',
+          relationship_owner_dob_month: '1',
+          relationship_owner_dob_year: '1950'
+        })
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_state')
       })
     })
 
@@ -305,10 +391,12 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_first_name: person.firstName,
           relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
@@ -341,10 +429,12 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_first_name: person.firstName,
           relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '',
           relationship_owner_dob_year: '1950'
@@ -377,10 +467,12 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_first_name: person.firstName,
           relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: ''
@@ -393,6 +485,558 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         assert.strictEqual(errorMessage, 'invalid-relationship_owner_dob_year')
       })
+    })
+
+    describe('invalid-relationship_owner_verification_document_front', () => {
+      it('missing posted file relationship_owner_verification_document_front', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'DE'
+        })
+        const person = TestHelper.nextIdentity()
+        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        }
+        req.body = TestHelper.createMultiPart(req, {
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
+          relationship_owner_address_country: 'GB',
+          relationship_owner_address_city: 'London',
+          relationship_owner_address_line1: 'A building',
+          relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
+          relationship_owner_dob_day: '1',
+          relationship_owner_dob_month: '1',
+          relationship_owner_dob_year: '1950'
+        })
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-relationship_owner_verification_document_front')
+      })
+    })
+
+    describe('invalid-relationship_owner_verification_document_back', () => {
+      it('missing posted file relationship_owner_verification_document_back', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'DE'
+        })
+        const person = TestHelper.nextIdentity()
+        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        req.body = TestHelper.createMultiPart(req, {
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
+          relationship_owner_address_country: 'GB',
+          relationship_owner_address_city: 'London',
+          relationship_owner_address_line1: 'A building',
+          relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
+          relationship_owner_dob_day: '1',
+          relationship_owner_dob_month: '1',
+          relationship_owner_dob_year: '1950'
+        })
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-relationship_owner_verification_document_back')
+      })
+    })
+
+    describe('invalid-token', () => {
+      it('missing posted token', async () => {
+        global.stripeJS = 3
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          type: 'company',
+          country: 'DE'
+        })
+        const person = TestHelper.nextIdentity()
+        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        }
+        req.body = TestHelper.createMultiPart(req, {
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName,
+          relationship_owner_email: person.email,
+          relationship_owner_address_country: 'GB',
+          relationship_owner_address_city: 'London',
+          relationship_owner_address_line1: 'A building',
+          relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
+          relationship_owner_dob_day: '1',
+          relationship_owner_dob_month: '1',
+          relationship_owner_dob_year: '1950'
+        })
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-token')
+      })
+    })
+  })
+
+  describe('receives', () => {
+    it('required posted relationship_owner_first_name', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_first_name, person.firstName)
+    })
+
+    it('required posted relationship_owner_last_name', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_last_name, person.lastName)
+    })
+
+    it('required posted relationship_owner_email', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_email, person.email)
+    })
+
+    it('required posted relationship_owner_dob_day', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_dob_day, '1')
+    })
+
+    it('required posted relationship_owner_dob_month', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '2',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_dob_month, '2')
+    })
+
+    it('required posted relationship_owner_dob_year', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_dob_year, '1950')
+    })
+
+    it('required posted relationship_owner_address_line1', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_address_line1, 'A building')
+    })
+
+    it('optional posted relationship_owner_address_line2', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line2: 'Additional detail',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_address_line2, 'Additional detail')
+    })
+
+    it('required posted relationship_owner_address_country', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_address_city, 'London')
+    })
+
+    it('required posted relationship_owner_address_city', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_address_city, 'London')
+    })
+
+    it('required posted relationship_owner_address_postal_code', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_address_postal_code, 'EC1A 1AA')
+    })
+
+    it('required posted relationship_owner_address_state', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.strictEqual(owner.relationship_owner_address_state, 'LND')
+    })
+
+    it('required posted file relationship_owner_verification_document_front', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.notStrictEqual(owner.relationship_owner_verification_document_front, null)
+      assert.notStrictEqual(owner.relationship_owner_verification_document_front, undefined)
+    })
+
+    it('required posted file relationship_owner_verification_document_back', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      })
+      const owner = await req.post()
+      assert.notStrictEqual(owner.relationship_owner_verification_document_back, null)
+      assert.notStrictEqual(owner.relationship_owner_verification_document_back, undefined)
     })
   })
 
@@ -414,16 +1058,56 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
         relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       })
       const owner = await req.post()
       assert.strictEqual(owner.object, 'owner')
+    })
+  })
+
+  describe('configuration', () => {
+    it('environment STRIPE_JS', async () => {
+      global.stripeJS = 3
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'GB'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.waitOnSubmit = true
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = {
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName,
+        relationship_owner_email: person.email,
+        relationship_owner_address_country: 'GB',
+        relationship_owner_address_city: 'London',
+        relationship_owner_address_line1: 'A building',
+        relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
+        relationship_owner_dob_day: '1',
+        relationship_owner_dob_month: '1',
+        relationship_owner_dob_year: '1950'
+      }
+      await req.post()
+      const owners = await global.api.user.connect.BeneficialOwners.get(req)
+      const owner = owners[0]
+      assert.notStrictEqual(owner.token, undefined)
+      assert.notStrictEqual(owner.token, null)
     })
   })
 })

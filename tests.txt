@@ -1,465 +1,16 @@
 
-> @userdashboard/stripe-connect@1.0.22 test /home/benlowry/testing/stripe-connect
-> mocha src --recursive --no-colors --retries 0 --timeout 480000 --slow 240000
+> @userdashboard/stripe-connect@1.0.22 test /root/workspaces/stripe-connect
+> mocha './src/www/api{,!(public)/**}/*.test.js' --recursive --no-colors --retries 0 --timeout 480000 --slow 240000
 
 
-
-  server/bind-ip
-    BindIP#BEFORE
-      ✓ should prioritize ip from header
-      ✓ should bind ip from connection remoteAddress
-      ✓ should bind ip from connection socket
-      ✓ should bind ip from socket remoteAddress
-
-  server/bind-stripekey
-    BindStripeKey#AFTER
-      ✓ should bind stripekey data to req
-
-  /account/connect/beneficial-owner
-    BeneficialOwner#BEFORE
-      ✓ should reject invalid ownerid
-      ✓ should bind owner to req
-    BeneficialOwner#GET
-      ✓ should show table for owner
-
-  /account/connect/beneficial-owners
-    BeneficialOwners#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should reject individual registration
-      ✓ should bind owners to req
-    BeneficialOwners#GET
-      ✓ should have row for each owner
-      ✓ should display submitted message with removed owners
-
-  /account/connect/company-director
-    CompanyDirector#BEFORE
-      ✓ should reject invalid directorid
-      ✓ should bind director to req
-    CompanyDirector#GET
-      ✓ should show table for director
-
-  /account/connect/company-directors
-    CompanyDirectors#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should reject individual registration
-      ✓ should bind directors to req
-    CompanyDirectors#GET
-      ✓ should have row for each director
-      ✓ should display submitted message with removed directors
-
-  /account/connect/create-beneficial-owner
-    CreateBeneficialOwner#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should reject submitted registration
-      ✓ should require own Stripe account
-    CreateBeneficialOwner#GET
-      ✓ should present the form
-    CreateBeneficialOwner#POST
-      ✓ should require each field
-      ✓ should require a document id front upload
-      ✓ should require a document id back upload
-      ✓ should create beneficial owner
-
-  /account/connect/create-company-director
-    CreateCompanyDirector#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should reject submitted registration
-      ✓ should require own Stripe account
-    CreateCompanyDirector#GET
-      ✓ should present the form
-    CreateCompanyDirector#POST
-      ✓ should require each field
-      ✓ should require a document id front upload
-      ✓ should require a document id back upload
-      ✓ should create director
-
-  /account/connect/create-registration
-    CreateRegistration#GET
-      ✓ should present the form
-    CreateRegistration#POST
-      ✓ should create Stripe account
-
-  /account/connect/delete-beneficial-owner
-    DeleteBeneficialOwner#BEFORE
-      ✓ should reject invalid ownerid
-      ✓ should reject submitted registration
-      ✓ should require own Stripe account
-      ✓ should bind owner to req
-    DeleteBeneficialOwner#GET
-      ✓ should present the form
-      ✓ should present the owner table
-    DeleteBeneficialOwner#POST
-      ✓ should delete owner
-
-  /account/connect/delete-company-director
-    DeleteCompanyDirector#BEFORE
-      ✓ should reject invalid directorid
-      ✓ should reject submitted registration
-      ✓ should require own Stripe account
-      ✓ should bind director to req
-    DeleteCompanyDirector#GET
-      ✓ should present the form
-      ✓ should present the director table
-    DeleteCompanyDirector#POST
-      ✓ should delete director
-
-  /account/connect/delete-stripe-account
-    DeleteStripeAccount#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should require own Stripe account
-      ✓ should bind Stripe account to req
-    DeleteStripeAccount#GET
-      ✓ should present the form
-      ✓ should present the Stripe account table
-    DeleteStripeAccount#POST
-      ✓ should delete Stripe account
-
-  /account/connect/edit-beneficial-owner
-    EditBeneficialOwner#BEFORE
-      ✓ should reject invalid ownerid
-      ✓ should reject submitted registration
-      ✓ should require own Stripe account
-      ✓ should bind owner to req
-    EditBeneficialOwner#GET
-      ✓ should present the form
-    EditBeneficialOwner#POST
-      ✓ should require each field
-      ✓ should update owner
-      ✓ should update document front upload
-      ✓ should update document back upload
-
-  /account/connect/edit-company-director
-    EditCompanyDirector#BEFORE
-      ✓ should reject invalid directorid
-      ✓ should reject submitted registration
-      ✓ should require own Stripe account
-      ✓ should bind director to req
-    EditCompanyDirector#GET
-      ✓ should present the form
-    EditCompanyDirector#POST
-      ✓ should require each field
-      ✓ should update director
-      ✓ should update document front upload
-      ✓ should update document back upload
-
-  /account/connect/edit-company-registration
-    EditCompanyRegistration#BEFORE
-      ✓ should reject invalid registration
-      ✓ should reject individual registration
-      ✓ should reject invalid personal address country
-      ✓ should reject invalid company address country
-      ✓ should bind application CountrySpec to req
-      ✓ should bind personal address country to req
-      ✓ should bind posted personal address country to req
-      ✓ should bind company address country to req
-      ✓ should bind posted company address country to req
-    EditCompanyRegistration#GET
-      ✓ should present the form
-      ✓ should have AT-required fields
-      ✓ should have AU-required fields
-      ✓ should have BE-required fields
-      ✓ should have CA-required fields
-      ✓ should have CH-required fields
-      ✓ should have DE-required fields
-      ✓ should have DK-required fields
-      ✓ should have ES-required fields
-      ✓ should have FI-required fields
-      ✓ should have FR-required fields
-      ✓ should have GB-required fields
-      ✓ should have HK-required fields
-      ✓ should have IE-required fields
-      ✓ should have IT-required fields
-      ✓ should have JP-required fields
-      ✓ should have LU-required fields
-      ✓ should have NL-required fields
-      ✓ should have NO-required fields
-      ✓ should have NZ-required fields
-      ✓ should have PT-required fields
-      ✓ should have SE-required fields
-      ✓ should have SG-required fields
-      ✓ should have US-required fields
-    EditCompanyRegistration#POST
-      ✓ should refresh and load states for posted company address
-      ✓ should reject AT invalid fields (164187ms)
-      ✓ should update AT information
-      ✓ should reject AU invalid fields (175779ms)
-      ✓ should update AU information
-      ✓ should reject BE invalid fields (165697ms)
-      ✓ should update BE information
-      ✓ should reject CA invalid fields (176045ms)
-      ✓ should update CA information
-      ✓ should reject CH invalid fields (165574ms)
-      ✓ should update CH information
-      ✓ should reject DE invalid fields (165598ms)
-      ✓ should update DE information
-      ✓ should reject DK invalid fields (165632ms)
-      ✓ should update DK information
-      ✓ should reject ES invalid fields (168078ms)
-      ✓ should update ES information
-      ✓ should reject FI invalid fields (165260ms)
-      ✓ should update FI information
-      ✓ should reject FR invalid fields (171495ms)
-      ✓ should update FR information
-      ✓ should reject GB invalid fields (176737ms)
-      ✓ should update GB information
-      ✓ should reject HK invalid fields (154386ms)
-      ✓ should update HK information
-      ✓ should reject IE invalid fields (167731ms)
-      ✓ should update IE information
-      ✓ should reject IT invalid fields (172191ms)
-      ✓ should update IT information
-      ✓ should reject JP invalid fields (420913ms)
-      ✓ should update JP information
-      ✓ should reject LU invalid fields (166485ms)
-      ✓ should update LU information
-      ✓ should reject NL invalid fields (166610ms)
-      ✓ should update NL information
-      ✓ should reject NO invalid fields (167714ms)
-      ✓ should update NO information
-      ✓ should reject NZ invalid fields (167227ms)
-      ✓ should update NZ information
-      ✓ should reject PT invalid fields (170542ms)
-      ✓ should update PT information
-      ✓ should reject SE invalid fields (168624ms)
-      ✓ should update SE information
-      ✓ should reject SG invalid fields (155629ms)
-      ✓ should update SG information
-      ✓ should reject US invalid fields (236564ms)
-      ✓ should update US information
-
-  /account/connect/edit-individual-registration
-    EditIndividualRegistration#BEFORE
-      ✓ should reject invalid registration
-      ✓ should reject company registration
-      ✓ should bind application CountrySpec to req
-      ✓ should bind address country to req
-    EditIndividualRegistration#GET
-      ✓ should present the form
-      ✓ should have AT-required fields
-      ✓ should have AU-required fields
-      ✓ should have BE-required fields
-      ✓ should have CA-required fields
-      ✓ should have CH-required fields
-      ✓ should have DE-required fields
-      ✓ should have DK-required fields
-      ✓ should have ES-required fields
-      ✓ should have FI-required fields
-      ✓ should have FR-required fields
-      ✓ should have GB-required fields
-      ✓ should have HK-required fields
-      ✓ should have IE-required fields
-      ✓ should have IT-required fields
-      ✓ should have JP-required fields
-      ✓ should have LU-required fields
-      ✓ should have NL-required fields
-      ✓ should have NO-required fields
-      ✓ should have NZ-required fields
-      ✓ should have PT-required fields
-      ✓ should have SE-required fields
-      ✓ should have SG-required fields
-      ✓ should have US-required fields
-    EditIndividualRegistration#POST
-      ✓ should reject AT invalid fields
-      ✓ should update AT information
-      ✓ should reject AU invalid fields
-      ✓ should update AU information
-      ✓ should reject BE invalid fields
-      ✓ should update BE information
-      ✓ should reject CA invalid fields
-      ✓ should update CA information
-      ✓ should reject CH invalid fields
-      ✓ should update CH information
-      ✓ should reject DE invalid fields
-      ✓ should update DE information
-      ✓ should reject DK invalid fields
-      ✓ should update DK information
-      ✓ should reject ES invalid fields
-      ✓ should update ES information
-      ✓ should reject FI invalid fields
-      ✓ should update FI information
-      ✓ should reject FR invalid fields
-      ✓ should update FR information
-      ✓ should reject GB invalid fields
-      ✓ should update GB information
-      ✓ should reject HK invalid fields
-      ✓ should update HK information
-      ✓ should reject IE invalid fields
-      ✓ should update IE information
-      ✓ should reject IT invalid fields
-      ✓ should update IT information
-      ✓ should reject JP invalid fields (191314ms)
-      ✓ should update JP information
-      ✓ should reject LU invalid fields
-      ✓ should update LU information
-      ✓ should reject NL invalid fields
-      ✓ should update NL information
-      ✓ should reject NO invalid fields
-      ✓ should update NO information
-      ✓ should reject NZ invalid fields
-      ✓ should update NZ information
-      ✓ should reject PT invalid fields
-      ✓ should update PT information
-      ✓ should reject SE invalid fields
-      ✓ should update SE information
-      ✓ should reject SG invalid fields
-      ✓ should update SG information
-      ✓ should reject US invalid fields (146551ms)
-      ✓ should update US information
-
-  /account/connect/edit-payment-information
-    EditPaymentInformation#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should bind Stripe account to req
-    EditPaymentInformation#GET
-      ✓ should present the form
-    EditPaymentInformation#POST
-      ✓ should reject AT invalid fields
-      ✓ should submit AT information
-      ✓ should reject AU invalid fields
-      ✓ should update AU information
-      ✓ should reject BE invalid fields
-      ✓ should update BE information
-      ✓ should reject CA invalid fields
-      ✓ should update CA information
-      ✓ should reject CH invalid fields
-      ✓ should update CH information
-      ✓ should reject DE invalid fields
-      ✓ should update DE information
-      ✓ should reject DK invalid fields
-      ✓ should update DK information
-      ✓ should reject ES invalid fields
-      ✓ should update ES information
-      ✓ should reject FI invalid fields
-      ✓ should update FI information
-      ✓ should reject GB invalid fields (account number, sort code)
-      ✓ should update GB information (account number, sort code)
-      ✓ should reject GB invalid fields (iban)
-      ✓ should update GB information (iban)
-      ✓ should reject HK invalid fields
-      ✓ should update HK information
-      ✓ should reject IE invalid fields
-      ✓ should update IE information
-      ✓ should reject IT invalid fields
-      ✓ should update IT information
-      ✓ should reject JP invalid fields
-      ✓ should update JP information
-      ✓ should reject LU invalid fields
-      ✓ should update LU information
-      ✓ should reject NL invalid fields
-      ✓ should update NL information
-      ✓ should reject NO invalid fields
-      ✓ should update NO information
-      ✓ should reject NZ invalid fields
-      ✓ should update NZ information
-      ✓ should reject PT invalid fields
-      ✓ should update PT information
-      ✓ should reject SE invalid fields
-      ✓ should update SE information
-      ✓ should reject SG invalid fields
-      ✓ should update SG information
-      ✓ should reject US invalid fields
-      ✓ should update US information
-
-  /account/connect
-    Index#BEFORE
-      ✓ should bind Stripe accounts to req
-    Index#GET
-      ✓ should have row for each Stripe account
-
-  /account/connect/stripe-account
-    StripeAccount#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should reject other account's stripeid
-      ✓ should bind Stripe account to req
-    StripeAccount#GET
-      ✓ should show registration unstarted
-      ✓ should show registration completed
-      ✓ should hide registration after submitting registration
-      ✓ should hide company owners after submitting registration
-      ✓ should show payment information required
-      ✓ should show payment information created
-      ✓ should show ready to submit
-      ✓ should show registration is submitted
-
-  /account/connect/stripe-accounts
-    StripeAccounts#BEFORE
-      ✓ should bind Stripe accounts to req
-    StripeAccounts#GET
-      ✓ should have row for each Stripe account
-
-  /account/connect/submit-company-registration
-    SubmitCompanyRegistration#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should reject individual registration
-      ✓ should bind Stripe account to req
-    SubmitCompanyRegistration#GET
-      ✓ should present the form
-      ✓ should reject registration that hasn't submitted payment details
-    SubmitCompanyRegistration#POST
-      ✓ should submit registration
-
-  /account/connect/submit-individual-registration
-    SubmitIndividualRegistration#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should reject company registration
-      ✓ should bind Stripe account to req
-    SubmitIndividualRegistration#GET
-      ✓ should present the form
-      ✓ should reject registration that hasn't submitted payment details
-    SubmitIndividualRegistration#POST
-      ✓ should submit registration
-
-  /administrator/connect/delete-stripe-account
-    DeleteStripeAccount#BEFORE
-      ✓ should bind Stripe account to req
-    DeleteStripeAccount#GET
-      ✓ should present the form
-      ✓ should present the Stripe account table
-    DeleteStripeAccount#POST
-      ✓ should delete Stripe account
-
-  /administrator/connect
-    Index#BEFORE
-      ✓ should bind Stripe accounts to req
-    Index#GET
-      ✓ should have row for each Stripe account
-
-  /administrator/connect/payout
-    Payout#BEFORE
-      ✓ should reject invalid payoutid
-      ✓ should bind payout to req
-    Payout#GET
-      ✓ should have row for payout
-
-  /administrator/connect/payouts
-    Payouts#BEFORE
-      ✓ should bind payouts to req
-    Payouts#GET
-      ✓ should have row for each payout
-
-  /administrator/connect/reject-stripe-account
-    RejectStripeAccount#BEFORE
-      ✓ should bind Stripe account to req
-    RejectStripeAccount#GET
-      ✓ should present the form
-      ✓ should present the Stripe account table
-    RejectStripeAccount#POST
-      ✓ should update the Stripe account as rejected
-
-  /administrator/connect/stripe-account
-    StripeAccount#BEFORE
-      ✓ should reject invalid stripeid
-      ✓ should bind Stripe account to req
-    StripeAccount#GET
-      ✓ should have row for Stripe account
-
-  /administrator/connect/stripe-accounts
-    StripeAccounts#BEFORE
-      ✓ should bind Stripe accounts to req
-    StripeAccounts#GET
-      ✓ should have row for each Stripe account
 
   /api/administrator/connect/account-stripe-accounts-count
+    exceptions
+      invalid-accountid
+        ✓ missing querystring accountid
+        ✓ invalid querystring accountid
+      invalid-account
+        ✓ missing querystring accountid
     returns
       ✓ integer
 
@@ -767,6 +318,47 @@
     returns
       ✓ array
 
+  /api/user/connect/set-beneficial-owners-submitted
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+        ✓ ineligible beneficial owners are submitted
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ object
+    configuration
+PAGE LOG: Refused to execute inline script because it violates the following Content Security Policy directive: "script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ http://207.246.72.230/public/strip3-v3-create-beneficial-owner.js 'unsafe-eval'". Either the 'unsafe-inline' keyword, a hash ('sha256-eYuS/3nO1FIDVcXXkdlPmCD/qvqaoZgSAxC+XrsoBDU='), or a nonce ('nonce-...') is required to enable inline execution.
+
+<head><title>Add beneficial owner for acct_1FotqzISFgAszzL5</title><meta http-equiv="content-type" content="text/html;charset=utf-8"><link rel="stylesheet" href="/public/pure-min.css"><link rel="stylesheet" href="/public/content.css"><link rel="stylesheet" href="/public/content-additional.css"><link rel="stylesheet" href="/public/connect.css"><script id="stripe-v3" src="https://js.stripe.com/v3/"></script><script id="connect-v3" src="/public/connect.js"></script><script id="handler-v3" src="/public/stripe-v3-create-beneficial-owner.js"></script><script id="client-v3">
+      window.stripePublishableKey = "pk_test_jaPHhWjZIC09xYzjrtbsoAPM"
+    </script>
+PAGE LOG: A cookie associated with a cross-site resource at https://m.stripe.com/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application>Storage>Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032.
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/set-company-directors-submitted
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+        ✓ ineligible company directors are submitted
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ object
+    configuration
+PAGE LOG: You may test your Stripe.js integration over HTTP. However, live Stripe.js integrations must use HTTPS.
+PAGE LOG: A cookie associated with a cross-site resource at https://m.stripe.com/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application>Storage>Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032.
+<head><title>Add company director for acct_1FotrQEmQLN5Y0yD</title><meta http-equiv="content-type" content="text/html;charset=utf-8"><link rel="stylesheet" href="/public/pure-min.css"><link rel="stylesheet" href="/public/content.css"><link rel="stylesheet" href="/public/content-additional.css"><link rel="stylesheet" href="/public/connect.css"><script id="stripe-v3" src="https://js.stripe.com/v3/"></script><script id="connect-v3" src="/public/connect.js"></script><script id="handler-v3" src="/public/stripe-v3-create-company-director.js"></script><script id="client-v3">
+      window.stripePublishableKey = "pk_test_jaPHhWjZIC09xYzjrtbsoAPM"
+    </script>
+      ✓ environment STRIPE_JS
+
   /api/user/connect/set-company-registration-submitted
     exceptions
       invalid-stripeid
@@ -787,6 +379,7 @@
       ✓ object for CH registration
       ✓ object for DE registration
       ✓ object for DK registration
+      ✓ object for EE registration
       ✓ object for ES registration
       ✓ object for FI registration
       ✓ object for FR registration
@@ -794,15 +387,36 @@
       ✓ object for HK registration
       ✓ object for IE registration
       ✓ object for IT registration
-      ✓ object for JP registration
+      ✓ object for LT registration
       ✓ object for LU registration
+      ✓ object for LV registration
       ✓ object for NL registration
       ✓ object for NO registration
       ✓ object for NZ registration
       ✓ object for PT registration
       ✓ object for SE registration
       ✓ object for SG registration
+      ✓ object for SI registration
+      ✓ object for SK registration
       ✓ object for US registration
+    configuration
+PAGE LOG: A cookie associated with a cross-site resource at https://m.stripe.com/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application>Storage>Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032.
+PAGE LOG: Refused to execute inline script because it violates the following Content Security Policy directive: "script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ http://207.246.72.230/public/stripe-v3-edit-company-registration.js 'unsafe-eval'". Either the 'unsafe-inline' keyword, a hash ('sha256-eYuS/3nO1FIDVcXXkdlPmCD/qvqaoZgSAxC+XrsoBDU='), or a nonce ('nonce-...') is required to enable inline execution.
+
+<head><title>Edit acct_1FotxjFsNY2UGAYi</title><meta http-equiv="content-type" content="text/html;charset=utf-8"><link rel="stylesheet" href="/public/pure-min.css"><link rel="stylesheet" href="/public/content.css"><link rel="stylesheet" href="/public/content-additional.css"><link rel="stylesheet" href="/public/connect.css?999"><script id="stripe-v3" src="https://js.stripe.com/v3/"></script><script id="connect-v3" src="/public/connect.js"></script><script id="handler-v3" src="/public/stripe-v3-edit-company-registration.js"></script><script id="client-v3">
+      window.stripePublishableKey = "pk_test_jaPHhWjZIC09xYzjrtbsoAPM"
+    </script>
+PAGE LOG: Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+PAGE LOG: Refused to execute inline script because it violates the following Content Security Policy directive: "script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ http://207.246.72.230/public/stripe-v3-edit-company-registration.js 'unsafe-eval'". Either the 'unsafe-inline' keyword, a hash ('sha256-eYuS/3nO1FIDVcXXkdlPmCD/qvqaoZgSAxC+XrsoBDU='), or a nonce ('nonce-...') is required to enable inline execution.
+
+PAGE LOG: A cookie associated with a cross-site resource at https://m.stripe.com/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application>Storage>Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032.
+<head><title>Edit acct_1FotxjFsNY2UGAYi representative</title><meta http-equiv="content-type" content="text/html;charset=utf-8"><link rel="stylesheet" href="/public/pure-min.css"><link rel="stylesheet" href="/public/content.css"><link rel="stylesheet" href="/public/content-additional.css"><link rel="stylesheet" href="/public/connect.css?999"><script id="stripe-v3" src="https://js.stripe.com/v3/"></script><script id="connect-v3" src="/public/connect.js"></script><script id="handler-v3" src="/public/stripe-v3-edit-company-representative.js"></script><script id="client-v3">
+      window.stripePublishableKey = "pk_test_jaPHhWjZIC09xYzjrtbsoAPM"
+    </script>
+PAGE LOG: Refused to execute inline script because it violates the following Content Security Policy directive: "script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ http://207.246.72.230/public/stripe-v3-edit-company-registration.js 'unsafe-eval'". Either the 'unsafe-inline' keyword, a hash ('sha256-eYuS/3nO1FIDVcXXkdlPmCD/qvqaoZgSAxC+XrsoBDU='), or a nonce ('nonce-...') is required to enable inline execution.
+
+<head><title>Payment information for acct_1FotxjFsNY2UGAYi</title><link href="/public/template.css" rel="stylesheet"><link href="/public/template-additional.css" rel="stylesheet"><meta charset="UTF-8"><base target="_top" href="/"><meta name="viewport" content="width=device-width, initial-scale=1">
+      1) environment STRIPE_JS
 
   /api/user/connect/set-individual-registration-submitted
     exceptions
@@ -824,6 +438,7 @@
       ✓ returns object for CH registration
       ✓ returns object for DE registration
       ✓ returns object for DK registration
+      ✓ returns object for EE registration
       ✓ returns object for ES registration
       ✓ returns object for FI registration
       ✓ returns object for FR registration
@@ -831,15 +446,26 @@
       ✓ returns object for HK registration
       ✓ returns object for IE registration
       ✓ returns object for IT registration
-      ✓ returns object for JP registration
+      ✓ returns object for LT registration
       ✓ returns object for LU registration
+      ✓ returns object for LV registration
       ✓ returns object for NL registration
       ✓ returns object for NO registration
       ✓ returns object for NZ registration
       ✓ returns object for PT registration
       ✓ returns object for SE registration
       ✓ returns object for SG registration
+      ✓ returns object for SI registration
+      ✓ returns object for SK registration
       ✓ returns object for US registration
+    configuration
+PAGE LOG: A cookie associated with a cross-site resource at https://m.stripe.com/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application>Storage>Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032.
+PAGE LOG: You may test your Stripe.js integration over HTTP. However, live Stripe.js integrations must use HTTPS.
+<head><title>Edit acct_1Fou1cDpqkFSUKxd</title><meta http-equiv="content-type" content="text/html;charset=utf-8"><link rel="stylesheet" href="/public/pure-min.css"><link rel="stylesheet" href="/public/content.css"><link rel="stylesheet" href="/public/content-additional.css"><link rel="stylesheet" href="/public/connect.css"><script id="stripe-v3" src="https://js.stripe.com/v3/"></script><script id="connect-v3" src="/public/connect.js"></script><script id="handler-v3" src="/public/stripe-v3-edit-individual-registration.js?asdf"></script><script id="client-v3">
+      window.stripePublishableKey = "pk_test_jaPHhWjZIC09xYzjrtbsoAPM"
+    </script>
+<head><title>Payment information for acct_1Fou1cDpqkFSUKxd</title><link href="/public/template.css" rel="stylesheet"><link href="/public/template-additional.css" rel="stylesheet"><meta charset="UTF-8"><base target="_top" href="/"><meta name="viewport" content="width=device-width, initial-scale=1">
+      ✓ environment STRIPE_JS
 
   /api/user/connect/stripe-account-payouts-count
     exceptions
@@ -858,8 +484,14 @@
         ✓ invalid querystring payoutid
       invalid-account
         ✓ ineligible accessing account
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
     returns
       ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
 
   /api/user/connect/stripe-account
     exceptions
@@ -910,6 +542,10 @@
         ✓ missing posted relationship_owner_last_name
       invalid-relationship_owner_address_country
         ✓ missing posted relationship_owner_address_country
+        ✓ invalid posted relationship_owner_address_country
+      invalid-relationship_owner_address_state
+        ✓ missing posted relationship_owner_address_state
+        ✓ invalid posted relationship_owner_address_state
       invalid-relationship_owner_address_city
         ✓ missing posted relationship_owner_address_city
       invalid-relationship_owner_address_postal_code
@@ -918,12 +554,33 @@
         ✓ missing posted relationship_owner_address_line1
       invalid-relationship_owner_dob_day
         ✓ missing posted relationship_owner_dob_day
+        ✓ invalid posted relationship_owner_dob_day
       invalid-relationship_owner_dob_month
         ✓ missing posted relationship_owner_dob_month
+        ✓ invalid posted relationship_owner_dob_month
       invalid-relationship_owner_dob_year
         ✓ missing posted relationship_owner_dob_year
+        ✓ invalid posted relationship_owner_dob_year
+    receives
+      ✓ optionally-required posted token
+      ✓ optional posted file relationship_owner_verification_document_front
+      ✓ optional posted file relationship_owner_verification_document_back
+      ✓ required posted relationship_owner_email
+      ✓ required posted relationship_owner_first_name
+      ✓ required posted relationship_owner_last_name
+      ✓ required posted relationship_owner_address_line1
+      ✓ optional posted relationship_owner_address_line2
+      ✓ required posted relationship_owner_address_city
+      ✓ required posted relationship_owner_address_state
+      ✓ required posted relationship_owner_address_country
+      ✓ required posted relationship_owner_address_postal_code
+      ✓ required posted relationship_owner_dob_day
+      ✓ required posted relationship_owner_dob_month
+      ✓ required posted relationship_owner_dob_year
     returns
       ✓ object
+    configuration
+      ✓ environment STRIPE_JS
 
   /api/user/connect/update-company-director
     exceptions
@@ -936,8 +593,28 @@
         ✓ missing posted relationship_director_first_name
       invalid-relationship_director_last_name
         ✓ missing posted relationship_director_last_name
+      invalid relationship_director_dob_day
+        ✓ missing posted relationship_director_dob_day
+        ✓ invalid posted relationship_director_dob_day
+      invalid-relationship_director_dob_month
+        ✓ missing posted relationship_director_dob_month
+        ✓ invalid posted relationship_director_dob_month
+      invalid-relationship_director_dob_year
+        ✓ missing posted relationship_director_dob_year
+        ✓ invalid posted relationship_director_dob_year
+    receives
+      ✓ optionally-required posted token
+      ✓ optional posted file relationship_director_verification_document_front
+      ✓ optional posted file relationship_director_verification_document_back
+      ✓ required posted relationship_director_first_name
+      ✓ required posted relationship_director_last_name
+      ✓ required posted relationship_director_dob_day
+      ✓ required posted relationship_director_dob_month
+      ✓ required posted relationship_director_dob_year
     returns
       ✓ object
+    configuration
+      ✓ environment STRIPE_JS
 
   /api/user/connect/update-company-registration
     exceptions
@@ -946,13 +623,9 @@
         ✓ invalid querystring stripeid
       invalid-stripe-account
         ✓ ineligible stripe account for individuals
-        ✓ ineligible stripe account is submitted
+        2) ineligible stripe account is submitted
       invalid-account
         ✓ ineligible accessing account
-      invalid-company_address_line1
-        ✓ missing posted company_address_line1
-      invalid-company_address_postal_code
-        ✓ missing posted company_address_postal_code
       invalid-company_name
         ✓ missing posted company_name
       invalid-company_tax_id
@@ -961,16 +634,90 @@
         ✓ missing posted company_address_line1
       invalid-company_address_state
         ✓ missing posted company_address_state
+        ✓ invalid posted company_address_state
+      invalid-company_address_line1
+        ✓ missing posted company_address_line1
+      invalid-company_address_postal_code
+        ✓ missing posted company_address_postal_code
       invalid-business_profile_mcc
         ✓ missing posted business_profile_mcc
+        ✓ invalid posted business_profile_mcc
       invalid-business_profile_url
         ✓ missing posted business_profile_url
+        ✓ invalid posted business_profile_url
+    receives
+      ✓ optionally-required posted token
+      ✓ required posted business_profile_mcc
+      ✓ optionally-required posted business_profile_url
+      ✓ optionally-required posted business_profile_product_description
+      ✓ required posted company_phone
+      ✓ required posted company_name
+      ✓ optionally-required posted company_address_postal_code
+      ✓ optionally-required posted company_address_city
+      ✓ optionally-required posted company_address_state
+      ✓ optionally-required posted company_address_line1
+      ✓ optional posted company_address_line2
+      ✓ optionally-required posted company_name_kana
+      ✓ optionally-required posted company_name_kanji
+      ✓ optionally-required posted company_address_kana_postal_code
+      ✓ optionally-required posted company_address_kana_city
+      ✓ optionally-required posted company_address_kana_state
+      ✓ optionally-required posted company_address_kana_town
+      ✓ optionally-required posted company_address_kana_line1
+      ✓ optionally-required posted company_address_kanji_postal_code
+      ✓ optionally-required posted company_address_kanji_city
+      ✓ optionally-required posted company_address_kanji_state
+      ✓ optionally-required posted company_address_kanji_town
+      ✓ optionally-required posted company_address_kanji_line1
+    returns
+      ✓ object for AT registration
+      ✓ object for AU registration
+      ✓ object for BE registration
+      ✓ object for CA registration
+      ✓ object for CH registration
+      ✓ object for DE registration
+      ✓ object for DK registration
+      ✓ object for EE registration
+      ✓ object for ES registration
+      ✓ object for FI registration
+      ✓ object for FR registration
+      ✓ object for GB registration
+      ✓ object for HK registration
+      ✓ object for IE registration
+      ✓ object for IT registration
+      ✓ object for JP registration
+      ✓ object for LU registration
+      ✓ object for NL registration
+      ✓ object for NO registration
+      ✓ object for NZ registration
+      ✓ object for PT registration
+      ✓ object for SE registration
+      ✓ object for SG registration
+      ✓ object for US registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/update-company-representative
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individuals
+        3) ineligible stripe account is submitted
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-relationship_representative_percent_owned
+        ✓ invalid posted relationship_representative_percent_owned
       invalid-relationship_representative_dob_day
         ✓ missing posted relationship_representative_dob_day
+        ✓ invalid posted relationship_representative_dob_day
       invalid-relationship_representative_dob_month
         ✓ missing posted relationship_representative_dob_month
+        ✓ invalid posted relationship_representative_dob_month
       invalid-relationship_representative_dob_year
         ✓ missing posted relationship_representative_dob_year
+        ✓ invalid posted relationship_representative_dob_year
       invalid-relationship_representative_first_name
         ✓ missing posted relationship_representative_first_name
       invalid-relationship_representative_last_name
@@ -981,30 +728,17 @@
         ✓ missing posted relationship_representative_phone
       invalid-relationship_representative_ssn_last_4
         ✓ missing posted relationship_representative_ssn_last_4
-      invalid-company_name_kana
-        ✓ missing posted company_name_kana
-      invalid-company_name_kanji
-        ✓ missing posted company_name_kanji
-      invalid-company_address_kana_postal_code
-        ✓ missing posted company_address_kana_postal_code
-      invalid-company_address_kana_city
-        ✓ missing posted company_address_kana_city
-      invalid-company_address_kana_state
-        ✓ missing posted company_address_kana_state
-      invalid-company_address_kana_town
-        ✓ missing posted company_address_kana_town
-      invalid-company_address_kana_line1
-        ✓ missing posted company_address_kana_line1
-      invalid-company_address_kanji_postal_code
-        ✓ missing posted company_address_kanji_postal_code
-      invalid-company_address_kanji_city
-        ✓ missing posted company_address_kanji_city
-      invalid-company_address_kanji_state
-        ✓ missing posted company_address_kanji_state
-      invalid-company_address_kanji_town
-        ✓ missing posted company_address_kanji_town
-      invalid-company_address_kanji_line1
-        ✓ missing posted company_address_kanji_line1
+      invalid-relationship_representative_address_line1
+        ✓ missing posted relationship_representative_address_line1
+      invalid-relationship_representative_address_city
+        ✓ missing posted relationship_representative_address_city
+      invalid-relationship_representative_address_state
+        ✓ missing posted relationship_representative_address_state
+      invalid-relationship_representative_address_country
+        ✓ missing posted relationship_representative_address_country
+        ✓ invalid-relationship_representative_address_country
+      invalid-relationship_representative_address_postal_code
+        ✓ missing posted relationship_representative_address_postal_code
       invalid-relationship_representative_address_kana_postal_code
         ✓ missing posted relationship_representative_address_kana_postal_code
       invalid-relationship_representative_address_kana_city
@@ -1025,6 +759,44 @@
         ✓ missing posted relationship_representative_address_kanji_town
       invalid-relationship_representative_address_kanji_line1
         ✓ missing posted relationship_representative_address_kanji_line1
+    receives
+      ✓ optionally-required posted token
+      ✓ required posted relationship_representative_dob_day
+      ✓ required posted relationship_representative_dob_month
+      ✓ required posted relationship_representative_dob_year
+      ✓ optionally-required posted file relationship_representative_verification_document_front
+      ✓ optionally-required posted file relationship_representative_verification_document_back
+      ✓ optionally-required posted relationship_representative_first_name
+      ✓ optionally-required posted relationship_representative_last_name
+      ✓ optionally-required posted relationship_representative_email
+      ✓ optionally-required posted relationship_representative_phone
+      ✓ optionally-required posted relationship_representative_gender
+      ✓ optionally-required posted relationship_representative_ssn_last_4
+      ✓ optionally-required posted relationship_representative_id_number
+      ✓ optionally-required posted relationship_representative_address_city
+      ✓ optionally-required posted relationship_representative_address_state
+      ✓ optionally-required posted relationship_representative_address_postal_code
+      ✓ optionally-required posted relationship_representative_address_country
+      ✓ optionally-required posted relationship_representative_address_line1
+      ✓ optional posted relationship_representative_address_line2
+      ✓ optional posted relationship_representative_percent_owned
+      ✓ optional posted relationship_representative_title
+      ✓ optional posted relationship_representative_director
+      ✓ optional posted relationship_representative_executive
+      ✓ optionally-required posted relationship_representative_first_name_kana
+      ✓ optionally-required posted relationship_representative_last_name_kana
+      ✓ optionally-required posted relationship_representative_address_kana_city
+      ✓ optionally-required posted relationship_representative_address_kana_state
+      ✓ optionally-required posted relationship_representative_address_kana_postal_code
+      ✓ optionally-required posted relationship_representative_address_kana_town
+      ✓ optionally-required posted relationship_representative_address_kana_line1
+      ✓ optionally-required posted relationship_representative_first_name_kanji
+      ✓ optionally-required posted relationship_representative_last_name_kanji
+      ✓ optionally-required posted relationship_representative_address_kanji_city
+      ✓ optionally-required posted relationship_representative_address_kanji_state
+      ✓ optionally-required posted relationship_representative_address_kanji_postal_code
+      ✓ optionally-required posted relationship_representative_address_kanji_town
+      ✓ optionally-required posted relationship_representative_address_kanji_line1
     returns
       ✓ object for AT registration
       ✓ object for AU registration
@@ -1033,6 +805,7 @@
       ✓ object for CH registration
       ✓ object for DE registration
       ✓ object for DK registration
+      ✓ object for EE registration
       ✓ object for ES registration
       ✓ object for FI registration
       ✓ object for FR registration
@@ -1049,6 +822,8 @@
       ✓ object for SE registration
       ✓ object for SG registration
       ✓ object for US registration
+    configuration
+      ✓ environment STRIPE_JS
 
   /api/user/connect/update-individual-registration
     exceptions
@@ -1062,10 +837,13 @@
         ✓ ineligible accessing account
       invalid-individual_dob_day
         ✓ missing posted individual_dob_day
+        ✓ invalid posted individual_dob_day
       invalid-individual_dob_month
         ✓ missing posted individual_dob_month
+        ✓ invalid posted individual_dob_month
       invalid-individual_dob_year
         ✓ missing posted individual_dob_year
+        ✓ invalid posted individual_dob_year
       invalid-individual_first_name
         ✓ missing posted individual_first_name
       invalid-individual_last_name
@@ -1076,8 +854,11 @@
         ✓ missing posted individual_address_state
       invalid-individual_address_postal_code
         ✓ missing posted individual_address_postal_code
+      invalid-individual_id_number
+        ✓ missing posted individual_id_number
       invalid-business_profile_mcc
         ✓ missing posted business_profile_mcc
+        ✓ invalid posted business_profile_mcc
       invalid-business_profile_url
         ✓ missing posted business_profile_url
       invalid-individual_ssn_last_4
@@ -1117,6 +898,41 @@
         ✓ missing posted individual_address_kanji_town
       invalid-individual_address_kanji_line1
         ✓ missing posted individual_address_kanji_line1
+    recieves
+      ✓ required posted business_profile_mcc
+      ✓ optionally-required posted business_profile_url
+      ✓ optionally-required posted business_profile_product_description
+      ✓ required posted individual_dob_day
+      ✓ required posted individual_dob_month
+      ✓ required posted individual_dob_year
+      ✓ required posted individual_first_name
+      ✓ required posted individual_last_name
+      ✓ optionally-required posted individual_email
+      ✓ optionally-required posted individual_phone
+      ✓ optionally-required posted individual_gender
+      ✓ optionally-required posted individual_ssn_last_4
+      ✓ optionally-required posted individual_id_number
+      4) optionally-required posted individual_address_country
+      ✓ optionally-required posted individual_address_state
+      ✓ optionally-required posted individual_address_postal_code
+      ✓ optionally-required posted individual_address_line1
+      ✓ optional posted individual_address_line2
+      ✓ optionally-required posted individual_first_name_kana
+      ✓ optionally-required posted individual_last_name_kana
+      ✓ optionally-required posted individual_address_kana_town
+      ✓ optionally-required posted individual_address_kana_state
+      ✓ optionally-required posted individual_address_kana_postal_code
+      ✓ optionally-required posted individual_address_kana_line1
+      ✓ optionally-required posted individual_first_name_kanji
+      ✓ optionally-required posted individual_last_name_kanji
+      ✓ optionally-required posted individual_address_kanji_state
+      ✓ optionally-required posted individual_address_kanji_postal_code
+      ✓ optionally-required posted individual_address_kanji_line1
+      ✓ optionally-required posted individual_address_kanji_town
+      ✓ optionally-required posted file individual_verification_document_front
+      ✓ optionally-required posted file individual_verification_document_back
+      ✓ optionally-required posted file individual_verification_additional_document_front
+      ✓ optionally-required posted file individual_verification_additional_document_back
     returns
       ✓ returns object for AT registration
       ✓ returns object for AU registration
@@ -1125,6 +941,7 @@
       ✓ returns object for CH registration
       ✓ returns object for DE registration
       ✓ returns object for DK registration
+      ✓ returns object for EE registration
       ✓ returns object for ES registration
       ✓ returns object for FI registration
       ✓ returns object for FR registration
@@ -1133,14 +950,20 @@
       ✓ returns object for IE registration
       ✓ returns object for IT registration
       ✓ returns object for JP registration
+      ✓ returns object for LT registration
       ✓ returns object for LU registration
+      ✓ returns object for LV registration
       ✓ returns object for NL registration
       ✓ returns object for NO registration
       ✓ returns object for NZ registration
       ✓ returns object for PT registration
       ✓ returns object for SE registration
+      ✓ returns object for SI registration
       ✓ returns object for SG registration
+      ✓ returns object for SK registration
       ✓ returns object for US registration
+    configuration
+      ✓ environment STRIPE_JS
 
   /api/user/connect/update-payment-information
     exceptions
@@ -1151,41 +974,68 @@
         ✓ ineligible accessing account
       invalid-currency
         ✓ missing posted currency
+        ✓ invalid posted currency
       invalid-country
         ✓ missing posted country
+        ✓ invalid posted country
       invalid-account_holder_name
         ✓ missing posted account_holder_name
-      invalid-account_type
-        ✓ missing posted account_type
+      invalid-account_holder_type
+        ✓ missing posted account_holder_type
+        ✓ invalid posted account_holder_type
       invalid-iban
         ✓ missing posted iban
+        ✓ invalid posted iban
       invalid-bsb_number
         ✓ missing posted bsb_number
+        ✓ invalid posted bsb_number
       invalid-account_number
         ✓ missing posted account_number
+        ✓ invalid posted account_number
       invalid-institution_number
         ✓ missing posted institution_number
+        ✓ invalid posted institution_number
       invalid-transit_number
         ✓ missing posted transit_number
+        ✓ invalid posted transit_number
       invalid-sort_code
         ✓ missing posted sort_code
+        ✓ invalid posted sort_code
       invalid-clearing_code
+        ✓ missing posted clearing_code
         ✓ missing posted clearing_code
       invalid-branch_code
         ✓ missing posted branch_code
+        ✓ invalid posted branch_code
       invalid-bank_code
         ✓ missing posted bank_code
+        ✓ invalid posted bank_code
       invalid-routing_number
         ✓ missing posted routing_number
+        ✓ invalid posted routing_number
+    receives
+      ✓ required posted currency
+      ✓ required posted account_holder_type
+      ✓ required posted account_holder_name
+      ✓ required posted country
+      ✓ optionally-required posted iban
+      ✓ optionally-required posted sort_code
+      ✓ optionally-required posted bank_code
+      ✓ optionally-required posted routing_number
+      ✓ optionally-required posted branch_code
+      ✓ optionally-required posted bsb_number
+      ✓ optionally-required posted transit_number
+      ✓ optionally-required posted institution_number
+      ✓ optionally-required posted account_number
     returns
       ✓ object for AT registration
-    returns
       ✓ object for AU registration
       ✓ object for BE registration
       ✓ object for CA registration
       ✓ object for CH registration
       ✓ object for DE registration
       ✓ object for DK registration
+      ✓ object for EE registration
       ✓ object for ES registration
       ✓ object for FI registration
       ✓ object for FR registration
@@ -1194,16 +1044,60 @@
       ✓ object for HK registration
       ✓ object for IE registration
       ✓ object for IT registration
-      ✓ object for JP registration
+      ✓ object for LT registration
       ✓ object for LU registration
+      ✓ object for LV registration
       ✓ object for NL registration
       ✓ object for NO registration
       ✓ object for NZ registration
       ✓ object for PT registration
       ✓ object for SE registration
       ✓ object for SG registration
+      ✓ object for SI registration
+      ✓ object for SK registration
       ✓ object for US registration
 
 
-  722 passing (5h)
+  627 passing (59m)
+  4 failing
+
+  1) /api/user/connect/set-company-registration-submitted
+       configuration
+         environment STRIPE_JS:
+     Error: invalid-registration
+      at Object.req.<computed> [as patch] (node_modules/@userdashboard/dashboard/test-helper.js:167:19)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+
+  2) /api/user/connect/update-company-registration
+       exceptions
+         invalid-stripe-account
+           ineligible stripe account is submitted:
+     Error: invalid-registration
+      at Object.req.<computed> [as patch] (node_modules/@userdashboard/dashboard/test-helper.js:167:19)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+
+  3) /api/user/connect/update-company-representative
+       exceptions
+         invalid-stripe-account
+           ineligible stripe account is submitted:
+     Error: invalid-registration
+      at Object.req.<computed> [as patch] (node_modules/@userdashboard/dashboard/test-helper.js:167:19)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+
+  4) /api/user/connect/update-individual-registration
+       recieves
+         optionally-required posted individual_address_country:
+     AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+[32m+ actual[39m [31m- expected[39m
+
+[32m+[39m undefined
+[31m-[39m 'NZ'
+      at Context.<anonymous> (src/www/api/user/connect/update-individual-registration.test.js:2195:14)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+
+
 

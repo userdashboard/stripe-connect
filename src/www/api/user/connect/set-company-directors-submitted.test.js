@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe.only('/api/user/connect/set-company-directors-submitted', () => {
+describe('/api/user/connect/set-company-directors-submitted', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -53,21 +53,13 @@ describe.only('/api/user/connect/set-company-directors-submitted', () => {
         assert.strictEqual(errorMessage, 'invalid-stripe-account')
       })
 
-      it('ineligible beneficial owners are submitted', async () => {
+      it('ineligible company directors are submitted', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           type: 'company',
-          country: 'US'
+          country: 'AT'
         })
-        const person = TestHelper.nextIdentity()
-        await TestHelper.createCompanyDirector(user, {
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
-        })
-        await TestHelper.submitBeneficialOwners(user)
+        await TestHelper.submitCompanyDirectors(user)
         const req = TestHelper.createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -114,7 +106,7 @@ describe.only('/api/user/connect/set-company-directors-submitted', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
+      assert.strictEqual(accountNow.company.directors_provided, true)
     })
   })
 
@@ -127,32 +119,27 @@ describe.only('/api/user/connect/set-company-directors-submitted', () => {
         country: 'DE'
       })
       const person = TestHelper.nextIdentity()
-      const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
       req.waitOnSubmit = true
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       }
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session
       const accountNow = await req2.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
+      assert.strictEqual(accountNow.company.directors_provided, true)
     })
   })
 })

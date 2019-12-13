@@ -19,13 +19,13 @@ module.exports = {
     if (!stripeAccount.external_accounts.data.length) {
       throw new Error('invalid-payment-details')
     }
-    if (!stripeAccount.company.owners_provided) {
+    if (connect.kycRequirements[stripeAccount.country].beneficialOwner && !stripeAccount.company.owners_provided) {
       throw new Error('invalid-registration')
     }
-    if (!stripeAccount.company.directors_provided) {
+    if (connect.kycRequirements[stripeAccount.country].companyDirector && !stripeAccount.company.directors_provided) {
       throw new Error('invalid-registration')
     }
-    
+
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration')
     if (!registration) {
       throw new Error('invalid-registration')
@@ -96,6 +96,8 @@ module.exports = {
       await stripeCache.update(stripeAccount)
       return stripeAccount
     } catch (error) {
+      console.log(error)
+      console.log(accountInfo)
       const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
       if (errorMessage.startsWith('company[address]')) {
         let field = errorMessage.substring('company[address]['.length)

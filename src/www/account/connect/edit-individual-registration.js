@@ -42,7 +42,7 @@ async function renderPage (req, res, messageTemplate) {
     res.setHeader('content-security-policy',
       'default-src * \'unsafe-inline\'; ' +
     `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
-    `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/stripe-helper.js 'unsafe-inline' 'unsafe-eval'; ` +
+    `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline' 'unsafe-eval'; ` +
     'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
     'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
@@ -57,25 +57,36 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
+  if (req.data.stripeAccount.country !== 'JP') {
+    removeElements.push(
+      'kanji-personal-address-container',
+      'kana-personal-address-container',
+      'kana-personal-information-container',
+      'kanji-personal-information-container')
+  } else {
+    removeElements.push('personal-address-container')
+  }
   const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].individual
   if (requiredFields.indexOf('business_profile.mcc') > -1) {
     const mccList = connect.getMerchantCategoryCodes(req.language)
     dashboard.HTML.renderList(doc, mccList, 'mcc-option', 'business_profile_mcc')
   }
-  if (requiredFields.indexOf('individual_address.country') > -1) {
-    let personalCountry
-    if (req.body) {
-      personalCountry = req.body.individual_address_country
-    }
-    personalCountry = personalCountry || req.data.registration.individual_address_country
-    personalCountry = personalCountry || req.data.stripeAccount.country
-    const personalStates = connect.countryDivisions[personalCountry]
+  if (requiredFields.indexOf('individual.address.state') > -1) {
+    const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'individual_address_state')
-    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'individual_address_country')
+  }
+  if (requiredFields.indexOf('individual.gender') === -1) {
+    removeElements.push('individual_gender-container')
+  }
+  if (requiredFields.indexOf('individual.id_number') === -1) {
+    removeElements.push('id_number-container')
+  }
+  if (requiredFields.indexOf('individual.ssn_last_4') === -1) {
+    removeElements.push('ssn_last_4-container')
   }
   if (req.data.registration.individual_id_number || req.data.registration.accountToken) {
-    const uploadFront = doc.getElementById('individual_id_number')
-    uploadFront.setAttribute('data-existing', true)
+    const idNumber = doc.getElementById('individual_id_number')
+    idNumber.setAttribute('data-existing', true)
   }
   if (req.data.registration.individual_verification_document_front) {
     const uploadFront = doc.getElementById('individual_verification_document_front')
@@ -105,15 +116,8 @@ async function renderPage (req, res, messageTemplate) {
         dashboard.HTML.setSelectedOptionByValue(doc, field, req.data.registration[field] || '')
       }
     }
-    for (const selectid of ['individual_address_state', 'individual_address_country']) {
-      if (req.data.registration[selectid]) {
-        dashboard.HTML.setSelectedOptionByValue(doc, selectid, req.data.registration[selectid])
-      }
-    }
-    for (const checkboxid of ['individual_executive', 'individual_director', 'individual_owner']) {
-      if (req.data.registration[checkboxid]) {
-        doc.getElementById(checkboxid).setAttribute('checked', true)
-      }
+    if (req.data.registration.individual_address_state) {
+      dashboard.HTML.setSelectedOptionByValue(doc, 'individual_address_state', req.data.registration.individual_address_state)
     }
   } else if (req.body) {
     for (const field in req.body) {
@@ -128,6 +132,10 @@ async function renderPage (req, res, messageTemplate) {
       }
     }
   }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
+  }
   return dashboard.Response.end(req, res, doc)
 }
 
@@ -139,6 +147,15 @@ async function submitForm (req, res) {
   for (const field of requiredFields) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
+      if (field === 'individual.address.line2' ||
+          field === 'individual.verification.document.front' ||
+          field === 'individual.verification.document.back' ||
+          field === 'individual.verification.additional_document.front' ||
+          field === 'individual.verification.additional_document.back' ||
+         (field === 'business_profile.url' && req.body.business_profile_product_description) ||
+         (field === 'business_profile.product_description' && req.body.business_profile_url)) {
+        continue
+      }
       return renderPage(req, res, `invalid-${posted}`)
     }
   }

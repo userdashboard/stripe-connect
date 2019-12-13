@@ -18,7 +18,7 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
   }
-  req.data = { owner }
+  req.data = { stripeAccount, owner }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -30,66 +30,93 @@ async function renderPage (req, res, messageTemplate) {
   } else if (req.error) {
     messageTemplate = req.error
   }
+  const removeElements = []
   const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'owner')
   if (global.stripeJS !== 3) {
-    const stripeJS = doc.getElementById('stripe-v3')
-    stripeJS.parentNode.removeChild(stripeJS)
-    const clientJS = doc.getElementById('client-v3')
-    clientJS.parentNode.removeChild(clientJS)
-    const connectJS = doc.getElementById('connect-v3')
-    connectJS.parentNode.removeChild(connectJS)
-    const handlerJS = doc.getElementById('handler-v3')
-    handlerJS.parentNode.removeChild(handlerJS)
+    removeElements.push('stripe-v3', 'client-v3', 'connect-v3', 'handler-v3')
   } else {
     res.setHeader('content-security-policy',
       'default-src * \'unsafe-inline\'; ' +
     `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
-    `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/stripe-helper.js 'unsafe-inline' 'unsafe-eval'; ` +
+    `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-eval' 'unsafe-inline'; ` +
     'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
     'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
-      const submitForm = doc.getElementById('form-container')
-      submitForm.parentNode.removeChild(submitForm)
+      removeElements.push('form-container')
+      for (const id of removeElements) {
+        const element = doc.getElementById(id)
+        element.parentNode.removeChild(element)
+      }
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const selectedCountry = req.body ? req.body.relationship_owner_address_country || req.data.owner.relationship_owner_address_country : req.data.owner.relationship_owner_address_country
-  const states = connect.countryDivisions[selectedCountry]
-  dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
-  const country = doc.getElementById('relationship_owner_address_country')
-  dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
-  dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].beneficialOwner
+  if (requiredFields.indexOf('relationship.owner.id_number') === -1) {
+    removeElements.push('relationship_owner_id_number-container')
+  }
+  if (requiredFields.indexOf('relationship.owner.email') === -1) {
+    removeElements.push('relationship_owner_email-container')
+  }
   if (req.method === 'GET') {
-    for (const field of ['first_name', 'last_name', 'dob_day', 'dob_month', 'dob_year', 'id_number', 'address_line1', 'address_line2', 'address_city', 'address_postal_code']) {
-      const element = doc.getElementById(`relationship_owner_${field}`)
-      element.setAttribute('value', req.data.owner[field])
+    const selectedCountry = req.data.owner.relationship_owner_address_country
+    const states = connect.countryDivisions[selectedCountry]
+    dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
+    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
+    dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
+    for (const field of requiredFields) {
+      const posted = field.split('.').join('_')
+      if (!req.data.owner[posted]) {
+        if (field === 'relationship.owner.verification.front' ||
+            field === 'relationship.owner.verification.back') {
+          continue
+        }
+        const element = doc.getElementById(posted)
+        if (element.attr.tag === 'input') {
+          if (element.attr.tag === 'checkbox') {
+            element.attr.checked = req.data.owner[posted]
+            continue
+          }
+          element.setAttribute('value', req.data.owner[posted])
+        } else if (element.attr.tag === 'select') {
+          dashboard.HTML.setSelectedOptionByValue(doc, element.attr.id, req.data.owner[posted])
+        }
+      }
     }
-    if (req.data.owner.relationship_owner_address_state) {
-      dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_state', req.data.owner.relationship_owner_address_state)
-    }
-    dashboard.HTML.setSelectedOptionByValue(doc, country, req.data.owner.relationship_owner_address_country)
   } else if (req.body) {
-    for (const fieldName in req.body) {
-      const el = doc.getElementById(fieldName)
+    const selectedCountry = req.body.relationship_owner_address_country || req.data.owner.relationship_owner_address_country
+    const states = connect.countryDivisions[selectedCountry]
+    dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
+    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
+    dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
+    for (const field of requiredFields) {
+      const posted = field.split('.').join('_')
+      if (!req.body[posted]) {
+        continue
+      }
+      const el = doc.getElementById(posted)
       if (!el) {
         continue
       }
       switch (el.tag) {
         case 'select':
-          dashboard.HTML.setSelectedOptionByValue(doc, el.attr.id, req.body[fieldName])
+          dashboard.HTML.setSelectedOptionByValue(doc, el.attr.id, req.body[posted])
           continue
         case 'input':
           if (el.attr.type === 'radio') {
             el.attr.checked = 'checked'
           } else {
-            el.attr.value = req.body[fieldName]
+            el.attr.value = req.body[posted]
           }
           continue
       }
     }
+  }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }
@@ -98,32 +125,37 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  if (!req.body.relationship_owner_address_city) {
-    return renderPage(req, res, 'invalid-relationship_owner_address_city')
+  if (global.stripeJS === 3 && !req.body.token) {
+    return renderPage(req, res, 'invalid-token')
   }
-  if (!req.body.relationship_owner_address_country) {
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].beneficialOwner
+  for (const field of requiredFields) {
+    const posted = field.split('.').join('_')
+    if (!field) {
+      if (field === 'relationship.owner.verification.front' ||
+          field === 'relationship.owner.verification.back') {
+        continue
+      }
+      return renderPage(req, res, `invalid-${posted}`)
+    }
+  }
+  if (!req.body.relationship_owner_address_country || !connect.countryNameIndex[req.body.relationship_owner_address_country]) {
+    delete (req.body.relationship_owner_address_country)
     return renderPage(req, res, 'invalid-relationship_owner_address_country')
   }
-  if (!req.body.relationship_owner_address_line1) {
-    return renderPage(req, res, 'invalid-relationship_owner_address_line1')
+  if (!req.body.relationship_owner_address_state) {
+    return renderPage(req, res, 'invalid-relationship_owner_address_state')
   }
-  if (!req.body.relationship_owner_address_postal_code) {
-    return renderPage(req, res, 'invalid-relationship_owner_address_postal_code')
+  const states = connect.countryDivisions[req.body.relationship_owner_address_country]
+  let found
+  for (const state of states) {
+    found = state.value === req.body.relationship_owner_address_state
+    if (found) {
+      break
+    }
   }
-  if (!req.body.relationship_owner_dob_day) {
-    return renderPage(req, res, 'invalid-relationship_owner_dob_day')
-  }
-  if (!req.body.relationship_owner_dob_month) {
-    return renderPage(req, res, 'invalid-relationship_owner_dob_month')
-  }
-  if (!req.body.relationship_owner_dob_year) {
-    return renderPage(req, res, 'invalid-relationship_owner_dob_year')
-  }
-  if (!req.body.relationship_owner_first_name) {
-    return renderPage(req, res, 'invalid-relationship_owner_first_name')
-  }
-  if (!req.body.relationship_owner_last_name) {
-    return renderPage(req, res, 'invalid-relationship_owner_last_name')
+  if (!found) {
+    return renderPage(req, res, 'invalid-relationship_owner_address_state')
   }
   try {
     await global.api.user.connect.UpdateBeneficialOwner.patch(req)

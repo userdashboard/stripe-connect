@@ -154,7 +154,10 @@ describe('/account/connect/create-company-director', () => {
       const person = TestHelper.nextIdentity()
       req.body = {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -178,7 +181,10 @@ describe('/account/connect/create-company-director', () => {
       const person = TestHelper.nextIdentity()
       req.body = {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -203,7 +209,10 @@ describe('/account/connect/create-company-director', () => {
       const person = TestHelper.nextIdentity()
       req.body = {
         relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

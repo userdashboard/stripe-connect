@@ -61,44 +61,59 @@ module.exports = {
         dob: {}
       }
     }
-    for (const field in registration) {
-      if (field.startsWith('individual_address_')) {
-        if (field.startsWith('individual_address_kana_')) {
-          const property = field.substring('individual_address_kana_'.length)
-          accountInfo.individual.address_kana = accountInfo.individual.address_kana || {}
-          accountInfo.individual.address_kana[property] = registration[field]
-        } else if (field.startsWith('individual_address_kanji_')) {
-          const property = field.substring('individual_address_kanji_'.length)
-          accountInfo.individual.address_kanji = accountInfo.individual.address_kanji || {}
-          accountInfo.individual.address_kanji[property] = registration[field]
+    if (global.stripeJS === 3) {
+      accountInfo.account_token = registration.individualToken
+      delete (accountInfo.individual)
+      delete (accountInfo.tos_acceptance)
+    } else {
+      for (const field in registration) {
+        if (field.startsWith('individual_address_')) {
+          if (field.startsWith('individual_address_kana_')) {
+            const property = field.substring('individual_address_kana_'.length)
+            accountInfo.individual.address_kana = accountInfo.individual.address_kana || {}
+            accountInfo.individual.address_kana[property] = registration[field]
+          } else if (field.startsWith('individual_address_kanji_')) {
+            const property = field.substring('individual_address_kanji_'.length)
+            accountInfo.individual.address_kanji = accountInfo.individual.address_kanji || {}
+            accountInfo.individual.address_kanji[property] = registration[field]
+          } else {
+            const property = field.substring('individual_address_'.length)
+            accountInfo.individual.address[property] = registration[field]
+          }
+        } else if (field.startsWith('individual_dob_')) {
+          const property = field.substring('individual_dob_'.length)
+          accountInfo.individual.dob[property] = registration[field]
+        } else if (field.startsWith('individual_verification_document_')) {
+          accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+          const property = field.substring('individual_verification_document_'.length)
+          accountInfo.individual.verification.document[property] = registration[field]
+        } else if (field.startsWith('individual_verification_additional_document_')) {
+          accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+          const property = field.substring('individual_verification_additional_document_'.length)
+          accountInfo.individual.verification.additional_document[property] = registration[field]
+        } else if (field.startsWith('individual_')) {
+          const property = field.substring('individual_'.length)
+          accountInfo.individual[property] = registration[field]
+        } else if (field.startsWith('business_profile_')) {
+          const property = field.substring('business_profile_'.length)
+          accountInfo.business_profile[property] = registration[field]
         } else {
-          const property = field.substring('individual_address_'.length)
-          accountInfo.individual.address[property] = registration[field]
+          accountInfo[field] = registration[field]
         }
-      } else if (field.startsWith('individual_dob_')) {
-        const property = field.substring('individual_dob_'.length)
-        accountInfo.individual.dob[property] = registration[field]
-      } else if (field.startsWith('individual_verification_document_')) {
-        accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-        const property = field.substring('individual_verification_document_'.length)
-        accountInfo.individual.verification.document[property] = registration[field]
-      } else if (field.startsWith('individual_verification_additional_document_')) {
-        accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-        const property = field.substring('individual_verification_additional_document_'.length)
-        accountInfo.individual.verification.additional_document[property] = registration[field]
-      } else if (field.startsWith('individual_')) {
-        const property = field.substring('individual_'.length)
-        accountInfo.individual[property] = registration[field]
-      } else if (field.startsWith('business_profile_')) {
-        const property = field.substring('business_profile_'.length)
-        accountInfo.business_profile[property] = registration[field]
-      } else {
-        accountInfo[field] = registration[field]
       }
     }
     try {
-      const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+      let accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       req.success = true
+      if (global.stripeJS === 3) {
+        accountNow = await stripe.accounts.update(req.query.stripeid, {
+          tos_acceptance: {
+            ip: req.ip,
+            user_agent: req.userAgent,
+            date: dashboard.Timestamp.now
+          }
+        }, req.stripeKey)
+      }
       await stripeCache.update(accountNow)
       return accountNow
     } catch (error) {

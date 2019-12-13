@@ -9,6 +9,9 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
+    if (!req.body) {
+      throw new Error('invalid_company_name')
+    }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
@@ -69,8 +72,8 @@ module.exports = {
       metadata: {
       }
     }
-    if (global.stripeJS === 3 && req.body.token) {
-      registration.company_token = req.body.token
+    if (global.stripeJS === 3) {
+      registration.companyToken = req.body.token
     }
     connect.MetaData.store(accountInfo.metadata, 'registration', registration)
     try {

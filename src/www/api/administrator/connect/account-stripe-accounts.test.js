@@ -74,7 +74,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           company_address_state: 'NY',
           company_address_country: 'US',
           business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_dob_day: '1',
@@ -124,7 +124,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           company_address_state: 'NY',
           company_address_country: 'US',
           business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_dob_day: '1',
@@ -171,7 +171,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           company_address_state: 'NY',
           company_address_country: 'US',
           business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_dob_day: '1',
@@ -218,7 +218,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           company_address_state: 'NY',
           company_address_country: 'US',
           business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_dob_day: '1',
@@ -266,7 +266,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           company_address_state: 'NY',
           company_address_country: 'US',
           business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_dob_day: '1',

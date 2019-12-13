@@ -22,11 +22,25 @@ module.exports = {
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
+    if (global.stripeJS === 3 && !req.body.token) {
+      throw new Error('invalid-token')
+    }
     if (!req.body.relationship_director_first_name) {
       throw new Error('invalid-relationship_director_first_name')
     }
     if (!req.body.relationship_director_last_name) {
       throw new Error('invalid-relationship_director_last_name')
+    }
+    const requiredFields = connect.kycRequirements[stripeAccount.country].companyDirector
+    for (const field of requiredFields) {
+      const posted = field.split('.').join('_')
+      if (!req.body[posted]) {
+        if (field === 'relationship.director.verification.document.front' ||
+            field === 'relationship.director.verification.document.back') {
+          continue
+        }
+        throw new Error(`invalid-${posted}`)
+      }
     }
     if (req.uploads && req.uploads.relationship_director_verification_document_front) {
       const frontData = {
@@ -71,11 +85,15 @@ module.exports = {
       directorid: `director_${id}`,
       object: 'director',
       created: dashboard.Timestamp.now,
-      stripeid: req.query.stripeid,
-      relationship_director_first_name: req.body.relationship_director_first_name,
-      relationship_director_last_name: req.body.relationship_director_last_name
+      stripeid: req.query.stripeid
     }
-    if (global.stripeJS === 3 && req.body.token) {
+    for (const field of requiredFields) {
+      const posted = field.split('.').join('_')
+      if (req.body[posted]) {
+        director[posted] = req.body[posted]
+      }
+    }
+    if (global.stripeJS === 3) {
       director.token = req.body.token
     }
     directors.unshift(director)

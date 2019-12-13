@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe.only('/api/user/connect/set-beneficial-owners-submitted', () => {
+describe('/api/user/connect/set-beneficial-owners-submitted', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -123,7 +123,7 @@ describe.only('/api/user/connect/set-beneficial-owners-submitted', () => {
   })
 
   describe('configuration', () => {
-    it.only('environment STRIPE_JS', async () => {
+    it('environment STRIPE_JS', async () => {
       global.stripeJS = 3
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -151,8 +151,7 @@ describe.only('/api/user/connect/set-beneficial-owners-submitted', () => {
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
-      const x = await req.post()
-      console.log(x.toString())
+      await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session

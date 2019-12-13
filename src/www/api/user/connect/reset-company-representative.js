@@ -22,7 +22,7 @@ module.exports = {
       return
     }
     try {
-      await stripe.accounts.updatePerson(req.query.stripeid, representatives.data[0].id, { 
+      await stripe.accounts.updatePerson(req.query.stripeid, representatives.data[0].id, {
         relationship: {
           representative: false
         }

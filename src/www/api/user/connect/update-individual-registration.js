@@ -84,13 +84,8 @@ module.exports = {
         }
       }
     }
-    if (req.body.individual_address_country) {
-      if (!connect.countryNameIndex[req.body.individual_address_country]) {
-        throw new Error('invalid-individual_address_country')
-      }
-    }
     if (req.body.individual_address_state) {
-      const states = connect.countryDivisions[req.body.individual_address_country]
+      const states = connect.countryDivisions[stripeAccount.country]
       let found = false
       for (const state of states) {
         found = state.value === req.body.individual_address_state
@@ -160,7 +155,7 @@ module.exports = {
         throw new Error('invalid-individual_dob_year')
       }
       try {
-        new Date(req.body.individual_dob_year, req.body.individual_dob_month, req.body.individual_dob_day)
+        Date.parse(`${req.body.individual_dob_year}/${req.body.individual_dob_month}/${req.body.individual_dob_day}`)
       } catch (error) {
         throw new Error('invalid-individual_dob_day')
       }
@@ -186,8 +181,8 @@ module.exports = {
       }
       registration[posted] = req.body[posted]
     }
-    if (global.stripeJS === 3 && req.body.token) {
-      registration.individual_token = req.body.token
+    if (global.stripeJS === 3) {
+      registration.token = req.body.token
     }
     if (req.body.individual_verification_document_front) {
       registration.individual_verification_document_front = req.body.individual_verification_document_front

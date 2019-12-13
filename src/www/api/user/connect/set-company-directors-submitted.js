@@ -14,11 +14,12 @@ module.exports = {
     if (stripeAccount.metadata.submitted ||
       stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.accountid !== req.account.accountid ||
+      (stripeAccount.company && stripeAccount.company.directors_provided) ||
       connect.kycRequirements[stripeAccount.country].companyDirector === undefined) {
       throw new Error('invalid-stripe-account')
     }
     if (global.stripeJS !== 3) {
-      const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors') 
+      const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
       if (directors && directors.length) {
         for (const director of directors) {
           const directorInfo = {

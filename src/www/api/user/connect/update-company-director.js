@@ -6,8 +6,15 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
+    console.log(req.body)
     if (!req.query || !req.query.directorid) {
       throw new Error('invalid-directorid')
+    }
+    if (!req.body) {
+      throw new Error('relationship_director_first_name')
+    }
+    if (global.stripeJS === 3 && !req.body.token) {
+      throw new Error('invalid-token')
     }
     const director = await global.api.user.connect.CompanyDirector.get(req)
     req.query.stripeid = director.stripeid
@@ -66,7 +73,7 @@ module.exports = {
         throw new Error('invalid-relationship_director_dob_year')
       }
       try {
-        new Date(req.body.relationship_director_dob_year, req.body.relationship_director_dob_month, req.body.relationship_director_dob_day)
+        Date.parse(`${req.body.relationship_director_dob_year}/${req.body.relationship_director_dob_month}/${req.body.relationship_director_dob_day}`)
       } catch (error) {
         throw new Error('invalid-relationship_director_dob_day')
       }
@@ -125,6 +132,9 @@ module.exports = {
       director.relationship_director_executive = true
     }
     director.relationship_owner_director = true
+    if (global.stripeJS === 3) {
+      director.token = req.body.token
+    }
     let directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
     if (directors && directors.length) {
       for (const i in directors) {

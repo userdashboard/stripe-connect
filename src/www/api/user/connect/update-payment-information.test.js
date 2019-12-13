@@ -852,7 +852,6 @@ describe('/api/user/connect/update-payment-information', () => {
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data[0].account_holder_type, 'individual')
-      
     })
 
     it('required posted account_holder_name', async () => {
@@ -1274,7 +1273,7 @@ describe('/api/user/connect/update-payment-information', () => {
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
-    
+
     it('object for FI registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -1439,7 +1438,7 @@ describe('/api/user/connect/update-payment-information', () => {
     //   const accountNow = await req.patch()
     //   assert.strictEqual(accountNow.external_accounts.data.length, 1)
     // })
-    
+
     it('object for LT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

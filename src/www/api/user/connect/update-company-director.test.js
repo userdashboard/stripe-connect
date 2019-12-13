@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/update-company-director', () => {
+describe.only('/api/user/connect/update-company-director', () => {
   describe('exceptions', () => {
     describe('invalid-directorid', () => {
       it('missing querystring directorid', async () => {
@@ -672,30 +672,40 @@ describe('/api/user/connect/update-company-director', () => {
         country: 'GB'
       })
       const person = TestHelper.nextIdentity()
-      const director = await TestHelper.createCompanyDirector(user, {
+      const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+      req.waitOnSubmit = true
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = {
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        relationship_director_first_name: 'Modified name',
+      }
+      await req.post()
+      const directors = await global.api.user.connect.CompanyDirectors.get(req)
+      const director = directors[0]
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${director.directorid}`)
+      req2.waitOnSubmit = true
+      req2.account = user.account
+      req2.session = user.session
+      req2.body = {
+        relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
       }
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-token')
+      await req2.post()
+      const directorNow = await global.api.user.connect.CompanyDirector.get(req2)
+      assert.notStrictEqual(directorNow.token, director.token)
+      assert.notStrictEqual(directorNow.token, null)
+      assert.notStrictEqual(directorNow.token, undefined)
     })
   })
 })

@@ -1,16 +1,14 @@
 const connect = require('../../../../../index.js')
-const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
-const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    let stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted ||
       stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
@@ -45,7 +43,7 @@ module.exports = {
       }
       if (field.startsWith('relationship_representative_address_kanji_')) {
         const property = field.substring('relationship_representative_address_kanji_'.length)
-        representarepresentativeInfoive.address_kanji = representativeInfo.address_kanji || {}
+        representativeInfo.address_kanji = representativeInfo.address_kanji || {}
         representativeInfo.address_kanji[property] = registration[field]
       } else if (field.startsWith('relationship_representative_address_kana_')) {
         const property = field.substring('relationship_representative_address_kana_'.length)
@@ -76,7 +74,7 @@ module.exports = {
     }
     await global.api.user.connect.ResetCompanyRepresentative.patch(req)
     try {
-      await stripe.accounts.createPerson(req.query.stripeid, representative, req.stripeKey)
+      await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
     } catch (error) {
       throw new Error('unkonwn-error')
     }
