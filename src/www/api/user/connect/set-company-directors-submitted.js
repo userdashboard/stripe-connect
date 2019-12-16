@@ -18,42 +18,63 @@ module.exports = {
       connect.kycRequirements[stripeAccount.country].companyDirector === undefined) {
       throw new Error('invalid-stripe-account')
     }
-    if (global.stripeJS !== 3) {
-      const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
-      if (directors && directors.length) {
-        for (const director of directors) {
-          const directorInfo = {
-            first_name: director.relationship_director_first_name,
-            last_name: director.relationship_director_last_name,
-            relationship: {
-              director: true
-            },
-            verification: {
-              document: {
-                front: director.relationship_director_verification_document_front,
-                back: director.relationship_director_verification_document_back
+    const persons = []
+    const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+    if (directors && directors.length) {
+      for (const director of directors) {
+        const directorInfo = {}
+        if (global.stripeJS === 3) {
+          directorInfo.token = director.token
+        } else {
+          for (const field in director) {
+            if (!field.startsWith('relationship_director_')) {
+              continue
+            }
+            if (field.startsWith('relationship_director_address_')) {
+              const property = field.substring('relationship_director_address_'.length)
+              directorInfo.address = directorInfo.address || {}
+              directorInfo.address[property] = director[field]
+              continue
+            } else if (field.startsWith('relationship_director_verification_document_')) {
+              if (global.stripeJS) {
+                continue
               }
+              const property = field.substring('relationship_director_verification_document_'.length)
+              directorInfo.verification = directorInfo.verification || {}
+              directorInfo.verification.document = directorInfo.verification.document || {}
+              directorInfo.verification.document[property] = director[field]
+            } else if (field.startsWith('relationship_director_verification_additional_document_')) {
+              if (global.stripeJS) {
+                continue
+              }
+              const property = field.substring('relationship_director_verification_additional_document_'.length)
+              directorInfo.verification = directorInfo.verification || {}
+              directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+              directorInfo.verification.additional_document[property] = director[field]
+            } else if (field.startsWith('relationship_director_dob_')) {
+              const property = field.substring('relationship_director_dob_'.length)
+              directorInfo.dob = directorInfo.dob || {}
+              directorInfo.dob[property] = director[field]
+            } else {
+              if (field === 'relationship_director_relationship_title') {
+                directorInfo.relationship = directorInfo.relationship || {}
+                directorInfo.relationship.title = director[field]
+                continue
+              }
+              const property = field.substring('relationship_director_'.length)
+              if (property === 'relationship_title' || property === 'executive' || property === 'director') {
+                continue
+              }
+              directorInfo[property] = director[field]
             }
           }
-          if (director.email) {
-            directorInfo.email = director.email
-          }
-          if (director.phone) {
-            directorInfo.phone = director.phone
-          }
-          if (director.relationship_director_dob_day) {
-            directorInfo.dob = {
-              day: director.relationship_director_dob_day,
-              month: director.relationship_director_dob_month,
-              year: director.relationship_director_dob_year
-            }
-          }
-          try {
-            await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripeKey)
-          } catch (error) {
-            const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
-            throw new Error(errorMessage)
-          }
+        }
+        try {
+          const person = await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripeKey)
+          persons.push({ personid: person.id })
+        } catch (error) {
+          const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
+          throw new Error(errorMessage)
         }
       }
     }
@@ -64,6 +85,12 @@ module.exports = {
       business_profile: {},
       company: {
         directors_provided: true
+      }
+    }
+    connect.MetaData.store(stripeAccount.metadata, 'directors', persons)
+    for (const field in stripeAccount.metadata) {
+      if (field.startsWith('directors')) {
+        accountInfo.metadata[field] = stripeAccount.metadata[field]
       }
     }
     try {

@@ -44,7 +44,10 @@ describe('/api/user/connect/delete-company-director', () => {
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
           relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          relationship_director_last_name: person.lastName,
+          relationship_director_dob_day: '1',
+          relationship_director_dob_month: '1',
+          relationship_director_dob_year: '1950'
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)

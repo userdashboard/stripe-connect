@@ -6,7 +6,6 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
-    console.log(req.body)
     if (!req.query || !req.query.directorid) {
       throw new Error('invalid-directorid')
     }

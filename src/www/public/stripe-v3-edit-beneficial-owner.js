@@ -1,16 +1,8 @@
-console.log(0)
 var stripe
 window.onload = function () {
   stripe = window.Stripe(window.stripePublishableKey)
   var submit = document.getElementById('submit-button')
-  submit.addEventListener('click', function (e) {
-    console.log('submitting form')
-    try {
-      convertOwner(e)
-    } catch (error) {
-      console.log('got an error', error)
-    }
-  })
+  submit.addEventListener('click', convertOwner)
 }
 
 function convertOwner (e) {
@@ -19,7 +11,6 @@ function convertOwner (e) {
   setTimeout(function () {
     e.target.disabled = false
   }, 1000)
-  console.log(1)
   var beneficialOwner = {}
   var firstName = document.getElementById('relationship_owner_first_name')
   if (firstName.value && firstName.value.length) {
@@ -33,7 +24,6 @@ function convertOwner (e) {
   } else {
     return window.renderError('invalid-relationship_owner_last_name')
   }
-  console.log(2)
   var addressLine1 = document.getElementById('relationship_owner_address_line1')
   if (addressLine1 && addressLine1.value) {
     beneficialOwner.address = {
@@ -56,7 +46,6 @@ function convertOwner (e) {
       beneficialOwner.address.country = addressCountry.value
     }
   }
-  console.log(3)
   var email = document.getElementById('relationship_owner_email')
   if (email && email.value) {
     beneficialOwner.email = email.value
@@ -73,7 +62,6 @@ function convertOwner (e) {
   if (idNumber && idNumber.value) {
     beneficialOwner.id_number = idNumber.value
   }
-  console.log(4)
   var executive = document.getElementById('relationship_owner_executive')
   if (executive.checked) {
     beneficialOwner.executive = true
@@ -104,7 +92,6 @@ function convertOwner (e) {
       return window.renderError('invalid-relationship_owner_dob_day')
     }
   }
-  console.log(5)
   var documentFront = document.getElementById('relationship_owner_verification_document_front')
   var documentBack = document.getElementById('relationship_owner_verification_document_back')
   return window.uploadDocumentFiles(documentFront, documentBack, function (error, front, back) {
@@ -123,9 +110,7 @@ function convertOwner (e) {
       beneficialOwner.verification.document = beneficialOwner.verification.document || {}
       beneficialOwner.verification.document.back = back.id
     }
-    console.log('okay')
     return stripe.createToken('person', beneficialOwner).then(function (result) {
-      console.log('result', result)
       if (result.error) {
         return window.renderError(result.error)
       }

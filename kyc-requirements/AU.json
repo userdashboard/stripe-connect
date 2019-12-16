@@ -5,7 +5,7 @@
     "business_profile.product_description",
     "individual.email",
     "individual.phone",
-    "individual.last_name",
+    "individual.first_name",
     "individual.last_name",
     "individual.dob.day",
     "individual.dob.month",
@@ -64,7 +64,9 @@
     "relationship.representative.address.country",
     "relationship.representative.address.postal_code",
     "relationship.representative.verification.document.front",
-    "relationship.representative.verification.document.back"
+    "relationship.representative.verification.document.back",
+    "relationship.representative.verification.additional_document.front",
+    "relationship.representative.verification.additional_document.back"
   ],
   "companyDirector": [
     "relationship.director.first_name",

@@ -216,15 +216,10 @@
 //         transit_number: '11000',
 //         institution_number: '000'
 //       })
-//       // console.log('submitting account')
 //       await TestHelper.submitStripeAccount(user)
-//       // console.log('waiting for verification')
 //       await TestHelper.waitForVerification(user.stripeAccount.id)
-//       // console.log('triggering verifification')
 //       await TestHelper.triggerVerification(user)
-//       // console.log('waiting for unverification')
 //       user.stripeAccount = await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
-//       // console.log('account is unverified', user.stripeAccount)
 //       const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
 //       req.account = user.account
 //       req.session = user.session
@@ -239,8 +234,6 @@
 //           const accountNow = await req2.route.api.patch(req2)
 //           assert.strictEqual(accountNow.requirements.fields_needed.length, 0)
 //           return
-//         } else if (new Date().getTime() % 4 === 0) {
-//           // console.log(user.stripeAccount.id, user.charge.id, user.stripeAccount.verification)
 //         }
 //         await wait()
 //       }
@@ -343,7 +336,6 @@
 //       while (true) {
 //         user.stripeAccount = await req2.route.api.get(req2)
 //         if (user.stripeAccount.requirements.fields_needed.length > 0) {
-//           // console.log(user.stripeAccount)
 //           assert.strictEqual(user.stripeAccount.requirements.fields_needed.length, 1)
 //           const req3 = TestHelper.createRequest(`/api/user/connect/resubmit-required-information?stripeid=${user.stripeAccount.id}`)
 //           req3.account = user.account
@@ -352,8 +344,6 @@
 //           const accountNow = await req3.route.api.patch(req3)
 //           assert.strictEqual(accountNow.requirements.fields_needed.length, 0)
 //           return
-//         } else if (new Date().getTime() % 4 === 0) {
-//           // console.log(user.stripeAccount)
 //         }
 //         await wait()
 //       }
@@ -414,8 +404,6 @@
 //           const accountNow = await req3.route.api.patch(req3)
 //           assert.strictEqual(accountNow.requirements.fields_needed.length, 0)
 //           return
-//         } else if (new Date().getTime() % 4 === 0) {
-//           // console.log(user.stripeAccount)
 //         }
 //         await wait()
 //       }

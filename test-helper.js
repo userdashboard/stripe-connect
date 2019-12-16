@@ -27,12 +27,15 @@ module.exports = {
   createStripeAccount,
   createStripeRegistration,
   createCompanyRepresentative,
+  setCompanyRepresentative,
   submitBeneficialOwners,
   submitCompanyDirectors,
   submitStripeAccount,
   triggerVerification,
   waitForVerification: util.promisify(waitForVerification),
+  waitForVerificationFields: util.promisify(waitForVerificationFields),
   waitForVerificationFailure: util.promisify(waitForVerificationFailure),
+  waitForVerificationStart: util.promisify(waitForVerificationStart),
   waitForPayout: util.promisify(waitForPayout),
   'success_id_scan_front.png': {
     filename: 'id_scan_front.png',
@@ -238,6 +241,16 @@ async function submitCompanyDirectors (user) {
   user.stripeAccount = stripeAccount
   return stripeAccount
 }
+
+async function setCompanyRepresentative (user) {
+  const req = TestHelper.createRequest(`/api/user/connect/set-company-representative?stripeid=${user.stripeAccount.id}`)
+  req.session = user.session
+  req.account = user.account
+  const stripeAccount = await req.patch()
+  user.stripeAccount = stripeAccount
+  return stripeAccount
+}
+
 async function submitStripeAccount (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-${user.stripeAccount.business_type}-registration-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
@@ -294,7 +307,7 @@ async function waitForVerification (stripeid, callback) {
     }
     return setTimeout(() => {
       return callback(null, stripeAccount)
-    }, 1000)
+    }, 10)
   }
   return setTimeout(wait, 100)
 }
@@ -317,10 +330,65 @@ async function waitForVerificationFailure (stripeid, callback) {
         return setTimeout(wait, 100)
       }
     }
-    return setTimeout(wait, 100)
-    // return setTimeout(() => {
-    //   return callback(null, stripeAccount)
-    // }, 1000)
+    return setTimeout(callback, 10)
+  }
+  return setTimeout(wait, 100)
+}
+
+async function waitForVerificationFields (user, contains, callback) {
+  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req.account = user.account
+  req.session = user.session
+  let attempts = 0
+  async function wait () {
+    if (global.testEnded) {
+      return
+    }
+    attempts++
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (attempts === 1000) {
+      return callback()
+    }
+    for (const field of stripeAccount.requirements.eventually_due) {
+      if (field.indexOf(contains) > -1) {
+        return setTimeout(wait, 100)
+      }
+    }
+    for (const field of stripeAccount.requirements.past_due) {
+      if (field.indexOf(contains) > -1) {
+        return setTimeout(wait, 100)
+      }
+    }
+    for (const field of stripeAccount.requirements.currently_due) {
+      if (field.indexOf(contains) > -1) {
+        return setTimeout(wait, 100)
+      }
+    }
+    return setTimeout(callback, 10)
+  }
+  return setTimeout(wait, 100)
+}
+
+async function waitForVerificationStart (user, callback) {
+  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req.account = user.account
+  req.session = user.session
+  let attempts = 0
+  async function wait () {
+    if (global.testEnded) {
+      return
+    }
+    attempts++
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (attempts === 1000) {
+      return callback()
+    }
+    if (stripeAccount.requirements.eventually_due.length ||
+      stripeAccount.requirements.past_due.length ||
+      stripeAccount.requirements.currently_due.length) {
+      return setTimeout(wait, 100)
+    }
+    return setTimeout(callback, 10)
   }
   return setTimeout(wait, 100)
 }

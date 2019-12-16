@@ -101,6 +101,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           routing_number: '110000000'
         })
         await TestHelper.submitBeneficialOwners(user)
+        await TestHelper.setCompanyRepresentative(user)
         await TestHelper.submitStripeAccount(user)
         const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -200,6 +201,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_address_state: '1',
+        company_phone: '456-789-0123',
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
@@ -233,12 +235,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for AU registration', async () => {
@@ -288,12 +299,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for BE registration', async () => {
@@ -341,12 +361,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for CA registration', async () => {
@@ -388,6 +417,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.createExternalAccount(user, {
         currency: 'cad',
         country: 'CA',
@@ -400,9 +430,17 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for CH registration', async () => {
@@ -450,12 +488,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for DE registration', async () => {
@@ -503,12 +550,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for DK registration', async () => {
@@ -556,12 +612,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for EE registration', async () => {
@@ -609,12 +674,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for ES registration', async () => {
@@ -662,12 +736,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for FI registration', async () => {
@@ -715,12 +798,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for FR registration', async () => {
@@ -768,12 +860,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for GB registration', async () => {
@@ -821,12 +922,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for HK registration', async () => {
@@ -868,6 +978,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.createExternalAccount(user, {
         currency: 'hkd',
         country: 'HK',
@@ -880,9 +991,17 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for IE registration', async () => {
@@ -931,12 +1050,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for IT registration', async () => {
@@ -984,12 +1112,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     // it('object for JP registration', async () => {
@@ -1061,9 +1198,17 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //   const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
-    //   const accountNow = await req.patch()
+    //   await req.patch()
+    // await TestHelper.waitForVerificationStart(user)
+    //       const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    //       req2.account = user.account
+    //       req2.session = user.session
+    //       const accountNow = await req2.get()
     //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
     //   assert.notStrictEqual(accountNow.metadata.submitted, null)
+    // assert.strictEqual(accountNow.requirements.past_due.length, 0)
+    // assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+    // assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     // })
 
     it('object for LT registration', async () => {
@@ -1111,12 +1256,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for LU registration', async () => {
@@ -1164,12 +1318,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for LV registration', async () => {
@@ -1217,12 +1380,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for NL registration', async () => {
@@ -1270,12 +1442,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     // it('object for MX registration', async () => {
@@ -1324,9 +1505,17 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //   const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
-    //   const accountNow = await req.patch()
+    //   await req.patch()
+    // await TestHelper.waitForVerificationStart(user)
+    //       const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    //       req2.account = user.account
+    //       req2.session = user.session
+    //       const accountNow = await req2.get()
     //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
     //   assert.notStrictEqual(accountNow.metadata.submitted, null)
+    // assert.strictEqual(accountNow.requirements.past_due.length, 0)
+    // assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+    // assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     // })
 
     it('object for NO registration', async () => {
@@ -1374,12 +1563,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for NZ registration', async () => {
@@ -1428,12 +1626,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for PT registration', async () => {
@@ -1481,12 +1688,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for SE registration', async () => {
@@ -1534,12 +1750,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for SG registration', async () => {
@@ -1591,12 +1816,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         branch_code: '000'
       })
       await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for SI registration', async () => {
@@ -1644,12 +1878,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for SK registration', async () => {
@@ -1697,12 +1940,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('object for US registration', async () => {
@@ -1752,12 +2004,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         routing_number: '110000000'
       })
       await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
   })
 
@@ -1827,12 +2088,19 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       req4.account = user.account
       req4.session = user.session
       await req4.patch()
+      const req5 = TestHelper.createRequest(`/api/user/connect/set-company-representative?stripeid=${user.stripeAccount.id}`)
+      req5.account = user.account
+      req5.session = user.session
+      await req5.patch()
       const req6 = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req6.account = user.account
       req6.session = user.session
       const accountNow = await req6.patch()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
   })
 })

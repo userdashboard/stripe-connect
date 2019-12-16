@@ -1,5 +1,6 @@
 const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
+const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   get: async (req) => {
@@ -21,6 +22,9 @@ module.exports = {
     const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
     for (const director of directors) {
       if (director.directorid === req.query.directorid) {
+        if (director.personid) {
+          return stripeCache.retrieve(director.personid, req.stripeKey)
+        }
         return director
       }
     }

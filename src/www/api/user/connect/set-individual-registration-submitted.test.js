@@ -179,7 +179,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_postal_code: '1020'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -191,9 +193,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for AU registration', async () => {
@@ -231,9 +241,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for BE registration', async () => {
@@ -258,7 +276,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_email: user.profile.contactEmail
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -270,9 +290,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for CA registration', async () => {
@@ -312,9 +340,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for CH registration', async () => {
@@ -339,7 +375,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -351,9 +389,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for DE registration', async () => {
@@ -378,7 +424,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -390,9 +438,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for DK registration', async () => {
@@ -417,7 +473,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -429,9 +487,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for EE registration', async () => {
@@ -456,7 +522,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -468,9 +536,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for ES registration', async () => {
@@ -495,7 +571,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -507,9 +585,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for FI registration', async () => {
@@ -534,7 +620,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -546,9 +634,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for FR registration', async () => {
@@ -573,7 +669,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -585,9 +683,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for GB registration', async () => {
@@ -612,7 +718,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -624,9 +732,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for HK registration', async () => {
@@ -667,9 +783,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for IE registration', async () => {
@@ -694,7 +818,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_postal_code: 'Dublin 1'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -707,9 +833,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for IT registration', async () => {
@@ -734,7 +868,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -746,9 +882,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     // it('returns object for JP registration', async () => {
@@ -790,7 +934,12 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
     //   const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
-    //   const accountNow = await req.patch()
+    //         await req.patch()
+    // await TestHelper.waitForVerificationStart(user)
+    // const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    // req2.account = user.account
+    // req2.session = user.session
+    // const accountNow = await req2.get()
     //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
     //   assert.notStrictEqual(accountNow.metadata.submitted, null)
     // })
@@ -817,7 +966,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -829,9 +980,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for LU registration', async () => {
@@ -856,7 +1015,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -868,9 +1029,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for LV registration', async () => {
@@ -895,7 +1064,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -907,9 +1078,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     // it('returns object for MX registration', async () => {
@@ -947,7 +1126,12 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
     //   const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
-    //   const accountNow = await req.patch()
+    //         await req.patch()
+    // await TestHelper.waitForVerificationStart(user)
+    // const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    // req2.account = user.account
+    // req2.session = user.session
+    // const accountNow = await req2.get()
     //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
     //   assert.notStrictEqual(accountNow.metadata.submitted, null)
     // })
@@ -974,7 +1158,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -986,9 +1172,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for NO registration', async () => {
@@ -1025,9 +1219,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for NZ registration', async () => {
@@ -1068,9 +1270,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for PT registration', async () => {
@@ -1095,7 +1305,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1107,9 +1319,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for SE registration', async () => {
@@ -1134,7 +1354,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1146,9 +1368,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for SG registration', async () => {
@@ -1188,9 +1418,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for SI registration', async () => {
@@ -1205,7 +1443,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_city: 'Ljubljana',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '1210',
-        individual_address_state: '07',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1215,7 +1452,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1227,9 +1466,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for SK registration', async () => {
@@ -1244,7 +1491,6 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_address_city: 'Slovakia',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '00102',
-        individual_address_state: 'BC',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1254,7 +1500,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_phone: '456-789-0123'
       }, {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png']
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1266,9 +1514,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
     it('returns object for US registration', async () => {
@@ -1307,9 +1563,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
   })
 
@@ -1364,6 +1628,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const accountNow = await req6.patch()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
+      assert.strictEqual(accountNow.requirements.past_due.length, 0)
+      assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
   })
 })

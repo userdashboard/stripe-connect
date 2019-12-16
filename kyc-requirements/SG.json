@@ -6,7 +6,7 @@
     "individual.email",
     "individual.phone",
     "individual.id_number",
-    "individual.last_name",
+    "individual.first_name",
     "individual.last_name",
     "individual.dob.day",
     "individual.dob.month",

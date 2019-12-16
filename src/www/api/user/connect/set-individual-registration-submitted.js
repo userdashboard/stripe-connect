@@ -103,17 +103,8 @@ module.exports = {
       }
     }
     try {
-      let accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+      const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       req.success = true
-      if (global.stripeJS === 3) {
-        accountNow = await stripe.accounts.update(req.query.stripeid, {
-          tos_acceptance: {
-            ip: req.ip,
-            user_agent: req.userAgent,
-            date: dashboard.Timestamp.now
-          }
-        }, req.stripeKey)
-      }
       await stripeCache.update(accountNow)
       return accountNow
     } catch (error) {

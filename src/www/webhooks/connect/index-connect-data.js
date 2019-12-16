@@ -41,7 +41,7 @@ module.exports = {
         }
         res.statusCode = 500
         if (process.env.DEBUG_ERRORS) {
-          // console.log('connect webhook error', error)
+          console.log('connect webhook error', error)
         }
       }
     }

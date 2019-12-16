@@ -34,6 +34,11 @@ function parse (metaData, fieldName) {
  * @param {*} object
  */
 function store (metaData, fieldName, object) {
+  for (const field in metaData) {
+    if (field.startsWith(fieldName)) {
+      metaData[field] = ''
+    }
+  }
   let json = JSON.stringify(object)
   if (json.length < 501) {
     metaData[fieldName] = json
@@ -51,10 +56,6 @@ function store (metaData, fieldName, object) {
       } else {
         metaData[`${fieldName}${i}`] = part
       }
-      i++
-    }
-    while (i < 20) {
-      metaData[`${fieldName}${i}`] = null
       i++
     }
   }

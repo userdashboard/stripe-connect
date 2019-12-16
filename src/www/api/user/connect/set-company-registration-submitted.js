@@ -20,12 +20,14 @@ module.exports = {
       throw new Error('invalid-payment-details')
     }
     if (connect.kycRequirements[stripeAccount.country].beneficialOwner && !stripeAccount.company.owners_provided) {
-      throw new Error('invalid-registration')
+      throw new Error('invalid-beneficial-owner')
     }
     if (connect.kycRequirements[stripeAccount.country].companyDirector && !stripeAccount.company.directors_provided) {
-      throw new Error('invalid-registration')
+      throw new Error('invalid-company-director')
     }
-
+    if (!stripeAccount.metadata.representative) {
+      throw new Error('invalid-representative')
+    }
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration')
     if (!registration) {
       throw new Error('invalid-registration')
@@ -48,8 +50,7 @@ module.exports = {
       },
       business_profile: {},
       company: {
-        address: {},
-        owners_provided: true
+        address: {}
       },
       tos_acceptance: {
         ip: req.ip,
@@ -57,36 +58,30 @@ module.exports = {
         date: dashboard.Timestamp.now
       }
     }
-    if (global.stripeJS === 3) {
-      accountInfo.token = registration.companyToken
-      delete (accountInfo.company)
-      delete (accountInfo.business_profile)
-    } else {
-      for (const field in registration) {
-        if (field.startsWith('business_profile_')) {
-          const property = field.substring('business_profile_'.length)
-          accountInfo.business_profile[property] = registration[field]
-          continue
-        }
-        if (field.startsWith('company_')) {
-          if (field.startsWith('company_address_kanji_')) {
-            const property = field.substring('company_address_kanji_'.length)
-            accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
-            accountInfo.company.address_kanji[property] = registration[field]
-          } else if (field.startsWith('company_address_kana_')) {
-            const property = field.substring('company_address_kana_'.length)
-            accountInfo.company.address_kana = accountInfo.company.address_kana || {}
-            accountInfo.company.address_kana[property] = registration[field]
-          } else if (field.startsWith('company_address_')) {
-            const property = field.substring('company_address_'.length)
-            accountInfo.company.address[property] = registration[field]
-          } else if (field.startsWith('company_name_')) {
-            const property = field.substring('company_name_'.length)
-            accountInfo.company[`name_${property}`] = registration[field]
-          } else {
-            const property = field.substring('company_'.length)
-            accountInfo.company[property] = registration[field]
-          }
+    for (const field in registration) {
+      if (field.startsWith('business_profile_')) {
+        const property = field.substring('business_profile_'.length)
+        accountInfo.business_profile[property] = registration[field]
+        continue
+      }
+      if (field.startsWith('company_')) {
+        if (field.startsWith('company_address_kanji_')) {
+          const property = field.substring('company_address_kanji_'.length)
+          accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
+          accountInfo.company.address_kanji[property] = registration[field]
+        } else if (field.startsWith('company_address_kana_')) {
+          const property = field.substring('company_address_kana_'.length)
+          accountInfo.company.address_kana = accountInfo.company.address_kana || {}
+          accountInfo.company.address_kana[property] = registration[field]
+        } else if (field.startsWith('company_address_')) {
+          const property = field.substring('company_address_'.length)
+          accountInfo.company.address[property] = registration[field]
+        } else if (field.startsWith('company_name_')) {
+          const property = field.substring('company_name_'.length)
+          accountInfo.company[`name_${property}`] = registration[field]
+        } else {
+          const property = field.substring('company_'.length)
+          accountInfo.company[property] = registration[field]
         }
       }
     }
@@ -96,8 +91,6 @@ module.exports = {
       await stripeCache.update(stripeAccount)
       return stripeAccount
     } catch (error) {
-      console.log(error)
-      console.log(accountInfo)
       const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
       if (errorMessage.startsWith('company[address]')) {
         let field = errorMessage.substring('company[address]['.length)

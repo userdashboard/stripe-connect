@@ -20,7 +20,7 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
     if (!req.body) {
-      throw new Error('invalid-first_name')
+      throw new Error('invalid-relationship_owner_first_name')
     }
     if (!req.body.relationship_owner_address_country || !connect.countryNameIndex[req.body.relationship_owner_address_country]) {
       throw new Error('invalid-relationship_owner_address_country')

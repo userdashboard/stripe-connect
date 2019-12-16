@@ -55,6 +55,7 @@ describe('/account/connect/create-beneficial-owner', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

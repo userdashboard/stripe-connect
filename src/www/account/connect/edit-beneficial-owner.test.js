@@ -76,6 +76,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
       })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account

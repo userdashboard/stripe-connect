@@ -43,10 +43,12 @@ describe('/api/user/connect/beneficial-owner', () => {
         })
         const person = TestHelper.nextIdentity()
         await TestHelper.createBeneficialOwner(user, {
+          relationship_owner_email: person.email,
           relationship_owner_first_name: person.firstName,
           relationship_owner_last_name: person.lastName,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
+          relationship_owner_address_state: 'LND',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
           relationship_owner_dob_day: '1',
@@ -77,9 +79,11 @@ describe('/api/user/connect/beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'GB',
+        relationship_owner_address_state: 'LND',
         relationship_owner_address_city: 'London',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',

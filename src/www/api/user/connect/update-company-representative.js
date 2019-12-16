@@ -165,7 +165,9 @@ module.exports = {
             field === 'relationship.representative.relationship.title' ||
             field === 'relationship.representative.executive' ||
             field === 'relationship.representative.director' ||
-            field === 'relationship.representative.owner') {
+            field === 'relationship.representative.owner' ||
+            (field === 'relationship.representative.verification.document.front' && req.body.token) ||
+            (field === 'relationship.representative.verification.document.back' && req.body.token)) {
           continue
         }
         throw new Error(`invalid-${posted}`)

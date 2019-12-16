@@ -17,7 +17,7 @@ async function beforeRequest (req) {
     stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  if (connect.euCountries.indexOf(stripeAccount.country) === -1) {
+  if (!connect.kycRequirements[stripeAccount.country].companyDirector) {
     throw new Error('invalid-stripe-account')
   }
   const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
@@ -25,7 +25,6 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  console.log('render', messageTemplate)
   if (req.success) {
     if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
       return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
@@ -82,7 +81,6 @@ async function renderPage (req, res, messageTemplate) {
 }
 
 async function submitForm (req, res) {
-  console.log('submit', req.body)
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }

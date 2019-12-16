@@ -14,7 +14,11 @@
     "individual.address.line2",
     "individual.address.city",
     "individual.address.state",
-    "individual.address.postal_code"
+    "individual.address.postal_code",
+    "individual.verification.document.front",
+    "individual.verification.document.back",
+    "individual.verification.additional_document.front",
+    "individual.verification.additional_document.back"
   ],
   "company": [
     "company.address.line1",
@@ -63,7 +67,9 @@
     "relationship.representative.address.country",
     "relationship.representative.address.postal_code",
     "relationship.representative.verification.document.front",
-    "relationship.representative.verification.document.back"
+    "relationship.representative.verification.document.back",
+    "relationship.representative.verification.additional_document.front",
+    "relationship.representative.verification.additional_document.back"
   ],
   "companyDirector": [
     "relationship.director.first_name",

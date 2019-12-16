@@ -17,6 +17,19 @@ module.exports = {
     await dashboard.Storage.write(`stripe/${id}`, cached)
     return object
   },
+  retrievePerson: async (stripeid, personid, stripeKey) => {
+    if (global.testEnded) {
+      return
+    }
+    const string = await dashboard.Storage.read(`stripe/${personid}`)
+    if (string) {
+      return JSON.parse(string)
+    }
+    const object = await stripe.accounts.retrievePerson(stripeid, personid, stripeKey)
+    const cached = JSON.stringify(object)
+    await dashboard.Storage.write(`stripe/${personid}`, cached)
+    return object
+  },
   update: async (object) => {
     if (global.testEnded) {
       return

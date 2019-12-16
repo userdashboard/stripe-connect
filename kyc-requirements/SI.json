@@ -11,7 +11,10 @@
     "individual.last_name",
     "individual.dob.day",
     "individual.dob.month",
-    "individual.dob.year"
+    "individual.dob.year",
+    "individual.address.line1",
+    "individual.address.city",
+    "individual.address.postal_code"
   ],
   "company": [
     "company.address.line1",
@@ -60,7 +63,9 @@
     "relationship.representative.address.country",
     "relationship.representative.address.postal_code",
     "relationship.representative.verification.document.front",
-    "relationship.representative.verification.document.back"
+    "relationship.representative.verification.document.back",
+    "relationship.representative.verification.additional_document.front",
+    "relationship.representative.verification.additional_document.back"
   ],
   "companyDirector": [
     "relationship.director.first_name",

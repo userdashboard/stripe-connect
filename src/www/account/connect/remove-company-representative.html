@@ -1,0 +1,29 @@
+<!doctype html>
+<html navbar="/account/connect/navbar-company-representative.html">
+  <head>
+    <title>Remove company representative for ${stripeAccount.id}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <link rel="stylesheet" href="/public/content-additional.css" />
+    <base target="_top" href="/" />
+    <script id="stripe-js-v2"></script>
+    <script id="stripe-js-v3"></script>    
+  </head>
+  <body>
+    <h1>Remove company representative for ${stripeAccount.id}</h1>
+    <p>You must submit new representative information within two weeks to avoid account disruption.</p>
+    <div id="message-container"></div>
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/submit-company-registration?stripeid=${stripeAccount.id}">
+      <div class="pure-controls">
+        <button id="submit-button" class="pure-button pure-button-primary">Remove representative</button>
+      </div>
+    </form>
+  </body>
+  <template id="success">
+    <div class="success message">Success! The representative has been removed</div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message">Error! An error occurred removing the representative</div>
+  </template>
+</html>

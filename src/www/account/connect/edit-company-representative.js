@@ -57,8 +57,17 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
+  if (req.data.stripeAccount.country !== 'JP') {
+    removeElements.push(
+      'kanji-personal-address-container',
+      'kana-personal-address-container',
+      'kana-personal-information-container',
+      'kanji-personal-information-container')
+  } else {
+    removeElements.push('personal-address-container')
+  }
   const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
-  if (requiredFields.indexOf('relationship_representative_address_country') > -1) {
+  if (requiredFields.indexOf('relationship.representative.address.country') > -1) {
     let personalCountry
     if (req.body) {
       personalCountry = req.body.relationship_representative_address_country
@@ -69,9 +78,12 @@ async function renderPage (req, res, messageTemplate) {
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_representative_address_state')
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_representative_address_country')
   }
-  if (req.data.registration.relationship_representative_id_number || req.data.registration.accountToken) {
-    const uploadFront = doc.getElementById('relationship_representative_id_number')
-    uploadFront.setAttribute('data-existing', true)
+  if (requiredFields.indexOf('relationship.owner.id_number') === -1) {
+    removeElements.push('id_number-container')
+  }
+  if (req.data.registration.relationship_representative_id_number) {
+    const idNumber = doc.getElementById('relationship_representative_id_number')
+    idNumber.setAttribute('data-existing', true)
   }
   if (req.data.registration.relationship_representative_verification_document_front) {
     const uploadFront = doc.getElementById('relationship_representative_verification_document_front')
@@ -96,19 +108,13 @@ async function renderPage (req, res, messageTemplate) {
         continue
       }
       if (element.tag === 'input') {
-        element.setAttribute('value', req.data.registration[field] || '')
+        if (element.attr.type === 'checkbox') {
+          element.setAttribute('checked', req.data.registration[field] === true)
+        } else {
+          element.setAttribute('value', req.data.registration[field] || '')
+        }
       } else if (element.tag === 'select') {
         dashboard.HTML.setSelectedOptionByValue(doc, element, req.data.registration[field] || '')
-      }
-    }
-    for (const selectid of ['relationship_representative_address_state', 'relationship_representative_address_country']) {
-      if (req.data.registration[selectid]) {
-        dashboard.HTML.setSelectedOptionByValue(doc, selectid, req.data.registration[selectid])
-      }
-    }
-    for (const checkboxid of ['relationship_representative_executive', 'relationship_representative_director', 'relationship_representative_owner']) {
-      if (req.data.registration[checkboxid]) {
-        doc.getElementById(checkboxid).setAttribute('checked', true)
       }
     }
   } else if (req.body) {
@@ -124,6 +130,10 @@ async function renderPage (req, res, messageTemplate) {
       }
     }
   }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
+  }
   return dashboard.Response.end(req, res, doc)
 }
 
@@ -135,14 +145,20 @@ async function submitForm (req, res) {
   for (const field of requiredFields) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
-      if (field === 'relationship.representative.address.line2') {
+      if (field === 'relationship.representative.address.line2' ||
+          field === 'relationship.representative.relationship.title' ||
+          field === 'relationship.representative.executive' ||
+          field === 'relationship.representative.director' ||
+          field === 'relationship.representative.owner' ||
+          (field === 'relationship.representative.verification.document.front' && req.body.token) ||
+          (field === 'relationship.representative.verification.document.back' && req.body.token)) {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
   try {
-    await global.api.user.connect.UpdateCompanyRegistration.patch(req)
+    await global.api.user.connect.UpdateCompanyRepresentative.patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

@@ -6,7 +6,7 @@
     "individual.email",
     "individual.phone",
     "individual.ssn_last_4",
-    "individual.last_name",
+    "individual.first_name",
     "individual.last_name",
     "individual.dob.day",
     "individual.dob.month",
@@ -31,6 +31,7 @@
     "business_profile.product_description"
   ],
   "companyRepresentative": [
+    "relationship.representative.relationship.title",
     "relationship.representative.ssn_last_4",
     "relationship.representative.email",
     "relationship.representative.phone",

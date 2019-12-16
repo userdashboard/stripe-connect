@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe.only('/api/user/connect/update-company-director', () => {
+describe('/api/user/connect/update-company-director', () => {
   describe('exceptions', () => {
     describe('invalid-directorid', () => {
       it('missing querystring directorid', async () => {

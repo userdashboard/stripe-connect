@@ -72,7 +72,7 @@ async function renderPage (req, res) {
     removeElements.push('submitted')
   }
   if (req.data.stripeAccount.business_type === 'individual') {
-    removeElements.push('company', 'business-name', 'business-registration-name')
+    removeElements.push('company', 'business-name', 'business-registration-name', 'company-representative-container')
     if (req.data.stripeAccount.individual.first_name) {
       removeElements.push('blank-name', 'individual-registration-name')
     } else {
@@ -94,6 +94,11 @@ async function renderPage (req, res) {
       } else {
         removeElements.push('business-registration-name')
       }
+    }
+    if (req.data.stripeAccount.metadata.representative) {
+      removeElements.push('edit-company-representative-link', 'submit-company-representative-link')
+    } else {
+      removeElements.push('remove-company-representative-link')
     }
   }
   if (req.data.stripeAccount.metadata.submitted) {

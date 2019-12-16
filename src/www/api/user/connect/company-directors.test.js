@@ -90,12 +90,18 @@ describe('/api/user/connect/company-directors', () => {
       const person1 = TestHelper.nextIdentity()
       const director1 = await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person1.firstName,
-        relationship_director_last_name: person1.lastName
+        relationship_director_last_name: person1.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       })
       const person2 = TestHelper.nextIdentity()
       const director2 = await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person2.firstName,
-        relationship_director_last_name: person2.lastName
+        relationship_director_last_name: person2.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
       })
       const req = TestHelper.createRequest(`/api/user/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

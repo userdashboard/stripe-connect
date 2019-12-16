@@ -1,5 +1,6 @@
 const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
+const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   get: async (req) => {
@@ -15,12 +16,16 @@ module.exports = {
     if (!stripeAccount) {
       throw new Error('invalid-account')
     }
-    if (!stripeAccount.metadata.owners || stripeAccount.metadata.owners === '[]') {
+    if (!stripeAccount.metadata.owners ||
+        stripeAccount.metadata.owners === '[]') {
       return null
     }
     const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
     for (const owner of owners) {
       if (owner.ownerid === req.query.ownerid) {
+        if (owner.personid) {
+          return stripeCache.retrieve(owner.personid, req.stripeKey)
+        }
         return owner
       }
     }

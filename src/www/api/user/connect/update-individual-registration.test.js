@@ -2158,43 +2158,6 @@ describe('/api/user/connect/update-individual-registration', () => {
       assert.strictEqual(registrationNow.individual_id_number, '000000000')
     })
 
-    it('optionally-required posted individual_address_country', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const body = {
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_email: user.profile.contactEmail,
-        individual_phone: '456-789-0123',
-        individual_address_city: 'Auckland',
-        individual_address_postal_code: '6011',
-        individual_address_line1: '844 Fleet Street',
-        individual_address_state: 'N',
-        individual_address_country: 'NZ'
-      }
-      req.uploads = {
-        individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png']
-      }
-      req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.individual_address_country, 'NZ')
-    })
-
     it('optionally-required posted individual_address_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -3971,7 +3934,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Ljubljana',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '1210',
-        individual_address_state: '07',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -4044,7 +4006,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_address_city: 'Slovakia',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '00102',
-        individual_address_state: 'BC',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -4111,10 +4072,11 @@ describe('/api/user/connect/update-individual-registration', () => {
         type: 'individual',
         country: 'US'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.waitOnSubmit = true
       req.account = user.account
       req.session = user.session
-      const body = {
+      req.body = {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_dob_day: '1',
@@ -4134,14 +4096,11 @@ describe('/api/user/connect/update-individual-registration', () => {
         individual_verification_document_front: TestHelper['success_id_scan_front.png'],
         individual_verification_document_back: TestHelper['success_id_scan_back.png']
       }
-      req.body = TestHelper.createMultiPart(req, body)
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
-      }
-      assert.strictEqual(errorMessage, 'invalid-token')
+      await req.post()
+      const accountNow = await global.api.user.connect.StripeAccount.get(req)
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registrationNow.token, null)
+      assert.notStrictEqual(registrationNow.token, undefined)
     })
   })
 })

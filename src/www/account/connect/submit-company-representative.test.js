@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/edit-company-director', () => {
-  describe('EditCompanyDirector#BEFORE', () => {
+describe('/account/connect/submit-company-representative', () => {
+  describe('SubmitCompanyRepresentative#BEFORE', () => {
     it('should reject invalid directorid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/connect/edit-company-director?directorid=invalid')
+      const req = TestHelper.createRequest('/account/connect/submit-company-representative?directorid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -28,14 +28,6 @@ describe('/account/connect/edit-company-director', () => {
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
         company_address_country: 'DE',
-        company_address_city: 'Berlin',
-        company_address_state: 'BW',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
-      })
-      await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_executive: 'true',
@@ -45,9 +37,10 @@ describe('/account/connect/edit-company-director', () => {
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        company_address_city: 'Berlin',
+        company_address_line1: 'First Street',
+        company_address_postal_code: '01067',
         relationship_representative_address_city: 'Berlin',
-        relationship_representative_address_state: 'BW',
-        relationship_representative_address_country: 'DE',
         relationship_representative_address_line1: 'First Street',
         relationship_representative_address_postal_code: '01067'
       })
@@ -66,11 +59,8 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
       })
-      await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitStripeAccount(user)
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -97,7 +87,7 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_dob_year: '1950'
       })
       const user2 = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
       req.account = user2.account
       req.session = user2.session
       let errorMessage
@@ -123,7 +113,7 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
@@ -131,7 +121,7 @@ describe('/account/connect/edit-company-director', () => {
     })
   })
 
-  describe('EditCompanyDirector#GET', () => {
+  describe('SubmitCompanyRepresentative#GET', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -146,7 +136,7 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
       req.account = user.account
       req.session = user.session
       const page = await req.get()
@@ -154,10 +144,33 @@ describe('/account/connect/edit-company-director', () => {
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
+
+    it('should present the director table', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'DE'
+      })
+      const person = TestHelper.nextIdentity()
+      await TestHelper.createCompanyDirector(user, {
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
+      })
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
+      req.account = user.account
+      req.session = user.session
+      const page = await req.get()
+      const doc = TestHelper.extractDoc(page)
+      const row = doc.getElementById(user.director.directorid)
+      assert.strictEqual(row.tag, 'tr')
+    })
   })
 
-  describe('EditCompanyDirector#POST', () => {
-    it('should require each field', async () => {
+  describe('SubmitCompanyRepresentative#POST', () => {
+    it('should delete director', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -171,125 +184,15 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
       req.account = user.account
       req.session = user.session
-      req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
-      }
-      for (const field in req.body) {
-        const value = req.body[field]
-        req.body[field] = ''
-        const page = await req.post()
-        req.body[field] = value
-        const doc = TestHelper.extractDoc(page)
-        const messageContainer = doc.getElementById('message-container')
-        const message = messageContainer.child[0]
-        assert.strictEqual(message.attr.template, `invalid-${field}`)
-      }
-    })
-
-    it('should update director', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should update document front upload', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
-      }
-      req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should update document back upload', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
-      }
-      req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      await req.post()
+      const req2 = TestHelper.createRequest(`/api/user/connect/company-directors?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const directors = await req2.get()
+      assert.strictEqual(directors, undefined)
     })
   })
 })

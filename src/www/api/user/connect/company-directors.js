@@ -1,4 +1,5 @@
 const connect = require('../../../../../index.js')
+const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   get: async (req) => {
@@ -15,10 +16,19 @@ module.exports = {
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
       return null
     }
-    if (connect.euCountries.indexOf(stripeAccount.country) === -1) {
+    if (!connect.kycRequirements[stripeAccount.country].companyDirector) {
       throw new Error('invalid-stripe-account')
     }
     const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
-    return directors
+    const persons = []
+    if (directors && directors.length) {
+      for (const director of directors) {
+        if (director.personid) {
+          const person = await stripeCache.retrievePerson(req.query.stripeid, director.personid, req.stripeKey)
+          persons.push(person)
+        }
+      }
+    }
+    return persons.length ? persons : directors
   }
 }

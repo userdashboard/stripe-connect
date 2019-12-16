@@ -1,4 +1,5 @@
 const connect = require('../../../../../index.js')
+const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   get: async (req) => {
@@ -16,6 +17,13 @@ module.exports = {
       return null
     }
     const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-    return owners
+    const people = []
+    for (const owner of owners) {
+      if (owner.personid) {
+        const person = await stripeCache.retrievePerson(req.query.stripeid, owner.personid, req.stripeKey)
+        people.push(person)
+      }
+    }
+    return people.length ? people : owners
   }
 }

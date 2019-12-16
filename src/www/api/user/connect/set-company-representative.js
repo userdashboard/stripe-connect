@@ -2,6 +2,7 @@ const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
@@ -9,8 +10,8 @@ module.exports = {
       throw new Error('invalid-stripeid')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (stripeAccount.metadata.submitted ||
-      stripeAccount.business_type !== 'company' ||
+    if (stripeAccount.business_type !== 'company' ||
+      stripeAccount.metadata.representative ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
@@ -20,13 +21,9 @@ module.exports = {
     }
     const representativeInfo = {
       relationship: {
-        representativeInfo: true
+        representative: true
       },
-      verification: {
-        document: {}
-      },
-      address: {},
-      dob: {}
+      address: {}
     }
     if (registration.relationship_representative_relationship_title) {
       representativeInfo.relationship.title = registration.relationship_representative_relationship_title
@@ -53,16 +50,28 @@ module.exports = {
         const property = field.substring('relationship_representative_address_'.length)
         representativeInfo.address[property] = registration[field]
       } else if (field.startsWith('relationship_representative_verification_document_')) {
+        if (global.stripeJS) {
+          continue
+        }
         const property = field.substring('relationship_representative_verification_document_'.length)
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.document = representativeInfo.verification.document || {}
         representativeInfo.verification.document[property] = registration[field]
+      } else if (field.startsWith('relationship_representative_verification_additional_document_')) {
+        if (global.stripeJS) {
+          continue
+        }
+        const property = field.substring('relationship_representative_verification_additional_document_'.length)
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+        representativeInfo.verification.additional_document[property] = registration[field]
       } else if (field.startsWith('relationship_representative_dob_')) {
         const property = field.substring('relationship_representative_dob_'.length)
+        representativeInfo.dob = representativeInfo.dob || {}
         representativeInfo.dob[property] = registration[field]
       } else {
         if (field === 'relationship_representative_relationship_title') {
-          representativeInfo.relationship = {
-            title: registration[field]
-          }
+          representativeInfo.relationship.title = registration[field]
           continue
         }
         const property = field.substring('relationship_representative_'.length)
@@ -72,11 +81,19 @@ module.exports = {
         representativeInfo[property] = registration[field]
       }
     }
-    await global.api.user.connect.ResetCompanyRepresentative.patch(req)
     try {
-      await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
+      const representative = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
+      req.success = true
+      const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, {
+        metadata: {
+          representative: representative.id
+        }
+      }, req.stripeKey)
+      await stripeCache.update(stripeAccountNow)
+      req.success = true
+      return stripeAccountNow
     } catch (error) {
-      throw new Error('unkonwn-error')
+      throw new Error('unknown-error')
     }
   }
 }

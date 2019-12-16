@@ -18,7 +18,7 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type !== 'company') {
     throw new Error('invalid-stripe-account')
   }
-  if (connect.euCountries.indexOf(stripeAccount.country) === -1) {
+  if (!connect.kycRequirements[stripeAccount.country].companyDirector) {
     throw new Error('invalid-stripe-account')
   }
   const directors = await global.api.user.connect.CompanyDirectors.get(req)

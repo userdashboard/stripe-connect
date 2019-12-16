@@ -26,7 +26,17 @@ describe('/api/user/connect/update-company-registration', () => {
         const req = TestHelper.createRequest('/api/user/connect/update-company-registration?stripeid=invalid')
         req.account = user.account
         req.session = user.session
-        req.body = {}
+        req.body = {
+          company_name: 'Company',
+          company_tax_id: '8',
+          company_phone: '456-123-7890',
+          company_address_city: 'New York',
+          company_address_line1: '285 Fulton St',
+          company_address_postal_code: '10007',
+          company_address_state: 'NY',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        }
         let errorMessage
         try {
           await req.patch(req)
@@ -48,9 +58,16 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          fileid: 'invalid'
+          company_name: 'Company',
+          company_tax_id: '8',
+          company_phone: '456-123-7890',
+          company_address_city: 'New York',
+          company_address_line1: '285 Fulton St',
+          company_address_postal_code: '10007',
+          company_address_state: 'NY',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         }
-        req.body = {}
         let errorMessage
         try {
           await req.patch(req)
@@ -106,14 +123,24 @@ describe('/api/user/connect/update-company-registration', () => {
           account_number: '000123456789',
           routing_number: '110000000'
         })
+        await TestHelper.submitBeneficialOwners(user)
+        await TestHelper.setCompanyRepresentative(user)
         await TestHelper.submitStripeAccount(user)
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          fileid: 'invalid'
+          company_name: 'Company',
+          company_tax_id: '8',
+          company_phone: '456-123-7890',
+          company_address_city: 'New York',
+          company_address_line1: '285 Fulton St',
+          company_address_postal_code: '10007',
+          company_address_state: 'NY',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+
         }
-        req.body = {}
         let errorMessage
         try {
           await req.patch(req)
@@ -135,7 +162,17 @@ describe('/api/user/connect/update-company-registration', () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user2.account
         req.session = user2.session
-        req.body = {}
+        req.body = {
+          company_name: 'Company',
+          company_tax_id: '8',
+          company_phone: '456-123-7890',
+          company_address_city: 'New York',
+          company_address_line1: '285 Fulton St',
+          company_address_postal_code: '10007',
+          company_address_state: 'NY',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        }
         let errorMessage
         try {
           await req.patch(req)
@@ -499,7 +536,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.company_token, 'sample2')
+      assert.strictEqual(registrationNow.companyToken, 'sample2')
     })
 
     it('required posted business_profile_mcc', async () => {
@@ -1797,7 +1834,8 @@ describe('/api/user/connect/update-company-registration', () => {
         type: 'company',
         country: 'US'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.waitOnSubmit = true
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1811,13 +1849,30 @@ describe('/api/user/connect/update-company-registration', () => {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
-      let errorMessage
-      try {
-        await req.patch()
-      } catch (error) {
-        errorMessage = error.message
+      await req.post()
+      const account = await global.api.user.connect.StripeAccount.get(req)
+      const registration = connect.MetaData.parse(account.metadata, 'registration')
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
+      req2.waitOnSubmit = true
+      req2.account = user.account
+      req2.session = user.session
+      req2.body = {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '285 Fulton St',
+        company_address_postal_code: '10007',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
-      assert.strictEqual(errorMessage, 'invalid-token')
+      await req2.post()
+      const accountNow = await global.api.user.connect.StripeAccount.get(req2)
+      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      assert.notStrictEqual(registrationNow.companyToken, registration.companyToken)
+      assert.notStrictEqual(registrationNow.companyToken, null)
+      assert.notStrictEqual(registrationNow.companyToken, undefined)
     })
   })
 })

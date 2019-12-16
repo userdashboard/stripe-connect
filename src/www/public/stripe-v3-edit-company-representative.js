@@ -11,40 +11,82 @@ function updateAccount (e) {
   setTimeout(function () {
     e.target.disabled = false
   }, 1000)
-  var accountData = {
-    company: {
-      address: { }
+  var companyRepresentative = {}
+  var firstName = document.getElementById('relationship_representative_first_name')
+  if (firstName.value && firstName.value.length) {
+    companyRepresentative.first_name = firstName.value
+  } else {
+    return window.renderError('invalid-relationship_representative_first_name')
+  }
+  var lastName = document.getElementById('relationship_representative_last_name')
+  if (lastName.value && lastName.value.length) {
+    companyRepresentative.last_name = lastName.value
+  } else {
+    return window.renderError('invalid-relationship_representative_last_name')
+  }
+  var addressLine1 = document.getElementById('relationship_representative_address_line1')
+  if (addressLine1 && addressLine1.value) {
+    companyRepresentative.address = {
+      line1: addressLine1.value
+    }
+    var city = document.getElementById('relationship_representative_address_city')
+    if (city && city.value) {
+      companyRepresentative.address.city = city.value
+    }
+    var state = document.getElementById('relationship_representative_address_state')
+    if (state && state.selectedIndex > 0) {
+      companyRepresentative.address.state = state.value
+    }
+    var addressLine2 = document.getElementById('relationship_representative_address_line2')
+    if (addressLine2 && addressLine2.value) {
+      companyRepresentative.address.line2 = addressLine2.value
+    }
+    var addressCountry = document.getElementById('relationship_representative_address_country')
+    if (addressCountry.selectedIndex > 0) {
+      companyRepresentative.address.country = addressCountry.value
     }
   }
-  var companyRepresentative = {
-    relationship: {
-      representative: true
-    },
-    address: {
-      line1: document.getElementById('relationship_representative_address_line1').value,
-      state: document.getElementById('relationship_representative_address_state').value,
-      country: document.getElementById('relationship_representative_address_country').value,
-      postal_code: document.getElementById('relationship_representative_address_postal_code').value
-    },
-    dob: {
-      day: document.getElementById('relationship_representative_dob_day').value,
+  var email = document.getElementById('relationship_representative_email')
+  if (email && email.value) {
+    companyRepresentative.email = email.value
+  }
+  var title = document.getElementById('relationship_representative_title')
+  if (title && title.value) {
+    companyRepresentative.title = title.value
+  }
+  var percent = document.getElementById('relationship_representative_percent_ownership')
+  if (percent && percent.value) {
+    companyRepresentative.percent_ownership = percent.value
+  }
+  var idNumber = document.getElementById('relationship_representative_id_number')
+  if (idNumber && idNumber.value) {
+    companyRepresentative.id_number = idNumber.value
+  }
+  var director = document.getElementById('relationship_representative_director')
+  if (director.checked) {
+    companyRepresentative.director = true
+  }
+  var dobDay = document.getElementById('relationship_representative_dob_day')
+  if (dobDay) {
+    companyRepresentative.dob = {
+      day: dobDay.value,
       month: document.getElementById('relationship_representative_dob_month').value,
       year: document.getElementById('relationship_representative_dob_year').value
     }
-  }
-  var idNumberField = document.getElementById('relationship_representative_id_number')
-  if (idNumberField) {
-    companyRepresentative.id_number = idNumberField.value
-  } else if (idNumberField.getAttribute('data-existing') !== 'true') {
-    return window.renderError('invalid-relationship_representative_id_number')
-  }
-  var genderField = document.getElementById('gender-container')
-  if (genderField) {
-    companyRepresentative.gender = document.getElementById('female').checked ? 'female' : 'male'
-  }
-  var personalAddressLine2 = document.getElementById('relationship_representative_address_line2')
-  if (personalAddressLine2 && personalAddressLine2.value) {
-    companyRepresentative.address.line2 = personalAddressLine2.value
+    if (!companyRepresentative.dob.day) {
+      return window.renderError('invalid-relationship_representative_dob_day')
+    }
+    if (!companyRepresentative.dob.month) {
+      return window.renderError('invalid-relationship_representative_dob_month')
+    }
+    if (!companyRepresentative.dob.year) {
+      return window.renderError('invalid-relationship_representative_dob_year')
+    }
+    try {
+      Date.parse(companyRepresentative.dob.year + '/' + companyRepresentative.dob.month + '/' + companyRepresentative.dob.day)
+    } catch (error) {
+      return window.renderError('invalid-relationship_representative_dob_day')
+    }
   }
   var documentFront = document.getElementById('relationship_representative_verification_document_front')
   var documentBack = document.getElementById('relationship_representative_verification_document_back')
@@ -68,7 +110,7 @@ function updateAccount (e) {
     } else if (documentBack.getAttribute('data-existing') !== 'true') {
       return window.renderError('invalid-relationship_representative_verification_document_back')
     }
-    return stripe.createToken('account', accountData).then(function (result) {
+    return stripe.createToken('person', companyRepresentative).then(function (result) {
       if (!result || result.error) {
         return window.renderError(result.error)
       }
