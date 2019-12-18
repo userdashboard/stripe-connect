@@ -39,7 +39,8 @@ async function beforeRequest (req) {
         field === 'business_type' ||
         field === 'relationship.owner' ||
         field === 'relationship.director' ||
-        field === 'relationship.representative') {
+        field === 'relationship.representative' ||
+        field === 'relationship.account_opener') {
         continue
       }
       const posted = field.split('.').join('_')

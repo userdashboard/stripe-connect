@@ -37,6 +37,7 @@ async function beforeRequest (req) {
     for (const field of fieldsNeeded) {
       if (field === 'external_account' ||
           field === 'relationship.representative' ||
+          field === 'relationship.account_opener' ||
           field === 'relationship.owner' ||
           field === 'business_type' ||
           field === 'tos_acceptance.ip' ||

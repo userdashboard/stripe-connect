@@ -1,5 +1,4 @@
 const connect = require('../../../../../index.js')
-const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
@@ -24,7 +23,7 @@ module.exports = {
       for (const director of directors) {
         const directorInfo = {}
         if (global.stripeJS === 3) {
-          directorInfo.token = director.token
+          directorInfo.person_token = director.token
         } else {
           for (const field in director) {
             if (!field.startsWith('relationship_director_')) {
@@ -79,9 +78,7 @@ module.exports = {
       }
     }
     const accountInfo = {
-      metadata: {
-        submittedDirectors: dashboard.Timestamp.now
-      },
+      metadata: {},
       business_profile: {},
       company: {
         directors_provided: true
@@ -93,13 +90,18 @@ module.exports = {
         accountInfo.metadata[field] = stripeAccount.metadata[field]
       }
     }
-    try {
-      stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-      req.success = true
-      await stripeCache.update(stripeAccount)
-      return stripeAccount
-    } catch (error) {
-      throw new Error('unknown-error')
+    while (true) {
+      try {
+        stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        req.success = true
+        await stripeCache.update(stripeAccount)
+        return stripeAccount
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
     }
   }
 }

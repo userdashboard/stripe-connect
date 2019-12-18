@@ -53,9 +53,9 @@ describe('/account/connect/create-beneficial-owner', () => {
         account_holder_type: 'individual',
         iban: 'DE89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

@@ -62,6 +62,7 @@ module.exports = {
       if (field.startsWith('business_profile_')) {
         const property = field.substring('business_profile_'.length)
         accountInfo.business_profile[property] = registration[field]
+        delete (registration[field])
         continue
       }
       if (field.startsWith('company_')) {
@@ -79,41 +80,62 @@ module.exports = {
         } else if (field.startsWith('company_name_')) {
           const property = field.substring('company_name_'.length)
           accountInfo.company[`name_${property}`] = registration[field]
+        } else if (field.startsWith('company_verification_document_')) {
+          const property = field.substring('company_verification_document_'.length)
+          accountInfo.company.verification = accountInfo.company.verification || {}
+          accountInfo.company.verification.document = accountInfo.company.verification.document || {}
+          accountInfo.company.verification.document[property] = registration[field]
         } else {
           const property = field.substring('company_'.length)
           accountInfo.company[property] = registration[field]
         }
+        delete (registration[field])
       }
     }
-    try {
-      stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-      req.success = true
-      await stripeCache.update(stripeAccount)
-      return stripeAccount
-    } catch (error) {
-      const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
-      if (errorMessage.startsWith('company[address]')) {
-        let field = errorMessage.substring('company[address]['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-company_address_${field}`)
-      } else if (errorMessage.startsWith('company[personal_address]')) {
-        let field = errorMessage.substring('company[personal_address]['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-${field}`)
-      } else if (errorMessage.startsWith('company[address_kana]')) {
-        let field = errorMessage.substring('company[address_kana]['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-company_address_${field}_kana`)
-      } else if (errorMessage.startsWith('company[address_kanji]')) {
-        let field = errorMessage.substring('company[address_kanji]['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-company_address_${field}_kanji`)
-      } else if (errorMessage.startsWith('company')) {
-        let field = errorMessage.substring('company['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-${field}`)
+    connect.MetaData.store(stripeAccount.metadata, 'registration', registration)
+    for (const field in stripeAccount.metadata) {
+      if (field.startsWith('registration')) {
+        accountInfo.metadata[field] = stripeAccount.metadata[field]
       }
-      throw new Error('unknown-error')
+    }
+    while (true) {
+      try {
+        const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        req.success = true
+        await stripeCache.update(stripeAccountNow)
+        return stripeAccountNow
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
+        if (errorMessage.startsWith('company[address]')) {
+          let field = errorMessage.substring('company[address]['.length)
+          field = field.substring(0, field.length - 1)
+          throw new Error(`invalid-company_address_${field}`)
+        } else if (errorMessage.startsWith('company[personal_address]')) {
+          let field = errorMessage.substring('company[personal_address]['.length)
+          field = field.substring(0, field.length - 1)
+          throw new Error(`invalid-${field}`)
+        } else if (errorMessage.startsWith('company[address_kana]')) {
+          let field = errorMessage.substring('company[address_kana]['.length)
+          field = field.substring(0, field.length - 1)
+          throw new Error(`invalid-company_address_${field}_kana`)
+        } else if (errorMessage.startsWith('company[address_kanji]')) {
+          let field = errorMessage.substring('company[address_kanji]['.length)
+          field = field.substring(0, field.length - 1)
+          throw new Error(`invalid-company_address_${field}_kanji`)
+        } else if (errorMessage.startsWith('company[verification]')) {
+          let field = errorMessage.substring('company[verification][document]['.length)
+          field = field.substring(0, field.length - 1)
+          throw new Error(`invalid-company_verification_document_${field}`)
+        } else if (errorMessage.startsWith('company')) {
+          let field = errorMessage.substring('company['.length)
+          field = field.substring(0, field.length - 1)
+          throw new Error(`invalid-${field}`)
+        }
+        throw new Error('unknown-error')
+      }
     }
   }
 }

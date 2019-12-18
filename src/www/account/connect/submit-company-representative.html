@@ -1,7 +1,7 @@
 <!doctype html>
 <html navbar="/account/connect/navbar-company-representative.html">
   <head>
-    <title>Submit company representative for ${stripeAccount.id}</title>
+    <title>Submit company representative for ${account.id}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="/public/pure-min.css" />
     <link rel="stylesheet" href="/public/content.css" />
@@ -11,9 +11,9 @@
     <script id="stripe-js-v3"></script>    
   </head>
   <body>
-    <h1>Submit company representative for ${stripeAccount.id}</h1>
+    <h1>Submit company representative for ${account.id}</h1>
     <div id="message-container"></div>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/submit-company-registration?stripeid=${stripeAccount.id}">
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/submit-company-representative?stripeid=${account.id}">
       <div class="pure-controls">
         <button id="submit-button" class="pure-button pure-button-primary">Remove representative</button>
       </div>

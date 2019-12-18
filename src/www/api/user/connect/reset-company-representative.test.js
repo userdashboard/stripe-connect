@@ -132,7 +132,9 @@ describe('/api/user/connect/reset-company-representative', () => {
         relationship_representative_address_postal_code: '1020'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'usd',
@@ -150,8 +152,8 @@ describe('/api/user/connect/reset-company-representative', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
+      assert.strictEqual(accountNow.requirements.currently_due.length, 1)
+      assert.strictEqual(accountNow.requirements.currently_due[0], 'relationship.representative')
     })
   })
 
@@ -164,11 +166,14 @@ describe('/api/user/connect/reset-company-representative', () => {
         country: 'US'
       })
       const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
+      req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session
       req2.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       req2.body = {
         relationship_representative_dob_day: '1',
@@ -191,16 +196,12 @@ describe('/api/user/connect/reset-company-representative', () => {
       const req3 = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)
       req3.account = user.account
       req3.session = user.session
-      await req3.patch()
+      await req3.post()
       const req4 = TestHelper.createRequest(`/api/user/connect/reset-company-representative?stripeid=${user.stripeAccount.id}`)
       req4.account = user.account
       req4.session = user.session
-      await req4.patch()
-      const req6 = TestHelper.createRequest(`/api/user/connect/reset-company-representative?stripeid=${user.stripeAccount.id}`)
-      req6.account = user.account
-      req6.session = user.session
-      const accountNow = await req6.patch()
-      assert.strictEqual(accountNow.metadata.representative, undefined)
+      const accountNow = await req4.patch()
+      assert.strictEqual(accountNow.requirements.currently_due[0], 'relationship.representative')
     })
   })
 })

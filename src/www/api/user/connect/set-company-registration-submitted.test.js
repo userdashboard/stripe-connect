@@ -90,7 +90,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           relationship_representative_percent_ownership: '0'
         }, {
           relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
         })
         await TestHelper.createExternalAccount(user, {
           currency: 'usd',
@@ -172,7 +174,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           relationship_representative_phone: '456-789-1230'
         }, {
           relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -224,7 +228,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_address_postal_code: '1020'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -233,9 +239,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'AT89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -287,7 +293,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_address_postal_code: '4000'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'aud',
@@ -297,9 +305,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_number: '000123456',
         bsb_number: '110000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -330,8 +338,12 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+      }, {
+        company_verification_document_front: TestHelper['success_id_scan_front.png'],
+        company_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Brussels',
@@ -350,7 +362,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_email: user.profile.contactEmail
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -359,9 +373,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'BE89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -457,6 +471,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -477,7 +492,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -486,9 +503,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'CH89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -517,6 +534,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_country: 'DE',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '01067',
+        company_phone: '456-789-0123',
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',
@@ -539,7 +557,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -548,9 +568,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'DE89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -581,6 +601,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '1000',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -601,7 +622,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -610,9 +633,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'DK89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -643,6 +666,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '10128',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -663,7 +687,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -672,9 +698,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'EE89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -705,6 +731,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '03179',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-01234',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -725,7 +752,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -734,9 +763,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'ES89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -767,6 +796,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '00990',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -787,7 +817,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -796,9 +828,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'FI89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -829,6 +861,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '75001',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -849,7 +882,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -858,9 +893,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'FR89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -891,6 +926,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: 'EC1A 1AA',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -911,7 +947,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -920,9 +958,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'GB89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1018,6 +1056,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: 'Dublin 1',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1038,7 +1077,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_address_postal_code: 'Dublin 1'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1048,9 +1089,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'IE89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1081,6 +1122,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '00010',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1101,7 +1143,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1110,9 +1154,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'IT89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1225,6 +1269,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_country: 'LT',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1245,7 +1290,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1254,9 +1301,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'LT89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1287,6 +1334,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '1623',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1307,7 +1355,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1316,9 +1366,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'LU89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1349,6 +1399,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_country: 'LV',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1369,7 +1420,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1378,9 +1431,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'LV89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1411,6 +1464,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '1071 JA',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1431,7 +1485,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1440,9 +1496,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'NL89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1532,6 +1588,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '0001',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1552,7 +1609,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1561,9 +1620,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'NO89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1594,6 +1653,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '6011',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1614,7 +1674,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_address_country: 'NZ'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'nzd',
@@ -1624,9 +1686,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_number: '0000000010',
         routing_number: '110000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1657,6 +1719,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_country: 'PT',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1677,7 +1740,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1686,9 +1751,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'PT89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1719,6 +1784,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_country: 'SE',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1739,7 +1805,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1748,9 +1816,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'SE89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1847,6 +1915,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_country: 'SI',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1867,7 +1936,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1876,9 +1947,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'SI89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1909,6 +1980,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_country: 'SK',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-789-0123',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       })
@@ -1929,7 +2001,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -1938,9 +2012,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         account_holder_type: 'individual',
         iban: 'SK89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

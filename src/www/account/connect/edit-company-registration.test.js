@@ -56,6 +56,7 @@ describe('/account/connect/edit-company-registration', () => {
         if (field === 'external_account' ||
           field === 'relationship.owner' ||
           field === 'relationship.representative' ||
+          field === 'relationship.account_opener' ||
           field === 'business_type' ||
           field === 'tos_acceptance.date' ||
           field === 'tos_acceptance.ip' ||

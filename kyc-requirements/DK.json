@@ -26,6 +26,7 @@
     "company.address.city",
     "company.address.state",
     "company.address.postal_code",
+    "company.phone",
     "company.name",
     "company.tax_id",
     "business_profile.mcc",

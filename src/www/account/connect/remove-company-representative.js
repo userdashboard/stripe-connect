@@ -1,5 +1,5 @@
 const dashboard = require('@userdashboard/dashboard')
-const navbar = require('./navbar-stripe-account.js')
+const navbar = require('./navbar-company-representative.js')
 
 module.exports = {
   before: beforeRequest,
@@ -29,7 +29,7 @@ async function renderPage (req, res, messageTemplate) {
   } else if (req.error) {
     messageTemplate = req.error
   }
-  const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'account')
   navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')

@@ -23,7 +23,7 @@ module.exports = {
       for (const owner of owners) {
         const ownerInfo = {}
         if (global.stripeJS === 3) {
-          ownerInfo.token = owner.token
+          ownerInfo.person_token = owner.token
         } else {
           for (const field in owner) {
             if (!field.startsWith('relationship_owner_')) {
@@ -73,8 +73,7 @@ module.exports = {
           await stripeCache.update(person)
           persons.push({ personid: person.id })
         } catch (error) {
-          const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
-          throw new Error(errorMessage)
+          throw new Error('unknown-error')
         }
       }
     }
@@ -90,13 +89,18 @@ module.exports = {
         accountInfo.metadata[field] = stripeAccount.metadata[field]
       }
     }
-    try {
-      stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-      req.success = true
-      await stripeCache.update(stripeAccount)
-      return stripeAccount
-    } catch (error) {
-      throw new Error('unknown-error')
+    while (true) {
+      try {
+        stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        req.success = true
+        await stripeCache.update(stripeAccount)
+        return stripeAccount
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
     }
   }
 }

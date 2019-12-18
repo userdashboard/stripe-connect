@@ -66,9 +66,9 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
       })
+      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.directorid}`)
       req.account = user.account

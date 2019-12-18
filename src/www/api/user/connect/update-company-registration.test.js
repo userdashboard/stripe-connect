@@ -539,6 +539,70 @@ describe('/api/user/connect/update-company-registration', () => {
       assert.strictEqual(registrationNow.companyToken, 'sample2')
     })
 
+    it('optionally-required posted file company_verification_document_front', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'BE'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '285 Fulton St',
+        company_address_postal_code: '10007',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        company_verification_document_front: 'sample2'
+      }
+      req.uploads = {
+        company_verification_document_front: TestHelper['success_id_scan_front.png'],
+        company_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const companyNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
+      assert.notStrictEqual(registrationNow.company_verification_document_front, null)
+      assert.notStrictEqual(registrationNow.company_verification_document_front, undefined)
+    })
+
+    it('optionally-required posted file company_verification_document_back', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        type: 'company',
+        country: 'BE'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        company_name: 'Company',
+        company_tax_id: '8',
+        company_phone: '456-123-7890',
+        company_address_city: 'New York',
+        company_address_line1: '285 Fulton St',
+        company_address_postal_code: '10007',
+        company_address_state: 'NY',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        company_verification_document_front: 'sample2'
+      }
+      req.uploads = {
+        company_verification_document_front: TestHelper['success_id_scan_front.png'],
+        company_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
+      const companyNow = await req.patch()
+      const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
+      assert.notStrictEqual(registrationNow.company_verification_document_back, null)
+      assert.notStrictEqual(registrationNow.company_verification_document_back, undefined)
+    })
+
     it('required posted business_profile_mcc', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

@@ -108,8 +108,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -152,8 +150,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -196,8 +192,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -240,8 +234,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -284,8 +276,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -335,8 +325,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -379,8 +367,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -392,7 +378,7 @@ describe('/api/user/connect/set-company- registration', () => {
       }
     })
 
-    it('object for EE registration', async () => {
+   it('object for EE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -423,8 +409,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -467,8 +451,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -511,8 +493,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -555,8 +535,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -599,8 +577,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -643,8 +619,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -687,8 +661,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -731,8 +703,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -857,8 +827,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -901,8 +869,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -945,8 +911,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -989,8 +953,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1090,8 +1052,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1132,8 +1092,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1176,8 +1134,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1220,8 +1176,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1264,8 +1218,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1308,8 +1260,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1352,8 +1302,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1395,8 +1343,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
       for (const key of accountNow.requirements.past_due) {
         assert.strictEqual(key.startsWith('person_'), false)
       }
@@ -1479,8 +1425,6 @@ describe('/api/user/connect/set-company- registration', () => {
       req6.account = user.account
       req6.session = user.session
       const accountNow = await req6.patch()
-      assert.notStrictEqual(accountNow.metadata.representative, undefined)
-      assert.notStrictEqual(accountNow.metadata.representative, null)
     })
   })
 })

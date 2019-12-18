@@ -19,12 +19,48 @@ module.exports = {
     if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
     }
+    if (req.uploads) {
+      if (req.uploads.company_verification_document_front) {
+        const uploadData = {
+          purpose: 'identity_document',
+          file: {
+            type: 'application/octet-stream',
+            name: req.uploads.company_verification_document_back.name,
+            data: req.uploads.company_verification_document_back.buffer
+          }
+        }
+        try {
+          const file = await stripe.files.create(uploadData, req.stripeKey)
+          req.body.company_verification_document_front = file.id
+        } catch (error) {
+          throw new Error('invalid-company_verification_document_front')
+        }
+      }
+      if (req.uploads.company_verification_document_back) {
+        const uploadData = {
+          purpose: 'identity_document',
+          file: {
+            type: 'application/octet-stream',
+            name: req.uploads.company_verification_document_back.name,
+            data: req.uploads.company_verification_document_back.buffer
+          }
+        }
+        try {
+          const file = await stripe.files.create(uploadData, req.stripeKey)
+          req.body.company_verification_document_back = file.id
+        } catch (error) {
+          throw new Error('invalid-company_verification_document_back')
+        }
+      }
+    }
     const requiredFields = connect.kycRequirements[stripeAccount.country].company
     const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
     for (const field of requiredFields) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
         if (field === 'company.address.line2' ||
+            field === 'individual.verification.document.front' ||
+            field === 'individual.verification.document.back' ||
            (field === 'business_profile.url' && req.body.business_profile_product_description) ||
            (field === 'business_profile.product_description' && req.body.business_profile_url)) {
           continue
