@@ -76,6 +76,9 @@ describe('/api/user/connect/update-individual-registration', () => {
           individual_address_country: 'US',
           individual_address_line1: '285 Fulton St',
           individual_address_postal_code: '10007'
+        }, {
+          individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+          individual_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         await TestHelper.createExternalAccount(user, {
           currency: 'usd',
@@ -4099,8 +4102,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       await req.post()
       const accountNow = await global.api.user.connect.StripeAccount.get(req)
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.notStrictEqual(registrationNow.token, null)
-      assert.notStrictEqual(registrationNow.token, undefined)
+      assert.notStrictEqual(registrationNow.individualToken, null)
+      assert.notStrictEqual(registrationNow.individualToken, undefined)
     })
   })
 })

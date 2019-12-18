@@ -100,7 +100,7 @@ describe('/api/user/connect/update-company-registration', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
+          relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
@@ -230,6 +230,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_state: '1',
           company_name: 'Company',
           company_tax_id: '',
+          company_phone: '456-789-0123',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         }
@@ -260,6 +261,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_state: '1',
           company_name: 'Company',
           company_tax_id: '8',
+          company_phone: '456-789-0123',
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         }
@@ -344,11 +346,16 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
+          company_address_country: 'AT',
+          company_address_city: 'Vienna',
           company_address_line1: '',
           company_address_postal_code: '1020',
+          company_address_state: '1',
+          company_phone: '456-789-0123',
           company_name: 'Company',
           company_tax_id: '8',
-          company_address_city: 'Vienna'
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
         }
         let errorMessage
         try {
@@ -549,22 +556,21 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        company_address_city: 'Brussels',
+        company_address_line1: '123 Park Lane',
+        company_address_state: 'BRU',
+        company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
         company_phone: '456-123-7890',
-        company_address_city: 'New York',
-        company_address_line1: '285 Fulton St',
-        company_address_postal_code: '10007',
-        company_address_state: 'NY',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_verification_document_front: 'sample2'
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
       req.uploads = {
         company_verification_document_front: TestHelper['success_id_scan_front.png'],
         company_verification_document_back: TestHelper['success_id_scan_back.png']
       }
-      req.body = TestHelper.createMultiPart(req, body)
+      req.body = TestHelper.createMultiPart(req, req.body)
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
       assert.notStrictEqual(registrationNow.company_verification_document_front, null)
@@ -581,22 +587,21 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        company_address_city: 'Brussels',
+        company_address_line1: '123 Park Lane',
+        company_address_state: 'BRU',
+        company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
         company_phone: '456-123-7890',
-        company_address_city: 'New York',
-        company_address_line1: '285 Fulton St',
-        company_address_postal_code: '10007',
-        company_address_state: 'NY',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_verification_document_front: 'sample2'
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
       req.uploads = {
         company_verification_document_front: TestHelper['success_id_scan_front.png'],
         company_verification_document_back: TestHelper['success_id_scan_back.png']
       }
-      req.body = TestHelper.createMultiPart(req, body)
+      req.body = TestHelper.createMultiPart(req, req.body)
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
       assert.notStrictEqual(registrationNow.company_verification_document_back, null)
@@ -1269,6 +1274,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_state: '1',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1315,20 +1321,26 @@ describe('/api/user/connect/update-company-registration', () => {
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.body = {
+      const body = {
         company_address_city: 'Brussels',
         company_address_line1: '123 Park Lane',
         company_address_state: 'BRU',
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
+      req.uploads = {
+        company_verification_document_front: TestHelper['success_id_scan_front.png'],
+        company_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      for (const field in req.body) {
-        assert.strictEqual(registrationNow[field], req.body[field])
+      for (const field in body) {
+        assert.strictEqual(registrationNow[field], body[field])
       }
     })
 
@@ -1375,6 +1387,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1020',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1401,6 +1414,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '01067',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1427,6 +1441,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1000',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1453,6 +1468,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10128',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1479,6 +1495,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '03179',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1505,6 +1522,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '00990',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1530,6 +1548,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '75001',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1556,6 +1575,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '75001',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1609,6 +1629,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: 'Dublin 1',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1635,6 +1656,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '00010',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1696,6 +1718,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1623',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1722,6 +1745,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1071 JA',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1747,6 +1771,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '0001',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1773,6 +1798,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '6011',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1799,6 +1825,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_state: '01',
         company_name: 'Company',
         company_tax_id: '8',
+        company_phone: '456-123-7890',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
       }
@@ -1823,6 +1850,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00150',
         company_address_state: 'K',
+        company_phone: '456-123-7890',
         company_name: 'Company',
         company_tax_id: '8',
         business_profile_mcc: '8931',

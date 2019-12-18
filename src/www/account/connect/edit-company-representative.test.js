@@ -428,8 +428,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_address_city: 'Vienna',
@@ -454,8 +454,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_address_country: 'AT',
@@ -484,8 +484,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_address_city: 'Brisbane',
@@ -511,8 +511,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_address_city: 'Brisbane',
@@ -544,8 +544,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -570,8 +570,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -596,8 +596,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -624,8 +624,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_id_number: '000000000',
         relationship_representative_phone: '456-789-0123',
@@ -660,8 +660,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -688,8 +688,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -717,8 +717,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -743,8 +743,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -772,8 +772,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -798,8 +798,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -827,8 +827,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -853,8 +853,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -882,8 +882,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -908,8 +908,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -937,8 +937,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -963,8 +963,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -992,8 +992,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1018,8 +1018,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1044,8 +1044,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_id_number: '000000000',
         relationship_representative_phone: '456-789-0123',
@@ -1071,8 +1071,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_id_number: '000000000',
         relationship_representative_phone: '456-789-0123',
@@ -1103,8 +1103,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_address_postal_code: 'Dublin 1'
@@ -1129,8 +1129,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_address_postal_code: 'Dublin 1'
@@ -1159,8 +1159,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1185,8 +1185,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1208,8 +1208,8 @@ describe('/account/connect/edit-company-registration', () => {
       req.body = {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -1246,8 +1246,8 @@ describe('/account/connect/edit-company-registration', () => {
       req.body = {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -1293,8 +1293,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1319,8 +1319,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1348,8 +1348,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1374,8 +1374,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1403,8 +1403,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1429,8 +1429,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1455,8 +1455,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_address_city: 'Auckland',
@@ -1481,8 +1481,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_address_city: 'Auckland',
@@ -1513,8 +1513,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1539,8 +1539,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1568,8 +1568,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1594,8 +1594,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
       }
@@ -1620,8 +1620,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_id_number: '000000000',
         relationship_representative_phone: '456-789-0123',
@@ -1647,8 +1647,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_id_number: '000000000',
         relationship_representative_phone: '456-789-0123',
@@ -1677,8 +1677,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_id_number: '000000000',
@@ -1706,8 +1706,8 @@ describe('/account/connect/edit-company-registration', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_id_number: '000000000',

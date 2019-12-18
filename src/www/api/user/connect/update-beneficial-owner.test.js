@@ -17,6 +17,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_last_name: person.lastName,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
+          relationship_owner_address_state: 'LND',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
           relationship_owner_dob_day: '1',
@@ -44,6 +45,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_last_name: person.lastName,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
+          relationship_owner_address_state: 'LND',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
           relationship_owner_dob_day: '1',
@@ -80,6 +82,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
@@ -91,6 +96,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_last_name: person.lastName,
           relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
+          relationship_owner_address_state: 'LND',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
           relationship_owner_dob_day: '1',
@@ -127,6 +133,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -174,6 +183,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -221,6 +233,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -266,6 +281,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -313,6 +331,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -358,6 +379,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -405,6 +429,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -452,6 +479,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -499,6 +529,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -546,6 +579,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -591,6 +627,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -638,6 +677,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -683,6 +725,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -730,6 +775,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -775,6 +823,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
         req.account = user.account
@@ -970,6 +1021,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1010,6 +1064,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1050,6 +1107,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1090,6 +1150,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1131,6 +1194,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1172,6 +1238,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1212,6 +1281,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1252,6 +1324,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1292,6 +1367,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1332,6 +1410,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1372,6 +1453,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1412,6 +1496,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account
@@ -1454,6 +1541,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
       req.account = user.account

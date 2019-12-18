@@ -35,8 +35,8 @@ describe('/account/connect/delete-beneficial-owner', () => {
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_dob_day: '1',
@@ -67,6 +67,9 @@ describe('/account/connect/delete-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
@@ -98,6 +101,9 @@ describe('/account/connect/delete-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const user2 = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
@@ -129,6 +135,9 @@ describe('/account/connect/delete-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
@@ -156,6 +165,9 @@ describe('/account/connect/delete-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
@@ -183,6 +195,9 @@ describe('/account/connect/delete-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
@@ -212,6 +227,9 @@ describe('/account/connect/delete-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account

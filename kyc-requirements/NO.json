@@ -46,9 +46,9 @@
     "relationship.owner.verification.document.back"
   ],
   "companyRepresentative": [
-    "relationship.representative.executive",
-    "relationship.representative.director",
-    "relationship.representative.owner",
+    "relationship.representative.relationship.executive",
+    "relationship.representative.relationship.director",
+    "relationship.representative.relationship.owner",
     "relationship.representative.relationship.title",
     "relationship.representative.email",
     "relationship.representative.phone",

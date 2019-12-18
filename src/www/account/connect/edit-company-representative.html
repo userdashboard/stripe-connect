@@ -12,6 +12,7 @@
     <script id="handler-v3" src="/public/stripe-v3-edit-company-representative.js"></script>
     <script id="client-v3">
       window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
+      window.isAccountOpener = "${stripeAccount.metadata.submitted ? false : true}"
     </script>
   </head>
   <body class="entry"> 
@@ -22,13 +23,13 @@
       <div id="form-container">
         <h2>Relationship to company</h2>
         <div class="pure-control-group">
-          <a name="relationship_representative_executive-anchor"></a>
-          <a name="relationship_representative_director-anchor"></a>
-          <a name="relationship_representative_owner-anchor"></a>
+          <a name="relationship_representative_relationship_executive-anchor"></a>
+          <a name="relationship_representative_relationship_director-anchor"></a>
+          <a name="relationship_representative_relationship_owner-anchor"></a>
           <div class="pure-checkbox">
             <label>
               <span>
-                <input type="checkbox" id="relationship_representative_executive" name="relationship_representative_executive" value="true" />
+                <input type="checkbox" id="relationship_representative_relationship_executive" name="relationship_representative_relationship_executive" value="true" />
               </span> 
               Executive
             </label>
@@ -36,7 +37,7 @@
           <div class="pure-checkbox">
             <label>
               <span>
-              <input type="checkbox" id="relationship_representative_director" name="relationship_representative_director" value="true" /> 
+              <input type="checkbox" id="relationship_representative_relationship_director" name="relationship_representative_relationship_director" value="true" /> 
               </span>
               Director
             </label>
@@ -44,16 +45,21 @@
           <div class="pure-checkbox">
             <label>
               <span>
-                <input type="checkbox" id="relationship_representative_owner" name="relationship_representative_owner" value="true" />
+                <input type="checkbox" id="relationship_representative_relationship_owner" name="relationship_representative_relationship_owner" value="true" />
               </span> 
               Owner
             </label>
           </div>
+          <div class="pure-control-group">
+            <a name="relationship_representative_percent_owned-anchor"></a>
+            <label for="relationship_representative_percent_owned">Percent owned (if any)</label>
+            <input id="relationship_representative_percent_owned" name="relationship_representative_percent_owned" type="text" maxlength="5" />
+          </div>
         </div> 
         <div class="pure-control-group">
-          <a name="relationship_representative_title-anchor"></a>
-          <label for="relationship_representative_title">Title (if any)</label>
-          <input class="full-width" required="required" id="relationship_representative_title" name="relationship_representative_title" type="text" maxlength="100" />
+          <a name="relationship_representative_relationship_title-anchor"></a>
+          <label for="relationship_representative_relationship_title">Title (if any)</label>
+          <input class="full-width" required="required" id="relationship_representative_relationship_title" name="relationship_representative_relationship_title" type="text" maxlength="100" />
         </div>
         <h2>Personal information</h2>
         <div id="personal-information-container">

@@ -149,7 +149,7 @@ async function createStripeRegistration (user, properties, uploads) {
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()
   await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id && 
+    return stripeEvent.data.object.id === user.stripeAccount.id &&
            stripeEvent.data.object.metadata.registration
   })
   return user.stripeAccount
@@ -196,11 +196,11 @@ function createMultiPart (req, body) {
   return multipartBody
 }
 
-async function createExternalAccount (user, details) {
+async function createExternalAccount (user, body) {
   const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.body = details
+  req.body = body
   user.stripeAccount = await req.patch()
   await waitForWebhook('account.updated', (stripeEvent) => {
     return stripeEvent.data.object.id === user.stripeAccount.id &&
@@ -209,20 +209,17 @@ async function createExternalAccount (user, details) {
   return user.stripeAccount.external_accounts.data[0]
 }
 
-async function createBeneficialOwner (user, properties) {
+async function createBeneficialOwner (user, body, uploads) {
   const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.uploads = {
-    relationship_owner_verification_document_front: module.exports['success_id_scan_front.png'],
-    relationship_owner_verification_document_back: module.exports['success_id_scan_back.png']
-  }
-  req.body = createMultiPart(req, properties)
+  req.uploads = uploads
+  req.body = createMultiPart(req, body)
   const owner = await req.post()
   await waitForWebhook('account.updated', (stripeEvent) => {
-    const owners = connect.MetaData.parse(stripeEvent.data.object, 'owners')
+    const owners = connect.MetaData.parse(stripeEvent.data.object.metadata, 'owners')
     return stripeEvent.data.object.id === user.stripeAccount.id &&
-           owners && 
+           owners &&
            owners.length &&
            owners[owners.length - 1].ownerid === owner.ownerid
   })
@@ -230,20 +227,17 @@ async function createBeneficialOwner (user, properties) {
   return owner
 }
 
-async function createCompanyDirector (user, properties) {
+async function createCompanyDirector (user, body, uploads) {
   const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.uploads = {
-    relationship_director_verification_document_front: module.exports['success_id_scan_front.png'],
-    relationship_director_verification_document_back: module.exports['success_id_scan_back.png']
-  }
-  req.body = createMultiPart(req, properties)
+  req.uploads = uploads
+  req.body = createMultiPart(req, body)
   const director = await req.post()
   await waitForWebhook('account.updated', (stripeEvent) => {
-    const directors = connect.MetaData.parse(stripeEvent.data.object, 'directors')
+    const directors = connect.MetaData.parse(stripeEvent.data.object.metadata, 'directors')
     return stripeEvent.data.object.id === user.stripeAccount.id &&
-           directors && 
+           directors &&
            directors.length &&
            directors[directors.length - 1].directorid === director.directorid
   })
@@ -296,7 +290,7 @@ async function submitCompanyDirectors (user) {
   const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
   await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id && 
+    return stripeEvent.data.object.id === user.stripeAccount.id &&
            stripeEvent.data.object.company.directors_provided === true
   })
   await wait()

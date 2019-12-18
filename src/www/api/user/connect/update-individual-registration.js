@@ -182,7 +182,7 @@ module.exports = {
       registration[posted] = req.body[posted]
     }
     if (global.stripeJS === 3) {
-      registration.token = req.body.token
+      registration.individualToken = req.body.token
     }
     if (req.body.individual_verification_document_front) {
       registration.individual_verification_document_front = req.body.individual_verification_document_front

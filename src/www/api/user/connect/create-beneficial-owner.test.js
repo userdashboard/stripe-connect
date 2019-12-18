@@ -59,8 +59,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_ssn_last_4: '0000',
           relationship_representative_phone: '456-789-0123',
@@ -628,6 +628,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_first_name, person.firstName)
@@ -659,6 +662,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_last_name, person.lastName)
@@ -690,6 +696,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_email, person.email)
@@ -721,6 +730,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_dob_day, '1')
@@ -783,6 +795,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_dob_year, '1950')
@@ -814,6 +829,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_address_line1, 'A building')
@@ -846,6 +864,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_address_line2, 'Additional detail')
@@ -877,6 +898,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_address_city, 'London')
@@ -908,6 +932,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_address_city, 'London')
@@ -939,6 +966,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_address_postal_code, 'EC1A 1AA')
@@ -970,6 +1000,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_owner_address_state, 'LND')
@@ -1001,6 +1034,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.notStrictEqual(owner.relationship_owner_verification_document_front, null)
@@ -1033,6 +1069,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.notStrictEqual(owner.relationship_owner_verification_document_back, null)
@@ -1067,6 +1106,9 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }, {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const owner = await req.post()
       assert.strictEqual(owner.object, 'owner')

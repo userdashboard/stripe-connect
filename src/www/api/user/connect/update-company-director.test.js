@@ -64,6 +64,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
@@ -100,6 +103,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
         req.account = user.account
@@ -135,6 +141,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
         req.account = user.account
@@ -170,6 +179,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
         req.account = user.account
@@ -203,6 +215,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
         req.account = user.account
@@ -238,6 +253,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
         req.account = user.account
@@ -271,6 +289,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
         req.account = user.account
@@ -306,6 +327,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
         req.account = user.account
@@ -339,6 +363,9 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
           relationship_director_dob_year: '1950'
+        }, {
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
         req.account = user.account
@@ -480,6 +507,9 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
       req.account = user.account
@@ -513,6 +543,9 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
       req.account = user.account
@@ -546,6 +579,9 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
       req.account = user.account
@@ -579,6 +615,9 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
       req.account = user.account
@@ -612,6 +651,9 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
       req.account = user.account
@@ -647,6 +689,9 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
       req.account = user.account

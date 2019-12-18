@@ -75,6 +75,9 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
           individual_email: user.profile.contactEmail,
           individual_first_name: user.profile.firstName,
           individual_last_name: user.profile.lastName
+        }, {
+          individual_verification_document_front: TestHelper['success_id_scan_front.png'],
+          individual_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         await TestHelper.createExternalAccount(user, {
           currency: 'usd',
@@ -1625,7 +1628,13 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req6 = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req6.account = user.account
       req6.session = user.session
-      const accountNow = await req6.patch()
+      await req6.patch()
+      await TestHelper.waitForVerificationStart(user)
+      await TestHelper.waitForVerificationFields(user, 'individual.')
+      const req7 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req7.account = user.account
+      req7.session = user.session
+      const accountNow = await req7.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
       assert.strictEqual(accountNow.requirements.past_due.length, 0)

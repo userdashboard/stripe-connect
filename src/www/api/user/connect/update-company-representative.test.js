@@ -78,7 +78,7 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
+          relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
@@ -158,7 +158,7 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1951',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
+          relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
@@ -200,8 +200,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'Vienna',
@@ -237,8 +237,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'Vienna',
@@ -276,8 +276,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'Vienna',
@@ -313,8 +313,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'Vienna',
@@ -352,8 +352,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'Vienna',
@@ -389,8 +389,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: 'invalid',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'Vienna',
@@ -428,8 +428,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: '',
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'Vienna',
@@ -504,8 +504,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: '',
           relationship_representative_phone: '456-789-0123',
           relationship_representative_address_city: 'Vienna',
@@ -543,8 +543,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '',
           relationship_representative_address_city: 'Vienna',
@@ -582,8 +582,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_id_number: '000000000',
@@ -625,8 +625,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_id_number: '000000000',
@@ -668,8 +668,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_id_number: '000000000',
@@ -711,8 +711,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_id_number: '000000000',
@@ -754,8 +754,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_id_number: '000000000',
@@ -795,8 +795,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_id_number: '000000000',
@@ -838,8 +838,8 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
           relationship_representative_id_number: '000000000',
@@ -1334,7 +1334,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1370,7 +1370,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1406,7 +1406,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1442,7 +1442,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1478,7 +1478,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1515,7 +1515,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1552,7 +1552,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1588,7 +1588,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1624,7 +1624,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1660,7 +1660,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1691,8 +1691,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -1739,7 +1739,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1775,8 +1775,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1811,7 +1811,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1847,7 +1847,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1883,7 +1883,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1919,7 +1919,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1955,7 +1955,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1991,7 +1991,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1951',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2029,8 +2029,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2046,7 +2046,7 @@ describe('/api/user/connect/update-company-representative', () => {
       assert.strictEqual(registration.relationship_representative_percent_owned, '100')
     })
 
-    it('optional posted relationship_representative_title', async () => {
+    it('optional posted relationship_representative_relationship_title', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -2066,8 +2066,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2080,10 +2080,10 @@ describe('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_title, 'Owner')
+      assert.strictEqual(registration.relationship_representative_relationship_title, 'Owner')
     })
 
-    it('optional posted relationship_representative_director', async () => {
+    it('optional posted relationship_representative_relationship_director', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -2103,8 +2103,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_director: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_director: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2117,10 +2117,10 @@ describe('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_director, true)
+      assert.strictEqual(registration.relationship_representative_relationship_director, true)
     })
 
-    it('optional posted relationship_representative_executive', async () => {
+    it('optional posted relationship_representative_relationship_executive', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -2140,8 +2140,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2154,7 +2154,7 @@ describe('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_executive, true)
+      assert.strictEqual(registration.relationship_representative_relationship_executive, true)
     })
 
     it('optionally-required posted relationship_representative_first_name_kana', async () => {
@@ -2171,8 +2171,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2214,8 +2214,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2257,8 +2257,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2300,8 +2300,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2343,8 +2343,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2386,8 +2386,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2429,8 +2429,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2472,8 +2472,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2515,8 +2515,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2558,8 +2558,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2601,8 +2601,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2644,8 +2644,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2687,8 +2687,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2730,8 +2730,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
-        relationship_representative_executive: 'true',
-        relationship_representative_title: 'Owner',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_gender: 'female',
@@ -2772,7 +2772,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_dob_day: '1',
@@ -2780,7 +2782,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2809,7 +2811,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_dob_day: '1',
@@ -2817,7 +2821,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2846,7 +2850,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Brussels',
@@ -2860,7 +2866,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_phone: '456-789-0123',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail
       }
@@ -2892,7 +2898,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2922,7 +2928,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Bern',
@@ -2935,7 +2943,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -2959,7 +2967,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Berlin',
@@ -2972,7 +2982,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -2996,7 +3006,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Copenhagen',
@@ -3009,7 +3021,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3033,7 +3045,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Talinn',
@@ -3046,7 +3060,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3070,7 +3084,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Madrid',
@@ -3083,7 +3099,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3107,7 +3123,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Helsinki',
@@ -3120,7 +3138,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3143,7 +3161,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Paris',
@@ -3156,7 +3176,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3180,7 +3200,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'London',
@@ -3193,7 +3215,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3225,7 +3247,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_id_number: '000000000',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
@@ -3256,7 +3278,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Dublin',
@@ -3268,7 +3292,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -3293,7 +3317,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Rome',
@@ -3306,7 +3332,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3373,7 +3399,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Luxemburg',
@@ -3386,7 +3414,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3410,7 +3438,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Amsterdam',
@@ -3423,7 +3453,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3446,7 +3476,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Oslo',
@@ -3459,7 +3491,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3493,7 +3525,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -3522,7 +3554,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Lisbon',
@@ -3535,7 +3569,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3559,7 +3593,9 @@ describe('/api/user/connect/update-company-representative', () => {
       req.session = user.session
       req.uploads = {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       const body = {
         relationship_representative_address_city: 'Stockholm',
@@ -3572,7 +3608,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -3604,7 +3640,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_address_line1: '123 Sesame St',
@@ -3643,7 +3679,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -3685,7 +3721,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -3713,7 +3749,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',

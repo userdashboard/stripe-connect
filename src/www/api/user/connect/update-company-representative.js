@@ -163,9 +163,9 @@ module.exports = {
       if (!req.body[posted]) {
         if (field === 'relationship.representative.address.line2' ||
             field === 'relationship.representative.relationship.title' ||
-            field === 'relationship.representative.executive' ||
-            field === 'relationship.representative.director' ||
-            field === 'relationship.representative.owner' ||
+            field === 'relationship.representative.relationship.executive' ||
+            field === 'relationship.representative.relationship.director' ||
+            field === 'relationship.representative.relationship.owner' ||
             (field === 'relationship.representative.verification.document.front' && req.body.token) ||
             (field === 'relationship.representative.verification.document.back' && req.body.token)) {
           continue
@@ -185,14 +185,14 @@ module.exports = {
       }
       registration.relationship_representative_percent_owned = req.body.relationship_representative_percent_owned
     }
-    if (req.body.relationship_representative_title) {
-      registration.relationship_representative_title = req.body.relationship_representative_title
+    if (req.body.relationship_representative_relationship_title) {
+      registration.relationship_representative_relationship_title = req.body.relationship_representative_relationship_title
     }
-    if (req.body.relationship_representative_executive) {
-      registration.relationship_representative_executive = true
+    if (req.body.relationship_representative_relationship_executive) {
+      registration.relationship_representative_relationship_executive = true
     }
-    if (req.body.relationship_representative_director) {
-      registration.relationship_representative_director = true
+    if (req.body.relationship_representative_relationship_director) {
+      registration.relationship_representative_relationship_director = true
     }
     const accountInfo = {
       metadata: {

@@ -64,35 +64,6 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           type: 'company',
           country: 'US'
         })
-        await TestHelper.createStripeRegistration(user, {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
-          company_address_city: 'New York',
-          company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
-          company_address_state: 'NY',
-          company_address_country: 'US',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
-        })
-        await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
-        })
         stripeAccounts.unshift(user.stripeAccount.id)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts?accountid=${user.account.accountid}&offset=${offset}`)
@@ -114,35 +85,6 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           type: 'company',
           country: 'US'
         })
-        await TestHelper.createStripeRegistration(user, {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
-          company_address_city: 'New York',
-          company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
-          company_address_state: 'NY',
-          company_address_country: 'US',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
-        })
-        await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
-        })
         stripeAccounts.unshift(stripeAccount)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts?accountid=${user.account.accountid}&limit=${limit}`)
@@ -160,35 +102,6 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
         const stripeAccount = await TestHelper.createStripeAccount(user, {
           type: 'company',
           country: 'US'
-        })
-        await TestHelper.createStripeRegistration(user, {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
-          company_address_city: 'New York',
-          company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
-          company_address_state: 'NY',
-          company_address_country: 'US',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
-        })
-        await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -208,35 +121,6 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           type: 'company',
           country: 'US'
         })
-        await TestHelper.createStripeRegistration(user, {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
-          company_address_city: 'New York',
-          company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
-          company_address_state: 'NY',
-          company_address_country: 'US',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
-        })
-        await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
-        })
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts?accountid=${user.account.accountid}`)
       req.account = administrator.account
@@ -255,35 +139,6 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
         await TestHelper.createStripeAccount(user, {
           type: 'company',
           country: 'US'
-        })
-        await TestHelper.createStripeRegistration(user, {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
-          company_address_city: 'New York',
-          company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
-          company_address_state: 'NY',
-          company_address_country: 'US',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
-        })
-        await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
-          relationship_representative_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
         })
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts?accountid=${user.account.accountid}`)

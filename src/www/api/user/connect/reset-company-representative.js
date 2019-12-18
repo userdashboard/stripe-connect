@@ -1,4 +1,3 @@
-const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
@@ -16,7 +15,7 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
     const persons = await stripe.accounts.listPersons(req.query.stripeid, { limit: 100 }, req.stripeKey)
-    for (const person of persons) {
+    for (const person of persons.data) {
       if (!person.relationship.representative) {
         continue
       }

@@ -77,7 +77,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
+          relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
@@ -155,6 +155,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '1020',
           company_name: 'Company',
+          company_phone: '456-789-0123',
           company_tax_id: '8'
         })
         await TestHelper.createCompanyRepresentative(user, {
@@ -168,7 +169,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_executive: 'true',
+          relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-1230'
@@ -217,7 +218,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -282,7 +283,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -357,7 +358,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_phone: '456-789-0123',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail
       }, {
@@ -417,7 +418,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -486,7 +487,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -551,7 +552,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -616,7 +617,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -681,7 +682,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -746,7 +747,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -811,7 +812,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -876,7 +877,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -941,7 +942,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1001,7 +1002,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_id_number: '000000000',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
@@ -1070,7 +1071,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1137,7 +1138,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1202,7 +1203,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //     relationship_representative_percent_ownership: '0',
     //     relationship_representative_first_name: user.profile.firstName,
     //     relationship_representative_last_name: user.profile.lastName,
-    //     relationship_representative_executive: 'true',
+    //     relationship_representative_relationship_executive: 'true',
     //     relationship_representative_relationship_title: 'Owner',
     //     relationship_representative_email: user.profile.contactEmail,
     //     relationship_representative_phone: '456-789-0123',
@@ -1284,7 +1285,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1349,7 +1350,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1414,7 +1415,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1479,7 +1480,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1543,7 +1544,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //     relationship_representative_dob_year: '1950',
     //     relationship_representative_first_name: user.profile.firstName,
     //     relationship_representative_last_name: user.profile.lastName,
-    //     relationship_representative_executive: 'true',
+    //     relationship_representative_relationship_executive: 'true',
     //     relationship_representative_relationship_title: 'Owner',
     //     relationship_representative_email: user.profile.contactEmail,
     //     relationship_representative_phone: '456-789-0123'
@@ -1603,7 +1604,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1663,7 +1664,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -1734,7 +1735,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1799,7 +1800,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1859,7 +1860,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_address_line1: '123 Sesame St',
@@ -1930,7 +1931,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -1995,7 +1996,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123'
@@ -2055,7 +2056,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2122,6 +2123,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       }
       await req.post()
       const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
+      req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session
       req2.uploads = {
@@ -2134,7 +2136,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_executive: 'true',
+        relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
@@ -2169,7 +2171,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       const req6 = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req6.account = user.account
       req6.session = user.session
-      const accountNow = await req6.patch()
+      await req6.patch()
+      await TestHelper.waitForVerificationStart(user)
+      await TestHelper.waitForVerificationFields(user, 'person_')
+      const req7 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req7.account = user.account
+      req7.session = user.session
+      const accountNow = await req7.get()
       assert.notStrictEqual(accountNow.metadata.submitted, undefined)
       assert.notStrictEqual(accountNow.metadata.submitted, null)
       assert.strictEqual(accountNow.requirements.past_due.length, 0)

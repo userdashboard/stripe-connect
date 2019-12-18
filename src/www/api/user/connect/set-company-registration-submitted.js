@@ -10,7 +10,7 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    let stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.metadata.submitted ||
       stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {

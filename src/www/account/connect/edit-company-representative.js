@@ -147,9 +147,9 @@ async function submitForm (req, res) {
     if (!req.body[posted]) {
       if (field === 'relationship.representative.address.line2' ||
           field === 'relationship.representative.relationship.title' ||
-          field === 'relationship.representative.executive' ||
-          field === 'relationship.representative.director' ||
-          field === 'relationship.representative.owner' ||
+          field === 'relationship.representative.relationship.executive' ||
+          field === 'relationship.representative.relationship.director' ||
+          field === 'relationship.representative.relationship.owner' ||
           (field === 'relationship.representative.verification.document.front' && req.body.token) ||
           (field === 'relationship.representative.verification.document.back' && req.body.token)) {
         continue
