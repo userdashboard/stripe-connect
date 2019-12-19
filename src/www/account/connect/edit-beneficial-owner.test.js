@@ -223,17 +223,17 @@ describe('/account/connect/edit-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_email: person.email,
         relationship_owner_address_city: 'London',
         relationship_owner_address_country: 'DE',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_state: 'BY',
         relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_state: 'BY',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       for (const field in req.body) {
         const value = req.body[field]
@@ -274,17 +274,17 @@ describe('/account/connect/edit-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_email: person.email,
-        relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'BY',
+        relationship_owner_address_country: 'DE',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_state: 'BY',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -323,17 +323,17 @@ describe('/account/connect/edit-beneficial-owner', () => {
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_email: person.email,
-        relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'BY',
+        relationship_owner_address_country: 'DE',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_state: 'BY',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -372,17 +372,17 @@ describe('/account/connect/edit-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_email: person.email,
-        relationship_owner_address_country: 'DE',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'BY',
+        relationship_owner_address_country: 'DE',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_state: 'BY',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

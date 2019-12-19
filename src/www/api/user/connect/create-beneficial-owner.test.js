@@ -119,8 +119,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -157,8 +157,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -195,8 +195,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -233,8 +233,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: '',
@@ -271,8 +271,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -309,8 +309,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -347,8 +347,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -385,8 +385,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -423,8 +423,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -461,8 +461,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -574,8 +574,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_owner_address_city: 'London',
@@ -613,8 +613,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -647,8 +647,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -681,8 +681,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -715,8 +715,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -749,8 +749,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -780,8 +780,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -814,8 +814,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -848,8 +848,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -883,8 +883,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -917,8 +917,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -951,8 +951,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -985,8 +985,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -1019,8 +1019,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -1054,8 +1054,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -1091,8 +1091,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_owner_address_city: 'London',
@@ -1129,21 +1129,21 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_email: person.email,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
         relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       await req.post()
       const owners = await global.api.user.connect.BeneficialOwners.get(req)

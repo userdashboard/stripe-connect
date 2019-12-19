@@ -406,9 +406,9 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_email: user.profile.contactEmail
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
@@ -426,9 +426,9 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_email: user.profile.contactEmail
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -447,15 +447,15 @@ describe('/account/connect/edit-individual-registration', () => {
       req.session = user.session
       req.body = {
         individual_address_city: 'Brisbane',
-        individual_address_state: 'QLD',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '4000',
+        individual_address_state: 'QLD',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_email: user.profile.contactEmail
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
@@ -471,15 +471,15 @@ describe('/account/connect/edit-individual-registration', () => {
       req.session = user.session
       req.body = {
         individual_address_city: 'Brisbane',
-        individual_address_state: 'QLD',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '4000',
+        individual_address_state: 'QLD',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_email: user.profile.contactEmail
+        individual_last_name: user.profile.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -501,9 +501,9 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_email: user.profile.contactEmail
+        individual_last_name: user.profile.lastName
       }
       await testEachFieldAsNull(req)
     })
@@ -541,11 +541,11 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        // individual_id_number: '000000000',
         individual_address_city: 'Vancouver',
-        individual_address_state: 'BC',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: 'V5K 0A1',
-        // individual_id_number: '000000000',
+        individual_address_state: 'BC',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -565,11 +565,11 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        // individual_id_number: '000000000',
         individual_address_city: 'Vancouver',
-        individual_address_state: 'BC',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: 'V5K 0A1',
-        // individual_id_number: '000000000',
+        individual_address_state: 'BC',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -887,9 +887,9 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        // individual_id_number: '000000000',
         individual_address_city: 'Hong Kong',
         individual_address_line1: '123 Sesame St',
-        // individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -909,9 +909,9 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        // individual_id_number: '000000000',
         individual_address_city: 'Hong Kong',
         individual_address_line1: '123 Sesame St',
-        // individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1019,25 +1019,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_line1: '27-15',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_line1: '２７－１５',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_town: '神宮前　３丁目',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_gender: 'female',
         individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         individual_first_name_kanji: '東京都',
+        individual_gender: 'female',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         individual_last_name_kanji: '東京都',
-        individual_phone: '0859-076500',
-        individual_address_kana_postal_code: '1500001',
-        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        individual_address_kana_city: 'ｼﾌﾞﾔ',
-        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        individual_address_kana_line1: '27-15',
-        individual_address_kanji_postal_code: '1500001',
-        individual_address_kanji_state: '東京都',
-        individual_address_kanji_city: '渋谷区',
-        individual_address_kanji_town: '神宮前　３丁目',
-        individual_address_kanji_line1: '２７－１５'
+        individual_phone: '0859-076500'
       }
       await testEachFieldAsNull(req)
     })
@@ -1052,25 +1052,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_line1: '27-15',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_line1: '２７－１５',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_town: '神宮前　３丁目',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_gender: 'female',
         individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         individual_first_name_kanji: '東京都',
+        individual_gender: 'female',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         individual_last_name_kanji: '東京都',
-        individual_phone: '0859-076500',
-        individual_address_kana_postal_code: '1500001',
-        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        individual_address_kana_city: 'ｼﾌﾞﾔ',
-        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        individual_address_kana_line1: '27-15',
-        individual_address_kanji_postal_code: '1500001',
-        individual_address_kanji_state: '東京都',
-        individual_address_kanji_city: '渋谷区',
-        individual_address_kanji_town: '神宮前　３丁目',
-        individual_address_kanji_line1: '２７－１５'
+        individual_phone: '0859-076500'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1347,9 +1347,9 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        // individual_id_number: '000000000',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '339696',
-        // individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1369,9 +1369,9 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        // individual_id_number: '000000000',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '339696',
-        // individual_id_number: '000000000',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
@@ -1395,6 +1395,7 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        // individual_id_number: '000000000',
         business_profile_mcc: '7997',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
@@ -1404,12 +1405,11 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_ssn_last_4: '0000',
-        // individual_id_number: '000000000',
-        individual_phone: '456-123-7890',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-123-7890',
+        individual_ssn_last_4: '0000'
       }
       await testEachFieldAsNull(req)
     })
@@ -1424,21 +1424,21 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        // individual_id_number: '000000000',
         business_profile_mcc: '7997',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
-        individual_ssn_last_4: '0000',
-        // individual_id_number: '000000000',
         individual_address_state: 'NY',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
-        individual_phone: '456-123-7890',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-123-7890',
+        individual_ssn_last_4: '0000'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

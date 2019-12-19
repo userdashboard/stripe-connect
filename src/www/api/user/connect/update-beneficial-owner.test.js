@@ -12,17 +12,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -40,17 +40,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -91,17 +91,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user2.account
         req.session = user2.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -141,17 +141,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: '',
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: '',
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -191,17 +191,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: '',
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: ''
         }
         let errorMessage
         try {
@@ -241,17 +241,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: '',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: '',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -289,17 +289,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'invalid',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'invalid',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -339,17 +339,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: '',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: '',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -387,17 +387,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'invalid',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'invalid',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -437,17 +437,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: '',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -487,17 +487,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: '',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -537,17 +537,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: '',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -587,17 +587,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -635,17 +635,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: 'invalid',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -685,17 +685,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -733,17 +733,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: 'invalid',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -783,17 +783,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: ''
+          relationship_owner_dob_year: '',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -831,17 +831,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: 'invalid'
+          relationship_owner_dob_year: 'invalid',
+          relationship_owner_email: person.email,
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -884,17 +884,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       const body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_state: 'LND',
         relationship_owner_address_city: 'London',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName,
         token: 'sample2'
       }
       req.body = TestHelper.createMultiPart(req, body)
@@ -934,17 +934,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_state: 'LND',
         relationship_owner_address_city: 'London',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       req.body = TestHelper.createMultiPart(req, body)
       const ownerNow = await req.patch()
@@ -983,17 +983,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_state: 'LND',
         relationship_owner_address_city: 'London',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       req.body = TestHelper.createMultiPart(req, body)
       const ownerNow = await req.patch()
@@ -1029,17 +1029,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_email, person.email)
@@ -1072,17 +1072,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_first_name, person.firstName)
@@ -1115,17 +1115,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_last_name, person.lastName)
@@ -1158,17 +1158,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: '123 Sesame St',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_address_line1, '123 Sesame St')
@@ -1202,18 +1202,18 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_line2: 'New info',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_address_line2, 'New info')
@@ -1246,17 +1246,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_address_city, 'London')
@@ -1289,17 +1289,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_address_state, 'LND')
@@ -1332,17 +1332,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'IE',
         relationship_owner_address_city: 'Dublin',
-        relationship_owner_address_state: 'LM',
+        relationship_owner_address_country: 'IE',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'Dublin 1',
+        relationship_owner_address_state: 'LM',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_address_country, 'IE')
@@ -1375,17 +1375,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AB',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_address_postal_code, 'EC1A 1AB')
@@ -1418,17 +1418,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '2',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_dob_day, '1')
@@ -1461,17 +1461,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '2',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_dob_month, '2')
@@ -1504,17 +1504,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_dob_year, '1950')
@@ -1549,17 +1549,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_state: 'LND',
         relationship_owner_address_city: 'London',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
       assert.strictEqual(ownerNow.relationship_owner_first_name, 'Modified name')
@@ -1580,21 +1580,21 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       await req.post()
       const owners = await global.api.user.connect.BeneficialOwners.get(req)
@@ -1604,17 +1604,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req2.account = user.account
       req2.session = user.session
       req2.body = {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_state: 'LND',
         relationship_owner_address_city: 'London',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: 'Modified name',
+        relationship_owner_last_name: person.lastName
       }
       await req2.post()
       const ownerNow = await global.api.user.connect.BeneficialOwner.get(req2)

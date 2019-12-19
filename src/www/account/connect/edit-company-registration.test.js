@@ -22,7 +22,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'US', type: 'individual'
+        country: 'US'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -81,7 +81,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'AU', type: 'company'
+        country: 'AU'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -95,7 +95,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have AT-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'AT', type: 'company'
+        country: 'AT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -106,7 +106,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have AU-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'AU', type: 'company'
+        country: 'AU'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -117,7 +117,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have BE-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'BE', type: 'company'
+        country: 'BE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -128,7 +128,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have CA-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'CA', type: 'company'
+        country: 'CA'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -139,7 +139,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have CH-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'CH', type: 'company'
+        country: 'CH'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -150,7 +150,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have DE-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE', type: 'company'
+        country: 'DE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -161,7 +161,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have DK-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DK', type: 'company'
+        country: 'DK'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -172,7 +172,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have ES-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'ES', type: 'company'
+        country: 'ES'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -183,7 +183,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have FI-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'FI', type: 'company'
+        country: 'FI'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -194,7 +194,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have FR-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'FR', type: 'company'
+        country: 'FR'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -205,7 +205,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have GB-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'GB', type: 'company'
+        country: 'GB'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -216,7 +216,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have HK-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'HK', type: 'company'
+        country: 'HK'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -227,7 +227,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have IE-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'IE', type: 'company'
+        country: 'IE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -238,7 +238,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have IT-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'IT', type: 'company'
+        country: 'IT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -249,7 +249,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have JP-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'JP', type: 'company'
+        country: 'JP'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -260,7 +260,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have LU-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'LU', type: 'company'
+        country: 'LU'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -271,7 +271,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have NL-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NL', type: 'company'
+        country: 'NL'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -282,7 +282,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have NO-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NO', type: 'company'
+        country: 'NO'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -293,7 +293,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have NZ-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NZ', type: 'company'
+        country: 'NZ'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -304,7 +304,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have PT-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'PT', type: 'company'
+        country: 'PT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -315,7 +315,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have SE-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'SE', type: 'company'
+        country: 'SE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -326,7 +326,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have SG-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'SG', type: 'company'
+        country: 'SG'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -337,7 +337,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should have US-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'US', type: 'company'
+        country: 'US'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -370,7 +370,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should refresh and load states for posted company address', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'AU', type: 'company'
+        country: 'AU'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -390,17 +390,17 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject AT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'AT', type: 'company'
+        country: 'AT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
+        company_address_city: 'Vienna',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
-        company_tax_id: '8',
-        company_address_city: 'Vienna'
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -408,14 +408,14 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update AT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'AT', type: 'company'
+        country: 'AT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_country: 'AT',
         company_address_city: 'Vienna',
+        company_address_country: 'AT',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_name: 'Company',
@@ -430,16 +430,16 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject AU invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'AU', type: 'company'
+        country: 'AU'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
         company_address_city: 'Brisbane',
-        company_address_state: 'QLD',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '4000',
+        company_address_state: 'QLD',
         company_name: 'Company',
         company_tax_id: '8'
       }
@@ -449,16 +449,16 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update AU information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'AU', type: 'company'
+        country: 'AU'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
         company_address_city: 'Brisbane',
-        company_address_state: 'QLD',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '4000',
+        company_address_state: 'QLD',
         company_name: 'Company',
         company_tax_id: '8'
       }
@@ -471,7 +471,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject BE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'BE', type: 'company'
+        country: 'BE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -489,7 +489,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update BE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'BE', type: 'company'
+        country: 'BE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -510,16 +510,16 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject CA invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'CA', type: 'company'
+        country: 'CA'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
         company_address_city: 'Vancouver',
-        company_address_state: 'BC',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: 'V5K 0A1',
+        company_address_state: 'BC',
         company_name: 'Company',
         company_tax_id: '8'
       }
@@ -529,16 +529,16 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update CA information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'CA', type: 'company'
+        country: 'CA'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
         company_address_city: 'Vancouver',
-        company_address_state: 'BC',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: 'V5K 0A1',
+        company_address_state: 'BC',
         company_name: 'Company',
         company_tax_id: '8'
       }
@@ -551,17 +551,17 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject CH invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'CH', type: 'company'
+        country: 'CH'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
         company_address_city: 'Bern',
-        company_address_state: 'BE',
         company_address_country: 'CH',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
+        company_address_state: 'BE',
         company_name: 'Company',
         company_tax_id: '8'
       }
@@ -571,17 +571,17 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update CH information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'CH', type: 'company'
+        country: 'CH'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
         company_address_city: 'Bern',
-        company_address_state: 'BE',
         company_address_country: 'CH',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
+        company_address_state: 'BE',
         company_name: 'Company',
         company_tax_id: '8'
       }
@@ -594,7 +594,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject DE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE', type: 'company'
+        country: 'DE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -612,7 +612,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update DE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE', type: 'company'
+        country: 'DE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -633,7 +633,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject DK invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DK', type: 'company'
+        country: 'DK'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -651,7 +651,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update DK information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DK', type: 'company'
+        country: 'DK'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -672,7 +672,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject ES invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'ES', type: 'company'
+        country: 'ES'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -690,7 +690,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update ES information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'ES', type: 'company'
+        country: 'ES'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -711,7 +711,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject FI invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'FI', type: 'company'
+        country: 'FI'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -729,7 +729,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update FI information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'FI', type: 'company'
+        country: 'FI'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -750,7 +750,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject FR invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'FR', type: 'company'
+        country: 'FR'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -768,7 +768,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update FR information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'FR', type: 'company'
+        country: 'FR'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -789,7 +789,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject GB invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'GB', type: 'company'
+        country: 'GB'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -807,7 +807,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update GB information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'GB', type: 'company'
+        country: 'GB'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -828,7 +828,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject HK invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'HK', type: 'company'
+        country: 'HK'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -845,7 +845,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update HK information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'HK', type: 'company'
+        country: 'HK'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -865,15 +865,15 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject IE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'IE', type: 'company'
+        country: 'IE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
         company_address_city: 'Dublin',
-        company_address_state: 'Dublin',
         company_address_line1: '123 Park Lane',
+        company_address_state: 'Dublin',
         company_name: 'Company',
         company_tax_id: '8'
       }
@@ -883,15 +883,15 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update IE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'IE', type: 'company'
+        country: 'IE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
         company_address_city: 'Dublin',
-        company_address_state: 'Dublin',
         company_address_line1: '123 Park Lane',
+        company_address_state: 'Dublin',
         company_name: 'Company',
         company_tax_id: '8'
       }
@@ -904,7 +904,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject IT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'IT', type: 'company'
+        country: 'IT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -922,7 +922,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update IT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'IT', type: 'company'
+        country: 'IT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -943,27 +943,27 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject JP invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'JP', type: 'company'
+        country: 'JP'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -971,27 +971,27 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update JP information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'JP', type: 'company'
+        country: 'JP'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -1002,7 +1002,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject LU invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'LU', type: 'company'
+        country: 'LU'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1020,7 +1020,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update LU information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'LU', type: 'company'
+        country: 'LU'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1041,7 +1041,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject NL invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NL', type: 'company'
+        country: 'NL'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1059,7 +1059,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update NL information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NL', type: 'company'
+        country: 'NL'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1080,7 +1080,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject NO invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NO', type: 'company'
+        country: 'NO'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1098,7 +1098,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update NO information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NO', type: 'company'
+        country: 'NO'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1119,7 +1119,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject NZ invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NZ', type: 'company'
+        country: 'NZ'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1137,7 +1137,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update NZ information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NZ', type: 'company'
+        country: 'NZ'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1158,7 +1158,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject PT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'PT', type: 'company'
+        country: 'PT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1176,7 +1176,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update PT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'PT', type: 'company'
+        country: 'PT'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1197,7 +1197,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject SE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'SE', type: 'company'
+        country: 'SE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1215,7 +1215,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update SE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'SE', type: 'company'
+        country: 'SE'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1236,7 +1236,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject SG invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'SG', type: 'company'
+        country: 'SG'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1253,7 +1253,7 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update SG information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'SG', type: 'company'
+        country: 'SG'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1273,21 +1273,21 @@ describe('/account/connect/edit-company-registration', () => {
     it('should reject US invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'US', type: 'company'
+        country: 'US'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       await testEachFieldAsNull(req)
     })
@@ -1295,21 +1295,21 @@ describe('/account/connect/edit-company-registration', () => {
     it('should update US information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'US', type: 'company'
+        country: 'US'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

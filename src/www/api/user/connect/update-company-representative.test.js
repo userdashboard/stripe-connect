@@ -148,26 +148,26 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_percent_owned: 'invalid',
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_country: 'US',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007',
+          relationship_representative_address_state: 'NY',
           relationship_representative_dob_day: '7',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1951',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_percent_owned: 'invalid',
+          relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
+          relationship_representative_ssn_last_4: '0000'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -191,22 +191,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -228,22 +228,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: 'invalid',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -267,22 +267,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -304,22 +304,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: 'invalid',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -343,22 +343,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -380,22 +380,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: 'invalid',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -419,22 +419,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: '',
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -458,20 +458,20 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: '',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_phone: '456-789-0123'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -495,22 +495,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: '',
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: '',
           relationship_representative_phone: '456-789-0123',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -534,22 +534,22 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_line1: '123 Sesame St',
+          relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_phone: '',
-          relationship_representative_address_city: 'Vienna',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020'
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -573,26 +573,26 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_country: 'US',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007',
+          relationship_representative_address_state: 'NY',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_id_number: '000000000',
           relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_id_number: '000000000',
-          relationship_representative_ssn_last_4: '',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
+          relationship_representative_ssn_last_4: ''
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -616,26 +616,26 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_country: 'US',
+          relationship_representative_address_line1: '',
+          relationship_representative_address_postal_code: '10007',
+          relationship_representative_address_state: 'NY',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_id_number: '000000000',
           relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_id_number: '000000000',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '',
-          relationship_representative_address_postal_code: '10007'
+          relationship_representative_ssn_last_4: '0000'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -659,26 +659,26 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: '',
+          relationship_representative_address_country: 'US',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007',
+          relationship_representative_address_state: 'NY',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_id_number: '000000000',
           relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_id_number: '000000000',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: '',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
+          relationship_representative_ssn_last_4: '0000'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -702,26 +702,26 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_country: 'US',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007',
+          relationship_representative_address_state: '',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_id_number: '000000000',
           relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_id_number: '000000000',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: '',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
+          relationship_representative_ssn_last_4: '0000'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -745,26 +745,26 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_country: '',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007',
+          relationship_representative_address_state: 'NY',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_id_number: '000000000',
           relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_id_number: '000000000',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: '',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
+          relationship_representative_ssn_last_4: '0000'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -786,26 +786,26 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_country: 'invalid',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '10007',
+          relationship_representative_address_state: 'NY',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_id_number: '000000000',
           relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_id_number: '000000000',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'invalid',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007'
+          relationship_representative_ssn_last_4: '0000'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -829,26 +829,26 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
+          relationship_representative_address_city: 'New York',
+          relationship_representative_address_country: 'US',
+          relationship_representative_address_line1: '285 Fulton St',
+          relationship_representative_address_postal_code: '',
+          relationship_representative_address_state: 'NY',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_id_number: '000000000',
           relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_id_number: '000000000',
-          relationship_representative_ssn_last_4: '0000',
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: ''
+          relationship_representative_ssn_last_4: '0000'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -872,28 +872,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -917,28 +917,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: '',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: '',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -962,28 +962,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: '',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: '',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -1007,28 +1007,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: '',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: '',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -1052,28 +1052,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -1097,28 +1097,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -1142,28 +1142,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -1187,28 +1187,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -1232,28 +1232,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '２７－１５',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '',
-          relationship_representative_address_kanji_line1: '２７－１５'
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -1277,28 +1277,28 @@ describe('/api/user/connect/update-company-representative', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const body = {
-          relationship_representative_gender: 'female',
+          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+          relationship_representative_address_kana_line1: '27-15',
+          relationship_representative_address_kana_postal_code: '1500001',
+          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+          relationship_representative_address_kanji_city: '渋谷区',
+          relationship_representative_address_kanji_line1: '',
+          relationship_representative_address_kanji_postal_code: '1500001',
+          relationship_representative_address_kanji_state: '東京都',
+          relationship_representative_address_kanji_town: '神宮前　３丁目',
           relationship_representative_dob_day: '1',
           relationship_representative_dob_month: '1',
           relationship_representative_dob_year: '1950',
           relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-          relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          relationship_representative_address_kana_line1: '27-15',
-          relationship_representative_address_kana_postal_code: '1500001',
           relationship_representative_first_name_kanji: '東京都',
-          relationship_representative_last_name_kanji: '東京都',
-          relationship_representative_address_kanji_postal_code: '1500001',
-          relationship_representative_address_kanji_state: '東京都',
-          relationship_representative_address_kanji_city: '渋谷区',
-          relationship_representative_address_kanji_town: '神宮前　３丁目',
-          relationship_representative_address_kanji_line1: ''
+          relationship_representative_gender: 'female',
+          relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+          relationship_representative_last_name_kanji: '東京都'
         }
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -1324,26 +1324,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        token: 'token',
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
         relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        token: 'token'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1361,25 +1361,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1397,25 +1397,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '11',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1433,25 +1433,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1469,25 +1469,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1506,25 +1506,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1543,25 +1543,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1579,25 +1579,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1615,25 +1615,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1651,25 +1651,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1687,32 +1687,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1730,25 +1730,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1766,25 +1766,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1',
+        relationship_representative_address_state: 'BC',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_last_name: user.profile.lastName,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_address_country: 'CA',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'V5K 0A1'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1802,25 +1802,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1838,25 +1838,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1874,25 +1874,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1910,25 +1910,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1946,25 +1946,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '7',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1982,26 +1982,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_dob_day: '7',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1951',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
         relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
         relationship_representative_address_country: 'US',
         relationship_representative_address_line1: '285 Fulton St',
         relationship_representative_address_line2: 'Another detail',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_dob_day: '7',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1951',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner',
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2019,26 +2019,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_percent_owned: 100,
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1',
+        relationship_representative_address_state: 'BC',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_percent_owned: 100,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_address_country: 'CA',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'V5K 0A1'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2056,26 +2056,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_percent_owned: 100,
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1',
+        relationship_representative_address_state: 'BC',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_percent_owned: 100,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_address_country: 'CA',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'V5K 0A1'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2093,26 +2093,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_percent_owned: 100,
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1',
+        relationship_representative_address_state: 'BC',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_director: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_percent_owned: 100,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_address_country: 'CA',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'V5K 0A1'
+        relationship_representative_relationship_director: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2130,26 +2130,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_percent_owned: 100,
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1',
+        relationship_representative_address_state: 'BC',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_id_number: '000000000',
         relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_percent_owned: 100,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_address_country: 'CA',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'V5K 0A1'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2167,32 +2167,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2210,32 +2210,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2253,32 +2253,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2296,32 +2296,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2339,32 +2339,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2382,32 +2382,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2425,32 +2425,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2468,32 +2468,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2511,32 +2511,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2554,32 +2554,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2597,32 +2597,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2640,32 +2640,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2683,32 +2683,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2726,32 +2726,32 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前　３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前　３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2771,26 +2771,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'Vienna',
+        relationship_representative_address_country: 'AT',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '1020',
+        relationship_representative_address_state: '1',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_country: 'AT',
-        relationship_representative_address_city: 'Vienna',
-        relationship_representative_address_state: '1',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2810,26 +2810,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'Brisbane',
+        relationship_representative_address_country: 'AU',
+        relationship_representative_address_line1: '845 Oxford St',
+        relationship_representative_address_postal_code: '4000',
+        relationship_representative_address_state: 'QLD',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Brisbane',
-        relationship_representative_address_state: 'QLD',
-        relationship_representative_address_country: 'AU',
-        relationship_representative_address_line1: '845 Oxford St',
-        relationship_representative_address_postal_code: '4000'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2849,26 +2849,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Brussels',
-        relationship_representative_address_state: 'BRU',
         relationship_representative_address_country: 'BE',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1020',
+        relationship_representative_address_state: 'BRU',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_phone: '456-789-0123',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2888,26 +2888,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_id_number: '7',
+        relationship_representative_address_city: 'Vancouver',
+        relationship_representative_address_country: 'CA',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'V5K 0A1',
+        relationship_representative_address_state: 'BC',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_id_number: '7',
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_percent_ownership: '0',
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_address_country: 'CA',
-        relationship_representative_address_postal_code: 'V5K 0A1',
-        relationship_representative_percent_ownership: '0'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2927,26 +2927,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Bern',
-        relationship_representative_address_state: 'BE',
         relationship_representative_address_country: 'CH',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1020',
+        relationship_representative_address_state: 'BE',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -2966,26 +2966,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Berlin',
-        relationship_representative_address_state: 'BE',
         relationship_representative_address_country: 'DE',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '01067',
+        relationship_representative_address_state: 'BE',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3005,26 +3005,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Copenhagen',
-        relationship_representative_address_state: '147',
         relationship_representative_address_country: 'DK',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1000',
+        relationship_representative_address_state: '147',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3044,26 +3044,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Talinn',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_state: '37',
         relationship_representative_address_country: 'EE',
+        relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '10128',
+        relationship_representative_address_state: '37',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3083,26 +3083,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Madrid',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_state: 'AN',
         relationship_representative_address_country: 'ES',
+        relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '03179',
+        relationship_representative_address_state: 'AN',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3122,26 +3122,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Helsinki',
-        relationship_representative_address_state: 'AL',
         relationship_representative_address_country: 'FI',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00990',
+        relationship_representative_address_state: 'AL',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3160,26 +3160,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Paris',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_state: 'A',
         relationship_representative_address_country: 'FR',
+        relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '75001',
+        relationship_representative_address_state: 'A',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3199,26 +3199,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'London',
-        relationship_representative_address_state: 'LND',
         relationship_representative_address_country: 'GB',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: 'EC1A 1AA',
+        relationship_representative_address_state: 'LND',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3238,26 +3238,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'Hong Kong',
+        relationship_representative_address_country: 'HK',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '999077',
+        relationship_representative_address_state: 'HK',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_id_number: '000000000',
-        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_percent_ownership: '0',
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Hong Kong',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_state: 'HK',
-        relationship_representative_address_postal_code: '999077',
-        relationship_representative_address_country: 'HK',
-        relationship_representative_percent_ownership: '0'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3277,26 +3277,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Dublin',
-        relationship_representative_address_state: 'D',
         relationship_representative_address_country: 'IE',
         relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: 'Dublin 1',
+        relationship_representative_address_state: 'D',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_postal_code: 'Dublin 1'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3316,26 +3316,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Rome',
-        relationship_representative_address_state: '65',
         relationship_representative_address_country: 'IT',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00010',
+        relationship_representative_address_state: '65',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3355,30 +3355,30 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_representative_gender: 'female',
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前 ３丁目',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
         relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
         relationship_representative_first_name_kanji: '東京都',
-        relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_town: '神宮前 ３丁目',
-        relationship_representative_address_kanji_line1: '２７－１５'
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_last_name_kanji: '東京都'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const stripeAccountNow = await req.patch()
@@ -3398,26 +3398,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Luxemburg',
+        relationship_representative_address_country: 'LU',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1623',
         relationship_representative_address_state: 'L',
-        relationship_representative_address_country: 'LU',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3437,26 +3437,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Amsterdam',
+        relationship_representative_address_country: 'NL',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1071 JA',
         relationship_representative_address_state: 'DR',
-        relationship_representative_address_country: 'NL',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3475,26 +3475,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Oslo',
+        relationship_representative_address_country: 'NO',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '0001',
         relationship_representative_address_state: '02',
-        relationship_representative_address_country: 'NO',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3514,26 +3514,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'Auckland',
+        relationship_representative_address_country: 'NZ',
+        relationship_representative_address_line1: '844 Fleet Street',
+        relationship_representative_address_postal_code: '6011',
+        relationship_representative_address_state: 'N',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'Auckland',
-        relationship_representative_address_postal_code: '6011',
-        relationship_representative_address_line1: '844 Fleet Street',
-        relationship_representative_address_state: 'N',
-        relationship_representative_address_country: 'NZ'
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3553,26 +3553,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Lisbon',
+        relationship_representative_address_country: 'PT',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '4520',
         relationship_representative_address_state: '01',
-        relationship_representative_address_country: 'PT',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3592,26 +3592,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
         relationship_representative_address_city: 'Stockholm',
+        relationship_representative_address_country: 'SE',
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '00150',
         relationship_representative_address_state: 'K',
-        relationship_representative_address_country: 'SE',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123'
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3631,26 +3631,26 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'Singapore',
+        relationship_representative_address_country: 'SG',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '339696',
+        relationship_representative_address_state: 'SG',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
         relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '339696',
-        relationship_representative_address_city: 'Singapore',
-        relationship_representative_address_state: 'SG',
-        relationship_representative_address_country: 'SG',
-        relationship_representative_phone: '456-789-0123',
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_id_number: '000000000',
+        relationship_representative_last_name: user.profile.lastName,
         relationship_representative_percent_ownership: '0',
-        relationship_representative_id_number: '000000000'
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3670,25 +3670,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -3712,25 +3712,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       await req.post()
       const account = await global.api.user.connect.StripeAccount.get(req)
@@ -3740,25 +3740,25 @@ describe('/api/user/connect/update-company-representative', () => {
       req2.account = user.account
       req2.session = user.session
       req2.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req2.body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       await req2.post()
       const accountNow = await global.api.user.connect.StripeAccount.get(req2)

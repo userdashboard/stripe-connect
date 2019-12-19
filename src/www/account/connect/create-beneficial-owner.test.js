@@ -37,8 +37,8 @@ describe('/account/connect/create-beneficial-owner', () => {
         company_tax_id: '00000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_country: 'DE',
         relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_country: 'DE',
         relationship_representative_address_line1: 'First Street',
         relationship_representative_address_postal_code: '01067',
         relationship_representative_address_state: 'BW',
@@ -142,21 +142,21 @@ describe('/account/connect/create-beneficial-owner', () => {
       ]
       for (const field of fields) {
         req.uploads = {
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         const person = TestHelper.nextIdentity()
         req.body = {
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_address_country: 'GB',
           relationship_owner_address_city: 'London',
-          relationship_owner_address_state: 'LND',
+          relationship_owner_address_country: 'GB',
           relationship_owner_address_line1: 'A building',
           relationship_owner_address_postal_code: 'EC1A 1AA',
+          relationship_owner_address_state: 'LND',
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950'
+          relationship_owner_dob_year: '1950',
+          relationship_owner_first_name: person.firstName,
+          relationship_owner_last_name: person.lastName
         }
         if (req.uploads[field]) {
           delete (req.uploads[field])
@@ -186,20 +186,20 @@ describe('/account/connect/create-beneficial-owner', () => {
       }
       const person = TestHelper.nextIdentity()
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
-        relationship_owner_address_state: 'LND',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -222,20 +222,20 @@ describe('/account/connect/create-beneficial-owner', () => {
       }
       const person = TestHelper.nextIdentity()
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_state: 'LND',
         relationship_owner_address_city: 'London',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -254,25 +254,25 @@ describe('/account/connect/create-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const person = TestHelper.nextIdentity()
       req.body = {
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'GB',
         relationship_owner_address_city: 'London',
+        relationship_owner_address_country: 'GB',
         relationship_owner_address_line1: 'A building',
-        relationship_owner_address_state: 'LND',
         relationship_owner_address_postal_code: 'EC1A 1AA',
+        relationship_owner_address_state: 'LND',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

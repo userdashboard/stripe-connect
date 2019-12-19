@@ -27,15 +27,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -58,15 +58,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -130,16 +130,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
-
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -163,15 +162,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user2.account
         req.session = user2.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -194,14 +193,14 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'Vienna',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '1020',
           company_address_state: '1',
           company_name: '',
-          company_tax_id: '8',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -224,15 +223,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'Vienna',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '1020',
           company_address_state: '1',
           company_name: 'Company',
-          company_tax_id: '',
           company_phone: '456-789-0123',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_tax_id: ''
         }
         let errorMessage
         try {
@@ -255,15 +254,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: '',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '1020',
           company_address_state: '1',
           company_name: 'Company',
-          company_tax_id: '8',
           company_phone: '456-789-0123',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -286,15 +285,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: '',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -315,15 +314,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'invalid',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -346,16 +345,16 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_address_country: 'AT',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'Vienna',
+          company_address_country: 'AT',
           company_address_line1: '',
           company_address_postal_code: '1020',
           company_address_state: '1',
-          company_phone: '456-789-0123',
           company_name: 'Company',
-          company_tax_id: '8',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_phone: '456-789-0123',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -378,14 +377,14 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'Vienna',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '',
           company_address_state: '1',
           company_name: 'Company',
-          company_tax_id: '8',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -408,15 +407,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
-          business_profile_mcc: '',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -437,15 +436,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: 'invalid',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
-          business_profile_mcc: 'invalid',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -468,15 +467,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: '',
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
-          business_profile_mcc: '8931',
-          business_profile_url: ''
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -497,15 +496,15 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: 'invalid',
           company_address_city: 'New York',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
-          business_profile_mcc: '8931',
-          business_profile_url: 'invalid'
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         }
         let errorMessage
         try {
@@ -530,15 +529,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8',
         token: 'sample2'
       }
       const companyNow = await req.patch()
@@ -556,19 +555,19 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Brussels',
         company_address_line1: '123 Park Lane',
-        company_address_state: 'BRU',
         company_address_postal_code: '1020',
+        company_address_state: 'BRU',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       req.uploads = {
-        company_verification_document_front: TestHelper['success_id_scan_front.png'],
-        company_verification_document_back: TestHelper['success_id_scan_back.png']
+        company_verification_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, req.body)
       const companyNow = await req.patch()
@@ -587,19 +586,19 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Brussels',
         company_address_line1: '123 Park Lane',
-        company_address_state: 'BRU',
         company_address_postal_code: '1020',
+        company_address_state: 'BRU',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       req.uploads = {
-        company_verification_document_front: TestHelper['success_id_scan_front.png'],
-        company_verification_document_back: TestHelper['success_id_scan_back.png']
+        company_verification_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, req.body)
       const companyNow = await req.patch()
@@ -618,15 +617,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -643,15 +642,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://updated.com',
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://updated.com'
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -668,15 +667,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_product_description: 'thing',
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_product_description: 'thing'
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -693,15 +692,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '111-222-3333',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '111-222-3333',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -719,15 +718,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Updated name',
-        company_tax_id: '8',
-        company_phone: '111-222-3333',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Updated name',
+        company_phone: '111-222-3333',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -744,15 +743,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '111-222-3333',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10008',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '111-222-3333',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -769,15 +768,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '111-222-3333',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Providence',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10008',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '111-222-3333',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -794,15 +793,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '111-222-3333',
+        business_profile_mcc: '7623',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10008',
         company_address_state: 'NJ',
-        business_profile_mcc: '7623',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '111-222-3333',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -819,15 +818,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '111-222-3333',
+        business_profile_mcc: '7623',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10008',
         company_address_state: 'NJ',
-        business_profile_mcc: '7623',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '111-222-3333',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -844,16 +843,16 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '111-222-3333',
+        business_profile_mcc: '7623',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_line2: 'Optional',
         company_address_postal_code: '10008',
         company_address_state: 'NJ',
-        business_profile_mcc: '7623',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '111-222-3333',
+        company_tax_id: '8'
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
@@ -870,23 +869,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -903,23 +902,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -936,23 +935,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -969,23 +968,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1002,23 +1001,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1035,23 +1034,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1068,23 +1067,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1101,23 +1100,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1134,23 +1133,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1167,23 +1166,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1200,23 +1199,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1233,23 +1232,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1268,15 +1267,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Vienna',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
         company_address_state: '1',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1295,15 +1294,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Brisbane',
-        company_address_state: 'QLD',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '4000',
+        company_address_state: 'QLD',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-789-0123',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1322,19 +1321,19 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       const body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Brussels',
         company_address_line1: '123 Park Lane',
-        company_address_state: 'BRU',
         company_address_postal_code: '1020',
+        company_address_state: 'BRU',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       req.uploads = {
-        company_verification_document_front: TestHelper['success_id_scan_front.png'],
-        company_verification_document_back: TestHelper['success_id_scan_back.png']
+        company_verification_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
@@ -1354,15 +1353,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Vancouver',
-        company_address_state: 'BC',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: 'V5K 0A1',
+        company_address_state: 'BC',
         company_name: 'Company',
         company_phone: '456-789-0123',
-        company_tax_id: '8',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1381,15 +1380,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Bern',
-        company_address_state: 'BE',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
+        company_address_state: 'BE',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1408,15 +1407,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Berlin',
-        company_address_state: 'BE',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '01067',
+        company_address_state: 'BE',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1435,15 +1434,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Copenhagen',
-        company_address_state: '147',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1000',
+        company_address_state: '147',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1462,15 +1461,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Tallinn',
-        company_address_state: '37',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '10128',
+        company_address_state: '37',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1489,15 +1488,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Madrid',
-        company_address_state: 'AN',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '03179',
+        company_address_state: 'AN',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1516,15 +1515,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Helsinki',
-        company_address_state: 'AL',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00990',
+        company_address_state: 'AL',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1542,15 +1541,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Paris',
-        company_address_state: 'A',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '75001',
+        company_address_state: 'A',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1569,15 +1568,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'London',
-        company_address_state: 'LND',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '75001',
+        company_address_state: 'LND',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1596,15 +1595,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_address_city: 'Hong Kong',
-        company_address_state: 'HK',
-        company_address_postal_code: '00000',
-        company_address_line1: '123 Park Lane',
-        company_phone: '456-789-0234',
-        company_name: 'Company',
-        company_tax_id: '8',
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        company_address_city: 'Hong Kong',
+        company_address_line1: '123 Park Lane',
+        company_address_postal_code: '00000',
+        company_address_state: 'HK',
+        company_name: 'Company',
+        company_phone: '456-789-0234',
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1623,15 +1622,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Dublin',
-        company_address_state: 'D',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: 'Dublin 1',
+        company_address_state: 'D',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1650,15 +1649,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Rome',
-        company_address_state: '65',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00010',
+        company_address_state: '65',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1677,23 +1676,23 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_tax_id: '8',
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_name: 'Company',
-        company_phone: '011-271-6677',
-        company_name_kana: 'ﾄｳｷﾖｳﾄ',
-        company_name_kanji: '東京都',
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
         company_address_kana_postal_code: '1500001',
         company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_city: 'ｼﾌﾞﾔ',
         company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kana_line1: '27-15',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
         company_address_kanji_postal_code: '1500001',
         company_address_kanji_state: '東京都',
-        company_address_kanji_city: '渋谷区',
         company_address_kanji_town: '神宮前　３丁目',
-        company_address_kanji_line1: '２７－１５'
+        company_name: 'Company',
+        company_name_kana: 'ﾄｳｷﾖｳﾄ',
+        company_name_kanji: '東京都',
+        company_phone: '011-271-6677',
+        company_tax_id: '8'
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
@@ -1712,15 +1711,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Luxemburg',
         company_address_line1: '123 Park Lane',
-        company_address_state: 'L',
         company_address_postal_code: '1623',
+        company_address_state: 'L',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1739,15 +1738,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Amsterdam',
-        company_address_state: 'DR',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '1071 JA',
+        company_address_state: 'DR',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1765,15 +1764,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Oslo',
         company_address_line1: '123 Park Lane',
-        company_address_state: '02',
         company_address_postal_code: '0001',
+        company_address_state: '02',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1792,15 +1791,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Auckland',
-        company_address_state: 'N',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '6011',
+        company_address_state: 'N',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1819,15 +1818,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Lisbon',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '4520',
         company_address_state: '01',
         company_name: 'Company',
-        company_tax_id: '8',
         company_phone: '456-123-7890',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1846,15 +1845,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Stockholm',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '00150',
         company_address_state: 'K',
-        company_phone: '456-123-7890',
         company_name: 'Company',
-        company_tax_id: '8',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1873,15 +1872,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        company_address_city: 'Singapore',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '339696',
-        company_address_city: 'Singapore',
         company_address_state: 'SG',
-        company_phone: '456-789-0123',
         company_name: 'Company',
-        company_tax_id: '8',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_phone: '456-789-0123',
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1900,15 +1899,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1931,15 +1930,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       await req.post()
       const account = await global.api.user.connect.StripeAccount.get(req)
@@ -1949,15 +1948,15 @@ describe('/api/user/connect/update-company-registration', () => {
       req2.account = user.account
       req2.session = user.session
       req2.body = {
-        company_name: 'Company',
-        company_tax_id: '8',
-        company_phone: '456-123-7890',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+        company_name: 'Company',
+        company_phone: '456-123-7890',
+        company_tax_id: '8'
       }
       await req2.post()
       const accountNow = await global.api.user.connect.StripeAccount.get(req2)

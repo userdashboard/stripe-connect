@@ -146,27 +146,27 @@ describe('/api/user/connect/reset-company-representative', () => {
       req2.account = user.account
       req2.session = user.session
       req2.uploads = {
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req2.body = {
+        relationship_representative_address_city: 'New York',
+        relationship_representative_address_country: 'US',
+        relationship_representative_address_line1: '285 Fulton St',
+        relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_address_city: 'New York',
-        relationship_representative_ssn_last_4: '0000',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007'
+        relationship_representative_ssn_last_4: '0000'
       }
       await req2.post()
       const req3 = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)

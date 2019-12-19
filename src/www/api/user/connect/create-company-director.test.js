@@ -88,8 +88,8 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_director_first_name: '',
@@ -117,8 +117,8 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_director_first_name: person.firstName,
@@ -146,8 +146,8 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_director_first_name: person.firstName,
@@ -175,8 +175,8 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_director_dob_day: '',
@@ -208,8 +208,8 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_director_dob_day: '1',
@@ -241,8 +241,8 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
           relationship_director_dob_day: '1',
@@ -339,8 +339,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_dob_day: '1',
@@ -364,8 +364,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_dob_day: '1',
@@ -389,8 +389,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_dob_day: '1',
@@ -416,8 +416,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_dob_day: '1',
@@ -443,8 +443,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_dob_day: '1',
@@ -468,8 +468,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_dob_day: '1',
@@ -493,8 +493,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_dob_day: '1',
@@ -518,8 +518,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_address_city: 'London',
@@ -550,8 +550,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_address_city: 'London',
@@ -584,8 +584,8 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
         relationship_director_dob_day: '1',
@@ -616,15 +616,15 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)

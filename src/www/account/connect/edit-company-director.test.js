@@ -190,11 +190,11 @@ describe('/account/connect/edit-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       for (const field in req.body) {
         const value = req.body[field]
@@ -229,11 +229,11 @@ describe('/account/connect/edit-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -266,11 +266,11 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -303,11 +303,11 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

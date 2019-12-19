@@ -37,8 +37,8 @@ describe('/account/connect/delete-beneficial-owner', () => {
         company_tax_id: '00000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_country: 'DE',
         relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_country: 'DE',
         relationship_representative_address_line1: 'First Street',
         relationship_representative_address_postal_code: '01067',
         relationship_representative_address_state: 'BW',

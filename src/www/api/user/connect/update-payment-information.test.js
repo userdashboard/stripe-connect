@@ -11,11 +11,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'gbp',
-          country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '00012345',
+          country: 'GB',
+          currency: 'gbp',
           sort_code: '108800'
         }
         let errorMessage
@@ -33,11 +33,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'gbp',
-          country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '00012345',
+          country: 'GB',
+          currency: 'gbp',
           sort_code: '108800'
         }
         let errorMessage
@@ -62,11 +62,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user2.account
         req.session = user2.session
         req.body = {
-          currency: 'gbp',
-          country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '00012345',
+          country: 'GB',
+          currency: 'gbp',
           sort_code: '108800'
         }
         let errorMessage
@@ -90,10 +90,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: '',
-          country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'company',
+          country: 'AT',
+          currency: '',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -115,10 +115,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'invalid',
-          country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'company',
+          country: 'AT',
+          currency: 'invalid',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -142,10 +142,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'eur',
-          country: '',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'company',
+          country: '',
+          currency: 'eur',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -167,10 +167,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'eur',
-          country: 'invalid',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'company',
+          country: 'invalid',
+          currency: 'eur',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -194,10 +194,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'eur',
-          country: 'AT',
           account_holder_name: '',
           account_holder_type: 'company',
+          country: 'AT',
+          currency: 'eur',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -221,10 +221,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'eur',
-          country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: '',
+          country: 'AT',
+          currency: 'eur',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -246,10 +246,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'eur',
-          country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'invalid',
+          country: 'AT',
+          currency: 'eur',
           iban: 'AT89370400440532013000'
         }
         let errorMessage
@@ -273,10 +273,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'eur',
-          country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'company',
+          country: 'AT',
+          currency: 'eur',
           iban: ''
         }
         let errorMessage
@@ -298,10 +298,10 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'eur',
-          country: 'AT',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'company',
+          country: 'AT',
+          currency: 'eur',
           iban: 'invalid'
         }
         let errorMessage
@@ -325,12 +325,12 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'aud',
-          country: 'AU',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456',
-          bsb_number: ''
+          bsb_number: '',
+          country: 'AU',
+          currency: 'aud'
         }
         let errorMessage
         try {
@@ -351,12 +351,12 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'aud',
-          country: 'AU',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456',
-          bsb_number: 'invalid'
+          bsb_number: 'invalid',
+          country: 'AU',
+          currency: 'aud'
         }
         let errorMessage
         try {
@@ -379,12 +379,12 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'aud',
-          country: 'AU',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '',
-          bsb_number: '110000'
+          bsb_number: '110000',
+          country: 'AU',
+          currency: 'aud'
         }
         let errorMessage
         try {
@@ -405,12 +405,12 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'aud',
-          country: 'AU',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: 'invalid',
-          bsb_number: '110000'
+          bsb_number: '110000',
+          country: 'AU',
+          currency: 'aud'
         }
         let errorMessage
         try {
@@ -433,11 +433,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'cad',
-          country: 'CA',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456789',
+          country: 'CA',
+          currency: 'cad',
           institution_number: '',
           transit_number: '11000'
         }
@@ -460,11 +460,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'cad',
-          country: 'CA',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456789',
+          country: 'CA',
+          currency: 'cad',
           institution_number: 'invalid',
           transit_number: '11000'
         }
@@ -489,11 +489,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'cad',
-          country: 'CA',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456789',
+          country: 'CA',
+          currency: 'cad',
           institution_number: '000',
           transit_number: ''
         }
@@ -516,11 +516,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'cad',
-          country: 'CA',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456789',
+          country: 'CA',
+          currency: 'cad',
           institution_number: '000',
           transit_number: 'invalid'
         }
@@ -545,11 +545,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'gbp',
-          country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '00012345',
+          country: 'GB',
+          currency: 'gbp',
           sort_code: ''
         }
         let errorMessage
@@ -571,11 +571,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'gbp',
-          country: 'GB',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '00012345',
+          country: 'GB',
+          currency: 'gbp',
           sort_code: 'invalid'
         }
         let errorMessage
@@ -599,13 +599,13 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'hkd',
-          country: 'HK',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456',
+          branch_code: '000',
           clearing_code: '',
-          branch_code: '000'
+          country: 'HK',
+          currency: 'hkd'
         }
         let errorMessage
         try {
@@ -626,13 +626,13 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'hkd',
-          country: 'HK',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456',
+          branch_code: '000',
           clearing_code: 'invalid',
-          branch_code: '000'
+          country: 'HK',
+          currency: 'hkd'
         }
         let errorMessage
         try {
@@ -655,13 +655,13 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'hkd',
-          country: 'HK',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456',
+          branch_code: '',
           clearing_code: '110',
-          branch_code: ''
+          country: 'HK',
+          currency: 'hkd'
         }
         let errorMessage
         try {
@@ -682,13 +682,13 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'hkd',
-          country: 'HK',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456',
+          branch_code: 'invalid',
           clearing_code: '110',
-          branch_code: 'invalid'
+          country: 'HK',
+          currency: 'hkd'
         }
         let errorMessage
         try {
@@ -711,13 +711,13 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'jpy',
-          country: 'JP',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '00012345',
           bank_code: '',
-          branch_code: '000'
+          branch_code: '000',
+          country: 'JP',
+          currency: 'jpy'
         }
         let errorMessage
         try {
@@ -738,13 +738,13 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'jpy',
-          country: 'JP',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '00012345',
           bank_code: 'invalid',
-          branch_code: '000'
+          branch_code: '000',
+          country: 'JP',
+          currency: 'jpy'
         }
         let errorMessage
         try {
@@ -767,11 +767,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'nzd',
-          country: 'NZ',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456',
+          country: 'NZ',
+          currency: 'nzd',
           routing_number: ''
         }
         let errorMessage
@@ -793,11 +793,11 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          currency: 'nzd',
-          country: 'NZ',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456',
+          country: 'NZ',
+          currency: 'nzd',
           routing_number: 'invalid'
         }
         let errorMessage
@@ -822,12 +822,12 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'aud',
-        country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
-        bsb_number: '110000'
+        bsb_number: '110000',
+        country: 'AU',
+        currency: 'aud'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data[0].currency, 'aud')
@@ -843,12 +843,12 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'aud',
-        country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
-        bsb_number: '110000'
+        bsb_number: '110000',
+        country: 'AU',
+        currency: 'aud'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data[0].account_holder_type, 'individual')
@@ -864,12 +864,12 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'aud',
-        country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
-        bsb_number: '110000'
+        bsb_number: '110000',
+        country: 'AU',
+        currency: 'aud'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data[0].account_holder_name, `${user.profile.firstName} ${user.profile.lastName}`)
@@ -885,12 +885,12 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'aud',
-        country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
-        bsb_number: '110000'
+        bsb_number: '110000',
+        country: 'AU',
+        currency: 'aud'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data[0].country, 'AU')
@@ -906,10 +906,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'EE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'EE',
+        currency: 'eur',
         iban: 'EE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -926,11 +926,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'gbp',
-        country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '00012345',
+        country: 'GB',
+        currency: 'gbp',
         sort_code: '108800'
       }
       const accountNow = await req.patch()
@@ -947,13 +947,13 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'sgd',
-        country: 'SG',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
         bank_code: '1100',
-        branch_code: '000'
+        branch_code: '000',
+        country: 'SG',
+        currency: 'sgd'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data[0].routing_number, '1100-000')
@@ -969,11 +969,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'nzd',
-        country: 'NZ',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '0000000010',
+        country: 'NZ',
+        currency: 'nzd',
         routing_number: '110000'
       }
       const accountNow = await req.patch()
@@ -990,13 +990,13 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'sgd',
-        country: 'SG',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
         bank_code: '1100',
-        branch_code: '000'
+        branch_code: '000',
+        country: 'SG',
+        currency: 'sgd'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
@@ -1012,12 +1012,12 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'aud',
-        country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
-        bsb_number: '110000'
+        bsb_number: '110000',
+        country: 'AU',
+        currency: 'aud'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data[0].routing_number, '11 0000')
@@ -1033,11 +1033,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'cad',
-        country: 'CA',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456789',
+        country: 'CA',
+        currency: 'cad',
         institution_number: '000',
         transit_number: '11000'
       }
@@ -1055,11 +1055,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'cad',
-        country: 'CA',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456789',
+        country: 'CA',
+        currency: 'cad',
         institution_number: '000',
         transit_number: '11000'
       }
@@ -1077,11 +1077,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'cad',
-        country: 'CA',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456789',
+        country: 'CA',
+        currency: 'cad',
         institution_number: '000',
         transit_number: '11000'
       }
@@ -1101,10 +1101,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'AT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'AT',
+        currency: 'eur',
         iban: 'AT89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1121,12 +1121,12 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'aud',
-        country: 'AU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
-        bsb_number: '110000'
+        bsb_number: '110000',
+        country: 'AU',
+        currency: 'aud'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
@@ -1142,10 +1142,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'BE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'BE',
+        currency: 'eur',
         iban: 'BE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1162,11 +1162,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'cad',
-        country: 'CA',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456789',
+        country: 'CA',
+        currency: 'cad',
         institution_number: '000',
         transit_number: '11000'
       }
@@ -1184,10 +1184,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'CH',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'CH',
+        currency: 'eur',
         iban: 'CH89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1204,10 +1204,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'DE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'DE',
+        currency: 'eur',
         iban: 'DE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1224,10 +1224,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'DK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'DK',
+        currency: 'eur',
         iban: 'DK89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1244,10 +1244,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'EE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'EE',
+        currency: 'eur',
         iban: 'EE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1264,10 +1264,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'ES',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'ES',
+        currency: 'eur',
         iban: 'ES89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1284,10 +1284,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'FI',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'FI',
+        currency: 'eur',
         iban: 'FI89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1304,10 +1304,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'FR',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'FR',
+        currency: 'eur',
         iban: 'FR89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1324,11 +1324,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'gbp',
-        country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '00012345',
+        country: 'GB',
+        currency: 'gbp',
         sort_code: '108800'
       }
       const accountNow = await req.patch()
@@ -1345,10 +1345,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'GB',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
+        country: 'GB',
+        currency: 'eur',
         iban: 'GB89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1365,13 +1365,13 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'hkd',
-        country: 'HK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
+        branch_code: '000',
         clearing_code: '110',
-        branch_code: '000'
+        country: 'HK',
+        currency: 'hkd'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
@@ -1387,10 +1387,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'IE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'IE',
+        currency: 'eur',
         iban: 'IE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1407,10 +1407,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'IT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'IT',
+        currency: 'eur',
         iban: 'IT89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1427,15 +1427,16 @@ describe('/api/user/connect/update-payment-information', () => {
     //   const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
-    //   req.body = {
-    //     currency: 'jpy',
-    //     country: 'JP',
+    //   req.body ={
     //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
     //     account_holder_type: 'individual',
     //     account_number: '00012345',
     //     bank_code: '1100',
     //     branch_code: '000'
-    //   }
+    // ,
+    //     country: 'JP',
+    //     currency: 'jpy'
+    // }
     //   const accountNow = await req.patch()
     //   assert.strictEqual(accountNow.external_accounts.data.length, 1)
     // })
@@ -1450,10 +1451,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'LT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'LT',
+        currency: 'eur',
         iban: 'LT89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1470,10 +1471,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'LU',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'LU',
+        currency: 'eur',
         iban: 'LU89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1490,10 +1491,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'LV',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'LV',
+        currency: 'eur',
         iban: 'LV89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1510,13 +1511,13 @@ describe('/api/user/connect/update-payment-information', () => {
     //   const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
-    //   req.body = {
-    //     currency: 'eur',
-    //     country: 'MX',
+    //   req.body ={
     //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
     //     account_holder_type: 'company',
+    //     country: 'MX',
+    //     currency: 'eur',
     //     iban: 'MX89370400440532013000'
-    //   }
+    // }
     //   const accountNow = await req.patch()
     //   assert.strictEqual(accountNow.external_accounts.data.length, 1)
     // })
@@ -1531,10 +1532,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'NL',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'NL',
+        currency: 'eur',
         iban: 'NL89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1551,10 +1552,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'NO',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'NO',
+        currency: 'eur',
         iban: 'NO89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1571,11 +1572,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'nzd',
-        country: 'NZ',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '0000000010',
+        country: 'NZ',
+        currency: 'nzd',
         routing_number: '110000'
       }
       const accountNow = await req.patch()
@@ -1592,10 +1593,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'PT',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'PT',
+        currency: 'eur',
         iban: 'PT89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1612,10 +1613,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'SE',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'SE',
+        currency: 'eur',
         iban: 'SE89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1632,13 +1633,13 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'sgd',
-        country: 'SG',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456',
         bank_code: '1100',
-        branch_code: '000'
+        branch_code: '000',
+        country: 'SG',
+        currency: 'sgd'
       }
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
@@ -1654,10 +1655,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'SI',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'SI',
+        currency: 'eur',
         iban: 'SI89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1674,10 +1675,10 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'eur',
-        country: 'SK',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'company',
+        country: 'SK',
+        currency: 'eur',
         iban: 'SK89370400440532013000'
       }
       const accountNow = await req.patch()
@@ -1694,11 +1695,11 @@ describe('/api/user/connect/update-payment-information', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        currency: 'usd',
-        country: 'US',
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
         account_number: '000123456789',
+        country: 'US',
+        currency: 'usd',
         routing_number: '110000000'
       }
       const accountNow = await req.patch()

@@ -12,11 +12,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -34,11 +34,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -73,11 +73,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user2.account
         req.session = user2.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -111,11 +111,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: '',
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: '',
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -149,11 +149,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: '',
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: ''
         }
         let errorMessage
         try {
@@ -187,11 +187,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -223,11 +223,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '46',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -261,11 +261,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -297,11 +297,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '15',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -335,11 +335,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: ''
+          relationship_director_dob_year: '',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -371,11 +371,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: 'invalid'
+          relationship_director_dob_year: 'invalid',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }
         let errorMessage
         try {
@@ -412,11 +412,11 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       const body = {
-        relationship_director_first_name: 'Modified name',
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950',
+        relationship_director_first_name: 'Modified name',
+        relationship_director_last_name: person.lastName,
         token: 'sample2'
       }
       req.body = TestHelper.createMultiPart(req, body)
@@ -448,11 +448,11 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_director_first_name: 'Modified name',
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: 'Modified name',
+        relationship_director_last_name: person.lastName
       }
       req.body = TestHelper.createMultiPart(req, body)
       const directorNow = await req.patch()
@@ -483,11 +483,11 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_director_first_name: 'Modified name',
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: 'Modified name',
+        relationship_director_last_name: person.lastName
       }
       req.body = TestHelper.createMultiPart(req, body)
       const directorNow = await req.patch()
@@ -515,11 +515,11 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_first_name: '',
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: '',
+        relationship_director_last_name: person.lastName
       }
       let errorMessage
       try {
@@ -551,11 +551,11 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: '',
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: ''
       }
       let errorMessage
       try {
@@ -587,11 +587,11 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       let errorMessage
       try {
@@ -623,11 +623,11 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       let errorMessage
       try {
@@ -659,11 +659,11 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: ''
+        relationship_director_dob_year: '',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       let errorMessage
       try {
@@ -697,11 +697,11 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_first_name: 'Modified name',
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: 'Modified name',
+        relationship_director_last_name: person.lastName
       }
       const directorNow = await req.patch()
       assert.strictEqual(directorNow.relationship_director_first_name, 'Modified name')
@@ -722,15 +722,15 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       await req.post()
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
@@ -740,11 +740,11 @@ describe('/api/user/connect/update-company-director', () => {
       req2.account = user.account
       req2.session = user.session
       req2.body = {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }
       await req2.post()
       const directorNow = await global.api.user.connect.CompanyDirector.get(req2)
