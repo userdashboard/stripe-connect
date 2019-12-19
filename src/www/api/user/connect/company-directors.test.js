@@ -110,6 +110,9 @@ describe('/api/user/connect/company-directors', () => {
       assert.strictEqual(directors.length, global.pageSize)
       assert.strictEqual(directors[0].directorid, director2.directorid)
       assert.strictEqual(directors[1].directorid, director1.directorid)
+    }, {
+      relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+      relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
     })
   })
 })

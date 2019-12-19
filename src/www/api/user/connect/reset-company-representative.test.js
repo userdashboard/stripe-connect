@@ -97,7 +97,7 @@ describe('/api/user/connect/reset-company-representative', () => {
   })
 
   describe('returns', () => {
-    it('object', async () => {
+    it.only('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',

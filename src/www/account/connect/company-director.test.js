@@ -31,6 +31,9 @@ describe('/account/connect/company-director', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.directorid}`)
       req.account = user.account
@@ -54,6 +57,9 @@ describe('/account/connect/company-director', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.directorid}`)
       req.account = user.account

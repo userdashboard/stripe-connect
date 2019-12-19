@@ -73,6 +73,9 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
           relationship_owner_dob_day: '1',
           relationship_owner_dob_month: '1',
           relationship_owner_dob_year: '1950'
+        }, {
+          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
         })
         await TestHelper.submitBeneficialOwners(user)
         const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
