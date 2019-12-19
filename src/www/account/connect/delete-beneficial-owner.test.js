@@ -30,7 +30,8 @@ describe('/account/connect/delete-beneficial-owner', () => {
         company_address_postal_code: '01067',
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
-        company_address_country: 'DE'
+        company_address_country: 'DE',
+        company_address_state: 'BW'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_first_name: user.profile.firstName,
@@ -44,6 +45,7 @@ describe('/account/connect/delete-beneficial-owner', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_address_city: 'Berlin',
         relationship_representative_address_line1: 'First Street',
+relationship_representative_address_state: 'BW',
         relationship_representative_address_postal_code: '01067'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
@@ -58,9 +60,11 @@ describe('/account/connect/delete-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
@@ -92,9 +96,11 @@ describe('/account/connect/delete-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
@@ -126,9 +132,11 @@ describe('/account/connect/delete-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
@@ -156,9 +164,11 @@ describe('/account/connect/delete-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
@@ -186,9 +196,11 @@ describe('/account/connect/delete-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
@@ -218,9 +230,11 @@ describe('/account/connect/delete-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',

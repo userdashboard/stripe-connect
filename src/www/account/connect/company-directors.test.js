@@ -98,21 +98,13 @@ describe('/account/connect/company-directors', () => {
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
         company_address_country: 'DE',
-        relationship_director_first_name: user.profile.firstName,
-        relationship_director_last_name: user.profile.lastName,
-        relationship_director_executive: 'true',
-        relationship_director_title: 'Owner',
-        relationship_director_email: user.profile.contactEmail,
-        relationship_director_phone: '456-789-0123',
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
         company_address_city: 'Berlin',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
-        relationship_director_address_city: 'Berlin',
-        relationship_director_address_line1: 'First Street',
-        relationship_director_address_postal_code: '01067'
+        company_address_state: 'BW',
+        company_phone: '456-789-0123',
+        business_profile_mcc: '5542',
+        business_profile_url: 'https://website.com'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -121,6 +113,18 @@ describe('/account/connect/company-directors', () => {
         account_holder_type: 'individual',
         iban: 'DE89370400440532013000'
       })
+      const person = TestHelper.nextIdentity()
+      await TestHelper.createCompanyDirector(user, {
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName,
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

@@ -44,9 +44,11 @@ describe('/account/connect/beneficial-owners', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
@@ -74,9 +76,11 @@ describe('/account/connect/beneficial-owners', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
+        relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName,
         relationship_owner_address_country: 'DE',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
         relationship_owner_address_postal_code: '01067',
         relationship_owner_address_line1: 'First Street',
@@ -108,7 +112,8 @@ describe('/account/connect/beneficial-owners', () => {
         company_address_postal_code: '01067',
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
-        company_address_country: 'DE'
+        company_address_country: 'DE',
+        company_address_state: 'BW'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_owner_first_name: user.profile.firstName,
@@ -121,6 +126,7 @@ describe('/account/connect/beneficial-owners', () => {
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950',
         relationship_owner_address_city: 'Berlin',
+        relationship_owner_address_state: 'BW',
         relationship_owner_address_line1: 'First Street',
         relationship_owner_address_postal_code: '01067'
       }, {
@@ -134,6 +140,9 @@ describe('/account/connect/beneficial-owners', () => {
         account_holder_type: 'individual',
         iban: 'DE89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

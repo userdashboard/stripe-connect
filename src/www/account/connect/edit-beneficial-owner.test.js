@@ -26,6 +26,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
       })
       await TestHelper.createStripeRegistration(user, {
         company_tax_id: '00000000',
+        company_phone: '456-789-0123',
         company_name: user.profile.firstName + '\'s company',
         company_address_city: 'Berlin',
         company_address_state: 'BW',

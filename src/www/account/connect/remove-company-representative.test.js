@@ -28,6 +28,16 @@ describe('/account/connect/remove-company-representative', () => {
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
         company_address_country: 'DE',
+        company_address_city: 'Berlin',
+        company_address_line1: 'First Street',
+        company_address_postal_code: '01067',
+        company_address_state: 'BW',
+        company_phone: '456-789-0123',
+        business_profile_mcc: '5542',
+        business_profile_url: 'https://website.com'
+      })
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_dob_year: '1950',
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_relationship_executive: 'true',
@@ -35,11 +45,7 @@ describe('/account/connect/remove-company-representative', () => {
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        company_address_city: 'Berlin',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
+        relationship_representative_dob_month: '1', 
         relationship_representative_address_city: 'Berlin',
         relationship_representative_address_line1: 'First Street',
         relationship_representative_address_postal_code: '01067'
