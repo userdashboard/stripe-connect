@@ -7,8 +7,8 @@ describe('/account/connect/stripe-accounts', () => {
     it('should bind Stripe accounts to req', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest('/account/connect/stripe-accounts')
       req.account = user.account
@@ -22,8 +22,8 @@ describe('/account/connect/stripe-accounts', () => {
     it('should have row for each Stripe account', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest('/account/connect/stripe-accounts')
       req.account = user.account

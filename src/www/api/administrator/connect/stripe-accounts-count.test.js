@@ -9,8 +9,8 @@ describe('/api/administrator/connect/stripe-accounts-count', () => {
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
       }
       const req = TestHelper.createRequest('/api/administrator/connect/stripe-accounts-count')

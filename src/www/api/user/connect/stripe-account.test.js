@@ -38,8 +38,8 @@ describe('/api/user/connect/stripe-account', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
@@ -60,8 +60,8 @@ describe('/api/user/connect/stripe-account', () => {
     it('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

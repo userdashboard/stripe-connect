@@ -61,8 +61,8 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         stripeAccounts.unshift(user.stripeAccount.id)
       }
@@ -82,8 +82,8 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const stripeAccount = await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -100,8 +100,8 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const stripeAccount = await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         stripeAccounts.unshift(stripeAccount)
       }
@@ -118,8 +118,8 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts?accountid=${user.account.accountid}`)
@@ -137,8 +137,8 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts?accountid=${user.account.accountid}`)

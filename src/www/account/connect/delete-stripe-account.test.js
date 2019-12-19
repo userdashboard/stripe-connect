@@ -21,8 +21,8 @@ describe('/account/connect/delete-stripe-account', () => {
     it('should require own Stripe account', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const user2 = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/account/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
@@ -40,8 +40,8 @@ describe('/account/connect/delete-stripe-account', () => {
     it('should bind Stripe account to req', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -55,8 +55,8 @@ describe('/account/connect/delete-stripe-account', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -70,8 +70,8 @@ describe('/account/connect/delete-stripe-account', () => {
     it('should present the Stripe account table', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -87,8 +87,8 @@ describe('/account/connect/delete-stripe-account', () => {
     it('should delete Stripe account', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

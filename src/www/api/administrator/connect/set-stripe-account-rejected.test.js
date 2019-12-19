@@ -82,8 +82,8 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/administrator/connect/set-stripe-account-rejected?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account

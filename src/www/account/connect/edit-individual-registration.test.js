@@ -22,8 +22,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject company registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -90,8 +90,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AT'
+        country: 'AT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -105,8 +105,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have AT-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AT'
+        country: 'AT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -117,8 +117,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have AU-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AU'
+        country: 'AU',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -129,8 +129,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have BE-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'BE'
+        country: 'BE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -141,8 +141,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have CA-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CA'
+        country: 'CA',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -153,8 +153,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have CH-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CH'
+        country: 'CH',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -165,8 +165,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have DE-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'DE'
+        country: 'DE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -177,8 +177,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have DK-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'DK'
+        country: 'DK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -188,8 +188,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have ES-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'ES'
+        country: 'ES',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -200,8 +200,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have FI-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'FI'
+        country: 'FI',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -212,8 +212,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have FR-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'FR'
+        country: 'FR',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -224,8 +224,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have GB-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'GB'
+        country: 'GB',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -236,8 +236,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have HK-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'HK'
+        country: 'HK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -248,8 +248,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have IE-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'IE'
+        country: 'IE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -260,8 +260,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have IT-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'IT'
+        country: 'IT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -272,8 +272,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have JP-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -284,8 +284,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have LU-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'LU'
+        country: 'LU',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -296,8 +296,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have NL-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NL'
+        country: 'NL',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -308,8 +308,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have NO-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NO'
+        country: 'NO',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -320,8 +320,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have NZ-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -332,8 +332,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have PT-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'PT'
+        country: 'PT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -344,8 +344,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have SE-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SE'
+        country: 'SE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -356,8 +356,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have SG-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SG'
+        country: 'SG',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -368,8 +368,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should have US-required fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -396,8 +396,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject AT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AT'
+        country: 'AT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -416,8 +416,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update AT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AT'
+        country: 'AT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -439,8 +439,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject AU invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AU'
+        country: 'AU',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -463,8 +463,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update AU information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AU'
+        country: 'AU',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -491,8 +491,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject BE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'BE'
+        country: 'BE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -511,8 +511,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update BE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'BE'
+        country: 'BE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -534,8 +534,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject CA invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CA'
+        country: 'CA',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -558,8 +558,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update CA information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CA'
+        country: 'CA',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -586,8 +586,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject CH invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CH'
+        country: 'CH',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -605,8 +605,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update CH information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CH'
+        country: 'CH',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -628,8 +628,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject DE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'DE'
+        country: 'DE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -647,8 +647,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update DE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'DE'
+        country: 'DE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -670,8 +670,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject DK invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'DK'
+        country: 'DK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -689,8 +689,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update DK information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'DK'
+        country: 'DK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -712,8 +712,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject ES invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'ES'
+        country: 'ES',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -731,8 +731,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update ES information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'ES'
+        country: 'ES',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -754,8 +754,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject FI invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'FI'
+        country: 'FI',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -773,8 +773,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update FI information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'FI'
+        country: 'FI',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -796,8 +796,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject FR invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'FR'
+        country: 'FR',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -815,8 +815,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update FR information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'FR'
+        country: 'FR',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -838,8 +838,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject GB invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'GB'
+        country: 'GB',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -857,8 +857,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update GB information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'GB'
+        country: 'GB',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -880,8 +880,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject HK invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'HK'
+        country: 'HK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -902,8 +902,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update HK information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'HK'
+        country: 'HK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -928,8 +928,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject IE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'IE'
+        country: 'IE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -947,8 +947,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update IE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'IE'
+        country: 'IE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -970,8 +970,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject IT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'IT'
+        country: 'IT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -989,8 +989,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update IT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'IT'
+        country: 'IT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1012,8 +1012,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject JP invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1045,8 +1045,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update JP information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1082,8 +1082,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject LU invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'LU'
+        country: 'LU',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1101,8 +1101,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update LU information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'LU'
+        country: 'LU',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1124,8 +1124,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject NL invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NL'
+        country: 'NL',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1143,8 +1143,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update NL information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NL'
+        country: 'NL',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1166,8 +1166,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject NO invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NO'
+        country: 'NO',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1185,8 +1185,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update NO information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NO'
+        country: 'NO',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1208,8 +1208,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject NZ invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1230,8 +1230,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update NZ information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1256,8 +1256,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject PT invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'PT'
+        country: 'PT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1275,8 +1275,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update PT information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'PT'
+        country: 'PT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1298,8 +1298,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject SE invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SE'
+        country: 'SE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1317,8 +1317,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update SE information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SE'
+        country: 'SE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1340,8 +1340,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject SG invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SG'
+        country: 'SG',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1362,8 +1362,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update SG information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SG'
+        country: 'SG',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1388,8 +1388,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should reject US invalid fields', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1417,8 +1417,8 @@ describe('/account/connect/edit-individual-registration', () => {
     it('should update US information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

@@ -38,19 +38,19 @@ describe('/api/user/connect/delete-company-director', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'FI'
+          country: 'FI',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         }, {
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)
@@ -71,19 +71,19 @@ describe('/api/user/connect/delete-company-director', () => {
     it('boolean', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'FI'
+        country: 'FI',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }, {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)
       req.account = user.account

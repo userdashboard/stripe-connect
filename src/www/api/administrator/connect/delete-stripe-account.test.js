@@ -39,8 +39,8 @@ describe('/api/administrator/connect/delete-stripe-account', () => {
         const administrator = await TestHelper.createAdministrator()
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = administrator.account

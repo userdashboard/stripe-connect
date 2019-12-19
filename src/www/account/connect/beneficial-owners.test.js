@@ -21,8 +21,8 @@ describe('/account/connect/beneficial-owners', () => {
     it('should reject individual registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -39,25 +39,25 @@ describe('/account/connect/beneficial-owners', () => {
     it('should bind owners to req', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_country: 'DE',
         relationship_owner_address_line1: 'First Street',
+        relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_state: 'BW',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }, {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -71,25 +71,25 @@ describe('/account/connect/beneficial-owners', () => {
     it('should have row for each owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_country: 'DE',
         relationship_owner_address_line1: 'First Street',
+        relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_state: 'BW',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }, {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -103,37 +103,37 @@ describe('/account/connect/beneficial-owners', () => {
     it('should display submitted message with removed owners', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       await TestHelper.createStripeRegistration(user, {
-        company_tax_id: '00000000',
-        company_name: user.profile.firstName + '\'s company',
-        company_address_country: 'DE',
+        business_profile_mcc: '5542',
+        business_profile_url: 'https://website.com',
         company_address_city: 'Berlin',
+        company_address_country: 'DE',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         company_address_state: 'BW',
+        company_name: user.profile.firstName + '\'s company',
         company_phone: '456-789-0123',
-        business_profile_mcc: '5542',
-        business_profile_url: 'https://website.com'
+        company_tax_id: '00000000'
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_state: 'BW',
         relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_country: 'DE',
         relationship_owner_address_line1: 'First Street',
+        relationship_owner_address_postal_code: '01067',
+        relationship_owner_address_state: 'BW',
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950'
+        relationship_owner_dob_year: '1950',
+        relationship_owner_email: person.email,
+        relationship_owner_first_name: person.firstName,
+        relationship_owner_last_name: person.lastName
       }, {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.submitBeneficialOwners(user)
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)

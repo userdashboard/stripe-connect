@@ -21,19 +21,19 @@ describe('/account/connect/company-director', () => {
     it('should bind director to req', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'FR'
+        country: 'FR',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }, {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.directorid}`)
       req.account = user.account
@@ -47,19 +47,19 @@ describe('/account/connect/company-director', () => {
     it('should show table for director', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'GB'
+        country: 'GB',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       }, {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.directorid}`)
       req.account = user.account

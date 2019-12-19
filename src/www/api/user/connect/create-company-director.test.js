@@ -39,8 +39,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -60,8 +60,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('ineligible stripe account for individual', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -80,8 +80,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('missing posted relationship_director_first_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -109,8 +109,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('missing posted relationship_director_last_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -138,8 +138,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('missing posted relationship_director_email', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -167,8 +167,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('missing posted relationship_director_dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -179,12 +179,12 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
-          relationship_director_email: person.email,
           relationship_director_dob_day: '',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_email: person.email,
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         })
         let errorMessage
         try {
@@ -200,8 +200,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('missing posted relationship_director_dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -212,12 +212,12 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
-          relationship_director_email: person.email,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_email: person.email,
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         })
         let errorMessage
         try {
@@ -233,8 +233,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('missing posted relationship_director_dob_year', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -245,12 +245,12 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
-          relationship_director_email: person.email,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: ''
+          relationship_director_dob_year: '',
+          relationship_director_email: person.email,
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         })
         let errorMessage
         try {
@@ -266,8 +266,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('missing posted file relationship_director_verification_document_front', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -277,12 +277,12 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
-          relationship_director_email: person.email,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_email: person.email,
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         })
         let errorMessage
         try {
@@ -298,8 +298,8 @@ describe('/api/user/connect/create-company-director', () => {
       it('missing posted file relationship_director_verification_document_back', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'DE'
+          country: 'DE',
+          type: 'company'
         })
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -309,12 +309,12 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName,
-          relationship_director_email: person.email,
           relationship_director_dob_day: '1',
           relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950'
+          relationship_director_dob_year: '1950',
+          relationship_director_email: person.email,
+          relationship_director_first_name: person.firstName,
+          relationship_director_last_name: person.lastName
         })
         let errorMessage
         try {
@@ -331,8 +331,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('required posted relationship_director_first_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -343,11 +343,11 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_director_first_name, person.firstName)
@@ -356,8 +356,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('required posted relationship_director_last_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -368,11 +368,11 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_director_last_name, person.lastName)
@@ -381,8 +381,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('optionally-required posted relationship_director_email', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AU'
+        country: 'AU',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -393,13 +393,13 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_email: person.email,
-        relationship_director_relationship_title: 'XXX',
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_email: person.email,
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName,
+        relationship_director_relationship_title: 'XXX'
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_director_email, person.email)
@@ -408,8 +408,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('optionally-required posted relationship_director_relationship_title', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AU'
+        country: 'AU',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -420,13 +420,13 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_email: person.email,
-        relationship_director_relationship_title: 'SVP Sales',
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_email: person.email,
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName,
+        relationship_director_relationship_title: 'SVP Sales'
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_director_relationship_title, 'SVP Sales')
@@ -435,8 +435,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('required posted relationship_director_dob_day', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -447,11 +447,11 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_director_dob_day, '1')
@@ -460,8 +460,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('required posted relationship_director_dob_month', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -472,11 +472,11 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '2',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_director_dob_month, '2')
@@ -485,8 +485,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('required posted relationship_director_dob_year', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -497,11 +497,11 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
       assert.strictEqual(owner.relationship_director_dob_year, '1950')
@@ -510,8 +510,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('required posted file relationship_director_verification_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -522,17 +522,17 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_email: person.email,
-        relationship_director_address_country: 'GB',
         relationship_director_address_city: 'London',
+        relationship_director_address_country: 'GB',
         relationship_director_address_line1: 'A building',
         relationship_director_address_postal_code: 'EC1A 1AA',
         relationship_director_address_state: 'LND',
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_email: person.email,
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
       assert.notStrictEqual(owner.relationship_director_verification_document_front, null)
@@ -542,8 +542,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('required posted file relationship_director_verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -554,17 +554,17 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_email: person.email,
-        relationship_director_address_country: 'GB',
         relationship_director_address_city: 'London',
+        relationship_director_address_country: 'GB',
         relationship_director_address_line1: 'A building',
         relationship_director_address_postal_code: 'EC1A 1AA',
         relationship_director_address_state: 'LND',
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_email: person.email,
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
       assert.notStrictEqual(owner.relationship_director_verification_document_back, null)
@@ -576,8 +576,8 @@ describe('/api/user/connect/create-company-director', () => {
     it('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
@@ -588,11 +588,11 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
       })
       await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
@@ -607,8 +607,8 @@ describe('/api/user/connect/create-company-director', () => {
       global.stripeJS = 3
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)

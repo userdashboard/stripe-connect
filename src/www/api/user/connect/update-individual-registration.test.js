@@ -39,8 +39,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('ineligible stripe account for company', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -57,35 +57,35 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('ineligible stripe account is submitted', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         await TestHelper.createStripeRegistration(user, {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+          individual_address_city: 'New York',
+          individual_address_country: 'US',
+          individual_address_line1: '285 Fulton St',
+          individual_address_postal_code: '10007',
+          individual_address_state: 'NY',
           individual_dob_day: '1',
           individual_dob_month: '1',
           individual_dob_year: '1950',
+          individual_email: user.profile.contactEmail,
           individual_first_name: user.profile.firstName,
           individual_last_name: user.profile.lastName,
-          individual_email: user.profile.contactEmail,
           individual_phone: '456-789-0123',
-          individual_address_city: 'New York',
-          individual_ssn_last_4: '0000',
-          individual_address_state: 'NY',
-          individual_address_country: 'US',
-          individual_address_line1: '285 Fulton St',
-          individual_address_postal_code: '10007'
+          individual_ssn_last_4: '0000'
         }, {
-          individual_verification_document_front: TestHelper['success_id_scan_front.png'],
-          individual_verification_document_back: TestHelper['success_id_scan_back.png']
+          individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+          individual_verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
-          currency: 'usd',
-          country: 'US',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456789',
+          country: 'US',
+          currency: 'usd',
           routing_number: '110000000'
         })
         await TestHelper.submitStripeAccount(user)
@@ -106,8 +106,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
@@ -127,8 +127,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AT'
+          country: 'AT',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -166,8 +166,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('invalid posted individual_dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AT'
+          country: 'AT',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -207,8 +207,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AT'
+          country: 'AT',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -246,8 +246,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('invalid posted individual_dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AT'
+          country: 'AT',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -287,8 +287,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_dob_year', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AT'
+          country: 'AT',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -326,8 +326,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('invalid posted individual_dob_year', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AT'
+          country: 'AT',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -367,8 +367,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_first_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AT'
+          country: 'AT',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -408,8 +408,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_last_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AT'
+          country: 'AT',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -449,8 +449,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_city', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AU'
+          country: 'AU',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -490,8 +490,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AU'
+          country: 'AU',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -531,8 +531,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'AU'
+          country: 'AU',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -572,8 +572,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_id_number', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'HK'
+          country: 'HK',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -614,8 +614,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted business_profile_mcc', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -654,8 +654,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('invalid posted business_profile_mcc', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -696,8 +696,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted business_profile_url', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -738,8 +738,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_ssn_last_4', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -780,8 +780,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_phone', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -822,8 +822,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted ', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -864,8 +864,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_gender', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -913,8 +913,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('invalid posted individual_gender', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -964,8 +964,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_first_name_kana', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1015,8 +1015,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_last_name_kana', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1066,8 +1066,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_first_name_kanji', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1117,8 +1117,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_last_name_kanji', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1168,8 +1168,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kana_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1219,8 +1219,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kana_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1270,8 +1270,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kana_city', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1321,8 +1321,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kana_town', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1372,8 +1372,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kana_line1', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1423,8 +1423,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kanji_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1474,8 +1474,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kanji_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1525,8 +1525,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kanji_city', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1576,8 +1576,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kanji_town', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1627,8 +1627,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       it('missing posted individual_address_kanji_line1', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'JP'
+          country: 'JP',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -1679,8 +1679,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('required posted business_profile_mcc', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1716,8 +1716,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted business_profile_url', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1753,8 +1753,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted business_profile_product_description', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1790,8 +1790,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('required posted individual_dob_day', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1827,8 +1827,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('required posted individual_dob_month', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1864,8 +1864,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('required posted individual_dob_year', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1901,8 +1901,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('required posted individual_first_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1938,8 +1938,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('required posted individual_last_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1975,8 +1975,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_email', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2012,8 +2012,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_phone', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2049,8 +2049,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_gender', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2094,8 +2094,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_ssn_last_4', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2129,8 +2129,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_id_number', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CA'
+        country: 'CA',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2164,8 +2164,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2201,8 +2201,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_postal_code', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2238,8 +2238,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2275,8 +2275,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optional posted individual_address_line2', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2313,8 +2313,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_first_name_kana', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2358,8 +2358,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_last_name_kana', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2403,8 +2403,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_kana_town', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2448,8 +2448,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_kana_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2493,8 +2493,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_kana_postal_code', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2538,8 +2538,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_kana_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2583,8 +2583,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_first_name_kanji', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2628,8 +2628,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_last_name_kanji', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2673,8 +2673,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_kanji_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2718,8 +2718,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_kanji_postal_code', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2763,8 +2763,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_kanji_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2808,8 +2808,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted individual_address_kanji_town', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2853,8 +2853,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted file individual_verification_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2891,8 +2891,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted file individual_verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2929,8 +2929,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted file individual_verification_additional_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -2967,8 +2967,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted file individual_verification_additional_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3007,8 +3007,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for AT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AT'
+        country: 'AT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3043,8 +3043,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for AU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'AU'
+        country: 'AU',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3079,8 +3079,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for BE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'BE'
+        country: 'BE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3115,8 +3115,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for CA registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CA'
+        country: 'CA',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3152,8 +3152,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for CH registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'CH'
+        country: 'CH',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3188,8 +3188,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for DE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'DE'
+        country: 'DE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3224,8 +3224,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for DK registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'DK'
+        country: 'DK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3260,8 +3260,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for EE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'EE'
+        country: 'EE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3296,8 +3296,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'ES'
+        country: 'ES',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3332,8 +3332,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for FI registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'FI'
+        country: 'FI',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3368,8 +3368,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for FR registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'FR'
+        country: 'FR',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3404,8 +3404,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for GB registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'GB'
+        country: 'GB',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3440,8 +3440,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for HK registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'HK'
+        country: 'HK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3478,8 +3478,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for IE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'IE'
+        country: 'IE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3514,8 +3514,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for IT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'IT'
+        country: 'IT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3550,8 +3550,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for JP registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'JP'
+        country: 'JP',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3597,8 +3597,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for LT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'LT'
+        country: 'LT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3633,8 +3633,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for LU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'LU'
+        country: 'LU',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3669,8 +3669,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for LV registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'LV'
+        country: 'LV',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3704,10 +3704,11 @@ describe('/api/user/connect/update-individual-registration', () => {
 
     // it('returns object for MX registration', async () => {
     //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user, {
-    //     type: 'individual',
+    //   await TestHelper.createStripeAccount(user,{
     //     country: 'MX'
-    //   })
+    // ,
+    //     type: 'individual'
+    // })
     //   const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
@@ -3742,8 +3743,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for NL registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NL'
+        country: 'NL',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3778,8 +3779,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for NO registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NO'
+        country: 'NO',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3814,8 +3815,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for NZ registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3853,8 +3854,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for PT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'PT'
+        country: 'PT',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3889,8 +3890,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for SE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SE'
+        country: 'SE',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3925,8 +3926,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for SI registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SI'
+        country: 'SI',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3960,8 +3961,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for SG registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SG'
+        country: 'SG',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -3997,8 +3998,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for SK registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'SK'
+        country: 'SK',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -4032,8 +4033,8 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('returns object for US registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -4072,8 +4073,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       global.stripeJS = 3
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'individual',
-        country: 'US'
+        country: 'US',
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.waitOnSubmit = true

@@ -8,8 +8,8 @@ describe('/api/user/connect/company-directors-count', () => {
       it('missing querystring stripeid', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest('/api/user/connect/company-directors-count')
         req.account = user.account
@@ -42,8 +42,8 @@ describe('/api/user/connect/company-directors-count', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/company-directors-count?stripeid=${user.stripeAccount.id}`)
@@ -63,8 +63,8 @@ describe('/api/user/connect/company-directors-count', () => {
       it('ineligible stripe account for individual', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/company-directors-count?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -84,30 +84,30 @@ describe('/api/user/connect/company-directors-count', () => {
     it('integer', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'FI'
+        country: 'FI',
+        type: 'company'
       })
       const person1 = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person1.firstName,
-        relationship_director_last_name: person1.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person1.firstName,
+        relationship_director_last_name: person1.lastName
       }, {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const person2 = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_first_name: person2.firstName,
-        relationship_director_last_name: person2.lastName,
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950'
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person2.firstName,
+        relationship_director_last_name: person2.lastName
       }, {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/company-directors-count?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

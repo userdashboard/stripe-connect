@@ -51,8 +51,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('ineligible stripe account for individuals', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'individual',
-          country: 'US'
+          country: 'US',
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -80,47 +80,47 @@ describe('/api/user/connect/update-company-registration', () => {
       it('ineligible stripe account is submitted', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         await TestHelper.createStripeRegistration(user, {
-          company_name: 'Company',
-          company_tax_id: '8',
-          company_phone: '456-123-7890',
+          business_profile_mcc: '8931',
+          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1]
+          company_name: 'Company',
+          company_phone: '456-123-7890',
+          company_tax_id: '8'
         })
         await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_ssn_last_4: '0000',
           relationship_representative_address_city: 'New York',
-          relationship_representative_address_state: 'NY',
           relationship_representative_address_country: 'US',
           relationship_representative_address_line1: '285 Fulton St',
           relationship_representative_address_postal_code: '10007',
-          relationship_representative_percent_ownership: '0'
+          relationship_representative_address_state: 'NY',
+          relationship_representative_dob_day: '1',
+          relationship_representative_dob_month: '1',
+          relationship_representative_dob_year: '1950',
+          relationship_representative_email: user.profile.contactEmail,
+          relationship_representative_first_name: user.profile.firstName,
+          relationship_representative_last_name: user.profile.lastName,
+          relationship_representative_percent_ownership: '0',
+          relationship_representative_phone: '456-789-0123',
+          relationship_representative_relationship_executive: 'true',
+          relationship_representative_relationship_title: 'Owner',
+          relationship_representative_ssn_last_4: '0000'
         }, {
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
-          currency: 'usd',
-          country: 'US',
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
           account_holder_type: 'individual',
           account_number: '000123456789',
+          country: 'US',
+          currency: 'usd',
           routing_number: '110000000'
         })
         await TestHelper.submitBeneficialOwners(user)
@@ -155,8 +155,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
@@ -187,8 +187,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('missing posted company_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'AT'
+          country: 'AT',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -217,8 +217,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('missing posted company_tax_id', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'AT'
+          country: 'AT',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -248,8 +248,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('missing posted company_address_line1', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'AT'
+          country: 'AT',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -279,8 +279,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('missing posted company_address_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -308,8 +308,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('invalid posted company_address_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -339,8 +339,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('missing posted company_address_line1', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'AT'
+          country: 'AT',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -371,8 +371,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('missing posted company_address_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'AT'
+          country: 'AT',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -401,8 +401,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('missing posted business_profile_mcc', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -430,8 +430,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('invalid posted business_profile_mcc', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -461,8 +461,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('missing posted business_profile_url', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -490,8 +490,8 @@ describe('/api/user/connect/update-company-registration', () => {
       it('invalid posted business_profile_url', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          type: 'company',
-          country: 'US'
+          country: 'US',
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -523,8 +523,8 @@ describe('/api/user/connect/update-company-registration', () => {
       global.stripeJS = 3
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -549,8 +549,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted file company_verification_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'BE'
+        country: 'BE',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -580,8 +580,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted file company_verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'BE'
+        country: 'BE',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -611,8 +611,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('required posted business_profile_mcc', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -636,8 +636,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted business_profile_url', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -661,8 +661,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted business_profile_product_description', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -686,8 +686,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('required posted company_phone', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -711,8 +711,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('required posted company_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
 
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
@@ -737,8 +737,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_postal_code', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -762,8 +762,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_city', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -787,8 +787,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -812,8 +812,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -837,8 +837,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optional posted company_address_line2', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -863,8 +863,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_name_kana', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -896,8 +896,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_name_kanji', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -929,8 +929,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kana_postal_code', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -962,8 +962,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kana_city', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -995,8 +995,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kana_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1028,8 +1028,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kana_town', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1061,8 +1061,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kana_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1094,8 +1094,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kanji_postal_code', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1127,8 +1127,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kanji_city', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1160,8 +1160,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kanji_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1193,8 +1193,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kanji_town', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1226,8 +1226,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('optionally-required posted company_address_kanji_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1261,8 +1261,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for AT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AT'
+        country: 'AT',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1288,8 +1288,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for AU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'AU'
+        country: 'AU',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1315,8 +1315,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for BE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'BE'
+        country: 'BE',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1347,8 +1347,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for CA registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'CA'
+        country: 'CA',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1374,8 +1374,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for CH registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'CH'
+        country: 'CH',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1401,8 +1401,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for DE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DE'
+        country: 'DE',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1428,8 +1428,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for DK registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'DK'
+        country: 'DK',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1455,8 +1455,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for EE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'EE'
+        country: 'EE',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1482,8 +1482,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for ES registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'ES'
+        country: 'ES',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1509,8 +1509,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for FI registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'FI'
+        country: 'FI',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1535,8 +1535,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for FR registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'FR'
+        country: 'FR',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1562,8 +1562,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for GB registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'GB'
+        country: 'GB',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1589,8 +1589,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for HK registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'HK'
+        country: 'HK',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1616,8 +1616,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for IE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'IE'
+        country: 'IE',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1643,8 +1643,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for IT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'IT'
+        country: 'IT',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1670,8 +1670,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for JP registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'JP'
+        country: 'JP',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1705,8 +1705,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for LU registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'LU'
+        country: 'LU',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1732,8 +1732,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for NL registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'NL'
+        country: 'NL',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1758,8 +1758,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for NO registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'NO'
+        country: 'NO',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1785,8 +1785,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for NZ registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'NZ'
+        country: 'NZ',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1812,8 +1812,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for PT registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'PT'
+        country: 'PT',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1839,8 +1839,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for SE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'SE'
+        country: 'SE',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1866,8 +1866,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for SG registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'SG'
+        country: 'SG',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1893,8 +1893,8 @@ describe('/api/user/connect/update-company-registration', () => {
     it('object for US registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -1923,8 +1923,8 @@ describe('/api/user/connect/update-company-registration', () => {
       global.stripeJS = 3
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        type: 'company',
-        country: 'US'
+        country: 'US',
+        type: 'company'
       })
       const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.waitOnSubmit = true
