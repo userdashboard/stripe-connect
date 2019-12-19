@@ -197,6 +197,10 @@ describe('/account/connect/create-beneficial-owner', () => {
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
@@ -229,6 +233,10 @@ describe('/account/connect/create-beneficial-owner', () => {
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
       }
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
+      }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
@@ -236,7 +244,7 @@ describe('/account/connect/create-beneficial-owner', () => {
       assert.strictEqual(message.attr.template, 'invalid-relationship_owner_verification_document_back')
     })
 
-    it('should create beneficial owner', async () => {
+    it.only('should create beneficial owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -261,6 +269,10 @@ describe('/account/connect/create-beneficial-owner', () => {
         relationship_owner_dob_day: '1',
         relationship_owner_dob_month: '1',
         relationship_owner_dob_year: '1950'
+      }
+      req.uploads = {
+        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

@@ -66,14 +66,10 @@ async function renderPage (req, res, messageTemplate) {
     const states = connect.countryDivisions[selectedCountry]
     dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
     dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
-    return dashboard.Response.end(req, res, doc)
   } else if (req.body) {
     const selectedCountry = req.body.relationship_owner_address_country || req.data.stripeAccount.country
     const states = connect.countryDivisions[selectedCountry]
     dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
-    if (req.body.relationship_owner_address_state) {
-      dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_state', req.body.relationship_owner_address_state)
-    }
     dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
     for (const fieldName in req.body) {
       const el = doc.getElementById(fieldName)
@@ -82,7 +78,7 @@ async function renderPage (req, res, messageTemplate) {
       }
       switch (el.tag) {
         case 'select':
-          dashboard.HTML.setSelectedOptionByValue(doc, el.attr.id, req.body[fieldName])
+          dashboard.HTML.setSelectedOptionByValue(doc, fieldName, req.body[fieldName])
           continue
         case 'input':
           if (el.attr.type === 'radio') {
@@ -92,9 +88,6 @@ async function renderPage (req, res, messageTemplate) {
           }
           continue
       }
-    }
-    if (req.body.relationship_owner_address_country) {
-      dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', req.body.relationship_owner_address_country)
     }
   }
   for (const id of removeElements) {
