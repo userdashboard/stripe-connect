@@ -94,6 +94,9 @@ describe('/api/user/connect/company-directors', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const person2 = TestHelper.nextIdentity()
       const director2 = await TestHelper.createCompanyDirector(user, {
@@ -102,6 +105,9 @@ describe('/api/user/connect/company-directors', () => {
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950'
+      }, {
+        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -110,9 +116,6 @@ describe('/api/user/connect/company-directors', () => {
       assert.strictEqual(directors.length, global.pageSize)
       assert.strictEqual(directors[0].directorid, director2.directorid)
       assert.strictEqual(directors[1].directorid, director1.directorid)
-    }, {
-      relationship_director_verification_document_front: TestHelper['success_id_scan_front.png'],
-      relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
     })
   })
 })

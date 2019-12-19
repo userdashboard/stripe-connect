@@ -97,7 +97,7 @@ describe('/api/user/connect/reset-company-representative', () => {
   })
 
   describe('returns', () => {
-    it.only('object', async () => {
+    it('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         type: 'company',
@@ -129,8 +129,7 @@ describe('/api/user/connect/reset-company-representative', () => {
       req.account = user.account
       req.session = user.session
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.requirements.currently_due.length, 1)
-      assert.strictEqual(accountNow.requirements.currently_due[0], 'relationship.representative')
+      assert.strictEqual(accountNow.requirements.currently_due.indexOf('relationship.representative') > -1, true)
     })
   })
 
@@ -178,7 +177,7 @@ describe('/api/user/connect/reset-company-representative', () => {
       req4.account = user.account
       req4.session = user.session
       const accountNow = await req4.patch()
-      assert.strictEqual(accountNow.requirements.currently_due[0], 'relationship.representative')
+      assert.strictEqual(accountNow.requirements.currently_due.indexOf('relationship.representative') > -1, true)
     })
   })
 })

@@ -175,3 +175,1028 @@
       invalid-stripe-account
         ✓ ineligible stripe account for individual
     returns
+      ✓ array
+
+  /api/user/connect/country-spec
+    exceptions
+      ✓ missing querystring country
+      ✓ invalid querystring country
+    returns
+      ✓ object
+
+  /api/user/connect/country-specs-count
+    returns
+      ✓ integer
+
+  /api/user/connect/country-specs
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
+    returns
+      ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
+
+  /api/user/connect/create-beneficial-owner
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+      invalid-relationship_owner_first_name
+        ✓ missing posted relationship_owner_first_name
+      invalid-relationship_owner_last_name
+        ✓ missing posted relationship_owner_last_name
+      invalid-relationship_owner_email
+        ✓ missing posted relationship_owner_email
+      invalid-relationship_owner_address_city
+        ✓ missing posted relationship_owner_address_city
+      invalid-relationship_owner_address_line1
+        ✓ missing posted relationship_owner_address_line1
+      invalid-relationship_owner_address_postal_code
+        ✓ missing posted relationship_owner_address_postal_code
+      invalid-relationship_owner_address_state
+        ✓ missing posted relationship_owner_address_state
+      invalid-relationship_owner_dob_day
+        ✓ missing posted relationship_owner_dob_day
+      invalid-relationship_owner_dob_month
+        ✓ missing posted relationship_owner_dob_month
+      invalid-relationship_owner_dob_year
+        ✓ missing posted relationship_owner_dob_year
+      invalid-relationship_owner_verification_document_front
+        ✓ missing posted file relationship_owner_verification_document_front
+      invalid-relationship_owner_verification_document_back
+        ✓ missing posted file relationship_owner_verification_document_back
+      invalid-token
+        ✓ missing posted token
+    receives
+      ✓ required posted relationship_owner_first_name
+      ✓ required posted relationship_owner_last_name
+      ✓ required posted relationship_owner_email
+      ✓ required posted relationship_owner_dob_day
+      ✓ required posted relationship_owner_dob_month
+      ✓ required posted relationship_owner_dob_year
+      ✓ required posted relationship_owner_address_line1
+      ✓ optional posted relationship_owner_address_line2
+      ✓ required posted relationship_owner_address_country
+      ✓ required posted relationship_owner_address_city
+      ✓ required posted relationship_owner_address_postal_code
+      ✓ required posted relationship_owner_address_state
+      ✓ required posted file relationship_owner_verification_document_front
+      ✓ required posted file relationship_owner_verification_document_back
+    returns
+      ✓ object
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/create-company-director
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+      invalid-relationship_director_first_name
+        ✓ missing posted relationship_director_first_name
+      invalid-relationship_director_last_name
+        ✓ missing posted relationship_director_last_name
+      invalid-relationship_director_email
+        ✓ missing posted relationship_director_email
+      invalid-relationship_director_dob_day
+        ✓ missing posted relationship_director_dob_day
+      invalid-relationship_director_dob_month
+        ✓ missing posted relationship_director_dob_month
+      invalid-relationship_director_dob_year
+        ✓ missing posted relationship_director_dob_year
+      invalid-relationship_director_verification_document_front
+        ✓ missing posted file relationship_director_verification_document_front
+      invalid-relationship_director_verification_document_back
+        ✓ missing posted file relationship_director_verification_document_back
+    receives
+      ✓ required posted relationship_director_first_name
+      ✓ required posted relationship_director_last_name
+      ✓ optionally-required posted relationship_director_email
+      ✓ optionally-required posted relationship_director_relationship_title
+      ✓ required posted relationship_director_dob_day
+      ✓ required posted relationship_director_dob_month
+      ✓ required posted relationship_director_dob_year
+      ✓ required posted file relationship_director_verification_document_front
+      ✓ required posted file relationship_director_verification_document_back
+    returns
+      ✓ object
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/create-stripe-account
+    exceptions
+      invalid-accountid
+        ✓ missing querystring accountid
+        ✓ invalid querystring accountid
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-type
+        ✓ missing posted type
+        ✓ invalid posted type
+      invalid-country
+        ✓ invalid posted country
+        ✓ invalid posted country
+    returns
+      ✓ object
+
+  /api/user/connect/delete-beneficial-owner
+    exceptions
+      invalid-ownerid
+        ✓ missing querystring ownerid
+        ✓ invalid querystring ownerid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ boolean
+
+  /api/user/connect/delete-company-director
+    exceptions
+      invalid-directorid
+        ✓ missing querystring directorid
+        ✓ invalid querystring directorid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ boolean
+
+  /api/user/connect/delete-stripe-account
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ boolean
+
+  /api/user/connect/payout
+    exceptions
+      invalid-payoutid
+        ✓ missing querystring payoutid
+        ✓ invalid querystring payoutid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ array
+
+  /api/user/connect/payouts-count
+    exceptions
+      invalid-payoutid
+        ✓ missing querystring payoutid
+        ✓ invalid querystring payoutid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ integer
+
+  /api/user/connect/payouts
+    exceptions
+      invalid-payoutid
+        ✓ missing querystring payoutid
+        ✓ invalid querystring payoutid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ array
+
+  /api/user/connect/reset-company-representative
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+      invalid-stripe-account
+        ✓ ineligible stripe account has no representative
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ object
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/set-beneficial-owners-submitted
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+        ✓ ineligible beneficial owners are submitted
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ object for AT registration
+      ✓ object for AU registration
+      ✓ object for BE registration
+      ✓ object for CH registration
+      ✓ object for DE registration
+      ✓ object for DK registration
+      ✓ object for EE registration
+      ✓ object for ES registration
+      ✓ object for FI registration
+      ✓ object for FR registration
+      ✓ object for GB registration
+      ✓ object for IE registration
+      ✓ object for IT registration
+      ✓ object for LT registration
+      ✓ object for LU registration
+      ✓ object for LV registration
+      ✓ object for NL registration
+      ✓ object for NO registration
+      ✓ object for NZ registration
+      ✓ object for PT registration
+      ✓ object for SE registration
+      ✓ object for SG registration
+      ✓ object for SI registration
+      ✓ object for SK registration
+      ✓ object for US registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/set-company-directors-submitted
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+        ✓ ineligible company directors are submitted
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ object for AT registration
+      1) object for AU registration
+      ✓ object for BE registration
+      ✓ object for CH registration
+      ✓ object for DE registration
+      ✓ object for DK registration
+      ✓ object for EE registration
+      ✓ object for ES registration
+      ✓ object for FI registration
+      ✓ object for FR registration
+      ✓ object for GB registration
+      ✓ object for IE registration
+      ✓ object for IT registration
+      ✓ object for LT registration
+      ✓ object for LU registration
+      ✓ object for LV registration
+      ✓ object for NL registration
+      ✓ object for NO registration
+      ✓ object for NZ registration
+      ✓ object for PT registration
+      ✓ object for SE registration
+      ✓ object for SI registration
+      ✓ object for SK registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/set-company-registration-submitted
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+        ✓ ineligible stripe account is submitted
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-payment-details
+        ✓ ineligible registration missing payment details
+    returns
+      ✓ object for AT registration
+      ✓ object for AU registration
+      ✓ object for BE registration
+      ✓ object for CA registration
+      ✓ object for CH registration
+      ✓ object for DE registration
+      ✓ object for DK registration
+      ✓ object for EE registration
+      ✓ object for ES registration
+      ✓ object for FI registration
+      ✓ object for FR registration
+      ✓ object for GB registration
+      ✓ object for HK registration
+      ✓ object for IE registration
+      ✓ object for IT registration
+      ✓ object for LT registration
+      ✓ object for LU registration
+      2) object for LV registration
+      ✓ object for NL registration
+      ✓ object for NO registration
+      ✓ object for NZ registration
+      ✓ object for PT registration
+      ✓ object for SE registration
+      ✓ object for SG registration
+      ✓ object for SI registration
+      ✓ object for SK registration
+      ✓ object for US registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/set-company-representative
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individual
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ object for AT registration
+      ✓ object for AU registration
+      ✓ object for BE registration
+      ✓ object for CA registration
+      ✓ object for CH registration
+      ✓ object for DE registration
+      ✓ object for DK registration
+      ✓ object for EE registration
+      ✓ object for ES registration
+      ✓ object for FI registration
+      ✓ object for FR registration
+      ✓ object for GB registration
+      ✓ object for HK registration
+      ✓ object for IE registration
+      ✓ object for IT registration
+      ✓ object for LT registration
+      ✓ object for LU registration
+      ✓ object for LV registration
+      ✓ object for NL registration
+      ✓ object for NO registration
+      ✓ object for NZ registration
+      ✓ object for PT registration
+      ✓ object for SE registration
+      ✓ object for SG registration
+      ✓ object for SI registration
+      ✓ object for SK registration
+      ✓ object for US registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/set-individual-registration-submitted
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for companies
+        ✓ ineligible stripe account is submitted
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-payment-details
+        ✓ ineligible registration missing payment details
+    returns
+      ✓ returns object for AT registration
+      ✓ returns object for AU registration
+      ✓ returns object for BE registration
+      ✓ returns object for CA registration
+      ✓ returns object for CH registration
+      ✓ returns object for DE registration
+      ✓ returns object for DK registration
+      ✓ returns object for EE registration
+      ✓ returns object for ES registration
+      ✓ returns object for FI registration
+      ✓ returns object for FR registration
+      ✓ returns object for GB registration
+      ✓ returns object for HK registration
+      ✓ returns object for IE registration
+      ✓ returns object for IT registration
+      ✓ returns object for LT registration
+      ✓ returns object for LU registration
+      ✓ returns object for LV registration
+      ✓ returns object for NL registration
+      ✓ returns object for NO registration
+      ✓ returns object for NZ registration
+      ✓ returns object for PT registration
+      ✓ returns object for SE registration
+      ✓ returns object for SG registration
+      ✓ returns object for SI registration
+      ✓ returns object for SK registration
+      ✓ returns object for US registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/stripe-account-payouts-count
+    exceptions
+      invalid-payoutid
+        ✓ missing querystring payoutid
+        ✓ invalid querystring payoutid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ integer
+
+  /api/user/connect/stripe-account-payouts
+    exceptions
+      invalid-payoutid
+        ✓ missing querystring payoutid
+        ✓ invalid querystring payoutid
+      invalid-account
+        ✓ ineligible accessing account
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
+    returns
+      ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
+
+  /api/user/connect/stripe-account
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ object
+
+  /api/user/connect/stripe-accounts-count
+    exceptions
+      invalid-payoutid
+        ✓ missing querystring payoutid
+        ✓ invalid querystring payoutid
+      invalid-account
+        ✓ ineligible accessing account
+    returns
+      ✓ integer
+
+  /api/user/connect/stripe-accounts
+    exceptions
+      invalid-payoutid
+        ✓ missing querystring payoutid
+        ✓ invalid querystring payoutid
+      invalid-account
+        ✓ ineligible accessing account
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
+    returns
+      ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
+
+  /api/user/connect/update-beneficial-owner
+    exceptions
+      invalid-ownerid
+        ✓ missing querystring ownerid
+        ✓ invalid querystring ownerid
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-relationship_owner_first_name
+        ✓ missing posted relationship_owner_first_name
+      invalid-relationship_owner_last_name
+        ✓ missing posted relationship_owner_last_name
+      invalid-relationship_owner_address_country
+        ✓ missing posted relationship_owner_address_country
+        ✓ invalid posted relationship_owner_address_country
+      invalid-relationship_owner_address_state
+        ✓ missing posted relationship_owner_address_state
+        ✓ invalid posted relationship_owner_address_state
+      invalid-relationship_owner_address_city
+        ✓ missing posted relationship_owner_address_city
+      invalid-relationship_owner_address_postal_code
+        ✓ missing posted relationship_owner_address_postal_code
+      invalid-relationship_owner_address_line1
+        ✓ missing posted relationship_owner_address_line1
+      invalid-relationship_owner_dob_day
+        ✓ missing posted relationship_owner_dob_day
+        ✓ invalid posted relationship_owner_dob_day
+      invalid-relationship_owner_dob_month
+        ✓ missing posted relationship_owner_dob_month
+        ✓ invalid posted relationship_owner_dob_month
+      invalid-relationship_owner_dob_year
+        ✓ missing posted relationship_owner_dob_year
+        ✓ invalid posted relationship_owner_dob_year
+    receives
+      ✓ optionally-required posted token
+      ✓ optional posted file relationship_owner_verification_document_front
+      ✓ optional posted file relationship_owner_verification_document_back
+      ✓ required posted relationship_owner_email
+      ✓ required posted relationship_owner_first_name
+      ✓ required posted relationship_owner_last_name
+      ✓ required posted relationship_owner_address_line1
+      ✓ optional posted relationship_owner_address_line2
+      ✓ required posted relationship_owner_address_city
+      ✓ required posted relationship_owner_address_state
+      ✓ required posted relationship_owner_address_country
+      ✓ required posted relationship_owner_address_postal_code
+      ✓ required posted relationship_owner_dob_day
+      ✓ required posted relationship_owner_dob_month
+      ✓ required posted relationship_owner_dob_year
+    returns
+      ✓ object
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/update-company-director
+    exceptions
+      invalid-directorid
+        ✓ missing querystring directorid
+        ✓ invalid querystring directorid
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-relationship_director_first_name
+        ✓ missing posted relationship_director_first_name
+      invalid-relationship_director_last_name
+        ✓ missing posted relationship_director_last_name
+      invalid relationship_director_dob_day
+        ✓ missing posted relationship_director_dob_day
+        ✓ invalid posted relationship_director_dob_day
+      invalid-relationship_director_dob_month
+        ✓ missing posted relationship_director_dob_month
+        ✓ invalid posted relationship_director_dob_month
+      invalid-relationship_director_dob_year
+        ✓ missing posted relationship_director_dob_year
+        ✓ invalid posted relationship_director_dob_year
+    receives
+      ✓ optionally-required posted token
+      ✓ optional posted file relationship_director_verification_document_front
+      ✓ optional posted file relationship_director_verification_document_back
+      ✓ required posted relationship_director_first_name
+      ✓ required posted relationship_director_last_name
+      ✓ required posted relationship_director_dob_day
+      ✓ required posted relationship_director_dob_month
+      ✓ required posted relationship_director_dob_year
+    returns
+      ✓ object
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/update-company-registration
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individuals
+        ✓ ineligible stripe account is submitted
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-company_name
+        ✓ missing posted company_name
+      invalid-company_tax_id
+        ✓ missing posted company_tax_id
+      invalid-company_address_city
+        ✓ missing posted company_address_line1
+      invalid-company_address_state
+        ✓ missing posted company_address_state
+        ✓ invalid posted company_address_state
+      invalid-company_address_line1
+        ✓ missing posted company_address_line1
+      invalid-company_address_postal_code
+        ✓ missing posted company_address_postal_code
+      invalid-business_profile_mcc
+        ✓ missing posted business_profile_mcc
+        ✓ invalid posted business_profile_mcc
+      invalid-business_profile_url
+        ✓ missing posted business_profile_url
+        ✓ invalid posted business_profile_url
+    receives
+      ✓ optionally-required posted token
+      ✓ optionally-required posted file company_verification_document_front
+      ✓ optionally-required posted file company_verification_document_back
+      ✓ required posted business_profile_mcc
+      ✓ optionally-required posted business_profile_url
+      ✓ optionally-required posted business_profile_product_description
+      ✓ required posted company_phone
+      ✓ required posted company_name
+      ✓ optionally-required posted company_address_postal_code
+      ✓ optionally-required posted company_address_city
+      ✓ optionally-required posted company_address_state
+      ✓ optionally-required posted company_address_line1
+      ✓ optional posted company_address_line2
+      ✓ optionally-required posted company_name_kana
+      ✓ optionally-required posted company_name_kanji
+      ✓ optionally-required posted company_address_kana_postal_code
+      ✓ optionally-required posted company_address_kana_city
+      ✓ optionally-required posted company_address_kana_state
+      ✓ optionally-required posted company_address_kana_town
+      ✓ optionally-required posted company_address_kana_line1
+      ✓ optionally-required posted company_address_kanji_postal_code
+      ✓ optionally-required posted company_address_kanji_city
+      ✓ optionally-required posted company_address_kanji_state
+      ✓ optionally-required posted company_address_kanji_town
+      ✓ optionally-required posted company_address_kanji_line1
+    returns
+      ✓ object for AT registration
+      ✓ object for AU registration
+      ✓ object for BE registration
+      ✓ object for CA registration
+      ✓ object for CH registration
+      ✓ object for DE registration
+      ✓ object for DK registration
+      ✓ object for EE registration
+      ✓ object for ES registration
+      ✓ object for FI registration
+      ✓ object for FR registration
+      ✓ object for GB registration
+      ✓ object for HK registration
+      ✓ object for IE registration
+      ✓ object for IT registration
+      ✓ object for JP registration
+      ✓ object for LU registration
+      ✓ object for NL registration
+      ✓ object for NO registration
+      ✓ object for NZ registration
+      ✓ object for PT registration
+      ✓ object for SE registration
+      ✓ object for SG registration
+      ✓ object for US registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/update-company-representative
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for individuals
+        ✓ ineligible stripe account is submitted
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-relationship_representative_percent_owned
+        ✓ invalid posted relationship_representative_percent_owned
+      invalid-relationship_representative_dob_day
+        ✓ missing posted relationship_representative_dob_day
+        ✓ invalid posted relationship_representative_dob_day
+      invalid-relationship_representative_dob_month
+        ✓ missing posted relationship_representative_dob_month
+        ✓ invalid posted relationship_representative_dob_month
+      invalid-relationship_representative_dob_year
+        ✓ missing posted relationship_representative_dob_year
+        ✓ invalid posted relationship_representative_dob_year
+      invalid-relationship_representative_first_name
+        ✓ missing posted relationship_representative_first_name
+      invalid-relationship_representative_last_name
+        ✓ missing posted relationship_representative_last_name
+      invalid-relationship_representative_email
+        ✓ missing posted relationship_representative_email
+      invalid-relationship_representative_phone
+        ✓ missing posted relationship_representative_phone
+      invalid-relationship_representative_ssn_last_4
+        ✓ missing posted relationship_representative_ssn_last_4
+      invalid-relationship_representative_address_line1
+        ✓ missing posted relationship_representative_address_line1
+      invalid-relationship_representative_address_city
+        ✓ missing posted relationship_representative_address_city
+      invalid-relationship_representative_address_state
+        ✓ missing posted relationship_representative_address_state
+      invalid-relationship_representative_address_country
+        ✓ missing posted relationship_representative_address_country
+        ✓ invalid-relationship_representative_address_country
+      invalid-relationship_representative_address_postal_code
+        ✓ missing posted relationship_representative_address_postal_code
+      invalid-relationship_representative_address_kana_postal_code
+        ✓ missing posted relationship_representative_address_kana_postal_code
+      invalid-relationship_representative_address_kana_city
+        ✓ missing posted relationship_representative_address_kana_city
+      invalid-relationship_representative_address_kana_state
+        ✓ missing posted relationship_representative_address_kana_state
+      invalid-relationship_representative_address_kana_town
+        ✓ missing posted relationship_representative_address_kana_town
+      invalid-relationship_representative_address_kana_line1
+        ✓ missing posted relationship_representative_address_kana_line1
+      invalid-relationship_representative_address_kanji_postal_code
+        ✓ missing posted relationship_representative_address_kanji_postal_code
+      invalid-relationship_representative_address_kanji_city
+        ✓ missing posted relationship_representative_address_kanji_city
+      invalid-relationship_representative_address_kanji_state
+        ✓ missing posted relationship_representative_address_kanji_state
+      invalid-relationship_representative_address_kanji_town
+        ✓ missing posted relationship_representative_address_kanji_town
+      invalid-relationship_representative_address_kanji_line1
+        ✓ missing posted relationship_representative_address_kanji_line1
+    receives
+      ✓ optionally-required posted token
+      ✓ required posted relationship_representative_dob_day
+      ✓ required posted relationship_representative_dob_month
+      ✓ required posted relationship_representative_dob_year
+      ✓ optionally-required posted file relationship_representative_verification_document_front
+      ✓ optionally-required posted file relationship_representative_verification_document_back
+      ✓ optionally-required posted relationship_representative_first_name
+      ✓ optionally-required posted relationship_representative_last_name
+      ✓ optionally-required posted relationship_representative_email
+      ✓ optionally-required posted relationship_representative_phone
+      ✓ optionally-required posted relationship_representative_gender
+      ✓ optionally-required posted relationship_representative_ssn_last_4
+      ✓ optionally-required posted relationship_representative_id_number
+      ✓ optionally-required posted relationship_representative_address_city
+      ✓ optionally-required posted relationship_representative_address_state
+      ✓ optionally-required posted relationship_representative_address_postal_code
+      ✓ optionally-required posted relationship_representative_address_country
+      ✓ optionally-required posted relationship_representative_address_line1
+      ✓ optional posted relationship_representative_address_line2
+      ✓ optional posted relationship_representative_percent_owned
+      ✓ optional posted relationship_representative_relationship_title
+      ✓ optional posted relationship_representative_relationship_director
+      ✓ optional posted relationship_representative_relationship_executive
+      ✓ optionally-required posted relationship_representative_first_name_kana
+      ✓ optionally-required posted relationship_representative_last_name_kana
+      ✓ optionally-required posted relationship_representative_address_kana_city
+      ✓ optionally-required posted relationship_representative_address_kana_state
+      ✓ optionally-required posted relationship_representative_address_kana_postal_code
+      ✓ optionally-required posted relationship_representative_address_kana_town
+      ✓ optionally-required posted relationship_representative_address_kana_line1
+      ✓ optionally-required posted relationship_representative_first_name_kanji
+      ✓ optionally-required posted relationship_representative_last_name_kanji
+      ✓ optionally-required posted relationship_representative_address_kanji_city
+      ✓ optionally-required posted relationship_representative_address_kanji_state
+      ✓ optionally-required posted relationship_representative_address_kanji_postal_code
+      ✓ optionally-required posted relationship_representative_address_kanji_town
+      ✓ optionally-required posted relationship_representative_address_kanji_line1
+    returns
+      ✓ object for AT registration
+      ✓ object for AU registration
+      ✓ object for BE registration
+      ✓ object for CA registration
+      ✓ object for CH registration
+      ✓ object for DE registration
+      ✓ object for DK registration
+      ✓ object for EE registration
+      ✓ object for ES registration
+      ✓ object for FI registration
+      ✓ object for FR registration
+      ✓ object for GB registration
+      ✓ object for HK registration
+      ✓ object for IE registration
+      ✓ object for IT registration
+      ✓ object for JP registration
+      ✓ object for LU registration
+      ✓ object for NL registration
+      ✓ object for NO registration
+      ✓ object for NZ registration
+      ✓ object for PT registration
+      ✓ object for SE registration
+      ✓ object for SG registration
+      ✓ object for US registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/update-individual-registration
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-stripe-account
+        ✓ ineligible stripe account for company
+        ✓ ineligible stripe account is submitted (320373ms)
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-individual_dob_day
+        ✓ missing posted individual_dob_day
+        ✓ invalid posted individual_dob_day
+      invalid-individual_dob_month
+        ✓ missing posted individual_dob_month
+        ✓ invalid posted individual_dob_month
+      invalid-individual_dob_year
+        ✓ missing posted individual_dob_year
+        ✓ invalid posted individual_dob_year
+      invalid-individual_first_name
+        ✓ missing posted individual_first_name
+      invalid-individual_last_name
+        ✓ missing posted individual_last_name
+      invalid-individual_address_city
+        ✓ missing posted individual_address_city
+      invalid-individual_address_state
+        ✓ missing posted individual_address_state
+      invalid-individual_address_postal_code
+        ✓ missing posted individual_address_postal_code
+      invalid-individual_id_number
+        ✓ missing posted individual_id_number
+      invalid-business_profile_mcc
+        ✓ missing posted business_profile_mcc
+        ✓ invalid posted business_profile_mcc
+      invalid-business_profile_url
+        ✓ missing posted business_profile_url
+      invalid-individual_ssn_last_4
+        ✓ missing posted individual_ssn_last_4
+      invalid-individual_phone
+        ✓ missing posted individual_phone
+      invalid-individual_email
+        ✓ missing posted 
+      invalid-individual_gender
+        ✓ missing posted individual_gender
+        ✓ invalid posted individual_gender
+      invalid-individual_first_name_kana
+        ✓ missing posted individual_first_name_kana
+      invalid-individual_last_name_kana
+        ✓ missing posted individual_last_name_kana
+      invalid-individual_first_name_kanji
+        ✓ missing posted individual_first_name_kanji
+      invalid-individual_last_name_kanji
+        ✓ missing posted individual_last_name_kanji
+      invalid-individual_address_kana_postal_code
+        ✓ missing posted individual_address_kana_postal_code
+      invalid-individual_address_kana_state
+        ✓ missing posted individual_address_kana_state
+      invalid-individual_address_kana_city
+        ✓ missing posted individual_address_kana_city
+      invalid-individual_address_kana_town
+        ✓ missing posted individual_address_kana_town
+      invalid-individual_address_kana_line1
+        ✓ missing posted individual_address_kana_line1
+      invalid-individual_address_kanji_postal_code
+        ✓ missing posted individual_address_kanji_postal_code
+      invalid-individual_address_kanji_state
+        ✓ missing posted individual_address_kanji_state
+      invalid-individual_address_kanji_city
+        ✓ missing posted individual_address_kanji_city
+      invalid-individual_address_kanji_town
+        ✓ missing posted individual_address_kanji_town
+      invalid-individual_address_kanji_line1
+        ✓ missing posted individual_address_kanji_line1
+    receives
+      ✓ required posted business_profile_mcc
+      ✓ optionally-required posted business_profile_url
+      ✓ optionally-required posted business_profile_product_description
+      ✓ required posted individual_dob_day
+      ✓ required posted individual_dob_month
+      ✓ required posted individual_dob_year
+      ✓ required posted individual_first_name
+      ✓ required posted individual_last_name
+      ✓ optionally-required posted individual_email
+      ✓ optionally-required posted individual_phone
+      ✓ optionally-required posted individual_gender
+      ✓ optionally-required posted individual_ssn_last_4
+      ✓ optionally-required posted individual_id_number
+      ✓ optionally-required posted individual_address_state
+      ✓ optionally-required posted individual_address_postal_code
+      ✓ optionally-required posted individual_address_line1
+      ✓ optional posted individual_address_line2
+      ✓ optionally-required posted individual_first_name_kana
+      ✓ optionally-required posted individual_last_name_kana
+      ✓ optionally-required posted individual_address_kana_town
+      ✓ optionally-required posted individual_address_kana_state
+      ✓ optionally-required posted individual_address_kana_postal_code
+      ✓ optionally-required posted individual_address_kana_line1
+      ✓ optionally-required posted individual_first_name_kanji
+      ✓ optionally-required posted individual_last_name_kanji
+      ✓ optionally-required posted individual_address_kanji_state
+      ✓ optionally-required posted individual_address_kanji_postal_code
+      ✓ optionally-required posted individual_address_kanji_line1
+      ✓ optionally-required posted individual_address_kanji_town
+      ✓ optionally-required posted file individual_verification_document_front
+      ✓ optionally-required posted file individual_verification_document_back
+      ✓ optionally-required posted file individual_verification_additional_document_front
+      ✓ optionally-required posted file individual_verification_additional_document_back
+    returns
+      ✓ returns object for AT registration
+      ✓ returns object for AU registration
+      ✓ returns object for BE registration
+      ✓ returns object for CA registration
+      ✓ returns object for CH registration
+      ✓ returns object for DE registration
+      ✓ returns object for DK registration
+      ✓ returns object for EE registration
+      ✓ returns object for ES registration
+      ✓ returns object for FI registration
+      ✓ returns object for FR registration
+      ✓ returns object for GB registration
+      ✓ returns object for HK registration
+      ✓ returns object for IE registration
+      ✓ returns object for IT registration
+      ✓ returns object for JP registration
+      ✓ returns object for LT registration
+      ✓ returns object for LU registration
+      ✓ returns object for LV registration
+      ✓ returns object for NL registration
+      ✓ returns object for NO registration
+      ✓ returns object for NZ registration
+      ✓ returns object for PT registration
+      ✓ returns object for SE registration
+      ✓ returns object for SI registration
+      ✓ returns object for SG registration
+      ✓ returns object for SK registration
+      ✓ returns object for US registration
+    configuration
+      ✓ environment STRIPE_JS
+
+  /api/user/connect/update-payment-information
+    exceptions
+      invalid-stripeid
+        ✓ missing querystring stripeid
+        ✓ invalid querystring stripeid
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-currency
+        ✓ missing posted currency
+        ✓ invalid posted currency
+      invalid-country
+        ✓ missing posted country
+        ✓ invalid posted country
+      invalid-account_holder_name
+        ✓ missing posted account_holder_name
+      invalid-account_holder_type
+        ✓ missing posted account_holder_type
+        ✓ invalid posted account_holder_type
+      invalid-iban
+        ✓ missing posted iban
+        ✓ invalid posted iban
+      invalid-bsb_number
+        ✓ missing posted bsb_number
+        ✓ invalid posted bsb_number
+      invalid-account_number
+        ✓ missing posted account_number
+        ✓ invalid posted account_number
+      invalid-institution_number
+        ✓ missing posted institution_number
+        ✓ invalid posted institution_number
+      invalid-transit_number
+        ✓ missing posted transit_number
+        ✓ invalid posted transit_number
+      invalid-sort_code
+        ✓ missing posted sort_code
+        ✓ invalid posted sort_code
+      invalid-clearing_code
+        ✓ missing posted clearing_code
+        ✓ missing posted clearing_code
+      invalid-branch_code
+        ✓ missing posted branch_code
+        ✓ invalid posted branch_code
+      invalid-bank_code
+        ✓ missing posted bank_code
+        ✓ invalid posted bank_code
+      invalid-routing_number
+        ✓ missing posted routing_number
+        ✓ invalid posted routing_number
+    receives
+      ✓ required posted currency
+      ✓ required posted account_holder_type
+      ✓ required posted account_holder_name
+      ✓ required posted country
+      ✓ optionally-required posted iban
+      ✓ optionally-required posted sort_code
+      ✓ optionally-required posted bank_code
+      ✓ optionally-required posted routing_number
+      ✓ optionally-required posted branch_code
+      ✓ optionally-required posted bsb_number
+      ✓ optionally-required posted transit_number
+      ✓ optionally-required posted institution_number
+      ✓ optionally-required posted account_number
+    returns
+      ✓ object for AT registration
+      ✓ object for AU registration
+      ✓ object for BE registration
+      ✓ object for CA registration
+      ✓ object for CH registration
+      ✓ object for DE registration
+      ✓ object for DK registration
+      ✓ object for EE registration
+      ✓ object for ES registration
+      ✓ object for FI registration
+      ✓ object for FR registration
+      ✓ object for GB registration (account number, sort code)
+      ✓ object for GB registration (iban)
+      ✓ object for HK registration
+      ✓ object for IE registration
+      ✓ object for IT registration
+      ✓ object for LT registration
+      ✓ object for LU registration
+      ✓ object for LV registration
+      ✓ object for NL registration
+      ✓ object for NO registration
+      ✓ object for NZ registration
+      ✓ object for PT registration
+      ✓ object for SE registration
+      ✓ object for SG registration
+      ✓ object for SI registration
+      ✓ object for SK registration
+      ✓ object for US registration
+
+
+  751 passing (2h)
+  2 failing
+
+  1) /api/user/connect/set-company-directors-submitted
+       returns
+         object for AU registration:
+     Error: invalid-relationship_director_verification_document_front
+      at Object.req.<computed> [as post] (node_modules/@userdashboard/dashboard/test-helper.js:173:19)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+
+  2) /api/user/connect/set-company-registration-submitted
+       returns
+         object for LV registration:
+     Error: unknown-error
+      at Object.req.<computed> [as patch] (node_modules/@userdashboard/dashboard/test-helper.js:173:19)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+
+
+
