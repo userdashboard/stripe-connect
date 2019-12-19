@@ -45,7 +45,7 @@ describe('/account/connect/remove-company-representative', () => {
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1', 
+        relationship_representative_dob_month: '1',
         relationship_representative_address_city: 'Berlin',
         relationship_representative_address_line1: 'First Street',
         relationship_representative_address_postal_code: '01067'

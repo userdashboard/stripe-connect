@@ -50,7 +50,7 @@ describe('/account/connect/submit-company-representative', () => {
         relationship_representative_address_state: 'BW',
         relationship_representative_address_line1: 'First Street',
         relationship_representative_address_postal_code: '01067',
-       relationship_representative_address_country: 'DE'
+        relationship_representative_address_country: 'DE'
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',

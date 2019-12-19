@@ -10,7 +10,9 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.ownerid) {
     throw new Error('invalid-ownerid')
   }
+  console.log('loading owner')
   const owner = await global.api.user.connect.BeneficialOwner.get(req)
+  console.log('got it')
   req.query.stripeid = owner.stripeid
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted) {

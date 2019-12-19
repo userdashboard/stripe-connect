@@ -106,13 +106,6 @@ describe('/account/connect/company-directors', () => {
         business_profile_mcc: '5542',
         business_profile_url: 'https://website.com'
       })
-      await TestHelper.createExternalAccount(user, {
-        currency: 'eur',
-        country: 'DE',
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        iban: 'DE89370400440532013000'
-      })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
         relationship_director_first_name: person.firstName,
@@ -125,7 +118,6 @@ describe('/account/connect/company-directors', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

@@ -25,13 +25,16 @@ describe('/account/connect/delete-beneficial-owner', () => {
         country: 'DE'
       })
       await TestHelper.createStripeRegistration(user, {
-        company_address_city: 'Berlin',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
         company_tax_id: '00000000',
         company_name: user.profile.firstName + '\'s company',
         company_address_country: 'DE',
-        company_address_state: 'BW'
+        company_address_city: 'Berlin',
+        company_address_line1: 'First Street',
+        company_address_postal_code: '01067',
+        company_address_state: 'BW',
+        company_phone: '456-789-0123',
+        business_profile_mcc: '5542',
+        business_profile_url: 'https://website.com'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_first_name: user.profile.firstName,
@@ -45,11 +48,14 @@ describe('/account/connect/delete-beneficial-owner', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_address_city: 'Berlin',
         relationship_representative_address_line1: 'First Street',
-relationship_representative_address_state: 'BW',
-        relationship_representative_address_postal_code: '01067'
+        relationship_representative_address_state: 'BW',
+        relationship_representative_address_postal_code: '01067',
+         relationship_representative_address_country: 'DE'
       }, {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png']
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png']
       })
       await TestHelper.createExternalAccount(user, {
         currency: 'eur',
@@ -75,6 +81,9 @@ relationship_representative_address_state: 'BW',
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png'],
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png']
       })
+      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
@@ -85,7 +94,7 @@ relationship_representative_address_state: 'BW',
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-stripe-account')
+      assert.strictEqual(errorMessage, 'invalid-ownerid')
     })
 
     it('should require own Stripe account', async () => {

@@ -205,7 +205,7 @@ module.exports = {
         } else if (errorMessage.startsWith('company')) {
           let field = errorMessage.substring('company['.length)
           field = field.substring(0, field.length - 1)
-          throw new Error(`invalid-${field}`)
+          throw new Error(`invalid-company_${field}`)
         }
         throw new Error('unknown-error')
       }

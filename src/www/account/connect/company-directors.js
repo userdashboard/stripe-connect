@@ -28,7 +28,7 @@ async function beforeRequest (req) {
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   navbar.setup(doc, req.data.stripeAccount)
-  if (req.data.stripeAccount.metadata.submitted) {
+  if (req.data.stripeAccount.company.directors_provided) {
     const directorContainer = doc.getElementById('directors-container')
     directorContainer.parentNode.removeChild(directorContainer)
   } else {
