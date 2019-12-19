@@ -77,6 +77,20 @@
             <option value="">Select the code for your business</option>
           </select>
         </div>
+        <div id="business_profile_product_description-container" class="pure-control-group">
+          <a name="business_profile_product_description-anchor"></a>
+          <label for="business_profile_product_description">Product description</label>
+          <input required="required" id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50" />
+        </div>
+        <div id="upload-container" class="pure-control-group">
+          <a name="company_verification_document_front-anchor"></a>
+          <a name="company_verification_document_back-anchor"></a>
+          <h2>Company registration</h2>
+          <label for="company_verification_document_front">Front scan/photo</label>
+          <input name="company_verification_document_front" id="company_verification_document_front" type="file" />
+          <label for="company_verification_document_back">Back scan/photo</label>
+          <input name="company_verification_document_back" id="company_verification_document_back" type="file" />
+        </div>
         <div id="company-address-container">
           <h2>Company address</h2>
           <div id="company_address_line1-container" class="pure-control-group">
@@ -189,6 +203,12 @@
   </template>
   <template id="upload-error">
     <div class="error message">Error! An error occurred uploading document images</div>
+  </template>
+  <template id="invalid-company_verification_document_front">
+    <div class="error message">Error! Invalid or missing document front scan or photo</div>
+  </template>
+  <template id="invalid-company_verification_document_back">
+    <div class="error message">Error! Invalid or missing document back scan or photo</div>
   </template>
   <template id="invalid-company_name">
     <div class="error message">Error! Invalid or missing business name</div>

@@ -17,45 +17,24 @@ async function beforeRequest (req) {
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  stripeAccount.company = stripeAccount.company || {}
-  stripeAccount.individual = stripeAccount.individual || {}
-  const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
+  if (connect.kycRequirements[stripeAccount.country].beneficialOwner && !stripeAccount.company.owners_provided) {
+    req.error = req.error || 'invalid-company_beneficial_owners'
+  }
+  if (connect.kycRequirements[stripeAccount.country].companyDirector && !stripeAccount.company.directors_provided) {
+    req.error = req.error || 'invalid-company_directors'
+  }
+  if (!stripeAccount.metadata.representative) {
+    req.error = req.error || 'invalid-company-representative'
+  }
   const completedPayment = stripeAccount.external_accounts &&
                            stripeAccount.external_accounts.data &&
                            stripeAccount.external_accounts.data.length
   if (!completedPayment) {
     req.error = req.error || 'invalid-payment-details'
   }
-  let registrationComplete = true
-  const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  if (!registration.relationship_representative_verification_document_front ||
-    !registration.relationship_representative_verification_document_back) {
-    registrationComplete = false
-  } else {
-    for (const field of fieldsNeeded) {
-      if (field === 'external_account' ||
-        field === 'tos_acceptance.ip' ||
-        field === 'tos_acceptance.date' ||
-        field === 'business_type' ||
-        field === 'relationship.owner' ||
-        field === 'relationship.director' ||
-        field === 'relationship.representative' ||
-        field === 'relationship.account_opener') {
-        continue
-      }
-      const posted = field.split('.').join('_')
-      if (!registration[posted]) {
-        registrationComplete = false
-        break
-      }
-    }
-  }
-  if (!registrationComplete) {
-    req.error = req.error || 'invalid-registration'
-  }
   const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
   const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
-  req.data = { stripeAccount, fieldsNeeded, owners, directors }
+  req.data = { stripeAccount, owners, directors }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -95,7 +74,7 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   try {
-    req.data.stripeAccount = await global.api.user.connect.SetCompanyRegistrationSubmitted.patch(req)
+    await global.api.user.connect.SetCompanyRegistrationSubmitted.patch(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

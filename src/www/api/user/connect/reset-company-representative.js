@@ -27,16 +27,25 @@ module.exports = {
       try {
         await stripe.accounts.updatePerson(req.query.stripeid, person.id, representativeInfo, req.stripeKey)
         req.success = true
-        const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, {
-          metadata: {
-            representative: null
-          }
-        }, req.stripeKey)
-        await stripeCache.update(stripeAccountNow)
-        req.success = true
-        return stripeAccountNow
       } catch (error) {
         throw new Error('unknown-error')
+      }
+      while (true) {
+        try {
+          const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, {
+            metadata: {
+              representative: null
+            }
+          }, req.stripeKey)
+          await stripeCache.update(stripeAccountNow)
+          req.success = true
+          return stripeAccountNow
+        } catch (error) {
+          if (error.raw && error.raw.code === 'lock_timeout') {
+            continue
+          }
+          throw error
+        }
       }
     }
     throw new Error('unknown-error')

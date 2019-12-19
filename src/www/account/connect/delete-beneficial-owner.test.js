@@ -28,7 +28,6 @@ describe('/account/connect/delete-beneficial-owner', () => {
         business_profile_mcc: '5542',
         business_profile_url: 'https://website.com',
         company_address_city: 'Berlin',
-        company_address_country: 'DE',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         company_address_state: 'BW',

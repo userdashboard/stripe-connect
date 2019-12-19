@@ -220,7 +220,7 @@ describe('/api/user/connect/set-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_id_number: '7',
+        relationship_representative_id_number: '000000000',
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_percent_ownership: '0',
         relationship_representative_phone: '456-789-0123',
@@ -737,7 +737,7 @@ describe('/api/user/connect/set-company-representative', () => {
     //     company_name_kana: 'Company',
     //     company_name_kanji: 'Company',
     //     company_phone: '011-271-6677',
-    //     company_tax_id: '8'
+    //     company_tax_id: '00000000000'
     // })
     //   await TestHelper.createCompanyRepresentative(user,{
     //     relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
@@ -974,12 +974,11 @@ describe('/api/user/connect/set-company-representative', () => {
     //     business_profile_mcc: '8931',
     //     business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
     //     company_address_city: 'Talin',
-    //     company_address_country: 'MX',
-    //     company_address_line1: '123 Park Lane',
+    //         //     company_address_line1: '123 Park Lane',
     //     company_address_postal_code: '10128',
     //     company_address_state: '37',
     //     company_name: 'Company',
-    //     company_tax_id: '8'
+    //     company_tax_id: '00000000000'
     // })
     //   await TestHelper.createCompanyRepresentative(user,{
     //     relationship_representative_address_city: 'Mexico City',
@@ -1375,13 +1374,12 @@ describe('/api/user/connect/set-company-representative', () => {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
-        company_address_country: 'US',
         company_address_line1: '285 Fulton St',
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
         company_phone: '456-123-7890',
-        company_tax_id: '8'
+        company_tax_id: '00000000000'
       }
       await req.post()
       const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)

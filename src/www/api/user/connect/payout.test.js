@@ -46,7 +46,6 @@ describe('/api/user/connect/payout', () => {
           business_profile_mcc: '7531',
           business_profile_url: 'https://www.abcde.com',
           individual_address_city: 'Auckland',
-          individual_address_country: 'NZ',
           individual_address_line1: '123 Sesame St',
           individual_address_postal_code: '6011',
           individual_address_state: 'AUK',

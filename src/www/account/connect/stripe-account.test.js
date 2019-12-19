@@ -80,7 +80,6 @@ describe('/account/connect/stripe-account', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        // individual_id_number: '000000000',
         business_profile_mcc: '7333',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
@@ -113,7 +112,6 @@ describe('/account/connect/stripe-account', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        // individual_id_number: '000000000',
         business_profile_mcc: '7333',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
@@ -128,6 +126,9 @@ describe('/account/connect/stripe-account', () => {
         individual_last_name: user.profile.lastName,
         individual_phone: '456-123-7890',
         individual_ssn_last_4: '0000'
+      }, {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -154,17 +155,22 @@ describe('/account/connect/stripe-account', () => {
         type: 'company'
       })
       await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Vienna',
-        company_address_country: 'AT',
-        company_address_line1: 'First Street',
+        company_address_line1: '123 Park Lane',
         company_address_postal_code: '1020',
-        company_name: user.profile.firstName + '\'s company',
-        company_tax_id: '00000000'
+        company_address_state: '1',
+        company_name: 'Company',
+        company_phone: '456-789-0123',
+        company_tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Vienna',
-        relationship_representative_address_line1: 'First Street',
+        relationship_representative_address_country: 'AT',
+        relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1020',
+        relationship_representative_address_state: '1',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -175,6 +181,8 @@ describe('/account/connect/stripe-account', () => {
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner'
       }, {
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -185,6 +193,9 @@ describe('/account/connect/stripe-account', () => {
         currency: 'eur',
         iban: 'AT89370400440532013000'
       })
+      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -202,7 +213,6 @@ describe('/account/connect/stripe-account', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        // individual_id_number: '000000000',
         business_profile_mcc: '7333',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
@@ -235,7 +245,6 @@ describe('/account/connect/stripe-account', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        // individual_id_number: '000000000',
         business_profile_mcc: '7333',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
@@ -276,7 +285,6 @@ describe('/account/connect/stripe-account', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        // individual_id_number: '000000000',
         business_profile_mcc: '7333',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',

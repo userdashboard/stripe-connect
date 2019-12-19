@@ -63,15 +63,14 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  if (!req.body) {
-    return dashboard.Response.end(req, res, doc)
-  }
-  for (const fieldName in req.body) {
-    const el = doc.getElementById(fieldName)
-    if (!el) {
-      continue
+  if (req.body) {
+    for (const fieldName in req.body) {
+      const el = doc.getElementById(fieldName)
+      if (!el) {
+        continue
+      }
+      el.attr.value = req.body[fieldName]
     }
-    el.attr.value = req.body[fieldName]
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)

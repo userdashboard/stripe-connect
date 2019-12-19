@@ -4,9 +4,9 @@ const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/submit-company-representative', () => {
   describe('SubmitCompanyRepresentative#BEFORE', () => {
-    it('should reject invalid directorid', async () => {
+    it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/connect/submit-company-representative?directorid=invalid')
+      const req = TestHelper.createRequest('/account/connect/submit-company-representative?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -15,10 +15,10 @@ describe('/account/connect/submit-company-representative', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-directorid')
+      assert.strictEqual(errorMessage, 'invalid-stripeid')
     })
 
-    it('should reject submitted registration', async () => {
+    it('should reject already-submitted representative', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -28,7 +28,6 @@ describe('/account/connect/submit-company-representative', () => {
         business_profile_mcc: '5542',
         business_profile_url: 'https://website.com',
         company_address_city: 'Berlin',
-        company_address_country: 'DE',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         company_address_state: 'BW',
@@ -39,9 +38,9 @@ describe('/account/connect/submit-company-representative', () => {
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Berlin',
         relationship_representative_address_country: 'DE',
-        relationship_representative_address_line1: 'First Street',
+        relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '01067',
-        relationship_representative_address_state: 'BW',
+        relationship_representative_address_state: 'BE',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -51,27 +50,14 @@ describe('/account/connect/submit-company-representative', () => {
         relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner'
-      })
-      await TestHelper.createExternalAccount(user, {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'DE',
-        currency: 'eur',
-        iban: 'DE89370400440532013000'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.submitStripeAccount(user)
-      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
+      await TestHelper.setCompanyRepresentative(user)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -89,19 +75,29 @@ describe('/account/connect/submit-company-representative', () => {
         country: 'DE',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_country: 'DE',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '01067',
+        relationship_representative_address_state: 'BE',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const user2 = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user2.account
       req.session = user2.session
       let errorMessage
@@ -112,30 +108,6 @@ describe('/account/connect/submit-company-representative', () => {
       }
       assert.strictEqual(errorMessage, 'invalid-account')
     })
-
-    it('should bind director to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
-      }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
-      req.account = user.account
-      req.session = user.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.director.directorid, user.director.directorid)
-    })
   })
 
   describe('SubmitCompanyRepresentative#GET', () => {
@@ -145,18 +117,28 @@ describe('/account/connect/submit-company-representative', () => {
         country: 'DE',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_country: 'DE',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '01067',
+        relationship_representative_address_state: 'BE',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       const page = await req.get()
@@ -164,53 +146,37 @@ describe('/account/connect/submit-company-representative', () => {
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
-
-    it('should present the director table', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
-      }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
-      req.account = user.account
-      req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.director.directorid)
-      assert.strictEqual(row.tag, 'tr')
-    })
   })
 
   describe('SubmitCompanyRepresentative#POST', () => {
-    it('should delete director', async () => {
+    it('should set company representative', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_city: 'Berlin',
+        relationship_representative_address_country: 'DE',
+        relationship_representative_address_line1: '123 Sesame St',
+        relationship_representative_address_postal_code: '01067',
+        relationship_representative_address_state: 'BE',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       await req.post()

@@ -24,37 +24,6 @@ describe('/account/connect/submit-individual-registration', () => {
         country: 'US',
         type: 'company'
       })
-      await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7542',
-        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'New York',
-        company_address_country: 'US',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '10001',
-        company_address_state: 'New York',
-        company_name: user.profile.firstName + '\'s company',
-        company_phone: '456-123-7890',
-        company_tax_id: '00000000'
-      })
-      await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'New York',
-        relationship_representative_address_line1: 'First Street',
-        relationship_representative_address_postal_code: '10007',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-123-7890',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_ssn_last_4: '0000'
-      }, {
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
       const req = TestHelper.createRequest(`/account/connect/submit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -74,7 +43,7 @@ describe('/account/connect/submit-individual-registration', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7542',
+        business_profile_mcc: '7997',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
@@ -85,10 +54,12 @@ describe('/account/connect/submit-individual-registration', () => {
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123',
+        individual_phone: '456-123-7890',
         individual_ssn_last_4: '0000'
+      }, {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -114,7 +85,7 @@ describe('/account/connect/submit-individual-registration', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7542',
+        business_profile_mcc: '7997',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
@@ -125,10 +96,12 @@ describe('/account/connect/submit-individual-registration', () => {
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123',
+        individual_phone: '456-123-7890',
         individual_ssn_last_4: '0000'
+      }, {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -154,7 +127,7 @@ describe('/account/connect/submit-individual-registration', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7542',
+        business_profile_mcc: '7997',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
@@ -165,10 +138,12 @@ describe('/account/connect/submit-individual-registration', () => {
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123',
+        individual_phone: '456-123-7890',
         individual_ssn_last_4: '0000'
+      }, {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/submit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -189,7 +164,7 @@ describe('/account/connect/submit-individual-registration', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7542',
+        business_profile_mcc: '7997',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
@@ -200,10 +175,12 @@ describe('/account/connect/submit-individual-registration', () => {
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123',
+        individual_phone: '456-123-7890',
         individual_ssn_last_4: '0000'
+      }, {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,

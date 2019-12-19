@@ -15,7 +15,9 @@
     "individual.address.line2",
     "individual.address.city",
     "individual.address.state",
-    "individual.address.postal_code"
+    "individual.address.postal_code",
+    "individual.verification.document.front",
+    "individual.verification.document.back"
   ],
   "company": [
     "company.address.line1",

@@ -11,6 +11,9 @@ module.exports = {
  * @param {*} fieldName
  */
 function parse (metaData, fieldName) {
+  if (!metaData[fieldName]) {
+    return null
+  }
   const parts = []
   let i = 2
   let part = metaData[fieldName]

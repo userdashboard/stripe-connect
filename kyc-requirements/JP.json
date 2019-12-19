@@ -20,7 +20,9 @@
     "individual.address_kanji.town",
     "individual.address_kanji.city",
     "individual.address_kanji.state",
-    "individual.address_kanji.postal_code"
+    "individual.address_kanji.postal_code",
+    "individual.verification.document.front",
+    "individual.verification.document.back"
   ],
   "company": [
     "company.address_kana.line1",

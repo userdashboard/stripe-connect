@@ -174,16 +174,18 @@ module.exports = {
       }
       registration[posted] = req.body[posted]
     }
-    if (req.body.relationship_representative_percent_owned) {
+    if (req.body.relationship_representative_percent_ownership) {
       try {
-        const percent = parseInt(req.body.relationship_representative_percent_owned, 10)
+        const percent = parseFloat(req.body.relationship_representative_percent_ownership, 10)
         if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
-          throw new Error('invalid-relationship_representative_percent_owned')
+          throw new Error('invalid-relationship_representative_percent_ownership')
         }
       } catch (s) {
-        throw new Error('invalid-relationship_representative_percent_owned')
+        throw new Error('invalid-relationship_representative_percent_ownership')
       }
-      registration.relationship_representative_percent_owned = req.body.relationship_representative_percent_owned
+      registration.relationship_representative_percent_ownership = req.body.relationship_representative_percent_ownership
+    } else if (requiredFields.indexOf('relationship.representative.percent_ownership') > -1) {
+      throw new Error('invalid-relationship_representative_percent_ownership')
     }
     if (req.body.relationship_representative_relationship_title) {
       registration.relationship_representative_relationship_title = req.body.relationship_representative_relationship_title

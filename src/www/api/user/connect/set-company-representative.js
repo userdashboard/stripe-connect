@@ -43,8 +43,8 @@ module.exports = {
       if (registration.relationship_representative_relationship_title) {
         representativeInfo.relationship.title = registration.relationship_representative_relationship_title
       }
-      if (registration.relationship_representative_percent_owned) {
-        representativeInfo.relationship.percent_owned = registration.relationship_representative_percent_owned
+      if (registration.relationship_representative_percent_ownership) {
+        representativeInfo.relationship.percent_owned = registration.relationship_representative_percent_ownership
       }
       for (const field in registration) {
         if (!field.startsWith('relationship_representative_')) {

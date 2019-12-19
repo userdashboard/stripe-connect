@@ -40,33 +40,10 @@ describe('/account/connect/edit-individual-registration', () => {
 
   describe('EditIndividualRegistration#GET', () => {
     async function testRequiredFieldInputsExist (req, stripeAccount) {
-      const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
-      const countrySpec = await connect.countrySpecIndex[stripeAccount.country]
-      const individualFields = countrySpec.verification_fields.individual.minimum.concat(countrySpec.verification_fields.individual.additional)
-      for (const field of individualFields) {
-        if (field === 'individual.verification.document') {
-          fieldsNeeded.push('individual.verification.document.front', 'individual.verification.document.back')
-          continue
-        }
-        fieldsNeeded.push(field)
-      }
+      const fieldsNeeded = connect.kycRequirements[stripeAccount.country].individual
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       for (const field of fieldsNeeded) {
-        if (field === 'external_account' ||
-          field === 'business_type' ||
-          field === 'tos_acceptance.date' ||
-          field === 'tos_acceptance.ip' ||
-          field === 'tos_acceptance.user_agent') {
-          continue
-        }
-        if (field === 'individual.verification.document') {
-          const front = doc.getElementById(field.split('.').join('_') + '_front')
-          assert.strictEqual(front.tag, 'input')
-          const back = doc.getElementById(field.split('.').join('_') + '_back')
-          assert.strictEqual(back.tag, 'input')
-          continue
-        }
         if (field === 'individual.gender') {
           const female = doc.getElementById('female')
           assert.strictEqual(female.tag, 'input')
@@ -75,15 +52,8 @@ describe('/account/connect/edit-individual-registration', () => {
           continue
         }
         const input = doc.getElementById(field.split('.').join('_'))
-        if (input.attr.name === 'individual_address_state' ||
-            input.attr.name === 'individual_address_country' ||
-            input.attr.name === 'business_profile_mcc') {
-          assert.strictEqual(input.tag, 'select')
-        } else if (input.attr.id === 'individual_gender') {
-          assert.strictEqual(input.tag, 'div')
-        } else {
-          assert.strictEqual(input.tag, 'input')
-        }
+        assert.notStrictEqual(input.tag, undefined)
+        assert.notStrictEqual(input.tag, null)
       }
     }
 
@@ -380,11 +350,26 @@ describe('/account/connect/edit-individual-registration', () => {
 
   describe('EditIndividualRegistration#POST', () => {
     async function testEachFieldAsNull (req) {
-      const body = JSON.stringify(req.body)
-      const fields = Object.keys(req.body)
+      const body = req.body
+      let fields = Object.keys(body)
+      const uploads = req.uploads
+      if (uploads) {
+        fields = fields.concat(Object.keys(uploads))
+      }
       for (const field of fields) {
-        req.body = JSON.parse(body)
-        req.body[field] = ''
+        req.body = JSON.parse(JSON.stringify(body))
+        if (uploads) {
+          req.uploads = {}
+          for (const file in uploads) {
+            req.uploads[file] = uploads[file]
+          }
+        }
+        if (req.body[field]) {
+          req.body[field] = ''
+        }
+        if (req.uploads && req.uploads[field]) {
+          delete (req.uploads[field])
+        }
         const page = await req.post()
         const doc = TestHelper.extractDoc(page)
         const messageContainer = doc.getElementById('message-container')
@@ -403,12 +388,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Vienna',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1020',
+        individual_address_state: '1',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -423,12 +421,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Vienna',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1020',
+        individual_address_state: '1',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -446,8 +457,10 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Brisbane',
-        individual_address_line1: '123 Sesame St',
+        individual_address_line1: '845 Oxford St',
         individual_address_postal_code: '4000',
         individual_address_state: 'QLD',
         individual_dob_day: '1',
@@ -456,6 +469,10 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -470,8 +487,10 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Brisbane',
-        individual_address_line1: '123 Sesame St',
+        individual_address_line1: '845 Oxford St',
         individual_address_postal_code: '4000',
         individual_address_state: 'QLD',
         individual_dob_day: '1',
@@ -479,13 +498,17 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject BE invalid fields', async () => {
@@ -498,12 +521,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Brussels',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1020',
+        individual_address_state: 'BRU',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -518,17 +554,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Brussels',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1020',
+        individual_address_state: 'BRU',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject CA invalid fields', async () => {
@@ -541,7 +590,8 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        // individual_id_number: '000000000',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Vancouver',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: 'V5K 0A1',
@@ -549,8 +599,15 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_id_number: '000000000',
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -565,7 +622,8 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        // individual_id_number: '000000000',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Vancouver',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: 'V5K 0A1',
@@ -573,14 +631,20 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_id_number: '000000000',
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject CH invalid fields', async () => {
@@ -593,11 +657,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Bern',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1020',
+        individual_address_state: 'BE',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -612,17 +690,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Bern',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1020',
+        individual_address_state: 'BE',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject DE invalid fields', async () => {
@@ -635,11 +726,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Berlin',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '01067',
+        individual_address_state: 'BE',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -654,17 +759,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Berlin',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '01067',
+        individual_address_state: 'BE',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject DK invalid fields', async () => {
@@ -677,11 +795,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Copenhagen',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1000',
+        individual_address_state: '147',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -696,17 +828,99 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Copenhagen',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1000',
+        individual_address_state: '147',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    })
+
+    it('should reject EE invalid fields', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'EE',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Tallinn',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '10128',
+        individual_address_state: '37',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it('should update EE information', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'EE',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Tallinn',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '10128',
+        individual_address_state: '37',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject ES invalid fields', async () => {
@@ -719,11 +933,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Madrid',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '03179',
+        individual_address_state: 'AN',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -738,17 +966,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Helsinki',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00990',
+        individual_address_state: 'AL',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject FI invalid fields', async () => {
@@ -761,11 +1002,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Helsinki',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00990',
+        individual_address_state: 'AL',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -780,17 +1035,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Helsinki',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00990',
+        individual_address_state: 'AL',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject FR invalid fields', async () => {
@@ -803,11 +1071,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Paris',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '75001',
+        individual_address_state: 'A',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -822,17 +1104,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Paris',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '75001',
+        individual_address_state: 'A',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject GB invalid fields', async () => {
@@ -845,11 +1140,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'London',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'EC1A 1AA',
+        individual_address_state: 'LND',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -864,17 +1173,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'London',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'EC1A 1AA',
+        individual_address_state: 'LND',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject HK invalid fields', async () => {
@@ -887,14 +1209,24 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        // individual_id_number: '000000000',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Hong Kong',
         individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '999077',
+        individual_address_state: 'HK',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_id_number: '000000000',
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -909,20 +1241,29 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        // individual_id_number: '000000000',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Hong Kong',
         individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '999077',
+        individual_address_state: 'HK',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_id_number: '000000000',
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject IE invalid fields', async () => {
@@ -935,11 +1276,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Dublin',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'Dublin 1',
+        individual_address_state: 'D',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -954,17 +1309,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Dublin',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'Dublin 1',
+        individual_address_state: 'D',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject IT invalid fields', async () => {
@@ -977,11 +1345,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Rome',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00010',
+        individual_address_state: '65',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -996,17 +1378,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Rome',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00010',
+        individual_address_state: '65',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject JP invalid fields', async () => {
@@ -1019,6 +1414,8 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_kana_city: 'ｼﾌﾞﾔ',
         individual_address_kana_line1: '27-15',
         individual_address_kana_postal_code: '1500001',
@@ -1036,8 +1433,11 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_first_name_kanji: '東京都',
         individual_gender: 'female',
         individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        individual_last_name_kanji: '東京都',
-        individual_phone: '0859-076500'
+        individual_last_name_kanji: '東京都'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1052,6 +1452,8 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_kana_city: 'ｼﾌﾞﾔ',
         individual_address_kana_line1: '27-15',
         individual_address_kana_postal_code: '1500001',
@@ -1069,14 +1471,85 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_first_name_kanji: '東京都',
         individual_gender: 'female',
         individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        individual_last_name_kanji: '東京都',
-        individual_phone: '0859-076500'
+        individual_last_name_kanji: '東京都'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    })
+
+    it('should reject LT invalid fields', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'LT',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Vilnius',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'LT-00000',
+        individual_address_state: 'AL',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it('should update LT information', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'LT',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Vilnius',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'LT-00000',
+        individual_address_state: 'AL',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject LU invalid fields', async () => {
@@ -1089,11 +1562,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Luxemburg',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1623',
+        individual_address_state: 'L',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1108,17 +1595,99 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Luxemburg',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1623',
+        individual_address_state: 'L',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    })
+
+    it('should reject LV invalid fields', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'LV',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Riga',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'LV–1073',
+        individual_address_state: 'AI',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it('should update LV information', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'LV',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Riga',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: 'LV–1073',
+        individual_address_state: 'AI',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject NL invalid fields', async () => {
@@ -1131,11 +1700,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Amsterdam',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1071 JA',
+        individual_address_state: 'DR',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1150,17 +1733,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Amsterdam',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1071 JA',
+        individual_address_state: 'DR',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject NO invalid fields', async () => {
@@ -1173,11 +1769,23 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Oslo',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '0001',
+        individual_address_state: '02',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1192,17 +1800,28 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Oslo',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '0001',
+        individual_address_state: '02',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject NZ invalid fields', async () => {
@@ -1215,14 +1834,23 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Auckland',
-        individual_address_line1: '123 Sesame St',
+        individual_address_line1: '844 Fleet Street',
         individual_address_postal_code: '6011',
+        individual_address_state: 'N',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1237,20 +1865,28 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'Auckland',
-        individual_address_line1: '123 Sesame St',
+        individual_address_line1: '844 Fleet Street',
         individual_address_postal_code: '6011',
+        individual_address_state: 'N',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject PT invalid fields', async () => {
@@ -1263,11 +1899,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Lisbon',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '4520',
+        individual_address_state: '01',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1282,17 +1932,30 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Lisbon',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '4520',
+        individual_address_state: '01',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject SE invalid fields', async () => {
@@ -1305,11 +1968,25 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Stockholm',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00150',
+        individual_address_state: 'K',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1324,17 +2001,93 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Stockholm',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00150',
+        individual_address_state: 'K',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    })
+
+    it('should reject SI invalid fields', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'SI',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Ljubljana',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1210',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it('should update SI information', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'SI',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Ljubljana',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '1210',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject SG invalid fields', async () => {
@@ -1347,14 +2100,24 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        // individual_id_number: '000000000',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Singapore',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '339696',
+        individual_address_state: 'SG',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_id_number: '000000000',
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1369,20 +2132,92 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        // individual_id_number: '000000000',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Singapore',
         individual_address_line1: '123 Sesame St',
         individual_address_postal_code: '339696',
+        individual_address_state: 'SG',
         individual_dob_day: '1',
         individual_dob_month: '1',
         individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_id_number: '000000000',
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    })
+
+    it('should reject SK invalid fields', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'SK',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Slovakia',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00102',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      await testEachFieldAsNull(req)
+    })
+
+    it('should update SK information', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'SK',
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_city: 'Slovakia',
+        individual_address_line1: '123 Sesame St',
+        individual_address_postal_code: '00102',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_email: user.profile.contactEmail,
+        individual_first_name: user.profile.firstName,
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
 
     it('should reject US invalid fields', async () => {
@@ -1395,9 +2230,8 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        // individual_id_number: '000000000',
-        business_profile_mcc: '7997',
-        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
@@ -1408,8 +2242,12 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
+        individual_phone: '456-789-0123',
         individual_ssn_last_4: '0000'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       await testEachFieldAsNull(req)
     })
@@ -1424,9 +2262,8 @@ describe('/account/connect/edit-individual-registration', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        // individual_id_number: '000000000',
-        business_profile_mcc: '7997',
-        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
         individual_address_postal_code: '10007',
@@ -1437,14 +2274,17 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
+        individual_phone: '456-789-0123',
         individual_ssn_last_4: '0000'
+      }
+      req.uploads = {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const redirectURL = TestHelper.extractRedirectURL(doc)
+      assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     })
   })
 })

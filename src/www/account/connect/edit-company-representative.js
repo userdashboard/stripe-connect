@@ -59,6 +59,7 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.data.stripeAccount.country !== 'JP') {
     removeElements.push(
+      'gender-container',
       'kanji-personal-address-container',
       'kana-personal-address-container',
       'kana-personal-information-container',
@@ -66,19 +67,17 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     removeElements.push('personal-address-container')
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
-  if (requiredFields.indexOf('relationship.representative.address.country') > -1) {
-    let personalCountry
-    if (req.body) {
-      personalCountry = req.body.relationship_representative_address_country
-    }
-    personalCountry = personalCountry || req.data.registration.relationship_representative_address_country
-    personalCountry = personalCountry || req.data.stripeAccount.country
-    const personalStates = connect.countryDivisions[personalCountry]
-    dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_representative_address_state')
-    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_representative_address_country')
+  let personalCountry
+  if (req.body) {
+    personalCountry = req.body.relationship_representative_address_country
   }
-  if (requiredFields.indexOf('relationship.owner.id_number') === -1) {
+  personalCountry = personalCountry || req.data.registration.relationship_representative_address_country
+  personalCountry = personalCountry || req.data.stripeAccount.country
+  const personalStates = connect.countryDivisions[personalCountry]
+  dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_representative_address_state')
+  dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_representative_address_country')
+  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
+  if (requiredFields.indexOf('relationship.representative.id_number') === -1) {
     removeElements.push('id_number-container')
   }
   if (req.data.registration.relationship_representative_id_number) {
@@ -150,11 +149,37 @@ async function submitForm (req, res) {
           field === 'relationship.representative.relationship.executive' ||
           field === 'relationship.representative.relationship.director' ||
           field === 'relationship.representative.relationship.owner' ||
-          (field === 'relationship.representative.verification.document.front' && req.body.token) ||
-          (field === 'relationship.representative.verification.document.back' && req.body.token)) {
+          field === 'relationship.representative.verification.document.front' ||
+          field === 'relationship.representative.verification.document.back' ||
+          field === 'relationship.representative.verification.additional_document.front' ||
+          field === 'relationship.representative.verification.additional_document.back') {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)
+    }
+  }
+  if (requiredFields.indexOf('relationship.representative.verification.document.front') > -1) {
+    if (!req.uploads || (
+      !req.uploads.relationship_representative_verification_document_front &&
+        !req.body.relationship_representative_verification_document_front)) {
+      return renderPage(req, res, 'invalid-relationship_representative_verification_document_front')
+    }
+    if (!req.uploads || (
+      !req.uploads.relationship_representative_verification_document_back &&
+      !req.body.relationship_representative_verification_document_back)) {
+      return renderPage(req, res, 'invalid-relationship_representative_verification_document_back')
+    }
+  }
+  if (requiredFields.indexOf('relationship.representative.verification.additional.document.front') > -1) {
+    if (!req.uploads || (
+      !req.uploads.relationship_representative_verification_additional_document_front &&
+      !req.body.relationship_representative_verification_additional_document_front)) {
+      return renderPage(req, res, 'invalid-relationship_representative_verification_additional_document_front')
+    }
+    if (!req.uploads || (
+      !req.uploads.relationship_representative_verification_additional_document_back &&
+      !req.body.relationship_representative_verification_additional_document_back)) {
+      return renderPage(req, res, 'invalid-relationship_representative_verification_additional_document_back')
     }
   }
   try {

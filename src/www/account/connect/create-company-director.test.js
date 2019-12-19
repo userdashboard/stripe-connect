@@ -28,7 +28,6 @@ describe('/account/connect/create-company-director', () => {
         business_profile_mcc: '5542',
         business_profile_url: 'https://website.com',
         company_address_city: 'Berlin',
-        company_address_country: 'DE',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         company_address_state: 'BW',
@@ -127,28 +126,20 @@ describe('/account/connect/create-company-director', () => {
       const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const fields = [
-        'relationship_director_first_name',
-        'relationship_director_last_name',
-        'relationship_director_dob_day',
-        'relationship_director_dob_month',
-        'relationship_director_dob_year',
-        'relationship_director_verification_document_front',
-        'relationship_director_verification_document_back'
-      ]
       const person = TestHelper.nextIdentity()
-      for (const field of fields) {
+      const body = {
+        relationship_director_dob_day: '1',
+        relationship_director_dob_month: '1',
+        relationship_director_dob_year: '1950',
+        relationship_director_first_name: person.firstName,
+        relationship_director_last_name: person.lastName
+      }
+      for (const field in body) {
         req.uploads = {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
-        }
+        req.body = JSON.parse(JSON.stringify(body))
         if (req.uploads[field]) {
           delete (req.uploads[field])
         }
@@ -183,10 +174,6 @@ describe('/account/connect/create-company-director', () => {
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName
       }
-      req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
-      }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')
@@ -213,10 +200,6 @@ describe('/account/connect/create-company-director', () => {
         relationship_director_dob_year: '1950',
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName
-      }
-      req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -245,10 +228,6 @@ describe('/account/connect/create-company-director', () => {
         relationship_director_dob_year: '1950',
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName
-      }
-      req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

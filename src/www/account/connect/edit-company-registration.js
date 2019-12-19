@@ -41,10 +41,10 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     res.setHeader('content-security-policy',
       'default-src * \'unsafe-inline\'; ' +
-    `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
-    `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-eval' 'unsafe-inline'; ` +
-    'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
-    'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
+      `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
+      `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-eval' 'unsafe-inline'; ` +
+      'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
+      'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
@@ -67,7 +67,6 @@ async function renderPage (req, res, messageTemplate) {
   if (requiredFields.indexOf('business_profile.url') === -1) {
     removeElements.push('business_profile_url-container')
   }
-
   if (requiredFields.indexOf('business_profile.mcc') === -1) {
     removeElements.push('business_profile_mcc-container')
   } else {
@@ -80,6 +79,9 @@ async function renderPage (req, res, messageTemplate) {
   if (requiredFields.indexOf('company.address.state') > -1) {
     const companyStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, companyStates, 'state-option', 'company_address_state')
+  }
+  if (requiredFields.indexOf('company.verification.document.front') === -1) {
+    removeElements.push('upload-container')
   }
   if (req.method === 'GET') {
     for (const field in req.data.registration) {
@@ -106,6 +108,10 @@ async function renderPage (req, res, messageTemplate) {
       }
     }
   }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
+  }
   return dashboard.Response.end(req, res, doc)
 }
 
@@ -118,11 +124,23 @@ async function submitForm (req, res) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'company.address.line2' ||
+        field === 'company.verification.document.front' ||
+        field === 'company.verification.document.back' ||
         (field === 'business_profile.url' && req.body.business_profile_product_description) ||
         (field === 'business_profile.product_description' && req.body.business_profile_url)) {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)
+    }
+  }
+  if (requiredFields.indexOf('company.verification.document.front') > -1) {
+    if (!req.data.registration.company_verification_document_front &&
+       (!req.uploads || !req.uploads.company_verification_document_front)) {
+      return renderPage(req, res, 'invalid-company_verification_document_front')
+    }
+    if (!req.data.registration.company_verification_document_back &&
+      (!req.uploads || !req.uploads.company_verification_document_back)) {
+      return renderPage(req, res, 'invalid-company_verification_document_back')
     }
   }
   try {

@@ -63,13 +63,12 @@ describe('/account/connect/submit-company-registration', () => {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
-        company_address_country: 'US',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '10001',
         company_address_state: 'NY',
         company_name: 'Company',
         company_phone: '456-123-7890',
-        company_tax_id: '8'
+        company_tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'New York',
@@ -118,13 +117,12 @@ describe('/account/connect/submit-company-registration', () => {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
-        company_address_country: 'US',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '10001',
         company_address_state: 'NY',
         company_name: 'Company',
         company_phone: '456-123-7890',
-        company_tax_id: '8'
+        company_tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'New York',
@@ -154,6 +152,8 @@ describe('/account/connect/submit-company-registration', () => {
         currency: 'usd',
         routing_number: '110000000'
       })
+      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitBeneficialOwners(user)
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -173,13 +173,12 @@ describe('/account/connect/submit-company-registration', () => {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'New York',
-        company_address_country: 'US',
         company_address_line1: '123 Park Lane',
         company_address_postal_code: '10001',
         company_address_state: 'NY',
         company_name: 'Company',
         company_phone: '456-123-7890',
-        company_tax_id: '8'
+        company_tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'New York',
@@ -201,6 +200,8 @@ describe('/account/connect/submit-company-registration', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       })
+      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitBeneficialOwners(user)
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -228,12 +229,14 @@ describe('/account/connect/submit-company-registration', () => {
         company_address_state: 'NY',
         company_name: 'Company',
         company_phone: '456-123-7890',
-        company_tax_id: '8'
+        company_tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'New York',
         relationship_representative_address_line1: '285 Fulton St',
         relationship_representative_address_postal_code: '10007',
+        relationship_representative_address_state: 'NY',
+        relationship_representative_address_country: 'US',
         relationship_representative_dob_day: '1',
         relationship_representative_dob_month: '1',
         relationship_representative_dob_year: '1950',
@@ -256,6 +259,8 @@ describe('/account/connect/submit-company-registration', () => {
         currency: 'usd',
         routing_number: '110000000'
       })
+      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitBeneficialOwners(user)
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

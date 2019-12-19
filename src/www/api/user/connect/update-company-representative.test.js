@@ -64,13 +64,12 @@ describe('/api/user/connect/update-company-representative', () => {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
-          company_address_country: 'US',
           company_address_line1: '285 Fulton St',
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
           company_phone: '456-123-7890',
-          company_tax_id: '8'
+          company_tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'New York',
@@ -137,8 +136,8 @@ describe('/api/user/connect/update-company-representative', () => {
       })
     })
 
-    describe('invalid-relationship_representative_percent_owned', () => {
-      it('invalid posted relationship_representative_percent_owned', async () => {
+    describe('invalid-relationship_representative_percent_ownership', () => {
+      it('invalid posted relationship_representative_percent_ownership', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'US',
@@ -163,7 +162,7 @@ describe('/api/user/connect/update-company-representative', () => {
           relationship_representative_email: user.profile.contactEmail,
           relationship_representative_first_name: user.profile.firstName,
           relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_percent_owned: 'invalid',
+          relationship_representative_percent_ownership: 'invalid',
           relationship_representative_phone: '456-789-0123',
           relationship_representative_relationship_executive: 'true',
           relationship_representative_relationship_title: 'Owner',
@@ -176,7 +175,7 @@ describe('/api/user/connect/update-company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_representative_percent_owned')
+        assert.strictEqual(errorMessage, 'invalid-relationship_representative_percent_ownership')
       })
     })
 
@@ -2009,7 +2008,7 @@ describe('/api/user/connect/update-company-representative', () => {
       assert.strictEqual(registration.relationship_representative_address_line2, 'Another detail')
     })
 
-    it('optional posted relationship_representative_percent_owned', async () => {
+    it('optional posted relationship_representative_percent_ownership', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'CA',
@@ -2035,7 +2034,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_id_number: '000000000',
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_percent_owned: 100,
+        relationship_representative_percent_ownership: 100,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner'
@@ -2043,7 +2042,7 @@ describe('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_percent_owned, '100')
+      assert.strictEqual(registration.relationship_representative_percent_ownership, '100')
     })
 
     it('optional posted relationship_representative_relationship_title', async () => {
@@ -2072,7 +2071,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_id_number: '000000000',
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_percent_owned: 100,
+        relationship_representative_percent_ownership: 100,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner'
@@ -2109,7 +2108,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_id_number: '000000000',
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_percent_owned: 100,
+        relationship_representative_percent_ownership: 100,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_director: 'true',
         relationship_representative_relationship_title: 'Owner'
@@ -2146,7 +2145,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_first_name: user.profile.firstName,
         relationship_representative_id_number: '000000000',
         relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_percent_owned: 100,
+        relationship_representative_percent_ownership: 100,
         relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner'
@@ -2902,7 +2901,7 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_dob_year: '1950',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_id_number: '7',
+        relationship_representative_id_number: '000000000',
         relationship_representative_last_name: user.profile.lastName,
         relationship_representative_percent_ownership: '0',
         relationship_representative_phone: '456-789-0123',

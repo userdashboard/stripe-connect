@@ -4,7 +4,6 @@
     "business_profile.url",
     "business_profile.product_description",
     "individual.email",
-    "individual.phone",
     "individual.first_name",
     "individual.last_name",
     "individual.dob.day",
@@ -14,7 +13,9 @@
     "individual.address.line2",
     "individual.address.city",
     "individual.address.state",
-    "individual.address.postal_code"
+    "individual.address.postal_code",
+    "individual.verification.document.front",
+    "individual.verification.document.back"
   ],
   "company": [
     "company.address.line1",

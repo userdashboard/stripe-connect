@@ -14,7 +14,9 @@
     "individual.dob.year",
     "individual.address.line1",
     "individual.address.city",
-    "individual.address.postal_code"
+    "individual.address.postal_code",
+    "individual.verification.document.front",
+    "individual.verification.document.back"
   ],
   "company": [
     "company.address.line1",

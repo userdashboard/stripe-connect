@@ -945,7 +945,7 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
         relationship_owner_dob_year: '1950',
         relationship_owner_email: person.email,
         relationship_owner_first_name: person.firstName,
-        relationship_owner_id_number: '00000000000',
+        relationship_owner_id_number: '000000000',
         relationship_owner_last_name: person.lastName
       }, {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],

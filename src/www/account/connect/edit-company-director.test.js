@@ -28,11 +28,11 @@ describe('/account/connect/edit-company-director', () => {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Berlin',
-        company_address_country: 'DE',
         company_address_line1: 'First Street',
         company_address_postal_code: '01067',
         company_address_state: 'BW',
         company_name: user.profile.firstName + '\'s company',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
@@ -50,6 +50,11 @@ describe('/account/connect/edit-company-director', () => {
         relationship_representative_phone: '456-789-0123',
         relationship_representative_relationship_executive: 'true',
         relationship_representative_relationship_title: 'Owner'
+      }, {
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -82,7 +87,7 @@ describe('/account/connect/edit-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-stripe-account')
+      assert.strictEqual(errorMessage, 'invalid-directorid')
     })
 
     it('should require own Stripe account', async () => {

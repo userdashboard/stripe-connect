@@ -37,7 +37,7 @@
 //       })
 //       await TestHelper.createStripeRegistration(user, {
 //         company_name: 'Company',
-//         company_tax_id: '8',
+//         company_tax_id: '00000000000',
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
@@ -91,7 +91,7 @@
 //       })
 //       await TestHelper.createStripeRegistration(user, {
 //         company_name: 'Company',
-//         company_tax_id: '8',
+//         company_tax_id: '00000000000',
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
@@ -141,7 +141,7 @@
 //       })
 //       await TestHelper.createStripeRegistration(user, {
 //         company_name: 'Company',
-//         company_tax_id: '8',
+//         company_tax_id: '00000000000',
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
@@ -200,7 +200,7 @@
 //         individual_address_state: 'BC',
 //         individual_address_line1: '123 Sesame St',
 //         individual_address_postal_code: 'V5K 0A1',
-//         individual_id_number: '111111111',
+//         individual_id_number: '000000000',
 //         individual_dob_day: '1',
 //         individual_dob_month: '1',
 //         individual_dob_year: '1950',
@@ -247,7 +247,7 @@
 //       })
 //       await TestHelper.createStripeRegistration(user, {
 //         company_name: 'Company',
-//         company_tax_id: '8',
+//         company_tax_id: '00000000000',
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
@@ -296,7 +296,7 @@
 //       })
 //       await TestHelper.createStripeRegistration(user, {
 //         company_name: 'Company',
-//         company_tax_id: '8',
+//         company_tax_id: '00000000000',
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',
@@ -357,7 +357,7 @@
 //       })
 //       await TestHelper.createStripeRegistration(user, {
 //         company_name: 'Company',
-//         company_tax_id: '8',
+//         company_tax_id: '00000000000',
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '285 Fulton St',

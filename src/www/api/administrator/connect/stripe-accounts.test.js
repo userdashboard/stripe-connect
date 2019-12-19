@@ -20,13 +20,12 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
-          company_address_country: 'US',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
           company_name: 'Company',
           company_phone: '456-123-7890',
-          company_tax_id: '8'
+          company_tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'New York',
@@ -73,13 +72,12 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
-          company_address_country: 'US',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
           company_name: 'Company',
           company_phone: '456-123-7890',
-          company_tax_id: '8'
+          company_tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'New York',
@@ -123,13 +121,12 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
-          company_address_country: 'US',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
           company_name: 'Company',
           company_phone: '456-123-7890',
-          company_tax_id: '8'
+          company_tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'New York',
@@ -174,13 +171,12 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
-          company_address_country: 'US',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
           company_name: 'Company',
           company_phone: '456-123-7890',
-          company_tax_id: '8'
+          company_tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'New York',
@@ -225,13 +221,12 @@ describe('/api/administrator/connect/stripe-accounts', () => {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
           company_address_city: 'New York',
-          company_address_country: 'US',
           company_address_line1: '123 Park Lane',
           company_address_postal_code: '10001',
           company_address_state: 'NY',
           company_name: 'Company',
           company_phone: '456-123-7890',
-          company_tax_id: '8'
+          company_tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'New York',

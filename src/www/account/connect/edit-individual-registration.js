@@ -84,6 +84,9 @@ async function renderPage (req, res, messageTemplate) {
   if (requiredFields.indexOf('individual.ssn_last_4') === -1) {
     removeElements.push('ssn_last_4-container')
   }
+  if (requiredFields.indexOf('individual.verification.additional_document.front') === -1) {
+    removeElements.push('additional-upload-container')
+  }
   if (req.data.registration.individual_id_number || req.data.registration.accountToken) {
     const idNumber = doc.getElementById('individual_id_number')
     idNumber.setAttribute('data-existing', true)
@@ -157,6 +160,30 @@ async function submitForm (req, res) {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)
+    }
+  }
+  if (requiredFields.indexOf('individual.verification.document.front') > -1) {
+    if (!req.uploads || (
+      !req.uploads.individual_verification_document_front &&
+        !req.body.individual_verification_document_front)) {
+      return renderPage(req, res, 'invalid-individual_verification_document_front')
+    }
+    if (!req.uploads || (
+      !req.uploads.individual_verification_document_back &&
+      !req.body.individual_verification_document_back)) {
+      return renderPage(req, res, 'invalid-individual_verification_document_back')
+    }
+  }
+  if (requiredFields.indexOf('individual.verification.additional_document.front') > -1) {
+    if (!req.uploads || (
+      !req.uploads.individual_verification_additional_document_front &&
+      !req.body.individual_verification_additional_document_front)) {
+      return renderPage(req, res, 'invalid-individual_verification_additional_document_front')
+    }
+    if (!req.uploads || (
+      !req.uploads.individual_verification_additional_document_back &&
+      !req.body.individual_verification_additional_document_back)) {
+      return renderPage(req, res, 'invalid-individual_verification_additional_document_back')
     }
   }
   try {

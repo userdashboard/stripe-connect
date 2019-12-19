@@ -24,8 +24,8 @@ module.exports = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.individual_verification_document_back.name,
-            data: req.uploads.individual_verification_document_back.buffer
+            name: req.uploads.individual_verification_document_front.name,
+            data: req.uploads.individual_verification_document_front.buffer
           }
         }
         try {
@@ -56,8 +56,8 @@ module.exports = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.individual_verification_additional_document_back.name,
-            data: req.uploads.individual_verification_additional_document_back.buffer
+            name: req.uploads.individual_verification_additional_document_front.name,
+            data: req.uploads.individual_verification_additional_document_front.buffer
           }
         }
         try {

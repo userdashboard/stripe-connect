@@ -52,7 +52,7 @@
 //         })
 //         await TestHelper.createStripeRegistration(user, {
 //           company_name: 'Company',
-//           company_tax_id: '8',
+//           company_tax_id: '00000000000',
 //           company_phone: '456-123-7890',
 //           company_address_city: 'New York',
 //           company_address_line1: '123 Park Lane',
@@ -103,7 +103,7 @@
 //         })
 //         await TestHelper.createStripeRegistration(user, {
 //           company_name: 'Company',
-//           company_tax_id: '8',
+//           company_tax_id: '00000000000',
 //           company_phone: '456-123-7890',
 //           company_address_city: 'New York',
 //           company_address_line1: '123 Park Lane',
@@ -148,7 +148,7 @@
 //         })
 //         await TestHelper.createStripeRegistration(user, {
 //           company_name: 'Company',
-//           company_tax_id: '8',
+//           company_tax_id: '00000000000',
 //           company_phone: '456-123-7890',
 //           company_address_city: 'New York',
 //           company_address_line1: '123 Park Lane',
@@ -199,7 +199,7 @@
 //         await req.get()
 //         await TestHelper.createStripeRegistration(user, {
 //           company_name: 'Company',
-//           company_tax_id: '8',
+//           company_tax_id: '00000000000',
 //           company_phone: '456-123-7890',
 //           company_address_city: 'New York',
 //           company_address_line1: '123 Park Lane',
@@ -258,7 +258,7 @@
 //       })
 //       await TestHelper.createStripeRegistration(user, {
 //         company_name: 'Company',
-//         company_tax_id: '8',
+//         company_tax_id: '00000000000',
 //         company_phone: '456-123-7890',
 //         company_address_city: 'New York',
 //         company_address_line1: '123 Park Lane',
