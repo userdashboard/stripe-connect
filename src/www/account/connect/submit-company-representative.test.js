@@ -57,7 +57,7 @@ describe('/account/connect/submit-company-representative', () => {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.setCompanyRepresentative(user)
-      await TestHelper.waitForVerificationFields(user, 'person_')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'person_')
       const req = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

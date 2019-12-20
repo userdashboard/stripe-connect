@@ -118,7 +118,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -151,7 +151,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -182,7 +182,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -213,7 +213,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -244,7 +244,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -275,7 +275,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -306,7 +306,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -337,7 +337,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -368,7 +368,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -399,7 +399,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -430,7 +430,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -461,7 +461,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -492,7 +492,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -523,7 +523,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -554,7 +554,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -585,7 +585,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -616,7 +616,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -647,7 +647,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -678,7 +678,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -709,7 +709,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -740,7 +740,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -771,7 +771,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)
@@ -802,7 +802,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
       req.session = user.session
       const accountNow = await req.patch()
       assert.strictEqual(accountNow.company.directors_provided, true)
-      await TestHelper.waitForVerificationFields(user, 'relationship.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       for (const director of directors) {
         assert.strictEqual(director.requirements.past_due.length, 0)

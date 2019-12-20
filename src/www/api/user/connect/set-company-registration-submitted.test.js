@@ -2147,7 +2147,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       req6.session = user.session
       await req6.patch()
       await TestHelper.waitForVerificationStart(user)
-      await TestHelper.waitForVerificationFields(user, 'person_')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'person_')
       const req7 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req7.account = user.account
       req7.session = user.session
