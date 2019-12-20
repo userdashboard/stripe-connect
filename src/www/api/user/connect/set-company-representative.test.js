@@ -714,87 +714,90 @@ describe('/api/user/connect/set-company-representative', () => {
       }
     })
 
-    // it('object for JP registration', async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user,{
-    //     country: 'JP',
-    //     type: 'company'
-    // })
-    //   await TestHelper.createStripeRegistration(user,{
-    //     business_profile_mcc: '8931',
-    //     business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-    //     company_address_kana_city: 'ｼﾌﾞﾔ',
-    //     company_address_kana_line1: '27-15',
-    //     company_address_kana_postal_code: '1500001',
-    //     company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-    //     company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-    //     company_address_kanji_city: '渋谷区',
-    //     company_address_kanji_line1: '２７－１５',
-    //     company_address_kanji_postal_code: '1500001',
-    //     company_address_kanji_state: '東京都',
-    //     company_address_kanji_town: '神宮前 ３丁目',
-    //     company_name: 'Company',
-    //     company_name_kana: 'Company',
-    //     company_name_kanji: 'Company',
-    //     company_phone: '011-271-6677',
-    //     company_tax_id: '00000000000'
-    // })
-    //   await TestHelper.createCompanyRepresentative(user,{
-    //     relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-    //     relationship_representative_address_kana_line1: '27-15',
-    //     relationship_representative_address_kana_postal_code: '1500001',
-    //     relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-    //     relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-    //     relationship_representative_address_kanji_city: '渋谷区',
-    //     relationship_representative_address_kanji_line1: '２７－１５',
-    //     relationship_representative_address_kanji_postal_code: '1500001',
-    //     relationship_representative_address_kanji_state: '東京都',
-    //     relationship_representative_address_kanji_town: '神宮前 ３丁目',
-    //     relationship_representative_dob_day: '1',
-    //     relationship_representative_dob_month: '1',
-    //     relationship_representative_dob_year: '1950',
-    //     relationship_representative_email: user.profile.contactEmail,
-    //     relationship_representative_first_name: user.profile.firstName,
-    //     relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-    //     relationship_representative_first_name_kanji: '東京都',
-    //     relationship_representative_gender: 'female',
-    //     relationship_representative_last_name: user.profile.lastName,
-    //     relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-    //     relationship_representative_last_name_kanji: '東京都',
-    //     relationship_representative_percent_ownership: '0',
-    //     relationship_representative_phone: '456-789-0123',
-    //     relationship_representative_relationship_executive: 'true',
-    //     relationship_representative_relationship_title: 'Owner'
-    // },{
-    //     relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-    //     relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-    //     relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-    //     relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
-    // })
-    //   await TestHelper.createExternalAccount(user,{
-    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_holder_type: 'individual',
-    //     account_number: '00012345',
-    //     bank_code: '110',
-    //     branch_code: '0000',
-    //     country: 'JP',
-    //     currency: 'jpy'
-    // })
-    //   const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   await req.patch()
-    // await TestHelper.waitForVerificationStart(user)
-    //       const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-    //       req2.account = user.account
-    //       req2.session = user.session
-    //       const accountNow = await req2.get()
-    //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
-    //   assert.notStrictEqual(accountNow.metadata.submitted, null)
-    // assert.strictEqual(accountNow.requirements.past_due.length, 0)
-    // assert.strictEqual(accountNow.requirements.eventually_due.length, 0)
-    // assert.strictEqual(accountNow.requirements.currently_due.length, 0)
-    // })
+    it('object for JP registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'JP',
+        type: 'company'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        company_address_kana_city: 'ｼﾌﾞﾔ',
+        company_address_kana_line1: '27-15',
+        company_address_kana_postal_code: '1500001',
+        company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        company_address_kanji_city: '渋谷区',
+        company_address_kanji_line1: '２７－１５',
+        company_address_kanji_postal_code: '1500001',
+        company_address_kanji_state: '東京都',
+        company_address_kanji_town: '神宮前 ３丁目',
+        company_name: 'Company',
+        company_name_kana: 'Company',
+        company_name_kanji: 'Company',
+        company_phone: '011-271-6677',
+        company_tax_id: '00000000000'
+      })
+      await TestHelper.createCompanyRepresentative(user, {
+        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
+        relationship_representative_address_kana_line1: '27-15',
+        relationship_representative_address_kana_postal_code: '1500001',
+        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        relationship_representative_address_kanji_city: '渋谷区',
+        relationship_representative_address_kanji_line1: '２７－１５',
+        relationship_representative_address_kanji_postal_code: '1500001',
+        relationship_representative_address_kanji_state: '東京都',
+        relationship_representative_address_kanji_town: '神宮前 ３丁目',
+        relationship_representative_dob_day: '1',
+        relationship_representative_dob_month: '1',
+        relationship_representative_dob_year: '1950',
+        relationship_representative_email: user.profile.contactEmail,
+        relationship_representative_first_name: user.profile.firstName,
+        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_first_name_kanji: '東京都',
+        relationship_representative_gender: 'female',
+        relationship_representative_last_name: user.profile.lastName,
+        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        relationship_representative_last_name_kanji: '東京都',
+        relationship_representative_percent_ownership: '0',
+        relationship_representative_phone: '456-789-0123',
+        relationship_representative_relationship_executive: 'true',
+        relationship_representative_relationship_title: 'Owner'
+      }, {
+        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
+        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '0001234',
+        bank_code: '110',
+        branch_code: '0000',
+        country: 'JP',
+        currency: 'jpy'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      await req.patch()
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
+      for (const key of accountNow.requirements.past_due) {
+        assert.strictEqual(key.startsWith('person_'), false)
+      }
+      for (const key of accountNow.requirements.currently_due) {
+        assert.strictEqual(key.startsWith('person_'), false)
+      }
+      for (const key of accountNow.requirements.eventually_due) {
+        assert.strictEqual(key.startsWith('person_'), false)
+      }
+    })
 
     it('object for LT registration', async () => {
       const user = await TestHelper.createUser()
@@ -1006,7 +1009,7 @@ describe('/api/user/connect/set-company-representative', () => {
     //     currency: 'eur',
     //     iban: 'MX89370400440532013000'
     // })
-    //   const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
+    //   const req = TestHelper.createRequest(`/api/user/connect/set-company-representative?stripeid=${user.stripeAccount.id}`)
     //   req.account = user.account
     //   req.session = user.session
     //   await req.patch()

@@ -897,54 +897,59 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
-    // it('returns object for JP registration', async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user,{
-    //     country: 'JP',
-    //     type: 'individual'
-    // })
-    //   await TestHelper.createStripeRegistration(user,{
-    //     individual_address_kana_city: 'ｼﾌﾞﾔ',
-    //     individual_address_kana_line1: '27-15',
-    //     individual_address_kana_postal_code: '1500001',
-    //     individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-    //     individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-    //     individual_address_kanji_city: '渋谷区',
-    //     individual_address_kanji_line1: '２７－１５',
-    //     individual_address_kanji_postal_code: '1500001',
-    //     individual_address_kanji_state: '東京都',
-    //     individual_address_kanji_town: '神宮前 ３丁目',
-    //     individual_dob_day: '1',
-    //     individual_dob_month: '1',
-    //     individual_dob_year: '1950',
-    //     individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-    //     individual_first_name_kanji: '東京都',
-    //     individual_gender: 'female',
-    //     individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-    //     individual_last_name_kanji: '東京都',
-    //     individual_phone: '+81112345678'
-    // })
-    //   await TestHelper.createExternalAccount(user,{
-    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_holder_type: 'individual',
-    //     account_number: '00012345',
-    //     bank_code: '1100',
-    //     branch_code: '000',
-    //     country: 'JP',
-    //     currency: 'jpy'
-    // })
-    // const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //         await req.patch()
-    // await TestHelper.waitForVerificationStart(user)
-    // const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-    // req2.account = user.account
-    // req2.session = user.session
-    // const accountNow = await req2.get()
-    //   assert.notStrictEqual(accountNow.metadata.submitted, undefined)
-    //   assert.notStrictEqual(accountNow.metadata.submitted, null)
-    // })
+    it('returns object for JP registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'JP',
+        type: 'individual'
+      })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
+        individual_address_kana_city: 'ｼﾌﾞﾔ',
+        individual_address_kana_line1: '27-15',
+        individual_address_kana_postal_code: '1500001',
+        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        individual_address_kanji_city: '渋谷区',
+        individual_address_kanji_line1: '２７－１５',
+        individual_address_kanji_postal_code: '1500001',
+        individual_address_kanji_state: '東京都',
+        individual_address_kanji_town: '神宮前 ３丁目',
+        individual_dob_day: '1',
+        individual_dob_month: '1',
+        individual_dob_year: '1950',
+        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_first_name_kanji: '東京都',
+        individual_gender: 'female',
+        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        individual_last_name_kanji: '東京都',
+        individual_phone: '+81112345678'
+      },  {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+      })
+      await TestHelper.createExternalAccount(user, {
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '0001234',
+        bank_code: '1100',
+        branch_code: '000',
+        country: 'JP',
+        currency: 'jpy'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      await req.patch()
+      await TestHelper.waitForVerificationStart(user)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const accountNow = await req2.get()
+      assert.notStrictEqual(accountNow.metadata.submitted, undefined)
+      assert.notStrictEqual(accountNow.metadata.submitted, null)
+    })
 
     it('returns object for LT registration', async () => {
       const user = await TestHelper.createUser()

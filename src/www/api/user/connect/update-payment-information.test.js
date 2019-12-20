@@ -1417,29 +1417,27 @@ describe('/api/user/connect/update-payment-information', () => {
       assert.strictEqual(accountNow.external_accounts.data.length, 1)
     })
 
-    // it('object for JP registration', async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user,{
-    //     country: 'JP'
-    // ,
-    //     type: 'company'
-    // })
-    //   const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   req.body ={
-    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_holder_type: 'individual',
-    //     account_number: '00012345',
-    //     bank_code: '1100',
-    //     branch_code: '000'
-    // ,
-    //     country: 'JP',
-    //     currency: 'jpy'
-    // }
-    //   const accountNow = await req.patch()
-    //   assert.strictEqual(accountNow.external_accounts.data.length, 1)
-    // })
+    it('object for JP registration', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'JP',
+        type: 'company'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '0001234',
+        bank_code: '1100',
+        branch_code: '000',
+        country: 'JP',
+        currency: 'jpy'
+      }
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.external_accounts.data.length, 1)
+    })
 
     it('object for LT registration', async () => {
       const user = await TestHelper.createUser()

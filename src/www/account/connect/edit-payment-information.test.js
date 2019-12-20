@@ -686,30 +686,30 @@ describe('/account/connect/edit-payment-information', () => {
       await testEachFieldAsNull(req)
     })
 
-    // it('should update JP information', async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user, {
-    //     country: 'JP',
-    //     type: 'company'
-    //   })
-    //   const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   req.body = {
-    //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-    //     account_holder_type: 'individual',
-    //     account_number: '00012345',
-    //     bank_code: '1100',
-    //     branch_code: '000',
-    //     country: 'JP',
-    //     currency: 'jpy'
-    //   }
-    //   const page = await req.post()
-    //   const doc = TestHelper.extractDoc(page)
-    //   const messageContainer = doc.getElementById('message-container')
-    //   const message = messageContainer.child[0]
-    //   assert.strictEqual(message.attr.template, 'success')
-    // })
+    it('should update JP information', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'JP',
+        type: 'company'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '0001234',
+        bank_code: '1100',
+        branch_code: '000',
+        country: 'JP',
+        currency: 'jpy'
+      }
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      const messageContainer = doc.getElementById('message-container')
+      const message = messageContainer.child[0]
+      assert.strictEqual(message.attr.template, 'success')
+    })
 
     it('should reject LU invalid fields', async () => {
       const user = await TestHelper.createUser()
