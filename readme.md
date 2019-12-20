@@ -8,15 +8,12 @@ Dashboard is a parallel web application that accompanies your web app, subscript
 
 Stripe Connect module is ready to use.  It supports registration for all countries in 'general availability', collecting all required information up-front.  The registration data is stored in JSON and not submitted to Stripe until it is all collected.  Set `STRIPE_JS=3` to use account and person tokens for registering Connect accounts, this is *required for Stripe accounts within France*, and otherwise optional.  When using Stripe's client-side account and person tokens the information is still submitted to the server s
 
-The following work remains, support in any form is welcome:
+Check the [Github Issues](https://github.com/userdashboard/stripe-connect/issues) for ways you can help, including:
 
-- translations required for everything in /languages [(please help)](https://github.com/userdashboard/stripe-connect)
-- verifying postal codes before submitting data to Stripe
-- verifying cities before submitting to data Stripe
-- verifying phone numbers before submitting data to Stripe
-- support for MX as this isn't available to all Stripe accounts yet
-- **Resubmitting failed verification data**, I'm having trouble using triggers like 01/01/1901 to force verification fields to fail.  This will require UI pages and API routes to submit required information as it becomes available, until it is in place you will need to resolve issues for your accounts using the Stripe SDK directly.
-
+- translations
+- adding support for new countries
+- adding support for new KYC information types
+- migration plans for moving from one Stripe SDK to another
 
 ## Import this module
 
