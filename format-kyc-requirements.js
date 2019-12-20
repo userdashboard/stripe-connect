@@ -2,8 +2,8 @@
   This script scans KYC requirements and ensures that the array data
   is alphabetically sorted
 
-  Example:  
-  
+  Example:
+
   "company": [
     "business_profile.mcc",
     "business_profile.product_description",
