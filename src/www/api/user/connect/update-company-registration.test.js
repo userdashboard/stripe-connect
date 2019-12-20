@@ -34,7 +34,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -65,7 +65,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -91,7 +91,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10001',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
@@ -137,7 +137,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -169,7 +169,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -292,7 +292,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: '',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -321,7 +321,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'invalid',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -413,7 +413,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -442,7 +442,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -473,7 +473,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -502,7 +502,7 @@ describe('/api/user/connect/update-company-registration', () => {
           company_address_postal_code: '10007',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         }
         let errorMessage
@@ -535,7 +535,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000',
         token: 'sample2'
       }
@@ -561,7 +561,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1020',
         company_address_state: 'BRU',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       req.uploads = {
@@ -592,7 +592,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1020',
         company_address_state: 'BRU',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       req.uploads = {
@@ -623,7 +623,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const companyNow = await req.patch()
@@ -648,7 +648,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const companyNow = await req.patch()
@@ -673,7 +673,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const companyNow = await req.patch()
@@ -1273,7 +1273,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1020',
         company_address_state: '1',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1327,7 +1327,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1020',
         company_address_state: 'BRU',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       req.uploads = {
@@ -1386,7 +1386,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1020',
         company_address_state: 'BE',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1413,7 +1413,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '01067',
         company_address_state: 'BE',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1440,7 +1440,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1000',
         company_address_state: '147',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1467,7 +1467,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10128',
         company_address_state: '37',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1494,7 +1494,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '03179',
         company_address_state: 'AN',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1521,7 +1521,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '00990',
         company_address_state: 'AL',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1547,7 +1547,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '75001',
         company_address_state: 'A',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1571,11 +1571,15 @@ describe('/api/user/connect/update-company-registration', () => {
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'London',
         company_address_line1: '123 Park Lane',
-        company_address_postal_code: '75001',
+        company_address_postal_code: 'EC1A 1AA',
         company_address_state: 'LND',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
+      }
+      req.uploads = {
+        company_verification_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
@@ -1628,7 +1632,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: 'Dublin 1',
         company_address_state: 'D',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1655,7 +1659,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '00010',
         company_address_state: '65',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1717,7 +1721,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1623',
         company_address_state: 'L',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1744,7 +1748,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '1071 JA',
         company_address_state: 'DR',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1770,7 +1774,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '0001',
         company_address_state: '02',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1797,7 +1801,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '6011',
         company_address_state: 'N',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }      
       req.uploads = {
@@ -1828,7 +1832,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '4520',
         company_address_state: '01',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1855,7 +1859,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '00150',
         company_address_state: 'K',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1909,7 +1913,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       const accountNow = await req.patch()
@@ -1940,7 +1944,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       await req.post()
@@ -1958,7 +1962,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       await req2.post()

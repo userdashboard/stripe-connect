@@ -25,7 +25,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
         individual_first_name: user.profile.firstName,
         individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
+        individual_phone: '456-789-0123',
         individual_ssn_last_4: '0000'
       })
       const req = TestHelper.createRequest(`/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
@@ -58,7 +58,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
         individual_first_name: user.profile.firstName,
         individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
+        individual_phone: '456-789-0123',
         individual_ssn_last_4: '0000'
       })
       const req = TestHelper.createRequest(`/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
@@ -91,7 +91,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
         individual_first_name: user.profile.firstName,
         individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
+        individual_phone: '456-789-0123',
         individual_ssn_last_4: '0000'
       })
       const req = TestHelper.createRequest(`/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
@@ -126,7 +126,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
         individual_first_name: user.profile.firstName,
         individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
+        individual_phone: '456-789-0123',
         individual_ssn_last_4: '0000'
       })
       const req = TestHelper.createRequest(`/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)

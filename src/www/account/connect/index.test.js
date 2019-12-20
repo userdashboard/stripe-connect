@@ -24,7 +24,7 @@ describe('/account/connect', () => {
         individual_first_name: user.profile.firstName,
         individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
+        individual_phone: '456-789-0123',
         individual_ssn_last_4: '0000'
       })
       const req = TestHelper.createRequest('/account/connect')
@@ -56,7 +56,7 @@ describe('/account/connect', () => {
         individual_first_name: user.profile.firstName,
         individual_id_number: '000000000',
         individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
+        individual_phone: '456-789-0123',
         individual_ssn_last_4: '0000'
       })
       const req = TestHelper.createRequest('/account/connect')

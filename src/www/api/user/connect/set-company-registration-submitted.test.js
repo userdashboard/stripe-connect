@@ -67,7 +67,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           company_address_postal_code: '10001',
           company_address_state: 'NY',
           company_name: 'Company',
-          company_phone: '456-123-7890',
+          company_phone: '456-789-0123',
           company_tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
@@ -917,6 +917,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_phone: '456-789-0123',
         company_tax_id: '00000000000'
+      }, {
+        company_verification_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'London',
@@ -1029,7 +1032,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
-    it('object for IE registration', async () => {
+    it.only('object for IE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'IE',
@@ -1083,6 +1086,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       req.session = user.session
       await req.patch()
       await TestHelper.waitForVerificationStart(user)
+      await TestHelper.waitForVerificationFieldsToReturn(user, 'company')
       const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session
@@ -2022,7 +2026,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
@@ -2092,7 +2096,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       await req.post()

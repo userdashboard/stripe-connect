@@ -1381,7 +1381,7 @@ describe('/api/user/connect/set-company-representative', () => {
         company_address_postal_code: '10007',
         company_address_state: 'NY',
         company_name: 'Company',
-        company_phone: '456-123-7890',
+        company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
       await req.post()

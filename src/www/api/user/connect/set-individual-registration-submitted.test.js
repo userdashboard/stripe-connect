@@ -72,7 +72,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
           individual_email: user.profile.contactEmail,
           individual_first_name: user.profile.firstName,
           individual_last_name: user.profile.lastName,
-          individual_phone: '456-123-7890',
+          individual_phone: '456-789-0123',
           individual_ssn_last_4: '0000'
         }, {
           individual_verification_document_back: TestHelper['success_id_scan_back.png'],
