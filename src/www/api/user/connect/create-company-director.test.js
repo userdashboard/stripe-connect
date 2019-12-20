@@ -454,7 +454,7 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_dob_day, '1')
+      assert.strictEqual(owner.relationship_director_dob_day, '01')
     })
 
     it('required posted relationship_director_dob_month', async () => {
@@ -479,7 +479,7 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_dob_month, '2')
+      assert.strictEqual(owner.relationship_director_dob_month, '02')
     })
 
     it('required posted relationship_director_dob_year', async () => {

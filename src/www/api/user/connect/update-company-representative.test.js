@@ -423,6 +423,7 @@ describe('/api/user/connect/update-company-representative', () => {
         }
         const body = {
           relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_country: 'AT',
           relationship_representative_address_line1: '123 Sesame St',
           relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
@@ -462,6 +463,7 @@ describe('/api/user/connect/update-company-representative', () => {
         }
         const body = {
           relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_country: 'AT',
           relationship_representative_address_line1: '123 Sesame St',
           relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
@@ -499,6 +501,7 @@ describe('/api/user/connect/update-company-representative', () => {
         }
         const body = {
           relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_country: 'AT',
           relationship_representative_address_line1: '123 Sesame St',
           relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
@@ -538,6 +541,7 @@ describe('/api/user/connect/update-company-representative', () => {
         }
         const body = {
           relationship_representative_address_city: 'Vienna',
+          relationship_representative_address_country: 'AT',
           relationship_representative_address_line1: '123 Sesame St',
           relationship_representative_address_postal_code: '1020',
           relationship_representative_dob_day: '1',
@@ -1383,7 +1387,7 @@ describe('/api/user/connect/update-company-representative', () => {
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_dob_day, '7')
+      assert.strictEqual(registration.relationship_representative_dob_day, '07')
     })
 
     it('required posted relationship_representative_dob_month', async () => {
@@ -2781,8 +2785,8 @@ describe('/api/user/connect/update-company-representative', () => {
         relationship_representative_address_line1: '123 Sesame St',
         relationship_representative_address_postal_code: '1020',
         relationship_representative_address_state: '1',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
+        relationship_representative_dob_day: '01',
+        relationship_representative_dob_month: '01',
         relationship_representative_dob_year: '1950',
         relationship_representative_email: user.profile.contactEmail,
         relationship_representative_first_name: user.profile.firstName,

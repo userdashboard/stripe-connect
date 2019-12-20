@@ -1578,6 +1578,8 @@ describe('/api/user/connect/update-company-registration', () => {
         company_tax_id: '00000000000'
       }
       req.uploads = {
+        company_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         company_verification_document_back: TestHelper['success_id_scan_back.png'],
         company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1808,6 +1810,7 @@ describe('/api/user/connect/update-company-registration', () => {
         company_verification_document_back: TestHelper['success_id_scan_back.png'],
         company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
+      req.body = TestHelper.createMultiPart(req, req.body)
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
       for (const field in req.body) {

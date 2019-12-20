@@ -734,7 +734,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_owner_dob_day, '1')
+      assert.strictEqual(owner.relationship_owner_dob_day, '01')
     })
 
     it('required posted relationship_owner_dob_month', async () => {
@@ -765,7 +765,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         relationship_owner_last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_owner_dob_month, '2')
+      assert.strictEqual(owner.relationship_owner_dob_month, '02')
     })
 
     it('required posted relationship_owner_dob_year', async () => {

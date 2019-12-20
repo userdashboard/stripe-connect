@@ -1431,7 +1431,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_dob_day, '1')
+      assert.strictEqual(ownerNow.relationship_owner_dob_day, '01')
     })
 
     it('required posted relationship_owner_dob_month', async () => {
@@ -1474,7 +1474,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_dob_month, '2')
+      assert.strictEqual(ownerNow.relationship_owner_dob_month, '02')
     })
 
     it('required posted relationship_owner_dob_year', async () => {
