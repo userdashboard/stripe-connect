@@ -4,11 +4,13 @@
 
 Dashboard is a parallel web application that accompanies your web app, subscription service, or Stripe Connect platform to provide all the "boilerplate" a modern web app requires to serve its users.  Use Dashboard instead of rewriting user account and login systems.  This module adds UI and APIs for a complete [Stripe Connect](https://stripe.com/connect) custom integration.
 
+Stripe Connect module is ready to use.  It supports registration for all countries in 'general availability', collecting all required information up-front.  The registration data is stored in JSON and not submitted to Stripe until after it is all collected.  This allows users to revise and edit all of their information right up until submission, which otherwise might take hours or days to return a typing mistake to be fixed.
+
+Set `STRIPE_JS=3` to use account and person tokens for registering Connect accounts, this is *required for Stripe accounts within France*, and otherwise optional.  When using Stripe's client-side account and person tokens the information is still submitted to the server.
+
 ## Development status
 
-Stripe Connect module is ready to use.  It supports registration for all countries in 'general availability', collecting all required information up-front.  The registration data is stored in JSON and not submitted to Stripe until it is all collected.  Set `STRIPE_JS=3` to use account and person tokens for registering Connect accounts, this is *required for Stripe accounts within France*, and otherwise optional.  When using Stripe's client-side account and person tokens the information is still submitted to the server s
-
-Check the [Github Issues](https://github.com/userdashboard/stripe-connect/issues) for ways you can help, including:
+Check the [Github Issues](https://github.com/userdashboard/stripe-connect/issues) for ways you can help improve and continue development of this module, including:
 
 - translations
 - adding support for new countries
