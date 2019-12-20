@@ -6,23 +6,17 @@ Dashboard is a parallel web application that accompanies your web app, subscript
 
 ## Development status
 
-Stripe Connect module is ready-ish to use.  The following work remains:
+Stripe Connect module is ready to use.  It supports registration for all countries in 'general availability', collecting all required information up-front.  The registration data is stored in JSON and not submitted to Stripe until it is all collected.  Set `STRIPE_JS=3` to use account and person tokens for registering Connect accounts, this is *required for Stripe accounts within France*, and otherwise optional.  When using Stripe's client-side account and person tokens the information is still submitted to the server s
+
+The following work remains, support in any form is welcome:
 
 - translations required for everything in /languages [(please help)](https://github.com/userdashboard/stripe-connect)
-- there is no "resubmission" flow for rejected/erroneous data pending a reliable way to trigger it on Stripe API, until there is users who fail validation can delete and start new registrations
-- some fields in `update-x` have a 'missing' test but no accompanying 'invalid' test that verifies the information is correct or correctly-structured or correctly-sized or whatever, such as `line1`, `city`, `postal_code`, `first_name`, `last_name` 
-- JP tests for `update-payment-information` and `set-x-registration-submitted` is throwing an error that you can't use live bank account numbers
-- MX tests are in place but it is not available for all accounts
+- verifying postal codes before submitting data to Stripe
+- verifying cities before submitting to data Stripe
+- verifying phone numbers before submitting data to Stripe
+- support for MX as this isn't available to all Stripe accounts yet
+- **Resubmitting failed verification data**, I'm having trouble using triggers like 01/01/1901 to force verification fields to fail.  This will require UI pages and API routes to submit required information as it becomes available, until it is in place you will need to resolve issues for your accounts using the Stripe SDK directly.
 
-## Adding countries
-
-Periodically Stripe Connect adds support for new countries.  When this happens:
-
-1) Add new 'kyc-requirements/XX.json' documenting all the required fields
-
-2) Update the UI `edit-payment-details` page and the API `update-payment-information` to support whatever bank account fields
-
-3) Update the UI `edit-individual-registration` + `edit-company-registration` and the API `update-individual-registration` + `update-company-registration` with any new fields or conditions
 
 ## Import this module
 
