@@ -24,23 +24,6 @@ describe('/account/connect/submit-company-registration', () => {
         country: 'US',
         type: 'individual'
       })
-      await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7333',
-        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'New York',
-        individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
-        individual_address_state: 'NY',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_id_number: '000000000',
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-123-7890',
-        individual_ssn_last_4: '0000'
-      })
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

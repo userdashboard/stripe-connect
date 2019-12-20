@@ -227,6 +227,9 @@ describe('/account/connect/stripe-account', () => {
         individual_last_name: user.profile.lastName,
         individual_phone: '456-123-7890',
         individual_ssn_last_4: '0000'
+      }, {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -259,6 +262,9 @@ describe('/account/connect/stripe-account', () => {
         individual_last_name: user.profile.lastName,
         individual_phone: '456-123-7890',
         individual_ssn_last_4: '0000'
+      }, {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -332,6 +338,9 @@ describe('/account/connect/stripe-account', () => {
         individual_last_name: user.profile.lastName,
         individual_phone: '456-123-7890',
         individual_ssn_last_4: '0000'
+      }, {
+        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
