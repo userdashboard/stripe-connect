@@ -31,7 +31,9 @@
     "company.address.state",
     "company.name",
     "company.phone",
-    "company.tax_id"
+    "company.tax_id",
+    "company.verification.document.back",
+    "company.verification.document.front"
   ],
   "beneficialOwner": [
     "relationship.owner.address.city",
