@@ -54,12 +54,12 @@ module.exports = {
               const property = field.substring('relationship_owner_dob_'.length)
               ownerInfo.dob = ownerInfo.dob || {}
               ownerInfo.dob[property] = owner[field]
+            } else if (field === 'relationship_owner_relationship_') {
+              const property = field.substring('relationship_owner_relationship_'.length)
+              ownerInfo.relationship = ownerInfo.relationship || {}
+              ownerInfo.relationship[property] = owner[field]
+              continue
             } else {
-              if (field === 'relationship_owner_relationship_title') {
-                ownerInfo.relationship = ownerInfo.relationship || {}
-                ownerInfo.relationship.title = owner[field]
-                continue
-              }
               const property = field.substring('relationship_owner_'.length)
               if (property === 'relationship_title' || property === 'executive' || property === 'director') {
                 continue
