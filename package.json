@@ -2,7 +2,7 @@
   "name": "@userdashboard/stripe-connect",
   "version": "1.0.22",
   "scripts": {
-    "test": "mocha './src/www/api{,!(public)/**}/*.test.js' --recursive --no-colors --retries 0 --timeout 480000 --slow 240000"
+    "test": "mocha './src{,!(public)/**}/*.test.js' --recursive --no-colors --retries 0 --timeout 480000 --slow 240000"
   },
   "repository": {
     "type": "git",
