@@ -24,6 +24,9 @@ module.exports = {
         if (!day || day < 1 || day > 31) {
           throw new Error('invalid-relationship_representative_dob_day')
         }
+        if (day < 10) {
+          req.body.relationship_representative_dob_day = '0' + day
+        }
       } catch (s) {
         throw new Error('invalid-relationship_representative_dob_day')
       }
@@ -34,6 +37,9 @@ module.exports = {
         const month = parseInt(req.body.relationship_representative_dob_month, 10)
         if (!month || month < 1 || month > 12) {
           throw new Error('invalid-relationship_representative_dob_month')
+        }
+        if (month < 10) {
+          req.body.relationship_representative_dob_month = '0' + month
         }
       } catch (s) {
         throw new Error('invalid-relationship_representative_dob_month')

@@ -25,11 +25,60 @@ module.exports = {
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
-    if (!req.body.relationship_director_first_name) {
-      throw new Error('invalid-relationship_director_first_name')
+    let validateDOB
+    if (req.body.relationship_director_dob_day) {
+      validateDOB = true
+      try {
+        const day = parseInt(req.body.relationship_director_dob_day, 10)
+        if (!day || day < 1 || day > 31) {
+          throw new Error('invalid-relationship_director_dob_day')
+        }
+        if (day < 10) {
+          req.body.relationship_director_dob_day = '0' + day
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_director_dob_day')
+      }
     }
-    if (!req.body.relationship_director_last_name) {
-      throw new Error('invalid-relationship_director_last_name')
+    if (req.body.relationship_director_dob_month) {
+      try {
+        const month = parseInt(req.body.relationship_director_dob_month, 10)
+        if (!month || month < 1 || month > 12) {
+          throw new Error('invalid-relationship_director_dob_month')
+        }
+        if (month < 10) {
+          req.body.relationship_director_dob_month = '0' + month
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_director_dob_month')
+      }
+    }
+    if (req.body.relationship_director_dob_year) {
+      validateDOB = true
+      try {
+        const year = parseInt(req.body.relationship_director_dob_year, 10)
+        if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
+          throw new Error('invalid-relationship_director_dob_year')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_director_dob_year')
+      }
+    }
+    if (validateDOB) {
+      if (!req.body.relationship_director_dob_day) {
+        throw new Error('invalid-relationship_director_dob_day')
+      }
+      if (!req.body.relationship_director_dob_month) {
+        throw new Error('invalid-relationship_director_dob_month')
+      }
+      if (!req.body.relationship_director_dob_year) {
+        throw new Error('invalid-relationship_director_dob_year')
+      }
+      try {
+        Date.parse(`${req.body.relationship_director_dob_year}/${req.body.relationship_director_dob_month}/${req.body.relationship_director_dob_day}`)
+      } catch (error) {
+        throw new Error('invalid-relationship_director_dob_day')
+      }
     }
     const requiredFields = connect.kycRequirements[stripeAccount.country].companyDirector
     for (const field of requiredFields) {
