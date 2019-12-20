@@ -925,7 +925,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
         individual_last_name_kanji: '東京都',
         individual_phone: '+81112345678'
-      },  {
+      }, {
         individual_verification_document_back: TestHelper['success_id_scan_back.png'],
         individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })

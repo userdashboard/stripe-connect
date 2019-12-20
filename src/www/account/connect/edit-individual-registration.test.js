@@ -468,9 +468,12 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_dob_year: '1950',
         individual_email: user.profile.contactEmail,
         individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName
+        individual_last_name: user.profile.lastName,
+        individual_phone: '456-789-0123'
       }
       req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         individual_verification_document_back: TestHelper['success_id_scan_back.png'],
         individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -502,6 +505,8 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_phone: '456-789-0123'
       }
       req.uploads = {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         individual_verification_document_back: TestHelper['success_id_scan_back.png'],
         individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }

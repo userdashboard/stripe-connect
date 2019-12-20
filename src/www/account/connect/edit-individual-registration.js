@@ -160,7 +160,7 @@ async function submitForm (req, res) {
         continue
       }
       if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
-        return renderPage(req, res, `invalid-business_profile_url`)
+        return renderPage(req, res, 'invalid-business_profile_url')
       }
       return renderPage(req, res, `invalid-${posted}`)
     }
