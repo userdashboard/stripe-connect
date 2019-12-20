@@ -85,7 +85,7 @@ function updateAccount (e) {
   companyRepresentative.relationship.owner = !!owner.checked
   if (owner.checked) {
     var percentOwned = document.getElementById('relationship_representative_percent_ownership')
-    companyRepresentative.percent_owned = percentOwned.value || '0'
+    companyRepresentative.relationship.percent_ownership = percentOwned.value || '0'
   }
   var dobDay = document.getElementById('relationship_representative_dob_day')
   if (dobDay) {

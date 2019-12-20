@@ -1319,6 +1319,10 @@ describe('/account/connect/edit-company-registration', () => {
         company_phone: '456-123-7890',
         company_tax_id: '00000000000'
       }
+      req.uploads = {
+        company_verification_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_document_front: TestHelper['success_id_scan_front.png']
+      }
       await testEachFieldAsNull(req)
     })
 
@@ -1341,6 +1345,10 @@ describe('/account/connect/edit-company-registration', () => {
         company_name: 'Company',
         company_phone: '456-123-7890',
         company_tax_id: '00000000000'
+      }
+      req.uploads = {
+        company_verification_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

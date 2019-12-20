@@ -228,6 +228,8 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         individual_last_name: user.profile.lastName,
         individual_phone: '456-789-0123'
       }, {
+        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         individual_verification_document_back: TestHelper['success_id_scan_back.png'],
         individual_verification_document_front: TestHelper['success_id_scan_front.png']
       })

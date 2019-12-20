@@ -104,6 +104,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         await TestHelper.submitBeneficialOwners(user)
         await TestHelper.setCompanyRepresentative(user)
         await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationStart(user)
         const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -1633,6 +1634,9 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         company_name: 'Company',
         company_phone: '456-789-0123',
         company_tax_id: '00000000000'
+      }, {
+        company_verification_document_back: TestHelper['success_id_scan_back.png'],
+        company_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Auckland',

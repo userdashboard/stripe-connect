@@ -578,7 +578,7 @@ describe('/api/user/connect/update-individual-registration', () => {
           individual_dob_year: '1950',
           individual_email: user.profile.contactEmail,
           individual_first_name: user.profile.firstName,
-          individual_id_number: '000000000',
+          individual_id_number: '',
           individual_last_name: user.profile.lastName,
           individual_phone: '456-789-0123'
         }
