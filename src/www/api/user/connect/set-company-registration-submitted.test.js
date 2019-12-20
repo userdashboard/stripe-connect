@@ -1032,7 +1032,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       assert.strictEqual(accountNow.requirements.currently_due.length, 0)
     })
 
-    it.only('object for IE registration', async () => {
+    it('object for IE registration', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'IE',
@@ -1086,7 +1086,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       req.session = user.session
       await req.patch()
       await TestHelper.waitForVerificationStart(user)
-      await TestHelper.waitForVerificationFieldsToReturn(user, 'company')
       const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session

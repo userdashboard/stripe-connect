@@ -452,21 +452,21 @@ async function waitForVerificationFieldsToReturn (user, contains, callback) {
       return callback()
     }
     for (const field of stripeAccount.requirements.eventually_due) {
-      if (field.indexOf(contains) === -1) {
-        return setTimeout(wait, 100)
+      if (field.indexOf(contains) > -1) {
+        return setTimeout(callback, 10)
       }
     }
     for (const field of stripeAccount.requirements.past_due) {
-      if (field.indexOf(contains) === -1) {
-        return setTimeout(wait, 100)
+      if (field.indexOf(contains) > -1) {
+        return setTimeout(callback, 10)
       }
     }
     for (const field of stripeAccount.requirements.currently_due) {
-      if (field.indexOf(contains) === -1) {
-        return setTimeout(wait, 100)
+      if (field.indexOf(contains) > -1) {
+        return setTimeout(callback, 10)
       }
     }
-    return setTimeout(callback, 10)
+    return setTimeout(wait, 100)
   }
   return setTimeout(wait, 100)
 }
