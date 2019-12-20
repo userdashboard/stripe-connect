@@ -174,6 +174,9 @@ module.exports = {
            (field === 'business_profile.product_description' && req.body.business_profile_url)) {
           continue
         }
+        if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
+          return renderPage(req, res, `invalid-business_profile_url`)
+        }
         throw new Error(`invalid-${posted}`)
       }
       if (field === 'individual.gender' && req.body.individual_gender !== 'female' && req.body.individual_gender !== 'male') {
