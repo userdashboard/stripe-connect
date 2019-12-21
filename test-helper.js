@@ -27,13 +27,14 @@ const waitForWebhook = util.promisify(async (webhookType, matching, callback) =>
   async function wait () {
     retries++
     if (retries === 10000) {
+      console.log('waited too long')
       return callback()
     }
     if (global.testEnded) {
       return
     }
     if (!global.webhooks || !global.webhooks.length) {
-      return setTimeout(wait, 10)
+      return setTimeout(wait, 20)
     }
     for (const received of global.webhooks) {
       if (received.type !== webhookType) {
@@ -43,9 +44,9 @@ const waitForWebhook = util.promisify(async (webhookType, matching, callback) =>
         return callback(null, received)
       }
     }
-    return setTimeout(wait, 10)
+    return setTimeout(wait, 20)
   }
-  return setTimeout(wait, 10)
+  return setTimeout(wait, 20)
 })
 
 module.exports = {
