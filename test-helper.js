@@ -41,7 +41,7 @@ const waitForWebhook = util.promisify(async (webhookType, matching, callback) =>
       if (matching(received)) {
         return setTimeout(() => {
           callback(null, received)
-        }, 20),
+        }, 20)
       }
     }
     return setTimeout(wait, 20)
