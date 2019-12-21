@@ -21,13 +21,11 @@ const wait = util.promisify((callback) => {
 
 const waitForWebhook = util.promisify(async (webhookType, matching, callback) => {
   if (process.env.DEBUG_ERRORS) {
-    console.log('waiting', webhookType)
   }
   let retries = 0
   async function wait () {
     retries++
-    if (retries === 10000) {
-      console.log('waited too long')
+    if (retries === 20000) {
       return callback()
     }
     if (global.testEnded) {
@@ -41,7 +39,9 @@ const waitForWebhook = util.promisify(async (webhookType, matching, callback) =>
         continue
       }
       if (matching(received)) {
-        return callback(null, received)
+        return setTimeout(() => {
+          callback(null, received)
+        }, 20),
       }
     }
     return setTimeout(wait, 20)
