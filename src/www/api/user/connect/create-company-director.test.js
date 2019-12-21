@@ -92,6 +92,9 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
+          relationship_director_dob_day: '1',
+          relationship_director_dob_month: '1',
+          relationship_director_dob_year: '1950',
           relationship_director_first_name: '',
           relationship_director_last_name: person.lastName
         })
@@ -121,6 +124,9 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
+          relationship_director_dob_day: '1',
+          relationship_director_dob_month: '1',
+          relationship_director_dob_year: '1950',
           relationship_director_first_name: person.firstName,
           relationship_director_last_name: ''
         })
@@ -150,6 +156,9 @@ describe('/api/user/connect/create-company-director', () => {
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
+          relationship_director_dob_day: '1',
+          relationship_director_dob_month: '1',
+          relationship_director_dob_year: '1950',
           relationship_director_first_name: person.firstName,
           relationship_director_last_name: ''
         })
@@ -522,11 +531,6 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_address_city: 'London',
-        relationship_director_address_country: 'GB',
-        relationship_director_address_line1: 'A building',
-        relationship_director_address_postal_code: 'EC1A 1AA',
-        relationship_director_address_state: 'LND',
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950',
@@ -554,11 +558,6 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_address_city: 'London',
-        relationship_director_address_country: 'GB',
-        relationship_director_address_line1: 'A building',
-        relationship_director_address_postal_code: 'EC1A 1AA',
-        relationship_director_address_state: 'LND',
         relationship_director_dob_day: '1',
         relationship_director_dob_month: '1',
         relationship_director_dob_year: '1950',

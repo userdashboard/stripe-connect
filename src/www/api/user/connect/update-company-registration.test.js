@@ -1566,7 +1566,7 @@ describe('/api/user/connect/update-company-registration', () => {
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.body = {
+      const body = {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'London',
@@ -1578,15 +1578,14 @@ describe('/api/user/connect/update-company-registration', () => {
         company_tax_id: '00000000000'
       }
       req.uploads = {
-        company_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        company_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         company_verification_document_back: TestHelper['success_id_scan_back.png'],
         company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
+      req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
       for (const field in req.body) {
-        assert.strictEqual(registrationNow[field], req.body[field])
+        assert.strictEqual(registrationNow[field], body[field])
       }
     })
 
@@ -1795,7 +1794,7 @@ describe('/api/user/connect/update-company-registration', () => {
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.body = {
+      const body = {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
         company_address_city: 'Auckland',
@@ -1810,11 +1809,11 @@ describe('/api/user/connect/update-company-registration', () => {
         company_verification_document_back: TestHelper['success_id_scan_back.png'],
         company_verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, req.body)
+      req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
       const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
       for (const field in req.body) {
-        assert.strictEqual(registrationNow[field], req.body[field])
+        assert.strictEqual(registrationNow[field], body[field])
       }
     })
 
