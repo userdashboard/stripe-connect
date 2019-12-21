@@ -23,7 +23,7 @@ module.exports = {
     for (const director of directors) {
       if (director.directorid === req.query.directorid) {
         if (director.personid) {
-          return stripeCache.retrieve(director.personid, req.stripeKey)
+          return stripeCache.retrievePerson(director.personid, req.stripeKey)
         }
         return director
       }

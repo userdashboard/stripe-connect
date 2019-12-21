@@ -24,7 +24,7 @@ module.exports = {
     for (const owner of owners) {
       if (owner.ownerid === req.query.ownerid) {
         if (owner.personid) {
-          return stripeCache.retrieve(owner.personid, req.stripeKey)
+          return stripeCache.retrievePerson(owner.personid, req.stripeKey)
         }
         return owner
       }
