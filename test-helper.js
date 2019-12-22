@@ -159,7 +159,7 @@ before(async () => {
     module.exports[x] = TestHelper[x]
   }
   const index = require('./index.js')
-  connect = await inndex.setup()
+  connect = await index.setup()
 })
 
 after (async () => {
