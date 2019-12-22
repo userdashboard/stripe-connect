@@ -180,6 +180,15 @@ describe('/account/connect/submit-company-representative', () => {
       const req = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/submit-company-representative?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

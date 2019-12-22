@@ -62,6 +62,11 @@ describe('/account/connect', () => {
       const req = TestHelper.createRequest('/account/connect')
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' }
+      ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       const row = doc.getElementById(user.stripeAccount.id)

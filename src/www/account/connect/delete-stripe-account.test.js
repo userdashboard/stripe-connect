@@ -93,6 +93,15 @@ describe('/account/connect/delete-stripe-account', () => {
       const req = TestHelper.createRequest(`/account/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

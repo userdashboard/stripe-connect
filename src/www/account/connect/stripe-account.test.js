@@ -66,6 +66,13 @@ describe('/account/connect/stripe-account', () => {
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` }
+      ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('account-status')

@@ -28,6 +28,13 @@ describe('/account/connect/create-registration', () => {
       }
       await req.post()
       const page = await req.post()
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/create-registration' },
+        { fill: '#submit-form' }
+      ]
       const doc = TestHelper.extractDoc(page)
       const redirectURL = TestHelper.extractRedirectURL(doc)
       assert.strictEqual(true, redirectURL.startsWith('/account/connect/stripe-account?'))

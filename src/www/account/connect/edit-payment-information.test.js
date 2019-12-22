@@ -100,6 +100,15 @@ describe('/account/connect/edit-payment-information', () => {
         currency: 'eur',
         iban: 'AT89370400440532013000'
       }
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/edit-payment-information?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')

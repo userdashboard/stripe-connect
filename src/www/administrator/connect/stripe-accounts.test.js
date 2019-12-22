@@ -62,6 +62,12 @@ describe('/administrator/connect/stripe-accounts', () => {
       const req = TestHelper.createRequest('/administrator/connect/stripe-accounts')
       req.account = administrator.account
       req.session = administrator.session
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#administrator-menu-container' },
+        { click: '/administrator/stripe-connect' },
+        { click: '/administrator/stripe-connect/stripe-accounts' }
+      ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       const row = doc.getElementById(user.stripeAccount.id)

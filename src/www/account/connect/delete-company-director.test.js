@@ -220,6 +220,17 @@ describe('/account/connect/delete-company-director', () => {
       const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/company-directors?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/company-director?directorid=${user.director.directorid}` },
+        { click: `/account/stripe-connect/delete-company-director?directorid=${user.director.directorid}` },
+        { fill: '#submit-form' }
+      ]
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

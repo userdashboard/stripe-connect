@@ -240,6 +240,17 @@ describe('/account/connect/edit-company-director', () => {
         relationship_director_first_name: person.firstName,
         relationship_director_last_name: person.lastName
       }
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/company-directors?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/company-director?directorid=${user.director.directorid}` },
+        { click: `/account/stripe-connect/edit-company-director?directorid=${user.director.directorid}` },
+        { fill: '#submit-form' }
+      ]
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')

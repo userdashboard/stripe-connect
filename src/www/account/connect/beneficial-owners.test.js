@@ -91,6 +91,14 @@ describe('/account/connect/beneficial-owners', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/beneficial-owners?stripeid=${user.stripeAccount.id}` }
+      ]
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
