@@ -1,4 +1,4 @@
-name: test-administrator-api
+name: test-administrator-api-with-tokens
 
 on: [push]
 

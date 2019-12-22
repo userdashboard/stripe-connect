@@ -10,6 +10,12 @@ const localTunnel = require('localtunnel')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+stripe.setAppInfo({
+  version: packageJSON.version,
+  name: '@userdashboard/stripe-connect',
+  url: 'https://github.com/userdashboard/stripe-connect'
+})
+
 const util = require('util')
 const stripeKey = {
   api_key: process.env.STRIPE_KEY

@@ -1,4 +1,4 @@
-name: test-user-ui
+name: test-user-ui-with-tokens
 
 on: [push]
 
@@ -16,7 +16,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Setup dependencies
       run: |
-        npm install mocha puppeteer --no-save
+        npm install localtunnel mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
         node node_modules/mocha/bin/mocha src/www/account --recursive --timeout 120000 --slow 120000 || exit 1

@@ -1,4 +1,4 @@
-name: test-user-api
+name: test-internal-api
 
 on: [push]
 
@@ -19,17 +19,16 @@ jobs:
         npm install localtunnel mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
-        node node_modules/mocha/bin/mocha src/www/api/user --recursive --timeout 120000 --slow 120000 || exit 1
+        node node_modules/mocha/bin/mocha src --timeout 120000 --slow 120000 || exit 1
       env:
         NODE_ENV: testing
         FAST_START: true
-        DASHBOARD_SERVER: "http://localhost:9003"
+        DASHBOARD_SERVER: "http://localhost:9000"
         DOMAIN: "localhost"
-        PORT: 9003
+        PORT: 9000
         STORAGE_PATH: /tmp/test-data1
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_6 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_6 }}
-        STRIPE_JS: false
+        STRIPE_KEY: "sk_test_key_not_required"
+        STRIPE_PUBLISHABLE_KEY: "pk_test_key_not_required"
     
