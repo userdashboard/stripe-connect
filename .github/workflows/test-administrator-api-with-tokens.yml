@@ -29,7 +29,7 @@ jobs:
         STORAGE_PATH: /tmp/test-data1
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_2 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_2 }}
-        STRIPE_JS: false
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_1 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_1 }}
+        STRIPE_JS: 3
     

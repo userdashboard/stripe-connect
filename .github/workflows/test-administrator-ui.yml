@@ -1,4 +1,4 @@
-name: test-administrator-api
+name: test-administrator-ui
 
 on: [push]
 
@@ -16,20 +16,18 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Setup dependencies
       run: |
-        npm install localtunnel mocha puppeteer @userdashboard/dashboard --no-save
+        npm install mocha puppeteer --no-save
     - name: Test (fs)
       run: |
-        node node_modules/mocha/bin/mocha src/www/api/administrator --recursive --timeout 120000 --slow 120000 || exit 1
+        node node_modules/mocha/bin/mocha src/www/administrator --recursive --timeout 120000 --slow 120000 || exit 1
       env:
         NODE_ENV: testing
         FAST_START: true
-        DASHBOARD_SERVER: "http://localhost:9004"
+        DASHBOARD_SERVER: "http://localhost:9005"
         DOMAIN: "localhost"
-        PORT: 9004
+        PORT: 9005
         STORAGE_PATH: /tmp/test-data1
-        GENERATE_SITEMAP_TXT: false
-        GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_2 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_2 }}
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_4 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_4 }}
         STRIPE_JS: false
     
