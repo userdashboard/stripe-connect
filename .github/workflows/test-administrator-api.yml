@@ -1,0 +1,35 @@
+name: test-administrator-api
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Setup dependencies
+      run: |
+        npm install mocha puppeteer @userdashboard/dashboard --no-save
+    - name: Test (fs)
+      run: |
+        node node_modules/mocha/bin/mocha src/www/api/administrator --recursive --timeout 120000 --slow 120000 || exit 1
+      env:
+        NODE_ENV: testing
+        FAST_START: true
+        DASHBOARD_SERVER: "http://localhost:9004"
+        DOMAIN: "localhost"
+        PORT: 9004
+        STORAGE_PATH: /tmp/test-data1
+        GENERATE_SITEMAP_TXT: false
+        GENERATE_API_TXT: false
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+        STRIPE_JS: false
+    
