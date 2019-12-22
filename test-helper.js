@@ -158,7 +158,8 @@ before(async () => {
   for (const x in TestHelper) {
     module.exports[x] = TestHelper[x]
   }
-  connect = await require('./index.js').setup()
+  const index = require('./index.js')
+  connect = await inndex.setup()
 })
 
 after (async () => {

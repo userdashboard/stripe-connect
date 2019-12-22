@@ -93,5 +93,6 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV !== 'testing') {
+  console.log('setting up', __filename)
   module.exports.setup()
 }
