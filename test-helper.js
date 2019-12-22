@@ -99,7 +99,8 @@ for (const x in TestHelper) {
 
 let tunnel
 before(async () => {
-  tunnel = await localTunnel({ port: process.env.PORT });
+  tunnel = await localTunnel({ port: process.env.PORT })
+  console.log('got tunnel', JSON.stringify(tunnel))
   global.dashboardServer = tunnel.url
   global.domain = tunnel.url.split('://')[1]
   const webhooks = await stripe.webhookEndpoints.list(stripeKey)
