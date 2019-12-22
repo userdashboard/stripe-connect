@@ -8,18 +8,18 @@ module.exports = {
 
 async function renderPage (req, res, messageTemplate) {
   if (req.success) {
-    if (req.query && req.query.returnURL && req.query.returnURL.indexOf('/') === 0) {
-      return dashboard.Response.redirect(req, res, decodeURI(req.query.returnURL))
+    if (req.query && req.query['return-url']) {
+      return dashboard.Response.redirect(req, res, decodeURI(req.query['return-url']))
     }
     return dashboard.Response.redirect(req, res, `/account/connect/stripe-account?stripeid=${req.data.stripeAccount.id}`)
   } else if (req.error) {
     messageTemplate = req.error
   }
   const doc = dashboard.HTML.parse(req.route.html)
-  if (!messageTemplate && req.method === 'GET' && req.query && req.query.returnURL) {
+  if (!messageTemplate && req.method === 'GET' && req.query && req.query['return-url']) {
     const submitForm = doc.getElementById('submit-form')
     const divider = submitForm.attr.action.indexOf('?') > -1 ? '&' : '?'
-    submitForm.attr.action += `${divider}returnURL=${encodeURI(req.query.returnURL).split('?').join('%3F')}`
+    submitForm.attr.action += `${divider}return-url=${encodeURI(req.query['return-url']).split('?').join('%3F')}`
   }
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
