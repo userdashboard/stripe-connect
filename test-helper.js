@@ -130,7 +130,6 @@ beforeEach((callback) => {
 module.exports.createRequest = (rawURL, method) => {
   const req = TestHelper.createRequest(rawURL, method)
   req.stripeKey = stripeKey
-  req.retry = true
   return req
 }
 
