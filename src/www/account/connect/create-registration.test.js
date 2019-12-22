@@ -32,7 +32,7 @@ describe('/account/connect/create-registration', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/stripe-connect' },
-        { click: '/account/stripe-connect/create-registration' },
+        { click: '/account/connect/create-registration' },
         { fill: '#submit-form' }
       ]
       const doc = TestHelper.extractDoc(page)

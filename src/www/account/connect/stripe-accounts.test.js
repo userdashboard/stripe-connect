@@ -32,7 +32,7 @@ describe('/account/connect/stripe-accounts', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/stripe-connect' },
-        { click: '/account/stripe-connect/stripe-accounts' }
+        { click: '/account/connect/stripe-accounts' }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)

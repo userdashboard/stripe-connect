@@ -66,7 +66,7 @@ describe('/administrator/connect/stripe-accounts', () => {
       req.screenshots = [
         { hover: '#administrator-menu-container' },
         { click: '/administrator/stripe-connect' },
-        { click: '/administrator/stripe-connect/stripe-accounts' }
+        { click: '/administrator/connect/stripe-accounts' }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)

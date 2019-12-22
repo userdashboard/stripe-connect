@@ -145,9 +145,9 @@ describe('/administrator/connect/reject-stripe-account', () => {
       req.screenshots = [
         { hover: '#administrator-menu-container' },
         { click: '/administrator/stripe-connect' },
-        { click: '/administrator/stripe-connect/stripe-accounts' },
-        { click: `/administrator/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/administrator/stripe-connect/reject-stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: '/administrator/connect/stripe-accounts' },
+        { click: `/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/administrator/connect/reject-stripe-account?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
       const page = await req.post()
