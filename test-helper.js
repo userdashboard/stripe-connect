@@ -99,15 +99,26 @@ for (const x in TestHelper) {
 
 let tunnel
 before(async () => {
-  tunnel = await localTunnel({ port: process.env.PORT })
-  console.log('got tunnel', JSON.stringify(tunnel))
+  tunnel = await localTunnel({ 
+    port: process.env.PORT,
+    host: 'http://localtunnel.me',
+    local_https: false
+  })
   global.dashboardServer = tunnel.url
   global.domain = tunnel.url.split('://')[1]
-  const webhooks = await stripe.webhookEndpoints.list(stripeKey)
-  if (webhooks.data && webhooks.data.length) {
+  let webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  while (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
       await stripe.webhookEndpoints.del(webhook.id, stripeKey)
     }
+    webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  }
+  let accounts = await stripe.accounts.list(stripeKey)
+  while (accounts.data && accounts.data.length) {
+    for (const account of accounts.data) {
+      await stripe.accounts.del(account.id, stripeKey)
+    }
+    accounts = await stripe.accounts.list(stripeKey)
   }
   const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
   const eventList = []
@@ -126,6 +137,20 @@ after ((callback) => {
   if (tunnel) {
     tunnel.close()
   }
+  let webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  while (webhooks.data && webhooks.data.length) {
+    for (const webhook of webhooks.data) {
+      await stripe.webhookEndpoints.del(webhook.id, stripeKey)
+    }
+    webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  }
+  let accounts = await stripe.accounts.list(stripeKey)
+  while (accounts.data && accounts.data.length) {
+    for (const account of accounts.data) {
+      await stripe.accounts.del(account.id, stripeKey)
+    }
+    accounts = await stripe.accounts.list(stripeKey)
+  }  
   return callback()
 })
 
