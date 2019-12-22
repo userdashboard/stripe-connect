@@ -115,18 +115,32 @@ before(async () => {
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
-      console.log('delete old webhook', webhook.id)
-      await stripe.webhookEndpoints.del(webhook.id, stripeKey)
+      if (webhook === 0) {
+        continue
+      }
+      try {
+        await stripe.webhookEndpoints.del(webhook.id, stripeKey)
+      } catch (error) {
+      }
     }
-    webhooks = await stripe.webhookEndpoints.list(stripeKey)
+    try {
+      webhooks = await stripe.webhookEndpoints.list(stripeKey)
+    } catch (error) {
+      webhooks = { data: [0] }
+    }
   }
   let accounts = await stripe.accounts.list(stripeKey)
   while (accounts.data && accounts.data.length) {
     for (const account of accounts.data) {
-      console.log('delete old account', account.id)
-      await stripe.accounts.del(account.id, stripeKey)
+      try {
+        await stripe.accounts.del(account.id, stripeKey)
+      } catch (error) {
+      }
     }
-    accounts = await stripe.accounts.list(stripeKey)
+    try {
+      accounts = await stripe.accounts.list(stripeKey)
+    } catch (error) {
+    }
   }
   const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
   const eventList = []
