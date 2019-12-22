@@ -253,6 +253,15 @@ describe('/account/connect/create-beneficial-owner', () => {
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName
       }
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const redirectURL = TestHelper.extractRedirectURL(doc)

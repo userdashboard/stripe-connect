@@ -288,6 +288,17 @@ describe('/account/connect/edit-beneficial-owner', () => {
         relationship_owner_first_name: person.firstName,
         relationship_owner_last_name: person.lastName
       }
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/beneficial-owners?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/beneficial-owner?ownerid=${user.owner.ownerid}` },
+        { click: `/account/stripe-connect/edit-beneficial-owner?ownerid=${user.owner.ownerid}` },
+        { fill: '#submit-form' }
+      ]
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const messageContainer = doc.getElementById('message-container')

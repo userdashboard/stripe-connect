@@ -64,6 +64,15 @@ describe('/account/connect/company-director', () => {
       const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.directorid}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/company-directors?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/company-director?directorid=${user.director.directorid}` }
+      ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
       const row = doc.getElementById(user.director.directorid)

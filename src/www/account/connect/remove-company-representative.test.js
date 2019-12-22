@@ -128,6 +128,15 @@ describe('/account/connect/remove-company-representative', () => {
       req.account = user.account
       req.session = user.session
       req.body = {}
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/remove-company-representative?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

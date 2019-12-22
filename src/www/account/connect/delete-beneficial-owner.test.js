@@ -256,6 +256,17 @@ describe('/account/connect/delete-beneficial-owner', () => {
       const req = TestHelper.createRequest(`/account/connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/beneficial-owners?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/beneficial-owner?ownerid=${user.owner.ownerid}` },
+        { click: `/account/stripe-connect/delete-beneficial-owner?ownerid=${user.owner.ownerid}` },
+        { fill: '#submit-form' }
+      ]
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

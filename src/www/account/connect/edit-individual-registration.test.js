@@ -441,6 +441,15 @@ describe('/account/connect/edit-individual-registration', () => {
         individual_verification_document_back: TestHelper['success_id_scan_back.png'],
         individual_verification_document_front: TestHelper['success_id_scan_front.png']
       }
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/edit-individual-registration?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const redirectURL = TestHelper.extractRedirectURL(doc)

@@ -470,6 +470,15 @@ describe('/account/connect/edit-company-representative', () => {
         relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       }
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/edit-company-representative?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const redirectURL = TestHelper.extractRedirectURL(doc)

@@ -436,6 +436,15 @@ describe('/account/connect/edit-company-registration', () => {
         company_phone: '456-789-0123',
         company_tax_id: '00000000000'
       }
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/stripe-connect' },
+        { click: '/account/stripe-connect/stripe-accounts' },
+        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/stripe-connect/edit-company-registration?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
       const redirectURL = TestHelper.extractRedirectURL(doc)
