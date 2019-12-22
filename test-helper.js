@@ -21,7 +21,6 @@ const stripeKey = {
   api_key: process.env.STRIPE_KEY
 }
 
-const TestHelper = require('@userdashboard/dashboard/test-helper.js')
 const wait = util.promisify((callback) => {
   return setTimeout(callback, 100)
 })
@@ -99,10 +98,6 @@ module.exports = {
   }
 }
 
-for (const x in TestHelper) {
-  module.exports[x] = TestHelper[x]
-}
-
 let tunnel, connect
 before(async () => {
   while (!tunnel) {
@@ -159,7 +154,11 @@ before(async () => {
     enabled_events: eventList
   }, stripeKey)
   global.connectWebhookEndPointSecret = webhook.secret
-  connect = await require('./index.js')
+  const TestHelper = require('@userdashboard/dashboard/test-helper.js')
+  for (const x in TestHelper) {
+    module.exports[x] = TestHelper[x]
+  }
+  connect = await require('./index.js').setup()
 })
 
 after (async () => {
