@@ -6,6 +6,7 @@ global.connectWebhookEndPointSecret = true
 
 const connect = require('./index.js')
 const fs = require('fs')
+const localTunnel = require('localtunnel')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
@@ -96,7 +97,11 @@ for (const x in TestHelper) {
   module.exports[x] = TestHelper[x]
 }
 
+let tunnel
 before(async () => {
+  tunnel = await localTunnel({ port: process.env.PORT });
+  global.dashboardServer = tunnel.url
+  global.domain = tunnel.url.split('://')[1]
   const webhooks = await stripe.webhookEndpoints.list(stripeKey)
   if (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
@@ -114,6 +119,13 @@ before(async () => {
     enabled_events: eventList
   }, stripeKey)
   global.connectWebhookEndPointSecret = webhook.secret
+})
+
+after ((callback) => {
+  if (tunnel) {
+    tunnel.close()
+  }
+  return callback()
 })
 
 const helperRoutes = require('./test-helper-routes.js')
