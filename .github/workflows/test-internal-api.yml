@@ -31,4 +31,5 @@ jobs:
         GENERATE_API_TXT: false
         STRIPE_KEY: "sk_test_key_not_required"
         STRIPE_PUBLISHABLE_KEY: "pk_test_key_not_required"
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
     

@@ -32,4 +32,5 @@ jobs:
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_5 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_5 }}
         STRIPE_JS: 3
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
     
