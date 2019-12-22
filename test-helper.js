@@ -133,7 +133,7 @@ before(async () => {
   global.connectWebhookEndPointSecret = webhook.secret
 })
 
-after ((callback) => {
+after (async () => {
   if (tunnel) {
     tunnel.close()
   }
