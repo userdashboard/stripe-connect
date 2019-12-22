@@ -105,7 +105,6 @@ for (const x in TestHelper) {
 
 let tunnel, connect
 before(async () => {
-  connect = await require('./index.js')
   while (!tunnel) {
     try {
       tunnel = await localTunnel({ 
@@ -160,6 +159,7 @@ before(async () => {
     enabled_events: eventList
   }, stripeKey)
   global.connectWebhookEndPointSecret = webhook.secret
+  connect = await require('./index.js')
 })
 
 after (async () => {
