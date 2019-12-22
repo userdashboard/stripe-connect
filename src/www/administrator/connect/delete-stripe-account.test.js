@@ -136,9 +136,9 @@ describe('/administrator/connect/delete-stripe-account', () => {
       req.screenshots = [
         { hover: '#administrator-menu-container' },
         { click: '/administrator/stripe-connect' },
-        { click: '/administrator/stripe-connect/stripe-accounts' },
-        { click: `/administrator/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/administrator/stripe-connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: '/administrator/connect/stripe-accounts' },
+        { click: `/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
       await req.post()

@@ -224,11 +224,11 @@ describe('/account/connect/delete-company-director', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/stripe-connect' },
-        { click: '/account/stripe-connect/stripe-accounts' },
-        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/stripe-connect/company-directors?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/stripe-connect/company-director?directorid=${user.director.directorid}` },
-        { click: `/account/stripe-connect/delete-company-director?directorid=${user.director.directorid}` },
+        { click: '/account/connect/stripe-accounts' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/company-directors?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/company-director?directorid=${user.director.directorid}` },
+        { click: `/account/connect/delete-company-director?directorid=${user.director.directorid}` },
         { fill: '#submit-form' }
       ]
       await req.post()

@@ -173,7 +173,7 @@ describe('/administrator/connect/payouts', () => {
       req.screenshots = [
         { hover: '#administrator-menu-container' },
         { click: '/administrator/stripe-connect' },
-        { click: '/administrator/stripe-connect/payouts' }
+        { click: '/administrator/connect/payouts' }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)

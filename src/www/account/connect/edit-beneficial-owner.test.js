@@ -292,11 +292,11 @@ describe('/account/connect/edit-beneficial-owner', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/stripe-connect' },
-        { click: '/account/stripe-connect/stripe-accounts' },
-        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/stripe-connect/beneficial-owners?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/stripe-connect/beneficial-owner?ownerid=${user.owner.ownerid}` },
-        { click: `/account/stripe-connect/edit-beneficial-owner?ownerid=${user.owner.ownerid}` },
+        { click: '/account/connect/stripe-accounts' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/beneficial-owner?ownerid=${user.owner.ownerid}` },
+        { click: `/account/connect/edit-beneficial-owner?ownerid=${user.owner.ownerid}` },
         { fill: '#submit-form' }
       ]
       const page = await req.post()

@@ -95,9 +95,9 @@ describe('/account/connect/beneficial-owners', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/stripe-connect' },
-        { click: '/account/stripe-connect/stripe-accounts' },
-        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/stripe-connect/beneficial-owners?stripeid=${user.stripeAccount.id}` }
+        { click: '/account/connect/stripe-accounts' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}` }
       ]
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

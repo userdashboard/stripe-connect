@@ -97,9 +97,9 @@ describe('/account/connect/delete-stripe-account', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/stripe-connect' },
-        { click: '/account/stripe-connect/stripe-accounts' },
-        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/stripe-connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: '/account/connect/stripe-accounts' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
       await req.post()

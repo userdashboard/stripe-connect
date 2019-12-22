@@ -70,8 +70,8 @@ describe('/account/connect/stripe-account', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/stripe-connect' },
-        { click: '/account/stripe-connect/stripe-accounts' },
-        { click: `/account/stripe-connect/stripe-account?stripeid=${user.stripeAccount.id}` }
+        { click: '/account/connect/stripe-accounts' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
