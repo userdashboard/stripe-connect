@@ -4,7 +4,6 @@ global.stripeAPIVersion = '2019-08-14'
 global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
-const connect = require('./index.js')
 const fs = require('fs')
 const localTunnel = require('localtunnel')
 const packageJSON = require('./package.json')
@@ -104,8 +103,9 @@ for (const x in TestHelper) {
   module.exports[x] = TestHelper[x]
 }
 
-let tunnel
+let tunnel, connect
 before(async () => {
+  connect = await require('./index.js')
   while (!tunnel) {
     try {
       tunnel = await localTunnel({ 
