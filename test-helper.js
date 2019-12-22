@@ -109,6 +109,7 @@ before(async () => {
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
+      console.log('delete old webhook', webhook.id)
       await stripe.webhookEndpoints.del(webhook.id, stripeKey)
     }
     webhooks = await stripe.webhookEndpoints.list(stripeKey)
@@ -116,6 +117,7 @@ before(async () => {
   let accounts = await stripe.accounts.list(stripeKey)
   while (accounts.data && accounts.data.length) {
     for (const account of accounts.data) {
+      console.log('delete old account', account.id)
       await stripe.accounts.del(account.id, stripeKey)
     }
     accounts = await stripe.accounts.list(stripeKey)
