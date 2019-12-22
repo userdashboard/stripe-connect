@@ -7,12 +7,13 @@ global.connectWebhookEndPointSecret = true
 const connect = require('./index.js')
 const fs = require('fs')
 const localTunnel = require('localtunnel')
+const packageJSON = require('./package.json')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 stripe.setAppInfo({
   version: packageJSON.version,
-  name: '@userdashboard/stripe-connect',
+  name: '@userdashboard/stripe-connect (test suite)',
   url: 'https://github.com/userdashboard/stripe-connect'
 })
 
