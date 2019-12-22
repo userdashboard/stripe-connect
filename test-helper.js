@@ -98,7 +98,7 @@ module.exports = {
   }
 }
 
-let tunnel, connect
+let TestHelper, tunnel, connect
 before(async () => {
   while (!tunnel) {
     try {
@@ -154,7 +154,7 @@ before(async () => {
     enabled_events: eventList
   }, stripeKey)
   global.connectWebhookEndPointSecret = webhook.secret
-  const TestHelper = require('@userdashboard/dashboard/test-helper.js')
+  TestHelper = require('@userdashboard/dashboard/test-helper.js')
   for (const x in TestHelper) {
     module.exports[x] = TestHelper[x]
   }
