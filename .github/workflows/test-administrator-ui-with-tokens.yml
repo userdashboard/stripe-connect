@@ -27,6 +27,8 @@ jobs:
         DOMAIN: "localhost"
         PORT: 9005
         STORAGE_PATH: /tmp/test-data1
+        GENERATE_SITEMAP_TXT: false
+        GENERATE_API_TXT: false
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_3 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_3 }}
         STRIPE_JS: 3
