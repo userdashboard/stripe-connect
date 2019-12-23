@@ -100,19 +100,6 @@ module.exports = {
 
 let TestHelper, tunnel, connect
 before(async () => {
-  while (!tunnel) {
-    try {
-      tunnel = await localTunnel({ 
-        port: process.env.PORT,
-        host: 'http://localtunnel.me',
-        local_https: false
-      })
-    } catch (error) {
-      continue
-    }
-  }
-  global.dashboardServer = tunnel.url
-  global.domain = tunnel.url.split('://')[1]
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
@@ -143,6 +130,20 @@ before(async () => {
     } catch (error) {
     }
   }
+  while (!tunnel) {
+    try {
+      tunnel = await localTunnel({ 
+        port: process.env.PORT,
+        host: 'http://localtunnel.me',
+        local_https: false
+      })
+    } catch (error) {
+      continue
+    }
+  }
+  global.dashboardServer = tunnel.url
+  global.domain = tunnel.url.split('://')[1]
+  console.log('configured local tunnel', global.dashboardServer)
   const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
   const eventList = []
   for (const event of events) {
