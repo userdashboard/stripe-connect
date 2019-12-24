@@ -87,7 +87,6 @@ describe('/account/connect/beneficial-owner', () => {
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      console.log(doc.toString())
       const row = doc.getElementById(user.owner.ownerid)
       assert.strictEqual(row.tag, 'tbody')
     })
