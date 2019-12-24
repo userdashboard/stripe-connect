@@ -158,7 +158,6 @@ before(async () => {
     module.exports[x] = TestHelper[x]
   }
   connect = require('./index.js')
-  connect = await connect.setup()
 })
 
 after (async () => {
