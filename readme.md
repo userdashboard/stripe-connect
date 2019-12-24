@@ -1,4 +1,5 @@
 # Stripe Connect module for Dashboard
+![StandardJS](https://github.com/userdashboard/stripe-connect/workflows/standardjs/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-user-ui/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-administrator-ui/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-user-api/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-administrator-api/badge.svg)
 
 ![Guest landing page](https://userdashboard.github.io/outline.png?raw=true) 
 

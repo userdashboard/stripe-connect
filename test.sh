@@ -1,5 +1,5 @@
 if [ ! -d node_modules/puppeteer ] || [ ! -d node_modules/@userdashboard/dashboard ]; then
-  npm install localtunnel puppeteer @userdashboard/dashboard --no-save
+  npm install ngrok puppeteer @userdashboard/dashboard --no-save
 fi
 NODE_ENV=testing \
 SILENT_START=true \
