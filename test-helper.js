@@ -5,6 +5,7 @@ global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
 const fs = require('fs')
+const ngrok = require('ngrok')
 const packageJSON = require('./package.json')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
@@ -129,22 +130,18 @@ before(async () => {
     } catch (error) {
     }
   }
-  const ngrok = require('ngrok')
   while (!tunnel) {
     try {
       tunnel = await ngrok.connect(process.env.PORT)
       if (!tunnel) {
         continue
       }
-      console.log(tunnel)
       global.dashboardServer = tunnel
       global.domain = tunnel.split('://')[1]
     } catch (error) {
       continue
     }
   }
-  global.dashboardServer = tunnel.url
-  global.domain = tunnel.url.split('://')[1]
   const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
   const eventList = []
   for (const event of events) {
@@ -160,8 +157,8 @@ before(async () => {
   for (const x in TestHelper) {
     module.exports[x] = TestHelper[x]
   }
-  const index = require('./index.js')
-  connect = await index.setup()
+  connect = require('./index.js')
+  connect = await connect.setup()
 })
 
 after (async () => {
