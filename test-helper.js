@@ -137,13 +137,21 @@ before(async () => {
         host: 'http://localtunnel.me',
         local_https: false
       })
+      tunnel.on('error', () => {
+        tunnel = await localTunnel({ 
+          port: process.env.PORT,
+          host: 'http://localtunnel.me',
+          local_https: false
+        })
+        global.dashboardServer = tunnel.url
+        global.domain = tunnel.url.split('://')[1]
+      })
     } catch (error) {
       continue
     }
   }
   global.dashboardServer = tunnel.url
   global.domain = tunnel.url.split('://')[1]
-  console.log('configured local tunnel', global.dashboardServer)
   const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
   const eventList = []
   for (const event of events) {
