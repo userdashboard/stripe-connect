@@ -137,7 +137,7 @@ before(async () => {
         host: 'http://localtunnel.me',
         local_https: false
       })
-      tunnel.on('error', () => {
+      tunnel.on('error', async () => {
         tunnel = await localTunnel({ 
           port: process.env.PORT,
           host: 'http://localtunnel.me',
