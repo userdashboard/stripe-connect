@@ -133,6 +133,10 @@ before(async () => {
   while (!tunnel) {
     try {
       tunnel = ngrok.connect(process.env.PORT)
+      if (!tunnel) {
+        continue
+      }
+      console.log(tunnel)
       global.dashboardServer = tunnel
       global.domain = tunnel.split('://')[1]
     } catch (error) {
@@ -161,9 +165,7 @@ before(async () => {
 })
 
 after (async () => {
-  if (tunnel) {
-    tunnel.close()
-  }
+  ngrok.kill()
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
