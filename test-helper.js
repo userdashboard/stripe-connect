@@ -157,7 +157,7 @@ before(async () => {
   for (const x in TestHelper) {
     module.exports[x] = TestHelper[x]
   }
-  connect = require('./index.js')
+  connect = await require('./index.js')
 })
 
 after (async () => {

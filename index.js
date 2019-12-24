@@ -88,4 +88,4 @@ if (global.stripeJS > 0 && !global.stripePublishableKey) {
     },
     MetaData: require('./src/meta-data.js')
   }
-})
+})()
