@@ -31,7 +31,7 @@ describe('/account/connect/create-registration', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
-        { click: '/account/stripe-connect' },
+        { click: '/account/connect' },
         { click: '/account/connect/create-registration' },
         { fill: '#submit-form' }
       ]

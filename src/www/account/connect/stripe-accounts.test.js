@@ -31,7 +31,7 @@ describe('/account/connect/stripe-accounts', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
-        { click: '/account/stripe-connect' },
+        { click: '/account/connect' },
         { click: '/account/connect/stripe-accounts' }
       ]
       const page = await req.get()

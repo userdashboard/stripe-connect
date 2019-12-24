@@ -65,7 +65,7 @@ describe('/account/connect', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
-        { click: '/account/stripe-connect' }
+        { click: '/account/connect' }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)

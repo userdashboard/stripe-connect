@@ -103,7 +103,7 @@ describe('/account/connect/edit-payment-information', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
-        { click: '/account/stripe-connect' },
+        { click: '/account/connect' },
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}` },

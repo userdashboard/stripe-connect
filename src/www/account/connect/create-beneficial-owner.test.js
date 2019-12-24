@@ -256,7 +256,7 @@ describe('/account/connect/create-beneficial-owner', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
-        { click: '/account/stripe-connect' },
+        { click: '/account/connect' },
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}` },

@@ -79,7 +79,7 @@ describe('/account/connect/beneficial-owner', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
-        { click: '/account/stripe-connect' },
+        { click: '/account/connect' },
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}` },
@@ -87,6 +87,7 @@ describe('/account/connect/beneficial-owner', () => {
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
+      console.log(doc.toString())
       const row = doc.getElementById(user.owner.ownerid)
       assert.strictEqual(row.tag, 'tbody')
     })
