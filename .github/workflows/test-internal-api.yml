@@ -19,7 +19,7 @@ jobs:
         npm install localtunnel mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
-        node node_modules/mocha/bin/mocha src --timeout 120000 --slow 120000 || exit 1
+        node node_modules/mocha/bin/mocha src --timeout 480000 --slow 480000 || exit 1
       env:
         NODE_ENV: testing
         FAST_START: true
