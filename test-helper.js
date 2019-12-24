@@ -5,7 +5,6 @@ global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
 const fs = require('fs')
-const localTunnel = require('localtunnel')
 const packageJSON = require('./package.json')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
@@ -130,22 +129,12 @@ before(async () => {
     } catch (error) {
     }
   }
+  const ngrok = require('ngrok')
   while (!tunnel) {
     try {
-      tunnel = await localTunnel({ 
-        port: process.env.PORT,
-        host: 'http://localtunnel.me',
-        local_https: false
-      })
-      tunnel.on('error', async () => {
-        tunnel = await localTunnel({ 
-          port: process.env.PORT,
-          host: 'http://localtunnel.me',
-          local_https: false
-        })
-        global.dashboardServer = tunnel.url
-        global.domain = tunnel.url.split('://')[1]
-      })
+      tunnel = ngrok.connect(process.env.PORT)
+      global.dashboardServer = tunnel
+      global.domain = tunnel.split('://')[1]
     } catch (error) {
       continue
     }
@@ -189,7 +178,6 @@ after (async () => {
     }
     accounts = await stripe.accounts.list(stripeKey)
   }  
-  return callback()
 })
 
 const helperRoutes = require('./test-helper-routes.js')
