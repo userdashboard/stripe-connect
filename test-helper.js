@@ -132,7 +132,7 @@ before(async () => {
   const ngrok = require('ngrok')
   while (!tunnel) {
     try {
-      tunnel = ngrok.connect(process.env.PORT)
+      tunnel = await ngrok.connect(process.env.PORT)
       if (!tunnel) {
         continue
       }
