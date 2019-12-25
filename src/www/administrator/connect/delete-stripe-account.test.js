@@ -135,19 +135,21 @@ describe('/administrator/connect/delete-stripe-account', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#administrator-menu-container' },
-        { click: '/adminsitrator/connect' },
+        { click: '/administrator/connect' },
         { click: '/administrator/connect/stripe-accounts' },
         { click: `/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
-      await req.post()
+      const a = await req.post()
+      console.log(a.toString())
       const req2 = TestHelper.createRequest(`/api/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req2.account = administrator.account
       req2.session = administrator.session
       let errorMessage
       try {
-        await req2.get()
+        const x = await req2.get()
+        console.log(x)
       } catch (error) {
         errorMessage = error.message
       }

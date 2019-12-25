@@ -65,7 +65,7 @@ describe('/administrator/connect/stripe-accounts', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#administrator-menu-container' },
-        { click: '/adminsitrator/connect' },
+        { click: '/administrator/connect' },
         { click: '/administrator/connect/stripe-accounts' }
       ]
       const page = await req.get()
