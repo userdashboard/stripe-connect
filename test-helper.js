@@ -136,7 +136,7 @@ before(async () => {
       if (!tunnel) {
         continue
       }
-      global.dashboardServer = tunnel
+      global.dashboardServer = tunnel.replace('https://', 'http://')
       global.domain = tunnel.split('://')[1]
     } catch (error) {
       continue
