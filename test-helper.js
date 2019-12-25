@@ -157,6 +157,11 @@ before(async () => {
   for (const x in TestHelper) {
     module.exports[x] = TestHelper[x]
   }
+  module.exports.createRequest = (rawURL, method) => {
+    const req = TestHelper.createRequest(rawURL, method)
+    req.stripeKey = stripeKey
+    return req
+  }
   connect = require('./index.js')
 })
 
@@ -189,11 +194,6 @@ beforeEach((callback) => {
   return callback()
 })
 
-module.exports.createRequest = (rawURL, method) => {
-  const req = TestHelper.createRequest(rawURL, method)
-  req.stripeKey = stripeKey
-  return req
-}
 
 async function createStripeAccount (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
