@@ -65,7 +65,7 @@ describe('/administrator/connect', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#administrator-menu-container' },
-        { click: '/administrator/stripe-connect' }
+        { click: '/adminsitrator/connect' }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)

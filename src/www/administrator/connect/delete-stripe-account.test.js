@@ -135,7 +135,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#administrator-menu-container' },
-        { click: '/administrator/stripe-connect' },
+        { click: '/adminsitrator/connect' },
         { click: '/administrator/connect/stripe-accounts' },
         { click: `/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },

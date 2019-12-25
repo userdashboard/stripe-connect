@@ -172,7 +172,7 @@ describe('/administrator/connect/payouts', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#administrator-menu-container' },
-        { click: '/administrator/stripe-connect' },
+        { click: '/adminsitrator/connect' },
         { click: '/administrator/connect/payouts' }
       ]
       const page = await req.get()

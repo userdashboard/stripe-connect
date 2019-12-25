@@ -100,7 +100,7 @@ describe('/administrator/connect/stripe-account', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#administrator-menu-container' },
-        { click: '/administrator/stripe-connect' },
+        { click: '/adminsitrator/connect' },
         { click: '/administrator/connect/stripe-accounts' },
         { click: `/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}` }
       ]

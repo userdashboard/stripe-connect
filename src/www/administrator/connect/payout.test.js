@@ -111,7 +111,7 @@ describe('/administrator/connect/payout', () => {
       req.filename = __filename
       req.screenshots = [
         { hover: '#administrator-menu-container' },
-        { click: '/administrator/stripe-connect' },
+        { click: '/adminsitrator/connect' },
         { click: '/administrator/connect/payouts' },
         { click: `/administrator/connect/payout?payoutid=${user.payout.id}` }
       ]
