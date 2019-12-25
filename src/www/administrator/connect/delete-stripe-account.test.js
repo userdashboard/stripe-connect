@@ -141,15 +141,13 @@ describe('/administrator/connect/delete-stripe-account', () => {
         { click: `/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
-      const a = await req.post()
-      console.log(a.toString())
+      await req.post()
       const req2 = TestHelper.createRequest(`/api/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req2.account = administrator.account
       req2.session = administrator.session
       let errorMessage
       try {
-        const x = await req2.get()
-        console.log(x)
+        await req2.get()
       } catch (error) {
         errorMessage = error.message
       }
