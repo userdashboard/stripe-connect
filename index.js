@@ -1,3 +1,5 @@
+console.log('ok')
+
 global.stripeAPIVersion = '2019-11-05'
 global.stripeJS = process.env.STRIPE_JS === 'false' ? false : parseInt(process.env.STRIPE_JS, 10)
 global.maximumStripeRetries = parseInt(process.env.MAXIMUM_STRIPE_RETRIES || '0', 10)
@@ -71,3 +73,4 @@ module.exports = {
   },
   MetaData: require('./src/meta-data.js')
 }
+console.log('ok1')

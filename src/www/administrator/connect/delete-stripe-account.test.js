@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 
 describe('/administrator/connect/delete-stripe-account', () => {
   describe('DeleteStripeAccount#BEFORE', () => {
-    it('should bind Stripe account to req', async () => {
+    it.only('should bind Stripe account to req', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -45,7 +45,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7997',
+        business_profile_mcc: '7997',   
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',
