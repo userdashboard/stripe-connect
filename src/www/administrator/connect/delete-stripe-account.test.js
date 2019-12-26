@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 
 describe('/administrator/connect/delete-stripe-account', () => {
   describe('DeleteStripeAccount#BEFORE', () => {
-    it.only('should bind Stripe account to req', async () => {
+    it('should bind Stripe account to req', async () => {
       const administrator = await TestHelper.createAdministrator()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
