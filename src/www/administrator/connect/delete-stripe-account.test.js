@@ -124,10 +124,6 @@ describe('/administrator/connect/delete-stripe-account', () => {
         { click: `/administrator/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
-      console.log('administrator deleting user')
-      console.log(JSON.stringify(administrator))
-      console.log('-----------')
-      console.log(JSON.stringify(user))
       await req.post()
       const req2 = TestHelper.createRequest(`/api/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req2.account = administrator.account
