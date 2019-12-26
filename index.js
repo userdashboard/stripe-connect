@@ -24,8 +24,6 @@ const countryNameIndex = {}
 for (const country of countryList) {
   countryNameIndex[country.code] = country.name
 }
-const fs = require('fs')
-const path = require('path')
 const countrySpecIndex = {}
 const countryCurrencyIndex = {}
 const kycRequirements = {}
@@ -65,7 +63,7 @@ module.exports = {
   countrySpecIndex: countrySpecIndex,
   countryCurrencyIndex: countryCurrencyIndex,
   kycRequirements: kycRequirements,
-  euCountries: ['AT', 'BE', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PT', 'SE', 'SI', 'SK'],
+  euCountries: ['AT', 'BE', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PL', 'PT', 'SE', 'SI', 'SK'],
   getMerchantCategoryCodes: (language) => {
     return merchantCategoryCodes[language || global.language] || merchantCategoryCodes.en
   },

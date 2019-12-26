@@ -38,12 +38,10 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
+  const removeList = []
   for (const countrySpec of connect.countrySpecs) {
     if (countrySpec.id !== req.data.stripeAccount.country) {
-      const countryContainer = doc.getElementById(`${countrySpec.id}-container`)
-      if (countryContainer) {
-        countryContainer.parentNode.removeChild(countryContainer)
-      }
+      removeList.push(`${countrySpec.id}-container`)
     }
   }
   dashboard.HTML.renderList(doc, connect.countrySpecs, 'country-option', 'country')
@@ -66,6 +64,10 @@ async function renderPage (req, res, messageTemplate) {
         dashboard.HTML.setSelectedOptionByValue(doc, field, req.body[field] || '')
       }
     }
+  }
+  for (const id of removeList) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }
