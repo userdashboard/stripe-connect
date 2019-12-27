@@ -101,6 +101,11 @@ async function renderPage (req, res) {
     } else {
       removeElements.push('remove-company-representative-link')
     }
+    if (req.data.stripeAccount.metadata.submitted) {
+      removeElements.push('add-account-opener-link', 'edit-account-opener-link')
+    } else if (req.data.stripeAccount.metadata.accountOpener) {
+      removeElements.push('add-account-opener-link')
+    }
   }
   if (req.data.stripeAccount.metadata.submitted) {
     removeElements.push('registration-container')

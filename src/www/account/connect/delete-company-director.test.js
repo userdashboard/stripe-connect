@@ -15,7 +15,7 @@ describe('/account/connect/delete-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-directorid')
+      assert.strictEqual(errorMessage, 'invalid-personid')
     })
 
     it('should reject submitted registration', async () => {
@@ -78,7 +78,7 @@ describe('/account/connect/delete-company-director', () => {
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitStripeAccount(user)
-      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.personid}`)
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -87,7 +87,7 @@ describe('/account/connect/delete-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-directorid')
+      assert.strictEqual(errorMessage, 'invalid-personid')
     })
 
     it('should require own Stripe account', async () => {
@@ -108,7 +108,7 @@ describe('/account/connect/delete-company-director', () => {
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const user2 = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.personid}`)
       req.account = user2.account
       req.session = user2.session
       let errorMessage
@@ -137,11 +137,11 @@ describe('/account/connect/delete-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.personid}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.director.directorid, user.director.directorid)
+      assert.strictEqual(req.data.director.personid, user.director.personid)
     })
   })
 
@@ -163,7 +163,7 @@ describe('/account/connect/delete-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.personid}`)
       req.account = user.account
       req.session = user.session
       const page = await req.get()
@@ -189,12 +189,12 @@ describe('/account/connect/delete-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.personid}`)
       req.account = user.account
       req.session = user.session
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.director.directorid)
+      const row = doc.getElementById(user.director.personid)
       assert.strictEqual(row.tag, 'tr')
     })
   })
@@ -217,7 +217,7 @@ describe('/account/connect/delete-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/delete-company-director?directorid=${user.director.personid}`)
       req.account = user.account
       req.session = user.session
       req.filename = __filename
@@ -227,8 +227,8 @@ describe('/account/connect/delete-company-director', () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/company-directors?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/company-director?directorid=${user.director.directorid}` },
-        { click: `/account/connect/delete-company-director?directorid=${user.director.directorid}` },
+        { click: `/account/connect/company-director?directorid=${user.director.personid}` },
+        { click: `/account/connect/delete-company-director?directorid=${user.director.personid}` },
         { fill: '#submit-form' }
       ]
       await req.post()

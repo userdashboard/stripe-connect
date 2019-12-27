@@ -1,7 +1,7 @@
 <!doctype html>
 <html navbar="/account/connect/navbar-company-director.html">
   <head>
-    <title>Delete ${director.directorid}</title>
+    <title>Delete ${director.personid}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="/public/pure-min.css" />
     <link rel="stylesheet" href="/public/content.css" />
@@ -9,7 +9,7 @@
     <base target="_top" href="/" />
   </head>
   <body>
-    <h1>Delete ${director.directorid}</h1>
+    <h1>Delete ${director.personid}</h1>
     <p>The director information will be deleted immediately and cannot be recovered.</p>
     <div id="message-container"></div>
     <table id="directors-table" class="pure-table object-table">
@@ -20,13 +20,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr id="${director.directorid}">
-          <td>${director.directorid}</td>
+        <tr id="${director.personid}">
+          <td>${director.personid}</td>
           <td>${director.relationship_director_first_name} ${director.relationship_director_last_name}</td>
         </tr>
       </thead>
     </table>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/delete-company-director?directorid=${director.directorid}">
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/delete-company-director?directorid=${director.personid}">
       <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
     </form>
   </body>

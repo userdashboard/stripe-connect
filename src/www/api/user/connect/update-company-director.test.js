@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/update-company-director', () => {
   describe('exceptions', () => {
-    describe('invalid-directorid', () => {
+    describe('invalid-personid', () => {
       it('missing querystring directorid', async () => {
         const user = await TestHelper.createUser()
         const person = TestHelper.nextIdentity()
@@ -24,7 +24,7 @@ describe('/api/user/connect/update-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-directorid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
 
       it('invalid querystring directorid', async () => {
@@ -46,7 +46,7 @@ describe('/api/user/connect/update-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-directorid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
     })
 
@@ -69,7 +69,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user2.account
         req.session = user2.session
         req.body = {
@@ -107,7 +107,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -145,7 +145,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -183,7 +183,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -219,7 +219,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -257,7 +257,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -293,7 +293,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -331,7 +331,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -367,7 +367,7 @@ describe('/api/user/connect/update-company-director', () => {
           relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -408,7 +408,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       const body = {
@@ -441,7 +441,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -476,7 +476,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -511,7 +511,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -547,7 +547,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -583,7 +583,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -619,7 +619,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -655,7 +655,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -693,7 +693,7 @@ describe('/api/user/connect/update-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -735,7 +735,7 @@ describe('/api/user/connect/update-company-director', () => {
       await req.post()
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       const director = directors[0]
-      const req2 = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${director.directorid}`)
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${director.personid}`)
       req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session

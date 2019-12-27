@@ -111,14 +111,14 @@
     </div>
   </body>
   <template id="owner-row">
-    <tr id="${owner.ownerid}">
-      <td><a href="/account/connect/edit-beneficial-owner?ownerid=${owner.ownerid}">${owner.ownerid}</a></td>
+    <tr id="${owner.personid}">
+      <td><a href="/account/connect/edit-beneficial-owner?ownerid=${owner.personid}">${owner.personid}</a></td>
       <td>${owner.relationship_owner_first_name} ${owner.relationship_owner_last_name}</td>
     </tr>
   </template>
   <template id="director-row">
-    <tr id="${director.directorid}">
-      <td><a href="/account/connect/edit-company-director?directorid=${director.directorid}">${director.directorid}</a></td>
+    <tr id="${director.personid}">
+      <td><a href="/account/connect/edit-company-director?directorid=${director.personid}">${director.personid}</a></td>
       <td>${director.relationship_director_first_name} ${director.relationship_director_last_name}</td>
     </tr>
   </template>

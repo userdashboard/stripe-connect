@@ -103,7 +103,7 @@ describe('/account/connect/edit-company-registration', () => {
         }
       })
     }
-  
+
     for (const country of connect.countrySpecs) {
       it('should update information (' + country.id + ')', async () => {
         const user = await TestHelper.createUser()
@@ -114,7 +114,7 @@ describe('/account/connect/edit-company-registration', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = postData[country.id] 
+        req.body = postData[country.id]
         if (connect.kycRequirements[country.id].company.indexOf('company.verification.document.front') > -1) {
           req.uploads = {
             company_verification_document_front: TestHelper['success_id_scan_back.png'],
@@ -265,7 +265,7 @@ const postData = {
     company_phone: '456-789-0123',
     company_tax_id: '00000000000'
   },
-  GB:{
+  GB: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
     company_address_city: 'London',
@@ -448,7 +448,7 @@ const postData = {
     company_name: 'Company',
     company_phone: '456-789-0123',
     company_tax_id: '00000000000'
-  }, 
+  },
   SG: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',

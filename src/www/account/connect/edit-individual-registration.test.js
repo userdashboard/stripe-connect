@@ -96,7 +96,7 @@ describe('/account/connect/edit-individual-registration', () => {
             for (const file in uploads) {
               req.uploads[file] = uploads[file]
             }
-          }  
+          }
           req.body = JSON.parse(body)
           if (req.body[field]) {
             delete (req.body[field])
@@ -112,7 +112,7 @@ describe('/account/connect/edit-individual-registration', () => {
         }
       })
     }
-  
+
     for (const country of connect.countrySpecs) {
       it('should update information (' + country.id + ')', async () => {
         const user = await TestHelper.createUser()
@@ -123,7 +123,7 @@ describe('/account/connect/edit-individual-registration', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = postData[country.id] 
+        req.body = postData[country.id]
         if (country.id !== 'JP') {
           req.body.individual_email = user.profile.contactEmail
           req.body.individual_first_name = user.profile.firstName
@@ -290,7 +290,7 @@ const postData = {
     individual_dob_year: '1950',
     individual_phone: '456-789-0123'
   },
-  GB:{
+  GB: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
     individual_address_city: 'London',
@@ -491,7 +491,7 @@ const postData = {
     individual_dob_month: '1',
     individual_dob_year: '1950',
     individual_phone: '456-789-0123'
-  }, 
+  },
   SG: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',

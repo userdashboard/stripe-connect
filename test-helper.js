@@ -165,7 +165,7 @@ before(async () => {
   connect = require('./index.js')
 })
 
-after (async () => {
+after(async () => {
   ngrok.kill()
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
@@ -180,7 +180,7 @@ after (async () => {
       await stripe.accounts.del(account.id, stripeKey)
     }
     accounts = await stripe.accounts.list(stripeKey)
-  }  
+  }
 })
 
 const helperRoutes = require('./test-helper-routes.js')
@@ -193,7 +193,6 @@ beforeEach((callback) => {
   global.webhooks = []
   return callback()
 })
-
 
 async function createStripeAccount (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
@@ -284,7 +283,7 @@ async function createBeneficialOwner (user, body, uploads) {
     return stripeEvent.data.object.id === user.stripeAccount.id &&
            owners &&
            owners.length &&
-           owners[owners.length - 1].ownerid === owner.ownerid
+           owners[owners.length - 1].personid === owner.personid
   })
   user.owner = owner
   return owner
@@ -302,7 +301,7 @@ async function createCompanyDirector (user, body, uploads) {
     return stripeEvent.data.object.id === user.stripeAccount.id &&
            directors &&
            directors.length &&
-           directors[directors.length - 1].directorid === director.directorid
+           directors[directors.length - 1].personid === director.personid
   })
   user.director = director
   return director

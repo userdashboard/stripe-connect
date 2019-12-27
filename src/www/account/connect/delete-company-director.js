@@ -7,8 +7,8 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
-  if (!req.query || !req.query.directorid) {
-    throw new Error('invalid-directorid')
+  if (!req.query || !req.query.personid) {
+    throw new Error('invalid-personid')
   }
   const director = await global.api.user.connect.CompanyDirector.get(req)
   req.query.stripeid = director.stripeid

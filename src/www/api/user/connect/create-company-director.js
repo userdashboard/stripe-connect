@@ -129,12 +129,15 @@ module.exports = {
     }
     let directors = await global.api.user.connect.CompanyDirectors.get(req)
     directors = directors || []
-    const id = await dashboard.UUID.generateID()
+    const personInfo = {
+      relationship: {
+        director: true
+      }
+    }
+    const person = await stripe.accounts.createPerson(req.query.stripeid, personInfo, req.stripeKey)
     const director = {
-      directorid: `director_${id}`,
-      object: 'director',
-      created: dashboard.Timestamp.now,
-      stripeid: req.query.stripeid
+      directorid: person.id,
+      object: 'director'
     }
     for (const field of requiredFields) {
       const posted = field.split('.').join('_')
@@ -154,7 +157,7 @@ module.exports = {
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       await stripeCache.update(accountNow)
-      await dashboard.Storage.write(`${req.appid}/map/directorid/stripeid/${director.directorid}`, req.query.stripeid)
+      await dashboard.Storage.write(`${req.appid}/map/directorid/stripeid/${director.personid}`, req.query.stripeid)
       req.success = true
       return director
     } catch (error) {

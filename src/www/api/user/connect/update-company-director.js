@@ -6,8 +6,8 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
-    if (!req.query || !req.query.directorid) {
-      throw new Error('invalid-directorid')
+    if (!req.query || !req.query.personid) {
+      throw new Error('invalid-personid')
     }
     if (!req.body) {
       throw new Error('relationship_director_first_name')
@@ -143,7 +143,7 @@ module.exports = {
     let directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
     if (directors && directors.length) {
       for (const i in directors) {
-        if (directors[i].directorid === req.query.directorid) {
+        if (directors[i].personid === req.query.personid) {
           directors[i] = director
           break
         }

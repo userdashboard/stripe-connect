@@ -114,8 +114,8 @@ describe('/api/user/connect/company-directors', () => {
       req.session = user.session
       const directors = await req.get()
       assert.strictEqual(directors.length, global.pageSize)
-      assert.strictEqual(directors[0].directorid, director2.directorid)
-      assert.strictEqual(directors[1].directorid, director1.directorid)
+      assert.strictEqual(directors[0].personid, director2.personid)
+      assert.strictEqual(directors[1].personid, director1.personid)
     })
   })
 })

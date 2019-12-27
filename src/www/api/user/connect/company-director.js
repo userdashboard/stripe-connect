@@ -4,12 +4,12 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   get: async (req) => {
-    if (!req.query || !req.query.directorid) {
-      throw new Error('invalid-directorid')
+    if (!req.query || !req.query.personid) {
+      throw new Error('invalid-personid')
     }
-    const stripeid = await dashboard.Storage.read(`${req.appid}/map/directorid/stripeid/${req.query.directorid}`)
+    const stripeid = await dashboard.Storage.read(`${req.appid}/map/directorid/stripeid/${req.query.personid}`)
     if (!stripeid) {
-      throw new Error('invalid-directorid')
+      throw new Error('invalid-personid')
     }
     req.query.stripeid = stripeid
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
@@ -21,13 +21,13 @@ module.exports = {
     }
     const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
     for (const director of directors) {
-      if (director.directorid === req.query.directorid) {
+      if (director.personid === req.query.personid) {
         if (director.personid) {
           return stripeCache.retrievePerson(director.personid, req.stripeKey)
         }
         return director
       }
     }
-    throw new Error('invalid-directorid')
+    throw new Error('invalid-personid')
   }
 }

@@ -1,7 +1,7 @@
 <!doctype html>
 <html template="false">
   <head>
-    <title>Edit ${director.directorid}</title>
+    <title>Edit ${director.personid}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="/public/pure-min.css" />
     <link rel="stylesheet" href="/public/content.css" />
@@ -15,9 +15,9 @@
     </script>
   </head>
   <body class="entry">
-    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-company-director?directorid=${director.directorid}">
+    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-company-director?directorid=${director.personid}">
       <input type="hidden" id="token" name="token" />
-      <h1>Edit ${director.directorid}</h1>
+      <h1>Edit ${director.personid}</h1>
       <div id="message-container"></div>
       <div id="form-container">
         <div class="pure-g">

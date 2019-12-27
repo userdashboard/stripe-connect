@@ -69,7 +69,7 @@ module.exports = {
           }
         }
         try {
-          const person = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
+          const person = await stripe.accounts.upatePerson(req.query.stripeid, owner.personid, ownerInfo, req.stripeKey)
           await stripeCache.update(person)
           persons.push({ personid: person.id })
         } catch (error) {

@@ -88,7 +88,7 @@ module.exports = {
       } else {
         const int = parseInt(req.body[field], 10)
         if (!int && int !== 0) {
-          throw new Error(`invalid-${field}`)  
+          throw new Error(`invalid-${field}`)
         }
         if (int.toString() !== req.body[field]) {
           if (req.body[field].startsWith('0')) {

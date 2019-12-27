@@ -15,7 +15,7 @@ describe('/account/connect/beneficial-owner', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-ownerid')
+      assert.strictEqual(errorMessage, 'invalid-personid')
     })
 
     it('should bind owner to req', async () => {
@@ -41,11 +41,11 @@ describe('/account/connect/beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.personid}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.owner.ownerid, user.owner.ownerid)
+      assert.strictEqual(req.data.owner.personid, user.owner.personid)
     })
   })
 
@@ -73,7 +73,7 @@ describe('/account/connect/beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.filename = __filename
@@ -83,11 +83,11 @@ describe('/account/connect/beneficial-owner', () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/beneficial-owner?ownerid=${user.owner.ownerid}` }
+        { click: `/account/connect/beneficial-owner?ownerid=${user.owner.personid}` }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.owner.ownerid)
+      const row = doc.getElementById(user.owner.personid)
       assert.strictEqual(row.tag, 'tbody')
     })
   })

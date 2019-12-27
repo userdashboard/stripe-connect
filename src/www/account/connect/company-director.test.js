@@ -15,7 +15,7 @@ describe('/account/connect/company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-directorid')
+      assert.strictEqual(errorMessage, 'invalid-personid')
     })
 
     it('should bind director to req', async () => {
@@ -35,11 +35,11 @@ describe('/account/connect/company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.personid}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.director.directorid, user.director.directorid)
+      assert.strictEqual(req.data.director.personid, user.director.personid)
     })
   })
 
@@ -61,7 +61,7 @@ describe('/account/connect/company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.directorid}`)
+      const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.personid}`)
       req.account = user.account
       req.session = user.session
       req.filename = __filename
@@ -71,11 +71,11 @@ describe('/account/connect/company-director', () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/company-directors?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/company-director?directorid=${user.director.directorid}` }
+        { click: `/account/connect/company-director?directorid=${user.director.personid}` }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.director.directorid)
+      const row = doc.getElementById(user.director.personid)
       assert.strictEqual(row.tag, 'tbody')
     })
   })

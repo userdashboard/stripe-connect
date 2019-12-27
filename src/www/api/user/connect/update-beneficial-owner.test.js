@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/update-beneficial-owner', () => {
   describe('exceptions', () => {
-    describe('invalid-ownerid', () => {
+    describe('invalid-personid', () => {
       it('missing querystring ownerid', async () => {
         const user = await TestHelper.createUser()
         const person = TestHelper.nextIdentity()
@@ -30,7 +30,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-ownerid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
 
       it('invalid querystring ownerid', async () => {
@@ -58,7 +58,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-ownerid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
     })
 
@@ -87,7 +87,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user2.account
         req.session = user2.session
         req.body = {
@@ -137,7 +137,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -187,7 +187,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -237,7 +237,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -285,7 +285,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -335,7 +335,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -383,7 +383,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -433,7 +433,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -483,7 +483,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -533,7 +533,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -583,7 +583,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -631,7 +631,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -681,7 +681,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -729,7 +729,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -779,7 +779,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -827,7 +827,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -880,7 +880,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       const body = {
@@ -927,7 +927,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -976,7 +976,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1025,7 +1025,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1068,7 +1068,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1111,7 +1111,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1154,7 +1154,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1198,7 +1198,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1242,7 +1242,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1285,7 +1285,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1328,7 +1328,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1371,7 +1371,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1414,7 +1414,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1457,7 +1457,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1500,7 +1500,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1545,7 +1545,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -1599,7 +1599,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       await req.post()
       const owners = await global.api.user.connect.BeneficialOwners.get(req)
       const owner = owners[0]
-      const req2 = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?ownerid=${owner.ownerid}`)
+      const req2 = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?ownerid=${owner.personid}`)
       req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session

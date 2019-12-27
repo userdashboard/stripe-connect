@@ -63,7 +63,7 @@ describe('/account/connect/beneficial-owners', () => {
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.owners[0].ownerid, user.owner.ownerid)
+      assert.strictEqual(req.data.owners[0].personid, user.owner.personid)
     })
   })
 
@@ -104,7 +104,7 @@ describe('/account/connect/beneficial-owners', () => {
       req.session = user.session
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.owner.ownerid)
+      const row = doc.getElementById(user.owner.personid)
       assert.strictEqual(row.tag, 'tr')
     })
 

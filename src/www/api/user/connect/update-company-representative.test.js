@@ -3013,7 +3013,7 @@ const postData = {
     relationship_representative_dob_year: '1950',
     relationship_representative_phone: '456-789-0123'
   },
-  GB:{
+  GB: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
     relationship_representative_address_city: 'London',
@@ -3214,7 +3214,7 @@ const postData = {
     relationship_representative_dob_month: '1',
     relationship_representative_dob_year: '1950',
     relationship_representative_phone: '456-789-0123'
-  }, 
+  },
   SG: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',

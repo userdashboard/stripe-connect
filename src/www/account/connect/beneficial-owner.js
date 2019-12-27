@@ -6,8 +6,8 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
-  if (!req.query || !req.query.ownerid) {
-    throw new Error('invalid-ownerid')
+  if (!req.query || !req.query.personid) {
+    throw new Error('invalid-personid')
   }
   const owner = await global.api.user.connect.BeneficialOwner.get(req)
   req.query.stripeid = owner.stripeid

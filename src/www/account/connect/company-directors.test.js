@@ -57,7 +57,7 @@ describe('/account/connect/company-directors', () => {
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.directors[0].directorid, user.director.directorid)
+      assert.strictEqual(req.data.directors[0].personid, user.director.personid)
     })
   })
 
@@ -92,7 +92,7 @@ describe('/account/connect/company-directors', () => {
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.director.directorid)
+      const row = doc.getElementById(user.director.personid)
       assert.strictEqual(row.tag, 'tr')
     })
 

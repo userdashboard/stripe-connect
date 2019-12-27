@@ -126,8 +126,8 @@ describe('/api/user/connect/beneficial-owners', () => {
       req.session = user.session
       const owners = await req.get()
       assert.strictEqual(owners.length, global.pageSize)
-      assert.strictEqual(owners[0].ownerid, owner2.ownerid)
-      assert.strictEqual(owners[1].ownerid, owner1.ownerid)
+      assert.strictEqual(owners[0].personid, owner2.personid)
+      assert.strictEqual(owners[1].personid, owner1.personid)
     })
   })
 })

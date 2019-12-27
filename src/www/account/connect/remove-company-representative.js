@@ -47,7 +47,7 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   try {
-    await global.api.user.connect.ResetCompanyRepresentative.patch(req)
+    await global.api.user.connect.DeleteCompanyRepresentative.delete(req)
     if (req.success) {
       return renderPage(req, res, 'success')
     }

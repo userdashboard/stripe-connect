@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/beneficial-owner', () => {
   describe('exceptions', () => {
-    describe('invalid-ownerid', () => {
+    describe('invalid-personid', () => {
       it('missing querystring ownerid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/beneficial-owner')
@@ -16,7 +16,7 @@ describe('/api/user/connect/beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-ownerid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
 
       it('invalid querystring ownerid', async () => {
@@ -30,7 +30,7 @@ describe('/api/user/connect/beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-ownerid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
     })
 
@@ -59,7 +59,7 @@ describe('/api/user/connect/beneficial-owner', () => {
           relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?ownerid=${user.owner.personid}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
@@ -97,7 +97,7 @@ describe('/api/user/connect/beneficial-owner', () => {
         relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?ownerid=${user.owner.ownerid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?ownerid=${user.owner.personid}`)
       req.account = user.account
       req.session = user.session
       const owner = await req.get()

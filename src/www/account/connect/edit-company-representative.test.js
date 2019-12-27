@@ -4,7 +4,7 @@ const connect = require('../../../../index.js')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/edit-company-representative', () => {
-  describe('EditIndividualRegistration#BEFORE', () => {
+  describe('EditCompanyRepresentative#BEFORE', () => {
     it('should reject invalid registration', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/edit-company-representative?stripeid=invalid')
@@ -38,7 +38,7 @@ describe('/account/connect/edit-company-representative', () => {
     })
   })
 
-  describe('EditIndividualRegistration#GET', () => {
+  describe('EditCompanyRepresentative#GET', () => {
     for (const country of connect.countrySpecs) {
       it('should present the form (' + country.id + ')', async () => {
         const user = await TestHelper.createUser()
@@ -57,7 +57,7 @@ describe('/account/connect/edit-company-representative', () => {
     }
   })
 
-  describe('EditIndividualRegistration#POST', () => {
+  describe('EditCompanyRepresentative#POST', () => {
     for (const country of connect.countrySpecs) {
       it('should reject invalid fields (' + country.id + ')', async () => {
         const user = await TestHelper.createUser()
@@ -96,7 +96,7 @@ describe('/account/connect/edit-company-representative', () => {
             for (const file in uploads) {
               req.uploads[file] = uploads[file]
             }
-          }  
+          }
           req.body = JSON.parse(body)
           if (req.body[field]) {
             delete (req.body[field])
@@ -112,7 +112,7 @@ describe('/account/connect/edit-company-representative', () => {
         }
       })
     }
-  
+
     for (const country of connect.countrySpecs) {
       it('should update information (' + country.id + ')', async () => {
         const user = await TestHelper.createUser()
@@ -123,7 +123,7 @@ describe('/account/connect/edit-company-representative', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = postData[country.id] 
+        req.body = postData[country.id]
         if (country.id !== 'JP') {
           req.body.relationship_representative_email = user.profile.contactEmail
           req.body.relationship_representative_first_name = user.profile.firstName
@@ -290,7 +290,7 @@ const postData = {
     relationship_representative_dob_year: '1950',
     relationship_representative_phone: '456-789-0123'
   },
-  GB:{
+  GB: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
     relationship_representative_address_city: 'London',
@@ -491,7 +491,7 @@ const postData = {
     relationship_representative_dob_month: '1',
     relationship_representative_dob_year: '1950',
     relationship_representative_phone: '456-789-0123'
-  }, 
+  },
   SG: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',

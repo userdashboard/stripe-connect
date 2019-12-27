@@ -45,7 +45,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
         type: 'individual'
       })
       await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7997',   
+        business_profile_mcc: '7997',
         business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
         individual_address_city: 'New York',
         individual_address_line1: '285 Fulton St',

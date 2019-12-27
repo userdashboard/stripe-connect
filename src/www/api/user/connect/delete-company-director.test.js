@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/delete-company-director', () => {
   describe('exceptions', () => {
-    describe('invalid-directorid', () => {
+    describe('invalid-personid', () => {
       it('missing querystring directorid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/delete-company-director')
@@ -16,7 +16,7 @@ describe('/api/user/connect/delete-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-directorid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
 
       it('invalid querystring directorid', async () => {
@@ -30,7 +30,7 @@ describe('/api/user/connect/delete-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-directorid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
     })
 
@@ -53,7 +53,7 @@ describe('/api/user/connect/delete-company-director', () => {
           relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.personid}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
@@ -85,7 +85,7 @@ describe('/api/user/connect/delete-company-director', () => {
         relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
         relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.directorid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?directorid=${director.personid}`)
       req.account = user.account
       req.session = user.session
       const deleted = await req.delete()

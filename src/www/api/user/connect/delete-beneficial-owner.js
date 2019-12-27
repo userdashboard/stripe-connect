@@ -7,8 +7,8 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   delete: async (req) => {
-    if (!req.query || !req.query.ownerid) {
-      throw new Error('invalid-ownerid')
+    if (!req.query || !req.query.personid) {
+      throw new Error('invalid-personid')
     }
     const owner = await global.api.user.connect.BeneficialOwner.get(req)
     req.query.stripeid = owner.stripeid
@@ -18,7 +18,7 @@ module.exports = {
     }
     const owners = await global.api.user.connect.BeneficialOwners.get(req)
     for (const i in owners) {
-      if (owners[i].ownerid !== req.query.ownerid) {
+      if (owners[i].personid !== req.query.personid) {
         continue
       }
       owners.splice(i, 1)
@@ -32,7 +32,7 @@ module.exports = {
     try {
       const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
       await stripeCache.update(accountNow)
-      await dashboard.Storage.deleteFile(`${req.appid}/map/ownerid/stripeid/${req.query.ownerid}`)
+      await dashboard.Storage.deleteFile(`${req.appid}/map/ownerid/stripeid/${req.query.personid}`)
       req.success = true
       return true
     } catch (error) {

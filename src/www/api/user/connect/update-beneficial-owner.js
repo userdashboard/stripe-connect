@@ -6,8 +6,8 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
-    if (!req.query || !req.query.ownerid) {
-      throw new Error('invalid-ownerid')
+    if (!req.query || !req.query.personid) {
+      throw new Error('invalid-personid')
     }
     if (!req.body) {
       throw new Error('relationship_owner_first_name')
@@ -181,7 +181,7 @@ module.exports = {
       owner.token = req.body.token
     }
     for (const i in owners) {
-      if (owners[i].ownerid === req.query.ownerid) {
+      if (owners[i].personid === req.query.personid) {
         owners[i] = owner
         break
       }

@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
+const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/update-payment-information', () => {
@@ -1250,7 +1251,7 @@ const postData = {
   SE: {
     currency: 'eur',
     iban: 'SE89370400440532013000'
-  }, 
+  },
   SG: {
     account_number: '000123456',
     bank_code: '1100',

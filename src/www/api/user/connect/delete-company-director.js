@@ -7,8 +7,8 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   delete: async (req) => {
-    if (!req.query || !req.query.directorid) {
-      throw new Error('invalid-directorid')
+    if (!req.query || !req.query.personid) {
+      throw new Error('invalid-personid')
     }
     const director = await global.api.user.connect.CompanyDirector.get(req)
     req.query.stripeid = director.stripeid
@@ -18,7 +18,7 @@ module.exports = {
     }
     const directors = await global.api.user.connect.CompanyDirectors.get(req)
     for (const i in directors) {
-      if (directors[i].directorid !== req.query.directorid) {
+      if (directors[i].personid !== req.query.personid) {
         continue
       }
       directors.splice(i, 1)
@@ -32,7 +32,7 @@ module.exports = {
     try {
       const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
       await stripeCache.update(accountNow)
-      await dashboard.Storage.deleteFile(`${req.appid}/map/directorid/stripeid/${req.query.directorid}`)
+      await dashboard.Storage.deleteFile(`${req.appid}/map/directorid/stripeid/${req.query.personid}`)
       req.success = true
       return true
     } catch (error) {

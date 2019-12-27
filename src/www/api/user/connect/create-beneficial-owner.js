@@ -151,12 +151,15 @@ module.exports = {
     }
     let owners = await global.api.user.connect.BeneficialOwners.get(req)
     owners = owners || []
-    const id = await dashboard.UUID.generateID()
+    const personInfo = {
+      relationship: {
+        owner: true
+      }
+    }
+    const person = await stripe.accounts.createPerson(req.query.stripeid, personInfo, req.stripekey)
     const owner = {
-      ownerid: `owner_${id}`,
-      object: 'owner',
-      created: dashboard.Timestamp.now,
-      stripeid: req.query.stripeid
+      ownerid: person.id,
+      object: 'owner'
     }
     for (const field of requiredFields) {
       const posted = field.split('.').join('_')
@@ -194,7 +197,7 @@ module.exports = {
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       await stripeCache.update(accountNow)
-      await dashboard.Storage.write(`${req.appid}/map/ownerid/stripeid/${owner.ownerid}`, req.query.stripeid)
+      await dashboard.Storage.write(`${req.appid}/map/ownerid/stripeid/${owner.personid}`, req.query.stripeid)
       req.success = true
       return owner
     } catch (error) {

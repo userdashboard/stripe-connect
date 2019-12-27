@@ -2,17 +2,17 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/reset-company-representative', () => {
+describe('/api/user/connect/delete-company-representative', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/reset-company-representative')
+        const req = TestHelper.createRequest('/api/user/connect/delete-company-representative')
         req.account = user.account
         req.session = user.session
         let errorMessage
         try {
-          await req.patch(req)
+          await req.delete(req)
         } catch (error) {
           errorMessage = error.message
         }
@@ -21,12 +21,12 @@ describe('/api/user/connect/reset-company-representative', () => {
 
       it('invalid querystring stripeid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/reset-company-representative?stripeid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/delete-company-representative?stripeid=invalid')
         req.account = user.account
         req.session = user.session
         let errorMessage
         try {
-          await req.patch(req)
+          await req.delete(req)
         } catch (error) {
           errorMessage = error.message
         }
@@ -41,12 +41,12 @@ describe('/api/user/connect/reset-company-representative', () => {
           country: 'US',
           type: 'individual'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/reset-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
         let errorMessage
         try {
-          await req.patch(req)
+          await req.delete(req)
         } catch (error) {
           errorMessage = error.message
         }
@@ -61,12 +61,12 @@ describe('/api/user/connect/reset-company-representative', () => {
           country: 'US',
           type: 'individual'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/reset-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
         let errorMessage
         try {
-          await req.patch(req)
+          await req.delete(req)
         } catch (error) {
           errorMessage = error.message
         }
@@ -82,12 +82,12 @@ describe('/api/user/connect/reset-company-representative', () => {
           type: 'company'
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/reset-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
         try {
-          await req.patch(req)
+          await req.delete(req)
         } catch (error) {
           errorMessage = error.message
         }
@@ -125,10 +125,10 @@ describe('/api/user/connect/reset-company-representative', () => {
         relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.setCompanyRepresentative(user)
-      const req = TestHelper.createRequest(`/api/user/connect/reset-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.patch()
+      const accountNow = await req.delete()
       assert.strictEqual(accountNow.requirements.currently_due.indexOf('relationship.representative') > -1, true)
     })
   })
@@ -173,10 +173,10 @@ describe('/api/user/connect/reset-company-representative', () => {
       req3.account = user.account
       req3.session = user.session
       await req3.post()
-      const req4 = TestHelper.createRequest(`/api/user/connect/reset-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req4 = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
       req4.account = user.account
       req4.session = user.session
-      const accountNow = await req4.patch()
+      const accountNow = await req4.delete()
       assert.strictEqual(accountNow.requirements.currently_due.indexOf('relationship.representative') > -1, true)
     })
   })

@@ -69,7 +69,7 @@ module.exports = {
           }
         }
         try {
-          const person = await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripeKey)
+          const person = await stripe.accounts.updatePerson(req.query.stripeid, director.personid, directorInfo, req.stripeKey)
           persons.push({ personid: person.id })
         } catch (error) {
           const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
