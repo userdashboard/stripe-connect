@@ -13,81 +13,33 @@ module.exports = {
     if (stripeAccount.metadata.submitted ||
       stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.accountid !== req.account.accountid ||
-      (stripeAccount.company && stripeAccount.company.directors_provided) ||
-      connect.kycRequirements[stripeAccount.country].companyDirector === undefined) {
+      (stripeAccount.company && stripeAccount.company.directors_provided)) {
       throw new Error('invalid-stripe-account')
     }
-    const persons = []
-    const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
-    if (directors && directors.length) {
-      for (const director of directors) {
-        const directorInfo = {}
-        if (global.stripeJS === 3) {
-          directorInfo.person_token = director.token
-        } else {
-          for (const field in director) {
-            if (!field.startsWith('relationship_director_')) {
-              continue
-            }
-            if (field.startsWith('relationship_director_address_')) {
-              const property = field.substring('relationship_director_address_'.length)
-              directorInfo.address = directorInfo.address || {}
-              directorInfo.address[property] = director[field]
-              continue
-            } else if (field.startsWith('relationship_director_verification_document_')) {
-              if (global.stripeJS) {
-                continue
-              }
-              const property = field.substring('relationship_director_verification_document_'.length)
-              directorInfo.verification = directorInfo.verification || {}
-              directorInfo.verification.document = directorInfo.verification.document || {}
-              directorInfo.verification.document[property] = director[field]
-            } else if (field.startsWith('relationship_director_verification_additional_document_')) {
-              if (global.stripeJS) {
-                continue
-              }
-              const property = field.substring('relationship_director_verification_additional_document_'.length)
-              directorInfo.verification = directorInfo.verification || {}
-              directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
-              directorInfo.verification.additional_document[property] = director[field]
-            } else if (field.startsWith('relationship_director_dob_')) {
-              const property = field.substring('relationship_director_dob_'.length)
-              directorInfo.dob = directorInfo.dob || {}
-              directorInfo.dob[property] = director[field]
-            } else {
-              if (field === 'relationship_director_relationship_title') {
-                directorInfo.relationship = directorInfo.relationship || {}
-                directorInfo.relationship.title = director[field]
-                continue
-              }
-              const property = field.substring('relationship_director_'.length)
-              if (property === 'relationship_title' || property === 'executive' || property === 'director') {
-                continue
-              }
-              directorInfo[property] = director[field]
-            }
-          }
-        }
-        try {
-          const person = await stripe.accounts.updatePerson(req.query.stripeid, director.personid, directorInfo, req.stripeKey)
-          persons.push({ personid: person.id })
-        } catch (error) {
-          const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
-          throw new Error(errorMessage)
-        }
-      }
+    const countrySpec = connect.countrySpecIndex[stripeAccount.country]
+    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
+      throw new Error('invalid-stripe-account')
     }
     const accountInfo = {
-      metadata: {},
-      business_profile: {},
+      metadata: {
+        companyDirectorTemplate: null
+      },
       company: {
         directors_provided: true
       }
     }
-    connect.MetaData.store(stripeAccount.metadata, 'directors', persons)
-    for (const field in stripeAccount.metadata) {
-      if (field.startsWith('directors')) {
-        accountInfo.metadata[field] = stripeAccount.metadata[field]
+    if (stripeAccount.metadata.companyDirectorTemplate) {
+      while (true) {
+        try {
+          await stripe.accounts.deletePerson(req.query.stripeid, stripeAccount.metadata.companyDirectorTemplate, req.stripeKey)
+          req.success = true
+          await stripeCache.update(stripeAccount)
+        } catch (error) {
+          if (error.raw && error.raw.code === 'lock_timeout') {
+            continue
+          }
+          throw new Error('unknown-error')
+        }
       }
     }
     while (true) {

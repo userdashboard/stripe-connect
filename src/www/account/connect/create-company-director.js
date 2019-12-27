@@ -17,7 +17,8 @@ async function beforeRequest (req) {
     stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  if (!connect.kycRequirements[stripeAccount.country].companyDirector) {
+  const countrySpec = connect.countrySpecIndex[stripeAccount.country]
+  if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
     throw new Error('invalid-stripe-account')
   }
   const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
@@ -45,11 +46,11 @@ async function renderPage (req, res, messageTemplate) {
     'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
     'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyDirector
-  if (requiredFields.indexOf('relationship.director.relationship_title') === -1) {
+  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyDirectorTemplate)
+  if (requirements.currently_due.indexOf('relationship.director.relationship_title') === -1) {
     removeElements.push('relationship_director_relationship_title-container')
   }
-  if (requiredFields.indexOf('relationship.director.email') === -1) {
+  if (requirements.currently_due.indexOf('relationship.director.email') === -1) {
     removeElements.push('relationship_director_email')
   }
   if (messageTemplate) {
@@ -86,8 +87,8 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyDirector
-  for (const field of requiredFields) {
+  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyDirectorTemplate)
+  for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {
       if (field === 'relationship.director.verification.front' ||

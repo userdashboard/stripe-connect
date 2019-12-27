@@ -15,38 +15,18 @@ module.exports = {
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration')
-    if (!registration) {
-      throw new Error('invalid-registration')
-    }
     const representativeInfo = {
     }
     if (global.stripeJS === 3) {
-      representativeInfo.person_token = registration.representativeToken
+      representativeInfo.person_token = req.body.representativeToken
       for (const field in registration) {
         if (!field.startsWith('relationship_representative_')) {
           continue
         }
-        delete (registration[field])
+        delete (req.body[field])
       }
     } else {
       representativeInfo.relationship = {}
-      representativeInfo.relationship.representative = true
-      if (registration.relationship_representative_relationship_executive) {
-        representativeInfo.relationship.executive = true
-      }
-      if (registration.relationship_representative_relationship_director) {
-        representativeInfo.relationship.director = true
-      }
-      if (registration.relationship_representative_relationship_owner) {
-        representativeInfo.relationship.owner = true
-      }
-      if (registration.relationship_representative_relationship_title) {
-        representativeInfo.relationship.title = registration.relationship_representative_relationship_title
-      }
-      if (registration.relationship_representative_percent_ownership) {
-        representativeInfo.relationship.percent_ownership = registration.relationship_representative_percent_ownership
-      }
       for (const field in registration) {
         if (!field.startsWith('relationship_representative_')) {
           continue
@@ -54,52 +34,61 @@ module.exports = {
         if (field.startsWith('relationship_representative_address_kanji_')) {
           const property = field.substring('relationship_representative_address_kanji_'.length)
           representativeInfo.address_kanji = representativeInfo.address_kanji || {}
-          representativeInfo.address_kanji[property] = registration[field]
+          representativeInfo.address_kanji[property] = req.body[field]
         } else if (field.startsWith('relationship_representative_address_kana_')) {
           const property = field.substring('relationship_representative_address_kana_'.length)
           representativeInfo.address_kana = representativeInfo.address_kana || {}
-          representativeInfo.address_kana[property] = registration[field]
+          representativeInfo.address_kana[property] = req.body[field]
         } else if (field.startsWith('relationship_representative_address_')) {
           const property = field.substring('relationship_representative_address_'.length)
           representativeInfo.address = representativeInfo.address || {}
-          representativeInfo.address[property] = registration[field]
+          representativeInfo.address[property] = req.body[field]
         } else if (field.startsWith('relationship_representative_verification_document_')) {
           const property = field.substring('relationship_representative_verification_document_'.length)
           representativeInfo.verification = representativeInfo.verification || {}
           representativeInfo.verification.document = representativeInfo.verification.document || {}
-          representativeInfo.verification.document[property] = registration[field]
+          representativeInfo.verification.document[property] = req.body[field]
         } else if (field.startsWith('relationship_representative_verification_additional_document_')) {
           const property = field.substring('relationship_representative_verification_additional_document_'.length)
           representativeInfo.verification = representativeInfo.verification || {}
           representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
-          representativeInfo.verification.additional_document[property] = registration[field]
+          representativeInfo.verification.additional_document[property] = req.body[field]
         } else if (field.startsWith('relationship_representative_dob_')) {
           const property = field.substring('relationship_representative_dob_'.length)
           representativeInfo.dob = representativeInfo.dob || {}
-          representativeInfo.dob[property] = registration[field]
+          representativeInfo.dob[property] = req.body[field]
         } else if (field === 'relationship_representative_relationship_title') {
-          representativeInfo.relationship.title = registration[field]
+          representativeInfo.relationship.title = req.body[field]
         } else {
           const property = field.substring('relationship_representative_'.length)
           if (property !== 'relationship_title' &&
               property !== 'relationship_executive' &&
               property !== 'percent_ownership' &&
               property !== 'relationship_director') {
-            representativeInfo[property] = registration[field]
+            representativeInfo[property] = req.body[field]
           }
         }
       }
+      representativeInfo.relationship.representative = true
+      if (req.body.relationship_representative_relationship_executive) {
+        representativeInfo.relationship.executive = true
+      }
+      if (req.body.relationship_representative_relationship_director) {
+        representativeInfo.relationship.director = true
+      }
+      if (req.body.relationship_representative_relationship_owner) {
+        representativeInfo.relationship.owner = true
+      }
+      if (req.body.relationship_representative_relationship_title) {
+        representativeInfo.relationship.title = req.body.relationship_representative_relationship_title
+      }
+      if (req.body.relationship_representative_percent_ownership) {
+        representativeInfo.relationship.percent_ownership = req.body.relationship_representative_percent_ownership
+      }
     }
-    const personInfo = {
-      relationship: {
-        representative: true
-      },
-      metadata: {}
-    }
-    connect.MetaData.store(personInfo.metadata, 'representative')
     let person
     try {
-      person = await stripe.accounts.createPerson(req.query.stripeid, personInfo, req.stripeKey)
+      person = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
       req.success = true
     } catch (error) {
       throw new Error('unknown-error')
@@ -109,7 +98,6 @@ module.exports = {
         representative: person.id
       }
     }
-    connect.MetaData.store(stripeAccount.metadata, 'registration', registration)
     while (true) {
       try {
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)

@@ -66,25 +66,24 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     removeElements.push('personal-address-container')
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].individual
-  if (requiredFields.indexOf('business_profile.mcc') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('business_profile.mcc') > -1) {
     const mccList = connect.getMerchantCategoryCodes(req.language)
     dashboard.HTML.renderList(doc, mccList, 'mcc-option', 'business_profile_mcc')
   }
-  if (requiredFields.indexOf('individual.address.state') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.address.state') > -1) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'individual_address_state')
   }
-  if (requiredFields.indexOf('individual.gender') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.gender') === -1) {
     removeElements.push('individual_gender-container')
   }
-  if (requiredFields.indexOf('individual.id_number') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.id_number') === -1) {
     removeElements.push('id_number-container')
   }
-  if (requiredFields.indexOf('individual.ssn_last_4') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.ssn_last_4') === -1) {
     removeElements.push('ssn_last_4-container')
   }
-  if (requiredFields.indexOf('individual.verification.additional_document.front') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.additional_document.front') === -1) {
     removeElements.push('additional-upload-container')
   }
   if (req.data.registration.individual_id_number || req.data.registration.accountToken) {
@@ -146,8 +145,7 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].individual
-  for (const field of requiredFields) {
+  for (const field of req.data.stripeAccount.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'individual.address.line2' ||
@@ -165,7 +163,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (requiredFields.indexOf('individual.verification.document.front') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.individual_verification_document_front &&
         !req.body.individual_verification_document_front)) {
@@ -177,7 +175,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-individual_verification_document_back')
     }
   }
-  if (requiredFields.indexOf('individual.verification.additional_document.front') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.additional_document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.individual_verification_additional_document_front &&
       !req.body.individual_verification_additional_document_front)) {

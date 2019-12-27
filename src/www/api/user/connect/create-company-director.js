@@ -80,8 +80,8 @@ module.exports = {
         throw new Error('invalid-relationship_director_dob_day')
       }
     }
-    const requiredFields = connect.kycRequirements[stripeAccount.country].companyDirector
-    for (const field of requiredFields) {
+    const requirements = JSON.parse(stripeAccount.metadata.companyDirectorTemplate)
+    for (const field of requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
         if (field === 'relationship.director.verification.document.front' ||
@@ -127,37 +127,69 @@ module.exports = {
     } else if (!req.body.token) {
       throw new Error('invalid-relationship_director_verification_document_back')
     }
-    let directors = await global.api.user.connect.CompanyDirectors.get(req)
-    directors = directors || []
-    const personInfo = {
+    const directorInfo = {
       relationship: {
         director: true
       }
     }
-    const person = await stripe.accounts.createPerson(req.query.stripeid, personInfo, req.stripeKey)
-    const director = {
-      directorid: person.id,
-      object: 'director'
-    }
-    for (const field of requiredFields) {
+    for (const field of requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (req.body[posted]) {
-        director[posted] = req.body[posted]
+        if (field.startsWith('relationship_director_address_')) {
+          const property = field.substring('relationship_director_address_'.length)
+          directorInfo.address = directorInfo.address || {}
+          directorInfo.address[property] = owner[field]
+          continue
+        } else if (field.startsWith('relationship_director_verification_document_')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('relationship_director_verification_document_'.length)
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.document = directorInfo.verification.document || {}
+          directorInfo.verification.document[property] = owner[field]
+        } else if (field.startsWith('relationship_director_verification_additional_document_')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('relationship_director_verification_additional_document_'.length)
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+          directorInfo.verification.additional_document[property] = owner[field]
+        } else if (field.startsWith('relationship_director_dob_')) {
+          const property = field.substring('relationship_director_dob_'.length)
+          directorInfo.dob = directorInfo.dob || {}
+          directorInfo.dob[property] = owner[field]
+        } else if (field === 'relationship_director_relationship_') {
+          const property = field.substring('relationship_director_relationship_'.length)
+          directorInfo.relationship = directorInfo.relationship || {}
+          directorInfo.relationship[property] = owner[field]
+          continue
+        } else {
+          const property = field.substring('relationship_director_'.length)
+          if (property === 'relationship_title' || property === 'executive' || property === 'director') {
+            continue
+          }
+          directorInfo[property] = owner[field]
+        }
       }
     }
     if (global.stripeJS === 3) {
       director.token = req.body.token
     }
-    directors.unshift(director)
+    const director = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripekey)
+    let directors = await global.api.user.connect.CompanyDirectors.get(req)
+    directors = directors || []
+    directors.unshift(director.id)
     const accountInfo = {
       metadata: {
+        directors
       }
     }
-    connect.MetaData.store(accountInfo.metadata, 'directors', directors)
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       await stripeCache.update(accountNow)
-      await dashboard.Storage.write(`${req.appid}/map/directorid/stripeid/${director.personid}`, req.query.stripeid)
+      await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${director.id}`, req.query.stripeid)
       req.success = true
       return director
     } catch (error) {

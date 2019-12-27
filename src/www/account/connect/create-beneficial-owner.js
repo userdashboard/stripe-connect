@@ -53,11 +53,11 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].beneficialOwner
-  if (requiredFields.indexOf('relationship.owner.id_number') === -1) {
+  const requirements = JSON.parse(req.data.stripeAccount.metadata.beneficialOwnerTemplate)
+  if (requirements.currently_due.indexOf('relationship.owner.id_number') === -1) {
     removeElements.push('relationship_owner_id_number-container')
   }
-  if (requiredFields.indexOf('relationship.owner.email') === -1) {
+  if (requirements.currently_due.indexOf('relationship.owner.email') === -1) {
     removeElements.push('relationship_owner_email-container')
   }
   dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
@@ -103,8 +103,8 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].beneficialOwner
-  for (const field of requiredFields) {
+  const requirements = JSON.parse(req.data.stripeAccount.metadata.beneficialOwnerTemplate)
+  for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {
       if (field === 'relationship.owner.verification.front' ||

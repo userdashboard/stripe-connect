@@ -18,7 +18,7 @@ module.exports = {
         const owners = await global.api.user.connect.BeneficialOwners.get(req)
         if (owners && owners.length) {
           for (const owner of owners) {
-            await dashboard.Storage.deleteFile(`${req.appid}/map/ownerid/stripeid/${owner.personid}`)
+            await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${owner.personid}`)
           }
         }
       }

@@ -76,8 +76,8 @@ async function renderPage (req, res, messageTemplate) {
   const personalStates = connect.countryDivisions[personalCountry]
   dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_representative_address_state')
   dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_representative_address_country')
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
-  if (requiredFields.indexOf('relationship.representative.id_number') === -1) {
+  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
+  if (requirements.currently_due.indexOf('relationship.representative.id_number') === -1) {
     removeElements.push('id_number-container')
   }
   if (req.data.registration.relationship_representative_id_number) {
@@ -140,8 +140,8 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
-  for (const field of requiredFields) {
+  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
+  for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'relationship.representative.address.line2' ||

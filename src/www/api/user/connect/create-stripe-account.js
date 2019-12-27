@@ -37,13 +37,28 @@ module.exports = {
       }
     }
     try {
-      const stripeAccount = await stripe.accounts.create(accountInfo, req.stripeKey)
+      let stripeAccountNow = await stripe.accounts.create(accountInfo, req.stripeKey)
       await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
       await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
       await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
+      if (req.body.type === 'company') {
+        const companyDirector = await stripe.accounts.createPerson(stripeAccount.id, { relationship: { director: true } }, req.stripeKey)
+        const beneficialOwner = await stripe.accounts.createPerson(stripeAccount.id, { relationship: { owner: true } }, req.stripeKey)
+        const companyRepresentative = await stripe.accounts.createPerson(stripeAccount.id, { relationship: { owner: true } }, req.stripeKey)
+        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${companyDirector.id}`, req.query.stripeid)
+        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${beneficialOwner.id}`, req.query.stripeid)
+        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${companyRepresentative.id}`, req.query.stripeid)
+        stripeAccountNow = await stripe.accounts.update(stripeAccount.id, {
+          metadata: {
+            companyDirectorTemplate: JSON.stringify(companyDirector.requirements),
+            beneficialOwnerTemplate: JSON.stringify(beneficialOwner.requirements),
+            companyRepresentativeTemplate: JSON.stringify(companyRepresentative.requirements)
+          }
+        }, req.stripeKey)
+      }
       req.success = true
-      await stripeCache.update(stripeAccount)
-      return stripeAccount
+      await stripeCache.update(stripeAccountNow)
+      return stripeAccountNow
     } catch (error) {
       throw new Error('unknown-error')
     }

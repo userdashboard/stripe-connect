@@ -32,7 +32,7 @@ module.exports = {
     try {
       const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
       await stripeCache.update(accountNow)
-      await dashboard.Storage.deleteFile(`${req.appid}/map/ownerid/stripeid/${req.query.personid}`)
+      await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
       req.success = true
       return true
     } catch (error) {

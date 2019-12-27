@@ -53,24 +53,57 @@ module.exports = {
         }
       }
     }
-    const requiredFields = connect.kycRequirements[stripeAccount.country].company
-    const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-    for (const field of requiredFields) {
-      const posted = field.split('.').join('_')
-      if (!req.body[posted]) {
-        if (field === 'company.address.line2' ||
-            field === 'individual.verification.document.front' ||
-            field === 'individual.verification.document.back' ||
-           (field === 'business_profile.url' && req.body.business_profile_product_description) ||
-           (field === 'business_profile.product_description' && req.body.business_profile_url)) {
+    const accountInfo = {}
+    if (global.stripeJS === 3) {
+      accountInfo.account_token = req.body.token
+    } else {
+      for (const field of stripeAccount.requirements.currently_due) {
+        const posted = field.split('.').join('_')
+        if (!req.body[posted]) {
+          if (field === 'company.address.line2' ||
+              field === 'individual.verification.document.front' ||
+              field === 'individual.verification.document.back' ||
+            (field === 'business_profile.url' && req.body.business_profile_product_description) ||
+            (field === 'business_profile.product_description' && req.body.business_profile_url)) {
+            continue
+          }
+          if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
+            throw new Error('invalid-business_profile_url')
+          }
+          throw new Error(`invalid-${posted}`)
+        }
+        if (field.startsWith('business_profile_')) {
+          const property = field.substring('business_profile_'.length)
+          accountInfo.business_profile[property] = req.body[field]
+          delete (req.body[field])
           continue
         }
-        if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
-          throw new Error('invalid-business_profile_url')
+        if (field.startsWith('company_')) {
+          if (field.startsWith('company_address_kanji_')) {
+            const property = field.substring('company_address_kanji_'.length)
+            accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
+            accountInfo.company.address_kanji[property] = req.body[field]
+          } else if (field.startsWith('company_address_kana_')) {
+            const property = field.substring('company_address_kana_'.length)
+            accountInfo.company.address_kana = accountInfo.company.address_kana || {}
+            accountInfo.company.address_kana[property] = req.body[field]
+          } else if (field.startsWith('company_address_')) {
+            const property = field.substring('company_address_'.length)
+            accountInfo.company.address[property] = req.body[field]
+          } else if (field.startsWith('company_name_')) {
+            const property = field.substring('company_name_'.length)
+            accountInfo.company[`name_${property}`] = req.body[field]
+          } else if (field.startsWith('company_verification_document_')) {
+            const property = field.substring('company_verification_document_'.length)
+            accountInfo.company.verification = accountInfo.company.verification || {}
+            accountInfo.company.verification.document = accountInfo.company.verification.document || {}
+            accountInfo.company.verification.document[property] = req.body[field]
+          } else {
+            const property = field.substring('company_'.length)
+            accountInfo.company[property] = req.body[field]
+          }
         }
-        throw new Error(`invalid-${posted}`)
       }
-      registration[posted] = req.body[posted]
     }
     if (req.body.business_profile_mcc) {
       const mccList = connect.getMerchantCategoryCodes(req.language)
@@ -107,14 +140,6 @@ module.exports = {
         throw new Error('invalid-company_address_state')
       }
     }
-    const accountInfo = {
-      metadata: {
-      }
-    }
-    if (global.stripeJS === 3) {
-      registration.companyToken = req.body.token
-    }
-    connect.MetaData.store(accountInfo.metadata, 'registration', registration)
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       req.success = true

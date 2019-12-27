@@ -29,8 +29,7 @@ module.exports = {
     if (!registration.individual_verification_document_back) {
       throw new Error('invalid-individual_verification_document_back')
     }
-    const requiredFields = connect.kycRequirements[stripeAccount.country].individual
-    for (const field of requiredFields) {
+    for (const field of stripeAccount.requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!registration[posted]) {
         if (field === 'individual.address.line2' ||

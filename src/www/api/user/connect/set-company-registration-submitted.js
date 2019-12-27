@@ -19,10 +19,11 @@ module.exports = {
     if (!stripeAccount.external_accounts.data.length) {
       throw new Error('invalid-payment-details')
     }
-    if (connect.kycRequirements[stripeAccount.country].beneficialOwner && !stripeAccount.company.owners_provided) {
+    const countrySpec = connect.countrySpecIndex[stripeAccount.country]
+    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.owner') > -1 && !stripeAccount.company.owners_provided) {
       throw new Error('invalid-beneficial-owner')
     }
-    if (connect.kycRequirements[stripeAccount.country].companyDirector && !stripeAccount.company.directors_provided) {
+    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
       throw new Error('invalid-company-director')
     }
     if (!stripeAccount.metadata.representative) {
@@ -32,8 +33,7 @@ module.exports = {
     if (!registration) {
       throw new Error('invalid-registration')
     }
-    const requiredFields = connect.kycRequirements[stripeAccount.country].company
-    for (const field of requiredFields) {
+    for (const field of stripeAccount.requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!registration[posted]) {
         if (field === 'company.address.line2' ||

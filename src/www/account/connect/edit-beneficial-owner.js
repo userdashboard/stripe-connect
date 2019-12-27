@@ -53,11 +53,10 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].beneficialOwner
-  if (requiredFields.indexOf('relationship.owner.id_number') === -1) {
+  if (req.data.owner.requirements.currently_due.indexOf('relationship.owner.id_number') === -1) {
     removeElements.push('relationship_owner_id_number-container')
   }
-  if (requiredFields.indexOf('relationship.owner.email') === -1) {
+  if (req.data.owner.requirements.currently_due.indexOf('relationship.owner.email') === -1) {
     removeElements.push('relationship_owner_email-container')
   }
   if (req.method === 'GET') {
@@ -66,7 +65,7 @@ async function renderPage (req, res, messageTemplate) {
     dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
     dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
-    for (const field of requiredFields) {
+    for (const field of req.data.owner.requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.data.owner[posted]) {
         if (field === 'relationship.owner.verification.front' ||
@@ -91,7 +90,7 @@ async function renderPage (req, res, messageTemplate) {
     dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
     dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
-    for (const field of requiredFields) {
+    for (const field of req.data.owner.requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
         continue
@@ -128,8 +127,7 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].beneficialOwner
-  for (const field of requiredFields) {
+  for (const field of req.data.owner.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {
       if (field === 'relationship.owner.verification.front' ||

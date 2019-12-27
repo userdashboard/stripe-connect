@@ -76,8 +76,8 @@ async function renderPage (req, res, messageTemplate) {
   const personalStates = connect.countryDivisions[personalCountry]
   dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_representative_address_state')
   dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_representative_address_country')
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
-  if (requiredFields.indexOf('relationship.account_opener..id_number') === -1) {
+  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyDirectorTemplate)
+  if (requirements.currently_due.indexOf('relationship.account_opener.id_number') === -1) {
     removeElements.push('id_number-container')
   }
   if (req.data.registration.relationship_representative_id_number) {
@@ -140,8 +140,8 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyRepresentative
-  for (const field of requiredFields) {
+  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyDirectorTemplate)
+  for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'relationship.account_opener.address.line2' ||
@@ -158,7 +158,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (requiredFields.indexOf('relationship.account_opener..verification.document.front') > -1) {
+  if (requirements.currently_due.indexOf('relationship.account_opener.verification.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.relationship_representative_verification_document_front &&
         !req.body.relationship_representative_verification_document_front)) {
@@ -170,7 +170,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-relationship_representative_verification_document_back')
     }
   }
-  if (requiredFields.indexOf('relationship.account_opener..verification.additional.document.front') > -1) {
+  if (requirements.currently_due.indexOf('relationship.account_opener.verification.additional.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.relationship_representative_verification_additional_document_front &&
       !req.body.relationship_representative_verification_additional_document_front)) {

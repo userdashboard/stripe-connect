@@ -166,49 +166,65 @@ module.exports = {
         throw new Error('invalid-individual_dob_day')
       }
     }
-    const requiredFields = connect.kycRequirements[stripeAccount.country].individual
-    const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-    for (const field of requiredFields) {
-      const posted = field.split('.').join('_')
-      if (!req.body[posted]) {
-        if (field === 'individual.address.line2' ||
-            field === 'individual.verification.document.front' ||
-            field === 'individual.verification.document.back' ||
-            field === 'individual.verification.additional_document.front' ||
-            field === 'individual.verification.additional_document.back' ||
-           (field === 'business_profile.url' && req.body.business_profile_product_description) ||
-           (field === 'business_profile.product_description' && req.body.business_profile_url)) {
-          continue
-        }
-        if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
-          throw new Error('invalid-business_profile_url')
-        }
-        throw new Error(`invalid-${posted}`)
-      }
-      if (field === 'individual.gender' && req.body.individual_gender !== 'female' && req.body.individual_gender !== 'male') {
-        throw new Error(`invalid-${posted}`)
-      }
-      registration[posted] = req.body[posted]
-    }
+    const accountInfo = {}
     if (global.stripeJS === 3) {
-      registration.individualToken = req.body.token
+      accountInfo.account_token = req.body.token
+    } else {
+      for (const field of stripeAccount.requirements.currently_sue) {
+        const posted = field.split('.').join('_')
+        if (!req.body[posted]) {
+          if (field === 'individual.address.line2' ||
+              field === 'individual.verification.document.front' ||
+              field === 'individual.verification.document.back' ||
+              field === 'individual.verification.additional_document.front' ||
+              field === 'individual.verification.additional_document.back' ||
+            (field === 'business_profile.url' && req.body.business_profile_product_description) ||
+            (field === 'business_profile.product_description' && req.body.business_profile_url)) {
+            continue
+          }
+          if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
+            throw new Error('invalid-business_profile_url')
+          }
+          throw new Error(`invalid-${posted}`)
+        }
+        if (field === 'individual.gender' && req.body.individual_gender !== 'female' && req.body.individual_gender !== 'male') {
+          throw new Error(`invalid-${posted}`)
+        }
+        if (field.startsWith('individual_address_')) {
+          if (field.startsWith('individual_address_kana_')) {
+            const property = field.substring('individual_address_kana_'.length)
+            accountInfo.individual.address_kana = accountInfo.individual.address_kana || {}
+            accountInfo.individual.address_kana[property] = req.body[field]
+          } else if (field.startsWith('individual_address_kanji_')) {
+            const property = field.substring('individual_address_kanji_'.length)
+            accountInfo.individual.address_kanji = accountInfo.individual.address_kanji || {}
+            accountInfo.individual.address_kanji[property] = req.body[field]
+          } else {
+            const property = field.substring('individual_address_'.length)
+            accountInfo.individual.address[property] = req.body[field]
+          }
+        } else if (field.startsWith('individual_dob_')) {
+          const property = field.substring('individual_dob_'.length)
+          accountInfo.individual.dob[property] = req.body[field]
+        } else if (field.startsWith('individual_verification_document_')) {
+          accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+          const property = field.substring('individual_verification_document_'.length)
+          accountInfo.individual.verification.document[property] = req.body[field]
+        } else if (field.startsWith('individual_verification_additional_document_')) {
+          accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+          const property = field.substring('individual_verification_additional_document_'.length)
+          accountInfo.individual.verification.additional_document[property] = req.body[field]
+        } else if (field.startsWith('individual_')) {
+          const property = field.substring('individual_'.length)
+          accountInfo.individual[property] = req.body[field]
+        } else if (field.startsWith('business_profile_')) {
+          const property = field.substring('business_profile_'.length)
+          accountInfo.business_profile[property] = req.body[field]
+        } else {
+          accountInfo[field] = req.body[field]
+        }
+      }
     }
-    if (req.body.individual_verification_document_front) {
-      registration.individual_verification_document_front = req.body.individual_verification_document_front
-    }
-    if (req.body.individual_verification_document_back) {
-      registration.individual_verification_document_back = req.body.individual_verification_document_back
-    }
-    if (req.body.individual_verification_additional_document_front) {
-      registration.individual_verification_additional_document_front = req.body.individual_verification_additional_document_front
-    }
-    if (req.body.individual_verification_additional_document_back) {
-      registration.individual_verification_additional_document_back = req.body.individual_verification_additional_document_back
-    }
-    const accountInfo = {
-      metadata: {}
-    }
-    connect.MetaData.store(accountInfo.metadata, 'registration', registration)
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       req.success = true

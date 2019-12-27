@@ -1,4 +1,3 @@
-const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
@@ -53,11 +52,10 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyDirector
-  if (requiredFields.indexOf('relationship.director.relationship_title') === -1) {
+  if (req.data.director.requirements.currently_due.indexOf('relationship.director.relationship_title') === -1) {
     removeElements.push('relationship_director_relationship_title-container')
   }
-  if (requiredFields.indexOf('relationship.director.email') === -1) {
+  if (req.data.director.requirements.currently_due.indexOf('relationship.director.email') === -1) {
     removeElements.push('relationship_director_email')
   }
   if (req.method === 'GET') {
@@ -90,8 +88,7 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].companyDirector
-  for (const field of requiredFields) {
+  for (const field of req.data.director.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {
       if (field === 'relationship.director.verification.front' ||

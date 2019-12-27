@@ -17,10 +17,11 @@ async function beforeRequest (req) {
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  if (connect.kycRequirements[stripeAccount.country].beneficialOwner && !stripeAccount.company.owners_provided) {
+  const countrySpec = connect.countrySpecIndex[stripeAccount.country]
+  if (countrySpec.verification_fields.company.minimum.indexOf('relationship.owner') > -1 && !stripeAccount.company.owners_provided) {
     req.error = req.error || 'invalid-company_beneficial_owners'
   }
-  if (connect.kycRequirements[stripeAccount.country].companyDirector && !stripeAccount.company.directors_provided) {
+  if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
     req.error = req.error || 'invalid-company_directors'
   }
   if (!stripeAccount.metadata.representative) {

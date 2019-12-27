@@ -57,17 +57,16 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].company
-  if (requiredFields.indexOf('company.tax_id') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.tax_id') === -1) {
     removeElements.push('company_tax_id-container')
   }
-  if (requiredFields.indexOf('company.phone') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.phone') === -1) {
     removeElements.push('company_phone-container')
   }
-  if (requiredFields.indexOf('business_profile.url') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('business_profile.url') === -1) {
     removeElements.push('business_profile_url-container')
   }
-  if (requiredFields.indexOf('business_profile.mcc') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('business_profile.mcc') === -1) {
     removeElements.push('business_profile_mcc-container')
   } else {
     const mccList = connect.getMerchantCategoryCodes(req.language)
@@ -76,11 +75,11 @@ async function renderPage (req, res, messageTemplate) {
   if (req.data.stripeAccount.country !== 'JP') {
     removeElements.push('JP-company-name-container', 'JP-company-address-container')
   }
-  if (requiredFields.indexOf('company.address.state') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.address.state') > -1) {
     const companyStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, companyStates, 'state-option', 'company_address_state')
   }
-  if (requiredFields.indexOf('company.verification.document.front') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.verification.document.front') === -1) {
     removeElements.push('upload-container')
   }
   if (req.method === 'GET') {
@@ -119,8 +118,7 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
-  const requiredFields = connect.kycRequirements[req.data.stripeAccount.country].company
-  for (const field of requiredFields) {
+  for (const field of req.data.stripeAccount.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'company.address.line2' ||
@@ -136,7 +134,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (requiredFields.indexOf('company.verification.document.front') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.verification.document.front') > -1) {
     if (!req.data.registration.company_verification_document_front &&
        (!req.uploads || !req.uploads.company_verification_document_front)) {
       return renderPage(req, res, 'invalid-company_verification_document_front')

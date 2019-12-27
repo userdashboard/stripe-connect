@@ -16,10 +16,11 @@ module.exports = {
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
       return null
     }
-    if (!connect.kycRequirements[stripeAccount.country].companyDirector) {
+    const countrySpec = connect.countrySpecIndex[stripeAccount.country]
+    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
       throw new Error('invalid-stripe-account')
     }
-    const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+    const directors = JSON.stringify(stripeAccount.metadata, 'directors')
     const persons = []
     if (directors && directors.length) {
       for (const director of directors) {

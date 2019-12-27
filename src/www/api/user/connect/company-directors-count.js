@@ -12,13 +12,14 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    if (!connect.kycRequirements[stripeAccount.country].companyDirector) {
+    const countrySpec = connect.countrySpecIndex[stripeAccount.country]
+    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
       throw new Error('invalid-stripe-account')
     }
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
       return null
     }
-    const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+    const directors = JSON.stringify(stripeAccount.metadata, 'directors')
     return directors ? directors.length : 0
   }
 }

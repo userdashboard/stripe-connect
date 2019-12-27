@@ -9,45 +9,12 @@ module.exports = {
     if (!req.query || !req.query.personid) {
       throw new Error('invalid-personid')
     }
-    if (!req.body) {
-      throw new Error('relationship_owner_first_name')
+    const person = await global.api.user.connect.BeneficialOwner.get(req)
+    if (!person) {
+      throw new Error('invalid-personid')
     }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
-    }
-    const owner = await global.api.user.connect.BeneficialOwner.get(req)
-    if (!req.body || !req.body.relationship_owner_address_city) {
-      throw new Error('invalid-relationship_owner_address_city')
-    }
-    if (!req.body.relationship_owner_address_line1) {
-      throw new Error('invalid-relationship_owner_address_line1')
-    }
-    if (!req.body.relationship_owner_address_postal_code) {
-      throw new Error('invalid-relationship_owner_address_postal_code')
-    }
-    if (!req.body.relationship_owner_address_country) {
-      throw new Error('invalid-relationship_owner_address_country')
-    } else if (!connect.countryNameIndex[req.body.relationship_owner_address_country]) {
-      throw new Error('invalid-relationship_owner_address_country')
-    }
-    if (req.body.relationship_owner_address_state) {
-      if (!req.body.relationship_owner_address_country) {
-        throw new Error('invalid-relationship_owner_address_state')
-      }
-      const states = connect.countryDivisions[req.body.relationship_owner_address_country]
-      if (!states || !states.length) {
-        throw new Error('invalid-relationship_owner_address_state')
-      }
-      let found = false
-      for (const state of states) {
-        found = state.value === req.body.relationship_owner_address_state
-        if (found) {
-          break
-        }
-      }
-      if (!found) {
-        throw new Error('invalid-relationship_owner_address_state')
-      }
     }
     let validateDOB = false
     if (req.body.relationship_owner_dob_day) {
@@ -83,7 +50,7 @@ module.exports = {
       try {
         const year = parseInt(req.body.relationship_owner_dob_year, 10)
         if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
-          throw new Error('invalid-relationship_owner_dob_year111')
+          throw new Error('invalid-relationship_owner_dob_year')
         }
       } catch (s) {
         throw new Error('invalid-relationship_owner_dob_year')
@@ -105,97 +72,171 @@ module.exports = {
         throw new Error('invalid-relationship_owner_dob_day')
       }
     }
-    if (!req.body.relationship_owner_first_name) {
-      throw new Error('invalid-relationship_owner_first_name')
+    if (req.body.relationship_owner_address_country) {
+      if (!connect.countryNameIndex[req.body.relationship_owner_address_country]) {
+        throw new Error('invalid-relationship_owner_address_country')
+      }
     }
-    if (!req.body.relationship_owner_last_name) {
-      throw new Error('invalid-relationship_owner_last_name')
-    }
-    if (global.stripeJS === 3 && !req.body.token) {
-      throw new Error('invalid-token')
-    }
-    if (req.uploads && req.uploads.relationship_owner_verification_document_front) {
-      const frontData = {
-        purpose: 'identity_document',
-        file: {
-          type: 'application/octet-stream',
-          name: req.uploads.relationship_owner_verification_document_front.name,
-          data: req.uploads.relationship_owner_verification_document_front.buffer
+    if (req.body.relationship_owner_address_state) {
+      if (!req.body.relationship_owner_address_country) {
+        throw new Error('invalid-relationship_owner_address_country')
+      }
+      const states = connect.countryDivisions[req.body.relationship_owner_address_country]
+      if (!states || !states.length) {
+        throw new Error('invalid-relationship_owner_address_state')
+      }
+      let found = false
+      for (const state of states) {
+        found = state.value === req.body.relationship_owner_address_state
+        if (found) {
+          break
         }
       }
-      try {
-        const front = await stripe.files.create(frontData, req.stripeKey)
-        req.body.relationship_owner_verification_document_front = front.id
-      } catch (error) {
-        throw new Error('invalid-relationship_owner_verification_document_front')
+      if (!found) {
+        throw new Error('invalid-relationship_owner_address_state')
       }
     }
-    if (req.uploads && req.uploads.relationship_owner_verification_document_back) {
-      const backData = {
-        purpose: 'identity_document',
-        file: {
-          type: 'application/octet-stream',
-          name: req.uploads.relationship_owner_verification_document_back.name,
-          data: req.uploads.relationship_owner_verification_document_back.buffer
+    if (req.uploads) {
+      if (req.uploads.relationship_owner_verification_document_front) {
+        const uploadData = {
+          purpose: 'identity_document',
+          file: {
+            type: 'application/octet-stream',
+            name: req.uploads.relationship_owner_verification_document_front.name,
+            data: req.uploads.relationship_owner_verification_document_front.buffer
+          }
+        }
+        try {
+          const file = await stripe.files.create(uploadData, req.stripeKey)
+          req.body.relationship_owner_verification_document_front = file.id
+        } catch (error) {
+          throw new Error('invalid-relationship_owner_verification_document_front')
         }
       }
-      try {
-        const back = await stripe.files.create(backData, req.stripeKey)
-        req.body.relationship_owner_verification_document_back = back.id
-      } catch (error) {
-        throw new Error('invalid-relationship_owner_verification_document_back')
-      }
-    }
-    req.query.stripeid = owner.stripeid
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (stripeAccount.metadata.submitted) {
-      throw new Error('invalid-stripe-account')
-    }
-    const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-    const requiredFields = connect.kycRequirements[stripeAccount.country].beneficialOwner
-    for (const field of requiredFields) {
-      const posted = field.split('.').join('_')
-      if (!req.body[posted]) {
-        if (field === 'relationship.owner.verification.document.front' ||
-            field === 'relationship.owner.verification.document.back' ||
-            field === 'relationship.owner.address.line2') {
-          continue
+      if (req.uploads.relationship_owner_verification_document_back) {
+        const uploadData = {
+          purpose: 'identity_document',
+          file: {
+            type: 'application/octet-stream',
+            name: req.uploads.relationship_owner_verification_document_back.name,
+            data: req.uploads.relationship_owner_verification_document_back.buffer
+          }
         }
-        throw new Error(`invalid-${posted}`)
+        try {
+          const file = await stripe.files.create(uploadData, req.stripeKey)
+          req.body.relationship_owner_verification_document_back = file.id
+        } catch (error) {
+          throw new Error('invalid-relationship_owner_verification_document_back')
+        }
       }
-      owner[posted] = req.body[posted]
+      if (req.uploads.relationship_owner_verification_additional_document_front) {
+        const uploadData = {
+          purpose: 'identity_document',
+          file: {
+            type: 'application/octet-stream',
+            name: req.uploads.relationship_owner_verification_additional_document_front.name,
+            data: req.uploads.relationship_owner_verification_additional_document_front.buffer
+          }
+        }
+        try {
+          const file = await stripe.files.create(uploadData, req.stripeKey)
+          req.body.relationship_owner_verification_additional_document_front = file.id
+        } catch (error) {
+          throw new Error('invalid-relationship_owner_verification_additional_document_front')
+        }
+      }
+      if (req.uploads.relationship_owner_verification_additional_document_back) {
+        const uploadData = {
+          purpose: 'identity_document',
+          file: {
+            type: 'application/octet-stream',
+            name: req.uploads.relationship_owner_verification_additional_document_back.name,
+            data: req.uploads.relationship_owner_verification_additional_document_back.buffer
+          }
+        }
+        try {
+          const file = await stripe.files.create(uploadData, req.stripeKey)
+          req.body.relationship_owner_verification_additional_document_back = file.id
+        } catch (error) {
+          throw new Error('invalid-relationship_owner_verification_additional_document_back')
+        }
+      }
     }
-    if (req.body.relationship_owner_title) {
-      owner.relationship_owner_title = req.body.relationship_owner_title
-    }
-    if (req.body.relationship_owner_executive) {
-      owner.relationship_owner_executive = true
-    }
-    if (req.body.relationship_owner_director) {
-      owner.relationship_owner_director = true
-    }
-    if (req.body.relationship_owner_owner) {
-      owner.relationship_owner_owner = true
-    }
+    const beneficialOwnerInfo = {}
     if (global.stripeJS === 3) {
-      owner.token = req.body.token
-    }
-    for (const i in owners) {
-      if (owners[i].personid === req.query.personid) {
-        owners[i] = owner
-        break
+      beneficialOwnerInfo.person_token = req.body.token
+    } else {
+      for (const field of person.requirements.currently_due) {
+        const posted = field.split('.').join('_')
+        if (!req.body[posted]) {
+          if (field === 'relationship.account_opener.address.line2' ||
+              field === 'relationship.account_opener.relationship.title' ||
+              field === 'relationship.account_opener.relationship.executive' ||
+              field === 'relationship.account_opener.relationship.director' ||
+              field === 'relationship.account_opener.relationship.owner' ||
+              (field === 'relationship.account_opener.verification.document.front' && req.body.token) ||
+              (field === 'relationship.account_opener.verification.document.back' && req.body.token)) {
+            continue
+          }
+          throw new Error(`invalid-${posted}`)
+        }
+        for (const field of person.requirements.currently_due) {
+          if (field.startsWith('business_profile_')) {
+            const property = field.substring('business_profile_'.length)
+            beneficialOwnerInfo.business_profile[property] = req.body[field]
+            delete (req.body[field])
+            continue
+          }
+          if (field.startsWith('address_kanji_')) {
+            const property = field.substring('address_kanji_'.length)
+            beneficialOwnerInfo.address_kanji = beneficialOwnerInfo.address_kanji || {}
+            beneficialOwnerInfo.address_kanji[property] = req.body[field]
+          } else if (field.startsWith('address_kana_')) {
+            const property = field.substring('address_kana_'.length)
+            beneficialOwnerInfo.address_kana = beneficialOwnerInfo.address_kana || {}
+            beneficialOwnerInfo.address_kana[property] = req.body[field]
+          } else if (field.startsWith('address_')) {
+            const property = field.substring('address_'.length)
+            beneficialOwnerInfo.address[property] = req.body[field]
+          } else if (field.startsWith('verification_document_')) {
+            const property = field.substring('verification_document_'.length)
+            beneficialOwnerInfo.verification = beneficialOwnerInfo.verification || {}
+            beneficialOwnerInfo.verification.document = beneficialOwnerInfo.verification.document || {}
+            beneficialOwnerInfo.verification.document[property] = req.body[field]
+          } else if (field.startsWith('verification_additional_document_')) {
+            const property = field.substring('verification_additional_document_'.length)
+            beneficialOwnerInfo.verification = beneficialOwnerInfo.verification || {}
+            beneficialOwnerInfo.verification.additional_document = beneficialOwnerInfo.verification.additional_document || {}
+            beneficialOwnerInfo.verification.additional_document[property] = req.body[field]
+          } else {
+            const property = field.substring(''.length)
+            beneficialOwnerInfo.company[property] = req.body[field]
+          }
+        }
       }
     }
-    const accountInfo = {
-      metadata: {
+    if (req.body.relationship_owner_percent_ownership) {
+      try {
+        const percent = parseFloat(req.body.relationship_owner_percent_ownership, 10)
+        if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+          throw new Error('invalid-relationship_owner_percent_ownership')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_owner_percent_ownership')
       }
+      beneficialOwnerInfo.relationship_owner_percent_ownership = req.body.relationship_owner_percent_ownership
     }
-    connect.MetaData.store(accountInfo.metadata, 'owners', owners)
+    if (req.body.relationship_owner_relationship_title) {
+      beneficialOwnerInfo.relationship_owner_relationship_title = req.body.relationship_owner_relationship_title
+    }
+    if (req.body.relationship_owner_relationship_executive) {
+      beneficialOwnerInfo.relationship_owner_relationship_executive = true
+    }
     try {
-      const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
-      await stripeCache.update(accountNow)
+      const beneficialOwnerNow = await stripe.accounts.updatePerson(person.account, person.id, beneficialOwnerInfo, req.stripeKey)
       req.success = true
-      return owner
+      await stripeCache.update(beneficialOwnerNow)
+      return beneficialOwnerNow
     } catch (error) {
       if (error.message.startsWith('invalid-')) {
         throw error

@@ -16,7 +16,7 @@ module.exports = {
     if (!stripeAccount.metadata.owners || stripeAccount.metadata.owners === '[]') {
       return null
     }
-    const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
+    const owners = JSON.stringify(stripeAccount.metadata, 'owners')
     const people = []
     for (const owner of owners) {
       if (owner.personid) {

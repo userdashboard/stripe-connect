@@ -595,7 +595,7 @@ describe('/api/user/connect/create-company-director', () => {
       })
       await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
-      const directorsNow = connect.MetaData.parse(stripeAccountNow.metadata, 'directors')
+      const directorsNow = JSON.parse(stripeAccountNow.metadata.directors)
       assert.strictEqual(directorsNow.length, 1)
       assert.strictEqual(directorsNow[0].relationship_director_first_name, person.firstName)
     })
@@ -627,7 +627,7 @@ describe('/api/user/connect/create-company-director', () => {
       }
       await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
-      const directorsNow = connect.MetaData.parse(stripeAccountNow.metadata, 'directors')
+      const directorsNow = JSON.parse(stripeAccountNow.metadata.directors)
       assert.strictEqual(directorsNow.length, 1)
       assert.notStrictEqual(directorsNow[0].token, null)
       assert.notStrictEqual(directorsNow[0].token, undefined)

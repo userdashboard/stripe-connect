@@ -6,15 +6,15 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
-    if (!req.query || !req.query.stripeid) {
-      throw new Error('invalid-stripeid')
+    if (!req.query || !req.query.personid) {
+      throw new Error('invalid-personid')
+    }
+    const person = await global.api.user.connect.CompanyRepresentative.get(req)
+    if (!person) {
+      throw new Error('invalid-personid')
     }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
-    }
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
-      throw new Error('invalid-stripe-account')
     }
     let validateDOB = false
     if (req.body.relationship_representative_dob_day) {
@@ -162,23 +162,58 @@ module.exports = {
         }
       }
     }
-    const requiredFields = connect.kycRequirements[stripeAccount.country].companyRepresentative
-    const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-    for (const field of requiredFields) {
-      const posted = field.split('.').join('_')
-      if (!req.body[posted]) {
-        if (field === 'relationship.representative.address.line2' ||
-            field === 'relationship.representative.relationship.title' ||
-            field === 'relationship.representative.relationship.executive' ||
-            field === 'relationship.representative.relationship.director' ||
-            field === 'relationship.representative.relationship.owner' ||
-            (field === 'relationship.representative.verification.document.front' && req.body.token) ||
-            (field === 'relationship.representative.verification.document.back' && req.body.token)) {
-          continue
+    const companyRepresentativeInfo = {}
+    if (global.stripeJS === 3) {
+      companyRepresentativeInfo.person_token = req.body.token
+    } else {
+      for (const field of person.requirements.currently_due) {
+        const posted = field.split('.').join('_')
+        if (!req.body[posted]) {
+          if (field === 'relationship.account_opener.address.line2' ||
+              field === 'relationship.account_opener.relationship.title' ||
+              field === 'relationship.account_opener.relationship.executive' ||
+              field === 'relationship.account_opener.relationship.director' ||
+              field === 'relationship.account_opener.relationship.owner' ||
+              (field === 'relationship.account_opener.verification.document.front' && req.body.token) ||
+              (field === 'relationship.account_opener.verification.document.back' && req.body.token)) {
+            continue
+          }
+          throw new Error(`invalid-${posted}`)
         }
-        throw new Error(`invalid-${posted}`)
+        for (const field of person.requirements.currently_due) {
+          if (field.startsWith('business_profile_')) {
+            const property = field.substring('business_profile_'.length)
+            companyRepresentativeInfo.business_profile[property] = req.body[field]
+            delete (req.body[field])
+            continue
+          }
+          if (field.startsWith('address_kanji_')) {
+            const property = field.substring('address_kanji_'.length)
+            companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
+            companyRepresentativeInfo.address_kanji[property] = req.body[field]
+          } else if (field.startsWith('address_kana_')) {
+            const property = field.substring('address_kana_'.length)
+            companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
+            companyRepresentativeInfo.address_kana[property] = req.body[field]
+          } else if (field.startsWith('address_')) {
+            const property = field.substring('address_'.length)
+            companyRepresentativeInfo.address[property] = req.body[field]
+          } else if (field.startsWith('verification_document_')) {
+            const property = field.substring('verification_document_'.length)
+            companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+            companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
+            companyRepresentativeInfo.verification.document[property] = req.body[field]
+          } else if (field.startsWith('verification_additional_document_')) {
+            const property = field.substring('verification_additional_document_'.length)
+            companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+            companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
+            companyRepresentativeInfo.verification.additional_document[property] = req.body[field]
+          } else {
+            const property = field.substring(''.length)
+            companyRepresentativeInfo.company[property] = req.body[field]
+          }
+        }
       }
-      registration[posted] = req.body[posted]
     }
     if (req.body.relationship_representative_percent_ownership) {
       try {
@@ -189,32 +224,19 @@ module.exports = {
       } catch (s) {
         throw new Error('invalid-relationship_representative_percent_ownership')
       }
-      registration.relationship_representative_percent_ownership = req.body.relationship_representative_percent_ownership
-    } else if (requiredFields.indexOf('relationship.representative.percent_ownership') > -1) {
-      throw new Error('invalid-relationship_representative_percent_ownership')
+      companyRepresentativeInfo.relationship_representative_percent_ownership = req.body.relationship_representative_percent_ownership
     }
     if (req.body.relationship_representative_relationship_title) {
-      registration.relationship_representative_relationship_title = req.body.relationship_representative_relationship_title
+      companyRepresentativeInfo.relationship_representative_relationship_title = req.body.relationship_representative_relationship_title
     }
     if (req.body.relationship_representative_relationship_executive) {
-      registration.relationship_representative_relationship_executive = true
+      companyRepresentativeInfo.relationship_representative_relationship_executive = true
     }
-    if (req.body.relationship_representative_relationship_director) {
-      registration.relationship_representative_relationship_director = true
-    }
-    const accountInfo = {
-      metadata: {
-      }
-    }
-    if (global.stripeJS === 3) {
-      registration.representativeToken = req.body.token
-    }
-    connect.MetaData.store(accountInfo.metadata, 'registration', registration)
     try {
-      const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+      const companyRepresentativeNow = await stripe.accounts.updatePerson(person.account, person.id, companyRepresentativeInfo, req.stripeKey)
       req.success = true
-      await stripeCache.update(accountNow)
-      return accountNow
+      await stripeCache.update(companyRepresentativeNow)
+      return companyRepresentativeNow
     } catch (error) {
       if (error.message.startsWith('invalid-')) {
         throw error

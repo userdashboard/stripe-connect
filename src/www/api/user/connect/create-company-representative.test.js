@@ -1359,8 +1359,7 @@ describe('/api/user/connect/create-company-representative', () => {
         token: 'token'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
+      const personNow = await req.post()
       assert.strictEqual(registration.representativeToken, 'token')
     })
 
@@ -1395,9 +1394,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_dob_day, '07')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.dob_day, '07')
     })
 
     it('required posted relationship_representative_dob_month', async () => {
@@ -1431,9 +1429,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_dob_month, '11')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.dob_month, '11')
     })
 
     it('required posted relationship_representative_dob_year', async () => {
@@ -1467,9 +1464,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_dob_year, '1951')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.dob_year, '1951')
     })
 
     it('optionally-required posted file relationship_representative_verification_document_front', async () => {
@@ -1503,10 +1499,9 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.notStrictEqual(registration.relationship_representative_verification_document_front, null)
-      assert.notStrictEqual(registration.relationship_representative_verification_document_front, undefined)
+      const personNow = await req.post()
+      assert.notStrictEqual(personNow.verification_document_front, null)
+      assert.notStrictEqual(personNow.verification_document_front, undefined)
     })
 
     it('optionally-required posted file relationship_representative_verification_document_back', async () => {
@@ -1540,10 +1535,9 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.notStrictEqual(registration.relationship_representative_verification_document_back, null)
-      assert.notStrictEqual(registration.relationship_representative_verification_document_back, undefined)
+      const personNow = await req.post()
+      assert.notStrictEqual(personNow.verification_document_back, null)
+      assert.notStrictEqual(personNow.verification_document_back, undefined)
     })
 
     it('optionally-required posted relationship_representative_first_name', async () => {
@@ -1577,9 +1571,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_first_name, user.profile.firstName)
+      const personNow = await req.post()
+      assert.strictEqual(personNow.first_name, user.profile.firstName)
     })
 
     it('optionally-required posted relationship_representative_last_name', async () => {
@@ -1613,9 +1606,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_last_name, user.profile.lastName)
+      const personNow = await req.post()
+      assert.strictEqual(personNow.last_name, user.profile.lastName)
     })
 
     it('optionally-required posted relationship_representative_email', async () => {
@@ -1649,9 +1641,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_email, user.profile.contactEmail)
+      const personNow = await req.post()
+      assert.strictEqual(personNow.email, user.profile.contactEmail)
     })
 
     it('optionally-required posted relationship_representative_phone', async () => {
@@ -1685,9 +1676,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_phone, '456-789-0123')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.phone, '456-789-0123')
     })
 
     it('optionally-required posted relationship_representative_gender', async () => {
@@ -1728,9 +1718,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_gender, 'female')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.gender, 'female')
     })
 
     it('optionally-required posted relationship_representative_ssn_last_4', async () => {
@@ -1764,9 +1753,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_ssn_last_4, '0000')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.ssn_last_4, '0000')
     })
 
     it('optionally-required posted relationship_representative_id_number', async () => {
@@ -1800,9 +1788,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_id_number, '000000000')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.id_number, '000000000')
     })
 
     it('optionally-required posted relationship_representative_address_city', async () => {
@@ -1836,9 +1823,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_city, 'New York')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_city, 'New York')
     })
 
     it('optionally-required posted relationship_representative_address_state', async () => {
@@ -1872,9 +1858,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_state, 'NY')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_state, 'NY')
     })
 
     it('optionally-required posted relationship_representative_address_postal_code', async () => {
@@ -1908,9 +1893,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_postal_code, '10007')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_postal_code, '10007')
     })
 
     it('optionally-required posted relationship_representative_address_country', async () => {
@@ -1944,9 +1928,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_country, 'US')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_country, 'US')
     })
 
     it('optionally-required posted relationship_representative_address_line1', async () => {
@@ -1980,9 +1963,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_line1, '285 Fulton St')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_line1, '285 Fulton St')
     })
 
     it('optional posted relationship_representative_address_line2', async () => {
@@ -2017,9 +1999,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_line2, 'Another detail')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_line2, 'Another detail')
     })
 
     it('optional posted relationship_representative_percent_ownership', async () => {
@@ -2054,9 +2035,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_percent_ownership, '100')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.percent_ownership, '100')
     })
 
     it('optional posted relationship_representative_relationship_title', async () => {
@@ -2091,9 +2071,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_relationship_title, 'Owner')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.relationship_title, 'Owner')
     })
 
     it('optional posted relationship_representative_relationship_director', async () => {
@@ -2128,9 +2107,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_relationship_director, true)
+      const personNow = await req.post()
+      assert.strictEqual(personNow.relationship_director, true)
     })
 
     it('optional posted relationship_representative_relationship_executive', async () => {
@@ -2165,9 +2143,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_relationship_executive, true)
+      const personNow = await req.post()
+      assert.strictEqual(personNow.relationship_executive, true)
     })
 
     it('optionally-required posted relationship_representative_first_name_kana', async () => {
@@ -2208,9 +2185,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kanji_line1, '２７－１５')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kanji_line1, '２７－１５')
     })
 
     it('optionally-required posted relationship_representative_last_name_kana', async () => {
@@ -2251,9 +2227,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_last_name_kana, 'ﾄｳｷﾖｳﾄ')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.last_name_kana, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted relationship_representative_address_kana_city', async () => {
@@ -2294,9 +2269,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kana_city, 'ｼﾌﾞﾔ')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kana_city, 'ｼﾌﾞﾔ')
     })
 
     it('optionally-required posted relationship_representative_address_kana_state', async () => {
@@ -2337,9 +2311,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kana_state, 'ﾄｳｷﾖｳﾄ')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kana_state, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted relationship_representative_address_kana_postal_code', async () => {
@@ -2380,9 +2353,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kana_postal_code, '1500001')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kana_postal_code, '1500001')
     })
 
     it('optionally-required posted relationship_representative_address_kana_town', async () => {
@@ -2423,9 +2395,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
     })
 
     it('optionally-required posted relationship_representative_address_kana_line1', async () => {
@@ -2466,9 +2437,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kana_line1, '27-15')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kana_line1, '27-15')
     })
 
     it('optionally-required posted relationship_representative_first_name_kanji', async () => {
@@ -2509,9 +2479,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_first_name_kanji, '東京都')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.first_name_kanji, '東京都')
     })
 
     it('optionally-required posted relationship_representative_last_name_kanji', async () => {
@@ -2552,9 +2521,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_last_name_kanji, '東京都')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.last_name_kanji, '東京都')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_city', async () => {
@@ -2595,9 +2563,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kanji_city, '渋谷区')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kanji_city, '渋谷区')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_state', async () => {
@@ -2638,9 +2605,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kanji_state, '東京都')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kanji_state, '東京都')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_postal_code', async () => {
@@ -2681,9 +2647,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kanji_postal_code, '1500001')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kanji_postal_code, '1500001')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_town', async () => {
@@ -2724,9 +2689,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kanji_town, '神宮前　３丁目')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kanji_town, '神宮前　３丁目')
     })
 
     it('optionally-required posted relationship_representative_address_kanji_line1', async () => {
@@ -2767,9 +2731,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_relationship_title: 'Owner'
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const accountNow = await req.post()
-      const registration = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registration.relationship_representative_address_kanji_line1, '２７－１５')
+      const personNow = await req.post()
+      assert.strictEqual(personNow.address_kanji_line1, '２７－１５')
     })
   })
 
@@ -2871,8 +2834,8 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       await req2.post()
-      const accountNow = await global.api.user.connect.StripeAccount.get(req2)
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
+      const personNow = await global.api.user.connect.StripeAccount.get(req2)
+      const registrationNow = connect.MetaData.parse(personNow.metadata, 'registration')
       assert.notStrictEqual(registrationNow.representativeToken, registration.representativeToken)
       assert.notStrictEqual(registrationNow.representativeToken, null)
       assert.notStrictEqual(registrationNow.representativeToken, undefined)

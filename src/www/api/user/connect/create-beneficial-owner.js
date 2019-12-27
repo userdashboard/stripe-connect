@@ -42,7 +42,7 @@ module.exports = {
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
-    const requiredFields = connect.kycRequirements[stripeAccount.country].beneficialOwner
+    const person = await stripe.accounts.createPerson(req.query.stripeid, personInfo, req.stripekey)
     for (const field of requiredFields) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
@@ -149,55 +149,71 @@ module.exports = {
     } else if (!req.body.token) {
       throw new Error('invalid-relationship_owner_verification_document_back')
     }
-    let owners = await global.api.user.connect.BeneficialOwners.get(req)
-    owners = owners || []
-    const personInfo = {
+    const ownerInfo = {
+      metadata: {},
       relationship: {
         owner: true
       }
     }
-    const person = await stripe.accounts.createPerson(req.query.stripeid, personInfo, req.stripekey)
-    const owner = {
-      ownerid: person.id,
-      object: 'owner'
-    }
-    for (const field of requiredFields) {
-      const posted = field.split('.').join('_')
-      if (req.body[posted]) {
-        owner[posted] = req.body[posted]
+    if (global.stripeJS === 3) {
+      ownerInfo.token = req.body.token
+    } else {
+      for (const field of requiredFields) {
+        const posted = field.split('.').join('_')
+        if (req.body[posted]) {
+          if (field.startsWith('relationship_owner_address_')) {
+            const property = field.substring('relationship_owner_address_'.length)
+            ownerInfo.address = ownerInfo.address || {}
+            ownerInfo.address[property] = owner[field]
+            continue
+          } else if (field.startsWith('relationship_owner_verification_document_')) {
+            if (global.stripeJS) {
+              continue
+            }
+            const property = field.substring('relationship_owner_verification_document_'.length)
+            ownerInfo.verification = ownerInfo.verification || {}
+            ownerInfo.verification.document = ownerInfo.verification.document || {}
+            ownerInfo.verification.document[property] = owner[field]
+          } else if (field.startsWith('relationship_owner_verification_additional_document_')) {
+            if (global.stripeJS) {
+              continue
+            }
+            const property = field.substring('relationship_owner_verification_additional_document_'.length)
+            ownerInfo.verification = ownerInfo.verification || {}
+            ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+            ownerInfo.verification.additional_document[property] = owner[field]
+          } else if (field.startsWith('relationship_owner_dob_')) {
+            const property = field.substring('relationship_owner_dob_'.length)
+            ownerInfo.dob = ownerInfo.dob || {}
+            ownerInfo.dob[property] = owner[field]
+          } else if (field === 'relationship_owner_relationship_') {
+            const property = field.substring('relationship_owner_relationship_'.length)
+            ownerInfo.relationship = ownerInfo.relationship || {}
+            ownerInfo.relationship[property] = owner[field]
+            continue
+          } else {
+            const property = field.substring('relationship_owner_'.length)
+            if (property === 'relationship_title' || property === 'executive' || property === 'director') {
+              continue
+            }
+            ownerInfo[property] = owner[field]
+          }
+        }
       }
     }
-    if (req.body.relationship_owner_title) {
-      owner.relationship_owner_title = req.body.relationship_owner_title
-    }
-    if (req.body.relationship_owner_executive) {
-      owner.relationship_owner_executive = true
-    }
-    if (req.body.relationship_owner_director) {
-      owner.relationship_owner_director = true
-    }
-    if (req.body.relationship_owner_owner) {
-      owner.relationship_owner_owner = true
-    }
-    if (req.body.relationship_owner_verification_document_front) {
-      owner.relationship_owner_verification_document_front = req.body.relationship_owner_verification_document_front
-    }
-    if (req.body.relationship_owner_verification_document_back) {
-      owner.relationship_owner_verification_document_back = req.body.relationship_owner_verification_document_back
-    }
-    if (global.stripeJS === 3) {
-      owner.token = req.body.token
-    }
-    owners.unshift(owner)
+    const owner = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripekey)
+    let owners = await global.api.user.connect.BeneficialOwners.get(req)
+    owners = owners || []
+    owners.unshift(owner.id)
     const accountInfo = {
       metadata: {
+        owners
       }
     }
-    connect.MetaData.store(accountInfo.metadata, 'owners', owners)
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
       await stripeCache.update(accountNow)
-      await dashboard.Storage.write(`${req.appid}/map/ownerid/stripeid/${owner.personid}`, req.query.stripeid)
+      await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${owner.id}`, req.query.stripeid)
       req.success = true
       return owner
     } catch (error) {
