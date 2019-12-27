@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/company-director', () => {
   describe('CompanyDirector#BEFORE', () => {
-    it('should reject invalid directorid', async () => {
+    it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/company-director?personid=invalid')
       req.account = user.account

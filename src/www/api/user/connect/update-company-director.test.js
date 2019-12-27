@@ -5,7 +5,7 @@ const TestHelper = require('../../../../../test-helper.js')
 describe('/api/user/connect/update-company-director', () => {
   describe('exceptions', () => {
     describe('invalid-personid', () => {
-      it('missing querystring directorid', async () => {
+      it('missing querystring personid', async () => {
         const user = await TestHelper.createUser()
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest('/api/user/connect/update-company-director')
@@ -27,7 +27,7 @@ describe('/api/user/connect/update-company-director', () => {
         assert.strictEqual(errorMessage, 'invalid-personid')
       })
 
-      it('invalid querystring directorid', async () => {
+      it('invalid querystring personid', async () => {
         const user = await TestHelper.createUser()
         const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest('/api/user/connect/update-company-director?personid=invalid')

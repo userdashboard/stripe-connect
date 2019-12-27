@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 
 describe.only('/account/connect/beneficial-owner', () => {
   describe('BeneficialOwner#BEFORE', () => {
-    it('should reject invalid ownerid', async () => {
+    it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/beneficial-owner?personid=invalid')
       req.account = user.account

@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/delete-beneficial-owner', () => {
   describe('DeleteBeneficialOwner#BEFORE', () => {
-    it('should reject invalid ownerid', async () => {
+    it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/delete-beneficial-owner?personid=invalid')
       req.account = user.account

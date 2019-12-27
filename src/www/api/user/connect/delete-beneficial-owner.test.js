@@ -5,7 +5,7 @@ const TestHelper = require('../../../../../test-helper.js')
 describe('/api/user/connect/delete-beneficial-owner', () => {
   describe('exceptions', () => {
     describe('invalid-personid', () => {
-      it('missing querystring ownerid', async () => {
+      it('missing querystring personid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/delete-beneficial-owner')
         req.account = user.account
@@ -19,7 +19,7 @@ describe('/api/user/connect/delete-beneficial-owner', () => {
         assert.strictEqual(errorMessage, 'invalid-personid')
       })
 
-      it('invalid querystring ownerid', async () => {
+      it('invalid querystring personid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/delete-beneficial-owner?personid=invalid')
         req.account = user.account
