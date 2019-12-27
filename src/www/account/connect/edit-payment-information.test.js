@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
+const connect = require('../../../../index.js')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/edit-payment-information', () => {
@@ -32,1036 +33,260 @@ describe('/account/connect/edit-payment-information', () => {
     })
   })
 
-  describe('EditPaymentInformation#GET', () => {
-    it('should present the form', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'company'
+  describe('EditPaymentInformation#GET', async () => {
+    for (const country of connect.countrySpecs) {
+      it('should present the form (' + country.id + ')', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'individual'
+        })
+        const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        const page = await req.get()
+        const doc = TestHelper.extractDoc(page)
+        assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
+        assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
-      assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
-      assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
-    })
+    }
   })
 
-  describe('EditPaymentInformation#POST', () => {
-    async function testEachFieldAsNull (req) {
-      const body = JSON.stringify(req.body)
-      for (const field in req.body) {
-        const value = req.body[field]
-        req.body = JSON.parse(body)
-        req.body[field] = ''
+  describe('EditPaymentInformation#POST', async () => {
+    for (const country of connect.countrySpecs) {
+      it('reject invalid fields (' + country.id + ')', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        if (postData[country.id].length) {
+          for (const format of postData[country.id]) {
+            req.body = format
+            req.body.country = country.id
+            req.body.account_holder_type = 'company'
+            req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
+            const body = JSON.stringify(req.body)
+            const fields = Object.keys(req.body)
+            for (const field of fields) {
+              req.body = JSON.parse(body)
+              req.body[field] = ''
+              const page = await req.post()
+              const doc = TestHelper.extractDoc(page)
+              const messageContainer = doc.getElementById('message-container')
+              const message = messageContainer.child[0]
+              assert.strictEqual(message.attr.template, `invalid-${field}`)
+            }
+          }
+          return
+        } 
+        req.body = postData[country.id]
+        req.body.country = country.id
+        req.body.account_holder_type = 'company'
+        req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
+        const body = JSON.stringify(req.body)
+        const fields = Object.keys(req.body)
+        for (const field of fields) {
+          req.body = JSON.parse(body)
+          req.body[field] = ''
+          const page = await req.post()
+          const doc = TestHelper.extractDoc(page)
+          const messageContainer = doc.getElementById('message-container')
+          const message = messageContainer.child[0]
+          assert.strictEqual(message.attr.template, `invalid-${field}`)
+        }
+      })
+    }
+
+    for (const country of connect.countrySpecs) {
+      it('submit payment information (' + country.id + ')', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'individual'
+        })
+        const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        if (postData[country.id].length) {
+          for (const format of postData[country.id]) {
+            req.body = format
+            req.body.country = country.id
+            req.body.account_holder_type = 'company'
+            req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
+            const page = await req.post()
+            const doc = TestHelper.extractDoc(page)
+            const messageContainer = doc.getElementById('message-container')
+            const message = messageContainer.child[0]
+            assert.strictEqual(message.attr.template, 'success')
+          }
+          return
+        }
+        req.body = postData[country.id]
+        req.body.country = country.id
+        req.body.account_holder_type = 'individual'
+        req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
+        req.filename = __filename
+        req.screenshots = [
+          { hover: '#account-menu-container' },
+          { click: '/account/connect' },
+          { click: '/account/connect/stripe-accounts' },
+          { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+          { click: `/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}` },
+          { fill: '#submit-form' }
+        ]
         const page = await req.post()
-        req.body[field] = value
         const doc = TestHelper.extractDoc(page)
         const messageContainer = doc.getElementById('message-container')
         const message = messageContainer.child[0]
-        assert.strictEqual(message.attr.template, `invalid-${field}`)
-      }
+        assert.strictEqual(message.attr.template, 'success')
+      })
     }
-
-    it('should reject AT invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AT',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'AT',
-        currency: 'eur',
-        iban: 'AT89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should submit AT information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AT',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'AT',
-        currency: 'eur',
-        iban: 'AT89370400440532013000'
-      }
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#account-menu-container' },
-        { click: '/account/connect' },
-        { click: '/account/connect/stripe-accounts' },
-        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}` },
-        { fill: '#submit-form' }
-      ]
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject AU invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AU',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456',
-        bsb_number: '110000',
-        country: 'AU',
-        currency: 'aud'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update AU information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AU',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456',
-        bsb_number: '110000',
-        country: 'AU',
-        currency: 'aud'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject BE invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'BE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'BE',
-        currency: 'eur',
-        iban: 'BE89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update BE information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'BE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'BE',
-        currency: 'eur',
-        iban: 'BE89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject CA invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'CA',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456789',
-        country: 'CA',
-        currency: 'cad',
-        institution_number: '000',
-        transit_number: '11000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update CA information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'CA',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456789',
-        country: 'CA',
-        currency: 'cad',
-        institution_number: '000',
-        transit_number: '11000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject CH invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'CH',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'CH',
-        currency: 'eur',
-        iban: 'CH89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update CH information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'CH',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'CH',
-        currency: 'eur',
-        iban: 'CH89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject DE invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'DE',
-        currency: 'eur',
-        iban: 'DE89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update DE information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'DE',
-        currency: 'eur',
-        iban: 'DE89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject DK invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DK',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'DK',
-        currency: 'eur',
-        iban: 'DK89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update DK information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DK',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'DK',
-        currency: 'eur',
-        iban: 'DK89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject ES invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'ES',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'ES',
-        currency: 'eur',
-        iban: 'ES89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update ES information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'ES',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'ES',
-        currency: 'eur',
-        iban: 'ES89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject FI invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'FI',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'FI',
-        currency: 'eur',
-        iban: 'FI89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update FI information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'FI',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'FI',
-        currency: 'eur',
-        iban: 'FI89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject GB invalid fields (account number, sort code)', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '00012345',
-        country: 'GB',
-        currency: 'gbp',
-        sort_code: '108800'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update GB information (account number, sort code)', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '00012345',
-        country: 'GB',
-        currency: 'gbp',
-        sort_code: '108800'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject GB invalid fields (iban)', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'GB',
-        currency: 'eur',
-        iban: 'GB89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update GB information (iban)', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'GB',
-        currency: 'eur',
-        iban: 'GB89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject HK invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'HK',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456',
-        branch_code: '000',
-        clearing_code: '110',
-        country: 'HK',
-        currency: 'hkd'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update HK information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'HK',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456',
-        branch_code: '000',
-        clearing_code: '110',
-        country: 'HK',
-        currency: 'hkd'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject IE invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'IE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'IE',
-        currency: 'eur',
-        iban: 'IE89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update IE information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'IE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'IE',
-        currency: 'eur',
-        iban: 'IE89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject IT invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'IT',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'IT',
-        currency: 'eur',
-        iban: 'IT89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update IT information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'IT',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'IT',
-        currency: 'eur',
-        iban: 'IT89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject JP invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'JP',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '00012345',
-        bank_code: '1100',
-        branch_code: '000',
-        country: 'JP',
-        currency: 'jpy'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update JP information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'JP',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '0001234',
-        bank_code: '1100',
-        branch_code: '000',
-        country: 'JP',
-        currency: 'jpy'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject LU invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'LU',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'LU',
-        currency: 'eur',
-        iban: 'LU89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update LU information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'LU',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'LU',
-        currency: 'eur',
-        iban: 'LU89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject NL invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NL',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'NL',
-        currency: 'eur',
-        iban: 'NL89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update NL information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NL',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'NL',
-        currency: 'eur',
-        iban: 'NL89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject NO invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NO',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'NO',
-        currency: 'eur',
-        iban: 'NO89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update NO information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NO',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'NO',
-        currency: 'eur',
-        iban: 'NO89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject NZ invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NZ',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '0000000010',
-        country: 'NZ',
-        currency: 'nzd',
-        routing_number: '110000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update NZ information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NZ',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '0000000010',
-        country: 'NZ',
-        currency: 'nzd',
-        routing_number: '110000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject PT invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'PT',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'PT',
-        currency: 'eur',
-        iban: 'PT89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update PT information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'PT',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'PT',
-        currency: 'eur',
-        iban: 'PT89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject SE invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'SE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'SE',
-        currency: 'eur',
-        iban: 'SE89370400440532013000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update SE information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'SE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'SE',
-        currency: 'eur',
-        iban: 'SE89370400440532013000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject SG invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'SG',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456',
-        bank_code: '1100',
-        branch_code: '000',
-        country: 'SG',
-        currency: 'sgd'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update SG information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'SG',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456',
-        bank_code: '1100',
-        branch_code: '000',
-        country: 'SG',
-        currency: 'sgd'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
-
-    it('should reject US invalid fields', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456789',
-        country: 'US',
-        currency: 'usd',
-        routing_number: '110000000'
-      }
-      await testEachFieldAsNull(req)
-    })
-
-    it('should update US information', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456789',
-        country: 'US',
-        currency: 'usd',
-        routing_number: '110000000'
-      }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
-    })
   })
 })
+
+const postData = {
+  AT: {
+    currency: 'eur',
+    iban: 'AT89370400440532013000'
+  },
+  AU: {
+    account_number: '000123456',
+    bsb_number: '110000',
+    currency: 'aud'
+  },
+  BE: {
+    currency: 'eur',
+    iban: 'BE89370400440532013000'
+  },
+  CA: {
+    account_number: '000123456789',
+    currency: 'cad',
+    institution_number: '000',
+    transit_number: '11000'
+  },
+  CH: {
+    currency: 'eur',
+    iban: 'CH89370400440532013000'
+  },
+  DE: {
+    currency: 'eur',
+    iban: 'DE89370400440532013000'
+  },
+  DK: {
+    currency: 'eur',
+    iban: 'DK89370400440532013000'
+  },
+  EE: {
+    currency: 'eur',
+    iban: 'EE89370400440532013000'
+  },
+  ES: {
+    currency: 'eur',
+    iban: 'ES89370400440532013000'
+  },
+  FI: {
+    currency: 'eur',
+    iban: 'FI89370400440532013000'
+  },
+  FR: {
+    currency: 'eur',
+    iban: 'FR89370400440532013000'
+  },
+  GB: [{
+    account_number: '00012345',
+    currency: 'gbp',
+    sort_code: '108800'
+  }, {
+    currency: 'eur',
+    iban: 'GB89370400440532013000'
+  }],
+  GR: {
+    currency: 'eur',
+    iban: 'GR89370400440532013000'
+  },
+  HK: {
+    account_number: '000123456',
+    branch_code: '000',
+    clearing_code: '110',
+    currency: 'hkd'
+  },
+  IE: {
+    currency: 'eur',
+    iban: 'IE89370400440532013000'
+  },
+  IT: {
+    currency: 'eur',
+    iban: 'IT89370400440532013000'
+  },
+  JP: {
+    account_number: '0001234',
+    bank_code: '1100',
+    branch_code: '000',
+    currency: 'jpy'
+  },
+  LT: {
+    currency: 'eur',
+    iban: 'LT89370400440532013000'
+  },
+  LU: {
+    currency: 'eur',
+    iban: 'LU89370400440532013000'
+  },
+  LV: {
+    currency: 'eur',
+    iban: 'LV89370400440532013000'
+  },
+  MY: {
+    currency: 'myr',
+    routing_number: 'TESTMYKL',
+    account_number: '000123456000'
+  },
+  NL: {
+    currency: 'eur',
+    iban: 'NL89370400440532013000'
+  },
+  NO: {
+    currency: 'eur',
+    iban: 'NO89370400440532013000'
+  },
+  NZ: {
+    account_number: '0000000010',
+    currency: 'nzd',
+    routing_number: '110000'
+  },
+  PL: {
+    currency: 'eur',
+    iban: 'PL89370400440532013000'
+  },
+  PT: {
+    currency: 'eur',
+    iban: 'PT89370400440532013000'
+  },
+  SE: {
+    currency: 'eur',
+    iban: 'SE89370400440532013000'
+  }, 
+  SG: {
+    account_number: '000123456',
+    bank_code: '1100',
+    branch_code: '000',
+    currency: 'sgd'
+  },
+  SI: {
+    currency: 'eur',
+    iban: 'SI89370400440532013000'
+  },
+  SK: {
+    currency: 'eur',
+    iban: 'SK89370400440532013000'
+  },
+  US: {
+    account_number: '000123456789',
+    currency: 'usd',
+    routing_number: '110000000'
+  }
+}
