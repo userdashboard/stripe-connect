@@ -1,3 +1,4 @@
+const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
@@ -21,110 +22,126 @@ module.exports = {
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
+    if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
+      throw new Error('invalid-address_country')
+    }
+    if (!req.body.address_state) {
+      throw new Error('invalid-address_state')
+    }
+    const states = connect.countryDivisions[req.body.address_country]
+    let found
+    for (const state of states) {
+      found = state.value === req.body.address_state
+      if (found) {
+        break
+      }
+    }
+    if (!found) {
+      throw new Error('invalid-address_state')
+    }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
-    let validateDOB
-    if (req.body.relationship_director_dob_day) {
-      validateDOB = true
-      try {
-        const day = parseInt(req.body.relationship_director_dob_day, 10)
-        if (!day || day < 1 || day > 31) {
-          throw new Error('invalid-relationship_director_dob_day')
-        }
-        if (day < 10) {
-          req.body.relationship_director_dob_day = '0' + day
-        }
-      } catch (s) {
-        throw new Error('invalid-relationship_director_dob_day')
-      }
-    }
-    if (req.body.relationship_director_dob_month) {
-      try {
-        const month = parseInt(req.body.relationship_director_dob_month, 10)
-        if (!month || month < 1 || month > 12) {
-          throw new Error('invalid-relationship_director_dob_month')
-        }
-        if (month < 10) {
-          req.body.relationship_director_dob_month = '0' + month
-        }
-      } catch (s) {
-        throw new Error('invalid-relationship_director_dob_month')
-      }
-    }
-    if (req.body.relationship_director_dob_year) {
-      validateDOB = true
-      try {
-        const year = parseInt(req.body.relationship_director_dob_year, 10)
-        if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
-          throw new Error('invalid-relationship_director_dob_year')
-        }
-      } catch (s) {
-        throw new Error('invalid-relationship_director_dob_year')
-      }
-    }
-    if (validateDOB) {
-      if (!req.body.relationship_director_dob_day) {
-        throw new Error('invalid-relationship_director_dob_day')
-      }
-      if (!req.body.relationship_director_dob_month) {
-        throw new Error('invalid-relationship_director_dob_month')
-      }
-      if (!req.body.relationship_director_dob_year) {
-        throw new Error('invalid-relationship_director_dob_year')
-      }
-      try {
-        Date.parse(`${req.body.relationship_director_dob_year}/${req.body.relationship_director_dob_month}/${req.body.relationship_director_dob_day}`)
-      } catch (error) {
-        throw new Error('invalid-relationship_director_dob_day')
-      }
-    }
-    const requirements = JSON.parse(stripeAccount.metadata.companyDirectorTemplate)
+    const requirements = JSON.parse(stripeAccount.metadata.beneficialOwnerTemplate)
     for (const field of requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
-        if (field === 'relationship.director.verification.document.front' ||
-            field === 'relationship.director.verification.document.back') {
+        if (field === 'address.line2' ||
+            field === 'relationship.title' ||
+            field === 'executive' ||
+            field === 'director' ||
+            field === 'verification.document.front' ||
+            field === 'verification.document.back' ||
+            field === 'director') {
           continue
         }
         throw new Error(`invalid-${posted}`)
       }
     }
-    if (req.uploads && req.uploads.relationship_director_verification_document_front) {
+    let validateDOB
+    if (req.body.dob_day) {
+      validateDOB = true
+      try {
+        const day = parseInt(req.body.dob_day, 10)
+        if (!day || day < 1 || day > 31) {
+          throw new Error('invalid-dob_day')
+        }
+      } catch (s) {
+        throw new Error('invalid-dob_day')
+      }
+    }
+    if (req.body.dob_month) {
+      try {
+        const month = parseInt(req.body.dob_month, 10)
+        if (!month || month < 1 || month > 12) {
+          throw new Error('invalid-dob_month')
+        }
+      } catch (s) {
+        throw new Error('invalid-dob_month')
+      }
+    }
+    if (req.body.dob_year) {
+      validateDOB = true
+      try {
+        const year = parseInt(req.body.dob_year, 10)
+        if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
+          throw new Error('invalid-dob_year')
+        }
+      } catch (s) {
+        throw new Error('invalid-dob_year')
+      }
+    }
+    if (validateDOB) {
+      if (!req.body.dob_day) {
+        throw new Error('invalid-dob_day')
+      }
+      if (!req.body.dob_month) {
+        throw new Error('invalid-dob_month')
+      }
+      if (!req.body.dob_year) {
+        throw new Error('invalid-dob_year')
+      }
+      try {
+        Date.parse(`${req.body.dob_year}/${req.body.dob_month}/${req.body.dob_day}`)
+      } catch (error) {
+        throw new Error('invalid-dob_day')
+      }
+    }
+    if (req.uploads && req.uploads.verification_document_front) {
       const frontData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads.relationship_director_verification_document_front.name,
-          data: req.uploads.relationship_director_verification_document_front.buffer
+          name: req.uploads.verification_document_front.name,
+          data: req.uploads.verification_document_front.buffer
         }
       }
       try {
         const front = await stripe.files.create(frontData, req.stripeKey)
-        req.body.relationship_director_verification_document_front = front.id
+        req.body.verification_document_front = front.id
       } catch (error) {
-        throw new Error('invalid-relationship_director_verification_document_front')
+        throw new Error('invalid-verification_document_front')
       }
     } else if (!req.body.token) {
-      throw new Error('invalid-relationship_director_verification_document_front')
+      throw new Error('invalid-verification_document_front')
     }
-    if (req.uploads && req.uploads.relationship_director_verification_document_back) {
+    if (req.uploads && req.uploads.verification_document_back) {
       const backData = {
         purpose: 'identity_document',
         file: {
           type: 'application/octet-stream',
-          name: req.uploads.relationship_director_verification_document_back.name,
-          data: req.uploads.relationship_director_verification_document_back.buffer
+          name: req.uploads.verification_document_back.name,
+          data: req.uploads.verification_document_back.buffer
         }
       }
       try {
         const back = await stripe.files.create(backData, req.stripeKey)
-        req.body.relationship_director_verification_document_back = back.id
+        req.body.verification_document_back = back.id
       } catch (error) {
-        throw new Error('invalid-relationship_director_verification_document_back')
+        throw new Error('invalid-verification_document_back')
       }
     } else if (!req.body.token) {
-      throw new Error('invalid-relationship_director_verification_document_back')
+      throw new Error('invalid-verification_document_back')
     }
     const directorInfo = {
       relationship: {
@@ -132,68 +149,83 @@ module.exports = {
       }
     }
     if (global.stripeJS === 3) {
-      directorInfo.person_token = req.body.token
+      directorInfo.token = req.body.token
     } else {
       for (const field of requirements.currently_due) {
         const posted = field.split('.').join('_')
         if (req.body[posted]) {
-          if (field.startsWith('relationship_director_address_')) {
-            const property = field.substring('relationship_director_address_'.length)
+          if (field.startsWith('address.')) {
+            const property = field.substring('address.'.length)
             directorInfo.address = directorInfo.address || {}
-            directorInfo.address[property] = req.body[field]
+            directorInfo.address[property] = req.body[posted]
             continue
-          } else if (field.startsWith('relationship_director_verification_document_')) {
+          } else if (field.startsWith('verification.document.')) {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('relationship_director_verification_document_'.length)
+            const property = field.substring('verification_document.'.length)
             directorInfo.verification = directorInfo.verification || {}
             directorInfo.verification.document = directorInfo.verification.document || {}
-            directorInfo.verification.document[property] = req.body[field]
-          } else if (field.startsWith('relationship_director_verification_additional_document_')) {
+            directorInfo.verification.document[property] = req.body[posted]
+          } else if (field.startsWith('verification.additional_document.')) {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('relationship_director_verification_additional_document_'.length)
+            const property = field.substring('verification.additional_document.'.length)
             directorInfo.verification = directorInfo.verification || {}
             directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
-            directorInfo.verification.additional_document[property] = req.body[field]
-          } else if (field.startsWith('relationship_director_dob_')) {
-            const property = field.substring('relationship_director_dob_'.length)
+            directorInfo.verification.additional_document[property] = req.body[posted]
+          } else if (field.startsWith('dob.')) {
+            const property = field.substring('dob.'.length)
             directorInfo.dob = directorInfo.dob || {}
-            directorInfo.dob[property] = req.body[field]
-          } else if (field === 'relationship_director_relationship_') {
-            const property = field.substring('relationship_director_relationship_'.length)
+            directorInfo.dob[property] = req.body[posted]
+          } else if (field === 'relationship.') {
+            const property = field.substring('relationship.'.length)
             directorInfo.relationship = directorInfo.relationship || {}
-            directorInfo.relationship[property] = req.body[field]
+            directorInfo.relationship[property] = req.body[posted]
             continue
           } else {
-            const property = field.substring('relationship_director_'.length)
+            const property = field
             if (property === 'relationship_title' || property === 'executive' || property === 'director') {
               continue
             }
-            directorInfo[property] = req.body[field]
+            directorInfo[property] = req.body[posted]
           }
         }
       }
     }
-    const director = await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripekey)
-    let directors = await global.api.user.connect.CompanyDirectors.get(req)
-    directors = directors || []
+    let director
+    while (true) {
+      try {
+        director = await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripeKey)
+        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${director.id}`, req.query.stripeid)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
+    }
+    const directors = JSON.parse(stripeAccount.metadata.directors || '[]')
     directors.unshift(director.id)
     const accountInfo = {
       metadata: {
-        directors
+        directors: JSON.stringify(directors)
       }
     }
-    try {
-      const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-      await stripeCache.update(accountNow)
-      await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${director.id}`, req.query.stripeid)
-      req.success = true
-      return director
-    } catch (error) {
-      throw new Error('unknown-error')
+    while (true) {
+      try {
+        const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        await stripeCache.update(accountNow)
+        req.success = true
+        return director
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
     }
   }
 }

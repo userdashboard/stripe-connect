@@ -45,22 +45,22 @@ describe('/api/user/connect/payout', () => {
         await TestHelper.createStripeRegistration(user, {
           business_profile_mcc: '7531',
           business_profile_url: 'https://www.abcde.com',
-          individual_address_city: 'Auckland',
-          individual_address_line1: '123 Sesame St',
-          individual_address_postal_code: '6011',
-          individual_address_state: 'AUK',
-          individual_dob_day: '1',
-          individual_dob_month: '1',
-          individual_dob_year: '1950',
-          individual_email: user.profile.contactEmail,
-          individual_first_name: user.profile.firstName,
-          individual_last_name: user.profile.lastName,
-          individual_phone: '456 789 0123'
+          address_city: 'Auckland',
+          address_line1: '123 Sesame St',
+          address_postal_code: '6011',
+          address_state: 'AUK',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: user.profile.contactEmail,
+          first_name: user.profile.firstName,
+          last_name: user.profile.lastName,
+          phone: '456 789 0123'
         }, {
-          individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-          individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-          individual_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -100,22 +100,22 @@ describe('/api/user/connect/payout', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '7531',
         business_profile_url: 'https://www.abcde.com',
-        individual_address_city: 'Auckland',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '6011',
-        individual_address_state: 'AUK',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456 789 0123'
+        address_city: 'Auckland',
+        address_line1: '123 Sesame St',
+        address_postal_code: '6011',
+        address_state: 'AUK',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456 789 0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,

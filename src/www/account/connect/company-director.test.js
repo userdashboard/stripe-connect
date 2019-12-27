@@ -6,7 +6,7 @@ describe('/account/connect/company-director', () => {
   describe('CompanyDirector#BEFORE', () => {
     it('should reject invalid directorid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/connect/company-director?directorid=invalid')
+      const req = TestHelper.createRequest('/account/connect/company-director?personid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -26,20 +26,20 @@ describe('/account/connect/company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.director.personid, user.director.personid)
+      assert.strictEqual(req.data.director.id, user.director.id)
     })
   })
 
@@ -52,16 +52,16 @@ describe('/account/connect/company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       req.filename = __filename
@@ -71,11 +71,11 @@ describe('/account/connect/company-director', () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/company-directors?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/company-director?directorid=${user.director.personid}` }
+        { click: `/account/connect/company-director?personid=${user.director.id}` }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.director.personid)
+      const row = doc.getElementById(user.director.id)
       assert.strictEqual(row.tag, 'tbody')
     })
   })

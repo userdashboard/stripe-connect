@@ -62,13 +62,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         await TestHelper.createStripeRegistration(user, {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          company_address_city: 'New York',
-          company_address_line1: '123 Park Lane',
-          company_address_postal_code: '10001',
-          company_address_state: 'NY',
-          company_name: 'Company',
-          company_phone: '456-789-0123',
-          company_tax_id: '00000000000'
+          address_city: 'New York',
+          address_line1: '123 Park Lane',
+          address_postal_code: '10001',
+          address_state: 'NY',
+          name: 'Company',
+          phone: '456-789-0123',
+          tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'New York',
@@ -149,13 +149,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         await TestHelper.createStripeRegistration(user, {
           business_profile_mcc: '7531',
           business_profile_url: 'https://www.abcde.com',
-          company_address_city: 'Frederiksberg',
-          company_address_line1: '123 Park Lane',
-          company_address_postal_code: '1020',
-          company_address_state: 'BW',
-          company_name: 'Company',
-          company_phone: '456-789-0123',
-          company_tax_id: '00000000000'
+          address_city: 'Frederiksberg',
+          address_line1: '123 Park Lane',
+          address_postal_code: '1020',
+          address_state: 'BW',
+          name: 'Company',
+          phone: '456-789-0123',
+          tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'Frederiksberg',
@@ -202,13 +202,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Vienna',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_address_state: '1',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Vienna',
+        address_line1: '123 Park Lane',
+        address_postal_code: '1020',
+        address_state: '1',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Vienna',
@@ -266,13 +266,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Brisbane',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '4000',
-        company_address_state: 'QLD',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Brisbane',
+        address_line1: '123 Park Lane',
+        address_postal_code: '4000',
+        address_state: 'QLD',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Brisbane',
@@ -331,16 +331,16 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Brussels',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_address_state: 'BRU',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Brussels',
+        address_line1: '123 Park Lane',
+        address_postal_code: '1020',
+        address_state: 'BRU',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       }, {
-        company_verification_document_back: TestHelper['success_id_scan_back.png'],
-        company_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Brussels',
@@ -398,13 +398,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Vancouver',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: 'V5K 0A1',
-        company_address_state: 'BC',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Vancouver',
+        address_line1: '123 Park Lane',
+        address_postal_code: 'V5K 0A1',
+        address_state: 'BC',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Vancouver',
@@ -462,13 +462,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Bern',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1020',
-        company_address_state: 'BE',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Bern',
+        address_line1: '123 Park Lane',
+        address_postal_code: '1020',
+        address_state: 'BE',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Bern',
@@ -526,13 +526,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Berlin',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '01067',
-        company_address_state: 'BE',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Berlin',
+        address_line1: '123 Park Lane',
+        address_postal_code: '01067',
+        address_state: 'BE',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Berlin',
@@ -590,13 +590,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Copenhagen',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1000',
-        company_address_state: '147',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Copenhagen',
+        address_line1: '123 Park Lane',
+        address_postal_code: '1000',
+        address_state: '147',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Copenhagen',
@@ -654,13 +654,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Talin',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '10128',
-        company_address_state: '37',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Talin',
+        address_line1: '123 Park Lane',
+        address_postal_code: '10128',
+        address_state: '37',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Tallinn',
@@ -718,13 +718,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Madrid',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '03179',
-        company_address_state: 'AN',
-        company_name: 'Company',
-        company_phone: '456-789-01234',
-        company_tax_id: '00000000000'
+        address_city: 'Madrid',
+        address_line1: '123 Park Lane',
+        address_postal_code: '03179',
+        address_state: 'AN',
+        name: 'Company',
+        phone: '456-789-01234',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Madrid',
@@ -782,13 +782,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Helsinki',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00990',
-        company_address_state: 'AL',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Helsinki',
+        address_line1: '123 Park Lane',
+        address_postal_code: '00990',
+        address_state: 'AL',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Helsinki',
@@ -846,13 +846,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Paris',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '75001',
-        company_address_state: 'A',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Paris',
+        address_line1: '123 Park Lane',
+        address_postal_code: '75001',
+        address_state: 'A',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Paris',
@@ -910,16 +910,16 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'London',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: 'EC1A 1AA',
-        company_address_state: 'LND',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'London',
+        address_line1: '123 Park Lane',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       }, {
-        company_verification_document_back: TestHelper['success_id_scan_back.png'],
-        company_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'London',
@@ -977,13 +977,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Hong Kong',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00000',
-        company_address_state: 'HK',
-        company_name: 'Company',
-        company_phone: '456-789-0234',
-        company_tax_id: '00000000000'
+        address_city: 'Hong Kong',
+        address_line1: '123 Park Lane',
+        address_postal_code: '00000',
+        address_state: 'HK',
+        name: 'Company',
+        phone: '456-789-0234',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Hong Kong',
@@ -1041,13 +1041,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Dublin',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: 'Dublin 1',
-        company_address_state: 'D',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Dublin',
+        address_line1: '123 Park Lane',
+        address_postal_code: 'Dublin 1',
+        address_state: 'D',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Dublin',
@@ -1073,7 +1073,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
-        company_state: 'Dublin',
+        state: 'Dublin',
         country: 'IE',
         currency: 'eur',
         iban: 'IE89370400440532013000'
@@ -1106,13 +1106,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Rome',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00010',
-        company_address_state: '65',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Rome',
+        address_line1: '123 Park Lane',
+        address_postal_code: '00010',
+        address_state: '65',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Rome',
@@ -1170,21 +1170,21 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_kana_city: 'ｼﾌﾞﾔ',
-        company_address_kana_line1: '27-15',
-        company_address_kana_postal_code: '1500001',
-        company_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        company_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        company_address_kanji_city: '渋谷区',
-        company_address_kanji_line1: '２７－１５',
-        company_address_kanji_postal_code: '1500001',
-        company_address_kanji_state: '東京都',
-        company_address_kanji_town: '神宮前 ３丁目',
-        company_name: 'Company',
-        company_name_kana: 'Company',
-        company_name_kanji: 'Company',
-        company_phone: '011-271-6677',
-        company_tax_id: '00000000000'
+        address_kana_city: 'ｼﾌﾞﾔ',
+        address_kana_line1: '27-15',
+        address_kana_postal_code: '1500001',
+        address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        address_kanji_city: '渋谷区',
+        address_kanji_line1: '２７－１５',
+        address_kanji_postal_code: '1500001',
+        address_kanji_state: '東京都',
+        address_kanji_town: '神宮前 ３丁目',
+        name: 'Company',
+        name_kana: 'Company',
+        name_kanji: 'Company',
+        phone: '011-271-6677',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
@@ -1253,13 +1253,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Vilnius',
-        company_address_line1: '123 Sesame St',
-        company_address_postal_code: 'LT-00000',
-        company_address_state: 'AL',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Vilnius',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'LT-00000',
+        address_state: 'AL',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Vilnius',
@@ -1317,13 +1317,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Luxemburg',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1623',
-        company_address_state: 'L',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Luxemburg',
+        address_line1: '123 Park Lane',
+        address_postal_code: '1623',
+        address_state: 'L',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Luxemburg',
@@ -1381,13 +1381,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Riga',
-        company_address_line1: '123 Sesame St',
-        company_address_postal_code: 'LV–1073',
-        company_address_state: 'AI',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Riga',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'LV–1073',
+        address_state: 'AI',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Riga',
@@ -1445,13 +1445,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Amsterdam',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '1071 JA',
-        company_address_state: 'DR',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Amsterdam',
+        address_line1: '123 Park Lane',
+        address_postal_code: '1071 JA',
+        address_state: 'DR',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Amsterdam',
@@ -1509,12 +1509,12 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //   await TestHelper.createStripeRegistration(user,{
     //     business_profile_mcc: '8931',
     //     business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-    //     company_address_city: 'Talin',
-    //         //     company_address_line1: '123 Park Lane',
-    //     company_address_postal_code: '10128',
-    //     company_address_state: '37',
-    //     company_name: 'Company',
-    //     company_tax_id: '00000000000'
+    //     address_city: 'Talin',
+    //         //     address_line1: '123 Park Lane',
+    //     address_postal_code: '10128',
+    //     address_state: '37',
+    //     name: 'Company',
+    //     tax_id: '00000000000'
     // })
     //   await TestHelper.createCompanyRepresentative(user,{
     //     relationship_representative_address_city: 'Mexico City',
@@ -1567,13 +1567,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Oslo',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '0001',
-        company_address_state: '02',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Oslo',
+        address_line1: '123 Park Lane',
+        address_postal_code: '0001',
+        address_state: '02',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Oslo',
@@ -1631,16 +1631,16 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Auckland',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '6011',
-        company_address_state: 'N',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Auckland',
+        address_line1: '123 Park Lane',
+        address_postal_code: '6011',
+        address_state: 'N',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       }, {
-        company_verification_document_back: TestHelper['success_id_scan_back.png'],
-        company_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Auckland',
@@ -1699,13 +1699,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Lisbon',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '4520',
-        company_address_state: '01',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Lisbon',
+        address_line1: '123 Park Lane',
+        address_postal_code: '4520',
+        address_state: '01',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Lisbon',
@@ -1763,13 +1763,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Stockholm',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '00150',
-        company_address_state: 'K',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Stockholm',
+        address_line1: '123 Park Lane',
+        address_postal_code: '00150',
+        address_state: 'K',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Stockholm',
@@ -1827,13 +1827,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Singapore',
-        company_address_line1: '123 Park Lane',
-        company_address_postal_code: '339696',
-        company_address_state: 'SG',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Singapore',
+        address_line1: '123 Park Lane',
+        address_postal_code: '339696',
+        address_state: 'SG',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Singapore',
@@ -1892,13 +1892,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Ljubljana',
-        company_address_line1: '123 Sesame St',
-        company_address_postal_code: '1210',
-        company_address_state: '07',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Ljubljana',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1210',
+        address_state: '07',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Ljubljana',
@@ -1956,13 +1956,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Slovakia',
-        company_address_line1: '123 Sesame St',
-        company_address_postal_code: '00102',
-        company_address_state: 'BC',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'Slovakia',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00102',
+        address_state: 'BC',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Slovakia',
@@ -2020,13 +2020,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'New York',
-        company_address_line1: '285 Fulton St',
-        company_address_postal_code: '10007',
-        company_address_state: 'NY',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'New York',
+        address_line1: '285 Fulton St',
+        address_postal_code: '10007',
+        address_state: 'NY',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'New York',
@@ -2090,13 +2090,13 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       req.body = {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'New York',
-        company_address_line1: '285 Fulton St',
-        company_address_postal_code: '10007',
-        company_address_state: 'NY',
-        company_name: 'Company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000000'
+        address_city: 'New York',
+        address_line1: '285 Fulton St',
+        address_postal_code: '10007',
+        address_state: 'NY',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
       }
       await req.post()
       const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)

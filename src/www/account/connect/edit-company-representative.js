@@ -19,8 +19,7 @@ async function beforeRequest (req) {
       stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
   }
-  const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  req.data = { stripeAccount, registration }
+  req.data = { stripeAccount }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -71,7 +70,6 @@ async function renderPage (req, res, messageTemplate) {
   if (req.body) {
     personalCountry = req.body.relationship_representative_address_country
   }
-  personalCountry = personalCountry || req.data.registration.relationship_representative_address_country
   personalCountry = personalCountry || req.data.stripeAccount.country
   const personalStates = connect.countryDivisions[personalCountry]
   dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_representative_address_state')
@@ -80,40 +78,11 @@ async function renderPage (req, res, messageTemplate) {
   if (requirements.currently_due.indexOf('relationship.representative.id_number') === -1) {
     removeElements.push('id_number-container')
   }
-  if (req.data.registration.relationship_representative_id_number) {
-    const idNumber = doc.getElementById('relationship_representative_id_number')
-    idNumber.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.relationship_representative_verification_document_front) {
-    const uploadFront = doc.getElementById('relationship_representative_verification_document_front')
-    uploadFront.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.relationship_representative_verification_document_back) {
-    const uploadBack = doc.getElementById('relationship_representative_verification_document_back')
-    uploadBack.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.relationship_representative_verification_additional_document_front) {
-    const uploadFront = doc.getElementById('relationship_representative_verification_additional_document_front')
-    uploadFront.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.relationship_representative_verification_additional_document_back) {
-    const uploadBack = doc.getElementById('relationship_representative_verification_additional_document_back')
-    uploadBack.setAttribute('data-existing', true)
-  }
   if (req.method === 'GET') {
-    for (const field in req.data.registration) {
+    for (const field of req.data.stripeAccount.requirements.currently_due) {
       const element = doc.getElementById(field)
       if (!element) {
         continue
-      }
-      if (element.tag === 'input') {
-        if (element.attr.type === 'checkbox') {
-          element.setAttribute('checked', req.data.registration[field] === true)
-        } else {
-          element.setAttribute('value', req.data.registration[field] || '')
-        }
-      } else if (element.tag === 'select') {
-        dashboard.HTML.setSelectedOptionByValue(doc, element, req.data.registration[field] || '')
       }
     }
   } else if (req.body) {

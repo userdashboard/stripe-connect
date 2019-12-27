@@ -24,9 +24,9 @@ module.exports = {
                 global.testNumber !== testNumber) {
               return
             }
-            if (req.body && req.uploads && req.uploads.individual_verification_document_front) {
-              req.body.individual_verification_document_front = token
-              delete (req.uploads.individual_verification_document_front)
+            if (req.body && req.uploads && req.uploads.verification_document_front) {
+              req.body.verification_document_front = token
+              delete (req.uploads.verification_document_front)
             }
             if (req.body && req.uploads && req.uploads.relationship_representative_verification_document_front) {
               req.body.relationship_representative_verification_document_front = token
@@ -54,11 +54,11 @@ module.exports = {
           if (global.testNumber !== testNumber) {
             return
           }
-          if (!req.body || !req.uploads || !req.uploads.individual_verification_document_front) {
+          if (!req.body || !req.uploads || !req.uploads.verification_document_front) {
             return
           }
-          req.body.individual_verification_document_back = token
-          delete (req.uploads.individual_verification_document_back)
+          req.body.verification_document_back = token
+          delete (req.uploads.verification_document_back)
         })
       }
     }

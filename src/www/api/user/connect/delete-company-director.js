@@ -18,7 +18,7 @@ module.exports = {
     }
     const directors = await global.api.user.connect.CompanyDirectors.get(req)
     for (const i in directors) {
-      if (directors[i].personid !== req.query.personid) {
+      if (directors[i].id !== req.query.personid) {
         continue
       }
       directors.splice(i, 1)

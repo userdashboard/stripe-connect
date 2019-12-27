@@ -9,8 +9,11 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.personid) {
     throw new Error('invalid-personid')
   }
+  console.log('loading owner', req.query)
   const owner = await global.api.user.connect.BeneficialOwner.get(req)
-  req.query.stripeid = owner.stripeid
+  console.log('got owner', owner)
+  req.query.stripeid = owner.account
+  console.log('load tripe account', req.query.stripeid)
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
@@ -19,6 +22,6 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res) {
-  const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'owner')
+  const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'person')
   return dashboard.Response.end(req, res, doc)
 }

@@ -62,21 +62,21 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         await TestHelper.createStripeRegistration(user, {
           business_profile_mcc: '7997',
           business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
-          individual_address_city: 'New York',
-          individual_address_line1: '285 Fulton St',
-          individual_address_postal_code: '10007',
-          individual_address_state: 'NY',
-          individual_dob_day: '1',
-          individual_dob_month: '1',
-          individual_dob_year: '1950',
-          individual_email: user.profile.contactEmail,
-          individual_first_name: user.profile.firstName,
-          individual_last_name: user.profile.lastName,
-          individual_phone: '456-789-0123',
-          individual_ssn_last_4: '0000'
+          address_city: 'New York',
+          address_line1: '285 Fulton St',
+          address_postal_code: '10007',
+          address_state: 'NY',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: user.profile.contactEmail,
+          first_name: user.profile.firstName,
+          last_name: user.profile.lastName,
+          phone: '456-789-0123',
+          ssn_last_4: '0000'
         }, {
-          individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-          individual_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -131,17 +131,17 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
         await TestHelper.createStripeRegistration(user, {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          individual_address_city: 'Berlin',
-          individual_address_line1: '123 Sesame St',
-          individual_address_postal_code: '01067',
-          individual_address_state: 'BE',
-          individual_dob_day: '1',
-          individual_dob_month: '1',
-          individual_dob_year: '1950',
-          individual_email: user.profile.contactEmail,
-          individual_first_name: user.profile.firstName,
-          individual_last_name: user.profile.lastName,
-          individual_phone: '456-789-0123'
+          address_city: 'Berlin',
+          address_line1: '123 Sesame St',
+          address_postal_code: '01067',
+          address_state: 'BE',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: user.profile.contactEmail,
+          first_name: user.profile.firstName,
+          last_name: user.profile.lastName,
+          phone: '456-789-0123'
         })
         const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -167,22 +167,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Vienna',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '1020',
-        individual_address_state: '1',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Vienna',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1020',
+        address_state: '1',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -216,22 +216,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Brisbane',
-        individual_address_line1: '845 Oxford St',
-        individual_address_postal_code: '4000',
-        individual_address_state: 'QLD',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Brisbane',
+        address_line1: '845 Oxford St',
+        address_postal_code: '4000',
+        address_state: 'QLD',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -266,22 +266,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Brussels',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '1020',
-        individual_address_state: 'BRU',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Brussels',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1020',
+        address_state: 'BRU',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -315,21 +315,21 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Vancouver',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: 'V5K 0A1',
-        individual_address_state: 'BC',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_id_number: '000000000',
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Vancouver',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'V5K 0A1',
+        address_state: 'BC',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        id_number: '000000000',
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -365,22 +365,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Bern',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '1020',
-        individual_address_state: 'BE',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Bern',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1020',
+        address_state: 'BE',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -414,22 +414,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Berlin',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '01067',
-        individual_address_state: 'BE',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Berlin',
+        address_line1: '123 Sesame St',
+        address_postal_code: '01067',
+        address_state: 'BE',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -463,22 +463,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Copenhagen',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '1000',
-        individual_address_state: '147',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Copenhagen',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1000',
+        address_state: '147',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -512,22 +512,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Tallinn',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '10128',
-        individual_address_state: '37',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Tallinn',
+        address_line1: '123 Sesame St',
+        address_postal_code: '10128',
+        address_state: '37',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -561,22 +561,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Madrid',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '03179',
-        individual_address_state: 'AN',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Madrid',
+        address_line1: '123 Sesame St',
+        address_postal_code: '03179',
+        address_state: 'AN',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -610,22 +610,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Helsinki',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '00990',
-        individual_address_state: 'AL',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Helsinki',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00990',
+        address_state: 'AL',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -659,22 +659,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Paris',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '75001',
-        individual_address_state: 'A',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Paris',
+        address_line1: '123 Sesame St',
+        address_postal_code: '75001',
+        address_state: 'A',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -708,22 +708,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'London',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: 'EC1A 1AA',
-        individual_address_state: 'LND',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'London',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -757,21 +757,21 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Hong Kong',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '999077',
-        individual_address_state: 'HK',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_id_number: '000000000',
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Hong Kong',
+        address_line1: '123 Sesame St',
+        address_postal_code: '999077',
+        address_state: 'HK',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        id_number: '000000000',
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -807,22 +807,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Dublin',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: 'Dublin 1',
-        individual_address_state: 'D',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Dublin',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'Dublin 1',
+        address_state: 'D',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -857,22 +857,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Rome',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '00010',
-        individual_address_state: '65',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Rome',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00010',
+        address_state: '65',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -906,28 +906,28 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_kana_city: 'ｼﾌﾞﾔ',
-        individual_address_kana_line1: '27-15',
-        individual_address_kana_postal_code: '1500001',
-        individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        individual_address_kanji_city: '渋谷区',
-        individual_address_kanji_line1: '２７－１５',
-        individual_address_kanji_postal_code: '1500001',
-        individual_address_kanji_state: '東京都',
-        individual_address_kanji_town: '神宮前 ３丁目',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        individual_first_name_kanji: '東京都',
-        individual_gender: 'female',
-        individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        individual_last_name_kanji: '東京都',
-        individual_phone: '+81112345678'
+        address_kana_city: 'ｼﾌﾞﾔ',
+        address_kana_line1: '27-15',
+        address_kana_postal_code: '1500001',
+        address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        address_kanji_city: '渋谷区',
+        address_kanji_line1: '２７－１５',
+        address_kanji_postal_code: '1500001',
+        address_kanji_state: '東京都',
+        address_kanji_town: '神宮前 ３丁目',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        first_name_kanji: '東京都',
+        gender: 'female',
+        last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        last_name_kanji: '東京都',
+        phone: '+81112345678'
       }, {
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -960,22 +960,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Vilnius',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: 'LT-00000',
-        individual_address_state: 'AL',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Vilnius',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'LT-00000',
+        address_state: 'AL',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1009,22 +1009,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Luxemburg',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '1623',
-        individual_address_state: 'L',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Luxemburg',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1623',
+        address_state: 'L',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1058,22 +1058,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Riga',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: 'LV–1073',
-        individual_address_state: 'AI',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Riga',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'LV–1073',
+        address_state: 'AI',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1107,20 +1107,20 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
     //   await TestHelper.createStripeRegistration(user,{
     //     business_profile_mcc: '8931',
     //     business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-    //     individual_address_city: 'Mexico City',
-    //         //     individual_address_line1: '123 Sesame St',
-    //     individual_address_postal_code: '11000',
-    //     individual_address_state: 'DIF',
-    //     individual_dob_day: '1',
-    //     individual_dob_month: '1',
-    //     individual_dob_year: '1950',
-    //     individual_email: user.profile.contactEmail,
-    //     individual_first_name: user.profile.firstName,
-    //     individual_last_name: user.profile.lastName,
-    //     individual_phone: '456-789-0123'
+    //     address_city: 'Mexico City',
+    //         //     address_line1: '123 Sesame St',
+    //     address_postal_code: '11000',
+    //     address_state: 'DIF',
+    //     dob_day: '1',
+    //     dob_month: '1',
+    //     dob_year: '1950',
+    //     email: user.profile.contactEmail,
+    //     first_name: user.profile.firstName,
+    //     last_name: user.profile.lastName,
+    //     phone: '456-789-0123'
     // },{
-    //     individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-    //     individual_verification_document_front: TestHelper['success_id_scan_front.png']
+    //     verification_document_back: TestHelper['success_id_scan_back.png'],
+    //     verification_document_front: TestHelper['success_id_scan_front.png']
     // })
     //   await TestHelper.createExternalAccount(user,{
     //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1151,22 +1151,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Amsterdam',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '1071 JA',
-        individual_address_state: 'DR',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Amsterdam',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1071 JA',
+        address_state: 'DR',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1200,20 +1200,20 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Oslo',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '0001',
-        individual_address_state: '02',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Oslo',
+        address_line1: '123 Sesame St',
+        address_postal_code: '0001',
+        address_state: '02',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1247,22 +1247,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Auckland',
-        individual_address_line1: '844 Fleet Street',
-        individual_address_postal_code: '6011',
-        individual_address_state: 'N',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Auckland',
+        address_line1: '844 Fleet Street',
+        address_postal_code: '6011',
+        address_state: 'N',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1297,22 +1297,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Lisbon',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '4520',
-        individual_address_state: '01',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Lisbon',
+        address_line1: '123 Sesame St',
+        address_postal_code: '4520',
+        address_state: '01',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1346,22 +1346,22 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Stockholm',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '00150',
-        individual_address_state: 'K',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Stockholm',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00150',
+        address_state: 'K',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1395,21 +1395,21 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Singapore',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '339696',
-        individual_address_state: 'SG',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_id_number: '000000000',
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Singapore',
+        address_line1: '123 Sesame St',
+        address_postal_code: '339696',
+        address_state: 'SG',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        id_number: '000000000',
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1445,21 +1445,21 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Ljubljana',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '1210',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Ljubljana',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1210',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1493,21 +1493,21 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'Slovakia',
-        individual_address_line1: '123 Sesame St',
-        individual_address_postal_code: '00102',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123'
+        address_city: 'Slovakia',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00102',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123'
       }, {
-        individual_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1541,21 +1541,21 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'New York',
-        individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
-        individual_address_state: 'NY',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123',
-        individual_ssn_last_4: '0000'
+        address_city: 'New York',
+        address_line1: '285 Fulton St',
+        address_postal_code: '10007',
+        address_state: 'NY',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        ssn_last_4: '0000'
       }, {
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1595,24 +1595,24 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       req2.account = user.account
       req2.session = user.session
       req2.uploads = {
-        individual_verification_document_back: TestHelper['success_id_scan_back.png'],
-        individual_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req2.body = {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        individual_address_city: 'New York',
-        individual_address_line1: '285 Fulton St',
-        individual_address_postal_code: '10007',
-        individual_address_state: 'NY',
-        individual_dob_day: '1',
-        individual_dob_month: '1',
-        individual_dob_year: '1950',
-        individual_email: user.profile.contactEmail,
-        individual_first_name: user.profile.firstName,
-        individual_last_name: user.profile.lastName,
-        individual_phone: '456-789-0123',
-        individual_ssn_last_4: '0000'
+        address_city: 'New York',
+        address_line1: '285 Fulton St',
+        address_postal_code: '10007',
+        address_state: 'NY',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        ssn_last_4: '0000'
       }
       await req2.post()
       const req3 = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)

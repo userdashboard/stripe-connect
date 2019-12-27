@@ -6,7 +6,7 @@ describe('/account/connect/edit-company-director', () => {
   describe('EditCompanyDirector#BEFORE', () => {
     it('should reject invalid directorid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/connect/edit-company-director?directorid=invalid')
+      const req = TestHelper.createRequest('/account/connect/edit-company-director?personid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -27,13 +27,13 @@ describe('/account/connect/edit-company-director', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '8931',
         business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        company_address_city: 'Berlin',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
-        company_address_state: 'BW',
-        company_name: user.profile.firstName + '\'s company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000'
+        address_city: 'Berlin',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        name: user.profile.firstName + '\'s company',
+        phone: '456-789-0123',
+        tax_id: '00000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Berlin',
@@ -65,20 +65,20 @@ describe('/account/connect/edit-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -98,17 +98,17 @@ describe('/account/connect/edit-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const user2 = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user2.account
       req.session = user2.session
       let errorMessage
@@ -128,20 +128,20 @@ describe('/account/connect/edit-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.director.personid, user.director.personid)
+      assert.strictEqual(req.data.director.id, user.director.id)
     })
   })
 
@@ -154,16 +154,16 @@ describe('/account/connect/edit-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       const page = await req.get()
@@ -182,24 +182,24 @@ describe('/account/connect/edit-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       for (const field in req.body) {
         const value = req.body[field]
@@ -221,24 +221,24 @@ describe('/account/connect/edit-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       req.filename = __filename
       req.screenshots = [
@@ -247,8 +247,8 @@ describe('/account/connect/edit-company-director', () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/company-directors?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/company-director?directorid=${user.director.personid}` },
-        { click: `/account/connect/edit-company-director?directorid=${user.director.personid}` },
+        { click: `/account/connect/company-director?personid=${user.director.id}` },
+        { click: `/account/connect/edit-company-director?personid=${user.director.id}` },
         { fill: '#submit-form' }
       ]
       const page = await req.post()
@@ -266,27 +266,27 @@ describe('/account/connect/edit-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
@@ -303,27 +303,27 @@ describe('/account/connect/edit-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${user.director.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+        verification_document_back: TestHelper['success_id_scan_back.png']
       }
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)

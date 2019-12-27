@@ -25,9 +25,7 @@ async function beforeRequest (req) {
   }
   stripeAccount.individual = stripeAccount.individual || {}
   stripeAccount.company = stripeAccount.company || {}
-  const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  stripeAccount.registration = registration
-  req.data = { stripeAccount, registration }
+  req.data = { stripeAccount }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -51,28 +49,18 @@ async function renderPage (req, res, messageTemplate) {
   }
   const removeElements = []
   if (req.data.stripeAccount.business_type === 'individual') {
-    removeElements.push('business-name', 'business-registration-name')
+    removeElements.push('business-name')
     if (req.data.stripeAccount.individual.first_name) {
-      removeElements.push('blank-name', 'individual-registration-name')
+      removeElements.push('blank-name')
     } else {
       removeElements.push('individual-name')
-      if (req.data.registration.individual_first_name) {
-        removeElements.push('blank-name')
-      } else {
-        removeElements.push('individual-registration-name')
-      }
     }
   } else {
-    removeElements.push('individual-name', 'individual-registration-name')
+    removeElements.push('individual-name')
     if (req.data.stripeAccount.company.name) {
-      removeElements.push('blank-name', 'business-registration-name')
+      removeElements.push('blank-name')
     } else {
       removeElements.push('business-name')
-      if (req.data.registration.company_name) {
-        removeElements.push('blank-name')
-      } else {
-        removeElements.push('business-registration-name')
-      }
     }
   }
   if (messageTemplate) {

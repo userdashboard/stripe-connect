@@ -19,82 +19,82 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
     if (req.uploads) {
-      if (req.uploads.individual_verification_document_front) {
+      if (req.uploads.verification_document_front) {
         const uploadData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.individual_verification_document_front.name,
-            data: req.uploads.individual_verification_document_front.buffer
+            name: req.uploads.verification_document_front.name,
+            data: req.uploads.verification_document_front.buffer
           }
         }
         try {
           const file = await stripe.files.create(uploadData, req.stripeKey)
-          req.body.individual_verification_document_front = file.id
+          req.body.verification_document_front = file.id
         } catch (error) {
-          throw new Error('invalid-individual_verification_document_front')
+          throw new Error('invalid-verification_document_front')
         }
       }
-      if (req.uploads.individual_verification_document_back) {
+      if (req.uploads.verification_document_back) {
         const uploadData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.individual_verification_document_back.name,
-            data: req.uploads.individual_verification_document_back.buffer
+            name: req.uploads.verification_document_back.name,
+            data: req.uploads.verification_document_back.buffer
           }
         }
         try {
           const file = await stripe.files.create(uploadData, req.stripeKey)
-          req.body.individual_verification_document_back = file.id
+          req.body.verification_document_back = file.id
         } catch (error) {
-          throw new Error('invalid-individual_verification_document_back')
+          throw new Error('invalid-verification_document_back')
         }
       }
-      if (req.uploads.individual_verification_additional_document_front) {
+      if (req.uploads.verification_additional_document_front) {
         const uploadData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.individual_verification_additional_document_front.name,
-            data: req.uploads.individual_verification_additional_document_front.buffer
+            name: req.uploads.verification_additional_document_front.name,
+            data: req.uploads.verification_additional_document_front.buffer
           }
         }
         try {
           const file = await stripe.files.create(uploadData, req.stripeKey)
-          req.body.individual_verification_additional_document_front = file.id
+          req.body.verification_additional_document_front = file.id
         } catch (error) {
-          throw new Error('invalid-individual_verification_additional_document_front')
+          throw new Error('invalid-verification_additional_document_front')
         }
       }
-      if (req.uploads.individual_verification_additional_document_back) {
+      if (req.uploads.verification_additional_document_back) {
         const uploadData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.individual_verification_additional_document_back.name,
-            data: req.uploads.individual_verification_additional_document_back.buffer
+            name: req.uploads.verification_additional_document_back.name,
+            data: req.uploads.verification_additional_document_back.buffer
           }
         }
         try {
           const file = await stripe.files.create(uploadData, req.stripeKey)
-          req.body.individual_verification_additional_document_back = file.id
+          req.body.verification_additional_document_back = file.id
         } catch (error) {
-          throw new Error('invalid-individual_verification_additional_document_back')
+          throw new Error('invalid-verification_additional_document_back')
         }
       }
     }
-    if (req.body.individual_address_state) {
+    if (req.body.address_state) {
       const states = connect.countryDivisions[stripeAccount.country]
       let found = false
       for (const state of states) {
-        found = state.value === req.body.individual_address_state
+        found = state.value === req.body.address_state
         if (found) {
           break
         }
       }
       if (!found) {
-        throw new Error('invalid-individual_address_state')
+        throw new Error('invalid-address_state')
       }
     }
     if (req.body.business_profile_mcc) {
@@ -111,59 +111,59 @@ module.exports = {
       }
     }
     let validateDOB = false
-    if (req.body.individual_dob_day) {
+    if (req.body.dob_day) {
       validateDOB = true
       try {
-        const day = parseInt(req.body.individual_dob_day, 10)
+        const day = parseInt(req.body.dob_day, 10)
         if (!day || day < 1 || day > 31) {
-          throw new Error('invalid-individual_dob_day')
+          throw new Error('invalid-dob_day')
         }
         if (day < 10) {
-          req.body.individual_dob_day = '0' + day
+          req.body.dob_day = '0' + day
         }
       } catch (s) {
-        throw new Error('invalid-individual_dob_day')
+        throw new Error('invalid-dob_day')
       }
     }
-    if (req.body.individual_dob_month) {
+    if (req.body.dob_month) {
       validateDOB = true
       try {
-        const month = parseInt(req.body.individual_dob_month, 10)
+        const month = parseInt(req.body.dob_month, 10)
         if (!month || month < 1 || month > 12) {
-          throw new Error('invalid-individual_dob_month')
+          throw new Error('invalid-dob_month')
         }
         if (month < 10) {
-          req.body.individual_dob_month = '0' + month
+          req.body.dob_month = '0' + month
         }
       } catch (s) {
-        throw new Error('invalid-individual_dob_month')
+        throw new Error('invalid-dob_month')
       }
     }
-    if (req.body.individual_dob_year) {
+    if (req.body.dob_year) {
       validateDOB = true
       try {
-        const year = parseInt(req.body.individual_dob_year, 10)
+        const year = parseInt(req.body.dob_year, 10)
         if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
-          throw new Error('invalid-individual_dob_year111')
+          throw new Error('invalid-dob_year111')
         }
       } catch (s) {
-        throw new Error('invalid-individual_dob_year')
+        throw new Error('invalid-dob_year')
       }
     }
     if (validateDOB) {
-      if (!req.body.individual_dob_day) {
-        throw new Error('invalid-individual_dob_day')
+      if (!req.body.dob_day) {
+        throw new Error('invalid-dob_day')
       }
-      if (!req.body.individual_dob_month) {
-        throw new Error('invalid-individual_dob_month')
+      if (!req.body.dob_month) {
+        throw new Error('invalid-dob_month')
       }
-      if (!req.body.individual_dob_year) {
-        throw new Error('invalid-individual_dob_year')
+      if (!req.body.dob_year) {
+        throw new Error('invalid-dob_year')
       }
       try {
-        Date.parse(`${req.body.individual_dob_year}/${req.body.individual_dob_month}/${req.body.individual_dob_day}`)
+        Date.parse(`${req.body.dob_year}/${req.body.dob_month}/${req.body.dob_day}`)
       } catch (error) {
-        throw new Error('invalid-individual_dob_day')
+        throw new Error('invalid-dob_day')
       }
     }
     const accountInfo = {}
@@ -187,41 +187,41 @@ module.exports = {
           }
           throw new Error(`invalid-${posted}`)
         }
-        if (field === 'individual.gender' && req.body.individual_gender !== 'female' && req.body.individual_gender !== 'male') {
+        if (field === 'individual.gender' && req.body.gender !== 'female' && req.body.gender !== 'male') {
           throw new Error(`invalid-${posted}`)
         }
-        if (field.startsWith('individual_address_')) {
-          if (field.startsWith('individual_address_kana_')) {
-            const property = field.substring('individual_address_kana_'.length)
+        if (field.startsWith('address_')) {
+          if (field.startsWith('address_kana_')) {
+            const property = field.substring('address_kana_'.length)
             accountInfo.individual.address_kana = accountInfo.individual.address_kana || {}
-            accountInfo.individual.address_kana[property] = req.body[field]
-          } else if (field.startsWith('individual_address_kanji_')) {
-            const property = field.substring('individual_address_kanji_'.length)
+            accountInfo.individual.address_kana[property] = req.body[posted]
+          } else if (field.startsWith('address_kanji_')) {
+            const property = field.substring('address_kanji_'.length)
             accountInfo.individual.address_kanji = accountInfo.individual.address_kanji || {}
-            accountInfo.individual.address_kanji[property] = req.body[field]
+            accountInfo.individual.address_kanji[property] = req.body[posted]
           } else {
-            const property = field.substring('individual_address_'.length)
-            accountInfo.individual.address[property] = req.body[field]
+            const property = field.substring('address_'.length)
+            accountInfo.individual.address[property] = req.body[posted]
           }
-        } else if (field.startsWith('individual_dob_')) {
-          const property = field.substring('individual_dob_'.length)
-          accountInfo.individual.dob[property] = req.body[field]
-        } else if (field.startsWith('individual_verification_document_')) {
+        } else if (field.startsWith('dob_')) {
+          const property = field.substring('dob_'.length)
+          accountInfo.individual.dob[property] = req.body[posted]
+        } else if (field.startsWith('verification_document_')) {
           accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-          const property = field.substring('individual_verification_document_'.length)
-          accountInfo.individual.verification.document[property] = req.body[field]
-        } else if (field.startsWith('individual_verification_additional_document_')) {
+          const property = field.substring('verification_document_'.length)
+          accountInfo.individual.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification_additional_document_')) {
           accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-          const property = field.substring('individual_verification_additional_document_'.length)
-          accountInfo.individual.verification.additional_document[property] = req.body[field]
-        } else if (field.startsWith('individual_')) {
-          const property = field.substring('individual_'.length)
-          accountInfo.individual[property] = req.body[field]
+          const property = field.substring('verification_additional_document_'.length)
+          accountInfo.individual.verification.additional_document[property] = req.body[posted]
+        } else if (field.startsWith('')) {
+          const property = field.substring(''.length)
+          accountInfo.individual[property] = req.body[posted]
         } else if (field.startsWith('business_profile_')) {
           const property = field.substring('business_profile_'.length)
-          accountInfo.business_profile[property] = req.body[field]
+          accountInfo.business_profile[property] = req.body[posted]
         } else {
-          accountInfo[field] = req.body[field]
+          accountInfo[field] = req.body[posted]
         }
       }
     }

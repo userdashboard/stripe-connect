@@ -12,11 +12,11 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -30,15 +30,15 @@ describe('/api/user/connect/update-company-director', () => {
       it('invalid querystring directorid', async () => {
         const user = await TestHelper.createUser()
         const person = TestHelper.nextIdentity()
-        const req = TestHelper.createRequest('/api/user/connect/update-company-director?directorid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/update-company-director?personid=invalid')
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -59,25 +59,25 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
         req.account = user2.account
         req.session = user2.session
         req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -89,8 +89,8 @@ describe('/api/user/connect/update-company-director', () => {
       })
     })
 
-    describe('invalid-relationship_director_first_name', () => {
-      it('missing posted relationship_director_first_name', async () => {
+    describe('invalid-first_name', () => {
+      it('missing posted first_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
@@ -98,24 +98,24 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: '',
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: '',
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -123,12 +123,12 @@ describe('/api/user/connect/update-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_first_name')
+        assert.strictEqual(errorMessage, 'invalid-first_name')
       })
     })
 
-    describe('invalid-relationship_director_last_name', () => {
-      it('missing posted relationship_director_last_name', async () => {
+    describe('invalid-last_name', () => {
+      it('missing posted last_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
@@ -136,24 +136,24 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: ''
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: ''
         }
         let errorMessage
         try {
@@ -161,12 +161,12 @@ describe('/api/user/connect/update-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_last_name')
+        assert.strictEqual(errorMessage, 'invalid-last_name')
       })
     })
 
-    describe('invalid relationship_director_dob_day', () => {
-      it('missing posted relationship_director_dob_day', async () => {
+    describe('invalid dob_day', () => {
+      it('missing posted dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
@@ -174,24 +174,24 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_dob_day: '',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -199,10 +199,10 @@ describe('/api/user/connect/update-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_day')
+        assert.strictEqual(errorMessage, 'invalid-dob_day')
       })
 
-      it('invalid posted relationship_director_dob_day', async () => {
+      it('invalid posted dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
@@ -210,24 +210,24 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_dob_day: '46',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '46',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -235,86 +235,12 @@ describe('/api/user/connect/update-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_day')
-      })
-    })
-
-    describe('invalid-relationship_director_dob_month', () => {
-      it('missing posted relationship_director_dob_month', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'GB',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
-        }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
-        }
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_month')
-      })
-
-      it('invalid posted relationship_director_dob_month', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'GB',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
-        }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '15',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
-        }
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_month')
+        assert.strictEqual(errorMessage, 'invalid-dob_day')
       })
     })
 
-    describe('invalid-relationship_director_dob_year', () => {
-      it('missing posted relationship_director_dob_year', async () => {
+    describe('invalid-dob_month', () => {
+      it('missing posted dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
@@ -322,24 +248,24 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -347,10 +273,10 @@ describe('/api/user/connect/update-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_year')
+        assert.strictEqual(errorMessage, 'invalid-dob_month')
       })
 
-      it('invalid posted relationship_director_dob_year', async () => {
+      it('invalid posted dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
@@ -358,24 +284,24 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: 'invalid',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '15',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -383,7 +309,81 @@ describe('/api/user/connect/update-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_year')
+        assert.strictEqual(errorMessage, 'invalid-dob_month')
+      })
+    })
+
+    describe('invalid-dob_year', () => {
+      it('missing posted dob_year', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'company'
+        })
+        const person = TestHelper.nextIdentity()
+        const director = await TestHelper.createCompanyDirector(user, {
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
+        }, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '',
+          first_name: person.firstName,
+          last_name: person.lastName
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-dob_year')
+      })
+
+      it('invalid posted dob_year', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'company'
+        })
+        const person = TestHelper.nextIdentity()
+        const director = await TestHelper.createCompanyDirector(user, {
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: person.lastName
+        }, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: 'invalid',
+          first_name: person.firstName,
+          last_name: person.lastName
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-dob_year')
       })
     })
   })
@@ -398,25 +398,25 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName,
         token: 'sample1'
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       const body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: 'Modified name',
-        relationship_director_last_name: person.lastName,
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: 'Modified name',
+        last_name: person.lastName,
         token: 'sample2'
       }
       req.body = TestHelper.createMultiPart(req, body)
@@ -424,7 +424,7 @@ describe('/api/user/connect/update-company-director', () => {
       assert.notStrictEqual(directorNow.token, director.token)
     })
 
-    it('optional posted file relationship_director_verification_document_front', async () => {
+    it('optional posted file verification_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -432,34 +432,34 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: 'Modified name',
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       req.body = TestHelper.createMultiPart(req, body)
       const directorNow = await req.patch()
-      assert.notStrictEqual(directorNow.relationship_director_verification_document_front, director.relationship_director_verification_document_front)
+      assert.notStrictEqual(directorNow.verification_document_front, director.verification_document_front)
     })
 
-    it('optional posted file relationship_director_verification_document_back', async () => {
+    it('optional posted file verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -467,34 +467,34 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: 'Modified name',
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       req.body = TestHelper.createMultiPart(req, body)
       const directorNow = await req.patch()
-      assert.notStrictEqual(directorNow.relationship_director_verification_document_back, director.relationship_director_verification_document_back)
+      assert.notStrictEqual(directorNow.verification_document_back, director.verification_document_back)
     })
 
-    it('required posted relationship_director_first_name', async () => {
+    it('required posted first_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -502,24 +502,24 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: '',
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: '',
+        last_name: person.lastName
       }
       let errorMessage
       try {
@@ -527,10 +527,10 @@ describe('/api/user/connect/update-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-relationship_director_first_name')
+      assert.strictEqual(errorMessage, 'invalid-first_name')
     })
 
-    it('required posted relationship_director_last_name', async () => {
+    it('required posted last_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -538,24 +538,24 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: ''
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: ''
       }
       let errorMessage
       try {
@@ -563,10 +563,10 @@ describe('/api/user/connect/update-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-relationship_director_last_name')
+      assert.strictEqual(errorMessage, 'invalid-last_name')
     })
 
-    it('required posted relationship_director_dob_day', async () => {
+    it('required posted dob_day', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -574,24 +574,24 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_dob_day: '',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       let errorMessage
       try {
@@ -599,10 +599,10 @@ describe('/api/user/connect/update-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_day')
+      assert.strictEqual(errorMessage, 'invalid-dob_day')
     })
 
-    it('required posted relationship_director_dob_month', async () => {
+    it('required posted dob_month', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -610,24 +610,24 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       let errorMessage
       try {
@@ -635,10 +635,10 @@ describe('/api/user/connect/update-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_month')
+      assert.strictEqual(errorMessage, 'invalid-dob_month')
     })
 
-    it('required posted relationship_director_dob_year', async () => {
+    it('required posted dob_year', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -646,24 +646,24 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       let errorMessage
       try {
@@ -671,7 +671,7 @@ describe('/api/user/connect/update-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_year')
+      assert.strictEqual(errorMessage, 'invalid-dob_year')
     })
   })
 
@@ -684,27 +684,27 @@ describe('/api/user/connect/update-company-director', () => {
       })
       const person = TestHelper.nextIdentity()
       const director = await TestHelper.createCompanyDirector(user, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?directorid=${director.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: 'Modified name',
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const directorNow = await req.patch()
-      assert.strictEqual(directorNow.relationship_director_first_name, 'Modified name')
+      assert.strictEqual(directorNow.first_name, 'Modified name')
     })
   })
 
@@ -722,29 +722,29 @@ describe('/api/user/connect/update-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       await req.post()
       const directors = await global.api.user.connect.CompanyDirectors.get(req)
       const director = directors[0]
-      const req2 = TestHelper.createRequest(`/account/connect/edit-company-director?directorid=${director.personid}`)
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${director.id}`)
       req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session
       req2.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       await req2.post()
       const directorNow = await global.api.user.connect.CompanyDirector.get(req2)

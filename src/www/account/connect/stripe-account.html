@@ -25,10 +25,8 @@
         <tr>
           <th>Name</th>
           <td id="blank-name">Not yet provided</td>
-          <td id="individual-registration-name">${stripeAccount.registration.individual_first_name} ${stripeAccount.registration.individual_last_name}</td>
-          <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
-          <td id="business-registration-name">${stripeAccount.registration.company_name || ""}</td>
-          <td id="business-name">${stripeAccount.company.name || ""}</td>
+                    <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+                    <td id="business-name">${stripeAccount.company.name || ""}</td>
         </tr>
         <tr>
           <th>Country</th>
@@ -119,15 +117,15 @@
     </div>
   </body>
   <template id="owner-row">
-    <tr id="${owner.personid}">
-      <td><a href="/account/connect/edit-beneficial-owner?ownerid=${owner.personid}">${owner.personid}</a></td>
-      <td>${owner.relationship_owner_first_name} ${owner.relationship_owner_last_name}</td>
+    <tr id="${person.id}">
+      <td><a href="/account/connect/edit-beneficial-owner?ownerid=${person.id}">${person.id}</a></td>
+      <td>${person.first_name} ${person.last_name}</td>
     </tr>
   </template>
   <template id="director-row">
-    <tr id="${director.personid}">
-      <td><a href="/account/connect/edit-company-director?directorid=${director.personid}">${director.personid}</a></td>
-      <td>${director.relationship_director_first_name} ${director.relationship_director_last_name}</td>
+    <tr id="${person.id}">
+      <td><a href="/account/connect/edit-company-director?directorid=${person.id}">${person.id}</a></td>
+      <td>${person.first_name} ${person.last_name}</td>
     </tr>
   </template>
   <template id="payment-information">

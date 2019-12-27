@@ -17,8 +17,8 @@ module.exports = {
       if (stripeAccount.metadata.owners) {
         const owners = await global.api.user.connect.BeneficialOwners.get(req)
         if (owners && owners.length) {
-          for (const owner of owners) {
-            await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${owner.personid}`)
+          for (const id of owners) {
+            await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${id}`)
           }
         }
       }

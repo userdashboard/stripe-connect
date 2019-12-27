@@ -53,10 +53,10 @@ async function renderPage (req, res, messageTemplate) {
     }
   }
   if (req.data.director.requirements.currently_due.indexOf('relationship.director.relationship_title') === -1) {
-    removeElements.push('relationship_director_relationship_title-container')
+    removeElements.push('relationship_title-container')
   }
   if (req.data.director.requirements.currently_due.indexOf('relationship.director.email') === -1) {
-    removeElements.push('relationship_director_email')
+    removeElements.push('email')
   }
   if (req.method === 'GET') {
     for (const field in req.data.director) {

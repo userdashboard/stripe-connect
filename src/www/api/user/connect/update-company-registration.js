@@ -10,7 +10,7 @@ module.exports = {
       throw new Error('invalid-stripeid')
     }
     if (!req.body) {
-      throw new Error('invalid_company_name')
+      throw new Error('invalid_name')
     }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
@@ -20,36 +20,36 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
     if (req.uploads) {
-      if (req.uploads.company_verification_document_front) {
+      if (req.uploads.verification_document_front) {
         const uploadData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.company_verification_document_back.name,
-            data: req.uploads.company_verification_document_back.buffer
+            name: req.uploads.verification_document_back.name,
+            data: req.uploads.verification_document_back.buffer
           }
         }
         try {
           const file = await stripe.files.create(uploadData, req.stripeKey)
-          req.body.company_verification_document_front = file.id
+          req.body.verification_document_front = file.id
         } catch (error) {
-          throw new Error('invalid-company_verification_document_front')
+          throw new Error('invalid-verification_document_front')
         }
       }
-      if (req.uploads.company_verification_document_back) {
+      if (req.uploads.verification_document_back) {
         const uploadData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
-            name: req.uploads.company_verification_document_back.name,
-            data: req.uploads.company_verification_document_back.buffer
+            name: req.uploads.verification_document_back.name,
+            data: req.uploads.verification_document_back.buffer
           }
         }
         try {
           const file = await stripe.files.create(uploadData, req.stripeKey)
-          req.body.company_verification_document_back = file.id
+          req.body.verification_document_back = file.id
         } catch (error) {
-          throw new Error('invalid-company_verification_document_back')
+          throw new Error('invalid-verification_document_back')
         }
       }
     }
@@ -74,33 +74,33 @@ module.exports = {
         }
         if (field.startsWith('business_profile_')) {
           const property = field.substring('business_profile_'.length)
-          accountInfo.business_profile[property] = req.body[field]
-          delete (req.body[field])
+          accountInfo.business_profile[property] = req.body[posted]
+          delete (req.body[posted])
           continue
         }
-        if (field.startsWith('company_')) {
-          if (field.startsWith('company_address_kanji_')) {
-            const property = field.substring('company_address_kanji_'.length)
+        if (field.startsWith('')) {
+          if (field.startsWith('address_kanji_')) {
+            const property = field.substring('address_kanji_'.length)
             accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
-            accountInfo.company.address_kanji[property] = req.body[field]
-          } else if (field.startsWith('company_address_kana_')) {
-            const property = field.substring('company_address_kana_'.length)
+            accountInfo.company.address_kanji[property] = req.body[posted]
+          } else if (field.startsWith('address_kana_')) {
+            const property = field.substring('address_kana_'.length)
             accountInfo.company.address_kana = accountInfo.company.address_kana || {}
-            accountInfo.company.address_kana[property] = req.body[field]
-          } else if (field.startsWith('company_address_')) {
-            const property = field.substring('company_address_'.length)
-            accountInfo.company.address[property] = req.body[field]
-          } else if (field.startsWith('company_name_')) {
-            const property = field.substring('company_name_'.length)
-            accountInfo.company[`name_${property}`] = req.body[field]
-          } else if (field.startsWith('company_verification_document_')) {
-            const property = field.substring('company_verification_document_'.length)
+            accountInfo.company.address_kana[property] = req.body[posted]
+          } else if (field.startsWith('address_')) {
+            const property = field.substring('address_'.length)
+            accountInfo.company.address[property] = req.body[posted]
+          } else if (field.startsWith('name_')) {
+            const property = field.substring('name_'.length)
+            accountInfo.company[`name_${property}`] = req.body[posted]
+          } else if (field.startsWith('verification_document_')) {
+            const property = field.substring('verification_document_'.length)
             accountInfo.company.verification = accountInfo.company.verification || {}
             accountInfo.company.verification.document = accountInfo.company.verification.document || {}
-            accountInfo.company.verification.document[property] = req.body[field]
+            accountInfo.company.verification.document[property] = req.body[posted]
           } else {
-            const property = field.substring('company_'.length)
-            accountInfo.company[property] = req.body[field]
+            const property = field.substring(''.length)
+            accountInfo.company[property] = req.body[posted]
           }
         }
       }
@@ -124,20 +124,20 @@ module.exports = {
         throw new Error('invalid-business_profile_url')
       }
     }
-    if (req.body.company_address_state) {
+    if (req.body.address_state) {
       const states = connect.countryDivisions[stripeAccount.country]
       if (!states || !states.length) {
-        throw new Error('invalid-company_address_state')
+        throw new Error('invalid-address_state')
       }
       let found = false
       for (const state of states) {
-        found = state.value === req.body.company_address_state
+        found = state.value === req.body.address_state
         if (found) {
           break
         }
       }
       if (!found) {
-        throw new Error('invalid-company_address_state')
+        throw new Error('invalid-address_state')
       }
     }
     try {

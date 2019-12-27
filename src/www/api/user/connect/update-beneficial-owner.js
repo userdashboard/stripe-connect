@@ -183,34 +183,34 @@ module.exports = {
         for (const field of person.requirements.currently_due) {
           if (field.startsWith('business_profile_')) {
             const property = field.substring('business_profile_'.length)
-            beneficialOwnerInfo.business_profile[property] = req.body[field]
-            delete (req.body[field])
+            beneficialOwnerInfo.business_profile[property] = req.body[posted]
+            delete (req.body[posted])
             continue
           }
           if (field.startsWith('address_kanji_')) {
             const property = field.substring('address_kanji_'.length)
             beneficialOwnerInfo.address_kanji = beneficialOwnerInfo.address_kanji || {}
-            beneficialOwnerInfo.address_kanji[property] = req.body[field]
+            beneficialOwnerInfo.address_kanji[property] = req.body[posted]
           } else if (field.startsWith('address_kana_')) {
             const property = field.substring('address_kana_'.length)
             beneficialOwnerInfo.address_kana = beneficialOwnerInfo.address_kana || {}
-            beneficialOwnerInfo.address_kana[property] = req.body[field]
+            beneficialOwnerInfo.address_kana[property] = req.body[posted]
           } else if (field.startsWith('address_')) {
             const property = field.substring('address_'.length)
-            beneficialOwnerInfo.address[property] = req.body[field]
+            beneficialOwnerInfo.address[property] = req.body[posted]
           } else if (field.startsWith('verification_document_')) {
             const property = field.substring('verification_document_'.length)
             beneficialOwnerInfo.verification = beneficialOwnerInfo.verification || {}
             beneficialOwnerInfo.verification.document = beneficialOwnerInfo.verification.document || {}
-            beneficialOwnerInfo.verification.document[property] = req.body[field]
+            beneficialOwnerInfo.verification.document[property] = req.body[posted]
           } else if (field.startsWith('verification_additional_document_')) {
             const property = field.substring('verification_additional_document_'.length)
             beneficialOwnerInfo.verification = beneficialOwnerInfo.verification || {}
             beneficialOwnerInfo.verification.additional_document = beneficialOwnerInfo.verification.additional_document || {}
-            beneficialOwnerInfo.verification.additional_document[property] = req.body[field]
+            beneficialOwnerInfo.verification.additional_document[property] = req.body[posted]
           } else {
             const property = field.substring(''.length)
-            beneficialOwnerInfo.company[property] = req.body[field]
+            beneficialOwnerInfo.company[property] = req.body[posted]
           }
         }
       }

@@ -18,7 +18,7 @@ module.exports = {
     }
     const owners = await global.api.user.connect.BeneficialOwners.get(req)
     for (const i in owners) {
-      if (owners[i].personid !== req.query.personid) {
+      if (owners[i].id !== req.query.personid) {
         continue
       }
       owners.splice(i, 1)

@@ -225,8 +225,7 @@ async function createCompanyRepresentative (user, properties, uploads) {
   req.body = createMultiPart(req, properties)
   await req.patch()
   await waitForWebhook('account.updated', (stripeEvent) => {
-    const registration = connect.MetaData.parse(stripeEvent.data.object.metadata, 'registration')
-    return registration && registration.relationship_representative_first_name
+    return stripeEvent.data.object.metadata.representative !== undefined
   })
   return user.stripeAccount
 }
@@ -283,7 +282,7 @@ async function createBeneficialOwner (user, body, uploads) {
     return stripeEvent.data.object.id === user.stripeAccount.id &&
            owners &&
            owners.length &&
-           owners[owners.length - 1].personid === owner.personid
+           owners[owners.length - 1] === owner.id
   })
   user.owner = owner
   return owner
@@ -301,7 +300,7 @@ async function createCompanyDirector (user, body, uploads) {
     return stripeEvent.data.object.id === user.stripeAccount.id &&
            directors &&
            directors.length &&
-           directors[directors.length - 1].personid === director.personid
+           directors[directors.length - 1] === director.id
   })
   user.director = director
   return director

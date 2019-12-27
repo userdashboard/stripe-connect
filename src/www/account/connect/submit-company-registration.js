@@ -19,10 +19,10 @@ async function beforeRequest (req) {
   }
   const countrySpec = connect.countrySpecIndex[stripeAccount.country]
   if (countrySpec.verification_fields.company.minimum.indexOf('relationship.owner') > -1 && !stripeAccount.company.owners_provided) {
-    req.error = req.error || 'invalid-company_beneficial_owners'
+    req.error = req.error || 'invalid-beneficial_owners'
   }
   if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
-    req.error = req.error || 'invalid-company_directors'
+    req.error = req.error || 'invalid-directors'
   }
   if (!stripeAccount.metadata.representative) {
     req.error = req.error || 'invalid-company-representative'
@@ -33,8 +33,8 @@ async function beforeRequest (req) {
   if (!completedPayment) {
     req.error = req.error || 'invalid-payment-details'
   }
-  const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-  const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+  const owners = await global.api.user.connect.BeneficialOwners.get(req)
+  const directors = await global.api.user.connect.CompanyDirectors.get(req)
   req.data = { stripeAccount, owners, directors }
 }
 

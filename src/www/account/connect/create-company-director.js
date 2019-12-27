@@ -21,7 +21,7 @@ async function beforeRequest (req) {
   if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
     throw new Error('invalid-stripe-account')
   }
-  const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
+  const directors = await global.api.user.connect.CompanyDirectors.get(req)
   req.data = { stripeAccount, directors }
 }
 
@@ -48,10 +48,10 @@ async function renderPage (req, res, messageTemplate) {
   }
   const requirements = JSON.parse(req.data.stripeAccount.metadata.companyDirectorTemplate)
   if (requirements.currently_due.indexOf('relationship.director.relationship_title') === -1) {
-    removeElements.push('relationship_director_relationship_title-container')
+    removeElements.push('relationship_title-container')
   }
   if (requirements.currently_due.indexOf('relationship.director.email') === -1) {
-    removeElements.push('relationship_director_email')
+    removeElements.push('email')
   }
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
@@ -100,8 +100,8 @@ async function submitForm (req, res) {
   }
   if (req.data && req.data.directors && req.data.directors.length) {
     for (const director of req.data.directors) {
-      if (director.first_name === req.body.relationship_director_first_name &&
-        director.last_name === req.body.relationship_director_last_name) {
+      if (director.first_name === req.body.first_name &&
+        director.last_name === req.body.last_name) {
         return renderPage(req, res, 'duplicate-name')
       }
     }

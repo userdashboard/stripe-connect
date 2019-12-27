@@ -29,73 +29,17 @@ module.exports = {
     if (!stripeAccount.metadata.representative) {
       throw new Error('invalid-representative')
     }
-    const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration')
-    if (!registration) {
+    if (stripeAccount.requirements.currently_due.length) {
       throw new Error('invalid-registration')
-    }
-    for (const field of stripeAccount.requirements.currently_due) {
-      const posted = field.split('.').join('_')
-      if (!registration[posted]) {
-        if (field === 'company.address.line2' ||
-          (field === 'business_profile.url' && registration.business_profile_product_description) ||
-          (field === 'business_profile.product_description' && registration.business_profile_url)) {
-          continue
-        }
-        throw new Error('invalid-registration')
-      }
     }
     const accountInfo = {
       metadata: {
         submitted: dashboard.Timestamp.now
       },
-      business_profile: {},
-      company: {
-        address: {}
-      },
       tos_acceptance: {
         ip: req.ip,
         user_agent: req.userAgent,
         date: dashboard.Timestamp.now
-      }
-    }
-    for (const field in registration) {
-      if (field.startsWith('business_profile_')) {
-        const property = field.substring('business_profile_'.length)
-        accountInfo.business_profile[property] = registration[field]
-        delete (registration[field])
-        continue
-      }
-      if (field.startsWith('company_')) {
-        if (field.startsWith('company_address_kanji_')) {
-          const property = field.substring('company_address_kanji_'.length)
-          accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
-          accountInfo.company.address_kanji[property] = registration[field]
-        } else if (field.startsWith('company_address_kana_')) {
-          const property = field.substring('company_address_kana_'.length)
-          accountInfo.company.address_kana = accountInfo.company.address_kana || {}
-          accountInfo.company.address_kana[property] = registration[field]
-        } else if (field.startsWith('company_address_')) {
-          const property = field.substring('company_address_'.length)
-          accountInfo.company.address[property] = registration[field]
-        } else if (field.startsWith('company_name_')) {
-          const property = field.substring('company_name_'.length)
-          accountInfo.company[`name_${property}`] = registration[field]
-        } else if (field.startsWith('company_verification_document_')) {
-          const property = field.substring('company_verification_document_'.length)
-          accountInfo.company.verification = accountInfo.company.verification || {}
-          accountInfo.company.verification.document = accountInfo.company.verification.document || {}
-          accountInfo.company.verification.document[property] = registration[field]
-        } else {
-          const property = field.substring('company_'.length)
-          accountInfo.company[property] = registration[field]
-        }
-        delete (registration[field])
-      }
-    }
-    connect.MetaData.store(stripeAccount.metadata, 'registration', registration)
-    for (const field in stripeAccount.metadata) {
-      if (field.startsWith('registration')) {
-        accountInfo.metadata[field] = stripeAccount.metadata[field]
       }
     }
     while (true) {
@@ -112,7 +56,7 @@ module.exports = {
         if (errorMessage.startsWith('company[address]')) {
           let field = errorMessage.substring('company[address]['.length)
           field = field.substring(0, field.length - 1)
-          throw new Error(`invalid-company_address_${field}`)
+          throw new Error(`invalid-address_${field}`)
         } else if (errorMessage.startsWith('company[personal_address]')) {
           let field = errorMessage.substring('company[personal_address]['.length)
           field = field.substring(0, field.length - 1)
@@ -120,15 +64,15 @@ module.exports = {
         } else if (errorMessage.startsWith('company[address_kana]')) {
           let field = errorMessage.substring('company[address_kana]['.length)
           field = field.substring(0, field.length - 1)
-          throw new Error(`invalid-company_address_${field}_kana`)
+          throw new Error(`invalid-address_${field}_kana`)
         } else if (errorMessage.startsWith('company[address_kanji]')) {
           let field = errorMessage.substring('company[address_kanji]['.length)
           field = field.substring(0, field.length - 1)
-          throw new Error(`invalid-company_address_${field}_kanji`)
+          throw new Error(`invalid-address_${field}_kanji`)
         } else if (errorMessage.startsWith('company[verification]')) {
           let field = errorMessage.substring('company[verification][document]['.length)
           field = field.substring(0, field.length - 1)
-          throw new Error(`invalid-company_verification_document_${field}`)
+          throw new Error(`invalid-verification_document_${field}`)
         } else if (errorMessage.startsWith('company')) {
           let field = errorMessage.substring('company['.length)
           field = field.substring(0, field.length - 1)

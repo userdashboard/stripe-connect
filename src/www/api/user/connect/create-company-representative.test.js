@@ -63,13 +63,13 @@ describe('/api/user/connect/create-company-representative', () => {
         await TestHelper.createStripeRegistration(user, {
           business_profile_mcc: '8931',
           business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          company_address_city: 'New York',
-          company_address_line1: '285 Fulton St',
-          company_address_postal_code: '10007',
-          company_address_state: 'NY',
-          company_name: 'Company',
-          company_phone: '456-789-0123',
-          company_tax_id: '00000000000'
+          address_city: 'New York',
+          address_line1: '285 Fulton St',
+          address_postal_code: '10007',
+          address_state: 'NY',
+          name: 'Company',
+          phone: '456-789-0123',
+          tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
           relationship_representative_address_city: 'New York',
@@ -2806,8 +2806,6 @@ describe('/api/user/connect/create-company-representative', () => {
         relationship_representative_ssn_last_4: '0000'
       }
       await req.post()
-      const account = await global.api.user.connect.StripeAccount.get(req)
-      const registration = connect.MetaData.parse(account.metadata, 'registration')
       const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
       req2.waitOnSubmit = true
       req2.account = user.account
@@ -2835,10 +2833,8 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       await req2.post()
       const personNow = await global.api.user.connect.StripeAccount.get(req2)
-      const registrationNow = connect.MetaData.parse(personNow.metadata, 'registration')
-      assert.notStrictEqual(registrationNow.representativeToken, registration.representativeToken)
-      assert.notStrictEqual(registrationNow.representativeToken, null)
-      assert.notStrictEqual(registrationNow.representativeToken, undefined)
+      assert.notStrictEqual(personNow.representativeToken, null)
+      assert.notStrictEqual(personNow.representativeToken, undefined)
     })
   })
 })

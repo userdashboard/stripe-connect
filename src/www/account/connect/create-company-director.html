@@ -23,44 +23,44 @@
         <div class="pure-g">
           <div class="pure-u-11-24">
             <div class="pure-control-group">
-              <label for="relationship_director_first_name">First name</label>
-              <input class="full-width" required="required" id="relationship_director_first_name" name="relationship_director_first_name" type="text" maxlength="50" />
+              <label for="first_name">First name</label>
+              <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50" />
             </div>
           </div>
           <div class="pure-u-2-24"></div>
           <div class="pure-u-11-24">
             <div class="pure-control-group">
-              <label for="relationship_director_last_name">Last name</label>
-              <input class="full-width" required="required" id="relationship_director_last_name" name="relationship_director_last_name" type="text" maxlength="50" />
+              <label for="last_name">Last name</label>
+              <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50" />
             </div>
           </div>
         </div>
-        <div id="relationship_director_email-container">
+        <div id="email-container">
           <div class="pure-control-group">
-            <label for="relationship_director_email">Contact email</label>
-            <input class="full-width" required="required" id="relationship_director_email" name="relationship_director_email" type="text" maxlength="50" />
+            <label for="email">Contact email</label>
+            <input class="full-width" required="required" id="email" name="email" type="text" maxlength="50" />
           </div>
         </div>
-        <div id="relationship_director_relationship_title-container">
+        <div id="relationship_title-container">
           <div class="pure-control-group">
-            <label for="relationship_director_relationship_title">Relationship title</label>
-            <input class="full-width" required="required" id="relationship_director_relationship_title" name="relationship_director_relationship_title" type="text" maxlength="50" />
+            <label for="relationship_title">Relationship title</label>
+            <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="50" />
           </div>
         </div>
         <div class="pure-control-group">
-          <label for="relationship_director_dob_day">Date of birth</label>
-          <input class="adjacent" required="required" id="relationship_director_dob_day" name="relationship_director_dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
-          <input class="adjacent" required="required" id="relationship_director_dob_month" name="relationship_director_dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
-          <input class="adjacent" required="required" id="relationship_director_dob_year" name="relationship_director_dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
+          <label for="dob_day">Date of birth</label>
+          <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD" />
+          <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
+          <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
         </div>
         <h2>Personal identification</h2>
         <div class="pure-control-group">
-          <label for="relationship_director_verification_document_front">Front scan/photo</label>
-          <input name="relationship_director_verification_document_front" id="relationship_director_verification_document_front" type="file" />
+          <label for="verification_document_front">Front scan/photo</label>
+          <input name="verification_document_front" id="verification_document_front" type="file" />
         </div>
         <div class="pure-control-group">
-          <label for="relationship_director_verification_document_back">Back scan/photo</label>
-          <input name="relationship_director_verification_document_back" id="relationship_director_verification_document_back" type="file" />
+          <label for="verification_document_back">Back scan/photo</label>
+          <input name="verification_document_back" id="verification_document_back" type="file" />
         </div>
         <div class="pure-controls spaced-buttons">
           <button id="submit-button" class="pure-button pure-button-primary">Create company director</button>
@@ -77,28 +77,28 @@
   <template id="upload-error">
     <div class="error message">Error! An error occurred uploading document images</div>
   </template>
-  <template id="invalid-relationship_director_verification_document_front">
+  <template id="invalid-verification_document_front">
     <div class="error message">Error! Invalid or missing document front scan or photo</div>
   </template>
-  <template id="invalid-relationship_director_verification_document_back">
+  <template id="invalid-verification_document_back">
     <div class="error message">Error! Invalid or missing document back scan or photo</div>
   </template>
-  <template id="invalid-relationship_director_first_name">
+  <template id="invalid-first_name">
     <div class="error message">Error! Invalid or missing first name</div>
   </template>
-  <template id="invalid-relationship_director_last_name">
+  <template id="invalid-last_name">
     <div class="error message">Error! Invalid or missing last name</div>
   </template>
-  <template id="relationship_director_duplicate-name">
+  <template id="duplicate-name">
     <div class="error message">Error! This director has already been added</div>
   </template>
-  <template id="invalid-relationship_director_dob_day">
+  <template id="invalid-dob_day">
     <div class="error message">Error! Invalid or missing date of birth</div>
   </template>
-  <template id="invalid-relationship_director_dob_month">
+  <template id="invalid-dob_month">
     <div class="error message">Error! Invalid or missing date of birth</div>
   </template>
-  <template id="invalid-relationship_director_dob_year">
+  <template id="invalid-dob_year">
     <div class="error message">Error! Invalid or missing date of birth</div>
   </template>
 </html>

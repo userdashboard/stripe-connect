@@ -1,6 +1,6 @@
 <a href="/home"><img src="/public/home.svg" title="Home" /><span>Home</span></a>
 <a href="/account/connect">Stripe Connect</a>
-<a href="/account/connect/stripe-account?stripeid=${owner.stripeid}">${owner.stripeid}</a>
-<a href="/account/connect/beneficial-owner?ownerid=${owner.personid}">${owner.personid}</a>
-<a href="/account/connect/edit-beneficial-owner?ownerid=${owner.personid}">Edit</a>
-<a href="/account/connect/delete-beneficial-owner?ownerid=${owner.personid}">Delete</a>
+<a href="/account/connect/stripe-account?stripeid=${person.account}">${person.account}</a>
+<a href="/account/connect/beneficial-owner?ownerid=${person.id}">${person.id}</a>
+<a href="/account/connect/edit-beneficial-owner?ownerid=${person.id}">Edit</a>
+<a href="/account/connect/delete-beneficial-owner?ownerid=${person.id}">Delete</a>

@@ -44,26 +44,26 @@ describe('/account/connect/beneficial-owners', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'Berlin',
+        address_country: 'DE',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.owners[0].personid, user.owner.personid)
+      assert.strictEqual(req.data.owners[0].id, user.owner.id)
     })
   })
 
@@ -76,20 +76,20 @@ describe('/account/connect/beneficial-owners', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'Berlin',
+        address_country: 'DE',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.filename = __filename
@@ -104,7 +104,7 @@ describe('/account/connect/beneficial-owners', () => {
       req.session = user.session
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.owner.personid)
+      const row = doc.getElementById(user.owner.id)
       assert.strictEqual(row.tag, 'tr')
     })
 
@@ -117,30 +117,30 @@ describe('/account/connect/beneficial-owners', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '5542',
         business_profile_url: 'https://website.com',
-        company_address_city: 'Berlin',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
-        company_address_state: 'BW',
-        company_name: user.profile.firstName + '\'s company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000'
+        address_city: 'Berlin',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        name: user.profile.firstName + '\'s company',
+        phone: '456-789-0123',
+        tax_id: '00000000'
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'Berlin',
+        address_country: 'DE',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.submitBeneficialOwners(user)
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)

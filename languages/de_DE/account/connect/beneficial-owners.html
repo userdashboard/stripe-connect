@@ -27,9 +27,9 @@
     </div>
   </body>
   <template id="owner-row">
-    <tr id="${owner.personid}">
-      <td><a href="/account/connect/beneficial-owner?ownerid=${owner.personid}">${owner.personid}</a></td>
-      <td>${owner.relationship_owner_first_name} ${owner.relationship_owner_last_name}</td>
+    <tr id="${person.id}">
+      <td><a href="/account/connect/beneficial-owner?ownerid=${person.id}">${person.id}</a></td>
+      <td>${person.first_name} ${person.last_name}</td>
     </tr>
   </template>
 </html>

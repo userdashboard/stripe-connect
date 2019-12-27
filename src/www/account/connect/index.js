@@ -57,7 +57,7 @@ async function renderPage (req, res) {
         removeElements.push(`blank-name-${req.data.individual.id}`, `individual-registration-name-${req.data.individual.id}`)
       } else {
         removeElements.push(`individual-name-${req.data.individual.id}`)
-        if (req.data.individual.registration.individual_first_name) {
+        if (req.data.individual.registration.first_name) {
           removeElements.push(`blank-name-${req.data.individual.id}`)
         } else {
           removeElements.push(`individual-registration-name-${req.data.individual.id}`)
@@ -80,7 +80,7 @@ async function renderPage (req, res) {
           removeElements.push(`blank-name-${account.id}`)
         } else {
           removeElements.push(`business-name-${account.id}`)
-          if (account.registration.company_name) {
+          if (account.registration.name) {
             removeElements.push(`blank-name-${account.id}`)
           } else {
             removeElements.push(`business-registration-name-${account.id}`)

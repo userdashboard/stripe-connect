@@ -1,4 +1,3 @@
-const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
 
@@ -25,26 +24,8 @@ async function beforeRequest (req) {
     req.error = req.error || 'invalid-payment-details'
   }
   let registrationComplete = true
-  const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  if (!registration.individual_verification_document_front ||
-    !registration.individual_verification_document_back) {
+  if (stripeAccount.requirements.currently_due.length) {
     registrationComplete = false
-  } else {
-    for (const field of fieldsNeeded) {
-      if (field === 'external_account' ||
-        field === 'business_type' ||
-        field === 'tos_acceptance.ip' ||
-        field === 'tos_acceptance.date' ||
-        field === 'tos_acceptance.document' ||
-        field === 'individual.verification.document') {
-        continue
-      }
-      const posted = field.split('.').join('_')
-      if (!registration[posted]) {
-        registrationComplete = false
-        break
-      }
-    }
   }
   if (!registrationComplete) {
     req.error = req.error || 'invalid-registration'

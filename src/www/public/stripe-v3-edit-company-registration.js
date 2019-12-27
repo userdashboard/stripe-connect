@@ -16,22 +16,22 @@ function updateAccount (e) {
       address: { }
     }
   }
-  var companyName = document.getElementById('company_name')
+  var companyName = document.getElementById('name')
   if (!companyName.value) {
-    return window.renderError('invalid-company_name')
+    return window.renderError('invalid-name')
   }
   accountData.company.name = companyName.value
-  var companyPhone = document.getElementById('company_phone')
+  var companyPhone = document.getElementById('phone')
   if (companyPhone) {
     if (!companyPhone.value) {
-      return window.renderError('invalid-company_phone')
+      return window.renderError('invalid-phone')
     }
     accountData.company.phone = companyPhone.value
   }
-  var companyTaxID = document.getElementById('company_tax_id')
+  var companyTaxID = document.getElementById('tax_id')
   if (companyTaxID) {
     if (!companyTaxID.value) {
-      return window.renderError('invalid-company_tax_id')
+      return window.renderError('invalid-tax_id')
     }
     accountData.company.tax_id = companyTaxID.value
   }
@@ -52,7 +52,7 @@ function updateAccount (e) {
     accountData.business_profile = accountData.business_profile || {}
     accountData.business_profile.mcc = businessProfileMCC.value
   }
-  var addressFields = ['company_address_line1', 'company_address_state', 'company_address_country', 'company_address_postal_code']
+  var addressFields = ['address_line1', 'address_state', 'address_country', 'address_postal_code']
   var field
   for (var i = 0, len = addressFields.length; i < len; i++) {
     field = document.getElementById(addressFields[i])
@@ -62,33 +62,33 @@ function updateAccount (e) {
     if (!field.value) {
       return window.renderError('invalid-' + addressFields[i])
     }
-    accountData.company.address[addressFields[i].substring('company_address_'.length)] = field.value
+    accountData.company.address[addressFields[i].substring('address_'.length)] = field.value
   }
-  var companyAddressLine2 = document.getElementById('company_address_line2')
+  var companyAddressLine2 = document.getElementById('address_line2')
   if (companyAddressLine2 && companyAddressLine2.value) {
     accountData.company.address.line2 = companyAddressLine2.value
   }
   if (document.getElementById('kana-company-address-container')) {
     accountData.address_kana = {
-      line1: document.getElementById('company_address_kana_line1').value,
-      state: document.getElementById('company_address_kana_state').value,
-      country: document.getElementById('company_address_kana_country').value,
-      postal_code: document.getElementById('company_address_kana_postal_code').value
+      line1: document.getElementById('address_kana_line1').value,
+      state: document.getElementById('address_kana_state').value,
+      country: document.getElementById('address_kana_country').value,
+      postal_code: document.getElementById('address_kana_postal_code').value
     }
     for (field in accountData.address_kana) {
       if (!accountData.address_kana[field]) {
-        return window.renderError('invalid-company_address_kana_' + field)
+        return window.renderError('invalid-address_kana_' + field)
       }
     }
     accountData.address_kanji = {
-      line1: document.getElementById('company_address_kanji_line1').value,
-      state: document.getElementById('company_address_kanji_state').value,
-      country: document.getElementById('company_address_kanji_country').value,
-      postal_code: document.getElementById('company_address_kanji_postal_code').value
+      line1: document.getElementById('address_kanji_line1').value,
+      state: document.getElementById('address_kanji_state').value,
+      country: document.getElementById('address_kanji_country').value,
+      postal_code: document.getElementById('address_kanji_postal_code').value
     }
     for (field in accountData.address_kanji) {
       if (!accountData.address_kanji[field]) {
-        return window.renderError('invalid-company_address_kanji_' + field)
+        return window.renderError('invalid-address_kanji_' + field)
       }
     }
   }

@@ -19,8 +19,7 @@ async function beforeRequest (req) {
       stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
   }
-  const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  req.data = { stripeAccount, registration }
+  req.data = { stripeAccount }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -58,10 +57,10 @@ async function renderPage (req, res, messageTemplate) {
     }
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('company.tax_id') === -1) {
-    removeElements.push('company_tax_id-container')
+    removeElements.push('tax_id-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('company.phone') === -1) {
-    removeElements.push('company_phone-container')
+    removeElements.push('phone-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('business_profile.url') === -1) {
     removeElements.push('business_profile_url-container')
@@ -77,21 +76,16 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('company.address.state') > -1) {
     const companyStates = connect.countryDivisions[req.data.stripeAccount.country]
-    dashboard.HTML.renderList(doc, companyStates, 'state-option', 'company_address_state')
+    dashboard.HTML.renderList(doc, companyStates, 'state-option', 'address_state')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('company.verification.document.front') === -1) {
     removeElements.push('upload-container')
   }
   if (req.method === 'GET') {
-    for (const field in req.data.registration) {
+    for (const field of req.data.stripeAccount.requirements.currently_due) {
       const element = doc.getElementById(field)
       if (!element) {
         continue
-      }
-      if (element.tag === 'input') {
-        element.setAttribute('value', req.data.registration[field] || '')
-      } else if (element.tag === 'select') {
-        dashboard.HTML.setSelectedOptionByValue(doc, field, req.data.registration[field] || '')
       }
     }
   } else if (req.body) {
@@ -135,13 +129,11 @@ async function submitForm (req, res) {
     }
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('company.verification.document.front') > -1) {
-    if (!req.data.registration.company_verification_document_front &&
-       (!req.uploads || !req.uploads.company_verification_document_front)) {
-      return renderPage(req, res, 'invalid-company_verification_document_front')
+    if (!req.uploads || !req.uploads.verification_document_front) {
+      return renderPage(req, res, 'invalid-verification_document_front')
     }
-    if (!req.data.registration.company_verification_document_back &&
-      (!req.uploads || !req.uploads.company_verification_document_back)) {
-      return renderPage(req, res, 'invalid-company_verification_document_back')
+    if (!req.uploads || !req.uploads.verification_document_back) {
+      return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
   try {

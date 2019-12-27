@@ -12,50 +12,50 @@ function convertDirector (e) {
     e.target.disabled = false
   }, 1000)
   var director = {}
-  var firstName = document.getElementById('relationship_director_first_name')
+  var firstName = document.getElementById('first_name')
   if (firstName.value && firstName.value.length) {
     director.first_name = firstName.value
   } else {
-    return window.renderError('invalid-relationship_director_first_name')
+    return window.renderError('invalid-first_name')
   }
-  var lastName = document.getElementById('relationship_director_last_name')
+  var lastName = document.getElementById('last_name')
   if (lastName.value && lastName.value.length) {
     director.last_name = lastName.value
   } else {
-    return window.renderError('invalid-relationship_director_last_name')
+    return window.renderError('invalid-last_name')
   }
-  var email = document.getElementById('relationship_director_email')
+  var email = document.getElementById('email')
   if (email && email.value) {
     director.email = email.value
   }
-  var relationshipTitle = document.getElementById('relationship_director_relationship_title')
+  var relationshipTitle = document.getElementById('relationship_title')
   if (relationshipTitle && relationshipTitle.value) {
     director.relationship_title = relationshipTitle.value
   }
-  var dobDay = document.getElementById('relationship_director_dob_day')
+  var dobDay = document.getElementById('dob_day')
   if (dobDay) {
     director.dob = {
       day: dobDay.value,
-      month: document.getElementById('relationship_director_dob_month').value,
-      year: document.getElementById('relationship_director_dob_year').value
+      month: document.getElementById('dob_month').value,
+      year: document.getElementById('dob_year').value
     }
     if (!director.dob.day) {
-      return window.renderError('invalid-relationship_director_dob_day')
+      return window.renderError('invalid-dob_day')
     }
     if (!director.dob.month) {
-      return window.renderError('invalid-relationship_director_dob_month')
+      return window.renderError('invalid-dob_month')
     }
     if (!director.dob.year) {
-      return window.renderError('invalid-relationship_director_dob_year')
+      return window.renderError('invalid-dob_year')
     }
     try {
       Date.parse(director.dob.year + '/' + director.dob.month + '/' + director.dob.day)
     } catch (eror) {
-      return window.renderError('invalid-relationship_director_dob_day')
+      return window.renderError('invalid-dob_day')
     }
   }
-  var documentFront = document.getElementById('relationship_director_verification_document_front')
-  var documentBack = document.getElementById('relationship_director_verification_document_back')
+  var documentFront = document.getElementById('verification_document_front')
+  var documentBack = document.getElementById('verification_document_back')
   return window.uploadDocumentFiles(documentFront, documentBack, function (error, front, back) {
     if (error) {
       return window.renderError(error.message)
@@ -67,14 +67,14 @@ function convertDirector (e) {
         }
       }
     } else {
-      return window.renderError('invalid-relationship_director_verification_document_front')
+      return window.renderError('invalid-verification_document_front')
     }
     if (back && back.id) {
       director.verification = director.verification || {}
       director.verification.document = director.verification.document || {}
       director.verification.document.back = back.id
     } else {
-      return window.renderError('invalid-relationship_director_verification_document_back')
+      return window.renderError('invalid-verification_document_back')
     }
     return stripe.createToken('person', director).then(function (result) {
       if (result.error) {

@@ -36,31 +36,135 @@ module.exports = {
         userAgent: req.userAgent
       }
     }
+    let stripeAccount
     try {
-      let stripeAccountNow = await stripe.accounts.create(accountInfo, req.stripeKey)
-      await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccountNow.id)
-      await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccountNow.id)
-      await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccountNow.id}`, req.query.accountid)
-      if (req.body.type === 'company') {
-        const companyDirector = await stripe.accounts.createPerson(stripeAccountNow.id, { relationship: { director: true } }, req.stripeKey)
-        const beneficialOwner = await stripe.accounts.createPerson(stripeAccountNow.id, { relationship: { owner: true } }, req.stripeKey)
-        const companyRepresentative = await stripe.accounts.createPerson(stripeAccountNow.id, { relationship: { owner: true } }, req.stripeKey)
-        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${companyDirector.id}`, req.query.stripeid)
-        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${beneficialOwner.id}`, req.query.stripeid)
-        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${companyRepresentative.id}`, req.query.stripeid)
-        stripeAccountNow = await stripe.accounts.update(stripeAccountNow.id, {
-          metadata: {
-            companyDirectorTemplate: JSON.stringify(companyDirector.requirements),
-            beneficialOwnerTemplate: JSON.stringify(beneficialOwner.requirements),
-            companyRepresentativeTemplate: JSON.stringify(companyRepresentative.requirements)
-          }
-        }, req.stripeKey)
-      }
+      stripeAccount = await stripe.accounts.create(accountInfo, req.stripeKey)
+      await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
+      await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
+      await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
       req.success = true
-      await stripeCache.update(stripeAccountNow)
-      return stripeAccountNow
+      await stripeCache.update(stripeAccount)
     } catch (error) {
       throw new Error('unknown-error')
+    }
+    if (stripeAccount.business_type === 'individual') {
+      return stripeAccount
+    }
+    let companyDirector, beneficialOwner, companyRepresentative
+    const directorInfo = {
+      metadata: {
+        template: true
+      },
+      relationship: {
+        director: true
+      }
+    }
+    const ownerInfo = {
+      metadata: {
+        template: true
+      },
+      relationship: {
+        owner: true
+      }
+    }
+    const representativeInfo = {
+      metadata: {
+        template: true
+      },
+      relationship: {
+        representative: true
+      }
+    }
+    while (true) {
+      try {
+        companyDirector = await stripe.accounts.createPerson(stripeAccount.id, directorInfo, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
+    }
+    while (true) {
+      try {
+        beneficialOwner = await stripe.accounts.createPerson(stripeAccount.id, ownerInfo, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
+    }
+    while (true) {
+      try {
+        companyRepresentative = await stripe.accounts.createPerson(stripeAccount.id, representativeInfo, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
+    }
+    while (true) {
+      try {
+        await stripe.accounts.deletePerson(stripeAccount.id, companyDirector.id, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
+    }
+    while (true) {
+      try {
+        await stripe.accounts.deletePerson(stripeAccount.id, beneficialOwner.id, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
+    }
+    while (true) {
+      try {
+        await stripe.accounts.deletePerson(stripeAccount.id, companyRepresentative.id, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
+    }
+    delete (companyDirector.requirements.pending_verification)
+    delete (companyDirector.requirements.past_due)
+    delete (beneficialOwner.requirements.pending_verification)
+    delete (beneficialOwner.requirements.past_due)
+    delete (companyRepresentative.requirements.pending_verification)
+    delete (companyRepresentative.requirements.past_due)
+    const accountUpdate = {
+      metadata: {
+        companyDirectorTemplate: JSON.stringify(companyDirector.requirements),
+        beneficialOwnerTemplate: JSON.stringify(beneficialOwner.requirements),
+        companyRepresentativeTemplate: JSON.stringify(companyRepresentative.requirements)
+      }
+    }
+    while (true) {
+      try {
+        const stripeAccountNow = await stripe.accounts.update(stripeAccount.id, accountUpdate, req.stripeKey)
+        await stripeCache.update(stripeAccountNow)
+        return stripeAccountNow
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        throw new Error('unknown-error')
+      }
     }
   }
 }

@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/beneficial-owner', () => {
+describe.only('/account/connect/beneficial-owner', () => {
   describe('BeneficialOwner#BEFORE', () => {
     it('should reject invalid ownerid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/connect/beneficial-owner?ownerid=invalid')
+      const req = TestHelper.createRequest('/account/connect/beneficial-owner?personid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -26,31 +26,31 @@ describe('/account/connect/beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'Berlin',
+        address_country: 'DE',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.owner.personid, user.owner.personid)
+      assert.strictEqual(req.data.owner.id, user.owner.id)
     })
   })
 
   describe('BeneficialOwner#GET', () => {
-    it('should show table for owner', async () => {
+    it.only('should show table for owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -58,22 +58,22 @@ describe('/account/connect/beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'Berlin',
+        address_country: 'DE',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?ownerid=${user.owner.personid}`)
+      const req = TestHelper.createRequest(`/account/connect/beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
       req.filename = __filename
@@ -83,11 +83,11 @@ describe('/account/connect/beneficial-owner', () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/beneficial-owner?ownerid=${user.owner.personid}` }
+        { click: `/account/connect/beneficial-owner?personid=${user.owner.id}` }
       ]
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const row = doc.getElementById(user.owner.personid)
+      const row = doc.getElementById(user.owner.id)
       assert.strictEqual(row.tag, 'tbody')
     })
   })

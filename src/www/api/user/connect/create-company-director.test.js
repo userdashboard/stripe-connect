@@ -75,8 +75,8 @@ describe('/api/user/connect/create-company-director', () => {
       })
     })
 
-    describe('invalid-relationship_director_first_name', () => {
-      it('missing posted relationship_director_first_name', async () => {
+    describe('invalid-first_name', () => {
+      it('missing posted first_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',
@@ -87,15 +87,15 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: '',
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: '',
+          last_name: person.lastName
         })
         let errorMessage
         try {
@@ -103,12 +103,12 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_first_name')
+        assert.strictEqual(errorMessage, 'invalid-first_name')
       })
     })
 
-    describe('invalid-relationship_director_last_name', () => {
-      it('missing posted relationship_director_last_name', async () => {
+    describe('invalid-last_name', () => {
+      it('missing posted last_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',
@@ -119,15 +119,15 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: ''
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: ''
         })
         let errorMessage
         try {
@@ -135,12 +135,12 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_last_name')
+        assert.strictEqual(errorMessage, 'invalid-last_name')
       })
     })
 
-    describe('invalid-relationship_director_email', () => {
-      it('missing posted relationship_director_email', async () => {
+    describe('invalid-email', () => {
+      it('missing posted email', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',
@@ -151,15 +151,15 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: ''
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          first_name: person.firstName,
+          last_name: ''
         })
         let errorMessage
         try {
@@ -167,12 +167,12 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_last_name')
+        assert.strictEqual(errorMessage, 'invalid-last_name')
       })
     })
 
-    describe('invalid-relationship_director_dob_day', () => {
-      it('missing posted relationship_director_dob_day', async () => {
+    describe('invalid-dob_day', () => {
+      it('missing posted dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',
@@ -183,16 +183,16 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_dob_day: '',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_email: person.email,
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         })
         let errorMessage
         try {
@@ -200,12 +200,12 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_day')
+        assert.strictEqual(errorMessage, 'invalid-dob_day')
       })
     })
 
-    describe('invalid-relationship_director_dob_month', () => {
-      it('missing posted relationship_director_dob_month', async () => {
+    describe('invalid-dob_month', () => {
+      it('missing posted dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',
@@ -216,16 +216,16 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '',
-          relationship_director_dob_year: '1950',
-          relationship_director_email: person.email,
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         })
         let errorMessage
         try {
@@ -233,12 +233,12 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_month')
+        assert.strictEqual(errorMessage, 'invalid-dob_month')
       })
     })
 
-    describe('invalid-relationship_director_dob_year', () => {
-      it('missing posted relationship_director_dob_year', async () => {
+    describe('invalid-dob_year', () => {
+      it('missing posted dob_year', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',
@@ -249,16 +249,16 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '',
-          relationship_director_email: person.email,
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         })
         let errorMessage
         try {
@@ -266,12 +266,12 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_dob_year')
+        assert.strictEqual(errorMessage, 'invalid-dob_year')
       })
     })
 
-    describe('invalid-relationship_director_verification_document_front', () => {
-      it('missing posted file relationship_director_verification_document_front', async () => {
+    describe('invalid-verification_document_front', () => {
+      it('missing posted file verification_document_front', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',
@@ -282,15 +282,15 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_back: TestHelper['success_id_scan_back.png']
+          verification_document_back: TestHelper['success_id_scan_back.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_email: person.email,
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         })
         let errorMessage
         try {
@@ -298,12 +298,12 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_verification_document_front')
+        assert.strictEqual(errorMessage, 'invalid-verification_document_front')
       })
     })
 
-    describe('invalid-relationship_director_verification_document_back', () => {
-      it('missing posted file relationship_director_verification_document_back', async () => {
+    describe('invalid-verification_document_back', () => {
+      it('missing posted file verification_document_back', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',
@@ -314,15 +314,15 @@ describe('/api/user/connect/create-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          relationship_director_dob_day: '1',
-          relationship_director_dob_month: '1',
-          relationship_director_dob_year: '1950',
-          relationship_director_email: person.email,
-          relationship_director_first_name: person.firstName,
-          relationship_director_last_name: person.lastName
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         })
         let errorMessage
         try {
@@ -330,13 +330,13 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_director_verification_document_back')
+        assert.strictEqual(errorMessage, 'invalid-verification_document_back')
       })
     })
   })
 
   describe('receives', () => {
-    it('required posted relationship_director_first_name', async () => {
+    it('required posted first_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -347,21 +347,21 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_first_name, person.firstName)
+      assert.strictEqual(owner.first_name, person.firstName)
     })
 
-    it('required posted relationship_director_last_name', async () => {
+    it('required posted last_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -372,21 +372,21 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_last_name, person.lastName)
+      assert.strictEqual(owner.last_name, person.lastName)
     })
 
-    it('optionally-required posted relationship_director_email', async () => {
+    it('optionally-required posted email', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'AU',
@@ -397,23 +397,23 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_email: person.email,
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_relationship_title: 'XXX'
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName,
+        relationship_title: 'XXX'
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_email, person.email)
+      assert.strictEqual(owner.email, person.email)
     })
 
-    it('optionally-required posted relationship_director_relationship_title', async () => {
+    it('optionally-required posted relationship_title', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'AU',
@@ -424,23 +424,23 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_email: person.email,
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName,
-        relationship_director_relationship_title: 'SVP Sales'
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName,
+        relationship_title: 'SVP Sales'
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_relationship_title, 'SVP Sales')
+      assert.strictEqual(owner.relationship_title, 'SVP Sales')
     })
 
-    it('required posted relationship_director_dob_day', async () => {
+    it('required posted dob_day', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -451,21 +451,21 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_dob_day, '01')
+      assert.strictEqual(owner.dob_day, '01')
     })
 
-    it('required posted relationship_director_dob_month', async () => {
+    it('required posted dob_month', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -476,21 +476,21 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '2',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '2',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_dob_month, '02')
+      assert.strictEqual(owner.dob_month, '02')
     })
 
-    it('required posted relationship_director_dob_year', async () => {
+    it('required posted dob_year', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -501,21 +501,21 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.relationship_director_dob_year, '1950')
+      assert.strictEqual(owner.dob_year, '1950')
     })
 
-    it('required posted file relationship_director_verification_document_front', async () => {
+    it('required posted file verification_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -526,23 +526,23 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_email: person.email,
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       })
       const owner = await req.post()
-      assert.notStrictEqual(owner.relationship_director_verification_document_front, null)
-      assert.notStrictEqual(owner.relationship_director_verification_document_front, undefined)
+      assert.notStrictEqual(owner.verification_document_front, null)
+      assert.notStrictEqual(owner.verification_document_front, undefined)
     })
 
-    it('required posted file relationship_director_verification_document_back', async () => {
+    it('required posted file verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -553,20 +553,20 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_email: person.email,
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       })
       const owner = await req.post()
-      assert.notStrictEqual(owner.relationship_director_verification_document_back, null)
-      assert.notStrictEqual(owner.relationship_director_verification_document_back, undefined)
+      assert.notStrictEqual(owner.verification_document_back, null)
+      assert.notStrictEqual(owner.verification_document_back, undefined)
     })
   })
 
@@ -582,21 +582,21 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       })
       await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
       const directorsNow = JSON.parse(stripeAccountNow.metadata.directors)
       assert.strictEqual(directorsNow.length, 1)
-      assert.strictEqual(directorsNow[0].relationship_director_first_name, person.firstName)
+      assert.strictEqual(directorsNow[0].first_name, person.firstName)
     })
   })
 
@@ -614,15 +614,15 @@ describe('/api/user/connect/create-company-director', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_director_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_director_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
-        relationship_director_dob_day: '1',
-        relationship_director_dob_month: '1',
-        relationship_director_dob_year: '1950',
-        relationship_director_first_name: person.firstName,
-        relationship_director_last_name: person.lastName
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)

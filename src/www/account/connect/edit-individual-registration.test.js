@@ -57,9 +57,9 @@ describe('/account/connect/edit-individual-registration', () => {
     }
   })
 
-  describe.only('EditIndividualRegistration#POST', () => {
+  describe('EditIndividualRegistration#POST', () => {
     for (const country of connect.countrySpecs) {
-      it.only('should reject invalid fields (' + country.id + ')', async () => {
+      it('should reject invalid fields (' + country.id + ')', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,
@@ -70,19 +70,19 @@ describe('/account/connect/edit-individual-registration', () => {
         req.session = user.session
         req.body = postData[country.id]
         if (country.id !== 'JP') {
-          req.body.individual_email = user.profile.contactEmail
-          req.body.individual_first_name = user.profile.firstName
-          req.body.individual_last_name = user.profile.lastName
+          req.body.email = user.profile.contactEmail
+          req.body.first_name = user.profile.firstName
+          req.body.last_name = user.profile.lastName
         }
         let uploads
         if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.document.front') > -1) {
           uploads = {
-            individual_verification_document_front: TestHelper['success_id_scan_back.png'],
-            individual_verification_document_back: TestHelper['success_id_scan_back.png']
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
           }
           if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.additional_document.front') > -1) {
-            uploads.individual_verification_additional_document_front = TestHelper['success_id_scan_back.png']
-            uploads.individual_verification_additional_document_back = TestHelper['success_id_scan_back.png']
+            uploads.verification_additional_document_front = TestHelper['success_id_scan_back.png']
+            uploads.verification_additional_document_back = TestHelper['success_id_scan_back.png']
           }
         }
         let fields = Object.keys(req.body)
@@ -125,18 +125,18 @@ describe('/account/connect/edit-individual-registration', () => {
         req.session = user.session
         req.body = postData[country.id]
         if (country.id !== 'JP') {
-          req.body.individual_email = user.profile.contactEmail
-          req.body.individual_first_name = user.profile.firstName
-          req.body.individual_last_name = user.profile.lastName
+          req.body.email = user.profile.contactEmail
+          req.body.first_name = user.profile.firstName
+          req.body.last_name = user.profile.lastName
         }
         if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.document.front') > -1) {
           req.uploads = {
-            individual_verification_document_front: TestHelper['success_id_scan_back.png'],
-            individual_verification_document_back: TestHelper['success_id_scan_back.png']
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
           }
           if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.additional_document.front') > -1) {
-            req.uploads.individual_verification_additional_document_front = TestHelper['success_id_scan_back.png']
-            req.uploads.individual_verification_additional_document_back = TestHelper['success_id_scan_back.png']
+            req.uploads.verification_additional_document_front = TestHelper['success_id_scan_back.png']
+            req.uploads.verification_additional_document_back = TestHelper['success_id_scan_back.png']
           }
         }
         req.filename = __filename
@@ -161,383 +161,383 @@ const postData = {
   AT: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Vienna',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '1020',
-    individual_address_state: '1',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Vienna',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1020',
+    address_state: '1',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   AU: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Brisbane',
-    individual_address_line1: '845 Oxford St',
-    individual_address_postal_code: '4000',
-    individual_address_state: 'QLD',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Brisbane',
+    address_line1: '845 Oxford St',
+    address_postal_code: '4000',
+    address_state: 'QLD',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   BE: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Brussels',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '1020',
-    individual_address_state: 'BRU',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Brussels',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1020',
+    address_state: 'BRU',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   CA: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Vancouver',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: 'V5K 0A1',
-    individual_address_state: 'BC',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_id_number: '000000000',
-    individual_phone: '456-789-0123'
+    address_city: 'Vancouver',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'V5K 0A1',
+    address_state: 'BC',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    id_number: '000000000',
+    phone: '456-789-0123'
   },
   CH: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Bern',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '1020',
-    individual_address_state: 'BE',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Bern',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1020',
+    address_state: 'BE',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   DE: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Berlin',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '01067',
-    individual_address_state: 'BE',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Berlin',
+    address_line1: '123 Sesame St',
+    address_postal_code: '01067',
+    address_state: 'BE',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   DK: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Copenhagen',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '1000',
-    individual_address_state: '147',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Copenhagen',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1000',
+    address_state: '147',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   EE: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Tallinn',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '10128',
-    individual_address_state: '37',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Tallinn',
+    address_line1: '123 Sesame St',
+    address_postal_code: '10128',
+    address_state: '37',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   ES: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Madrid',
-    individual_address_line1: '123 Park Lane',
-    individual_address_postal_code: '03179',
-    individual_address_state: 'AN',
-    individual_name: 'Individual',
-    individual_phone: '456-789-0123',
-    individual_tax_id: '00000000000'
+    address_city: 'Madrid',
+    address_line1: '123 Park Lane',
+    address_postal_code: '03179',
+    address_state: 'AN',
+    name: 'Individual',
+    phone: '456-789-0123',
+    tax_id: '00000000000'
   },
   FI: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Helsinki',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '00990',
-    individual_address_state: 'AL',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Helsinki',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00990',
+    address_state: 'AL',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   FR: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Paris',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '75001',
-    individual_address_state: 'A',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Paris',
+    address_line1: '123 Sesame St',
+    address_postal_code: '75001',
+    address_state: 'A',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   GB: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'London',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: 'EC1A 1AA',
-    individual_address_state: 'LND',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'London',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'EC1A 1AA',
+    address_state: 'LND',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   GR: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Athens',
-    individual_address_line1: '123 Park Lane',
-    individual_address_postal_code: '104',
-    individual_address_state: 'I',
-    individual_phone: '456-789-0123',
-    individual_tax_id: '00000000000'
+    address_city: 'Athens',
+    address_line1: '123 Park Lane',
+    address_postal_code: '104',
+    address_state: 'I',
+    phone: '456-789-0123',
+    tax_id: '00000000000'
   },
   HK: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Hong Kong',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '999077',
-    individual_address_state: 'HK',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_id_number: '000000000',
-    individual_phone: '456-789-0123'
+    address_city: 'Hong Kong',
+    address_line1: '123 Sesame St',
+    address_postal_code: '999077',
+    address_state: 'HK',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    id_number: '000000000',
+    phone: '456-789-0123'
   },
   IE: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Dublin',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: 'Dublin 1',
-    individual_address_state: 'D',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Dublin',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'Dublin 1',
+    address_state: 'D',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   IT: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Rome',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '00010',
-    individual_address_state: '65',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Rome',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00010',
+    address_state: '65',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   JP: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_kana_city: 'ｼﾌﾞﾔ',
-    individual_address_kana_line1: '27-15',
-    individual_address_kana_postal_code: '1500001',
-    individual_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-    individual_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-    individual_address_kanji_city: '渋谷区',
-    individual_address_kanji_line1: '２７－１５',
-    individual_address_kanji_postal_code: '1500001',
-    individual_address_kanji_state: '東京都',
-    individual_address_kanji_town: '神宮前 ３丁目',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-    individual_first_name_kanji: '東京都',
-    individual_gender: 'female',
-    individual_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-    individual_last_name_kanji: '東京都',
-    individual_phone: '+81112345678'
+    address_kana_city: 'ｼﾌﾞﾔ',
+    address_kana_line1: '27-15',
+    address_kana_postal_code: '1500001',
+    address_kana_state: 'ﾄｳｷﾖｳﾄ',
+    address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+    address_kanji_city: '渋谷区',
+    address_kanji_line1: '２７－１５',
+    address_kanji_postal_code: '1500001',
+    address_kanji_state: '東京都',
+    address_kanji_town: '神宮前 ３丁目',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    first_name_kana: 'ﾄｳｷﾖｳﾄ',
+    first_name_kanji: '東京都',
+    gender: 'female',
+    last_name_kana: 'ﾄｳｷﾖｳﾄ',
+    last_name_kanji: '東京都',
+    phone: '+81112345678'
   },
   LT: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Vilnius',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: 'LT-00000',
-    individual_address_state: 'AL',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Vilnius',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'LT-00000',
+    address_state: 'AL',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   LU: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Luxemburg',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '1623',
-    individual_address_state: 'L',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Luxemburg',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1623',
+    address_state: 'L',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   LV: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Riga',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: 'LV–1073',
-    individual_address_state: 'AI',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Riga',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'LV–1073',
+    address_state: 'AI',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   MY: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Kuala Lumpur',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '50450',
-    individual_address_state: 'C',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Kuala Lumpur',
+    address_line1: '123 Sesame St',
+    address_postal_code: '50450',
+    address_state: 'C',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   NL: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Amsterdam',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '1071 JA',
-    individual_address_state: 'DR',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Amsterdam',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1071 JA',
+    address_state: 'DR',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   NO: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Oslo',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '0001',
-    individual_address_state: '02',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Oslo',
+    address_line1: '123 Sesame St',
+    address_postal_code: '0001',
+    address_state: '02',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   NZ: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Auckland',
-    individual_address_line1: '844 Fleet Street',
-    individual_address_postal_code: '6011',
-    individual_address_state: 'N',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Auckland',
+    address_line1: '844 Fleet Street',
+    address_postal_code: '6011',
+    address_state: 'N',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   PL: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Krakow',
-    individual_address_line1: '123 Park Lane',
-    individual_address_postal_code: '32-400',
-    individual_address_state: 'KR',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Krakow',
+    address_line1: '123 Park Lane',
+    address_postal_code: '32-400',
+    address_state: 'KR',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   PT: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Lisbon',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '4520',
-    individual_address_state: '01',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Lisbon',
+    address_line1: '123 Sesame St',
+    address_postal_code: '4520',
+    address_state: '01',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   SE: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Stockholm',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '00150',
-    individual_address_state: 'K',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Stockholm',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00150',
+    address_state: 'K',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   SG: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Singapore',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '339696',
-    individual_address_state: 'SG',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_id_number: '000000000',
-    individual_phone: '456-789-0123'
+    address_city: 'Singapore',
+    address_line1: '123 Sesame St',
+    address_postal_code: '339696',
+    address_state: 'SG',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    id_number: '000000000',
+    phone: '456-789-0123'
   },
   SI: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Ljubljana',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '1210',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Ljubljana',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1210',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   SK: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'Slovakia',
-    individual_address_line1: '123 Sesame St',
-    individual_address_postal_code: '00102',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123'
+    address_city: 'Slovakia',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00102',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   US: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
-    individual_address_city: 'New York',
-    individual_address_line1: '285 Fulton St',
-    individual_address_postal_code: '10007',
-    individual_address_state: 'NY',
-    individual_dob_day: '1',
-    individual_dob_month: '1',
-    individual_dob_year: '1950',
-    individual_phone: '456-789-0123',
-    individual_ssn_last_4: '0000'
+    address_city: 'New York',
+    address_line1: '285 Fulton St',
+    address_postal_code: '10007',
+    address_state: 'NY',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123',
+    ssn_last_4: '0000'
   }
 }

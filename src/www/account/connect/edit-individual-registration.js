@@ -20,8 +20,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripe-account')
   }
   stripeAccount.stripePublishableKey = global.stripePublishableKey
-  const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  req.data = { stripeAccount, registration }
+  req.data = { stripeAccount }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -72,10 +71,10 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.address.state') > -1) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
-    dashboard.HTML.renderList(doc, personalStates, 'state-option', 'individual_address_state')
+    dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.gender') === -1) {
-    removeElements.push('individual_gender-container')
+    removeElements.push('gender-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.id_number') === -1) {
     removeElements.push('id_number-container')
@@ -86,40 +85,15 @@ async function renderPage (req, res, messageTemplate) {
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.additional_document.front') === -1) {
     removeElements.push('additional-upload-container')
   }
-  if (req.data.registration.individual_id_number || req.data.registration.accountToken) {
-    const idNumber = doc.getElementById('individual_id_number')
-    idNumber.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.individual_verification_document_front) {
-    const uploadFront = doc.getElementById('individual_verification_document_front')
-    uploadFront.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.individual_verification_document_back) {
-    const uploadBack = doc.getElementById('individual_verification_document_back')
-    uploadBack.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.individual_verification_additional_document_front) {
-    const uploadFront = doc.getElementById('individual_verification_additional_document_front')
-    uploadFront.setAttribute('data-existing', true)
-  }
-  if (req.data.registration.individual_verification_additional_document_back) {
-    const uploadBack = doc.getElementById('individual_verification_additional_document_back')
-    uploadBack.setAttribute('data-existing', true)
-  }
   if (req.method === 'GET') {
-    for (const field in req.data.registration) {
+    for (const field of req.data.stripeAccount.currently_due) {
       const element = doc.getElementById(field)
       if (!element) {
         continue
       }
-      if (element.tag === 'input') {
-        element.setAttribute('value', req.data.registration[field] || '')
-      } else if (element.tag === 'select') {
-        dashboard.HTML.setSelectedOptionByValue(doc, field, req.data.registration[field] || '')
-      }
     }
-    if (req.data.registration.individual_address_state) {
-      dashboard.HTML.setSelectedOptionByValue(doc, 'individual_address_state', req.data.registration.individual_address_state)
+    if (req.data.stripeAccount.individual.address.state) {
+      dashboard.HTML.setSelectedOptionByValue(doc, 'address_state', req.data.stripeAccount.individual.address.state)
     }
   } else if (req.body) {
     for (const field in req.body) {
@@ -165,26 +139,26 @@ async function submitForm (req, res) {
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.document.front') > -1) {
     if (!req.uploads || (
-      !req.uploads.individual_verification_document_front &&
-        !req.body.individual_verification_document_front)) {
-      return renderPage(req, res, 'invalid-individual_verification_document_front')
+      !req.uploads.verification_document_front &&
+        !req.body.verification_document_front)) {
+      return renderPage(req, res, 'invalid-verification_document_front')
     }
     if (!req.uploads || (
-      !req.uploads.individual_verification_document_back &&
-      !req.body.individual_verification_document_back)) {
-      return renderPage(req, res, 'invalid-individual_verification_document_back')
+      !req.uploads.verification_document_back &&
+      !req.body.verification_document_back)) {
+      return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.additional_document.front') > -1) {
     if (!req.uploads || (
-      !req.uploads.individual_verification_additional_document_front &&
-      !req.body.individual_verification_additional_document_front)) {
-      return renderPage(req, res, 'invalid-individual_verification_additional_document_front')
+      !req.uploads.verification_additional_document_front &&
+      !req.body.verification_additional_document_front)) {
+      return renderPage(req, res, 'invalid-verification_additional_document_front')
     }
     if (!req.uploads || (
-      !req.uploads.individual_verification_additional_document_back &&
-      !req.body.individual_verification_additional_document_back)) {
-      return renderPage(req, res, 'invalid-individual_verification_additional_document_back')
+      !req.uploads.verification_additional_document_back &&
+      !req.body.verification_additional_document_back)) {
+      return renderPage(req, res, 'invalid-verification_additional_document_back')
     }
   }
   try {

@@ -1,4 +1,3 @@
-const connect = require('../../../../../index.js')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -16,20 +15,15 @@ module.exports = {
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
       return null
     }
-    const countrySpec = connect.countrySpecIndex[stripeAccount.country]
-    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
-      throw new Error('invalid-stripe-account')
+    const ids = JSON.parse(stripeAccount.metadata, 'directors')
+    if (!ids || !ids.length) {
+      return null
     }
-    const directors = JSON.stringify(stripeAccount.metadata, 'directors')
-    const persons = []
-    if (directors && directors.length) {
-      for (const director of directors) {
-        if (director.personid) {
-          const person = await stripeCache.retrievePerson(req.query.stripeid, director.personid, req.stripeKey)
-          persons.push(person)
-        }
-      }
+    const directors = []
+    for (const id of ids) {
+      const person = await stripeCache.retrievePerson(req.query.stripeid, id, req.stripeKey)
+      directors.push(person)
     }
-    return persons.length ? persons : directors
+    return directors
   }
 }

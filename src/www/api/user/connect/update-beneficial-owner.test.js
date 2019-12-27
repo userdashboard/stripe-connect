@@ -12,17 +12,17 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -36,21 +36,21 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       it('invalid querystring ownerid', async () => {
         const user = await TestHelper.createUser()
         const person = TestHelper.nextIdentity()
-        const req = TestHelper.createRequest('/api/user/connect/update-beneficial-owner?ownerid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/update-beneficial-owner?personid=invalid')
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -70,38 +70,38 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user2.account
         req.session = user2.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -113,45 +113,45 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       })
     })
 
-    describe('invalid-relationship_owner_first_name', () => {
-      it('missing posted relationship_owner_first_name', async () => {
+    describe('invalid-first_name', () => {
+      it('missing posted first_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: '',
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: '',
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -159,49 +159,49 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_first_name')
+        assert.strictEqual(errorMessage, 'invalid-first_name')
       })
     })
 
-    describe('invalid-relationship_owner_last_name', () => {
-      it('missing posted relationship_owner_last_name', async () => {
+    describe('invalid-last_name', () => {
+      it('missing posted last_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: ''
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: ''
         }
         let errorMessage
         try {
@@ -209,49 +209,49 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_last_name')
+        assert.strictEqual(errorMessage, 'invalid-last_name')
       })
     })
 
-    describe('invalid-relationship_owner_address_country', () => {
-      it('missing posted relationship_owner_address_country', async () => {
+    describe('invalid-address_country', () => {
+      it('missing posted address_country', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: '',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: '',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -259,47 +259,47 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_country')
+        assert.strictEqual(errorMessage, 'invalid-address_country')
       })
 
-      it('invalid posted relationship_owner_address_country', async () => {
+      it('invalid posted address_country', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'invalid',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'invalid',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -307,147 +307,49 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_country')
-      })
-    })
-
-    describe('invalid-relationship_owner_address_state', () => {
-      it('missing posted relationship_owner_address_state', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'GB',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
-        }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: '',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
-        }
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_state')
-      })
-
-      it('invalid posted relationship_owner_address_state', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'GB',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
-        }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'invalid',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
-        }
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_state')
+        assert.strictEqual(errorMessage, 'invalid-address_country')
       })
     })
 
-    describe('invalid-relationship_owner_address_city', () => {
-      it('missing posted relationship_owner_address_city', async () => {
+    describe('invalid-address_state', () => {
+      it('missing posted address_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: '',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: '',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -455,49 +357,97 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_city')
+        assert.strictEqual(errorMessage, 'invalid-address_state')
+      })
+
+      it('invalid posted address_state', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'company'
+        })
+        const person = TestHelper.nextIdentity()
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
+        }, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'invalid',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-address_state')
       })
     })
 
-    describe('invalid-relationship_owner_address_postal_code', () => {
-      it('missing posted relationship_owner_address_postal_code', async () => {
+    describe('invalid-address_city', () => {
+      it('missing posted address_city', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: '',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: '',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -505,49 +455,49 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_postal_code')
+        assert.strictEqual(errorMessage, 'invalid-address_city')
       })
     })
 
-    describe('invalid-relationship_owner_address_line1', () => {
-      it('missing posted relationship_owner_address_line1', async () => {
+    describe('invalid-address_postal_code', () => {
+      it('missing posted address_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: '',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: '',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -555,49 +505,49 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_address_line1')
+        assert.strictEqual(errorMessage, 'invalid-address_postal_code')
       })
     })
 
-    describe('invalid-relationship_owner_dob_day', () => {
-      it('missing posted relationship_owner_dob_day', async () => {
+    describe('invalid-address_line1', () => {
+      it('missing posted address_line1', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: '',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -605,97 +555,49 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_dob_day')
-      })
-
-      it('invalid posted relationship_owner_dob_day', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'GB',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
-        }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: 'invalid',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
-        }
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_dob_day')
+        assert.strictEqual(errorMessage, 'invalid-address_line1')
       })
     })
 
-    describe('invalid-relationship_owner_dob_month', () => {
-      it('missing posted relationship_owner_dob_month', async () => {
+    describe('invalid-dob_day', () => {
+      it('missing posted dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -703,47 +605,47 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_dob_month')
+        assert.strictEqual(errorMessage, 'invalid-dob_day')
       })
 
-      it('invalid posted relationship_owner_dob_month', async () => {
+      it('invalid posted dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: 'invalid',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: 'invalid',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -751,49 +653,49 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_dob_month')
+        assert.strictEqual(errorMessage, 'invalid-dob_day')
       })
     })
 
-    describe('invalid-relationship_owner_dob_year', () => {
-      it('missing posted relationship_owner_dob_year', async () => {
+    describe('invalid-dob_month', () => {
+      it('missing posted dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -801,47 +703,47 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_dob_year')
+        assert.strictEqual(errorMessage, 'invalid-dob_month')
       })
 
-      it('invalid posted relationship_owner_dob_year', async () => {
+      it('invalid posted dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const owner = await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          relationship_owner_address_city: 'London',
-          relationship_owner_address_country: 'GB',
-          relationship_owner_address_line1: 'A building',
-          relationship_owner_address_postal_code: 'EC1A 1AA',
-          relationship_owner_address_state: 'LND',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: 'invalid',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: 'invalid',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
         }
         let errorMessage
         try {
@@ -849,7 +751,105 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-relationship_owner_dob_year')
+        assert.strictEqual(errorMessage, 'invalid-dob_month')
+      })
+    })
+
+    describe('invalid-dob_year', () => {
+      it('missing posted dob_year', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'company'
+        })
+        const person = TestHelper.nextIdentity()
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
+        }, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-dob_year')
+      })
+
+      it('invalid posted dob_year', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'company'
+        })
+        const person = TestHelper.nextIdentity()
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
+        }, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          address_city: 'London',
+          address_country: 'GB',
+          address_line1: 'A building',
+          address_postal_code: 'EC1A 1AA',
+          address_state: 'LND',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: 'invalid',
+          email: person.email,
+          first_name: person.firstName,
+          last_name: person.lastName
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-dob_year')
       })
     })
   })
@@ -864,37 +864,37 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName,
         token: 'sample1'
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       const body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName,
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName,
         token: 'sample2'
       }
       req.body = TestHelper.createMultiPart(req, body)
@@ -904,7 +904,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       assert.notStrictEqual(ownerNow.token, undefined)
     })
 
-    it('optional posted file relationship_owner_verification_document_front', async () => {
+    it('optional posted file verification_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -912,48 +912,48 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       req.body = TestHelper.createMultiPart(req, body)
       const ownerNow = await req.patch()
-      assert.notStrictEqual(ownerNow.relationship_owner_verification_document_front, owner.relationship_owner_verification_document_front)
-      assert.notStrictEqual(ownerNow.relationship_owner_verification_document_front, null)
-      assert.notStrictEqual(ownerNow.relationship_owner_verification_document_front, undefined)
+      assert.notStrictEqual(ownerNow.verification_document_front, owner.verification_document_front)
+      assert.notStrictEqual(ownerNow.verification_document_front, null)
+      assert.notStrictEqual(ownerNow.verification_document_front, undefined)
     })
 
-    it('optional posted file relationship_owner_verification_document_back', async () => {
+    it('optional posted file verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -961,563 +961,563 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       })
       const person = TestHelper.nextIdentity()
       const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       req.body = TestHelper.createMultiPart(req, body)
       const ownerNow = await req.patch()
-      assert.notStrictEqual(ownerNow.relationship_owner_verification_document_back, owner.relationship_owner_verification_document_back)
-      assert.notStrictEqual(ownerNow.relationship_owner_verification_document_back, null)
-      assert.notStrictEqual(ownerNow.relationship_owner_verification_document_back, undefined)
+      assert.notStrictEqual(ownerNow.verification_document_back, owner.verification_document_back)
+      assert.notStrictEqual(ownerNow.verification_document_back, null)
+      assert.notStrictEqual(ownerNow.verification_document_back, undefined)
     })
 
-    it('required posted relationship_owner_email', async () => {
+    it('required posted email', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: 'random@email.com',
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: 'random@email.com',
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_email, person.email)
+      assert.strictEqual(ownerNow.email, person.email)
     })
 
-    it('required posted relationship_owner_first_name', async () => {
+    it('required posted first_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Something',
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Something',
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_first_name, person.firstName)
+      assert.strictEqual(ownerNow.first_name, person.firstName)
     })
 
-    it('required posted relationship_owner_last_name', async () => {
+    it('required posted last_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: 'Something'
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: 'Something'
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_last_name, person.lastName)
+      assert.strictEqual(ownerNow.last_name, person.lastName)
     })
 
-    it('required posted relationship_owner_address_line1', async () => {
+    it('required posted address_line1', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: '123 Sesame St',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_address_line1, '123 Sesame St')
+      assert.strictEqual(ownerNow.address_line1, '123 Sesame St')
     })
 
-    it('optional posted relationship_owner_address_line2', async () => {
+    it('optional posted address_line2', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_line2: 'More info',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_line2: 'More info',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_line2: 'New info',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_line2: 'New info',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_address_line2, 'New info')
+      assert.strictEqual(ownerNow.address_line2, 'New info')
     })
 
-    it('required posted relationship_owner_address_city', async () => {
+    it('required posted address_city', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Manchester',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'Manchester',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_address_city, 'London')
+      assert.strictEqual(ownerNow.address_city, 'London')
     })
 
-    it('required posted relationship_owner_address_state', async () => {
+    it('required posted address_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LUT',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LUT',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_address_state, 'LND')
+      assert.strictEqual(ownerNow.address_state, 'LND')
     })
 
-    it('required posted relationship_owner_address_country', async () => {
+    it('required posted address_country', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'Dublin',
-        relationship_owner_address_country: 'IE',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'Dublin 1',
-        relationship_owner_address_state: 'LM',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'Dublin',
+        address_country: 'IE',
+        address_line1: 'A building',
+        address_postal_code: 'Dublin 1',
+        address_state: 'LM',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_address_country, 'IE')
+      assert.strictEqual(ownerNow.address_country, 'IE')
     })
 
-    it('required posted relationship_owner_address_postal_code', async () => {
+    it('required posted address_postal_code', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AB',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AB',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_address_postal_code, 'EC1A 1AB')
+      assert.strictEqual(ownerNow.address_postal_code, 'EC1A 1AB')
     })
 
-    it('required posted relationship_owner_dob_day', async () => {
+    it('required posted dob_day', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '2',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '2',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_dob_day, '01')
+      assert.strictEqual(ownerNow.dob_day, '01')
     })
 
-    it('required posted relationship_owner_dob_month', async () => {
+    it('required posted dob_month', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '2',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '2',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_dob_month, '02')
+      assert.strictEqual(ownerNow.dob_month, '02')
     })
 
-    it('required posted relationship_owner_dob_year', async () => {
+    it('required posted dob_year', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_dob_year, '1950')
+      assert.strictEqual(ownerNow.dob_year, '1950')
     })
   })
 
@@ -1529,40 +1529,40 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      const owner = await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+      await TestHelper.createBeneficialOwner(user, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?ownerid=${owner.personid}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${person.id}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.relationship_owner_first_name, 'Modified name')
+      assert.strictEqual(ownerNow.first_name, 'Modified name')
     })
   })
 
@@ -1580,41 +1580,41 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
       }
       await req.post()
       const owners = await global.api.user.connect.BeneficialOwners.get(req)
       const owner = owners[0]
-      const req2 = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?ownerid=${owner.personid}`)
+      const req2 = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${person.id}`)
       req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session
       req2.body = {
-        relationship_owner_address_city: 'London',
-        relationship_owner_address_country: 'GB',
-        relationship_owner_address_line1: 'A building',
-        relationship_owner_address_postal_code: 'EC1A 1AA',
-        relationship_owner_address_state: 'LND',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: 'Modified name',
-        relationship_owner_last_name: person.lastName
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: 'Modified name',
+        last_name: person.lastName
       }
       await req2.post()
       const ownerNow = await global.api.user.connect.BeneficialOwner.get(req2)

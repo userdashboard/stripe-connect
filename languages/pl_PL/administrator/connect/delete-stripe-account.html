@@ -22,10 +22,8 @@
       <tr id="${stripeAccount.id}">
         <td><a href="/account/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a></td>
         <td id="blank-name">Not yet provided</td>
-        <td id="individual-registration-name">${stripeAccount.registration.individual_first_name} ${stripeAccount.registration.individual_last_name}</td>
-        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
-        <td id="business-registration-name">${stripeAccount.registration.company_name || ""}</td>
-        <td id="business-name">${stripeAccount.company.name || ""}</td>
+                <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+                <td id="business-name">${stripeAccount.company.name || ""}</td>
         <td id="mcc-description"></td>
         <td id="account-status"></td>
       </tr>

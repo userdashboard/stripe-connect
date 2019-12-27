@@ -53,23 +53,23 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  if (req.data.owner.requirements.currently_due.indexOf('relationship.owner.id_number') === -1) {
-    removeElements.push('relationship_owner_id_number-container')
+  if (req.data.owner.requirements.currently_due.indexOf('id_number') === -1) {
+    removeElements.push('id_number-container')
   }
-  if (req.data.owner.requirements.currently_due.indexOf('relationship.owner.email') === -1) {
-    removeElements.push('relationship_owner_email-container')
+  if (req.data.owner.requirements.currently_due.indexOf('email') === -1) {
+    removeElements.push('email-container')
   }
   if (req.method === 'GET') {
-    const selectedCountry = req.data.owner.relationship_owner_address_country
+    const selectedCountry = req.data.owner.address_country
     const states = connect.countryDivisions[selectedCountry]
-    dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
-    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
-    dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
+    dashboard.HTML.renderList(doc, states, 'state-option', 'address_state')
+    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
+    dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
     for (const field of req.data.owner.requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.data.owner[posted]) {
-        if (field === 'relationship.owner.verification.front' ||
-            field === 'relationship.owner.verification.back') {
+        if (field === 'verification.front' ||
+            field === 'verification.back') {
           continue
         }
         const element = doc.getElementById(posted)
@@ -85,11 +85,11 @@ async function renderPage (req, res, messageTemplate) {
       }
     }
   } else if (req.body) {
-    const selectedCountry = req.body.relationship_owner_address_country || req.data.owner.relationship_owner_address_country
+    const selectedCountry = req.body.address_country || req.data.owner.address_country
     const states = connect.countryDivisions[selectedCountry]
-    dashboard.HTML.renderList(doc, states, 'state-option', 'relationship_owner_address_state')
-    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_owner_address_country')
-    dashboard.HTML.setSelectedOptionByValue(doc, 'relationship_owner_address_country', selectedCountry)
+    dashboard.HTML.renderList(doc, states, 'state-option', 'address_state')
+    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
+    dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
     for (const field of req.data.owner.requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
@@ -130,30 +130,30 @@ async function submitForm (req, res) {
   for (const field of req.data.owner.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {
-      if (field === 'relationship.owner.verification.front' ||
-          field === 'relationship.owner.verification.back') {
+      if (field === 'verification.front' ||
+          field === 'verification.back') {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (!req.body.relationship_owner_address_country || !connect.countryNameIndex[req.body.relationship_owner_address_country]) {
-    delete (req.body.relationship_owner_address_country)
-    return renderPage(req, res, 'invalid-relationship_owner_address_country')
+  if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
+    delete (req.body.address_country)
+    return renderPage(req, res, 'invalid-address_country')
   }
-  if (!req.body.relationship_owner_address_state) {
-    return renderPage(req, res, 'invalid-relationship_owner_address_state')
+  if (!req.body.address_state) {
+    return renderPage(req, res, 'invalid-address_state')
   }
-  const states = connect.countryDivisions[req.body.relationship_owner_address_country]
+  const states = connect.countryDivisions[req.body.address_country]
   let found
   for (const state of states) {
-    found = state.value === req.body.relationship_owner_address_state
+    found = state.value === req.body.address_state
     if (found) {
       break
     }
   }
   if (!found) {
-    return renderPage(req, res, 'invalid-relationship_owner_address_state')
+    return renderPage(req, res, 'invalid-address_state')
   }
   try {
     await global.api.user.connect.UpdateBeneficialOwner.patch(req)

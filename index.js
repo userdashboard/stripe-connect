@@ -26,7 +26,6 @@ for (const country of countryList) {
 }
 const countrySpecIndex = {}
 const countryCurrencyIndex = {}
-const kycRequirements = {}
 const countrySpecs = require('./stripe-country-specs.json')
 for (const countrySpec of countrySpecs) {
   countrySpecIndex[countrySpec.id] = countrySpec
@@ -34,7 +33,6 @@ for (const countrySpec of countrySpecs) {
   for (const currency in countrySpec.supported_bank_account_currencies) {
     countryCurrencyIndex[countrySpec.id].push({ name: currency.toUpperCase(), currency, object: 'currency' })
   }
-  kycRequirements[countrySpec.id] = require(`./kyc-requirements/${countrySpec.id}.json`)
 }
 
 const countryDivisions = {}
@@ -62,7 +60,6 @@ module.exports = {
   countrySpecs: countrySpecs,
   countrySpecIndex: countrySpecIndex,
   countryCurrencyIndex: countryCurrencyIndex,
-  kycRequirements: kycRequirements,
   euCountries: ['AT', 'BE', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PL', 'PT', 'SE', 'SI', 'SK'],
   getMerchantCategoryCodes: (language) => {
     return merchantCategoryCodes[language || global.language] || merchantCategoryCodes.en

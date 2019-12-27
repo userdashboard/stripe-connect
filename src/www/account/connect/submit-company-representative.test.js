@@ -27,13 +27,13 @@ describe('/account/connect/submit-company-representative', () => {
       await TestHelper.createStripeRegistration(user, {
         business_profile_mcc: '5542',
         business_profile_url: 'https://website.com',
-        company_address_city: 'Berlin',
-        company_address_line1: 'First Street',
-        company_address_postal_code: '01067',
-        company_address_state: 'BW',
-        company_name: user.profile.firstName + '\'s company',
-        company_phone: '456-789-0123',
-        company_tax_id: '00000000'
+        address_city: 'Berlin',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        name: user.profile.firstName + '\'s company',
+        phone: '456-789-0123',
+        tax_id: '00000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
         relationship_representative_address_city: 'Berlin',

@@ -1,4 +1,3 @@
-const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
 const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
@@ -30,11 +29,9 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata && stripeAccount.metadata.submitted) {
     stripeAccount.metadata.submittedFormatted = dashboard.Format.date(stripeAccount.metadata.submitted)
   }
-  const fieldsNeeded = stripeAccount.requirements.past_due.concat(stripeAccount.requirements.eventually_due)
   let registrationComplete = true
-  const registration = connect.MetaData.parse(stripeAccount.metadata, 'registration') || {}
-  if (fieldsNeeded) {
-    for (const field of fieldsNeeded) {
+  if (stripeAccount.requirements.currently_due.length) {
+    for (const field of stripeAccount.requirements.currently_due) {
       if (field === 'external_account' ||
           field === 'relationship.representative' ||
           field === 'relationship.account_opener' ||
@@ -45,19 +42,17 @@ async function beforeRequest (req) {
           field === 'tos_acceptance.date') {
         continue
       }
-      const posted = field.split('.').join('_')
-      if (!registration[posted]) {
-        registrationComplete = false
-        break
-      }
+      registrationComplete = false
     }
   }
   stripeAccount.company = stripeAccount.company || {}
   stripeAccount.individual = stripeAccount.individual || {}
-  stripeAccount.registration = registration
-  const owners = connect.MetaData.parse(stripeAccount.metadata, 'owners')
-  const directors = connect.MetaData.parse(stripeAccount.metadata, 'directors')
-  req.data = { owners, directors, stripeAccount, registration, registrationComplete }
+  console.log('loading owners', stripeAccount)
+  const owners = await global.api.user.connect.BeneficialOwners.get(req)
+  console.log(owners)
+  const directors = await global.api.user.connect.CompanyDirectors.get(req)
+  console.log(directors)
+  req.data = { owners, directors, stripeAccount, registrationComplete }
 }
 
 async function renderPage (req, res) {
@@ -73,28 +68,18 @@ async function renderPage (req, res) {
     removeElements.push('submitted')
   }
   if (req.data.stripeAccount.business_type === 'individual') {
-    removeElements.push('company', 'business-name', 'business-registration-name', 'company-representative-container')
+    removeElements.push('business-name')
     if (req.data.stripeAccount.individual.first_name) {
-      removeElements.push('blank-name', 'individual-registration-name')
+      removeElements.push('blank-name')
     } else {
       removeElements.push('individual-name')
-      if (req.data.registration.individual_first_name) {
-        removeElements.push('blank-name')
-      } else {
-        removeElements.push('individual-registration-name')
-      }
     }
   } else {
-    removeElements.push('individual', 'individual-name', 'individual-registration-name')
+    removeElements.push('individual-name')
     if (req.data.stripeAccount.company.name) {
-      removeElements.push('blank-name', 'business-registration-name')
+      removeElements.push('blank-name')
     } else {
       removeElements.push('business-name')
-      if (req.data.registration.company_name) {
-        removeElements.push('blank-name')
-      } else {
-        removeElements.push('business-registration-name')
-      }
     }
     if (req.data.stripeAccount.metadata.representative) {
       removeElements.push('edit-company-representative-link', 'submit-company-representative-link')
