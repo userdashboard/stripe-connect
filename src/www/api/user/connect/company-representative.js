@@ -12,7 +12,7 @@ module.exports = {
     }
     req.query.stripeid = stripeid
     try {
-      const person = await stripeCache.retrievePerson(stripeid, representative.personid, req.stripeKey)
+      const person = await stripeCache.retrievePerson(stripeid, req.query.personid, req.stripeKey)
       if (!person) {
         throw new Error('invalid-personid')
       }

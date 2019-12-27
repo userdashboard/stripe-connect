@@ -1360,7 +1360,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(registration.representativeToken, 'token')
+      assert.strictEqual(personNow.representativeToken, 'token')
     })
 
     it('required posted relationship_representative_dob_day', async () => {

@@ -1,4 +1,3 @@
-const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
@@ -15,19 +14,32 @@ module.exports = {
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
+    if (global.stripeJS === 3 && !req.body.token) {
+      throw new Error('invalid-token')
+    }
+    const requirements = JSON.parse(stripeAccount.metadata.companyRepresentativeTemplate)
+    for (const field of requirements.currently_due) {
+      const posted = field.split('.').join('_')
+      if (!req.body[posted]) {
+        if (field === 'relationship.owner.address.line2' ||
+            field === 'relationship.owner.relationship.title' ||
+            field === 'relationship.owner.executive' ||
+            field === 'relationship.owner.director' ||
+            field === 'relationship.owner.verification.document.front' ||
+            field === 'relationship.owner.verification.document.back' ||
+            field === 'relationship.owner.owner') {
+          continue
+        }
+        throw new Error(`invalid-${posted}`)
+      }
+    }
     const representativeInfo = {
     }
     if (global.stripeJS === 3) {
       representativeInfo.person_token = req.body.representativeToken
-      for (const field in registration) {
-        if (!field.startsWith('relationship_representative_')) {
-          continue
-        }
-        delete (req.body[field])
-      }
     } else {
       representativeInfo.relationship = {}
-      for (const field in registration) {
+      for (const field of requirements.currently_due) {
         if (!field.startsWith('relationship_representative_')) {
           continue
         }

@@ -1,4 +1,3 @@
-const connect = require('../../../../../index.js')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {

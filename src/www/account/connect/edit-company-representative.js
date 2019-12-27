@@ -158,7 +158,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (requiredFields.indexOf('relationship.representative.verification.document.front') > -1) {
+  if (requirements.currently_due.indexOf('relationship.representative.verification.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.relationship_representative_verification_document_front &&
         !req.body.relationship_representative_verification_document_front)) {
@@ -170,7 +170,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-relationship_representative_verification_document_back')
     }
   }
-  if (requiredFields.indexOf('relationship.representative.verification.additional.document.front') > -1) {
+  if (requirements.currently_due.indexOf('relationship.representative.verification.additional.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.relationship_representative_verification_additional_document_front &&
       !req.body.relationship_representative_verification_additional_document_front)) {

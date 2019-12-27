@@ -1,4 +1,3 @@
-const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const stripeCache = require('../../../../stripe-cache.js')
 
@@ -12,7 +11,7 @@ module.exports = {
       throw new Error('invalid-personid')
     }
     try {
-      const person = await stripeCache.retrievePerson(stripeid, owner.personid, req.stripeKey)
+      const person = await stripeCache.retrievePerson(stripeid, req.query.personid, req.stripeKey)
       if (!person) {
         throw new Error('invalid-personid')
       }

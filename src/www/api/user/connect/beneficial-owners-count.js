@@ -1,5 +1,3 @@
-const connect = require('../../../../../index.js')
-
 module.exports = {
   get: async (req) => {
     if (!req.query || !req.query.stripeid) {

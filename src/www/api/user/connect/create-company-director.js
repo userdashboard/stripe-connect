@@ -1,4 +1,3 @@
-const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
@@ -132,52 +131,53 @@ module.exports = {
         director: true
       }
     }
-    for (const field of requirements.currently_due) {
-      const posted = field.split('.').join('_')
-      if (req.body[posted]) {
-        if (field.startsWith('relationship_director_address_')) {
-          const property = field.substring('relationship_director_address_'.length)
-          directorInfo.address = directorInfo.address || {}
-          directorInfo.address[property] = owner[field]
-          continue
-        } else if (field.startsWith('relationship_director_verification_document_')) {
-          if (global.stripeJS) {
+    if (global.stripeJS === 3) {
+      directorInfo.person_token = req.body.token
+    } else {
+      for (const field of requirements.currently_due) {
+        const posted = field.split('.').join('_')
+        if (req.body[posted]) {
+          if (field.startsWith('relationship_director_address_')) {
+            const property = field.substring('relationship_director_address_'.length)
+            directorInfo.address = directorInfo.address || {}
+            directorInfo.address[property] = req.body[field]
             continue
-          }
-          const property = field.substring('relationship_director_verification_document_'.length)
-          directorInfo.verification = directorInfo.verification || {}
-          directorInfo.verification.document = directorInfo.verification.document || {}
-          directorInfo.verification.document[property] = owner[field]
-        } else if (field.startsWith('relationship_director_verification_additional_document_')) {
-          if (global.stripeJS) {
+          } else if (field.startsWith('relationship_director_verification_document_')) {
+            if (global.stripeJS) {
+              continue
+            }
+            const property = field.substring('relationship_director_verification_document_'.length)
+            directorInfo.verification = directorInfo.verification || {}
+            directorInfo.verification.document = directorInfo.verification.document || {}
+            directorInfo.verification.document[property] = req.body[field]
+          } else if (field.startsWith('relationship_director_verification_additional_document_')) {
+            if (global.stripeJS) {
+              continue
+            }
+            const property = field.substring('relationship_director_verification_additional_document_'.length)
+            directorInfo.verification = directorInfo.verification || {}
+            directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+            directorInfo.verification.additional_document[property] = req.body[field]
+          } else if (field.startsWith('relationship_director_dob_')) {
+            const property = field.substring('relationship_director_dob_'.length)
+            directorInfo.dob = directorInfo.dob || {}
+            directorInfo.dob[property] = req.body[field]
+          } else if (field === 'relationship_director_relationship_') {
+            const property = field.substring('relationship_director_relationship_'.length)
+            directorInfo.relationship = directorInfo.relationship || {}
+            directorInfo.relationship[property] = req.body[field]
             continue
+          } else {
+            const property = field.substring('relationship_director_'.length)
+            if (property === 'relationship_title' || property === 'executive' || property === 'director') {
+              continue
+            }
+            directorInfo[property] = req.body[field]
           }
-          const property = field.substring('relationship_director_verification_additional_document_'.length)
-          directorInfo.verification = directorInfo.verification || {}
-          directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
-          directorInfo.verification.additional_document[property] = owner[field]
-        } else if (field.startsWith('relationship_director_dob_')) {
-          const property = field.substring('relationship_director_dob_'.length)
-          directorInfo.dob = directorInfo.dob || {}
-          directorInfo.dob[property] = owner[field]
-        } else if (field === 'relationship_director_relationship_') {
-          const property = field.substring('relationship_director_relationship_'.length)
-          directorInfo.relationship = directorInfo.relationship || {}
-          directorInfo.relationship[property] = owner[field]
-          continue
-        } else {
-          const property = field.substring('relationship_director_'.length)
-          if (property === 'relationship_title' || property === 'executive' || property === 'director') {
-            continue
-          }
-          directorInfo[property] = owner[field]
         }
       }
     }
-    if (global.stripeJS === 3) {
-      director.token = req.body.token
-    }
-    const director = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripekey)
+    const director = await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripekey)
     let directors = await global.api.user.connect.CompanyDirectors.get(req)
     directors = directors || []
     directors.unshift(director.id)
