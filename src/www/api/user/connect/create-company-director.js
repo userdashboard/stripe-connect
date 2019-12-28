@@ -163,7 +163,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification_document.'.length)
+            const property = field.substring('verification.document.'.length)
             directorInfo.verification = directorInfo.verification || {}
             directorInfo.verification.document = directorInfo.verification.document || {}
             directorInfo.verification.document[property] = req.body[posted]

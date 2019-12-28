@@ -18,53 +18,14 @@ module.exports = {
     if (!stripeAccount.external_accounts.data.length) {
       throw new Error('invalid-payment-details')
     }
-    if (stripeAccount.requirements.currently_due.length) {
-      throw new Error('invalid-registration')
+    if (stripeAccount.requirements.currently_due.length > 0) {
+      for (const field of stripeAccount.requirements.currently_due) {
+        if (!field.startsWith('tos_acceptance')) {
+          throw new Error('invalid-registration')
+        }
+      }
     }
     const accountInfo = {
-      tos_acceptance: {
-        ip: req.ip,
-        user_agent: req.userAgent,
-        date: dashboard.Timestamp.now
-      },
-      metadata: {
-        submitted: dashboard.Timestamp.now
-      }
-    }
-    let stripeAccountNow
-    try {
-      stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-      req.success = true
-      await stripeCache.update(stripeAccountNow)
-    } catch (error) {
-      const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
-      if (errorMessage.startsWith('individual[address]')) {
-        let field = errorMessage.substring('individual[address]['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-${field}`)
-      } else if (errorMessage.startsWith('individual[personal_address]')) {
-        let field = errorMessage.substring('individual[personal_address]['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-${field}`)
-      } else if (errorMessage.startsWith('individual[address_kana]')) {
-        let field = errorMessage.substring('individual[address_kana]['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-${field}_kana`)
-      } else if (errorMessage.startsWith('individual[address_kanji]')) {
-        let field = errorMessage.substring('individual[address_kanji]['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-${field}_kanji`)
-      } else if (errorMessage.startsWith('individual')) {
-        let field = errorMessage.substring('individual['.length)
-        field = field.substring(0, field.length - 1)
-        throw new Error(`invalid-${field}`)
-      }
-      throw new Error('unknown-error')
-    }
-    if (global.stripeJS !== 3) {
-      return stripeAccountNow
-    }
-    const accountInfoNow = {
       metadata: {
         submitted: dashboard.Timestamp.now
       },
@@ -76,7 +37,7 @@ module.exports = {
     }
     while (true) {
       try {
-        stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfoNow, req.stripeKey)
+        stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(stripeAccountNow)
         return stripeAccountNow
       } catch (error) {

@@ -163,7 +163,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification_document.'.length)
+            const property = field.substring('verification.document.'.length)
             representativeInfo.verification = representativeInfo.verification || {}
             representativeInfo.verification.document = representativeInfo.verification.document || {}
             representativeInfo.verification.document[property] = req.body[posted]

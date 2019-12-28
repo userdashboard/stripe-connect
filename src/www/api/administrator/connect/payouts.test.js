@@ -30,8 +30,6 @@ describe('/api/administrator/connect/payouts', () => {
           last_name: user.profile.lastName,
           phone: '456 789 0123'
         }, {
-          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -43,8 +41,14 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
+        await TestHelper.createStripeRegistration(user, {
+        }, {
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        })
         await TestHelper.waitForVerification(user.stripeAccount.id)
+        await TestHelper.submitStripeAccount(user)
         await TestHelper.createPayout(user)
         payouts.unshift(user.payout.id)
       }
@@ -81,8 +85,6 @@ describe('/api/administrator/connect/payouts', () => {
           last_name: user.profile.lastName,
           phone: '456 789 0123'
         }, {
-          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -94,8 +96,14 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
+        await TestHelper.createStripeRegistration(user, {
+        }, {
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        })
         await TestHelper.waitForVerification(user.stripeAccount.id)
+        await TestHelper.submitStripeAccount(user)
         await TestHelper.createPayout(user)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/payouts?limit=${limit}`)
@@ -129,8 +137,6 @@ describe('/api/administrator/connect/payouts', () => {
           last_name: user.profile.lastName,
           phone: '456 789 0123'
         }, {
-          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -142,9 +148,14 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
+        await TestHelper.createStripeRegistration(user, {
+        }, {
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        })
         await TestHelper.waitForVerification(user.stripeAccount.id)
-        await TestHelper.createPayout(user)
+        await TestHelper.submitStripeAccount(user)
         payouts.unshift(user.payout.id)
       }
       const req = TestHelper.createRequest('/api/administrator/connect/payouts?all=true')
@@ -179,8 +190,6 @@ describe('/api/administrator/connect/payouts', () => {
           last_name: user.profile.lastName,
           phone: '456 789 0123'
         }, {
-          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -192,8 +201,14 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
+        await TestHelper.createStripeRegistration(user, {
+        }, {
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        })
         await TestHelper.waitForVerification(user.stripeAccount.id)
+        await TestHelper.submitStripeAccount(user)
         await TestHelper.createPayout(user)
       }
       const req = TestHelper.createRequest('/api/administrator/connect/payouts')
@@ -229,8 +244,6 @@ describe('/api/administrator/connect/payouts', () => {
           last_name: user.profile.lastName,
           phone: '456 789 0123'
         }, {
-          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -242,8 +255,14 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
+        await TestHelper.createStripeRegistration(user, {
+        }, {
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        })
         await TestHelper.waitForVerification(user.stripeAccount.id)
+        await TestHelper.submitStripeAccount(user)
         await TestHelper.createPayout(user)
       }
       const req = TestHelper.createRequest('/api/administrator/connect/payouts')

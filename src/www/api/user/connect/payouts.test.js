@@ -75,8 +75,6 @@ describe('/api/user/connect/payouts', () => {
         last_name: user.profile.lastName,
         phone: '456 789 0123'
       }, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })

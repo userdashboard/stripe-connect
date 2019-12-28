@@ -13,7 +13,7 @@ module.exports = {
       throw new Error('invalid-token')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (stripeAccount.metadata.submitted ||
+    if (!stripeAccount.requirements.currently_due.length ||
       stripeAccount.business_type !== 'individual' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
@@ -118,9 +118,6 @@ module.exports = {
         if (!day || day < 1 || day > 31) {
           throw new Error('invalid-dob_day')
         }
-        if (day < 10) {
-          req.body.dob_day = '0' + day
-        }
       } catch (s) {
         throw new Error('invalid-dob_day')
       }
@@ -131,9 +128,6 @@ module.exports = {
         const month = parseInt(req.body.dob_month, 10)
         if (!month || month < 1 || month > 12) {
           throw new Error('invalid-dob_month')
-        }
-        if (month < 10) {
-          req.body.dob_month = '0' + month
         }
       } catch (s) {
         throw new Error('invalid-dob_month')
@@ -170,16 +164,18 @@ module.exports = {
     if (global.stripeJS === 3) {
       accountInfo.account_token = req.body.token
     } else {
-      for (const field of stripeAccount.requirements.currently_sue) {
-        const posted = field.split('.').join('_')
+      accountInfo.individual = {}
+      for (const field of stripeAccount.requirements.currently_due) {
+        const posted = field.split('.').join('_').replace('individual_', '')
         if (!req.body[posted]) {
           if (field === 'individual.address.line2' ||
-              field === 'individual.verification.document.front' ||
-              field === 'individual.verification.document.back' ||
-              field === 'individual.verification.additional_document.front' ||
-              field === 'individual.verification.additional_document.back' ||
-            (field === 'business_profile.url' && req.body.business_profile_product_description) ||
-            (field === 'business_profile.product_description' && req.body.business_profile_url)) {
+              field === 'individual.verification.document' ||
+              field === 'individual.verification.additional_document' ||
+             (field === 'business_profile.url' && req.body.business_profile_product_description) ||
+             (field === 'business_profile.product_description' && req.body.business_profile_url) ||
+              field === 'external_account' ||
+              field === 'tos_acceptance.date' ||
+              field === 'tos_acceptance.ip') {
             continue
           }
           if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
@@ -190,40 +186,53 @@ module.exports = {
         if (field === 'individual.gender' && req.body.gender !== 'female' && req.body.gender !== 'male') {
           throw new Error(`invalid-${posted}`)
         }
-        if (field.startsWith('address_')) {
-          if (field.startsWith('address_kana_')) {
-            const property = field.substring('address_kana_'.length)
+        if (field.startsWith('individual.address.')) {
+          if (field.startsWith('individual.address_kana.')) {
+            const property = field.substring('individual.address_kana.'.length)
             accountInfo.individual.address_kana = accountInfo.individual.address_kana || {}
             accountInfo.individual.address_kana[property] = req.body[posted]
-          } else if (field.startsWith('address_kanji_')) {
-            const property = field.substring('address_kanji_'.length)
+          } else if (field.startsWith('individual.address_kanji.')) {
+            const property = field.substring('individual.address_kanji.'.length)
             accountInfo.individual.address_kanji = accountInfo.individual.address_kanji || {}
             accountInfo.individual.address_kanji[property] = req.body[posted]
           } else {
-            const property = field.substring('address_'.length)
+            const property = field.substring('individual.address.'.length)
+            accountInfo.individual.address = accountInfo.individual.address || {}
             accountInfo.individual.address[property] = req.body[posted]
           }
-        } else if (field.startsWith('dob_')) {
-          const property = field.substring('dob_'.length)
+        } else if (field.startsWith('individual.dob.')) {
+          const property = field.substring('individual.dob.'.length)
+          accountInfo.individual.dob = accountInfo.individual.dob || {}
           accountInfo.individual.dob[property] = req.body[posted]
-        } else if (field.startsWith('verification_document_')) {
-          accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-          const property = field.substring('verification_document_'.length)
-          accountInfo.individual.verification.document[property] = req.body[posted]
-        } else if (field.startsWith('verification_additional_document_')) {
-          accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-          const property = field.substring('verification_additional_document_'.length)
-          accountInfo.individual.verification.additional_document[property] = req.body[posted]
-        } else if (field.startsWith('')) {
-          const property = field.substring(''.length)
+        } else if (field.startsWith('individual.')) {
+          const property = field.substring('individual.'.length)
           accountInfo.individual[property] = req.body[posted]
-        } else if (field.startsWith('business_profile_')) {
-          const property = field.substring('business_profile_'.length)
+        } else if (field.startsWith('business_profile.')) {
+          const property = field.substring('business_profile.'.length)
+          accountInfo.business_profile = accountInfo.business_profile || {}
           accountInfo.business_profile[property] = req.body[posted]
-        } else {
-          accountInfo[field] = req.body[posted]
         }
       }
+    }
+    if (req.body.verification_document_front) {
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+      accountInfo.individual.verification.document.front = req.body.verification_document_front
+    }
+    if (req.body.verification_document_back) {
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+      accountInfo.individual.verification.document.back = req.body.verification_document_back
+    }
+    if (req.body.verification_additional_document_front) {
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+      accountInfo.individual.verification.additional_document.front = req.body.verification_additional_document_front
+    }
+    if (req.body.verification_additional_document_back) {
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additionl_document || {}
+      accountInfo.individual.verification.additional_document.back = req.body.verification_additional_document_back
     }
     try {
       const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)

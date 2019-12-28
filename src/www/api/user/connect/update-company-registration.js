@@ -72,29 +72,29 @@ module.exports = {
           }
           throw new Error(`invalid-${posted}`)
         }
-        if (field.startsWith('business_profile_')) {
-          const property = field.substring('business_profile_'.length)
+        if (field.startsWith('business_profile.')) {
+          const property = field.substring('business_profile.'.length)
           accountInfo.business_profile[property] = req.body[posted]
           delete (req.body[posted])
           continue
         }
         if (field.startsWith('')) {
-          if (field.startsWith('address_kanji_')) {
-            const property = field.substring('address_kanji_'.length)
+          if (field.startsWith('address_kanji.')) {
+            const property = field.substring('address_kanji.'.length)
             accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
             accountInfo.company.address_kanji[property] = req.body[posted]
-          } else if (field.startsWith('address_kana_')) {
-            const property = field.substring('address_kana_'.length)
+          } else if (field.startsWith('address_kana.')) {
+            const property = field.substring('address_kana.'.length)
             accountInfo.company.address_kana = accountInfo.company.address_kana || {}
             accountInfo.company.address_kana[property] = req.body[posted]
-          } else if (field.startsWith('address_')) {
-            const property = field.substring('address_'.length)
+          } else if (field.startsWith('address.')) {
+            const property = field.substring('address.'.length)
             accountInfo.company.address[property] = req.body[posted]
-          } else if (field.startsWith('name_')) {
-            const property = field.substring('name_'.length)
+          } else if (field.startsWith('name.')) {
+            const property = field.substring('name.'.length)
             accountInfo.company[`name_${property}`] = req.body[posted]
-          } else if (field.startsWith('verification_document_')) {
-            const property = field.substring('verification_document_'.length)
+          } else if (field.startsWith('verification.document.')) {
+            const property = field.substring('verification.document.'.length)
             accountInfo.company.verification = accountInfo.company.verification || {}
             accountInfo.company.verification.document = accountInfo.company.verification.document || {}
             accountInfo.company.verification.document[property] = req.body[posted]

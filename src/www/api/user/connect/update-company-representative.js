@@ -181,36 +181,34 @@ module.exports = {
           throw new Error(`invalid-${posted}`)
         }
         for (const field of person.requirements.currently_due) {
-          if (field.startsWith('business_profile_')) {
-            const property = field.substring('business_profile_'.length)
+          if (field.startsWith('business_profile.')) {
+            const property = field.substring('business_profile.'.length)
+            companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
             companyRepresentativeInfo.business_profile[property] = req.body[posted]
             delete (req.body[posted])
             continue
           }
-          if (field.startsWith('address_kanji_')) {
-            const property = field.substring('address_kanji_'.length)
+          if (field.startsWith('address_kanji.')) {
+            const property = field.substring('address_kanji.'.length)
             companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
             companyRepresentativeInfo.address_kanji[property] = req.body[posted]
-          } else if (field.startsWith('address_kana_')) {
-            const property = field.substring('address_kana_'.length)
+          } else if (field.startsWith('address_kana.')) {
+            const property = field.substring('address_kana.'.length)
             companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
             companyRepresentativeInfo.address_kana[property] = req.body[posted]
-          } else if (field.startsWith('address_')) {
-            const property = field.substring('address_'.length)
+          } else if (field.startsWith('address.')) {
+            const property = field.substring('address.'.length)
             companyRepresentativeInfo.address[property] = req.body[posted]
-          } else if (field.startsWith('verification_document_')) {
-            const property = field.substring('verification_document_'.length)
+          } else if (field.startsWith('verification.document.')) {
+            const property = field.substring('verification.document.'.length)
             companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
             companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
             companyRepresentativeInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification_additional_document_')) {
-            const property = field.substring('verification_additional_document_'.length)
+          } else if (field.startsWith('verification.additional_document.')) {
+            const property = field.substring('verification.additional_document.'.length)
             companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
             companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
             companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
-          } else {
-            const property = field.substring(''.length)
-            companyRepresentativeInfo.company[property] = req.body[posted]
           }
         }
       }

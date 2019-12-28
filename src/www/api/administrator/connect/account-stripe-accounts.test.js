@@ -85,7 +85,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           country: 'US',
           type: 'company'
         })
-        stripeAccounts.unshift(stripeAccount)
+        stripeAccounts.unshift(stripeAccount.id)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts?accountid=${user.account.accountid}&limit=${limit}`)
       req.account = administrator.account
@@ -103,7 +103,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
           country: 'US',
           type: 'company'
         })
-        stripeAccounts.unshift(stripeAccount)
+        stripeAccounts.unshift(stripeAccount.id)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/account-stripe-accounts?accountid=${user.account.accountid}&all=true`)
       req.account = administrator.account

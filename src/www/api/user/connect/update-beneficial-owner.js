@@ -167,7 +167,7 @@ module.exports = {
       beneficialOwnerInfo.person_token = req.body.token
     } else {
       for (const field of person.requirements.currently_due) {
-        const posted = field.split('.').join('_')
+        const posted = field.split('.').join('.')
         if (!req.body[posted]) {
           if (field === 'relationship.account_opener.address.line2' ||
               field === 'relationship.account_opener.relationship.title' ||
@@ -181,30 +181,31 @@ module.exports = {
           throw new Error(`invalid-${posted}`)
         }
         for (const field of person.requirements.currently_due) {
-          if (field.startsWith('business_profile_')) {
-            const property = field.substring('business_profile_'.length)
+          if (field.startsWith('business_profile.')) {
+            const property = field.substring('business_profile.'.length)
+            beneficialOwnerInfo.business_profile = beneficialOwnerInfo.business_profile || {}
             beneficialOwnerInfo.business_profile[property] = req.body[posted]
             delete (req.body[posted])
             continue
           }
-          if (field.startsWith('address_kanji_')) {
-            const property = field.substring('address_kanji_'.length)
+          if (field.startsWith('address_kanji.')) {
+            const property = field.substring('address_kanji.'.length)
             beneficialOwnerInfo.address_kanji = beneficialOwnerInfo.address_kanji || {}
             beneficialOwnerInfo.address_kanji[property] = req.body[posted]
-          } else if (field.startsWith('address_kana_')) {
-            const property = field.substring('address_kana_'.length)
+          } else if (field.startsWith('address_kana.')) {
+            const property = field.substring('address_kana.'.length)
             beneficialOwnerInfo.address_kana = beneficialOwnerInfo.address_kana || {}
             beneficialOwnerInfo.address_kana[property] = req.body[posted]
-          } else if (field.startsWith('address_')) {
-            const property = field.substring('address_'.length)
+          } else if (field.startsWith('address.')) {
+            const property = field.substring('address.'.length)
             beneficialOwnerInfo.address[property] = req.body[posted]
-          } else if (field.startsWith('verification_document_')) {
-            const property = field.substring('verification_document_'.length)
+          } else if (field.startsWith('verification.document.')) {
+            const property = field.substring('verification.document.'.length)
             beneficialOwnerInfo.verification = beneficialOwnerInfo.verification || {}
             beneficialOwnerInfo.verification.document = beneficialOwnerInfo.verification.document || {}
             beneficialOwnerInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification_additional_document_')) {
-            const property = field.substring('verification_additional_document_'.length)
+          } else if (field.startsWith('verification.additional_document.')) {
+            const property = field.substring('verification.additional_document.'.length)
             beneficialOwnerInfo.verification = beneficialOwnerInfo.verification || {}
             beneficialOwnerInfo.verification.additional_document = beneficialOwnerInfo.verification.additional_document || {}
             beneficialOwnerInfo.verification.additional_document[property] = req.body[posted]
