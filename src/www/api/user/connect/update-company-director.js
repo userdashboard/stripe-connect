@@ -24,9 +24,6 @@ module.exports = {
         if (!day || day < 1 || day > 31) {
           throw new Error('invalid-dob_day')
         }
-        if (day < 10) {
-          req.body.dob_day = '0' + day
-        }
       } catch (s) {
         throw new Error('invalid-dob_day')
       }
@@ -37,9 +34,6 @@ module.exports = {
         const month = parseInt(req.body.dob_month, 10)
         if (!month || month < 1 || month > 12) {
           throw new Error('invalid-dob_month')
-        }
-        if (month < 10) {
-          req.body.dob_month = '0' + month
         }
       } catch (s) {
         throw new Error('invalid-dob_month')
@@ -167,18 +161,19 @@ module.exports = {
       companyDirectorInfo.person_token = req.body.token
     } else {
       for (const field of person.requirements.currently_due) {
-        const posted = field.split('.').join('.')
+        const posted = field.split('.').join('_').replace('relationship_director_', '')
         if (!req.body[posted]) {
-          if (field === 'relationship.account_opener.address.line2' ||
-              field === 'relationship.account_opener.relationship.title' ||
-              field === 'relationship.account_opener.relationship.executive' ||
-              field === 'relationship.account_opener.relationship.director' ||
-              field === 'relationship.account_opener.relationship.owner' ||
-              (field === 'relationship.account_opener.verification.document.front' && req.body.token) ||
-              (field === 'relationship.account_opener.verification.document.back' && req.body.token)) {
+          if (field === 'relationship.director.address.line2' ||
+              field === 'relationship.director.relationship.title' ||
+              field === 'relationship.director.relationship.executive' ||
+              field === 'relationship.director.relationship.director' ||
+              field === 'relationship.director.relationship.owner') {
             continue
           }
-          throw new Error(`invalid-${posted}`)
+          if (field !== 'relationship.director.verification.document' && 
+              field !== 'relationship.director.verification.additional_document') {
+            throw new Error(`invalid-${posted}`)
+          }
         }
         for (const field of person.requirements.currently_due) {
           if (field.startsWith('business_profile.')) {
@@ -232,16 +227,21 @@ module.exports = {
     if (req.body.relationship_executive) {
       companyDirectorInfo.relationship_executive = true
     }
-    try {
-      const companyDirectorNow = await stripe.accounts.updatePerson(person.account, person.id, companyDirectorInfo, req.stripeKey)
-      req.success = true
-      await stripeCache.update(companyDirectorNow)
-      return companyDirectorNow
-    } catch (error) {
-      if (error.message.startsWith('invalid-')) {
-        throw error
+      while (true) {
+      try {
+        const companyDirectorNow = await stripe.accounts.updatePerson(person.account, person.id, companyDirectorInfo, req.stripeKey)
+        req.success = true
+        await stripeCache.update(companyDirectorNow)
+        return companyDirectorNow
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.message.startsWith('invalid-')) {
+          throw error
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
-      throw new Error('unknown-error')
     }
   }
 }

@@ -12,13 +12,18 @@ module.exports = {
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
     }
-    try {
-      await stripe.accounts.del(req.query.stripeid, req.stripeKey)
-      req.success = true
-      await stripeCache.delete(req.query.stripeid)
-      return true
-    } catch (error) {
-      throw new Error('unknown-error')
+    while (true) {
+      try {
+        await stripe.accounts.del(req.query.stripeid, req.stripeKey)
+        req.success = true
+        await stripeCache.delete(req.query.stripeid)
+        return true
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeut') {
+          continue
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+      }
     }
   }
 }

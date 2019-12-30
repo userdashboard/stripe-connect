@@ -93,7 +93,7 @@ describe('/api/user/connect/stripe-account-payouts-count', () => {
         routing_number: '110000'
       })
       await TestHelper.submitStripeAccount(user)
-      await TestHelper.waitForVerification(user.stripeAccount.id)
+      await TestHelper.waitForVerification(user)
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/api/user/connect/stripe-account-payouts-count?stripeid=${user.stripeAccount.id}`)

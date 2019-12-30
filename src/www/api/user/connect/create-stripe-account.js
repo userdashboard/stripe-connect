@@ -45,7 +45,7 @@ module.exports = {
       req.success = true
       await stripeCache.update(stripeAccount)
     } catch (error) {
-      throw new Error('unknown-error')
+      if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
     }
     if (stripeAccount.business_type === 'individual') {
       return stripeAccount
@@ -83,7 +83,7 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
-        throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
     }
     while (true) {
@@ -94,7 +94,7 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
-        throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
     }
     while (true) {
@@ -105,40 +105,7 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
-        throw new Error('unknown-error')
-      }
-    }
-    while (true) {
-      try {
-        await stripe.accounts.deletePerson(stripeAccount.id, companyDirector.id, req.stripeKey)
-        break
-      } catch (error) {
-        if (error.raw && error.raw.code === 'lock_timeout') {
-          continue
-        }
-        throw new Error('unknown-error')
-      }
-    }
-    while (true) {
-      try {
-        await stripe.accounts.deletePerson(stripeAccount.id, beneficialOwner.id, req.stripeKey)
-        break
-      } catch (error) {
-        if (error.raw && error.raw.code === 'lock_timeout') {
-          continue
-        }
-        throw new Error('unknown-error')
-      }
-    }
-    while (true) {
-      try {
-        await stripe.accounts.deletePerson(stripeAccount.id, companyRepresentative.id, req.stripeKey)
-        break
-      } catch (error) {
-        if (error.raw && error.raw.code === 'lock_timeout') {
-          continue
-        }
-        throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
     }
     delete (companyDirector.requirements.pending_verification)
@@ -163,7 +130,7 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
-        throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
     }
   }

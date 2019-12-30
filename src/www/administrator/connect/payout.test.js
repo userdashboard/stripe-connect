@@ -54,7 +54,7 @@ describe('/administrator/connect/payout', () => {
         routing_number: '110000'
       })
       await TestHelper.submitStripeAccount(user)
-      await TestHelper.waitForVerification(user.stripeAccount.id)
+      await TestHelper.waitForVerification(user)
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/administrator/connect/payout?payoutid=${user.payout.id}`)
@@ -102,7 +102,7 @@ describe('/administrator/connect/payout', () => {
         routing_number: '110000'
       })
       await TestHelper.submitStripeAccount(user)
-      await TestHelper.waitForVerification(user.stripeAccount.id)
+      await TestHelper.waitForVerification(user)
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/administrator/connect/payout?payoutid=${user.payout.id}`)

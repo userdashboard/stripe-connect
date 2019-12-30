@@ -28,20 +28,6 @@ module.exports = {
         directors_provided: true
       }
     }
-    if (stripeAccount.metadata.companyDirectorTemplate) {
-      while (true) {
-        try {
-          await stripe.accounts.deletePerson(req.query.stripeid, stripeAccount.metadata.companyDirectorTemplate, req.stripeKey)
-          req.success = true
-          await stripeCache.update(stripeAccount)
-        } catch (error) {
-          if (error.raw && error.raw.code === 'lock_timeout') {
-            continue
-          }
-          throw new Error('unknown-error')
-        }
-      }
-    }
     while (true) {
       try {
         stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
@@ -52,7 +38,7 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
-        throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
     }
   }

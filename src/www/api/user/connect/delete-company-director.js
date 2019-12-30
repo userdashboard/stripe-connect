@@ -29,14 +29,19 @@ module.exports = {
       }
     }
     connect.MetaData.store(accountInfo.metadata, 'directors', directors)
-    try {
-      const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
-      await stripeCache.update(accountNow)
-      await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
-      req.success = true
-      return true
-    } catch (error) {
-      throw new Error('unknown-error')
+    while (true) {
+      try {
+        const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
+        await stripeCache.update(accountNow)
+        await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
+        req.success = true
+        return true
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+      }
     }
   }
 }

@@ -28,7 +28,7 @@ module.exports = {
         await stripe.accounts.updatePerson(req.query.stripeid, person.id, representativeInfo, req.stripeKey)
         req.success = true
       } catch (error) {
-        throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
       while (true) {
         try {
@@ -48,6 +48,6 @@ module.exports = {
         }
       }
     }
-    throw new Error('unknown-error')
+    if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
   }
 }

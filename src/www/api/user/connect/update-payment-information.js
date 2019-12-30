@@ -171,19 +171,24 @@ module.exports = {
         stripeData.external_account.account_number = req.body.iban
         break
     }
-    try {
-      const accountNow = await stripe.accounts.update(req.query.stripeid, stripeData, req.stripeKey)
-      req.success = true
-      const bankAccount = accountNow.external_accounts.data[0]
-      await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
-      await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
-      await stripeCache.update(accountNow)
-      return accountNow
-    } catch (error) {
-      if (error.message.startsWith('invalid-')) {
-        throw error
+    while (true) {
+      try {
+        const accountNow = await stripe.accounts.update(req.query.stripeid, stripeData, req.stripeKey)
+        req.success = true
+        const bankAccount = accountNow.external_accounts.data[0]
+        await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
+        await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
+        await stripeCache.update(accountNow)
+        return accountNow
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.message.startsWith('invalid-')) {
+          throw error
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
-      throw new Error('unknown-error')
     }
   }
 }

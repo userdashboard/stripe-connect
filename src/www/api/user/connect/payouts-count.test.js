@@ -88,7 +88,7 @@ describe('/api/user/connect/payouts-count', () => {
         routing_number: '110000'
       })
       await TestHelper.submitStripeAccount(user)
-      await TestHelper.waitForVerification(user.stripeAccount.id)
+      await TestHelper.waitForVerification(user)
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPayout(user)
       }

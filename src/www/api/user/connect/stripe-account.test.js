@@ -57,7 +57,7 @@ describe('/api/user/connect/stripe-account', () => {
   })
 
   describe('returns', () => {
-    it('object', async () => {
+    it.only('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

@@ -29,9 +29,6 @@ describe('/api/administrator/connect/payouts', () => {
           first_name: user.profile.firstName,
           last_name: user.profile.lastName,
           phone: '456 789 0123'
-        }, {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -41,16 +38,18 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
-        await TestHelper.createStripeRegistration(user, {
-        }, {
+        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user)
+        await TestHelper.createStripeRegistration(user, null, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png'],
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         })
-        await TestHelper.waitForVerification(user.stripeAccount.id)
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForPayoutsEnabled(user)
         await TestHelper.createPayout(user)
         payouts.unshift(user.payout.id)
+        await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/payouts?offset=${offset}`)
       req.account = administrator.account
@@ -84,9 +83,6 @@ describe('/api/administrator/connect/payouts', () => {
           first_name: user.profile.firstName,
           last_name: user.profile.lastName,
           phone: '456 789 0123'
-        }, {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -96,15 +92,17 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
-        await TestHelper.createStripeRegistration(user, {
-        }, {
+        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user)
+        await TestHelper.createStripeRegistration(user, null, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png'],
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         })
-        await TestHelper.waitForVerification(user.stripeAccount.id)
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForPayoutsEnabled(user)
         await TestHelper.createPayout(user)
+        await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/payouts?limit=${limit}`)
       req.account = administrator.account
@@ -136,9 +134,6 @@ describe('/api/administrator/connect/payouts', () => {
           first_name: user.profile.firstName,
           last_name: user.profile.lastName,
           phone: '456 789 0123'
-        }, {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -148,15 +143,18 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
-        await TestHelper.createStripeRegistration(user, {
-        }, {
+        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user)
+        await TestHelper.createStripeRegistration(user, null, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png'],
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         })
-        await TestHelper.waitForVerification(user.stripeAccount.id)
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForPayoutsEnabled(user)
+        await TestHelper.createPayout(user)
         payouts.unshift(user.payout.id)
+        await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       }
       const req = TestHelper.createRequest('/api/administrator/connect/payouts?all=true')
       req.account = administrator.account
@@ -189,9 +187,6 @@ describe('/api/administrator/connect/payouts', () => {
           first_name: user.profile.firstName,
           last_name: user.profile.lastName,
           phone: '456 789 0123'
-        }, {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -201,15 +196,17 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
-        await TestHelper.createStripeRegistration(user, {
-        }, {
+        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user)
+        await TestHelper.createStripeRegistration(user, null, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png'],
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         })
-        await TestHelper.waitForVerification(user.stripeAccount.id)
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForPayoutsEnabled(user)
         await TestHelper.createPayout(user)
+        await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       }
       const req = TestHelper.createRequest('/api/administrator/connect/payouts')
       req.account = administrator.account
@@ -243,9 +240,6 @@ describe('/api/administrator/connect/payouts', () => {
           first_name: user.profile.firstName,
           last_name: user.profile.lastName,
           phone: '456 789 0123'
-        }, {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -255,15 +249,17 @@ describe('/api/administrator/connect/payouts', () => {
           currency: 'nzd',
           routing_number: '110000'
         })
-        await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
-        await TestHelper.createStripeRegistration(user, {
-        }, {
+        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForVerificationFailure(user)
+        await TestHelper.createStripeRegistration(user, null, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png'],
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         })
-        await TestHelper.waitForVerification(user.stripeAccount.id)
-        await TestHelper.submitStripeAccount(user)
+        await TestHelper.waitForPayoutsEnabled(user)
         await TestHelper.createPayout(user)
+        await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       }
       const req = TestHelper.createRequest('/api/administrator/connect/payouts')
       req.account = administrator.account

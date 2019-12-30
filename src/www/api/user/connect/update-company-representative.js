@@ -24,9 +24,6 @@ module.exports = {
         if (!day || day < 1 || day > 31) {
           throw new Error('invalid-relationship_representative_dob_day')
         }
-        if (day < 10) {
-          req.body.relationship_representative_dob_day = '0' + day
-        }
       } catch (s) {
         throw new Error('invalid-relationship_representative_dob_day')
       }
@@ -37,9 +34,6 @@ module.exports = {
         const month = parseInt(req.body.relationship_representative_dob_month, 10)
         if (!month || month < 1 || month > 12) {
           throw new Error('invalid-relationship_representative_dob_month')
-        }
-        if (month < 10) {
-          req.body.relationship_representative_dob_month = '0' + month
         }
       } catch (s) {
         throw new Error('invalid-relationship_representative_dob_month')
@@ -167,18 +161,19 @@ module.exports = {
       companyRepresentativeInfo.person_token = req.body.token
     } else {
       for (const field of person.requirements.currently_due) {
+        if (field === 'relationship.account_opener.address.line2' ||
+            field === 'relationship.account_opener.relationship.title' ||
+            field === 'relationship.account_opener.relationship.executive' ||
+            field === 'relationship.account_opener.relationship.director' ||
+            field === 'relationship.account_opener.relationship.owner') {
+          continue
+        }
         const posted = field.split('.').join('_')
         if (!req.body[posted]) {
-          if (field === 'relationship.account_opener.address.line2' ||
-              field === 'relationship.account_opener.relationship.title' ||
-              field === 'relationship.account_opener.relationship.executive' ||
-              field === 'relationship.account_opener.relationship.director' ||
-              field === 'relationship.account_opener.relationship.owner' ||
-              (field === 'relationship.account_opener.verification.document.front' && req.body.token) ||
-              (field === 'relationship.account_opener.verification.document.back' && req.body.token)) {
-            continue
+          if (field !== 'relationship.account_opener.verification.document' &&
+              field !== 'relationship.account_opener.verification.additional_document') {
+            throw new Error(`invalid-${posted}`)
           }
-          throw new Error(`invalid-${posted}`)
         }
         for (const field of person.requirements.currently_due) {
           if (field.startsWith('business_profile.')) {
@@ -186,9 +181,52 @@ module.exports = {
             companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
             companyRepresentativeInfo.business_profile[property] = req.body[posted]
             delete (req.body[posted])
-            continue
+          } else if (field.startsWith('address_kanji.')) {
+            const property = field.substring('address_kanji.'.length)
+            companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
+            companyRepresentativeInfo.address_kanji[property] = req.body[posted]
+          } else if (field.startsWith('address_kana.')) {
+            const property = field.substring('address_kana.'.length)
+            companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
+            companyRepresentativeInfo.address_kana[property] = req.body[posted]
+          } else if (field.startsWith('address.')) {
+            const property = field.substring('address.'.length)
+            companyRepresentativeInfo.address[property] = req.body[posted]
+          } else if (field.startsWith('verification.document.')) {
+            const property = field.substring('verification.document.'.length)
+            companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+            companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
+            companyRepresentativeInfo.verification.document[property] = req.body[posted]
+          } else if (field.startsWith('verification.additional_document.')) {
+            const property = field.substring('verification.additional_document.'.length)
+            companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+            companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
+            companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
           }
-          if (field.startsWith('address_kanji.')) {
+        }
+      }
+      for (const field of person.requirements.eventually_due) {
+        if (field === 'relationship.account_opener.address.line2' ||
+            field === 'relationship.account_opener.relationship.title' ||
+            field === 'relationship.account_opener.relationship.executive' ||
+            field === 'relationship.account_opener.relationship.director' ||
+            field === 'relationship.account_opener.relationship.owner') {
+          continue
+        }
+        if (person.requirements.currently_due.indexOf(field) > -1) {
+          continue
+        }
+        const posted = field.split('.').join('_')
+        if (!req.body[posted]) {
+          continue
+        }
+        for (const field of person.requirements.currently_due) {
+          if (field.startsWith('business_profile.')) {
+            const property = field.substring('business_profile.'.length)
+            companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
+            companyRepresentativeInfo.business_profile[property] = req.body[posted]
+            delete (req.body[posted])
+          } else if (field.startsWith('address_kanji.')) {
             const property = field.substring('address_kanji.'.length)
             companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
             companyRepresentativeInfo.address_kanji[property] = req.body[posted]
@@ -230,16 +268,21 @@ module.exports = {
     if (req.body.relationship_representative_relationship_executive) {
       companyRepresentativeInfo.relationship_representative_relationship_executive = true
     }
-    try {
-      const companyRepresentativeNow = await stripe.accounts.updatePerson(person.account, person.id, companyRepresentativeInfo, req.stripeKey)
-      req.success = true
-      await stripeCache.update(companyRepresentativeNow)
-      return companyRepresentativeNow
-    } catch (error) {
-      if (error.message.startsWith('invalid-')) {
-        throw error
+    while (true) {
+     try {
+        const companyRepresentativeNow = await stripe.accounts.updatePerson(person.account, person.id, companyRepresentativeInfo, req.stripeKey)
+        req.success = true
+        await stripeCache.update(companyRepresentativeNow)
+        return companyRepresentativeNow
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.message.startsWith('invalid-')) {
+          throw error
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
-      throw new Error('unknown-error')
     }
   }
 }

@@ -47,11 +47,8 @@ async function beforeRequest (req) {
   }
   stripeAccount.company = stripeAccount.company || {}
   stripeAccount.individual = stripeAccount.individual || {}
-  console.log('loading owners', stripeAccount)
   const owners = await global.api.user.connect.BeneficialOwners.get(req)
-  console.log(owners)
   const directors = await global.api.user.connect.CompanyDirectors.get(req)
-  console.log(directors)
   req.data = { owners, directors, stripeAccount, registrationComplete }
 }
 

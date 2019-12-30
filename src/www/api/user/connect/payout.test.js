@@ -71,7 +71,7 @@ describe('/api/user/connect/payout', () => {
           routing_number: '110000'
         })
         await TestHelper.submitStripeAccount(user)
-        await TestHelper.waitForVerification(user.stripeAccount.id)
+        await TestHelper.waitForPayoutsEnabled(user)
         await TestHelper.createPayout(user)
         await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
         const user2 = await TestHelper.createUser()
@@ -90,7 +90,7 @@ describe('/api/user/connect/payout', () => {
   })
 
   describe('returns', () => {
-    it('array', async () => {
+    it('object', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -126,7 +126,7 @@ describe('/api/user/connect/payout', () => {
         routing_number: '110000'
       })
       await TestHelper.submitStripeAccount(user)
-      await TestHelper.waitForVerification(user.stripeAccount.id)
+      await TestHelper.waitForVerification(user)
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/api/user/connect/payout?payoutid=${user.payout.id}`)

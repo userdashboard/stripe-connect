@@ -27,7 +27,7 @@ module.exports = {
       await stripeCache.update(accountNow)
       return accountNow
     } catch (error) {
-      throw new Error('unknown-error')
+      if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
     }
   }
 }

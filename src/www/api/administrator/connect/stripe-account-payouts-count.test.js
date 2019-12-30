@@ -57,9 +57,6 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
         first_name: user.profile.firstName,
         last_name: user.profile.lastName,
         phone: '456 789 0123'
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -69,13 +66,15 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
         currency: 'nzd',
         routing_number: '110000'
       })
-      await TestHelper.waitForVerificationFailure(user.stripeAccount.id)
+      await TestHelper.submitStripeAccount(user)
+      await TestHelper.waitForVerificationFailure(user)
       await TestHelper.createStripeRegistration(user, null, {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png'],
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.waitForVerification(user.stripeAccount.id)
-      await TestHelper.submitStripeAccount(user)
+      await TestHelper.waitForPayoutsEnabled(user)
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const user2 = await TestHelper.createUser()
@@ -97,9 +96,6 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
         first_name: user2.profile.firstName,
         last_name: user2.profile.lastName,
         phone: '456 789 0123'
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user2, {
         account_holder_name: `${user2.profile.firstName} ${user2.profile.lastName}`,
@@ -109,13 +105,15 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
         currency: 'nzd',
         routing_number: '110000'
       })
-      await TestHelper.waitForVerificationFailure(user2.stripeAccount.id)
+      await TestHelper.submitStripeAccount(user2)
+      await TestHelper.waitForVerificationFailure(user2)
       await TestHelper.createStripeRegistration(user2, null, {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png'],
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.waitForVerification(user2.stripeAccount.id)
-      await TestHelper.submitStripeAccount(user2)
+      await TestHelper.waitForPayoutsEnabled(user2)
       await TestHelper.createPayout(user2)
       await TestHelper.waitForPayout(administrator, user2.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts-count?stripeid=${user.stripeAccount.id}`)

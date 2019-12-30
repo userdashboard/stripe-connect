@@ -13,23 +13,28 @@ module.exports = {
     if (stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    try {
-      if (stripeAccount.metadata.owners) {
-        const owners = await global.api.user.connect.BeneficialOwners.get(req)
-        if (owners && owners.length) {
-          for (const id of owners) {
-            await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${id}`)
+    while (true) {
+      try {
+        if (stripeAccount.metadata.owners) {
+          const owners = await global.api.user.connect.BeneficialOwners.get(req)
+          if (owners && owners.length) {
+            for (const id of owners) {
+              await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${id}`)
+            }
           }
         }
+        await stripe.accounts.del(req.query.stripeid, req.stripeKey)
+        await stripeCache.delete(req.query.stripeid)
+        await dashboard.StorageList.remove(`${req.appid}/stripeAccounts`, req.query.stripeid)
+        await dashboard.StorageList.remove(`${req.appid}/account/stripeAccounts/${req.account.accountid}`, req.query.stripeid)
+        req.success = true
+        return true
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
-      await stripe.accounts.del(req.query.stripeid, req.stripeKey)
-      await stripeCache.delete(req.query.stripeid)
-      await dashboard.StorageList.remove(`${req.appid}/stripeAccounts`, req.query.stripeid)
-      await dashboard.StorageList.remove(`${req.appid}/account/stripeAccounts/${req.account.accountid}`, req.query.stripeid)
-      req.success = true
-      return true
-    } catch (error) {
-      throw new Error('unknown-error')
     }
   }
 }

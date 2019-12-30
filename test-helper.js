@@ -5,7 +5,10 @@ global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
 const fs = require('fs')
-const ngrok = require('ngrok')
+let ngrok
+if (process.env.NGROK) {
+  ngrok = require('ngrok')
+}
 const packageJSON = require('./package.json')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
@@ -71,6 +74,7 @@ module.exports = {
   triggerVerification,
   waitForWebhook,
   waitForVerification: util.promisify(waitForVerification),
+  waitForPayoutsEnabled: util.promisify(waitForPayoutsEnabled),
   waitForVerificationFieldsToLeave: util.promisify(waitForVerificationFieldsToLeave),
   waitForVerificationFieldsToReturn: util.promisify(waitForVerificationFieldsToReturn),
   waitForVerificationFailure: util.promisify(waitForVerificationFailure),
@@ -120,6 +124,15 @@ before(async () => {
   let accounts = await stripe.accounts.list(stripeKey)
   while (accounts.data && accounts.data.length) {
     for (const account of accounts.data) {
+      const persons = await stripe.accounts.listPersons(account.id, { limit: 100 }, stripeKey)
+      if (persons.data && persons.data.length) {
+        for (const person of persons.data) {
+          try {
+            await stripe.accounts.deletePerson(account.id, person.id, stripeKey)
+          } catch (error) {
+          }
+        }
+      }
       try {
         await stripe.accounts.del(account.id, stripeKey)
       } catch (error) {
@@ -130,18 +143,30 @@ before(async () => {
     } catch (error) {
     }
   }
-  while (!tunnel) {
-    try {
-      tunnel = await ngrok.connect(process.env.PORT)
-      if (!tunnel) {
+  if (process.env.NGROK) {
+    while (!tunnel) {
+      try {
+        tunnel = await ngrok.connect(process.env.PORT)
+        if (!tunnel) {
+          continue
+        }
+        global.dashboardServer = tunnel.replace('https://', 'http://')
+        global.domain = tunnel.split('://')[1]
+      } catch (error) {
         continue
       }
-      global.dashboardServer = tunnel.replace('https://', 'http://')
-      global.domain = tunnel.split('://')[1]
-    } catch (error) {
-      continue
     }
   }
+  TestHelper = require('@userdashboard/dashboard/test-helper.js')
+  for (const x in TestHelper) {
+    module.exports[x] = TestHelper[x]
+  }
+  module.exports.createRequest = (rawURL, method) => {
+    const req = TestHelper.createRequest(rawURL, method)
+    req.stripeKey = stripeKey
+    return req
+  }
+  connect = require('./index.js')
   const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
   const eventList = []
   for (const event of events) {
@@ -153,20 +178,12 @@ before(async () => {
     enabled_events: eventList
   }, stripeKey)
   global.connectWebhookEndPointSecret = webhook.secret
-  TestHelper = require('@userdashboard/dashboard/test-helper.js')
-  for (const x in TestHelper) {
-    module.exports[x] = TestHelper[x]
-  }
-  module.exports.createRequest = (rawURL, method) => {
-    const req = TestHelper.createRequest(rawURL, method)
-    req.stripeKey = stripeKey
-    return req
-  }
-  connect = require('./index.js')
 })
 
 after(async () => {
-  ngrok.kill()
+  if (process.env.NGROK) {
+    ngrok.kill()
+  }
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
@@ -177,7 +194,16 @@ after(async () => {
   let accounts = await stripe.accounts.list(stripeKey)
   while (accounts.data && accounts.data.length) {
     for (const account of accounts.data) {
-      await stripe.accounts.del(account.id, stripeKey)
+      while (true) {
+        try {
+          await stripe.accounts.del(account.id, stripeKey)
+        } catch (error) {
+          if (error.raw && error.raw.code === 'lock_timeout') {
+            continue
+          }
+          break
+        }
+      }
     }
     accounts = await stripe.accounts.list(stripeKey)
   }
@@ -211,8 +237,7 @@ async function createStripeRegistration (user, properties, uploads) {
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()
   await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.metadata.registration
+    return stripeEvent.data.object.id === user.stripeAccount.id
   })
   return user.stripeAccount
 }
@@ -414,24 +439,17 @@ async function waitForPayout (administrator, stripeid, previousid, callback) {
   return setTimeout(wait, 100)
 }
 
-async function waitForVerification (stripeid, callback) {
+async function waitForPayoutsEnabled (user, callback) {
+  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForPayoutsEnabled`)
+  req.account = user.account
+  req.session = user.session
   async function wait () {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey)
-    if (stripeAccount.business_type === 'individual') {
-      if (!stripeAccount.payouts_enabled ||
-          !stripeAccount.individual.verification ||
-          stripeAccount.individual.verification.status !== 'verified') {
-        return setTimeout(wait, 100)
-      }
-    } else {
-      if (!stripeAccount.payouts_enabled ||
-          !stripeAccount.requirements ||
-          stripeAccount.requirements.disabled_reason !== 'requirements.pending_verification') {
-        return setTimeout(wait, 100)
-      }
+    const stripeAccount = await req.get(req)
+    if (!stripeAccount.payouts_enabled) {
+      return setTimeout(wait, 100)
     }
     return setTimeout(() => {
       return callback(null, stripeAccount)
@@ -440,21 +458,51 @@ async function waitForVerification (stripeid, callback) {
   return setTimeout(wait, 100)
 }
 
-async function waitForVerificationFailure (stripeid, callback) {
+async function waitForVerification (user, callback) {
+  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerification`)
+  req.account = user.account
+  req.session = user.session
   async function wait () {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await stripe.accounts.retrieve(stripeid, stripeKey)
+    const stripeAccount = await req.get(req)
     if (stripeAccount.business_type === 'individual') {
-      if (stripeAccount.payouts_enabled ||
-        stripeAccount.individual.disabled_reason.status !== 'requirements.pending_verification') {
+      if (!stripeAccount.individual || stripeAccount.individual.verification.status !== 'verified') {
+        return setTimeout(wait, 100)
+      }
+    } else {
+      if (!stripeAccount.company || stripeAccount.company.verification.status !== 'verified') {
+        return setTimeout(wait, 100)
+      }
+    }
+    if (!stripeAccount.payouts_enabled && !stripeAccount.requirements.currently_due.length) {
+      return setTimeout(wait, 100)
+    }
+    return setTimeout(() => {
+      return callback(null, stripeAccount)
+    }, 10)
+  }
+  return setTimeout(wait, 100)
+}
+
+async function waitForVerificationFailure (user, callback) {
+  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerificationFailure`)
+  req.account = user.account
+  req.session = user.session
+  async function wait () {
+    if (global.testEnded) {
+      return
+    }
+    const stripeAccount = await req.get(req)
+    if (stripeAccount.business_type === 'individual') {
+      if (stripeAccount.requirements.pending_verification.length ||
+          (stripeAccount.individual && stripeAccount.individual.verification.status !== 'unverified')) {
         return setTimeout(wait, 100)
       }
     } else {
       if (stripeAccount.requirements.pending_verification.length ||
-        stripeAccount.requirements.past_due.length ||
-          stripeAccount.requirements.disabled_reason === 'requirements.pending_verification') {
+        (stripeAccount.company && stripeAccount.company.verification.status !== 'unverified')) {
         return setTimeout(wait, 100)
       }
     }
@@ -468,7 +516,7 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
   req.account = user.account
   req.session = user.session
   let attempts = 0
-  async function wait () {
+  async function wait () { 
     if (global.testEnded) {
       return
     }

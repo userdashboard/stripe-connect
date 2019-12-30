@@ -58,11 +58,10 @@ module.exports = {
       accountInfo.account_token = req.body.token
     } else {
       for (const field of stripeAccount.requirements.currently_due) {
-        const posted = field.split('.').join('_')
+        const posted = field.split('.').join('_').replace('company.', '')
         if (!req.body[posted]) {
           if (field === 'company.address.line2' ||
-              field === 'individual.verification.document.front' ||
-              field === 'individual.verification.document.back' ||
+              field === 'company.verification.document' ||
             (field === 'business_profile.url' && req.body.business_profile_product_description) ||
             (field === 'business_profile.product_description' && req.body.business_profile_url)) {
             continue
@@ -74,34 +73,65 @@ module.exports = {
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
+          accountInfo.business_profile = accountInfo.business_profile || {}
           accountInfo.business_profile[property] = req.body[posted]
           delete (req.body[posted])
           continue
-        }
-        if (field.startsWith('')) {
-          if (field.startsWith('address_kanji.')) {
-            const property = field.substring('address_kanji.'.length)
-            accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
-            accountInfo.company.address_kanji[property] = req.body[posted]
-          } else if (field.startsWith('address_kana.')) {
-            const property = field.substring('address_kana.'.length)
-            accountInfo.company.address_kana = accountInfo.company.address_kana || {}
-            accountInfo.company.address_kana[property] = req.body[posted]
-          } else if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            accountInfo.company.address[property] = req.body[posted]
-          } else if (field.startsWith('name.')) {
-            const property = field.substring('name.'.length)
-            accountInfo.company[`name_${property}`] = req.body[posted]
-          } else if (field.startsWith('verification.document.')) {
-            const property = field.substring('verification.document.'.length)
-            accountInfo.company.verification = accountInfo.company.verification || {}
-            accountInfo.company.verification.document = accountInfo.company.verification.document || {}
-            accountInfo.company.verification.document[property] = req.body[posted]
-          } else {
-            const property = field.substring(''.length)
-            accountInfo.company[property] = req.body[posted]
+        } else if (field.startsWith('address_kanji.')) {
+          const property = field.substring('address_kanji.'.length)
+          accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
+          accountInfo.company.address_kanji[property] = req.body[posted]
+        } else if (field.startsWith('address_kana.')) {
+          const property = field.substring('address_kana.'.length)
+          accountInfo.company.address_kana = accountInfo.company.address_kana || {}
+          accountInfo.company.address_kana[property] = req.body[posted]
+        } else if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          accountInfo.company.address[property] = req.body[posted]
+        } else if (field === 'company.verification.document') {
+          accountInfo.company.verification = accountInfo.company.verification || {}
+          accountInfo.company.verification.document = accountInfo.company.verification.document || {}
+          const front = `${posted}_front`
+          const back = `${posted}_back`
+          if (req.body[front]) {
+            accountInfo.company.verification.document.front = req.body[front]
           }
+          if (req.body[back]) {
+            accountInfo.company.verification.document.back = req.body[back]
+          }
+        } else {
+          accountInfo.company[field] = req.body[posted]
+        }
+      }
+      for (const field of stripeAccount.requirements.eventually_due) {
+        const posted = field.split('.').join('_')
+        if (!req.body[posted]) {
+          continue
+        }
+        if (field.startsWith('address_kanji.')) {
+          const property = field.substring('address_kanji.'.length)
+          accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
+          accountInfo.company.address_kanji[property] = req.body[posted]
+        } else if (field.startsWith('address_kana.')) {
+          const property = field.substring('address_kana.'.length)
+          accountInfo.company.address_kana = accountInfo.company.address_kana || {}
+          accountInfo.company.address_kana[property] = req.body[posted]
+        } else if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          accountInfo.company.address[property] = req.body[posted]
+        } else if (field ==='company.verification.document') {
+          accountInfo.company.verification = accountInfo.company.verification || {}
+          accountInfo.company.verification.document = accountInfo.company.verification.document || {}
+          const front = `${posted}_front`
+          const back = `${posted}_back`
+          if (req.body[front]) {
+            accountInfo.company.verification.document.front = req.body[front]
+          }
+          if (req.body[back]) {
+            accountInfo.company.verification.document.back = req.body[back]
+          }
+        } else {
+          accountInfo.company[field] = req.body[posted]
         }
       }
     }
@@ -140,16 +170,21 @@ module.exports = {
         throw new Error('invalid-address_state')
       }
     }
-    try {
-      const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-      req.success = true
-      await stripeCache.update(accountNow)
-      return accountNow
-    } catch (error) {
-      if (error.message.startsWith('invalid-')) {
-        throw error
+    while(true) {
+      try {
+        const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        req.success = true
+        await stripeCache.update(accountNow)
+        return accountNow
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.message.startsWith('invalid-')) {
+          throw error
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
-      throw new Error('unknown-error')
     }
   }
 }

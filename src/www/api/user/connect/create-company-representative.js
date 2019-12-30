@@ -204,7 +204,7 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
-        throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
     }
     const accountInfo = {
@@ -222,7 +222,7 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
-        throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
     }
   }
