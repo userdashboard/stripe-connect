@@ -22,23 +22,6 @@ module.exports = {
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
-    if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
-      throw new Error('invalid-address_country')
-    }
-    if (!req.body.address_state) {
-      throw new Error('invalid-address_state')
-    }
-    const states = connect.countryDivisions[req.body.address_country]
-    let found
-    for (const state of states) {
-      found = state.value === req.body.address_state
-      if (found) {
-        break
-      }
-    }
-    if (!found) {
-      throw new Error('invalid-address_state')
-    }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
@@ -56,6 +39,29 @@ module.exports = {
           continue
         }
         throw new Error(`invalid-${posted}`)
+      }
+    }
+    if (requirements.currently_due.indexOf('address.country') > -1 ||
+        requirements.eventually_due.indexOf('address.country' ) > -1) {
+      if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
+        throw new Error('invalid-address_country')
+      }
+      if (requirements.currently_due.indexOf('address.state') > -1 || 
+          requirements.eventually_due.indexOf('address.state' ) > -1) {
+        if (!req.body.address_state) {
+          throw new Error('invalid-address_state')
+        }  
+        const states = connect.countryDivisions[req.body.address_country]
+        let found
+        for (const state of states) {
+          found = state.value === req.body.address_state
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-address_state')
+        }
       }
     }
     if (req.body.relationship_percent_ownership) {
