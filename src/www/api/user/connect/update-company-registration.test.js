@@ -95,25 +95,25 @@ describe('/api/user/connect/update-company-registration', () => {
           tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_percent_ownership: '0',
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_ssn_last_4: '0000'
+          address_city: 'New York',
+          address_country: 'US',
+          address_line1: '285 Fulton St',
+          address_postal_code: '10007',
+          address_state: 'NY',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: user.profile.contactEmail,
+          first_name: user.profile.firstName,
+          last_name: user.profile.lastName,
+          relationship_percent_ownership: '0',
+          phone: '456-789-0123',
+          relationship_executive: 'true',
+          relationship_title: 'Owner',
+          ssn_last_4: '0000'
         }, {
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -628,7 +628,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.business_profile_mcc, '8931')
+      assert.strictEqual(registrationNow.business_profile.mcc, '8931')
     })
 
     it('optionally-required posted business_profile_url', async () => {
@@ -653,7 +653,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.business_profile_url, 'https://updated.com')
+      assert.strictEqual(registrationNow.business_profile.url, 'https://updated.com')
     })
 
     it('optionally-required posted business_profile_product_description', async () => {
@@ -678,7 +678,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.business_profile_product_description, 'thing')
+      assert.strictEqual(registrationNow.business_profile.product_description, 'thing')
     })
 
     it('required posted phone', async () => {
@@ -754,7 +754,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address_postal_code, '10008')
+      assert.strictEqual(registrationNow.address.postal_code, '10008')
     })
 
     it('optionally-required posted address_city', async () => {
@@ -779,7 +779,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address_city, 'Providence')
+      assert.strictEqual(registrationNow.address.city, 'Providence')
     })
 
     it('optionally-required posted address_state', async () => {
@@ -804,7 +804,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address_state, 'NJ')
+      assert.strictEqual(registrationNow.address.state, 'NJ')
     })
 
     it('optionally-required posted address_line1', async () => {
@@ -829,7 +829,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address_line1, '285 Fulton St')
+      assert.strictEqual(registrationNow.address.line1, '285 Fulton St')
     })
 
     it('optional posted address_line2', async () => {
@@ -855,7 +855,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const companyNow = await req.patch()
       const registrationNow = connect.MetaData.parse(companyNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address_line2, 'Optional')
+      assert.strictEqual(registrationNow.address.line2, 'Optional')
     })
 
     it('optionally-required posted name_kana', async () => {
@@ -954,7 +954,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kana_postal_code, '1500001')
+      assert.strictEqual(registration.address.kana_postal_code, '1500001')
     })
 
     it('optionally-required posted address_kana_city', async () => {
@@ -987,7 +987,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kana_city, 'ｼﾌﾞﾔ')
+      assert.strictEqual(registration.address.kana_city, 'ｼﾌﾞﾔ')
     })
 
     it('optionally-required posted address_kana_state', async () => {
@@ -1020,7 +1020,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kana_state, 'ﾄｳｷﾖｳﾄ')
+      assert.strictEqual(registration.address.kana_state, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted address_kana_town', async () => {
@@ -1053,7 +1053,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
+      assert.strictEqual(registration.address.kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
     })
 
     it('optionally-required posted address_kana_line1', async () => {
@@ -1086,7 +1086,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kana_line1, '27-15')
+      assert.strictEqual(registration.address.kana_line1, '27-15')
     })
 
     it('optionally-required posted address_kanji_postal_code', async () => {
@@ -1119,7 +1119,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kanji_postal_code, '1500001')
+      assert.strictEqual(registration.address.kanji_postal_code, '1500001')
     })
 
     it('optionally-required posted address_kanji_city', async () => {
@@ -1152,7 +1152,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kanji_city, '渋谷区')
+      assert.strictEqual(registration.address.kanji_city, '渋谷区')
     })
 
     it('optionally-required posted address_kanji_state', async () => {
@@ -1185,7 +1185,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kanji_state, '東京都')
+      assert.strictEqual(registration.address.kanji_state, '東京都')
     })
 
     it('optionally-required posted address_kanji_town', async () => {
@@ -1218,7 +1218,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kanji_town, '神宮前　３丁目')
+      assert.strictEqual(registration.address.kanji_town, '神宮前　３丁目')
     })
 
     it('optionally-required posted address_kanji_line1', async () => {
@@ -1251,7 +1251,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       const stripeAccountNow = await req.patch()
       const registration = connect.MetaData.parse(stripeAccountNow.metadata, 'registration')
-      assert.strictEqual(registration.address_kanji_line1, '２７－１５')
+      assert.strictEqual(registration.address.kanji_line1, '２７－１５')
     })
   })
 

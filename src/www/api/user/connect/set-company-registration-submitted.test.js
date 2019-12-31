@@ -71,27 +71,27 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_address_city: 'New York',
-          relationship_representative_address_country: 'US',
-          relationship_representative_address_line1: '285 Fulton St',
-          relationship_representative_address_postal_code: '10007',
-          relationship_representative_address_state: 'NY',
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_percent_ownership: '0',
-          relationship_representative_phone: '456-789-0123',
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner',
-          relationship_representative_ssn_last_4: '0000'
+          address_city: 'New York',
+          address_country: 'US',
+          address_line1: '285 Fulton St',
+          address_postal_code: '10007',
+          address_state: 'NY',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: user.profile.contactEmail,
+          first_name: user.profile.firstName,
+          last_name: user.profile.lastName,
+          relationship_percent_ownership: '0',
+          phone: '456-789-0123',
+          relationship_executive: 'true',
+          relationship_title: 'Owner',
+          ssn_last_4: '0000'
         }, {
-          relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         await TestHelper.createExternalAccount(user, {
           account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -158,25 +158,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           tax_id: '00000000000'
         })
         await TestHelper.createCompanyRepresentative(user, {
-          relationship_representative_address_city: 'Frederiksberg',
-          relationship_representative_address_country: 'DE',
-          relationship_representative_address_line1: '123 Sesame St',
-          relationship_representative_address_postal_code: '1020',
-          relationship_representative_address_state: 'BW',
-          relationship_representative_dob_day: '1',
-          relationship_representative_dob_month: '1',
-          relationship_representative_dob_year: '1950',
-          relationship_representative_email: user.profile.contactEmail,
-          relationship_representative_first_name: user.profile.firstName,
-          relationship_representative_last_name: user.profile.lastName,
-          relationship_representative_phone: '456-789-1230',
-          relationship_representative_relationship_executive: 'true',
-          relationship_representative_relationship_title: 'Owner'
+          address_city: 'Frederiksberg',
+          address_country: 'DE',
+          address_line1: '123 Sesame St',
+          address_postal_code: '1020',
+          address_state: 'BW',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: user.profile.contactEmail,
+          first_name: user.profile.firstName,
+          last_name: user.profile.lastName,
+          phone: '456-789-1230',
+          relationship_executive: 'true',
+          relationship_title: 'Owner'
         }, {
-          relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-          relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -211,25 +211,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Vienna',
-        relationship_representative_address_country: 'AT',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_address_state: '1',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Vienna',
+        address_country: 'AT',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1020',
+        address_state: '1',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -275,25 +275,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Brisbane',
-        relationship_representative_address_country: 'AU',
-        relationship_representative_address_line1: '845 Oxford St',
-        relationship_representative_address_postal_code: '4000',
-        relationship_representative_address_state: 'QLD',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Brisbane',
+        address_country: 'AU',
+        address_line1: '845 Oxford St',
+        address_postal_code: '4000',
+        address_state: 'QLD',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -343,25 +343,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Brussels',
-        relationship_representative_address_country: 'BE',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_address_state: 'BRU',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Brussels',
+        address_country: 'BE',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1020',
+        address_state: 'BRU',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -407,25 +407,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Vancouver',
-        relationship_representative_address_country: 'CA',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'V5K 0A1',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_id_number: '000000000',
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_percent_ownership: '0',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Vancouver',
+        address_country: 'CA',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'V5K 0A1',
+        address_state: 'BC',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        id_number: '000000000',
+        last_name: user.profile.lastName,
+        relationship_percent_ownership: '0',
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.setCompanyRepresentative(user)
       await TestHelper.createExternalAccount(user, {
@@ -471,25 +471,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Bern',
-        relationship_representative_address_country: 'CH',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1020',
-        relationship_representative_address_state: 'BE',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Bern',
+        address_country: 'CH',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1020',
+        address_state: 'BE',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -535,25 +535,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Berlin',
-        relationship_representative_address_country: 'DE',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '01067',
-        relationship_representative_address_state: 'BE',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Berlin',
+        address_country: 'DE',
+        address_line1: '123 Sesame St',
+        address_postal_code: '01067',
+        address_state: 'BE',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -599,25 +599,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Copenhagen',
-        relationship_representative_address_country: 'DK',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1000',
-        relationship_representative_address_state: '147',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Copenhagen',
+        address_country: 'DK',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1000',
+        address_state: '147',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -663,25 +663,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Tallinn',
-        relationship_representative_address_country: 'EE',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '10128',
-        relationship_representative_address_state: '37',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Tallinn',
+        address_country: 'EE',
+        address_line1: '123 Sesame St',
+        address_postal_code: '10128',
+        address_state: '37',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -727,25 +727,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Madrid',
-        relationship_representative_address_country: 'ES',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '03179',
-        relationship_representative_address_state: 'AN',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Madrid',
+        address_country: 'ES',
+        address_line1: '123 Sesame St',
+        address_postal_code: '03179',
+        address_state: 'AN',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -791,25 +791,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Helsinki',
-        relationship_representative_address_country: 'FI',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00990',
-        relationship_representative_address_state: 'AL',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Helsinki',
+        address_country: 'FI',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00990',
+        address_state: 'AL',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -855,25 +855,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Paris',
-        relationship_representative_address_country: 'FR',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '75001',
-        relationship_representative_address_state: 'A',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Paris',
+        address_country: 'FR',
+        address_line1: '123 Sesame St',
+        address_postal_code: '75001',
+        address_state: 'A',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -922,25 +922,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'London',
-        relationship_representative_address_country: 'GB',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'EC1A 1AA',
-        relationship_representative_address_state: 'LND',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -986,25 +986,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Hong Kong',
-        relationship_representative_address_country: 'HK',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '999077',
-        relationship_representative_address_state: 'HK',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_id_number: '000000000',
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_percent_ownership: '0',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Hong Kong',
+        address_country: 'HK',
+        address_line1: '123 Sesame St',
+        address_postal_code: '999077',
+        address_state: 'HK',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        id_number: '000000000',
+        last_name: user.profile.lastName,
+        relationship_percent_ownership: '0',
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.setCompanyRepresentative(user)
       await TestHelper.createExternalAccount(user, {
@@ -1050,25 +1050,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Dublin',
-        relationship_representative_address_country: 'IE',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'Dublin 1',
-        relationship_representative_address_state: 'D',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Dublin',
+        address_country: 'IE',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'Dublin 1',
+        address_state: 'D',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1115,25 +1115,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Rome',
-        relationship_representative_address_country: 'IT',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00010',
-        relationship_representative_address_state: '65',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Rome',
+        address_country: 'IT',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00010',
+        address_state: '65',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1187,36 +1187,36 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_kana_city: 'ｼﾌﾞﾔ',
-        relationship_representative_address_kana_line1: '27-15',
-        relationship_representative_address_kana_postal_code: '1500001',
-        relationship_representative_address_kana_state: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-        relationship_representative_address_kanji_city: '渋谷区',
-        relationship_representative_address_kanji_line1: '２７－１５',
-        relationship_representative_address_kanji_postal_code: '1500001',
-        relationship_representative_address_kanji_state: '東京都',
-        relationship_representative_address_kanji_town: '神宮前 ３丁目',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_first_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_first_name_kanji: '東京都',
-        relationship_representative_gender: 'female',
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_last_name_kana: 'ﾄｳｷﾖｳﾄ',
-        relationship_representative_last_name_kanji: '東京都',
-        relationship_representative_percent_ownership: '0',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_kana_city: 'ｼﾌﾞﾔ',
+        address_kana_line1: '27-15',
+        address_kana_postal_code: '1500001',
+        address_kana_state: 'ﾄｳｷﾖｳﾄ',
+        address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
+        address_kanji_city: '渋谷区',
+        address_kanji_line1: '２７－１５',
+        address_kanji_postal_code: '1500001',
+        address_kanji_state: '東京都',
+        address_kanji_town: '神宮前 ３丁目',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        first_name_kana: 'ﾄｳｷﾖｳﾄ',
+        first_name_kanji: '東京都',
+        gender: 'female',
+        last_name: user.profile.lastName,
+        last_name_kana: 'ﾄｳｷﾖｳﾄ',
+        last_name_kanji: '東京都',
+        relationship_percent_ownership: '0',
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1262,25 +1262,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Vilnius',
-        relationship_representative_address_country: 'LT',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'LT-00000',
-        relationship_representative_address_state: 'AL',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Vilnius',
+        address_country: 'LT',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'LT-00000',
+        address_state: 'AL',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1326,25 +1326,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Luxemburg',
-        relationship_representative_address_country: 'LU',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1623',
-        relationship_representative_address_state: 'L',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Luxemburg',
+        address_country: 'LU',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1623',
+        address_state: 'L',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1390,25 +1390,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Riga',
-        relationship_representative_address_country: 'LV',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: 'LV–1073',
-        relationship_representative_address_state: 'AI',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Riga',
+        address_country: 'LV',
+        address_line1: '123 Sesame St',
+        address_postal_code: 'LV–1073',
+        address_state: 'AI',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1454,25 +1454,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Amsterdam',
-        relationship_representative_address_country: 'NL',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1071 JA',
-        relationship_representative_address_state: 'DR',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Amsterdam',
+        address_country: 'NL',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1071 JA',
+        address_state: 'DR',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1517,23 +1517,23 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
     //     tax_id: '00000000000'
     // })
     //   await TestHelper.createCompanyRepresentative(user,{
-    //     relationship_representative_address_city: 'Mexico City',
-    //     relationship_representative_address_country: 'MX',
-    //     relationship_representative_address_line1: '123 Sesame St',
-    //     relationship_representative_address_postal_code: '11000',
-    //     relationship_representative_address_state: 'DIF',
-    //     relationship_representative_dob_day: '1',
-    //     relationship_representative_dob_month: '1',
-    //     relationship_representative_dob_year: '1950',
-    //     relationship_representative_email: user.profile.contactEmail,
-    //     relationship_representative_first_name: user.profile.firstName,
-    //     relationship_representative_last_name: user.profile.lastName,
-    //     relationship_representative_phone: '456-789-0123',
-    //     relationship_representative_relationship_executive: 'true',
-    //     relationship_representative_relationship_title: 'Owner'
+    //     address_city: 'Mexico City',
+    //     address_country: 'MX',
+    //     address_line1: '123 Sesame St',
+    //     address_postal_code: '11000',
+    //     address_state: 'DIF',
+    //     dob_day: '1',
+    //     dob_month: '1',
+    //     dob_year: '1950',
+    //     email: user.profile.contactEmail,
+    //     first_name: user.profile.firstName,
+    //     last_name: user.profile.lastName,
+    //     phone: '456-789-0123',
+    //     relationship_executive: 'true',
+    //     relationship_title: 'Owner'
     // },{
-    //     relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-    //     relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+    //     verification_document_back: TestHelper['success_id_scan_back.png'],
+    //     verification_document_front: TestHelper['success_id_scan_front.png']
     // })
     //   await TestHelper.createExternalAccount(user,{
     //     account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1576,25 +1576,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Oslo',
-        relationship_representative_address_country: 'NO',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '0001',
-        relationship_representative_address_state: '02',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Oslo',
+        address_country: 'NO',
+        address_line1: '123 Sesame St',
+        address_postal_code: '0001',
+        address_state: '02',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1643,25 +1643,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Auckland',
-        relationship_representative_address_country: 'NZ',
-        relationship_representative_address_line1: '844 Fleet Street',
-        relationship_representative_address_postal_code: '6011',
-        relationship_representative_address_state: 'N',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Auckland',
+        address_country: 'NZ',
+        address_line1: '844 Fleet Street',
+        address_postal_code: '6011',
+        address_state: 'N',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1708,25 +1708,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Lisbon',
-        relationship_representative_address_country: 'PT',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '4520',
-        relationship_representative_address_state: '01',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Lisbon',
+        address_country: 'PT',
+        address_line1: '123 Sesame St',
+        address_postal_code: '4520',
+        address_state: '01',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1772,25 +1772,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Stockholm',
-        relationship_representative_address_country: 'SE',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00150',
-        relationship_representative_address_state: 'K',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Stockholm',
+        address_country: 'SE',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00150',
+        address_state: 'K',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1836,25 +1836,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Singapore',
-        relationship_representative_address_country: 'SG',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '339696',
-        relationship_representative_address_state: 'SG',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_id_number: '000000000',
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_percent_ownership: '0',
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Singapore',
+        address_country: 'SG',
+        address_line1: '123 Sesame St',
+        address_postal_code: '339696',
+        address_state: 'SG',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        id_number: '000000000',
+        last_name: user.profile.lastName,
+        relationship_percent_ownership: '0',
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1901,25 +1901,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Ljubljana',
-        relationship_representative_address_country: 'SI',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '1210',
-        relationship_representative_address_state: '07',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Ljubljana',
+        address_country: 'SI',
+        address_line1: '123 Sesame St',
+        address_postal_code: '1210',
+        address_state: '07',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -1965,25 +1965,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Slovakia',
-        relationship_representative_address_country: 'SK',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '00102',
-        relationship_representative_address_state: 'BC',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Slovakia',
+        address_country: 'SK',
+        address_line1: '123 Sesame St',
+        address_postal_code: '00102',
+        address_state: 'BC',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -2029,24 +2029,24 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         tax_id: '00000000000'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'New York',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_ssn_last_4: '0000'
+        address_city: 'New York',
+        address_country: 'US',
+        address_line1: '285 Fulton St',
+        address_postal_code: '10007',
+        address_state: 'NY',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner',
+        ssn_last_4: '0000'
       }, {
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -2104,25 +2104,25 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       req2.account = user.account
       req2.session = user.session
       req2.uploads = {
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req2.body = {
-        relationship_representative_address_city: 'New York',
-        relationship_representative_address_country: 'US',
-        relationship_representative_address_line1: '285 Fulton St',
-        relationship_representative_address_postal_code: '10007',
-        relationship_representative_address_state: 'NY',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner',
-        relationship_representative_ssn_last_4: '0000'
+        address_city: 'New York',
+        address_country: 'US',
+        address_line1: '285 Fulton St',
+        address_postal_code: '10007',
+        address_state: 'NY',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner',
+        ssn_last_4: '0000'
       }
       await req2.post()
       const req3 = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)

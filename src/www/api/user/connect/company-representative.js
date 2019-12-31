@@ -11,6 +11,13 @@ module.exports = {
       throw new Error('invalid-personid')
     }
     req.query.stripeid = stripeid
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount || stripeAccount.business_type !== 'company') {
+      throw new Error('invalid-personid')
+    }
+    if (stripeAccount.metadata.representative !== req.query.personid) {
+      throw new Error('invalid-personid')
+    }
     try {
       const person = await stripeCache.retrievePerson(stripeid, req.query.personid, req.stripeKey)
       if (!person) {

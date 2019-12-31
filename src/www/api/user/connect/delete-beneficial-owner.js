@@ -13,12 +13,18 @@ module.exports = {
     const owner = await global.api.user.connect.BeneficialOwner.get(req)
     req.query.stripeid = owner.stripeid
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount || stripeAccount.business_type !== 'company') {
+      throw new Error('invalid-personid')
+    }
     if (stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')
     }
-    const owners = await global.api.user.connect.BeneficialOwners.get(req)
+    if (!stripeAccount.metadata.owners || stripeAccount.metadata.owners === '[]') {
+      throw new Error('invalid-personid')
+    }
+    const owners = JSON.parse(stripeAccount.metadata.owners)
     for (const i in owners) {
-      if (owners[i].id !== req.query.personid) {
+      if (owners[i]  !== req.query.personid) {
         continue
       }
       owners.splice(i, 1)

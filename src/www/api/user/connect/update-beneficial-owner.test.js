@@ -1171,7 +1171,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.address_line1, '123 Sesame St')
+      assert.strictEqual(ownerNow.address.line1, '123 Sesame St')
     })
 
     it('optional posted address_line2', async () => {
@@ -1216,7 +1216,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.address_line2, 'New info')
+      assert.strictEqual(ownerNow.address.line2, 'New info')
     })
 
     it('required posted address_city', async () => {
@@ -1259,7 +1259,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.address_city, 'London')
+      assert.strictEqual(ownerNow.address.city, 'London')
     })
 
     it('required posted address_state', async () => {
@@ -1302,7 +1302,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.address_state, 'LND')
+      assert.strictEqual(ownerNow.address.state, 'LND')
     })
 
     it('required posted address_country', async () => {
@@ -1345,7 +1345,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.address_country, 'IE')
+      assert.strictEqual(ownerNow.address.country, 'IE')
     })
 
     it('required posted address_postal_code', async () => {
@@ -1388,7 +1388,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.address_postal_code, 'EC1A 1AB')
+      assert.strictEqual(ownerNow.address.postal_code, 'EC1A 1AB')
     })
 
     it('required posted dob_day', async () => {
@@ -1431,7 +1431,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.dob_day, '01')
+      assert.strictEqual(ownerNow.dob.day, 1) 
     })
 
     it('required posted dob_month', async () => {
@@ -1474,7 +1474,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.dob_month, '02')
+      assert.strictEqual(ownerNow.dob.month, 2) 
     })
 
     it('required posted dob_year', async () => {
@@ -1517,7 +1517,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         last_name: person.lastName
       }
       const ownerNow = await req.patch()
-      assert.strictEqual(ownerNow.dob_year, '1950')
+      assert.strictEqual(ownerNow.dob.year, 1950) 
     })
   })
 

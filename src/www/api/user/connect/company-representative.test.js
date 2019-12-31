@@ -42,7 +42,7 @@ describe('/api/user/connect/company-representative', () => {
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        await TestHelper.createBeneficialOwner(user, {
+        await TestHelper.createCompanyRepresentative(user, {
           address_city: 'London',
           address_country: 'GB',
           address_line1: 'A building',
@@ -59,7 +59,7 @@ describe('/api/user/connect/company-representative', () => {
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.owner.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.representative.id}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
@@ -81,7 +81,7 @@ describe('/api/user/connect/company-representative', () => {
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
+      await TestHelper.createCompanyRepresentative(user, {
         address_city: 'London',
         address_country: 'GB',
         address_line1: 'A building',
@@ -92,16 +92,17 @@ describe('/api/user/connect/company-representative', () => {
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.owner.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
-      const owner = await req.get()
-      assert.strictEqual(owner.id, user.owner.id)
+      const representative = await req.get()
+      assert.strictEqual(representative.id, user.representative.id)
     })
   })
 })

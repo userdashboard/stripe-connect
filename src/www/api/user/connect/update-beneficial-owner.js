@@ -9,7 +9,7 @@ module.exports = {
     if (!req.query || !req.query.personid) {
       throw new Error('invalid-personid')
     }
-    const person = await global.api.user.connect.CompanyOwner.get(req)
+    const person = await global.api.user.connect.BeneficialOwner.get(req)
     if (!person) {
       throw new Error('invalid-personid')
     }
@@ -209,15 +209,19 @@ module.exports = {
           }
         }
       }
+      if (req.body.address_line2) {
+        companyOwnerInfo.address = ownerInfo.address || {}
+        companyOwnerInfo.address.line2 = req.body.address_line2
+      }
     }
     if (req.body.percent_ownership) {
       try {
         const percent = parseFloat(req.body.percent_ownership, 10)
         if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
-          throw new Error('invalid-percent_ownership')
+          throw new Error('invalid-relationship_percent_ownership')
         }
       } catch (s) {
-        throw new Error('invalid-percent_ownership')
+        throw new Error('invalid-relationship_percent_ownership')
       }
       companyOwnerInfo.percent_ownership = req.body.percent_ownership
     }

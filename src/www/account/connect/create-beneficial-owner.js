@@ -43,6 +43,7 @@ async function renderPage (req, res, messageTemplate) {
     'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
   if (messageTemplate) {
+    console.log(messageTemplate)
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
       removeElements.push('submit-form')
@@ -148,6 +149,7 @@ async function submitForm (req, res) {
     }
     return renderPage(req, res, 'unknown-error')
   } catch (error) {
+    console.log(error)
     return renderPage(req, res, error.message)
   }
 }

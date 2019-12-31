@@ -94,8 +94,10 @@ describe('/api/user/connect/create-company-director', () => {
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
+          email: person.email,
           first_name: '',
-          last_name: person.lastName
+          last_name: person.lastName,
+          relationship_title: 'Director'
         })
         let errorMessage
         try {
@@ -126,8 +128,10 @@ describe('/api/user/connect/create-company-director', () => {
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
+          email: person.email,
           first_name: person.firstName,
-          last_name: ''
+          last_name: '',
+          relationship_title: 'Director'
         })
         let errorMessage
         try {
@@ -158,8 +162,10 @@ describe('/api/user/connect/create-company-director', () => {
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
+          email: '',
           first_name: person.firstName,
-          last_name: ''
+          last_name: person.lastName,
+          relationship_title: 'Director'
         })
         let errorMessage
         try {
@@ -167,7 +173,7 @@ describe('/api/user/connect/create-company-director', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-last_name')
+        assert.strictEqual(errorMessage, 'invalid-email')
       })
     })
 
@@ -192,7 +198,8 @@ describe('/api/user/connect/create-company-director', () => {
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          relationship_title: 'Director'
         })
         let errorMessage
         try {
@@ -225,7 +232,8 @@ describe('/api/user/connect/create-company-director', () => {
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          relationship_title: 'Director'
         })
         let errorMessage
         try {
@@ -258,7 +266,8 @@ describe('/api/user/connect/create-company-director', () => {
           dob_year: '',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          relationship_title: 'Director'
         })
         let errorMessage
         try {
@@ -290,7 +299,8 @@ describe('/api/user/connect/create-company-director', () => {
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          relationship_title: 'Director'
         })
         let errorMessage
         try {
@@ -322,7 +332,8 @@ describe('/api/user/connect/create-company-director', () => {
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          relationship_title: 'Director'
         })
         let errorMessage
         try {
@@ -354,11 +365,13 @@ describe('/api/user/connect/create-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.strictEqual(owner.first_name, person.firstName)
+      const director = await req.post()
+      assert.strictEqual(director.first_name, person.firstName)
     })
 
     it('required posted last_name', async () => {
@@ -379,11 +392,13 @@ describe('/api/user/connect/create-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.strictEqual(owner.last_name, person.lastName)
+      const director = await req.post()
+      assert.strictEqual(director.last_name, person.lastName)
     })
 
     it('optionally-required posted email', async () => {
@@ -407,13 +422,13 @@ describe('/api/user/connect/create-company-director', () => {
         email: person.email,
         first_name: person.firstName,
         last_name: person.lastName,
-        relationship_title: 'XXX'
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.strictEqual(owner.email, person.email)
+      const director = await req.post()
+      assert.strictEqual(director.email, person.email)
     })
 
-    it('optionally-required posted relationship_title', async () => {
+    it('optionally-required posted title', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'AU',
@@ -434,10 +449,10 @@ describe('/api/user/connect/create-company-director', () => {
         email: person.email,
         first_name: person.firstName,
         last_name: person.lastName,
-        relationship_title: 'SVP Sales'
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.strictEqual(owner.relationship_title, 'SVP Sales')
+      const director = await req.post()
+      assert.strictEqual(director.relationship.title, 'Director')
     })
 
     it('required posted dob_day', async () => {
@@ -458,11 +473,13 @@ describe('/api/user/connect/create-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.strictEqual(owner.dob_day, '01')
+      const director = await req.post()
+      assert.strictEqual(director.dob.day, 1) 
     })
 
     it('required posted dob_month', async () => {
@@ -483,11 +500,13 @@ describe('/api/user/connect/create-company-director', () => {
         dob_day: '1',
         dob_month: '2',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.strictEqual(owner.dob_month, '02')
+      const director = await req.post()
+      assert.strictEqual(director.dob.month, 2) 
     })
 
     it('required posted dob_year', async () => {
@@ -508,11 +527,13 @@ describe('/api/user/connect/create-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.strictEqual(owner.dob_year, '1950')
+      const director = await req.post()
+      assert.strictEqual(director.dob.year, 1950) 
     })
 
     it('required posted file verification_document_front', async () => {
@@ -535,11 +556,12 @@ describe('/api/user/connect/create-company-director', () => {
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.notStrictEqual(owner.verification_document_front, null)
-      assert.notStrictEqual(owner.verification_document_front, undefined)
+      const director = await req.post()
+      assert.notStrictEqual(director.verification.document.front, null)
+      assert.notStrictEqual(director.verification.document.front, undefined)
     })
 
     it('required posted file verification_document_back', async () => {
@@ -562,11 +584,12 @@ describe('/api/user/connect/create-company-director', () => {
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       })
-      const owner = await req.post()
-      assert.notStrictEqual(owner.verification_document_back, null)
-      assert.notStrictEqual(owner.verification_document_back, undefined)
+      const director = await req.post()
+      assert.notStrictEqual(director.verification.document.back, null)
+      assert.notStrictEqual(director.verification.document.back, undefined)
     })
   })
 
@@ -589,14 +612,14 @@ describe('/api/user/connect/create-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       })
-      await req.post()
-      const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
-      const directorsNow = JSON.parse(stripeAccountNow.metadata.directors)
-      assert.strictEqual(directorsNow.length, 1)
-      assert.strictEqual(directorsNow[0].first_name, person.firstName)
+      const director = await req.post()
+      assert.strictEqual(director.object, 'person')
+      assert.strictEqual(director.metadata.token, 'false')
     })
   })
 
@@ -621,15 +644,30 @@ describe('/api/user/connect/create-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        relationship_title: 'Director'
       }
       await req.post()
-      const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
-      const directorsNow = JSON.parse(stripeAccountNow.metadata.directors)
-      assert.strictEqual(directorsNow.length, 1)
-      assert.notStrictEqual(directorsNow[0].token, null)
-      assert.notStrictEqual(directorsNow[0].token, undefined)
+      let personid
+      await TestHelper.waitForWebhook('person.created', (stripeEvent) => {
+        if (stripeEvent.data.object.account === user.stripeAccount.id) {
+          personid = stripeEvent.data.object.id
+          return true
+        }
+      })
+      await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
+        const directors = JSON.parse(stripeEvent.data.object.metadata.directors || '[]')
+        return stripeEvent.data.object.id === user.stripeAccount.id &&
+               directors.length &&
+               directors.indexOf(personid) > -1
+      })
+      const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${personid}`)
+      req2.account = user.account
+      req2.session = user.session
+      const director = await req2.get()
+      assert.notStrictEqual(director.metadata.token, false)
     })
   })
 })

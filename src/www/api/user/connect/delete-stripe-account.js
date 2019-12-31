@@ -15,18 +15,8 @@ module.exports = {
     }
     while (true) {
       try {
-        if (stripeAccount.metadata.owners) {
-          const owners = await global.api.user.connect.BeneficialOwners.get(req)
-          if (owners && owners.length) {
-            for (const id of owners) {
-              await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${id}`)
-            }
-          }
-        }
         await stripe.accounts.del(req.query.stripeid, req.stripeKey)
         await stripeCache.delete(req.query.stripeid)
-        await dashboard.StorageList.remove(`${req.appid}/stripeAccounts`, req.query.stripeid)
-        await dashboard.StorageList.remove(`${req.appid}/account/stripeAccounts/${req.account.accountid}`, req.query.stripeid)
         req.success = true
         return true
       } catch (error) {

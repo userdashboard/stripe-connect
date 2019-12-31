@@ -42,20 +42,30 @@ module.exports = {
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
-    const requirements = JSON.parse(stripeAccount.metadata.beneficialOwnerTemplate)
+    const requirements = JSON.parse(stripeAccount.metadata.companyRepresentativeTemplate)
     for (const field of requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
         if (field === 'address.line2' ||
             field === 'relationship.title' ||
-            field === 'executive' ||
-            field === 'representative' ||
+            field === 'relationship.executive' ||
+            field === 'relationship.representative' ||
+            field === 'owner' ||
             field === 'verification.document.front' ||
-            field === 'verification.document.back' ||
-            field === 'representative') {
+            field === 'verification.document.back') {
           continue
         }
         throw new Error(`invalid-${posted}`)
+      }
+    }
+    if (req.body.relationship_percent_ownership) {
+      try {
+        const ownership = parseFloat(req.body.relationship_percent_ownership, 10)
+        if (ownership < 0 || ownership > 100 || ownership.toString() !== req.body.relationship_percent_ownership) {
+          throw new Error('invalid-relationship_percent_ownership')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_percent_ownership')
       }
     }
     let validateDOB
@@ -149,10 +159,10 @@ module.exports = {
       }
     }
     if (global.stripeJS === 3) {
-      representativeInfo.token = req.body.token
+      representativeInfo.person_token = req.body.token
     } else {
       for (const field of requirements.currently_due) {
-        const posted = field.split('.').join('_')
+        const posted = field.split('.').join('_').replace('representative.')
         if (req.body[posted]) {
           if (field.startsWith('address.')) {
             const property = field.substring('address.'.length)
@@ -179,19 +189,118 @@ module.exports = {
             const property = field.substring('dob.'.length)
             representativeInfo.dob = representativeInfo.dob || {}
             representativeInfo.dob[property] = req.body[posted]
-          } else if (field === 'relationship.') {
+          } else if (field.startsWith('relationship.')) {
             const property = field.substring('relationship.'.length)
             representativeInfo.relationship = representativeInfo.relationship || {}
             representativeInfo.relationship[property] = req.body[posted]
             continue
           } else {
             const property = field
-            if (property === 'relationship_title' || property === 'executive' || property === 'representative') {
-              continue
-            }
             representativeInfo[property] = req.body[posted]
           }
         }
+      }
+      for (const field of requirements.eventually_due) {
+        if (requirements.currently_due.indexOf(field) > -1) {
+          continue
+        }
+        const posted = field.split('.').join('_').replace('representative.')
+        if (req.body[posted]) {
+          if (field.startsWith('address.')) {
+            const property = field.substring('address.'.length)
+            representativeInfo.address = representativeInfo.address || {}
+            representativeInfo.address[property] = req.body[posted]
+            continue
+          } else if (field.startsWith('verification.document.')) {
+            if (global.stripeJS) {
+              continue
+            }
+            const property = field.substring('verification.document.'.length)
+            representativeInfo.verification = representativeInfo.verification || {}
+            representativeInfo.verification.document = representativeInfo.verification.document || {}
+            representativeInfo.verification.document[property] = req.body[posted]
+          } else if (field.startsWith('verification.additional_document.')) {
+            if (global.stripeJS) {
+              continue
+            }
+            const property = field.substring('verification.additional_document.'.length)
+            representativeInfo.verification = representativeInfo.verification || {}
+            representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+            representativeInfo.verification.additional_document[property] = req.body[posted]
+          } else if (field.startsWith('dob.')) {
+            const property = field.substring('dob.'.length)
+            representativeInfo.dob = representativeInfo.dob || {}
+            representativeInfo.dob[property] = req.body[posted]
+          } else if (field.startsWith('relationship.')) {
+            const property = field.substring('relationship.'.length)
+            representativeInfo.relationship = representativeInfo.relationship || {}
+            representativeInfo.relationship[property] = req.body[posted]
+            continue
+          } else {
+            const property = field
+            representativeInfo[property] = req.body[posted]
+          }
+        }
+      }
+      if (req.body.relationship_title) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.title = req.body.relationship_title
+      }
+      if (req.body.relationship_percent_ownership) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
+      }
+      if (req.body.relationship_executive) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.executive = true
+      }
+      if (req.body.relationship_director) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.director = true
+      }
+      if (req.body.relationship_owner) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.owner = true
+      }
+      if (req.body.address_line1) {
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.line1 = req.body.address_line1
+      }
+      if (req.body.address_line2) {
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.line2 = req.body.address_line2
+      }
+      if (req.body.address_state) {
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.state = req.body.address_state
+      }
+      if (req.body.address_postal_code) {
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.postal_code = req.body.address_postal_code
+      }
+      if (req.body.address_country) {
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.country = req.body.address_country
+      }
+      if (req.body.verification_document_back) {
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.document = representativeInfo.verification.document || {}
+        representativeInfo.verification.document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_document_front) {
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.document = representativeInfo.verification.document || {}
+        representativeInfo.verification.document.front = req.body.verification_document_front
+      }
+      if (req.body.verification_additional_document_back) {
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+        representativeInfo.verification.additional_document.back = req.body.verification_additional_document_back
+      }
+      if (req.body.verification_additional_document_front) {
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+        representativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
     let representative
@@ -217,6 +326,7 @@ module.exports = {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(accountNow)
         req.success = true
+        console.log('got rep', representative, accountNow)
         return representative
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

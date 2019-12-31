@@ -134,6 +134,10 @@ module.exports = {
           accountInfo.company[field] = req.body[posted]
         }
       }
+      if (req.body.address_line2) {
+        accountInfo.address = ownerInfo.address || {}
+        accountInfo.address.line2 = req.body.address_line2
+      }
     }
     if (req.body.business_profile_mcc) {
       const mccList = connect.getMerchantCategoryCodes(req.language)

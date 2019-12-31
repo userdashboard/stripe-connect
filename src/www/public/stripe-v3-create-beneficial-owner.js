@@ -11,7 +11,11 @@ function convertOwner (e) {
   setTimeout(function () {
     e.target.disabled = false
   }, 1000)
-  var beneficialOwner = {}
+  var beneficialOwner = {
+    relationship: {
+      owner: true
+    }
+  }
   var firstName = document.getElementById('first_name')
   if (firstName.value && firstName.value.length) {
     beneficialOwner.first_name = firstName.value

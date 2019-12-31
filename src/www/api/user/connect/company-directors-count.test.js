@@ -90,8 +90,10 @@ describe('/api/user/connect/company-directors-count', () => {
       const person1 = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
         dob_day: '1',
+        dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person1.email,
         first_name: person1.firstName,
         last_name: person1.lastName
       }, {
@@ -103,6 +105,7 @@ describe('/api/user/connect/company-directors-count', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person2.email,
         first_name: person2.firstName,
         last_name: person2.lastName
       }, {

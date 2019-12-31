@@ -47,12 +47,6 @@ async function renderPage (req, res, messageTemplate) {
     'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
   const requirements = JSON.parse(req.data.stripeAccount.metadata.companyDirectorTemplate)
-  if (requirements.currently_due.indexOf('relationship.director.relationship_title') === -1) {
-    removeElements.push('relationship_title-container')
-  }
-  if (requirements.currently_due.indexOf('relationship.director.email') === -1) {
-    removeElements.push('email')
-  }
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
@@ -114,6 +108,7 @@ async function submitForm (req, res) {
     }
     return renderPage(req, res, 'unknown-error')
   } catch (error) {
+    console.log(error)
     return renderPage(req, res, error.message)
   }
 }

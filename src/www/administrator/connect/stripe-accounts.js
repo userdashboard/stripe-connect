@@ -39,28 +39,18 @@ async function renderPage (req, res) {
     dashboard.HTML.renderTable(doc, req.data.stripeAccounts, 'stripe-account-row', 'stripe-accounts-table')
     for (const stripeAccount of req.data.stripeAccounts) {
       if (stripeAccount.business_type === 'individual') {
-        removeElements.push(`business-name-${stripeAccount.id}`, `business-registration-name-${stripeAccount.id}`)
+        removeElements.push(`business-name-${stripeAccount.id}`)
         if (stripeAccount.individual.first_name) {
-          removeElements.push(`blank-name-${stripeAccount.id}`, `individual-registration-name-${stripeAccount.id}`)
+          removeElements.push(`blank-name-${stripeAccount.id}`)
         } else {
           removeElements.push(`individual-name-${stripeAccount.id}`)
-          if (stripeAccount.registration.first_name) {
-            removeElements.push(`blank-name-${stripeAccount.id}`)
-          } else {
-            removeElements.push(`individual-registration-name-${stripeAccount.id}`)
-          }
         }
       } else {
-        removeElements.push(`individual-name-${stripeAccount.id}`, `individual-registration-name-${stripeAccount.id}`)
+        removeElements.push(`individual-name-${stripeAccount.id}`)
         if (stripeAccount.company.name) {
-          removeElements.push(`blank-name-${stripeAccount.id}`, `business-registration-name-${stripeAccount.id}`)
+          removeElements.push(`blank-name-${stripeAccount.id}`)
         } else {
           removeElements.push(`business-name-${stripeAccount.id}`)
-          if (stripeAccount.registration.name) {
-            removeElements.push(`blank-name-${stripeAccount.id}`)
-          } else {
-            removeElements.push(`business-registration-name-${stripeAccount.id}`)
-          }
         }
       }
       if (stripeAccount.statusMessage) {

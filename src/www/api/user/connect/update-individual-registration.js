@@ -292,6 +292,10 @@ module.exports = {
           accountInfo.individual[property] = req.body[posted]
         } 
       }
+      if (req.body.address_line2) {
+        accountInfo.address = ownerInfo.address || {}
+        accountInfo.address.line2 = req.body.address_line2
+      }
     }
     while (true) {
       try {

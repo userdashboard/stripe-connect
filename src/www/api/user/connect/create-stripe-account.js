@@ -37,15 +37,21 @@ module.exports = {
       }
     }
     let stripeAccount
-    try {
-      stripeAccount = await stripe.accounts.create(accountInfo, req.stripeKey)
-      await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
-      await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
-      await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
-      req.success = true
-      await stripeCache.update(stripeAccount)
-    } catch (error) {
-      if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+    while (true) {
+      try {
+        stripeAccount = await stripe.accounts.create(accountInfo, req.stripeKey)
+        await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
+        await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
+        await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
+        req.success = true
+        await stripeCache.update(stripeAccount)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+      }
     }
     if (stripeAccount.business_type === 'individual') {
       return stripeAccount
@@ -110,10 +116,25 @@ module.exports = {
     }
     delete (companyDirector.requirements.pending_verification)
     delete (companyDirector.requirements.past_due)
+    for (const item of companyDirector.requirements.eventually_due) {
+      if (companyDirector.requirements.currently_due.indexOf(item) > -1) {
+        companyDirector.requirements.eventually_due.splice(companyDirector.requirements.eventually_due.indexOf(item), 1)
+      }
+    }
     delete (beneficialOwner.requirements.pending_verification)
     delete (beneficialOwner.requirements.past_due)
+    for (const item of beneficialOwner.requirements.eventually_due) {
+      if (beneficialOwner.requirements.currently_due.indexOf(item) > -1) {
+        beneficialOwner.requirements.eventually_due.splice(beneficialOwner.requirements.eventually_due.indexOf(item), 1)
+      }
+    }
     delete (companyRepresentative.requirements.pending_verification)
     delete (companyRepresentative.requirements.past_due)
+    for (const item of companyRepresentative.requirements.eventually_due) {
+      if (companyRepresentative.requirements.currently_due.indexOf(item) > -1) {
+        companyRepresentative.requirements.eventually_due.splice(companyRepresentative.requirements.eventually_due.indexOf(item), 1)
+      }
+    }
     const accountUpdate = {
       metadata: {
         companyDirectorTemplate: JSON.stringify(companyDirector.requirements),

@@ -47,6 +47,7 @@ describe('/account/connect/company-directors', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -73,6 +74,7 @@ describe('/account/connect/company-directors', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -118,6 +120,7 @@ describe('/account/connect/company-directors', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {

@@ -68,12 +68,12 @@ async function renderPage (req, res, messageTemplate) {
   }
   let personalCountry
   if (req.body) {
-    personalCountry = req.body.relationship_representative_address_country
+    personalCountry = req.body.address_country
   }
   personalCountry = personalCountry || req.data.stripeAccount.country
   const personalStates = connect.countryDivisions[personalCountry]
-  dashboard.HTML.renderList(doc, personalStates, 'state-option', 'relationship_representative_address_state')
-  dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'relationship_representative_address_country')
+  dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
+  dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
   const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
   if (requirements.currently_due.indexOf('relationship.representative.id_number') === -1) {
     removeElements.push('id_number-container')
@@ -129,26 +129,26 @@ async function submitForm (req, res) {
   }
   if (requirements.currently_due.indexOf('relationship.representative.verification.document.front') > -1) {
     if (!req.uploads || (
-      !req.uploads.relationship_representative_verification_document_front &&
-        !req.body.relationship_representative_verification_document_front)) {
-      return renderPage(req, res, 'invalid-relationship_representative_verification_document_front')
+      !req.uploads.verification_document_front &&
+        !req.body.verification_document_front)) {
+      return renderPage(req, res, 'invalid-verification_document_front')
     }
     if (!req.uploads || (
-      !req.uploads.relationship_representative_verification_document_back &&
-      !req.body.relationship_representative_verification_document_back)) {
-      return renderPage(req, res, 'invalid-relationship_representative_verification_document_back')
+      !req.uploads.verification_document_back &&
+      !req.body.verification_document_back)) {
+      return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
   if (requirements.currently_due.indexOf('relationship.representative.verification.additional.document.front') > -1) {
     if (!req.uploads || (
-      !req.uploads.relationship_representative_verification_additional_document_front &&
-      !req.body.relationship_representative_verification_additional_document_front)) {
-      return renderPage(req, res, 'invalid-relationship_representative_verification_additional_document_front')
+      !req.uploads.verification_additional_document_front &&
+      !req.body.verification_additional_document_front)) {
+      return renderPage(req, res, 'invalid-verification_additional_document_front')
     }
     if (!req.uploads || (
-      !req.uploads.relationship_representative_verification_additional_document_back &&
-      !req.body.relationship_representative_verification_additional_document_back)) {
-      return renderPage(req, res, 'invalid-relationship_representative_verification_additional_document_back')
+      !req.uploads.verification_additional_document_back &&
+      !req.body.verification_additional_document_back)) {
+      return renderPage(req, res, 'invalid-verification_additional_document_back')
     }
   }
   try {

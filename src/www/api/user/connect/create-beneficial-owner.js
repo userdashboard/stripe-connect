@@ -15,8 +15,7 @@ module.exports = {
       throw new Error('invalid-stripeid')
     }
     if (stripeAccount.business_type !== 'company' ||
-      stripeAccount.metadata.submitted ||
-      stripeAccount.metadata.accountid !== req.account.accountid) {
+      stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')
     }
     if (!req.body) {
@@ -44,7 +43,7 @@ module.exports = {
     }
     const requirements = JSON.parse(stripeAccount.metadata.beneficialOwnerTemplate)
     for (const field of requirements.currently_due) {
-      const posted = field.split('.').join('_')
+      const posted = field.split('.').join('_').replace('owner.', '')
       if (!req.body[posted]) {
         if (field === 'address.line2' ||
             field === 'relationship.title' ||
@@ -56,6 +55,16 @@ module.exports = {
           continue
         }
         throw new Error(`invalid-${posted}`)
+      }
+    }
+    if (req.body.relationship_percent_ownership) {
+      try {
+        const ownership = parseFloat(req.body.relationship_percent_ownership, 10)
+        if (ownership < 0 || ownership > 100 || ownership.toString() !== req.body.relationship_percent_ownership) {
+          throw new Error('invalid-relationship_percent_ownership')
+        }
+      } catch (s) {
+        throw new Error('invalid-relationship_percent_ownership')
       }
     }
     let validateDOB
@@ -144,13 +153,16 @@ module.exports = {
       throw new Error('invalid-verification_document_back')
     }
     const ownerInfo = {
-      relationship: {
-        owner: true
-      }
     }
     if (global.stripeJS === 3) {
-      ownerInfo.token = req.body.token
+      ownerInfo.person_token = req.body.token
     } else {
+      ownerInfo.metadata = {
+        token: false
+      }
+      ownerInfo.relationship = {
+        owner: true
+      }
       for (const field of requirements.currently_due) {
         const posted = field.split('.').join('_')
         if (req.body[posted]) {
@@ -179,19 +191,124 @@ module.exports = {
             const property = field.substring('dob.'.length)
             ownerInfo.dob = ownerInfo.dob || {}
             ownerInfo.dob[property] = req.body[posted]
-          } else if (field === 'relationship.') {
+          } else if (field.startsWith('relationship.')) {
             const property = field.substring('relationship.'.length)
             ownerInfo.relationship = ownerInfo.relationship || {}
             ownerInfo.relationship[property] = req.body[posted]
             continue
           } else {
             const property = field
-            if (property === 'relationship_title' || property === 'executive' || property === 'director') {
+            if (property === 'executive' || property === 'director') {
               continue
             }
             ownerInfo[property] = req.body[posted]
           }
         }
+      }
+      for (const field of requirements.eventually_due) {
+        if (requirements.currently_due.indexOf(field) > -1) {
+          continue
+        }
+        const posted = field.split('.').join('_')
+        if (req.body[posted]) {
+          if (field.startsWith('address.')) {
+            const property = field.substring('address.'.length)
+            ownerInfo.address = ownerInfo.address || {}
+            ownerInfo.address[property] = req.body[posted]
+            continue
+          } else if (field.startsWith('verification.document.')) {
+            if (global.stripeJS) {
+              continue
+            }
+            const property = field.substring('verification.document.'.length)
+            ownerInfo.verification = ownerInfo.verification || {}
+            ownerInfo.verification.document = ownerInfo.verification.document || {}
+            ownerInfo.verification.document[property] = req.body[posted]
+          } else if (field.startsWith('verification.additional_document.')) {
+            if (global.stripeJS) {
+              continue
+            }
+            const property = field.substring('verification.additional_document.'.length)
+            ownerInfo.verification = ownerInfo.verification || {}
+            ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+            ownerInfo.verification.additional_document[property] = req.body[posted]
+          } else if (field.startsWith('dob.')) {
+            const property = field.substring('dob.'.length)
+            ownerInfo.dob = ownerInfo.dob || {}
+            ownerInfo.dob[property] = req.body[posted]
+          } else if (field.startsWith('relationship.')) {
+            const property = field.substring('relationship.'.length)
+            ownerInfo.relationship = ownerInfo.relationship || {}
+            ownerInfo.relationship[property] = req.body[posted]
+            continue
+          } else {
+            const property = field
+            if (property === 'executive' || property === 'director') {
+              continue
+            }
+            ownerInfo[property] = req.body[posted]
+          }
+        }
+      }
+      if (req.body.relationship_title) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.title = req.body.relationship_title
+      }
+      if (req.body.relationship_percent_ownership) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
+      }
+      if (req.body.relationship_executive) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.executive = true
+      }
+      if (req.body.relationship_director) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.director = true
+      }
+      if (req.body.relationship_owner) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.owner = true
+      }
+      if (req.body.address_line1) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.line1 = req.body.address_line1
+      }
+      if (req.body.address_line2) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.line2 = req.body.address_line2
+      }
+      if (req.body.address_state) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.state = req.body.address_state
+      }
+      if (req.body.address_postal_code) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.postal_code = req.body.address_postal_code
+      }
+      if (req.body.address_country) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.country = req.body.address_country
+      }
+      if (req.body.verification_document_back) {
+        ownerInfo.verification = ownerInfo.verification || {}
+        ownerInfo.verification.document = ownerInfo.verification.document || {}
+        ownerInfo.verification.document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_document_front) {
+        ownerInfo.verification = ownerInfo.verification || {}
+        ownerInfo.verification.document = ownerInfo.verification.document || {}
+        ownerInfo.verification.document.front = req.body.verification_document_front
+      }
+      if (req.body.verification_additional_document_back) {
+        ownerInfo.verification = ownerInfo.verification || {}
+        ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+        ownerInfo.verification.additional_document.back = req.body.verification_additional_document_back
+      }
+      if (req.body.verification_additional_document_front) {
+        ownerInfo.verification = ownerInfo.verification || {}
+        ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+        ownerInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
     let owner

@@ -14,40 +14,33 @@ module.exports = {
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    const persons = await stripe.accounts.listPersons(req.query.stripeid, { limit: 100 }, req.stripeKey)
-    for (const person of persons.data) {
-      if (!person.relationship.representative) {
-        continue
-      }
-      const representativeInfo = {
-        relationship: {
-          representative: false
-        }
-      }
-      try {
-        await stripe.accounts.updatePerson(req.query.stripeid, person.id, representativeInfo, req.stripeKey)
-        req.success = true
-      } catch (error) {
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
-      }
-      while (true) {
-        try {
-          const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, {
-            metadata: {
-              representative: null
-            }
-          }, req.stripeKey)
-          await stripeCache.update(stripeAccountNow)
-          req.success = true
-          return stripeAccountNow
-        } catch (error) {
-          if (error.raw && error.raw.code === 'lock_timeout') {
-            continue
-          }
-          throw error
-        }
+    const representativeInfo = {
+      relationship: {
+        representative: false
       }
     }
-    if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+    try {
+      await stripe.accounts.updatePerson(req.query.stripeid, stripeAccount.metadata.representative, representativeInfo, req.stripeKey)
+      req.success = true
+    } catch (error) {
+      if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+    }
+    while (true) {
+      try {
+        const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, {
+          metadata: {
+            representative: null
+          }
+        }, req.stripeKey)
+        await stripeCache.update(stripeAccountNow)
+        req.success = true
+        return stripeAccountNow
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+      }
+    }
   }
 }

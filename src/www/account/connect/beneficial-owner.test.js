@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe.only('/account/connect/beneficial-owner', () => {
+describe('/account/connect/beneficial-owner', () => {
   describe('BeneficialOwner#BEFORE', () => {
     it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()
@@ -50,7 +50,7 @@ describe.only('/account/connect/beneficial-owner', () => {
   })
 
   describe('BeneficialOwner#GET', () => {
-    it.only('should show table for owner', async () => {
+    it('should show table for owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',

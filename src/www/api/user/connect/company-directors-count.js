@@ -7,10 +7,10 @@ module.exports = {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount) {
-      throw new Error('invalid-stripeid')
+      throw new Error('invalid-personid')
     }
     if (stripeAccount.business_type !== 'company') {
-      throw new Error('invalid-stripe-account')
+      throw new Error('invalid-stripe-account') 
     }
     const countrySpec = connect.countrySpecIndex[stripeAccount.country]
     if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
@@ -19,7 +19,7 @@ module.exports = {
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
       return null
     }
-    const directors = JSON.stringify(stripeAccount.metadata, 'directors')
+    const directors = JSON.parse(stripeAccount.metadata.directors)
     return directors ? directors.length : 0
   }
 }

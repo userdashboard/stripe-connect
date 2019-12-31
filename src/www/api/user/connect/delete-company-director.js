@@ -13,6 +13,9 @@ module.exports = {
     const director = await global.api.user.connect.CompanyDirector.get(req)
     req.query.stripeid = director.stripeid
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount || stripeAccount.business_type !== 'company') {
+      throw new Error('invalid-personid')
+    }
     if (stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')
     }

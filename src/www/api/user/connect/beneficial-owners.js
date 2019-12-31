@@ -1,5 +1,3 @@
-const stripeCache = require('../../../../stripe-cache.js')
-
 module.exports = {
   get: async (req) => {
     if (!req.query || !req.query.stripeid) {
@@ -15,13 +13,14 @@ module.exports = {
     if (!stripeAccount.metadata.owners || stripeAccount.metadata.owners === '[]') {
       return null
     }
-    const ids = JSON.parse(stripeAccount.metadata, 'owners')
+    const ids = JSON.parse(stripeAccount.metadata.owners)
     if (!ids || !ids.length) {
       return null
     }
     const owners = []
     for (const id of ids) {
-      const person = await stripeCache.retrievePerson(req.query.stripeid, id, req.stripeKey)
+      req.query.personid = id
+      const person = await global.api.user.connect.BeneficialOwner.get(req)
       owners.push(person)
     }
     return owners

@@ -64,25 +64,25 @@ describe('/account/connect/remove-company-representative', () => {
         type: 'company'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Berlin',
-        relationship_representative_address_country: 'DE',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '01067',
-        relationship_representative_address_state: 'BE',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Berlin',
+        address_country: 'DE',
+        address_line1: '123 Sesame St',
+        address_postal_code: '01067',
+        address_state: 'BE',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/account/connect/remove-company-representative?stripeid=${user.stripeAccount.id}`)
@@ -103,25 +103,25 @@ describe('/account/connect/remove-company-representative', () => {
         type: 'company'
       })
       await TestHelper.createCompanyRepresentative(user, {
-        relationship_representative_address_city: 'Berlin',
-        relationship_representative_address_country: 'DE',
-        relationship_representative_address_line1: '123 Sesame St',
-        relationship_representative_address_postal_code: '01067',
-        relationship_representative_address_state: 'BE',
-        relationship_representative_dob_day: '1',
-        relationship_representative_dob_month: '1',
-        relationship_representative_dob_year: '1950',
-        relationship_representative_email: user.profile.contactEmail,
-        relationship_representative_first_name: user.profile.firstName,
-        relationship_representative_last_name: user.profile.lastName,
-        relationship_representative_phone: '456-789-0123',
-        relationship_representative_relationship_executive: 'true',
-        relationship_representative_relationship_title: 'Owner'
+        address_city: 'Berlin',
+        address_country: 'DE',
+        address_line1: '123 Sesame St',
+        address_postal_code: '01067',
+        address_state: 'BE',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: user.profile.contactEmail,
+        first_name: user.profile.firstName,
+        last_name: user.profile.lastName,
+        phone: '456-789-0123',
+        relationship_executive: 'true',
+        relationship_title: 'Owner'
       }, {
-        relationship_representative_verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        relationship_representative_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_representative_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/account/connect/remove-company-representative?stripeid=${user.stripeAccount.id}`)

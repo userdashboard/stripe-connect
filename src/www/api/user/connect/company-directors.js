@@ -7,21 +7,23 @@ module.exports = {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount) {
-      throw new Error('invalid-stripeid')
+      console.log('no stripe account', req.query.stripeid)
+      throw new Error('invalid-personid')
     }
     if (stripeAccount.business_type !== 'company') {
-      throw new Error('invalid-stripe-account')
+      throw new Error('invalid-stripe-account') 
     }
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
       return null
     }
-    const ids = JSON.parse(stripeAccount.metadata, 'directors')
+    const ids = JSON.parse(stripeAccount.metadata.directors)
     if (!ids || !ids.length) {
       return null
     }
     const directors = []
     for (const id of ids) {
-      const person = await stripeCache.retrievePerson(req.query.stripeid, id, req.stripeKey)
+      req.query.personid = id
+      const person = await global.api.user.connect.CompanyDirector.get(req)
       directors.push(person)
     }
     return directors

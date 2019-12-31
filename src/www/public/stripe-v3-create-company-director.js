@@ -11,7 +11,11 @@ function convertDirector (e) {
   setTimeout(function () {
     e.target.disabled = false
   }, 1000)
-  var director = {}
+  var director = {
+    relationship: {
+      director: true
+    }
+  }
   var firstName = document.getElementById('first_name')
   if (firstName.value && firstName.value.length) {
     director.first_name = firstName.value

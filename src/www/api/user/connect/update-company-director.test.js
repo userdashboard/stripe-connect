@@ -12,12 +12,13 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }
         let errorMessage
         try {
           await req.patch(req)
@@ -34,12 +35,13 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user.account
         req.session = user.session
         req.body = {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }
         let errorMessage
         try {
           await req.patch(req)
@@ -59,12 +61,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -73,12 +76,13 @@ describe('/api/user/connect/update-company-director', () => {
         req.account = user2.account
         req.session = user2.session
         req.body = {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }
         let errorMessage
         try {
           await req.patch(req)
@@ -98,12 +102,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -136,12 +141,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -174,12 +180,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -210,12 +217,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -248,12 +256,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -284,12 +293,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -322,12 +332,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -358,12 +369,13 @@ describe('/api/user/connect/update-company-director', () => {
         })
         const person = TestHelper.nextIdentity()
         const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -435,6 +447,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -470,6 +483,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -505,6 +519,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -541,6 +556,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -577,6 +593,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -613,6 +630,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -649,6 +667,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -687,6 +706,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }, {
@@ -729,6 +749,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }
@@ -743,6 +764,7 @@ describe('/api/user/connect/update-company-director', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        email: person.email,
         first_name: person.firstName,
         last_name: person.lastName
       }
