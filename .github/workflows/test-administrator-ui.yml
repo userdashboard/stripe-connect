@@ -32,5 +32,9 @@ jobs:
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_2 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_2 }}
         STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"       
+        DEBUG_ERRORS: true
+        DEBUG_REQUESTS: true
+        DEBUG_PUPPETEER: true
+        DEBUG_PUPPETEER_SCREENSHOTS: true'
         NGROK: true
