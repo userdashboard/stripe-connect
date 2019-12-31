@@ -117,22 +117,25 @@ module.exports = {
     delete (companyDirector.requirements.pending_verification)
     delete (companyDirector.requirements.past_due)
     for (const item of companyDirector.requirements.eventually_due) {
-      if (companyDirector.requirements.currently_due.indexOf(item) > -1) {
-        companyDirector.requirements.eventually_due.splice(companyDirector.requirements.eventually_due.indexOf(item), 1)
+      const duplicate = companyDirector.requirements.currently_due.indexOf(item)
+      if (duplicate > -1) {
+        companyDirector.requirements.eventually_due = companyDirector.requirements.eventually_due.splice(duplicate, 1)
       }
     }
     delete (beneficialOwner.requirements.pending_verification)
     delete (beneficialOwner.requirements.past_due)
     for (const item of beneficialOwner.requirements.eventually_due) {
-      if (beneficialOwner.requirements.currently_due.indexOf(item) > -1) {
-        beneficialOwner.requirements.eventually_due.splice(beneficialOwner.requirements.eventually_due.indexOf(item), 1)
+      const duplicate = beneficialOwner.requirements.currently_due.indexOf(item)
+      if (duplicate > -1) {
+        beneficialOwner.requirements.eventually_due = beneficialOwner.requirements.eventually_due.splice(duplicate, 1)
       }
     }
     delete (companyRepresentative.requirements.pending_verification)
     delete (companyRepresentative.requirements.past_due)
     for (const item of companyRepresentative.requirements.eventually_due) {
-      if (companyRepresentative.requirements.currently_due.indexOf(item) > -1) {
-        companyRepresentative.requirements.eventually_due.splice(companyRepresentative.requirements.eventually_due.indexOf(item), 1)
+      const duplicate = companyRepresentative.requirements.currently_due.indexOf(item)
+      if (duplicate > -1) {
+        companyRepresentative.requirements.eventually_due = companyRepresentative.requirements.eventually_due.splice(duplicate, 1)
       }
     }
     const accountUpdate = {
