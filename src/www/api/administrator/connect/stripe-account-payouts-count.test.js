@@ -6,7 +6,7 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/stripe-account-payouts-count')
         req.account = administrator.account
         req.session = administrator.session
@@ -20,7 +20,7 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
       })
 
       it('invalid querystring stripeid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/stripe-account-payouts-count?stripeid=invalid')
         req.account = administrator.account
         req.session = administrator.session
@@ -37,7 +37,7 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
 
   describe('returns', () => {
     it('integer', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'NZ',

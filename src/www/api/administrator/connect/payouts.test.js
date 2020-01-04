@@ -166,7 +166,7 @@ describe('/api/administrator/connect/payouts', () => {
 
   describe('returns', () => {
     it('array', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
@@ -221,7 +221,7 @@ describe('/api/administrator/connect/payouts', () => {
   describe('configuration', () => {
     it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {

@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 describe('/administrator/connect/stripe-account', () => {
   describe('StripeAccount#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -24,7 +24,7 @@ describe('/administrator/connect/stripe-account', () => {
     })
 
     it('should bind Stripe account to req', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -40,7 +40,7 @@ describe('/administrator/connect/stripe-account', () => {
 
   describe('StripeAccount#GET', () => {
     it('should have row for Stripe account', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

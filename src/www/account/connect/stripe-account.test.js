@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 describe('/account/connect/stripe-account', () => {
   describe('StripeAccount#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

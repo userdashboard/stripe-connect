@@ -7,7 +7,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
   describe('exceptions', () => {
     describe('invalid-accountid', () => {
       it('missing querystring accountid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/account-stripe-accounts')
         req.account = administrator.account
         req.session = administrator.session
@@ -21,7 +21,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       })
 
       it('invalid querystring accountid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/account-stripe-accounts?accountid=invalid')
         req.account = administrator.account
         req.session = administrator.session
@@ -37,7 +37,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
 
     describe('invalid-account', () => {
       it('missing querystring accountid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/account-stripe-accounts?accountid=')
         req.account = administrator.account
         req.session = administrator.session
@@ -57,7 +57,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
       const offset = 1
       global.delayDiskWrites = true
       const stripeAccounts = []
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createStripeAccount(user, {
@@ -78,7 +78,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
     it('optional querystring limit (integer)', async () => {
       const limit = 1
       const stripeAccounts = []
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const stripeAccount = await TestHelper.createStripeAccount(user, {
@@ -95,7 +95,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
     })
 
     it('optional querystring all (boolean)', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const stripeAccounts = []
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
@@ -114,7 +114,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
   })
   describe('returns', () => {
     it('array', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createStripeAccount(user, {
@@ -135,7 +135,7 @@ describe('/api/administrator/connect/account-stripe-accounts', () => {
   describe('configuration', () => {
     it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createStripeAccount(user, {

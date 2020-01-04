@@ -6,7 +6,7 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected')
         req.account = administrator.account
         req.session = administrator.session
@@ -23,7 +23,7 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
       })
 
       it('invalid querystring stripeid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid')
         req.account = administrator.account
         req.session = administrator.session
@@ -42,7 +42,7 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
 
     describe('invalid-reason', () => {
       it('missing posted reason', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid')
         req.account = administrator.account
         req.session = administrator.session
@@ -59,7 +59,7 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
       })
 
       it('invalid posted reason', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/set-stripe-account-rejected?stripeid=invalid')
         req.account = administrator.account
         req.session = administrator.session
@@ -79,7 +79,7 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
 
   describe('returns', () => {
     it('boolean', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 describe('/administrator/connect/payouts', () => {
   describe('Payouts#BEFORE', () => {
     it('should bind payouts to req', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'NZ',
@@ -95,7 +95,7 @@ describe('/administrator/connect/payouts', () => {
 
   describe('Payouts#GET', () => {
     it('should have row for each payout', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'NZ',

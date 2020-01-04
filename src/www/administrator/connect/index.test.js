@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 describe('/administrator/connect', () => {
   describe('Index#BEFORE', () => {
     it('should bind Stripe accounts to req', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -21,7 +21,7 @@ describe('/administrator/connect', () => {
 
   describe('Index#GET', () => {
     it('should have row for each Stripe account', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

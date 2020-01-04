@@ -6,7 +6,7 @@ describe('/api/administrator/connect/payout', () => {
   describe('exceptions', () => {
     describe('invalid-payoputid', () => {
       it('missing querystring payoutid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/payout')
         req.account = administrator.account
         req.session = administrator.session
@@ -20,7 +20,7 @@ describe('/api/administrator/connect/payout', () => {
       })
 
       it('invalid querystring payoutid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/payout?payoutid=invalid')
         req.account = administrator.account
         req.session = administrator.session
@@ -37,7 +37,7 @@ describe('/api/administrator/connect/payout', () => {
 
   describe('returns', () => {
     it('object', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'NZ',

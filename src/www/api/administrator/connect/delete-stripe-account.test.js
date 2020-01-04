@@ -6,7 +6,7 @@ describe('/api/administrator/connect/delete-stripe-account', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/delete-stripe-account')
         req.account = administrator.account
         req.session = administrator.session
@@ -20,7 +20,7 @@ describe('/api/administrator/connect/delete-stripe-account', () => {
       })
 
       it('invalid querystring stripeid', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/delete-stripe-account?stripeid=invalid')
         req.account = administrator.account
         req.session = administrator.session
@@ -36,7 +36,7 @@ describe('/api/administrator/connect/delete-stripe-account', () => {
 
     describe('returns', () => {
       it('boolean', async () => {
-        const administrator = await TestHelper.createAdministrator()
+        const administrator = await TestHelper.createOwner()
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'DE',

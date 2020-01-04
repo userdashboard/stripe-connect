@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 describe('/administrator/connect/payout', () => {
   describe('Payout#BEFORE', () => {
     it('should reject invalid payoutid', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const req = TestHelper.createRequest('/administrator/connect/payout?payoutid=invalid')
       req.account = administrator.account
       req.session = administrator.session
@@ -19,7 +19,7 @@ describe('/administrator/connect/payout', () => {
     })
 
     it('should bind payout to req', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'NZ',
@@ -69,7 +69,7 @@ describe('/administrator/connect/payout', () => {
 
   describe('Payout#GET', () => {
     it('should have row for payout', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'NZ',

@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 describe('/administrator/connect/delete-stripe-account', () => {
   describe('DeleteStripeAccount#BEFORE', () => {
     it('should bind Stripe account to req', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -21,7 +21,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
 
   describe('DeleteStripeAccount#GET', () => {
     it('should present the form', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -37,7 +37,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
     })
 
     it('should present the Stripe account table', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -55,7 +55,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
 
   describe('DeleteStripeAccount#POST', () => {
     it('should delete Stripe account', async () => {
-      const administrator = await TestHelper.createAdministrator()
+      const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
