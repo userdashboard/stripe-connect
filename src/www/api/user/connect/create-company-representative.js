@@ -41,9 +41,12 @@ module.exports = {
         throw new Error(`invalid-${posted}`)
       }
     }
+    if (req.body.address_country && !connect.countryNameIndex[req.body.address_country]) {
+      throw new Error('invalid-address_country')
+    }
     if (requirements.currently_due.indexOf('address.country') > -1 ||
         requirements.eventually_due.indexOf('address.country' ) > -1) {
-      if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
+      if (!req.body.address_country) {
         throw new Error('invalid-address_country')
       }
       if (requirements.currently_due.indexOf('address.state') > -1 || 
