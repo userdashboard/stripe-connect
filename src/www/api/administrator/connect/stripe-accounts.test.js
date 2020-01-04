@@ -78,6 +78,8 @@ describe('/api/administrator/connect/stripe-accounts', () => {
       const req = TestHelper.createRequest('/api/administrator/connect/stripe-accounts')
       req.account = administrator.account
       req.session = administrator.session
+      req.filename = __filename
+      req.saveResponse = true
       const stripeAccounts = await req.get()
       assert.strictEqual(stripeAccounts.length, global.pageSize)
     })

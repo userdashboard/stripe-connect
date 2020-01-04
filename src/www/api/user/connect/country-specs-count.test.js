@@ -9,6 +9,8 @@ describe('/api/user/connect/country-specs-count', () => {
       const req = TestHelper.createRequest('/api/user/connect/country-specs-count')
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const total = await req.get()
       assert.strictEqual(total > 0, true)
     })

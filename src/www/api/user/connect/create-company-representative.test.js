@@ -3,7 +3,7 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/create-company-representative', () => {
+describe.only('/api/user/connect/create-company-representative', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -694,47 +694,6 @@ describe('/api/user/connect/create-company-representative', () => {
     })
 
     describe('invalid-address_country', () => {
-      it('missing posted address_country', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'New York',
-          address_country: '',
-          address_line1: '285 Fulton St',
-          address_postal_code: '10007',
-          address_state: 'NY',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          id_number: '000000000',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner',
-          ssn_last_4: '0000'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_country')
-      })
-
       it('invalid-address_country', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
@@ -1843,7 +1802,7 @@ describe('/api/user/connect/create-company-representative', () => {
       assert.strictEqual(personNow.address.postal_code, '10007')
     })
 
-    it('optionally-required posted address_country', async () => {
+    it('optional posted address_country', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -2709,6 +2668,8 @@ describe('/api/user/connect/create-company-representative', () => {
             req.uploads.verification_additional_document_back = TestHelper['success_id_scan_back.png']
           }
         }
+        req.filename = __filename
+        req.saveResponse = true
         req.body = TestHelper.createMultiPart(req, req.body)
         const representative = await req.post()
         assert.strictEqual(representative.object, 'person')

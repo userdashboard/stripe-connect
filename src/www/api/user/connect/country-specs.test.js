@@ -35,6 +35,8 @@ describe('/api/user/connect/country-specs', () => {
   describe('returns', () => {
     it('array', async () => {
       const req = TestHelper.createRequest('/api/user/connect/country-specs')
+      req.filename = __filename
+      req.saveResponse = true
       const countrySpecs = await req.get()
       assert.strictEqual(countrySpecs.length, global.pageSize)
     })

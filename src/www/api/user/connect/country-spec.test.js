@@ -39,6 +39,8 @@ describe('/api/user/connect/country-spec', () => {
       const req = TestHelper.createRequest('/api/user/connect/country-spec?country=US')
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const countrySpec = await req.get()
       assert.strictEqual(countrySpec.id, 'US')
     })

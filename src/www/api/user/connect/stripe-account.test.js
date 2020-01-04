@@ -66,6 +66,8 @@ describe('/api/user/connect/stripe-account', () => {
       const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const stripeAccount = await req.get()
       assert.strictEqual(stripeAccount.id, user.stripeAccount.id)
     })

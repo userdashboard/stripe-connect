@@ -115,6 +115,8 @@ describe('/api/user/connect/company-directors', () => {
       const req = TestHelper.createRequest(`/api/user/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const directors = await req.get()
       assert.strictEqual(directors.length, global.pageSize)
       assert.strictEqual(directors[0].id, director2.id)

@@ -211,6 +211,8 @@ describe('/api/administrator/connect/payouts', () => {
       const req = TestHelper.createRequest('/api/administrator/connect/payouts')
       req.account = administrator.account
       req.session = administrator.session
+      req.filename = __filename
+      req.saveResponse = true
       const payouts = await req.get()
       assert.strictEqual(payouts.length, global.pageSize)
     })

@@ -88,6 +88,8 @@ describe('/api/administrator/connect/set-stripe-account-rejected', () => {
       const req = TestHelper.createRequest(`/api/administrator/connect/set-stripe-account-rejected?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session
+      req.filename = __filename
+      req.saveResponse = true
       req.body = {
         reason: 'fraud'
       }

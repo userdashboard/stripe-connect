@@ -124,6 +124,8 @@ describe('/api/user/connect/beneficial-owners-count', () => {
       const req = TestHelper.createRequest(`/api/user/connect/beneficial-owners-count?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const total = await req.get()
       assert.strictEqual(total, 2)
     })

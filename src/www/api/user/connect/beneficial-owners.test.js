@@ -124,6 +124,8 @@ describe('/api/user/connect/beneficial-owners', () => {
       const req = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const owners = await req.get()
       assert.strictEqual(owners.length, global.pageSize)
       assert.strictEqual(owners[0].id, owner2.id)

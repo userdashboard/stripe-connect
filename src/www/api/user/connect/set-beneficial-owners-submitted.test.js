@@ -1112,6 +1112,8 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
       const req2 = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session
+      req2.filename = __filename
+      req2.saveResponse = true
       const accountNow = await req2.patch()
       assert.strictEqual(accountNow.company.owners_provided, true)
       await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')

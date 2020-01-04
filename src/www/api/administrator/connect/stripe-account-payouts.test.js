@@ -135,6 +135,8 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session
+      req.filename = __filename
+      req.saveResponse = true
       const payouts = await req.get()
       assert.strictEqual(payouts.length, global.pageSize)
     })

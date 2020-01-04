@@ -142,6 +142,8 @@ describe('/api/user/connect/create-stripe-account', () => {
         type: 'individual',
         country: 'US'
       }
+      req.filename = __filename
+      req.saveResponse = true
       const stripeAccount = await req.post()
       assert.strictEqual(stripeAccount.business_type, 'individual')
     })

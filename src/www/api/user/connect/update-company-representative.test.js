@@ -2802,6 +2802,8 @@ describe('/api/user/connect/update-company-representative', () => {
           }
         }
         req.body = TestHelper.createMultiPart(req, req.body)
+        req.filename = __filename
+        req.saveResponse = true
         const page = await req.patch()
         const doc = TestHelper.extractDoc(page)
         const redirectURL = TestHelper.extractRedirectURL(doc)

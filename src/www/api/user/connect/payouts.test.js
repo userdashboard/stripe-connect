@@ -97,6 +97,8 @@ describe('/api/user/connect/payouts', () => {
       const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const payouts = await req.get()
       assert.strictEqual(payouts.length, global.pageSize)
       assert.strictEqual(payouts[0].id, payout3.id)

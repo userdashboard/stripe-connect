@@ -313,6 +313,8 @@ describe('/api/user/connect/stripe-account-payouts', () => {
       const req = TestHelper.createRequest(`/api/user/connect/stripe-account-payouts?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const payoutsNow = await req.get()
       assert.strictEqual(payoutsNow.length, global.pageSize)
     })

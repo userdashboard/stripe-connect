@@ -53,7 +53,8 @@ describe('/api/user/connect/beneficial-owner', () => {
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          phone: '456-789-0123'
         }, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
@@ -100,6 +101,8 @@ describe('/api/user/connect/beneficial-owner', () => {
       const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const owner = await req.get()
       assert.strictEqual(owner.id, user.owner.id)
     })

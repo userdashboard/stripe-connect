@@ -176,6 +176,8 @@ describe('/api/user/connect/delete-company-representative', () => {
       const req4 = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
       req4.account = user.account
       req4.session = user.session
+      req4.filename = __filename
+      req4.saveResponse = true
       const accountNow = await req4.delete()
       assert.strictEqual(accountNow.requirements.currently_due.indexOf('relationship.representative') > -1, true)
     })

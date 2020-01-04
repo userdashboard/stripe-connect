@@ -90,6 +90,8 @@ describe('/api/user/connect/delete-company-director', () => {
       const req = TestHelper.createRequest(`/api/user/connect/delete-company-director?personid=${director.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const deleted = await req.delete()
       assert.strictEqual(deleted, true)
     })

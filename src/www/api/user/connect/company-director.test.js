@@ -90,6 +90,8 @@ describe('/api/user/connect/company-director', () => {
       const req = TestHelper.createRequest(`/api/user/connect/company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const director = await req.get()
       assert.strictEqual(director.id, user.director.id)
     })

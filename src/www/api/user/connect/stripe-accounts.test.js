@@ -121,6 +121,8 @@ describe('/api/user/connect/stripe-accounts', () => {
       const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
       req.account = user.account
       req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
       const stripeAccounts = await req.get()
       assert.strictEqual(stripeAccounts.length, global.pageSize)
     })
@@ -139,6 +141,7 @@ describe('/api/user/connect/stripe-accounts', () => {
       const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
       req.account = user.account
       req.session = user.session
+      
       const stripeAccounts = await req.get()
       assert.strictEqual(stripeAccounts.length, global.pageSize)
     })

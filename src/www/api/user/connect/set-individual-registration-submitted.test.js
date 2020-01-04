@@ -1630,6 +1630,8 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
       const req6 = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req6.account = user.account
       req6.session = user.session
+      req6.filename = __filename
+      req6.saveResponse = true
       await req6.patch()
       await TestHelper.waitForVerificationStart(user)
       await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.')

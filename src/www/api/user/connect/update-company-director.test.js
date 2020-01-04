@@ -723,6 +723,8 @@ describe('/api/user/connect/update-company-director', () => {
         first_name: 'Modified name',
         last_name: person.lastName
       }
+      req.filename = __filename
+      req.saveResponse = true
       const directorNow = await req.patch()
       assert.strictEqual(directorNow.first_name, 'Modified name')
     })
@@ -768,6 +770,7 @@ describe('/api/user/connect/update-company-director', () => {
         first_name: person.firstName,
         last_name: person.lastName
       }
+
       await req2.post()
       const directorNow = await global.api.user.connect.CompanyDirector.get(req2)
       assert.notStrictEqual(directorNow.token, director.token)
