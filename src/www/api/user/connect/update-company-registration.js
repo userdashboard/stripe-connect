@@ -58,10 +58,16 @@ module.exports = {
       accountInfo.account_token = req.body.token
     } else {
       for (const field of stripeAccount.requirements.currently_due) {
-        const posted = field.split('.').join('_').replace('company.', '')
+        const posted = field.split('.').join('_').replace('company_', '')
         if (!req.body[posted]) {
           if (field === 'company.address.line2' ||
               field === 'company.verification.document' ||
+              field === 'external_account' ||
+              field === 'relationship.director' ||
+              field === 'relationship.owner' ||
+              field.startsWith('relationship.') ||
+              field.startsWith('tos_acceptance.') ||
+              field.startsWith('person_') ||
             (field === 'business_profile.url' && req.body.business_profile_product_description) ||
             (field === 'business_profile.product_description' && req.body.business_profile_url)) {
             continue
@@ -71,24 +77,29 @@ module.exports = {
           }
           throw new Error(`invalid-${posted}`)
         }
-        if (field.startsWith('business_profile.')) {
-          const property = field.substring('business_profile.'.length)
+        if (posted.startsWith('business_profile_')) {
+          const property = posted.substring('business_profile_'.length)
           accountInfo.business_profile = accountInfo.business_profile || {}
           accountInfo.business_profile[property] = req.body[posted]
           delete (req.body[posted])
           continue
-        } else if (field.startsWith('address_kanji.')) {
-          const property = field.substring('address_kanji.'.length)
+        } else if (posted.startsWith('address_kanji_')) {
+          const property = posted.substring('address_kanji_'.length)
+          accountInfo.company = accountInfo.company || {}
           accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
           accountInfo.company.address_kanji[property] = req.body[posted]
-        } else if (field.startsWith('address_kana.')) {
-          const property = field.substring('address_kana.'.length)
+        } else if (posted.startsWith('address_kana_')) {
+          const property = posted.substring('address_kana_'.length)
+          accountInfo.company = accountInfo.company || {}
           accountInfo.company.address_kana = accountInfo.company.address_kana || {}
           accountInfo.company.address_kana[property] = req.body[posted]
-        } else if (field.startsWith('address.')) {
-          const property = field.substring('address.'.length)
+        } else if (posted.startsWith('address_')) {
+          const property = posted.substring('address_'.length)
+          accountInfo.company = accountInfo.company || {}
+          accountInfo.company.address = accountInfo.company.address || {}
           accountInfo.company.address[property] = req.body[posted]
-        } else if (field === 'company.verification.document') {
+        } else if (posted === 'verification_document') {
+          accountInfo.company = accountInfo.company || {}
           accountInfo.company.verification = accountInfo.company.verification || {}
           accountInfo.company.verification.document = accountInfo.company.verification.document || {}
           const front = `${posted}_front`
@@ -100,26 +111,39 @@ module.exports = {
             accountInfo.company.verification.document.back = req.body[back]
           }
         } else {
-          accountInfo.company[field] = req.body[posted]
+          const property = field.substring('company.'.length)
+          accountInfo.company = accountInfo.company || {}
+          accountInfo.company[property] = req.body[posted]
         }
       }
       for (const field of stripeAccount.requirements.eventually_due) {
-        const posted = field.split('.').join('_')
+        const posted = field.split('.').join('_').replace('company_', '')
         if (!req.body[posted]) {
           continue
         }
-        if (field.startsWith('address_kanji.')) {
-          const property = field.substring('address_kanji.'.length)
+        if (posted.startsWith('business_profile_')) {
+          const property = posted.substring('business_profile-'.length)
+          accountInfo.business_profile = accountInfo.business_profile || {}
+          accountInfo.business_profile[property] = req.body[posted]
+          delete (req.body[posted])
+          continue
+        } else if (posted.startsWith('address_kanji_')) {
+          const property = posted.substring('address_kanji_'.length)
+          accountInfo.company = accountInfo.company || {}
           accountInfo.company.address_kanji = accountInfo.company.address_kanji || {}
           accountInfo.company.address_kanji[property] = req.body[posted]
-        } else if (field.startsWith('address_kana.')) {
-          const property = field.substring('address_kana.'.length)
+        } else if (posted.startsWith('address_kana_')) {
+          const property = posted.substring('address_kana_'.length)
+          accountInfo.company = accountInfo.company || {}
           accountInfo.company.address_kana = accountInfo.company.address_kana || {}
           accountInfo.company.address_kana[property] = req.body[posted]
-        } else if (field.startsWith('address.')) {
-          const property = field.substring('address.'.length)
+        } else if (posted.startsWith('address_')) {
+          const property = posted.substring('address_'.length)
+          accountInfo.company = accountInfo.company || {}
+          accountInfo.company.address = accountInfo.company.address || {}
           accountInfo.company.address[property] = req.body[posted]
-        } else if (field ==='company.verification.document') {
+        } else if (posted === 'verification_document') {
+          accountInfo.company = accountInfo.company || {}
           accountInfo.company.verification = accountInfo.company.verification || {}
           accountInfo.company.verification.document = accountInfo.company.verification.document || {}
           const front = `${posted}_front`
@@ -131,7 +155,9 @@ module.exports = {
             accountInfo.company.verification.document.back = req.body[back]
           }
         } else {
-          accountInfo.company[field] = req.body[posted]
+          const property = field.substring('company.'.length)
+          accountInfo.company = accountInfo.company || {}
+          accountInfo.company[property] = req.body[posted]
         }
       }
       if (req.body.address_line2) {
