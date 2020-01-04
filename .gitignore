@@ -1,6 +1,6 @@
 node_modules
 data
 screenshots
-apis
+api/**/*.json
 .vscode
 .DS_Store
