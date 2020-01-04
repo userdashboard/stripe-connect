@@ -50,7 +50,7 @@ describe('/account/connect/beneficial-owner', () => {
   })
 
   describe('BeneficialOwner#GET', () => {
-    it('should show table for owner', async () => {
+    it('should show table for owner (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',

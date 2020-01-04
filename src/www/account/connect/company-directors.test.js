@@ -63,7 +63,7 @@ describe('/account/connect/company-directors', () => {
   })
 
   describe('CompanyDirectors#GET', () => {
-    it('should have row for each director', async () => {
+    it('should have row for each director (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

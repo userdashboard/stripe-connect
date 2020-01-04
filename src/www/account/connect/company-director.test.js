@@ -45,7 +45,7 @@ describe('/account/connect/company-director', () => {
   })
 
   describe('CompanyDirector#GET', () => {
-    it('should show table for director', async () => {
+    it('should show table for director (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',

@@ -226,7 +226,7 @@ describe('/account/connect/create-beneficial-owner', () => {
       assert.strictEqual(message.attr.template, 'invalid-verification_document_back')
     })
 
-    it('should create beneficial owner', async () => {
+    it('should create beneficial owner (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',

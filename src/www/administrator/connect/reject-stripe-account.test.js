@@ -54,7 +54,7 @@ describe('/administrator/connect/reject-stripe-account', () => {
   })
 
   describe('RejectStripeAccount#POST', () => {
-    it('should update the Stripe account as rejected', async () => {
+    it('should update the Stripe account as rejected (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

@@ -150,7 +150,7 @@ describe('/account/connect/submit-company-representative', () => {
   })
 
   describe('SubmitCompanyRepresentative#POST', () => {
-    it('should set company representative', async () => {
+    it('should set company representative (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

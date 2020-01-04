@@ -54,7 +54,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
   })
 
   describe('DeleteStripeAccount#POST', () => {
-    it('should delete Stripe account', async () => {
+    it('should delete Stripe account (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

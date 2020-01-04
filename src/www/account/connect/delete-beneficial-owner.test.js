@@ -230,7 +230,7 @@ describe('/account/connect/delete-beneficial-owner', () => {
   })
 
   describe('DeleteBeneficialOwner#POST', () => {
-    it('should delete owner', async () => {
+    it('should delete owner (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

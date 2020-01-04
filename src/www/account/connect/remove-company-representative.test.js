@@ -96,7 +96,7 @@ describe('/account/connect/remove-company-representative', () => {
   })
 
   describe('RemoveCompanyRepresentative#POST', () => {
-    it('should remove company representative', async () => {
+    it('should remove company representative (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

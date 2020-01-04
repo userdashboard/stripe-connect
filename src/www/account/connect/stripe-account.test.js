@@ -57,7 +57,7 @@ describe('/account/connect/stripe-account', () => {
   })
 
   describe('StripeAccount#GET', () => {
-    it('should show registration unstarted', async () => {
+    it('should show registration unstarted (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

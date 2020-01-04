@@ -157,7 +157,7 @@ describe('/account/connect/submit-individual-registration', () => {
   })
 
   describe('SubmitIndividualRegistration#POST', () => {
-    it('should submit registration', async () => {
+    it('should submit registration (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

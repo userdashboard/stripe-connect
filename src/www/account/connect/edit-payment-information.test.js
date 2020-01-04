@@ -102,7 +102,7 @@ describe('/account/connect/edit-payment-information', () => {
     }
 
     for (const country of connect.countrySpecs) {
-      it('submit payment information (' + country.id + ')', async () => {
+      it('submit payment information (' + country.id + ') (screenshots)', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,

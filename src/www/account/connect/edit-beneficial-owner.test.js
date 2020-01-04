@@ -249,7 +249,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
       }
     })
 
-    it('should update owner', async () => {
+    it('should update owner (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

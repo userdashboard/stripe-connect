@@ -68,7 +68,7 @@ describe('/account/connect/beneficial-owners', () => {
   })
 
   describe('BeneficialOwners#GET', () => {
-    it('should have row for each owner', async () => {
+    it('should have row for each owner (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

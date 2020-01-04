@@ -197,7 +197,7 @@ describe('/account/connect/submit-company-registration', () => {
   })
 
   describe('SubmitCompanyRegistration#POST', () => {
-    it('should submit registration', async () => {
+    it('should submit registration (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

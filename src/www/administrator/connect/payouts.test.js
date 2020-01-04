@@ -94,7 +94,7 @@ describe('/administrator/connect/payouts', () => {
   })
 
   describe('Payouts#GET', () => {
-    it('should have row for each payout', async () => {
+    it('should have row for each payout (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

@@ -114,7 +114,7 @@ describe('/account/connect/edit-individual-registration', () => {
     }
 
     for (const country of connect.countrySpecs) {
-      it('should update information (' + country.id + ')', async () => {
+      it('should update information (' + country.id + ') (screenshots)', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,

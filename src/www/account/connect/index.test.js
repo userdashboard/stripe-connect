@@ -36,7 +36,7 @@ describe('/account/connect', () => {
   })
 
   describe('Index#GET', () => {
-    it('should have row for each Stripe account', async () => {
+    it('should have row for each Stripe account (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

@@ -211,7 +211,7 @@ describe('/account/connect/create-company-director', () => {
       assert.strictEqual(message.attr.template, 'invalid-verification_document_back')
     })
 
-    it('should create director', async () => {
+    it('should create director (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

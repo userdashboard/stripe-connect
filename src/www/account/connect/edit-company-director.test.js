@@ -219,7 +219,7 @@ describe('/account/connect/edit-company-director', () => {
       }
     })
 
-    it('should update director', async () => {
+    it('should update director (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

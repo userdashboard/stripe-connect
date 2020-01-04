@@ -39,7 +39,7 @@ describe('/administrator/connect/stripe-account', () => {
   })
 
   describe('StripeAccount#GET', () => {
-    it('should have row for Stripe account', async () => {
+    it('should have row for Stripe account (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

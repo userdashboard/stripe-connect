@@ -205,7 +205,7 @@ describe('/account/connect/delete-company-director', () => {
   })
 
   describe('DeleteCompanyDirector#POST', () => {
-    it('should delete director', async () => {
+    it('should delete director (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
