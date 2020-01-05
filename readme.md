@@ -3,13 +3,11 @@
 
 Dashboard bundles everything a web app needs, all the "boilerplate" like signing in and changing passwords, into a parallel server so you can write a much smaller web app.
 
-The Stripe Connect module adds a complete "custom" integration of Stripe's Connect API, allowing your users to provide personal or company information and receive payouts on your platform.
-
-A complete UI is provided for users to create and manage their registrations, and a basic administrator UI is provided for oversight but has limited functionality so far.
+The Stripe Connect module adds a complete "custom" integration of Stripe's Connect API, allowing your users to provide personal or company information and receive payouts on your platform.  A complete UI is provided for users to create and manage their registrations, and a basic administrator UI is provided for oversight but has limited functionality so far.
 
 Your application server can use the Stripe Connect module's API to ensure the user has a valid Connect account with payouts enabled.
 
-Currently only automatic payouts are supported.
+Currently only automatic payouts are supported.  Countries that are "in beta" support by Stripe are not supported and need to be added as they become generally available. 
 
 ## Import this module
 
@@ -35,9 +33,13 @@ You will need to retrieve various keys from [Stripe](https://stripe.com).  Durin
 - environment STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxxx
 - environment CONNECT_WEBHOOK_ENDPOINT_SECRET=whsec_xxxxxxxx
 
+## Integrating the Connect platform information
+
+When a user has completed a Stripe account registration and it has been approved by Stripe their status will be changed to `payouts_enabled`.  Your application should use this information to control access to your platform functionality.
+
 ### Request Connect data from your application server
 
-Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example uses NodeJS to fetch the user's organizations from the Dashboard server using NodeJS, your application server can be in any language.
+Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example uses NodeJS to fetch the user's organizations from the Dashboard server, your application server can be in any language.
 
 You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/api/stripe-connect).
 
@@ -53,10 +55,10 @@ You can view API documentation within the NodeJS modules' `api.txt` files, or on
         const salt = bcrypt.genSaltSync(4)
         const token = bcrypt.hashSync(hashText, salt)
         const requestOptions = {
-            'dashboard.example.com',
-            path,
-            '443',
-            'GET',
+            host: 'dashboard.example.com',
+            path: path,
+            port: '443',
+            method: 'GET',
             headers: {
                 'x-application-server': 'application.example.com',
                 'x-dashboard-token': token
