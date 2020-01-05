@@ -1,24 +1,21 @@
 # Stripe Connect module for Dashboard
 ![StandardJS](https://github.com/userdashboard/stripe-connect/workflows/standardjs/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-user-ui/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-administrator-ui/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-user-api/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-administrator-api/badge.svg)
 
-![Guest landing page](https://userdashboard.github.io/outline.png?raw=true) 
+Dashboard bundles everything a web app needs, all the "boilerplate" like signing in and changing passwords, into a parallel server so you can write a much smaller web app.
 
-Dashboard is a parallel web application that accompanies your web app, subscription service, or Stripe Connect platform to provide all the "boilerplate" a modern web app requires to serve its users.  Use Dashboard instead of rewriting user account and login systems.  This module adds UI and APIs for a complete [Stripe Connect](https://stripe.com/connect) custom integration.
+The Stripe Connect module adds a complete "custom" integration of Stripe's Connect API, allowing your users to provide personal or company information and receive payouts on your platform.
 
-Stripe Connect module is ready to use.  It supports registration for all countries in 'general availability', collecting all required information up-front.  The registration data is stored in JSON and not submitted to Stripe until after it is all collected.  This allows users to revise and edit all of their information right up until submission, which otherwise might take hours or days to return a typing mistake to be fixed.
+A complete UI is provided for users to create and manage their registrations, and a basic administrator UI is provided for oversight but has limited functionality so far.
 
-Set `STRIPE_JS=3` to use account and person tokens for registering Connect accounts, this is *required for Stripe accounts within France*, and otherwise optional.  When using Stripe's client-side account and person tokens the information is still submitted to the server.
+Your application server can use the Stripe Connect module's API to ensure the user has a valid Connect account with payouts enabled.
 
-## Development status
-
-Check the [Github Issues](https://github.com/userdashboard/stripe-connect/issues) for ways you can help improve and continue development of this module, including:
-
-- translations
-- adding support for new countries
-- adding support for new KYC information types
-- migration plans for moving from one Stripe SDK to another
+Currently only automatic payouts are supported.
 
 ## Import this module
+
+Install the module with NPM:
+
+    $ npm install @userdashboard/stripe-connect
 
 Edit your `package.json` to activate the module:
 
@@ -28,13 +25,9 @@ Edit your `package.json` to activate the module:
       ]
     }
 
-Install the module with NPM:
-
-    $ npm install @userdashboard/stripe-connect
-
 ## Setting up your Stripe credentials
 
-In development your webhook can be created automatically, but in production since you might have multiple Dashboard server instances you must set it up manually.
+You will need to retrieve various keys from [Stripe](https://stripe.com).  During development your webhook will be created automatically, but in production with multiple dashboard server instances they share a configured webhook:
 
 - create your Stripe account and find your API keys
 - create a webhook for https://your_domain/webhooks/connect/index-connect-data 
@@ -42,39 +35,51 @@ In development your webhook can be created automatically, but in production sinc
 - environment STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxxx
 - environment CONNECT_WEBHOOK_ENDPOINT_SECRET=whsec_xxxxxxxx
 
-## Local documentation
+### Request Connect data from your application server
 
-| File | Description | 
-|------|-------------|
-| `/documentation/1. Stripe Connect module.md` | Markdown version of the developer documentation |
-| `/documentation/2. Building a Stripe Connect platform.md` | Markdown version of the developer documentation |
-| `/api.txt` | How to use the API via NodeJS or your application server |
-| `/sitemap.txt` | Runtime configuration and map of URLs to modules & local files |
-| `/start-dev.sh` | Environment variables you can use to configure Dashboard |
+Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example uses NodeJS to fetch the user's organizations from the Dashboard server using NodeJS, your application server can be in any language.
 
-## Online documentation
+You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/api/stripe-connect).
 
-Join the freenode IRC #dashboard chatroom for support.  [Web IRC client](https://kiwiirc.com/nextclient/)
+    const stripeAccounts = await proxy(`/api/user/connect/stripe-accounts?accountid=${accountid}&all=true`, accountid, sessionid)
 
-- [Developer documentation home](https://userdashboard.github.io/home)
-- [Administrator manual](https://userdashboard.github.io/administrators/home)
-- [User manual](https://userdashboard.github.io/users/home)
+    const proxy = util.promisify((path, accountid, sessionid, callback) => {
+        let hashText
+        if (accountid) {
+            hashText = `${process.env.APPLICATION_SERVER_TOKEN}/${accountid}/${sessionid}`
+        } else {
+            hashText = process.env.APPLICATION_SERVER_TOKEN
+        }
+        const salt = bcrypt.genSaltSync(4)
+        const token = bcrypt.hashSync(hashText, salt)
+        const requestOptions = {
+            'dashboard.example.com',
+            path,
+            '443',
+            'GET',
+            headers: {
+                'x-application-server': 'application.example.com',
+                'x-dashboard-token': token
+            }
+        }
+        if (accountid) {
+            requestOptions.headers['x-accountid'] = accountid
+            requestOptions.headers['x-sessionid'] = sessionid
+        }
+        const proxyRequest = require('https').request(requestOptions, (proxyResponse) => {
+            let body = ''
+            proxyResponse.on('data', (chunk) => {
+                body += chunk
+            })
+            return proxyResponse.on('end', () => {
+                return callback(null, JSON.parse(body))
+            })
+        })
+        proxyRequest.on('error', (error) => {
+            return callback(error)
+        })
+        return proxyRequest.end()
+      })
+    }
 
-### Case studies 
 
-`Hastebin` is an open source pastebin web application.  It started as a service for anonymous guests only, and was transformed with Dashboard and modules into a web application for registered users with support for sharing posts with organizations and paid subscriptions.
-
-- [Hastebin - free web application](https://userdashboard.github.io/integrations/converting-hastebin-free-saas.html)
-- [Hastebin - subscription web application](https://userdashboard.github.io/integrations/converting-hastebin-subscription-saas.html)
-
-## Privacy
-
-Dashboard accounts optionally support anonymous registration and irreversibly encrypt signin username and passwords.  There are no third-party trackers, analytics or resources embedded in Dashboard pages.  
-
-#### Development
-
-Development takes place on [Github](https://github.com/userdashboard/dashboard) with releases on [NPM](https://www.npmjs.com/package/@userdashboard/dashboard).
-
-#### License
-
-This software is distributed under the MIT license.
