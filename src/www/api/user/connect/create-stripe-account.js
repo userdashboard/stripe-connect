@@ -78,7 +78,8 @@ module.exports = {
     }
     const representativeInfo = {
       metadata: {
-        template: true
+        template: true,
+        token: false
       },
       relationship: {
         representative: true
