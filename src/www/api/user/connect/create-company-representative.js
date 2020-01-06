@@ -19,10 +19,7 @@ module.exports = {
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    if (!req.body) {
-      throw new Error('invalid-first_name')
-    }
-    if (global.stripeJS === 3 && !req.body.token) {
+    if (global.stripeJS === 3 && (!req.body || !req.body.token)) {
       throw new Error('invalid-token')
     }
     req.query.personid = stripeAccount.metadata.representative
@@ -30,7 +27,7 @@ module.exports = {
     const requirements = JSON.parse(stripeAccount.metadata.companyRepresentativeTemplate)
     for (const field of requirements.currently_due) {
       const posted = field.split('.').join('_')
-      if (!req.body[posted]) {
+      if (!req.body || !req.body[posted]) {
         if (field === 'address.line2' ||
             field === 'relationship.title' ||
             field === 'relationship.executive' ||
@@ -180,6 +177,16 @@ module.exports = {
             representativeInfo.address = representativeInfo.address || {}
             representativeInfo.address[property] = req.body[posted]
             continue
+          } else if (field.startsWith('address_kana.')) {
+            const property = field.substring('address_kana.'.length)
+            representativeInfo.address_kana = representativeInfo.address_kana || {}
+            representativeInfo.address_kana[property] = req.body[posted]
+            continue
+        } else if (field.startsWith('address_kanji.')) {
+            const property = field.substring('address_kanji.'.length)
+            representativeInfo.address_kanji = representativeInfo.address_kanji || {}
+            representativeInfo.address_kanji[property] = req.body[posted]
+            continue
           } else if (field.startsWith('verification.document.')) {
             if (global.stripeJS) {
               continue
@@ -222,6 +229,16 @@ module.exports = {
             representativeInfo.address = representativeInfo.address || {}
             representativeInfo.address[property] = req.body[posted]
             continue
+          } else if (field.startsWith('address_kana.')) {
+              const property = field.substring('address_kana.'.length)
+              representativeInfo.address_kana = representativeInfo.address_kana || {}
+              representativeInfo.address_kana[property] = req.body[posted]
+              continue
+          } else if (field.startsWith('address_kanji.')) {
+              const property = field.substring('address_kanji.'.length)
+              representativeInfo.address_kanji = representativeInfo.address_kanji || {}
+              representativeInfo.address_kanji[property] = req.body[posted]
+              continue
           } else if (field.startsWith('verification.document.')) {
             if (global.stripeJS) {
               continue
