@@ -165,7 +165,6 @@ before(async () => {
     req.stripeKey = stripeKey
     return req
   }
-  connect = require('./index.js')
   const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
   const eventList = []
   for (const event of events) {
@@ -180,9 +179,10 @@ before(async () => {
 })
 
 if (process.env.GENERATE_COUNTRY) {
+  const connect = require('./index.js')
   for (const countrySpec of connect.countrySpecs) {
     if (countrySpec.id !== process.env.SPECIFIC_COUNTRY) {
-      connect.countrySpecs.splice(connect.countrySpecs.indexOf(countrySpec), 1)
+      connect.countrySpecs  = connect.countrySpecs.splice(connect.countrySpecs.indexOf(countrySpec), 1)
     }
   }
 }
