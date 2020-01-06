@@ -181,7 +181,7 @@ before(async () => {
 if (process.env.GENERATE_COUNTRY) {
   const connect = require('./index.js')
   for (const countrySpec of connect.countrySpecs) {
-    if (countrySpec.id !== process.env.SPECIFIC_COUNTRY) {
+    if (countrySpec.id !== process.env.GENERATE_COUNTRY) {
       connect.countrySpecs  = connect.countrySpecs.splice(connect.countrySpecs.indexOf(countrySpec), 1)
     }
   }

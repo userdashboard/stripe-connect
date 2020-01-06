@@ -3,7 +3,7 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe.only('/api/user/connect/create-company-representative', () => {
+describe('/api/user/connect/create-company-representative', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
