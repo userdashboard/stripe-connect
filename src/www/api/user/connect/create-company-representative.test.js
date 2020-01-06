@@ -2651,7 +2651,7 @@ describe.only('/api/user/connect/create-company-representative', () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,
-          type: 'individual'
+          type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
