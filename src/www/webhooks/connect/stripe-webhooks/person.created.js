@@ -15,6 +15,9 @@ module.exports = async (stripeEvent, req) => {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
         return
       }
     }

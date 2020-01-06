@@ -184,6 +184,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
         if (error.message.startsWith('invalid-')) {
           throw error
         }

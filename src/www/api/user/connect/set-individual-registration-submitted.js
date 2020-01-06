@@ -44,6 +44,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
         const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
         if (errorMessage.startsWith('company[address]')) {
           let field = errorMessage.substring('company[address]['.length)

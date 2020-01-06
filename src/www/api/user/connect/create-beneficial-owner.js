@@ -321,6 +321,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
       }
     }
@@ -339,6 +342,9 @@ module.exports = {
         return owner
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
           continue
         }
         if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
