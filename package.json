@@ -1,6 +1,6 @@
 {
   "name": "@userdashboard/stripe-connect",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "scripts": {
     "test": "mocha './src{,!(public)/**}/*.test.js' --recursive --no-colors --retries 0 --timeout 600000 --slow 600000"
   },
