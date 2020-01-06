@@ -3,7 +3,7 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/connect/create-company-representative', () => {
+describe.only('/api/user/connect/create-company-representative', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -1941,7 +1941,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.percent_ownership, '100')
+      assert.strictEqual(personNow.relationship.percent_ownership, 100)
     })
 
     it('optional posted relationship_title', async () => {
@@ -1977,7 +1977,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.relationship_title, 'Owner')
+      assert.strictEqual(personNow.relationship.title, 'Owner')
     })
 
     it('optional posted relationship_director', async () => {
@@ -2013,7 +2013,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.relationship_director, true)
+      assert.strictEqual(personNow.relationship.director, true)
     })
 
     it('optional posted relationship_executive', async () => {
@@ -2049,7 +2049,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.relationship_executive, true)
+      assert.strictEqual(personNow.relationship.executive, true)
     })
 
     it('optionally-required posted first_name_kana', async () => {
@@ -2091,7 +2091,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kanji_line1, '２７－１５')
+      assert.strictEqual(personNow.address_kanji.line1, '２７－１５')
     })
 
     it('optionally-required posted last_name_kana', async () => {
@@ -2175,7 +2175,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kana_city, 'ｼﾌﾞﾔ')
+      assert.strictEqual(personNow.address_kana.city, 'ｼﾌﾞﾔ')
     })
 
     it('optionally-required posted address_kana_state', async () => {
@@ -2217,7 +2217,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kana_state, 'ﾄｳｷﾖｳﾄ')
+      assert.strictEqual(personNow.address_kana.state, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted address_kana_postal_code', async () => {
@@ -2259,7 +2259,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kana_postal_code, '1500001')
+      assert.strictEqual(personNow.address_kana.postal_code, '1500001')
     })
 
     it('optionally-required posted address_kana_town', async () => {
@@ -2301,7 +2301,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
+      assert.strictEqual(personNow.address_kana.town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
     })
 
     it('optionally-required posted address_kana_line1', async () => {
@@ -2343,7 +2343,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kana_line1, '27-15')
+      assert.strictEqual(personNow.address_kana.line1, '27-15')
     })
 
     it('optionally-required posted first_name_kanji', async () => {
@@ -2469,7 +2469,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kanji_city, '渋谷区')
+      assert.strictEqual(personNow.address_kanji.city, '渋谷区')
     })
 
     it('optionally-required posted address_kanji_state', async () => {
@@ -2511,7 +2511,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kanji_state, '東京都')
+      assert.strictEqual(personNow.address_kanji.state, '東京都')
     })
 
     it('optionally-required posted address_kanji_postal_code', async () => {
@@ -2553,7 +2553,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kanji_postal_code, '1500001')
+      assert.strictEqual(personNow.address_kanji.postal_code, '1500001')
     })
 
     it('optionally-required posted address_kanji_town', async () => {
@@ -2595,7 +2595,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kanji_town, '神宮前　３丁目')
+      assert.strictEqual(personNow.address_kanji.town, '神宮前　３丁目')
     })
 
     it('optionally-required posted address_kanji_line1', async () => {
@@ -2637,7 +2637,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address.kanji_line1, '２７－１５')
+      assert.strictEqual(personNow.address_kanji.line1, '２７－１５')
     })
   })
 

@@ -106,6 +106,7 @@ module.exports = {
     while (true) {
       try {
         companyRepresentative = await stripe.accounts.createPerson(stripeAccount.id, representativeInfo, req.stripeKey)
+        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${companyRepresentative.id}`, stripeAccount.id)
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -142,7 +143,8 @@ module.exports = {
       metadata: {
         companyDirectorTemplate: JSON.stringify(companyDirector.requirements),
         beneficialOwnerTemplate: JSON.stringify(beneficialOwner.requirements),
-        companyRepresentativeTemplate: JSON.stringify(companyRepresentative.requirements)
+        companyRepresentativeTemplate: JSON.stringify(companyRepresentative.requirements),
+        representative: companyRepresentative.id
       }
     }
     while (true) {

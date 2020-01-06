@@ -25,6 +25,8 @@ module.exports = {
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
+    req.query.personid = stripeAccount.metadata.representative
+    const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
     const requirements = JSON.parse(stripeAccount.metadata.companyRepresentativeTemplate)
     for (const field of requirements.currently_due) {
       const posted = field.split('.').join('_')
@@ -312,11 +314,16 @@ module.exports = {
         representativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
+    
     let representative
     while (true) {
       try {
-        representative = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
-        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${representative.id}`, req.query.stripeid)
+        if (existingRepresentative && existingRepresentative.metadata.template) {
+          representative = await stripe.accounts.updatePerson(req.query.stripeid, existingRepresentative.id, representativeInfo, req.stripeKey)
+        } else {
+          representative = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
+          await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${representative.id}`, req.query.stripeid)
+        }
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -335,7 +342,6 @@ module.exports = {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(accountNow)
         req.success = true
-        console.log('got rep', representative, accountNow)
         return representative
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
