@@ -3,7 +3,7 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe.only('/api/user/connect/create-company-representative', () => {
+describe('/api/user/connect/create-company-representative', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -1261,11 +1261,15 @@ describe.only('/api/user/connect/create-company-representative', () => {
         relationship_executive: 'true',
         relationship_title: 'Owner',
         ssn_last_4: '0000',
-        token: 'token'
+        token: ''
       }
       req.body = TestHelper.createMultiPart(req, body)
-      const personNow = await req.post()
-      assert.strictEqual(personNow.representativeToken, 'token')
+      try {
+        await req.post()
+      } catch (error) {
+        errorMessage = error.message
+      }
+      assert.strictEqual(errorMessage, 'invalid-token')
     })
 
     it('required posted dob_day', async () => {
@@ -1405,8 +1409,8 @@ describe.only('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.notStrictEqual(personNow.verification_document_front, null)
-      assert.notStrictEqual(personNow.verification_document_front, undefined)
+      assert.notStrictEqual(personNow.verification.document.front, null)
+      assert.notStrictEqual(personNow.verification.document.front, undefined)
     })
 
     it('optionally-required posted file verification_document_back', async () => {
@@ -1441,8 +1445,8 @@ describe.only('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.notStrictEqual(personNow.verification_document_back, null)
-      assert.notStrictEqual(personNow.verification_document_back, undefined)
+      assert.notStrictEqual(personNow.verification.document.back, null)
+      assert.notStrictEqual(personNow.verification.document.back, undefined)
     })
 
     it('optionally-required posted first_name', async () => {
@@ -1582,7 +1586,7 @@ describe.only('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.phone, '456-789-0123')
+      assert.strictEqual(personNow.phone, '+14567890123')
     })
 
     it('optionally-required posted gender', async () => {
@@ -1659,7 +1663,7 @@ describe.only('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.ssn_last_4, '0000')
+      assert.strictEqual(personNow.ssn_last_4_provided, true)
     })
 
     it('optionally-required posted id_number', async () => {
@@ -1694,7 +1698,7 @@ describe.only('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.id_number, '000000000')
+      assert.strictEqual(personNow.id_number_provided, true)
     })
 
     it('optionally-required posted address_city', async () => {
@@ -2091,7 +2095,7 @@ describe.only('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address_kanji.line1, '２７－１５')
+      assert.strictEqual(personNow.first_name_kana, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted last_name_kana', async () => {

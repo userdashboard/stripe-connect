@@ -1689,8 +1689,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.business_profile.mcc, '8931')
+      assert.strictEqual(accountNow.business_profile.mcc, '8931')
     })
 
     it('optionally-required posted business_profile_url', async () => {
@@ -1725,8 +1724,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.business_profile.url, 'https://' + user.profile.contactEmail.split('@')[1])
+      assert.strictEqual(accountNow.business_profile.url, 'https://' + user.profile.contactEmail.split('@')[1])
     })
 
     it('optionally-required posted business_profile_product_description', async () => {
@@ -1761,8 +1759,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.business_profile.product_description, 'Things')
+      assert.strictEqual(accountNow.business_profile.product_description, 'Things')
     })
 
     it('required posted dob_day', async () => {
@@ -1797,8 +1794,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.dob.day, 1) 
+      assert.strictEqual(accountNow.individual.dob.day, 1) 
     })
 
     it('required posted dob_month', async () => {
@@ -1833,8 +1829,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.dob.month, 2) 
+      assert.strictEqual(accountNow.individual.dob.month, 2) 
     })
 
     it('required posted dob_year', async () => {
@@ -1869,8 +1864,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.dob.year, 1950) 
+      assert.strictEqual(accountNow.individual.dob.year, 1950) 
     })
 
     it('required posted first_name', async () => {
@@ -1905,8 +1899,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.first_name, user.profile.firstName)
+      assert.strictEqual(accountNow.individual.first_name, user.profile.firstName)
     })
 
     it('required posted last_name', async () => {
@@ -1941,8 +1934,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.last_name, user.profile.lastName)
+      assert.strictEqual(accountNow.individual.last_name, user.profile.lastName)
     })
 
     it('optionally-required posted email', async () => {
@@ -1977,8 +1969,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.email, user.profile.contactEmail)
+      assert.strictEqual(accountNow.individual.email, user.profile.contactEmail)
     })
 
     it('optionally-required posted phone', async () => {
@@ -2013,8 +2004,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.phone, '456-789-0123')
+      assert.strictEqual(accountNow.individual.phone, '+14567890123')
     })
 
     it('optionally-required posted gender', async () => {
@@ -2058,8 +2048,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.gender, 'female')
+      assert.strictEqual(accountNow.individual.gender, 'female')
     })
 
     it('optionally-required posted ssn_last_4', async () => {
@@ -2093,8 +2082,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.ssn_last_4, '0000')
+      assert.strictEqual(accountNow.individual.ssn_last_4_provided, true)
     })
 
     it('optionally-required posted id_number', async () => {
@@ -2128,8 +2116,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.id_number, '000000000')
+      assert.strictEqual(accountNow.individual.id_number_provided, true)
     })
 
     it('optionally-required posted address_state', async () => {
@@ -2164,8 +2151,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.state, 'N')
+      assert.strictEqual(accountNow.individual.address.state, 'N')
     })
 
     it('optionally-required posted address_postal_code', async () => {
@@ -2200,8 +2186,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.postal_code, '6011')
+      assert.strictEqual(accountNow.individual.address.postal_code, '6011')
     })
 
     it('optionally-required posted address_line1', async () => {
@@ -2236,8 +2221,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.line1, '844 Fleet Street')
+      assert.strictEqual(accountNow.individual.address.line1, '844 Fleet Street')
     })
 
     it('optional posted address_line2', async () => {
@@ -2273,8 +2257,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.line2, 'More details')
+      assert.strictEqual(accountNow.individual.address.line2, 'More details')
     })
 
     it('optionally-required posted first_name_kana', async () => {
@@ -2318,8 +2301,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.first_name_kana, 'ﾄｳｷﾖｳﾄ')
+      assert.strictEqual(accountNow.individual.first_name_kana, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted last_name_kana', async () => {
@@ -2363,8 +2345,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.last_name_kana, 'ﾄｳｷﾖｳﾄ')
+      assert.strictEqual(accountNow.individual.last_name_kana, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted address_kana_town', async () => {
@@ -2408,8 +2389,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
+      assert.strictEqual(accountNow.individual.address.kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
     })
 
     it('optionally-required posted address_kana_state', async () => {
@@ -2453,8 +2433,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.kana_state, 'ﾄｳｷﾖｳﾄ')
+      assert.strictEqual(accountNow.individual.address.kana_state, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted address_kana_postal_code', async () => {
@@ -2498,8 +2477,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.kana_postal_code, '1500001')
+      assert.strictEqual(accountNow.individual.address.kana_postal_code, '1500001')
     })
 
     it('optionally-required posted address_kana_line1', async () => {
@@ -2543,8 +2521,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.kana_line1, '27-15')
+      assert.strictEqual(accountNow.individual.address.kana_line1, '27-15')
     })
 
     it('optionally-required posted first_name_kanji', async () => {
@@ -2588,8 +2565,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.first_name_kanji, '東京都')
+      assert.strictEqual(accountNow.individual.first_name_kanji, '東京都')
     })
 
     it('optionally-required posted last_name_kanji', async () => {
@@ -2633,8 +2609,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.last_name_kanji, '東京都')
+      assert.strictEqual(accountNow.individual.last_name_kanji, '東京都')
     })
 
     it('optionally-required posted address_kanji_state', async () => {
@@ -2678,8 +2653,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.kanji_state, '東京都')
+      assert.strictEqual(accountNow.individual.address.kanji_state, '東京都')
     })
 
     it('optionally-required posted address_kanji_postal_code', async () => {
@@ -2723,8 +2697,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.kanji_postal_code, '1500001')
+      assert.strictEqual(accountNow.individual.address.kanji_postal_code, '1500001')
     })
 
     it('optionally-required posted address_kanji_line1', async () => {
@@ -2768,8 +2741,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.kanji_line1, '２７－１５')
+      assert.strictEqual(accountNow.individual.address.kanji_line1, '２７－１５')
     })
 
     it('optionally-required posted address_kanji_town', async () => {
@@ -2813,8 +2785,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.strictEqual(registrationNow.address.kanji_town, '神宮前　３丁目')
+      assert.strictEqual(accountNow.individual.address.kanji_town, '神宮前　３丁目')
     })
 
     it('optionally-required posted file verification_document_front', async () => {
@@ -2849,9 +2820,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.notStrictEqual(registrationNow.verification_document_front, null)
-      assert.notStrictEqual(registrationNow.verification_document_front, undefined)
+      assert.notStrictEqual(accountNow.individual.verification.document.front, null)
+      assert.notStrictEqual(accountNow.individual.verification.document.front, undefined)
     })
 
     it('optionally-required posted file verification_document_back', async () => {
@@ -2886,9 +2856,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.notStrictEqual(registrationNow.verification_document_back, null)
-      assert.notStrictEqual(registrationNow.verification_document_back, undefined)
+      assert.notStrictEqual(accountNow.individual.verification.document.back, null)
+      assert.notStrictEqual(accountNow.individual.verification.document.back, undefined)
     })
 
     it('optionally-required posted file verification_additional_document_front', async () => {
@@ -2923,9 +2892,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.notStrictEqual(registrationNow.verification_additional_document_front, null)
-      assert.notStrictEqual(registrationNow.verification_additional_document_front, undefined)
+      assert.notStrictEqual(accountNow.individual.verification.additional_document.front, null)
+      assert.notStrictEqual(accountNow.individual.verification.additional_document.front, undefined)
     })
 
     it('optionally-required posted file verification_additional_document_back', async () => {
@@ -2960,9 +2928,8 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.notStrictEqual(registrationNow.verification_additional_document_back, null)
-      assert.notStrictEqual(registrationNow.verification_additional_document_back, undefined)
+      assert.notStrictEqual(accountNow.individual.verification.additional_document.back, null)
+      assert.notStrictEqual(accountNow.individual.verification.additional_document.back, undefined)
     })
   })
 
@@ -3024,9 +2991,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = TestHelper.createMultiPart(req, req.body)
       await req.post()
       const accountNow = await global.api.user.connect.StripeAccount.get(req)
-      const registrationNow = connect.MetaData.parse(accountNow.metadata, 'registration')
-      assert.notStrictEqual(registrationNow.individualToken, null)
-      assert.notStrictEqual(registrationNow.individualToken, undefined)
+      assert.notStrictEqual(accountNow.metadata.token, false)
     })
   })
 })
