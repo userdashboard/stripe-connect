@@ -231,7 +231,7 @@ module.exports = {
     if (req.body.relationship_executive) {
       companyDirectorInfo.relationship_executive = true
     }
-      while (true) {
+    while (true) {
       try {
         const companyDirectorNow = await stripe.accounts.updatePerson(person.account, person.id, companyDirectorInfo, req.stripeKey)
         req.success = true

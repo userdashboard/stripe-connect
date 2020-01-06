@@ -21,13 +21,21 @@ module.exports = {
     const updateInfo = {
       reason: req.body.reason
     }
-    try {
-      const accountNow = await stripe.accounts.reject(req.query.stripeid, updateInfo, req.stripeKey)
-      req.success = true
-      await stripeCache.update(accountNow)
-      return accountNow
-    } catch (error) {
-      if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+    while (true) {
+      try {
+        const accountNow = await stripe.accounts.reject(req.query.stripeid, updateInfo, req.stripeKey)
+        req.success = true
+        await stripeCache.update(accountNow)
+        return accountNow
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeut') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+      }
     }
   }
 }

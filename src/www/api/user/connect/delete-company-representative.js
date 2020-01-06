@@ -19,11 +19,20 @@ module.exports = {
         representative: false
       }
     }
-    try {
-      await stripe.accounts.updatePerson(req.query.stripeid, stripeAccount.metadata.representative, representativeInfo, req.stripeKey)
-      req.success = true
-    } catch (error) {
-      if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+
+    while (true) {
+      try {
+        await stripe.accounts.updatePerson(req.query.stripeid, stripeAccount.metadata.representative, representativeInfo, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+      }
     }
     while (true) {
       try {
