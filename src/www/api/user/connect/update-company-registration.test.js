@@ -1303,7 +1303,7 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       await req2.post()
       const accountNow = await global.api.user.connect.StripeAccount.get(req2)
-      assert.notStrictEqual(accountNow.metadata.token, false)
+      assert.notStrictEqual(accountNow.metadata.token, 'false')
     })
   })
 })

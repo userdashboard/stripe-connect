@@ -1067,7 +1067,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       req2.account = user.account
       req2.session = user.session
       const owner = await req2.get()
-      assert.notStrictEqual(owner.metadata.token, false)
+      assert.notStrictEqual(owner.metadata.token, 'false')
     })
   })
 })

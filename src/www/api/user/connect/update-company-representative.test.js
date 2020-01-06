@@ -2830,7 +2830,7 @@ describe('/api/user/connect/update-company-representative', () => {
       }
       await req2.post()
       const personNow = await global.api.user.connect.StripeAccount.get(req2)
-      assert.notStrictEqual(personNow.metadata.token, false)
+      assert.notStrictEqual(personNow.metadata.token, 'false')
     })
   })
 })

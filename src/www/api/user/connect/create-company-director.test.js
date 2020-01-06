@@ -669,7 +669,7 @@ describe('/api/user/connect/create-company-director', () => {
       req2.account = user.account
       req2.session = user.session
       const director = await req2.get()
-      assert.notStrictEqual(director.metadata.token, false)
+      assert.notStrictEqual(director.metadata.token, 'false')
     })
   })
 })

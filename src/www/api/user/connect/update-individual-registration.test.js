@@ -2985,7 +2985,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.body = TestHelper.createMultiPart(req, req.body)
       await req.post()
       const accountNow = await global.api.user.connect.StripeAccount.get(req)
-      assert.notStrictEqual(accountNow.metadata.token, false)
+      assert.notStrictEqual(accountNow.metadata.token, 'false')
     })
   })
 })

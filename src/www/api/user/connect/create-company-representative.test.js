@@ -2671,7 +2671,7 @@ describe.only('/api/user/connect/create-company-representative', () => {
         req.body = TestHelper.createMultiPart(req, req.body)
         const representative = await req.post()
         assert.strictEqual(representative.object, 'person')
-        assert.strictEqual(representative.metadata.token, false)
+        assert.strictEqual(representative.metadata.token, 'false')
       })
     }
   })
