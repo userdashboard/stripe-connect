@@ -74,16 +74,9 @@ describe('/account/connect/edit-individual-registration', () => {
           req.body.first_name = user.profile.firstName
           req.body.last_name = user.profile.lastName
         }
-        let uploads
-        if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.document.front') > -1) {
-          uploads = {
-            verification_document_front: TestHelper['success_id_scan_back.png'],
-            verification_document_back: TestHelper['success_id_scan_back.png']
-          }
-          if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.additional_document.front') > -1) {
-            uploads.verification_additional_document_front = TestHelper['success_id_scan_back.png']
-            uploads.verification_additional_document_back = TestHelper['success_id_scan_back.png']
-          }
+        let uploads = {
+          verification_document_front: TestHelper['success_id_scan_back.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png']
         }
         let fields = Object.keys(req.body)
         if (uploads) {
@@ -129,15 +122,9 @@ describe('/account/connect/edit-individual-registration', () => {
           req.body.first_name = user.profile.firstName
           req.body.last_name = user.profile.lastName
         }
-        if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.document.front') > -1) {
-          req.uploads = {
-            verification_document_front: TestHelper['success_id_scan_back.png'],
-            verification_document_back: TestHelper['success_id_scan_back.png']
-          }
-          if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.additional_document.front') > -1) {
-            req.uploads.verification_additional_document_front = TestHelper['success_id_scan_back.png']
-            req.uploads.verification_additional_document_back = TestHelper['success_id_scan_back.png']
-          }
+        req.uploads = {
+          verification_document_front: TestHelper['success_id_scan_back.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png']
         }
         req.filename = __filename
         req.screenshots = [

@@ -1246,11 +1246,9 @@ describe('/api/user/connect/update-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = postData[country.id]
-        if (connect.kycRequirements[country.id].company.indexOf('company.verification.document.front') > -1) {
-          req.uploads = {
-            verification_document_front: TestHelper['success_id_scan_back.png'],
-            verification_document_back: TestHelper['success_id_scan_back.png']
-          }
+        req.uploads = {
+          verification_document_front: TestHelper['success_id_scan_back.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png']
         }
         req.body = TestHelper.createMultiPart(req, req.body)
         req.filename = __filename

@@ -2950,15 +2950,9 @@ describe('/api/user/connect/update-individual-registration', () => {
           req.body.first_name = user.profile.firstName
           req.body.last_name = user.profile.lastName
         }
-        if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.document.front') > -1) {
-          req.uploads = {
-            verification_document_front: TestHelper['success_id_scan_back.png'],
-            verification_document_back: TestHelper['success_id_scan_back.png']
-          }
-          if (connect.kycRequirements[country.id].individual.indexOf('individual.verification.additional_document.front') > -1) {
-            req.uploads.verification_additional_document_front = TestHelper['success_id_scan_back.png']
-            req.uploads.verification_additional_document_back = TestHelper['success_id_scan_back.png']
-          }
+        req.uploads = {
+          verification_document_front: TestHelper['success_id_scan_back.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png']
         }
         req.body = TestHelper.createMultiPart(req, req.body)
         req.filename = __filename
