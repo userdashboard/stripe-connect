@@ -108,7 +108,6 @@ async function submitForm (req, res) {
     }
     return renderPage(req, res, 'unknown-error')
   } catch (error) {
-    console.log(error)
     return renderPage(req, res, error.message)
   }
 }

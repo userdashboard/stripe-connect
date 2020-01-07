@@ -7,7 +7,6 @@ module.exports = {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount) {
-      console.log('no stripe account', req.query.stripeid)
       throw new Error('invalid-personid')
     }
     if (stripeAccount.business_type !== 'company') {
