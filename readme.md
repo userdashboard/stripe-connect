@@ -41,7 +41,7 @@ When a user has completed a Stripe account registration and it has been approved
 
 Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example uses NodeJS to fetch the user's organizations from the Dashboard server, your application server can be in any language.
 
-You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/api/stripe-connect).
+You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/stripe-connect-api).
 
     const stripeAccounts = await proxy(`/api/user/connect/stripe-accounts?accountid=${accountid}&all=true`, accountid, sessionid)
 
