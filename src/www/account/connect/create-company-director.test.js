@@ -117,7 +117,7 @@ describe('/account/connect/create-company-director', () => {
   })
 
   describe('CreateCompanyDirector#POST', () => {
-    it('should require each field', async () => {
+    it.only('should require each field', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',

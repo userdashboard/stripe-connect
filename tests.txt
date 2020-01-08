@@ -1,46 +1,191 @@
 
-> puppeteer@2.0.0 install /root/workspaces/stripe-connect/node_modules/puppeteer
-> node install.js
-
-Chromium downloaded to /root/workspaces/stripe-connect/node_modules/puppeteer/.local-chromium/linux-706915
-
-> ngrok@3.2.7 postinstall /root/workspaces/stripe-connect/node_modules/ngrok
-> node ./postinstall.js
-
-ngrok - cached download found at /root/.ngrok/aHR0cHM6Ly9iaW4uZXF1aW5veC5pby9jLzRWbUR6QTdpYUhiL25ncm9rLXN0YWJsZS1saW51eC1hbWQ2NC56aXA=.zip
-ngrok - unpacking binary
-ngrok - binary unpacked to /root/workspaces/stripe-connect/node_modules/ngrok/bin/ngrok
-+ puppeteer@2.0.0
-+ ngrok@3.2.7
-+ @userdashboard/dashboard@1.0.74
-added 154 packages from 205 contributors and audited 6 packages in 11.7s
-found 0 vulnerabilities
+> @userdashboard/stripe-connect@1.0.31 test /root/workspaces/stripe-connect
+> mocha './src{,!(public)/**}/*.test.js' --recursive --no-colors --retries 0 --timeout 600000 --slow 600000
 
 
-> @userdashboard/stripe-connect@1.0.23 test /root/workspaces/stripe-connect
-> mocha './src{,!(public)/**}/*.test.js' --recursive --no-colors --retries 0 --timeout 480000 --slow 240000
 
-ok
-ok1
+  server/bind-ip
+    BindIP#BEFORE
+      ✓ should prioritize ip from header
+      ✓ should bind ip from connection remoteAddress
+      ✓ should bind ip from connection socket
+      ✓ should bind ip from socket remoteAddress
 
+  server/bind-stripekey
+    BindStripeKey#AFTER
+      ✓ should bind stripekey data to req
 
-  /administrator/connect/delete-stripe-account
-    DeleteStripeAccount#BEFORE
-server.receive POST /api/user/create-account
-server.receive POST /api/user/create-session?accountid=account_31f5553c
-server.receive GET /api/user/account?accountid=account_31f5553c
-server.receive GET /api/user/profile?profileid=profile_ca74f22e
-server.receive GET /api/user/session?sessionid=session_70e69744
-server.receive POST /api/user/create-account
-server.receive POST /api/user/create-session?accountid=account_81c76e4d
-server.receive GET /api/user/account?accountid=account_81c76e4d
-server.receive GET /api/user/profile?profileid=profile_b7b065fe
-server.receive GET /api/user/session?sessionid=session_b62c1dbd
-server.receive POST /api/user/connect/create-stripe-account?accountid=account_81c76e4d
-server.receive PATCH /api/user/connect/update-individual-registration?stripeid=acct_1FtycUFyOgK7xEr7
-server.receive POST /webhooks/connect/index-connect-data
-      ✓ should bind Stripe account to req
+  /account/connect/beneficial-owner
+    BeneficialOwner#BEFORE
+      ✓ should reject invalid personid
+      ✓ should bind owner to req
+    BeneficialOwner#GET
+      1) should show table for owner (screenshots)
 
+  /account/connect/beneficial-owners
+    BeneficialOwners#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual registration
+      ✓ should bind owners to req
+    BeneficialOwners#GET
+      ✓ should have row for each owner (screenshots)
+      ✓ should display submitted message with removed owners
 
-  1 passing (12s)
+  /account/connect/company-director
+    CompanyDirector#BEFORE
+      ✓ should reject invalid personid
+      2) should bind director to req
+    CompanyDirector#GET
+      3) should show table for director (screenshots)
 
+  /account/connect/company-directors
+    CompanyDirectors#BEFORE
+      ✓ should reject invalid stripeid
+      ✓ should reject individual registration
+      ✓ should bind directors to req
+    CompanyDirectors#GET
+      ✓ should have row for each director (screenshots)
+      ✓ should display submitted message with removed directors
+
+  /account/connect/create-beneficial-owner
+    CreateBeneficialOwner#BEFORE
+      ✓ should reject invalid stripeid
+      4) should reject submitted registration
+      ✓ should require own Stripe account
+    CreateBeneficialOwner#GET
+      ✓ should present the form
+    CreateBeneficialOwner#POST
+      ✓ should require each field
+      ✓ should require a document id front upload
+      ✓ should require a document id back upload
+      ✓ should create beneficial owner (screenshots)
+
+  /account/connect/create-company-director
+    CreateCompanyDirector#BEFORE
+      ✓ should reject invalid stripeid
+      5) should reject submitted registration
+      ✓ should require own Stripe account
+    CreateCompanyDirector#GET
+      ✓ should present the form
+    CreateCompanyDirector#POST
+      6) should require each field
+      ✓ should require a document id front upload
+      ✓ should require a document id back upload
+      7) should create director (screenshots)
+
+  /account/connect/create-company-representative
+    CreateCompanyRepresentative#BEFORE
+      ✓ should reject invalid registration
+      8) should reject company registration
+    CreateCompanyRepresentative#GET
+      9) should present the form (AT)
+      10) should present the form (AU)
+      11) should present the form (BE)
+      12) should present the form (CA)
+      13) should present the form (CH)
+      14) should present the form (DE)
+      15) should present the form (DK)
+      16) should present the form (EE)
+      17) should present the form (ES)
+      18) should present the form (FI)
+      19) should present the form (FR)
+      20) should present the form (GB)
+      21) should present the form (GR)
+      22) should present the form (HK)
+      23) should present the form (IE)
+      24) should present the form (IT)
+      25) should present the form (JP)
+      26) should present the form (LT)
+      27) should present the form (LU)
+      28) should present the form (LV)
+      29) should present the form (MY)
+      30) should present the form (NL)
+      31) should present the form (NO)
+      32) should present the form (NZ)
+      33) should present the form (PL)
+      34) should present the form (PT)
+      35) should present the form (SE)
+      36) should present the form (SG)
+      37) should present the form (SI)
+      38) should present the form (SK)
+      39) should present the form (US)
+    CreateCompanyRepresentative#POST
+      40) should reject invalid fields (AT)
+      41) should reject invalid fields (AU)
+      42) should reject invalid fields (BE)
+      43) should reject invalid fields (CA)
+      44) should reject invalid fields (CH)
+      45) should reject invalid fields (DE)
+      46) should reject invalid fields (DK)
+      47) should reject invalid fields (EE)
+      48) should reject invalid fields (ES)
+      49) should reject invalid fields (FI)
+      50) should reject invalid fields (FR)
+      51) should reject invalid fields (GB)
+      52) should reject invalid fields (GR)
+      53) should reject invalid fields (HK)
+      54) should reject invalid fields (IE)
+      55) should reject invalid fields (IT)
+      56) should reject invalid fields (JP)
+      57) should reject invalid fields (LT)
+      58) should reject invalid fields (LU)
+      59) should reject invalid fields (LV)
+      60) should reject invalid fields (MY)
+      61) should reject invalid fields (NL)
+      62) should reject invalid fields (NO)
+      63) should reject invalid fields (NZ)
+      64) should reject invalid fields (PL)
+      65) should reject invalid fields (PT)
+      66) should reject invalid fields (SE)
+      67) should reject invalid fields (SG)
+      68) should reject invalid fields (SI)
+      69) should reject invalid fields (SK)
+      70) should reject invalid fields (US)
+      71) should update information (AT) (screenshots)
+      72) should update information (AU) (screenshots)
+      73) should update information (BE) (screenshots)
+      74) should update information (CA) (screenshots)
+      75) should update information (CH) (screenshots)
+      76) should update information (DE) (screenshots)
+      77) should update information (DK) (screenshots)
+      78) should update information (EE) (screenshots)
+      79) should update information (ES) (screenshots)
+      80) should update information (FI) (screenshots)
+      81) should update information (FR) (screenshots)
+      82) should update information (GB) (screenshots)
+      83) should update information (GR) (screenshots)
+      84) should update information (HK) (screenshots)
+      85) should update information (IE) (screenshots)
+      86) should update information (IT) (screenshots)
+      87) should update information (JP) (screenshots)
+      88) should update information (LT) (screenshots)
+      89) should update information (LU) (screenshots)
+      90) should update information (LV) (screenshots)
+      91) should update information (MY) (screenshots)
+      92) should update information (NL) (screenshots)
+      93) should update information (NO) (screenshots)
+      94) should update information (NZ) (screenshots)
+      95) should update information (PL) (screenshots)
+      96) should update information (PT) (screenshots)
+      97) should update information (SE) (screenshots)
+      98) should update information (SG) (screenshots)
+      99) should update information (SI) (screenshots)
+      100) should update information (SK) (screenshots)
+      101) should update information (US) (screenshots)
+
+  /account/connect/create-registration
+    CreateRegistration#GET
+      102) should present the form
+    CreateRegistration#POST
+      103) should create Stripe account (screenshots)
+
+  /account/connect/delete-beneficial-owner
+    DeleteBeneficialOwner#BEFORE
+      ✓ should reject invalid personid
+      104) should reject submitted registration
+      ✓ should require own Stripe account
+      105) should bind owner to req
+    DeleteBeneficialOwner#GET
+      106) should present the form
+      107) should present the owner table
+    DeleteBeneficialOwner#POST
