@@ -200,7 +200,7 @@ describe('/account/connect/stripe-account', () => {
         currency: 'eur',
         iban: 'AT89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitCompanyRepresentative(user)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitStripeAccount(user)

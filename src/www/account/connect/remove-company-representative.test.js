@@ -84,7 +84,7 @@ describe('/account/connect/remove-company-representative', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/account/connect/remove-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -123,7 +123,6 @@ describe('/account/connect/remove-company-representative', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/account/connect/remove-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

@@ -80,7 +80,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.setCompanyRepresentative(user)
+      await TestHelper.submitCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)
