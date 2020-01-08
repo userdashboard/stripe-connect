@@ -102,7 +102,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           routing_number: '110000000'
         })
         await TestHelper.submitBeneficialOwners(user)
-        await TestHelper.setCompanyRepresentative(user)
         await TestHelper.submitStripeAccount(user)
         await TestHelper.waitForVerificationStart(user)
         const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -238,7 +237,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'AT89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -303,7 +301,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         country: 'AU',
         currency: 'aud'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -370,7 +367,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'BE89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -427,7 +423,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
@@ -498,7 +493,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'CH89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -562,7 +556,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'DE89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -626,7 +619,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'DK89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -690,7 +682,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'EE89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -754,7 +745,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'ES89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -818,7 +808,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'FI89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -882,7 +871,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'FR89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -949,7 +937,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'GB89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1006,7 +993,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
@@ -1078,7 +1064,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'IE89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1142,7 +1127,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'IT89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1227,7 +1211,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         country: 'JP',
         currency: 'jpy'
       })
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1289,7 +1272,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'LT89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1353,7 +1335,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'LU89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1417,7 +1398,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'LV89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1481,7 +1461,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'NL89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1603,7 +1582,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'NO89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1671,7 +1649,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'nzd',
         routing_number: '110000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1735,7 +1712,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'PT89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1799,7 +1775,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'SE89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1866,7 +1841,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'sgd'
       })
       await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -1928,7 +1902,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'SI89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -1992,7 +1965,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         currency: 'eur',
         iban: 'SK89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
@@ -2057,7 +2029,6 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
         routing_number: '110000000'
       })
       await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.setCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

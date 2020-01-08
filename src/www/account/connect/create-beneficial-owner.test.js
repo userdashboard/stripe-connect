@@ -63,7 +63,6 @@ describe('/account/connect/create-beneficial-owner', () => {
         currency: 'eur',
         iban: 'DE89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)

@@ -63,7 +63,6 @@ describe('/account/connect/create-company-director', () => {
         currency: 'eur',
         iban: 'DE89370400440532013000'
       })
-      await TestHelper.setCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)
@@ -117,7 +116,7 @@ describe('/account/connect/create-company-director', () => {
   })
 
   describe('CreateCompanyDirector#POST', () => {
-    it('should require each field', async () => {
+    it.only('should require each field', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
