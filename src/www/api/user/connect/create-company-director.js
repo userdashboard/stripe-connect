@@ -49,7 +49,7 @@ module.exports = {
       }
       if (!found) {
         throw new Error('invalid-address_state')
-      }      
+      }
     }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
@@ -323,7 +323,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
     const directors = JSON.parse(stripeAccount.metadata.directors || '[]')
@@ -337,7 +337,6 @@ module.exports = {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(accountNow)
-        req.success = true
         return director
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -346,7 +345,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

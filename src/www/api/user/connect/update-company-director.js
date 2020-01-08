@@ -13,6 +13,18 @@ module.exports = {
     if (!person) {
       throw new Error('invalid-personid')
     }
+    if (!req.body) {
+      if (person.requirements.currently_due.length) {
+        throw new Error('invalid-' + person.requirements.currently_due[0])
+      }
+      if (person.requirements.eventually_due.length) {
+        throw new Error('invalid-' + person.requirements.eventually_due[0])
+      }
+      throw new Error('invalid-person')
+    }
+    if (!person.requirements.currently_due.length && !person.requirements.eventually_due.length) {
+      throw new Error('invalid-person')
+    }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
@@ -161,7 +173,7 @@ module.exports = {
       companyDirectorInfo.person_token = req.body.token
     } else {
       for (const field of person.requirements.currently_due) {
-        const posted = field.split('.').join('_').replace('relationship_director_', '')
+        const posted = field.split('.').join('_')
         if (!req.body[posted]) {
           if (field === 'relationship.director.address.line2' ||
               field === 'relationship.director.relationship.title' ||
@@ -170,47 +182,80 @@ module.exports = {
               field === 'relationship.director.relationship.owner') {
             continue
           }
-          if (field !== 'relationship.director.verification.document' && 
+          if (field !== 'relationship.director.verification.document' &&
               field !== 'relationship.director.verification.additional_document') {
             throw new Error(`invalid-${posted}`)
           }
         }
-        for (const field of person.requirements.currently_due) {
-          if (field.startsWith('business_profile.')) {
-            const property = field.substring('business_profile.'.length)
-            companyDirectorInfo.business_profile[property] = req.body[posted]
-            delete (req.body[posted])
-            continue
-          }
-          if (field.startsWith('address_kanji.')) {
-            const property = field.substring('address_kanji.'.length)
-            companyDirectorInfo.address_kanji = companyDirectorInfo.address_kanji || {}
-            companyDirectorInfo.address_kanji[property] = req.body[posted]
-          } else if (field.startsWith('address_kana.')) {
-            const property = field.substring('address_kana.'.length)
-            companyDirectorInfo.address_kana = companyDirectorInfo.address_kana || {}
-            companyDirectorInfo.address_kana[property] = req.body[posted]
-          } else if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            companyDirectorInfo.address[property] = req.body[posted]
-          } else if (field.startsWith('verification.document.')) {
-            const property = field.substring('verification.document.'.length)
-            companyDirectorInfo.verification = companyDirectorInfo.verification || {}
-            companyDirectorInfo.verification.document = companyDirectorInfo.verification.document || {}
-            companyDirectorInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            const property = field.substring('verification.additional_document.'.length)
-            companyDirectorInfo.verification = companyDirectorInfo.verification || {}
-            companyDirectorInfo.verification.additional_document = companyDirectorInfo.verification.additional_document || {}
-            companyDirectorInfo.verification.additional_document[property] = req.body[posted]
-          } else {
-            const property = field.substring(''.length)
-            companyDirectorInfo.company[property] = req.body[posted]
-          }
+        if (field.startsWith('business_profile.')) {
+          const property = field.substring('business_profile.'.length)
+          companyDirectorInfo.business_profile[property] = req.body[posted]
+          continue
+        }
+        if (field.startsWith('address_kanji.')) {
+          const property = field.substring('address_kanji.'.length)
+          companyDirectorInfo.address_kanji = companyDirectorInfo.address_kanji || {}
+          companyDirectorInfo.address_kanji[property] = req.body[posted]
+        } else if (field.startsWith('address_kana.')) {
+          const property = field.substring('address_kana.'.length)
+          companyDirectorInfo.address_kana = companyDirectorInfo.address_kana || {}
+          companyDirectorInfo.address_kana[property] = req.body[posted]
+        } else if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          companyDirectorInfo.address[property] = req.body[posted]
+        } else if (field.startsWith('verification.document.')) {
+          const property = field.substring('verification.document.'.length)
+          companyDirectorInfo.verification = companyDirectorInfo.verification || {}
+          companyDirectorInfo.verification.document = companyDirectorInfo.verification.document || {}
+          companyDirectorInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          const property = field.substring('verification.additional_document.'.length)
+          companyDirectorInfo.verification = companyDirectorInfo.verification || {}
+          companyDirectorInfo.verification.additional_document = companyDirectorInfo.verification.additional_document || {}
+          companyDirectorInfo.verification.additional_document[property] = req.body[posted]
+        } else {
+          const property = field.substring(''.length)
+          companyDirectorInfo[property] = req.body[posted]
+        }
+      }
+      for (const field of person.requirements.eventually_due) {
+        const posted = field.split('.').join('_')
+        if (!req.body[posted]) {
+          continue
+        }
+        if (field.startsWith('business_profile.')) {
+          const property = field.substring('business_profile.'.length)
+          companyDirectorInfo.business_profile[property] = req.body[posted]
+          continue
+        }
+        if (field.startsWith('address_kanji.')) {
+          const property = field.substring('address_kanji.'.length)
+          companyDirectorInfo.address_kanji = companyDirectorInfo.address_kanji || {}
+          companyDirectorInfo.address_kanji[property] = req.body[posted]
+        } else if (field.startsWith('address_kana.')) {
+          const property = field.substring('address_kana.'.length)
+          companyDirectorInfo.address_kana = companyDirectorInfo.address_kana || {}
+          companyDirectorInfo.address_kana[property] = req.body[posted]
+        } else if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          companyDirectorInfo.address[property] = req.body[posted]
+        } else if (field.startsWith('verification.document.')) {
+          const property = field.substring('verification.document.'.length)
+          companyDirectorInfo.verification = companyDirectorInfo.verification || {}
+          companyDirectorInfo.verification.document = companyDirectorInfo.verification.document || {}
+          companyDirectorInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          const property = field.substring('verification.additional_document.'.length)
+          companyDirectorInfo.verification = companyDirectorInfo.verification || {}
+          companyDirectorInfo.verification.additional_document = companyDirectorInfo.verification.additional_document || {}
+          companyDirectorInfo.verification.additional_document[property] = req.body[posted]
+        } else {
+          const property = field.substring(''.length)
+          companyDirectorInfo[property] = req.body[posted]
         }
       }
       if (req.body.address_line2) {
-        companyDirectorInfo.address = ownerInfo.address || {}
+        companyDirectorInfo.address = companyDirectorInfo.address || {}
         companyDirectorInfo.address.line2 = req.body.address_line2
       }
     }
@@ -234,7 +279,6 @@ module.exports = {
     while (true) {
       try {
         const companyDirectorNow = await stripe.accounts.updatePerson(person.account, person.id, companyDirectorInfo, req.stripeKey)
-        req.success = true
         await stripeCache.update(companyDirectorNow)
         return companyDirectorNow
       } catch (error) {
@@ -247,7 +291,7 @@ module.exports = {
         if (error.message.startsWith('invalid-')) {
           throw error
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

@@ -10,7 +10,7 @@ module.exports = {
       throw new Error('invalid-personid')
     }
     if (stripeAccount.business_type !== 'company') {
-      throw new Error('invalid-stripe-account') 
+      throw new Error('invalid-stripe-account')
     }
     const countrySpec = connect.countrySpecIndex[stripeAccount.country]
     if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {

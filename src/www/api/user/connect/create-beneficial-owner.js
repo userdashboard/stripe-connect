@@ -324,7 +324,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
     const owners = JSON.parse(stripeAccount.metadata.owners || '[]')
@@ -338,7 +338,6 @@ module.exports = {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(accountNow)
-        req.success = true
         return owner
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -347,7 +346,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

@@ -1264,6 +1264,7 @@ describe('/api/user/connect/create-company-representative', () => {
         token: ''
       }
       req.body = TestHelper.createMultiPart(req, body)
+      let errorMessage
       try {
         await req.post()
       } catch (error) {
@@ -1304,7 +1305,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.dob.day, 7) 
+      assert.strictEqual(personNow.dob.day, 7)
     })
 
     it('required posted dob_month', async () => {
@@ -1339,7 +1340,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.dob.month, 11) 
+      assert.strictEqual(personNow.dob.month, 11)
     })
 
     it('required posted dob_year', async () => {
@@ -1374,7 +1375,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.dob.year, 1951) 
+      assert.strictEqual(personNow.dob.year, 1951)
     })
 
     it('optionally-required posted file verification_document_front', async () => {

@@ -573,7 +573,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
   })
 
   describe('receives', () => {
-    it('required posted first_name', async () => {  
+    it('required posted first_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -706,7 +706,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const owner = await req.post()
-      assert.strictEqual(owner.dob.day, 1) 
+      assert.strictEqual(owner.dob.day, 1)
     })
 
     it('required posted dob_month', async () => {
@@ -737,7 +737,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         last_name: person.lastName
       })
       const owner = await req.post()
-      assert.strictEqual(owner.dob.month, 2) 
+      assert.strictEqual(owner.dob.month, 2)
     })
 
     it('required posted dob_year', async () => {
@@ -771,7 +771,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const owner = await req.post()
-      assert.strictEqual(owner.dob.year, 1950) 
+      assert.strictEqual(owner.dob.year, 1950)
     })
 
     it('required posted address_line1', async () => {

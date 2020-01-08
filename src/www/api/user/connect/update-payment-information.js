@@ -174,7 +174,6 @@ module.exports = {
     while (true) {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, stripeData, req.stripeKey)
-        req.success = true
         const bankAccount = accountNow.external_accounts.data[0]
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
         await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
@@ -190,7 +189,7 @@ module.exports = {
         if (error.message.startsWith('invalid-')) {
           throw error
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

@@ -7,14 +7,7 @@ module.exports = {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  if (req.success) {
-    if (req.query && req.query['return-url']) {
-      return dashboard.Response.redirect(req, res, decodeURI(req.query['return-url']))
-    }
-    return dashboard.Response.redirect(req, res, `/account/connect/stripe-account?stripeid=${req.data.stripeAccount.id}`)
-  } else if (req.error) {
-    messageTemplate = req.error
-  }
+  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.route.html)
   if (!messageTemplate && req.method === 'GET' && req.query && req.query['return-url']) {
     const submitForm = doc.getElementById('submit-form')
@@ -53,16 +46,20 @@ async function submitForm (req, res) {
   if (!found) {
     return renderPage(req, res, 'invalid-country')
   }
+  req.query = req.query || {}
+  req.query.accountid = req.account.accountid
+  let stripeAccount
   try {
-    req.query = req.query || {}
-    req.query.accountid = req.account.accountid
-    const stripeAccount = await global.api.user.connect.CreateStripeAccount.post(req)
-    if (req.success) {
-      req.data = { stripeAccount }
-      return renderPage(req, res, 'success')
-    }
-    return renderPage(req, res, 'unknown-error')
+    stripeAccount = await global.api.user.connect.CreateStripeAccount.post(req)
   } catch (error) {
     return renderPage(req, res, error.message)
+  }
+  if (req.query['return-url']) {
+    return dashboard.Response.redirect(req, res, req.query['return-url'])
+  } else {
+    res.writeHead(302, {
+      location: `/account/connect/stripe-account?stripeid=${stripeAccount.id}`
+    })
+    return res.end()
   }
 }

@@ -10,6 +10,6 @@ module.exports = async (stripeEvent, req) => {
     if (exists) {
       await stripeCache.update(exists)
     }
-  }  catch (error) {
+  } catch (error) {
   }
 }

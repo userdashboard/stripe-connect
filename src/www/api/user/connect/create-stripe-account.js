@@ -43,7 +43,6 @@ module.exports = {
         await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
         await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
         await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
-        req.success = true
         await stripeCache.update(stripeAccount)
         break
       } catch (error) {
@@ -53,7 +52,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
     if (stripeAccount.business_type === 'individual') {
@@ -96,7 +95,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
     while (true) {
@@ -110,7 +109,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
     while (true) {
@@ -125,7 +124,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
     delete (companyDirector.requirements.pending_verification)
@@ -172,7 +171,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

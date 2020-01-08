@@ -28,7 +28,7 @@ module.exports = {
       }
       return person
     } catch (error) {
-      if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+      if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
     }
   }
 }

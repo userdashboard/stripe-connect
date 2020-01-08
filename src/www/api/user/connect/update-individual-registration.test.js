@@ -1794,7 +1794,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.dob.day, 1) 
+      assert.strictEqual(accountNow.individual.dob.day, 1)
     })
 
     it('required posted dob_month', async () => {
@@ -1829,7 +1829,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.dob.month, 2) 
+      assert.strictEqual(accountNow.individual.dob.month, 2)
     })
 
     it('required posted dob_year', async () => {
@@ -1864,7 +1864,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.dob.year, 1950) 
+      assert.strictEqual(accountNow.individual.dob.year, 1950)
     })
 
     it('required posted first_name', async () => {

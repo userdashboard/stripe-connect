@@ -1,4 +1,3 @@
-const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
@@ -17,7 +16,6 @@ module.exports = {
       try {
         await stripe.accounts.del(req.query.stripeid, req.stripeKey)
         await stripeCache.delete(req.query.stripeid)
-        req.success = true
         return true
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -26,7 +24,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

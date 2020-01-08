@@ -974,7 +974,7 @@ describe('/api/user/connect/update-company-registration', () => {
         tax_id: '00000000000'
       }
       const stripeAccountNow = await req.patch()
-      assert.strictEqual(registration.company.address.kana_city, 'ｼﾌﾞﾔ')
+      assert.strictEqual(stripeAccountNow.company.address.kana_city, 'ｼﾌﾞﾔ')
     })
 
     it('optionally-required posted address_kana_state', async () => {
@@ -1285,7 +1285,6 @@ describe('/api/user/connect/update-company-registration', () => {
         tax_id: '00000000000'
       }
       await req.post()
-      const account = await global.api.user.connect.StripeAccount.get(req)
       const req2 = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req2.waitOnSubmit = true
       req2.account = user.account

@@ -31,7 +31,6 @@ module.exports = {
     while (true) {
       try {
         stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        req.success = true
         await stripeCache.update(stripeAccount)
         return stripeAccount
       } catch (error) {
@@ -41,7 +40,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

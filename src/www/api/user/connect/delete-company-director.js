@@ -11,7 +11,7 @@ module.exports = {
       throw new Error('invalid-personid')
     }
     const director = await global.api.user.connect.CompanyDirector.get(req)
-    req.query.stripeid = director.stripeid
+    req.query.stripeid = director.account
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount || stripeAccount.business_type !== 'company') {
       throw new Error('invalid-personid')
@@ -37,7 +37,6 @@ module.exports = {
         const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
         await stripeCache.update(accountNow)
         await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
-        req.success = true
         return true
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -46,7 +45,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

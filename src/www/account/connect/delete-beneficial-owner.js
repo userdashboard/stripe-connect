@@ -11,7 +11,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-personid')
   }
   const owner = await global.api.user.connect.BeneficialOwner.get(req)
-  req.query.stripeid = owner.stripeid
+  req.query.stripeid = owner.account
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
@@ -20,14 +20,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  if (req.success) {
-    if (req.query && req.query['return-url']) {
-      return dashboard.Response.redirect(req, res, decodeURI(req.query['return-url']))
-    }
-    return dashboard.Response.redirect(req, res, `/account/connect/beneficial-owners?stripeid=${req.data.stripeAccount.id}`)
-  } else if (req.error) {
-    messageTemplate = req.error
-  }
+  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'owner')
 
   if (messageTemplate) {
@@ -43,11 +36,15 @@ async function renderPage (req, res, messageTemplate) {
 async function submitForm (req, res) {
   try {
     await global.api.user.connect.DeleteBeneficialOwner.delete(req)
-    if (req.success) {
-      return renderPage(req, res, 'success')
-    }
-    return renderPage(req, res, 'unknown-error')
   } catch (error) {
     return renderPage(req, res, error.message)
+  }
+  if (req.query['return-url']) {
+    return dashboard.Response.redirect(req, res, req.query['return-url'])
+  } else {
+    res.writeHead(302, {
+      location: `${req.urlPath}?personid=${req.query.personid}&message=success`
+    })
+    return res.end()
   }
 }

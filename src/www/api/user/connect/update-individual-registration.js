@@ -179,7 +179,7 @@ module.exports = {
           if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
             throw new Error('invalid-business_profile_url')
           }
-          if (field !== 'individual.verification.document' && 
+          if (field !== 'individual.verification.document' &&
               field !== 'individual.verification.additional_document') {
             throw new Error(`invalid-${posted}`)
           }
@@ -232,7 +232,7 @@ module.exports = {
         } else if (field.startsWith('individual.')) {
           const property = field.substring('individual.'.length)
           accountInfo.individual[property] = req.body[posted]
-        } 
+        }
       }
       for (const field of stripeAccount.requirements.eventually_due) {
         if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
@@ -240,7 +240,7 @@ module.exports = {
         }
         const posted = field.split('.').join('_').replace('individual_', '')
         if (!req.body[posted]) {
-          if (field !== 'individual.verification.document' && 
+          if (field !== 'individual.verification.document' &&
               field !== 'individual.verification.additional_document') {
             continue
           }
@@ -290,17 +290,16 @@ module.exports = {
         } else if (field.startsWith('individual.')) {
           const property = field.substring('individual.'.length)
           accountInfo.individual[property] = req.body[posted]
-        } 
+        }
       }
       if (req.body.address_line2) {
-        accountInfo.address = ownerInfo.address || {}
+        accountInfo.address = accountInfo.address || {}
         accountInfo.address.line2 = req.body.address_line2
       }
     }
     while (true) {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        req.success = true
         await stripeCache.update(accountNow)
         return accountNow
       } catch (error) {
@@ -313,7 +312,7 @@ module.exports = {
         if (error.message.startsWith('invalid-')) {
           throw error
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

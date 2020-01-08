@@ -8,7 +8,7 @@ module.exports = {
       throw new Error('invalid-stripeid')
     }
     if (stripeAccount.business_type !== 'company') {
-      throw new Error('invalid-stripe-account') 
+      throw new Error('invalid-stripe-account')
     }
     if (!stripeAccount.metadata.owners || stripeAccount.metadata.owners === '[]') {
       return 0

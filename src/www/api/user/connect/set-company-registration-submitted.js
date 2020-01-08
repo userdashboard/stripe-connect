@@ -45,7 +45,6 @@ module.exports = {
     while (true) {
       try {
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        req.success = true
         await stripeCache.update(stripeAccountNow)
         return stripeAccountNow
       } catch (error) {
@@ -81,7 +80,7 @@ module.exports = {
           field = field.substring(0, field.length - 1)
           throw new Error(`invalid-${field}`)
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

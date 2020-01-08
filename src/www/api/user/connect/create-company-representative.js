@@ -44,15 +44,15 @@ module.exports = {
       throw new Error('invalid-address_country')
     }
     if (requirements.currently_due.indexOf('address.country') > -1 ||
-        requirements.eventually_due.indexOf('address.country' ) > -1) {
+        requirements.eventually_due.indexOf('address.country') > -1) {
       if (!req.body.address_country) {
         throw new Error('invalid-address_country')
       }
-      if (requirements.currently_due.indexOf('address.state') > -1 || 
-          requirements.eventually_due.indexOf('address.state' ) > -1) {
+      if (requirements.currently_due.indexOf('address.state') > -1 ||
+          requirements.eventually_due.indexOf('address.state') > -1) {
         if (!req.body.address_state) {
           throw new Error('invalid-address_state')
-        }  
+        }
         const states = connect.countryDivisions[req.body.address_country]
         let found
         for (const state of states) {
@@ -182,7 +182,7 @@ module.exports = {
             representativeInfo.address_kana = representativeInfo.address_kana || {}
             representativeInfo.address_kana[property] = req.body[posted]
             continue
-        } else if (field.startsWith('address_kanji.')) {
+          } else if (field.startsWith('address_kanji.')) {
             const property = field.substring('address_kanji.'.length)
             representativeInfo.address_kanji = representativeInfo.address_kanji || {}
             representativeInfo.address_kanji[property] = req.body[posted]
@@ -230,15 +230,15 @@ module.exports = {
             representativeInfo.address[property] = req.body[posted]
             continue
           } else if (field.startsWith('address_kana.')) {
-              const property = field.substring('address_kana.'.length)
-              representativeInfo.address_kana = representativeInfo.address_kana || {}
-              representativeInfo.address_kana[property] = req.body[posted]
-              continue
+            const property = field.substring('address_kana.'.length)
+            representativeInfo.address_kana = representativeInfo.address_kana || {}
+            representativeInfo.address_kana[property] = req.body[posted]
+            continue
           } else if (field.startsWith('address_kanji.')) {
-              const property = field.substring('address_kanji.'.length)
-              representativeInfo.address_kanji = representativeInfo.address_kanji || {}
-              representativeInfo.address_kanji[property] = req.body[posted]
-              continue
+            const property = field.substring('address_kanji.'.length)
+            representativeInfo.address_kanji = representativeInfo.address_kanji || {}
+            representativeInfo.address_kanji[property] = req.body[posted]
+            continue
           } else if (field.startsWith('verification.document.')) {
             if (global.stripeJS) {
               continue
@@ -331,7 +331,7 @@ module.exports = {
         representativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
-    
+
     let representative
     while (true) {
       try {
@@ -349,7 +349,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
     const accountInfo = {
@@ -361,7 +361,6 @@ module.exports = {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(accountNow)
-        req.success = true
         return representative
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -370,7 +369,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

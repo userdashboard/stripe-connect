@@ -12,6 +12,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripeid')
   }
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+  stripeAccount.stripePublishableKey = global.stripePublishableKey
   if (!stripeAccount) {
     throw new Error('invalid-stripeid')
   }
@@ -23,16 +24,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  if (req.success) {
-    if (req.query && req.query['return-url']) {
-      return dashboard.Response.redirect(req, res, decodeURI(req.query['return-url']))
-    } else {
-      return dashboard.Response.redirect(req, res, `/account/connect/stripe-account?stripeid=${req.query.stripeid}`)
-    }
-  } else if (req.error) {
-    messageTemplate = req.error
-  }
-  req.data.stripeAccount.stripePublishableKey = global.stripePublishableKey
+  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   const removeElements = []
   if (global.stripeJS !== 3) {
@@ -144,16 +136,21 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_additional_document_back')
     }
   }
+  let person
   try {
-    await global.api.user.connect.CreateCompanyRepresentative.post(req)
-    if (req.success) {
-      return renderPage(req, res, 'success')
-    }
-    return renderPage(req, res, 'unknown-error')
+    person = await global.api.user.connect.CreateCompanyRepresentative.post(req)
   } catch (error) {
     if (error.message.startsWith('invalid-')) {
       return renderPage(req, res, error.message)
     }
     return renderPage(req, res, error.message)
+  }
+  if (req.query['return-url']) {
+    return dashboard.Response.redirect(req, res, req.query['return-url'])
+  } else {
+    res.writeHead(302, {
+      location: `/account/connect/company-representative?personid=${person.id}`
+    })
+    return res.end()
   }
 }

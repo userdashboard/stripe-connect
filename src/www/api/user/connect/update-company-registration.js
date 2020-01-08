@@ -161,7 +161,7 @@ module.exports = {
         }
       }
       if (req.body.address_line2) {
-        accountInfo.address = ownerInfo.address || {}
+        accountInfo.address = accountInfo.address || {}
         accountInfo.address.line2 = req.body.address_line2
       }
     }
@@ -200,10 +200,9 @@ module.exports = {
         throw new Error('invalid-address_state')
       }
     }
-    while(true) {
+    while (true) {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        req.success = true
         await stripeCache.update(accountNow)
         return accountNow
       } catch (error) {
@@ -216,7 +215,7 @@ module.exports = {
         if (error.message.startsWith('invalid-')) {
           throw error
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

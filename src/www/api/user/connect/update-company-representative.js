@@ -205,7 +205,7 @@ module.exports = {
           }
         }
         if (req.body.address_line2) {
-          companyRepresentativeInfo.address = ownerInfo.address || {}
+          companyRepresentativeInfo.address = companyRepresentativeInfo.address || {}
           companyRepresentativeInfo.address.line2 = req.body.address_line2
         }
       }
@@ -273,9 +273,8 @@ module.exports = {
       companyRepresentativeInfo.relationship_executive = true
     }
     while (true) {
-     try {
+      try {
         const companyRepresentativeNow = await stripe.accounts.updatePerson(person.account, person.id, companyRepresentativeInfo, req.stripeKey)
-        req.success = true
         await stripeCache.update(companyRepresentativeNow)
         return companyRepresentativeNow
       } catch (error) {
@@ -288,7 +287,7 @@ module.exports = {
         if (error.message.startsWith('invalid-')) {
           throw error
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

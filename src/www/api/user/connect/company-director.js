@@ -16,13 +16,13 @@ module.exports = {
       throw new Error('invalid-personid')
     }
     if (stripeAccount.business_type !== 'company') {
-      throw new Error('invalid-stripe-account') 
+      throw new Error('invalid-stripe-account')
     }
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
       throw new Error('invalid-personid')
     }
     const directors = JSON.parse(stripeAccount.metadata.directors)
-    if(directors.indexOf(req.query.personid) === -1) {
+    if (directors.indexOf(req.query.personid) === -1) {
       throw new Error('invalid-personid')
     }
     try {
@@ -35,7 +35,7 @@ module.exports = {
       }
       return person
     } catch (error) {
-      if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+      if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
     }
   }
 }

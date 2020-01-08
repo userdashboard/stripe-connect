@@ -15,7 +15,6 @@ module.exports = {
     while (true) {
       try {
         await stripe.accounts.del(req.query.stripeid, req.stripeKey)
-        req.success = true
         await stripeCache.delete(req.query.stripeid)
         return true
       } catch (error) {
@@ -25,7 +24,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

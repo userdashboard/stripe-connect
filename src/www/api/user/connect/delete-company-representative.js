@@ -31,7 +31,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
     while (true) {
@@ -42,7 +42,6 @@ module.exports = {
           }
         }, req.stripeKey)
         await stripeCache.update(stripeAccountNow)
-        req.success = true
         return stripeAccountNow
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -51,7 +50,7 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-        if (process.env.DEBUG_ERRORS) { console.log(error); } throw new Error('unknown-error')
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
   }

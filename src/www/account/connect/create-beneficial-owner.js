@@ -23,13 +23,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  if (req.success) {
-    if (req.query && req.query['return-url']) {
-      return dashboard.Response.redirect(req, res, decodeURI(req.query['return-url']))
-    } else {
-      return dashboard.Response.redirect(req, res, `/account/connect/stripe-account?stripeid=${req.query.stripeid}`)
-    }
-  }
+  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const removeElements = []
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   if (global.stripeJS !== 3) {
@@ -140,14 +134,18 @@ async function submitForm (req, res) {
       }
     }
   }
+  let person
   try {
-    const owner = await global.api.user.connect.CreateBeneficialOwner.post(req)
-    if (req.success) {
-      req.data = { owner }
-      return renderPage(req, res, 'success')
-    }
-    return renderPage(req, res, 'unknown-error')
+    person = await global.api.user.connect.CreateBeneficialOwner.post(req)
   } catch (error) {
     return renderPage(req, res, error.message)
+  }
+  if (req.query['return-url']) {
+    return dashboard.Response.redirect(req, res, req.query['return-url'])
+  } else {
+    res.writeHead(302, {
+      location: `/account/connect/beneficial-owner?personid=${person.id}`
+    })
+    return res.end()
   }
 }

@@ -10,7 +10,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-personid')
   }
   const director = await global.api.user.connect.CompanyDirector.get(req)
-  req.query.stripeid = director.stripeid
+  req.query.stripeid = director.account
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted) {
     throw new Error('invalid-stripe-account')
@@ -19,6 +19,6 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res) {
-  const doc = dashboard.HTML.parse(req.route.html, req.data.director, 'director')
+  const doc = dashboard.HTML.parse(req.route.html, req.data.director, 'person')
   return dashboard.Response.end(req, res, doc)
 }

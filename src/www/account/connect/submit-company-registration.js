@@ -39,13 +39,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  if (req.success) {
-    if (req.query && req.query['return-url']) {
-      return dashboard.Response.redirect(req, res, decodeURI(req.query['return-url']))
-    }
-  } else if (req.error) {
-    messageTemplate = req.error
-  }
+  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
@@ -55,13 +49,13 @@ async function renderPage (req, res, messageTemplate) {
       submitForm.parentNode.removeChild(submitForm)
     }
   }
-  if (!req.success && req.data.owners && req.data.owners.length) {
+  if (messageTemplate !== 'success' && req.data.owners && req.data.owners.length) {
     dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
   } else {
     const ownersContainer = doc.getElementById('owners-container')
     ownersContainer.parentNode.removeChild(ownersContainer)
   }
-  if (!req.success && req.data.directors && req.data.directors.length) {
+  if (messageTemplate !== 'success' && req.data.directors && req.data.directors.length) {
     dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
   } else {
     const directorsContainer = doc.getElementById('directors-container')
@@ -76,11 +70,15 @@ async function submitForm (req, res) {
   }
   try {
     await global.api.user.connect.SetCompanyRegistrationSubmitted.patch(req)
-    if (req.success) {
-      return renderPage(req, res, 'success')
-    }
-    return renderPage(req, res, 'unknown-error')
   } catch (error) {
     return renderPage(req, res, error.message)
+  }
+  if (req.query['return-url']) {
+    return dashboard.Response.redirect(req, res, req.query['return-url'])
+  } else {
+    res.writeHead(302, {
+      location: `${req.urlPath}?message=success`
+    })
+    return res.end()
   }
 }

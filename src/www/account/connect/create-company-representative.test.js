@@ -74,7 +74,7 @@ describe('/account/connect/create-company-representative', () => {
           req.body.first_name = user.profile.firstName
           req.body.last_name = user.profile.lastName
         }
-        let uploads = {
+        const uploads = {
           verification_document_front: TestHelper['success_id_scan_back.png'],
           verification_document_back: TestHelper['success_id_scan_back.png']
         }

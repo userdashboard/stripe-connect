@@ -69,7 +69,7 @@ describe('/account/connect/edit-company-registration', () => {
         req.account = user.account
         req.session = user.session
         req.body = postData[country.id]
-        let uploads = {
+        const uploads = {
           verification_document_front: TestHelper['success_id_scan_back.png'],
           verification_document_back: TestHelper['success_id_scan_back.png']
         }

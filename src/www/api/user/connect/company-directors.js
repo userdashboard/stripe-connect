@@ -1,5 +1,3 @@
-const stripeCache = require('../../../../stripe-cache.js')
-
 module.exports = {
   get: async (req) => {
     if (!req.query || !req.query.stripeid) {
@@ -10,7 +8,7 @@ module.exports = {
       throw new Error('invalid-personid')
     }
     if (stripeAccount.business_type !== 'company') {
-      throw new Error('invalid-stripe-account') 
+      throw new Error('invalid-stripe-account')
     }
     if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
       return null

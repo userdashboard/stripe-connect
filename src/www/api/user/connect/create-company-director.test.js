@@ -479,7 +479,7 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_title: 'Director'
       })
       const director = await req.post()
-      assert.strictEqual(director.dob.day, 1) 
+      assert.strictEqual(director.dob.day, 1)
     })
 
     it('required posted dob_month', async () => {
@@ -506,7 +506,7 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_title: 'Director'
       })
       const director = await req.post()
-      assert.strictEqual(director.dob.month, 2) 
+      assert.strictEqual(director.dob.month, 2)
     })
 
     it('required posted dob_year', async () => {
@@ -533,7 +533,7 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_title: 'Director'
       })
       const director = await req.post()
-      assert.strictEqual(director.dob.year, 1950) 
+      assert.strictEqual(director.dob.year, 1950)
     })
 
     it('required posted file verification_document_front', async () => {

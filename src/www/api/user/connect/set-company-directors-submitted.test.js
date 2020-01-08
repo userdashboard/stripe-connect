@@ -859,8 +859,8 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
         first_name: person.firstName,
         last_name: person.lastName
       }
-      req2.filename = __filename
-      req2.saveResponse = true
+      req.filename = __filename
+      req.saveResponse = true
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

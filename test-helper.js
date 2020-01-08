@@ -101,7 +101,7 @@ module.exports = {
   }
 }
 
-let TestHelper, tunnel, connect
+let TestHelper, tunnel
 before(async () => {
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
@@ -180,7 +180,7 @@ before(async () => {
     const connect = require('./index.js')
     for (const countrySpec of connect.countrySpecs) {
       if (countrySpec.id !== process.env.GENERATE_COUNTRY) {
-        connect.countrySpecs  = connect.countrySpecs.splice(connect.countrySpecs.indexOf(countrySpec), 1)
+        connect.countrySpecs = connect.countrySpecs.splice(connect.countrySpecs.indexOf(countrySpec), 1)
       }
     }
   }
@@ -495,12 +495,12 @@ async function waitForVerificationFailure (user, callback) {
     }
     const stripeAccount = await req.get(req)
     if (stripeAccount.business_type === 'individual') {
-      if (stripeAccount.requirements && stripeAccount.requirements.pending_verification.length ||
+      if ((stripeAccount.requirements && stripeAccount.requirements.pending_verification.length) ||
           (stripeAccount.individual && stripeAccount.individual.verification.status !== 'unverified')) {
         return setTimeout(wait, 100)
       }
     } else {
-      if (stripeAccount.requirements && stripeAccount.requirements.pending_verification.length ||
+      if ((stripeAccount.requirements && stripeAccount.requirements.pending_verification.length) ||
         (stripeAccount.company && stripeAccount.company.verification.status !== 'unverified')) {
         return setTimeout(wait, 100)
       }
@@ -515,7 +515,7 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
   req.account = user.account
   req.session = user.session
   let attempts = 0
-  async function wait () { 
+  async function wait () {
     if (global.testEnded) {
       return
     }
