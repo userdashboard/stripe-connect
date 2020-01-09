@@ -135,7 +135,6 @@ describe('/account/connect/submit-company-registration', () => {
         currency: 'usd',
         routing_number: '110000000'
       })
-      await TestHelper.submitCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

@@ -331,7 +331,11 @@ module.exports = {
         representativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
-
+    if (existingRepresentative && existingRepresentative.metadata.template) {
+      representativeInfo.metadata = {
+        template: null
+      }
+    }
     let representative
     while (true) {
       try {

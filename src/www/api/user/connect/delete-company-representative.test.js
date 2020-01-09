@@ -124,7 +124,6 @@ describe('/api/user/connect/delete-company-representative', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.submitCompanyRepresentative(user)
       const req = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -169,16 +168,12 @@ describe('/api/user/connect/delete-company-representative', () => {
         ssn_last_4: '0000'
       }
       await req2.post()
-      const req3 = TestHelper.createRequest(`/account/connect/submit-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req3 = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
       req3.account = user.account
       req3.session = user.session
-      await req3.post()
-      const req4 = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
-      req4.account = user.account
-      req4.session = user.session
-      req4.filename = __filename
-      req4.saveResponse = true
-      const accountNow = await req4.delete()
+      req3.filename = __filename
+      req3.saveResponse = true
+      const accountNow = await req3.delete()
       assert.strictEqual(accountNow.requirements.currently_due.indexOf('relationship.representative') > -1, true)
     })
   })

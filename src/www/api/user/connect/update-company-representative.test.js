@@ -100,7 +100,6 @@ describe('/api/user/connect/update-company-representative', () => {
           routing_number: '110000000'
         })
         await TestHelper.submitBeneficialOwners(user)
-        await TestHelper.submitCompanyRepresentative(user)
         await TestHelper.submitStripeAccount(user)
         const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account

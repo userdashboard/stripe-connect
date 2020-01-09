@@ -161,60 +161,54 @@ module.exports = {
       companyRepresentativeInfo.person_token = req.body.token
     } else {
       for (const field of person.requirements.currently_due) {
-        if (field === 'relationship.account_opener.address.line2' ||
-            field === 'relationship.account_opener.relationship.title' ||
-            field === 'relationship.account_opener.relationship.executive' ||
-            field === 'relationship.account_opener.relationship.director' ||
-            field === 'relationship.account_opener.relationship.owner') {
+        if (field === 'address.line2' ||
+            field === 'relationship.title' ||
+            field === 'relationship.executive' ||
+            field === 'relationship.director' ||
+            field === 'relationship.owner') {
           continue
         }
         const posted = field.split('.').join('_')
         if (!req.body[posted]) {
-          if (field !== 'relationship.account_opener.verification.document' &&
-              field !== 'relationship.account_opener.verification.additional_document') {
+          if (field !== 'verification.document' &&
+              field !== 'verification.additional_document') {
             throw new Error(`invalid-${posted}`)
           }
         }
-        for (const field of person.requirements.currently_due) {
-          if (field.startsWith('business_profile.')) {
-            const property = field.substring('business_profile.'.length)
-            companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
-            companyRepresentativeInfo.business_profile[property] = req.body[posted]
-            delete (req.body[posted])
-          } else if (field.startsWith('address_kanji.')) {
-            const property = field.substring('address_kanji.'.length)
-            companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
-            companyRepresentativeInfo.address_kanji[property] = req.body[posted]
-          } else if (field.startsWith('address_kana.')) {
-            const property = field.substring('address_kana.'.length)
-            companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
-            companyRepresentativeInfo.address_kana[property] = req.body[posted]
-          } else if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            companyRepresentativeInfo.address[property] = req.body[posted]
-          } else if (field.startsWith('verification.document.')) {
-            const property = field.substring('verification.document.'.length)
-            companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-            companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
-            companyRepresentativeInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            const property = field.substring('verification.additional_document.'.length)
-            companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-            companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
-            companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
-          }
-        }
-        if (req.body.address_line2) {
-          companyRepresentativeInfo.address = companyRepresentativeInfo.address || {}
-          companyRepresentativeInfo.address.line2 = req.body.address_line2
+        if (field.startsWith('business_profile.')) {
+          const property = field.substring('business_profile.'.length)
+          companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
+          companyRepresentativeInfo.business_profile[property] = req.body[posted]
+          delete (req.body[posted])
+        } else if (field.startsWith('address_kanji.')) {
+          const property = field.substring('address_kanji.'.length)
+          companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
+          companyRepresentativeInfo.address_kanji[property] = req.body[posted]
+        } else if (field.startsWith('address_kana.')) {
+          const property = field.substring('address_kana.'.length)
+          companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
+          companyRepresentativeInfo.address_kana[property] = req.body[posted]
+        } else if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          companyRepresentativeInfo.address[property] = req.body[posted]
+        } else if (field.startsWith('verification.document.')) {
+          const property = field.substring('verification.document.'.length)
+          companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+          companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
+          companyRepresentativeInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          const property = field.substring('verification.additional_document.'.length)
+          companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+          companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
+          companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
         }
       }
       for (const field of person.requirements.eventually_due) {
-        if (field === 'relationship.account_opener.address.line2' ||
-            field === 'relationship.account_opener.relationship.title' ||
-            field === 'relationship.account_opener.relationship.executive' ||
-            field === 'relationship.account_opener.relationship.director' ||
-            field === 'relationship.account_opener.relationship.owner') {
+        if (field === 'address.line2' ||
+            field === 'relationship.title' ||
+            field === 'relationship.executive' ||
+            field === 'relationship.director' ||
+            field === 'relationship.owner') {
           continue
         }
         if (person.requirements.currently_due.indexOf(field) > -1) {
@@ -254,23 +248,47 @@ module.exports = {
           }
         }
       }
-    }
-    if (req.body.percent_ownership) {
-      try {
-        const percent = parseFloat(req.body.percent_ownership, 10)
-        if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+      if (req.body.address_line2) {
+        companyRepresentativeInfo.address = companyRepresentativeInfo.address || {}
+        companyRepresentativeInfo.address.line2 = req.body.address_line2
+      }
+      if (req.body.verification_document_back && person.requirements.eventually_due.indexOf('verification.document') > -1) {
+        companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+        companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
+        companyRepresentativeInfo.verification.document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_document_front && person.requirements.eventually_due.indexOf('verification.document') > -1) {
+        companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+        companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
+        companyRepresentativeInfo.verification.document.deonr = req.body.verification_document_front
+      }
+      if (req.body.verification_additional_document_back && person.requirements.eventually_due.indexOf('verification.additional_document') > -1) {
+        companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+        companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
+        companyRepresentativeInfo.verification.additional_document.back = req.body.verification_additional_document_back
+      }
+      if (req.body.verification_additional_document_front && person.requirements.eventually_due.indexOf('verification.additional_document') > -1) {
+        companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+        companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
+        companyRepresentativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
+      }
+      if (req.body.percent_ownership) {
+        try {
+          const percent = parseFloat(req.body.percent_ownership, 10)
+          if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+            throw new Error('invalid-relationship_percent_ownership')
+          }
+        } catch (s) {
           throw new Error('invalid-relationship_percent_ownership')
         }
-      } catch (s) {
-        throw new Error('invalid-relationship_percent_ownership')
+        companyRepresentativeInfo.percent_ownership = req.body.percent_ownership
       }
-      companyRepresentativeInfo.percent_ownership = req.body.percent_ownership
-    }
-    if (req.body.relationship_title) {
-      companyRepresentativeInfo.relationship_title = req.body.relationship_title
-    }
-    if (req.body.relationship_executive) {
-      companyRepresentativeInfo.relationship_executive = true
+      if (req.body.relationship_title) {
+        companyRepresentativeInfo.relationship_title = req.body.relationship_title
+      }
+      if (req.body.relationship_executive) {
+        companyRepresentativeInfo.relationship_executive = true
+      }
     }
     while (true) {
       try {

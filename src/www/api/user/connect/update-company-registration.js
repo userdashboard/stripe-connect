@@ -98,18 +98,6 @@ module.exports = {
           accountInfo.company = accountInfo.company || {}
           accountInfo.company.address = accountInfo.company.address || {}
           accountInfo.company.address[property] = req.body[posted]
-        } else if (posted === 'verification_document') {
-          accountInfo.company = accountInfo.company || {}
-          accountInfo.company.verification = accountInfo.company.verification || {}
-          accountInfo.company.verification.document = accountInfo.company.verification.document || {}
-          const front = `${posted}_front`
-          const back = `${posted}_back`
-          if (req.body[front]) {
-            accountInfo.company.verification.document.front = req.body[front]
-          }
-          if (req.body[back]) {
-            accountInfo.company.verification.document.back = req.body[back]
-          }
         } else {
           const property = field.substring('company.'.length)
           accountInfo.company = accountInfo.company || {}
@@ -142,18 +130,6 @@ module.exports = {
           accountInfo.company = accountInfo.company || {}
           accountInfo.company.address = accountInfo.company.address || {}
           accountInfo.company.address[property] = req.body[posted]
-        } else if (posted === 'verification_document') {
-          accountInfo.company = accountInfo.company || {}
-          accountInfo.company.verification = accountInfo.company.verification || {}
-          accountInfo.company.verification.document = accountInfo.company.verification.document || {}
-          const front = `${posted}_front`
-          const back = `${posted}_back`
-          if (req.body[front]) {
-            accountInfo.company.verification.document.front = req.body[front]
-          }
-          if (req.body[back]) {
-            accountInfo.company.verification.document.back = req.body[back]
-          }
         } else {
           const property = field.substring('company.'.length)
           accountInfo.company = accountInfo.company || {}
@@ -164,40 +140,56 @@ module.exports = {
         accountInfo.address = accountInfo.address || {}
         accountInfo.address.line2 = req.body.address_line2
       }
-    }
-    if (req.body.business_profile_mcc) {
-      const mccList = connect.getMerchantCategoryCodes(req.language)
-      let found = false
-      for (const mcc of mccList) {
-        found = mcc.code === req.body.business_profile_mcc
-        if (found) {
-          break
+      if (req.body.business_profile_mcc) {
+        const mccList = connect.getMerchantCategoryCodes(req.language)
+        let found = false
+        for (const mcc of mccList) {
+          found = mcc.code === req.body.business_profile_mcc
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-business_profile_mcc')
         }
       }
-      if (!found) {
-        throw new Error('invalid-business_profile_mcc')
-      }
-    }
-    if (req.body.business_profile_url) {
-      if (!req.body.business_profile_url.startsWith('http://') &&
-          !req.body.business_profile_url.startsWith('https://')) {
-        throw new Error('invalid-business_profile_url')
-      }
-    }
-    if (req.body.address_state) {
-      const states = connect.countryDivisions[stripeAccount.country]
-      if (!states || !states.length) {
-        throw new Error('invalid-address_state')
-      }
-      let found = false
-      for (const state of states) {
-        found = state.value === req.body.address_state
-        if (found) {
-          break
+      if (req.body.business_profile_url) {
+        if (!req.body.business_profile_url.startsWith('http://') &&
+            !req.body.business_profile_url.startsWith('https://')) {
+          throw new Error('invalid-business_profile_url')
         }
       }
-      if (!found) {
-        throw new Error('invalid-address_state')
+      if (req.body.address_state) {
+        const states = connect.countryDivisions[stripeAccount.country]
+        if (!states || !states.length) {
+          throw new Error('invalid-address_state')
+        }
+        let found = false
+        for (const state of states) {
+          found = state.value === req.body.address_state
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-address_state')
+        }
+      }
+      if (req.body.address_line2) {
+        accountInfo.address = accountInfo.address || {}
+        accountInfo.address.line2 = req.body.address_line2
+      }
+      if (req.body.verification_document_back && stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) {
+        accountInfo.verification = accountInfo.verification || {}
+        accountInfo.verification.company = accountInfo.verification.company || {}
+        accountInfo.verification.company.document = accountInfo.verification.company.document || {}
+        accountInfo.verification.company.document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_document_front && stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) {
+        accountInfo.verification = accountInfo.verification || {}
+        accountInfo.verification.company = accountInfo.verification.company || {}
+        accountInfo.verification.company.document = accountInfo.company.verification.document || {}
+        accountInfo.verification.company.document.front = req.body.verification_document_front
       }
     }
     while (true) {

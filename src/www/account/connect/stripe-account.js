@@ -79,7 +79,7 @@ async function renderPage (req, res) {
       removeElements.push('business-name')
     }
     if (req.data.stripeAccount.metadata.representative) {
-      removeElements.push('edit-company-representative-link', 'submit-company-representative-link')
+      removeElements.push('edit-company-representative-link')
     } else {
       removeElements.push('remove-company-representative-link')
     }

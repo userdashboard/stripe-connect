@@ -30,7 +30,12 @@ module.exports = {
       throw new Error('invalid-representative')
     }
     if (stripeAccount.requirements.currently_due.length) {
-      throw new Error('invalid-registration')
+      for (const field of stripeAccount.requirements.currently_due) {
+        if (field !== 'tos_acceptance.date' &&
+            field !== 'tos_acceptance.ip') {
+          throw new Error('invalid-registration')
+        }
+      }
     }
     const accountInfo = {
       metadata: {

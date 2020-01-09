@@ -34,6 +34,9 @@ describe('/account/connect/create-beneficial-owner', () => {
         name: user.profile.firstName + '\'s company',
         phone: '456-789-013',
         tax_id: '00000000'
+      }, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createCompanyRepresentative(user, {
         address_city: 'Berlin',
@@ -51,11 +54,14 @@ describe('/account/connect/create-beneficial-owner', () => {
         relationship_executive: 'true',
         relationship_title: 'Owner'
       }, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
+      await TestHelper.updateCompanyRepresentative(user, {}, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
+      })
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'person_')
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
         account_holder_type: 'individual',
@@ -63,10 +69,12 @@ describe('/account/connect/create-beneficial-owner', () => {
         currency: 'eur',
         iban: 'DE89370400440532013000'
       })
-      await TestHelper.submitCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
       await TestHelper.submitStripeAccount(user)
+      await TestHelper.waitForVerification(user)
       const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

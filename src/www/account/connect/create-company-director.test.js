@@ -51,10 +51,12 @@ describe('/account/connect/create-company-director', () => {
         relationship_executive: 'true',
         relationship_title: 'Owner'
       }, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
+      })
+      await TestHelper.updateCompanyRepresentative(user, {}, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.createExternalAccount(user, {
         account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
@@ -63,7 +65,6 @@ describe('/account/connect/create-company-director', () => {
         currency: 'eur',
         iban: 'DE89370400440532013000'
       })
-      await TestHelper.submitCompanyRepresentative(user)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)
@@ -117,7 +118,7 @@ describe('/account/connect/create-company-director', () => {
   })
 
   describe('CreateCompanyDirector#POST', () => {
-    it.only('should require each field', async () => {
+    it('should require each field', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
