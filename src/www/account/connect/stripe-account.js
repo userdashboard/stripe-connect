@@ -49,7 +49,9 @@ async function beforeRequest (req) {
   stripeAccount.individual = stripeAccount.individual || {}
   const owners = await global.api.user.connect.BeneficialOwners.get(req)
   const directors = await global.api.user.connect.CompanyDirectors.get(req)
-  req.data = { owners, directors, stripeAccount, registrationComplete }
+  req.query.personid = stripeAccount.metadata.representative
+  const representative = await global.api.user.connect.CompanyRepresentative.get(req)
+  req.data = { owners, directors, representative, stripeAccount, registrationComplete }
 }
 
 async function renderPage (req, res) {
@@ -65,14 +67,14 @@ async function renderPage (req, res) {
     removeElements.push('submitted')
   }
   if (req.data.stripeAccount.business_type === 'individual') {
-    removeElements.push('business-name')
+    removeElements.push('business', 'business-name')
     if (req.data.stripeAccount.individual.first_name) {
       removeElements.push('blank-name')
     } else {
       removeElements.push('individual-name')
     }
   } else {
-    removeElements.push('individual-name')
+    removeElements.push('individual', 'individual-name')
     if (req.data.stripeAccount.company.name) {
       removeElements.push('blank-name')
     } else {
@@ -120,19 +122,30 @@ async function renderPage (req, res) {
     dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
   } else {
     if (req.data.stripeAccount.metadata.submitted ||
-        req.data.stripeAccount.business_type === 'individual') {
+        req.data.stripeAccount.company.owners_provided ||
+        req.data.stripeAccount.business_type === 'individual' ||
+        req.data.stripeAccount.requirements.currently_due.indexOf('relationship.owner') === -1) {
       removeElements.push('owners-container')
     } else {
       removeElements.push('owners-table')
     }
   }
-  if (!req.data.stripeAccount.metadata.submitted && req.data.directors && req.data.directors.length) {
+  if (req.data.representative) {
+    dashboard.HTML.renderTable(doc, [req.data.representative], 'representative-row', 'representatives-table')
+  } else {
+    removeElements.push('representatives-table')
+  }
+  if (!req.data.stripeAccount.metadata.submitted && 
+      !req.data.stripeAccount.company.directors_provided && 
+      req.data.directors && 
+      req.data.directors.length) {
     dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
   } else {
     if (req.data.stripeAccount.metadata.submitted ||
+        req.data.stripeAccount.company.directors_provided ||
         req.data.stripeAccount.business_type === 'individual' ||
-        !euCountries[req.data.stripeAccount.country]) {
-      removeElements.push('directors-container')
+        req.data.stripeAccount.requirements.currently_due.indexOf('relationship.director') === -1) {
+      removeElements.push('directors-table')
     } else {
       removeElements.push('directors-table')
     }

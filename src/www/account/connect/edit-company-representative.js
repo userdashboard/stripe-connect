@@ -101,6 +101,9 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
+  if (req.query && req.query.message === 'success') {
+    return renderPage(req, res)
+  }
   const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
   for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')

@@ -36,8 +36,9 @@ describe('/account/connect/create-registration', () => {
         { fill: '#submit-form' }
       ]
       const doc = TestHelper.extractDoc(page)
-      const redirectURL = TestHelper.extractRedirectURL(doc)
-      assert.strictEqual(true, redirectURL.startsWith('/account/connect/stripe-account?'))
+      const accountsTable = doc.getElementById('stripe-accounts-table')
+      assert.notStrictEqual(accountsTable, undefined)
+      assert.notStrictEqual(accountsTable, null)
     })
   })
 })

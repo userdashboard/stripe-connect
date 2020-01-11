@@ -13,7 +13,7 @@ async function beforeRequest (req) {
   const director = await global.api.user.connect.CompanyDirector.get(req)
   req.query.stripeid = director.account
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-  if (stripeAccount.metadata.submitted) {
+  if (stripeAccount.company && stripeAccount.company.owners_provided) {
     throw new Error('invalid-stripe-account')
   }
   req.data = { director, stripeAccount }
@@ -21,7 +21,7 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  const doc = dashboard.HTML.parse(req.route.html, req.data.director, 'director')
+  const doc = dashboard.HTML.parse(req.route.html, req.data.director, 'person')
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {

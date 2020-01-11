@@ -24,7 +24,7 @@ async function beforeRequest (req) {
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const removeElements = []
-  const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'owner')
+  const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'person')
   if (global.stripeJS !== 3) {
     removeElements.push('stripe-v3', 'client-v3', 'connect-v3', 'handler-v3')
   } else {
@@ -115,6 +115,9 @@ async function renderPage (req, res, messageTemplate) {
 
 async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
+    return renderPage(req, res)
+  }
+  if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
   if (global.stripeJS === 3 && !req.body.token) {

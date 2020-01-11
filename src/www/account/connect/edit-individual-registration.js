@@ -111,6 +111,9 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
+  if (req.query && req.query.message === 'success') {
+    return renderPage(req, res)
+  }
   for (const field of req.data.stripeAccount.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {

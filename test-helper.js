@@ -4,6 +4,13 @@ global.stripeAPIVersion = '2019-08-14'
 global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
+const connect = require('./index.js')
+if (process.env.GENERATE_COUNTRY) {
+  connect.countrySpecs = [
+    connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
+  ]
+  console.log('countries', connect.countrySpecs.length)
+}
 const fs = require('fs')
 let ngrok
 if (process.env.NGROK) {
@@ -71,7 +78,9 @@ module.exports = {
   submitCompanyDirectors,
   submitStripeAccount,
   triggerVerification,
+  updateStripeRegistration,
   updateCompanyRepresentative,
+  waitForAccountRequirement: util.promisify(waitForAccountRequirement),
   waitForWebhook,
   waitForVerification: util.promisify(waitForVerification),
   waitForPayoutsEnabled: util.promisify(waitForPayoutsEnabled),
@@ -177,14 +186,6 @@ before(async () => {
     enabled_events: eventList
   }, stripeKey)
   global.connectWebhookEndPointSecret = webhook.secret
-  if (process.env.GENERATE_COUNTRY) {
-    const connect = require('./index.js')
-    for (const countrySpec of connect.countrySpecs) {
-      if (countrySpec.id !== process.env.GENERATE_COUNTRY) {
-        connect.countrySpecs = connect.countrySpecs.splice(connect.countrySpecs.indexOf(countrySpec), 1)
-      }
-    }
-  }
 })
 
 after(async () => {
@@ -243,9 +244,22 @@ async function createStripeRegistration (user, properties, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id
-  })
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === user.stripeAccount.id
+  // })
+  return user.stripeAccount
+}
+
+async function updateStripeRegistration (user, properties, uploads) {
+  const req = TestHelper.createRequest(`/api/user/connect/update-${user.stripeAccount.business_type}-registration?stripeid=${user.stripeAccount.id}`)
+  req.session = user.session
+  req.account = user.account
+  req.uploads = uploads
+  req.body = createMultiPart(req, properties)
+  user.stripeAccount = await req.patch()
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === user.stripeAccount.id
+  // })
   return user.stripeAccount
 }
 
@@ -256,12 +270,12 @@ async function createCompanyRepresentative (user, properties, uploads) {
   req.uploads = uploads || {}
   req.body = createMultiPart(req, properties)
   const representative = await req.post()
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.metadata.representative !== undefined
-  })
-  await waitForWebhook('person.created', (stripeEvent) => {
-    return stripeEvent.data.object.id === representative.id
-  })
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.metadata.representative !== undefined
+  // })
+  // await waitForWebhook('person.created', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === representative.id
+  // })
   user.representative = representative
   return user.stripeAccount
 }
@@ -273,12 +287,12 @@ async function updateCompanyRepresentative (user, properties, uploads) {
   req.uploads = uploads || {}
   req.body = createMultiPart(req, properties)
   const representative = await req.patch()
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.metadata.representative !== undefined
-  })
-  await waitForWebhook('person.created', (stripeEvent) => {
-    return stripeEvent.data.object.id === representative.id
-  })
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.metadata.representative !== undefined
+  // })
+  // await waitForWebhook('person.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === representative.id
+  // })
   user.representative = representative
   return user.stripeAccount
 }
@@ -316,10 +330,10 @@ async function createExternalAccount (user, body) {
   req.account = user.account
   req.body = body
   user.stripeAccount = await req.patch()
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.external_accounts.data.length
-  })
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
+  //          stripeEvent.data.object.external_accounts.data.length
+  // })
   return user.stripeAccount.external_accounts.data[0]
 }
 
@@ -330,16 +344,16 @@ async function createBeneficialOwner (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   const owner = await req.post()
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    const owners = JSON.parse(stripeEvent.data.object.metadata.owners || '[]')
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           owners &&
-           owners.length &&
-           owners.indexOf(owner.id) > -1
-  })
-  await waitForWebhook('person.created', (stripeEvent) => {
-    return stripeEvent.data.object.id === owner.id
-  })
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   const owners = JSON.parse(stripeEvent.data.object.metadata.owners || '[]')
+  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
+  //          owners &&
+  //          owners.length &&
+  //          owners.indexOf(owner.id) > -1
+  // })
+  // await waitForWebhook('person.created', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === owner.id
+  // })
   user.owner = owner
   return owner
 }
@@ -351,16 +365,16 @@ async function createCompanyDirector (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   const director = await req.post()
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    const directors = JSON.parse(stripeEvent.data.object.metadata.directors || '[]')
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           directors &&
-           directors.length &&
-           directors.indexOf(director.id) > -1
-  })
-  await waitForWebhook('person.created', (stripeEvent) => {
-    return stripeEvent.data.object.id === director.id
-  })
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   const directors = JSON.parse(stripeEvent.data.object.metadata.directors || '[]')
+  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
+  //          directors &&
+  //          directors.length &&
+  //          directors.indexOf(director.id) > -1
+  // })
+  // await waitForWebhook('person.created', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === director.id
+  // })
   user.director = director
   return director
 }
@@ -395,11 +409,11 @@ async function submitBeneficialOwners (user) {
   req.account = user.account
   const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.company.owners_provided === true
-  })
-  await wait()
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
+  //          stripeEvent.data.object.company.owners_provided === true
+  // })
+  // await wait()
   return stripeAccount
 }
 
@@ -409,11 +423,11 @@ async function submitCompanyDirectors (user) {
   req.account = user.account
   const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.company.directors_provided === true
-  })
-  await wait()
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
+  //          stripeEvent.data.object.company.directors_provided === true
+  // })
+  // await wait()
   return user.stripeAccount
 }
 
@@ -423,10 +437,10 @@ async function submitStripeAccount (user) {
   req.account = user.account
   const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.metadata.submitted
-  })
+  // await waitForWebhook('account.updated', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
+  //          stripeEvent.data.object.metadata.submitted
+  // })
   return stripeAccount
 }
 
@@ -619,6 +633,35 @@ async function waitForVerificationStart (user, callback) {
   }
   return setTimeout(wait, 100)
 }
+
+async function waitForAccountRequirement (user, field, callback) {
+  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req.account = user.account
+  req.session = user.session
+  let attempts = 0
+  async function wait () {
+    if (global.testEnded) {
+      return
+    }
+    attempts++
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (attempts === 400) {
+      return callback()
+    }
+    if (!stripeAccount.requirements) {
+      return setTimeout(wait, 100)
+    }
+    if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
+      return setTimeout(callback, 10)
+    }
+    if (stripeAccount.requirements.eventually_due.indexOf(field) > -1) {
+      return setTimeout(callback, 10)
+    }
+    return setTimeout(wait, 100)
+  }
+  return setTimeout(wait, 100)
+}
+
 
 async function triggerVerification (user) {
   const accountKey = {

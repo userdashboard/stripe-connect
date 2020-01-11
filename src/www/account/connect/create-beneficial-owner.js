@@ -13,6 +13,7 @@ async function beforeRequest (req) {
   }
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted ||
+    (stripeAccount.company && stripeAccount.company.owners_provided) ||
     stripeAccount.business_type === 'individual' ||
     stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
@@ -92,6 +93,9 @@ async function renderPage (req, res, messageTemplate) {
 
 async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
+    return renderPage(req, res)
+  }
+  if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
   if (global.stripeJS === 3 && !req.body.token) {

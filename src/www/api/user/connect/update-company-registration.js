@@ -179,17 +179,21 @@ module.exports = {
         accountInfo.address = accountInfo.address || {}
         accountInfo.address.line2 = req.body.address_line2
       }
-      if (req.body.verification_document_back && stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) {
-        accountInfo.verification = accountInfo.verification || {}
-        accountInfo.verification.company = accountInfo.verification.company || {}
-        accountInfo.verification.company.document = accountInfo.verification.company.document || {}
-        accountInfo.verification.company.document.back = req.body.verification_document_back
+      if (req.body.verification_document_back && 
+          stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1 ||
+          !stripeAccount.company.verification.document.back) {
+        accountInfo.company = accountInfo.company || {}
+        accountInfo.company.verification = accountInfo.company.verification || {}
+        accountInfo.company.verification.document = accountInfo.company.verification.document || {}
+        accountInfo.company.verification.document.back = req.body.verification_document_back
       }
-      if (req.body.verification_document_front && stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) {
-        accountInfo.verification = accountInfo.verification || {}
-        accountInfo.verification.company = accountInfo.verification.company || {}
-        accountInfo.verification.company.document = accountInfo.company.verification.document || {}
-        accountInfo.verification.company.document.front = req.body.verification_document_front
+      if (req.body.verification_document_front && 
+        stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1 ||
+        !stripeAccount.company.verification.document.front) {
+        accountInfo.company = accountInfo.company || {}
+        accountInfo.company.verification = accountInfo.company.verification || {}
+        accountInfo.company.verification.document = accountInfo.company.verification.document || {}
+        accountInfo.company.verification.document.front = req.body.verification_document_front
       }
     }
     while (true) {

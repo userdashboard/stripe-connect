@@ -12,10 +12,22 @@ module.exports = {
     if (string) {
       return JSON.parse(string)
     }
-    const object = await stripe[group].retrieve(id, stripeKey)
-    const cached = JSON.stringify(object)
-    await dashboard.Storage.write(`stripe/${id}`, cached)
-    return object
+    while (true) {
+      try {
+        const object = await stripe[group].retrieve(id, stripeKey)
+        const cached = JSON.stringify(object)
+        await dashboard.Storage.write(`stripe/${id}`, cached)
+        return object
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+        throw error
+      }  
+    }
   },
   retrievePerson: async (stripeid, personid, stripeKey) => {
     if (global.testEnded) {
@@ -25,10 +37,22 @@ module.exports = {
     if (string) {
       return JSON.parse(string)
     }
-    const object = await stripe.accounts.retrievePerson(stripeid, personid, stripeKey)
-    const cached = JSON.stringify(object)
-    await dashboard.Storage.write(`stripe/${personid}`, cached)
-    return object
+    while (true) {
+      try {
+        const object = await stripe.accounts.retrievePerson(stripeid, personid, stripeKey)
+        const cached = JSON.stringify(object)
+        await dashboard.Storage.write(`stripe/${personid}`, cached)
+        return object
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+        throw error
+      }
+    }
   },
   update: async (object) => {
     if (global.testEnded) {

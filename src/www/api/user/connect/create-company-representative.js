@@ -140,7 +140,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_front')
       }
-    } else if (!req.body.token) {
+    } else if (requirements.currently_due.indexOf('verification.document') > -1) {
       throw new Error('invalid-verification_document_front')
     }
     if (req.uploads && req.uploads.verification_document_back) {
@@ -158,7 +158,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_back')
       }
-    } else if (!req.body.token) {
+    } else if (requirements.currently_due.indexOf('verification.document') > -1) {
       throw new Error('invalid-verification_document_back')
     }
     const representativeInfo = {
@@ -351,6 +351,9 @@ module.exports = {
           continue
         }
         if (error.type === 'StripeConnectionError') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'account_invalid') {
           continue
         }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')

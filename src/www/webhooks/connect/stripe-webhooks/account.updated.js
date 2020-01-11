@@ -5,11 +5,19 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = async (stripeEvent, req) => {
   const account = stripeEvent.data.object
-  try {
-    const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
-    if (exists) {
-      await stripeCache.update(exists)
+  while (true) {
+    try {
+      const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
+      if (exists) {
+        await stripeCache.update(exists)
+      }
+    } catch (error) {
+      if (error.raw && error.raw.code === 'lock_timeout') {
+        continue
+      }
+      if (error.type === 'StripeConnectionError') {
+        continue
+      }
     }
-  } catch (error) {
   }
 }

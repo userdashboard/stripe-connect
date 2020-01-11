@@ -69,6 +69,9 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
+  if (req.query && req.query.message === 'success') {
+    return renderPage(req, res)
+  }
   try {
     await global.api.user.connect.UpdatePaymentInformation.patch(req)
   } catch (error) {

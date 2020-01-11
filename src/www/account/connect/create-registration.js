@@ -39,6 +39,9 @@ async function submitForm (req, res) {
   if (!req.body) {
     return renderPage(req, res)
   }
+  if (req.query && req.query.message === 'success') {
+    return renderPage(req, res)
+  }
   if (!req.body.country) {
     return renderPage(req, res, 'invalid-country')
   }

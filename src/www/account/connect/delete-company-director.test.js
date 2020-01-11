@@ -18,50 +18,11 @@ describe('/account/connect/delete-company-director', () => {
       assert.strictEqual(errorMessage, 'invalid-personid')
     })
 
-    it('should reject submitted registration', async () => {
+    it('should reject registration with directors submitted', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
         type: 'company'
-      })
-      await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '5542',
-        business_profile_url: 'https://website.com',
-        address_city: 'Berlin',
-        address_line1: 'First Street',
-        address_postal_code: '01067',
-        address_state: 'BW',
-        name: user.profile.firstName + '\'s company',
-        phone: '456-789-0123',
-        tax_id: '00000000'
-      })
-      await TestHelper.createCompanyRepresentative(user, {
-        address_city: 'Berlin',
-        address_country: 'DE',
-        address_line1: 'First Street',
-        address_postal_code: '01067',
-        address_state: 'BW',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: user.profile.contactEmail,
-        first_name: user.profile.firstName,
-        last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        relationship_executive: 'true',
-        relationship_title: 'Owner'
-      }, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      await TestHelper.createExternalAccount(user, {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        country: 'DE',
-        currency: 'eur',
-        iban: 'DE89370400440532013000'
       })
       const person = TestHelper.nextIdentity()
       await TestHelper.createCompanyDirector(user, {
@@ -76,8 +37,6 @@ describe('/account/connect/delete-company-director', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/delete-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
@@ -87,7 +46,7 @@ describe('/account/connect/delete-company-director', () => {
       } catch (error) {
         errorMessage = error.message
       }
-      assert.strictEqual(errorMessage, 'invalid-personid')
+      assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
 
     it('should require own Stripe account', async () => {

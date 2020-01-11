@@ -13,6 +13,7 @@ async function beforeRequest (req) {
   }
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.submitted ||
+    (stripeAccount.company && stripeAccount.company.directors_provided) ||
     stripeAccount.business_type === 'individual' ||
     stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
@@ -26,7 +27,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
+  messageTemplate = messageTemplate || req.query.message  
   const removeElements = []
   req.data.stripeAccount.stripePublishableKey = global.stripePublishableKey
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
@@ -71,6 +72,9 @@ async function submitForm (req, res) {
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
+  if (req.query.message === 'success') {
+    return renderPage(req, res)
+  }
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
@@ -78,8 +82,8 @@ async function submitForm (req, res) {
   for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {
-      if (field === 'relationship.director.verification.front' ||
-          field === 'relationship.director.verification.back') {
+      if (field === 'verification.document.front' ||
+          field === 'verification.document.back') {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)
@@ -88,7 +92,7 @@ async function submitForm (req, res) {
   if (req.data && req.data.directors && req.data.directors.length) {
     for (const director of req.data.directors) {
       if (director.first_name === req.body.first_name &&
-        director.last_name === req.body.last_name) {
+          director.last_name === req.body.last_name) {
         return renderPage(req, res, 'duplicate-name')
       }
     }
