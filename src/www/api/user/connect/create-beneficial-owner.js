@@ -321,6 +321,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
+        if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
         if (error.type === 'StripeConnectionError') {
           continue
         }
@@ -341,6 +344,9 @@ module.exports = {
         return owner
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
         if (error.type === 'StripeConnectionError') {

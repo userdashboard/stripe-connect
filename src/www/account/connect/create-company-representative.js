@@ -24,7 +24,6 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  console.log('render', messageTemplate)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   const removeElements = []
   if (global.stripeJS !== 3) {
@@ -94,9 +93,6 @@ async function renderPage (req, res, messageTemplate) {
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
-    if (!element || !element.parentNode) {
-      console.log(id)
-    }
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
@@ -124,7 +120,6 @@ async function submitForm (req, res) {
           field === 'verification.additional_document.back') {
         continue
       }
-      console.log('invalid field', field)
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
@@ -152,11 +147,9 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_additional_document_back')
     }
   }
-  console.log('updating', req.body)
   let person
   try {
     person = await global.api.user.connect.CreateCompanyRepresentative.post(req)
-    console.log(requirements)
   } catch (error) {
     if (error.message.startsWith('invalid-')) {
       return renderPage(req, res, error.message)

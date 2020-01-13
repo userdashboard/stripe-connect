@@ -188,7 +188,6 @@ describe('/account/connect/delete-company-director', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/connect' },
-        { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/company-directors?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/company-director?personid=${user.director.id}` },

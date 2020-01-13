@@ -10,6 +10,15 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.personid) {
     throw new Error('invalid-personid')
   }
+  if (req.query.message === 'success') {
+    req.data = {
+      owner: {
+        id: '',
+        object: 'person'
+      }
+    }
+    return
+  }
   const owner = await global.api.user.connect.BeneficialOwner.get(req)
   req.query.stripeid = owner.account
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
@@ -22,7 +31,6 @@ async function beforeRequest (req) {
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'person')
-
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {

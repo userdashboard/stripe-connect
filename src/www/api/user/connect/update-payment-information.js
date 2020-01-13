@@ -174,17 +174,16 @@ module.exports = {
     while (true) {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, stripeData, req.stripeKey)
-        if (!accountNow.external_accounts || !accountNow.external_accounts.data || !accountNow.external_accounts.data.length) {
-          console.log('account update failed', accountNow)
-        }
         const bankAccount = accountNow.external_accounts.data[0]
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
         await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
         await stripeCache.update(accountNow)
         return accountNow
       } catch (error) {
-        console.log(error)
         if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
         if (error.type === 'StripeConnectionError') {

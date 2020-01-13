@@ -59,50 +59,7 @@ describe('/account/connect/edit-company-registration', () => {
 
   describe('EditCompanyRegistration#POST', () => {
     for (const country of connect.countrySpecs) {
-      it('should reject invalid fields (' + country.id + ')', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: country.id,
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = postData[country.id]
-        const uploads = {
-          verification_document_front: TestHelper['success_id_scan_back.png'],
-          verification_document_back: TestHelper['success_id_scan_back.png']
-        }
-        let fields = Object.keys(req.body)
-        if (uploads) {
-          fields = fields.concat(Object.keys(uploads))
-        }
-        const body = JSON.stringify(req.body)
-        for (const field of fields) {
-          if (uploads) {
-            req.uploads = {}
-            for (const file in uploads) {
-              req.uploads[file] = uploads[file]
-            }
-          }
-          req.body = JSON.parse(body)
-          if (req.body[field]) {
-            delete (req.body[field])
-          }
-          if (req.uploads && req.uploads[field]) {
-            delete (req.uploads[field])
-          }
-          const page = await req.post()
-          const doc = TestHelper.extractDoc(page)
-          const messageContainer = doc.getElementById('message-container')
-          const message = messageContainer.child[0]
-          assert.strictEqual(message.attr.template, `invalid-${field}`)
-        }
-      })
-    }
-
-    for (const country of connect.countrySpecs) {
-      it('should update information (' + country.id + ') (screenshots)', async () => {
+      it('should update required document (' + country.id + ') (screenshots)', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,
@@ -120,15 +77,15 @@ describe('/account/connect/edit-company-registration', () => {
         req.screenshots = [
           { hover: '#account-menu-container' },
           { click: '/account/connect' },
-          { click: '/account/connect/stripe-accounts' },
           { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
           { click: `/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}` },
           { fill: '#submit-form' }
         ]
         const page = await req.post()
         const doc = TestHelper.extractDoc(page)
-        const redirectURL = TestHelper.extractRedirectURL(doc)
-        assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+        const messageContainer = doc.getElementById('message-container')
+        const message = messageContainer.child[0]
+        assert.strictEqual(message.attr.template, 'success')
       })
     }
   })

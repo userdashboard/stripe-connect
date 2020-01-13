@@ -15,7 +15,10 @@ async function beforeRequest (req) {
   owner.stripePublishableKey = global.stripePublishableKey
   req.query.stripeid = owner.account
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-  if (stripeAccount.metadata.submitted) {
+  if (stripeAccount.business_type === 'individual') {
+    throw new Error('invalid-stripe-account')
+  }
+  if (stripeAccount.company && stripeAccount.company.owners_provided) {
     throw new Error('invalid-stripe-account')
   }
   req.data = { stripeAccount, owner }
@@ -52,37 +55,57 @@ async function renderPage (req, res, messageTemplate) {
   if (req.data.owner.requirements.currently_due.indexOf('email') === -1) {
     removeElements.push('email-container')
   }
-  if (req.method === 'GET') {
-    const selectedCountry = req.data.owner.address_country
+  if (req.data.owner.requirements.currently_due.indexOf('address.state') === -1) {
+    removeElements.push('state-container')
+  }
+  if (req.data.owner.requirements.currently_due.indexOf('address.country') === -1) {
+    removeElements.push('country-container')
+  }
+  if (req.data.owner.requirements.currently_due.indexOf('verification.document') === -1) {
+    removeElements.push('document-container')
+  }
+  if (req.data.owner.requirements.currently_due.indexOf('verification.additional_document') === -1) {
+    removeElements.push('additional_document-container')
+  }
+  if (req.method === 'GET' && req.data.owner.address.country) {
+    const selectedCountry = req.data.owner.address.country
     const states = connect.countryDivisions[selectedCountry]
     dashboard.HTML.renderList(doc, states, 'state-option', 'address_state')
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
     dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
     for (const field of req.data.owner.requirements.currently_due) {
       const posted = field.split('.').join('_')
-      if (!req.data.owner[posted]) {
-        if (field === 'verification.front' ||
-            field === 'verification.back') {
+      if (field === 'verification.document' ||
+          field === 'verification.additional_document') {
+        continue
+      }
+      const element = doc.getElementById(posted)
+      if (element.attr.tag === 'input') {
+        if (element.attr.tag === 'checkbox') {
+          element.attr.checked = req.data.owner[posted]
           continue
         }
-        const element = doc.getElementById(posted)
-        if (element.attr.tag === 'input') {
-          if (element.attr.tag === 'checkbox') {
-            element.attr.checked = req.data.owner[posted]
-            continue
-          }
-          element.setAttribute('value', req.data.owner[posted])
-        } else if (element.attr.tag === 'select') {
-          dashboard.HTML.setSelectedOptionByValue(doc, element.attr.id, req.data.owner[posted])
-        }
+        element.setAttribute('value', req.data.owner[posted])
+      } else if (element.attr.tag === 'select') {
+        dashboard.HTML.setSelectedOptionByValue(doc, element.attr.id, req.data.owner[posted])
       }
     }
   } else if (req.body) {
-    const selectedCountry = req.body.address_country || req.data.owner.address_country
-    const states = connect.countryDivisions[selectedCountry]
-    dashboard.HTML.renderList(doc, states, 'state-option', 'address_state')
-    dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
-    dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
+    if (req.data.owner.requirements.currently_due.indexOf('address.state') > -1) {
+      let selectedCountry
+      if (req.data.owner.requirements.currently_due.indexOf('address.country') > -1) {
+        selectedCountry = req.body.address_country || req.data.stripeAccount.country
+      } else {
+        selectedCountry = req.data.stripeAccount.country
+      }
+      const states = connect.countryDivisions[selectedCountry] 
+      dashboard.HTML.renderList(doc, states, 'state-option', 'address_state')
+    }
+    if (req.data.owner.requirements.currently_due.indexOf('address.country') > -1) {
+      const selectedCountry = req.body.address_country || req.data.owner.address_country
+      dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
+      dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
+    }
     for (const field of req.data.owner.requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
@@ -126,30 +149,33 @@ async function submitForm (req, res) {
   for (const field of req.data.owner.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {
-      if (field === 'verification.front' ||
-          field === 'verification.back') {
+      if (field === 'verification.document' ||
+          field === 'verification.additional_document') {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
-    delete (req.body.address_country)
-    return renderPage(req, res, 'invalid-address_country')
-  }
-  if (!req.body.address_state) {
-    return renderPage(req, res, 'invalid-address_state')
-  }
-  const states = connect.countryDivisions[req.body.address_country]
-  let found
-  for (const state of states) {
-    found = state.value === req.body.address_state
-    if (found) {
-      break
+  if (req.data.owner.requirements.currently_due.indexOf('address.country') > -1) {
+    if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
+      return renderPage(req, res, 'invalid-address_country')
     }
   }
-  if (!found) {
-    return renderPage(req, res, 'invalid-address_state')
+  if (req.data.owner.requirements.currently_due.indexOf('address.state') > -1) {
+    if (!req.body.address_state) {
+      return renderPage(req, res, 'invalid-address_state')
+    }
+    const states = connect.countryDivisions[req.body.address_country]
+    let found
+    for (const state of states) {
+      found = state.value === req.body.address_state
+      if (found) {
+        break
+      }
+    }
+    if (!found) {
+      return renderPage(req, res, 'invalid-address_state')
+    }
   }
   try {
     await global.api.user.connect.UpdateBeneficialOwner.patch(req)
@@ -160,7 +186,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `${req.urlPath}?message=success`
+      location: `${req.urlPath}?personid=${req.query.personid}&message=success`
     })
     return res.end()
   }

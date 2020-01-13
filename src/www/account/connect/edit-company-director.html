@@ -53,19 +53,21 @@
           <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
           <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
         </div>
-        <h2>Personal identification</h2>
-        <div class="pure-control-group">
-          <label for="verification_document_front">Front scan/photo</label>
-          <input name="verification_document_front" id="verification_document_front" type="file" />
-        </div>
-        <div class="pure-control-group">
-          <label for="verification_document_back">Back scan/photo</label>
-          <input name="verification_document_back" id="verification_document_back" type="file" />
+        <div id="documentation-container">
+          <h2>Personal identification</h2>
+          <div class="pure-control-group">
+            <label for="verification_document_front">Front scan/photo</label>
+            <input name="verification_document_front" id="verification_document_front" type="file" />
+          </div>
+          <div class="pure-control-group">
+            <label for="verification_document_back">Back scan/photo</label>
+            <input name="verification_document_back" id="verification_document_back" type="file" />
+          </div>
         </div>
         <div class="pure-controls spaced-buttons">
           <button id="submit-button" class="pure-button pure-button-primary">Update company director</button>
         </div>
-      </div>
+      </divi>
     </form>
   </body>
   <template id="invalid-token">
@@ -89,11 +91,17 @@
   <template id="invalid-verification_document_back">
     <div class="error message">Error! Invalid or missing document ID back scan</div>
   </template>
+  <template id="invalid-email">
+    <div class="error message">Error! Invalid or missing email address</div>
+  </template>
   <template id="invalid-first_name">
     <div class="error message">Error! Invalid or missing first name</div>
   </template>
   <template id="invalid-last_name">
     <div class="error message">Error! Invalid or missing last name</div>
+  </template>
+  <template id="invalid-relationship_title">
+    <div class="error message">Error! Invalid or missing relationship title</div>
   </template>
   <template id="duplicate-name">
     <div class="error message">Error! This director has already been added</div>

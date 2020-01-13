@@ -15,9 +15,25 @@ module.exports = {
       throw new Error('invalid-account')
     }
     let stripeAccount
-    try {
-      stripeAccount = await stripeCache.retrieve(req.query.stripeid, 'accounts', req.stripeKey)
-    } catch (error) {
+    while (true) {
+      try {
+        stripeAccount = await stripeCache.retrieve(req.query.stripeid, 'accounts', req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+        if (error.message.startsWith('invalid-')) {
+          throw error
+        }
+        throw new Error('unknown-error')
+      }
     }
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')

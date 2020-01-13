@@ -47,10 +47,13 @@ async function beforeRequest (req) {
   }
   stripeAccount.company = stripeAccount.company || {}
   stripeAccount.individual = stripeAccount.individual || {}
-  const owners = await global.api.user.connect.BeneficialOwners.get(req)
-  const directors = await global.api.user.connect.CompanyDirectors.get(req)
-  req.query.personid = stripeAccount.metadata.representative
-  const representative = await global.api.user.connect.CompanyRepresentative.get(req)
+  let owners, directors, representative
+  if (stripeAccount.business_type === 'company') {
+    owners = await global.api.user.connect.BeneficialOwners.get(req)
+    directors = await global.api.user.connect.CompanyDirectors.get(req)
+    req.query.personid = stripeAccount.metadata.representative
+    representative = await global.api.user.connect.CompanyRepresentative.get(req)
+  }
   req.data = { owners, directors, representative, stripeAccount, registrationComplete }
 }
 

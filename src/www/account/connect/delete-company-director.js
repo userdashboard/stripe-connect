@@ -10,10 +10,19 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.personid) {
     throw new Error('invalid-personid')
   }
+  if (req.query.message === 'success') {
+    req.data = {
+      director: {
+        id: '',
+        object: 'person'
+      }
+    }
+    return
+  }
   const director = await global.api.user.connect.CompanyDirector.get(req)
   req.query.stripeid = director.account
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-  if (stripeAccount.company && stripeAccount.company.owners_provided) {
+  if (stripeAccount.company && stripeAccount.company.directors_provided) {
     throw new Error('invalid-stripe-account')
   }
   req.data = { director, stripeAccount }

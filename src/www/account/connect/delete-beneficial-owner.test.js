@@ -218,7 +218,6 @@ describe('/account/connect/delete-beneficial-owner', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/connect' },
-        { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/beneficial-owner?personid=${user.owner.id}` },

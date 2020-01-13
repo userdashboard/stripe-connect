@@ -11,6 +11,16 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
+  if (req.query.message === 'success') {
+    req.data = {
+      stripeAccount: {
+        country: 'US',
+        id: '',
+        metadata: {}
+      }
+    }
+    return
+  }
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')

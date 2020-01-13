@@ -175,15 +175,15 @@ module.exports = {
       for (const field of person.requirements.currently_due) {
         const posted = field.split('.').join('_')
         if (!req.body[posted]) {
-          if (field === 'relationship.director.address.line2' ||
-              field === 'relationship.director.relationship.title' ||
-              field === 'relationship.director.relationship.executive' ||
-              field === 'relationship.director.relationship.director' ||
-              field === 'relationship.director.relationship.owner') {
+          if (field === 'address.line2' ||
+              field === 'relationship.title' ||
+              field === 'relationship.executive' ||
+              field === 'relationship.director' ||
+              field === 'relationship.owner') {
             continue
           }
-          if (field !== 'relationship.director.verification.document' &&
-              field !== 'relationship.director.verification.additional_document') {
+          if (field !== 'verification.document' &&
+              field !== 'verification.additional_document') {
             throw new Error(`invalid-${posted}`)
           }
         }
@@ -283,6 +283,9 @@ module.exports = {
         return companyDirectorNow
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
         if (error.type === 'StripeConnectionError') {

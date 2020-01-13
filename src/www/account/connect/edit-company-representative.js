@@ -67,7 +67,7 @@ async function renderPage (req, res, messageTemplate) {
   dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
   dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
   const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
-  if (requirements.currently_due.indexOf('relationship.representative.id_number') === -1) {
+  if (requirements.currently_due.indexOf('id_number') === -1) {
     removeElements.push('id_number-container')
   }
   if (req.method === 'GET') {
@@ -108,21 +108,19 @@ async function submitForm (req, res) {
   for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
-      if (field === 'relationship.representative.address.line2' ||
-          field === 'relationship.representative.relationship.title' ||
-          field === 'relationship.representative.relationship.executive' ||
-          field === 'relationship.representative.relationship.director' ||
-          field === 'relationship.representative.relationship.owner' ||
-          field === 'relationship.representative.verification.document.front' ||
-          field === 'relationship.representative.verification.document.back' ||
-          field === 'relationship.representative.verification.additional_document.front' ||
-          field === 'relationship.representative.verification.additional_document.back') {
+      if (field === 'address.line2' ||
+          field === 'relationship.title' ||
+          field === 'relationship.executive' ||
+          field === 'relationship.director' ||
+          field === 'relationship.owner' ||
+          field === 'verification.document' ||
+          field === 'verification.additional_document') {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (requirements.currently_due.indexOf('relationship.representative.verification.document.front') > -1) {
+  if (requirements.currently_due.indexOf('verification.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.verification_document_front &&
         !req.body.verification_document_front)) {
@@ -134,7 +132,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
-  if (requirements.currently_due.indexOf('relationship.representative.verification.additional.document.front') > -1) {
+  if (requirements.currently_due.indexOf('verification.additional.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.verification_additional_document_front &&
       !req.body.verification_additional_document_front)) {

@@ -25,17 +25,33 @@ module.exports = {
     if (owners.indexOf(req.query.personid) === -1) {
       throw new Error('invalid-personid')
     }
-    try {
-      const person = await stripeCache.retrievePerson(stripeid, req.query.personid, req.stripeKey)
-      if (!person) {
-        throw new Error('invalid-personid')
+    let person
+    while (true) {
+      try {
+        person = await stripeCache.retrievePerson(stripeid, req.query.personid, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+        if (error.message.startsWith('invalid-')) {
+          throw error
+        }
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
-      if (person.relationship.owner !== true) {
-        throw new Error('invalid-person')
-      }
-      return person
-    } catch (error) {
-      if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
     }
+    if (!person) {
+      throw new Error('invalid-personid')
+    }
+    if (person.relationship.owner !== true) {
+      throw new Error('invalid-person')
+    }
+    return person
   }
 }

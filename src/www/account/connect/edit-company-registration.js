@@ -37,6 +37,7 @@ async function renderPage (req, res, messageTemplate) {
       'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
       'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
+  console.log('render', messageTemplate)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success' || req.error) {
@@ -108,11 +109,16 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   for (const field of req.data.stripeAccount.requirements.currently_due) {
-    const posted = field.split('.').join('_')
+    const posted = field.split('.').join('_').replace('company_', '')
     if (!req.body[posted]) {
-      if (field === 'company.address.line2' ||
-        field === 'company.verification.document.front' ||
-        field === 'company.verification.document.back' ||
+      if (field === 'address.line2' ||
+        field === 'company.verification.document' ||
+        field === 'relationship.owner' ||
+        field === 'relationship.director' ||
+        field === 'external_account' || 
+        field.startsWith('relationship.') ||
+        field.startsWith('tos_acceptance.') ||
+        field.startsWith('person_') ||
         (field === 'business_profile.url' && req.body.business_profile_product_description) ||
         (field === 'business_profile.product_description' && req.body.business_profile_url)) {
         continue
@@ -134,6 +140,7 @@ async function submitForm (req, res) {
   try {
     await global.api.user.connect.UpdateCompanyRegistration.patch(req)
   } catch (error) {
+    console .log(error)
     if (error.message.startsWith('invalid-')) {
       return renderPage(req, res, error.message)
     }
@@ -143,7 +150,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `${req.urlPath}?message=success`
+      location: `${req.urlPath}?stripeid=${req.query.stripeid}&message=success`
     })
     return res.end()
   }
