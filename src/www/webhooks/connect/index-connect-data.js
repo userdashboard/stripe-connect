@@ -3,6 +3,7 @@ const path = require('path')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+stripe.setTelemetryEnabled(false)
 const webhookPath = path.join(__dirname, '.')
 const supportedWebhooks = {}
 const subscriptionWebhooks = fs.readdirSync(`${webhookPath}/stripe-webhooks/`)
@@ -16,8 +17,13 @@ module.exports = {
   template: false,
   post: async (req, res) => {
     res.statusCode = 200
-    if (!req.body || !req.bodyRaw) {
+    if (!req.body || !req.bodyRaw || global.testEnded) {
       return res.end()
+    }
+    if (global.testNumber) {
+      if (req.bodyRaw.indexOf('appid') && req.bodyRaw.indexOf(global.testNumber) === -1) {
+        return res.end()
+      }
     }
     let stripeEvent
     try {
@@ -29,7 +35,6 @@ module.exports = {
     }
     res.statusCode = 200
     if (global.testNumber) {
-      global.webhooks = global.webhooks || []
       global.webhooks.unshift(stripeEvent)
     }
     if (supportedWebhooks[stripeEvent.type]) {

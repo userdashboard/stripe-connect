@@ -14,6 +14,7 @@ const packageJSON = require('./package.json')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+stripe.setTelemetryEnabled(false)
 stripe.setAppInfo({
   version: packageJSON.version,
   name: '@userdashboard/stripe-connect',

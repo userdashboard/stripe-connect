@@ -188,8 +188,6 @@ describe('/account/connect/stripe-account', () => {
         relationship_executive: 'true',
         relationship_title: 'Owner'
       }, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -202,6 +200,10 @@ describe('/account/connect/stripe-account', () => {
       })
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.updateCompanyRepresentative(user, {}, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
+      })
       await TestHelper.submitStripeAccount(user)
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

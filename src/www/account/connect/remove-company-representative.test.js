@@ -18,11 +18,11 @@ describe('/account/connect/remove-company-representative', () => {
       assert.strictEqual(errorMessage, 'invalid-stripeid')
     })
 
-    it('should reject Stripe account without representative', async () => {
+    it('should reject individual Stripe account', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
-        type: 'company'
+        type: 'individual'
       })
       const req = TestHelper.createRequest(`/account/connect/remove-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -117,10 +117,12 @@ describe('/account/connect/remove-company-representative', () => {
         relationship_executive: 'true',
         relationship_title: 'Owner'
       }, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
+      })
+      await TestHelper.updateCompanyRepresentative(user, {}, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/account/connect/remove-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account

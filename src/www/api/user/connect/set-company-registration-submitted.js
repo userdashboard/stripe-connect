@@ -3,6 +3,7 @@ const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -31,6 +32,7 @@ module.exports = {
     }
     if (stripeAccount.requirements.currently_due.length) {
       for (const field of stripeAccount.requirements.currently_due) {
+        console.log(field)
         if (field !== 'tos_acceptance.date' &&
             field !== 'tos_acceptance.ip') {
           throw new Error('invalid-registration')
@@ -57,6 +59,9 @@ module.exports = {
           continue
         }
         if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
         if (error.type === 'StripeConnectionError') {

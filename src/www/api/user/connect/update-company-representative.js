@@ -2,6 +2,7 @@ const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -15,6 +16,11 @@ module.exports = {
     }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
+    }
+    req.query.stripeid = person.account
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount) {
+      throw new Error('invalid-personid')
     }
     let validateDOB = false
     if (req.body.dob_day) {
@@ -66,16 +72,8 @@ module.exports = {
         throw new Error('invalid-dob_day')
       }
     }
-    if (req.body.address_country) {
-      if (!connect.countryNameIndex[req.body.address_country]) {
-        throw new Error('invalid-address_country')
-      }
-    }
     if (req.body.address_state) {
-      if (!req.body.address_country) {
-        throw new Error('invalid-address_country')
-      }
-      const states = connect.countryDivisions[req.body.address_country]
+      const states = connect.countryDivisions[stripeAccount.country]
       if (!states || !states.length) {
         throw new Error('invalid-address_state')
       }
@@ -190,6 +188,7 @@ module.exports = {
           companyRepresentativeInfo.address_kana[property] = req.body[posted]
         } else if (field.startsWith('address.')) {
           const property = field.substring('address.'.length)
+          companyRepresentativeInfo.address = companyRepresentativeInfo.address || {}
           companyRepresentativeInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
           const property = field.substring('verification.document.'.length)
@@ -218,34 +217,32 @@ module.exports = {
         if (!req.body[posted]) {
           continue
         }
-        for (const field of person.requirements.currently_due) {
-          if (field.startsWith('business_profile.')) {
-            const property = field.substring('business_profile.'.length)
-            companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
-            companyRepresentativeInfo.business_profile[property] = req.body[posted]
-            delete (req.body[posted])
-          } else if (field.startsWith('address_kanji.')) {
-            const property = field.substring('address_kanji.'.length)
-            companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
-            companyRepresentativeInfo.address_kanji[property] = req.body[posted]
-          } else if (field.startsWith('address_kana.')) {
-            const property = field.substring('address_kana.'.length)
-            companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
-            companyRepresentativeInfo.address_kana[property] = req.body[posted]
-          } else if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            companyRepresentativeInfo.address[property] = req.body[posted]
-          } else if (field.startsWith('verification.document.')) {
-            const property = field.substring('verification.document.'.length)
-            companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-            companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
-            companyRepresentativeInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            const property = field.substring('verification.additional_document.'.length)
-            companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-            companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
-            companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
-          }
+        if (field.startsWith('business_profile.')) {
+          const property = field.substring('business_profile.'.length)
+          companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
+          companyRepresentativeInfo.business_profile[property] = req.body[posted]
+          delete (req.body[posted])
+        } else if (field.startsWith('address_kanji.')) {
+          const property = field.substring('address_kanji.'.length)
+          companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
+          companyRepresentativeInfo.address_kanji[property] = req.body[posted]
+        } else if (field.startsWith('address_kana.')) {
+          const property = field.substring('address_kana.'.length)
+          companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
+          companyRepresentativeInfo.address_kana[property] = req.body[posted]
+        } else if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          companyRepresentativeInfo.address[property] = req.body[posted]
+        } else if (field.startsWith('verification.document.')) {
+          const property = field.substring('verification.document.'.length)
+          companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+          companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
+          companyRepresentativeInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          const property = field.substring('verification.additional_document.'.length)
+          companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
+          companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
+          companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
         }
       }
       if (req.body.address_line2) {
@@ -300,6 +297,9 @@ module.exports = {
           continue
         }
         if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
         if (error.type === 'StripeConnectionError') {

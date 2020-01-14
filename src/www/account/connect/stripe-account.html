@@ -53,7 +53,7 @@
         <a id="update-company-registration-link" class="pure-button" href="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
       </p>
     </div>    
-    <div id="company-representative-container">
+    <div id="representative-container">
       <h2>Company representative</h2>
       <p>To avoid account disruption submit new representative information if the specified person leaves or no longer represents the company.</p>
       <table id="representatives-table" class="pure-table pure-table-striped data-table">
@@ -65,7 +65,8 @@
         </thead>
       </table>
       <p class="pure-button-group" role="group" id="registration-options">
-        <a id="edit-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+        <a id="add-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+        <a id="update-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/edit-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update representative</a>
         <a id="remove-company-representative-link" class="pure-button" href="/account/connect/remove-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Remove representative</a>
       </p>
     </div>

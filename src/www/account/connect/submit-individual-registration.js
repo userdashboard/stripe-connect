@@ -24,8 +24,12 @@ async function beforeRequest (req) {
     req.error = req.error || 'invalid-payment-details'
   }
   let registrationComplete = true
-  if (stripeAccount.requirements.currently_due.length) {
+  for (const field of stripeAccount.requirements.currently_due) {
+    if (field.startsWith('tos_acceptance.')) {
+      continue
+    }
     registrationComplete = false
+    break
   }
   if (!registrationComplete) {
     req.error = req.error || 'invalid-registration'
@@ -34,7 +38,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
+  messageTemplate = messageTemplate || req.error || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {

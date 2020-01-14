@@ -2,10 +2,12 @@ const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
+    console.log('received', 1)
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -19,6 +21,7 @@ module.exports = {
     if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
     }
+    console.log('received', 2)
     if (req.uploads) {
       if (req.uploads.verification_document_front) {
         const uploadData = {
@@ -53,6 +56,7 @@ module.exports = {
         }
       }
     }
+    console.log('received', 3)
     const accountInfo = {}
     if (global.stripeJS === 3) {
       accountInfo.account_token = req.body.token
@@ -110,7 +114,7 @@ module.exports = {
           continue
         }
         if (posted.startsWith('business_profile_')) {
-          const property = posted.substring('business_profile-'.length)
+          const property = posted.substring('business_profile_'.length)
           accountInfo.business_profile = accountInfo.business_profile || {}
           accountInfo.business_profile[property] = req.body[posted]
           delete (req.body[posted])
@@ -196,16 +200,23 @@ module.exports = {
         accountInfo.company.verification.document.front = req.body.verification_document_front
       }
     }
+    console.log('received', 4)
     while (true) {
       try {
+        console.log('updating stripe account')
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        console.log('finished updating stripe account')
         await stripeCache.update(accountNow)
         return accountNow
       } catch (error) {
+        console.log(error)
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
         if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
         if (error.type === 'StripeConnectionError') {
@@ -214,6 +225,7 @@ module.exports = {
         if (error.message.startsWith('invalid-')) {
           throw error
         }
+        console.log(error)
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

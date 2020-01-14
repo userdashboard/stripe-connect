@@ -3,6 +3,7 @@ const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -353,6 +354,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
+        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+          continue
+        }
         if (error.type === 'StripeConnectionError') {
           continue
         }
@@ -377,6 +381,9 @@ module.exports = {
           continue
         }
         if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
         if (error.type === 'StripeConnectionError') {

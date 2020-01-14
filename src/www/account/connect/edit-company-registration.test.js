@@ -59,7 +59,7 @@ describe('/account/connect/edit-company-registration', () => {
 
   describe('EditCompanyRegistration#POST', () => {
     for (const country of connect.countrySpecs) {
-      it('should update required document (' + country.id + ') (screenshots)', async () => {
+      it('should update registration (' + country.id + ') (screenshots)', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,

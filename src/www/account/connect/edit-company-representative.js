@@ -16,15 +16,17 @@ async function beforeRequest (req) {
   if (!stripeAccount) {
     throw new Error('invalid-stripeid')
   }
-  if (stripeAccount.business_type === 'individual' ||
-      stripeAccount.metadata.submitted) {
+  if (stripeAccount.business_type === 'individual') {
     throw new Error('invalid-stripe-account')
   }
-  req.data = { stripeAccount }
+  req.query.personid = stripeAccount.metadata.representative
+  const representative = await global.api.user.connect.CompanyRepresentative.get(req)
+  req.data = { stripeAccount, representative }
 }
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
+  console.log('render', messageTemplate)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   const removeElements = []
   if (global.stripeJS !== 3) {
@@ -58,16 +60,14 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     removeElements.push('personal-address-container')
   }
-  let personalCountry
-  if (req.body) {
-    personalCountry = req.body.address_country
+  console.log(req.data.representative.requirements)
+  if (req.data.representative.requirements.currently_due.indexOf('address.state') > -1) {
+    const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
+    dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
+  } else if (removeElements.indexOf('personal-address-container') === -1) {
+    removeElements.push('state-container')
   }
-  personalCountry = personalCountry || req.data.stripeAccount.country
-  const personalStates = connect.countryDivisions[personalCountry]
-  dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
-  dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
-  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
-  if (requirements.currently_due.indexOf('id_number') === -1) {
+  if (req.data.representative.requirements.currently_due.indexOf('id_number') === -1) {
     removeElements.push('id_number-container')
   }
   if (req.method === 'GET') {
@@ -92,6 +92,7 @@ async function renderPage (req, res, messageTemplate) {
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
+    console.log(id)
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
@@ -104,8 +105,8 @@ async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
-  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
-  for (const field of requirements.currently_due) {
+  console.log('submit', req.body, req.data.representative.requirements)
+  for (const field of req.data.representative.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'address.line2' ||
@@ -117,10 +118,11 @@ async function submitForm (req, res) {
           field === 'verification.additional_document') {
         continue
       }
+      console.log('missing field', field, req.data.representative.requirements)
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (requirements.currently_due.indexOf('verification.document.front') > -1) {
+  if (req.data.representative.requirements.currently_due.indexOf('verification.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.verification_document_front &&
         !req.body.verification_document_front)) {
@@ -132,7 +134,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
-  if (requirements.currently_due.indexOf('verification.additional.document.front') > -1) {
+  if (req.data.representative.requirements.currently_due.indexOf('verification.additional.document.front') > -1) {
     if (!req.uploads || (
       !req.uploads.verification_additional_document_front &&
       !req.body.verification_additional_document_front)) {
@@ -156,7 +158,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `${req.urlPath}?personid=${req.query.personid}&message=success`
+      location: `${req.urlPath}?stripeid=${req.query.stripeid}&message=success`
     })
     return res.end()
   }

@@ -39,7 +39,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
+  messageTemplate = messageTemplate || req.error || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
@@ -77,7 +77,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `${req.urlPath}?message=success`
+      location: `${req.urlPath}?stripeid=${req.query.stripeid}&message=success`
     })
     return res.end()
   }

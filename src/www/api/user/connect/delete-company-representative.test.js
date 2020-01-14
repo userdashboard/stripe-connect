@@ -97,7 +97,7 @@ describe('/api/user/connect/delete-company-representative', () => {
   })
 
   describe('returns', () => {
-    it('object', async () => {
+    it('boolean', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'AT',
@@ -119,16 +119,14 @@ describe('/api/user/connect/delete-company-representative', () => {
         relationship_executive: 'true',
         relationship_title: 'Owner'
       }, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const req = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const accountNow = await req.delete()
-      assert.strictEqual(accountNow.requirements.currently_due.indexOf('relationship.representative') > -1, true)
+      const deleted = await req.delete()
+      assert.strictEqual(deleted, true)
     })
   })
 
@@ -145,8 +143,6 @@ describe('/api/user/connect/delete-company-representative', () => {
       req2.account = user.account
       req2.session = user.session
       req2.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }

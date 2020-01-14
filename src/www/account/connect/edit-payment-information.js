@@ -32,9 +32,15 @@ async function renderPage (req, res, messageTemplate) {
     }
   }
   const removeList = []
-  for (const countrySpec of connect.countrySpecs) {
-    if (countrySpec.id !== req.data.stripeAccount.country) {
-      removeList.push(`${countrySpec.id}-container`)
+  // only countries with country specs have containers for 
+  // their banking field format, but during tests the list
+  // of country specs may be replaced with a single country
+  // so the full, non-stripe country list is used here
+  for (const country of connect.countryList) {
+    if (country.code !== req.data.stripeAccount.country) {
+      if (req.route.html.indexOf(`${country.code}-container`) > -1) {
+        removeList.push(`${country.code}-container`)
+      }
     }
   }
   dashboard.HTML.renderList(doc, connect.countrySpecs, 'country-option', 'country')
@@ -81,7 +87,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `${req.urlPath}?message=success`
+      location: `${req.urlPath}?stripeid=${req.query.stripeid}&message=success`
     })
     return res.end()
   }

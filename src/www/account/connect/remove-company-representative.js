@@ -25,6 +25,7 @@ async function renderPage (req, res, messageTemplate) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'account')
   navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
+    console.log(messageTemplate)
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success' || req.error) {
       const submitForm = doc.getElementById('submit-form')

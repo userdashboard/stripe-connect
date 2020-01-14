@@ -1,6 +1,5 @@
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
-const euCountries = ['AT', 'BE', 'DE', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'LU', 'NL', 'NO', 'PT', 'SE']
 
 module.exports = {
   before: beforeRequest,
@@ -35,7 +34,10 @@ async function beforeRequest (req) {
       if (field === 'external_account' ||
           field === 'relationship.representative' ||
           field === 'relationship.account_opener' ||
+          field === 'relationship.title' ||
           field === 'relationship.owner' ||
+          field === 'relationship.executive' ||
+          field === 'relationship.director' ||
           field === 'business_type' ||
           field === 'tos_acceptance.ip' ||
           field === 'individual.verification.document' ||
@@ -51,6 +53,7 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type === 'company') {
     owners = await global.api.user.connect.BeneficialOwners.get(req)
     directors = await global.api.user.connect.CompanyDirectors.get(req)
+    console.log('loading representative', stripeAccount.metadata.representative)
     req.query.personid = stripeAccount.metadata.representative
     representative = await global.api.user.connect.CompanyRepresentative.get(req)
   }
@@ -84,9 +87,14 @@ async function renderPage (req, res) {
       removeElements.push('business-name')
     }
     if (req.data.stripeAccount.metadata.representative) {
-      removeElements.push('edit-company-representative-link')
+      if (req.data.representative.first_name) {
+        removeElements.push('add-company-representative-link')
+      } else {
+        removeElements.push('update-company-representative-link', 'remove-company-representative-link')
+      }
+      dashboard.HTML.renderTable(doc, [req.data.representative], 'representative-row', 'representatives-table')
     } else {
-      removeElements.push('remove-company-representative-link')
+      removeElements.push('update-company-representative-link', 'remove-company-representative-link', 'representative-container')
     }
     if (req.data.stripeAccount.metadata.submitted) {
       removeElements.push('add-account-opener-link', 'edit-account-opener-link')
@@ -133,11 +141,6 @@ async function renderPage (req, res) {
       removeElements.push('owners-table')
     }
   }
-  if (req.data.representative) {
-    dashboard.HTML.renderTable(doc, [req.data.representative], 'representative-row', 'representatives-table')
-  } else {
-    removeElements.push('representatives-table')
-  }
   if (!req.data.stripeAccount.metadata.submitted && 
       !req.data.stripeAccount.company.directors_provided && 
       req.data.directors && 
@@ -172,6 +175,9 @@ async function renderPage (req, res) {
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
+    if (!element) {
+      console.log(id)
+    }
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
