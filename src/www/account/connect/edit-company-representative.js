@@ -26,7 +26,6 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  console.log('render', messageTemplate)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   const removeElements = []
   if (global.stripeJS !== 3) {
@@ -60,12 +59,27 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     removeElements.push('personal-address-container')
   }
-  console.log(req.data.representative.requirements)
+  let requiresAddress = false
+  for (const requirement of req.data.representative.requirements.currently_due) {
+    requiresAddress = requirement.startsWith('address.')
+    if (requiresAddress) {
+      break
+    }
+  }
+  if (!requiresAddress && removeElements.indexOf('personal-address-container') === -1) {
+    removeElements.push('personal-address-container')
+  }
   if (req.data.representative.requirements.currently_due.indexOf('address.state') > -1) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
   } else if (removeElements.indexOf('personal-address-container') === -1) {
-    removeElements.push('state-container')
+    removeElements.push('state-container', 'state-container-bridge')
+    if (req.data.representative.requirements.currently_due.indexOf('address.line1') === -1) {
+      removeElements.push('line1-container', 'line2-container')
+    }
+    if (req.data.representative.requirements.currently_due.indexOf('address.city') === -1) {
+      removeElements.push('city-container')
+    }
   }
   if (req.data.representative.requirements.currently_due.indexOf('id_number') === -1) {
     removeElements.push('id_number-container')
@@ -92,7 +106,6 @@ async function renderPage (req, res, messageTemplate) {
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
-    console.log(id)
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
@@ -105,7 +118,6 @@ async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
-  console.log('submit', req.body, req.data.representative.requirements)
   for (const field of req.data.representative.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
@@ -118,7 +130,6 @@ async function submitForm (req, res) {
           field === 'verification.additional_document') {
         continue
       }
-      console.log('missing field', field, req.data.representative.requirements)
       return renderPage(req, res, `invalid-${posted}`)
     }
   }

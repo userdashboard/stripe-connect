@@ -346,6 +346,7 @@ module.exports = {
           representative = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
           await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${representative.id}`, req.query.stripeid)
         }
+        await stripeCache.update(representative)
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -365,6 +366,9 @@ module.exports = {
         }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
+    }
+    if (stripeAccount.metadata.representative === representative.id) {
+      return representative
     }
     const accountInfo = {
       metadata: {
