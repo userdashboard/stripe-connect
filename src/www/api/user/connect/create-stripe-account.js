@@ -168,19 +168,10 @@ module.exports = {
         beneficialOwner.requirements.eventually_due = beneficialOwner.requirements.eventually_due.splice(duplicate, 1)
       }
     }
-    delete (companyRepresentative.requirements.pending_verification)
-    delete (companyRepresentative.requirements.past_due)
-    for (const item of companyRepresentative.requirements.eventually_due) {
-      const duplicate = companyRepresentative.requirements.currently_due.indexOf(item)
-      if (duplicate > -1) {
-        companyRepresentative.requirements.eventually_due = companyRepresentative.requirements.eventually_due.splice(duplicate, 1)
-      }
-    }
     const accountUpdate = {
       metadata: {
         companyDirectorTemplate: JSON.stringify(companyDirector.requirements),
         beneficialOwnerTemplate: JSON.stringify(beneficialOwner.requirements),
-        companyRepresentativeTemplate: JSON.stringify(companyRepresentative.requirements),
         representative: companyRepresentative.id
       }
     }

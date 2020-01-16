@@ -79,7 +79,7 @@ describe('/account/connect/edit-individual-registration', () => {
         if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'SG') {
           req.body.business_profile_url = 'https://a-website.com'
         }
-        if  (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
+        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
           req.body.business_profile_mcc = '8931'
         }
         const fields = Object.keys(req.body)
@@ -119,7 +119,7 @@ describe('/account/connect/edit-individual-registration', () => {
         if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'SG') {
           req.body.business_profile_url = 'https://a-website.com'
         }
-        if  (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
+        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
           req.body.business_profile_mcc = '8931'
         }
         req.uploads = {

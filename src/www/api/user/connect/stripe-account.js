@@ -41,6 +41,12 @@ module.exports = {
     if (!stripeAccount) {
       throw new Error('invalid-stripeid')
     }
+    if (!stripeAccount.metadata || !req.account) {
+      // one time an error got thrown here that it couldn't one of
+      // the accountids below
+      console.log('very strange exception', stripeAccount, req)
+      throw new Error('something went terribly wrong')
+    }
     if (stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }

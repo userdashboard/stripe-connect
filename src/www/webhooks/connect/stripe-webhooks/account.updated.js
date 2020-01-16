@@ -13,11 +13,13 @@ module.exports = async (stripeEvent, req) => {
     try {
       const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
       if (exists) {
+        console.log('updating account')
         if (global.testEnded) {
           return
         }
-        return stripeCache.update(exists)
+        await stripeCache.update(exists)
       }
+      return
     } catch (error) {
       if (error.raw && error.raw.code === 'lock_timeout') {
         continue

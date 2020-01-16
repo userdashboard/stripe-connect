@@ -111,13 +111,12 @@ describe('/account/connect/edit-company-representative', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
-        await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
+        await TestHelper.waitForPersonRequirement(user, user.representative.id, 'company-representative', 'verification.additional_document')
         const req = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
-          verification_additional_document_back: TestHelper['success_id_scan_back.png'], 
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         }
         req.filename = __filename
@@ -174,7 +173,7 @@ const postData = {
     address_state: 'BC',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950',
+    dob_year: '1950'
   },
   CH: {
     address_city: 'Bern',
@@ -218,7 +217,8 @@ const postData = {
     address_postal_code: '03179',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   FI: {
     address_city: 'Helsinki',
@@ -253,7 +253,8 @@ const postData = {
     address_postal_code: '104',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   HK: {
     dob_day: '1',
@@ -402,7 +403,7 @@ const postData = {
     dob_year: '1950',
     phone: '456-789-0123'
   },
-  SK: { 
+  SK: {
     address_city: 'Slovakia',
     address_line1: '123 Sesame St',
     address_postal_code: '00102',

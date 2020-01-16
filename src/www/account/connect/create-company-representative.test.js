@@ -90,7 +90,6 @@ describe('/account/connect/create-company-representative', () => {
           assert.strictEqual(message.attr.template, `invalid-${field}`)
         }
       })
-
     }
     for (const country of connect.countrySpecs) {
       it('should create representative (' + country.id + ') (screenshots)', async () => {
@@ -104,9 +103,11 @@ describe('/account/connect/create-company-representative', () => {
         req.session = user.session
         req.body = postData[country.id]
         if (country.id !== 'JP') {
-          req.body.email = user.profile.contactEmail
           req.body.first_name = user.profile.firstName
           req.body.last_name = user.profile.lastName
+        }
+        if (country.id !== 'JP' && country.id !== 'CA' && country.id !== 'HK' && country.id !== 'MY' && country.id !== 'SG') {
+          req.body.email = user.profile.contactEmail
         }
         req.filename = __filename
         req.screenshots = [
@@ -120,7 +121,7 @@ describe('/account/connect/create-company-representative', () => {
         const doc = TestHelper.extractDoc(page)
         const representativesTable = doc.getElementById('representatives-table')
         const rows = representativesTable.getElementsByTagName('tr')
-        assert.strictEqual(rows.length, 2)    
+        assert.strictEqual(rows.length, 2)
       })
     }
   })
@@ -207,6 +208,7 @@ const postData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
+    phone: '456-789-0123'
   },
   FI: {
     address_city: 'Helsinki',
@@ -242,11 +244,12 @@ const postData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
+    phone: '456-789-0123'
   },
   HK: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950',
+    dob_year: '1950'
   },
   IE: {
     address_city: 'Dublin',
@@ -374,6 +377,7 @@ const postData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
+    phone: '456-789-0123'
   },
   SG: {
     dob_day: '1',

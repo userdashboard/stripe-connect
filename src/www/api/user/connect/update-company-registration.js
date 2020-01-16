@@ -7,13 +7,10 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
-    console.log('received', 1)
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    if (!req.body) {
-      throw new Error('invalid_name')
-    }
+    req.body = req.body || {}
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
@@ -21,7 +18,6 @@ module.exports = {
     if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
     }
-    console.log('received', 2)
     if (req.uploads) {
       if (req.uploads.verification_document_front) {
         const uploadData = {
@@ -56,7 +52,6 @@ module.exports = {
         }
       }
     }
-    console.log('received', 3)
     const accountInfo = {}
     if (global.stripeJS === 3) {
       accountInfo.account_token = req.body.token
@@ -183,33 +178,27 @@ module.exports = {
         accountInfo.address = accountInfo.address || {}
         accountInfo.address.line2 = req.body.address_line2
       }
-      if (req.body.verification_document_back && 
-          stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1 ||
-          !stripeAccount.company.verification.document.back) {
+      if (req.body.verification_document_back &&
+          stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) {
         accountInfo.company = accountInfo.company || {}
         accountInfo.company.verification = accountInfo.company.verification || {}
         accountInfo.company.verification.document = accountInfo.company.verification.document || {}
         accountInfo.company.verification.document.back = req.body.verification_document_back
       }
-      if (req.body.verification_document_front && 
-        stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1 ||
-        !stripeAccount.company.verification.document.front) {
+      if (req.body.verification_document_front &&
+        stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) {
         accountInfo.company = accountInfo.company || {}
         accountInfo.company.verification = accountInfo.company.verification || {}
         accountInfo.company.verification.document = accountInfo.company.verification.document || {}
         accountInfo.company.verification.document.front = req.body.verification_document_front
       }
     }
-    console.log('received', 4)
     while (true) {
       try {
-        console.log('updating stripe account')
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        console.log('finished updating stripe account')
         await stripeCache.update(accountNow)
         return accountNow
       } catch (error) {
-        console.log(error)
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
@@ -225,7 +214,6 @@ module.exports = {
         if (error.message.startsWith('invalid-')) {
           throw error
         }
-        console.log(error)
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

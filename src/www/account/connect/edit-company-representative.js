@@ -60,8 +60,8 @@ async function renderPage (req, res, messageTemplate) {
     removeElements.push('personal-address-container')
   }
   let requiresAddress = false
-  for (const requirement of req.data.representative.requirements.currently_due) {
-    requiresAddress = requirement.startsWith('address.')
+  for (const requirement of req.data.stripeAccount.requirements.currently_due) {
+    requiresAddress = requirement.startsWith(`${req.data.representative.id}.address.`)
     if (requiresAddress) {
       break
     }
@@ -69,19 +69,19 @@ async function renderPage (req, res, messageTemplate) {
   if (!requiresAddress && removeElements.indexOf('personal-address-container') === -1) {
     removeElements.push('personal-address-container')
   }
-  if (req.data.representative.requirements.currently_due.indexOf('address.state') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.address.state`) > -1) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
-    dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
+    dashboard.HTML.renderList(doc, personalStates, 'state-option', `${req.data.representative.id}.address_state`)
   } else if (removeElements.indexOf('personal-address-container') === -1) {
     removeElements.push('state-container', 'state-container-bridge')
-    if (req.data.representative.requirements.currently_due.indexOf('address.line1') === -1) {
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.address.line1`) === -1) {
       removeElements.push('line1-container', 'line2-container')
     }
-    if (req.data.representative.requirements.currently_due.indexOf('address.city') === -1) {
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.address.city`) === -1) {
       removeElements.push('city-container')
     }
   }
-  if (req.data.representative.requirements.currently_due.indexOf('id_number') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.id_number`) === -1) {
     removeElements.push('id_number-container')
   }
   if (req.method === 'GET') {
@@ -118,8 +118,8 @@ async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
-  for (const field of req.data.representative.requirements.currently_due) {
-    const posted = field.split('.').join('_')
+  for (const field of req.data.stripeAccount.requirements.currently_due) {
+    const posted = field.split('.').join('_').replace(`${req.data.representative.id}_`, '')
     if (!req.body[posted]) {
       if (field === 'address.line2' ||
           field === 'relationship.title' ||
@@ -133,7 +133,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (req.data.representative.requirements.currently_due.indexOf('verification.document.front') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.verification.document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_document_front &&
         !req.body.verification_document_front)) {
@@ -145,7 +145,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
-  if (req.data.representative.requirements.currently_due.indexOf('verification.additional.document.front') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.verification.additional.document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_additional_document_front &&
       !req.body.verification_additional_document_front)) {

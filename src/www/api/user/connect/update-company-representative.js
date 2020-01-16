@@ -158,7 +158,7 @@ module.exports = {
     if (global.stripeJS === 3) {
       companyRepresentativeInfo.person_token = req.body.token
     } else {
-      for (const field of person.requirements.currently_due) {
+      for (const field of stripeAccount.requirements.currently_due) {
         if (field === 'address.line2' ||
             field === 'relationship.title' ||
             field === 'relationship.executive' ||
@@ -166,7 +166,7 @@ module.exports = {
             field === 'relationship.owner') {
           continue
         }
-        const posted = field.split('.').join('_')
+        const posted = field.split('.').join('_').replace(`${person.id}_`, '')
         if (!req.body[posted]) {
           if (field !== 'verification.document' &&
               field !== 'verification.additional_document') {
@@ -202,7 +202,7 @@ module.exports = {
           companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
         }
       }
-      for (const field of person.requirements.eventually_due) {
+      for (const field of stripeAccount.requirements.eventually_due) {
         if (field === 'address.line2' ||
             field === 'relationship.title' ||
             field === 'relationship.executive' ||
@@ -210,10 +210,10 @@ module.exports = {
             field === 'relationship.owner') {
           continue
         }
-        if (person.requirements.currently_due.indexOf(field) > -1) {
+        if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
           continue
         }
-        const posted = field.split('.').join('_')
+        const posted = field.split('.').join('_').replace(`${person.id}_`, '')
         if (!req.body[posted]) {
           continue
         }
@@ -249,22 +249,22 @@ module.exports = {
         companyRepresentativeInfo.address = companyRepresentativeInfo.address || {}
         companyRepresentativeInfo.address.line2 = req.body.address_line2
       }
-      if (req.body.verification_document_back && person.requirements.eventually_due.indexOf('verification.document') > -1) {
+      if (req.body.verification_document_back && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.document`) > -1) {
         companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
         companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
         companyRepresentativeInfo.verification.document.back = req.body.verification_document_back
       }
-      if (req.body.verification_document_front && person.requirements.eventually_due.indexOf('verification.document') > -1) {
+      if (req.body.verification_document_front && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.document`) > -1) {
         companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
         companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
         companyRepresentativeInfo.verification.document.deonr = req.body.verification_document_front
       }
-      if (req.body.verification_additional_document_back && person.requirements.eventually_due.indexOf('verification.additional_document') > -1) {
+      if (req.body.verification_additional_document_back && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.additional_document`) > -1) {
         companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
         companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
         companyRepresentativeInfo.verification.additional_document.back = req.body.verification_additional_document_back
       }
-      if (req.body.verification_additional_document_front && person.requirements.eventually_due.indexOf('verification.additional_document') > -1) {
+      if (req.body.verification_additional_document_front && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.additional_document`) > -1) {
         companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
         companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
         companyRepresentativeInfo.verification.additional_document.front = req.body.verification_additional_document_front

@@ -32,7 +32,6 @@ module.exports = {
     }
     if (stripeAccount.requirements.currently_due.length) {
       for (const field of stripeAccount.requirements.currently_due) {
-        console.log(field)
         if (field !== 'tos_acceptance.date' &&
             field !== 'tos_acceptance.ip') {
           throw new Error('invalid-registration')

@@ -56,26 +56,25 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     removeElements.push('personal-address-container')
   }
-  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
-  if (requirements.currently_due.indexOf('address.state') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.state`) > -1) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
-  } else if (req.data.stripeAccount.country !== 'JP') {
+  } else if (removeElements.indexOf('personal-address-container') === -1) {
     removeElements.push('state-container', 'state-container-bridge')
   }
-  if (requirements.currently_due.indexOf('gender') === -1) {
+  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.gender`) === -1) {
     removeElements.push('gender-container')
   }
-  if (requirements.currently_due.indexOf('id_number') === -1) {
+  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.id_number`) === -1) {
     removeElements.push('id_number-container')
   }
-  if (requirements.currently_due.indexOf('email') === -1) {
+  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.email`) === -1) {
     removeElements.push('email-container')
   }
-  if (requirements.currently_due.indexOf('phone') === -1) {
+  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.phone`) === -1) {
     removeElements.push('phone-container')
   }
-  if (requirements.currently_due.indexOf('ssn_last_4') === -1) {
+  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.ssn_last_4`) === -1) {
     removeElements.push('ssn_last_4-container')
   }
   if (req.body) {
@@ -105,9 +104,8 @@ async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
-  const requirements = JSON.parse(req.data.stripeAccount.metadata.companyRepresentativeTemplate)
-  for (const field of requirements.currently_due) {
-    const posted = field.split('.').join('_')
+  for (const field of req.data.stripeAccount.requirements.currently_due) {
+    const posted = field.split('.').join('_').replace(`${req.data.stripeAccount.metadata.representative}_`, '')
     if (!req.body[posted]) {
       if (field === 'address.line2' ||
           field === 'relationship.title' ||
@@ -123,7 +121,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (requirements.currently_due.indexOf('relationship.representative.verification.document.front') > -1) {
+  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.verification.document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_document_front &&
         !req.body.verification_document_front)) {
@@ -135,7 +133,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
-  if (requirements.currently_due.indexOf('relationship.representative.verification.additional.document.front') > -1) {
+  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.verification.additional.document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_additional_document_front &&
       !req.body.verification_additional_document_front)) {
@@ -147,9 +145,8 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_additional_document_back')
     }
   }
-  let person
   try {
-    person = await global.api.user.connect.CreateCompanyRepresentative.post(req)
+    await global.api.user.connect.CreateCompanyRepresentative.post(req)
   } catch (error) {
     if (error.message.startsWith('invalid-')) {
       return renderPage(req, res, error.message)

@@ -222,7 +222,7 @@ describe('/account/connect/create-company-director', () => {
       const doc = TestHelper.extractDoc(page)
       const directorsTable = doc.getElementById('directors-table')
       const rows = directorsTable.getElementsByTagName('tr')
-      assert.strictEqual(rows.length, 2)    
+      assert.strictEqual(rows.length, 2)
     })
   })
 })

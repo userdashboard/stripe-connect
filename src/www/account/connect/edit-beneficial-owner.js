@@ -39,6 +39,7 @@ async function renderPage (req, res, messageTemplate) {
     'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
   if (messageTemplate) {
+    console.log(messageTemplate)
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
       removeElements.push('form-container')
@@ -49,22 +50,22 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  if (req.data.owner.requirements.currently_due.indexOf('id_number') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.id_number`) === -1) {
     removeElements.push('id_number-container')
   }
-  if (req.data.owner.requirements.currently_due.indexOf('email') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.email`) === -1) {
     removeElements.push('email-container')
   }
-  if (req.data.owner.requirements.currently_due.indexOf('address.state') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.address.state`) === -1) {
     removeElements.push('state-container')
   }
-  if (req.data.owner.requirements.currently_due.indexOf('address.country') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.address.country`) === -1) {
     removeElements.push('country-container')
   }
-  if (req.data.owner.requirements.currently_due.indexOf('verification.document') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.verification.document`) === -1) {
     removeElements.push('document-container')
   }
-  if (req.data.owner.requirements.currently_due.indexOf('verification.additional_document') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.verification.additional_document`) === -1) {
     removeElements.push('additional_document-container')
   }
   if (req.method === 'GET' && req.data.owner.address.country) {
@@ -73,8 +74,8 @@ async function renderPage (req, res, messageTemplate) {
     dashboard.HTML.renderList(doc, states, 'state-option', 'address_state')
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
     dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
-    for (const field of req.data.owner.requirements.currently_due) {
-      const posted = field.split('.').join('_')
+    for (const field of req.data.stripeAccount.requirements.currently_due) {
+      const posted = field.split('.').join('_').replace(`${req.data.owner.id}_`, '')
       if (field === 'verification.document' ||
           field === 'verification.additional_document') {
         continue
@@ -91,22 +92,22 @@ async function renderPage (req, res, messageTemplate) {
       }
     }
   } else if (req.body) {
-    if (req.data.owner.requirements.currently_due.indexOf('address.state') > -1) {
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.address.state`) > -1) {
       let selectedCountry
-      if (req.data.owner.requirements.currently_due.indexOf('address.country') > -1) {
+      if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.address.country`) > -1) {
         selectedCountry = req.body.address_country || req.data.stripeAccount.country
       } else {
         selectedCountry = req.data.stripeAccount.country
       }
-      const states = connect.countryDivisions[selectedCountry] 
+      const states = connect.countryDivisions[selectedCountry]
       dashboard.HTML.renderList(doc, states, 'state-option', 'address_state')
     }
-    if (req.data.owner.requirements.currently_due.indexOf('address.country') > -1) {
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.address.country`) > -1) {
       const selectedCountry = req.body.address_country || req.data.owner.address_country
       dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
       dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
     }
-    for (const field of req.data.owner.requirements.currently_due) {
+    for (const field of req.data.stripeAccount.requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
         continue
@@ -146,8 +147,8 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  for (const field of req.data.owner.requirements.currently_due) {
-    const posted = field.split('.').join('_')
+  for (const field of req.data.stripeAccount.requirements.currently_due) {
+    const posted = field.split('.').join('_').replace(`${req.data.ownerid}_`, '')
     if (!field) {
       if (field === 'verification.document' ||
           field === 'verification.additional_document') {
@@ -156,12 +157,12 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (req.data.owner.requirements.currently_due.indexOf('address.country') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.address.country`) > -1) {
     if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
       return renderPage(req, res, 'invalid-address_country')
     }
   }
-  if (req.data.owner.requirements.currently_due.indexOf('address.state') > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.owner.id}.address.state`) > -1) {
     if (!req.body.address_state) {
       return renderPage(req, res, 'invalid-address_state')
     }

@@ -25,7 +25,6 @@ async function beforeRequest (req) {
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   req.data.stripeAccount.stripePublishableKey = global.stripePublishableKey
-  console.log('renddering', messageTemplate)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   const removeElements = []
   if (global.stripeJS !== 3) {
@@ -54,7 +53,7 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('company.phone') === -1) {
     removeElements.push('phone-container')
-  } 
+  }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('business_profile.url') === -1) {
     removeElements.push('business_profile_url-container')
   }
@@ -98,16 +97,12 @@ async function renderPage (req, res, messageTemplate) {
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
-    if (!element) {
-      console.log('no element', id)
-    }
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }
 
 async function submitForm (req, res) {
-  console.log('posted', req.body)
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
@@ -121,7 +116,7 @@ async function submitForm (req, res) {
         field === 'company.verification.document' ||
         field === 'relationship.owner' ||
         field === 'relationship.director' ||
-        field === 'external_account' || 
+        field === 'external_account' ||
         field.startsWith('relationship.') ||
         field.startsWith('tos_acceptance.') ||
         field.startsWith('person_') ||
@@ -144,17 +139,13 @@ async function submitForm (req, res) {
     }
   }
   try {
-    console.log('hitting API')
     await global.api.user.connect.UpdateCompanyRegistration.patch(req)
-    console.log('finished patching company registration')
   } catch (error) {
-    console.log(error)
     if (error.message.startsWith('invalid-')) {
       return renderPage(req, res, error.message)
     }
     return renderPage(req, res, error.message)
   }
-  console.log('redirecting to self or custom url', req.query)
   if (req.query['return-url']) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {

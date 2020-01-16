@@ -156,7 +156,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
   })
 
   describe('EditBeneficialOwner#POST', () => {
-    it('should update required document (screenshots)', async () => {
+    it.only('should update required document (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -179,6 +179,9 @@ describe('/account/connect/edit-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
+      console.log('waiting for person requirement')
+      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'beneficial-owner', 'verification.additional_document')
+      console.log('received person requirement')
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
@@ -225,7 +228,9 @@ describe('/account/connect/edit-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.waitForAccountRequirement(user, 'verification.additional_document')
+      console.log('waiting for person requirement')
+      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'beneficial-owner', 'verification.additional_document')
+      console.log('received person requirement')
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session

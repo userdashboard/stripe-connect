@@ -32,7 +32,7 @@ async function renderPage (req, res, messageTemplate) {
     }
   }
   const removeList = []
-  // only countries with country specs have containers for 
+  // only countries with country specs have containers for
   // their banking field format, but during tests the list
   // of country specs may be replaced with a single country
   // so the full, non-stripe country list is used here

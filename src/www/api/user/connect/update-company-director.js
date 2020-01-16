@@ -14,21 +14,15 @@ module.exports = {
     if (!person) {
       throw new Error('invalid-personid')
     }
-    if (!req.body) {
-      if (person.requirements.currently_due.length) {
-        throw new Error('invalid-' + person.requirements.currently_due[0])
-      }
-      if (person.requirements.eventually_due.length) {
-        throw new Error('invalid-' + person.requirements.eventually_due[0])
-      }
-      throw new Error('invalid-person')
-    }
-    if (!person.requirements.currently_due.length && !person.requirements.eventually_due.length) {
+    req.query.stripeid = person.account
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount.requirements.currently_due.length && !stripeAccount.requirements.eventually_due.length) {
       throw new Error('invalid-person')
     }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
+    req.body = req.body || {}
     let validateDOB = false
     if (req.body.dob_day) {
       validateDOB = true
@@ -173,8 +167,8 @@ module.exports = {
     if (global.stripeJS === 3) {
       companyDirectorInfo.person_token = req.body.token
     } else {
-      for (const field of person.requirements.currently_due) {
-        const posted = field.split('.').join('_')
+      for (const field of stripeAccount.requirements.currently_due) {
+        const posted = field.split('.').join('_').replace(`${person.id}_`, '')
         if (!req.body[posted]) {
           if (field === 'address.line2' ||
               field === 'relationship.title' ||
@@ -219,8 +213,8 @@ module.exports = {
           companyDirectorInfo[property] = req.body[posted]
         }
       }
-      for (const field of person.requirements.eventually_due) {
-        const posted = field.split('.').join('_')
+      for (const field of stripeAccount.requirements.eventually_due) {
+        const posted = field.split('.').join('_').replace(`${person.id}_`, '')
         if (!req.body[posted]) {
           continue
         }

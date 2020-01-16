@@ -53,7 +53,6 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type === 'company') {
     owners = await global.api.user.connect.BeneficialOwners.get(req)
     directors = await global.api.user.connect.CompanyDirectors.get(req)
-    console.log('loading representative', stripeAccount.metadata.representative)
     req.query.personid = stripeAccount.metadata.representative
     representative = await global.api.user.connect.CompanyRepresentative.get(req)
   }
@@ -141,9 +140,9 @@ async function renderPage (req, res) {
       removeElements.push('owners-table')
     }
   }
-  if (!req.data.stripeAccount.metadata.submitted && 
-      !req.data.stripeAccount.company.directors_provided && 
-      req.data.directors && 
+  if (!req.data.stripeAccount.metadata.submitted &&
+      !req.data.stripeAccount.company.directors_provided &&
+      req.data.directors &&
       req.data.directors.length) {
     dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
   } else {
@@ -175,9 +174,6 @@ async function renderPage (req, res) {
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
-    if (!element) {
-      console.log(id)
-    }
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)

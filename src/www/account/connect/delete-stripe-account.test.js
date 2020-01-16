@@ -84,7 +84,7 @@ describe('/account/connect/delete-stripe-account', () => {
   })
 
   describe('DeleteStripeAccount#POST', () => {
-   it('should delete Stripe account (screenshots)', async () => {
+    it('should delete Stripe account (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',

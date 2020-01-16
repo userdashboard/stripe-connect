@@ -31,7 +31,6 @@ module.exports = {
     }
     while (true) {
       try {
-        accountInfo
         stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(stripeAccount)
         return stripeAccount

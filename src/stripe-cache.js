@@ -33,7 +33,7 @@ module.exports = {
           continue
         }
         throw error
-      }  
+      }
     }
   },
   retrievePerson: async (stripeid, personid, stripeKey) => {

@@ -25,9 +25,8 @@ module.exports = {
     }
     req.query.personid = stripeAccount.metadata.representative
     const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
-    const requirements = JSON.parse(stripeAccount.metadata.companyRepresentativeTemplate)
-    for (const field of requirements.currently_due) {
-      const posted = field.split('.').join('_')
+    for (const field of stripeAccount.requirements.currently_due) {
+      const posted = field.split('.').join('_').replace(`${req.data.stripeAccount.metadata.representative}_`, '')
       if (!req.body || !req.body[posted]) {
         if (field === 'address.line2' ||
             field === 'relationship.title' ||
@@ -44,13 +43,13 @@ module.exports = {
     if (req.body.address_country && !connect.countryNameIndex[req.body.address_country]) {
       throw new Error('invalid-address_country')
     }
-    if (requirements.currently_due.indexOf('address.country') > -1 ||
-        requirements.eventually_due.indexOf('address.country') > -1) {
+    if (stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.country`) > -1 ||
+        stripeAccount.requirements.eventually_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.country`) > -1) {
       if (!req.body.address_country) {
         throw new Error('invalid-address_country')
       }
-      if (requirements.currently_due.indexOf('address.state') > -1 ||
-          requirements.eventually_due.indexOf('address.state') > -1) {
+      if (stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.state`) > -1 ||
+          stripeAccount.requirements.eventually_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.state`) > -1) {
         if (!req.body.address_state) {
           throw new Error('invalid-address_state')
         }
@@ -141,7 +140,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_front')
       }
-    } else if (requirements.currently_due.indexOf('verification.document') > -1) {
+    } else if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.verification.document`) > -1) {
       throw new Error('invalid-verification_document_front')
     }
     if (req.uploads && req.uploads.verification_document_back) {
@@ -159,7 +158,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_back')
       }
-    } else if (requirements.currently_due.indexOf('verification.document') > -1) {
+    } else if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.verification.document`) > -1) {
       throw new Error('invalid-verification_document_back')
     }
     const representativeInfo = {
@@ -170,8 +169,8 @@ module.exports = {
     if (global.stripeJS === 3) {
       representativeInfo.person_token = req.body.token
     } else {
-      for (const field of requirements.currently_due) {
-        const posted = field.split('.').join('_').replace('representative.')
+      for (const field of stripeAccount.requirements.currently_due) {
+        const posted = field.split('.').join('_').replace(`${existingRepresentative.id}_`, '')
         if (req.body[posted]) {
           if (field.startsWith('address.')) {
             const property = field.substring('address.'.length)
@@ -219,8 +218,8 @@ module.exports = {
           }
         }
       }
-      for (const field of requirements.eventually_due) {
-        if (requirements.currently_due.indexOf(field) > -1) {
+      for (const field of stripeAccount.requirements.eventually_due) {
+        if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
           continue
         }
         const posted = field.split('.').join('_').replace('representative.')

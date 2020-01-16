@@ -27,7 +27,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  messageTemplate = messageTemplate || req.query.message  
+  messageTemplate = messageTemplate || req.query.message
   const removeElements = []
   req.data.stripeAccount.stripePublishableKey = global.stripePublishableKey
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')

@@ -37,7 +37,6 @@ async function renderPage (req, res, messageTemplate) {
     'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
     'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
-  console.log(messageTemplate)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
@@ -49,19 +48,19 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  if (req.data.director.requirements.currently_due.indexOf('relationship.director.relationship_title') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.director.id}.relationship.title`) === -1) {
     removeElements.push('relationship_title-container')
   }
-  if (req.data.director.requirements.currently_due.indexOf('relationship.director.email') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.director.id}.email`) === -1) {
     removeElements.push('email')
   }
   if (req.method === 'GET') {
-    for (const field of req.data.director.requirements.currently_due) {
+    for (const field of req.data.stripeAccount.requirements.currently_due) {
       if (field === 'verification.document' ||
           field === 'verification.additional_document') {
         continue
-      }   
-      const posted = field.split('.').join('_')   
+      }
+      const posted = field.split('.').join('_')
       const element = doc.getElementById(posted)
       if (element) {
         element.setAttribute('value', req.data.director[field])
@@ -93,7 +92,7 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  for (const field of req.data.director.requirements.currently_due) {
+  for (const field of req.data.stripeAccount.requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {
       if (field === 'verification.document' ||
