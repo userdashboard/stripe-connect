@@ -8,7 +8,7 @@ module.exports = {
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'individual'
-    })    
+    })
     const identity = TestHelper.nextIdentity()
     const individual = {
       first_name: identity.firstName,
@@ -438,7 +438,6 @@ const companyData = {
     tax_id: '00000000000'
   }
 }
-
 
 const representativeData = {
   AT: {
