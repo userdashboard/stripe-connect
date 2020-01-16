@@ -54,6 +54,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
         if (errorMessage.startsWith('company[address]')) {
           let field = errorMessage.substring('company[address]['.length)

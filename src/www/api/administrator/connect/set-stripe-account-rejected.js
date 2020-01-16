@@ -40,6 +40,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

@@ -150,7 +150,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           business_profile_url: 'https://www.abcde.com',
           address_city: 'Frederiksberg',
           address_line1: '123 Park Lane',
-          address_postal_code: '1020',
+          address_postal_code: '01067',
           address_state: 'BW',
           name: 'Company',
           phone: '456-789-0123',

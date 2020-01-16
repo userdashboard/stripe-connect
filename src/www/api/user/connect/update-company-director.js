@@ -168,13 +168,16 @@ module.exports = {
       companyDirectorInfo.person_token = req.body.token
     } else {
       for (const field of stripeAccount.requirements.currently_due) {
+        if (!field.startsWith(person.id)) {
+          continue
+        }
         const posted = field.split('.').join('_').replace(`${person.id}_`, '')
         if (!req.body[posted]) {
-          if (field === 'address.line2' ||
-              field === 'relationship.title' ||
-              field === 'relationship.executive' ||
-              field === 'relationship.director' ||
-              field === 'relationship.owner') {
+          if (field === `${person.id}.address.line2` ||
+          field === `${person.id}.relationship.title` ||
+          field === `${person.id}.relationship.executive` ||
+          field === `${person.id}.relationship.director` ||
+          field === `${person.id}.relationship.owner`) {
             continue
           }
           if (field !== 'verification.document' &&
@@ -214,6 +217,9 @@ module.exports = {
         }
       }
       for (const field of stripeAccount.requirements.eventually_due) {
+        if (!field.startsWith(person.id)) {
+          continue
+        }
         const posted = field.split('.').join('_').replace(`${person.id}_`, '')
         if (!req.body[posted]) {
           continue
@@ -289,6 +295,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (error.message.startsWith('invalid-')) {
           throw error
         }

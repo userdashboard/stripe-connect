@@ -134,14 +134,17 @@ before(async () => {
   let accounts = await stripe.accounts.list(stripeKey)
   while (accounts.data && accounts.data.length) {
     for (const account of accounts.data) {
-      const persons = await stripe.accounts.listPersons(account.id, { limit: 100 }, stripeKey)
-      if (persons.data && persons.data.length) {
-        for (const person of persons.data) {
-          try {
-            await stripe.accounts.deletePerson(account.id, person.id, stripeKey)
-          } catch (error) {
+      try {
+        const persons = await stripe.accounts.listPersons(account.id, { limit: 100 }, stripeKey)
+        if (persons.data && persons.data.length) {
+          for (const person of persons.data) {
+            try {
+              await stripe.accounts.deletePerson(account.id, person.id, stripeKey)
+            } catch (error) {
+            }
           }
         }
+      } catch (error) {
       }
       try {
         await stripe.accounts.del(account.id, stripeKey)
@@ -636,7 +639,7 @@ async function waitForVerificationStart (user, callback) {
   return setTimeout(wait, 100)
 }
 
-async function waitForAccountRequirement (user, field, callback) {
+async function waitForAccountRequirement (user, requirement, callback) {
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -649,10 +652,10 @@ async function waitForAccountRequirement (user, field, callback) {
     if (!stripeAccount.requirements) {
       return setTimeout(wait, 100)
     }
-    if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
+    if (stripeAccount.requirements.currently_due.indexOf(requirement) > -1) {
       return setTimeout(callback, 10)
     }
-    if (stripeAccount.requirements.eventually_due.indexOf(field) > -1) {
+    if (stripeAccount.requirements.eventually_due.indexOf(requirement) > -1) {
       return setTimeout(callback, 10)
     }
     return setTimeout(wait, 100)
@@ -660,31 +663,98 @@ async function waitForAccountRequirement (user, field, callback) {
   return setTimeout(wait, 100)
 }
 
-async function waitForPersonRequirement (user, personid, type, field, callback) {
+async function waitForPersonRequirement (user, personid, requirement, callback) {
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
+  const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${personid}`)
+  req2.account = user.account
+  req2.session = user.session
+  req2.stripeKey = stripeKey
+  const req3 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${personid}`)
+  req3.account = user.account
+  req3.session = user.session
+  req3.stripeKey = stripeKey
+  const req4 = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${personid}`)
+  req4.account = user.account
+  req4.session = user.session
+  req4.stripeKey = stripeKey
+  console.log('awaiting field', personid, requirement)
   async function wait () {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await req.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.requirements) {
       return setTimeout(wait, 100)
     }
     for (const field of stripeAccount.requirements.currently_due) {
-      if (field.indexOf(personid) === 0) {
-        console.log('person field', field, 'now currently_due')
+      if (field === `${personid}.${requirement}`) {
+        console.log('account field', field, 'now currently_due')
         return setTimeout(callback, 10)
       }
     }
     for (const field of stripeAccount.requirements.eventually_due) {
-      if (field.indexOf(personid) === 0) {
-        console.log('person field', field, 'now currently_due')
+      if (field === `${personid}.${requirement}`) {
+        console.log('account field', field, 'now eventually_due')
         return setTimeout(callback, 10)
       }
     }
+    try {
+      const person = await global.api.user.connect.BeneficialOwner.get(req2)
+      if (person && person.requirements) {
+        for (const field of person.requirements.currently_due) {
+          if (field === requirement) {
+            console.log('person field', field, 'now currently_due')
+            return setTimeout(callback, 10)
+          }
+        }
+        for (const field of person.requirements.eventually_due) {
+          if (field === requirement) {
+            console.log('person field', field, 'now eventually_due')
+            return setTimeout(callback, 10)
+          }
+        }
+      }
+    } catch (error) {
+    }
+    try {
+      const person = await global.api.user.connect.CompanyDirector.get(req3)
+      if (person && person.requirements) {
+        for (const field of person.requirements.currently_due) {
+          if (field === requirement) {
+            console.log('person field', field, 'now currently_due')
+            return setTimeout(callback, 10)
+          }
+        }
+        for (const field of person.requirements.eventually_due) {
+          if (field === requirement) {
+            console.log('person field', field, 'now eventually_due')
+            return setTimeout(callback, 10)
+          }
+        }
+      }
+    } catch (error) {
+    }
+    try {
+      const person = await global.api.user.connect.CompanyRepresentative.get(req4)
+      if (person && person.requirements) {
+        for (const field of person.requirements.currently_due) {
+          if (field === requirement) {
+            console.log('person field', field, 'now currently_due')
+            return setTimeout(callback, 10)
+          }
+        }
+        for (const field of person.requirements.eventually_due) {
+          if (field === requirement) {
+            console.log('person field', field, 'now eventually_due')
+            return setTimeout(callback, 10)
+          }
+        }
+      }
+    } catch (error) {
+    }    
     return setTimeout(wait, 100)
   }
   return setTimeout(wait, 100)

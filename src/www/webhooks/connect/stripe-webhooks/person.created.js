@@ -6,9 +6,6 @@ stripe.setTelemetryEnabled(false)
 module.exports = async (stripeEvent, req) => {
   const person = stripeEvent.data.object
   if (person.metadata.template) {
-    if (person.relationship.representative) {
-      return
-    }
     while (true) {
       if (global.testEnded) {
         return
@@ -28,6 +25,9 @@ module.exports = async (stripeEvent, req) => {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         return
       }
     }

@@ -30,6 +30,7 @@ module.exports = {
       stripeEvent = stripe.webhooks.constructEvent(req.bodyRaw, req.headers['stripe-signature'], req.endpointSecret || global.connectWebhookEndPointSecret)
     } catch (error) {
     }
+    console.log('got event', stripeEvent.type)
     if (!stripeEvent) {
       return res.end()
     }

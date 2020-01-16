@@ -156,13 +156,41 @@ describe('/account/connect/edit-beneficial-owner', () => {
   })
 
   describe('EditBeneficialOwner#POST', () => {
-    it.only('should update required document (screenshots)', async () => {
+    it('should update required document (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
         type: 'company'
       })
+      await TestHelper.createStripeRegistration(user, {
+        business_profile_mcc: '7531',
+        business_profile_url: 'https://www.abcde.com',
+        address_city: 'Frederiksberg',
+        address_line1: '123 Park Lane',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000'
+      })
       const person = TestHelper.nextIdentity()
+      await TestHelper.createCompanyRepresentative(user, {
+        address_city: 'Berlin',
+        address_line1: 'First Street',
+        address_postal_code: '01067',
+        address_state: 'BW',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        phone: '456-789-0123',
+        first_name: person.firstName,
+        last_name: person.lastName
+      }, {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      })
+      const person2 = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
         address_city: 'Berlin',
         address_country: 'DE',
@@ -172,15 +200,24 @@ describe('/account/connect/edit-beneficial-owner', () => {
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
+        email: person2.email,
+        first_name: person2.firstName,
+        last_name: person2.lastName
       })
+      await TestHelper.createExternalAccount(user, {
+        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
+        account_holder_type: 'individual',
+        account_number: '000123456789',
+        country: 'US',
+        currency: 'usd',
+        routing_number: '110000000'
+      })      
+      await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.submitStripeAccount(user)
+      console.log(user.owner)
       console.log('waiting for person requirement')
-      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'beneficial-owner', 'verification.additional_document')
+      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.additional_document')
       console.log('received person requirement')
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
@@ -214,7 +251,6 @@ describe('/account/connect/edit-beneficial-owner', () => {
       const person = TestHelper.nextIdentity()
       await TestHelper.createBeneficialOwner(user, {
         address_city: 'Berlin',
-        address_country: 'DE',
         address_line1: 'First Street',
         address_postal_code: '01067',
         address_state: 'BW',
@@ -229,7 +265,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       console.log('waiting for person requirement')
-      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'beneficial-owner', 'verification.additional_document')
+      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.additional_document')
       console.log('received person requirement')
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account

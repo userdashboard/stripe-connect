@@ -50,8 +50,8 @@ module.exports = {
             field === 'relationship.title' ||
             field === 'executive' ||
             field === 'director' ||
-            field === 'verification.document.front' ||
-            field === 'verification.document.back' ||
+            field === 'verification.document' ||
+            field === 'verification.additional_document' ||
             field === 'owner') {
           continue
         }
@@ -117,7 +117,7 @@ module.exports = {
         throw new Error('invalid-dob_day')
       }
     }
-    if (req.uploads && req.uploads.verification_document_front) {
+    if (!req.body.token && req.uploads && req.uploads.verification_document_front) {
       const frontData = {
         purpose: 'identity_document',
         file: {
@@ -132,10 +132,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_front')
       }
-    } else if (!req.body.token) {
-      throw new Error('invalid-verification_document_front')
-    }
-    if (req.uploads && req.uploads.verification_document_back) {
+    } else if (!req.body.token && req.uploads && req.uploads.verification_document_back) {
       const backData = {
         purpose: 'identity_document',
         file: {
@@ -150,8 +147,6 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_back')
       }
-    } else if (!req.body.token) {
-      throw new Error('invalid-verification_document_back')
     }
     const ownerInfo = {
     }
@@ -312,6 +307,7 @@ module.exports = {
         ownerInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
+    console.log('creating beneficial owner', ownerInfo)
     let owner
     while (true) {
       try {
@@ -331,9 +327,14 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
+        console.log(error)
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
+    console.log('updating account')
     const owners = JSON.parse(stripeAccount.metadata.owners || '[]')
     owners.unshift(owner.id)
     const accountInfo = {
@@ -359,6 +360,10 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
+        console.log(error)
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

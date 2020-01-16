@@ -59,6 +59,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -84,7 +87,6 @@ module.exports = {
     }
     const representativeInfo = {
       metadata: {
-        template: true,
         token: false
       },
       relationship: {
@@ -108,6 +110,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -128,6 +133,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -149,6 +157,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -178,6 +189,7 @@ module.exports = {
     while (true) {
       try {
         const stripeAccountNow = await stripe.accounts.update(stripeAccount.id, accountUpdate, req.stripeKey)
+        console.log('created account', 'representative', companyRepresentative.id, 'director template', companyDirector.id, 'owner template', beneficialOwner.id, 'account object', stripeAccountNow)
         await stripeCache.update(stripeAccountNow)
         return stripeAccountNow
       } catch (error) {
@@ -193,6 +205,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

@@ -75,6 +75,9 @@ async function renderPage (req, res, messageTemplate) {
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
     dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
     for (const field of req.data.stripeAccount.requirements.currently_due) {
+      if (!field.startsWith(req.data.owner.id)) {
+        continue
+      }
       const posted = field.split('.').join('_').replace(`${req.data.owner.id}_`, '')
       if (field === 'verification.document' ||
           field === 'verification.additional_document') {
@@ -148,9 +151,13 @@ async function submitForm (req, res) {
     return renderPage(req, res, 'invalid-token')
   }
   for (const field of req.data.stripeAccount.requirements.currently_due) {
-    const posted = field.split('.').join('_').replace(`${req.data.ownerid}_`, '')
+    if (!field.startsWith(req.data.owner.id)) {
+      continue
+    }
+    const posted = field.split('.').join('_').replace(`${req.data.owner.id}_`, '')
     if (!field) {
-      if (field === 'verification.document' ||
+      if (field === 'relationship.executive' || 
+          field === 'verification.document' ||
           field === 'verification.additional_document') {
         continue
       }

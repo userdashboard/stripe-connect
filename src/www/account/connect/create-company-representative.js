@@ -105,17 +105,18 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   for (const field of req.data.stripeAccount.requirements.currently_due) {
+    if (!field.startsWith(stripeAccount.metadata.representative)) {
+      continue
+    }
     const posted = field.split('.').join('_').replace(`${req.data.stripeAccount.metadata.representative}_`, '')
     if (!req.body[posted]) {
-      if (field === 'address.line2' ||
-          field === 'relationship.title' ||
-          field === 'relationship.executive' ||
-          field === 'relationship.director' ||
-          field === 'relationship.owner' ||
-          field === 'verification.document.front' ||
-          field === 'verification.document.back' ||
-          field === 'verification.additional_document.front' ||
-          field === 'verification.additional_document.back') {
+      if (field === `${req.data.stripeAccount.metadata.representative}address.line2` ||
+          field === `${req.data.stripeAccount.metadata.representative}relationship.title` ||
+          field === `${req.data.stripeAccount.metadata.representative}relationship.executive` ||
+          field === `${req.data.stripeAccount.metadata.representative}relationship.director` ||
+          field === `${req.data.stripeAccount.metadata.representative}relationship.owner` ||
+          field === `${req.data.stripeAccount.metadata.representative}verification.document` ||
+          field === `${req.data.stripeAccount.metadata.representative}verification.additional_document`) {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)

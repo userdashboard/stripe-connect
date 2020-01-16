@@ -41,6 +41,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (error.message.startsWith('invalid-')) {
           throw error
         }

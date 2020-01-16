@@ -119,6 +119,9 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   for (const field of req.data.stripeAccount.requirements.currently_due) {
+    if (!field.startsWith(req.data.representative.id)) {
+      continue
+    }
     const posted = field.split('.').join('_').replace(`${req.data.representative.id}_`, '')
     if (!req.body[posted]) {
       if (field === 'address.line2' ||

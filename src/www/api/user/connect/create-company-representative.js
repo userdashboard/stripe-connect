@@ -26,15 +26,18 @@ module.exports = {
     req.query.personid = stripeAccount.metadata.representative
     const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
     for (const field of stripeAccount.requirements.currently_due) {
-      const posted = field.split('.').join('_').replace(`${req.data.stripeAccount.metadata.representative}_`, '')
+      if (!field.startsWith(stripeAccount.metadata.representative)) {
+        continue
+      }
+      const posted = field.split('.').join('_').replace(`${stripeAccount.metadata.representative}_`, '')
       if (!req.body || !req.body[posted]) {
-        if (field === 'address.line2' ||
-            field === 'relationship.title' ||
-            field === 'relationship.executive' ||
-            field === 'relationship.representative' ||
-            field === 'owner' ||
-            field === 'verification.document.front' ||
-            field === 'verification.document.back') {
+        if (field === `${stripeAccount.metadata.representative}.address.line2` ||
+            field === `${stripeAccount.metadata.representative}.relationship.title` ||
+            field === `${stripeAccount.metadata.representative}.relationship.executive` ||
+            field === `${stripeAccount.metadata.representative}.relationship.representative` ||
+            field === `${stripeAccount.metadata.representative}.owner` ||
+            field === `${stripeAccount.metadata.representative}.verification.document` ||
+            field === `${stripeAccount.metadata.representative}.verification.additional_document`) {
           continue
         }
         throw new Error(`invalid-${posted}`)
@@ -43,13 +46,13 @@ module.exports = {
     if (req.body.address_country && !connect.countryNameIndex[req.body.address_country]) {
       throw new Error('invalid-address_country')
     }
-    if (stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.country`) > -1 ||
-        stripeAccount.requirements.eventually_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.country`) > -1) {
+    if (stripeAccount.requirements.currently_due.indexOf(`${stripeAccount.metadata.representative}.address.country`) > -1 ||
+        stripeAccount.requirements.eventually_due.indexOf(`${stripeAccount.metadata.representative}.address.country`) > -1) {
       if (!req.body.address_country) {
         throw new Error('invalid-address_country')
       }
-      if (stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.state`) > -1 ||
-          stripeAccount.requirements.eventually_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.state`) > -1) {
+      if (stripeAccount.requirements.currently_due.indexOf(`${stripeAccount.metadata.representative}.address.state`) > -1 ||
+          stripeAccount.requirements.eventually_due.indexOf(`${stripeAccount.metadata.representative}.address.state`) > -1) {
         if (!req.body.address_state) {
           throw new Error('invalid-address_state')
         }
@@ -170,6 +173,9 @@ module.exports = {
       representativeInfo.person_token = req.body.token
     } else {
       for (const field of stripeAccount.requirements.currently_due) {
+        if (!field.startsWith(existingRepresentative.id)) {
+          continue
+        }
         const posted = field.split('.').join('_').replace(`${existingRepresentative.id}_`, '')
         if (req.body[posted]) {
           if (field.startsWith('address.')) {
@@ -360,6 +366,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (error.raw && error.raw.code === 'account_invalid') {
           continue
         }
@@ -392,6 +401,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

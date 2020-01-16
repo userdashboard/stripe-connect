@@ -13,7 +13,9 @@ module.exports = async (stripeEvent, req) => {
     try {
       const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
       if (exists) {
-        console.log('updating account')
+        if (stripeEvent.data.previous_attributes) {
+          console.log('updating account requirements', stripeEvent.data.object.requirements.currently_due)
+        }
         if (global.testEnded) {
           return
         }
