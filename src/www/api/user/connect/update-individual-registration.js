@@ -161,6 +161,10 @@ module.exports = {
         throw new Error('invalid-dob_day')
       }
     }
+    stripeAccount.individual = stripeAccount.individual || {}
+    stripeAccount.individual.verification = stripeAccount.individual.verification || {}
+    stripeAccount.individual.verification.document = stripeAccount.individual.verification.document || {}
+    stripeAccount.individual.verification.additional_document = stripeAccount.individual.verification.additional_document || {}
     const accountInfo = {}
     if (global.stripeJS === 3) {
       accountInfo.account_token = req.body.token
@@ -264,19 +268,18 @@ module.exports = {
       if (req.body.verification_additional_document_back && !stripeAccount.individual.verification.additional_document.back) {
         accountInfo.individual = accountInfo.individual || {}
         accountInfo.individual.verification = accountInfo.individual.verification || {}
-        accountInfo.individual.verification.additonal_document = accountInfo.individual.verification.additional_document || {}
-        accountInfo.individual.verification.additonal_document.back = req.body.verification_document_back
+        accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+        accountInfo.individual.verification.additional_document.back = req.body.verification_additional_document_back
       }
       if (req.body.verification_additional_document_front && !stripeAccount.individual.verification.additional_document.front) {
         accountInfo.individual = accountInfo.individual || {}
         accountInfo.individual.verification = accountInfo.individual.verification || {}
         accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-        accountInfo.individual.verification.additional_document.front = req.body.verification_document_front
+        accountInfo.individual.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
     while (true) {
       try {
-        console.log('updating', accountInfo, req.body, req.uploads, stripeAccount.requirements)
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(accountNow)
         return accountNow

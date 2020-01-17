@@ -36,6 +36,7 @@ module.exports = {
       verification_additional_document_back: TestHelper['success_id_scan_back.png'],
       verification_additional_document_front: TestHelper['success_id_scan_front.png']
     })
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional.document')
     await TestHelper.submitStripeAccount(user)
     return user
   },
