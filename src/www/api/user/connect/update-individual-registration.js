@@ -309,17 +309,17 @@ module.exports = {
       accountInfo.individual.verification.document.front = req.body.verification_document_front
     }
     if (req.body.verification_additional_document_back && !stripeAccount.individual.verification.additional_document.back) {
-    accountInfo.individual = accountInfo.individual || {}
-    accountInfo.individual.verification = accountInfo.individual.verification || {}
-    accountInfo.individual.verification.additonal_document = accountInfo.individual.verification.document || {}
-    accountInfo.individual.verification.additonal_document.back = req.body.verification_document_back
-  }
-  if (req.body.verification_additional_document_front && !stripeAccount.individual.verification.additional_document.front) {
-    accountInfo.individual = accountInfo.individual || {}
-    accountInfo.individual.verification = accountInfo.individual.verification || {}
-    accountInfo.individual.verification.additional_document = accountInfo.individual.verification.document || {}
-    accountInfo.individual.verification.additional_document.front = req.body.verification_document_front
-  }
+      accountInfo.individual = accountInfo.individual || {}
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.additonal_document = accountInfo.individual.verification.additional_document || {}
+      accountInfo.individual.verification.additonal_document.back = req.body.verification_document_back
+    }
+    if (req.body.verification_additional_document_front && !stripeAccount.individual.verification.additional_document.front) {
+      accountInfo.individual = accountInfo.individual || {}
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+      accountInfo.individual.verification.additional_document.front = req.body.verification_document_front
+    }
     }
     while (true) {
       try {
