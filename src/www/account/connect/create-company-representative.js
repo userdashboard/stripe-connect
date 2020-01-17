@@ -111,13 +111,13 @@ async function submitForm (req, res) {
     const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
-      if (field === `${req.data.stripeAccount.metadata.representative}address.line2` ||
-          field === `${req.data.stripeAccount.metadata.representative}relationship.title` ||
-          field === `${req.data.stripeAccount.metadata.representative}relationship.executive` ||
-          field === `${req.data.stripeAccount.metadata.representative}relationship.director` ||
-          field === `${req.data.stripeAccount.metadata.representative}relationship.owner` ||
-          field === `${req.data.stripeAccount.metadata.representative}verification.document` ||
-          field === `${req.data.stripeAccount.metadata.representative}verification.additional_document`) {
+      if (field === `address.line2` ||
+          field === `relationship.title` ||
+          field === `relationship.executive` ||
+          field === `relationship.director` ||
+          field === `relationship.owner` ||
+          field === `verification.document` ||
+          field === `verification.additional_document`) {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)

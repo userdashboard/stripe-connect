@@ -32,13 +32,13 @@ module.exports = {
       const field = fullField.substring(`${existingRepresentative.id}.`.length)
       const posted = field.split('.').join('_')
       if (!req.body || !req.body[posted]) {
-        if (field === `${existingRepresentative.id}.address.line2` ||
-            field === `${existingRepresentative.id}.relationship.title` ||
-            field === `${existingRepresentative.id}.relationship.executive` ||
-            field === `${existingRepresentative.id}.relationship.representative` ||
-            field === `${existingRepresentative.id}.owner` ||
-            field === `${existingRepresentative.id}.verification.document` ||
-            field === `${existingRepresentative.id}.verification.additional_document`) {
+        if (field === `address.line2` ||
+            field === `relationship.title` ||
+            field === `relationship.executive` ||
+            field === `relationship.representative` ||
+            field === `owner` ||
+            field === `verification.document` ||
+            field === `verification.additional_document`) {
           continue
         }
         throw new Error(`invalid-${posted}`)

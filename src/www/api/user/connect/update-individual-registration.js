@@ -173,6 +173,8 @@ module.exports = {
              (field === 'business_profile.url' && req.body.business_profile_product_description) ||
              (field === 'business_profile.product_description' && req.body.business_profile_url) ||
               field === 'external_account' ||
+              field !== 'individual.verification.document' ||
+              field !== 'individual.verification.additional_document' ||
               field === 'tos_acceptance.date' ||
               field === 'tos_acceptance.ip') {
             continue
@@ -180,10 +182,7 @@ module.exports = {
           if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
             throw new Error('invalid-business_profile_url')
           }
-          if (field !== 'individual.verification.document' &&
-              field !== 'individual.verification.additional_document') {
-            throw new Error(`invalid-${posted}`)
-          }
+          throw new Error(`invalid-${posted}`)
         }
         if (field === 'individual.gender' && req.body.gender !== 'female' && req.body.gender !== 'male') {
           throw new Error(`invalid-${posted}`)
@@ -297,6 +296,30 @@ module.exports = {
         accountInfo.address = accountInfo.address || {}
         accountInfo.address.line2 = req.body.address_line2
       }
+      if (req.body.verification_document_back && !stripeAccount.individual.verification.document.back) {
+      accountInfo.individual = accountInfo.individual || {}
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+      accountInfo.individual.verification.document.back = req.body.verification_document_back
+    }
+    if (req.body.verification_document_front && !stripeAccount.individual.verification.document.front) {
+      accountInfo.individual = accountInfo.individual || {}
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+      accountInfo.individual.verification.document.front = req.body.verification_document_front
+    }
+    if (req.body.verification_additional_document_back && !stripeAccount.individual.verification.additional_document.back) {
+    accountInfo.individual = accountInfo.individual || {}
+    accountInfo.individual.verification = accountInfo.individual.verification || {}
+    accountInfo.individual.verification.additonal_document = accountInfo.individual.verification.document || {}
+    accountInfo.individual.verification.additonal_document.back = req.body.verification_document_back
+  }
+  if (req.body.verification_additional_document_front && !stripeAccount.individual.verification.additional_document.front) {
+    accountInfo.individual = accountInfo.individual || {}
+    accountInfo.individual.verification = accountInfo.individual.verification || {}
+    accountInfo.individual.verification.additional_document = accountInfo.individual.verification.document || {}
+    accountInfo.individual.verification.additional_document.front = req.body.verification_document_front
+  }
     }
     while (true) {
       try {

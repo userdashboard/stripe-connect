@@ -12,10 +12,11 @@ module.exports = {
     if (cache[req.query.country]) {
       return cache[req.query.country]
     }
+    let countrySpec
     while (true) {
-      let countrySpec
       try {
         countrySpec = cache[req.query.country] = await stripe.countrySpecs.retrieve(req.query.country, req.stripeKey)
+        break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
@@ -32,12 +33,12 @@ module.exports = {
        if (error.type === 'StripeAPIError') {
           continue
        }
-        throw error
+       break
       }
-      if (!countrySpec) {
-        throw new Error('invalid-country')
-      }
-      return countrySpec
     }
+    if (!countrySpec) {
+      throw new Error('invalid-country')
+    }
+    return countrySpec
   }
 }

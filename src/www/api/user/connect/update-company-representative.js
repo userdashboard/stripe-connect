@@ -163,11 +163,11 @@ module.exports = {
           continue
         }
         const field = fullField.substring(`${person.id}.`.length)
-        if (field === `${person.id}.address.line2` ||
-            field === `${person.id}.relationship.title` ||
-            field === `${person.id}.relationship.executive` ||
-            field === `${person.id}.relationship.director` ||
-            field === `${person.id}.relationship.owner`) {
+        if (field === `address.line2` ||
+            field === `relationship.title` ||
+            field === `relationship.executive` ||
+            field === `relationship.director` ||
+            field === `relationship.owner`) {
           continue
         }
         const posted = field.split('.').join('_')
@@ -211,11 +211,11 @@ module.exports = {
           continue
         }
         const field = fullField.substring(`${person.id}.`.length)
-        if (field === `${person.id}.address.line2` ||
-            field === `${person.id}.relationship.title` ||
-            field === `${person.id}.relationship.executive` ||
-            field === `${person.id}.relationship.director` ||
-            field === `${person.id}.relationship.owner`) {
+        if (field === `address.line2` ||
+            field === `relationship.title` ||
+            field === `relationship.executive` ||
+            field === `relationship.director` ||
+            field === `relationship.owner`) {
           continue
         }
         if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
