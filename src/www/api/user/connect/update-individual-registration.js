@@ -173,8 +173,8 @@ module.exports = {
              (field === 'business_profile.url' && req.body.business_profile_product_description) ||
              (field === 'business_profile.product_description' && req.body.business_profile_url) ||
               field === 'external_account' ||
-              field !== 'individual.verification.document' ||
-              field !== 'individual.verification.additional_document' ||
+              field === 'individual.verification.document' ||
+              field === 'individual.verification.additional_document' ||
               field === 'tos_acceptance.date' ||
               field === 'tos_acceptance.ip') {
             continue
@@ -207,28 +207,6 @@ module.exports = {
           const property = field.substring('business_profile.'.length)
           accountInfo.business_profile = accountInfo.business_profile || {}
           accountInfo.business_profile[property] = req.body[posted]
-        } else if (field === 'individual.verification.document') {
-          const front = `${posted}_front`
-          const back = `${posted}_back`
-          accountInfo.individual.verification = accountInfo.individual.verification || {}
-          accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-          if (req.body[front]) {
-            accountInfo.individual.verification.document.front = req.body[front]
-          }
-          if (req.body[back]) {
-            accountInfo.individual.verification.document.back = req.body[back]
-          }
-        } else if (field === 'individual.verification.additional_document') {
-          const front = `${posted}_front`
-          const back = `${posted}_back`
-          accountInfo.individual.verification = accountInfo.individual.verification || {}
-          accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-          if (req.body[front]) {
-            accountInfo.individual.verification.additional_document.front = req.body[front]
-          }
-          if (req.body[back]) {
-            accountInfo.individual.verification.additional_document.back = req.body[back]
-          }
         } else if (field.startsWith('individual.')) {
           const property = field.substring('individual.'.length)
           accountInfo.individual[property] = req.body[posted]
@@ -240,10 +218,7 @@ module.exports = {
         }
         const posted = field.split('.').join('_').replace('individual_', '')
         if (!req.body[posted]) {
-          if (field !== 'individual.verification.document' &&
-              field !== 'individual.verification.additional_document') {
-            continue
-          }
+          continue
         }
         if (field.startsWith('individual.address_kana.')) {
           const property = field.substring('individual.address_kana.'.length)
