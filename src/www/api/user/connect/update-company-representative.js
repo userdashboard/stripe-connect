@@ -158,10 +158,11 @@ module.exports = {
     if (global.stripeJS === 3) {
       companyRepresentativeInfo.person_token = req.body.token
     } else {
-      for (const field of stripeAccount.requirements.currently_due) {
-        if (!field.startsWith(person.id)) {
+      for (const fullField of stripeAccount.requirements.currently_due) {
+        if (!fullField.startsWith(person.id)) {
           continue
         }
+        const field = fullField.substring(`${person.id}.`.length)
         if (field === `${person.id}.address.line2` ||
             field === `${person.id}.relationship.title` ||
             field === `${person.id}.relationship.executive` ||
@@ -169,7 +170,7 @@ module.exports = {
             field === `${person.id}.relationship.owner`) {
           continue
         }
-        const posted = field.split('.').join('_').replace(`${person.id}_`, '')
+        const posted = field.split('.').join('_')
         if (!req.body[posted]) {
           if (field !== 'verification.document' &&
               field !== 'verification.additional_document') {
@@ -205,10 +206,11 @@ module.exports = {
           companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
         }
       }
-      for (const field of stripeAccount.requirements.eventually_due) {
-        if (!field.startsWith(person.id)) {
+      for (const fullField of stripeAccount.requirements.eventually_due) {
+        if (!fullField.startsWith(person.id)) {
           continue
         }
+        const field = fullField.substring(`${person.id}.`.length)
         if (field === `${person.id}.address.line2` ||
             field === `${person.id}.relationship.title` ||
             field === `${person.id}.relationship.executive` ||
@@ -219,7 +221,7 @@ module.exports = {
         if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
           continue
         }
-        const posted = field.split('.').join('_').replace(`${person.id}_`, '')
+        const posted = field.split('.').join('_')
         if (!req.body[posted]) {
           continue
         }

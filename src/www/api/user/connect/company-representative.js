@@ -29,6 +29,7 @@ module.exports = {
         }
         return person
       } catch (error) {
+        console.log(error)
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }

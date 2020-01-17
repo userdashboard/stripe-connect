@@ -55,7 +55,11 @@ async function renderPage (req, res, messageTemplate) {
     removeElements.push('email')
   }
   if (req.method === 'GET') {
-    for (const field of req.data.stripeAccount.requirements.currently_due) {
+    for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+      if (!fullField.startsWith(req.data.director.id)) {
+        continue
+      }
+      const field = fullField.substring(`${req.data.director.id}.`.length)
       if (field === 'verification.document' ||
           field === 'verification.additional_document') {
         continue
@@ -92,12 +96,16 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  for (const field of req.data.stripeAccount.requirements.currently_due) {
+  for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+    if (!fullField.startsWith(req.data.director.id)) {
+      continue
+    }
+    const field = fullField.substring(`${req.data.director.id}.`.length)
     const posted = field.split('.').join('_')
     if (!field) {
       if (field === 'verification.document' ||
           field === 'verification.additional_document' ||
-          field === 'relationship_title') {
+          field === 'relationship.title') {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)

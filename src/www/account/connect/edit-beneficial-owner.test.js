@@ -215,10 +215,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)
-      console.log(user.owner)
-      console.log('waiting for person requirement')
       await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.additional_document')
-      console.log('received person requirement')
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
@@ -264,9 +261,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      console.log('waiting for person requirement')
       await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.additional_document')
-      console.log('received person requirement')
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session

@@ -7,7 +7,6 @@ const stripeCache = require('../../../../stripe-cache.js')
 module.exports = async (stripeEvent, req) => {
   const person = stripeEvent.data.object
   let exists
-  console.log('person updated', stripeEvent)
   while (true) {
     if (global.testEnded) {
       return

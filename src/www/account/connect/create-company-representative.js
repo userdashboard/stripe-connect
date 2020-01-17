@@ -104,11 +104,12 @@ async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
-  for (const field of req.data.stripeAccount.requirements.currently_due) {
-    if (!field.startsWith(stripeAccount.metadata.representative)) {
+  for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+    if (!fullField.startsWith(stripeAccount.metadata.representative)) {
       continue
     }
-    const posted = field.split('.').join('_').replace(`${req.data.stripeAccount.metadata.representative}_`, '')
+    const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)
+    const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === `${req.data.stripeAccount.metadata.representative}address.line2` ||
           field === `${req.data.stripeAccount.metadata.representative}relationship.title` ||

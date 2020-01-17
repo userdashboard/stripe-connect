@@ -25,19 +25,20 @@ module.exports = {
     }
     req.query.personid = stripeAccount.metadata.representative
     const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
-    for (const field of stripeAccount.requirements.currently_due) {
-      if (!field.startsWith(stripeAccount.metadata.representative)) {
+    for (const fullField of stripeAccount.requirements.currently_due) {
+      if (!fullField.startsWith(stripeAccount.metadata.representative)) {
         continue
       }
-      const posted = field.split('.').join('_').replace(`${stripeAccount.metadata.representative}_`, '')
+      const field = fullField.substring(`${existingRepresentative.id}.`.length)
+      const posted = field.split('.').join('_')
       if (!req.body || !req.body[posted]) {
-        if (field === `${stripeAccount.metadata.representative}.address.line2` ||
-            field === `${stripeAccount.metadata.representative}.relationship.title` ||
-            field === `${stripeAccount.metadata.representative}.relationship.executive` ||
-            field === `${stripeAccount.metadata.representative}.relationship.representative` ||
-            field === `${stripeAccount.metadata.representative}.owner` ||
-            field === `${stripeAccount.metadata.representative}.verification.document` ||
-            field === `${stripeAccount.metadata.representative}.verification.additional_document`) {
+        if (field === `${existingRepresentative.id}.address.line2` ||
+            field === `${existingRepresentative.id}.relationship.title` ||
+            field === `${existingRepresentative.id}.relationship.executive` ||
+            field === `${existingRepresentative.id}.relationship.representative` ||
+            field === `${existingRepresentative.id}.owner` ||
+            field === `${existingRepresentative.id}.verification.document` ||
+            field === `${existingRepresentative.id}.verification.additional_document`) {
           continue
         }
         throw new Error(`invalid-${posted}`)
@@ -46,13 +47,13 @@ module.exports = {
     if (req.body.address_country && !connect.countryNameIndex[req.body.address_country]) {
       throw new Error('invalid-address_country')
     }
-    if (stripeAccount.requirements.currently_due.indexOf(`${stripeAccount.metadata.representative}.address.country`) > -1 ||
-        stripeAccount.requirements.eventually_due.indexOf(`${stripeAccount.metadata.representative}.address.country`) > -1) {
+    if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.address.country`) > -1 ||
+        stripeAccount.requirements.eventually_due.indexOf(`${existingRepresentative.id}.address.country`) > -1) {
       if (!req.body.address_country) {
         throw new Error('invalid-address_country')
       }
-      if (stripeAccount.requirements.currently_due.indexOf(`${stripeAccount.metadata.representative}.address.state`) > -1 ||
-          stripeAccount.requirements.eventually_due.indexOf(`${stripeAccount.metadata.representative}.address.state`) > -1) {
+      if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.address.state`) > -1 ||
+          stripeAccount.requirements.eventually_due.indexOf(`${existingRepresentative.id}.address.state`) > -1) {
         if (!req.body.address_state) {
           throw new Error('invalid-address_state')
         }
@@ -172,11 +173,12 @@ module.exports = {
     if (global.stripeJS === 3) {
       representativeInfo.person_token = req.body.token
     } else {
-      for (const field of stripeAccount.requirements.currently_due) {
-        if (!field.startsWith(existingRepresentative.id)) {
+      for (const fullField of stripeAccount.requirements.currently_due) {
+        if (!fullField.startsWith(existingRepresentative.id)) {
           continue
         }
-        const posted = field.split('.').join('_').replace(`${existingRepresentative.id}_`, '')
+        const field = fullField.substring(`${existingRepresentative.id}.`.length)
+        const posted = field.split('.').join('_')
         if (req.body[posted]) {
           if (field.startsWith('address.')) {
             const property = field.substring('address.'.length)
@@ -224,11 +226,15 @@ module.exports = {
           }
         }
       }
-      for (const field of stripeAccount.requirements.eventually_due) {
+      for (const fullField of stripeAccount.requirements.currently_due) {
+        if (!fullField.startsWith(existingRepresentative.id)) {
+          continue
+        }
+        const field = fullField.substring(`${existingRepresentative.id}.`.length)
         if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
           continue
         }
-        const posted = field.split('.').join('_').replace('representative.')
+        const posted = field.split('.').join('_').replace(`${existingRepresentative.id}_`, '')
         if (req.body[posted]) {
           if (field.startsWith('address.')) {
             const property = field.substring('address.'.length)
@@ -337,15 +343,10 @@ module.exports = {
         representativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
-    if (existingRepresentative && existingRepresentative.metadata.template) {
-      representativeInfo.metadata = {
-        template: null
-      }
-    }
     let representative
     while (true) {
       try {
-        if (existingRepresentative && existingRepresentative.metadata.template) {
+        if (existingRepresentative) {
           representative = await stripe.accounts.updatePerson(req.query.stripeid, existingRepresentative.id, representativeInfo, req.stripeKey)
         } else {
           representative = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
@@ -404,6 +405,7 @@ module.exports = {
        if (error.type === 'StripeAPIError') {
           continue
        }
+       console.log(error)
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

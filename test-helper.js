@@ -680,7 +680,6 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
   req4.account = user.account
   req4.session = user.session
   req4.stripeKey = stripeKey
-  console.log('awaiting field', personid, requirement)
   async function wait () {
     if (global.testEnded) {
       return
@@ -691,13 +690,11 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
     }
     for (const field of stripeAccount.requirements.currently_due) {
       if (field === `${personid}.${requirement}`) {
-        console.log('account field', field, 'now currently_due')
         return setTimeout(callback, 10)
       }
     }
     for (const field of stripeAccount.requirements.eventually_due) {
       if (field === `${personid}.${requirement}`) {
-        console.log('account field', field, 'now eventually_due')
         return setTimeout(callback, 10)
       }
     }
@@ -706,13 +703,11 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
       if (person && person.requirements) {
         for (const field of person.requirements.currently_due) {
           if (field === requirement) {
-            console.log('person field', field, 'now currently_due')
             return setTimeout(callback, 10)
           }
         }
         for (const field of person.requirements.eventually_due) {
           if (field === requirement) {
-            console.log('person field', field, 'now eventually_due')
             return setTimeout(callback, 10)
           }
         }
@@ -724,13 +719,11 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
       if (person && person.requirements) {
         for (const field of person.requirements.currently_due) {
           if (field === requirement) {
-            console.log('person field', field, 'now currently_due')
             return setTimeout(callback, 10)
           }
         }
         for (const field of person.requirements.eventually_due) {
           if (field === requirement) {
-            console.log('person field', field, 'now eventually_due')
             return setTimeout(callback, 10)
           }
         }
@@ -742,13 +735,11 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
       if (person && person.requirements) {
         for (const field of person.requirements.currently_due) {
           if (field === requirement) {
-            console.log('person field', field, 'now currently_due')
             return setTimeout(callback, 10)
           }
         }
         for (const field of person.requirements.eventually_due) {
           if (field === requirement) {
-            console.log('person field', field, 'now eventually_due')
             return setTimeout(callback, 10)
           }
         }

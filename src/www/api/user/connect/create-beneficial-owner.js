@@ -44,7 +44,7 @@ module.exports = {
     }
     const requirements = JSON.parse(stripeAccount.metadata.beneficialOwnerTemplate)
     for (const field of requirements.currently_due) {
-      const posted = field.split('.').join('_').replace('owner.', '')
+      const posted = field.split('.').join('_')
       if (!req.body[posted]) {
         if (field === 'address.line2' ||
             field === 'relationship.title' ||
@@ -307,7 +307,6 @@ module.exports = {
         ownerInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
-    console.log('creating beneficial owner', ownerInfo)
     let owner
     while (true) {
       try {
@@ -330,11 +329,9 @@ module.exports = {
        if (error.type === 'StripeAPIError') {
           continue
        }
-        console.log(error)
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
-    console.log('updating account')
     const owners = JSON.parse(stripeAccount.metadata.owners || '[]')
     owners.unshift(owner.id)
     const accountInfo = {
@@ -363,7 +360,6 @@ module.exports = {
        if (error.type === 'StripeAPIError') {
           continue
        }
-        console.log(error)
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

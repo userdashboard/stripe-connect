@@ -85,8 +85,13 @@ async function renderPage (req, res, messageTemplate) {
     removeElements.push('id_number-container')
   }
   if (req.method === 'GET') {
-    for (const field of req.data.stripeAccount.requirements.currently_due) {
-      const element = doc.getElementById(field)
+    for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+      if (!fullField.startsWith(stripeAccount.metadata.representative)) {
+        continue
+      }
+      const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)
+      const posted = field.split('.').join('_')
+      const element = doc.getElementById(posted)
       if (!element) {
         continue
       }
@@ -118,11 +123,12 @@ async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
-  for (const field of req.data.stripeAccount.requirements.currently_due) {
-    if (!field.startsWith(req.data.representative.id)) {
+  for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+    if (!fullField.startsWith(stripeAccount.metadata.representative)) {
       continue
     }
-    const posted = field.split('.').join('_').replace(`${req.data.representative.id}_`, '')
+    const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)
+    const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'address.line2' ||
           field === 'relationship.title' ||

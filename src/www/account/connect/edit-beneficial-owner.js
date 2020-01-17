@@ -39,7 +39,6 @@ async function renderPage (req, res, messageTemplate) {
     'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
   if (messageTemplate) {
-    console.log(messageTemplate)
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
       removeElements.push('form-container')
@@ -74,11 +73,12 @@ async function renderPage (req, res, messageTemplate) {
     dashboard.HTML.renderList(doc, states, 'state-option', 'address_state')
     dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
     dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
-    for (const field of req.data.stripeAccount.requirements.currently_due) {
-      if (!field.startsWith(req.data.owner.id)) {
+    for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+      if (!fullField.startsWith(req.data.owner.id)) {
         continue
       }
-      const posted = field.split('.').join('_').replace(`${req.data.owner.id}_`, '')
+      const field = fullField.substring(`${req.data.owner.id}.`.length)
+      const posted = field.split('.').join('_')
       if (field === 'verification.document' ||
           field === 'verification.additional_document') {
         continue
@@ -110,7 +110,11 @@ async function renderPage (req, res, messageTemplate) {
       dashboard.HTML.renderList(doc, connect.countryList, 'country-option', 'address_country')
       dashboard.HTML.setSelectedOptionByValue(doc, 'address_country', selectedCountry)
     }
-    for (const field of req.data.stripeAccount.requirements.currently_due) {
+    for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+      if (!fullField.startsWith(req.data.owner.id)) {
+        continue
+      }
+      const field = fullField.substring(`${req.data.owner.id}.`.length)
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {
         continue
@@ -150,11 +154,12 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  for (const field of req.data.stripeAccount.requirements.currently_due) {
-    if (!field.startsWith(req.data.owner.id)) {
+  for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+    if (!fullField.startsWith(req.data.owner.id)) {
       continue
     }
-    const posted = field.split('.').join('_').replace(`${req.data.owner.id}_`, '')
+    const field = fullField.substring(`${req.data.owner.id}.`.length)
+    const posted = field.split('.').join('_')
     if (!field) {
       if (field === 'relationship.executive' || 
           field === 'verification.document' ||

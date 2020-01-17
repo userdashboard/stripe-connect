@@ -189,7 +189,6 @@ module.exports = {
     while (true) {
       try {
         const stripeAccountNow = await stripe.accounts.update(stripeAccount.id, accountUpdate, req.stripeKey)
-        console.log('created account', 'representative', companyRepresentative.id, 'director template', companyDirector.id, 'owner template', beneficialOwner.id, 'account object', stripeAccountNow)
         await stripeCache.update(stripeAccountNow)
         return stripeAccountNow
       } catch (error) {
