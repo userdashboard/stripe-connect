@@ -240,28 +240,6 @@ module.exports = {
           const property = field.substring('business_profile.'.length)
           accountInfo.business_profile = accountInfo.business_profile || {}
           accountInfo.business_profile[property] = req.body[posted]
-        } else if (field === 'individual.verification.document') {
-          const front = `${posted}_front`
-          const back = `${posted}_back`
-          accountInfo.individual.verification = accountInfo.individual.verification || {}
-          accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-          if (req.body[front]) {
-            accountInfo.individual.verification.document.front = req.body[front]
-          }
-          if (req.body[back]) {
-            accountInfo.individual.verification.document.back = req.body[back]
-          }
-        } else if (field === 'individual.verification.additional_document') {
-          const front = `${posted}_front`
-          const back = `${posted}_back`
-          accountInfo.individual.verification = accountInfo.individual.verification || {}
-          accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-          if (req.body[front]) {
-            accountInfo.individual.verification.additional_document.front = req.body[front]
-          }
-          if (req.body[back]) {
-            accountInfo.individual.verification.additional_document.back = req.body[back]
-          }
         } else if (field.startsWith('individual.')) {
           const property = field.substring('individual.'.length)
           accountInfo.individual[property] = req.body[posted]
@@ -272,32 +250,33 @@ module.exports = {
         accountInfo.address.line2 = req.body.address_line2
       }
       if (req.body.verification_document_back && !stripeAccount.individual.verification.document.back) {
-      accountInfo.individual = accountInfo.individual || {}
-      accountInfo.individual.verification = accountInfo.individual.verification || {}
-      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-      accountInfo.individual.verification.document.back = req.body.verification_document_back
-    }
-    if (req.body.verification_document_front && !stripeAccount.individual.verification.document.front) {
-      accountInfo.individual = accountInfo.individual || {}
-      accountInfo.individual.verification = accountInfo.individual.verification || {}
-      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-      accountInfo.individual.verification.document.front = req.body.verification_document_front
-    }
-    if (req.body.verification_additional_document_back && !stripeAccount.individual.verification.additional_document.back) {
-      accountInfo.individual = accountInfo.individual || {}
-      accountInfo.individual.verification = accountInfo.individual.verification || {}
-      accountInfo.individual.verification.additonal_document = accountInfo.individual.verification.additional_document || {}
-      accountInfo.individual.verification.additonal_document.back = req.body.verification_document_back
-    }
-    if (req.body.verification_additional_document_front && !stripeAccount.individual.verification.additional_document.front) {
-      accountInfo.individual = accountInfo.individual || {}
-      accountInfo.individual.verification = accountInfo.individual.verification || {}
-      accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-      accountInfo.individual.verification.additional_document.front = req.body.verification_document_front
-    }
+        accountInfo.individual = accountInfo.individual || {}
+        accountInfo.individual.verification = accountInfo.individual.verification || {}
+        accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+        accountInfo.individual.verification.document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_document_front && !stripeAccount.individual.verification.document.front) {
+        accountInfo.individual = accountInfo.individual || {}
+        accountInfo.individual.verification = accountInfo.individual.verification || {}
+        accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+        accountInfo.individual.verification.document.front = req.body.verification_document_front
+      }
+      if (req.body.verification_additional_document_back && !stripeAccount.individual.verification.additional_document.back) {
+        accountInfo.individual = accountInfo.individual || {}
+        accountInfo.individual.verification = accountInfo.individual.verification || {}
+        accountInfo.individual.verification.additonal_document = accountInfo.individual.verification.additional_document || {}
+        accountInfo.individual.verification.additonal_document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_additional_document_front && !stripeAccount.individual.verification.additional_document.front) {
+        accountInfo.individual = accountInfo.individual || {}
+        accountInfo.individual.verification = accountInfo.individual.verification || {}
+        accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+        accountInfo.individual.verification.additional_document.front = req.body.verification_document_front
+      }
     }
     while (true) {
       try {
+        console.log('updating', accountInfo, req.body, req.uploads, stripeAccount.requirements)
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.update(accountNow)
         return accountNow
