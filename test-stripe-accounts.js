@@ -18,7 +18,10 @@ module.exports = {
     for (const field in individualData[country]) {
       individual[field] = individualData[country][field]
     }
-    await TestHelper.createStripeRegistration(user, individual)
+    await TestHelper.createStripeRegistration(user, individual, {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    })
     const payment = {
       country,
       account_holder_name: identity.firstName + ' ' + identity.lastName,
