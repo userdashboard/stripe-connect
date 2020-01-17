@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/account/connect/stripe-account', () => {
   describe('StripeAccount#BEFORE', () => {
@@ -113,39 +114,7 @@ describe('/account/connect/stripe-account', () => {
     })
 
     it('should hide registration after submitting registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'individual'
-      })
-      await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7333',
-        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
-        address_city: 'New York',
-        address_line1: '285 Fulton St',
-        address_postal_code: '10007',
-        address_state: 'NY',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: user.profile.contactEmail,
-        first_name: user.profile.firstName,
-        last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        ssn_last_4: '0000'
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      await TestHelper.createExternalAccount(user, {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456789',
-        country: 'US',
-        currency: 'usd',
-        routing_number: '110000000'
-      })
-      await TestHelper.submitStripeAccount(user)
+      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -156,55 +125,7 @@ describe('/account/connect/stripe-account', () => {
     })
 
     it('should hide company owners after submitting registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AT',
-        type: 'company'
-      })
-      await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        address_city: 'Vienna',
-        address_line1: '123 Park Lane',
-        address_postal_code: '1020',
-        address_state: '1',
-        name: 'Company',
-        phone: '456-789-0123',
-        tax_id: '00000000000'
-      })
-      await TestHelper.createCompanyRepresentative(user, {
-        address_city: 'Vienna',
-        address_country: 'AT',
-        address_line1: '123 Sesame St',
-        address_postal_code: '1020',
-        address_state: '1',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: user.profile.contactEmail,
-        first_name: user.profile.firstName,
-        last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        relationship_executive: 'true',
-        relationship_title: 'Owner'
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      await TestHelper.createExternalAccount(user, {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'company',
-        country: 'AT',
-        currency: 'eur',
-        iban: 'AT89370400440532013000'
-      })
-      await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.updateCompanyRepresentative(user, {}, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png']
-      })
-      await TestHelper.submitStripeAccount(user)
+      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -325,40 +246,7 @@ describe('/account/connect/stripe-account', () => {
     })
 
     it('should show registration is submitted', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'individual'
-      })
-      await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7333',
-        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
-        address_city: 'New York',
-        address_line1: '285 Fulton St',
-        address_postal_code: '10007',
-        address_state: 'NY',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: user.profile.contactEmail,
-        first_name: user.profile.firstName,
-        id_number: '000000000',
-        last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        ssn_last_4: '0000'
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      await TestHelper.createExternalAccount(user, {
-        account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-        account_holder_type: 'individual',
-        account_number: '000123456789',
-        country: 'US',
-        currency: 'usd',
-        routing_number: '110000000'
-      })
-      await TestHelper.submitStripeAccount(user)
+      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
