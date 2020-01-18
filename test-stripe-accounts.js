@@ -38,6 +38,7 @@ module.exports = {
     })
     await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional.document')
     await TestHelper.submitStripeAccount(user)
+    await TestHelper.waitForPayoutsEnabled(user)
     return user
   },
   createSubmittedCompany: async (country) => {
