@@ -12,7 +12,6 @@ describe('/api/administrator/connect/payouts', () => {
       const payouts = []
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-        await TestHelper.waitForPayoutsEnabled(user)
         await TestHelper.createPayout(user)
         payouts.unshift(user.payout.id)
         await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)

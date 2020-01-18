@@ -40,7 +40,6 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
     it('array', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      await TestHelper.waitForPayoutsEnabled(user)
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPayout(user)
         await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)

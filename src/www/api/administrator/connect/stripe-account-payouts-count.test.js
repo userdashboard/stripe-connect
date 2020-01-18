@@ -40,11 +40,9 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
     it('integer', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      await TestHelper.waitForPayoutsEnabled(user)
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const user2 = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      await TestHelper.waitForPayoutsEnabled(user2)
       await TestHelper.createPayout(user2)
       await TestHelper.waitForPayout(administrator, user2.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts-count?stripeid=${user.stripeAccount.id}`)
