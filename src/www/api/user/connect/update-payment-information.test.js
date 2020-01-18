@@ -1093,7 +1093,7 @@ describe('/api/user/connect/update-payment-information', () => {
 
   describe('returns', () => {
     for (const country of connect.countrySpecs) {
-      it.only('object (' + country.id + ')', async () => {
+      it('object (' + country.id + ')', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,
@@ -1119,7 +1119,7 @@ describe('/api/user/connect/update-payment-information', () => {
         req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
         req.filename = __filename
         req.saveResponse = true
-        const accountNow = await req.post()
+        const accountNow = await req.patch()
         assert.strictEqual(accountNow.object, 'account')
       })
     }

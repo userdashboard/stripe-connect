@@ -2716,10 +2716,11 @@ describe('/api/user/connect/update-company-representative', () => {
         req.body = TestHelper.createMultiPart(req, req.body)
         req.filename = __filename
         req.saveResponse = true
-        const page = await req.patch()
-        const doc = TestHelper.extractDoc(page)
-        const redirectURL = TestHelper.extractRedirectURL(doc)
-        assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+        const personNow = await req.patch()
+        assert.notStrictEqual(personNow.verification.document.front, null)
+        assert.notStrictEqual(personNow.verification.document.front, undefined)
+        assert.notStrictEqual(personNow.verification.document.back, null)
+        assert.notStrictEqual(personNow.verification.document.back, undefined)
       })
     }
   })

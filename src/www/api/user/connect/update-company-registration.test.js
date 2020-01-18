@@ -1207,10 +1207,11 @@ describe('/api/user/connect/update-company-registration', () => {
         req.body = TestHelper.createMultiPart(req, req.body)
         req.filename = __filename
         req.saveResponse = true
-        const page = await req.patch()
-        const doc = TestHelper.extractDoc(page)
-        const redirectURL = TestHelper.extractRedirectURL(doc)
-        assert.strictEqual(redirectURL, `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+        const accountNow = await req.patch()
+        assert.notStrictEqual(accountNow.company.verification.document.front, null)
+        assert.notStrictEqual(accountNow.company.verification.document.front, undefined)
+        assert.notStrictEqual(accountNow.company.verification.document.back, null)
+        assert.notStrictEqual(accountNow.company.verification.document.back, undefined)
       })
     }
   })
