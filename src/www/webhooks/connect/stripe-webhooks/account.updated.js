@@ -13,8 +13,6 @@ module.exports = async (stripeEvent, req) => {
     try {
       const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
       if (exists) {
-        if (stripeEvent.data.previous_attributes) {
-        }
         if (global.testEnded) {
           return
         }

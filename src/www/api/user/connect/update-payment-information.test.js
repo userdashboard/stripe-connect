@@ -1108,7 +1108,7 @@ describe('/api/user/connect/update-payment-information', () => {
             req.body.country = country.id
             req.body.account_holder_type = 'company'
             req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
-            const accountNow = await req.post()
+            const accountNow = await req.patch()
             assert.strictEqual(accountNow.object, 'account')
           }
           return

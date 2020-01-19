@@ -186,11 +186,12 @@ module.exports = {
         representative: companyRepresentative.id
       }
     }
+    let stripeAccountNow
     while (true) {
       try {
-        const stripeAccountNow = await stripe.accounts.update(stripeAccount.id, accountUpdate, req.stripeKey)
+        stripeAccountNow = await stripe.accounts.update(stripeAccount.id, accountUpdate, req.stripeKey)
         await stripeCache.update(stripeAccountNow)
-        return stripeAccountNow
+        break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
@@ -210,5 +211,52 @@ module.exports = {
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
+    while (true) {
+      try {
+        await stripe.accounts.deletePerson(stripeAccount.id, companyDirector.id, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
+      }
+    }
+    while (true) {
+      try {
+        await stripe.accounts.deletePerson(stripeAccount.id, beneficialOwner.id, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
+      }
+    }
+    return stripeAccountNow
   }
 }

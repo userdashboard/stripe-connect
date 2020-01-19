@@ -16,7 +16,7 @@ module.exports = {
       throw new Error('invalid-personid')
     }
     if (stripeAccount.metadata.representative !== req.query.personid) {
-      throw new Error('invalid-personid')
+      throw new Error('invalid-person')
     }
     while (true) {
       try {
@@ -29,7 +29,6 @@ module.exports = {
         }
         return person
       } catch (error) {
-        console.log(error)
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }

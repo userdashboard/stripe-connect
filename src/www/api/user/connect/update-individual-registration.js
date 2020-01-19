@@ -253,6 +253,33 @@ module.exports = {
         accountInfo.address = accountInfo.address || {}
         accountInfo.address.line2 = req.body.address_line2
       }
+      if (req.body.business_profile_mcc) {
+        const mccList = connect.getMerchantCategoryCodes(req.language)
+        let found = false
+        for (const mcc of mccList) {
+          found = mcc.code === req.body.business_profile_mcc
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-business_profile_mcc')
+        }
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.mcc = req.body.business_profile_mcc
+      }
+      if (req.body.business_profile_url) {
+        if (!req.body.business_profile_url.startsWith('http://') &&
+            !req.body.business_profile_url.startsWith('https://')) {
+          throw new Error('invalid-business_profile_url')
+        }
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.url = req.body.business_profile_url
+      }
+      if (req.body.business_profile_product_description) {
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.product_description = req.body.business_profile_product_description
+      }
       if (req.body.verification_document_back && !stripeAccount.individual.verification.document.back) {
         accountInfo.individual = accountInfo.individual || {}
         accountInfo.individual.verification = accountInfo.individual.verification || {}

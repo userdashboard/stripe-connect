@@ -15,7 +15,10 @@ module.exports = {
       throw new Error('invalid-token')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (stripeAccount.metadata.submitted || stripeAccount.business_type === 'individual') {
+    if (!stripeAccount.requirements.currently_due.length || 
+        stripeAccount.business_type === 'individual' || 
+        (!stripeAccount.company.verification.document.front && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1) || 
+        (!stripeAccount.company.verification.document.back && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1)) {
       throw new Error('invalid-stripe-account')
     }
     if (req.uploads) {
@@ -174,19 +177,19 @@ module.exports = {
           throw new Error('invalid-address_state')
         }
       }
-      if (req.body.address_line2) {
-        accountInfo.address = accountInfo.address || {}
-        accountInfo.address.line2 = req.body.address_line2
-      }
       if (req.body.verification_document_back &&
-          stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) {
+          (stripeAccount.requirements.currently_due.indexOf('company.verification.document') > -1) || 
+          (stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) ||
+          (stripeAccount.company.verification.document === null && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1)) {
         accountInfo.company = accountInfo.company || {}
         accountInfo.company.verification = accountInfo.company.verification || {}
         accountInfo.company.verification.document = accountInfo.company.verification.document || {}
         accountInfo.company.verification.document.back = req.body.verification_document_back
       }
       if (req.body.verification_document_front &&
-        stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) {
+        (stripeAccount.requirements.currently_due.indexOf('company.verification.document') > -1) || 
+        (stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) ||
+        (stripeAccount.company.verification.document === null && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1)) {
         accountInfo.company = accountInfo.company || {}
         accountInfo.company.verification = accountInfo.company.verification || {}
         accountInfo.company.verification.document = accountInfo.company.verification.document || {}
@@ -222,3 +225,4 @@ module.exports = {
     }
   }
 }
+

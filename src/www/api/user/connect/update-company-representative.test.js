@@ -6,8 +6,8 @@ const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/update-company-representative', () => {
   describe('exceptions', () => {
-    describe('invalid-stripeid', () => {
-      it('missing querystring stripeid', async () => {
+    describe('invalid-personid', () => {
+      it('missing querystring personid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/update-company-representative')
         req.account = user.account
@@ -18,12 +18,12 @@ describe('/api/user/connect/update-company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-stripeid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
 
-      it('invalid querystring stripeid', async () => {
+      it('invalid querystring personid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/update-company-representative?stripeid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/update-company-representative?personid=invalid')
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -32,18 +32,35 @@ describe('/api/user/connect/update-company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-stripeid')
+        assert.strictEqual(errorMessage, 'invalid-personid')
       })
     })
 
-    describe('invalid-stripe-account', () => {
-      it('ineligible stripe account for individuals', async () => {
+    describe('invalid-person', () => {
+      it('ineligible person is not representative', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'US',
-          type: 'individual'
+          type: 'company'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        const person1 = TestHelper.nextIdentity()
+        await TestHelper.createBeneficialOwner(user, {
+          address_city: 'Berlin',
+          address_country: 'DE',
+          address_line1: 'First Street',
+          address_postal_code: '01067',
+          address_state: 'BW',
+          dob_day: '1',
+          dob_month: '1',
+          dob_year: '1950',
+          email: person1.email,
+          first_name: person1.firstName,
+          last_name: person1.lastName
+        }, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.owner.id}`)
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -52,12 +69,12 @@ describe('/api/user/connect/update-company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
+        assert.strictEqual(errorMessage, 'invalid-person')
       })
 
-      it('ineligible stripe account is submitted', async () => {
-        const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      it('ineligible person has no required information', async () => {
+        const user = await TestStripeAccounts.createSubmittedCompany('DE')
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -66,7 +83,7 @@ describe('/api/user/connect/update-company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
+        assert.strictEqual(errorMessage, 'invalid-person')
       })
     })
 
@@ -78,7 +95,7 @@ describe('/api/user/connect/update-company-representative', () => {
           type: 'company'
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
@@ -92,13 +109,13 @@ describe('/api/user/connect/update-company-representative', () => {
     })
 
     describe('invalid-relationship_percent_ownership', () => {
-      it('invalid posted percent_ownership', async () => {
+      it('invalid posted relationship_percent_ownership', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'US',
           type: 'company'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
@@ -121,6 +138,7 @@ describe('/api/user/connect/update-company-representative', () => {
           phone: '456-789-0123',
           relationship_executive: 'true',
           relationship_title: 'Owner',
+          relationship_percent_ownership: 'invalid',
           ssn_last_4: '0000'
         }
         req.body = TestHelper.createMultiPart(req, body)
@@ -135,52 +153,13 @@ describe('/api/user/connect/update-company-representative', () => {
     })
 
     describe('invalid-dob_day', () => {
-      it('missing posted dob_day', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'AT',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'Vienna',
-          address_country: 'AT',
-          address_line1: '123 Sesame St',
-          address_postal_code: '1020',
-          address_state: '1',
-          dob_day: '',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-dob_day')
-      })
-
       it('invalid posted dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'AT',
           type: 'company'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
@@ -214,51 +193,13 @@ describe('/api/user/connect/update-company-representative', () => {
     })
 
     describe('invalid-dob_month', () => {
-      it('missing posted dob_month', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'AT',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'Vienna',
-          address_line1: '123 Sesame St',
-          address_postal_code: '1020',
-          address_state: '1',
-          dob_day: '1',
-          dob_month: '',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-dob_month')
-      })
-
       it('invalid posted dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'AT',
           type: 'company'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
@@ -292,51 +233,13 @@ describe('/api/user/connect/update-company-representative', () => {
     })
 
     describe('invalid-dob_year', () => {
-      it('missing posted dob_year', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'AT',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'Vienna',
-          address_line1: '123 Sesame St',
-          address_postal_code: '1020',
-          address_state: '1',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-dob_year')
-      })
-
       it('invalid posted dob_year', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'AT',
           type: 'company'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
@@ -369,305 +272,14 @@ describe('/api/user/connect/update-company-representative', () => {
       })
     })
 
-    describe('invalid-first_name', () => {
-      it('missing posted first_name', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'AT',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'Vienna',
-          address_country: 'AT',
-          address_line1: '123 Sesame St',
-          address_postal_code: '1020',
-          address_state: '1',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: '',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-first_name')
-      })
-    })
-
-    describe('invalid-last_name', () => {
-      it('missing posted last_name', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'AT',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'Vienna',
-          address_country: 'AT',
-          address_line1: '123 Sesame St',
-          address_postal_code: '1020',
-          address_state: '1',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          last_name: '',
-          phone: '456-789-0123'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-last_name')
-      })
-    })
-
-    describe('invalid-email', () => {
-      it('missing posted email', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'AT',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'Vienna',
-          address_country: 'AT',
-          address_line1: '123 Sesame St',
-          address_postal_code: '1020',
-          address_state: '1',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: '',
-          first_name: user.profile.firstName,
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-email')
-      })
-    })
-
-    describe('invalid-phone', () => {
-      it('missing posted phone', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'AT',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'Vienna',
-          address_country: 'AT',
-          address_line1: '123 Sesame St',
-          address_postal_code: '1020',
-          address_state: '1',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          last_name: user.profile.lastName,
-          phone: '',
-          relationship_executive: 'true',
-          relationship_title: 'Owner'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-phone')
-      })
-    })
-
-    describe('invalid-ssn_last_4', () => {
-      it('missing posted ssn_last_4', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'New York',
-          address_country: 'US',
-          address_line1: '285 Fulton St',
-          address_postal_code: '10007',
-          address_state: 'NY',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          id_number: '000000000',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner',
-          ssn_last_4: ''
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-ssn_last_4')
-      })
-    })
-
-    describe('invalid-address_line1', () => {
-      it('missing posted address_line1', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'New York',
-          address_country: 'US',
-          address_line1: '',
-          address_postal_code: '10007',
-          address_state: 'NY',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          id_number: '000000000',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner',
-          ssn_last_4: '0000'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_line1')
-      })
-    })
-
-    describe('invalid-address_city', () => {
-      it('missing posted address_city', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: '',
-          address_country: 'US',
-          address_line1: '285 Fulton St',
-          address_postal_code: '10007',
-          address_state: 'NY',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          id_number: '000000000',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner',
-          ssn_last_4: '0000'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_city')
-      })
-    })
-
     describe('invalid-address_state', () => {
-      it('missing posted address_state', async () => {
+      it('invalid posted address_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'US',
           type: 'company'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
@@ -679,7 +291,7 @@ describe('/api/user/connect/update-company-representative', () => {
           address_country: 'US',
           address_line1: '285 Fulton St',
           address_postal_code: '10007',
-          address_state: '',
+          address_state: 'invalid',
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
@@ -702,583 +314,6 @@ describe('/api/user/connect/update-company-representative', () => {
         assert.strictEqual(errorMessage, 'invalid-address_state')
       })
     })
-
-    describe('invalid-address_country', () => {
-      it('missing posted address_country', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'New York',
-          address_country: '',
-          address_line1: '285 Fulton St',
-          address_postal_code: '10007',
-          address_state: 'NY',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          id_number: '000000000',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner',
-          ssn_last_4: '0000'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_country')
-      })
-
-      it('invalid-address_country', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'New York',
-          address_country: 'invalid',
-          address_line1: '285 Fulton St',
-          address_postal_code: '10007',
-          address_state: 'NY',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          id_number: '000000000',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner',
-          ssn_last_4: '0000'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_country')
-      })
-    })
-
-    describe('invalid-address_postal_code', () => {
-      it('missing posted address_postal_code', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_city: 'New York',
-          address_country: 'US',
-          address_line1: '285 Fulton St',
-          address_postal_code: '',
-          address_state: 'NY',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          id_number: '000000000',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123',
-          relationship_executive: 'true',
-          relationship_title: 'Owner',
-          ssn_last_4: '0000'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_postal_code')
-      })
-    })
-
-    describe('invalid-address_kana_postal_code', () => {
-      it('missing posted address_kana_postal_code', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '東京都',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kana_postal_code')
-      })
-    })
-
-    describe('invalid-address_kana_city', () => {
-      it('missing posted address_kana_city', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: '',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '1500001',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '東京都',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kana_city')
-      })
-    })
-
-    describe('invalid-address_kana_state', () => {
-      it('missing posted address_kana_state', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '1500001',
-          address_kana_state: '',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '東京都',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kana_state')
-      })
-    })
-
-    describe('invalid-address_kana_town', () => {
-      it('missing posted address_kana_town', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '1500001',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: '',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '東京都',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kana_town')
-      })
-    })
-
-    describe('invalid-address_kana_line1', () => {
-      it('missing posted address_kana_line1', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '',
-          address_kana_postal_code: '1500001',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '東京都',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kana_line1')
-      })
-    })
-
-    describe('invalid-address_kanji_postal_code', () => {
-      it('missing posted address_kanji_postal_code', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '1500001',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '',
-          address_kanji_state: '東京都',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kanji_postal_code')
-      })
-    })
-
-    describe('invalid-address_kanji_city', () => {
-      it('missing posted address_kanji_city', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '1500001',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '東京都',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kanji_city')
-      })
-    })
-
-    describe('invalid-address_kanji_state', () => {
-      it('missing posted address_kanji_state', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '1500001',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kanji_state')
-      })
-    })
-
-    describe('invalid-address_kanji_town', () => {
-      it('missing posted address_kanji_town', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '1500001',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '２７－１５',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '東京都',
-          address_kanji_town: '',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kanji_town')
-      })
-    })
-
-    describe('invalid-address_kanji_line1', () => {
-      it('missing posted address_kanji_line1', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'JP',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        const body = {
-          address_kana_city: 'ｼﾌﾞﾔ',
-          address_kana_line1: '27-15',
-          address_kana_postal_code: '1500001',
-          address_kana_state: 'ﾄｳｷﾖｳﾄ',
-          address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-          address_kanji_city: '渋谷区',
-          address_kanji_line1: '',
-          address_kanji_postal_code: '1500001',
-          address_kanji_state: '東京都',
-          address_kanji_town: '神宮前　３丁目',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          first_name_kana: 'ﾄｳｷﾖｳﾄ',
-          first_name_kanji: '東京都',
-          gender: 'female',
-          last_name_kana: 'ﾄｳｷﾖｳﾄ',
-          last_name_kanji: '東京都'
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-address_kanji_line1')
-      })
-    })
   })
 
   describe('receives', () => {
@@ -1289,7 +324,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1319,13 +354,13 @@ describe('/api/user/connect/update-company-representative', () => {
       assert.strictEqual(personNow.representativeToken, 'token')
     })
 
-    it('required posted dob_day', async () => {
+    it('optionally-required posted dob_day', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1354,13 +389,13 @@ describe('/api/user/connect/update-company-representative', () => {
       assert.strictEqual(personNow.dob.day, 7)
     })
 
-    it('required posted dob_month', async () => {
+    it('optionally-required posted dob_month', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1389,13 +424,13 @@ describe('/api/user/connect/update-company-representative', () => {
       assert.strictEqual(personNow.dob.month, 11)
     })
 
-    it('required posted dob_year', async () => {
+    it('optionally-required posted dob_year', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1430,7 +465,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1466,7 +501,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1502,7 +537,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1537,7 +572,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1572,7 +607,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1607,7 +642,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1642,7 +677,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1684,7 +719,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1719,7 +754,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'CA',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1754,7 +789,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1789,7 +824,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1824,7 +859,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1859,7 +894,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1894,7 +929,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1929,7 +964,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -1965,7 +1000,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'CA',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2001,7 +1036,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'CA',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2037,7 +1072,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'CA',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2073,7 +1108,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'CA',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2109,7 +1144,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2151,7 +1186,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2193,7 +1228,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2235,7 +1270,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2277,7 +1312,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2319,7 +1354,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2361,7 +1396,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2403,7 +1438,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2445,7 +1480,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2487,7 +1522,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2529,7 +1564,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2571,7 +1606,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2613,7 +1648,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2655,7 +1690,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'JP',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -2698,9 +1733,9 @@ describe('/api/user/connect/update-company-representative', () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,
-          type: 'individual'
+          type: 'company'
         })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
         req.body = postData[country.id]
@@ -2733,7 +1768,7 @@ describe('/api/user/connect/update-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-representative?personid=${user.representative.id}`)
       req.waitOnSubmit = true
       req.account = user.account
       req.session = user.session
@@ -2759,7 +1794,7 @@ describe('/api/user/connect/update-company-representative', () => {
         ssn_last_4: '0000'
       }
       await req.post()
-      const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?personid=${user.representative.id}`)
       req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session
@@ -2896,9 +1931,7 @@ const postData = {
     address_line1: '123 Park Lane',
     address_postal_code: '03179',
     address_state: 'AN',
-    name: 'Individual',
-    phone: '456-789-0123',
-    tax_id: '00000000000'
+    phone: '456-789-0123'
   },
   FI: {
     business_profile_mcc: '8931',
@@ -2943,8 +1976,7 @@ const postData = {
     address_line1: '123 Park Lane',
     address_postal_code: '104',
     address_state: 'I',
-    phone: '456-789-0123',
-    tax_id: '00000000000'
+    phone: '456-789-0123'
   },
   HK: {
     business_profile_mcc: '8931',

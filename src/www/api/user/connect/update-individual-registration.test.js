@@ -525,47 +525,6 @@ describe('/api/user/connect/update-individual-registration', () => {
       })
     })
 
-    describe('invalid-id_number', () => {
-      it('missing posted id_number', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'HK',
-          type: 'individual'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        const body = {
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          address_city: 'Hong Kong',
-          address_line1: '123 Sesame St',
-          address_postal_code: '999077',
-          address_state: 'HK',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          id_number: '',
-          last_name: user.profile.lastName,
-          phone: '456-789-0123'
-        }
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, body)
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-id_number')
-      })
-    })
-
     describe('invalid-business_profile_mcc', () => {
       it('missing posted business_profile_mcc', async () => {
         const user = await TestHelper.createUser()
@@ -1651,8 +1610,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1686,8 +1643,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1721,8 +1676,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1756,8 +1709,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1791,8 +1742,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1826,8 +1775,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1861,8 +1808,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1896,8 +1841,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1931,8 +1874,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -1966,8 +1907,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -2057,7 +1996,7 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted id_number', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'CA',
+        country: 'HK',
         type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
@@ -2065,19 +2004,19 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.session = user.session
       const body = {
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        address_city: 'Vancouver',
+        business_profile_url: 'https://a-website.com',
+        address_city: 'Hong Kong',
         address_line1: '123 Sesame St',
-        address_postal_code: 'V5K 0A1',
-        address_state: 'BC',
+        address_postal_code: '999077',
+        address_state: 'HK',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
+        id_number: '000000000',
+        phone: '456-789-0123',
         email: user.profile.contactEmail,
         first_name: user.profile.firstName,
-        id_number: '000000000',
-        last_name: user.profile.lastName,
-        phone: '456-789-0123'
+        last_name: user.profile.lastName
       }
       req.uploads = {
         verification_document_back: TestHelper['success_id_scan_back.png'],
@@ -2091,7 +2030,7 @@ describe('/api/user/connect/update-individual-registration', () => {
     it('optionally-required posted address_state', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'NZ',
+        country: 'AU',
         type: 'individual'
       })
       const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
@@ -2099,28 +2038,26 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.session = user.session
       const body = {
         business_profile_mcc: '8931',
-        business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-        address_city: 'Auckland',
-        address_line1: '844 Fleet Street',
-        address_postal_code: '6011',
-        address_state: 'N',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
+        business_profile_url: 'https://a-website.com',
+        address_city: 'Brisbane',
+        address_line1: '123 Park Lane',
+        address_postal_code: '4000',
+        address_state: 'QLD',
+        name: 'Company',
+        phone: '456-789-0123',
+        tax_id: '00000000000',
         email: user.profile.contactEmail,
         first_name: user.profile.firstName,
         last_name: user.profile.lastName,
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.state, 'N')
+      assert.strictEqual(accountNow.individual.address.state, 'QLD')
     })
 
     it('optionally-required posted address_postal_code', async () => {
@@ -2148,8 +2085,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -2183,8 +2118,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -2219,8 +2152,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -2358,7 +2289,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
+      assert.strictEqual(accountNow.individual.address_kana.town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
     })
 
     it('optionally-required posted address_kana_state', async () => {
@@ -2402,7 +2333,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.kana_state, 'ﾄｳｷﾖｳﾄ')
+      assert.strictEqual(accountNow.individual.address_kana.state, 'ﾄｳｷﾖｳﾄ')
     })
 
     it('optionally-required posted address_kana_postal_code', async () => {
@@ -2446,7 +2377,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.kana_postal_code, '1500001')
+      assert.strictEqual(accountNow.individual.address_kana.postal_code, '1500001')
     })
 
     it('optionally-required posted address_kana_line1', async () => {
@@ -2490,7 +2421,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.kana_line1, '27-15')
+      assert.strictEqual(accountNow.individual.address_kana.line1, '27-15')
     })
 
     it('optionally-required posted first_name_kanji', async () => {
@@ -2622,7 +2553,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.kanji_state, '東京都')
+      assert.strictEqual(accountNow.individual.address_kanji.state, '東京都')
     })
 
     it('optionally-required posted address_kanji_postal_code', async () => {
@@ -2666,7 +2597,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.kanji_postal_code, '1500001')
+      assert.strictEqual(accountNow.individual.address_kanji.postal_code, '1500001')
     })
 
     it('optionally-required posted address_kanji_line1', async () => {
@@ -2710,7 +2641,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.kanji_line1, '２７－１５')
+      assert.strictEqual(accountNow.individual.address_kanji.line1, '２７－１５')
     })
 
     it('optionally-required posted address_kanji_town', async () => {
@@ -2754,7 +2685,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const accountNow = await req.patch()
-      assert.strictEqual(accountNow.individual.address.kanji_town, '神宮前　３丁目')
+      assert.strictEqual(accountNow.individual.address_kanji.town, '神宮前　３丁目')
     })
 
     it('optionally-required posted file verification_document_front', async () => {
@@ -2782,8 +2713,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -2818,8 +2747,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -2854,8 +2781,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
@@ -2890,8 +2815,6 @@ describe('/api/user/connect/update-individual-registration', () => {
         phone: '456-789-0123'
       }
       req.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }

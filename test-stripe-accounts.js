@@ -57,7 +57,10 @@ module.exports = {
     const representative = {
       first_name: identity.firstName,
       last_name: identity.lastName,
-      email: identity.email
+      email: identity.email,
+      relationship_title: 'Owner',
+      relationship_executive: true,
+      relationship_percent_owned: 0
     }
     for (const field in representativeData[country]) {
       representative[field] = representativeData[country][field]
@@ -65,6 +68,11 @@ module.exports = {
     await TestHelper.createCompanyRepresentative(user, representative, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
+    })
+    await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
+    await TestHelper.updateCompanyRepresentative(user, {}, {
+      verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+      verification_additional_document_front: TestHelper['success_id_scan_front.png']
     })
     await TestHelper.submitBeneficialOwners(user)
     await TestHelper.submitCompanyDirectors(user)
@@ -77,17 +85,23 @@ module.exports = {
       payment[field] = paymentData[country][field]
     }
     await TestHelper.createExternalAccount(user, payment)
-    await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
-    await TestHelper.updateCompanyRepresentative(user, {}, {
-      verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-      verification_additional_document_front: TestHelper['success_id_scan_front.png']
-    })
-    await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
-    await TestHelper.updateStripeRegistration(user, {}, {
-      verification_document_back: TestHelper['success_id_scan_back.png'],
-      verification_document_front: TestHelper['success_id_scan_front.png']
-    })
+    // TODO: fix this when Stripe fixes company.verification.document
+    // the 'company.verification.document' erroneously shows up in the
+    // 'requirements.pending_validation' signifying it is under review, then
+    // it is removed from that, but really it needs to show up in currently_due
+    // and then submit the documents and then it should be pending_validation
+
+    // await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
+    // await TestHelper.waitForVerificationFieldsToReturn(user, user.representative.id)
+    // console.log('waiting for fields to leave', user.stripeAccount, user.representative)
+    // await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
     await TestHelper.submitStripeAccount(user)
+    // await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
+    // await TestHelper.updateStripeRegistration(user, {}, {
+    //   verification_document_back: TestHelper['success_id_scan_back.png'],
+    //   verification_document_front: TestHelper['success_id_scan_front.png']
+    // })
+    await TestHelper.waitForPayoutsEnabled(user)
     return user
   }
 }

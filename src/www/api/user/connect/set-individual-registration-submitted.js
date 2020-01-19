@@ -19,10 +19,8 @@ module.exports = {
     if (!stripeAccount.external_accounts.data.length) {
       throw new Error('invalid-payment-details')
     }
-    console.log('submitting stripe account', stripeAccount)
     if (stripeAccount.requirements.currently_due.length > 0) {
       for (const field of stripeAccount.requirements.currently_due) {
-        console.log('requires field', field)
         if (!field.startsWith('tos_acceptance')) {
           throw new Error('invalid-registration')
         }

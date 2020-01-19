@@ -22,6 +22,24 @@ module.exports = {
     if (!stripeAccount) {
       throw new Error('invalid-personid')
     }
+    let requiresInfo = false
+    for (const requirement of stripeAccount.requirements.currently_due) {
+      requiresInfo = requirement.startsWith(person.id)
+      if (requiresInfo) {
+        break
+      }
+    }
+    if (!requiresInfo) {
+      for (const requirement of stripeAccount.requirements.eventually_due) {
+        requiresInfo = requirement.startsWith(person.id)
+        if (requiresInfo) {
+          break
+        }
+      }
+    }
+    if (!requiresInfo) {
+      throw new Error('invalid-person')
+    }
     let validateDOB = false
     if (req.body.dob_day) {
       validateDOB = true
@@ -277,22 +295,32 @@ module.exports = {
         companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
         companyRepresentativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
-      if (req.body.percent_ownership) {
+      if (req.body.relationship_percent_ownership) {
         try {
-          const percent = parseFloat(req.body.percent_ownership, 10)
+          const percent = parseFloat(req.body.relationship_percent_ownership, 10)
           if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
             throw new Error('invalid-relationship_percent_ownership')
           }
         } catch (s) {
           throw new Error('invalid-relationship_percent_ownership')
         }
-        companyRepresentativeInfo.percent_ownership = req.body.percent_ownership
+        companyRepresentativeInfo.relaationship.percent_ownership = req.body.relationship_percent_ownership
       }
       if (req.body.relationship_title) {
-        companyRepresentativeInfo.relationship_title = req.body.relationship_title
+        companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
+        companyRepresentativeInfo.relationship.title = req.body.relationship_title
       }
       if (req.body.relationship_executive) {
-        companyRepresentativeInfo.relationship_executive = true
+        companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
+        companyRepresentativeInfo.relationship.executive = true
+      }
+      if (req.body.relationship_director) {
+        companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
+        companyRepresentativeInfo.relationship.director = true
+      }
+      if (req.body.relationship_owner) {
+        companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
+        companyRepresentativeInfo.relationship.owner = true
       }
     }
     while (true) {
