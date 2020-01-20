@@ -15,7 +15,7 @@ module.exports = {
     req.query.stripeid = owner.account
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount || stripeAccount.business_type !== 'company') {
-      throw new Error('invalid-personid')
+      throw new Error('invalid-stripe-account')
     }
     if (stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')

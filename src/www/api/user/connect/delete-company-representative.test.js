@@ -169,8 +169,8 @@ describe('/api/user/connect/delete-company-representative', () => {
       req3.session = user.session
       req3.filename = __filename
       req3.saveResponse = true
-      const accountNow = await req3.delete()
-      assert.strictEqual(accountNow.requirements.currently_due.indexOf('relationship.representative') > -1, true)
+      const deleted = await req3.delete()
+      assert.strictEqual(deleted, true)
     })
   })
 })

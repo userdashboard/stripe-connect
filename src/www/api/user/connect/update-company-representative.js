@@ -213,12 +213,12 @@ module.exports = {
           companyRepresentativeInfo.address = companyRepresentativeInfo.address || {}
           companyRepresentativeInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
-          const property = field.substring('verification.document.'.length)
+          const property = field.substring('verification.document'.length)
           companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
           companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
           companyRepresentativeInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          const property = field.substring('verification.additional_document.'.length)
+          const property = field.substring('verification.additional_document'.length)
           companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
           companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
           companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
@@ -260,12 +260,12 @@ module.exports = {
           const property = field.substring('address.'.length)
           companyRepresentativeInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
-          const property = field.substring('verification.document.'.length)
+          const property = field.substring('verification.document'.length)
           companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
           companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
           companyRepresentativeInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          const property = field.substring('verification.additional_document.'.length)
+          const property = field.substring('verification.additional_document'.length)
           companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
           companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
           companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]

@@ -26,7 +26,7 @@ module.exports = {
     req.query.personid = stripeAccount.metadata.representative
     const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
     for (const fullField of stripeAccount.requirements.currently_due) {
-      if (!fullField.startsWith(stripeAccount.metadata.representative)) {
+      if (!fullField.startsWith(existingRepresentative.id)) {
         continue
       }
       const field = fullField.substring(`${existingRepresentative.id}.`.length)
@@ -199,7 +199,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.document.'.length)
+            const property = field.substring('verification.document'.length)
             representativeInfo.verification = representativeInfo.verification || {}
             representativeInfo.verification.document = representativeInfo.verification.document || {}
             representativeInfo.verification.document[property] = req.body[posted]
@@ -207,7 +207,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.additional_document.'.length)
+            const property = field.substring('verification.additional_document'.length)
             representativeInfo.verification = representativeInfo.verification || {}
             representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
             representativeInfo.verification.additional_document[property] = req.body[posted]
@@ -226,7 +226,7 @@ module.exports = {
           }
         }
       }
-      for (const fullField of stripeAccount.requirements.currently_due) {
+      for (const fullField of stripeAccount.requirements.eventually_due) {
         if (!fullField.startsWith(existingRepresentative.id)) {
           continue
         }
@@ -255,7 +255,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.document.'.length)
+            const property = field.substring('verification.document'.length)
             representativeInfo.verification = representativeInfo.verification || {}
             representativeInfo.verification.document = representativeInfo.verification.document || {}
             representativeInfo.verification.document[property] = req.body[posted]
@@ -263,7 +263,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.additional_document.'.length)
+            const property = field.substring('verification.additional_document'.length)
             representativeInfo.verification = representativeInfo.verification || {}
             representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
             representativeInfo.verification.additional_document[property] = req.body[posted]

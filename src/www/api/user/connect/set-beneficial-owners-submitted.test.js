@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
+const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 
 describe('/api/user/connect/set-beneficial-owners-submitted', () => {
@@ -59,24 +60,6 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
           country: 'US',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
-        await TestHelper.createBeneficialOwner(user, {
-          relationship_owner_address_city: 'Berlin',
-          relationship_owner_address_country: 'DE',
-          relationship_owner_address_line1: 'First Street',
-          relationship_owner_address_postal_code: '01067',
-          relationship_owner_address_state: 'BW',
-          relationship_owner_dob_day: '1',
-          relationship_owner_dob_month: '1',
-          relationship_owner_dob_year: '1950',
-          relationship_owner_email: person.email,
-          relationship_owner_first_name: person.firstName,
-          relationship_owner_last_name: person.lastName,
-          relationship_owner_ssn_last_4: '0000'
-        }, {
-          relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-          relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-        })
         await TestHelper.submitBeneficialOwners(user)
         const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -114,968 +97,43 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
   })
 
   describe('returns', () => {
-    it('object for AT registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AT',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
+    for (const country of connect.countrySpecs) {
+      if (country.id === 'JP') {
+        continue
       }
-    })
-
-    it('object for AU registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AU',
-        type: 'company'
+      it('object (' + country.id + ')', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'company'
+        })
+        const person = TestHelper.nextIdentity()
+        const owner = JSON.parse(JSON.stringify(beneficialOwnerData[country.id]))
+        owner.email = person.email,
+        owner.first_name = person.firstName,
+        owner.last_name = person.lastName
+        await TestHelper.createBeneficialOwner(user, owner, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
+        await TestHelper.updateBeneficialOwner(user, owner, {
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        const accountNow = await req.patch()
+        assert.strictEqual(accountNow.company.owners_provided, true)
+        await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
+        const owners = await global.api.user.connect.BeneficialOwners.get(req)
+        for (const owner of owners) {
+          assert.strictEqual(owner.requirements.past_due.length, 0)
+          assert.strictEqual(owner.requirements.eventually_due.length, 0)
+          assert.strictEqual(owner.requirements.currently_due.length, 0)
+        }
       })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for BE registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'BE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for CH registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'CH',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for DE registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for DK registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DK',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for EE registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'EE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for ES registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'ES',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for FI registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'FI',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for FR registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'FR',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for GB registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for IE registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'IE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for IT registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'IT',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for LT registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'LT',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for LU registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'LU',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for LV registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'LV',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    // it('object for MX registration', async () => {
-    //   const user = await TestHelper.createUser()
-    //   await TestHelper.createStripeAccount(user,{
-    //     country: 'MX',
-    //     type: 'company'
-    // })
-    //   const person = TestHelper.nextIdentity()
-    //   await TestHelper.createBeneficialOwner(user,{
-    //     relationship_owner_address_city: 'Berlin',
-    //     relationship_owner_address_country: 'DE',
-    //     relationship_owner_address_line1: 'First Street',
-    //     relationship_owner_address_postal_code: '01067',
-    //     relationship_owner_address_state: 'BW',
-    //     relationship_owner_dob_day: '1',
-    //     relationship_owner_dob_month: '1',
-    //     relationship_owner_dob_year: '1950',
-    //     relationship_owner_email: person.email,
-    //     relationship_owner_first_name: person.firstName,
-    //     relationship_owner_last_name: person.lastName
-    // })
-    //   const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-    //   req.account = user.account
-    //   req.session = user.session
-    //   const accountNow = await req.patch()
-    //   assert.strictEqual(accountNow.company.owners_provided, true)
-    //   for (const key of accountNow.requirements.past_due) {
-    //     assert.strictEqual(key.startsWith('person_'), false)
-    //   }
-    //   for (const key of accountNow.requirements.currently_due) {
-    //     assert.strictEqual(key.startsWith('person_'), false)
-    //   }
-    //   for (const key of accountNow.requirements.eventually_due) {
-    //     assert.strictEqual(key.startsWith('person_'), false)
-    //   }
-    // })
-
-    it('object for NL registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NL',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for NO registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NO',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for NZ registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'NZ',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for PT registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'PT',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for SE registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'SE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for SG registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'SG',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_id_number: '000000000',
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for SI registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'SI',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for SK registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'SK',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
-
-    it('object for US registration', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName,
-        relationship_owner_ssn_last_4: '0000'
-      }, {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const accountNow = await req.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
-      }
-    })
+    }
   })
 
   describe('configuration', () => {
@@ -1092,37 +150,324 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
       req.account = user.account
       req.session = user.session
       req.uploads = {
-        relationship_owner_verification_document_back: TestHelper['success_id_scan_back.png'],
-        relationship_owner_verification_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = {
-        relationship_owner_address_city: 'Berlin',
-        relationship_owner_address_country: 'DE',
-        relationship_owner_address_line1: 'First Street',
-        relationship_owner_address_postal_code: '01067',
-        relationship_owner_address_state: 'BW',
-        relationship_owner_dob_day: '1',
-        relationship_owner_dob_month: '1',
-        relationship_owner_dob_year: '1950',
-        relationship_owner_email: person.email,
-        relationship_owner_first_name: person.firstName,
-        relationship_owner_last_name: person.lastName
-      }
+      req.body = JSON.parse(JSON.stringify(beneficialOwnerData['DE']))
+      req.body.email = person.email
+      req.body.first_name = person.firstName
+      req.body.last_name = person.lastName
       await req.post()
-      const req2 = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
+      const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session
-      req2.filename = __filename
-      req2.saveResponse = true
-      const accountNow = await req2.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-      const owners = await global.api.user.connect.BeneficialOwners.get(req)
-      for (const owner of owners) {
-        assert.strictEqual(owner.requirements.past_due.length, 0)
-        assert.strictEqual(owner.requirements.eventually_due.length, 0)
-        assert.strictEqual(owner.requirements.currently_due.length, 0)
+      const owners = await req2.get()
+      const owner = owners[0]
+      const req3 = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${owner.id}`)
+      req3.account = user.account
+      req3.session = user.session
+      req3.uploads = {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
       }
+      await req.post()
+      const req4 = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
+      req4.account = user.account
+      req4.session = user.session
+      req4.filename = __filename
+      req4.saveResponse = true
+      const accountNow = await req4.patch()
+      assert.strictEqual(accountNow.company.owners_provided, true)
+      const req5 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${owner.id}`)
+      req5.account = user.account
+      req5.session = user.session
+      req5.filename = __filename
+      req5.saveResponse = true
+      const ownerNow = await req5.get()
+      assert.strictEqual(ownerNow.metadata.token, undefined)
     })
   })
 })
+
+const beneficialOwnerData = {
+  AT: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  AU: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  BE: {
+    address_city: 'Brussels',
+    address_country: 'BE',
+    address_line1: 'First Street',
+    address_postal_code: '1020',
+    address_state: 'BRU',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  CA: {
+    address_city: 'Vancouver',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'V5K 0A1',
+    address_state: 'BC',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  CH: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  DE:  {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  DK: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }, 
+  EE: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }, 
+  ES: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  FI: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  FR: {
+    address_city: 'Paris',
+    address_country: 'FR',
+    address_line1: '123 Sesame St',
+    address_postal_code: '75001',
+    address_state: 'A',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  GB: {
+    address_city: 'London',
+    address_country: 'GB',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'EC1A 1AA',
+    address_state: 'LND',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  GR: {
+    address_city: 'Athens',
+    address_country: 'GR',
+    address_line1: '123 Park Lane',
+    address_postal_code: '104',
+    address_state: 'I',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  HK: {
+    address_city: 'Hong Kong',
+    address_country: 'HK',
+    address_line1: '123 Sesame St',
+    address_postal_code: '999077',
+    address_state: 'HK',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  IE: {
+    address_city: 'Dublin',
+    address_country: 'IE',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'Dublin 1',
+    address_state: 'D',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  IT: {
+    address_city: 'Rome',
+    address_country: 'IT',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00010',
+    address_state: '65',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  JP: {
+  },
+  LT: {
+    address_city: 'Vilnius',
+    address_country: 'LT',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'LT-00000',
+    address_state: 'AL',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  LU: {
+    address_city: 'Luxemburg',
+    address_country: 'LU',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1623',
+    address_state: 'L',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  LV: {
+    address_city: 'Riga',
+    address_country: 'LV',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'LV–1073',
+    address_state: 'AI',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  MY: {
+    address_city: 'Kuala Lumpur',
+    address_country: 'MY',
+    address_line1: '123 Sesame St',
+    address_postal_code: '50450',
+    address_state: 'C',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }, 
+  NL: {
+    address_city: 'Amsterdam',
+    address_country: 'NL',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1071 JA',
+    address_state: 'DR',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+  },
+  NO: {
+    address_city: 'Oslo',
+    address_country: 'NO',
+    address_line1: '123 Sesame St',
+    address_postal_code: '0001',
+    address_state: '02',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  NZ: {
+    address_city: 'Auckland',
+    address_country: 'NZ',
+    address_line1: '844 Fleet Street',
+    address_postal_code: '6011',
+    address_state: 'N',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  PL: {
+    address_city: 'Krakow',
+    address_country: 'PL',
+    address_line1: '123 Park Lane',
+    address_postal_code: '32-400',
+    address_state: 'KR',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  PT: {
+    address_city: 'Stockholm',
+    address_country: 'PT',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00150',
+    address_state: 'K',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SE: {
+    address_city: 'Singapore',
+    address_country: 'SE',
+    address_line1: '123 Sesame St',
+    address_postal_code: '339696',
+    address_state: 'SG',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SK: {
+    address_city: 'Slovakia',
+    address_country: 'SK',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00102',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  US: {
+    address_city: 'New York',
+    address_country: 'US',
+    address_line1: '285 Fulton St',
+    address_postal_code: '10007',
+    address_state: 'NY',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }
+}

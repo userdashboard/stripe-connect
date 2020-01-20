@@ -15,6 +15,9 @@ module.exports = {
     if (!stripeAccount) {
       throw new Error('invalid-personid')
     }
+    if (stripeAccount.metadata.accountid !== req.account.accountid) {
+      throw new Error('invalid-account')
+    }
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }

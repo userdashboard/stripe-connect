@@ -20,10 +20,32 @@ module.exports = {
         representative: false
       }
     }
-
     while (true) {
       try {
         await stripe.accounts.updatePerson(req.query.stripeid, stripeAccount.metadata.representative, representativeInfo, req.stripeKey)
+        break
+      } catch (error) {
+        if (error.raw && error.raw.code === 'lock_timeout') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+          continue
+        }
+        if (error.type === 'StripeConnectionError') {
+          continue
+        }
+       if (error.type === 'StripeAPIError') {
+          continue
+       }
+        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
+      }
+    }
+    while (true) {
+      try {
+        await stripe.accounts.deletePerson(req.query.stripeid, stripeAccount.metadata.representative, req.stripeKey)
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -52,7 +74,7 @@ module.exports = {
           }
         }, req.stripeKey)
         await stripeCache.update(stripeAccountNow)
-        return stripeAccountNow
+        return true
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue

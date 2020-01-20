@@ -75,12 +75,12 @@ module.exports = {
     }
     if (req.body.address_country) {
       if (!connect.countryNameIndex[req.body.address_country]) {
-        throw new Error('invalid-address_country11')
+        throw new Error('invalid-address_country')
       }
     }
     if (req.body.address_state) {
       if (!req.body.address_country) {
-        throw new Error('invalid-address_country22')
+        throw new Error('invalid-address_country')
       }
       const states = connect.countryDivisions[req.body.address_country]
       if (!states || !states.length) {
@@ -163,9 +163,9 @@ module.exports = {
         }
       }
     }
-    const beneficialOwner = {}
+    const ownerInfo = {}
     if (global.stripeJS === 3) {
-      beneficialOwner.person_token = req.body.token
+      ownerInfo.person_token = req.body.token
     } else {
       for (const fullField of stripeAccount.requirements.currently_due) {
         if (!fullField.startsWith(person.id)) {
@@ -178,45 +178,33 @@ module.exports = {
               field === `relationship.title` ||
               field === `relationship.executive` ||
               field === `relationship.director` ||
-              field === `relationship.owner`) {
+              field === `relationship.owner` ||
+              field === 'verification.document' || 
+              field === 'verification.additional_document') {
             continue
-          }
-          if (field !== 'verification.document' &&
-              field !== 'verification.additional_document') {
-            throw new Error(`invalid-${posted}`)
           }
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
-          beneficialOwner.business_profile = beneficialOwner.business_profile || {}
-          beneficialOwner.business_profile[property] = req.body[posted]
+          ownerInfo.business_profile = ownerInfo.business_profile || {}
+          ownerInfo.business_profile[property] = req.body[posted]
           continue
         }
         if (field.startsWith('address_kanji.')) {
           const property = field.substring('address_kanji.'.length)
-          beneficialOwner.address_kanji = beneficialOwner.address_kanji || {}
-          beneficialOwner.address_kanji[property] = req.body[posted]
+          ownerInfo.address_kanji = ownerInfo.address_kanji || {}
+          ownerInfo.address_kanji[property] = req.body[posted]
         } else if (field.startsWith('address_kana.')) {
           const property = field.substring('address_kana.'.length)
-          beneficialOwner.address_kana = beneficialOwner.address_kana || {}
-          beneficialOwner.address_kana[property] = req.body[posted]
+          ownerInfo.address_kana = ownerInfo.address_kana || {}
+          ownerInfo.address_kana[property] = req.body[posted]
         } else if (field.startsWith('address.')) {
           const property = field.substring('address.'.length)
-          beneficialOwner.address = beneficialOwner.address || {}
-          beneficialOwner.address[property] = req.body[posted]
-        } else if (field.startsWith('verification.document.')) {
-          const property = field.substring('verification.document.'.length)
-          beneficialOwner.verification = beneficialOwner.verification || {}
-          beneficialOwner.verification.document = beneficialOwner.verification.document || {}
-          beneficialOwner.verification.document[property] = req.body[posted]
-        } else if (field.startsWith('verification.additional_document.')) {
-          const property = field.substring('verification.additional_document.'.length)
-          beneficialOwner.verification = beneficialOwner.verification || {}
-          beneficialOwner.verification.additional_document = beneficialOwner.verification.additional_document || {}
-          beneficialOwner.verification.additional_document[property] = req.body[posted]
+          ownerInfo.address = ownerInfo.address || {}
+          ownerInfo.address[property] = req.body[posted]
         } else {
           const property = field.substring(''.length)
-          beneficialOwner[property] = req.body[posted]
+          ownerInfo[property] = req.body[posted]
         }
       }
       for (const fullField of stripeAccount.requirements.eventually_due) {
@@ -224,69 +212,93 @@ module.exports = {
           continue
         }
         const field = fullField.substring(`${person.id}.`.length)
+        if (field === 'verification.document' || 
+            field === 'verification.additional_document') {
+          continue
+        }
         const posted = field.split('.').join('_').replace(`${person.id}_`, '')
         if (!req.body[posted]) {
           continue
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
-          beneficialOwner.business_profile[property] = req.body[posted]
+          ownerInfo.business_profile[property] = req.body[posted]
           continue
         }
         if (field.startsWith('address_kanji.')) {
           const property = field.substring('address_kanji.'.length)
-          beneficialOwner.address_kanji = beneficialOwner.address_kanji || {}
-          beneficialOwner.address_kanji[property] = req.body[posted]
+          ownerInfo.address_kanji = ownerInfo.address_kanji || {}
+          ownerInfo.address_kanji[property] = req.body[posted]
         } else if (field.startsWith('address_kana.')) {
           const property = field.substring('address_kana.'.length)
-          beneficialOwner.address_kana = beneficialOwner.address_kana || {}
-          beneficialOwner.address_kana[property] = req.body[posted]
+          ownerInfo.address_kana = ownerInfo.address_kana || {}
+          ownerInfo.address_kana[property] = req.body[posted]
         } else if (field.startsWith('address.')) {
           const property = field.substring('address.'.length)
-          beneficialOwner.address[property] = req.body[posted]
+          ownerInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
-          const property = field.substring('verification.document.'.length)
-          beneficialOwner.verification = beneficialOwner.verification || {}
-          beneficialOwner.verification.document = beneficialOwner.verification.document || {}
-          beneficialOwner.verification.document[property] = req.body[posted]
+          const property = field.substring('verification.document'.length)
+          ownerInfo.verification = ownerInfo.verification || {}
+          ownerInfo.verification.document = ownerInfo.verification.document || {}
+          ownerInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          const property = field.substring('verification.additional_document.'.length)
-          beneficialOwner.verification = beneficialOwner.verification || {}
-          beneficialOwner.verification.additional_document = beneficialOwner.verification.additional_document || {}
-          beneficialOwner.verification.additional_document[property] = req.body[posted]
+          const property = field.substring('verification.additional_document'.length)
+          ownerInfo.verification = ownerInfo.verification || {}
+          ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+          ownerInfo.verification.additional_document[property] = req.body[posted]
         } else {
           const property = field.substring(''.length)
-          beneficialOwner[property] = req.body[posted]
+          ownerInfo[property] = req.body[posted]
         }
       }
       if (req.body.address_line2) {
-        beneficialOwner.address = beneficialOwner.address || {}
-        beneficialOwner.address.line2 = req.body.address_line2
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.line2 = req.body.address_line2
       }
-    }
-    if (req.body.relationship_percent_ownership) {
-      try {
-        const percent = parseFloat(req.body.relationship_percent_ownership, 10)
-        if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+      if (req.body.verification_document_back) {
+        ownerInfo.verification = ownerInfo.verification || {}
+        ownerInfo.verification.document = ownerInfo.verification.document || {}
+        ownerInfo.verification.document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_document_front) {
+        ownerInfo.verification = ownerInfo.verification || {}
+        ownerInfo.verification.document = ownerInfo.verification.document || {}
+        ownerInfo.verification.document.front = req.body.verification_document_front
+      }
+      if (req.body.verification_additional_document_back) {
+        ownerInfo.verification = ownerInfo.verification || {}
+        ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+        ownerInfo.verification.additional_document.back = req.body.verification_additional_document_back
+      }
+      if (req.body.verification_additional_document_front) {
+        ownerInfo.verification = ownerInfo.verification || {}
+        ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+        ownerInfo.verification.additional_document.front = req.body.verification_additional_document_front
+      }
+      if (req.body.relationship_percent_ownership) {
+        try {
+          const percent = parseFloat(req.body.relationship_percent_ownership, 10)
+          if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+            throw new Error('invalid-relationship_percent_ownership')
+          }
+        } catch (s) {
           throw new Error('invalid-relationship_percent_ownership')
         }
-      } catch (s) {
-        throw new Error('invalid-relationship_percent_ownership')
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
       }
-      beneficialOwner.relationship = beneficialOwner.relationship || {}
-      beneficialOwner.relationship.percent_ownership = req.body.relationship_percent_ownership
-    }
-    if (req.body.relationship_title) {
-      beneficialOwner.relationship = beneficialOwner.relationship || {}
-      beneficialOwner.relationship.datatitle = req.body.relationship_title
-    }
-    if (req.body.relationship_executive) {
-      beneficialOwner.relationship = beneficialOwner.relationship || {}
-      beneficialOwner.relationship.executive = true
+      if (req.body.relationship_title) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.datatitle = req.body.relationship_title
+      }
+      if (req.body.relationship_executive) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.executive = true
+      }
     }
     while (true) {
       try {
-        const companyOwnerNow = await stripe.accounts.updatePerson(person.account, person.id, beneficialOwner, req.stripeKey)
+        const companyOwnerNow = await stripe.accounts.updatePerson(person.account, person.id, ownerInfo, req.stripeKey)
         await stripeCache.update(companyOwnerNow)
         return companyOwnerNow
       } catch (error) {

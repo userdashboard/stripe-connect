@@ -203,12 +203,12 @@ module.exports = {
           const property = field.substring('address.'.length)
           companyDirectorInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
-          const property = field.substring('verification.document.'.length)
+          const property = field.substring('verification.document'.length)
           companyDirectorInfo.verification = companyDirectorInfo.verification || {}
           companyDirectorInfo.verification.document = companyDirectorInfo.verification.document || {}
           companyDirectorInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          const property = field.substring('verification.additional_document.'.length)
+          const property = field.substring('verification.additional_document'.length)
           companyDirectorInfo.verification = companyDirectorInfo.verification || {}
           companyDirectorInfo.verification.additional_document = companyDirectorInfo.verification.additional_document || {}
           companyDirectorInfo.verification.additional_document[property] = req.body[posted]
@@ -243,12 +243,12 @@ module.exports = {
           const property = field.substring('address.'.length)
           companyDirectorInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
-          const property = field.substring('verification.document.'.length)
+          const property = field.substring('verification.document'.length)
           companyDirectorInfo.verification = companyDirectorInfo.verification || {}
           companyDirectorInfo.verification.document = companyDirectorInfo.verification.document || {}
           companyDirectorInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          const property = field.substring('verification.additional_document.'.length)
+          const property = field.substring('verification.additional_document'.length)
           companyDirectorInfo.verification = companyDirectorInfo.verification || {}
           companyDirectorInfo.verification.additional_document = companyDirectorInfo.verification.additional_document || {}
           companyDirectorInfo.verification.additional_document[property] = req.body[posted]

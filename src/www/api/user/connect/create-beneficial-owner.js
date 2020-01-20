@@ -22,23 +22,6 @@ module.exports = {
     if (!req.body) {
       throw new Error('invalid-first_name')
     }
-    if (!req.body.address_country || !connect.countryNameIndex[req.body.address_country]) {
-      throw new Error('invalid-address_country')
-    }
-    if (!req.body.address_state) {
-      throw new Error('invalid-address_state')
-    }
-    const states = connect.countryDivisions[req.body.address_country]
-    let found
-    for (const state of states) {
-      found = state.value === req.body.address_state
-      if (found) {
-        break
-      }
-    }
-    if (!found) {
-      throw new Error('invalid-address_state')
-    }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
@@ -132,7 +115,10 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_front')
       }
-    } else if (!req.body.token && req.uploads && req.uploads.verification_document_back) {
+    } else if (requirements.currently_due.indexOf('verification.document') > -1) {
+      throw new Error('invalid-verification_document_front')
+    }
+    if (!req.body.token && req.uploads && req.uploads.verification_document_back) {
       const backData = {
         purpose: 'identity_document',
         file: {
@@ -147,6 +133,8 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_back')
       }
+    } else if (requirements.currently_due.indexOf('verification.document') > -1) {
+      throw new Error('invalid-verification_document_back')
     }
     const ownerInfo = {
     }
@@ -171,7 +159,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.document.'.length)
+            const property = field.substring('verification.document'.length)
             ownerInfo.verification = ownerInfo.verification || {}
             ownerInfo.verification.document = ownerInfo.verification.document || {}
             ownerInfo.verification.document[property] = req.body[posted]
@@ -179,7 +167,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.additional_document.'.length)
+            const property = field.substring('verification.additional_document'.length)
             ownerInfo.verification = ownerInfo.verification || {}
             ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
             ownerInfo.verification.additional_document[property] = req.body[posted]
@@ -216,7 +204,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.document.'.length)
+            const property = field.substring('verification.document'.length)
             ownerInfo.verification = ownerInfo.verification || {}
             ownerInfo.verification.document = ownerInfo.verification.document || {}
             ownerInfo.verification.document[property] = req.body[posted]
@@ -224,7 +212,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.additional_document.'.length)
+            const property = field.substring('verification.additional_document'.length)
             ownerInfo.verification = ownerInfo.verification || {}
             ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
             ownerInfo.verification.additional_document[property] = req.body[posted]
@@ -275,6 +263,17 @@ module.exports = {
         ownerInfo.address.line2 = req.body.address_line2
       }
       if (req.body.address_state) {
+        const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+        let found
+        for (const state of states) {
+          found = state.value === req.body.address_state
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-address_state')
+        }
         ownerInfo.address = ownerInfo.address || {}
         ownerInfo.address.state = req.body.address_state
       }
@@ -285,6 +284,9 @@ module.exports = {
       if (req.body.address_country) {
         ownerInfo.address = ownerInfo.address || {}
         ownerInfo.address.country = req.body.address_country
+        if (!connect.countryNameIndex[req.body.address_country]) {
+          throw new Error('invalid-address_country')
+        }
       }
       if (req.body.verification_document_back) {
         ownerInfo.verification = ownerInfo.verification || {}
@@ -306,7 +308,7 @@ module.exports = {
         ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
         ownerInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
-    }
+    } 
     let owner
     while (true) {
       try {

@@ -71,7 +71,7 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.address.state`) > -1) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
-    dashboard.HTML.renderList(doc, personalStates, 'state-option', `${req.data.representative.id}.address_state`)
+    dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
   } else if (removeElements.indexOf('personal-address-container') === -1) {
     removeElements.push('state-container', 'state-container-bridge')
     if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.address.line1`) === -1) {
@@ -86,7 +86,7 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.method === 'GET') {
     for (const fullField of req.data.stripeAccount.requirements.currently_due) {
-      if (!fullField.startsWith(stripeAccount.metadata.representative)) {
+      if (!fullField.startsWith(req.data.stripeAccount.metadata.representative)) {
         continue
       }
       const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)

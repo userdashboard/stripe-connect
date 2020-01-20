@@ -1670,7 +1670,7 @@ describe('/api/user/connect/create-company-representative', () => {
     it('optionally-required posted id_number', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'CA',
+        country: 'MY',
         type: 'company'
       })
       const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
@@ -1681,11 +1681,12 @@ describe('/api/user/connect/create-company-representative', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
       const body = {
-        address_city: 'Vancouver',
-        address_country: 'CA',
+        business_profile_mcc: '8931',
+        business_profile_url: 'https://a-website.com',
+        address_city: 'Kuala Lumpur',
         address_line1: '123 Sesame St',
-        address_postal_code: 'V5K 0A1',
-        address_state: 'BC',
+        address_postal_code: '50450',
+        address_state: 'C',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
@@ -1693,9 +1694,7 @@ describe('/api/user/connect/create-company-representative', () => {
         first_name: user.profile.firstName,
         id_number: '000000000',
         last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        relationship_executive: 'true',
-        relationship_title: 'Owner'
+        phone: '456-789-0123'
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
@@ -2540,7 +2539,7 @@ describe('/api/user/connect/create-company-representative', () => {
         address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
         address_kanji_city: '渋谷区',
         address_kanji_line1: '２７－１５',
-        address_kanji_postal_code: '1500001',
+        address_kanji_postal_code: '１５００００１',
         address_kanji_state: '東京都',
         address_kanji_town: '神宮前　３丁目',
         dob_day: '1',
@@ -2558,7 +2557,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       req.body = TestHelper.createMultiPart(req, body)
       const personNow = await req.post()
-      assert.strictEqual(personNow.address_kanji.postal_code, '1500001')
+      assert.strictEqual(personNow.address_kanji.postal_code, '１５００００１')
     })
 
     it('optionally-required posted address_kanji_town', async () => {
@@ -2685,7 +2684,7 @@ describe('/api/user/connect/create-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
       req.waitOnSubmit = true
       req.account = user.account
       req.session = user.session
@@ -2738,8 +2737,7 @@ describe('/api/user/connect/create-company-representative', () => {
       }
       await req2.post()
       const personNow = await global.api.user.connect.StripeAccount.get(req2)
-      assert.notStrictEqual(personNow.representativeToken, null)
-      assert.notStrictEqual(personNow.representativeToken, undefined)
+      assert.strictEqual(personNow.metadata.token, undefined)
     })
   })
 })
@@ -2849,9 +2847,10 @@ const postData = {
     address_line1: '123 Park Lane',
     address_postal_code: '03179',
     address_state: 'AN',
-    name: 'Individual',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
     phone: '456-789-0123',
-    tax_id: '00000000000'
   },
   FI: {
     business_profile_mcc: '8931',
@@ -2896,8 +2895,10 @@ const postData = {
     address_line1: '123 Park Lane',
     address_postal_code: '104',
     address_state: 'I',
-    phone: '456-789-0123',
-    tax_id: '00000000000'
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   HK: {
     business_profile_mcc: '8931',
@@ -3005,6 +3006,7 @@ const postData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
+    id_number: '000000000',
     phone: '456-789-0123'
   },
   NL: {

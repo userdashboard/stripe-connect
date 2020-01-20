@@ -60,7 +60,7 @@ describe('/api/user/connect/delete-beneficial-owner', () => {
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/delete-beneficial-owner?personid=${person.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/delete-beneficial-owner?personid=${user.owner.id}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
@@ -98,7 +98,7 @@ describe('/api/user/connect/delete-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      const req = TestHelper.createRequest(`/api/user/connect/delete-beneficial-owner?personid=${person.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/delete-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
       req.filename = __filename

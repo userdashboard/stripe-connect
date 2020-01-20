@@ -178,7 +178,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.document.'.length)
+            const property = field.substring('verification.document'.length)
             directorInfo.verification = directorInfo.verification || {}
             directorInfo.verification.document = directorInfo.verification.document || {}
             directorInfo.verification.document[property] = req.body[posted]
@@ -186,7 +186,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.additional_document.'.length)
+            const property = field.substring('verification.additional_document'.length)
             directorInfo.verification = directorInfo.verification || {}
             directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
             directorInfo.verification.additional_document[property] = req.body[posted]
@@ -223,7 +223,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.document.'.length)
+            const property = field.substring('verification.document'.length)
             directorInfo.verification = directorInfo.verification || {}
             directorInfo.verification.document = directorInfo.verification.document || {}
             directorInfo.verification.document[property] = req.body[posted]
@@ -231,7 +231,7 @@ module.exports = {
             if (global.stripeJS) {
               continue
             }
-            const property = field.substring('verification.additional_document.'.length)
+            const property = field.substring('verification.additional_document'.length)
             directorInfo.verification = directorInfo.verification || {}
             directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
             directorInfo.verification.additional_document[property] = req.body[posted]

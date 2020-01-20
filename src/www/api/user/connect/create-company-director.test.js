@@ -143,40 +143,6 @@ describe('/api/user/connect/create-company-director', () => {
       })
     })
 
-    describe('invalid-email', () => {
-      it('missing posted email', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: '',
-          first_name: person.firstName,
-          last_name: person.lastName,
-          relationship_title: 'Director'
-        })
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-email')
-      })
-    })
-
     describe('invalid-dob_day', () => {
       it('missing posted dob_day', async () => {
         const user = await TestHelper.createUser()
@@ -652,24 +618,11 @@ describe('/api/user/connect/create-company-director', () => {
         relationship_title: 'Director'
       }
       await req.post()
-      let personid
-      await TestHelper.waitForWebhook('person.created', (stripeEvent) => {
-        if (stripeEvent.data.object.account === user.stripeAccount.id) {
-          personid = stripeEvent.data.object.id
-          return true
-        }
-      })
-      await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
-        const directors = JSON.parse(stripeEvent.data.object.metadata.directors || '[]')
-        return stripeEvent.data.object.id === user.stripeAccount.id &&
-               directors.length &&
-               directors.indexOf(personid) > -1
-      })
-      const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${personid}`)
+      const req2 = TestHelper.createRequest(`/api/user/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session
-      const director = await req2.get()
-      assert.notStrictEqual(director.metadata.token, 'false')
+      const directors = await req2.get()
+      assert.strictEqual(directors[0].metadata.token, undefined)
     })
   })
 })

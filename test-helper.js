@@ -78,6 +78,7 @@ module.exports = {
   submitCompanyDirectors,
   submitStripeAccount,
   triggerVerification,
+  updateBeneficialOwner,
   updateStripeRegistration,
   updateCompanyRepresentative,
   waitForAccountRequirement: util.promisify(waitForAccountRequirement),
@@ -131,31 +132,31 @@ before(async () => {
       webhooks = { data: [0] }
     }
   }
-  let accounts = await stripe.accounts.list(stripeKey)
-  while (accounts.data && accounts.data.length) {
-    for (const account of accounts.data) {
-      try {
-        const persons = await stripe.accounts.listPersons(account.id, { limit: 100 }, stripeKey)
-        if (persons.data && persons.data.length) {
-          for (const person of persons.data) {
-            try {
-              await stripe.accounts.deletePerson(account.id, person.id, stripeKey)
-            } catch (error) {
-            }
-          }
-        }
-      } catch (error) {
-      }
-      try {
-        await stripe.accounts.del(account.id, stripeKey)
-      } catch (error) {
-      }
-    }
-    try {
-      accounts = await stripe.accounts.list(stripeKey)
-    } catch (error) {
-    }
-  }
+  // let accounts = await stripe.accounts.list(stripeKey)
+  // while (accounts.data && accounts.data.length) {
+  //   for (const account of accounts.data) {
+  //     try {
+  //       const persons = await stripe.accounts.listPersons(account.id, { limit: 100 }, stripeKey)
+  //       if (persons.data && persons.data.length) {
+  //         for (const person of persons.data) {
+  //           try {
+  //             await stripe.accounts.deletePerson(account.id, person.id, stripeKey)
+  //           } catch (error) {
+  //           }
+  //         }
+  //       }
+  //     } catch (error) {
+  //     }
+  //     try {
+  //       await stripe.accounts.del(account.id, stripeKey)
+  //     } catch (error) {
+  //     }
+  //   }
+  //   try {
+  //     accounts = await stripe.accounts.list(stripeKey)
+  //   } catch (error) {
+  //   }
+  // }
   if (process.env.NGROK) {
     while (!tunnel) {
       try {
@@ -357,6 +358,20 @@ async function createBeneficialOwner (user, body, uploads) {
            owners.length &&
            owners.indexOf(owner.id) > -1
   })
+  // await waitForWebhook('person.created', (stripeEvent) => {
+  //   return stripeEvent.data.object.id === owner.id
+  // })
+  user.owner = owner
+  return owner
+}
+
+async function updateBeneficialOwner (user, body, uploads) {
+  const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${user.owner.id}`)
+  req.session = user.session
+  req.account = user.account
+  req.uploads = uploads
+  req.body = createMultiPart(req, body)
+  const owner = await req.patch()
   // await waitForWebhook('person.created', (stripeEvent) => {
   //   return stripeEvent.data.object.id === owner.id
   // })

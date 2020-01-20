@@ -455,82 +455,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       })
     })
 
-    describe('invalid-verification_document_front', () => {
-      it('missing posted file verification_document_front', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png']
-        }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-verification_document_front')
-      })
-    })
-
-    describe('invalid-verification_document_back', () => {
-      it('missing posted file verification_document_back', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-verification_document_back')
-      })
-    })
-
     describe('invalid-token', () => {
       it('missing posted token', async () => {
         global.stripeJS = 3
@@ -978,6 +902,77 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       const owner = await req.post()
       assert.strictEqual(owner.address.state, 'NY')
     })
+
+    it('optionally-required posted file verification_document_front', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'DE',
+        type: 'company'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName,
+        phone: '456-789-0123'
+      }, {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      })
+      const owner = await req.post()
+      assert.notStrictEqual(owner.verification.document.front, undefined)
+      assert.notStrictEqual(owner.verification.document.front, null)
+    })
+
+
+    it('optionally-required posted file verification_document_back', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'DE',
+        type: 'company'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        verification_document_back: TestHelper['success_id_scan_front.png']
+      }
+      req.body = TestHelper.createMultiPart(req, {
+        address_city: 'London',
+        address_country: 'GB',
+        address_line1: 'A building',
+        address_postal_code: 'EC1A 1AA',
+        address_state: 'LND',
+        dob_day: '1',
+        dob_month: '1',
+        dob_year: '1950',
+        email: person.email,
+        first_name: person.firstName,
+        last_name: person.lastName,
+        phone: '456-789-0123'
+      }, {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      })
+      const owner = await req.post()
+      assert.notStrictEqual(owner.verification.document.back, undefined)
+      assert.notStrictEqual(owner.verification.document.back, null)
+    })
   })
 
   describe('returns', () => {
@@ -1050,24 +1045,12 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         last_name: person.lastName
       }
       await req.post()
-      let personid
-      await TestHelper.waitForWebhook('person.created', (stripeEvent) => {
-        if (stripeEvent.data.object.account === user.stripeAccount.id) {
-          personid = stripeEvent.data.object.id
-          return true
-        }
-      })
-      await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
-        const owners = JSON.parse(stripeEvent.data.object.metadata.owners || '[]')
-        return stripeEvent.data.object.id === user.stripeAccount.id &&
-               owners.length &&
-               owners.indexOf(personid) > -1
-      })
-      const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${personid}`)
+      const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session
-      const owner = await req2.get()
-      assert.notStrictEqual(owner.metadata.token, 'false')
+      const owners = await req2.get()
+      assert.strictEqual(owners.length, 1)
+      assert.strictEqual(owners[0].metadata.token, undefined)
     })
   })
 })
