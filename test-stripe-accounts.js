@@ -106,7 +106,7 @@ module.exports = {
   }
 }
 
-const companyData = {
+const companyData = module.exports.companyData = {
   AT: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
@@ -458,7 +458,7 @@ const companyData = {
   }
 }
 
-const representativeData = {
+const representativeData = module.exports.representativeData = {
   AT: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
@@ -843,7 +843,7 @@ const representativeData = {
   }
 }
 
-const paymentData = {
+const paymentData = module.exports.paymentData = {
   AT: {
     currency: 'eur',
     iban: 'AT89370400440532013000'
@@ -986,7 +986,7 @@ const paymentData = {
   }
 }
 
-const individualData = {
+const individualData = module.exports.individualData = {
   AT: {
     business_profile_mcc: '8931',
     business_profile_url: 'https://a-website.com',
@@ -1368,5 +1368,553 @@ const individualData = {
     dob_year: '1950',
     phone: '456-789-0123',
     ssn_last_4: '0000'
+  }
+}
+
+const beneficialOwnerData = module.exports.beneficialOwnerData = {
+  AT: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  AU: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  BE: {
+    address_city: 'Brussels',
+    address_country: 'BE',
+    address_line1: 'First Street',
+    address_postal_code: '1020',
+    address_state: 'BRU',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  CA: false,
+  CH: {
+    address_city: 'Bern',
+    address_country: 'CH',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1020',
+    address_state: 'BE',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  DE:  {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  DK: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }, 
+  EE: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }, 
+  ES: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  FI: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  FR: {
+    address_city: 'Paris',
+    address_country: 'FR',
+    address_line1: '123 Sesame St',
+    address_postal_code: '75001',
+    address_state: 'A',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  GB: {
+    address_city: 'London',
+    address_country: 'GB',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'EC1A 1AA',
+    address_state: 'LND',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  GR: {
+    address_city: 'Athens',
+    address_country: 'GR',
+    address_line1: '123 Park Lane',
+    address_postal_code: '104',
+    address_state: 'I',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  HK: {
+    address_city: 'Hong Kong',
+    address_country: 'HK',
+    address_line1: '123 Sesame St',
+    address_postal_code: '999077',
+    address_state: 'HK',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  IE: {
+    address_city: 'Dublin',
+    address_country: 'IE',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'Dublin 1',
+    address_state: 'D',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  IT: {
+    address_city: 'Rome',
+    address_country: 'IT',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00010',
+    address_state: '65',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  JP: false,
+  LT: {
+    address_city: 'Vilnius',
+    address_country: 'LT',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'LT-00000',
+    address_state: 'AL',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  LU: {
+    address_city: 'Luxemburg',
+    address_country: 'LU',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1623',
+    address_state: 'L',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  LV: {
+    address_city: 'Riga',
+    address_country: 'LV',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'LV–1073',
+    address_state: 'AI',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  MY: false, 
+  NL: {
+    address_city: 'Amsterdam',
+    address_country: 'NL',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1071 JA',
+    address_state: 'DR',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+  },
+  NO: {
+    address_city: 'Oslo',
+    address_country: 'NO',
+    address_line1: '123 Sesame St',
+    address_postal_code: '0001',
+    address_state: '02',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  NZ: {
+    address_city: 'Auckland',
+    address_country: 'NZ',
+    address_line1: '844 Fleet Street',
+    address_postal_code: '6011',
+    address_state: 'N',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  PL: {
+    address_city: 'Krakow',
+    address_country: 'PL',
+    address_line1: '123 Park Lane',
+    address_postal_code: '32-400',
+    address_state: 'KR',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  PT: {
+    address_city: 'Lisbon',
+    address_line1: '123 Park Lane',
+    address_postal_code: '4520',
+    address_state: '01',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SE: {
+    address_city: 'Stockholm',
+    address_country: 'PT',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00150',
+    address_state: 'K',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SG: {
+    address_city: 'Singapore',
+    address_country: 'SE',
+    address_line1: '123 Sesame St',
+    address_postal_code: '339696',
+    address_state: 'SG',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SK: {
+    address_city: 'Slovakia',
+    address_country: 'SK',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00102',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  US: {
+    address_city: 'New York',
+    address_country: 'US',
+    address_line1: '285 Fulton St',
+    address_postal_code: '10007',
+    address_state: 'NY',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }
+}
+
+const companyDirectorData = module.exports.companyDirectorData = {
+  AT: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  AU: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  BE: {
+    address_city: 'Brussels',
+    address_country: 'BE',
+    address_line1: 'First Street',
+    address_postal_code: '1020',
+    address_state: 'BRU',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  CA: false,
+  CH: {
+    address_city: 'Bern',
+    address_country: 'CH',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1020',
+    address_state: 'BE',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  DE:  {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  DK: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }, 
+  EE: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  }, 
+  ES: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  FI: {
+    address_city: 'Berlin',
+    address_country: 'DE',
+    address_line1: 'First Street',
+    address_postal_code: '01067',
+    address_state: 'BW',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  FR: {
+    address_city: 'Paris',
+    address_country: 'FR',
+    address_line1: '123 Sesame St',
+    address_postal_code: '75001',
+    address_state: 'A',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  GB: {
+    address_city: 'London',
+    address_country: 'GB',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'EC1A 1AA',
+    address_state: 'LND',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  GR: {
+    address_city: 'Athens',
+    address_country: 'GR',
+    address_line1: '123 Park Lane',
+    address_postal_code: '104',
+    address_state: 'I',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  HK: {
+    address_city: 'Hong Kong',
+    address_country: 'HK',
+    address_line1: '123 Sesame St',
+    address_postal_code: '999077',
+    address_state: 'HK',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  IE: {
+    address_city: 'Dublin',
+    address_country: 'IE',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'Dublin 1',
+    address_state: 'D',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  IT: {
+    address_city: 'Rome',
+    address_country: 'IT',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00010',
+    address_state: '65',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  JP: false,
+  LT: {
+    address_city: 'Vilnius',
+    address_country: 'LT',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'LT-00000',
+    address_state: 'AL',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  LU: {
+    address_city: 'Luxemburg',
+    address_country: 'LU',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1623',
+    address_state: 'L',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  LV: {
+    address_city: 'Riga',
+    address_country: 'LV',
+    address_line1: '123 Sesame St',
+    address_postal_code: 'LV–1073',
+    address_state: 'AI',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  MY: false, 
+  NL: {
+    address_city: 'Amsterdam',
+    address_country: 'NL',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1071 JA',
+    address_state: 'DR',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+  },
+  NO: {
+    address_city: 'Oslo',
+    address_country: 'NO',
+    address_line1: '123 Sesame St',
+    address_postal_code: '0001',
+    address_state: '02',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  NZ: {
+    address_city: 'Auckland',
+    address_country: 'NZ',
+    address_line1: '844 Fleet Street',
+    address_postal_code: '6011',
+    address_state: 'N',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  PL: {
+    address_city: 'Krakow',
+    address_country: 'PL',
+    address_line1: '123 Park Lane',
+    address_postal_code: '32-400',
+    address_state: 'KR',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  PT: {
+    address_city: 'Lisbon',
+    address_line1: '123 Park Lane',
+    address_postal_code: '4520',
+    address_state: '01',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SE: {
+    address_city: 'Stockholm',
+    address_country: 'PT',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00150',
+    address_state: 'K',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SG: {
+    address_city: 'Singapore',
+    address_country: 'SE',
+    address_line1: '123 Sesame St',
+    address_postal_code: '339696',
+    address_state: 'SG',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SK: {
+    address_city: 'Slovakia',
+    address_country: 'SK',
+    address_line1: '123 Sesame St',
+    address_postal_code: '00102',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  US: {
+    address_city: 'New York',
+    address_country: 'US',
+    address_line1: '285 Fulton St',
+    address_postal_code: '10007',
+    address_state: 'NY',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
   }
 }
