@@ -53,6 +53,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
+        if (error.raw && error.raw.code === 'account_invalid') {
+          continue
+        }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
@@ -104,6 +107,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
+        if (error.raw && error.raw.code === 'account_invalid') {
+          continue
+        }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
@@ -125,6 +131,9 @@ module.exports = {
           continue
         }
         if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'account_invalid') {
           continue
         }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
@@ -149,6 +158,9 @@ module.exports = {
           continue
         }
         if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'account_invalid') {
           continue
         }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
@@ -199,6 +211,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
+        if (error.raw && error.raw.code === 'account_invalid') {
+          continue
+        }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
@@ -222,6 +237,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
+        if (error.raw && error.raw.code === 'account_invalid') {
+          continue
+        }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
@@ -243,6 +261,9 @@ module.exports = {
           continue
         }
         if (error.raw && error.raw.code === 'rate_limit') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'account_invalid') {
           continue
         }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {

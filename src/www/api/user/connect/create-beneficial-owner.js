@@ -322,6 +322,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
+        if (error.raw && error.raw.code === 'account_invalid') {
+          continue
+        }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
@@ -353,15 +356,18 @@ module.exports = {
         if (error.raw && error.raw.code === 'rate_limit') {
           continue
         }
+        if (error.raw && error.raw.code === 'account_invalid') {
+          continue
+        }
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
