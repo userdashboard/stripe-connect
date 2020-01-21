@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/beneficial-owners-count', () => {
   describe('exceptions', () => {
@@ -88,36 +89,20 @@ describe('/api/user/connect/beneficial-owners-count', () => {
         type: 'company'
       })
       const person1 = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        address_city: 'Berlin',
-        address_country: 'DE',
-        address_line1: 'First Street',
-        address_postal_code: '01067',
-        address_state: 'BW',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person1.email,
-        first_name: person1.firstName,
-        last_name: person1.lastName
-      }, {
+      const body1 = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData['DE']))
+      body1.email = person1.email
+      body1.first_name = person1.firstName
+      body1.last_name = person1.lastName
+      await TestHelper.createBeneficialOwner(user, body1, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const person2 = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        address_city: 'Berlin',
-        address_country: 'DE',
-        address_line1: 'First Street',
-        address_postal_code: '01067',
-        address_state: 'BW',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person2.email,
-        first_name: person2.firstName,
-        last_name: person2.lastName
-      }, {
+      const body2 = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData['DE']))
+      body2.email = person2.email
+      body2.first_name = person2.firstName
+      body2.last_name = person2.lastName
+      await TestHelper.createBeneficialOwner(user, body2, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
