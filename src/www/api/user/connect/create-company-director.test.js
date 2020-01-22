@@ -436,7 +436,7 @@ describe('/api/user/connect/create-company-director', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestHelper.createMultiPart(req, {
-        dob_day: '1',
+        dob_day: '',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,

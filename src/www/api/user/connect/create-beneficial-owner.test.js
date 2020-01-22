@@ -307,7 +307,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted address_state', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'US',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -319,11 +319,10 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
         req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: '',
+          address_city: 'New York',
+          address_line1: '285 Fulton St',
+          address_postal_code: '10007',
+          address_state: 'invalid',
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',

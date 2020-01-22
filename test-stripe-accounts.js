@@ -4,6 +4,25 @@ const TestHelper = require('./test-helper.js')
 module.exports = {
   createSubmittedIndividual: async (country) => {
     country = country || 'US'
+    const user = await module.exports.createIndividualReadyForSubmission(country)
+    await TestHelper.submitStripeAccount(user)
+    await TestHelper.waitForPayoutsEnabled(user)
+    return user
+  },
+  createSubmittedCompany: async (country) => {
+    country = country || 'US'
+    const user = await module.exports.createCompanyReadyForSubmission(country)
+    await TestHelper.submitStripeAccount(user)
+    // await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
+    // await TestHelper.updateStripeRegistration(user, {}, {
+    //   verification_document_back: TestHelper['success_id_scan_back.png'],
+    //   verification_document_front: TestHelper['success_id_scan_front.png']
+    // })
+    await TestHelper.waitForPayoutsEnabled(user)
+    return user
+  },
+  createIndividualReadyForSubmission: async (country) => {
+    country = country || 'US'
     const user = await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
@@ -25,23 +44,29 @@ module.exports = {
     const payment = {
       country,
       account_holder_name: identity.firstName + ' ' + identity.lastName,
-      account_holder_type: 'company'
+      account_holder_type: 'individual'
     }
-    for (const field in paymentData[country]) {
-      payment[field] = paymentData[country][field]
+    if (paymentData[country].length) {
+      for (const field in paymentData[country][0]) {
+        payment[field] = paymentData[country][0][field]
+      }
+    } else {
+      for (const field in paymentData[country]) {
+        payment[field] = paymentData[country][field]
+      }
     }
     await TestHelper.createExternalAccount(user, payment)
-    await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
-    await TestHelper.updateStripeRegistration(user, {}, {
-      verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-      verification_additional_document_front: TestHelper['success_id_scan_front.png']
-    })
-    await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional.document')
-    await TestHelper.submitStripeAccount(user)
-    await TestHelper.waitForPayoutsEnabled(user)
+    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+      await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
+      await TestHelper.updateStripeRegistration(user, {}, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
+      })
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional.document')
+    }
     return user
   },
-  createSubmittedCompany: async (country) => {
+  createCompanyReadyForSubmission: async (country) => {
     country = country || 'US'
     const user = await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
@@ -69,20 +94,32 @@ module.exports = {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
-    await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
-    await TestHelper.updateCompanyRepresentative(user, {}, {
-      verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-      verification_additional_document_front: TestHelper['success_id_scan_front.png']
-    })
-    await TestHelper.submitBeneficialOwners(user)
-    await TestHelper.submitCompanyDirectors(user)
+    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
+      await TestHelper.updateCompanyRepresentative(user, {}, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
+      })
+    }
+    if (beneficialOwnerData[country] !== false) {
+      await TestHelper.submitBeneficialOwners(user)
+    }
+    if (companyDirectorData[country] !== false) {
+      await TestHelper.submitCompanyDirectors(user)
+    }
     const payment = {
       country,
       account_holder_name: identity.firstName + ' ' + identity.lastName,
       account_holder_type: 'company'
     }
-    for (const field in paymentData[country]) {
-      payment[field] = paymentData[country][field]
+    if (paymentData[country].length) {
+      for (const field in paymentData[country][0]) {
+        payment[field] = paymentData[country][0][field]
+      }
+    } else {
+      for (const field in paymentData[country]) {
+        payment[field] = paymentData[country][field]
+      }
     }
     await TestHelper.createExternalAccount(user, payment)
     // TODO: fix this when Stripe fixes company.verification.document
@@ -90,18 +127,6 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
-
-    // await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
-    // await TestHelper.waitForVerificationFieldsToReturn(user, user.representative.id)
-    // console.log('waiting for fields to leave', user.stripeAccount, user.representative)
-    // await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
-    await TestHelper.submitStripeAccount(user)
-    // await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
-    // await TestHelper.updateStripeRegistration(user, {}, {
-    //   verification_document_back: TestHelper['success_id_scan_back.png'],
-    //   verification_document_front: TestHelper['success_id_scan_front.png']
-    // })
-    await TestHelper.waitForPayoutsEnabled(user)
     return user
   }
 }
@@ -563,9 +588,10 @@ const representativeData = module.exports.representativeData = {
     address_line1: '123 Park Lane',
     address_postal_code: '03179',
     address_state: 'AN',
-    name: 'Individual',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
     phone: '456-789-0123',
-    tax_id: '00000000000'
   },
   FI: {
     business_profile_mcc: '8931',
@@ -610,8 +636,10 @@ const representativeData = module.exports.representativeData = {
     address_line1: '123 Park Lane',
     address_postal_code: '104',
     address_state: 'I',
-    phone: '456-789-0123',
-    tax_id: '00000000000'
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   HK: {
     business_profile_mcc: '8931',
@@ -719,6 +747,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
+    id_number: '000000000',
     phone: '456-789-0123'
   },
   NL: {
@@ -1091,9 +1120,10 @@ const individualData = module.exports.individualData = {
     address_line1: '123 Park Lane',
     address_postal_code: '03179',
     address_state: 'AN',
-    name: 'Individual',
-    phone: '456-789-0123',
-    tax_id: '00000000000'
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   FI: {
     business_profile_mcc: '8931',
@@ -1137,9 +1167,11 @@ const individualData = module.exports.individualData = {
     address_city: 'Athens',
     address_line1: '123 Park Lane',
     address_postal_code: '104',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950',
     address_state: 'I',
-    phone: '456-789-0123',
-    tax_id: '00000000000'
+    phone: '456-789-0123'
   },
   HK: {
     business_profile_mcc: '8931',
@@ -1247,7 +1279,8 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123'
+    phone: '456-789-0123',
+    id_number: '000000000'
   },
   NL: {
     business_profile_mcc: '8931',
@@ -1493,16 +1526,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_month: '1',
     dob_year: '1950'
   },
-  HK: {
-    address_city: 'Hong Kong',
-    address_country: 'HK',
-    address_line1: '123 Sesame St',
-    address_postal_code: '999077',
-    address_state: 'HK',
-    dob_day: '1',
-    dob_month: '1',
-    dob_year: '1950'
-  },
+  HK: false,
   IE: {
     address_city: 'Dublin',
     address_country: 'IE',
@@ -1554,7 +1578,16 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_month: '1',
     dob_year: '1950'
   },
-  MY: false, 
+  MY: {
+    address_city: 'Kuala Lumpur',
+    address_country: 'MY',
+    address_line1: '123 Sesame St',
+    address_postal_code: '50450',
+    address_state: 'C',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
   NL: {
     address_city: 'Amsterdam',
     address_country: 'NL',
@@ -1597,6 +1630,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   PT: {
     address_city: 'Lisbon',
+    address_country: 'PT',
     address_line1: '123 Park Lane',
     address_postal_code: '4520',
     address_state: '01',
@@ -1606,7 +1640,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   SE: {
     address_city: 'Stockholm',
-    address_country: 'PT',
+    address_country: 'SE',
     address_line1: '123 Sesame St',
     address_postal_code: '00150',
     address_state: 'K',
@@ -1616,10 +1650,20 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   SG: {
     address_city: 'Singapore',
-    address_country: 'SE',
+    address_country: 'SG',
     address_line1: '123 Sesame St',
     address_postal_code: '339696',
     address_state: 'SG',
+    dob_day: '1',
+    dob_month: '1',
+    dob_year: '1950'
+  },
+  SI: {
+    address_city: 'Ljubljana',
+    address_country: 'SI',
+    address_line1: '123 Sesame St',
+    address_postal_code: '1210',
+    address_state: '07',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
@@ -1641,7 +1685,9 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'NY',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    phone: '+14567890123',
+    ssn_last_4: '0000'
   }
 }
 
@@ -1767,16 +1813,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_month: '1',
     dob_year: '1950'
   },
-  HK: {
-    address_city: 'Hong Kong',
-    address_country: 'HK',
-    address_line1: '123 Sesame St',
-    address_postal_code: '999077',
-    address_state: 'HK',
-    dob_day: '1',
-    dob_month: '1',
-    dob_year: '1950'
-  },
+  HK: false,
   IE: {
     address_city: 'Dublin',
     address_country: 'IE',
@@ -1871,6 +1908,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
   },
   PT: {
     address_city: 'Lisbon',
+    address_country: 'PT',
     address_line1: '123 Park Lane',
     address_postal_code: '4520',
     address_state: '01',
@@ -1880,7 +1918,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
   },
   SE: {
     address_city: 'Stockholm',
-    address_country: 'PT',
+    address_country: 'SE',
     address_line1: '123 Sesame St',
     address_postal_code: '00150',
     address_state: 'K',
@@ -1888,33 +1926,16 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_month: '1',
     dob_year: '1950'
   },
-  SG: {
-    address_city: 'Singapore',
-    address_country: 'SE',
-    address_line1: '123 Sesame St',
-    address_postal_code: '339696',
-    address_state: 'SG',
-    dob_day: '1',
-    dob_month: '1',
-    dob_year: '1950'
-  },
+  SG: false,
   SK: {
     address_city: 'Slovakia',
     address_country: 'SK',
     address_line1: '123 Sesame St',
     address_postal_code: '00102',
+    address_state: 'BC',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
   },
-  US: {
-    address_city: 'New York',
-    address_country: 'US',
-    address_line1: '285 Fulton St',
-    address_postal_code: '10007',
-    address_state: 'NY',
-    dob_day: '1',
-    dob_month: '1',
-    dob_year: '1950'
-  }
+  US: false
 }

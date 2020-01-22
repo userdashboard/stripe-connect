@@ -109,9 +109,11 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const director = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData[country.id]))
+        const director = JSON.parse(JSON.stringify(TestStripeAccounts.companyDirectorData[country.id]))
         director.first_name = person.firstName
         director.last_name = person.lastName
+        director.email = person.email
+        director.relationship_title = 'Director'
         await TestHelper.createCompanyDirector(user, director, {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
@@ -129,41 +131,5 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
         }
       })
     }
-  })
-
-  describe('configuration', () => {
-    it('environment STRIPE_JS', async () => {
-      global.stripeJS = 3
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.waitOnSubmit = true
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = {
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }
-      req.filename = __filename
-      req.saveResponse = true
-      await req.post()
-      const req2 = TestHelper.createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
-      req2.account = user.account
-      req2.session = user.session
-      const accountNow = await req2.patch()
-      assert.strictEqual(accountNow.company.directors_provided, true)
-    })
   })
 })

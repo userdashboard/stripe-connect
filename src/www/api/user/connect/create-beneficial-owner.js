@@ -262,6 +262,36 @@ module.exports = {
         ownerInfo.address = ownerInfo.address || {}
         ownerInfo.address.line2 = req.body.address_line2
       }
+      if (req.body.address_city) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.city = req.body.address_city
+      }
+      if (req.body.address_state) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.state = req.body.address_state
+      }
+      if (req.body.address_country) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.country = req.body.address_country
+      }
+      if (req.body.phone) {
+        ownerInfo.phone = req.body.phone
+      }
+      if (req.body.ssn_last_4) {
+        ownerInfo.ssn_last_4 = req.body.ssn_last_4
+      }
+      if (req.body.dob_day) {
+        ownerInfo.dob = ownerInfo.dob || {}
+        ownerInfo.dob.day = req.body.dob_day
+      }
+      if (req.body.dob_month) {
+        ownerInfo.dob = ownerInfo.dob || {}
+        ownerInfo.dob.month = req.body.dob_month
+      }
+      if (req.body.dob_year) {
+        ownerInfo.dob = ownerInfo.dob || {}
+        ownerInfo.dob.year = req.body.dob_year
+      }
       if (req.body.address_state) {
         const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
         let found

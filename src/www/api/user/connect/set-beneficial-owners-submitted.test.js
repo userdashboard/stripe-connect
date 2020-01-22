@@ -117,7 +117,7 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        await TestHelper.updateBeneficialOwner(user, owner, {
+        await TestHelper.updateBeneficialOwner(user, null, {
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -128,64 +128,13 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
         assert.strictEqual(accountNow.company.owners_provided, true)
         const owners = await global.api.user.connect.BeneficialOwners.get(req)
         for (const owner of owners) {
+          console.log(owner)
           assert.strictEqual(owner.requirements.past_due.length, 0)
           assert.strictEqual(owner.requirements.eventually_due.length, 0)
           assert.strictEqual(owner.requirements.currently_due.length, 0)
         }
       })
     }
-  })
-
-  describe('configuration', () => {
-    it('environment STRIPE_JS', async () => {
-      global.stripeJS = 3
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
-      req.waitOnSubmit = true
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData['DE']))
-      req.body.email = person.email
-      req.body.first_name = person.firstName
-      req.body.last_name = person.lastName
-      await req.post()
-      const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
-      req2.account = user.account
-      req2.session = user.session
-      const owners = await req2.get()
-      const owner = owners[0]
-      const req3 = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${owner.id}`)
-      req3.account = user.account
-      req3.session = user.session
-      req3.uploads = {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png']
-      }
-      await req.post()
-      const req4 = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-      req4.account = user.account
-      req4.session = user.session
-      req4.filename = __filename
-      req4.saveResponse = true
-      const accountNow = await req4.patch()
-      assert.strictEqual(accountNow.company.owners_provided, true)
-      const req5 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${owner.id}`)
-      req5.account = user.account
-      req5.session = user.session
-      req5.filename = __filename
-      req5.saveResponse = true
-      const ownerNow = await req5.get()
-      assert.strictEqual(ownerNow.metadata.token, undefined)
-    })
   })
 })
 

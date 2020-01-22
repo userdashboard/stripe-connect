@@ -15,11 +15,11 @@ module.exports = {
       stripeAccount.business_type !== 'company' ||
       stripeAccount.metadata.accountid !== req.account.accountid ||
       (stripeAccount.company && stripeAccount.company.owners_provided)) {
-      throw new Error('invalid-stripe-account111')
+      throw new Error('invalid-stripe-account')
     }
     const countrySpec = connect.countrySpecIndex[stripeAccount.country]
     if (countrySpec.verification_fields.company.minimum.indexOf('relationship.owner') === -1) {
-      throw new Error('invalid-stripe-account222')
+      throw new Error('invalid-stripe-account')
     }
     const accountInfo = {
       company: {
