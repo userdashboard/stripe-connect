@@ -62,8 +62,13 @@ module.exports = {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional.document')
     }
+    await TestHelper.waitForWebhook('account.updated', stripeEvent => {
+      if (stripeEvent.data.object.individual.verification.status === 'verified') {
+        user.stripeAccount = stripeEvent.data.object
+        return true
+      }
+    })
     return user
   },
   createCompanyReadyForSubmission: async (country) => {
