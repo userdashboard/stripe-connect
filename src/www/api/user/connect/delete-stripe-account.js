@@ -31,6 +31,9 @@ module.exports = {
         if (error.raw && error.raw.code === 'idempotency_key_in_use') {
           continue
         }
+        if (error.raw && error.raw.code === 'resource_missing') {
+          continue
+        }
         if (error.type === 'StripeConnectionError') {
           continue
         }
