@@ -18,7 +18,9 @@ if (process.env.NGROK) {
 const packageJSON = require('./package.json')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 stripe.setAppInfo({
   version: packageJSON.version,

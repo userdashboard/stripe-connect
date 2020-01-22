@@ -2,7 +2,9 @@
   if (!process.env.CONNECT_WEBHOOK_ENDPOINT_SECRET) {
     const stripe = require('stripe')()
     stripe.setApiVersion(global.stripeAPIVersion)
-    stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+    if (global.maxmimumStripeRetries) {
+      stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+    }
     const fs = require('fs')
     const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
     const eventList = []

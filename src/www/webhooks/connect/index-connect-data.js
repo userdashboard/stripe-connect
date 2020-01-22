@@ -2,7 +2,9 @@ const fs = require('fs')
 const path = require('path')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 const webhookPath = path.join(__dirname, '.')
 const supportedWebhooks = {}
