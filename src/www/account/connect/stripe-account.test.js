@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
-const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
+const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/stripe-account', () => {
   describe('StripeAccount#BEFORE', () => {
