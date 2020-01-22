@@ -223,6 +223,7 @@ beforeEach((callback) => {
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
   global.stripeJS = false
+  global.maximumStripeRetries = 0
   global.webhooks = []
   return callback()
 })
