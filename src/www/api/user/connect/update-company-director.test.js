@@ -1,10 +1,10 @@
 /* eslint-env mocha */
-/*
-  This script now only supports information specified
-  in the requirements.currently_due and eventually_due
-  collections.  Testing most fields is disabled until
-  they submit data that fails validation first.
-*/
+
+// TODO: this script now only supports information specified
+// in the requirements.currently_due and eventually_due
+// collections.  Testing most fields is disabled until
+// they submit data that fails validation first.
+
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
@@ -252,53 +252,53 @@ describe('/api/user/connect/update-company-director', () => {
       // const directorNow = await req.patch()
       // assert.strictEqual(directorNow.object, 'person')
     })
-
-    // describe('configuration', () => {
-    // it('environment STRIPE_JS', async () => {
-    // global.stripeJS = 3
-    // const user = await TestHelper.createUser()
-    // await TestHelper.createStripeAccount(user, {
-    //   country: 'GB',
-    //   type: 'company'
-    // })
-    // const person = TestHelper.nextIdentity()
-    // const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-    // req.waitOnSubmit = true
-    // req.account = user.account
-    // req.session = user.session
-    // req.uploads = {
-    //   verification_document_back: TestHelper['success_id_scan_back.png'],
-    //   verification_document_front: TestHelper['success_id_scan_front.png']
-    // }
-    // req.body = {
-    //   dob_day: '1',
-    //   dob_month: '1',
-    //   dob_year: '1950',
-    //   email: person.email,
-    //   first_name: person.firstName,
-    //   last_name: person.lastName
-    // }
-    // await req.post()
-    // const directors = await global.api.user.connect.CompanyDirectors.get(req)
-    // const director = directors[0]
-    // const req2 = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${director.id}`)
-    // req2.waitOnSubmit = true
-    // req2.account = user.account
-    // req2.session = user.session
-    // req2.body = {
-    //   dob_day: '1',
-    //   dob_month: '1',
-    //   dob_year: '1950',
-    //   email: person.email,
-    //   first_name: person.firstName,
-    //   last_name: person.lastName
-    // }
-
-    // await req2.post()
-    // const directorNow = await global.api.user.connect.CompanyDirector.get(req2)
-    // assert.notStrictEqual(directorNow.token, director.token)
-    // assert.notStrictEqual(directorNow.token, null)
-    // assert.notStrictEqual(directorNow.token, undefined)
-    // })
   })
+
+  // describe('configuration', () => {
+  // it('environment STRIPE_JS', async () => {
+  // global.stripeJS = 3
+  // const user = await TestHelper.createUser()
+  // await TestHelper.createStripeAccount(user, {
+  //   country: 'GB',
+  //   type: 'company'
+  // })
+  // const person = TestHelper.nextIdentity()
+  // const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+  // req.waitOnSubmit = true
+  // req.account = user.account
+  // req.session = user.session
+  // req.uploads = {
+  //   verification_document_back: TestHelper['success_id_scan_back.png'],
+  //   verification_document_front: TestHelper['success_id_scan_front.png']
+  // }
+  // req.body = {
+  //   dob_day: '1',
+  //   dob_month: '1',
+  //   dob_year: '1950',
+  //   email: person.email,
+  //   first_name: person.firstName,
+  //   last_name: person.lastName
+  // }
+  // await req.post()
+  // const directors = await global.api.user.connect.CompanyDirectors.get(req)
+  // const director = directors[0]
+  // const req2 = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${director.id}`)
+  // req2.waitOnSubmit = true
+  // req2.account = user.account
+  // req2.session = user.session
+  // req2.body = {
+  //   dob_day: '1',
+  //   dob_month: '1',
+  //   dob_year: '1950',
+  //   email: person.email,
+  //   first_name: person.firstName,
+  //   last_name: person.lastName
+  // }
+
+  // await req2.post()
+  // const directorNow = await global.api.user.connect.CompanyDirector.get(req2)
+  // assert.notStrictEqual(directorNow.token, director.token)
+  // assert.notStrictEqual(directorNow.token, null)
+  // assert.notStrictEqual(directorNow.token, undefined)
+  // })
 })

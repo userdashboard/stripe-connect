@@ -1,9 +1,10 @@
 /* eslint-env mocha */
 /*
-  This script now only supports information specified
+  This route now only supports information specified
   in the requirements.currently_due and eventually_due
   collections.  Testing most fields is disabled until
-  they submit data that fails validation first.
+  they submit data that fails validation and requires
+  resubmitting
 */
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
