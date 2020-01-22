@@ -31,6 +31,17 @@ async function beforeRequest (req) {
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  if (messageTemplate) {
+    dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
+    if (messageTemplate === 'success') {
+      const stripeAccountsTable = doc.getElementById('stripe-accounts-table')
+      stripeAccountsTable.parentNode.removeChild(stripeAccountsTable)
+      const submitForm = doc.getElementById('submit-form')
+      submitForm.parentNode.removeChild(submitForm)
+      return dashboard.Response.end(req, res, doc)
+    }
+  }
+
   dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, 'account-status')
   const mccCodes = connect.getMerchantCategoryCodes(req.language)
   const mccDescription = doc.getElementById('mcc-description')
@@ -56,12 +67,6 @@ async function renderPage (req, res, messageTemplate) {
       removeElements.push('business-name')
     }
   }
-  if (messageTemplate) {
-    if (messageTemplate === 'success') {
-      removeElements.push('submit-form', 'stripe-accounts-table')
-    }
-    dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
-  }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
     element.parentNode.removeChild(element)
@@ -82,7 +87,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `${req.urlPath}?message=success`
+      location: `${req.urlPath}?stripeid=${req.query.stripeid}&message=success`
     })
     return res.end()
   }
