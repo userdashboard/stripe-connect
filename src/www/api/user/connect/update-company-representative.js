@@ -1,7 +1,9 @@
 const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
@@ -181,11 +183,11 @@ module.exports = {
           continue
         }
         const field = fullField.substring(`${person.id}.`.length)
-        if (field === `address.line2` ||
-            field === `relationship.title` ||
-            field === `relationship.executive` ||
-            field === `relationship.director` ||
-            field === `relationship.owner`) {
+        if (field === 'address.line2' ||
+            field === 'relationship.title' ||
+            field === 'relationship.executive' ||
+            field === 'relationship.director' ||
+            field === 'relationship.owner') {
           continue
         }
         const posted = field.split('.').join('_')
@@ -229,11 +231,11 @@ module.exports = {
           continue
         }
         const field = fullField.substring(`${person.id}.`.length)
-        if (field === `address.line2` ||
-            field === `relationship.title` ||
-            field === `relationship.executive` ||
-            field === `relationship.director` ||
-            field === `relationship.owner`) {
+        if (field === 'address.line2' ||
+            field === 'relationship.title' ||
+            field === 'relationship.executive' ||
+            field === 'relationship.director' ||
+            field === 'relationship.owner') {
           continue
         }
         if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
@@ -347,9 +349,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (error.message.startsWith('invalid-')) {
           throw error
         }

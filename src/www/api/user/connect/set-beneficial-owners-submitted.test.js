@@ -110,7 +110,7 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
         })
         const person = TestHelper.nextIdentity()
         const owner = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData[country.id]))
-        owner.email = person.email,
+        owner.email = person.email
         owner.first_name = person.firstName
         owner.last_name = person.lastName
         await TestHelper.createBeneficialOwner(user, owner, {
@@ -137,4 +137,3 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
     }
   })
 })
-

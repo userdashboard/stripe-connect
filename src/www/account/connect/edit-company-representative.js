@@ -124,7 +124,7 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   for (const fullField of req.data.stripeAccount.requirements.currently_due) {
-    if (!fullField.startsWith(stripeAccount.metadata.representative)) {
+    if (!fullField.startsWith(req.data.stripeAccount.metadata.representative)) {
       continue
     }
     const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)

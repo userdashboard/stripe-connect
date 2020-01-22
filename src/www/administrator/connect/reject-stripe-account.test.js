@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/administrator/connect/reject-stripe-account', () => {
   describe('RejectStripeAccount#BEFORE', () => {
@@ -56,30 +57,7 @@ describe('/administrator/connect/reject-stripe-account', () => {
   describe('RejectStripeAccount#POST', () => {
     it('should update the Stripe account as rejected (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'individual'
-      })
-      await TestHelper.createStripeRegistration(user, {
-        business_profile_mcc: '7997',
-        business_profile_url: 'https://www.' + user.profile.contactEmail.split('@')[1],
-        address_city: 'New York',
-        address_line1: '285 Fulton St',
-        address_postal_code: '10007',
-        address_state: 'NY',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: user.profile.contactEmail,
-        first_name: user.profile.firstName,
-        last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        ssn_last_4: '0000'
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createIndividualReadyForSubmission('US')
       const req = TestHelper.createRequest(`/administrator/connect/reject-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session

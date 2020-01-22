@@ -2,7 +2,9 @@ const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
@@ -32,13 +34,13 @@ module.exports = {
       const field = fullField.substring(`${existingRepresentative.id}.`.length)
       const posted = field.split('.').join('_')
       if (!req.body || !req.body[posted]) {
-        if (field === `address.line2` ||
-            field === `relationship.title` ||
-            field === `relationship.executive` ||
-            field === `relationship.representative` ||
-            field === `owner` ||
-            field === `verification.document` ||
-            field === `verification.additional_document`) {
+        if (field === 'address.line2' ||
+            field === 'relationship.title' ||
+            field === 'relationship.executive' ||
+            field === 'relationship.representative' ||
+            field === 'owner' ||
+            field === 'verification.document' ||
+            field === 'verification.additional_document') {
           continue
         }
         throw new Error(`invalid-${posted}`)
@@ -373,9 +375,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (error.raw && error.raw.code === 'account_invalid') {
           continue
         }
@@ -414,9 +416,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

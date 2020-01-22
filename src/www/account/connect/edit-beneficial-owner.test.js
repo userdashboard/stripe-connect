@@ -211,7 +211,7 @@ describe('/account/connect/edit-beneficial-owner', () => {
         country: 'US',
         currency: 'usd',
         routing_number: '110000000'
-      })      
+      })
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.submitStripeAccount(user)

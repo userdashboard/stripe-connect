@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/administrator/connect/stripe-account', () => {
   describe('StripeAccount#BEFORE', () => {
@@ -41,11 +42,7 @@ describe('/administrator/connect/stripe-account', () => {
   describe('StripeAccount#GET', () => {
     it('should have row for Stripe account (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'individual'
-      })
+      const user = await TestStripeAccounts.createIndividualReadyForSubmission('US')
       const req = TestHelper.createRequest(`/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session
@@ -53,7 +50,6 @@ describe('/administrator/connect/stripe-account', () => {
       req.screenshots = [
         { hover: '#administrator-menu-container' },
         { click: '/administrator/connect' },
-        { click: '/administrator/connect/stripe-accounts' },
         { click: `/administrator/connect/stripe-account?stripeid=${user.stripeAccount.id}` }
       ]
       const page = await req.get()

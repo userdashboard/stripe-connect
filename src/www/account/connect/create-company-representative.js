@@ -105,19 +105,19 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   for (const fullField of req.data.stripeAccount.requirements.currently_due) {
-    if (!fullField.startsWith(stripeAccount.metadata.representative)) {
+    if (!fullField.startsWith(req.data.stripeAccount.metadata.representative)) {
       continue
     }
     const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
-      if (field === `address.line2` ||
-          field === `relationship.title` ||
-          field === `relationship.executive` ||
-          field === `relationship.director` ||
-          field === `relationship.owner` ||
-          field === `verification.document` ||
-          field === `verification.additional_document`) {
+      if (field === 'address.line2' ||
+          field === 'relationship.title' ||
+          field === 'relationship.executive' ||
+          field === 'relationship.director' ||
+          field === 'relationship.owner' ||
+          field === 'verification.document' ||
+          field === 'verification.additional_document') {
         continue
       }
       return renderPage(req, res, `invalid-${posted}`)

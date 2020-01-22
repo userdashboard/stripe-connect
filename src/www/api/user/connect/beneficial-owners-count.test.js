@@ -89,7 +89,7 @@ describe('/api/user/connect/beneficial-owners-count', () => {
         type: 'company'
       })
       const person1 = TestHelper.nextIdentity()
-      const body1 = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData['DE']))
+      const body1 = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData.DE))
       body1.email = person1.email
       body1.first_name = person1.firstName
       body1.last_name = person1.lastName
@@ -98,7 +98,7 @@ describe('/api/user/connect/beneficial-owners-count', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       const person2 = TestHelper.nextIdentity()
-      const body2 = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData['DE']))
+      const body2 = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData.DE))
       body2.email = person2.email
       body2.first_name = person2.firstName
       body2.last_name = person2.lastName

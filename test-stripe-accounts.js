@@ -596,7 +596,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '456-789-0123'
   },
   FI: {
     business_profile_mcc: '8931',
@@ -1451,7 +1451,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_month: '1',
     dob_year: '1950'
   },
-  DE:  {
+  DE: {
     address_city: 'Berlin',
     address_country: 'DE',
     address_line1: 'First Street',
@@ -1470,7 +1470,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
-  }, 
+  },
   EE: {
     address_city: 'Berlin',
     address_country: 'DE',
@@ -1480,7 +1480,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
-  }, 
+  },
   ES: {
     address_city: 'Berlin',
     address_country: 'DE',
@@ -1601,7 +1601,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'DR',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950',
+    dob_year: '1950'
   },
   NO: {
     address_city: 'Oslo',
@@ -1738,7 +1738,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_month: '1',
     dob_year: '1950'
   },
-  DE:  {
+  DE: {
     address_city: 'Berlin',
     address_country: 'DE',
     address_line1: 'First Street',
@@ -1757,7 +1757,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
-  }, 
+  },
   EE: {
     address_city: 'Berlin',
     address_country: 'DE',
@@ -1767,7 +1767,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
-  }, 
+  },
   ES: {
     address_city: 'Berlin',
     address_country: 'DE',
@@ -1870,7 +1870,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_month: '1',
     dob_year: '1950'
   },
-  MY: false, 
+  MY: false,
   NL: {
     address_city: 'Amsterdam',
     address_country: 'NL',
@@ -1879,7 +1879,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
     address_state: 'DR',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950',
+    dob_year: '1950'
   },
   NO: {
     address_city: 'Oslo',

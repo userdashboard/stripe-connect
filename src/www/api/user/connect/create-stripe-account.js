@@ -1,7 +1,9 @@
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
@@ -65,9 +67,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -122,9 +124,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -151,9 +153,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -181,9 +183,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -235,9 +237,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -264,9 +266,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
@@ -293,9 +295,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

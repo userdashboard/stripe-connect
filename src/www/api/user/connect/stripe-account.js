@@ -39,7 +39,7 @@ module.exports = {
           continue
         }
         if (error.type === 'StripeAPIError') {
-           continue
+          continue
         }
         if (error.message.startsWith('invalid-')) {
           throw error

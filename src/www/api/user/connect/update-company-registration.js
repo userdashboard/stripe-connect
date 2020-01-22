@@ -1,7 +1,9 @@
 const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
@@ -15,9 +17,9 @@ module.exports = {
       throw new Error('invalid-token')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (!stripeAccount.requirements.currently_due.length || 
-        stripeAccount.business_type === 'individual' || 
-        (!stripeAccount.company.verification.document.front && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1) || 
+    if (!stripeAccount.requirements.currently_due.length ||
+        stripeAccount.business_type === 'individual' ||
+        (!stripeAccount.company.verification.document.front && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1) ||
         (!stripeAccount.company.verification.document.back && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1)) {
       throw new Error('invalid-stripe-account')
     }
@@ -177,19 +179,21 @@ module.exports = {
           throw new Error('invalid-address_state')
         }
       }
+      // TODO: on Stripe's test API the company.verification.document is erroneously
+      // placed in the pending_verification collection without submitting it
       if (req.body.verification_document_back &&
-          (stripeAccount.requirements.currently_due.indexOf('company.verification.document') > -1) || 
+          ((stripeAccount.requirements.currently_due.indexOf('company.verification.document') > -1) ||
           (stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) ||
-          (stripeAccount.company.verification.document === null && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1)) {
+          (stripeAccount.company.verification.document === null && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1))) {
         accountInfo.company = accountInfo.company || {}
         accountInfo.company.verification = accountInfo.company.verification || {}
         accountInfo.company.verification.document = accountInfo.company.verification.document || {}
         accountInfo.company.verification.document.back = req.body.verification_document_back
       }
       if (req.body.verification_document_front &&
-        (stripeAccount.requirements.currently_due.indexOf('company.verification.document') > -1) || 
+        ((stripeAccount.requirements.currently_due.indexOf('company.verification.document') > -1) ||
         (stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) ||
-        (stripeAccount.company.verification.document === null && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1)) {
+        (stripeAccount.company.verification.document === null && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1))) {
         accountInfo.company = accountInfo.company || {}
         accountInfo.company.verification = accountInfo.company.verification || {}
         accountInfo.company.verification.document = accountInfo.company.verification.document || {}
@@ -220,9 +224,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         if (error.message.startsWith('invalid-')) {
           throw error
         }
@@ -231,4 +235,3 @@ module.exports = {
     }
   }
 }
-

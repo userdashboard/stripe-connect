@@ -324,7 +324,7 @@ function createMultiPart (req, body) {
       ]
       buffers.push(Buffer.from(segment.join('\r\n')), fs.readFileSync(req.uploads[field].path), Buffer.from('\r\n'))
     }
-}
+  }
   for (const field in body) {
     buffers.push(Buffer.from(`${delimiter}\r\nContent-Disposition: form-data; name="${field}"\r\n\r\n${body[field]}`))
   }
@@ -768,7 +768,7 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
         }
       }
     } catch (error) {
-    }    
+    }
     return setTimeout(wait, 100)
   }
   return setTimeout(wait, 100)

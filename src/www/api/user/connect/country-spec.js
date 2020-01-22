@@ -1,6 +1,8 @@
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 const cache = {}
 
@@ -36,10 +38,10 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
-       break
+        }
+        break
       }
     }
     if (!countrySpec) {

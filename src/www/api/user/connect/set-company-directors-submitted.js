@@ -1,7 +1,9 @@
 const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
@@ -54,7 +56,7 @@ module.exports = {
           continue
         }
         if (error.type === 'StripeAPIError') {
-           continue
+          continue
         }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }

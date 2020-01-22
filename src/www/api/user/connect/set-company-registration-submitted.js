@@ -2,7 +2,9 @@ const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
-stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
 stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
@@ -72,9 +74,9 @@ module.exports = {
         if (error.type === 'StripeConnectionError') {
           continue
         }
-       if (error.type === 'StripeAPIError') {
+        if (error.type === 'StripeAPIError') {
           continue
-       }
+        }
         const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
         if (errorMessage.startsWith('company[address]')) {
           let field = errorMessage.substring('company[address]['.length)

@@ -161,7 +161,7 @@ async function submitForm (req, res) {
     const field = fullField.substring(`${req.data.owner.id}.`.length)
     const posted = field.split('.').join('_')
     if (!field) {
-      if (field === 'relationship.executive' || 
+      if (field === 'relationship.executive' ||
           field === 'verification.document' ||
           field === 'verification.additional_document') {
         continue

@@ -937,7 +937,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       assert.notStrictEqual(owner.verification.document.front, null)
     })
 
-
     it('optionally-required posted file verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
