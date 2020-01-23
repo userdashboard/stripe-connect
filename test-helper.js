@@ -40,12 +40,12 @@ const wait = util.promisify((callback) => {
 const waitForWebhook = util.promisify(async (webhookType, matching, callback) => {
   if (process.env.DEBUG_ERRORS) {
   }
-  let retries = 0
+  // let retries = 0
   async function wait () {
-    retries++
-    if (retries === 20000) {
-      return callback()
-    }
+    // retries++
+    // if (retries === 20000) {
+    //   return callback()
+    // }
     if (global.testEnded) {
       return
     }
