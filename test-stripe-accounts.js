@@ -105,6 +105,7 @@ module.exports = {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
     }
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
