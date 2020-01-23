@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
-const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/administrator/connect/reject-stripe-account', () => {
   describe('RejectStripeAccount#BEFORE', () => {
@@ -57,7 +56,11 @@ describe('/administrator/connect/reject-stripe-account', () => {
   describe('RejectStripeAccount#POST', () => {
     it('should update the Stripe account as rejected (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
-      const user = await TestStripeAccounts.createIndividualReadyForSubmission('US')
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'US',
+        type: 'individual'
+      })
       const req = TestHelper.createRequest(`/administrator/connect/reject-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = administrator.account
       req.session = administrator.session

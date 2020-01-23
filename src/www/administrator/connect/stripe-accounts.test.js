@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
-const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/administrator/connect/stripe-accounts', () => {
   describe('StripeAccounts#BEFORE', () => {
@@ -23,7 +22,11 @@ describe('/administrator/connect/stripe-accounts', () => {
   describe('StripeAccounts#GET', () => {
     it('should have row for each Stripe account (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
-      const user = await TestStripeAccounts.createIndividualReadyForSubmission('NZ')
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'US',
+        type: 'individual'
+      })
       const req = TestHelper.createRequest('/administrator/connect/stripe-accounts')
       req.account = administrator.account
       req.session = administrator.session
