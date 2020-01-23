@@ -35,6 +35,7 @@ module.exports = {
     if (!stripeEvent) {
       return res.end()
     }
+    console.log('got stripe event', stripeEvent.type)
     res.statusCode = 200
     if (global.testNumber) {
       global.webhooks.unshift(stripeEvent)

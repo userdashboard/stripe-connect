@@ -232,6 +232,7 @@ async function createStripeAccount (user, properties) {
   req.body = properties
   user.stripeAccount = await req.post()
   if (req.body.type === 'company') {
+    console.log('wait1')
     await waitForWebhook('account.updated', (stripeEvent) => {
       if (stripeEvent.data &&
           stripeEvent.data.object &&
@@ -245,7 +246,8 @@ async function createStripeAccount (user, properties) {
     const req2 = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.stripeAccount.metadata.representative}`)
     req2.session = user.session
     req2.account = user.account
-    user.representative = await req2.get()    
+    user.representative = await req2.get()
+    console.log('wait2')
     await waitForWebhook('account.updated', (stripeEvent) => {
       if (stripeEvent.data &&
           stripeEvent.data.object &&
@@ -259,6 +261,7 @@ async function createStripeAccount (user, properties) {
         }
       }
     })
+    console.log('wait ended')
   }
   return user.stripeAccount
 }
