@@ -110,6 +110,11 @@ module.exports = {
         representative: true
       }
     }
+    const accountUpdate = {
+      metadata: {
+        representative: companyRepresentative.id
+      }
+    }
     if (stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1) {
       while (true) {
         try {
@@ -140,6 +145,15 @@ module.exports = {
           if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
         }
       }
+      delete (companyDirector.requirements.pending_verification)
+      delete (companyDirector.requirements.past_due)
+      for (const item of companyDirector.requirements.eventually_due) {
+        const duplicate = companyDirector.requirements.currently_due.indexOf(item)
+        if (duplicate > -1) {
+          companyDirector.requirements.eventually_due = companyDirector.requirements.eventually_due.splice(duplicate, 1)
+        }
+      }
+      accountUpdate.metadata.companyDirectorTemplate = JSON.stringify(companyDirector.requirements)
     }
     if (stripeAccount.requirements.currently_due.indexOf('relationship.owner') > -1) {
       while (true) {
@@ -171,6 +185,15 @@ module.exports = {
           if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
         }
       }
+      delete (beneficialOwner.requirements.pending_verification)
+      delete (beneficialOwner.requirements.past_due)
+      for (const item of beneficialOwner.requirements.eventually_due) {
+        const duplicate = beneficialOwner.requirements.currently_due.indexOf(item)
+        if (duplicate > -1) {
+          beneficialOwner.requirements.eventually_due = beneficialOwner.requirements.eventually_due.splice(duplicate, 1)
+        }
+      }
+      accountUpdate.metadata.beneficialOwnerTemplate = JSON.stringify(beneficialOwner.requirements)
     }
     while (true) {
       try {
@@ -200,29 +223,6 @@ module.exports = {
           continue
         }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-      }
-    }
-    delete (companyDirector.requirements.pending_verification)
-    delete (companyDirector.requirements.past_due)
-    for (const item of companyDirector.requirements.eventually_due) {
-      const duplicate = companyDirector.requirements.currently_due.indexOf(item)
-      if (duplicate > -1) {
-        companyDirector.requirements.eventually_due = companyDirector.requirements.eventually_due.splice(duplicate, 1)
-      }
-    }
-    delete (beneficialOwner.requirements.pending_verification)
-    delete (beneficialOwner.requirements.past_due)
-    for (const item of beneficialOwner.requirements.eventually_due) {
-      const duplicate = beneficialOwner.requirements.currently_due.indexOf(item)
-      if (duplicate > -1) {
-        beneficialOwner.requirements.eventually_due = beneficialOwner.requirements.eventually_due.splice(duplicate, 1)
-      }
-    }
-    const accountUpdate = {
-      metadata: {
-        companyDirectorTemplate: JSON.stringify(companyDirector.requirements),
-        beneficialOwnerTemplate: JSON.stringify(beneficialOwner.requirements),
-        representative: companyRepresentative.id
       }
     }
     let stripeAccountNow
