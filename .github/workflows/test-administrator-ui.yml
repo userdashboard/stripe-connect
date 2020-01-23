@@ -19,7 +19,7 @@ jobs:
         npm install ngrok mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
-        node node_modules/mocha/bin/mocha src/www/administrator --recursive --timeout 900000 --slow 900000 || exit 1
+        node node_modules/mocha/bin/mocha src/www/administrator --recursive --bail --timeout 900000 --slow 900000 || exit 1
       env:
         NODE_ENV: testing
         FAST_START: true
