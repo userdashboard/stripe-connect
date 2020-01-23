@@ -513,7 +513,7 @@ async function waitForPayoutsEnabled (user, callback) {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await req.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.payouts_enabled) {
       return setTimeout(wait, 100)
     }
@@ -533,7 +533,7 @@ async function waitForVerification (user, callback) {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await req.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.business_type === 'individual') {
       if (!stripeAccount.individual || stripeAccount.individual.verification.status !== 'verified') {
         return setTimeout(wait, 100)
@@ -562,7 +562,7 @@ async function waitForVerificationFailure (user, callback) {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await req.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (stripeAccount.business_type === 'individual') {
       if ((stripeAccount.requirements && stripeAccount.requirements.pending_verification.length) ||
           (stripeAccount.individual && stripeAccount.individual.verification.status !== 'unverified')) {
@@ -673,7 +673,7 @@ async function waitForAccountRequirement (user, requirement, callback) {
     if (global.testEnded) {
       return
     }
-    const stripeAccount = await req.get(req)
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.requirements) {
       return setTimeout(wait, 100)
     }
