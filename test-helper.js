@@ -38,8 +38,6 @@ const wait = util.promisify((callback) => {
 })
 
 const waitForWebhook = util.promisify(async (webhookType, matching, callback) => {
-  if (process.env.DEBUG_ERRORS) {
-  }
   async function wait () {
     if (global.testEnded) {
       return
@@ -232,22 +230,19 @@ async function createStripeAccount (user, properties) {
   req.body = properties
   user.stripeAccount = await req.post()
   if (req.body.type === 'company') {
-    console.log('wait1')
+    console.log('wait1', JSON.stringify(user.stripeAccount, null, '  '))
     await waitForWebhook('account.updated', (stripeEvent) => {
-      if (stripeEvent.data &&
+      return stripeEvent.data &&
           stripeEvent.data.object &&
           stripeEvent.data.object.id === user.stripeAccount.id &&
           stripeEvent.data.object.metadata &&
-          stripeEvent.data.object.metadata.representative) {
-        user.stripeAccount = stripeEvent.data.object
-        return true
-      }
+          stripeEvent.data.object.metadata.representative
     })
     const req2 = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.stripeAccount.metadata.representative}`)
     req2.session = user.session
     req2.account = user.account
     user.representative = await req2.get()
-    console.log('wait2')
+    console.log('wait2', JSON.stringify(user.representative, null, '  '))
     await waitForWebhook('account.updated', (stripeEvent) => {
       if (stripeEvent.data &&
           stripeEvent.data.object &&
