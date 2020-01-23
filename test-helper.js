@@ -403,8 +403,17 @@ async function createCompanyDirector (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.director = await req.post()
-  await waitForWebhook('person.created', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.director.id
+  await waitForWebhook('account.updated', (stripeEvent) => {
+    if (stripeEvent.data &&
+        stripeEvent.data.object &&
+        stripeEvent.data.object.id === user.stripeAccount.id &&
+        stripeEvent.data.object.requirements) {
+      for (const requirement of stripeEvent.data.object.requirements.currently_due) {
+        if (requirement.startsWith(user.director.id)) {
+          return true
+        }
+      }
+    }
   })
   return user.director
 }
