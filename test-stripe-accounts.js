@@ -64,7 +64,11 @@ module.exports = {
       })
     }
     await TestHelper.waitForWebhook('account.updated', stripeEvent => {
-      if (stripeEvent.data.object.individual.verification.status === 'verified') {
+      if (stripeEvent.data.object && 
+        stripeEvent.data.object.id === user.stripeAccount.id &&
+        stripeEvent.data.object.individual && 
+        stripeEvent.data.object.individual.verification &&
+        stripeEvent.data.object.individual.verification.status === 'verified') {
         user.stripeAccount = stripeEvent.data.object
         return true
       }
