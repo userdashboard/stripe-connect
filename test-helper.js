@@ -40,12 +40,7 @@ const wait = util.promisify((callback) => {
 const waitForWebhook = util.promisify(async (webhookType, matching, callback) => {
   if (process.env.DEBUG_ERRORS) {
   }
-  // let retries = 0
   async function wait () {
-    // retries++
-    // if (retries === 20000) {
-    //   return callback()
-    // }
     if (global.testEnded) {
       return
     }
@@ -651,16 +646,11 @@ async function waitForVerificationStart (user, callback) {
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
-  let attempts = 0
   async function wait () {
     if (global.testEnded) {
       return
     }
-    attempts++
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (attempts === 400) {
-      return callback()
-    }
     if (stripeAccount.requirements.eventually_due.length ||
       stripeAccount.requirements.past_due.length ||
       stripeAccount.requirements.currently_due.length) {
