@@ -12,6 +12,9 @@ module.exports = async (stripeEvent, req) => {
     if (global.testEnded) {
       return
     }
+    if (account.metadata.template) {
+      
+    }
     try {
       const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
       if (exists) {
