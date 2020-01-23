@@ -490,7 +490,7 @@ async function waitForPayout (administrator, stripeid, previousid, callback) {
     req.account = administrator.account
     req.session = administrator.session
     req.stripeKey = stripeKey
-    const itemids = await req.get()
+    const itemids = await global.api.administrator.connect.StripeAccountPayouts.get(req)
     if (!itemids || !itemids.length) {
       return setTimeout(wait, 100)
     }
