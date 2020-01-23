@@ -112,7 +112,6 @@ module.exports = {
     }
     const accountUpdate = {
       metadata: {
-        representative: companyRepresentative.id
       }
     }
     if (stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1) {
@@ -199,6 +198,7 @@ module.exports = {
       try {
         companyRepresentative = await stripe.accounts.createPerson(stripeAccount.id, representativeInfo, req.stripeKey)
         await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${companyRepresentative.id}`, stripeAccount.id)
+        accountUpdate.metadata.representative = companyRepresentative.id
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
