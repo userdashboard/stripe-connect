@@ -120,7 +120,7 @@ async function submitForm (req, res) {
     return renderPage(req, res, 'invalid-address_state')
   }
   if (req.body.address_state) {
-    const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+    const states = connect.countryDivisions[req.body.address_country || req.data.stripeAccount.country]
     let found
     for (const state of states) {
       found = state.value === req.body.address_state
