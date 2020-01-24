@@ -70,9 +70,12 @@ module.exports = {
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
+    req.stripeKey = {
+      api_key: process.env.STRIPE_KEY
+    }
     while (true) {
       try {
-        user.stripeAccount = await req.get()
+        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.individualData.requirements.currently_due.length === 2) {
           return user
         }
