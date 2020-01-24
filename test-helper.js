@@ -236,7 +236,7 @@ async function createStripeAccount (user, properties) {
     while (!user.representative) {
       try {
         user.representative = await req2.get()
-      } catch (error ){
+      } catch (error) {
       }
     }
   }

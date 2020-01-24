@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/beneficial-owner', () => {
   describe('BeneficialOwner#BEFORE', () => {
@@ -19,28 +20,7 @@ describe('/account/connect/beneficial-owner', () => {
     })
 
     it('should bind owner to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'FR',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        address_city: 'Berlin',
-        address_country: 'DE',
-        address_line1: 'First Street',
-        address_postal_code: '01067',
-        address_state: 'BW',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithOwners('FR', 1)
       const req = TestHelper.createRequest(`/account/connect/beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
@@ -51,28 +31,7 @@ describe('/account/connect/beneficial-owner', () => {
 
   describe('BeneficialOwner#GET', () => {
     it('should show table for owner (screenshots)', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createBeneficialOwner(user, {
-        address_city: 'Berlin',
-        address_country: 'DE',
-        address_line1: 'First Street',
-        address_postal_code: '01067',
-        address_state: 'BW',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithOwners('GB', 1)
       const req = TestHelper.createRequest(`/account/connect/beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session

@@ -1,4 +1,3 @@
-
 const TestHelper = require('./test-helper.js')
 
 module.exports = {
@@ -64,9 +63,9 @@ module.exports = {
       })
     }
     await TestHelper.waitForWebhook('account.updated', stripeEvent => {
-      if (stripeEvent.data.object && 
+      if (stripeEvent.data.object &&
         stripeEvent.data.object.id === user.stripeAccount.id &&
-        stripeEvent.data.object.individual && 
+        stripeEvent.data.object.individual &&
         stripeEvent.data.object.individual.verification &&
         stripeEvent.data.object.individual.verification.status === 'verified') {
         user.stripeAccount = stripeEvent.data.object
@@ -137,6 +136,89 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
+    return user
+  },
+  createCompanyWithOwners: async (country, numOwners) => {
+    country = country || 'US'
+    const user = await TestHelper.createUser()
+    await TestHelper.createStripeAccount(user, {
+      country: country,
+      type: 'company'
+    })
+    if (numOwners && beneficialOwnerData[country] !== false) {
+      const requirements = JSON.parse(user.stripeAccount.metadata.beneficialOwnerTemplate)
+      const requireDocument = requirements.currently_due.indexOf('verification.document') > -1 ||
+                              requirements.eventually_due.indexOf('verification.document') > -1
+      let documents
+      if (requireDocument) {
+        documents = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+      }
+      for (let i = 0, len = numOwners; i < len; i++) {
+        const person = TestHelper.nextIdentity()
+        const body = JSON.parse(JSON.stringify(beneficialOwnerData[country]))
+        body.email = person.email
+        body.first_name = person.firstName
+        body.last_name = person.lastName
+
+        await TestHelper.createBeneficialOwner(user, body, documents)
+      }
+    }
+    return user
+  },
+  createCompanyWithDirectors: async (country, numDirectors) => {
+    country = country || 'US'
+    const user = await TestHelper.createUser()
+    await TestHelper.createStripeAccount(user, {
+      country: country,
+      type: 'company'
+    })
+    if (numDirectors && companyDirectorData[country] !== false) {
+      const requirements = JSON.parse(user.stripeAccount.metadata.companyDirectorTemplate)
+      const requireDocument = requirements.currently_due.indexOf('verification.document') > -1 ||
+                              requirements.eventually_due.indexOf('verification.document') > -1
+      let documents
+      if (requireDocument) {
+        documents = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+      }
+      for (let i = 0, len = numDirectors; i < len; i++) {
+        const person = TestHelper.nextIdentity()
+        const body = JSON.parse(JSON.stringify(beneficialOwnerData[country]))
+        body.email = person.email
+        body.first_name = person.firstName
+        body.last_name = person.lastName
+        await TestHelper.createCompanyDirector(user, body, documents)
+      }
+    }
+    return user
+  },
+  createCompanyWithRepresentative: async (country) => {
+    country = country || 'US'
+    const user = await TestHelper.createUser()
+    await TestHelper.createStripeAccount(user, {
+      country: country,
+      type: 'company'
+    })
+    const person = TestHelper.nextIdentity()
+    const body = JSON.parse(JSON.stringify(representativeData[country]))
+    body.email = person.email
+    body.first_name = person.firstName
+    body.last_name = person.lastName
+    const requireDocument = user.representative.requirements.currently_due.indexOf('verification.document') > -1 ||
+                            user.representative.requirements.eventually_due.indexOf('verification.document') > -1
+    let documents
+    if (requireDocument) {
+      documents = {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+    }
+    await TestHelper.createCompanyRepresentative(user, body, documents)
     return user
   }
 }

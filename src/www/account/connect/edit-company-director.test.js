@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/edit-company-director', () => {
   describe('EditCompanyDirector#BEFORE', () => {
@@ -19,23 +20,7 @@ describe('/account/connect/edit-company-director', () => {
     })
 
     it('should reject registration with directors submitted', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
       await TestHelper.submitCompanyDirectors(user)
       const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
@@ -50,23 +35,7 @@ describe('/account/connect/edit-company-director', () => {
     })
 
     it('should require own Stripe account', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
       const user2 = await TestHelper.createUser()
       const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user2.account
@@ -81,23 +50,7 @@ describe('/account/connect/edit-company-director', () => {
     })
 
     it('should bind director to req', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
@@ -108,23 +61,7 @@ describe('/account/connect/edit-company-director', () => {
 
   describe('EditCompanyDirector#GET', () => {
     it('should present the form', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
@@ -137,23 +74,7 @@ describe('/account/connect/edit-company-director', () => {
 
   describe('EditCompanyDirector#POST', () => {
     it('should update required document (screenshots)', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
@@ -178,23 +99,7 @@ describe('/account/connect/edit-company-director', () => {
     })
 
     it('should update required additional document', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      await TestHelper.createCompanyDirector(user, {
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/edit-company-director?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session

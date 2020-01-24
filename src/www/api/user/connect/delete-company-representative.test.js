@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/delete-company-representative', () => {
   describe('exceptions', () => {
@@ -98,30 +99,7 @@ describe('/api/user/connect/delete-company-representative', () => {
 
   describe('returns', () => {
     it('boolean', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AT',
-        type: 'company'
-      })
-      await TestHelper.createCompanyRepresentative(user, {
-        address_city: 'Vienna',
-        address_country: 'AT',
-        address_line1: '123 Sesame St',
-        address_postal_code: '1020',
-        address_state: '1',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: user.profile.contactEmail,
-        first_name: user.profile.firstName,
-        last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        relationship_executive: 'true',
-        relationship_title: 'Owner'
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithRepresentative('DE')
       const req = TestHelper.createRequest(`/api/user/connect/delete-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

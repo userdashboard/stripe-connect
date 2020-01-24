@@ -103,21 +103,7 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
         continue
       }
       it('object (' + country.id + ')', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: country.id,
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const director = JSON.parse(JSON.stringify(TestStripeAccounts.companyDirectorData[country.id]))
-        director.first_name = person.firstName
-        director.last_name = person.lastName
-        director.email = person.email
-        director.relationship_title = 'Director'
-        await TestHelper.createCompanyDirector(user, director, {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        })
+        const user = await TestStripeAccounts.createCompanyWithDirectors(country.id, 1)
         const req = TestHelper.createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session

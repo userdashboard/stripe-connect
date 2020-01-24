@@ -144,25 +144,6 @@ async function submitForm (req, res) {
   if (!req.body.token && (!req.uploads || !req.uploads.verification_document_back)) {
     return renderPage(req, res, 'invalid-verification_document_back')
   }
-  if (!req.body.token && req.uploads && req.uploads.verification_document_back) {
-    const backData = {
-      purpose: 'identity_document',
-      file: {
-        type: 'application/octet-stream',
-        name: req.uploads.verification_document_back.name,
-        data: req.uploads.verification_document_back.buffer
-      }
-    }
-    try {
-      const back = await stripe.files.create(backData, req.stripeKey)
-      req.body.verification_document_back = back.id
-    } catch (error) {
-      throw new Error('invalid-verification_document_back')
-    }
-  } else if (requirements.currently_due.indexOf('verification.document') > -1) {
-    throw new Error('invalid-verification_document_back')
-  }
-
   let person
   try {
     person = await global.api.user.connect.CreateBeneficialOwner.post(req)

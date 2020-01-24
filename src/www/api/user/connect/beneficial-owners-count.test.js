@@ -83,29 +83,7 @@ describe('/api/user/connect/beneficial-owners-count', () => {
 
   describe('returns', () => {
     it('integer', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person1 = TestHelper.nextIdentity()
-      const body1 = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData.DE))
-      body1.email = person1.email
-      body1.first_name = person1.firstName
-      body1.last_name = person1.lastName
-      await TestHelper.createBeneficialOwner(user, body1, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      const person2 = TestHelper.nextIdentity()
-      const body2 = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData.DE))
-      body2.email = person2.email
-      body2.first_name = person2.firstName
-      body2.last_name = person2.lastName
-      await TestHelper.createBeneficialOwner(user, body2, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithOwners('DE', 2)
       const req = TestHelper.createRequest(`/api/user/connect/beneficial-owners-count?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

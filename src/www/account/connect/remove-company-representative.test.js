@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/remove-company-representative', () => {
   describe('RemoveCompanyRepresentative#BEFORE', () => {
@@ -58,32 +59,7 @@ describe('/account/connect/remove-company-representative', () => {
 
   describe('RemoveCompanyRepresentative#GET', () => {
     it('should present the form', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      await TestHelper.createCompanyRepresentative(user, {
-        address_city: 'Berlin',
-        address_country: 'DE',
-        address_line1: '123 Sesame St',
-        address_postal_code: '01067',
-        address_state: 'BE',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: user.profile.contactEmail,
-        first_name: user.profile.firstName,
-        last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        relationship_executive: 'true',
-        relationship_title: 'Owner'
-      }, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithRepresentative('DE')
       const req = TestHelper.createRequest(`/account/connect/remove-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -96,34 +72,7 @@ describe('/account/connect/remove-company-representative', () => {
 
   describe('RemoveCompanyRepresentative#POST', () => {
     it('should remove company representative (screenshots)', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      await TestHelper.createCompanyRepresentative(user, {
-        address_city: 'Berlin',
-        address_country: 'DE',
-        address_line1: '123 Sesame St',
-        address_postal_code: '01067',
-        address_state: 'BE',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: user.profile.contactEmail,
-        first_name: user.profile.firstName,
-        last_name: user.profile.lastName,
-        phone: '456-789-0123',
-        relationship_executive: 'true',
-        relationship_title: 'Owner'
-      }, {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      })
-      await TestHelper.updateCompanyRepresentative(user, {}, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png']
-      })
+      const user = await TestStripeAccounts.createCompanyWithRepresentative('DE')
       const req = TestHelper.createRequest(`/account/connect/remove-company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
