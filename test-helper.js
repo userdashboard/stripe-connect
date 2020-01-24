@@ -323,14 +323,18 @@ async function createExternalAccount (user, body) {
   req.account = user.account
   req.body = body
   user.stripeAccount = await req.patch()
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data && 
-           stripeEvent.data.object && 
-           stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.external_accounts &&
-           stripeEvent.data.object.external_accounts.total_count === 1
-  })
-  return user.stripeAccount.external_accounts.data[0]
+  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req2.session = user.session
+  req2.account = user.account
+  while (true) {
+    try {
+      user.stripeAccount = await req2.get()
+      if (user.stripeAccount.external_accounts.total_count === 1) {
+        return user.stripeAccount
+      }
+    } catch (error) {
+    }
+  }
 }
 
 async function createBeneficialOwner (user, body, uploads) {
@@ -412,26 +416,38 @@ async function submitBeneficialOwners (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  const stripeAccount = await req.patch()
-  user.stripeAccount = stripeAccount
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.company.owners_provided === true
-  })
-  return stripeAccount
+  user.stripeAccount = await req.patch()
+  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req2.session = user.session
+  req2.account = user.account
+  while (true) {
+    try {
+      user.stripeAccount = await req2.get()
+      if (user.stripeAccount.company.owners_provided) {
+        return user.stripeAccount
+      }
+    } catch (error) {
+    }
+  }
 }
 
 async function submitCompanyDirectors (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  const stripeAccount = await req.patch()
-  user.stripeAccount = stripeAccount
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.company.directors_provided === true
-  })
-  return user.stripeAccount
+  user.stripeAccount = await req.patch()
+  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req2.session = user.session
+  req2.account = user.account
+  while (true) {
+    try {
+      user.stripeAccount = await req2.get()
+      if (user.stripeAccount.company.directors_provided) {
+        return user.stripeAccount
+      }
+    } catch (error) {
+    }
+  }
 }
 
 async function submitStripeAccount (user) {

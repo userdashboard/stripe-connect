@@ -39,7 +39,7 @@ module.exports = {
     await TestHelper.createStripeRegistration(user, individual)
     console.log('waiting for document account requirement', JSON.stringify(user.stripeAccount, null, '  '))
     await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
-    await TestHelper.createStripeRegistration(user, {}, {
+    await TestHelper.updateStripeRegistration(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
