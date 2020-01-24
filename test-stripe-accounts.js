@@ -71,7 +71,7 @@ module.exports = {
       if (stripeEvent.data.object &&
         stripeEvent.data.object.id === user.stripeAccount.id &&
         stripeEvent.data.object.individual &&
-        stripeEvent.data.object.individual.requirements.length === 2)
+        stripeEvent.data.object.individual.requirements.length === 2) {
         return true
       }
     })
