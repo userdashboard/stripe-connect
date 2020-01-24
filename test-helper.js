@@ -469,6 +469,7 @@ async function submitStripeAccount (user) {
   user.stripeAccount = stripeAccount
   await waitForWebhook('account.updated', (stripeEvent) => {
     return stripeEvent.data.object.id === user.stripeAccount.id &&
+           stripeEvent.data.object.metadata &&
            stripeEvent.data.object.metadata.submitted
   })
   return stripeAccount
