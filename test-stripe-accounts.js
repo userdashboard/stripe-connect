@@ -4,27 +4,20 @@ const TestHelper = require('./test-helper.js')
 module.exports = {
   createSubmittedIndividual: async (country) => {
     country = country || 'US'
-    console.log('creating individual', country)
     const user = await module.exports.createIndividualReadyForSubmission(country)
-    console.log('submitting')
     await TestHelper.submitStripeAccount(user)
-    console.log('waiting for payouts to be enabled')
     await TestHelper.waitForPayoutsEnabled(user)
-    console.log('ready')
     return user
   },
   createSubmittedCompany: async (country) => {
     country = country || 'US'
-    console.log('creating company', country)
     const user = await module.exports.createCompanyReadyForSubmission(country)
-    console.log('submitting')
     await TestHelper.submitStripeAccount(user)
     // await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
     // await TestHelper.updateStripeRegistration(user, {}, {
     //   verification_document_back: TestHelper['success_id_scan_back.png'],
     //   verification_document_front: TestHelper['success_id_scan_front.png']
     // })
-    console.log('waiting for payouts to be enabled')
     await TestHelper.waitForPayoutsEnabled(user)
     return user
   },
