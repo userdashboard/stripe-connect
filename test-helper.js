@@ -335,6 +335,7 @@ async function createExternalAccount (user, body) {
       }
     } catch (error) {
     }
+    await wait()
   }
 }
 
@@ -345,6 +346,7 @@ async function createBeneficialOwner (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.owner = await req.post()
+  console.log('owner', owner)
   const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${user.owner.id}`)
   req2.session = user.session
   req2.account = user.account
@@ -355,6 +357,7 @@ async function createBeneficialOwner (user, body, uploads) {
       return user.owner
     } catch (error) {
     }
+    await wait()
   }
 }
 
@@ -378,6 +381,7 @@ async function createCompanyDirector (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.director = await req.post()
+  console.log('director', director)
   const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${user.director.id}`)
   req2.session = user.session
   req2.account = user.account
@@ -388,6 +392,7 @@ async function createCompanyDirector (user, body, uploads) {
       return user.director
     } catch (error) {
     }
+    await wait()
   }
 }
 
@@ -396,11 +401,11 @@ async function createPayout (user) {
   req.session = user.session
   req.account = user.account
   await req.get()
+  const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
+  req2.session = user.session
+  req2.account = user.account
+  req2.stripeKey = stripeKey
   while (true) {
-    const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
-    req2.session = user.session
-    req2.account = user.account
-    req2.stripeKey = stripeKey
     const payouts = await global.api.user.connect.Payouts.get(req2)
     if (!payouts || !payouts.length) {
       await wait()
@@ -433,6 +438,7 @@ async function submitBeneficialOwners (user) {
       }
     } catch (error) {
     }
+    await wait()
   }
 }
 
@@ -453,6 +459,7 @@ async function submitCompanyDirectors (user) {
       }
     } catch (error) {
     }
+    await wait()
   }
 }
 
