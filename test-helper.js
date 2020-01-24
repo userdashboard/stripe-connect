@@ -235,7 +235,7 @@ async function createStripeAccount (user, properties) {
     req2.account = user.account
     while (!user.representative) {
       try {
-        user.representative = await req2.get()
+        user.representative = await global.api.user.connect.CompanyRepresentative.get(req2)
       } catch (error) {
       }
     }
@@ -328,7 +328,7 @@ async function createExternalAccount (user, body) {
   req2.account = user.account
   while (true) {
     try {
-      user.stripeAccount = await req2.get()
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
       if (user.stripeAccount.external_accounts.total_count === 1) {
         return user.stripeAccount
       }
@@ -349,7 +349,7 @@ async function createBeneficialOwner (user, body, uploads) {
   req2.account = user.account
   while (true) {
     try {
-      user.owner = await req2.get()
+      user.owner = await global.api.user.connect.BeneficialOwner.get(req2)
       return user.owner
     } catch (error) {
     }
@@ -381,7 +381,7 @@ async function createCompanyDirector (user, body, uploads) {
   req2.account = user.account
   while (true) {
     try {
-      user.director = await req2.get()
+      user.director = await global.api.user.connect.CompanyDirector.get(req2)
       return user.director
     } catch (error) {
     }
@@ -422,7 +422,7 @@ async function submitBeneficialOwners (user) {
   req2.account = user.account
   while (true) {
     try {
-      user.stripeAccount = await req2.get()
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
       if (user.stripeAccount.company.owners_provided) {
         return user.stripeAccount
       }
@@ -441,7 +441,7 @@ async function submitCompanyDirectors (user) {
   req2.account = user.account
   while (true) {
     try {
-      user.stripeAccount = await req2.get()
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
       if (user.stripeAccount.company.directors_provided) {
         return user.stripeAccount
       }
