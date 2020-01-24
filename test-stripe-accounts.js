@@ -78,12 +78,7 @@ module.exports = {
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
-    let attempts = 0
     while (true) {
-      attempts++
-      if (attempts % 100 === 0) {
-        console.log(user.stripeAccount)
-      }
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.requirements.currently_due.length === 2) {
@@ -211,6 +206,7 @@ module.exports = {
         body.email = person.email
         body.first_name = person.firstName
         body.last_name = person.lastName
+        body.relationship_title = 'Director'
         await TestHelper.createCompanyDirector(user, body, documents)
       }
     }
