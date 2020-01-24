@@ -230,10 +230,15 @@ async function createStripeAccount (user, properties) {
   req.body = properties
   user.stripeAccount = await req.post()
   if (req.body.type === 'company') {
-    const req2 = TestHelper.createRequest(`/api/user/connect/company-representative?stripeid=${user.stripeAccount.id}`)
+    const req2 = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.stripeAccount.metadata.representative}`)
     req2.session = user.session
     req2.account = user.account
-    user.representative = await req2.get()
+    while (!user.representative) {
+      try {
+        user.representative = await req2.get()
+      } catch (error ){
+      }
+    }
   }
   return user.stripeAccount
 }
