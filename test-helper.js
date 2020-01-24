@@ -381,6 +381,7 @@ async function createCompanyDirector (user, body, uploads) {
   const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${user.director.id}`)
   req2.session = user.session
   req2.account = user.account
+  req2.stripeKey = stripeKey
   while (true) {
     try {
       user.director = await global.api.user.connect.CompanyDirector.get(req2)
@@ -399,6 +400,7 @@ async function createPayout (user) {
     const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
     req2.session = user.session
     req2.account = user.account
+    req2.stripeKey = stripeKey
     const payouts = await global.api.user.connect.Payouts.get(req2)
     if (!payouts || !payouts.length) {
       await wait()
