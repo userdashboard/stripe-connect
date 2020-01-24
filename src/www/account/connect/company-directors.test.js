@@ -68,8 +68,7 @@ describe('/account/connect/company-directors', () => {
     })
 
     it('should display submitted message with removed directors', async () => {
-      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
-      await TestHelper.submitCompanyDirectors(user)
+      const user = await TestStripeAccounts.createSubmittedCompany('DE')
       const req = TestHelper.createRequest(`/account/connect/company-directors?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
