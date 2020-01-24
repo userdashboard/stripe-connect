@@ -151,13 +151,18 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
+    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    req.session = user.session
+    req.account = user.account
+    req.stripeKey = {
+      api_key: process.env.STRIPE_KEY
+    }
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.requirements.currently_due.length === 2) {
           return user
         }
-        console.log(user.stripeAccount.requirements.currently_due.join(', '))
       } catch (error) {
       }
       await wait()

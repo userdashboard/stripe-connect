@@ -11,6 +11,14 @@ async function beforeRequest (req) {
   if (!req.query || !req.query.stripeid) {
     throw new Error('invalid-stripeid')
   }
+  if (req.query.message === 'success') {
+    req.data = {
+      stripeAccount: {
+        id: req.query.stripeid
+      }
+    }
+    return
+  }
   const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
   if (stripeAccount.payouts_enabled) {
     stripeAccount.statusMessage = 'verified'
@@ -79,7 +87,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `${req.urlPath}?message=success`
+      location: `${req.urlPath}?stripeid=${req.query.stripeid}&message=success`
     })
     return res.end()
   }
