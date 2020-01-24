@@ -137,7 +137,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_front')
       }
-    } else if (!req.body.token) {
+    } else if (!req.body.token && (requirements.currently_due.indexOf('verification.document') > -1 || requirements.eventually_due.indexOf('verification.document') > -1)) {
       throw new Error('invalid-verification_document_front')
     }
     if (req.uploads && req.uploads.verification_document_back) {
@@ -155,7 +155,7 @@ module.exports = {
       } catch (error) {
         throw new Error('invalid-verification_document_back')
       }
-    } else if (!req.body.token) {
+    } else if (!req.body.token && (requirements.currently_due.indexOf('verification.document') > -1 || requirements.eventually_due.indexOf('verification.document') > -1)) {
       throw new Error('invalid-verification_document_back')
     }
     const directorInfo = {}
