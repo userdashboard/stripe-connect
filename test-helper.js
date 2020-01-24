@@ -324,8 +324,11 @@ async function createExternalAccount (user, body) {
   req.body = body
   user.stripeAccount = await req.patch()
   await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.external_accounts.data.length
+    return stripeEvent.data && 
+           stripeEvent.data.object && 
+           stripeEvent.data.object.id === user.stripeAccount.id &&
+           stripeEvent.data.object.external_accounts &&
+           stripeEvent.data.object.external_accounts.total_count === 1
   })
   return user.stripeAccount.external_accounts.data[0]
 }
