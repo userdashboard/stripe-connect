@@ -417,10 +417,10 @@ async function submitBeneficialOwners (user) {
   req.account = user.account
   const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
-  // await waitForWebhook('account.updated', (stripeEvent) => {
-  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
-  //          stripeEvent.data.object.company.owners_provided === true
-  // })
+  await waitForWebhook('account.updated', (stripeEvent) => {
+    return stripeEvent.data.object.id === user.stripeAccount.id &&
+           stripeEvent.data.object.company.owners_provided === true
+  })
   return stripeAccount
 }
 
@@ -430,10 +430,10 @@ async function submitCompanyDirectors (user) {
   req.account = user.account
   const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
-  // await waitForWebhook('account.updated', (stripeEvent) => {
-  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
-  //          stripeEvent.data.object.company.directors_provided === true
-  // })
+  await waitForWebhook('account.updated', (stripeEvent) => {
+    return stripeEvent.data.object.id === user.stripeAccount.id &&
+           stripeEvent.data.object.company.directors_provided === true
+  })
   return user.stripeAccount
 }
 
@@ -443,10 +443,10 @@ async function submitStripeAccount (user) {
   req.account = user.account
   const stripeAccount = await req.patch()
   user.stripeAccount = stripeAccount
-  // await waitForWebhook('account.updated', (stripeEvent) => {
-  //   return stripeEvent.data.object.id === user.stripeAccount.id &&
-  //          stripeEvent.data.object.metadata.submitted
-  // })
+  await waitForWebhook('account.updated', (stripeEvent) => {
+    return stripeEvent.data.object.id === user.stripeAccount.id &&
+           stripeEvent.data.object.metadata.submitted
+  })
   return stripeAccount
 }
 
