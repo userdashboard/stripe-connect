@@ -340,19 +340,16 @@ async function createBeneficialOwner (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.owner = await req.post()
-  // await waitForWebhook('account.updated', (stripeEvent) => {
-  //   if (stripeEvent.data &&
-  //       stripeEvent.data.object &&
-  //       stripeEvent.data.object.id === user.stripeAccount.id &&
-  //       stripeEvent.data.object.requirements) {
-  //     for (const requirement of stripeEvent.data.object.requirements.currently_due) {
-  //       if (requirement.startsWith(user.owner.id)) {
-  //         return true
-  //       }
-  //     }
-  //   }
-  // })
-  return user.owner
+  const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${user.owner.id}`)
+  req2.session = user.session
+  req2.account = user.account
+  while (true) {
+    try {
+      user.owner = await req2.get()
+      return user.owner
+    } catch (error) {
+    }
+  }
 }
 
 async function updateBeneficialOwner (user, body, uploads) {
@@ -375,19 +372,16 @@ async function createCompanyDirector (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.director = await req.post()
-  // await waitForWebhook('account.updated', (stripeEvent) => {
-  //   if (stripeEvent.data &&
-  //       stripeEvent.data.object &&
-  //       stripeEvent.data.object.id === user.stripeAccount.id &&
-  //       stripeEvent.data.object.requirements) {
-  //     for (const requirement of stripeEvent.data.object.requirements.currently_due) {
-  //       if (requirement.startsWith(user.director.id)) {
-  //         return true
-  //       }
-  //     }
-  //   }
-  // })
-  return user.director
+  const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${user.owner.id}`)
+  req2.session = user.session
+  req2.account = user.account
+  while (true) {
+    try {
+      user.director = await req2.get()
+      return user.director
+    } catch (error) {
+    }
+  }
 }
 
 async function createPayout (user) {
