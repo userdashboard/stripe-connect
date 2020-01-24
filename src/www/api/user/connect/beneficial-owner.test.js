@@ -37,7 +37,7 @@ describe('/api/user/connect/beneficial-owner', () => {
 
     describe('invalid-account', () => {
       it('ineligible accessing account', async () => {
-        const user = await TestStripeAccounts.createCompanyWithOwner('DE', 1)
+        const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${user.owner.id}`)
         req.account = user2.account
@@ -55,7 +55,7 @@ describe('/api/user/connect/beneficial-owner', () => {
 
   describe('returns', () => {
     it('object', async () => {
-      const user = await TestStripeAccounts.createCompanyWithOwner('DE', 1)
+      const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
       const req = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session

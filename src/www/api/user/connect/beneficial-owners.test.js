@@ -83,7 +83,7 @@ describe('/api/user/connect/beneficial-owners', () => {
 
   describe('returns', () => {
     it('array', async () => {
-      const user = await TestStripeAccounts.createCompanyWithOwner('DE', 2)
+      const user = await TestStripeAccounts.createCompanyWithOwners('DE', 2)
       const req = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
