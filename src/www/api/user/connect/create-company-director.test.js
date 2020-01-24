@@ -244,72 +244,6 @@ describe('/api/user/connect/create-company-director', () => {
         assert.strictEqual(errorMessage, 'invalid-dob_year')
       })
     })
-
-    describe('invalid-verification_document_front', () => {
-      it('missing posted file verification_document_front', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png']
-        }
-        req.body = TestHelper.createMultiPart(req, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          relationship_title: 'Director'
-        })
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-verification_document_front')
-      })
-    })
-
-    describe('invalid-verification_document_back', () => {
-      it('missing posted file verification_document_back', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const person = TestHelper.nextIdentity()
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          relationship_title: 'Director'
-        })
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-verification_document_back')
-      })
-    })
   })
 
   describe('receives', () => {
@@ -502,7 +436,7 @@ describe('/api/user/connect/create-company-director', () => {
       assert.strictEqual(director.dob.year, 1950)
     })
 
-    it('required posted file verification_document_front', async () => {
+    it('optionally-required posted file verification_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
@@ -530,7 +464,7 @@ describe('/api/user/connect/create-company-director', () => {
       assert.notStrictEqual(director.verification.document.front, undefined)
     })
 
-    it('required posted file verification_document_back', async () => {
+    it('optionally-required posted file verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
