@@ -10,8 +10,22 @@ module.exports = {
     country = country || 'US'
     const user = await module.exports.createIndividualReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
-    await TestHelper.waitForPayoutsEnabled(user)
-    return user
+    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    req.session = user.session
+    req.account = user.account
+    req.stripeKey = {
+      api_key: process.env.STRIPE_KEY
+    }
+    while (true) {
+      try {
+        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+        if (user.stripeAccount.payouts_enabled && user.stripeAccount.individual.verification.status === 'verified') {
+          return user
+        }
+      } catch (error) {
+      }
+      await wait()
+    }
   },
   createSubmittedCompany: async (country) => {
     country = country || 'US'
@@ -42,7 +56,6 @@ module.exports = {
       individual[field] = individualData[country][field]
     }
     await TestHelper.createStripeRegistration(user, individual)
-    console.log('waiting for document account requirement', JSON.stringify(user.stripeAccount, null, '  '))
     await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
     await TestHelper.updateStripeRegistration(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
@@ -64,14 +77,12 @@ module.exports = {
     }
     await TestHelper.createExternalAccount(user, payment)
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-      console.log('waiting for additional_document account requirement', JSON.stringify(user.stripeAccount, null, '  '))
       await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
       await TestHelper.updateStripeRegistration(user, {}, {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
     }
-    console.log('waiting for verified status')
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
