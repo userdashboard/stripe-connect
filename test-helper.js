@@ -372,7 +372,7 @@ async function createCompanyDirector (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.director = await req.post()
-  const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${user.owner.id}`)
+  const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${user.director.id}`)
   req2.session = user.session
   req2.account = user.account
   while (true) {
