@@ -1,4 +1,9 @@
 const TestHelper = require('./test-helper.js')
+const util = require('util')
+
+const wait = util.promisify((callback) => {
+  return setTimeout(callback, 100)
+})
 
 module.exports = {
   createSubmittedIndividual: async (country) => {
@@ -73,15 +78,23 @@ module.exports = {
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
+    let attempts = 0
     while (true) {
+      attempts++
+      if (attempts % 100 === 0) {
+        console.log(user.stripeAccount)
+      }
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.individual.requirements.currently_due.length === 2) {
           return user
         }
-        console.log(user.stripeAccount.individual.requirements.currently_due.join(', '))
+        if (user.stripeAccount.individual.requirements.currently_due.length) {
+          console.log(user.stripeAccount.individual.requirements.currently_due.join(', '))
+        }
       } catch (error) {
       }
+      await wait()
     }
   },
   createCompanyReadyForSubmission: async (country) => {
