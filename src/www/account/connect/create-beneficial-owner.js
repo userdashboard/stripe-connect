@@ -116,9 +116,6 @@ async function submitForm (req, res) {
     delete (req.body.address_country)
     return renderPage(req, res, 'invalid-address_country')
   }
-  if (!req.body.address_state) {
-    return renderPage(req, res, 'invalid-address_state')
-  }
   if (req.body.address_state) {
     const states = connect.countryDivisions[req.body.address_country || req.data.stripeAccount.country]
     let found

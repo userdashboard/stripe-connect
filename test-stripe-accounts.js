@@ -1503,21 +1503,20 @@ const individualData = module.exports.individualData = {
 
 const beneficialOwnerData = module.exports.beneficialOwnerData = {
   AT: {
-    address_city: 'Berlin',
-    address_country: 'DE',
-    address_line1: 'First Street',
-    address_postal_code: '01067',
+    address_city: 'Vienna',
+    address_line1: '123 Park Lane',
+    address_postal_code: '1020',
+    address_state: '1',
     address_state: 'BW',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
   },
   AU: {
-    address_city: 'Berlin',
-    address_country: 'DE',
-    address_line1: 'First Street',
-    address_postal_code: '01067',
-    address_state: 'BW',
+    address_city: 'Brisbane',
+    address_line1: '123 Park Lane',
+    address_postal_code: '4000',
+    address_state: 'QLD',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
@@ -1790,21 +1789,20 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
 
 const companyDirectorData = module.exports.companyDirectorData = {
   AT: {
-    address_city: 'Berlin',
-    address_country: 'DE',
-    address_line1: 'First Street',
-    address_postal_code: '01067',
+    address_city: 'Vienna',
+    address_line1: '123 Park Lane',
+    address_postal_code: '1020',
+    address_state: '1',
     address_state: 'BW',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
   },
   AU: {
-    address_city: 'Berlin',
-    address_country: 'DE',
-    address_line1: 'First Street',
-    address_postal_code: '01067',
-    address_state: 'BW',
+    address_city: 'Brisbane',
+    address_line1: '123 Park Lane',
+    address_postal_code: '4000',
+    address_state: 'QLD',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
