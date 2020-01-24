@@ -231,6 +231,7 @@ async function createStripeAccount (user, properties) {
   user.stripeAccount = await req.post()
   if (req.body.type === 'company') {
     const req2 = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.stripeAccount.metadata.representative}`)
+    req2.stripeKey = stripeKey
     req2.session = user.session
     req2.account = user.account
     while (!user.representative) {
@@ -269,8 +270,7 @@ async function createCompanyRepresentative (user, properties, uploads) {
   req.account = user.account
   req.uploads = uploads || {}
   req.body = createMultiPart(req, properties)
-  const representative = await req.post()
-  user.representative = representative
+  user.representative = await req.post()
   return user.stripeAccount
 }
 
@@ -326,6 +326,7 @@ async function createExternalAccount (user, body) {
   const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req2.session = user.session
   req2.account = user.account
+  req2.stripeKey = stripeKey
   while (true) {
     try {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
@@ -347,6 +348,7 @@ async function createBeneficialOwner (user, body, uploads) {
   const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${user.owner.id}`)
   req2.session = user.session
   req2.account = user.account
+  req2.stripeKey = stripeKey
   while (true) {
     try {
       user.owner = await global.api.user.connect.BeneficialOwner.get(req2)
@@ -420,6 +422,7 @@ async function submitBeneficialOwners (user) {
   const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req2.session = user.session
   req2.account = user.account
+  req2.stripeKey = stripeKey
   while (true) {
     try {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
@@ -439,6 +442,7 @@ async function submitCompanyDirectors (user) {
   const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req2.session = user.session
   req2.account = user.account
+  req2.stripeKey = stripeKey
   while (true) {
     try {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
