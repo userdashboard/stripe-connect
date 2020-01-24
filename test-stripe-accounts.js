@@ -86,11 +86,8 @@ module.exports = {
       }
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.individual.requirements.currently_due.length === 2) {
+        if (user.stripeAccount.requirements.currently_due.length === 2) {
           return user
-        }
-        if (user.stripeAccount.individual.requirements.currently_due.length) {
-          console.log(user.stripeAccount.individual.requirements.currently_due.join(', '))
         }
       } catch (error) {
       }
