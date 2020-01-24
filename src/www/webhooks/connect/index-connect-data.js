@@ -39,7 +39,6 @@ module.exports = {
     if (global.testNumber) {
       global.webhooks.unshift(stripeEvent)
     }
-    console.log('connect webhook', stripeEvent.type, req.bodyRaw)
     if (supportedWebhooks[stripeEvent.type]) {
       try {
         await supportedWebhooks[stripeEvent.type](stripeEvent, req)

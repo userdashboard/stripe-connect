@@ -346,7 +346,6 @@ async function createBeneficialOwner (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.owner = await req.post()
-  console.log('owner', user.owner)
   const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${user.owner.id}`)
   req2.session = user.session
   req2.account = user.account
@@ -381,7 +380,6 @@ async function createCompanyDirector (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.director = await req.post()
-  console.log('director', user.director)
   const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${user.director.id}`)
   req2.session = user.session
   req2.account = user.account
