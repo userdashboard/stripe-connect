@@ -79,6 +79,7 @@ module.exports = {
         if (user.stripeAccount.individual.requirements.currently_due.length === 2) {
           return user
         }
+        console.log(user.stripeAccount.individual.requirements.currently_due.join(', '))
       } catch (error) {
       }
     }

@@ -68,9 +68,7 @@ describe('/account/connect/beneficial-owners', () => {
     })
 
     it('should display submitted message with removed owners', async () => {
-      const user = await TestStripeAccounts.createCompanyWithOwners('GB', 1)
-      await TestHelper.submitBeneficialOwners(user)
-      console.log(user.stripeAccount)
+      const user = await TestStripeAccounts.createSubmittedCompany('GB', 1)
       const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
