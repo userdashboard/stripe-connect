@@ -13,7 +13,7 @@ module.exports = {
       throw new Error('invalid-stripeid')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    console.log(JSON.parse(stripeAccount, null, '  '))
+    console.log(JSON.stringify(stripeAccount, null, '  '))
     if (stripeAccount.metadata.submitted ||
       stripeAccount.business_type !== 'individual' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
