@@ -268,9 +268,6 @@ async function createStripeRegistration (user, properties, uploads) {
   req.uploads = uploads || {}
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id
-  })
   return user.stripeAccount
 }
 
@@ -281,9 +278,6 @@ async function updateStripeRegistration (user, properties, uploads) {
   req.uploads = uploads || []
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()
-  // await waitForWebhook('account.updated', (stripeEvent) => {
-  //   return stripeEvent.data.object.id === user.stripeAccount.id
-  // })
   return user.stripeAccount
 }
 
