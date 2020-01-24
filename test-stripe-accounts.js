@@ -66,13 +66,12 @@ module.exports = {
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
     }
+    console.log('waiting for verified status')
     await TestHelper.waitForWebhook('account.updated', stripeEvent => {
       if (stripeEvent.data.object &&
         stripeEvent.data.object.id === user.stripeAccount.id &&
         stripeEvent.data.object.individual &&
-        stripeEvent.data.object.individual.verification &&
-        stripeEvent.data.object.individual.verification.status === 'verified') {
-        user.stripeAccount = stripeEvent.data.object
+        stripeEvent.data.object.individual.requirements.length === 2)
         return true
       }
     })
