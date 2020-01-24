@@ -67,15 +67,18 @@ module.exports = {
       })
     }
     console.log('waiting for verified status')
-    await TestHelper.waitForWebhook('account.updated', stripeEvent => {
-      if (stripeEvent.data.object &&
-        stripeEvent.data.object.id === user.stripeAccount.id &&
-        stripeEvent.data.object.individual &&
-        stripeEvent.data.object.individual.requirements.length === 2) {
-        return true
+    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    req.session = user.session
+    req.account = user.account
+    while (true) {
+      try {
+        user.stripeAccount = await req.get()
+        if (user.stripeAccount.individualData.requirements.currently_due.length === 2) {
+          return user
+        }
+      } catch (error) {
       }
-    })
-    return user
+    }
   },
   createCompanyReadyForSubmission: async (country) => {
     country = country || 'US'
