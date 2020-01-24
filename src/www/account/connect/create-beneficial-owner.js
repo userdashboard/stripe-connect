@@ -119,16 +119,18 @@ async function submitForm (req, res) {
   if (!req.body.address_state) {
     return renderPage(req, res, 'invalid-address_state')
   }
-  const states = connect.countryDivisions[req.body.address_country]
-  let found
-  for (const state of states) {
-    found = state.value === req.body.address_state
-    if (found) {
-      break
+  if (req.body.address_state) {
+    const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+    let found
+    for (const state of states) {
+      found = state.value === req.body.address_state
+      if (found) {
+        break
+      }
     }
-  }
-  if (!found) {
-    return renderPage(req, res, 'invalid-address_state')
+    if (!found) {
+      return renderPage(req, res, 'invalid-address_state')
+    }
   }
   if (req.data && req.data.owners && req.data.owners.length) {
     for (const owner of req.data.owners) {
