@@ -288,9 +288,6 @@ async function createCompanyRepresentative (user, properties, uploads) {
   req.uploads = uploads || {}
   req.body = createMultiPart(req, properties)
   const representative = await req.post()
-  await waitForWebhook('person.created', (stripeEvent) => {
-    return stripeEvent.data.object.id === representative.id
-  })
   user.representative = representative
   return user.stripeAccount
 }
