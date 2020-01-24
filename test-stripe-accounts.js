@@ -36,6 +36,8 @@ module.exports = {
     for (const field in individualData[country]) {
       individual[field] = individualData[country][field]
     }
+    console.log('waiting for document account requirement', JSON.stringify(user.stripeAccount, null, '  '))
+    await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
     await TestHelper.createStripeRegistration(user, individual, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
@@ -56,6 +58,7 @@ module.exports = {
     }
     await TestHelper.createExternalAccount(user, payment)
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+      console.log('waiting for additional_document account requirement', JSON.stringify(user.stripeAccount, null, '  '))
       await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
       await TestHelper.updateStripeRegistration(user, {}, {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
@@ -162,7 +165,6 @@ module.exports = {
         body.email = person.email
         body.first_name = person.firstName
         body.last_name = person.lastName
-
         await TestHelper.createBeneficialOwner(user, body, documents)
       }
     }
