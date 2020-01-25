@@ -10,7 +10,23 @@ module.exports = {
     country = country || 'US'
     const user = await module.exports.createIndividualReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
-    await TestHelper.waitForPayoutsEnabled(user)
+    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    req.session = user.session
+    req.account = user.account
+    req.stripeKey = {
+      api_key: process.env.STRIPE_KEY
+    }
+    while (true) {
+      try {
+        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+        if (user.stripeAccount.requirements.pending_verification.length === 0) {
+          await TestHelper.waitForPayoutsEnabled(user)
+          return user
+        }
+      } catch (error) {
+      }
+      await wait()
+    }
   },
   createSubmittedCompany: async (country) => {
     country = country || 'US'
@@ -189,7 +205,6 @@ module.exports = {
         body.first_name = person.firstName
         body.last_name = person.lastName
         await TestHelper.createBeneficialOwner(user, body, documents)
-        console.log('created owner', user.owner)
       }
     }
     return user
@@ -220,7 +235,6 @@ module.exports = {
         body.last_name = person.lastName
         body.relationship_title = 'Director'
         await TestHelper.createCompanyDirector(user, body, documents)
-        console.log('created director', user.director)
       }
     }
     return user
