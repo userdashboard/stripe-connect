@@ -180,7 +180,7 @@ before(async () => {
   }
   const webhook = await stripe.webhookEndpoints.create({
     connect: true,
-    url: `${tunnel}/webhooks/connect/index-connect-data`,
+    url: `${tunnel || process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
     enabled_events: eventList
   }, stripeKey)
   global.connectWebhookEndPointSecret = webhook.secret
@@ -505,7 +505,7 @@ async function waitForPayoutsEnabled (user, callback) {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.payouts_enabled) {
-      console.log('waiting for payouts', JSON.parse(stripeAccount, null, '  '))
+      console.log('waiting for payouts', JSON.stringify(stripeAccount, null, '  '))
       return setTimeout(wait, 100)
     }
     return setTimeout(() => {
