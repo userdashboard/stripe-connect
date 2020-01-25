@@ -505,7 +505,6 @@ async function waitForPayoutsEnabled (user, callback) {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.payouts_enabled) {
-      console.log('waiting for payouts', JSON.stringify(stripeAccount, null, '  '))
       return setTimeout(wait, 100)
     }
     return setTimeout(() => {

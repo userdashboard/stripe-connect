@@ -38,11 +38,9 @@ module.exports = {
         date: dashboard.Timestamp.now
       }
     }
-    console.log('submitting', accountInfo)
     while (true) {
       try {
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        console.log('submitted', JSON.stringify(stripeAccountNow, null, '  '))
         await stripeCache.update(stripeAccountNow)
         return stripeAccountNow
       } catch (error) {

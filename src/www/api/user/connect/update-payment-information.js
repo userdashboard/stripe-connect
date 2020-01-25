@@ -178,7 +178,6 @@ module.exports = {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, stripeData, req.stripeKey)
         if (!accountNow.external_accounts || !accountNow.external_accounts.data || !accountNow.external_accounts.data.length) {
-          console.log('no exeternal account created', JSON.stringify(accountNow, null, '  '))
           continue
         }
         const bankAccount = accountNow.external_accounts.data[0]

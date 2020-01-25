@@ -10,16 +10,13 @@ module.exports = {
     api: {
       get: async (req) => {
         if (process.env.NODE_ENV !== 'testing') {
-          console.log('fake payout failed', 'invalid-route')
           throw new Error('invalid-route')
         }
         if (!req.query || !req.query.stripeid) {
-          console.log('fake payout failed', 'invalid-stripeid')
           throw new Error('invalid-stripeid')
         }
         const stripeAccount = await stripe.accounts.retrieve(req.query.stripeid, req.stripeKey)
         if (!stripeAccount.payouts_enabled) {
-          console.log('fake payout failed', 'invalid-stripe-account', JSON.stringify(stripeAccount, null, '  '))
           throw new Error('invalid-stripe-account')
         }
         req.stripeKey.stripe_account = req.query.stripeid
@@ -41,7 +38,6 @@ module.exports = {
           }
         }
         const payout = await stripe.payouts.create(payoutInfo, req.stripeKey)
-        console.log('created payout', payout)
         return payout
       }
     }
