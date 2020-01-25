@@ -466,30 +466,7 @@ async function submitStripeAccount (user) {
   req.session = user.session
   req.account = user.account
   user.stripeAccount = await req.patch()
-  if (!user.stripeAccount.metadata.submitted) {
-    throw new Error('submission failed')
-  }
-  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-  req2.session = user.session
-  req2.account = user.account
-  req2.stripeKey = stripeKey
-  while (true) {
-    try {
-      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
-    } catch (error) {
-    }
-    if (!user.stripeAccount.payouts_enabled) {
-      await wait()
-      continue
-    }
-    if (user.stripeAccount.business_type === 'company') {
-      return user.stripeAccount
-    }
-    if (user.stripeAccount.business_type === 'individual' && user.stripeAccount.individual.verification.status === 'verified') {
-      return user.stripeAccount
-    }
-    await wait()
-  }
+  return user.stripeAccount
 }
 
 async function waitForPayout (administrator, stripeid, previousid, callback) {
