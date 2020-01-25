@@ -159,8 +159,6 @@ before(async () => {
         if (!tunnel) {
           continue
         }
-        global.dashboardServer = tunnel.replace('https://', 'http://')
-        global.domain = tunnel.split('://')[1]
       } catch (error) {
         continue
       }
@@ -182,7 +180,7 @@ before(async () => {
   }
   const webhook = await stripe.webhookEndpoints.create({
     connect: true,
-    url: `${global.dashboardServer}/webhooks/connect/index-connect-data`,
+    url: `${tunnel}/webhooks/connect/index-connect-data`,
     enabled_events: eventList
   }, stripeKey)
   global.connectWebhookEndPointSecret = webhook.secret
