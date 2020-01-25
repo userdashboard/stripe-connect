@@ -11,11 +11,7 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
    const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
-    if (!directorids || !directorids.length) {
-      return null
-    }
-    const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
-    if (directorids.indexOf(req.query.personid) === -1) {
+    if (!directorids || !directorids.length || directorids.indexOf(req.query.personid) === -1) {
       throw new Error('invalid-personid')
     }
     if (!directorids || !directorids.length) {
