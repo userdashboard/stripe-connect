@@ -477,21 +477,17 @@ async function submitStripeAccount (user) {
   while (true) {
     try {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
-      if (user.stripeAccount.business_type === 'company') {
-        console.log(user.stripeAccount.payouts_enabled, user.stripeAccount.company.verification.status)
-      } else {
-        console.log(user.stripeAccount.payouts_enabled, user.stripeAccount.individual.verification.status)
-      }
-      if (user.stripeAccount.business_type === 'company' && user.stripeAccount.company.verification.status !== 'verified') {
-        continue
-      }
-      if (user.stripeAccount.business_type === 'individual' && user.stripeAccount.individual.verification.status !== 'verified') {
-        continue
-      }
-      if (user.stripeAccount.payouts_enabled) {
-        return user.stripeAccount
-      }
     } catch (error) {
+    }
+    if (!user.stripeAccount.payouts_enabled) {
+      await wait()
+      continue
+    }
+    if (user.stripeAccount.business_type === 'company' && user.stripeAccount.company.verification.status === 'verified') {
+      return user.stripeAccount
+    }
+    if (user.stripeAccount.business_type === 'individual' && user.stripeAccount.individual.verification.status === 'verified') {
+      return user.stripeAccount
     }
     await wait()
   }
