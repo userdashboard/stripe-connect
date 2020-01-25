@@ -466,10 +466,20 @@ async function submitStripeAccount (user) {
   req.session = user.session
   req.account = user.account
   user.stripeAccount = await req.patch()
+  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req2.session = user.session
+  req2.account = user.account
+  req2.stripeKey = stripeKey
   while (true) {
     try {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
-      if (user.stripeAccount.metadata.submitted) {
+      if (user.stripeAccount.business_type === 'company' && user.stripeAccount.company.verification.status !== 'verified') {
+        return
+      }
+      if (user.stripeAccount.business_type === 'individual' && user.stripeAccount.individual.verification.status !== 'verified') {
+        return
+      }
+      if (user.stripeAccount.payouts_enabled) {
         return user.stripeAccount
       }
     } catch (error) {
