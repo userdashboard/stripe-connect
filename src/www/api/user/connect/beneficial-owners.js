@@ -13,7 +13,7 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
     const ownerids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/owners/${req.query.stripeid}`)
-    if (ownerids || !ownerids.length) {
+    if (!ownerids || !ownerids.length) {
       return null
     }
     const owners = []
