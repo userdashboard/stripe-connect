@@ -341,48 +341,11 @@ module.exports = {
         ownerInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
-    let owner
     while (true) {
       try {
-        owner = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
+        const owner = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
         await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${owner.id}`, req.query.stripeid)
-        break
-      } catch (error) {
-        if (error.raw && error.raw.code === 'lock_timeout') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'rate_limit') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'account_invalid') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'resource_missing') {
-          continue
-        }
-        if (error.type === 'StripeConnectionError') {
-          continue
-        }
-        if (error.type === 'StripeAPIError') {
-          continue
-        }
-        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-      }
-    }
-    const owners = JSON.parse(stripeAccount.metadata.owners || '[]')
-    owners.unshift(owner.id)
-    const accountInfo = {
-      metadata: {
-        owners: JSON.stringify(owners)
-      }
-    }
-    while (true) {
-      try {
-        const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        await stripeCache.update(accountNow)
+        await dashboard.StorageList.add(`${req.appid}/stripeAccount/owners/${req.query.stripeid}`, owner.id)
         return owner
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

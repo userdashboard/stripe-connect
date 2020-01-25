@@ -10,10 +10,10 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    if (!stripeAccount.metadata.owners || stripeAccount.metadata.owners === '[]') {
+    const ownerids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/owners/${req.query.stripeid}`)
+    if (!ownerids) {
       return 0
     }
-    const owners = JSON.parse(stripeAccount.metadata.owners)
-    return owners ? owners.length : 0
+    return ownerids.length
   }
 }

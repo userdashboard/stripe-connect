@@ -21,11 +21,8 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    if (!stripeAccount.metadata.owners || stripeAccount.metadata.owners === '[]') {
-      throw new Error('invalid-personid')
-    }
-    const owners = JSON.parse(stripeAccount.metadata.owners)
-    if (owners.indexOf(req.query.personid) === -1) {
+    const ownerids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/owners/${req.query.stripeid}`)
+    if (!ownerids || !ownerids.length || ownerids.indexOf(req.query.personid) === -1) {
       throw new Error('invalid-personid')
     }
     let person

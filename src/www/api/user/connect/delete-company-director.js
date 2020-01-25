@@ -16,30 +16,18 @@ module.exports = {
     const director = await global.api.user.connect.CompanyDirector.get(req)
     req.query.stripeid = director.account
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (!stripeAccount || stripeAccount.business_type !== 'company') {
+    if (!stripeAccount) {
       throw new Error('invalid-personid')
     }
     if (stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')
     }
-    const directors = await global.api.user.connect.CompanyDirectors.get(req)
-    for (const i in directors) {
-      if (directors[i].id !== req.query.personid) {
-        continue
-      }
-      directors.splice(i, 1)
-      break
-    }
-    const accountInfo = {
-      metadata: {
-      }
-    }
-    connect.MetaData.store(accountInfo.metadata, 'directors', directors)
     while (true) {
       try {
-        const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
-        await stripeCache.update(accountNow)
+        await stripeCache.delete(req.query.personid)
+        await stripe.accounts.deletePerson(stripeAccount.id, req.query.personid, req.stripeKey)
         await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
+        await dashboard.StorageList.remove(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`, req.query.personid)
         return true
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

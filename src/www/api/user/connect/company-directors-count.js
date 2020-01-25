@@ -16,10 +16,10 @@ module.exports = {
     if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
       throw new Error('invalid-stripe-account')
     }
-    if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
-      return null
+    const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
+    if (!directorids || !directorids.length) {
+      return 0
     }
-    const directors = JSON.parse(stripeAccount.metadata.directors)
-    return directors ? directors.length : 0
+    return directorids.length
   }
 }

@@ -10,15 +10,19 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
+   const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
+    if (!directorids || !directorids.length) {
       return null
     }
-    const ids = JSON.parse(stripeAccount.metadata.directors)
-    if (!ids || !ids.length) {
+    const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
+    if (directorids.indexOf(req.query.personid) === -1) {
+      throw new Error('invalid-personid')
+    }
+    if (!directorids || !directorids.length) {
       return null
     }
     const directors = []
-    for (const id of ids) {
+    for (const id of directorids) {
       req.query.personid = id
       const person = await global.api.user.connect.CompanyDirector.get(req)
       directors.push(person)

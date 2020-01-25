@@ -18,11 +18,8 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    if (!stripeAccount.metadata.directors || stripeAccount.metadata.directors === '[]') {
-      throw new Error('invalid-personid')
-    }
-    const directors = JSON.parse(stripeAccount.metadata.directors)
-    if (directors.indexOf(req.query.personid) === -1) {
+    const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
+    if (directorids.indexOf(req.query.personid) === -1) {
       throw new Error('invalid-personid')
     }
     while (true) {

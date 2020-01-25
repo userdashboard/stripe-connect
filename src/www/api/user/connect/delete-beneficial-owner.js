@@ -16,33 +16,18 @@ module.exports = {
     const owner = await global.api.user.connect.BeneficialOwner.get(req)
     req.query.stripeid = owner.account
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (!stripeAccount || stripeAccount.business_type !== 'company') {
+    if (!stripeAccount) {
       throw new Error('invalid-stripe-account')
     }
     if (stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')
     }
-    if (!stripeAccount.metadata.owners || stripeAccount.metadata.owners === '[]') {
-      throw new Error('invalid-personid')
-    }
-    const owners = JSON.parse(stripeAccount.metadata.owners)
-    for (const i in owners) {
-      if (owners[i] !== req.query.personid) {
-        continue
-      }
-      owners.splice(i, 1)
-      break
-    }
-    const accountInfo = {
-      metadata: {
-      }
-    }
-    connect.MetaData.store(accountInfo.metadata, 'owners', owners)
     while (true) {
       try {
-        const accountNow = await stripe.accounts.update(stripeAccount.id, accountInfo, req.stripeKey)
-        await stripeCache.update(accountNow)
+        await stripeCache.delete(req.query.personid)
+        await stripe.accounts.deletePerson(stripeAccount.id, req.query.personid, req.stripeKey)
         await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
+        await dashboard.StorageList.remove(`${req.appid}/stripeAccount/owners/${req.query.stripeid}`, req.query.personid)
         return true
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
