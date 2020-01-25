@@ -204,6 +204,7 @@ module.exports = {
         body.first_name = person.firstName
         body.last_name = person.lastName
         await TestHelper.createBeneficialOwner(user, body, documents)
+        console.log('created owner', user.owner)
       }
     }
     return user
@@ -228,12 +229,13 @@ module.exports = {
       }
       for (let i = 0, len = numDirectors; i < len; i++) {
         const person = TestHelper.nextIdentity()
-        const body = JSON.parse(JSON.stringify(beneficialOwnerData[country]))
+        const body = JSON.parse(JSON.stringify(companyDirectorData[country]))
         body.email = person.email
         body.first_name = person.firstName
         body.last_name = person.lastName
         body.relationship_title = 'Director'
         await TestHelper.createCompanyDirector(user, body, documents)
+        console.log('created director', user.director)
       }
     }
     return user
