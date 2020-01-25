@@ -9,27 +9,8 @@ module.exports = {
   createSubmittedIndividual: async (country) => {
     country = country || 'US'
     const user = await module.exports.createIndividualReadyForSubmission(country)
-    console.log('submitting account')
     await TestHelper.submitStripeAccount(user)
-    console.log('waiting for account validation')
-    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-    req.session = user.session
-    req.account = user.account
-    req.stripeKey = {
-      api_key: process.env.STRIPE_KEY
-    }
-    console.log('waiting', user.stripeAccount.individual)
-    while (true) {
-      try {
-        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        console.log('waiting for true/verified', user.stripeAccount.payouts_enabled, user.stripeAccount.individual.verification.status)
-        if (user.stripeAccount.payouts_enabled && user.stripeAccount.individual.verification.status === 'verified') {
-          return user
-        }
-      } catch (error) {
-      }
-      await wait()
-    }
+    await TestHelper.waitForPayoutsEnabled(user)
   },
   createSubmittedCompany: async (country) => {
     country = country || 'US'
@@ -1723,7 +1704,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'C',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    id_number: '000000000'
   },
   NL: {
     address_city: 'Amsterdam',
