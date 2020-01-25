@@ -1,3 +1,5 @@
+const dashboard = require('@userdashboard/dashboard')
+
 module.exports = {
   get: async (req) => {
     if (!req.query || !req.query.stripeid) {
@@ -10,7 +12,7 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-   const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
+    const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
     if (!directorids || !directorids.length || directorids.indexOf(req.query.personid) === -1) {
       throw new Error('invalid-personid')
     }

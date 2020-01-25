@@ -316,6 +316,7 @@ module.exports = {
     while (true) {
       try {
         const director = await stripe.accounts.createPerson(req.query.stripeid, directorInfo, req.stripeKey)
+        await stripeCache.update(director)
         await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${director.id}`, req.query.stripeid)
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`, director.id)
         return director

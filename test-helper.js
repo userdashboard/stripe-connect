@@ -465,7 +465,7 @@ async function submitStripeAccount (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-${user.stripeAccount.business_type}-registration-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  user.stripeAccount = await req.patch() 
+  user.stripeAccount = await req.patch()
   if (!user.stripeAccount.metadata.submitted) {
     throw new Error('submission failed')
   }
@@ -484,12 +484,12 @@ async function submitStripeAccount (user) {
     }
     if (user.stripeAccount.business_type === 'company') {
       return user.stripeAccount
-    } 
+    }
     if (user.stripeAccount.business_type === 'individual' && user.stripeAccount.individual.verification.status === 'verified') {
       return user.stripeAccount
     }
     await wait()
-  } 
+  }
 }
 
 async function waitForPayout (administrator, stripeid, previousid, callback) {

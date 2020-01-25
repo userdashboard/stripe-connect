@@ -1545,7 +1545,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_line1: '123 Park Lane',
     address_postal_code: '1020',
     address_state: '1',
-    address_state: 'BW',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'

@@ -21,7 +21,7 @@ module.exports = {
         }
         const stripeAccount = await stripe.accounts.retrieve(req.query.stripeid, req.stripeKey)
         if (!stripeAccount.payouts_enabled) {
-          console.log('fake payout failed', 'invalid-stripe-account', JSON.stringify(stirpeAccount, null, '  '))
+          console.log('fake payout failed', 'invalid-stripe-account', JSON.stringify(stripeAccount, null, '  '))
           throw new Error('invalid-stripe-account')
         }
         req.stripeKey.stripe_account = req.query.stripeid

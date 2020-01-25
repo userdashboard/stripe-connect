@@ -344,6 +344,7 @@ module.exports = {
     while (true) {
       try {
         const owner = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
+        await stripeCache.update(owner)
         await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${owner.id}`, req.query.stripeid)
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/owners/${req.query.stripeid}`, owner.id)
         return owner
