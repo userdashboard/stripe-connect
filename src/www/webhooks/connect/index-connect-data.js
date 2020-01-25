@@ -35,7 +35,6 @@ module.exports = {
     if (!stripeEvent) {
       return res.end()
     }
-    res.statusCode = 200
     if (global.testNumber) {
       global.webhooks.unshift(stripeEvent)
     }
