@@ -8,9 +8,7 @@ stripe.setTelemetryEnabled(false)
 module.exports = {
   fakePayout: {
     api: {
-      get: async (req, res) => {
-        res.statusCode = 200
-        res.end()
+      get: async (req) => {
         if (process.env.NODE_ENV !== 'testing') {
           console.log('fake payout failed', 'invalid-route')
           throw new Error('invalid-route')
