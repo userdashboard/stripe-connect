@@ -13,7 +13,6 @@ module.exports = {
       throw new Error('invalid-stripeid')
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    console.log(JSON.stringify(stripeAccount, null, '  '))
     if (stripeAccount.metadata.submitted ||
       stripeAccount.business_type !== 'individual' ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
@@ -39,9 +38,11 @@ module.exports = {
         date: dashboard.Timestamp.now
       }
     }
+    console.log('submitting', accountInfo)
     while (true) {
       try {
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        console.log('submitting', JSON.stringify(stripeAccount, null, '  '))
         await stripeCache.update(stripeAccountNow)
         return stripeAccountNow
       } catch (error) {
