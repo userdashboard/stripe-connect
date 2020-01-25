@@ -1,4 +1,10 @@
 const dashboard = require('@userdashboard/dashboard')
+const stripe = require('stripe')()
+stripe.setApiVersion(global.stripeAPIVersion)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
+stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = async (stripeEvent, req) => {

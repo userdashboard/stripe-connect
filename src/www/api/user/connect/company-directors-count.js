@@ -1,4 +1,5 @@
 const connect = require('../../../../../index.js')
+const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
   get: async (req) => {
