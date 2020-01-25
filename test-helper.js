@@ -469,7 +469,6 @@ async function submitStripeAccount (user) {
   if (!user.stripeAccount.metadata.submitted) {
     throw new Error('submission failed')
   }
-  console.log('user is submitted')
   const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req2.session = user.session
   req2.account = user.account
@@ -483,14 +482,14 @@ async function submitStripeAccount (user) {
       await wait()
       continue
     }
-    if (user.stripeAccount.business_type === 'company' && user.stripeAccount.company.verification.status === 'verified') {
+    if (user.stripeAccount.business_type === 'company') {
       return user.stripeAccount
-    }
+    } 
     if (user.stripeAccount.business_type === 'individual' && user.stripeAccount.individual.verification.status === 'verified') {
       return user.stripeAccount
     }
     await wait()
-  }
+  } 
 }
 
 async function waitForPayout (administrator, stripeid, previousid, callback) {
@@ -531,6 +530,7 @@ async function waitForPayoutsEnabled (user, callback) {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.payouts_enabled) {
+      console.log('waiting for payouts', JSON.parse(stripeAccount, null, '  '))
       return setTimeout(wait, 100)
     }
     return setTimeout(() => {

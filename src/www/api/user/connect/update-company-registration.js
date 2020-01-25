@@ -18,9 +18,7 @@ module.exports = {
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     if (!stripeAccount.requirements.currently_due.length ||
-        stripeAccount.business_type === 'individual' ||
-        (!stripeAccount.company.verification.document.front && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1) ||
-        (!stripeAccount.company.verification.document.back && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1)) {
+        stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
     }
     if (req.uploads) {
@@ -179,21 +177,17 @@ module.exports = {
           throw new Error('invalid-address_state')
         }
       }
-      // TODO: on Stripe's test API the company.verification.document is erroneously
-      // placed in the pending_verification collection without submitting it
-      if (req.body.verification_document_back &&
-          ((stripeAccount.requirements.currently_due.indexOf('company.verification.document') > -1) ||
-          (stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) ||
-          (stripeAccount.company.verification.document === null && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1))) {
+      // TODO: check this document is required before updating
+      // currently Stripe do not correctly report it as required
+      // during testing it just goes straight to review without
+      // submitting or ever requiring it
+      if (req.body.verification_document_back) {
         accountInfo.company = accountInfo.company || {}
         accountInfo.company.verification = accountInfo.company.verification || {}
         accountInfo.company.verification.document = accountInfo.company.verification.document || {}
         accountInfo.company.verification.document.back = req.body.verification_document_back
       }
-      if (req.body.verification_document_front &&
-        ((stripeAccount.requirements.currently_due.indexOf('company.verification.document') > -1) ||
-        (stripeAccount.requirements.eventually_due.indexOf('company.verification.document') > -1) ||
-        (stripeAccount.company.verification.document === null && stripeAccount.requirements.pending_verification.indexOf('company.verification.document') > -1))) {
+      if (req.body.verification_document_front) {
         accountInfo.company = accountInfo.company || {}
         accountInfo.company.verification = accountInfo.company.verification || {}
         accountInfo.company.verification.document = accountInfo.company.verification.document || {}

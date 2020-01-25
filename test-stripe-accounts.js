@@ -30,12 +30,12 @@ module.exports = {
   createSubmittedCompany: async (country) => {
     country = country || 'US'
     const user = await module.exports.createCompanyReadyForSubmission(country)
-    await TestHelper.submitStripeAccount(user)
     // await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
-    // await TestHelper.updateStripeRegistration(user, {}, {
-    //   verification_document_back: TestHelper['success_id_scan_back.png'],
-    //   verification_document_front: TestHelper['success_id_scan_front.png']
-    // })
+    await TestHelper.updateStripeRegistration(user, {}, {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    })
+    await TestHelper.submitStripeAccount(user)
     await TestHelper.waitForPayoutsEnabled(user)
     return user
   },
