@@ -465,14 +465,17 @@ async function submitStripeAccount (user) {
   const req = TestHelper.createRequest(`/api/user/connect/set-${user.stripeAccount.business_type}-registration-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  const stripeAccount = await req.patch()
-  user.stripeAccount = stripeAccount
-  await waitForWebhook('account.updated', (stripeEvent) => {
-    return stripeEvent.data.object.id === user.stripeAccount.id &&
-           stripeEvent.data.object.metadata &&
-           stripeEvent.data.object.metadata.submitted
-  })
-  return stripeAccount
+  user.stripeAccount = await req.patch()
+  while (true) {
+    try {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
+      if (user.stripeAccount.metadata.submitted) {
+        return user.stripeAccount
+      }
+    } catch (error) {
+    }
+    await wait()
+  }
 }
 
 async function waitForPayout (administrator, stripeid, previousid, callback) {
