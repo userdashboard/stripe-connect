@@ -10,6 +10,10 @@ module.exports = {
     country = country || 'US'
     const user = await module.exports.createIndividualReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
+    console.log('account is submitted', user.stripeAccount.metadata.submitted)
+    console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
+    console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
+    console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
@@ -24,6 +28,7 @@ module.exports = {
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
           console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
+          try {}
         }
         if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
           console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
