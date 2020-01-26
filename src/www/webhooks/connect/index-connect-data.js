@@ -43,9 +43,6 @@ module.exports = {
       try {
         await supportedWebhooks[stripeEvent.type](stripeEvent, req)
       } catch (error) {
-        if (process.env.NODE_ENV === 'testing') {
-          return res.end()
-        }
         res.statusCode = 500
         if (process.env.DEBUG_ERRORS) {
           console.log('connect webhook error', error)
