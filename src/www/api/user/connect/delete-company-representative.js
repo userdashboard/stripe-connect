@@ -19,35 +19,6 @@ module.exports = {
     }
     while (true) {
       try {
-        await stripe.accounts.deletePerson(req.query.stripeid, stripeAccount.metadata.representative, req.stripeKey)
-        break
-      } catch (error) {
-        if (error.raw && error.raw.code === 'lock_timeout') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'rate_limit') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'account_invalid') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'resource_missing') {
-          continue
-        }
-        if (error.type === 'StripeConnectionError') {
-          continue
-        }
-        if (error.type === 'StripeAPIError') {
-          continue
-        }
-        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-      }
-    }
-    while (true) {
-      try {
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, {
           metadata: {
             representative: null
