@@ -464,7 +464,20 @@ async function submitStripeAccount (user) {
   req.session = user.session
   req.account = user.account
   user.stripeAccount = await req.patch()
-  return user.stripeAccount
+  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req2.session = user.session
+  req2.account = user.account
+  req2.stripeKey = stripeKey
+  while (true) {
+    try {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
+      if (user.stripeAccount.requirements.pending_verification.length) {
+        return wait()
+      }
+    } catch (error) {
+    }
+    return user.account
+  }
 }
 
 async function waitForPayout (administrator, stripeid, previousid, callback) {
