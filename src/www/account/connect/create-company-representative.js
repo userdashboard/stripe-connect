@@ -62,19 +62,19 @@ async function renderPage (req, res, messageTemplate) {
   } else if (removeElements.indexOf('personal-address-container') === -1) {
     removeElements.push('state-container', 'state-container-bridge')
   }
-  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.gender`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.gender`) === -1) {
     removeElements.push('gender-container')
   }
-  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.id_number`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.id_number`) === -1) {
     removeElements.push('id_number-container')
   }
-  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.email`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.email`) === -1) {
     removeElements.push('email-container')
   }
-  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.phone`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.phone`) === -1) {
     removeElements.push('phone-container')
   }
-  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.ssn_last_4`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.ssn_last_4`) === -1) {
     removeElements.push('ssn_last_4-container')
   }
   if (req.body) {
@@ -123,7 +123,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.verification.document`) > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.verification.document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_document_front &&
         !req.body.verification_document_front)) {
@@ -135,7 +135,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
-  if (req.data.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.verification.additional.document`) > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.verification.additional.document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_additional_document_front &&
       !req.body.verification_additional_document_front)) {
