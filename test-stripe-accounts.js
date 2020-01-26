@@ -19,9 +19,20 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.requirements.pending_verification.length === 0) {
-          await TestHelper.waitForPayoutsEnabled(user)
+        if (user.stripeAccount.payouts_enabled && user.stripeAccount.requirements.pending_verification.length === 0) {
           return user
+        }
+        if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
+          console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
+        }
+        if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
+          console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
+        }
+        if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
+          console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
+        }
+        if (!user.stripeAccount.payouts_enabled) {
+          console.log('payouts not enabled')
         }
       } catch (error) {
       }
