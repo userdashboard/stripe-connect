@@ -14,6 +14,7 @@ module.exports = {
     console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
     console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
     console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
+    await TestHelper.waitForPayoutsEnabled(user)
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
@@ -74,7 +75,54 @@ module.exports = {
     })
     await TestHelper.submitStripeAccount(user)
     await TestHelper.waitForPayoutsEnabled(user)
-    return user
+    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    req.session = user.session
+    req.account = user.account
+    req.stripeKey = {
+      api_key: process.env.STRIPE_KEY
+    }
+    let lastMessage
+    while (true) {
+      try {
+        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+        if (user.stripeAccount.payouts_enabled && user.stripeAccount.requirements.pending_verification.length === 0) {
+          return user
+        }
+        if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
+          if (lastMessage !== 1) {
+            console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
+          }
+          lastMessage = 1
+          await wait()
+          continue
+        }
+        if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
+          if (lastMessage !== 2) {
+            console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
+          }
+          lastMessage = 2
+          await wait()
+          continue
+        }
+        if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
+          if (lastMessage !== 3) {
+            console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
+          }
+          lastMessage = 3
+          await wait()
+          continue
+        }
+        if (!user.stripeAccount.payouts_enabled) {
+          if (lastMessage !== 4) {
+            console.log('payouts not enabled', user.stripeAccount.id)
+          }
+          lastMessage = 4
+          await wait()
+          continue
+        }
+      } catch (error) {
+      }
+    }
   },
   createIndividualReadyForSubmission: async (country) => {
     country = country || 'US'

@@ -17,6 +17,9 @@ module.exports = {
         }
         const stripeAccount = await stripe.accounts.retrieve(req.query.stripeid, req.stripeKey)
         if (!stripeAccount.payouts_enabled) {
+          if (process.env.DEBUG_ERRORS) {
+            console.log('payouts not enabled', JSON.stringify(stripeAccount, null, '  '))
+          }
           throw new Error('invalid-stripe-account')
         }
         req.stripeKey.stripe_account = req.query.stripeid
