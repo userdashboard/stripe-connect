@@ -877,7 +877,8 @@ const representativeData = module.exports.representativeData = {
     address_state: 'D',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   IT: {
     address_city: 'Rome',
