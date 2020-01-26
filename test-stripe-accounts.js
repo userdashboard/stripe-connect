@@ -20,6 +20,7 @@ module.exports = {
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
+    let lastMessage
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
@@ -27,16 +28,28 @@ module.exports = {
           return user
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
-          console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
+          if (lastMessage !== 1) {
+            console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
+          }
+          lastMessage = 1
         }
         if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
-          console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
+          if (lastMessage !== 2) {
+            console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
+          }
+          lastMessage = 2
         }
         if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
-          console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
+          if (lastMessage !== 3) {
+            console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
+          }
+          lastMessage = 3
         }
         if (!user.stripeAccount.payouts_enabled) {
-          console.log('payouts not enabled', user.stripeAccount.id)
+          if (lastMessage !== 4) {
+            console.log('payouts not enabled', user.stripeAccount.id)
+          }
+          lastMessage = 4
         }
       } catch (error) {
       }
