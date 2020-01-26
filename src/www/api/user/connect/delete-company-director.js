@@ -23,11 +23,8 @@ module.exports = {
     }
     while (true) {
       try {
-        await stripeCache.delete(req.query.personid)
         await stripe.accounts.deletePerson(stripeAccount.id, req.query.personid, req.stripeKey)
-        await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
-        await dashboard.StorageList.remove(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`, req.query.personid)
-        return true
+        break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
@@ -53,5 +50,15 @@ module.exports = {
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
+    await stripeCache.delete(req.query.personid)
+    try {
+      await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
+    } catch (error) {
+    }
+    try {
+      await dashboard.StorageList.remove(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`, req.query.personid)
+    } catch (error ){
+    }
+    return true
   }
 }
