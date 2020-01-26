@@ -32,24 +32,32 @@ module.exports = {
             console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
           }
           lastMessage = 1
+          await wait()
+          continue
         }
         if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
           if (lastMessage !== 2) {
             console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
           }
           lastMessage = 2
+          await wait()
+          continue
         }
         if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
           if (lastMessage !== 3) {
             console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
           }
           lastMessage = 3
+          await wait()
+          continue
         }
         if (!user.stripeAccount.payouts_enabled) {
           if (lastMessage !== 4) {
             console.log('payouts not enabled', user.stripeAccount.id)
           }
           lastMessage = 4
+          await wait()
+          continue
         }
       } catch (error) {
       }
