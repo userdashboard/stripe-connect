@@ -109,12 +109,6 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
         req.session = user.session
         const accountNow = await req.patch()
         assert.strictEqual(accountNow.company.owners_provided, true)
-        const owners = await global.api.user.connect.BeneficialOwners.get(req)
-        for (const owner of owners) {
-          assert.strictEqual(owner.requirements.past_due.length, 0)
-          assert.strictEqual(owner.requirements.eventually_due.length, 0)
-          assert.strictEqual(owner.requirements.currently_due.length, 0)
-        }
       })
     }
   })

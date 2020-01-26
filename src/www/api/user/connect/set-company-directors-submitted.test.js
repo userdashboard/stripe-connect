@@ -109,12 +109,6 @@ describe('/api/user/connect/set-company-directors-submitted', () => {
         req.session = user.session
         const accountNow = await req.patch()
         assert.strictEqual(accountNow.company.directors_provided, true)
-        const directors = await global.api.user.connect.CompanyDirectors.get(req)
-        for (const director of directors) {
-          assert.strictEqual(director.requirements.past_due.length, 0)
-          assert.strictEqual(director.requirements.eventually_due.length, 0)
-          assert.strictEqual(director.requirements.currently_due.length, 0)
-        }
       })
     }
   })
