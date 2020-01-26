@@ -14,6 +14,12 @@ module.exports = {
     console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
     console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
     console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
+    if (user.stripeAccount.requirements.pending_verification.indexOf('verification.document') > -1) {
+      await TestHelper.waitForVerificationFieldsToLeave('verification.document')
+    }
+    if (user.stripeAccount.requirements.pending_verification.indexOf('verification.additional_document') > -1) {
+      await TestHelper.waitForVerificationFieldsToLeave('verification.additional_document')
+    }
     await TestHelper.waitForPayoutsEnabled(user)
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
