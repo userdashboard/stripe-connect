@@ -27,16 +27,16 @@ module.exports = {
           return user
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
-          console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
+          console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
         }
         if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
-          console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
+          console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
         }
         if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
-          console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
+          console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
         }
         if (!user.stripeAccount.payouts_enabled) {
-          console.log('payouts not enabled')
+          console.log('payouts not enabled', user.stripeAccount.id)
         }
       } catch (error) {
       }
