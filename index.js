@@ -66,6 +66,5 @@ module.exports = {
   euCountries: ['AT', 'BE', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PL', 'PT', 'SE', 'SI', 'SK'],
   getMerchantCategoryCodes: (language) => {
     return merchantCategoryCodes[language || global.language] || merchantCategoryCodes.en
-  },
-  MetaData: require('./src/meta-data.js')
+  }
 }
