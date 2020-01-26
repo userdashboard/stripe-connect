@@ -79,6 +79,7 @@ module.exports = {
   waitForAccountRequirement: util.promisify(waitForAccountRequirement),
   waitForPersonRequirement: util.promisify(waitForPersonRequirement),
   waitForWebhook,
+  waitForPendingFieldsToLeave: util.promisify(waitForPendingFieldsToLeave),
   waitForVerification: util.promisify(waitForVerification),
   waitForPayoutsEnabled: util.promisify(waitForPayoutsEnabled),
   waitForVerificationFieldsToLeave: util.promisify(waitForVerificationFieldsToLeave),
@@ -582,7 +583,7 @@ async function waitForVerificationFailure (user, callback) {
   return setTimeout(wait, 100)
 }
 
-async function waitForVerificationFieldsToLeave (user, contains, callback) {
+async function waitForPendingFieldsToLeave (user, contains, callback) {
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -592,18 +593,48 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
       return
     }
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (stripeAccount.requirements.pending_verification.length) {
+      return setTimeout(wait, 100)
+    }
+  }
+  return setTimeout(wait, 100)
+}
+
+async function waitForVerificationFieldsToLeave (user, contains, callback) {
+  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req.account = user.account
+  req.session = user.session
+  req.stripeKey = stripeKey
+  let lastMessage
+  async function wait () {
+    if (global.testEnded) {
+      return
+    }
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
     for (const field of stripeAccount.requirements.eventually_due) {
       if (field.indexOf(contains) > -1) {
+        if (lastMessage !== 1) {
+          console.log('eventually due still contains field', field, stripeAccount.requirements.eventually_due.join(', '))
+          lastMessage = 1
+        }
         return setTimeout(wait, 100)
       }
     }
     for (const field of stripeAccount.requirements.past_due) {
       if (field.indexOf(contains) > -1) {
+        if (lastMessage !== 2) {
+          console.log('past due still contains field', field, stripeAccount.requirements.past_due.join(', '))
+          lastMessage = 2
+        }
         return setTimeout(wait, 100)
       }
     }
     for (const field of stripeAccount.requirements.currently_due) {
       if (field.indexOf(contains) > -1) {
+        if (lastMessage !== 3) {
+          console.log('currently due still contains field', field, stripeAccount.requirements.currently_due.join(', '))
+          lastMessage = 3
+        }
         return setTimeout(wait, 100)
       }
     }

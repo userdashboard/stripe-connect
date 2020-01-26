@@ -14,13 +14,11 @@ module.exports = {
     console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
     console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
     console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
-    if (user.stripeAccount.requirements.pending_verification.indexOf('individual.verification.document') > -1) {
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.document')
-    }
-    if (user.stripeAccount.requirements.pending_verification.indexOf('individual.verification.additional_document') > -1) {
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
-    }
+    console.log('waiting on pending fields')
+    await TestHelper.waitForPendingFieldsToLeave(user)
+    console.log('waiting on payouts enabled')
     await TestHelper.waitForPayoutsEnabled(user)
+    console.log('confirming local data is updated')
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
