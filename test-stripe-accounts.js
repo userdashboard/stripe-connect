@@ -28,7 +28,6 @@ module.exports = {
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
           console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
-          try {}
         }
         if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
           console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
