@@ -583,7 +583,7 @@ async function waitForVerificationFailure (user, callback) {
   return setTimeout(wait, 100)
 }
 
-async function waitForPendingFieldsToLeave (user, contains, callback) {
+async function waitForPendingFieldsToLeave (user, callback) {
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -596,6 +596,7 @@ async function waitForPendingFieldsToLeave (user, contains, callback) {
     if (stripeAccount.requirements.pending_verification.length) {
       return setTimeout(wait, 100)
     }
+    return setTimeout(callback, 10)
   }
   return setTimeout(wait, 100)
 }
