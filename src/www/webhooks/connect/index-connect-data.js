@@ -35,7 +35,7 @@ module.exports = {
     if (!stripeEvent) {
       return res.end()
     }
-    console.log(stripeEvent.type, stripeEvent.data.object ? stripeEvent.data.object.id : 'no id', stripeEvent.data.previous_attributes)
+    console.log(stripeEvent.type, stripeEvent.data.object ? stripeEvent.data.object.id : 'no id', JSON.stringify(stripeEvent, null, '  '))
     if (global.testNumber) {
       global.webhooks.unshift(stripeEvent)
     }
