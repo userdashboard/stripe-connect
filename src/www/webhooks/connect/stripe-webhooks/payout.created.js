@@ -28,12 +28,22 @@ module.exports = async (stripeEvent, req) => {
       if (error.raw && error.raw.code === 'rate_limit') {
         continue
       }
+      if (error.raw && error.raw.code === 'account_invalid') {
+        continue
+      }
       if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+        continue
+      }
+      if (error.raw && error.raw.code === 'resource_missing') {
         continue
       }
       if (error.type === 'StripeConnectionError') {
         continue
       }
+      if (error.type === 'StripeAPIError') {
+        continue
+      }
+      if (process.env.DEBUG_ERRORS) { console.log('webhook error', stripeEvent.type, error, stripeEvent) }
       return
     }
   }
