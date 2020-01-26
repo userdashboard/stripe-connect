@@ -57,7 +57,7 @@ module.exports = {
     }
     try {
       await dashboard.StorageList.remove(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`, req.query.personid)
-    } catch (error ){
+    } catch (error) {
     }
     return true
   }
