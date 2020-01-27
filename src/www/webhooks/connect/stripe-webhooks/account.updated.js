@@ -62,7 +62,7 @@ module.exports = async (stripeEvent, req) => {
     } else {
       console.log('updating cache')
     }
-    await stripeCache.update(exists)
+    return stripeCache.update(exists)
   }
   if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
     console.log('webhook ended without finding account ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
