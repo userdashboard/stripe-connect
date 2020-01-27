@@ -14,11 +14,6 @@ module.exports = {
     console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
     console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
     console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
-    console.log('waiting on pending fields')
-    await TestHelper.waitForPendingFieldsToLeave(user)
-    console.log('waiting on payouts enabled')
-    await TestHelper.waitForPayoutsEnabled(user)
-    console.log('confirming local data is updated')
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
@@ -80,7 +75,6 @@ module.exports = {
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
     await TestHelper.submitStripeAccount(user)
-    await TestHelper.waitForPayoutsEnabled(user)
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account

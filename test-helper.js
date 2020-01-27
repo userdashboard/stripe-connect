@@ -602,6 +602,7 @@ async function waitForPendingFieldsToLeave (user, callback) {
   req.session = user.session
   req.stripeKey = stripeKey
   let lastVersion = JSON.stringify(user.stripeAccount, null, '  ')
+  let lastMessage 
   async function wait () {
     if (global.testEnded) {
       return
@@ -611,10 +612,14 @@ async function waitForPendingFieldsToLeave (user, callback) {
       const newVersion = JSON.stringify(user.stripeAccount, null, '  ')
       if (newVersion !== lastVersion) {
         lastVersion = newVersion
+        lastMessage = 1
         console.log('waiting on pending fields to leave', 'account has changed', newVersion)
       }
       if (stripeAccount.requirements.pending_verification.length) {
-        console.log('waiting on pending fields to leave', stripeAccount.requirements.pending_verification.join(', '))
+        if (lastMessage !== 2) {
+          console.log('waiting on pending fields to leave', stripeAccount.requirements.pending_verification.join(', '))
+          lastMessage = 2
+        }
         return setTimeout(wait, 100)
       }
       return setTimeout(callback, 10)
