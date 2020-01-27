@@ -29,7 +29,9 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.payouts_enabled && user.stripeAccount.requirements.pending_verification.length === 0) {
+        if (user.stripeAccount.payouts_enabled && 
+            !user.stripeAccount.requirements.pending_verification.length &&
+            !user.stripeAccount.requirements.disabled_reason) {
           return user
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
@@ -89,7 +91,9 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.payouts_enabled && user.stripeAccount.requirements.pending_verification.length === 0) {
+        if (user.stripeAccount.payouts_enabled && 
+           !user.stripeAccount.requirements.pending_verification.length &&*
+           !user.stripeAccount.requirements.disabled_reason) {
           return user
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
