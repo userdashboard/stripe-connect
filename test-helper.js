@@ -32,9 +32,6 @@ const util = require('util')
 const stripeKey = {
   api_key: process.env.STRIPE_KEY
 }
-if (stripeKey.api_key.startsWith('sk_test')) {
-  console.log('test stripe key sk_test_', stripeKey.api_key.substring('sk_test_'.length))
-}
 
 const wait = util.promisify((callback) => {
   return setTimeout(callback, 100)
