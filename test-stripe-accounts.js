@@ -221,8 +221,8 @@ module.exports = {
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-      // console.log('waiting for additional document to be required')
-      // await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
+      console.log('waiting for additional document to be required')
+      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
       console.log('submitting additional document')
       await TestHelper.updateCompanyRepresentative(user, {}, {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
@@ -857,7 +857,8 @@ const representativeData = module.exports.representativeData = {
     address_postal_code: 'EC1A 1AA',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    phone: '456-789-0123'
   },
   GR: {
     address_city: 'Athens',
