@@ -19,11 +19,11 @@ module.exports = async (stripeEvent, req) => {
       const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
       if (exists) {
         if (global.testEnded) {
-          return console.log('webhook update ended without finding account')
+          return  console.log('webhook update ended after tests ended')
         }
         await stripeCache.update(exists)
       }
-      return
+      return console.log('webhook update ended without finding account')
     } catch (error) {
       if (error.raw && error.raw.code === 'lock_timeout') {
         continue

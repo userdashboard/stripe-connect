@@ -23,7 +23,14 @@ module.exports = {
       return res.end()
     }
     if (global.testNumber) {
+      if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+        console.log('received webhook for monitored account', global.monitorStripeAccount)
+        console.log(JSON.stringify(JSON.parse(req.bodyRaw), null, '  '))
+      } else {
+       console.log('received webhook for other account or reason', req.bodyRaw) 
+      }
       if (req.bodyRaw.indexOf('appid') && req.bodyRaw.indexOf(global.testNumber) === -1) {
+        console.log('webhook ended due to stale test data')
         return res.end()
       }
     }
@@ -31,15 +38,11 @@ module.exports = {
     try {
       stripeEvent = stripe.webhooks.constructEvent(req.bodyRaw, req.headers['stripe-signature'], req.endpointSecret || global.connectWebhookEndPointSecret)
     } catch (error) {
+      console.log('webhook failed parsing', error)
     }
     if (!stripeEvent) {
+      console.log('webhook failed due to no event parsed from body')
       return res.end()
-    }
-    if (global.testNumber && global.monitorStripeAccount && stripeEvent.data.object && stripeEvent.data.object.id) {
-      if (global.monitorStripeAccount === stripeEvent.data.object.id) {
-        console.log('received webhook for monitored account', global.monitorStripeAccount)
-        console.log(stripeEvent.type, JSON.stringify(stripeEvent, null, '  '))
-      }
     }
     if (global.testNumber) {
       global.webhooks.unshift(stripeEvent)
@@ -48,6 +51,7 @@ module.exports = {
       try {
         await supportedWebhooks[stripeEvent.type](stripeEvent, req)
       } catch (error) {
+        console.log('webhook failed due to error', error)
         res.statusCode = 500
         if (process.env.DEBUG_ERRORS) {
           console.log('connect webhook error', JSON.stringify(error, null, '  '))
