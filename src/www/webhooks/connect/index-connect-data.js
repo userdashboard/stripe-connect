@@ -27,8 +27,8 @@ module.exports = {
         console.log('received webhook for monitored account', global.monitorStripeAccount)
         console.log(JSON.stringify(JSON.parse(req.bodyRaw), null, '  '))
       }
-      if (req.bodyRaw.indexOf('appid') && req.bodyRaw.indexOf(global.testNumber) === -1) {
-        if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+      if (req.bodyRaw.indexOf('appid') > -1 && req.bodyRaw.indexOf(global.testNumber) === -1) {
+        if (global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
           console.log('webhook ended due to stale test data ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
         } else {
           console.log('webhook ended due to stale test data')
