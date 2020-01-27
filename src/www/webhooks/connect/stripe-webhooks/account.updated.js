@@ -19,11 +19,19 @@ module.exports = async (stripeEvent, req) => {
       const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
       if (exists) {
         if (global.testEnded) {
-          return  console.log('webhook update ended after tests ended')
+          if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+            return console.log('webhook after tests ended ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+          } else {
+            return console.log('webhook after tests ended')
+          }
         }
         await stripeCache.update(exists)
       }
-      return console.log('webhook update ended without finding account')
+      if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+        console.log('webhook ended without finding account ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+      } else {
+        return console.log('webhook ended without finding account')
+      }
     } catch (error) {
       if (error.raw && error.raw.code === 'lock_timeout') {
         continue
@@ -47,7 +55,11 @@ module.exports = async (stripeEvent, req) => {
         continue
       }
       if (process.env.DEBUG_ERRORS) { console.log('webhook error', stripeEvent.type, error, stripeEvent) }
-      return console.log('webhook update failed')
+      if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+        console.log('webhook update failed ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+      } else {
+        return console.log('webhook update failed')
+      }
     }
   }
 }
