@@ -756,7 +756,7 @@ describe('/api/user/connect/update-company-representative', () => {
       // assert.strictEqual(personNow.address.line1, '285 Fulton St')
     })
 
-    it('optionally-required posted percent_ownership', async () => {
+    it('optionally-required posted relationship_percent_ownership', async () => {
       // const user = await TestHelper.createUser()
       // await TestHelper.createStripeAccount(user, {
       //   country: 'CA',

@@ -264,16 +264,16 @@ module.exports = {
         companyDirectorInfo.address.line2 = req.body.address_line2
       }
     }
-    if (req.body.percent_ownership) {
+    if (req.body.relationship_percent_ownership) {
       try {
-        const percent = parseFloat(req.body.percent_ownership, 10)
+        const percent = parseFloat(req.body.relationship_percent_ownership, 10)
         if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
           throw new Error('invalid-relationship_percent_ownership')
         }
       } catch (s) {
         throw new Error('invalid-relationship_percent_ownership')
       }
-      companyDirectorInfo.percent_ownership = req.body.percent_ownership
+      companyDirectorInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
     }
     if (req.body.relationship_title) {
       companyDirectorInfo.relationship_title = req.body.relationship_title

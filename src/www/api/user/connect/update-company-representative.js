@@ -306,7 +306,7 @@ module.exports = {
         } catch (s) {
           throw new Error('invalid-relationship_percent_ownership')
         }
-        companyRepresentativeInfo.relaationship.percent_ownership = req.body.relationship_percent_ownership
+        companyRepresentativeInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
       }
       if (req.body.relationship_title) {
         companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
