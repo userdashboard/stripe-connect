@@ -36,7 +36,7 @@ module.exports = {
       return res.end()
     }
     if (global.testNumber && global.monitorStripeAccount && stripeEvent.data.object && stripeEvent.data.object.id) {
-      if (global.debugStripeAccount === stripeEvent.data.object.id) {
+      if (global.monitorStripeAccount === stripeEvent.data.object.id) {
         console.log('received webhook for monitored account', global.monitorStripeAccount)
         console.log(stripeEvent.type, JSON.stringify(stripeEvent, null, '  '))
       }
