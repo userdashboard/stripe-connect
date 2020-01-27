@@ -47,7 +47,7 @@ module.exports = async (stripeEvent, req) => {
       }
       const persons = await stripe.accounts.listPersons(person.account, req.stripeKey)
       if (persons.data && !persons.data.length) {
-        await stripe.accounts.del(person.account)
+        await stripe.accounts.del(person.account, req.stripeKey)
       }
       return
     }
