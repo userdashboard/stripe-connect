@@ -42,31 +42,31 @@ module.exports = async (stripeEvent, req) => {
         continue
       }
       if (process.env.DEBUG_ERRORS) { console.log('webhook error', stripeEvent.type, error, stripeEvent) }
-      if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-        console.log('webhook update failed ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-      } else {
-        return console.log('webhook update failed')
-      }
+      // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+      //   console.log('webhook update failed ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+      // } else {
+      //   return console.log('webhook update failed')
+      // }
     }
   }
   if (exists) {
     if (global.testEnded) {
-      if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-        return console.log('webhook after tests ended ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-      } else {
-        return console.log('webhook after tests ended')
-      }
+      // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+      //   return console.log('webhook after tests ended ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+      // } else {
+      //   return console.log('webhook after tests ended')
+      // }
     }
-    if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-      console.log('updating cache ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-    } else {
-      console.log('updating cache')
-    }
+    // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+    //   console.log('updating cache ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+    // } else {
+    //   console.log('updating cache')
+    // }
     return stripeCache.update(exists)
   }
-  if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-    console.log('webhook ended without finding account ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-  } else {
-    return console.log('webhook ended without finding account')
-  }
+  // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+  //   console.log('webhook ended without finding account ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+  // } else {
+  //   return console.log('webhook ended without finding account')
+  // }
 }

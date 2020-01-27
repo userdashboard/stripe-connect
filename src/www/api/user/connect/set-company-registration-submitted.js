@@ -46,13 +46,15 @@ module.exports = {
       },
       tos_acceptance: {
         ip: req.ip,
-        user_agent: req.userAgent,
+        user_agent: req.headers['user-agent'] || 'None',
         date: dashboard.Timestamp.now
       }
     }
     while (true) {
       try {
+        console.log('submitting company', JSON.stringify(accountInfo, null, '  '))
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        console.log('submitted company', JSON.stringify(stripeAccountNow, null, '  '))
         await stripeCache.update(stripeAccountNow)
         return stripeAccountNow
       } catch (error) {

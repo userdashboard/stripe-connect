@@ -40,6 +40,7 @@ module.exports = {
     }
     while (true) {
       try {
+        console.log('submitting individual', JSON.stringify(accountInfo, null, '  '))
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         console.log('submitted individual', JSON.stringify(stripeAccountNow, null, '  '))
         await stripeCache.update(stripeAccountNow)

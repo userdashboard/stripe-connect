@@ -26,7 +26,8 @@ module.exports = {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.payouts_enabled && 
             !user.stripeAccount.requirements.pending_verification.length &&
-            !user.stripeAccount.requirements.disabled_reason) {
+            !user.stripeAccount.requirements.disabled_reason &&
+            user.stripeAccount.individual.verification.status === 'verified') {
           return user
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
@@ -79,7 +80,7 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.requirements.currently_due === 2) {
+        if (user.stripeAccount.requirements.currently_due.length === 2) {
           break
         }
         if (lastMessage !== 1) {
@@ -95,7 +96,12 @@ module.exports = {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
+    console.log('submitting account')
     await TestHelper.submitStripeAccount(user)
+    console.log('account is submitted', user.stripeAccount.metadata.submitted)
+    console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
+    console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
+    console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
     lastMessage = null
     while (true) {
       try {
@@ -103,7 +109,7 @@ module.exports = {
         if (user.stripeAccount.payouts_enabled && 
            !user.stripeAccount.requirements.pending_verification.length &&
            !user.stripeAccount.requirements.disabled_reason) {
-          break
+          return user
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
           if (lastMessage !== 1) {
