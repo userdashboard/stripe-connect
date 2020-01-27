@@ -613,7 +613,7 @@ async function waitForPendingFieldsToLeave (user, callback) {
         console.log('waiting on pending fields to leave', 'account has changed', newVersion)
       }
       if (stripeAccount.requirements.pending_verification.length) {
-        console.log('waiting on pending fields to leave', 'fields have left')
+        console.log('waiting on pending fields to leave', stripeAccount.requirements.pending_verification.join(', '))
         return setTimeout(wait, 100)
       }
       return setTimeout(callback, 10)
