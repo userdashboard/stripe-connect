@@ -19,7 +19,7 @@ module.exports = async (stripeEvent, req) => {
       const exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
       if (exists) {
         if (global.testEnded) {
-          return
+          return console.log('webhook update ended without finding account')
         }
         await stripeCache.update(exists)
       }
@@ -47,7 +47,7 @@ module.exports = async (stripeEvent, req) => {
         continue
       }
       if (process.env.DEBUG_ERRORS) { console.log('webhook error', stripeEvent.type, error, stripeEvent) }
-      return
+      return console.log('webhook update failed')
     }
   }
 }
