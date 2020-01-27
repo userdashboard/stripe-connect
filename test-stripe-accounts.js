@@ -92,7 +92,7 @@ module.exports = {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.payouts_enabled && 
-           !user.stripeAccount.requirements.pending_verification.length &&*
+           !user.stripeAccount.requirements.pending_verification.length &&
            !user.stripeAccount.requirements.disabled_reason) {
           return user
         }
