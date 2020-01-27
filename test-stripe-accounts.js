@@ -69,12 +69,6 @@ module.exports = {
   createSubmittedCompany: async (country) => {
     country = country || 'US'
     const user = await module.exports.createCompanyReadyForSubmission(country)
-    // await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
-    await TestHelper.updateStripeRegistration(user, {}, {
-      verification_document_back: TestHelper['success_id_scan_back.png'],
-      verification_document_front: TestHelper['success_id_scan_front.png']
-    })
-    await TestHelper.submitStripeAccount(user)
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
@@ -85,10 +79,31 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+        if (user.stripeAccount.requirements.currently_due === 2) {
+          break
+        }
+        if (lastMessage !== 1) {
+          console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
+        }
+        lastMessage = 1
+        await wait()
+        continue
+      } catch (error) {
+      }
+    }
+    await TestHelper.updateStripeRegistration(user, {}, {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    })
+    await TestHelper.submitStripeAccount(user)
+    lastMessage = null
+    while (true) {
+      try {
+        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.payouts_enabled && 
            !user.stripeAccount.requirements.pending_verification.length &&
            !user.stripeAccount.requirements.disabled_reason) {
-          return user
+          break
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
           if (lastMessage !== 1) {
