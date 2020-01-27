@@ -135,6 +135,7 @@ module.exports = {
       country: country,
       type: 'individual'
     })
+    global.monitorStripeAccount = user.stripeAccount.id
     const identity = TestHelper.nextIdentity()
     const individual = {
       first_name: identity.firstName,
