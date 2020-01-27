@@ -78,7 +78,7 @@ describe('/api/user/connect/create-company-representative', () => {
     })
 
     describe('invalid-relationship_percent_ownership', () => {
-      it.only('invalid posted percent_ownership', async () => {
+      it('invalid posted percent_ownership', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'US',
