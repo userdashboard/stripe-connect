@@ -34,9 +34,11 @@ module.exports = {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.payouts_enabled && 
+            user.stripeAccount.individual.verification.status === 'verified' &&
             !user.stripeAccount.requirements.pending_verification.length &&
-            !user.stripeAccount.requirements.disabled_reason &&
-            user.stripeAccount.individual.verification.status === 'verified') {
+            !user.stripeAccount.requirements.currently_due.length &&
+            !user.stripeAccount.requirements.eventually_due.length &&
+            !user.stripeAccount.requirements.disabled_reason) {
           return user
         }
         if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
@@ -218,7 +220,8 @@ module.exports = {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
         if (user.stripeAccount.requirements.currently_due.length === 2 &&
-            !user.stripeAccount.requirements.pending_verification.length) {
+            !user.stripeAccount.requirements.pending_verification.length &&
+            user.stripeAccount.individual.verification.status === 'verified') {
           return user
         }
       } catch (error) {
@@ -258,9 +261,11 @@ module.exports = {
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
     console.log('got representative', user.representative)
-    for (const field in representative) {
-      console.log('waiting for representative fields to clear out')
-      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.${field.split('_').join('.')}`)
+    for (const posted in representative) {
+      const field = posted.replace('address_', 'address.').replace('relationship_', 'relationship.').replace('dob_', 'dob.').replace('verification_', 'verification.')
+      console.log('waiting for representative fields to clear out', field, posted)
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.${field}`)
+
     }
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       console.log('waiting for additional document to be required')

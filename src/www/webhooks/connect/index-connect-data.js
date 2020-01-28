@@ -54,9 +54,6 @@ module.exports = {
       // }
       return res.end()
     }
-    if (global.testNumber) {
-      global.webhooks.unshift(stripeEvent)
-    }
     if (supportedWebhooks[stripeEvent.type]) {
       try {
         await supportedWebhooks[stripeEvent.type](stripeEvent, req)
@@ -71,6 +68,9 @@ module.exports = {
           console.log('connect webhook error', JSON.stringify(error, null, '  '))
         }
       }
+    }
+    if (global.testNumber) {
+      global.webhooks.unshift(stripeEvent)
     }
     return res.end()
   }
