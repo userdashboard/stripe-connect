@@ -10,6 +10,15 @@ module.exports = {
     country = country || 'US'
     const user = await module.exports.createIndividualReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
+    await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
+      return stripeEvent.data.object.id === user.stripeAccount.id &&
+             stripeEvent.data.object.payouts_enabled &&
+             stripeEvent.data.object.metadata.submitted &&
+             stripeEvent.data.object.individual.verification.status === 'verified' &&
+             !stripeEvent.data.object.requirements.currently_due.length &&
+             !stripeEvent.data.object.requirements.eventually_due.length &&
+             !stripeEvent.data.object.requirements.pending_verification.length
+    })
     console.log('account is submitted', user.stripeAccount.metadata.submitted)
     console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
     console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
@@ -98,6 +107,14 @@ module.exports = {
     })
     console.log('submitting account')
     await TestHelper.submitStripeAccount(user)
+    await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
+      return stripeEvent.data.object.id === user.stripeAccount.id &&
+             stripeEvent.data.object.payouts_enabled &&
+             stripeEvent.data.object.metadata.submitted &&
+             !stripeEvent.data.object.requirements.currently_due.length &&
+             !stripeEvent.data.object.requirements.eventually_due.length &&
+             !stripeEvent.data.object.requirements.pending_verification.length
+    })
     console.log('account is submitted', user.stripeAccount.metadata.submitted)
     console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
     console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
@@ -200,7 +217,8 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.requirements.currently_due.length === 2) {
+        if (user.stripeAccount.requirements.currently_due.length === 2 &&
+            !user.stripeAccount.requirements.pending_verification.length) {
           return user
         }
       } catch (error) {
@@ -295,7 +313,8 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.requirements.currently_due.length === 2 && !user.stripeAccount.requirements.pending_verification.length) {
+        if (user.stripeAccount.requirements.currently_due.length === 2 && 
+           !user.stripeAccount.requirements.pending_verification.length) {
           console.log('user has only tos_acceptance left', user.stripeAccount.requirements)
           return user
         }
