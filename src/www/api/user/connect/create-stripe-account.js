@@ -5,7 +5,6 @@ if (global.maxmimumStripeRetries) {
   stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 }
 stripe.setTelemetryEnabled(false)
-const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   post: async (req) => {
@@ -46,7 +45,6 @@ module.exports = {
         await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
         await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
         await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
-        await stripeCache.update(stripeAccount)
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -229,7 +227,6 @@ module.exports = {
     while (true) {
       try {
         stripeAccountNow = await stripe.accounts.update(stripeAccount.id, accountUpdate, req.stripeKey)
-        await stripeCache.update(stripeAccountNow)
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

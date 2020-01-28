@@ -312,7 +312,7 @@ module.exports = {
       try {
         console.log('updating account', accountInfo)
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        await stripeCache.update(accountNow)
+        await stripeCache.delete(req.query.stripeid)
         return accountNow
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

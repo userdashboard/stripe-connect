@@ -518,7 +518,7 @@ async function waitForPayoutsEnabled (user, callback) {
     if (global.testEnded) {
       return
     }
-    try { 
+    try {
       const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       if (!stripeAccount.payouts_enabled) {
         return setTimeout(wait, 100)
@@ -589,9 +589,9 @@ async function waitForVerificationFailure (user, callback) {
         }
       }
       return setTimeout(callback, 10)
-    } catch (error ){
+    } catch (error) {
     }
-    return setTimeout(wait, 10)  
+    return setTimeout(wait, 10)
   }
   return setTimeout(wait, 100)
 }
@@ -602,7 +602,7 @@ async function waitForPendingFieldsToLeave (user, callback) {
   req.session = user.session
   req.stripeKey = stripeKey
   let lastVersion = JSON.stringify(user.stripeAccount, null, '  ')
-  let lastMessage 
+  let lastMessage
   async function wait () {
     if (global.testEnded) {
       return
@@ -623,7 +623,7 @@ async function waitForPendingFieldsToLeave (user, callback) {
         return setTimeout(wait, 100)
       }
       return setTimeout(callback, 10)
-    } catch (error ){
+    } catch (error) {
     }
     return setTimeout(wait, 10)
   }
@@ -706,7 +706,7 @@ async function waitForVerificationFieldsToReturn (user, contains, callback) {
       return setTimeout(wait, 10)
     } catch (error) {
     }
-    return setTimeout(wat, 10)
+    return setTimeout(wait, 10)
   }
   return setTimeout(wait, 100)
 }

@@ -183,7 +183,7 @@ module.exports = {
         const bankAccount = accountNow.external_accounts.data[0]
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
         await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
-        await stripeCache.update(accountNow)
+        await stripeCache.delete(req.query.stripeid)
         return accountNow
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

@@ -19,12 +19,12 @@ module.exports = {
     }
     while (true) {
       try {
-        const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, {
+        await stripe.accounts.update(req.query.stripeid, {
           metadata: {
             representative: null
           }
         }, req.stripeKey)
-        await stripeCache.update(stripeAccountNow)
+        await stripeCache.delete(req.query.stripeid)
         return true
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

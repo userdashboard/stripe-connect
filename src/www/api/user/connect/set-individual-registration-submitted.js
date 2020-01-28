@@ -43,7 +43,7 @@ module.exports = {
         console.log('submitting individual', JSON.stringify(accountInfo, null, '  '))
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         console.log('submitted individual', JSON.stringify(stripeAccountNow, null, '  '))
-        await stripeCache.update(stripeAccountNow)
+        await stripeCache.delete(req.query.stripeid)
         return stripeAccountNow
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

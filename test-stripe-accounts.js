@@ -33,7 +33,7 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.payouts_enabled && 
+        if (user.stripeAccount.payouts_enabled &&
             user.stripeAccount.individual.verification.status === 'verified' &&
             !user.stripeAccount.requirements.pending_verification.length &&
             !user.stripeAccount.requirements.currently_due.length &&
@@ -117,7 +117,7 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.payouts_enabled && 
+        if (user.stripeAccount.payouts_enabled &&
            !user.stripeAccount.requirements.pending_verification.length &&
            !user.stripeAccount.requirements.disabled_reason) {
           return user
@@ -302,7 +302,7 @@ module.exports = {
     while (true) {
       try {
         user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.requirements.currently_due.length === 2 && 
+        if (user.stripeAccount.requirements.currently_due.length === 2 &&
            !user.stripeAccount.requirements.pending_verification.length) {
           console.log('user has only tos_acceptance left', user.stripeAccount.requirements)
           return user
@@ -420,7 +420,6 @@ module.exports = {
     return user
   }
 }
-
 
 const companyData = module.exports.companyData = {
   AT: {

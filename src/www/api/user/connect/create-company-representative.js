@@ -355,7 +355,6 @@ module.exports = {
           representative = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
           await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${representative.id}`, req.query.stripeid)
         }
-        await stripeCache.update(representative)
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -395,8 +394,8 @@ module.exports = {
     }
     while (true) {
       try {
-        const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        await stripeCache.update(accountNow)
+        await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
+        await stripeCache.delete(req.query.stripeid)
         return representative
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

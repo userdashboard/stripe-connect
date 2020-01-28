@@ -302,7 +302,7 @@ module.exports = {
     while (true) {
       try {
         const companyOwnerNow = await stripe.accounts.updatePerson(person.account, person.id, ownerInfo, req.stripeKey)
-        await stripeCache.update(companyOwnerNow)
+        await stripeCache.delete(person.id)
         return companyOwnerNow
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

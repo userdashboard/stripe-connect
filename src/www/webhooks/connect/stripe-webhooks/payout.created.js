@@ -5,7 +5,6 @@ if (global.maxmimumStripeRetries) {
   stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 }
 stripe.setTelemetryEnabled(false)
-const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = async (stripeEvent, req) => {
   const add = []
@@ -59,7 +58,7 @@ module.exports = async (stripeEvent, req) => {
   while (true) {
     if (global.testEnded) {
       return
-    } 
+    }
     try {
       account = await stripe.accounts.retrieve(stripeEvent.account, req.stripeKey)
       break
@@ -90,9 +89,8 @@ module.exports = async (stripeEvent, req) => {
     }
   }
   if (!account) {
-    return 
+    return
   }
-  await stripeCache.update(payout)
   await dashboard.Storage.write(`${req.appid}/map/payoutid/stripeid/${payout.id}`, stripeEvent.account)
   add.push({ index: `${req.appid}/payouts`, value: payout.id })
   add.push({ index: `${req.appid}/bankAccount/payouts/${payout.destination}`, value: payout.id })

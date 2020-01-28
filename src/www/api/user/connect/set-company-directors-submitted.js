@@ -34,7 +34,7 @@ module.exports = {
     while (true) {
       try {
         stripeAccount = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        await stripeCache.update(stripeAccount)
+        await stripeCache.delete(req.query.stripeid)
         return stripeAccount
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
