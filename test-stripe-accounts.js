@@ -240,8 +240,10 @@ module.exports = {
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
     console.log('got representative', user.representative)
-    console.log('waiting for representative fields to clear out')
-    await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
+    for (const field in representative) {
+      console.log('waiting for representative fields to clear out')
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.${field.split('_').join('.')}`)
+    }
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       console.log('waiting for additional document to be required')
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
