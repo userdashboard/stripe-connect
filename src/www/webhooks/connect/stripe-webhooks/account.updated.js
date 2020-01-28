@@ -11,6 +11,7 @@ module.exports = async (stripeEvent, req) => {
   if (account.metadata.template) {
     return
   }
+  console.log('got account update', 1, account.id)
   let exists
   while (true) {
     if (global.testEnded) {
@@ -20,6 +21,7 @@ module.exports = async (stripeEvent, req) => {
       exists = await stripe.accounts.retrieve(account.id, req.stripeKey)
       break
     } catch (error) {
+      console.log('got account update', 2, error.raw ? error.raw.code : error.type || error.message, account.id)
       if (error.raw && error.raw.code === 'lock_timeout') {
         continue
       }
@@ -42,31 +44,37 @@ module.exports = async (stripeEvent, req) => {
         continue
       }
       if (process.env.DEBUG_ERRORS) { console.log('webhook error', stripeEvent.type, error, stripeEvent) }
-      // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-      //   console.log('webhook update failed ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-      // } else {
-      //   return console.log('webhook update failed')
-      // }
+      if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+        console.log('webhook update failed ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+      } else {
+        console.log('webhook update failed')
+      }
+      return
     }
   }
+  console.log('got account update', 3, account.id)
   if (exists) {
     if (global.testEnded) {
-      // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-      //   return console.log('webhook after tests ended ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-      // } else {
-      //   return console.log('webhook after tests ended')
-      // }
+      if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+        console.log('webhook after tests ended ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+      } else {
+        console.log('webhook after tests ended')
+      }
+      console.log('got account update', 4, account.id)
+      return
     }
-    // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-    //   console.log('updating cache ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-    // } else {
-    //   console.log('updating cache')
-    // }
+    if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+      console.log('updating cache ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+    } else {
+      console.log('updating cache')
+    }
+    console.log('got account update', 5, account.id)
     return stripeCache.update(exists)
   }
-  // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-  //   console.log('webhook ended without finding account ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-  // } else {
-  //   return console.log('webhook ended without finding account')
-  // }
+  console.log('got account update', 6, account.id)
+  if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
+    console.log('webhook ended without finding account ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
+  } else {
+    console.log('webhook ended without finding account')
+  }
 }
