@@ -46,32 +46,24 @@ module.exports = {
             console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
           }
           lastMessage = 1
-          await wait()
-          continue
         }
         if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
           if (lastMessage !== 2) {
             console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
           }
           lastMessage = 2
-          await wait()
-          continue
         }
         if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
           if (lastMessage !== 3) {
             console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
           }
           lastMessage = 3
-          await wait()
-          continue
         }
         if (!user.stripeAccount.payouts_enabled) {
           if (lastMessage !== 4) {
             console.log('payouts not enabled', user.stripeAccount.id)
           }
           lastMessage = 4
-          await wait()
-          continue
         }
       } catch (error) {
       }
@@ -135,35 +127,28 @@ module.exports = {
             console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
           }
           lastMessage = 1
-          await wait()
-          continue
         }
         if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
           if (lastMessage !== 2) {
             console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
           }
           lastMessage = 2
-          await wait()
-          continue
         }
         if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
           if (lastMessage !== 3) {
             console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
           }
           lastMessage = 3
-          await wait()
-          continue
         }
         if (!user.stripeAccount.payouts_enabled) {
           if (lastMessage !== 4) {
             console.log('payouts not enabled', user.stripeAccount.id)
           }
           lastMessage = 4
-          await wait()
-          continue
         }
       } catch (error) {
       }
+      await wait()
     }
   },
   createIndividualReadyForSubmission: async (country) => {
@@ -255,7 +240,7 @@ module.exports = {
     for (const field in representativeData[country]) {
       representative[field] = representativeData[country][field]
     }
-    console.log('creating representative')
+    console.log('creating representative', representative)
     await TestHelper.createCompanyRepresentative(user, representative, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
@@ -265,7 +250,6 @@ module.exports = {
       const field = posted.replace('address_', 'address.').replace('relationship_', 'relationship.').replace('dob_', 'dob.').replace('verification_', 'verification.')
       console.log('waiting for representative fields to clear out', field, posted)
       await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.${field}`)
-
     }
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       console.log('waiting for additional document to be required')
@@ -328,32 +312,24 @@ module.exports = {
             console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
           }
           lastMessage = 1
-          await wait()
-          continue
         }
         if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
           if (lastMessage !== 2) {
             console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
           }
           lastMessage = 2
-          await wait()
-          continue
         }
         if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
           if (lastMessage !== 3) {
             console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
           }
           lastMessage = 3
-          await wait()
-          continue
         }
         if (!user.stripeAccount.payouts_enabled) {
           if (lastMessage !== 4) {
             console.log('payouts not enabled', user.stripeAccount.id)
           }
           lastMessage = 4
-          await wait()
-          continue
         }
       } catch (error) {
       }
