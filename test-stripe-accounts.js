@@ -227,7 +227,10 @@ module.exports = {
       company[field] = companyData[country][field]
     }
     console.log('creating registration', user.stripeAccount.requirements.currently_due.join(', '))
-    await TestHelper.createStripeRegistration(user, company)
+    await TestHelper.createStripeRegistration(user, company, {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    })
     const identity = TestHelper.nextIdentity()
     const representative = {
       first_name: identity.firstName,
