@@ -239,7 +239,11 @@ module.exports = {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
-    await TestHelper.waitForVerificationFieldsToLeave(`${user.representative.id}.address`)
+    console.log('got representative', user.representative)
+    console.log('waiting for representative fields to clear out')
+    await TestHelper.waitForVerificationFieldsToLeave(`${user.representative.id}.address.city`)
+    await TestHelper.waitForVerificationFieldsToLeave(`${user.representative.id}.address.line1`)
+    await TestHelper.waitForVerificationFieldsToLeave(`${user.representative.id}.address.postal_code`)
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       console.log('waiting for additional document to be required')
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
