@@ -241,9 +241,7 @@ module.exports = {
     })
     console.log('got representative', user.representative)
     console.log('waiting for representative fields to clear out')
-    await TestHelper.waitForVerificationFieldsToLeave(`${user.representative.id}.address.city`)
-    await TestHelper.waitForVerificationFieldsToLeave(`${user.representative.id}.address.line1`)
-    await TestHelper.waitForVerificationFieldsToLeave(`${user.representative.id}.address.postal_code`)
+    await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       console.log('waiting for additional document to be required')
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
