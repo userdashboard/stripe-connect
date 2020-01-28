@@ -239,16 +239,17 @@ module.exports = {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
+    await TestHelper.waitForVerificationFieldsToLeave(`${user.representative.id}.address`)
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-      // console.log('waiting for additional document to be required')
-      // await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
+      console.log('waiting for additional document to be required')
+      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
       console.log('submitting additional document')
       await TestHelper.updateCompanyRepresentative(user, {}, {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
-      // console.log('waiting for additional document field to leave')
-      // await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
+      console.log('waiting for additional document field to leave')
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
     }
     console.log('beneficial owners')
     if (beneficialOwnerData[country] !== false) {
