@@ -35,5 +35,7 @@ jobs:
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         DEBUG_ERRORS: true
         DEBUG_REQUESTS: true
+        DEBUG_PAGES: true
+        DEBUG_PUPPETEER: true
         NGROK: true
     
