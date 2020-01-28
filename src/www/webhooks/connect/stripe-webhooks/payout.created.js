@@ -17,10 +17,7 @@ module.exports = async (stripeEvent, req) => {
     }
     try {
       exists = await stripe.accounts.retrieve(payout.account, req.stripeKey)
-      if (exists) {
-        break
-      }
-      return
+      break
     } catch (error) {
       if (error.raw && error.raw.code === 'lock_timeout') {
         continue
@@ -47,6 +44,9 @@ module.exports = async (stripeEvent, req) => {
       return
     }
   }
+  if (!exists) {
+    return
+  }
   let accountid
   try {
     accountid = await dashboard.Storage.read(`${req.appid}/map/stripeid/accountid/${stripeEvent.account}`)
@@ -54,6 +54,43 @@ module.exports = async (stripeEvent, req) => {
   }
   if (!accountid) {
     return
+  }
+  let account
+  while (true) {
+    if (global.testEnded) {
+      return
+    } 
+    try {
+      account = await stripe.accounts.retrieve(stripeEvent.account, req.stripeKey)
+      break
+    } catch (error) {
+      if (error.raw && error.raw.code === 'lock_timeout') {
+        continue
+      }
+      if (error.raw && error.raw.code === 'rate_limit') {
+        continue
+      }
+      if (error.raw && error.raw.code === 'account_invalid') {
+        continue
+      }
+      if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+        continue
+      }
+      if (error.raw && error.raw.code === 'resource_missing') {
+        continue
+      }
+      if (error.type === 'StripeConnectionError') {
+        continue
+      }
+      if (error.type === 'StripeAPIError') {
+        continue
+      }
+      if (process.env.DEBUG_ERRORS) { console.log('webhook error', stripeEvent.type, error, stripeEvent) }
+      return
+    }
+  }
+  if (!account) {
+    return 
   }
   await stripeCache.update(payout)
   await dashboard.Storage.write(`${req.appid}/map/payoutid/stripeid/${payout.id}`, stripeEvent.account)
