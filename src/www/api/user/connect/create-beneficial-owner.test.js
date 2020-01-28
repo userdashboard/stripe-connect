@@ -79,7 +79,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted first_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -92,10 +92,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         req.body = TestHelper.createMultiPart(req, {
           address_city: 'London',
-          address_country: 'GB',
           address_line1: 'A building',
           address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
@@ -117,7 +115,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted last_name', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -130,16 +128,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         req.body = TestHelper.createMultiPart(req, {
           address_city: 'London',
-          address_country: 'GB',
           address_line1: 'A building',
           address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: ''
+          last_name: '',
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -155,7 +152,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted email', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -168,16 +165,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         req.body = TestHelper.createMultiPart(req, {
           address_city: 'London',
-          address_country: 'GB',
           address_line1: 'A building',
           address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
           email: '',
           first_name: person.firstName,
-          last_name: ''
+          last_name: person.lastName,
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -193,7 +189,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted address_city', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -206,16 +202,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         req.body = TestHelper.createMultiPart(req, {
           address_city: '',
-          address_country: 'GB',
           address_line1: 'A building',
           address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -231,7 +226,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted address_line1', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -244,16 +239,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         req.body = TestHelper.createMultiPart(req, {
           address_city: 'London',
-          address_country: 'GB',
           address_line1: '',
           address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -269,7 +263,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted address_postal_code', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -282,16 +276,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         req.body = TestHelper.createMultiPart(req, {
           address_city: 'London',
-          address_country: 'GB',
           address_line1: 'A building',
           address_postal_code: '',
-          address_state: 'LND',
           dob_day: '1',
           dob_month: '1',
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -328,7 +321,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -344,7 +338,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted dob_day', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -357,16 +351,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         req.body = TestHelper.createMultiPart(req, {
           address_city: 'London',
-          address_country: 'GB',
           address_line1: 'A building',
           address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
           dob_day: '',
           dob_month: '1',
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -382,7 +375,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted dob_month', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -395,16 +388,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         req.body = TestHelper.createMultiPart(req, {
           address_city: 'London',
-          address_country: 'GB',
           address_line1: 'A building',
           address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
           dob_day: '1',
           dob_month: '',
           dob_year: '1950',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -420,7 +412,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       it('missing posted dob_year', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -442,7 +434,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           dob_year: '',
           email: person.email,
           first_name: person.firstName,
-          last_name: person.lastName
+          last_name: person.lastName,
+          phone: '456-789-0123'
         })
         let errorMessage
         try {
@@ -459,7 +452,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         global.stripeJS = 3
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'DE',
+          country: 'GB',
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
@@ -499,7 +492,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted first_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -512,16 +505,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -533,7 +525,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted last_name', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -546,16 +538,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -567,7 +558,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted email', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -580,16 +571,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -601,7 +591,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted dob_day', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -614,16 +604,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -635,7 +624,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted dob_month', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -648,16 +637,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '2',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       })
       const owner = await req.post()
       assert.strictEqual(owner.dob.month, 2)
@@ -666,7 +654,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted dob_year', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -679,16 +667,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -722,7 +709,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -757,7 +745,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -769,7 +758,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted address_country', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -782,16 +771,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -803,7 +791,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted address_city', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -816,16 +804,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -837,7 +824,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('required posted address_postal_code', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -850,16 +837,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -893,7 +879,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -905,7 +892,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('optionally-required posted file verification_document_front', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -917,10 +904,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
@@ -940,7 +925,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('optionally-required posted file verification_document_back', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -952,10 +937,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
@@ -977,7 +960,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     it('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'DE',
+        country: 'GB',
         type: 'company'
       })
       const person = TestHelper.nextIdentity()
@@ -992,16 +975,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestHelper.createMultiPart(req, {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
@@ -1031,16 +1013,15 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = {
         address_city: 'London',
-        address_country: 'GB',
         address_line1: 'A building',
         address_postal_code: 'EC1A 1AA',
-        address_state: 'LND',
         dob_day: '1',
         dob_month: '1',
         dob_year: '1950',
         email: person.email,
         first_name: person.firstName,
-        last_name: person.lastName
+        last_name: person.lastName,
+        phone: '456-789-0123'
       }
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
