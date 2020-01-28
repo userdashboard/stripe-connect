@@ -98,9 +98,6 @@ module.exports = {
     try {
       await dashboard.Storage.deleteFile(`stripe/${id}`)
     } catch (error) {
-      if (error.message !== 'invalid-file') {
-        throw error
-      }
     }
   }
 }
