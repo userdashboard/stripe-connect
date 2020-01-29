@@ -132,18 +132,6 @@ before(async () => {
   while (accounts.data && accounts.data.length) {
     for (const account of accounts.data) {
       try {
-        const persons = await stripe.accounts.listPersons(account.id, { limit: 100 }, stripeKey)
-        if (persons.data && persons.data.length) {
-          for (const person of persons.data) {
-            try {
-              await stripe.accounts.deletePerson(account.id, person.id, stripeKey)
-            } catch (error) {
-            }
-          }
-        }
-      } catch (error) {
-      }
-      try {
         await stripe.accounts.del(account.id, stripeKey)
       } catch (error) {
       }
@@ -197,6 +185,19 @@ before(async () => {
   global.connectWebhookEndPointSecret = webhook.secret
 })
 
+afterEach(async () => {
+  let accounts = await stripe.accounts.list(stripeKey)
+  while (accounts.data && accounts.data.length) {
+    for (const account of accounts.data) {
+      try {
+        await stripe.accounts.del(account.id, stripeKey)
+      } catch (error) {
+      }
+    }
+    accounts = await stripe.accounts.list(stripeKey)
+  }
+})
+
 after(async () => {
   if (process.env.NGROK) {
     ngrok.kill()
@@ -207,16 +208,6 @@ after(async () => {
       await stripe.webhookEndpoints.del(webhook.id, stripeKey)
     }
     webhooks = await stripe.webhookEndpoints.list(stripeKey)
-  }
-  let accounts = await stripe.accounts.list(stripeKey)
-  while (accounts.data && accounts.data.length) {
-    for (const account of accounts.data) {
-      try {
-        await stripe.accounts.del(account.id, stripeKey)
-      } catch (error) {
-      }
-    }
-    accounts = await stripe.accounts.list(stripeKey)
   }
 })
 
