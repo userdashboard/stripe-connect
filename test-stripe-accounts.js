@@ -24,7 +24,7 @@ module.exports = {
          !user.stripeAccount.requirements.pending_verification.length &&
          !user.stripeAccount.individual.requirements.pending_verification.length) {
         return true
-      } 
+      }
     })
     // console.log('payout status', user.stripeAccount.payouts_enabled)
     // console.log('disabled reason', user.stripeAccount.individual.verification.disabled_reason)
@@ -108,7 +108,7 @@ module.exports = {
     await TestHelper.waitForVerificationFieldsToLeave(user, 'external_account')
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
-    req.account = user.account 
+    req.account = user.account
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }

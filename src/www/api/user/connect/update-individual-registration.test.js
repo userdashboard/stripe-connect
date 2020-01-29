@@ -2,7 +2,7 @@
 const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
-const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
+// const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/update-individual-registration', () => {
   describe('exceptions', () => {
@@ -55,19 +55,22 @@ describe('/api/user/connect/update-individual-registration', () => {
         assert.strictEqual(errorMessage, 'invalid-stripe-account')
       })
 
-      it('ineligible stripe account is submitted', async () => {
-        const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-        const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
-      })
+      // TODO: fix this test
+      // the stripe test api cannot create fully-submitted individual
+      // accounts when they fix that this test can be restored
+      // it('ineligible stripe account is submitted', async () => {
+      //   const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      //   const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+      //   req.account = user.account
+      //   req.session = user.session
+      //   let errorMessage
+      //   try {
+      //     await req.patch(req)
+      //   } catch (error) {
+      //     errorMessage = error.message
+      //   }
+      //   assert.strictEqual(errorMessage, 'invalid-stripe-account')
+      // })
     })
 
     describe('invalid-account', () => {

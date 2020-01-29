@@ -114,7 +114,11 @@ describe('/account/connect/stripe-account', () => {
     })
 
     it('should hide registration after submitting registration', async () => {
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -125,7 +129,11 @@ describe('/account/connect/stripe-account', () => {
     })
 
     it('should hide company owners after submitting registration', async () => {
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -246,7 +254,11 @@ describe('/account/connect/stripe-account', () => {
     })
 
     it('should show registration is submitted', async () => {
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

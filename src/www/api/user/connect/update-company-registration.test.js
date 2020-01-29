@@ -90,7 +90,7 @@ describe('/api/user/connect/update-company-registration', () => {
       })
 
       it('ineligible stripe account is submitted', async () => {
-        const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+        const user = await TestStripeAccounts.createSubmittedCompany('NZ')
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session

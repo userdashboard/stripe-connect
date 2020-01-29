@@ -21,7 +21,11 @@ describe('/administrator/connect/payout', () => {
 
     it('should bind payout to req', async () => {
       const administrator = await TestHelper.createOwner()
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/administrator/connect/payout?payoutid=${user.payout.id}`)
@@ -35,7 +39,11 @@ describe('/administrator/connect/payout', () => {
   describe('Payout#GET', () => {
     it('should have row for payout (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/administrator/connect/payout?payoutid=${user.payout.id}`)

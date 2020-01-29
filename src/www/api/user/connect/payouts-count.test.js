@@ -55,7 +55,11 @@ describe('/api/user/connect/payouts-count', () => {
 
   describe('returns', () => {
     it('integer', async () => {
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPayout(user)
       }

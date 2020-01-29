@@ -399,10 +399,6 @@ async function createPayout (user) {
   const req = TestHelper.createRequest(`/api/fake-payout?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  // TODO: have to retry here because for individual accounts
-  // there is a period where after submitting everything and
-  // after becoming verified, and no data is required, the 
-  // payouts become disabled
   await req.get()
   const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
   req2.session = user.session

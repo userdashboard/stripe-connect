@@ -56,7 +56,11 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
       })
 
       it('ineligible stripe account is submitted', async () => {
-        const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+        // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+        const user = await TestStripeAccounts.createSubmittedCompany('NZ')
         const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session

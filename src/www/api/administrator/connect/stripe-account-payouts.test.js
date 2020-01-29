@@ -39,7 +39,11 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
   describe('returns', () => {
     it('array', async () => {
       const administrator = await TestHelper.createOwner()
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPayout(user)
         await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
@@ -56,7 +60,11 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
     it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
       const administrator = await TestHelper.createOwner()
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPayout(user)
         await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)

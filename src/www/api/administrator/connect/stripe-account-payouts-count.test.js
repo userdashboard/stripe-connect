@@ -39,10 +39,18 @@ describe('/api/administrator/connect/stripe-account-payouts-count', () => {
   describe('returns', () => {
     it('integer', async () => {
       const administrator = await TestHelper.createOwner()
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       await TestHelper.createPayout(user)
       await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
-      const user2 = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user2 = await TestStripeAccounts.createSubmittedCompany('NZ')
       await TestHelper.createPayout(user2)
       await TestHelper.waitForPayout(administrator, user2.stripeAccount.id, null)
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts-count?stripeid=${user.stripeAccount.id}`)
