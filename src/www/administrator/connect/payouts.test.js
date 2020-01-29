@@ -36,7 +36,7 @@ describe('/administrator/connect/payouts', () => {
       const user1 = await TestStripeAccounts.createSubmittedCompany('NZ')
       const payout1 = await TestHelper.createPayout(user1)
       await TestHelper.waitForPayout(administrator, user1.stripeAccount.id, null)
-      const user2 = await TestStripeAccounts.createSubmittedCompany('NZ')
+      const user2 = await TestStripeAccounts.createSubmittedCompany('GB')
       const payout2 = await TestHelper.createPayout(user2)
       await TestHelper.waitForPayout(administrator, user2.stripeAccount.id, null)
       const req = TestHelper.createRequest('/administrator/connect/payouts')
