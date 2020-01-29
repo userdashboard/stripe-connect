@@ -403,15 +403,7 @@ async function createPayout (user) {
   // there is a period where after submitting everything and
   // after becoming verified, and no data is required, the 
   // payouts become disabled
-  while (true) {
-    try {
-      await req.get()
-      break
-    } catch (error) {
-    }
-    await wait()
-    continue
-  }
+  await req.get()
   const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
   req2.session = user.session
   req2.account = user.account
