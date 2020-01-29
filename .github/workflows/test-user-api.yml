@@ -29,8 +29,8 @@ jobs:
         STORAGE_PATH: /tmp/test-data-3
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_3 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_3 }}
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_7 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_7 }}
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         DEBUG_ERRORS: true
