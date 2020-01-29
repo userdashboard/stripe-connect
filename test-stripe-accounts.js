@@ -19,6 +19,11 @@ module.exports = {
              !stripeEvent.data.object.requirements.eventually_due.length &&
              !stripeEvent.data.object.requirements.pending_verification.length
     })
+    await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
+      return stripeEvent.data.object.id === user.stripeAccount.id &&
+             !stripeEvent.data.object.payouts_enabled
+    })
+    console.log('disabled payout detected')
     console.log('account is submitted', user.stripeAccount.metadata.submitted)
     console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
     console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
