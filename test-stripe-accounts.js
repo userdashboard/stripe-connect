@@ -106,19 +106,18 @@ module.exports = {
     }
     await TestHelper.createExternalAccount(user, payment)
     await TestHelper.waitForVerificationFieldsToLeave(user, 'external_account')
-    global.webhooks = []
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
-    req.account = user.account
+    req.account = user.account 
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
     await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
-    global.webhooks = []
     await TestHelper.updateStripeRegistration(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
+    console.log('waiting until document fields leave')
     await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.document')
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
@@ -126,10 +125,12 @@ module.exports = {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
+      console.log('waiting until additional document fields leave')
       await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
     }
+    console.log('waiting until pending verification fields leave')
     await TestHelper.waitForPendingFieldsToLeave(user)
-    // console.log('waiting until only tos acceptance is due')
+    console.log('waiting until only tos acceptance is due')
     await TestHelper.waitForWebhook('account.updated', async () => {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       if (user.stripeAccount.requirements.currently_due.length === 2 &&
