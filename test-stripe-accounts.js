@@ -181,6 +181,8 @@ module.exports = {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
+    await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.document`)
+    await TestHelper.waitForPendingFieldsToLeave(user)
     // console.log('got representative', user.representative)
     for (const posted in representative) {
       const field = posted.replace('address_', 'address.').replace('relationship_', 'relationship.').replace('dob_', 'dob.').replace('verification_', 'verification.')
@@ -197,6 +199,7 @@ module.exports = {
       })
       // console.log('waiting for additional document field to leave')
       await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
+      await TestHelper.waitForPendingFieldsToLeave(user)
     }
     // console.log('beneficial owners')
     if (beneficialOwnerData[country] !== false) {
