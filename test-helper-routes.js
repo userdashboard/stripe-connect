@@ -100,9 +100,6 @@ module.exports = {
         while (true) {
           try {
             const payout = await stripe.payouts.create(payoutInfo, req.stripeKey)
-            if (process.env.DEBUG_ERRORS) {
-              console.log('created payout', payout)
-            }
             return payout
           } catch (error) {
             if (error.raw && error.raw.code === 'lock_timeout') {

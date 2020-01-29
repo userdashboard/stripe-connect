@@ -9,7 +9,6 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
-    console.log('updating individual', req.query, req.body)
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
@@ -310,7 +309,6 @@ module.exports = {
     }
     while (true) {
       try {
-        console.log('updating account', accountInfo)
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
         await stripeCache.delete(req.query.stripeid)
         return accountNow
