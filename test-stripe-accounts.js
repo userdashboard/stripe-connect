@@ -10,70 +10,43 @@ module.exports = {
     country = country || 'US'
     const user = await module.exports.createIndividualReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
-    await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
-      return stripeEvent.data.object.id === user.stripeAccount.id &&
-             stripeEvent.data.object.payouts_enabled &&
-             stripeEvent.data.object.metadata.submitted &&
-             stripeEvent.data.object.individual.verification.status === 'verified' &&
-             !stripeEvent.data.object.requirements.currently_due.length &&
-             !stripeEvent.data.object.requirements.eventually_due.length &&
-             !stripeEvent.data.object.requirements.pending_verification.length
-    })
-    await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
-      return stripeEvent.data.object.id === user.stripeAccount.id &&
-             !stripeEvent.data.object.payouts_enabled
-    })
-    console.log('disabled payout detected')
-    console.log('account is submitted', user.stripeAccount.metadata.submitted)
-    console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
-    console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
-    console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
-    let lastMessage
-    while (true) {
-      try {
-        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.payouts_enabled &&
-            user.stripeAccount.individual.verification.status === 'verified' &&
-            !user.stripeAccount.requirements.pending_verification.length &&
-            !user.stripeAccount.requirements.currently_due.length &&
-            !user.stripeAccount.requirements.eventually_due.length &&
-            !user.stripeAccount.requirements.disabled_reason) {
-          return user
-        }
-        if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
-          if (lastMessage !== 1) {
-            console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 1
-        }
-        if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
-          if (lastMessage !== 2) {
-            console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 2
-        }
-        if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
-          if (lastMessage !== 3) {
-            console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 3
-        }
-        if (!user.stripeAccount.payouts_enabled) {
-          if (lastMessage !== 4) {
-            console.log('payouts not enabled', user.stripeAccount.id)
-          }
-          lastMessage = 4
-        }
-      } catch (error) {
+    console.log('waiting on submitted, verified, payouts_enabled')
+    await TestHelper.waitForWebhook('account.updated', async () => {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      if (user.stripeAccount.payouts_enabled &&
+          user.stripeAccount.metadata.submitted &&
+          user.stripeAccount.individual.verification.status === 'verified' &&
+         !user.stripeAccount.requirements.currently_due.length &&
+         !user.stripeAccount.requirements.eventually_due.length &&
+         !user.stripeAccount.requirements.pending_verification.length) {
+        return true
+      } 
+    })
+    console.log('disabled payout detected')
+    console.log('payout status', user.stripeAccount.payouts_enabled)
+    console.log('disabled reason', user.stripeAccount.individual.verification.disabled_reason)
+    console.log('account is submitted', user.stripeAccount.metadata.submitted)
+    console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
+    console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
+    console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
+    await TestHelper.waitForWebhook('account.updated', async () => {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      if (user.stripeAccount.payouts_enabled &&
+          user.stripeAccount.individual.verification.status === 'verified' &&
+          !user.stripeAccount.requirements.pending_verification.length &&
+          !user.stripeAccount.requirements.currently_due.length &&
+          !user.stripeAccount.requirements.eventually_due.length &&
+          !user.stripeAccount.requirements.disabled_reason) {
+        return true
       }
-      await wait()
-    }
+    })
+    return user
   },
   createSubmittedCompany: async (country) => {
     country = country || 'US'
@@ -84,77 +57,35 @@ module.exports = {
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
-    let lastMessage
-    while (true) {
-      try {
-        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.requirements.currently_due.length === 2) {
-          break
-        }
-        if (lastMessage !== 1) {
-          console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
-        }
-        lastMessage = 1
-        await wait()
-        continue
-      } catch (error) {
+    await TestHelper.waitForWebhook('account.updated', async () => {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      if (user.stripeAccount.requirements.currently_due.length === 2) {
+        return true
       }
-    }
-    await TestHelper.updateStripeRegistration(user, {}, {
-      verification_document_back: TestHelper['success_id_scan_back.png'],
-      verification_document_front: TestHelper['success_id_scan_front.png']
     })
     console.log('submitting account')
     await TestHelper.submitStripeAccount(user)
-    await TestHelper.waitForWebhook('account.updated', (stripeEvent) => {
-      return stripeEvent.data.object.id === user.stripeAccount.id &&
-             stripeEvent.data.object.payouts_enabled &&
-             stripeEvent.data.object.metadata.submitted &&
-             !stripeEvent.data.object.requirements.currently_due.length &&
-             !stripeEvent.data.object.requirements.eventually_due.length &&
-             !stripeEvent.data.object.requirements.pending_verification.length
+    await TestHelper.waitForWebhook('account.updated', async () => {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      return user.stripeAccount.payouts_enabled &&
+             user.stripeAccount.metadata.submitted &&
+            !user.stripeAccount.requirements.currently_due.length &&
+            !user.stripeAccount.requirements.eventually_due.length &&
+            !user.stripeAccount.requirements.pending_verification.length
     })
     console.log('account is submitted', user.stripeAccount.metadata.submitted)
     console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
     console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
     console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
-    lastMessage = null
-    while (true) {
-      try {
-        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.payouts_enabled &&
-           !user.stripeAccount.requirements.pending_verification.length &&
-           !user.stripeAccount.requirements.disabled_reason) {
-          return user
-        }
-        if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
-          if (lastMessage !== 1) {
-            console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 1
-        }
-        if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
-          if (lastMessage !== 2) {
-            console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 2
-        }
-        if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
-          if (lastMessage !== 3) {
-            console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 3
-        }
-        if (!user.stripeAccount.payouts_enabled) {
-          if (lastMessage !== 4) {
-            console.log('payouts not enabled', user.stripeAccount.id)
-          }
-          lastMessage = 4
-        }
-      } catch (error) {
+    await TestHelper.waitForWebhook('account.updated', async () => {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      if (user.stripeAccount.payouts_enabled &&
+          !user.stripeAccount.requirements.pending_verification.length &&
+          !user.stripeAccount.requirements.disabled_reason) {
+        return true
       }
-      await wait()
-    }
+    })
+    return user
   },
   createIndividualReadyForSubmission: async (country) => {
     country = country || 'US'
@@ -200,24 +131,30 @@ module.exports = {
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
     }
+    console.log('waiting until payouts are disabled')
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
-    while (true) {
-      try {
-        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.requirements.currently_due.length === 2 &&
-            !user.stripeAccount.requirements.pending_verification.length &&
-            user.stripeAccount.individual.verification.status === 'verified') {
-          return user
-        }
-      } catch (error) {
+    await TestHelper.waitForWebhook('account.updated', async () => {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      if (!user.stripeAccount.payouts_enabled) {
+        return true
       }
-      await wait()
-    }
+    })
+    console.log('waiting until only tos acceptance is due')
+    await TestHelper.waitForWebhook('account.updated', async () => {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      if (user.stripeAccount.requirements.currently_due.length === 2 &&
+        !user.stripeAccount.requirements.pending_verification.length &&
+        user.stripeAccount.individual.verification.status === 'verified') {
+        return true
+      }
+    })
+    console.log('ready to go')
+    return user
   },
   createCompanyReadyForSubmission: async (country) => {
     country = country || 'US'
@@ -299,6 +236,11 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
+    console.log('company document')
+    await TestHelper.updateStripeRegistration(user, {}, {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    })
     console.log('awaiting verification')
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
@@ -306,43 +248,15 @@ module.exports = {
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
-    let lastMessage
-    while (true) {
-      try {
-        user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-        if (user.stripeAccount.requirements.currently_due.length === 2 &&
-           !user.stripeAccount.requirements.pending_verification.length) {
-          console.log('user has only tos_acceptance left', user.stripeAccount.requirements)
-          return user
-        }
-        if (user.stripeAccount.requirements.currently_due && user.stripeAccount.requirements.currently_due.length) {
-          if (lastMessage !== 1) {
-            console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 1
-        }
-        if (user.stripeAccount.requirements.eventually_due && user.stripeAccount.requirements.eventually_due.length) {
-          if (lastMessage !== 2) {
-            console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 2
-        }
-        if (user.stripeAccount.requirements.pending_verification && user.stripeAccount.requirements.pending_verification.length) {
-          if (lastMessage !== 3) {
-            console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '), user.stripeAccount.id)
-          }
-          lastMessage = 3
-        }
-        if (!user.stripeAccount.payouts_enabled) {
-          if (lastMessage !== 4) {
-            console.log('payouts not enabled', user.stripeAccount.id)
-          }
-          lastMessage = 4
-        }
-      } catch (error) {
+    await TestHelper.waitForWebhook('account.updated', async () => {
+      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      if (user.stripeAccount.requirements.currently_due.length === 2 &&
+          !user.stripeAccount.requirements.pending_verification.length) {
+        console.log('user has only tos_acceptance left', user.stripeAccount.requirements)
+        return true
       }
-      await wait()
-    }
+    })
+    return user
   },
   createCompanyWithOwners: async (country, numOwners) => {
     country = country || 'US'
