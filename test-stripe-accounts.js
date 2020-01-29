@@ -119,6 +119,7 @@ module.exports = {
     })
     console.log('waiting until document fields leave')
     await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.document')
+    await TestHelper.waitForPendingFieldsToLeave(user)
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
       await TestHelper.updateStripeRegistration(user, {}, {
@@ -135,8 +136,8 @@ module.exports = {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       if (user.stripeAccount.requirements.currently_due.length === 2 &&
         !user.stripeAccount.requirements.pending_verification.length &&
-        !user.stripeAccount.individual.requirements.pending_verification.length &&
         !user.stripeAccount.requirements.disabled_reason &&
+        !user.stripeAccount.individual.requirements.pending_verification.length &&
         user.stripeAccount.individual.verification.status === 'verified' &&
         user.stripeAccount.capabilities.card_payments === 'active' &&
         user.stripeAccount.capabilities.transfers === 'active') {
