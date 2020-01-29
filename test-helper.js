@@ -156,7 +156,15 @@ before(async () => {
   if (process.env.NGROK) {
     while (!tunnel) {
       try {
-        tunnel = await ngrok.connect(process.env.PORT)
+        tunnel = await ngrok.connect({
+          port: process.env.PORT,
+          onStatusChange: (status) => {
+            console.log('ngrok tunnel status', status)
+          },
+          onLogEvent: (data) => {
+            console.log('ngrok log data', data)
+          }
+        })
         if (!tunnel) {
           continue
         }

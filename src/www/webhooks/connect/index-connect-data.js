@@ -28,11 +28,7 @@ module.exports = {
       //   console.log(JSON.stringify(JSON.parse(req.bodyRaw), null, '  '))
       // }
       if (req.bodyRaw.indexOf('appid') > -1 && req.bodyRaw.indexOf(global.testNumber) === -1) {
-        // if (global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
-        //   console.log('webhook ended due to stale test data ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
-        // } else {
-        //   console.log('webhook ended due to stale test data')
-        // }
+        console.log('webhook ended due to stale test data')
         return res.end()
       }
     }
