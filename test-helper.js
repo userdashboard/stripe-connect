@@ -166,9 +166,11 @@ before(async () => {
           }
         })
         if (!tunnel) {
+          console.log('no tunnel')
           continue
         }
       } catch (error) {
+        console.log(error)
         continue
       }
     }
