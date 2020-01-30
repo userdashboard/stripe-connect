@@ -1,3 +1,4 @@
+const dashboard = require('@userdashboard/dashboard')
 const TestHelper = require('./test-helper.js')
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
     req.stripeKey = {
       api_key: process.env.STRIPE_KEY
     }
-    // console.log('waiting on submitted, verified, payouts_enabled')
+    console.log('waiting on submitted, verified, payouts_enabled')
     await TestHelper.waitForWebhook('account.updated', async () => {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       if (user.stripeAccount.payouts_enabled &&
@@ -26,12 +27,12 @@ module.exports = {
         return true
       }
     })
-    // console.log('payout status', user.stripeAccount.payouts_enabled)
-    // console.log('disabled reason', user.stripeAccount.individual.verification.disabled_reason)
-    // console.log('account is submitted', user.stripeAccount.metadata.submitted)
-    // console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
-    // console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
-    // console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
+    console.log('payout status', user.stripeAccount.payouts_enabled)
+    console.log('disabled reason', user.stripeAccount.individual.verification.disabled_reason)
+    console.log('account is submitted', user.stripeAccount.metadata.submitted)
+    console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
+    console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
+    console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
     return user
   },
   createSubmittedCompany: async (country) => {
@@ -49,7 +50,7 @@ module.exports = {
         return true
       }
     })
-    // console.log('submitting account')
+    console.log('submitting account')
     await TestHelper.submitStripeAccount(user)
     await TestHelper.waitForWebhook('account.updated', async () => {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
@@ -59,10 +60,10 @@ module.exports = {
             !user.stripeAccount.requirements.eventually_due.length &&
             !user.stripeAccount.requirements.pending_verification.length
     })
-    // console.log('account is submitted', user.stripeAccount.metadata.submitted)
-    // console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
-    // console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
-    // console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
+    console.log('account is submitted', user.stripeAccount.metadata.submitted)
+    console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
+    console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
+    console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
     await TestHelper.waitForWebhook('account.updated', async () => {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       if (user.stripeAccount.payouts_enabled &&
@@ -144,13 +145,13 @@ module.exports = {
         return true
       }
     })
-    // console.log('ready to go')
+    console.log('ready to go')
     return user
   },
   createCompanyReadyForSubmission: async (country) => {
     country = country || 'US'
     const user = await TestHelper.createUser()
-    // console.log('creating stripe account')
+    console.log('creating stripe account')
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -159,7 +160,7 @@ module.exports = {
     for (const field in companyData[country]) {
       company[field] = companyData[country][field]
     }
-    // console.log('creating registration', user.stripeAccount.requirements.currently_due.join(', '))
+    console.log('creating registration', user.stripeAccount.requirements.currently_due.join(', '))
     await TestHelper.createStripeRegistration(user, company, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
@@ -176,36 +177,36 @@ module.exports = {
     for (const field in representativeData[country]) {
       representative[field] = representativeData[country][field]
     }
-    // console.log('creating representative', representative)
+    console.log('creating representative', representative)
     await TestHelper.createCompanyRepresentative(user, representative, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
     await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.document`)
     await TestHelper.waitForPendingFieldsToLeave(user)
-    // console.log('got representative', user.representative)
+    console.log('got representative', user.representative)
     for (const posted in representative) {
       const field = posted.replace('address_', 'address.').replace('relationship_', 'relationship.').replace('dob_', 'dob.').replace('verification_', 'verification.')
-      // console.log('waiting for representative fields to clear out', field, posted)
+      console.log('waiting for representative fields to clear out', field, posted)
       await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.${field}`)
     }
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-      // console.log('waiting for additional document to be required')
+      console.log('waiting for additional document to be required')
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
-      // console.log('submitting additional document')
+      console.log('submitting additional document')
       await TestHelper.updateCompanyRepresentative(user, {}, {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
-      // console.log('waiting for additional document field to leave')
+      console.log('waiting for additional document field to leave')
       await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
       await TestHelper.waitForPendingFieldsToLeave(user)
     }
-    // console.log('beneficial owners')
+    console.log('beneficial owners')
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
     }
-    // console.log('company directors')
+    console.log('company directors')
     if (companyDirectorData[country] !== false) {
       await TestHelper.submitCompanyDirectors(user)
     }
@@ -223,19 +224,19 @@ module.exports = {
         payment[field] = paymentData[country][field]
       }
     }
-    // console.log('external account')
+    console.log('external account')
     await TestHelper.createExternalAccount(user, payment)
     // TODO: fix this when Stripe fixes company.verification.document
     // the 'company.verification.document' erroneously shows up in the
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
-    // console.log('company document')
+    console.log('company document')
     await TestHelper.updateStripeRegistration(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
-    // console.log('awaiting verification')
+    console.log('awaiting verification')
     const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
     req.session = user.session
     req.account = user.account
@@ -246,7 +247,7 @@ module.exports = {
       user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       if (user.stripeAccount.requirements.currently_due.length === 2 &&
           !user.stripeAccount.requirements.pending_verification.length) {
-        // console.log('user has only tos_acceptance left', user.stripeAccount.requirements)
+        console.log('user has only tos_acceptance left', user.stripeAccount.requirements)
         return true
       }
     })
@@ -260,7 +261,8 @@ module.exports = {
       type: 'company'
     })
     if (numOwners && beneficialOwnerData[country] !== false) {
-      const requirements = JSON.parse(user.stripeAccount.metadata.beneficialOwnerTemplate)
+      const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${user.stripeAccount.id}`)
+      const requirements = JSON.parse(requirementsRaw)
       const requireDocument = requirements.currently_due.indexOf('verification.document') > -1 ||
                               requirements.eventually_due.indexOf('verification.document') > -1
       let documents
@@ -289,7 +291,8 @@ module.exports = {
       type: 'company'
     })
     if (numDirectors && companyDirectorData[country] !== false) {
-      const requirements = JSON.parse(user.stripeAccount.metadata.companyDirectorTemplate)
+      const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:director:${user.stripeAccount.id}`)
+      const requirements = JSON.parse(requirementsRaw)
       const requireDocument = requirements.currently_due.indexOf('verification.document') > -1 ||
                               requirements.eventually_due.indexOf('verification.document') > -1
       let documents

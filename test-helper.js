@@ -231,7 +231,7 @@ async function createStripeAccount (user, properties) {
   user.stripeAccount = await req.post()
   global.monitorStripeAccount = user.stripeAccount.id
   if (req.body.type === 'company') {
-    const req2 = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.stripeAccount.metadata.representative}`)
+    const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account-company-representative?stripeid=${user.stripeAccount.id}`)
     req2.stripeKey = stripeKey
     req2.session = user.session
     req2.account = user.account
