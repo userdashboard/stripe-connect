@@ -10,14 +10,19 @@ module.exports = {
     await TestHelper.waitForVerificationStart(user)
     await TestHelper.waitForPayoutsEnabled(user)
     await TestHelper.waitForPendingFieldsToLeave(user)
+    await TestHelper.waitForVerification(user)
+    await TestHelper.waitForPayoutsEnabled(user)
     return user
   },
   createSubmittedCompany: async (country) => {
     country = country || 'US'
     const user = await module.exports.createCompanyReadyForSubmission(country)
+    await TestHelper.submitStripeAccount(user)
     await TestHelper.waitForVerificationStart(user)
     await TestHelper.waitForPayoutsEnabled(user)
     await TestHelper.waitForPendingFieldsToLeave(user)
+    await TestHelper.waitForVerification(user)
+    await TestHelper.waitForPayoutsEnabled(user)
     return user
   },
   createIndividualReadyForSubmission: async (country) => {
@@ -77,21 +82,8 @@ module.exports = {
       await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
     }
     // console.log('waiting until pending verification fields leave')
+    await TestHelper.waitForPayoutsEnabled(user)
     await TestHelper.waitForPendingFieldsToLeave(user)
-    // console.log('waiting until only tos acceptance is due')
-    await TestHelper.waitForWebhook('account.updated', async () => {
-      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      if (user.stripeAccount.requirements.currently_due.length === 2 &&
-        !user.stripeAccount.requirements.pending_verification.length &&
-        !user.stripeAccount.requirements.disabled_reason &&
-        !user.stripeAccount.individual.requirements.pending_verification.length &&
-        user.stripeAccount.individual.verification.status === 'verified' &&
-        user.stripeAccount.capabilities.card_payments === 'active' &&
-        user.stripeAccount.capabilities.transfers === 'active') {
-        return true
-      }
-    })
-    // console.log('ready to go')
     return user
   },
   createCompanyReadyForSubmission: async (country) => {
@@ -151,10 +143,12 @@ module.exports = {
     // console.log('beneficial owners')
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.owner')
     }
     // console.log('company directors')
     if (companyDirectorData[country] !== false) {
       await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.director')
     }
     const payment = {
       country,
@@ -182,21 +176,8 @@ module.exports = {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
-    // console.log('awaiting verification')
-    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-    req.session = user.session
-    req.account = user.account
-    req.stripeKey = {
-      api_key: process.env.STRIPE_KEY
-    }
-    await TestHelper.waitForWebhook('account.updated', async () => {
-      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      if (user.stripeAccount.requirements.currently_due.length === 2 &&
-          !user.stripeAccount.requirements.pending_verification.length) {
-        // console.log('user has only tos_acceptance left', user.stripeAccount.requirements)
-        return true
-      }
-    })
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'company.verification.document')
+    await TestHelper.waitForPendingFieldsToLeave(user)
     return user
   },
   createCompanyWithOwners: async (country, numOwners) => {

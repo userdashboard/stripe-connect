@@ -570,17 +570,12 @@ async function waitForVerification (user, callback) {
         if (!stripeAccount.individual || stripeAccount.individual.verification.status !== 'verified') {
           return setTimeout(wait, 100)
         }
-      } else {
-        if (!stripeAccount.company || stripeAccount.company.verification.status !== 'verified') {
-          return setTimeout(wait, 100)
-        }
-      }
+      } 
       if (!stripeAccount.payouts_enabled || stripeAccount.requirements.currently_due.length) {
         return setTimeout(wait, 100)
       }
-      return setTimeout(() => {
-        return callback(null, stripeAccount)
-      }, 10)
+      user.stripeAccount = stripeAccount
+      return callback(null, stripeAccount)
     } catch (error) {
     }
     return setTimeout(wait, 10)
@@ -644,6 +639,7 @@ async function waitForPendingFieldsToLeave (user, callback) {
         }
         return setTimeout(wait, 100)
       }
+      user.stripeAccount = stripeAccount
       return setTimeout(callback, 10)
     } catch (error) {
     }
@@ -691,6 +687,7 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
           return setTimeout(wait, 100)
         }
       }
+      user.stripeAccount = stripeAccount
       return setTimeout(callback, 10)
     } catch (error) {
     }
@@ -712,16 +709,19 @@ async function waitForVerificationFieldsToReturn (user, contains, callback) {
       const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       for (const field of stripeAccount.requirements.eventually_due) {
         if (field.indexOf(contains) > -1) {
+          user.stripeAccount = stripeAccount
           return setTimeout(callback, 10)
         }
       }
       for (const field of stripeAccount.requirements.past_due) {
         if (field.indexOf(contains) > -1) {
+          user.stripeAccount = stripeAccount
           return setTimeout(callback, 10)
         }
       }
       for (const field of stripeAccount.requirements.currently_due) {
         if (field.indexOf(contains) > -1) {
+          user.stripeAccount = stripeAccount
           return setTimeout(callback, 10)
         }
       }
@@ -747,8 +747,10 @@ async function waitForVerificationStart (user, callback) {
       if (stripeAccount.requirements.eventually_due.length ||
         stripeAccount.requirements.past_due.length ||
         stripeAccount.requirements.currently_due.length) {
+        console.log('still requires fields', stripeAccount.requirements)
         return setTimeout(wait, 100)
       }
+      user.stripeAccount = stripeAccount
       return setTimeout(callback, 10)
     } catch (error) {
     }
@@ -772,9 +774,11 @@ async function waitForAccountRequirement (user, requirement, callback) {
         return setTimeout(wait, 100)
       }
       if (stripeAccount.requirements.currently_due.indexOf(requirement) > -1) {
+        user.stripeAccount = stripeAccount
         return setTimeout(callback, 10)
       }
       if (stripeAccount.requirements.eventually_due.indexOf(requirement) > -1) {
+        user.stripeAccount = stripeAccount
         return setTimeout(callback, 10)
       }
       return setTimeout(wait, 100)
@@ -813,11 +817,13 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
       }
       for (const field of stripeAccount.requirements.currently_due) {
         if (field === `${personid}.${requirement}`) {
+          user.stripeAccount = stripeAccount
           return setTimeout(callback, 10)
         }
       }
       for (const field of stripeAccount.requirements.eventually_due) {
         if (field === `${personid}.${requirement}`) {
+          user.stripeAccount = stripeAccount
           return setTimeout(callback, 10)
         }
       }
@@ -829,11 +835,13 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
       if (person && person.requirements) {
         for (const field of person.requirements.currently_due) {
           if (field === requirement) {
+            user.stripeAccount = stripeAccount
             return setTimeout(callback, 10)
           }
         }
         for (const field of person.requirements.eventually_due) {
           if (field === requirement) {
+            user.stripeAccount = stripeAccount
             return setTimeout(callback, 10)
           }
         }
@@ -845,11 +853,13 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
       if (person && person.requirements) {
         for (const field of person.requirements.currently_due) {
           if (field === requirement) {
+            user.stripeAccount = stripeAccount
             return setTimeout(callback, 10)
           }
         }
         for (const field of person.requirements.eventually_due) {
           if (field === requirement) {
+            user.stripeAccount = stripeAccount
             return setTimeout(callback, 10)
           }
         }
@@ -861,11 +871,13 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
       if (person && person.requirements) {
         for (const field of person.requirements.currently_due) {
           if (field === requirement) {
+            user.stripeAccount = stripeAccount
             return setTimeout(callback, 10)
           }
         }
         for (const field of person.requirements.eventually_due) {
           if (field === requirement) {
+            user.stripeAccount = stripeAccount
             return setTimeout(callback, 10)
           }
         }
