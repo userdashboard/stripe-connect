@@ -70,7 +70,7 @@ describe('/api/administrator/connect/payouts', () => {
   })
 
   describe('returns', () => {
-    it.only('array', async () => {
+    it('array', async () => {
       const administrator = await TestHelper.createOwner()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
@@ -92,7 +92,7 @@ describe('/api/administrator/connect/payouts', () => {
   })
 
   describe('configuration', () => {
-    it.only('environment PAGE_SIZE', async () => {
+    it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
       const administrator = await TestHelper.createOwner()
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
