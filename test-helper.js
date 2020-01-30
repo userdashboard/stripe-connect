@@ -276,7 +276,7 @@ async function createCompanyRepresentative (user, properties, uploads) {
 }
 
 async function updateCompanyRepresentative (user, properties, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?personid=${user.representative.id}`)
+  const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   req.uploads = uploads || {}

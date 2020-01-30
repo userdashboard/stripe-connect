@@ -9,20 +9,22 @@ const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   patch: async (req) => {
-    if (!req.query || !req.query.personid) {
-      throw new Error('invalid-personid')
+    if (!req.query || !req.query.stripeid) {
+      throw new Error('invalid-stripeid')
+    }
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount) {
+      throw new Error('invalid-stripeid')
+    }
+    if (stripeAccount.business_type !== 'company') {
+      throw new Error('invalid-stripe-account')
     }
     const person = await global.api.user.connect.CompanyRepresentative.get(req)
     if (!person) {
-      throw new Error('invalid-personid')
+      throw new Error('invalid-stripeid')
     }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
-    }
-    req.query.stripeid = person.account
-    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (!stripeAccount) {
-      throw new Error('invalid-personid')
     }
     let requiresInfo = false
     for (const requirement of stripeAccount.requirements.currently_due) {
