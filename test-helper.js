@@ -239,7 +239,6 @@ beforeEach(async () => {
       url: `${tunnel}/webhooks/connect/index-connect-data`,
       enabled_events: eventList
     }, stripeKey)
-    console.log(webhook)
     global.connectWebhookEndPointSecret = webhook.secret
     return
   }

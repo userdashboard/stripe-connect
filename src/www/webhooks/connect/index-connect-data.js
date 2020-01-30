@@ -59,7 +59,7 @@ module.exports = {
         stripeEvent.data.object.id !== stripeEvent.data.account) {
       await stripeCache.delete(stripeEvent.data.object.id)
     }
-    console.log('webhook', global.monitorStripeAccount, stripeEvent.type, stripeEvent.data.object ? stripeEvent.data.object.id : 'no objectid', stripeEvent)
+    // console.log('webhook', global.monitorStripeAccount, stripeEvent.type, stripeEvent.data.object ? stripeEvent.data.object.id : 'no objectid', stripeEvent)
     if (supportedWebhooks[stripeEvent.type]) {
       try {
         await supportedWebhooks[stripeEvent.type](stripeEvent, req)
