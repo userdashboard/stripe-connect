@@ -53,7 +53,6 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type === 'company') {
     owners = await global.api.user.connect.BeneficialOwners.get(req)
     directors = await global.api.user.connect.CompanyDirectors.get(req)
-    req.query.personid = stripeAccount.metadata.representative
     representative = await global.api.user.connect.CompanyRepresentative.get(req)
   }
   req.data = { owners, directors, representative, stripeAccount, registrationComplete }
@@ -85,7 +84,7 @@ async function renderPage (req, res) {
     } else {
       removeElements.push('business-name')
     }
-    if (req.data.stripeAccount.metadata.representative) {
+    if (req.data.representative) {
       if (req.data.representative.first_name) {
         removeElements.push('add-company-representative-link')
       } else {

@@ -29,7 +29,8 @@ module.exports = {
     if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
       throw new Error('invalid-company-director')
     }
-    if (!stripeAccount.metadata.representative) {
+    const representative = await global.api.user.connect.CompanyRepresentative.get(req)
+    if (!representative) {
       throw new Error('invalid-representative')
     }
     if (stripeAccount.requirements.currently_due.length) {

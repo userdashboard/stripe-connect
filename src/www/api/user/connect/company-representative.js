@@ -1,33 +1,26 @@
 const dashboard = require('@userdashboard/dashboard')
+const stripe = require('stripe')()
+stripe.setApiVersion(global.stripeAPIVersion)
+if (global.maxmimumStripeRetries) {
+  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
+}
+stripe.setTelemetryEnabled(false)
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   get: async (req) => {
-    if (!req.query || !req.query.personid) {
-      throw new Error('invalid-personid')
+    if (!req.query || !req.query.stripeid) {
+      throw new Error('invalid-stripeid')
     }
-    const stripeid = await dashboard.Storage.read(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
-    if (!stripeid) {
-      throw new Error('invalid-personid')
-    }
-    req.query.stripeid = stripeid
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    if (!stripeAccount || stripeAccount.business_type !== 'company') {
-      throw new Error('invalid-personid')
+    if (stripeAccount.business_type !== 'company') {
+      throw new Error('invalid-account')
     }
-    if (stripeAccount.metadata.representative !== req.query.personid) {
-      throw new Error('invalid-person')
-    }
+    let persons
     while (true) {
       try {
-        const person = await stripeCache.retrievePerson(stripeid, req.query.personid, req.stripeKey)
-        if (!person) {
-          throw new Error('invalid-personid')
-        }
-        if (person.relationship.representative !== true) {
-          throw new Error('invalid-person')
-        }
-        return person
+        persons = await stripe.account.listPersons(req.query.stripeid, req.stripeKey)
+        break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
@@ -56,5 +49,14 @@ module.exports = {
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
+    if (!persons || !persons.data || !persons.data.length) {
+      return null
+    }
+    for (const person of persons.data) {
+      if (person.relationship.representative) {
+        return person
+      }
+    }
+    return null
   }
 }

@@ -13,7 +13,6 @@ async function beforeRequest (req) {
   }
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (stripeAccount.business_type !== 'company' ||
-      !stripeAccount.metadata.representative ||
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }

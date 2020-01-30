@@ -48,7 +48,8 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requirements = JSON.parse(req.data.stripeAccount.metadata.beneficialOwnerTemplate)
+  const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${req.stripeACcount.id}`)
+  const requirements = JSON.parse(requirementsRaw)
   if (requirements.currently_due.indexOf('id_number') === -1) {
     removeElements.push('id_number-container')
   }
@@ -101,7 +102,8 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  const requirements = JSON.parse(req.data.stripeAccount.metadata.beneficialOwnerTemplate)
+  const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:ownere:${req.query.stripeid}`)
+  const requirements = JSON.parse(requirementsRaw)
   for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')
     if (!field) {

@@ -24,7 +24,8 @@ async function beforeRequest (req) {
   if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
     req.error = req.error || 'invalid-directors'
   }
-  if (!stripeAccount.metadata.representative) {
+  const representative = await global.api.user.connect.CompanyRepresentative.get(req)
+  if (!representative) {
     req.error = req.error || 'invalid-company-representative'
   }
   const completedPayment = stripeAccount.external_accounts &&

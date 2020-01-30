@@ -5,8 +5,8 @@ const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/company-representative', () => {
   describe('exceptions', () => {
-    describe('invalid-personid', () => {
-      it('missing querystring personid', async () => {
+    describe('invalid-stripeid', () => {
+      it('missing querystring stripeid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/company-representative')
         req.account = user.account
@@ -17,12 +17,12 @@ describe('/api/user/connect/company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-personid')
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
 
-      it('invalid querystring personid', async () => {
+      it('invalid querystring stripeid', async () => {
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/connect/company-representative?personid=invalid')
+        const req = TestHelper.createRequest('/api/user/connect/company-representative?stripeid=invalid')
         req.account = user.account
         req.session = user.session
         let errorMessage
@@ -31,7 +31,7 @@ describe('/api/user/connect/company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, 'invalid-personid')
+        assert.strictEqual(errorMessage, 'invalid-stripeid')
       })
     })
 
@@ -39,7 +39,7 @@ describe('/api/user/connect/company-representative', () => {
       it('ineligible accessing account', async () => {
         const user = await TestStripeAccounts.createCompanyWithRepresentative('DE')
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.representative.id}`)
+        const req = TestHelper.createRequest(`/api/user/connect/company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user2.account
         req.session = user2.session
         let errorMessage
@@ -56,7 +56,7 @@ describe('/api/user/connect/company-representative', () => {
   describe('returns', () => {
     it('object', async () => {
       const user = await TestStripeAccounts.createCompanyWithRepresentative('DE')
-      const req = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${user.representative.id}`)
+      const req = TestHelper.createRequest(`/api/user/connect/company-representative?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.filename = __filename

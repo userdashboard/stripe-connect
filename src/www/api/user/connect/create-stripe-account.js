@@ -74,15 +74,6 @@ module.exports = {
     if (stripeAccount.business_type === 'individual') {
       return stripeAccount
     }
-    const tempStripeAccount = await stripe.accounts.create({
-      type: 'custom',
-      business_type: 'company',
-      requested_capabilities: ['card_payments', 'transfers'],
-      country: stripeAccount.country,
-      metadata: {
-        template: true
-      }
-    }, req.stripeKey)
     let companyDirector, beneficialOwner, companyRepresentative
     const directorInfo = {
       metadata: {
@@ -108,11 +99,45 @@ module.exports = {
         representative: true
       }
     }
-    const accountUpdate = {
-      metadata: {
-      }
-    }
+    let tempStripeAccount
     if (stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1) {
+      while (true) {
+        try {
+          tempStripeAccount = await stripe.accounts.create({
+            type: 'custom',
+            business_type: 'company',
+            requested_capabilities: ['card_payments', 'transfers'],
+            country: stripeAccount.country,
+            metadata: {
+              template: true
+            }
+          }, req.stripeKey)
+        } catch (error) {
+          if (error.raw && error.raw.code === 'lock_timeout') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'rate_limit') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'account_invalid') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'resource_missing') {
+            continue
+          }
+          if (error.type === 'StripeConnectionError') {
+            continue
+          }
+          if (error.type === 'StripeAPIError') {
+            continue
+          }
+          if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
+        }
+        break
+      }
       while (true) {
         try {
           companyDirector = await stripe.accounts.createPerson(tempStripeAccount.id, directorInfo, req.stripeKey)
@@ -150,9 +175,46 @@ module.exports = {
           companyDirector.requirements.eventually_due = companyDirector.requirements.eventually_due.splice(duplicate, 1)
         }
       }
-      accountUpdate.metadata.companyDirectorTemplate = JSON.stringify(companyDirector.requirements)
+      await dashboard.Storage.write(`stripeid:requirements:director:${stripeAccount.id}`, companyDirector.requirements)
     }
     if (stripeAccount.requirements.currently_due.indexOf('relationship.owner') > -1) {
+      while (true) {
+        try {
+          tempStripeAccount = tempStripeAccount || await stripe.accounts.create({
+            type: 'custom',
+            business_type: 'company',
+            requested_capabilities: ['card_payments', 'transfers'],
+            country: stripeAccount.country,
+            metadata: {
+              template: true
+            }
+          }, req.stripeKey)
+        } catch (error) {
+          if (error.raw && error.raw.code === 'lock_timeout') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'rate_limit') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'account_invalid') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'resource_missing') {
+            continue
+          }
+          if (error.type === 'StripeConnectionError') {
+            continue
+          }
+          if (error.type === 'StripeAPIError') {
+            continue
+          }
+          if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
+        }
+        break
+      }
       while (true) {
         try {
           beneficialOwner = await stripe.accounts.createPerson(tempStripeAccount.id, ownerInfo, req.stripeKey)
@@ -182,21 +244,12 @@ module.exports = {
           if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
         }
       }
-      delete (beneficialOwner.requirements.pending_verification)
-      delete (beneficialOwner.requirements.past_due)
-      for (const item of beneficialOwner.requirements.eventually_due) {
-        const duplicate = beneficialOwner.requirements.currently_due.indexOf(item)
-        if (duplicate > -1) {
-          beneficialOwner.requirements.eventually_due = beneficialOwner.requirements.eventually_due.splice(duplicate, 1)
-        }
-      }
-      accountUpdate.metadata.beneficialOwnerTemplate = JSON.stringify(beneficialOwner.requirements)
+      await dashboard.Storage.write(`stripeid:requirements:owner:${stripeAccount.id}`, beneficialOwner.requirements)
     }
     while (true) {
       try {
         companyRepresentative = await stripe.accounts.createPerson(stripeAccount.id, representativeInfo, req.stripeKey)
         await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${companyRepresentative.id}`, stripeAccount.id)
-        accountUpdate.metadata.representative = companyRepresentative.id
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -223,36 +276,6 @@ module.exports = {
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }
-    let stripeAccountNow
-    while (true) {
-      try {
-        stripeAccountNow = await stripe.accounts.update(stripeAccount.id, accountUpdate, req.stripeKey)
-        break
-      } catch (error) {
-        if (error.raw && error.raw.code === 'lock_timeout') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'rate_limit') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'account_invalid') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'resource_missing') {
-          continue
-        }
-        if (error.type === 'StripeConnectionError') {
-          continue
-        }
-        if (error.type === 'StripeAPIError') {
-          continue
-        }
-        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-      }
-    }
-    return stripeAccountNow
+    return stripeAccount
   }
 }

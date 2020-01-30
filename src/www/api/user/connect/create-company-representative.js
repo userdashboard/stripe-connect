@@ -25,7 +25,6 @@ module.exports = {
     if (global.stripeJS === 3 && (!req.body || !req.body.token)) {
       throw new Error('invalid-token')
     }
-    req.query.personid = stripeAccount.metadata.representative
     const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
     for (const fullField of stripeAccount.requirements.currently_due) {
       if (!fullField.startsWith(existingRepresentative.id)) {
@@ -355,47 +354,6 @@ module.exports = {
           representative = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
           await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${representative.id}`, req.query.stripeid)
         }
-        break
-      } catch (error) {
-        if (error.raw && error.raw.code === 'lock_timeout') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'rate_limit') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'account_invalid') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'resource_missing') {
-          continue
-        }
-        if (error.type === 'StripeConnectionError') {
-          continue
-        }
-        if (error.type === 'StripeAPIError') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'account_invalid') {
-          continue
-        }
-        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-      }
-    }
-    if (stripeAccount.metadata.representative === representative.id) {
-      return representative
-    }
-    const accountInfo = {
-      metadata: {
-        representative: representative.id
-      }
-    }
-    while (true) {
-      try {
-        await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        await stripeCache.delete(req.query.stripeid)
         return representative
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
@@ -417,6 +375,9 @@ module.exports = {
           continue
         }
         if (error.type === 'StripeAPIError') {
+          continue
+        }
+        if (error.raw && error.raw.code === 'account_invalid') {
           continue
         }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')

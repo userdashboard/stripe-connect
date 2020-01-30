@@ -1,7 +1,7 @@
 module.exports = {
-  setup: (doc, stripeAccount) => {
+  setup: (doc, representative) => {
     const template = doc.getElementById('navbar')
-    if (stripeAccount.metadata.representative) {
+    if (representative) {
       const editCompanyRepresentative = template.getElementById('edit-company-representative-link')
       editCompanyRepresentative.parentNode.removeChild(editCompanyRepresentative)
     } else {

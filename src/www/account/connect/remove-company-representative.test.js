@@ -87,11 +87,11 @@ describe('/account/connect/remove-company-representative', () => {
         { fill: '#submit-form' }
       ]
       await req.post()
-      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+      const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account-representative?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account
       req2.session = user.session
-      const stripeAccountNow = await req2.get()
-      assert.strictEqual(stripeAccountNow.metadata.representative, undefined)
+      const representativeNow = await req2.get()
+      assert.strictEqual(representativeNow, undefined)
     })
   })
 })

@@ -19,7 +19,7 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type === 'individual') {
     throw new Error('invalid-stripe-account')
   }
-  req.data = { stripeAccount }
+  req.data = { stripeAccount, representative }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -56,25 +56,25 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     removeElements.push('personal-address-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.address.state`) > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.address.state`) > -1) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
   } else if (removeElements.indexOf('personal-address-container') === -1) {
     removeElements.push('state-container', 'state-container-bridge')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.gender`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.gender`) === -1) {
     removeElements.push('gender-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.id_number`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.id_number`) === -1) {
     removeElements.push('id_number-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.email`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.email`) === -1) {
     removeElements.push('email-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.phone`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.phone`) === -1) {
     removeElements.push('phone-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.ssn_last_4`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.ssn_last_4`) === -1) {
     removeElements.push('ssn_last_4-container')
   }
   if (req.body) {
@@ -105,10 +105,10 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   for (const fullField of req.data.stripeAccount.requirements.currently_due) {
-    if (!fullField.startsWith(req.data.stripeAccount.metadata.representative)) {
+    if (!fullField.startsWith(req.data.representative.id)) {
       continue
     }
-    const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)
+    const field = fullField.substring(`${req.data.representative.id}.`.length)
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'address.line2' ||
@@ -123,7 +123,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.verification.document`) > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.verification.document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_document_front &&
         !req.body.verification_document_front)) {
@@ -135,7 +135,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.stripeAccount.metadata.representative}.verification.additional.document`) > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.verification.additional.document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_additional_document_front &&
       !req.body.verification_additional_document_front)) {

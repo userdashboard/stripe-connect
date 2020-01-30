@@ -26,9 +26,6 @@ module.exports = {
     const accountInfo = {
       company: {
         owners_provided: true
-      },
-      metadata: {
-        beneficialOwnerTemplate: null
       }
     }
     while (true) {

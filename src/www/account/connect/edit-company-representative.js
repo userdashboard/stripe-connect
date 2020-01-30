@@ -19,7 +19,6 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type === 'individual') {
     throw new Error('invalid-stripe-account')
   }
-  req.query.personid = stripeAccount.metadata.representative
   const representative = await global.api.user.connect.CompanyRepresentative.get(req)
   req.data = { stripeAccount, representative }
 }
@@ -86,10 +85,10 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.method === 'GET') {
     for (const fullField of req.data.stripeAccount.requirements.currently_due) {
-      if (!fullField.startsWith(req.data.stripeAccount.metadata.representative)) {
+      if (!fullField.startsWith(req.data.representative.id)) {
         continue
       }
-      const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)
+      const field = fullField.substring(`${req.data.representative.id}.`.length)
       const posted = field.split('.').join('_')
       const element = doc.getElementById(posted)
       if (!element) {
@@ -124,10 +123,10 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   for (const fullField of req.data.stripeAccount.requirements.currently_due) {
-    if (!fullField.startsWith(req.data.stripeAccount.metadata.representative)) {
+    if (!fullField.startsWith(req.data.representative.id)) {
       continue
     }
-    const field = fullField.substring(`${req.data.stripeAccount.metadata.representative}.`.length)
+    const field = fullField.substring(`${req.data.representative.id}.`.length)
     const posted = field.split('.').join('_')
     if (!req.body[posted]) {
       if (field === 'address.line2' ||

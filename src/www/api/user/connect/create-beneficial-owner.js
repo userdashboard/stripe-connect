@@ -26,7 +26,8 @@ module.exports = {
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
-    const requirements = JSON.parse(stripeAccount.metadata.beneficialOwnerTemplate)
+    const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${user.stripeAccount.id}`)
+    const requirements = JSON.parse(requirementsRaw)
     for (const field of requirements.currently_due) {
       const posted = field.split('.').join('_')
       if (!req.body[posted]) {

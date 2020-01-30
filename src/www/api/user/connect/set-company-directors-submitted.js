@@ -24,9 +24,6 @@ module.exports = {
       throw new Error('invalid-stripe-account')
     }
     const accountInfo = {
-      metadata: {
-        companyDirectorTemplate: null
-      },
       company: {
         directors_provided: true
       }
