@@ -19,6 +19,7 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type === 'individual') {
     throw new Error('invalid-stripe-account')
   }
+  const representative = await global.api.user.connect.CompanyRepresentative.get(req)
   req.data = { stripeAccount, representative }
 }
 
