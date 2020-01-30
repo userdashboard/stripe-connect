@@ -48,7 +48,7 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${req.stripeACcount.id}`)
+  const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${req.stripeAccount.id}`)
   const requirements = JSON.parse(requirementsRaw)
   if (requirements.currently_due.indexOf('id_number') === -1) {
     removeElements.push('id_number-container')
