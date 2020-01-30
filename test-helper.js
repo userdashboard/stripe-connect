@@ -37,6 +37,12 @@ const wait = util.promisify((callback) => {
   return setTimeout(callback, 100)
 })
 
+const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
+const eventList = []
+for (const event of events) {
+  eventList.push(event.substring(0, event.indexOf('.js')))
+}
+
 const waitForWebhook = util.promisify(async (webhookType, matching, callback) => {
   async function wait () {
     if (global.testEnded) {
@@ -141,29 +147,6 @@ before(async () => {
     } catch (error) {
     }
   }
-  if (process.env.NGROK) {
-    while (!tunnel) {
-      try {
-        tunnel = await ngrok.connect({
-          port: process.env.PORT,
-          restart: true,
-          onStatusChange: (status) => {
-            console.log('ngrok tunnel status', status)
-          },
-          onLogEvent: (data) => {
-            console.log('ngrok log data', data)
-          }
-        })
-        if (!tunnel) {
-          console.log('no tunnel')
-          continue
-        }
-      } catch (error) {
-        console.log(error)
-        continue
-      }
-    }
-  }
   TestHelper = require('@userdashboard/dashboard/test-helper.js')
   for (const x in TestHelper) {
     module.exports[x] = TestHelper[x]
@@ -173,17 +156,14 @@ before(async () => {
     req.stripeKey = stripeKey
     return req
   }
-  const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
-  const eventList = []
-  for (const event of events) {
-    eventList.push(event.substring(0, event.indexOf('.js')))
+  if (!process.env.NGROK) {
+    const webhook = await stripe.webhookEndpoints.create({
+      connect: true,
+      url: `${process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
+      enabled_events: eventList
+    }, stripeKey)
+    global.connectWebhookEndPointSecret = webhook.secret
   }
-  const webhook = await stripe.webhookEndpoints.create({
-    connect: true,
-    url: `${tunnel || process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
-    enabled_events: eventList
-  }, stripeKey)
-  global.connectWebhookEndPointSecret = webhook.secret
 })
 
 afterEach(async () => {
@@ -214,14 +194,55 @@ after(async () => {
 
 const helperRoutes = require('./test-helper-routes.js')
 
-beforeEach((callback) => {
+beforeEach(async () => {
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
   global.stripeJS = false
   global.maximumStripeRetries = 0
   global.webhooks = []
-  return callback()
+  if (process.env.NGROK) {
+    let webhooks = await stripe.webhookEndpoints.list(stripeKey)
+    while (webhooks.data && webhooks.data.length) {
+      for (const webhook of webhooks.data) {
+        if (webhook === 0) {
+          continue
+        }
+        try {
+          await stripe.webhookEndpoints.del(webhook.id, stripeKey)
+        } catch (error) {
+        }
+      }
+      try {
+        webhooks = await stripe.webhookEndpoints.list(stripeKey)
+      } catch (error) {
+        webhooks = { data: [0] }
+      }
+    }
+    ngrok.kill()
+    tunnel = null
+    while (!tunnel) {
+      try {
+        tunnel = await ngrok.connect({
+          port: process.env.PORT
+        })
+        if (!tunnel) {
+          continue
+        }
+        break
+      } catch (error) {
+        continue
+      }
+    }
+    const webhook = await stripe.webhookEndpoints.create({
+      connect: true,
+      url: `${tunnel}/webhooks/connect/index-connect-data`,
+      enabled_events: eventList
+    }, stripeKey)
+    console.log(webhook)
+    global.connectWebhookEndPointSecret = webhook.secret
+    return
+  }
 })
 
 async function createStripeAccount (user, properties) {
