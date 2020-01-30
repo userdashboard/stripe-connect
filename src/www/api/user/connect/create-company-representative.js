@@ -344,7 +344,6 @@ module.exports = {
         representativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
-    console.log('creating rep', req.body, representativeInfo)
     let representative
     while (true) {
       try {
@@ -377,7 +376,7 @@ module.exports = {
         if (error.type === 'StripeAPIError') {
           continue
         }
-        if (error.raw && error.raw.code === 'account_invalid') {
+        if (error.message === 'An error occurred with our connection to Stripe.') {
           continue
         }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')

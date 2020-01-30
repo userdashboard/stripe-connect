@@ -55,6 +55,9 @@ module.exports = {
         if (error.type === 'StripeAPIError') {
           continue
         }
+        if (error.message === 'An error occurred with our connection to Stripe.') {
+          continue
+        }
         if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
       }
     }

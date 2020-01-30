@@ -207,6 +207,9 @@ module.exports = {
         if (error.type === 'StripeAPIError') {
           continue
         }
+        if (error.message === 'An error occurred with our connection to Stripe.') {
+          continue
+        }
         if (error.message.startsWith('invalid-')) {
           throw error
         }

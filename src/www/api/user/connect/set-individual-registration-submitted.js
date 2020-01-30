@@ -65,6 +65,9 @@ module.exports = {
         if (error.type === 'StripeAPIError') {
           continue
         }
+        if (error.message === 'An error occurred with our connection to Stripe.') {
+          continue
+        }
         const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
         if (errorMessage.startsWith('company[address]')) {
           let field = errorMessage.substring('company[address]['.length)

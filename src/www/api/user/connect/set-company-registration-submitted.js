@@ -53,9 +53,7 @@ module.exports = {
     }
     while (true) {
       try {
-        console.log('submitting company', JSON.stringify(accountInfo, null, '  '))
         const stripeAccountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
-        console.log('submitted company', JSON.stringify(stripeAccountNow, null, '  '))
         await stripeCache.delete(req.query.stripeid)
         return stripeAccountNow
       } catch (error) {
@@ -78,6 +76,9 @@ module.exports = {
           continue
         }
         if (error.type === 'StripeAPIError') {
+          continue
+        }
+        if (error.message === 'An error occurred with our connection to Stripe.') {
           continue
         }
         const errorMessage = error.raw && error.raw.param ? error.raw.param : error.message
