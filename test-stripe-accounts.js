@@ -7,71 +7,17 @@ module.exports = {
     global.webhooks = []
     const user = await module.exports.createIndividualReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
-    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-    req.session = user.session
-    req.account = user.account
-    req.stripeKey = {
-      api_key: process.env.STRIPE_KEY
-    }
-    // console.log('waiting on submitted, verified, payouts_enabled')
-    await TestHelper.waitForWebhook('account.updated', async () => {
-      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      if (user.stripeAccount.payouts_enabled &&
-          user.stripeAccount.metadata.submitted &&
-          user.stripeAccount.individual.verification.status === 'verified' &&
-         !user.stripeAccount.requirements.disabled_reason &&
-         !user.stripeAccount.requirements.currently_due.length &&
-         !user.stripeAccount.requirements.eventually_due.length &&
-         !user.stripeAccount.requirements.pending_verification.length &&
-         !user.stripeAccount.individual.requirements.pending_verification.length) {
-        return true
-      }
-    })
-    // console.log('payout status', user.stripeAccount.payouts_enabled)
-    // console.log('disabled reason', user.stripeAccount.individual.verification.disabled_reason)
-    // console.log('account is submitted', user.stripeAccount.metadata.submitted)
-    // console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
-    // console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
-    // console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
+    await TestHelper.waitForVerificationStart(user)
+    await TestHelper.waitForPayoutsEnabled(user)
+    await TestHelper.waitForPendingFieldsToLeave(user)
     return user
   },
   createSubmittedCompany: async (country) => {
     country = country || 'US'
     const user = await module.exports.createCompanyReadyForSubmission(country)
-    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-    req.session = user.session
-    req.account = user.account
-    req.stripeKey = {
-      api_key: process.env.STRIPE_KEY
-    }
-    await TestHelper.waitForWebhook('account.updated', async () => {
-      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      if (user.stripeAccount.requirements.currently_due.length === 2) {
-        return true
-      }
-    })
-    // console.log('submitting account')
-    await TestHelper.submitStripeAccount(user)
-    await TestHelper.waitForWebhook('account.updated', async () => {
-      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      return user.stripeAccount.payouts_enabled &&
-             user.stripeAccount.metadata.submitted &&
-            !user.stripeAccount.requirements.currently_due.length &&
-            !user.stripeAccount.requirements.eventually_due.length &&
-            !user.stripeAccount.requirements.pending_verification.length
-    })
-    // console.log('account is submitted', user.stripeAccount.metadata.submitted)
-    // console.log('currently due fields', user.stripeAccount.requirements.currently_due.join(', '))
-    // console.log('eventually due fields', user.stripeAccount.requirements.eventually_due.join(', '))
-    // console.log('pending verification fields', user.stripeAccount.requirements.pending_verification.join(', '))
-    await TestHelper.waitForWebhook('account.updated', async () => {
-      user.stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      if (user.stripeAccount.payouts_enabled &&
-          !user.stripeAccount.requirements.pending_verification.length &&
-          !user.stripeAccount.requirements.disabled_reason) {
-        return true
-      }
-    })
+    await TestHelper.waitForVerificationStart(user)
+    await TestHelper.waitForPayoutsEnabled(user)
+    await TestHelper.waitForPendingFieldsToLeave(user)
     return user
   },
   createIndividualReadyForSubmission: async (country) => {
