@@ -6,6 +6,7 @@ if (global.maxmimumStripeRetries) {
   stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 }
 stripe.setTelemetryEnabled(false)
+const stripeCache = require('../../../stripe-cache.js')
 const webhookPath = path.join(__dirname, '.')
 const supportedWebhooks = {}
 const subscriptionWebhooks = fs.readdirSync(`${webhookPath}/stripe-webhooks/`)
@@ -39,7 +40,7 @@ module.exports = {
       // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
       //   console.log('webhook failed parsing ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
       // } else {
-      //   console.log('webhook failed parsing', error)
+        // console.log('webhook failed parsing', error)
       // }
     }
     if (!stripeEvent) {
@@ -50,6 +51,15 @@ module.exports = {
       // }
       return res.end()
     }
+    if (stripeEvent.data.account) {
+      await stripeCache.delete(stripeEvent.data.account)
+    }
+    if (stripeEvent.data.object && 
+        stripeEvent.data.object.id && 
+        stripeEvent.data.object.id !== stripeEvent.data.account) {
+      await stripeCache.delete(stripeEvent.data.object.id)
+    }
+    console.log('webhook', global.monitorStripeAccount, stripeEvent.type, stripeEvent.data.object ? stripeEvent.data.object.id : 'no objectid', stripeEvent)
     if (supportedWebhooks[stripeEvent.type]) {
       try {
         await supportedWebhooks[stripeEvent.type](stripeEvent, req)
