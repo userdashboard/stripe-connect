@@ -146,6 +146,7 @@ before(async () => {
       try {
         tunnel = await ngrok.connect({
           port: process.env.PORT,
+          restart: true,
           onStatusChange: (status) => {
             console.log('ngrok tunnel status', status)
           },
