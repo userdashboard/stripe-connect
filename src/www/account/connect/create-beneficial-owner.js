@@ -102,7 +102,7 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:ownere:${req.query.stripeid}`)
+  const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${req.query.stripeid}`)
   const requirements = JSON.parse(requirementsRaw)
   for (const field of requirements.currently_due) {
     const posted = field.split('.').join('_')
