@@ -116,7 +116,10 @@ module.exports = {
       representative[field] = representativeData[country][field]
     }
     // console.log('creating representative', representative)
-    await TestHelper.createCompanyRepresentative(user, representative, {
+    await TestHelper.createCompanyRepresentative(user, representative)
+    await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
+    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
+    await TestHelper.updateCompanyRepresentative(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
