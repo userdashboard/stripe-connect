@@ -36,5 +36,5 @@ jobs:
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         DEBUG_ERRORS: true
         DEBUG_REQUESTS: true
-        PUBLIC_IP: true
+        LOCAL_TUNNEL: true
     

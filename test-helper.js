@@ -11,12 +11,15 @@ if (process.env.GENERATE_COUNTRY) {
   ]
 }
 const fs = require('fs')
-let ngrok, publicIP
+let ngrok, publicIP, localTunnel
 if (process.env.NGROK) {
   ngrok = require('ngrok')
 } else if (process.env.PUBLIC_IP) { 
   publicIP = require('public-ip')
+} else if (process.env.LOCAL_TUNNEL) {
+  localTunnel = require('localtunnel')
 }
+
 const packageJSON = require('./package.json')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
@@ -176,6 +179,8 @@ afterEach(async () => {
 after(async () => {
   if (process.env.NGROK) {
     ngrok.kill()
+  } else if (process.env.LOCAL_TUNNEL) {
+    tunnel.close()
   }
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
@@ -243,13 +248,20 @@ beforeEach(async () => {
     global.connectWebhookEndPointSecret = webhook.secret
     return
   } else if (process.env.PUBLIC_IP) {
-    console.log('checking ip')
     const ip = await publicIP.v4()
-    const ip2 = await publicIP.v4()
-    console.log('listening on ip', ip, ip2, process.env.PORT)
     const webhook = await stripe.webhookEndpoints.create({
       connect: true,
       url: `http://${ip}:${process.env.PORT}/webhooks/connect/index-connect-data`,
+      enabled_events: eventList
+    }, stripeKey)
+    global.connectWebhookEndPointSecret = webhook.secret
+  } else if (process.env.LOCAL_TUNNEL) {
+    console.log('getting tunnel')
+    tunnel = await localTunnel({ port: process.env.PORT })
+    console.log('got tunnel url', tunnel.url)
+    const webhook = await stripe.webhookEndpoints.create({
+      connect: true,
+      url: `${tunnel.url}/webhooks/connect/index-connect-data`,
       enabled_events: eventList
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret

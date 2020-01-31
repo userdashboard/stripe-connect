@@ -38,4 +38,4 @@ jobs:
         DEBUG_REQUESTS: true
         DEBUG_PAGES: true
         DEBUG_PUPPETEER: true
-        PUBLIC_IP: true
+        LOCAL_TUNNEL: true
