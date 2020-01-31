@@ -17,7 +17,7 @@ jobs:
     - name: Setup dependencies
       run: |
         sudo ufw allow 8000
-        npm install localtunnel mocha puppeteer @userdashboard/dashboard --no-save
+        npm install mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
         node node_modules/mocha/bin/mocha src/www/account --recursive --bail --timeout 1800000 --slow 1800000 || exit 1
@@ -38,5 +38,5 @@ jobs:
         DEBUG_PAGES: true
         DEBUG_PUPPETEER: true
         DEBUG_REQUESTS: true
-        LOCAL_TUNNEL: true
+        LOCALHOST_RUN: true
     

@@ -11,7 +11,8 @@ if (process.env.GENERATE_COUNTRY) {
   ]
 }
 const fs = require('fs')
-let ngrok, publicIP, localTunnel
+const util = require('util')
+let ngrok, publicIP, localTunnel, localhostRun
 if (process.env.NGROK) {
   ngrok = require('ngrok')
 } else if (process.env.PUBLIC_IP) { 
@@ -32,8 +33,6 @@ stripe.setAppInfo({
   name: '@userdashboard/stripe-connect (test suite)',
   url: 'https://github.com/userdashboard/stripe-connect'
 })
-
-const util = require('util')
 const stripeKey = {
   api_key: process.env.STRIPE_KEY
 }
@@ -122,23 +121,6 @@ module.exports = {
 
 let TestHelper, tunnel
 before(async () => {
-  let webhooks = await stripe.webhookEndpoints.list(stripeKey)
-  while (webhooks.data && webhooks.data.length) {
-    for (const webhook of webhooks.data) {
-      if (webhook === 0) {
-        continue
-      }
-      try {
-        await stripe.webhookEndpoints.del(webhook.id, stripeKey)
-      } catch (error) {
-      }
-    }
-    try {
-      webhooks = await stripe.webhookEndpoints.list(stripeKey)
-    } catch (error) {
-      webhooks = { data: [0] }
-    }
-  }
   let accounts = await stripe.accounts.list(stripeKey)
   while (accounts.data && accounts.data.length) {
     for (const account of accounts.data) {
@@ -161,45 +143,6 @@ before(async () => {
     req.stripeKey = stripeKey
     return req
   }
-})
-
-afterEach(async () => {
-  let accounts = await stripe.accounts.list(stripeKey)
-  while (accounts.data && accounts.data.length) {
-    for (const account of accounts.data) {
-      try {
-        await stripe.accounts.del(account.id, stripeKey)
-      } catch (error) {
-      }
-    }
-    accounts = await stripe.accounts.list(stripeKey)
-  }
-})
-
-after(async () => {
-  if (process.env.NGROK) {
-    ngrok.kill()
-  } else if (process.env.LOCAL_TUNNEL) {
-    tunnel.close()
-  }
-  let webhooks = await stripe.webhookEndpoints.list(stripeKey)
-  while (webhooks.data && webhooks.data.length) {
-    for (const webhook of webhooks.data) {
-      await stripe.webhookEndpoints.del(webhook.id, stripeKey)
-    }
-    webhooks = await stripe.webhookEndpoints.list(stripeKey)
-  }
-})
-
-const helperRoutes = require('./test-helper-routes.js')
-
-beforeEach(async () => {
-  global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
-  global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
-  global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
-  global.stripeJS = false
-  global.maximumStripeRetries = 0
-  global.webhooks = []
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
@@ -256,12 +199,19 @@ beforeEach(async () => {
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
   } else if (process.env.LOCAL_TUNNEL) {
-    console.log('getting tunnel')
     tunnel = await localTunnel({ port: process.env.PORT, local_https: false, host: 'http://localtunnel.me' })
-    console.log('got tunnel url', tunnel.url)
     const webhook = await stripe.webhookEndpoints.create({
       connect: true,
       url: `${tunnel.url}/webhooks/connect/index-connect-data`,
+      enabled_events: eventList
+    }, stripeKey)
+    global.connectWebhookEndPointSecret = webhook.secret
+  } else if (process.env.LOCALHOST_RUN) {
+    const asyncLocalHostRun = util.promisify(createLocalHostRun)
+    const url = await asyncLocalHostRun()
+    const webhook = await stripe.webhookEndpoints.create({
+      connect: true,
+      url: `${url}/webhooks/connect/index-connect-data`,
       enabled_events: eventList
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
@@ -273,6 +223,56 @@ beforeEach(async () => {
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
   }
+})
+
+function createLocalHostRun (callback) {
+  const spawn = require('child_process').spawn;
+  localhostRun = spawn('ssh', ['-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + process.env.PORT, 'ssh.localhost.run'])
+  localhostRun.stdout.on('data', async (log) => {
+    const url = log.toString().split(' ').pop().trim()
+    return callback(null, url)
+  })
+}
+
+afterEach(async () => {
+  let accounts = await stripe.accounts.list(stripeKey)
+  while (accounts.data && accounts.data.length) {
+    for (const account of accounts.data) {
+      try {
+        await stripe.accounts.del(account.id, stripeKey)
+      } catch (error) {
+      }
+    }
+    accounts = await stripe.accounts.list(stripeKey)
+  }
+})
+
+after(async () => {
+  if (process.env.NGROK) {
+    ngrok.kill()
+  } else if (process.env.LOCAL_TUNNEL) {
+    tunnel.close()
+  } else if (process.env.LOCALHOST_RUN) {
+    localhostRun.close()
+  }
+  let webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  while (webhooks.data && webhooks.data.length) {
+    for (const webhook of webhooks.data) {
+      await stripe.webhookEndpoints.del(webhook.id, stripeKey)
+    }
+    webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  }
+})
+
+const helperRoutes = require('./test-helper-routes.js')
+
+beforeEach(async () => {
+  global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
+  global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
+  global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
+  global.stripeJS = false
+  global.maximumStripeRetries = 0
+  global.webhooks = []
 })
 
 async function createStripeAccount (user, properties) {

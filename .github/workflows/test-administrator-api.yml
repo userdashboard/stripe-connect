@@ -16,11 +16,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Setup dependencies
       run: |
-        sudo ufw allow 8000
-        npm install localtunnel mocha puppeteer @userdashboard/dashboard --no-save
+        npm install mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
-        node node_modules/mocha/bin/mocha src/www/api/administrator --recursive --bail --timeout 1800000 --slow 1800000 || exit 1
+        node node_modules/mocha/bin/mocha src/www/api/administrator --recursive --bail --timeout 1800000 --slow 1800000
       env:
         NODE_ENV: testing
         FAST_START: true
@@ -36,5 +35,5 @@ jobs:
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         DEBUG_ERRORS: true
         DEBUG_REQUESTS: true
-        LOCAL_TUNNEL: true
+        LOCALHOST_RUN: true
     
