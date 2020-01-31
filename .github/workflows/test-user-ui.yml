@@ -17,7 +17,7 @@ jobs:
     - name: Setup dependencies
       run: |
         sudo ufw allow 8000
-        npm install public-ip mocha puppeteer @userdashboard/dashboard --no-save
+        npm install localtunnel mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
         node node_modules/mocha/bin/mocha src/www/account --recursive --bail --timeout 1800000 --slow 1800000 || exit 1
