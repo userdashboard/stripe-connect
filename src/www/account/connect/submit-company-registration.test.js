@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/submit-company-registration', () => {
   describe('SubmitCompanyRegistration#BEFORE', () => {
@@ -37,7 +38,7 @@ describe('/account/connect/submit-company-registration', () => {
     })
 
     it('should bind Stripe account to req', async () => {
-      const user = await TestHelper.createCompanyReadyForSubmission('US')
+      const user = await TestStripeAccounts.createCompanyReadyForSubmission('DE')
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -48,7 +49,7 @@ describe('/account/connect/submit-company-registration', () => {
 
   describe('SubmitCompanyRegistration#GET', () => {
     it('should present the form', async () => {
-      const user = await TestHelper.createCompanyReadyForSubmission('US')
+      const user = await TestStripeAccounts.createCompanyReadyForSubmission('US')
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -109,7 +110,7 @@ describe('/account/connect/submit-company-registration', () => {
 
   describe('SubmitCompanyRegistration#POST', () => {
     it('should submit registration (screenshots)', async () => {
-      const user = await TestHelper.createCompanyReadyForSubmission('US')
+      const user = await TestStripeAccounts.createCompanyReadyForSubmission('US')
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
