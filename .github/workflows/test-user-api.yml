@@ -23,9 +23,9 @@ jobs:
       env:
         NODE_ENV: testing
         FAST_START: true
-        DASHBOARD_SERVER: "http://localhost:9003"
+        DASHBOARD_SERVER: "http://localhost"
         DOMAIN: "localhost"
-        PORT: 9003
+        PORT: 80
         STORAGE_PATH: /tmp/test-data-3
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
