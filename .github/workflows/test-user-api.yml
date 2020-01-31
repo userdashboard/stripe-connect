@@ -20,7 +20,7 @@ jobs:
         npm install public-ip mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
-        sudo node node_modules/mocha/bin/mocha src/www/api/user --recursive --bail --timeout 1800000 --slow 1800000 || exit 1
+        node node_modules/mocha/bin/mocha src/www/api/user --recursive --bail --timeout 1800000 --slow 1800000 || exit 1
       env:
         NODE_ENV: testing
         FAST_START: true
