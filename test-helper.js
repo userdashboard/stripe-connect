@@ -47,29 +47,6 @@ for (const event of events) {
   eventList.push(event.substring(0, event.indexOf('.js')))
 }
 
-const waitForWebhook = util.promisify(async (webhookType, matching, callback) => {
-  async function wait () {
-    if (global.testEnded) {
-      return
-    }
-    if (!global.webhooks || !global.webhooks.length) {
-      return setTimeout(wait, 20)
-    }
-    for (const received of global.webhooks) {
-      if (received.type !== webhookType) {
-        continue
-      }
-      if (matching(received)) {
-        return setTimeout(() => {
-          callback(null, received)
-        }, 20)
-      }
-    }
-    return setTimeout(wait, 20)
-  }
-  return setTimeout(wait, 20)
-})
-
 module.exports = {
   createBeneficialOwner,
   createCompanyDirector,
@@ -88,7 +65,6 @@ module.exports = {
   updateCompanyRepresentative,
   waitForAccountRequirement: util.promisify(waitForAccountRequirement),
   waitForPersonRequirement: util.promisify(waitForPersonRequirement),
-  waitForWebhook,
   waitForPendingFieldsToLeave: util.promisify(waitForPendingFieldsToLeave),
   waitForVerification: util.promisify(waitForVerification),
   waitForPayoutsEnabled: util.promisify(waitForPayoutsEnabled),
@@ -121,18 +97,9 @@ module.exports = {
 
 let TestHelper, tunnel
 before(async () => {
-  let accounts = await stripe.accounts.list(stripeKey)
-  while (accounts.data && accounts.data.length) {
-    for (const account of accounts.data) {
-      try {
-        await stripe.accounts.del(account.id, stripeKey)
-      } catch (error) {
-      }
-    }
-    try {
-      accounts = await stripe.accounts.list(stripeKey)
-    } catch (error) {
-    }
+  try {
+    await deleteOldStripeAccounts()
+  } catch (error ){
   }
   TestHelper = require('@userdashboard/dashboard/test-helper.js')
   for (const x in TestHelper) {
@@ -143,6 +110,24 @@ before(async () => {
     req.stripeKey = stripeKey
     return req
   }
+  try {
+    await deleteOldWebhooks()
+  } catch (error) {  
+  }
+  if (!process.env.NGROK &&
+      !process.env.LOCAL_TUNNEL &&
+      !process.env.LOCALHOST_RUN &&
+      !process.env.PUBLIC_IP) {
+    const webhook = await stripe.webhookEndpoints.create({
+      connect: true,
+      url: `${process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
+      enabled_events: eventList
+    }, stripeKey)
+    global.connectWebhookEndPointSecret = webhook.secret
+  }
+})
+
+async function deleteOldWebhooks () {
   let webhooks = await stripe.webhookEndpoints.list(stripeKey)
   while (webhooks.data && webhooks.data.length) {
     for (const webhook of webhooks.data) {
@@ -160,18 +145,23 @@ before(async () => {
       webhooks = { data: [0] }
     }
   }
-  if (!process.env.NGROK &&
-      !process.env.LOCAL_TUNNEL &&
-      !process.env.LOCALHOST_RUN &&
-      !process.env.PUBLIC_IP) {
-    const webhook = await stripe.webhookEndpoints.create({
-      connect: true,
-      url: `${process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList
-    }, stripeKey)
-    global.connectWebhookEndPointSecret = webhook.secret
+}
+
+async function deleteOldStripeAccounts () {
+  let accounts = await stripe.accounts.list(stripeKey)
+  while (accounts.data && accounts.data.length) {
+    for (const account of accounts.data) {
+      try {
+        await stripe.accounts.del(account.id, stripeKey)
+      } catch (error) {
+      }
+    }
+    try {
+      accounts = await stripe.accounts.list(stripeKey)
+    } catch (error) {
+    }
   }
-})
+}
 
 function createLocalHostRun (callback) {
   const spawn = require('child_process').spawn;
@@ -186,15 +176,9 @@ function createLocalHostRun (callback) {
 }
 
 afterEach(async () => {
-  let accounts = await stripe.accounts.list(stripeKey)
-  while (accounts.data && accounts.data.length) {
-    for (const account of accounts.data) {
-      try {
-        await stripe.accounts.del(account.id, stripeKey)
-      } catch (error) {
-      }
-    }
-    accounts = await stripe.accounts.list(stripeKey)
+  try {
+    await deleteOldStripeAccounts()
+  } catch (error) {
   }
 })
 
@@ -207,12 +191,13 @@ after(async () => {
     localhostRun.stdin.pause()
     localhostRun.kill()
   }
-  let webhooks = await stripe.webhookEndpoints.list(stripeKey)
-  while (webhooks.data && webhooks.data.length) {
-    for (const webhook of webhooks.data) {
-      await stripe.webhookEndpoints.del(webhook.id, stripeKey)
-    }
-    webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  try {
+    await deleteOldStripeAccounts()
+  } catch (error) {
+  }
+  try {
+    await deleteOldWebhooks()
+  } catch (error) {
   }
 })
 
@@ -226,22 +211,9 @@ beforeEach(async () => {
   global.maximumStripeRetries = 0
   global.webhooks = []
   if(process.env.NGROK || process.env.PUBLIC_IP || process.env.LOCAL_TUNNEL || process.env.LOCALHOST_RUN) {
-    let webhooks = await stripe.webhookEndpoints.list(stripeKey)
-    while (webhooks.data && webhooks.data.length) {
-      for (const webhook of webhooks.data) {
-        if (webhook === 0) {
-          continue
-        }
-        try {
-          await stripe.webhookEndpoints.del(webhook.id, stripeKey)
-        } catch (error) {
-        }
-      }
-      try {
-        webhooks = await stripe.webhookEndpoints.list(stripeKey)
-      } catch (error) {
-        webhooks = { data: [0] }
-      }
+    try {
+      await deleteOldWebhooks()
+    } catch (error) {
     }
   }
   if (process.env.NGROK) {
@@ -368,9 +340,6 @@ async function updateCompanyRepresentative (user, properties, uploads) {
   req.uploads = uploads || {}
   req.body = createMultiPart(req, properties)
   const representative = await req.patch()
-  // await waitForWebhook('person.updated', (stripeEvent) => {
-  //   return stripeEvent.data.object.id === representative.id
-  // })
   user.representative = representative
   return user.stripeAccount
 }
@@ -454,9 +423,6 @@ async function updateBeneficialOwner (user, body, uploads) {
   req.uploads = uploads
   req.body = createMultiPart(req, body)
   user.owner = await req.patch()
-  // await waitForWebhook('person.updated', (stripeEvent) => {
-  //   return stripeEvent.data.object.id === user.owner.id
-  // })
   return user.owner
 }
 
