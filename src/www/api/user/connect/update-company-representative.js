@@ -395,7 +395,7 @@ module.exports = {
       if (req.body.verification_document_front && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.document`) > -1) {
         companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
         companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
-        companyRepresentativeInfo.verification.document.deonr = req.body.verification_document_front
+        companyRepresentativeInfo.verification.document.front = req.body.verification_document_front
       }
       if (req.body.verification_additional_document_back && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.additional_document`) > -1) {
         companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
