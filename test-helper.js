@@ -225,6 +225,25 @@ beforeEach(async () => {
   global.stripeJS = false
   global.maximumStripeRetries = 0
   global.webhooks = []
+  if(process.env.NGROK || process.env.PUBLIC_IP || process.env.LOCAL_TUNNEL || process.env.LOCALHOST_RUN) {
+    let webhooks = await stripe.webhookEndpoints.list(stripeKey)
+    while (webhooks.data && webhooks.data.length) {
+      for (const webhook of webhooks.data) {
+        if (webhook === 0) {
+          continue
+        }
+        try {
+          await stripe.webhookEndpoints.del(webhook.id, stripeKey)
+        } catch (error) {
+        }
+      }
+      try {
+        webhooks = await stripe.webhookEndpoints.list(stripeKey)
+      } catch (error) {
+        webhooks = { data: [0] }
+      }
+    }
+  }
   if (process.env.NGROK) {
     ngrok.kill()
     tunnel = null
