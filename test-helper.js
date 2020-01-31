@@ -15,7 +15,7 @@ const util = require('util')
 let ngrok, publicIP, localTunnel, localhostRun
 if (process.env.NGROK) {
   ngrok = require('ngrok')
-} else if (process.env.PUBLIC_IP) { 
+} else if (process.env.PUBLIC_IP) {
   publicIP = require('public-ip')
 } else if (process.env.LOCAL_TUNNEL) {
   localTunnel = require('localtunnel')
@@ -99,7 +99,7 @@ let TestHelper, tunnel
 before(async () => {
   try {
     await deleteOldStripeAccounts()
-  } catch (error ){
+  } catch (error) {
   }
   TestHelper = require('@userdashboard/dashboard/test-helper.js')
   for (const x in TestHelper) {
@@ -112,7 +112,7 @@ before(async () => {
   }
   try {
     await deleteOldWebhooks()
-  } catch (error) {  
+  } catch (error) {
   }
   if (!process.env.NGROK &&
       !process.env.LOCAL_TUNNEL &&
@@ -164,7 +164,7 @@ async function deleteOldStripeAccounts () {
 }
 
 function createLocalHostRun (callback) {
-  const spawn = require('child_process').spawn;
+  const spawn = require('child_process').spawn
   localhostRun = spawn('ssh', ['-T', '-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + process.env.PORT, 'ssh.localhost.run'])
   localhostRun.stdout.on('data', async (log) => {
     const url = log.toString().split(' ').pop().trim()
@@ -210,7 +210,7 @@ beforeEach(async () => {
   global.stripeJS = false
   global.maximumStripeRetries = 0
   global.webhooks = []
-  if(process.env.NGROK || process.env.PUBLIC_IP || process.env.LOCAL_TUNNEL || process.env.LOCALHOST_RUN) {
+  if (process.env.NGROK || process.env.PUBLIC_IP || process.env.LOCAL_TUNNEL || process.env.LOCALHOST_RUN) {
     try {
       await deleteOldWebhooks()
     } catch (error) {
@@ -229,7 +229,7 @@ beforeEach(async () => {
           },
           onLogEvent: data => {
             console.log('ngrok log event', data)
-          },
+          }
         })
         if (!tunnel) {
           continue
@@ -245,7 +245,6 @@ beforeEach(async () => {
       enabled_events: eventList
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
-    return
   } else if (process.env.PUBLIC_IP) {
     const ip = await publicIP.v4()
     const webhook = await stripe.webhookEndpoints.create({
@@ -278,7 +277,7 @@ beforeEach(async () => {
       enabled_events: eventList
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
-  } 
+  }
 })
 
 async function createStripeAccount (user, properties) {
@@ -601,7 +600,7 @@ async function waitForVerification (user, callback) {
         if (!stripeAccount.individual || stripeAccount.individual.verification.status !== 'verified') {
           return setTimeout(wait, 100)
         }
-      } 
+      }
       if (!stripeAccount.payouts_enabled || stripeAccount.requirements.currently_due.length) {
         return setTimeout(wait, 100)
       }
@@ -841,8 +840,9 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
     if (global.testEnded) {
       return
     }
+    let stripeAccount
     try {
-      const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       if (!stripeAccount.requirements) {
         return setTimeout(wait, 100)
       }
