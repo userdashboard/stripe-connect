@@ -175,7 +175,7 @@ before(async () => {
 
 function createLocalHostRun (callback) {
   const spawn = require('child_process').spawn;
-  localhostRun = spawn('ssh', ['-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + process.env.PORT, 'ssh.localhost.run'])
+  localhostRun = spawn('ssh', ['-T', '-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + process.env.PORT, 'ssh.localhost.run'])
   localhostRun.stdout.on('data', async (log) => {
     const url = log.toString().split(' ').pop().trim()
     return callback(null, url)
