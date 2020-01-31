@@ -158,14 +158,6 @@ before(async () => {
     req.stripeKey = stripeKey
     return req
   }
-  if (!process.env.NGROK) {
-    const webhook = await stripe.webhookEndpoints.create({
-      connect: true,
-      url: `${process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList
-    }, stripeKey)
-    global.connectWebhookEndPointSecret = webhook.secret
-  }
 })
 
 afterEach(async () => {
@@ -258,6 +250,13 @@ beforeEach(async () => {
     const webhook = await stripe.webhookEndpoints.create({
       connect: true,
       url: `http://${ip}:${process.env.PORT}/webhooks/connect/index-connect-data`,
+      enabled_events: eventList
+    }, stripeKey)
+    global.connectWebhookEndPointSecret = webhook.secret
+  } else {
+    const webhook = await stripe.webhookEndpoints.create({
+      connect: true,
+      url: `${process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
       enabled_events: eventList
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
