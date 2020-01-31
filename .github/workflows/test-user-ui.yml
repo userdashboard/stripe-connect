@@ -16,7 +16,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Setup dependencies
       run: |
-        npm install ngrok mocha puppeteer @userdashboard/dashboard --no-save
+        npm install public-ip mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
         node node_modules/mocha/bin/mocha src/www/account --recursive --bail --timeout 1800000 --slow 1800000 || exit 1
@@ -37,5 +37,5 @@ jobs:
         DEBUG_PAGES: true
         DEBUG_PUPPETEER: true
         DEBUG_REQUESTS: true
-        NGROK: true
+        PUBLIC_IP: true
     

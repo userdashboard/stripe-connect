@@ -1,5 +1,5 @@
 if [ ! -d node_modules/puppeteer ] || [ ! -d node_modules/@userdashboard/dashboard ]; then
-  npm install ngrok puppeteer @userdashboard/dashboard --no-save
+  npm install public-ip puppeteer @userdashboard/dashboard --no-save
 fi
 PARAMS=""
 if [ ! -z "$1" ]; then

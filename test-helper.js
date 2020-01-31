@@ -11,9 +11,11 @@ if (process.env.GENERATE_COUNTRY) {
   ]
 }
 const fs = require('fs')
-let ngrok
+let ngrok, publicIP
 if (process.env.NGROK) {
   ngrok = require('ngrok')
+} else if (process.env.PUBLIC_IP) { 
+  publicIP = require('public-ip')
 }
 const packageJSON = require('./package.json')
 const stripe = require('stripe')()
@@ -201,30 +203,37 @@ beforeEach(async () => {
   global.stripeJS = false
   global.maximumStripeRetries = 0
   global.webhooks = []
-  if (process.env.NGROK) {
-    let webhooks = await stripe.webhookEndpoints.list(stripeKey)
-    while (webhooks.data && webhooks.data.length) {
-      for (const webhook of webhooks.data) {
-        if (webhook === 0) {
-          continue
-        }
-        try {
-          await stripe.webhookEndpoints.del(webhook.id, stripeKey)
-        } catch (error) {
-        }
+  let webhooks = await stripe.webhookEndpoints.list(stripeKey)
+  while (webhooks.data && webhooks.data.length) {
+    for (const webhook of webhooks.data) {
+      if (webhook === 0) {
+        continue
       }
       try {
-        webhooks = await stripe.webhookEndpoints.list(stripeKey)
+        await stripe.webhookEndpoints.del(webhook.id, stripeKey)
       } catch (error) {
-        webhooks = { data: [0] }
       }
     }
+    try {
+      webhooks = await stripe.webhookEndpoints.list(stripeKey)
+    } catch (error) {
+      webhooks = { data: [0] }
+    }
+  }
+  if (process.env.NGROK) {
     ngrok.kill()
     tunnel = null
     while (!tunnel) {
       try {
         tunnel = await ngrok.connect({
-          port: process.env.PORT
+          port: process.env.PORT,
+          auth: process.env.NGROK_AUTH,
+          onStatusChange: status => {
+            console.log('ngrok status', status)
+          },
+          onLogEvent: data => {
+            console.log('ngrok log event', data)
+          },
         })
         if (!tunnel) {
           continue
@@ -241,6 +250,14 @@ beforeEach(async () => {
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
     return
+  } else if (process.env.PUBLIC_IP) {
+    const ip = await publicIP.v6()
+    const webhook = await stripe.webhookEndpoints.create({
+      connect: true,
+      url: `http://${ip}/webhooks/connect/index-connect-data`,
+      enabled_events: eventList
+    }, stripeKey)
+    global.connectWebhookEndPointSecret = webhook.secret
   }
 })
 

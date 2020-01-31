@@ -16,7 +16,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Setup dependencies
       run: |
-        npm install ngrok mocha puppeteer @userdashboard/dashboard --no-save
+        npm install public-ip mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
         node node_modules/mocha/bin/mocha src/www/api/administrator --recursive --bail --timeout 1800000 --slow 1800000 || exit 1
@@ -35,5 +35,5 @@ jobs:
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         DEBUG_ERRORS: true
         DEBUG_REQUESTS: true
-        NGROK: true
+        PUBLIC_IP: true
     
