@@ -180,6 +180,9 @@ function createLocalHostRun (callback) {
     const url = log.toString().split(' ').pop().trim()
     return callback(null, url)
   })
+  localhostRun.stderr.on('data', async (log) => {
+    console.log('localhost.run error', log.toString())
+  })
 }
 
 afterEach(async () => {
