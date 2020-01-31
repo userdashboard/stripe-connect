@@ -251,8 +251,10 @@ beforeEach(async () => {
     global.connectWebhookEndPointSecret = webhook.secret
     return
   } else if (process.env.PUBLIC_IP) {
+    console.log('checking ip')
     const ip = await publicIP.v4()
-    console.log('listening on ip', ip, port)
+    const ip2 = await publicIP.v4()
+    console.log('listening on ip', ip, ip2, process.env.PORT)
     const webhook = await stripe.webhookEndpoints.create({
       connect: true,
       url: `http://${ip}:${process.env.PORT}/webhooks/connect/index-connect-data`,
