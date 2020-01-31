@@ -66,7 +66,7 @@ module.exports = {
         }
       }
       if (req.uploads.verification_document_back) {
-        const uploadData = {
+        const backData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
@@ -152,7 +152,7 @@ module.exports = {
         }
       }
       if (req.uploads.verification_additional_document_back) {
-        const uploadData = {
+        const backData = {
           purpose: 'identity_document',
           file: {
             type: 'application/octet-stream',
