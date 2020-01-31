@@ -257,7 +257,7 @@ beforeEach(async () => {
     global.connectWebhookEndPointSecret = webhook.secret
   } else if (process.env.LOCAL_TUNNEL) {
     console.log('getting tunnel')
-    tunnel = await localTunnel({ port: process.env.PORT })
+    tunnel = await localTunnel({ port: process.env.PORT, local_https: false, host: 'http://localtunnel.me' })
     console.log('got tunnel url', tunnel.url)
     const webhook = await stripe.webhookEndpoints.create({
       connect: true,
