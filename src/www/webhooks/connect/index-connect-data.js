@@ -40,7 +40,7 @@ module.exports = {
       // if (global.testNumber && global.monitorStripeAccount && req.bodyRaw.indexOf(global.monitorStripeAccount) > -1) {
       //   console.log('webhook failed parsing ** for monitored account', global.monitorStripeAccount, req.bodyRaw)
       // } else {
-        // console.log('webhook failed parsing', error)
+      // console.log('webhook failed parsing', error)
       // }
     }
     if (!stripeEvent) {
@@ -54,8 +54,8 @@ module.exports = {
     if (stripeEvent.data.account) {
       await stripeCache.delete(stripeEvent.data.account)
     }
-    if (stripeEvent.data.object && 
-        stripeEvent.data.object.id && 
+    if (stripeEvent.data.object &&
+        stripeEvent.data.object.id &&
         stripeEvent.data.object.id !== stripeEvent.data.account) {
       await stripeCache.delete(stripeEvent.data.object.id)
     }
