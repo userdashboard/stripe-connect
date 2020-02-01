@@ -4,7 +4,7 @@ const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/user/connect/create-beneficial-owner', () => {
+describe.only('/api/user/connect/create-beneficial-owner', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -88,7 +88,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           continue
         }
         testedMissingFields.push(field)
-        describe.only(`invalid-${field}`, () => {
+        describe(`invalid-${field}`, () => {
           it(`missing posted ${field}`, async () => {
             const user = await TestHelper.createUser()
             await TestHelper.createStripeAccount(user, {
@@ -104,7 +104,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
             delete (body[field])
-            console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
             try {
@@ -112,6 +111,39 @@ describe('/api/user/connect/create-beneficial-owner', () => {
             } catch (error) {
               errorMessage = error.message
             }
+            console.log('testing missing field', field, 'error', errorMessage)
+            assert.strictEqual(errorMessage, `invalid-${field}`)
+          })
+
+          it(`invalid posted ${field}`, async () => {
+            const user = await TestHelper.createUser()
+            await TestHelper.createStripeAccount(user, {
+              country: country.id,
+              type: 'company'
+            })
+            const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+            req.account = user.account
+            req.session = user.session
+            req.uploads = {
+              verification_document_back: TestHelper['success_id_scan_back.png'],
+              verification_document_front: TestHelper['success_id_scan_front.png']
+            }
+            const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
+            body[field] = 'an invalid value'
+            if (field.startsWith('dob_')) {
+              body.dob_day = invalidValues.dob_day
+              body.dob_month = invalidValues.dob_month
+              body.dob_year = invalidValues.dob_year
+              body[field] = 'invalid'
+            }
+            req.body = TestHelper.createMultiPart(req, body)
+            let errorMessage
+            try {
+              await req.post()
+            } catch (error) {
+              errorMessage = error.message
+            }
+            console.log('testing invalid field', field, 'error', errorMessage)
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
         })
@@ -142,6 +174,32 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         }
         assert.strictEqual(errorMessage, 'invalid-token')
       })
+
+      it('invalid posted token', async () => {
+        global.stripeJS = 3
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
+        body.token = 'invalid'
+        req.body = TestHelper.createMultiPart(req, body)
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-token')
+      })
     })
   })
 
@@ -157,7 +215,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           continue
         }
         testedRequiredFields.push(field)
-        it(`required posted ${field}`, async () => {
+        it(`optionally-required posted ${field}`, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -172,8 +230,8 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           }
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
           req.body = TestHelper.createMultiPart(req, body)
-
           const owner = await req.post()
+          console.log('testing field', field, 'value', owner[field])
           assert.strictEqual(owner[field], body[field])
         })
       }

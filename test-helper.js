@@ -95,20 +95,21 @@ module.exports = {
   }
 }
 
-let TestHelper, tunnel
+const TestHelper = require('@userdashboard/dashboard/test-helper.js')
+for (const x in TestHelper) {
+  module.exports[x] = TestHelper[x]
+}
+module.exports.createRequest = (rawURL, method) => {
+  const req = TestHelper.createRequest(rawURL, method)
+  req.stripeKey = stripeKey
+  return req
+}
+
+let tunnel
 before(async () => {
   try {
     await deleteOldStripeAccounts()
   } catch (error) {
-  }
-  TestHelper = require('@userdashboard/dashboard/test-helper.js')
-  for (const x in TestHelper) {
-    module.exports[x] = TestHelper[x]
-  }
-  module.exports.createRequest = (rawURL, method) => {
-    const req = TestHelper.createRequest(rawURL, method)
-    req.stripeKey = stripeKey
-    return req
   }
   try {
     await deleteOldWebhooks()

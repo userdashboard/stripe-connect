@@ -408,6 +408,232 @@ module.exports = {
     }
     await TestHelper.waitForVerificationFieldsToLeave(user, 'external_account')
     return user
+  },
+  createIndividualWithFailedField: async (country, field) => {
+    country = country || 'US'
+    const user = await TestHelper.createUser()
+    await TestHelper.createStripeAccount(user, {
+      country: country,
+      type: 'individual'
+    })
+    const individualPostData = createPostData(individualData[country], user.profile)
+    switch (field) {
+      case 'address':
+        individualPostData.address_line1 = 'address_no_match'
+        break
+      case 'dob':
+        individualPostData.dob_day = '01'
+        individualPostData.dob_month = '01'
+        individualPostData.dob_year = '1900'
+        break
+      case 'id_number':
+        individualPostData.id_number = '111111111'
+        break
+      case 'ssn_last_4':
+        individualPostData.ssn_last_4 = '1111'
+        break
+      case 'document':
+        individualPostData.verification_document_back = 'file_identity_document_failure'
+        individualPostData.verification_document_front = 'file_identity_document_failure'
+        break
+      case 'additional_document':
+        individualPostData.verification_document_back = 'file_identity_document_failure'
+        individualPostData.verification_document_front = 'file_identity_document_failure'
+        break
+    }
+    await TestHelper.createStripeRegistration(user, individualPostData)
+    let paymentPostData
+    if (paymentData[country].length) {
+      paymentPostData = createPostData(paymentData[country][0], user.profile)
+    } else {
+      paymentPostData = createPostData(paymentData[country], user.profile)
+    }
+    if (field === 'payment') {
+      if (!paymentPostData.account_number || !paymentPostData.routing_number) {
+        throw new Error('can only use countries with account_number / routing_number to test payment info errors')
+      }
+      paymentPostData.routing_number = '110000000'
+      paymentPostData.account_number = '000111111116'
+    }
+    await TestHelper.createExternalAccount(user, paymentPostData)
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'external_account')
+    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+    req.session = user.session
+    req.account = user.account
+    req.stripeKey = {
+      api_key: process.env.STRIPE_KEY
+    }
+    await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
+    await TestHelper.updateStripeRegistration(user, {}, {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    })
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.document')
+    await TestHelper.waitForPendingFieldsToLeave(user)
+    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+      await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
+      await TestHelper.updateStripeRegistration(user, {}, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
+      })
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
+    }
+    await TestHelper.waitForPayoutsEnabled(user)
+    await TestHelper.waitForPendingFieldsToLeave(user)
+    return user
+  },
+  createCompanyWithFailedField: async (country, field) => {
+    country = country || 'US'
+    const user = await TestHelper.createUser()
+    await TestHelper.createStripeAccount(user, {
+      country: country,
+      type: 'company'
+    })
+    const companyPostData = createPostData(individualData[country], user.profile)
+    switch (field) {
+      case 'company.address':
+        companyPostData.address_line1 = 'address_no_match'
+        break
+      case 'tax_id':
+        companyPostData.tax_id = '111111111'
+        break
+      case 'document':
+        companyPostData.verification_document_back = 'file_identity_document_failure'
+        companyPostData.verification_document_front = 'file_identity_document_failure'
+        break
+    }
+    await TestHelper.createStripeRegistration(user, companyPostData)
+    const representativePostData = createPostData(representativeData[country], user.profile)
+    switch (field) {
+      case 'representative.address':
+        representativePostData.address_line1 = 'address_no_match'
+        break
+      case 'representative.dob':
+        representativePostData.dob_day = '01'
+        representativePostData.dob_month = '01'
+        representativePostData.dob_year = '1900'
+        break
+      case 'representative.id_number':
+        representativePostData.id_number = '111111111'
+        break
+      case 'representative.ssn_last_4':
+        representativePostData.ssn_last_4 = '1111'
+        break
+      case 'representative.document':
+        representativePostData.verification_document_back = 'file_identity_document_failure'
+        representativePostData.verification_document_front = 'file_identity_document_failure'
+        break
+      case 'representative.additional_document':
+        representativePostData.verification_document_back = 'file_identity_document_failure'
+        representativePostData.verification_document_front = 'file_identity_document_failure'
+        break
+    }
+    await TestHelper.createCompanyRepresentative(user, representativePostData)
+    await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
+    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
+    await TestHelper.updateCompanyRepresentative(user, {}, {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    })
+    await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.document`)
+    for (const posted in representativePostData) {
+      const field = posted.replace('address_', 'address.').replace('relationship_', 'relationship.').replace('dob_', 'dob.').replace('verification_', 'verification.')
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.${field}`)
+    }
+    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
+      await TestHelper.updateCompanyRepresentative(user, {}, {
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_front.png']
+      })
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
+    }
+    if (beneficialOwnerData[country] !== false) {
+      const beneficialOwnerPostData = createPostData(beneficialOwnerData[country], user.profile)
+      switch (field) {
+        case 'owner.address':
+          beneficialOwnerPostData.address_line1 = 'address_no_match'
+          break
+        case 'owner.dob':
+          beneficialOwnerPostData.dob_day = '01'
+          beneficialOwnerPostData.dob_month = '01'
+          beneficialOwnerPostData.dob_year = '1900'
+          break
+        case 'owner.id_number':
+          beneficialOwnerPostData.id_number = '111111111'
+          break
+        case 'owner.ssn_last_4':
+          beneficialOwnerPostData.ssn_last_4 = '1111'
+          break
+        case 'owner.document':
+          beneficialOwnerPostData.verification_document_back = 'file_identity_document_failure'
+          beneficialOwnerPostData.verification_document_front = 'file_identity_document_failure'
+          break
+        case 'owner.additional_document':
+          beneficialOwnerPostData.verification_document_back = 'file_identity_document_failure'
+          beneficialOwnerPostData.verification_document_front = 'file_identity_document_failure'
+          break
+      }
+      await TestHelper.createBeneficialOwner(user, beneficialOwnerPostData)
+      await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
+    }
+    if (companyDirectorData[country] !== false) {
+      const companyDirectorPostData = createPostData(companyDirectorData[country], user.profile)
+      switch (field) {
+        case 'director.address':
+          companyDirectorPostData.address_line1 = 'address_no_match'
+          break
+        case 'director.dob':
+          companyDirectorPostData.dob_day = '01'
+          companyDirectorPostData.dob_month = '01'
+          companyDirectorPostData.dob_year = '1900'
+          break
+        case 'director.id_number':
+          companyDirectorPostData.id_number = '111111111'
+          break
+        case 'director.ssn_last_4':
+          companyDirectorPostData.ssn_last_4 = '1111'
+          break
+        case 'director.document':
+          companyDirectorPostData.verification_document_back = 'file_identity_document_failure'
+          companyDirectorPostData.verification_document_front = 'file_identity_document_failure'
+          break
+        case 'director.additional_document':
+          companyDirectorPostData.verification_document_back = 'file_identity_document_failure'
+          companyDirectorPostData.verification_document_front = 'file_identity_document_failure'
+          break
+      }
+      await TestHelper.createCompanyDirector(user, companyDirectorPostData)
+      await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
+    }
+    let paymentPostData
+    if (paymentData[country].length) {
+      paymentPostData = createPostData(paymentData[country][0], user.profile)
+    } else {
+      paymentPostData = createPostData(paymentData[country], user.profile)
+    }
+    if (field === 'payment') {
+      if (!paymentPostData.account_number || !paymentPostData.routing_number) {
+        throw new Error('can only use countries with account_number / routing_number to test payment info errors')
+      }
+      paymentPostData.routing_number = '110000000'
+      paymentPostData.account_number = '000111111116'
+    }
+    await TestHelper.createExternalAccount(user, createPostData(paymentPostData, user.profile))
+    // TODO: fix this when Stripe fixes company.verification.document
+    // the 'company.verification.document' erroneously shows up in the
+    // 'requirements.pending_validation' signifying it is under review, then
+    // it is removed from that, but really it needs to show up in currently_due
+    // and then submit the documents and then it should be pending_validation
+    await TestHelper.updateStripeRegistration(user, {}, {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    })
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'company.verification.document')
+    await TestHelper.waitForPendingFieldsToLeave(user)
+    return user
   }
 }
 
@@ -1903,7 +2129,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_city: 'Vienna',
     address_line1: '123 Park Lane',
     address_postal_code: '1020',
-    address_state: '1',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',

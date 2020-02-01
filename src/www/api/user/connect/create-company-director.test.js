@@ -4,7 +4,7 @@ const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/user/connect/create-company-director', () => {
+describe.only('/api/user/connect/create-company-director', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -88,7 +88,7 @@ describe('/api/user/connect/create-company-director', () => {
           continue
         }
         testedMissingFields.push(field)
-        describe.only(`invalid-${field}`, () => {
+        describe(`invalid-${field}`, () => {
           it(`missing posted ${field}`, async () => {
             const user = await TestHelper.createUser()
             await TestHelper.createStripeAccount(user, {
@@ -111,6 +111,33 @@ describe('/api/user/connect/create-company-director', () => {
             } catch (error) {
               errorMessage = error.message
             }
+            console.log('testing missing field', field, 'error', errorMessage)
+            assert.strictEqual(errorMessage, `invalid-${field}`)
+          })
+
+          it(`invalid posted ${field}`, async () => {
+            const user = await TestHelper.createUser()
+            await TestHelper.createStripeAccount(user, {
+              country: country.id,
+              type: 'company'
+            })
+            const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+            req.account = user.account
+            req.session = user.session
+            req.uploads = {
+              verification_document_back: TestHelper['success_id_scan_back.png'],
+              verification_document_front: TestHelper['success_id_scan_front.png']
+            }
+            const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+            body[field] = 'invalid'
+            req.body = TestHelper.createMultiPart(req, body)
+            let errorMessage
+            try {
+              await req.post()
+            } catch (error) {
+              errorMessage = error.message
+            }
+            console.log('testing invalid field', field, 'error', errorMessage)
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
         })
@@ -130,7 +157,7 @@ describe('/api/user/connect/create-company-director', () => {
           continue
         }
         testedRequiredFields.push(field)
-        it(`required posted ${field}`, async () => {
+        it(`optionally-required posted ${field}`, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -144,8 +171,10 @@ describe('/api/user/connect/create-company-director', () => {
             verification_document_front: TestHelper['success_id_scan_front.png']
           }
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+          delete (body[field])
           req.body = TestHelper.createMultiPart(req, body)
           const director = await req.post()
+          console.log('testing field', field, 'value', owner[field])
           assert.strictEqual(director[field], body[field])
         })
       }
