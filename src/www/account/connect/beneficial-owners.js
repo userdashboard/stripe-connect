@@ -17,6 +17,10 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type !== 'company') {
     throw new Error('invalid-stripe-account')
   }
+  if (!stripeAccount.company.owners_provided && 
+    stripeAccount.requirements.currently_due.indexOf('relationship.owner') === -1) {
+   throw new Error('invalid-stripe-account')
+  }
   const owners = await global.api.user.connect.BeneficialOwners.get(req)
   req.data = { stripeAccount, owners }
 }

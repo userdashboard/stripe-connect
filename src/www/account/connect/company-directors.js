@@ -17,7 +17,8 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type !== 'company') {
     throw new Error('invalid-stripe-account')
   }
-  if (stripeAccount.requirements.currently_due.indexOf('relationship.director') === -1) {
+  if (!stripeAccount.company.directors_provided && 
+       stripeAccount.requirements.currently_due.indexOf('relationship.director') === -1) {
     throw new Error('invalid-stripe-account')
   }
   const directors = await global.api.user.connect.CompanyDirectors.get(req)
