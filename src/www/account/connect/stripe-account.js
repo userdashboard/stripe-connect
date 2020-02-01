@@ -85,14 +85,12 @@ async function renderPage (req, res) {
       removeElements.push('business-name')
     }
     if (req.data.representative) {
-      if (req.data.representative.first_name) {
-        removeElements.push('add-company-representative-link')
-      } else {
-        removeElements.push('update-company-representative-link', 'remove-company-representative-link')
+      if (req.data.representative.requirements.currently_due.length === 0) {
+        removeElements.push('update-company-representative-link')
       }
       dashboard.HTML.renderTable(doc, [req.data.representative], 'representative-row', 'representatives-table')
     } else {
-      removeElements.push('update-company-representative-link', 'remove-company-representative-link', 'representative-container')
+      removeElements.push('update-company-representative-link', 'create-company-representative-link', 'representative-container')
     }
     if (req.data.stripeAccount.metadata.submitted) {
       removeElements.push('add-account-opener-link', 'edit-account-opener-link')

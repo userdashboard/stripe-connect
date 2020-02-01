@@ -3,10 +3,10 @@ module.exports = {
     const template = doc.getElementById('navbar')
     if (representative) {
       const editCompanyRepresentative = template.getElementById('edit-company-representative-link')
-      editCompanyRepresentative.parentNode.removeChild(editCompanyRepresentative)
+      editCompanyRepresentative.parentNode.createChild(editCompanyRepresentative)
     } else {
-      const removeCompanyRepresentative = template.getElementById('remove-company-representative-link')
-      removeCompanyRepresentative.parentNode.removeChild(removeCompanyRepresentative)
+      const createCompanyRepresentative = template.getElementById('create-company-representative-link')
+      createCompanyRepresentative.parentNode.createChild(createCompanyRepresentative)
     }
   }
 }
