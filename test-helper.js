@@ -535,6 +535,7 @@ async function submitStripeAccount (user) {
 }
 
 async function waitForPayout (administrator, stripeid, previousid, callback) {
+  console.log('wait for payout')
   callback = callback || previousid
   if (callback === previousid) {
     previousid = null
@@ -562,6 +563,7 @@ async function waitForPayout (administrator, stripeid, previousid, callback) {
 }
 
 async function waitForPayoutsEnabled (user, callback) {
+  console.log('wait for payouts enabled')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForPayoutsEnabled`)
   req.account = user.account
   req.session = user.session
@@ -586,6 +588,7 @@ async function waitForPayoutsEnabled (user, callback) {
 }
 
 async function waitForVerification (user, callback) {
+  console.log('wait for verification')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerification`)
   req.account = user.account
   req.session = user.session
@@ -614,6 +617,7 @@ async function waitForVerification (user, callback) {
 }
 
 async function waitForVerificationFailure (user, callback) {
+  console.log('wait for verification failure')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerificationFailure`)
   req.account = user.account
   req.session = user.session
@@ -644,6 +648,7 @@ async function waitForVerificationFailure (user, callback) {
 }
 
 async function waitForPendingFieldsToLeave (user, callback) {
+  console.log('wait for pending fields to leave')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -679,6 +684,7 @@ async function waitForPendingFieldsToLeave (user, callback) {
 }
 
 async function waitForVerificationFieldsToLeave (user, contains, callback) {
+  console.log('wait for verification fields to leave')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -727,6 +733,7 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
 }
 
 async function waitForVerificationFieldsToReturn (user, contains, callback) {
+  console.log('wait for verification fields to return')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -764,6 +771,7 @@ async function waitForVerificationFieldsToReturn (user, contains, callback) {
 }
 
 async function waitForVerificationStart (user, callback) {
+  console.log('wait for verification start')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -790,6 +798,7 @@ async function waitForVerificationStart (user, callback) {
 }
 
 async function waitForAccountRequirement (user, requirement, callback) {
+  console.log('wait for account requirement')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -820,6 +829,7 @@ async function waitForAccountRequirement (user, requirement, callback) {
 }
 
 async function waitForPersonRequirement (user, personid, requirement, callback) {
+  console.log('wait for person requirement')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
