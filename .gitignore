@@ -4,3 +4,4 @@ screenshots
 /api
 .vscode
 .DS_Store
+debug-requests.txt
