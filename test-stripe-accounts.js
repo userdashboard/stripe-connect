@@ -1848,6 +1848,7 @@ const companyDirectorData = module.exports.companyDirectorData = {
     address_country: 'LT',
     address_line1: '123 Sesame St',
     address_postal_code: 'LT-00000',
+    address_state: 'AL',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950'
