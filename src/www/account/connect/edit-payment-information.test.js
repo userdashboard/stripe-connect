@@ -84,10 +84,7 @@ describe('/account/connect/edit-payment-information', () => {
           }
           return
         }
-        const body = JSON.parse(JSON.stringify(TestStripeAccounts.paymentData[country.id]))
-        body.country = country.id
-        body.account_holder_type = 'company'
-        body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
         const fields = Object.keys(req.body)
         for (const field of fields) {
           req.body = JSON.parse(body)
@@ -113,10 +110,7 @@ describe('/account/connect/edit-payment-information', () => {
         req.session = user.session
         if (TestStripeAccounts.paymentData[country.id].length) {
           for (const format of TestStripeAccounts.paymentData[country.id]) {
-            req.body = JSON.parse(JSON.stringify(format))
-            req.body.country = country.id
-            req.body.account_holder_type = 'company'
-            req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
+            req.body = TestStripeAccounts.createPostData(format, user.profile)
             const page = await req.post()
             const doc = TestHelper.extractDoc(page)
             const messageContainer = doc.getElementById('message-container')
@@ -125,10 +119,7 @@ describe('/account/connect/edit-payment-information', () => {
           }
           return
         }
-        req.body = JSON.parse(JSON.stringify(TestStripeAccounts.paymentData[country.id]))
-        req.body.country = country.id
-        req.body.account_holder_type = 'individual'
-        req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id], user.profile)
         req.filename = __filename
         req.screenshots = [
           { hover: '#account-menu-container' },

@@ -22,11 +22,10 @@ module.exports = {
     if (!stripeAccount.external_accounts.data.length) {
       throw new Error('invalid-payment-details')
     }
-    const countrySpec = connect.countrySpecIndex[stripeAccount.country]
-    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.owner') > -1 && !stripeAccount.company.owners_provided) {
+    if (stripeAccount.requirements.currently_due.indexOf('relationship.owner') > -1 && !stripeAccount.company.owners_provided) {
       throw new Error('invalid-beneficial-owner')
     }
-    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
+    if (stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
       throw new Error('invalid-company-director')
     }
     const representative = await global.api.user.connect.CompanyRepresentative.get(req)

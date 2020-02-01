@@ -19,8 +19,7 @@ module.exports = {
       (stripeAccount.company && stripeAccount.company.owners_provided)) {
       throw new Error('invalid-stripe-account')
     }
-    const countrySpec = connect.countrySpecIndex[stripeAccount.country]
-    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.owner') === -1) {
+    if (stripeAccount.requirements.currently_due.indexOf('relationship.owner') === -1) {
       throw new Error('invalid-stripe-account')
     }
     const accountInfo = {

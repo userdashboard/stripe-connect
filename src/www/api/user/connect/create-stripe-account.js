@@ -1,3 +1,4 @@
+const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
@@ -18,12 +19,7 @@ module.exports = {
     if (!req.body || (req.body.type !== 'individual' && req.body.type !== 'company')) {
       throw new Error('invalid-type')
     }
-    if (!req.body.country) {
-      throw new Error('invalid-country')
-    }
-    req.query.country = req.body.country
-    const countrySpec = await global.api.user.connect.CountrySpec.get(req)
-    if (!countrySpec) {
+    if (!req.body.country || !connect.countrySpecIndex[req.body.country]) {
       throw new Error('invalid-country')
     }
     const accountInfo = {

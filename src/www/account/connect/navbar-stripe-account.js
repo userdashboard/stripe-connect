@@ -30,8 +30,11 @@ module.exports = {
       editIndividual.parentNode.removeChild(editIndividual)
       const submitIndividual = template.getElementById('navbar-submit-individual')
       submitIndividual.parentNode.removeChild(submitIndividual)
-      const countrySpec = connect.countrySpecIndex[stripeAccount.country]
-      if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
+      if (stripeAccount.requirements.currently_due.indexOf('relationship.owner') === -1) {
+        const companyOwners = template.getElementById('navbar-beneficial-owners')
+        companyOwners.parentNode.removeChild(companyOwners)
+      }
+      if (stripeAccount.requirements.currently_due.indexOf('relationship.director') === -1) {
         const companyDirectors = template.getElementById('navbar-company-directors')
         companyDirectors.parentNode.removeChild(companyDirectors)
       }

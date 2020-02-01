@@ -69,14 +69,7 @@ describe('/account/connect/edit-company-representative', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = JSON.parse(JSON.stringify(TestStripeAccounts.representativeData[country.id]))
-        if (country.id !== 'JP') {
-          req.body.first_name = user.profile.firstName
-          req.body.last_name = user.profile.lastName
-        }
-        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
-          req.body.email = user.profile.contactEmail
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
         const fields = Object.keys(req.body)
         const body = JSON.stringify(req.body)
         for (const field of fields) {
@@ -100,15 +93,7 @@ describe('/account/connect/edit-company-representative', () => {
           country: country.id,
           type: 'company'
         })
-        const createBody = JSON.parse(JSON.stringify(TestStripeAccounts.representativeData[country.id]))
-        if (country.id !== 'JP') {
-          createBody.first_name = user.profile.firstName
-          createBody.last_name = user.profile.lastName
-        }
-        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
-          createBody.email = user.profile.contactEmail
-        }
-        await TestHelper.createCompanyRepresentative(user, createBody, {
+        await TestHelper.createCompanyRepresentative(user, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id]), {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })

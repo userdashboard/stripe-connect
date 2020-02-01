@@ -69,7 +69,7 @@ describe('/account/connect/edit-company-registration', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = JSON.parse(JSON.stringify(TestStripeAccounts.companyData[country.id]))
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
         req.uploads = {
           verification_document_front: TestHelper['success_id_scan_back.png'],
           verification_document_back: TestHelper['success_id_scan_back.png']

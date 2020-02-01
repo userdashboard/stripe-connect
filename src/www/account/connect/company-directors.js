@@ -18,8 +18,8 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type !== 'company') {
     throw new Error('invalid-stripe-account')
   }
-  const countrySpec = connect.countrySpecIndex[stripeAccount.country]
-  if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
+  stripeAccount.requirements.currently_due.indexOf
+  if (stripeAccount.requirements.currently_due.indexOf.indexOf('company.director') === -1) {
     throw new Error('invalid-stripe-account')
   }
   const directors = await global.api.user.connect.CompanyDirectors.get(req)

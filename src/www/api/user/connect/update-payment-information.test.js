@@ -1105,7 +1105,7 @@ describe('/api/user/connect/update-payment-information', () => {
         req.session = user.session
         if (TestStripeAccounts.paymentData[country.id].length) {
           for (const format of TestStripeAccounts.paymentData[country.id]) {
-            req.body = format
+            req.body = TestStripeAccounts.createPostData(format, user.profile)
             req.body.country = country.id
             req.body.account_holder_type = 'company'
             req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
@@ -1114,10 +1114,7 @@ describe('/api/user/connect/update-payment-information', () => {
           }
           return
         }
-        req.body = TestStripeAccounts.paymentData[country.id]
-        req.body.country = country.id
-        req.body.account_holder_type = 'individual'
-        req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id], user.profile)
         req.filename = __filename
         req.saveResponse = true
         const accountNow = await req.patch()

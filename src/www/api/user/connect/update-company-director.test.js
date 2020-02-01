@@ -7,24 +7,17 @@
 
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/update-company-director', () => {
   describe('exceptions', () => {
     describe('invalid-personid', () => {
       it('missing querystring personid', async () => {
         const user = await TestHelper.createUser()
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest('/api/user/connect/update-company-director')
         req.account = user.account
         req.session = user.session
-        req.body = {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE)
         let errorMessage
         try {
           await req.patch(req)
@@ -36,18 +29,10 @@ describe('/api/user/connect/update-company-director', () => {
 
       it('invalid querystring personid', async () => {
         const user = await TestHelper.createUser()
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest('/api/user/connect/update-company-director?personid=invalid')
         req.account = user.account
         req.session = user.session
-        req.body = {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE)
         let errorMessage
         try {
           await req.patch(req)
@@ -66,14 +51,7 @@ describe('/api/user/connect/update-company-director', () => {
           type: 'company'
         })
         const person = TestHelper.nextIdentity()
-        const director = await TestHelper.createCompanyDirector(user, {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName
-        }, {
+        const director = await TestHelper.createCompanyDirector(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE, person), {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -81,14 +59,7 @@ describe('/api/user/connect/update-company-director', () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
         req.account = user2.account
         req.session = user2.session
-        req.body = {
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE, person)
         let errorMessage
         try {
           await req.patch(req)
@@ -109,28 +80,14 @@ describe('/api/user/connect/update-company-director', () => {
       //   type: 'company'
       // })
       // const person = TestHelper.nextIdentity()
-      // const director = await TestHelper.createCompanyDirector(user, {
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   first_name: person.firstName,
-      //   last_name: person.lastName,
-      //   token: 'sample1'
-      // }, {
+      // const director = await TestHelper.createCompanyDirector(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person), {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // })
       // const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   first_name: 'Modified name',
-      //   last_name: person.lastName,
-      //   token: 'sample2'
-      // }
+      // const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person)
       // req.body = TestHelper.createMultiPart(req, body)
       // const directorNow = await req.patch()
       // assert.notStrictEqual(directorNow.token, director.token)
@@ -143,14 +100,7 @@ describe('/api/user/connect/update-company-director', () => {
       //   type: 'company'
       // })
       // const person = TestHelper.nextIdentity()
-      // const director = await TestHelper.createCompanyDirector(user, {
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: person.email,
-      //   first_name: person.firstName,
-      //   last_name: person.lastName
-      // }, {
+      // const director = await TestHelper.createCompanyDirector(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person), {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // })
@@ -160,13 +110,7 @@ describe('/api/user/connect/update-company-director', () => {
       // req.uploads = {
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // const body = {
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   first_name: 'Modified name',
-      //   last_name: person.lastName
-      // }
+      // const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person)
       // req.body = TestHelper.createMultiPart(req, body)
       // const directorNow = await req.patch()
       // assert.notStrictEqual(directorNow.verification_document_front, director.verification_document_front)
@@ -179,14 +123,7 @@ describe('/api/user/connect/update-company-director', () => {
       //   type: 'company'
       // })
       // const person = TestHelper.nextIdentity()
-      // const director = await TestHelper.createCompanyDirector(user, {
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: person.email,
-      //   first_name: person.firstName,
-      //   last_name: person.lastName
-      // }, {
+      // const director = await TestHelper.createCompanyDirector(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person), {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // })
@@ -196,13 +133,7 @@ describe('/api/user/connect/update-company-director', () => {
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_front.png']
       // }
-      // const body = {
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   first_name: 'Modified name',
-      //   last_name: person.lastName
-      // }
+      // const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person)
       // req.body = TestHelper.createMultiPart(req, body)
       // const directorNow = await req.patch()
       // assert.notStrictEqual(directorNow.verification_document_back, director.verification_document_back)
@@ -232,21 +163,14 @@ describe('/api/user/connect/update-company-director', () => {
       //   type: 'company'
       // })
       // const person = TestHelper.nextIdentity()
-      // const director = await TestHelper.createCompanyDirector(user, {
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: person.email,
-      //   first_name: person.firstName,
-      //   last_name: person.lastName
-      // }, {
+      // const director = await TestHelper.createCompanyDirector(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person), {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // })
       // const req = TestHelper.createRequest(`/api/user/connect/update-company-director?personid=${director.id}`)
       // req.account = user.account
       // req.session = user.session
-      // req.body = {}
+      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person)
       // req.filename = __filename
       // req.saveResponse = true
       // const directorNow = await req.patch()
@@ -271,14 +195,7 @@ describe('/api/user/connect/update-company-director', () => {
   //   verification_document_back: TestHelper['success_id_scan_back.png'],
   //   verification_document_front: TestHelper['success_id_scan_front.png']
   // }
-  // req.body = {
-  //   dob_day: '1',
-  //   dob_month: '1',
-  //   dob_year: '1950',
-  //   email: person.email,
-  //   first_name: person.firstName,
-  //   last_name: person.lastName
-  // }
+  // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person)
   // await req.post()
   // const directors = await global.api.user.connect.CompanyDirectors.get(req)
   // const director = directors[0]
@@ -286,15 +203,7 @@ describe('/api/user/connect/update-company-director', () => {
   // req2.waitOnSubmit = true
   // req2.account = user.account
   // req2.session = user.session
-  // req2.body = {
-  //   dob_day: '1',
-  //   dob_month: '1',
-  //   dob_year: '1950',
-  //   email: person.email,
-  //   first_name: person.firstName,
-  //   last_name: person.lastName
-  // }
-
+  // req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB, person)
   // await req2.post()
   // const directorNow = await global.api.user.connect.CompanyDirector.get(req2)
   // assert.notStrictEqual(directorNow.token, director.token)

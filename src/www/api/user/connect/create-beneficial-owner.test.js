@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/create-beneficial-owner', () => {
   describe('exceptions', () => {
@@ -82,7 +83,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -90,17 +90,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: '',
-          last_name: person.lastName
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -118,7 +108,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -126,18 +115,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: '',
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -155,7 +133,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -163,18 +140,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: '',
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -192,7 +158,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -200,18 +165,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: '',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -229,7 +183,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -237,18 +190,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_line1: '',
-          address_postal_code: 'EC1A 1AA',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -266,7 +208,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -274,18 +215,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_line1: 'A building',
-          address_postal_code: '',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -303,7 +233,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'US',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -311,19 +240,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'New York',
-          address_line1: '285 Fulton St',
-          address_postal_code: '10007',
-          address_state: 'invalid',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -341,7 +258,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -349,18 +265,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          dob_day: '',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -378,7 +283,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -386,18 +290,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          dob_day: '1',
-          dob_month: '',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -415,7 +308,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -423,20 +315,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -455,7 +334,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           country: 'GB',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -463,20 +341,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        req.body = TestHelper.createMultiPart(req, {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        })
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
         let errorMessage
         try {
           await req.post()
@@ -503,18 +368,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB, person), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -536,18 +390,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB, person), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -569,18 +412,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB, person), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -594,7 +426,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -602,18 +433,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -627,7 +447,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -635,18 +454,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '2',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      })
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB))
       const owner = await req.post()
       assert.strictEqual(owner.dob.month, 2)
     })
@@ -657,7 +465,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -665,18 +472,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -690,7 +486,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'US',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -698,20 +493,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'New York',
-        address_line1: '285 Fulton St',
-        address_postal_code: '10007',
-        address_state: 'NY',
-        address_country: 'US',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.US), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -725,7 +507,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'US',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -733,21 +514,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'New York',
-        address_line1: '285 Fulton St',
-        address_line2: 'Additional detail',
-        address_postal_code: '10007',
-        address_state: 'NY',
-        address_country: 'US',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.US), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -761,7 +528,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -769,18 +535,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -794,7 +549,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -802,18 +556,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -827,7 +570,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -835,18 +577,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -860,7 +591,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'US',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -868,20 +598,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'New York',
-        address_line1: '285 Fulton St',
-        address_postal_code: '10007',
-        address_state: 'NY',
-        address_country: 'US',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.US), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -895,25 +612,13 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -928,25 +633,13 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
         verification_document_back: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -963,7 +656,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -973,18 +665,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }, {
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -1002,7 +683,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         country: 'GB',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
       req.waitOnSubmit = true
       req.account = user.account
@@ -1011,18 +691,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = {
-        address_city: 'London',
-        address_line1: 'A building',
-        address_postal_code: 'EC1A 1AA',
-        dob_day: '1',
-        dob_month: '1',
-        dob_year: '1950',
-        email: person.email,
-        first_name: person.firstName,
-        last_name: person.lastName,
-        phone: '456-789-0123'
-      }
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB)
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

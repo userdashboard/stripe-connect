@@ -535,7 +535,6 @@ async function submitStripeAccount (user) {
 }
 
 async function waitForPayout (administrator, stripeid, previousid, callback) {
-  // console.log('wait for payout')
   callback = callback || previousid
   if (callback === previousid) {
     previousid = null
@@ -563,7 +562,6 @@ async function waitForPayout (administrator, stripeid, previousid, callback) {
 }
 
 async function waitForPayoutsEnabled (user, callback) {
-  // console.log('wait for payouts enabled')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForPayoutsEnabled`)
   req.account = user.account
   req.session = user.session
@@ -588,7 +586,6 @@ async function waitForPayoutsEnabled (user, callback) {
 }
 
 async function waitForVerification (user, callback) {
-  // console.log('wait for verification')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerification`)
   req.account = user.account
   req.session = user.session
@@ -617,7 +614,6 @@ async function waitForVerification (user, callback) {
 }
 
 async function waitForVerificationFailure (user, callback) {
-  // console.log('wait for verification failure')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerificationFailure`)
   req.account = user.account
   req.session = user.session
@@ -648,30 +644,17 @@ async function waitForVerificationFailure (user, callback) {
 }
 
 async function waitForPendingFieldsToLeave (user, callback) {
-  // console.log('wait for pending fields to leave')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
-  let lastVersion = JSON.stringify(user.stripeAccount, null, '  ')
-  let lastMessage
   async function wait () {
     if (global.testEnded) {
       return
     }
     try {
       const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      const newVersion = JSON.stringify(user.stripeAccount, null, '  ')
-      if (newVersion !== lastVersion) {
-        lastVersion = newVersion
-        lastMessage = 1
-        // console.log('waiting on pending fields to leave', 'account has changed', newVersion)
-      }
       if (stripeAccount.requirements.pending_verification.length) {
-        if (lastMessage !== 2) {
-          // console.log('waiting on pending fields to leave', stripeAccount.requirements.pending_verification.join(', '))
-          lastMessage = 2
-        }
         return setTimeout(wait, 100)
       }
       user.stripeAccount = stripeAccount
@@ -684,12 +667,10 @@ async function waitForPendingFieldsToLeave (user, callback) {
 }
 
 async function waitForVerificationFieldsToLeave (user, contains, callback) {
-  // console.log('wait for verification fields to leave')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
-  let lastMessage
   async function wait () {
     if (global.testEnded) {
       return
@@ -698,28 +679,16 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
       const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
       for (const field of stripeAccount.requirements.eventually_due) {
         if (field.indexOf(contains) > -1) {
-          if (lastMessage !== 1) {
-            // console.log('eventually due still contains field', field, stripeAccount.requirements.eventually_due.join(', '))
-            lastMessage = 1
-          }
           return setTimeout(wait, 100)
         }
       }
       for (const field of stripeAccount.requirements.past_due) {
         if (field.indexOf(contains) > -1) {
-          if (lastMessage !== 2) {
-            // console.log('past due still contains field', field, stripeAccount.requirements.past_due.join(', '))
-            lastMessage = 2
-          }
           return setTimeout(wait, 100)
         }
       }
       for (const field of stripeAccount.requirements.currently_due) {
         if (field.indexOf(contains) > -1) {
-          if (lastMessage !== 3) {
-            // console.log('currently due still contains field', field, stripeAccount.requirements.currently_due.join(', '))
-            lastMessage = 3
-          }
           return setTimeout(wait, 100)
         }
       }
@@ -733,7 +702,6 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
 }
 
 async function waitForVerificationFieldsToReturn (user, contains, callback) {
-  // console.log('wait for verification fields to return')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -771,7 +739,6 @@ async function waitForVerificationFieldsToReturn (user, contains, callback) {
 }
 
 async function waitForVerificationStart (user, callback) {
-  // console.log('wait for verification start')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -785,7 +752,6 @@ async function waitForVerificationStart (user, callback) {
       if (stripeAccount.requirements.eventually_due.length ||
         stripeAccount.requirements.past_due.length ||
         stripeAccount.requirements.currently_due.length) {
-        // console.log('still requires fields', stripeAccount.requirements)
         return setTimeout(wait, 100)
       }
       user.stripeAccount = stripeAccount
@@ -798,7 +764,6 @@ async function waitForVerificationStart (user, callback) {
 }
 
 async function waitForAccountRequirement (user, requirement, callback) {
-  // console.log('wait for account requirement')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -829,7 +794,6 @@ async function waitForAccountRequirement (user, requirement, callback) {
 }
 
 async function waitForPersonRequirement (user, personid, requirement, callback) {
-  // console.log('wait for person requirement')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session

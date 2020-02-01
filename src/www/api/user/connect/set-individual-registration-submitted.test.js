@@ -102,21 +102,7 @@ describe('/api/user/connect/set-individual-registration-submitted', () => {
           country: 'DE',
           type: 'individual'
         })
-        await TestHelper.createStripeRegistration(user, {
-          business_profile_mcc: '8931',
-          business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-          address_city: 'Berlin',
-          address_line1: '123 Sesame St',
-          address_postal_code: '01067',
-          address_state: 'BE',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          last_name: user.profile.lastName,
-          phone: '456-789-0123'
-        })
+        await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.DE, user.profile))
         const req = TestHelper.createRequest(`/api/user/connect/set-individual-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session

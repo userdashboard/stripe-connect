@@ -69,20 +69,7 @@ describe('/account/connect/edit-individual-registration', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = JSON.parse(JSON.stringify(TestStripeAccounts.individualData[country.id]))
-        if (country.id !== 'JP') {
-          req.body.first_name = user.profile.firstName
-          req.body.last_name = user.profile.lastName
-        }
-        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
-          req.body.email = user.profile.contactEmail
-        }
-        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'SG') {
-          req.body.business_profile_url = 'https://a-website.com'
-        }
-        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
-          req.body.business_profile_mcc = '8931'
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
         const fields = Object.keys(req.body)
         const body = JSON.stringify(req.body)
         for (const field of fields) {
@@ -109,20 +96,7 @@ describe('/account/connect/edit-individual-registration', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = JSON.parse(JSON.stringify(TestStripeAccounts.individualData[country.id]))
-        if (country.id !== 'JP') {
-          req.body.first_name = user.profile.firstName
-          req.body.last_name = user.profile.lastName
-        }
-        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
-          req.body.email = user.profile.contactEmail
-        }
-        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'SG') {
-          req.body.business_profile_url = 'https://a-website.com'
-        }
-        if (country.id !== 'CA' && country.id !== 'HK' && country.id !== 'JP' && country.id !== 'MY' && country.id !== 'SG') {
-          req.body.business_profile_mcc = '8931'
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
         req.uploads = {
           verification_document_front: TestHelper['success_id_scan_back.png'],
           verification_document_back: TestHelper['success_id_scan_back.png']

@@ -13,10 +13,6 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    const countrySpec = connect.countrySpecIndex[stripeAccount.country]
-    if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') === -1) {
-      throw new Error('invalid-stripe-account')
-    }
     const directorids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`)
     if (!directorids || !directorids.length) {
       return 0

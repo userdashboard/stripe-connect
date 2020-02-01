@@ -17,16 +17,21 @@ async function beforeRequest (req) {
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  const countrySpec = connect.countrySpecIndex[stripeAccount.country]
-  if (countrySpec.verification_fields.company.minimum.indexOf('relationship.owner') > -1 && !stripeAccount.company.owners_provided) {
-    req.error = req.error || 'invalid-beneficial_owners'
+  if (stripeAccount.requirements.currently_due.indexOf('relationship.owner') > -1 && !stripeAccount.company.owners_provided) {
+    req.error = req.error || 'invalid-beneficial-owners'
   }
-  if (countrySpec.verification_fields.company.minimum.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
-    req.error = req.error || 'invalid-directors'
+  if (stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
+    req.error = req.error || 'invalid-company-directors'
   }
   const representative = await global.api.user.connect.CompanyRepresentative.get(req)
   if (!representative) {
     req.error = req.error || 'invalid-company-representative'
+  }
+  for (const requirement of stripeAccount.requirements.currently_due) {
+    if( requirement.startsWith(representative.id)) {
+      req.error = req.error || 'invalid-company-representative'
+      break
+    }
   }
   const completedPayment = stripeAccount.external_accounts &&
                            stripeAccount.external_accounts.data &&

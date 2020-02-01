@@ -78,20 +78,25 @@ describe('/account/connect/create-beneficial-owner', () => {
   })
 
   describe('CreateBeneficialOwner#GET', () => {
-    it('should present the form', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
+    for (const country of connect.countrySpecs) {
+      if (TestStripeAccounts.beneficialOwnerData[country.id] === false) {
+        continue
+      }
+      it('should present the form (' + country.id + ')', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        const page = await req.get()
+        const doc = TestHelper.extractDoc(page)
+        assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
+        assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
       })
-      const req = TestHelper.createRequest(`/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
-      assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
-      assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
-    })
+    }
   })
 
   describe('CreateBeneficialOwner#POST', () => {
@@ -113,12 +118,7 @@ describe('/account/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        const person = TestHelper.nextIdentity()
-        const body = JSON.parse(JSON.stringify(TestStripeAccounts.beneficialOwnerData[country.id]))
-        body.email = person.email
-        body.first_name = person.firstName
-        body.last_name = person.lastName
-        req.body = body
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
         req.filename = __filename
         req.screenshots = [
           { hover: '#account-menu-container' },

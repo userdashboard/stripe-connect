@@ -69,14 +69,7 @@ describe('/account/connect/create-company-representative', () => {
         const req = TestHelper.createRequest(`/account/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = JSON.parse(JSON.stringify(TestStripeAccounts.representativeData[country.id]))
-        if (country.id !== 'JP') {
-          req.body.first_name = user.profile.firstName
-          req.body.last_name = user.profile.lastName
-        }
-        if (country.id !== 'JP' && country.id !== 'CA' && country.id !== 'HK' && country.id !== 'MY' && country.id !== 'SG') {
-          req.body.email = user.profile.contactEmail
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id], user.profile)
         const fields = Object.keys(req.body)
         const body = JSON.stringify(req.body)
         for (const field of fields) {
@@ -92,6 +85,7 @@ describe('/account/connect/create-company-representative', () => {
         }
       })
     }
+
     for (const country of connect.countrySpecs) {
       it('should create representative (' + country.id + ') (screenshots)', async () => {
         const user = await TestHelper.createUser()
@@ -102,14 +96,7 @@ describe('/account/connect/create-company-representative', () => {
         const req = TestHelper.createRequest(`/account/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.body = JSON.parse(JSON.stringify(TestStripeAccounts.representativeData[country.id]))
-        if (country.id !== 'JP') {
-          req.body.first_name = user.profile.firstName
-          req.body.last_name = user.profile.lastName
-        }
-        if (country.id !== 'JP' && country.id !== 'CA' && country.id !== 'HK' && country.id !== 'MY' && country.id !== 'SG') {
-          req.body.email = user.profile.contactEmail
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id], user.profile)
         req.filename = __filename
         req.screenshots = [
           { hover: '#account-menu-container' },

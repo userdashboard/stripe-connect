@@ -105,26 +105,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
-      // req.uploads = {
-      //   verification_document_back: TestHelper['success_id_scan_back.png'],
-      //   verification_document_front: TestHelper['success_id_scan_front.png']
-      // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.business_profile.mcc, '8931')
     })
@@ -138,26 +119,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.business_profile.url, 'https://' + user.profile.contactEmail.split('@')[1])
     })
@@ -170,27 +136,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // })
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
-      // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_product_description: 'Things',
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.business_profile.product_description, 'Things')
     })
@@ -204,26 +154,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.dob.day, 1)
     })
@@ -237,26 +172,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '2',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.dob.month, 2)
     })
@@ -270,26 +190,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.dob.year, 1950)
     })
@@ -303,26 +208,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.first_name, user.profile.firstName)
     })
@@ -336,26 +226,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.last_name, user.profile.lastName)
     })
@@ -369,26 +244,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.email, user.profile.contactEmail)
     })
@@ -402,26 +262,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.phone, '+14567890123')
     })
@@ -435,37 +280,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.gender, 'female')
     })
@@ -479,27 +298,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'New York',
-      //   address_line1: '285 Fulton St',
-      //   address_postal_code: '10007',
-      //   address_state: 'NY',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123',
-      //   ssn_last_4: '0000'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.ssn_last_4_provided, true)
     })
@@ -513,27 +316,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://a-website.com',
-      //   address_city: 'Hong Kong',
-      //   address_line1: '123 Sesame St',
-      //   address_postal_code: '999077',
-      //   address_state: 'HK',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   id_number: '000000000',
-      //   phone: '456-789-0123',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.HK, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.id_number_provided, true)
     })
@@ -547,26 +334,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://a-website.com',
-      //   address_city: 'Brisbane',
-      //   address_line1: '123 Park Lane',
-      //   address_postal_code: '4000',
-      //   address_state: 'QLD',
-      //   name: 'Company',
-      //   phone: '456-789-0123',
-      //   tax_id: '00000000000',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AU, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address.state, 'QLD')
     })
@@ -580,26 +352,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address.postal_code, '6011')
     })
@@ -613,26 +370,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address.line1, '844 Fleet Street')
     })
@@ -646,27 +388,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_line2: 'More details',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address.line2, 'More details')
     })
@@ -680,37 +406,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.first_name_kana, 'ﾄｳｷﾖｳﾄ')
     })
@@ -724,37 +424,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.last_name_kana, 'ﾄｳｷﾖｳﾄ')
     })
@@ -768,37 +442,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address_kana.town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
     })
@@ -812,37 +460,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address_kana.state, 'ﾄｳｷﾖｳﾄ')
     })
@@ -856,37 +478,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address_kana.postal_code, '1500001')
     })
@@ -900,37 +496,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address_kana.line1, '27-15')
     })
@@ -944,37 +514,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AJP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.first_name_kanji, '東京都')
     })
@@ -988,37 +532,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.last_name_kanji, '東京都')
     })
@@ -1032,37 +550,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address_kanji.state, '東京都')
     })
@@ -1076,37 +568,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address_kanji.postal_code, '1500001')
     })
@@ -1120,37 +586,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address_kanji.line1, '２７－１５')
     })
@@ -1164,37 +604,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_kana_city: 'ｼﾌﾞﾔ',
-      //   address_kana_line1: '27-15',
-      //   address_kana_postal_code: '1500001',
-      //   address_kana_state: 'ﾄｳｷﾖｳﾄ',
-      //   address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
-      //   address_kanji_city: '渋谷区',
-      //   address_kanji_line1: '２７－１５',
-      //   address_kanji_postal_code: '1500001',
-      //   address_kanji_state: '東京都',
-      //   address_kanji_town: '神宮前 ３丁目',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   first_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   first_name_kanji: '東京都',
-      //   gender: 'female',
-      //   last_name: user.profile.lastName,
-      //   last_name_kana: 'ﾄｳｷﾖｳﾄ',
-      //   last_name_kanji: '東京都',
-      //   phone: '011-6789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.JP, user.profile))
       // const accountNow = await req.patch()
       // assert.strictEqual(accountNow.individual.address_kanji.town, '神宮前 ３丁目')
     })
@@ -1208,26 +622,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.notStrictEqual(accountNow.individual.verification.document.front, null)
       // assert.notStrictEqual(accountNow.individual.verification.document.front, undefined)
@@ -1242,26 +641,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.notStrictEqual(accountNow.individual.verification.document.back, null)
       // assert.notStrictEqual(accountNow.individual.verification.document.back, undefined)
@@ -1276,26 +660,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.notStrictEqual(accountNow.individual.verification.additional_document.front, null)
       // assert.notStrictEqual(accountNow.individual.verification.additional_document.front, undefined)
@@ -1310,26 +679,11 @@ describe('/api/user/connect/update-individual-registration', () => {
       // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
       // req.account = user.account
       // req.session = user.session
-      // const body = {
-      //   business_profile_mcc: '8931',
-      //   business_profile_url: 'https://' + user.profile.contactEmail.split('@')[1],
-      //   address_city: 'Auckland',
-      //   address_line1: '844 Fleet Street',
-      //   address_postal_code: '6011',
-      //   address_state: 'N',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: user.profile.contactEmail,
-      //   first_name: user.profile.firstName,
-      //   last_name: user.profile.lastName,
-      //   phone: '456-789-0123'
-      // }
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = TestHelper.createMultiPart(req, body)
+      // req.body = TestHelper.createMultiPart(req, req, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.NZ, user.profile))
       // const accountNow = await req.patch()
       // assert.notStrictEqual(accountNow.individual.verification.additional_document.back, null)
       // assert.notStrictEqual(accountNow.individual.verification.additional_document.back, undefined)
@@ -1347,12 +701,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         // const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         // req.account = user.account
         // req.session = user.session
-        // req.body = TestStripeAccounts.individualData[country.id]
-        // if (country.id !== 'JP') {
-        //   req.body.email = user.profile.contactEmail
-        //   req.body.first_name = user.profile.firstName
-        //   req.body.last_name = user.profile.lastName
-        // }
+        // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id], user.profile)
         // req.uploads = {
         //   verification_document_front: TestHelper['success_id_scan_back.png'],
         //   verification_document_back: TestHelper['success_id_scan_back.png']
@@ -1381,7 +730,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       // req.waitOnSubmit = true
       // req.account = user.account
       // req.session = user.session
-      // req.body = TestStripeAccounts.individualData.US
+      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile)
       // req.uploads = {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']

@@ -8,30 +8,17 @@
 */
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
+const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/update-beneficial-owner', () => {
   describe('exceptions', () => {
     describe('invalid-personid', () => {
       it('missing querystring personid', async () => {
         const user = await TestHelper.createUser()
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest('/api/user/connect/update-beneficial-owner')
         req.account = user.account
         req.session = user.session
-        req.body = {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.US)
         let errorMessage
         try {
           await req.patch(req)
@@ -43,24 +30,10 @@ describe('/api/user/connect/update-beneficial-owner', () => {
 
       it('invalid querystring personid', async () => {
         const user = await TestHelper.createUser()
-        const person = TestHelper.nextIdentity()
         const req = TestHelper.createRequest('/api/user/connect/update-beneficial-owner?personid=invalid')
         req.account = user.account
         req.session = user.session
-        req.body = {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.US)
         let errorMessage
         try {
           await req.patch(req)
@@ -78,21 +51,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           country: 'DE',
           type: 'company'
         })
-        const person = TestHelper.nextIdentity()
-        await TestHelper.createBeneficialOwner(user, {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456 -789-0123'
-        }, {
+        await TestHelper.createBeneficialOwner(user, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.DE), {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -100,20 +59,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${user.owner.id}`)
         req.account = user2.account
         req.session = user2.session
-        req.body = {
-          address_city: 'London',
-          address_country: 'GB',
-          address_line1: 'A building',
-          address_postal_code: 'EC1A 1AA',
-          address_state: 'LND',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: person.email,
-          first_name: person.firstName,
-          last_name: person.lastName,
-          phone: '456-789-0123'
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.DE)
         let errorMessage
         try {
           await req.patch(req)
@@ -179,20 +125,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       //   country: 'GB',
       //   type: 'company'
       // })
-      // const person = TestHelper.nextIdentity()
-      // await TestHelper.createBeneficialOwner(user, {
-      //   address_city: 'London',
-      //   address_country: 'GB',
-      //   address_line1: 'A building',
-      //   address_postal_code: 'EC1A 1AA',
-      //   address_state: 'LND',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: person.email,
-      //   first_name: person.firstName,
-      //   last_name: person.lastName
-      // }, {
+      // await TestHelper.createBeneficialOwner(user, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB), {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // })
@@ -224,19 +157,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       //   verification_document_back: TestHelper['success_id_scan_back.png'],
       //   verification_document_front: TestHelper['success_id_scan_front.png']
       // }
-      // req.body = {
-      //   address_city: 'London',
-      //   address_country: 'GB',
-      //   address_line1: 'A building',
-      //   address_postal_code: 'EC1A 1AA',
-      //   address_state: 'LND',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: person.email,
-      //   first_name: person.firstName,
-      //   last_name: person.lastName
-      // }
+      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB, person)
       // await req.post()
       // const owners = await global.api.user.connect.BeneficialOwners.get(req)
       // const owner = owners[0]
@@ -244,19 +165,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       // req2.waitOnSubmit = true
       // req2.account = user.account
       // req2.session = user.session
-      // req2.body = {
-      //   address_city: 'London',
-      //   address_country: 'GB',
-      //   address_line1: 'A building',
-      //   address_postal_code: 'EC1A 1AA',
-      //   address_state: 'LND',
-      //   dob_day: '1',
-      //   dob_month: '1',
-      //   dob_year: '1950',
-      //   email: person.email,
-      //   first_name: 'Modified name',
-      //   last_name: person.lastName
-      // }
+      // req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB, person)
       // await req2.post()
       // const ownerNow = await global.api.user.connect.BeneficialOwner.get(req2)
       // assert.notStrictEqual(ownerNow.metadata.token, null)

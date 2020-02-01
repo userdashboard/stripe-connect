@@ -102,33 +102,8 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
           country: 'DE',
           type: 'company'
         })
-        await TestHelper.createStripeRegistration(user, {
-          business_profile_mcc: '7531',
-          business_profile_url: 'https://www.abcde.com',
-          address_city: 'Frederiksberg',
-          address_line1: '123 Park Lane',
-          address_postal_code: '01067',
-          address_state: 'BW',
-          name: 'Company',
-          phone: '456-789-0123',
-          tax_id: '00000000000'
-        })
-        await TestHelper.createCompanyRepresentative(user, {
-          address_city: 'Frederiksberg',
-          address_country: 'DE',
-          address_line1: '123 Sesame St',
-          address_postal_code: '1020',
-          address_state: 'BW',
-          dob_day: '1',
-          dob_month: '1',
-          dob_year: '1950',
-          email: user.profile.contactEmail,
-          first_name: user.profile.firstName,
-          last_name: user.profile.lastName,
-          phone: '456-789-1230',
-          relationship_executive: 'true',
-          relationship_title: 'Owner'
-        }, {
+        await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyData.DE, user.profile))
+        await TestHelper.createCompanyRepresentative(user, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.DE, user.profile), {
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png'],
           verification_document_back: TestHelper['success_id_scan_back.png'],
