@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
+const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
@@ -76,301 +77,102 @@ describe('/api/user/connect/create-company-director', () => {
       })
     })
 
-    describe('invalid-first_name', () => {
-      it('missing posted first_name', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
+    const testedMissingFields = []
+    for (const country of connect.countrySpecs) {
+      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+      if (payload === false) {
+        continue
+      }
+      for (const field in payload) {
+        if (testedMissingFields.indexOf(field) > -1) {
+          continue
+        }
+        testedMissingFields.push(field)
+        describe.only(`invalid-${field}`, () => {
+          it(`missing posted ${field}`, async () => {
+            const user = await TestHelper.createUser()
+            await TestHelper.createStripeAccount(user, {
+              country: country.id,
+              type: 'company'
+            })
+            const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+            req.account = user.account
+            req.session = user.session
+            req.uploads = {
+              verification_document_back: TestHelper['success_id_scan_back.png'],
+              verification_document_front: TestHelper['success_id_scan_front.png']
+            }
+            const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+            delete (body[field])
+            req.body = TestHelper.createMultiPart(req, body)
+            let errorMessage
+            try {
+              await req.post()
+            } catch (error) {
+              errorMessage = error.message
+            }
+            assert.strictEqual(errorMessage, `invalid-${field}`)
+          })
         })
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-first_name')
-      })
-    })
-
-    describe('invalid-last_name', () => {
-      it('missing posted last_name', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-last_name')
-      })
-    })
-
-    describe('invalid-dob_day', () => {
-      it('missing posted dob_day', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-dob_day')
-      })
-    })
-
-    describe('invalid-dob_month', () => {
-      it('missing posted dob_month', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-dob_month')
-      })
-    })
-
-    describe('invalid-dob_year', () => {
-      it('missing posted dob_year', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-        let errorMessage
-        try {
-          await req.post()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-dob_year')
-      })
-    })
+      }
+    }
   })
 
   describe('receives', () => {
-    it('required posted first_name', async () => {
+    const testedRequiredFields = []
+    for (const country of connect.countrySpecs) {
+      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+      if (payload === false) {
+        continue
+      }
+      for (const field in payload) {
+        if (testedRequiredFields.indexOf(field) > -1) {
+          continue
+        }
+        testedRequiredFields.push(field)
+        it(`required posted ${field}`, async () => {
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'company'
+          })
+          const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+          req.account = user.account
+          req.session = user.session
+          req.uploads = {
+            verification_document_back: TestHelper['success_id_scan_back.png'],
+            verification_document_front: TestHelper['success_id_scan_front.png']
+          }
+          const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+          req.body = TestHelper.createMultiPart(req, body)
+          const director = await req.post()
+          assert.strictEqual(director[field], body[field])
+        })
+      }
+    }
+
+    it('optionally-required posted token', async () => {
+      global.stripeJS = 3
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'DE',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+      req.waitOnSubmit = true
       req.account = user.account
       req.session = user.session
       req.uploads = {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE, person))
-      const director = await req.post()
-      assert.strictEqual(director.first_name, person.firstName)
-    })
-
-    it('required posted last_name', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-      const director = await req.post()
-      assert.strictEqual(director.last_name, person.lastName)
-    })
-
-    it('optionally-required posted email', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AU',
-        type: 'company'
-      })
-      const person = TestHelper.nextIdentity()
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.AU))
-
-      const director = await req.post()
-      assert.strictEqual(director.email, person.email)
-    })
-
-    it('optionally-required posted title', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'AU',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.AU))
-      const director = await req.post()
-      assert.strictEqual(director.relationship.title, 'Director')
-    })
-
-    it('required posted dob_day', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-      const director = await req.post()
-      assert.strictEqual(director.dob.day, 1)
-    })
-
-    it('required posted dob_month', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-
-      const director = await req.post()
-      assert.strictEqual(director.dob.month, 2)
-    })
-
-    it('required posted dob_year', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-
-      const director = await req.post()
-      assert.strictEqual(director.dob.year, 1950)
-    })
-
-    it('optionally-required posted file verification_document_front', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-      const director = await req.post()
-      assert.notStrictEqual(director.verification.document.front, null)
-      assert.notStrictEqual(director.verification.document.front, undefined)
-    })
-
-    it('optionally-required posted file verification_document_back', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'DE',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE))
-      const director = await req.post()
-      assert.notStrictEqual(director.verification.document.back, null)
-      assert.notStrictEqual(director.verification.document.back, undefined)
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE)
+      await req.post()
+      const req2 = TestHelper.createRequest(`/api/user/connect/company-directors?stripeid=${user.stripeAccount.id}`)
+      req2.account = user.account
+      req2.session = user.session
+      const directors = await req2.get()
+      assert.strictEqual(directors[0].metadata.token, undefined)
     })
   })
 
