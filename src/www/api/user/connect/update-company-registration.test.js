@@ -60,7 +60,6 @@ describe('/api/user/connect/update-company-registration', () => {
       })
     })
 
-
     describe('invalid-stripe-account', () => {
       it('ineligible querystring stripe account', async () => {
         const user = await TestHelper.createUser()
@@ -131,7 +130,7 @@ describe('/api/user/connect/update-company-registration', () => {
               verification_document_front: TestHelper['success_id_scan_front.png']
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
-            body[field] = invalidValues[field]
+            body[field] = 'invalid'
             console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
@@ -175,7 +174,7 @@ describe('/api/user/connect/update-company-registration', () => {
         global.stripeJS = 3
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: country.id,
+          country: 'GB',
           type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
@@ -185,7 +184,7 @@ describe('/api/user/connect/update-company-registration', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB)
         body.token = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -201,24 +200,24 @@ describe('/api/user/connect/update-company-registration', () => {
 
   describe('receives', () => {
     const fieldMaps = {
-      'address_line1': 'address',
-      'address_city': 'address',
-      'address_state': 'address',
-      'address_postal_code': 'address',
-      'address_country': 'address',
-      'address_kana_line1': 'address',
-      'address_kana_city': 'address',
-      'address_kana_state': 'address',
-      'address_kana_postal_code': 'address',
-      'address_kana_country': 'address',
-      'address_kanji_line1': 'address',
-      'address_kanji_city': 'address',
-      'address_kanji_state': 'address',
-      'address_kanji_postal_code': 'address',
-      'address_kanji_country': 'address',
-      'tax_id': 'tax_id',
-      'verification_document_front': 'document',
-      'verification_document_back': 'document'
+      address_line1: 'address',
+      address_city: 'address',
+      address_state: 'address',
+      address_postal_code: 'address',
+      address_country: 'address',
+      address_kana_line1: 'address',
+      address_kana_city: 'address',
+      address_kana_state: 'address',
+      address_kana_postal_code: 'address',
+      address_kana_country: 'address',
+      address_kanji_line1: 'address',
+      address_kanji_city: 'address',
+      address_kanji_state: 'address',
+      address_kanji_postal_code: 'address',
+      address_kanji_country: 'address',
+      tax_id: 'tax_id',
+      verification_document_front: 'document',
+      verification_document_back: 'document'
     }
     const testedRequiredFields = []
     for (const country of connect.countrySpecs) {
@@ -253,9 +252,9 @@ describe('/api/user/connect/update-company-registration', () => {
       'verification_document_back',
       'verification_additional_document_front',
       'verification_additional_document_back'
-     ]
+    ]
     for (const field of uploadFields) {
-      it(`optionally-required posted ${documentFile}`, async () => {
+      it(`optionally-required posted ${field}`, async () => {
         const user = await TestStripeAccounts.createIndividualWithFailedrepresentativeField('FR', fieldMaps[field])
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -263,8 +262,8 @@ describe('/api/user/connect/update-company-registration', () => {
         req.uploads = {
           [field]: TestHelper['success_id_scan_back.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
-        body[field = invalidValues[field]]
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.FR)
+        body[field] = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         const representative = await req.patch()
         assert.strictEqual(representative[field], body[field])
@@ -285,8 +284,8 @@ describe('/api/user/connect/update-company-registration', () => {
       req.body = {}
       req.filename = __filename
       req.saveResponse = true
-      const representativeNow = await req.patch()
-      assert.strictEqual(representativeNow.object, 'person')
+      const stripeAccount = await req.patch()
+      assert.strictEqual(stripeAccount.object, 'person')
     })
   })
 
@@ -309,17 +308,15 @@ describe('/api/user/connect/update-company-registration', () => {
       }
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
       await req.post()
-      const representatives = await global.api.user.connect.Beneficialrepresentatives.get(req)
-      const representative = representatives[0]
-      const req2 = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${id}`)
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session
       req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
       await req2.post()
-      const representativeNow = await global.api.user.connect.Beneficialget(req2)
-      assert.notStrictEqual(representativeNow.metadata.token, null)
-      assert.notStrictEqual(representativeNow.metadata.token, undefined)
+      const stripeAccount = await global.api.user.connect.Beneficialget(req2)
+      assert.notStrictEqual(stripeAccount.metadata.token, null)
+      assert.notStrictEqual(stripeAccount.metadata.token, undefined)
     })
   })
 })

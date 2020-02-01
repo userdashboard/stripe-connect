@@ -183,7 +183,7 @@ describe('/api/user/connect/update-payment-information', () => {
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
           const accountNow = await req.patch()
           assert.strictEqual(accountNow.external_accounts.data[0].currency, 'aud')
-        }) 
+        })
       }
     }
   })

@@ -64,7 +64,6 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       })
     })
 
-
     describe('invalid-person', () => {
       it('ineligible querystring person', async () => {
         const user = await TestHelper.createUser()
@@ -139,7 +138,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
               verification_document_front: TestHelper['success_id_scan_front.png']
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-            body[field] = invalidValues[field]
+            body[field] = 'invalid'
             console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
@@ -183,7 +182,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         global.stripeJS = 3
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: country.id,
+          country: 'GB',
           type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?stripeid=${user.stripeAccount.id}`)
@@ -193,7 +192,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB)
         body.token = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -209,18 +208,18 @@ describe('/api/user/connect/update-beneficial-owner', () => {
 
   describe('receives', () => {
     const fieldMaps = {
-      'address_line1': 'owner.address',
-      'address_city': 'owner.address',
-      'address_state': 'owner.address',
-      'address_postal_code': 'owner.address',
-      'address_country': 'owner.address',
-      'dob_day': 'owner.dob',
-      'dob_month': 'owner.dob',
-      'dob_year': 'owner.year',
-      'verification_document_front': 'owner.document',
-      'verification_document_back': 'owner.document',
-      'verification_additional_document_front': 'owner.additional_document',
-      'verification_additional_document_back': 'owner.additional_document'
+      address_line1: 'owner.address',
+      address_city: 'owner.address',
+      address_state: 'owner.address',
+      address_postal_code: 'owner.address',
+      address_country: 'owner.address',
+      dob_day: 'owner.dob',
+      dob_month: 'owner.dob',
+      dob_year: 'owner.year',
+      verification_document_front: 'owner.document',
+      verification_document_back: 'owner.document',
+      verification_additional_document_front: 'owner.additional_document',
+      verification_additional_document_back: 'owner.additional_document'
     }
     const testedRequiredFields = []
     for (const country of connect.countrySpecs) {
@@ -255,9 +254,9 @@ describe('/api/user/connect/update-beneficial-owner', () => {
       'verification_document_back',
       'verification_additional_document_front',
       'verification_additional_document_back'
-     ]
+    ]
     for (const field of uploadFields) {
-      it(`optionally-required posted ${documentFile}`, async () => {
+      it(`optionally-required posted ${field}`, async () => {
         const user = await TestStripeAccounts.createCompanyWithFailedOwnerField('FR', fieldMaps[field])
         const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -265,8 +264,8 @@ describe('/api/user/connect/update-beneficial-owner', () => {
         req.uploads = {
           [field]: TestHelper['success_id_scan_back.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
-        body[field = invalidValues[field]]
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.FR)
+        body[field] = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         const owner = await req.patch()
         assert.strictEqual(owner[field], body[field])

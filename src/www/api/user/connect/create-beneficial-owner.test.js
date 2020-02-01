@@ -131,9 +131,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
             body[field] = 'an invalid value'
             if (field.startsWith('dob_')) {
-              body.dob_day = invalidValues.dob_day
-              body.dob_month = invalidValues.dob_month
-              body.dob_year = invalidValues.dob_year
               body[field] = 'invalid'
             }
             req.body = TestHelper.createMultiPart(req, body)
@@ -179,7 +176,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         global.stripeJS = 3
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: country.id,
+          country: 'GB',
           type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
@@ -189,7 +186,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB)
         body.token = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage

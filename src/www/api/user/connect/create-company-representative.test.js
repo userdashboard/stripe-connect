@@ -130,7 +130,7 @@ describe('/api/user/connect/create-company-representative', () => {
               verification_document_front: TestHelper['success_id_scan_front.png']
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-            body[field] = invalidValues[field]
+            body[field] = 'invalid'
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
             try {
@@ -175,7 +175,7 @@ describe('/api/user/connect/create-company-representative', () => {
           delete (body[field])
           req.body = TestHelper.createMultiPart(req, body)
           const representative = await req.post()
-          console.log('testing field', field, 'value', owner[field])
+          console.log('testing field', field, 'value', representative[field])
           assert.strictEqual(representative[field], body[field])
         })
       }

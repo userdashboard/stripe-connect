@@ -64,7 +64,6 @@ describe('/api/user/connect/update-company-director', () => {
       })
     })
 
-
     describe('invalid-person', () => {
       it('ineligible querystring person', async () => {
         const user = await TestHelper.createUser()
@@ -139,7 +138,7 @@ describe('/api/user/connect/update-company-director', () => {
               verification_document_front: TestHelper['success_id_scan_front.png']
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-            body[field] = invalidValues[field]
+            body[field] = 'invalid'
             console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
@@ -183,7 +182,7 @@ describe('/api/user/connect/update-company-director', () => {
         global.stripeJS = 3
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: country.id,
+          country: 'GB',
           type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?stripeid=${user.stripeAccount.id}`)
@@ -193,7 +192,7 @@ describe('/api/user/connect/update-company-director', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.GB)
         body.token = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -209,11 +208,11 @@ describe('/api/user/connect/update-company-director', () => {
 
   describe('receives', () => {
     const fieldMaps = {
-      'dob_day': 'director.dob',
-      'dob_month': 'director.dob',
-      'dob_year': 'director.year',
-      'verification_document_front': 'director.document',
-      'verification_document_back': 'director.document'
+      dob_day: 'director.dob',
+      dob_month: 'director.dob',
+      dob_year: 'director.year',
+      verification_document_front: 'director.document',
+      verification_document_back: 'director.document'
     }
     const testedRequiredFields = []
     for (const country of connect.countrySpecs) {
@@ -246,9 +245,9 @@ describe('/api/user/connect/update-company-director', () => {
     const uploadFields = [
       'verification_document_front',
       'verification_document_back'
-     ]
+    ]
     for (const field of uploadFields) {
-      it(`optionally-required posted ${documentFile}`, async () => {
+      it(`optionally-required posted ${field}`, async () => {
         const user = await TestStripeAccounts.createCompanyWithFaileddirectorField('FR', fieldMaps[field])
         const req = TestHelper.createRequest(`/api/user/connect/update-company-director?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -256,8 +255,8 @@ describe('/api/user/connect/update-company-director', () => {
         req.uploads = {
           [field]: TestHelper['success_id_scan_back.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
-        body[field = invalidValues[field]]
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.FR)
+        body[field] = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         const director = await req.patch()
         assert.strictEqual(director[field], body[field])

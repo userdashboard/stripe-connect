@@ -64,7 +64,6 @@ describe('/api/user/connect/update-company-representative', () => {
       })
     })
 
-
     describe('invalid-person', () => {
       it('ineligible querystring person', async () => {
         const user = await TestHelper.createUser()
@@ -139,7 +138,7 @@ describe('/api/user/connect/update-company-representative', () => {
               verification_document_front: TestHelper['success_id_scan_front.png']
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-            body[field] = invalidValues[field]
+            body[field] = 'invalid'
             console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
@@ -183,7 +182,7 @@ describe('/api/user/connect/update-company-representative', () => {
         global.stripeJS = 3
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: country.id,
+          country: 'GB',
           type: 'company'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
@@ -193,7 +192,7 @@ describe('/api/user/connect/update-company-representative', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.GB)
         body.token = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         let errorMessage
@@ -209,18 +208,18 @@ describe('/api/user/connect/update-company-representative', () => {
 
   describe('receives', () => {
     const fieldMaps = {
-      'address_line1': 'representative.address',
-      'address_city': 'representative.address',
-      'address_state': 'representative.address',
-      'address_postal_code': 'representative.address',
-      'address_country': 'representative.address',
-      'dob_day': 'representative.dob',
-      'dob_month': 'representative.dob',
-      'dob_year': 'representative.year',
-      'verification_document_front': 'representative.document',
-      'verification_document_back': 'representative.document',
-      'verification_additional_document_front': 'representative.additional_document',
-      'verification_additional_document_back': 'representative.additional_document'
+      address_line1: 'representative.address',
+      address_city: 'representative.address',
+      address_state: 'representative.address',
+      address_postal_code: 'representative.address',
+      address_country: 'representative.address',
+      dob_day: 'representative.dob',
+      dob_month: 'representative.dob',
+      dob_year: 'representative.year',
+      verification_document_front: 'representative.document',
+      verification_document_back: 'representative.document',
+      verification_additional_document_front: 'representative.additional_document',
+      verification_additional_document_back: 'representative.additional_document'
     }
     const testedRequiredFields = []
     for (const country of connect.countrySpecs) {
@@ -253,9 +252,9 @@ describe('/api/user/connect/update-company-representative', () => {
     const uploadFields = [
       'verification_document_front',
       'verification_document_back'
-     ]
+    ]
     for (const field of uploadFields) {
-      it(`optionally-required posted ${documentFile}`, async () => {
+      it(`optionally-required posted ${field}`, async () => {
         const user = await TestStripeAccounts.createCompanyWithFailedrepresentativeField('FR', fieldMaps[field])
         const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -263,8 +262,8 @@ describe('/api/user/connect/update-company-representative', () => {
         req.uploads = {
           [field]: TestHelper['success_id_scan_back.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-        body[field = invalidValues[field]]
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.FR)
+        body[field] = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         const representative = await req.patch()
         assert.strictEqual(representative[field], body[field])

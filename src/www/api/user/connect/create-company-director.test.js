@@ -174,7 +174,7 @@ describe('/api/user/connect/create-company-director', () => {
           delete (body[field])
           req.body = TestHelper.createMultiPart(req, body)
           const director = await req.post()
-          console.log('testing field', field, 'value', owner[field])
+          console.log('testing field', field, 'value', director[field])
           assert.strictEqual(director[field], body[field])
         })
       }
