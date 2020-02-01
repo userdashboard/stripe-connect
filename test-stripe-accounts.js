@@ -169,8 +169,7 @@ module.exports = {
         }
       }
       for (let i = 0, len = numOwners; i < len; i++) {
-        const person = TestHelper.nextIdentity()
-        await TestHelper.createBeneficialOwner(user, createPostData(beneficialOwnerData[country], person), documents)
+        await TestHelper.createBeneficialOwner(user, createPostData(beneficialOwnerData[country]), documents)
       }
     }
     return user
@@ -195,8 +194,7 @@ module.exports = {
         }
       }
       for (let i = 0, len = numDirectors; i < len; i++) {
-        const person = TestHelper.nextIdentity()
-        await TestHelper.createCompanyDirector(user, createPostData(companyDirectorData[country], person), documents)
+        await TestHelper.createCompanyDirector(user, createPostData(companyDirectorData[country]), documents)
       }
     }
     return user
@@ -1908,7 +1906,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: '1',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   AU: {
     address_city: 'Brisbane',
@@ -1917,7 +1918,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'QLD',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   BE: {
     address_city: 'Brussels',
@@ -1927,7 +1931,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'BRU',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   CA: false,
   CH: {
@@ -1938,7 +1945,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'BE',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   DE: {
     address_city: 'Berlin',
@@ -1948,7 +1958,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'BW',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   DK: {
     address_city: 'Copenhagen',
@@ -1958,7 +1971,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: '147',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   EE: {
     address_city: 'Talin',
@@ -1968,7 +1984,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: '37',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   ES: {
     address_city: 'Madrid',
@@ -1978,7 +1997,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'AN',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   FI: {
     address_city: 'Helsinki',
@@ -1988,7 +2010,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'AL',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   FR: {
     address_city: 'Paris',
@@ -1998,7 +2023,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'A',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   GB: {
     address_city: 'London',
@@ -2008,7 +2036,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'LND',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   GR: {
     address_city: 'Athens',
@@ -2018,7 +2049,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'I',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   HK: false,
   IE: {
@@ -2029,7 +2063,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'D',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   IT: {
     address_city: 'Rome',
@@ -2039,7 +2076,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: '65',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   JP: false,
   LT: {
@@ -2050,7 +2090,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'AL',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   LU: {
     address_city: 'Luxemburg',
@@ -2060,7 +2103,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'L',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   LV: {
     address_city: 'Riga',
@@ -2070,7 +2116,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'AI',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   MY: {
     address_city: 'Kuala Lumpur',
@@ -2081,7 +2130,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    id_number: '000000000'
+    id_number: '000000000',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   NL: {
     address_city: 'Amsterdam',
@@ -2091,7 +2143,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'DR',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   NO: {
     address_city: 'Oslo',
@@ -2101,7 +2156,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: '02',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   NZ: {
     address_city: 'Auckland',
@@ -2111,7 +2169,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'N',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   PL: {
     address_city: 'Krakow',
@@ -2121,7 +2182,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'KR',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   PT: {
     address_city: 'Lisbon',
@@ -2131,7 +2195,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: '01',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   SE: {
     address_city: 'Stockholm',
@@ -2141,7 +2208,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'K',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   SG: {
     address_city: 'Singapore',
@@ -2151,7 +2221,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'SG',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950' ,
+    first_name: true,
+    last_name: true,
+    email: true
   },
   SI: {
     address_city: 'Ljubljana',
@@ -2161,7 +2234,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: '07',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   SK: {
     address_city: 'Slovakia',
@@ -2170,7 +2246,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_postal_code: '00102',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   US: {
     address_city: 'New York',
@@ -2182,7 +2261,10 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+14567890123',
-    ssn_last_4: '0000'
+    ssn_last_4: '0000',
+    first_name: true,
+    last_name: true,
+    email: true
   }
 }
 
@@ -2190,132 +2272,207 @@ const companyDirectorData = module.exports.companyDirectorData = {
   AT: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   AU: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   BE: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   CA: false,
   CH: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   DE: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   DK: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   EE: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   ES: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   FI: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   FR: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   GB: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   GR: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   HK: false,
   IE: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   IT: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   JP: false,
   LT: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   LU: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   LV: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   MY: false,
   NL: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   NO: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   NZ: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   PL: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   PT: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   SE: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   SI: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   SG: false,
   SK: {
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950'
+    dob_year: '1950',
+    first_name: true,
+    last_name: true,
+    email: true
   },
   US: false
 }
