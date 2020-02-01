@@ -1,15 +1,4 @@
 /* eslint-env mocha */
-
-// TODO: this script now only supports information specified
-// in the requirements.currently_due and eventually_due
-// collections.  Testing most fields is disabled until
-// they submit data that fails validation first.
-
-// TODO: fix this when Stripe fixes company.verification.document
-// the 'company.verification.document' erroneously shows up in the
-// 'requirements.pending_validation' signifying it is under review, then
-// it is removed from that, but really it needs to show up in currently_due
-// and then submit the documents and then it should be pending_validation
 const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
@@ -23,7 +12,7 @@ describe('/api/user/connect/update-company-registration', () => {
         const req = TestHelper.createRequest('/api/user/connect/update-company-registration')
         req.account = user.account
         req.session = user.session
-        req.body = {}
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US)
         let errorMessage
         try {
           await req.patch(req)
@@ -38,7 +27,7 @@ describe('/api/user/connect/update-company-registration', () => {
         const req = TestHelper.createRequest('/api/user/connect/update-company-registration?stripeid=invalid')
         req.account = user.account
         req.session = user.session
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US)
         let errorMessage
         try {
           await req.patch(req)
@@ -49,54 +38,18 @@ describe('/api/user/connect/update-company-registration', () => {
       })
     })
 
-    describe('invalid-stripe-account', () => {
-      it('ineligible stripe account for individuals', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'individual'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
-      })
-
-      it('ineligible stripe account is submitted', async () => {
-        const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-        const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.NZ, user.profile)
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-stripe-account')
-      })
-    })
-
     describe('invalid-account', () => {
       it('ineligible accessing account', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'US',
+          country: 'DE',
           type: 'company'
         })
         const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user2.account
         req.session = user2.session
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.DE)
         let errorMessage
         try {
           await req.patch(req)
@@ -106,381 +59,267 @@ describe('/api/user/connect/update-company-registration', () => {
         assert.strictEqual(errorMessage, 'invalid-account')
       })
     })
+
+
+    describe('invalid-stripe-account', () => {
+      it('ineligible querystring stripe account', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'DE',
+          type: 'individual'
+        })
+        const user2 = await TestHelper.createUser()
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+        req.account = user2.account
+        req.session = user2.session
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.DE)
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-stripe-account')
+      })
+    })
+
+    const testedMissingFields = []
+    for (const country of connect.countrySpecs) {
+      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+      if (payload === false) {
+        continue
+      }
+      for (const field in payload) {
+        if (testedMissingFields.indexOf(field) > -1) {
+          continue
+        }
+        testedMissingFields.push(field)
+        describe(`invalid-${field}`, () => {
+          it(`missing posted ${field}`, async () => {
+            const user = await TestStripeAccounts.createIndividualWithFailedrepresentativeField(country.id, 'address')
+            const req = TestHelper.createRequest(`/api/user/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
+            req.account = user.account
+            req.session = user.session
+            req.uploads = {
+              verification_document_back: TestHelper['success_id_scan_back.png'],
+              verification_document_front: TestHelper['success_id_scan_front.png']
+            }
+            const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+            delete (body[field])
+            console.log('posting', field, body)
+            req.body = TestHelper.createMultiPart(req, body)
+            let errorMessage
+            try {
+              await req.post()
+            } catch (error) {
+              errorMessage = error.message
+            }
+            assert.strictEqual(errorMessage, `invalid-${field}`)
+          })
+
+          it(`invalid posted ${field}`, async () => {
+            const user = await TestHelper.createUser()
+            await TestHelper.createStripeAccount(user, {
+              country: country.id,
+              type: 'company'
+            })
+            const req = TestHelper.createRequest(`/api/user/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
+            req.account = user.account
+            req.session = user.session
+            req.uploads = {
+              verification_document_back: TestHelper['success_id_scan_back.png'],
+              verification_document_front: TestHelper['success_id_scan_front.png']
+            }
+            const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+            body[field] = invalidValues[field]
+            console.log('posting', field, body)
+            req.body = TestHelper.createMultiPart(req, body)
+            let errorMessage
+            try {
+              await req.post()
+            } catch (error) {
+              errorMessage = error.message
+            }
+            assert.strictEqual(errorMessage, `invalid-${field}`)
+          })
+        })
+      }
+    }
+
+    describe('invalid-token', () => {
+      it('missing posted token', async () => {
+        global.stripeJS = 3
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB))
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-token')
+      })
+
+      it('invalid posted token', async () => {
+        global.stripeJS = 3
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+        body.token = 'invalid'
+        req.body = TestHelper.createMultiPart(req, body)
+        let errorMessage
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-token')
+      })
+    })
   })
 
   describe('receives', () => {
-    it('optionally-required posted token', async () => {
-      // global.stripeJS = 3
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // let errorMessage
-      // try {
-      //   await req.patch()
-      // } catch (error) {
-      //   errorMessage = error.message
-      // }
-      // assert.strictEqual(errorMessage, 'invalid-token')
-    })
-
-    it('optionally-required posted file verification_document_front', async () => {
-    })
-
-    it('optionally-required posted file verification_document_back', async () => {
-    })
-
-    it('required posted business_profile_mcc', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.business_profile.mcc, '8931')
-    })
-
-    it('optionally-required posted business_profile_url', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.business_profile.url, 'https://updated.com')
-    })
-
-    it('optionally-required posted business_profile_product_description', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.business_profile.product_description, 'thing')
-    })
-
-    it('optionally-required posted phone', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.company.phone, '+14567890123')
-    })
-
-    it('optionally-required posted name', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.company.name, 'Updated name')
-    })
-
-    it('optionally-required posted address_postal_code', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.company.address.postal_code, '10008')
-    })
-
-    it('optionally-required posted address_city', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.address.city, 'Providence')
-    })
-
-    it('optionally-required posted address_state', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.company.address.state, 'NJ')
-    })
-
-    it('optionally-required posted address_line1', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // const companyNow = await req.patch()
-      // assert.strictEqual(companyNow.company.address.line1, '285 Fulton St')
-    })
-
-    it('optionally-required posted name_kana', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.name_kana, 'ﾄｳｷﾖｳﾄ')
-    })
-
-    it('optionally-required posted name_kanji', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.name_kanji, '東京都')
-    })
-
-    it('optionally-required posted address_kana_postal_code', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kana_postal_code, '1500001')
-    })
-
-    it('optionally-required posted address_kana_city', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kana_city, 'ｼﾌﾞﾔ')
-    })
-
-    it('optionally-required posted address_kana_state', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kana_state, 'ﾄｳｷﾖｳﾄ')
-    })
-
-    it('optionally-required posted address_kana_town', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kana_town, 'ｼﾞﾝｸﾞｳﾏｴ 3-')
-    })
-
-    it('optionally-required posted address_kana_line1', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kana_line1, '27-15')
-    })
-
-    it('optionally-required posted address_kanji_postal_code', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kanji_postal_code, '1500001')
-    })
-
-    it('optionally-required posted address_kanji_city', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kanji_city, '渋谷区')
-    })
-
-    it('optionally-required posted address_kanji_state', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kanji_state, '東京都')
-    })
-
-    it('optionally-required posted address_kanji_town', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kanji_town, '神宮前 ３丁目')
-    })
-
-    it('optionally-required posted address_kanji_line1', async () => {
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'JP',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.JP, user.profile)
-      // const stripeAccountNow = await req.patch()
-      // assert.strictEqual(stripeAccountNow.company.address.kanji_line1, '２７－１５')
-    })
-  })
-
-  describe('returns', () => {
+    const fieldMaps = {
+      'address_line1': 'address',
+      'address_city': 'address',
+      'address_state': 'address',
+      'address_postal_code': 'address',
+      'address_country': 'address',
+      'address_kana_line1': 'address',
+      'address_kana_city': 'address',
+      'address_kana_state': 'address',
+      'address_kana_postal_code': 'address',
+      'address_kana_country': 'address',
+      'address_kanji_line1': 'address',
+      'address_kanji_city': 'address',
+      'address_kanji_state': 'address',
+      'address_kanji_postal_code': 'address',
+      'address_kanji_country': 'address',
+      'tax_id': 'tax_id',
+      'verification_document_front': 'document',
+      'verification_document_back': 'document'
+    }
+    const testedRequiredFields = []
     for (const country of connect.countrySpecs) {
-      it('object (' + country.id + ')', async () => {
-        // const user = await TestHelper.createUser()
-        // await TestHelper.createStripeAccount(user, {
-        //   country: country.id,
-        //   type: 'company'
-        // })
-        // const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-        // req.account = user.account
-        // req.session = user.session
-        // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id], user.profile)
-        // req.uploads = {
-        //   verification_document_front: TestHelper['success_id_scan_back.png'],
-        //   verification_document_back: TestHelper['success_id_scan_back.png']
-        // }
-        // req.body = TestHelper.createMultiPart(req, req.body)
-        // req.filename = __filename
-        // req.saveResponse = true
-        // const accountNow = await req.patch()
-        // assert.notStrictEqual(accountNow.company.verification.document.front, null)
-        // assert.notStrictEqual(accountNow.company.verification.document.front, undefined)
-        // assert.notStrictEqual(accountNow.company.verification.document.back, null)
-        // assert.notStrictEqual(accountNow.company.verification.document.back, undefined)
+      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+      if (payload === false) {
+        continue
+      }
+      for (const field in payload) {
+        if (testedRequiredFields.indexOf(field) > -1) {
+          continue
+        }
+        testedRequiredFields.push(field)
+        it(`optionally-required posted ${field}`, async () => {
+          const user = await TestStripeAccounts.createIndividualWithFailedrepresentativeField(country.id, fieldMaps[field])
+          const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+          req.account = user.account
+          req.session = user.session
+          req.uploads = {
+            verification_document_back: TestHelper['success_id_scan_back.png'],
+            verification_document_front: TestHelper['success_id_scan_front.png']
+          }
+          const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+          req.body = TestHelper.createMultiPart(req, body)
+          const representative = await req.patch()
+          assert.strictEqual(representative[field], body[field])
+        })
+      }
+    }
+
+    const uploadFields = [
+      'verification_document_front',
+      'verification_document_back',
+      'verification_additional_document_front',
+      'verification_additional_document_back'
+     ]
+    for (const field of uploadFields) {
+      it(`optionally-required posted ${documentFile}`, async () => {
+        const user = await TestStripeAccounts.createIndividualWithFailedrepresentativeField('FR', fieldMaps[field])
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          [field]: TestHelper['success_id_scan_back.png']
+        }
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+        body[field = invalidValues[field]]
+        req.body = TestHelper.createMultiPart(req, body)
+        const representative = await req.patch()
+        assert.strictEqual(representative[field], body[field])
       })
     }
   })
 
+  describe('returns', () => {
+    it('object', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'GB',
+        type: 'company'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = {}
+      req.filename = __filename
+      req.saveResponse = true
+      const representativeNow = await req.patch()
+      assert.strictEqual(representativeNow.object, 'person')
+    })
+  })
+
   describe('configuration', () => {
     it('environment STRIPE_JS', async () => {
-      // global.stripeJS = 3
-      // const user = await TestHelper.createUser()
-      // await TestHelper.createStripeAccount(user, {
-      //   country: 'US',
-      //   type: 'company'
-      // })
-      // const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req.waitOnSubmit = true
-      // req.account = user.account
-      // req.session = user.session
-      // req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // await req.post()
-      // const req2 = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      // req2.waitOnSubmit = true
-      // req2.account = user.account
-      // req2.session = user.session
-      // req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US, user.profile)
-      // await req2.post()
-      // const accountNow = await global.api.user.connect.StripeAccount.get(req2)
-      // assert.notStrictEqual(accountNow.metadata.token, 'false')
+      global.stripeJS = 3
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'GB',
+        type: 'company'
+      })
+      const person = TestHelper.nextIdentity()
+      const req = TestHelper.createRequest(`/account/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
+      req.waitOnSubmit = true
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
+      await req.post()
+      const representatives = await global.api.user.connect.Beneficialrepresentatives.get(req)
+      const representative = representatives[0]
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${id}`)
+      req2.waitOnSubmit = true
+      req2.account = user.account
+      req2.session = user.session
+      req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
+      await req2.post()
+      const representativeNow = await global.api.user.connect.Beneficialget(req2)
+      assert.notStrictEqual(representativeNow.metadata.token, null)
+      assert.notStrictEqual(representativeNow.metadata.token, undefined)
     })
   })
 })
