@@ -1,5 +1,3 @@
-const connect = require('../../../../index.js')
-
 module.exports = {
   setup: (doc, stripeAccount) => {
     const template = doc.getElementById('navbar')

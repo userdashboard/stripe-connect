@@ -125,11 +125,11 @@ module.exports = {
     }
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.owner')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
     }
     if (companyDirectorData[country] !== false) {
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
     }
     if (paymentData[country].length) {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country][0], user.profile))
@@ -232,11 +232,11 @@ module.exports = {
     })
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.owner')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
     }
     if (companyDirectorData[country] !== false) {
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
     }
     if (paymentData[country].length) {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country][0], user.profile))
@@ -277,11 +277,11 @@ module.exports = {
     await TestHelper.createCompanyRepresentative(user, representativePostData, representativeUploadData)
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.owner')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
     }
     if (companyDirectorData[country] !== false) {
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
     }
     // TODO: fix this when Stripe fixes company.verification.document
     // the 'company.verification.document' erroneously shows up in the
@@ -322,7 +322,7 @@ module.exports = {
     await TestHelper.createCompanyRepresentative(user, representativePostData, representativeUploadData)
     if (companyDirectorData[country] !== false) {
       await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.director')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relatioship.director')
     }
     // TODO: fix this when Stripe fixes company.verification.document
     // the 'company.verification.document' erroneously shows up in the
@@ -363,7 +363,7 @@ module.exports = {
     await TestHelper.createCompanyRepresentative(user, representativePostData, representativeUploadData)
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'company.owner')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
     }
     // TODO: fix this when Stripe fixes company.verification.document
     // the 'company.verification.document' erroneously shows up in the
@@ -2221,7 +2221,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     address_state: 'SG',
     dob_day: '1',
     dob_month: '1',
-    dob_year: '1950' ,
+    dob_year: '1950',
     first_name: true,
     last_name: true,
     email: true

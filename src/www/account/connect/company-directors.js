@@ -1,4 +1,3 @@
-const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
 
@@ -18,8 +17,7 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type !== 'company') {
     throw new Error('invalid-stripe-account')
   }
-  stripeAccount.requirements.currently_due.indexOf
-  if (stripeAccount.requirements.currently_due.indexOf.indexOf('company.director') === -1) {
+  if (stripeAccount.requirements.currently_due.indexOf('relationship.director') === -1) {
     throw new Error('invalid-stripe-account')
   }
   const directors = await global.api.user.connect.CompanyDirectors.get(req)

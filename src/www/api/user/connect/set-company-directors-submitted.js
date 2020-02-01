@@ -1,4 +1,3 @@
-const connect = require('../../../../../index.js')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 if (global.maxmimumStripeRetries) {

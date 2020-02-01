@@ -1,4 +1,3 @@
-const connect = require('../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-stripe-account.js')
 
@@ -28,7 +27,7 @@ async function beforeRequest (req) {
     req.error = req.error || 'invalid-company-representative'
   }
   for (const requirement of stripeAccount.requirements.currently_due) {
-    if( requirement.startsWith(representative.id)) {
+    if (requirement.startsWith(representative.id)) {
       req.error = req.error || 'invalid-company-representative'
       break
     }
