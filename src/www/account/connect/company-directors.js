@@ -17,7 +17,7 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type !== 'company') {
     throw new Error('invalid-stripe-account')
   }
-  if (!stripeAccount.company.directors_provided && 
+  if (!stripeAccount.company.directors_provided &&
        stripeAccount.requirements.currently_due.indexOf('relationship.director') === -1) {
     throw new Error('invalid-stripe-account')
   }
