@@ -112,7 +112,6 @@ describe('/account/connect/edit-company-representative', () => {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
         })
-        await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.additional_document')
         const req = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session

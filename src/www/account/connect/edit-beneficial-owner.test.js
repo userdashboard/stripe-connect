@@ -75,7 +75,6 @@ describe('/account/connect/edit-beneficial-owner', () => {
   describe('EditBeneficialOwner#POST', () => {
     it('should update required document (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
-      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.document')
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
@@ -101,7 +100,6 @@ describe('/account/connect/edit-beneficial-owner', () => {
 
     it('should update required additional_document', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
-      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.additional_document')
       const req = TestHelper.createRequest(`/account/connect/edit-beneficial-owner?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
