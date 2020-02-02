@@ -21,98 +21,98 @@ module.exports = {
         stripeAccount.business_type === 'individual') {
       throw new Error('invalid-stripe-account')
     }
-    if (req.uploads) {
-      if (req.uploads.verification_document_front) {
-        const frontData = {
-          purpose: 'identity_document',
-          file: {
-            type: 'application/octet-stream',
-            name: req.uploads.verification_document_back.name,
-            data: req.uploads.verification_document_back.buffer
-          }
-        }
-        while (true) {
-          try {
-            const front = await stripe.files.create(frontData, req.stripeKey)
-            req.body.verification_document_front = front.id
-            break
-          } catch (error) {
-            if (error.raw && error.raw.code === 'lock_timeout') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'rate_limit') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'account_invalid') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'resource_missing') {
-              continue
-            }
-            if (error.type === 'StripeConnectionError') {
-              continue
-            }
-            if (error.type === 'StripeAPIError') {
-              continue
-            }
-            if (error.message === 'An error occurred with our connection to Stripe.') {
-              continue
-            }
-            if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_front')
-          }
-        }
-      }
-      if (req.uploads.verification_document_back) {
-        const backData = {
-          purpose: 'identity_document',
-          file: {
-            type: 'application/octet-stream',
-            name: req.uploads.verification_document_back.name,
-            data: req.uploads.verification_document_back.buffer
-          }
-        }
-        while (true) {
-          try {
-            const back = await stripe.files.create(backData, req.stripeKey)
-            req.body.verification_document_back = back.id
-            break
-          } catch (error) {
-            if (error.raw && error.raw.code === 'lock_timeout') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'rate_limit') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'account_invalid') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'resource_missing') {
-              continue
-            }
-            if (error.type === 'StripeConnectionError') {
-              continue
-            }
-            if (error.type === 'StripeAPIError') {
-              continue
-            }
-            if (error.message === 'An error occurred with our connection to Stripe.') {
-              continue
-            }
-            if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_back')
-          }
-        }
-      }
-    }
     const accountInfo = {}
     if (global.stripeJS === 3) {
       accountInfo.account_token = req.body.token
     } else {
+      if (req.uploads) {
+        if (req.uploads.verification_document_front) {
+          const frontData = {
+            purpose: 'identity_document',
+            file: {
+              type: 'application/octet-stream',
+              name: req.uploads.verification_document_back.name,
+              data: req.uploads.verification_document_back.buffer
+            }
+          }
+          while (true) {
+            try {
+              const front = await stripe.files.create(frontData, req.stripeKey)
+              req.body.verification_document_front = front.id
+              break
+            } catch (error) {
+              if (error.raw && error.raw.code === 'lock_timeout') {
+                continue
+              }
+              if (error.raw && error.raw.code === 'rate_limit') {
+                continue
+              }
+              if (error.raw && error.raw.code === 'account_invalid') {
+                continue
+              }
+              if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+                continue
+              }
+              if (error.raw && error.raw.code === 'resource_missing') {
+                continue
+              }
+              if (error.type === 'StripeConnectionError') {
+                continue
+              }
+              if (error.type === 'StripeAPIError') {
+                continue
+              }
+              if (error.message === 'An error occurred with our connection to Stripe.') {
+                continue
+              }
+              if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_front')
+            }
+          }
+        }
+        if (req.uploads.verification_document_back) {
+          const backData = {
+            purpose: 'identity_document',
+            file: {
+              type: 'application/octet-stream',
+              name: req.uploads.verification_document_back.name,
+              data: req.uploads.verification_document_back.buffer
+            }
+          }
+          while (true) {
+            try {
+              const back = await stripe.files.create(backData, req.stripeKey)
+              req.body.verification_document_back = back.id
+              break
+            } catch (error) {
+              if (error.raw && error.raw.code === 'lock_timeout') {
+                continue
+              }
+              if (error.raw && error.raw.code === 'rate_limit') {
+                continue
+              }
+              if (error.raw && error.raw.code === 'account_invalid') {
+                continue
+              }
+              if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+                continue
+              }
+              if (error.raw && error.raw.code === 'resource_missing') {
+                continue
+              }
+              if (error.type === 'StripeConnectionError') {
+                continue
+              }
+              if (error.type === 'StripeAPIError') {
+                continue
+              }
+              if (error.message === 'An error occurred with our connection to Stripe.') {
+                continue
+              }
+              if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_back')
+            }
+          }
+        }
+      }
       for (const field of stripeAccount.requirements.currently_due) {
         const posted = field.split('.').join('_').replace('company_', '')
         if (!req.body[posted]) {

@@ -26,164 +26,6 @@ module.exports = {
       throw new Error('invalid-token')
     }
     const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
-    for (const fullField of stripeAccount.requirements.currently_due) {
-      if (!fullField.startsWith(existingRepresentative.id)) {
-        continue
-      }
-      const field = fullField.substring(`${existingRepresentative.id}.`.length)
-      const posted = field.split('.').join('_')
-      if (!req.body || !req.body[posted]) {
-        if (field === 'address.line2' ||
-            field === 'relationship.title' ||
-            field === 'relationship.executive' ||
-            field === 'relationship.representative' ||
-            field === 'owner' ||
-            field === 'verification.document' ||
-            field === 'verification.additional_document') {
-          continue
-        }
-        throw new Error(`invalid-${posted}`)
-      }
-    }
-    let validateDOB
-    if (req.body.dob_day) {
-      validateDOB = true
-      try {
-        const day = parseInt(req.body.dob_day, 10)
-        if (!day || day < 1 || day > 31) {
-          throw new Error('invalid-dob_day')
-        }
-      } catch (s) {
-        throw new Error('invalid-dob_day')
-      }
-    }
-    if (req.body.dob_month) {
-      try {
-        const month = parseInt(req.body.dob_month, 10)
-        if (!month || month < 1 || month > 12) {
-          throw new Error('invalid-dob_month')
-        }
-      } catch (s) {
-        throw new Error('invalid-dob_month')
-      }
-    }
-    if (req.body.dob_year) {
-      validateDOB = true
-      try {
-        const year = parseInt(req.body.dob_year, 10)
-        if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
-          throw new Error('invalid-dob_year')
-        }
-      } catch (s) {
-        throw new Error('invalid-dob_year')
-      }
-    }
-    if (validateDOB) {
-      if (!req.body.dob_day) {
-        throw new Error('invalid-dob_day')
-      }
-      if (!req.body.dob_month) {
-        throw new Error('invalid-dob_month')
-      }
-      if (!req.body.dob_year) {
-        throw new Error('invalid-dob_year')
-      }
-      try {
-        Date.parse(`${req.body.dob_year}/${req.body.dob_month}/${req.body.dob_day}`)
-      } catch (error) {
-        throw new Error('invalid-dob_day')
-      }
-    }
-    if (req.uploads && req.uploads.verification_document_front) {
-      const frontData = {
-        purpose: 'identity_document',
-        file: {
-          type: 'application/octet-stream',
-          name: req.uploads.verification_document_front.name,
-          data: req.uploads.verification_document_front.buffer
-        }
-      }
-      while (true) {
-        try {
-          const front = await stripe.files.create(frontData, req.stripeKey)
-          req.body.verification_document_front = front.id
-          break
-        } catch (error) {
-          if (error.raw && error.raw.code === 'lock_timeout') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'rate_limit') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'account_invalid') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'resource_missing') {
-            continue
-          }
-          if (error.type === 'StripeConnectionError') {
-            continue
-          }
-          if (error.type === 'StripeAPIError') {
-            continue
-          }
-          if (error.message === 'An error occurred with our connection to Stripe.') {
-            continue
-          }
-          if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_front')
-        }
-      }
-    } else if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.verification.document`) > -1) {
-      throw new Error('invalid-verification_document_front')
-    }
-    if (req.uploads && req.uploads.verification_document_back) {
-      const backData = {
-        purpose: 'identity_document',
-        file: {
-          type: 'application/octet-stream',
-          name: req.uploads.verification_document_back.name,
-          data: req.uploads.verification_document_back.buffer
-        }
-      }
-      while (true) {
-        try {
-          const back = await stripe.files.create(backData, req.stripeKey)
-          req.body.verification_document_back = back.id
-          break
-        } catch (error) {
-          if (error.raw && error.raw.code === 'lock_timeout') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'rate_limit') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'account_invalid') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'resource_missing') {
-            continue
-          }
-          if (error.type === 'StripeConnectionError') {
-            continue
-          }
-          if (error.type === 'StripeAPIError') {
-            continue
-          }
-          if (error.message === 'An error occurred with our connection to Stripe.') {
-            continue
-          }
-          if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_back')
-        }
-      }
-    } else if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.verification.document`) > -1) {
-      throw new Error('invalid-verification_document_back')
-    }
     const representativeInfo = {
       relationship: {
         representative: true
@@ -192,6 +34,164 @@ module.exports = {
     if (global.stripeJS === 3) {
       representativeInfo.person_token = req.body.token
     } else {
+      for (const fullField of stripeAccount.requirements.currently_due) {
+        if (!fullField.startsWith(existingRepresentative.id)) {
+          continue
+        }
+        const field = fullField.substring(`${existingRepresentative.id}.`.length)
+        const posted = field.split('.').join('_')
+        if (!req.body || !req.body[posted]) {
+          if (field === 'address.line2' ||
+              field === 'relationship.title' ||
+              field === 'relationship.executive' ||
+              field === 'relationship.representative' ||
+              field === 'owner' ||
+              field === 'verification.document' ||
+              field === 'verification.additional_document') {
+            continue
+          }
+          throw new Error(`invalid-${posted}`)
+        }
+      }
+      let validateDOB
+      if (req.body.dob_day) {
+        validateDOB = true
+        try {
+          const day = parseInt(req.body.dob_day, 10)
+          if (!day || day < 1 || day > 31) {
+            throw new Error('invalid-dob_day')
+          }
+        } catch (s) {
+          throw new Error('invalid-dob_day')
+        }
+      }
+      if (req.body.dob_month) {
+        try {
+          const month = parseInt(req.body.dob_month, 10)
+          if (!month || month < 1 || month > 12) {
+            throw new Error('invalid-dob_month')
+          }
+        } catch (s) {
+          throw new Error('invalid-dob_month')
+        }
+      }
+      if (req.body.dob_year) {
+        validateDOB = true
+        try {
+          const year = parseInt(req.body.dob_year, 10)
+          if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
+            throw new Error('invalid-dob_year')
+          }
+        } catch (s) {
+          throw new Error('invalid-dob_year')
+        }
+      }
+      if (validateDOB) {
+        if (!req.body.dob_day) {
+          throw new Error('invalid-dob_day')
+        }
+        if (!req.body.dob_month) {
+          throw new Error('invalid-dob_month')
+        }
+        if (!req.body.dob_year) {
+          throw new Error('invalid-dob_year')
+        }
+        try {
+          Date.parse(`${req.body.dob_year}/${req.body.dob_month}/${req.body.dob_day}`)
+        } catch (error) {
+          throw new Error('invalid-dob_day')
+        }
+      }
+      if (req.uploads && req.uploads.verification_document_front) {
+        const frontData = {
+          purpose: 'identity_document',
+          file: {
+            type: 'application/octet-stream',
+            name: req.uploads.verification_document_front.name,
+            data: req.uploads.verification_document_front.buffer
+          }
+        }
+        while (true) {
+          try {
+            const front = await stripe.files.create(frontData, req.stripeKey)
+            req.body.verification_document_front = front.id
+            break
+          } catch (error) {
+            if (error.raw && error.raw.code === 'lock_timeout') {
+              continue
+            }
+            if (error.raw && error.raw.code === 'rate_limit') {
+              continue
+            }
+            if (error.raw && error.raw.code === 'account_invalid') {
+              continue
+            }
+            if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+              continue
+            }
+            if (error.raw && error.raw.code === 'resource_missing') {
+              continue
+            }
+            if (error.type === 'StripeConnectionError') {
+              continue
+            }
+            if (error.type === 'StripeAPIError') {
+              continue
+            }
+            if (error.message === 'An error occurred with our connection to Stripe.') {
+              continue
+            }
+            if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_front')
+          }
+        }
+      } else if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.verification.document`) > -1) {
+        throw new Error('invalid-verification_document_front')
+      }
+      if (req.uploads && req.uploads.verification_document_back) {
+        const backData = {
+          purpose: 'identity_document',
+          file: {
+            type: 'application/octet-stream',
+            name: req.uploads.verification_document_back.name,
+            data: req.uploads.verification_document_back.buffer
+          }
+        }
+        while (true) {
+          try {
+            const back = await stripe.files.create(backData, req.stripeKey)
+            req.body.verification_document_back = back.id
+            break
+          } catch (error) {
+            if (error.raw && error.raw.code === 'lock_timeout') {
+              continue
+            }
+            if (error.raw && error.raw.code === 'rate_limit') {
+              continue
+            }
+            if (error.raw && error.raw.code === 'account_invalid') {
+              continue
+            }
+            if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+              continue
+            }
+            if (error.raw && error.raw.code === 'resource_missing') {
+              continue
+            }
+            if (error.type === 'StripeConnectionError') {
+              continue
+            }
+            if (error.type === 'StripeAPIError') {
+              continue
+            }
+            if (error.message === 'An error occurred with our connection to Stripe.') {
+              continue
+            }
+            if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_back')
+          }
+        }
+      } else if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.verification.document`) > -1) {
+        throw new Error('invalid-verification_document_back')
+      }
       for (const fullField of stripeAccount.requirements.currently_due) {
         if (!fullField.startsWith(existingRepresentative.id)) {
           continue
