@@ -79,6 +79,7 @@ describe('/api/user/connect/create-company-representative', () => {
     })
 
     const testedMissingFields = []
+    // TODO: invalid values marked as 'false' are skipped until they can be verified
     const invalidValues = {
       address_line1: false,
       address_city: false,
@@ -145,14 +146,9 @@ describe('/api/user/connect/create-company-representative', () => {
             } catch (error) {
               errorMessage = error.message
             }
-            console.log('testing missing field', field, 'error', errorMessage)
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-
-          if (invalidValues[field] === undefined) {
-            console.log('invalid values missing field', field, __filename)
-          }
-
+          
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
               const user = await TestHelper.createUser()
@@ -176,7 +172,6 @@ describe('/api/user/connect/create-company-representative', () => {
               } catch (error) {
                 errorMessage = error.message
               }
-              console.log('testing invalid field', field, 'error', errorMessage)
               assert.strictEqual(errorMessage, `invalid-${field}`)
             })
           }
@@ -214,8 +209,25 @@ describe('/api/user/connect/create-company-representative', () => {
           delete (body[field])
           req.body = TestHelper.createMultiPart(req, body)
           const representative = await req.post()
-          console.log('testing field', field, 'value', representative[field])
-          assert.strictEqual(representative[field], body[field])
+          if (field.startsWith('address_kana')) {
+            const property = field.substring('address_'.length)
+            assert.strictEqual(representative.address_kana[property], body[field])
+          } else if (field.startsWith('address_kanji')) {
+            const property = field.substring('address_'.length)
+            assert.strictEqual(representative.address_kanji[property], body[field])
+          } else if (field.startsWith('address_')) {
+            const property = field.substring('address_'.length)
+            assert.strictEqual(representative.address[property], body[field])
+          } else if (field.startsWith('dob_')) {
+            const property = field.substring('dob_'.length)
+            assert.strictEqual(representative.address[property], body[field])
+          } else if (field === 'id_number') {
+            assert.strictEqual(representative.id_number_provided, true)
+          } else if (field === 'ssn_last_4') {
+            assert.strictEqual(representative.ssn_last_4, true)
+          } else {
+            assert.strictEqual(representative[field], body[field])
+          }
         })
       }
     }

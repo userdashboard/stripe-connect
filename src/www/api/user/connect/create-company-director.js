@@ -21,38 +21,7 @@ module.exports = {
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
-    if (!req.body) {
-      throw new Error('invalid-first_name')
-    }
-    if (req.body.relationship_percent_ownership) {
-      try {
-        const ownership = parseFloat(req.body.relationship_percent_ownership, 10)
-        if (ownership < 0 || ownership > 100 || ownership.toString() !== req.body.relationship_percent_ownership) {
-          throw new Error('invalid-relationship_percent_ownership')
-        }
-      } catch (s) {
-        throw new Error('invalid-relationship_percent_ownership')
-      }
-    }
-    if (req.body.address_country) {
-      if (!connect.countryNameIndex[req.body.address_country]) {
-        throw new Error('invalid-address_country')
-      }
-      if (!req.body.address_state) {
-        throw new Error('invalid-address_state')
-      }
-      const states = connect.countryDivisions[req.body.address_country]
-      let found
-      for (const state of states) {
-        found = state.value === req.body.address_state
-        if (found) {
-          break
-        }
-      }
-      if (!found) {
-        throw new Error('invalid-address_state')
-      }
-    }
+    req.body = req.body || {}
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }

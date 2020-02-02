@@ -91,6 +91,7 @@ describe('/api/user/connect/update-company-director', () => {
     })
 
     const testedMissingFields = []
+    // TODO: invalid values marked as 'false' are skipped until they can be verified
     const invalidValues = {
       dob_day: '32',
       dob_month: '15',
@@ -121,7 +122,6 @@ describe('/api/user/connect/update-company-director', () => {
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
             delete (body[field])
-            console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
             try {
@@ -131,10 +131,6 @@ describe('/api/user/connect/update-company-director', () => {
             }
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-
-          if (invalidValues[field] === undefined) {
-            console.log('invalid values missing field', field, __filename)
-          }
 
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
@@ -152,7 +148,6 @@ describe('/api/user/connect/update-company-director', () => {
               }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
               body[field] = 'invalid'
-              console.log('posting', field, body)
               req.body = TestHelper.createMultiPart(req, body)
               let errorMessage
               try {
@@ -251,7 +246,12 @@ describe('/api/user/connect/update-company-director', () => {
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
           req.body = TestHelper.createMultiPart(req, body)
           const director = await req.patch()
-          assert.strictEqual(director[field], body[field])
+          if (field.startsWith('dob_')) {
+            const property = field.substring('dob_'.length)
+            assert.strictEqual(director.address[property], body[field])
+          } else {
+            assert.strictEqual(director[field], body[field])
+          }
         })
       }
     }

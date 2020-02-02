@@ -2150,10 +2150,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   BE: {
     address_city: 'Brussels',
-    address_country: 'BE',
     address_line1: 'First Street',
     address_postal_code: '1020',
-    address_state: 'BRU',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
@@ -2164,7 +2162,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   CA: false,
   CH: {
     address_city: 'Bern',
-    address_country: 'CH',
     address_line1: '123 Sesame St',
     address_postal_code: '1020',
     address_state: 'BE',
@@ -2177,7 +2174,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   DE: {
     address_city: 'Berlin',
-    address_country: 'DE',
     address_line1: 'First Street',
     address_postal_code: '01067',
     address_state: 'BW',
@@ -2190,7 +2186,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   DK: {
     address_city: 'Copenhagen',
-    address_country: 'DK',
     address_line1: '123 Park Lane',
     address_postal_code: '1000',
     address_state: '147',
@@ -2203,7 +2198,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   EE: {
     address_city: 'Talin',
-    address_country: 'EE',
     address_line1: '123 Park Lane',
     address_postal_code: '10128',
     address_state: '37',
@@ -2216,7 +2210,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   ES: {
     address_city: 'Madrid',
-    address_country: 'ES',
     address_line1: '123 Park Lane',
     address_postal_code: '03179',
     address_state: 'AN',
@@ -2229,7 +2222,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   FI: {
     address_city: 'Helsinki',
-    address_country: 'FI',
     address_line1: '123 Park Lane',
     address_postal_code: '00990',
     address_state: 'AL',
@@ -2242,7 +2234,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   FR: {
     address_city: 'Paris',
-    address_country: 'FR',
     address_line1: '123 Sesame St',
     address_postal_code: '75001',
     address_state: 'A',
@@ -2255,7 +2246,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   GB: {
     address_city: 'London',
-    address_country: 'GB',
     address_line1: '123 Sesame St',
     address_postal_code: 'EC1A 1AA',
     address_state: 'LND',
@@ -2268,7 +2258,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   GR: {
     address_city: 'Athens',
-    address_country: 'GR',
     address_line1: '123 Park Lane',
     address_postal_code: '104',
     address_state: 'I',
@@ -2282,7 +2271,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   HK: false,
   IE: {
     address_city: 'Dublin',
-    address_country: 'IE',
     address_line1: '123 Sesame St',
     address_postal_code: 'Dublin 1',
     address_state: 'D',
@@ -2295,7 +2283,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   IT: {
     address_city: 'Rome',
-    address_country: 'IT',
     address_line1: '123 Sesame St',
     address_postal_code: '00010',
     address_state: '65',
@@ -2309,7 +2296,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   JP: false,
   LT: {
     address_city: 'Vilnius',
-    address_country: 'LT',
     address_line1: '123 Sesame St',
     address_postal_code: 'LT-00000',
     address_state: 'AL',
@@ -2322,7 +2308,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   LU: {
     address_city: 'Luxemburg',
-    address_country: 'LU',
     address_line1: '123 Sesame St',
     address_postal_code: '1623',
     address_state: 'L',
@@ -2335,7 +2320,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   LV: {
     address_city: 'Riga',
-    address_country: 'LV',
     address_line1: '123 Sesame St',
     address_postal_code: 'LV–1073',
     address_state: 'AI',
@@ -2348,7 +2332,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   MY: {
     address_city: 'Kuala Lumpur',
-    address_country: 'MY',
     address_line1: '123 Sesame St',
     address_postal_code: '50450',
     address_state: 'C',
@@ -2362,7 +2345,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   NL: {
     address_city: 'Amsterdam',
-    address_country: 'NL',
     address_line1: '123 Sesame St',
     address_postal_code: '1071 JA',
     address_state: 'DR',
@@ -2375,7 +2357,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   NO: {
     address_city: 'Oslo',
-    address_country: 'NO',
     address_line1: '123 Sesame St',
     address_postal_code: '0001',
     address_state: '02',
@@ -2388,7 +2369,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   NZ: {
     address_city: 'Auckland',
-    address_country: 'NZ',
     address_line1: '844 Fleet Street',
     address_postal_code: '6011',
     address_state: 'N',
@@ -2401,7 +2381,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   PL: {
     address_city: 'Krakow',
-    address_country: 'PL',
     address_line1: '123 Park Lane',
     address_postal_code: '32-400',
     address_state: 'KR',
@@ -2414,7 +2393,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   PT: {
     address_city: 'Lisbon',
-    address_country: 'PT',
     address_line1: '123 Park Lane',
     address_postal_code: '4520',
     address_state: '01',
@@ -2427,7 +2405,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   SE: {
     address_city: 'Stockholm',
-    address_country: 'SE',
     address_line1: '123 Sesame St',
     address_postal_code: '00150',
     address_state: 'K',
@@ -2440,7 +2417,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   SG: {
     address_city: 'Singapore',
-    address_country: 'SG',
     address_line1: '123 Sesame St',
     address_postal_code: '339696',
     address_state: 'SG',
@@ -2453,7 +2429,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   SI: {
     address_city: 'Ljubljana',
-    address_country: 'SI',
     address_line1: '123 Sesame St',
     address_postal_code: '1210',
     address_state: '07',
@@ -2466,7 +2441,6 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   SK: {
     address_city: 'Slovakia',
-    address_country: 'SK',
     address_line1: '123 Sesame St',
     address_postal_code: '00102',
     dob_day: '1',
@@ -2478,15 +2452,12 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   },
   US: {
     address_city: 'New York',
-    address_country: 'US',
     address_line1: '285 Fulton St',
     address_postal_code: '10007',
     address_state: 'NY',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '+14567890123',
-    ssn_last_4: '0000',
     first_name: true,
     last_name: true,
     email: true

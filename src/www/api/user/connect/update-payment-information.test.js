@@ -82,6 +82,7 @@ describe('/api/user/connect/update-payment-information', () => {
     })
 
     const testedMissingFields = []
+    // TODO: invalid values marked as 'false' are skipped until they can be verified
     const invalidValues = {
       account_holder_name: false,
       account_holder_type: 'invalid',
@@ -129,7 +130,6 @@ describe('/api/user/connect/update-payment-information', () => {
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
             delete (body[field])
-            console.log('posting', field, body)
             req.body = body
             let errorMessage
             try {
@@ -139,10 +139,6 @@ describe('/api/user/connect/update-payment-information', () => {
             }
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-
-          if (invalidValues[field] === undefined) {
-            console.log('invalid values missing field', field, __filename)
-          }
 
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
@@ -160,7 +156,6 @@ describe('/api/user/connect/update-payment-information', () => {
               }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
               body[field] = 'invalid'
-              console.log('posting', field, body)
               req.body = body
               let errorMessage
               try {
@@ -204,7 +199,7 @@ describe('/api/user/connect/update-payment-information', () => {
           }
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
           const accountNow = await req.patch()
-          assert.strictEqual(accountNow.external_accounts.data[0].currency, 'aud')
+          assert.strictEqual(accountNow.external_accounts.data[0].currency, req.body.curency)
         })
       }
     }

@@ -91,6 +91,7 @@ describe('/api/user/connect/update-beneficial-owner', () => {
     })
 
     const testedMissingFields = []
+    // TODO: invalid values marked as 'false' are skipped until they can be verified
     const invalidValues = {
       address_line1: false,
       address_city: false,
@@ -146,7 +147,6 @@ describe('/api/user/connect/update-beneficial-owner', () => {
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
             delete (body[field])
-            console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
             try {
@@ -156,10 +156,6 @@ describe('/api/user/connect/update-beneficial-owner', () => {
             }
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-
-          if (invalidValues[field] === undefined) {
-            console.log('invalid values missing field', field, __filename)
-          }
 
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
@@ -177,7 +173,6 @@ describe('/api/user/connect/update-beneficial-owner', () => {
               }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
               body[field] = 'invalid'
-              console.log('posting', field, body)
               req.body = TestHelper.createMultiPart(req, body)
               let errorMessage
               try {
@@ -283,7 +278,19 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
           req.body = TestHelper.createMultiPart(req, body)
           const owner = await req.patch()
-          assert.strictEqual(owner[field], body[field])
+          if (field.startsWith('address_')) {
+            const property = field.substring('address_'.length)
+            assert.strictEqual(owner.address[property], body[field])
+          } else if (field.startsWith('dob_')) {
+            const property = field.substring('dob_'.length)
+            assert.strictEqual(owner.address[property], body[field])
+          } else if (field === 'id_number') {
+            assert.strictEqual(owner.id_number_provided, true)
+          } else if (field === 'ssn_last_4') {
+            assert.strictEqual(owner.ssn_last_4, true)
+          } else {
+            assert.strictEqual(owner[field], body[field])
+          }
         })
       }
     }

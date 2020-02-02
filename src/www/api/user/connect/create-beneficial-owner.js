@@ -20,9 +20,7 @@ module.exports = {
       stripeAccount.metadata.submitted) {
       throw new Error('invalid-stripe-account')
     }
-    if (!req.body) {
-      throw new Error('invalid-first_name')
-    }
+    req.body = req.body || {}
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
@@ -41,16 +39,6 @@ module.exports = {
           continue
         }
         throw new Error(`invalid-${posted}`)
-      }
-    }
-    if (req.body.relationship_percent_ownership) {
-      try {
-        const ownership = parseFloat(req.body.relationship_percent_ownership, 10)
-        if (ownership < 0 || ownership > 100 || ownership.toString() !== req.body.relationship_percent_ownership) {
-          throw new Error('invalid-relationship_percent_ownership')
-        }
-      } catch (s) {
-        throw new Error('invalid-relationship_percent_ownership')
       }
     }
     let validateDOB
@@ -102,7 +90,7 @@ module.exports = {
         throw new Error('invalid-dob_day')
       }
     }
-    if (!req.body.token && req.uploads && req.uploads.verification_document_front) {
+    if (req.uploads && req.uploads.verification_document_front) {
       const frontData = {
         purpose: 'identity_document',
         file: {
@@ -147,7 +135,7 @@ module.exports = {
     } else if (requirements.currently_due.indexOf('verification.document') > -1) {
       throw new Error('invalid-verification_document_front')
     }
-    if (!req.body.token && req.uploads && req.uploads.verification_document_back) {
+    if (req.uploads && req.uploads.verification_document_back) {
       const backData = {
         purpose: 'identity_document',
         file: {
@@ -204,44 +192,45 @@ module.exports = {
       }
       for (const field of requirements.currently_due) {
         const posted = field.split('.').join('_')
-        if (req.body[posted]) {
-          if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            ownerInfo.address = ownerInfo.address || {}
-            ownerInfo.address[property] = req.body[posted]
+        if (!req.body[posted]) {
+          throw new Error(`invalid-${posted}`)
+        }
+        if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          ownerInfo.address = ownerInfo.address || {}
+          ownerInfo.address[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('verification.document.')) {
+          if (global.stripeJS) {
             continue
-          } else if (field.startsWith('verification.document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.document'.length)
-            ownerInfo.verification = ownerInfo.verification || {}
-            ownerInfo.verification.document = ownerInfo.verification.document || {}
-            ownerInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.additional_document'.length)
-            ownerInfo.verification = ownerInfo.verification || {}
-            ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
-            ownerInfo.verification.additional_document[property] = req.body[posted]
-          } else if (field.startsWith('dob.')) {
-            const property = field.substring('dob.'.length)
-            ownerInfo.dob = ownerInfo.dob || {}
-            ownerInfo.dob[property] = req.body[posted]
-          } else if (field.startsWith('relationship.')) {
-            const property = field.substring('relationship.'.length)
-            ownerInfo.relationship = ownerInfo.relationship || {}
-            ownerInfo.relationship[property] = req.body[posted]
-            continue
-          } else {
-            const property = field
-            if (property === 'executive' || property === 'director') {
-              continue
-            }
-            ownerInfo[property] = req.body[posted]
           }
+          const property = field.substring('verification.document'.length)
+          ownerInfo.verification = ownerInfo.verification || {}
+          ownerInfo.verification.document = ownerInfo.verification.document || {}
+          ownerInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('verification.additional_document'.length)
+          ownerInfo.verification = ownerInfo.verification || {}
+          ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+          ownerInfo.verification.additional_document[property] = req.body[posted]
+        } else if (field.startsWith('dob.')) {
+          const property = field.substring('dob.'.length)
+          ownerInfo.dob = ownerInfo.dob || {}
+          ownerInfo.dob[property] = req.body[posted]
+        } else if (field.startsWith('relationship.')) {
+          const property = field.substring('relationship.'.length)
+          ownerInfo.relationship = ownerInfo.relationship || {}
+          ownerInfo.relationship[property] = req.body[posted]
+          continue
+        } else {
+          const property = field
+          if (property === 'executive' || property === 'director') {
+            continue
+          }
+          ownerInfo[property] = req.body[posted]
         }
       }
       for (const field of requirements.eventually_due) {

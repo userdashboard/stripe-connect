@@ -201,8 +201,11 @@ module.exports = {
             break
           }
         }
+        if (!found) {
+          throw new Error('invalid-business_profile_mcc')
+        }
         accountInfo.business_profile = accountInfo.business_profile || {}
-        accountInfo.business_profile.business_profile_mcc = req.body.business_profile_mcc
+        accountInfo.business_profile.mcc = req.body.mcc
       }
       if (req.body.business_profile_url) {
         if (!req.body.business_profile_url.startsWith('http://') &&
@@ -220,15 +223,15 @@ module.exports = {
       // so when Stripe updates to have something like an 'optionally_due' array
       // the manual checks can be removed
       if (req.body.address_line2) {
-        accountInfo.address = accountInfo.address || {}
-        accountInfo.address.line2 = req.body.address_line2
+        accountInfo.company.address = accountInfo.company.address || {}
+        accountInfo.company.address.line2 = req.body.address_line2
       }
       if (req.body.address_country) {
         if (!connect.countryNameIndex[req.body.address_country]) {
           throw new Error('invalid-address_country')
         }
-        accountInfo.address = accountInfo.address || {}
-        accountInfo.address.country = req.body.address_country
+        accountInfo.company.address = accountInfo.company.address || {}
+        accountInfo.company.address.country = req.body.address_country
       }
       if (req.body.address_state) {
         const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
@@ -242,12 +245,12 @@ module.exports = {
         if (!found) {
           throw new Error('invalid-address_state')
         }
-        accountInfo.address = accountInfo.address || {}
-        accountInfo.address.state = req.body.address_state
+        accountInfo.company.address = accountInfo.company.address || {}
+        accountInfo.company.address.state = req.body.address_state
       }
       if (req.body.address_postal_code) {
-        accountInfo.address = accountInfo.address || {}
-        accountInfo.address.postal_code = req.body.address_postal_code
+        accountInfo.company.address = accountInfo.company.address || {}
+        accountInfo.company.address.postal_code = req.body.address_postal_code
       }
       // TODO: check this document is required before updating
       // currently Stripe do not correctly report it as required

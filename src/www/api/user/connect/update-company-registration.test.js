@@ -83,6 +83,7 @@ describe('/api/user/connect/update-company-registration', () => {
     })
 
     const testedMissingFields = []
+    // TODO: invalid values marked as 'false' are skipped until they can be verified
     const invalidValues = {
       address_line1: false,
       address_city: false,
@@ -129,7 +130,6 @@ describe('/api/user/connect/update-company-registration', () => {
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
             delete (body[field])
-            console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
             try {
@@ -139,10 +139,6 @@ describe('/api/user/connect/update-company-registration', () => {
             }
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-
-          if (invalidValues[field] === undefined) {
-            console.log('invalid values missing field', field, __filename)
-          }
 
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
@@ -160,7 +156,6 @@ describe('/api/user/connect/update-company-registration', () => {
               }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
               body[field] = 'invalid'
-              console.log('posting', field, body)
               req.body = TestHelper.createMultiPart(req, body)
               let errorMessage
               try {
@@ -261,7 +256,7 @@ describe('/api/user/connect/update-company-registration', () => {
         }
         testedRequiredFields.push(field)
         it(`optionally-required posted ${field}`, async () => {
-          const user = await TestStripeAccounts.createIndividualWithFailedrepresentativeField(country.id, fieldMaps[field])
+          const user = await TestStripeAccounts.createIndividualWithFailedRepresentativeField(country.id, fieldMaps[field])
           const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
           req.account = user.account
           req.session = user.session
@@ -271,8 +266,8 @@ describe('/api/user/connect/update-company-registration', () => {
           }
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
           req.body = TestHelper.createMultiPart(req, body)
-          const representative = await req.patch()
-          assert.strictEqual(representative[field], body[field])
+          const accountNow = await req.patch()
+          assert.strictEqual(accountNow[field], body[field])
         })
       }
     }
@@ -285,7 +280,7 @@ describe('/api/user/connect/update-company-registration', () => {
     ]
     for (const field of uploadFields) {
       it(`optionally-required posted ${field}`, async () => {
-        const user = await TestStripeAccounts.createIndividualWithFailedrepresentativeField('FR', fieldMaps[field])
+        const user = await TestStripeAccounts.createIndividualWithFailedRepresentativeField('FR', fieldMaps[field])
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -295,8 +290,22 @@ describe('/api/user/connect/update-company-registration', () => {
         const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.FR)
         body[field] = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
-        const representative = await req.patch()
-        assert.strictEqual(representative[field], body[field])
+        const accountNow = await req.patch()
+        if (field.startsWith('address_')) {
+          const property = field.substring('address_kana'.length)
+          assert.strictEqual(accountNow.company.address_kana[property], body[field])
+        } else if (field.startsWith('address_kanji')) {
+          const property = field.substring('address_kanji'.length)
+          assert.strictEqual(accountNow.company.address_kanji[property], body[field])
+        } else if (field.startsWith('address_')) {
+          const property = field.substring('address_'.length)
+          assert.strictEqual(accountNow.company.address[property], body[field])
+        } else if (field.startsWith('dob_')) {
+          const property = field.substring('dob_'.length)
+          assert.strictEqual(accountNow.company.address[property], body[field])
+        } else {
+          assert.strictEqual(accountNow[field], body[field])
+        }
       })
     }
   })
@@ -311,11 +320,11 @@ describe('/api/user/connect/update-company-registration', () => {
       const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.body = {}
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB)
       req.filename = __filename
       req.saveResponse = true
       const stripeAccount = await req.patch()
-      assert.strictEqual(stripeAccount.object, 'person')
+      assert.strictEqual(stripeAccount.object, 'account')
     })
   })
 

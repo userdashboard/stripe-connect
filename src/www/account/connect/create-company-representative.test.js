@@ -4,7 +4,7 @@ const connect = require('../../../../index.js')
 const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
-describe.only('/account/connect/create-company-representative', () => {
+describe('/account/connect/create-company-representative', () => {
   describe('CreateCompanyRepresentative#BEFORE', () => {
     it('should reject invalid registration', async () => {
       const user = await TestHelper.createUser()
@@ -60,7 +60,7 @@ describe.only('/account/connect/create-company-representative', () => {
 
   describe('CreateCompanyRepresentative#POST', () => {
     for (const country of connect.countrySpecs) {
-      it.only('should reject invalid fields (' + country.id + ')', async () => {
+      it('should reject invalid fields (' + country.id + ')', async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,

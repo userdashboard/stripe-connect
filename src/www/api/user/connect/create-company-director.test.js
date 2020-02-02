@@ -78,6 +78,7 @@ describe('/api/user/connect/create-company-director', () => {
     })
 
     const testedMissingFields = []
+    // TODO: invalid values marked as 'false' are skipped until they can be verified
     const invalidValues = {
       dob_day: '32',
       dob_month: '15',
@@ -119,13 +120,8 @@ describe('/api/user/connect/create-company-director', () => {
             } catch (error) {
               errorMessage = error.message
             }
-            console.log('testing missing field', field, 'error', errorMessage)
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-
-          if (invalidValues[field] === undefined) {
-            console.log('invalid values missing field', field, __filename)
-          }
 
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
@@ -150,7 +146,6 @@ describe('/api/user/connect/create-company-director', () => {
               } catch (error) {
                 errorMessage = error.message
               }
-              console.log('testing invalid field', field, 'error', errorMessage)
               assert.strictEqual(errorMessage, `invalid-${field}`)
             })
           }
@@ -188,8 +183,12 @@ describe('/api/user/connect/create-company-director', () => {
           delete (body[field])
           req.body = TestHelper.createMultiPart(req, body)
           const director = await req.post()
-          console.log('testing field', field, 'value', director[field])
-          assert.strictEqual(director[field], body[field])
+          if (field.startsWith('dob_')) {
+            const property = field.substring('dob_'.length)
+            assert.strictEqual(director.address[property], body[field])
+          } else {
+            assert.strictEqual(director[field], body[field])
+          }
         })
       }
     }

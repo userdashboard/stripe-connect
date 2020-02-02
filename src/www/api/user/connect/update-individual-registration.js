@@ -21,6 +21,56 @@ module.exports = {
       stripeAccount.metadata.accountid !== req.account.accountid) {
       throw new Error('invalid-stripe-account')
     }
+    let validateDOB = false
+    if (req.body.dob_day) {
+      validateDOB = true
+      try {
+        const day = parseInt(req.body.dob_day, 10)
+        if (!day || day < 1 || day > 31) {
+          throw new Error('invalid-dob_day')
+        }
+      } catch (s) {
+        throw new Error('invalid-dob_day')
+      }
+    }
+    if (req.body.dob_month) {
+      validateDOB = true
+      try {
+        const month = parseInt(req.body.dob_month, 10)
+        if (!month || month < 1 || month > 12) {
+          throw new Error('invalid-dob_month')
+        }
+      } catch (s) {
+        throw new Error('invalid-dob_month')
+      }
+    }
+    if (req.body.dob_year) {
+      validateDOB = true
+      try {
+        const year = parseInt(req.body.dob_year, 10)
+        if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
+          throw new Error('invalid-dob_year111')
+        }
+      } catch (s) {
+        throw new Error('invalid-dob_year')
+      }
+    }
+    if (validateDOB) {
+      if (!req.body.dob_day) {
+        throw new Error('invalid-dob_day')
+      }
+      if (!req.body.dob_month) {
+        throw new Error('invalid-dob_month')
+      }
+      if (!req.body.dob_year) {
+        throw new Error('invalid-dob_year')
+      }
+      try {
+        Date.parse(`${req.body.dob_year}/${req.body.dob_month}/${req.body.dob_day}`)
+      } catch (error) {
+        throw new Error('invalid-dob_day')
+      }
+    }
     if (req.uploads) {
       if (req.uploads.verification_document_front) {
         const frontData = {
@@ -195,60 +245,6 @@ module.exports = {
         }
       }
     }
-    let validateDOB = false
-    if (req.body.dob_day) {
-      validateDOB = true
-      try {
-        const day = parseInt(req.body.dob_day, 10)
-        if (!day || day < 1 || day > 31) {
-          throw new Error('invalid-dob_day')
-        }
-      } catch (s) {
-        throw new Error('invalid-dob_day')
-      }
-    }
-    if (req.body.dob_month) {
-      validateDOB = true
-      try {
-        const month = parseInt(req.body.dob_month, 10)
-        if (!month || month < 1 || month > 12) {
-          throw new Error('invalid-dob_month')
-        }
-      } catch (s) {
-        throw new Error('invalid-dob_month')
-      }
-    }
-    if (req.body.dob_year) {
-      validateDOB = true
-      try {
-        const year = parseInt(req.body.dob_year, 10)
-        if (!year || year < 1900 || year > new Date().getFullYear() - 18) {
-          throw new Error('invalid-dob_year111')
-        }
-      } catch (s) {
-        throw new Error('invalid-dob_year')
-      }
-    }
-    if (validateDOB) {
-      if (!req.body.dob_day) {
-        throw new Error('invalid-dob_day')
-      }
-      if (!req.body.dob_month) {
-        throw new Error('invalid-dob_month')
-      }
-      if (!req.body.dob_year) {
-        throw new Error('invalid-dob_year')
-      }
-      try {
-        Date.parse(`${req.body.dob_year}/${req.body.dob_month}/${req.body.dob_day}`)
-      } catch (error) {
-        throw new Error('invalid-dob_day')
-      }
-    }
-    stripeAccount.individual = stripeAccount.individual || {}
-    stripeAccount.individual.verification = stripeAccount.individual.verification || {}
-    stripeAccount.individual.verification.document = stripeAccount.individual.verification.document || {}
-    stripeAccount.individual.verification.additional_document = stripeAccount.individual.verification.additional_document || {}
     const accountInfo = {}
     if (global.stripeJS === 3) {
       accountInfo.account_token = req.body.token

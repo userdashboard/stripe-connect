@@ -83,6 +83,7 @@ describe('/api/user/connect/update-individual-registration', () => {
     })
 
     const testedMissingFields = []
+    // TODO: invalid values marked as 'false' are skipped until they can be verified
     const invalidValues = {
       address_line1: false,
       address_city: false,
@@ -138,7 +139,6 @@ describe('/api/user/connect/update-individual-registration', () => {
             }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
             delete (body[field])
-            console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
             try {
@@ -148,10 +148,6 @@ describe('/api/user/connect/update-individual-registration', () => {
             }
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-
-          if (invalidValues[field] === undefined) {
-            console.log('invalid values missing field', field, __filename)
-          }
 
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
@@ -169,7 +165,6 @@ describe('/api/user/connect/update-individual-registration', () => {
               }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
               body[field] = 'invalid'
-              console.log('posting', field, body)
               req.body = TestHelper.createMultiPart(req, body)
               let errorMessage
               try {
@@ -287,7 +282,25 @@ describe('/api/user/connect/update-individual-registration', () => {
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
           req.body = TestHelper.createMultiPart(req, body)
           const stripeAccount = await req.patch()
-          assert.strictEqual(stripeAccount[field], body[field])
+          if (field.startsWith('address_kana')) {
+            const property = field.substring('address_kana'.length)
+            assert.strictEqual(stripeAccount.address_kana[property], body[field])
+          } else if (field.startsWith('address_kanji')) {
+            const property = field.substring('address_kanji'.length)
+            assert.strictEqual(stripeAccount.address_kanji[property], body[field])
+          } else if (field.startsWith('address_')) {
+            const property = field.substring('address_'.length)
+            assert.strictEqual(stripeAccount.address[property], body[field])
+          } else if (field.startsWith('dob_')) {
+            const property = field.substring('dob_'.length)
+            assert.strictEqual(stripeAccount.address[property], body[field])
+          } else if (field === 'id_number') {
+            assert.strictEqual(stripeAccount.id_number_provided, true)
+          } else if (field === 'ssn_last_4') {
+            assert.strictEqual(stripeAccount.ssn_last_4, true)
+          } else {
+            assert.strictEqual(stripeAccount[field], body[field])
+          }
         })
       }
     }
@@ -330,7 +343,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req.filename = __filename
       req.saveResponse = true
       const stripeAccountNow = await req.patch()
-      assert.strictEqual(stripeAccountNow.object, 'person')
+      assert.strictEqual(stripeAccountNow.object, 'account')
     })
   })
 
