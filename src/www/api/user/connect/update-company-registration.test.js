@@ -83,6 +83,30 @@ describe('/api/user/connect/update-company-registration', () => {
     })
 
     const testedMissingFields = []
+    const invalidValues = {
+      address_line1: false,
+      address_city: false,
+      address_state: 'invalid',
+      address_country: 'invalid',
+      address_postal_code: 'invalid',
+      address_kana_line1: false,
+      address_kana_city: false,
+      address_kana_town: 'invalid',
+      address_kana_state: 'invalid',
+      address_kana_postal_code: 'invalid',
+      address_kanji_line1: false,
+      address_kanji_city: false,
+      address_kanji_town: 'invalid',
+      address_kanji_state: 'invalid',
+      address_kanji_postal_code: 'invalid',
+      business_profile_mcc: 'invalid',
+      business_profile_url: 'invalid',
+      tax_id: '1111',
+      phone: 'invalid',
+      name: false,
+      name_kana: false,
+      name_kanji: false
+    }
     for (const country of connect.countrySpecs) {
       const payload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
       if (payload === false) {
@@ -116,31 +140,37 @@ describe('/api/user/connect/update-company-registration', () => {
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
 
-          it(`invalid posted ${field}`, async () => {
-            const user = await TestHelper.createUser()
-            await TestHelper.createStripeAccount(user, {
-              country: country.id,
-              type: 'company'
+          if (invalidValues[field] === undefined) {
+            console.log('invalid values missing field', field, __filename)
+          }
+
+          if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
+            it(`invalid posted ${field}`, async () => {
+              const user = await TestHelper.createUser()
+              await TestHelper.createStripeAccount(user, {
+                country: country.id,
+                type: 'company'
+              })
+              const req = TestHelper.createRequest(`/api/user/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
+              req.account = user.account
+              req.session = user.session
+              req.uploads = {
+                verification_document_back: TestHelper['success_id_scan_back.png'],
+                verification_document_front: TestHelper['success_id_scan_front.png']
+              }
+              const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+              body[field] = 'invalid'
+              console.log('posting', field, body)
+              req.body = TestHelper.createMultiPart(req, body)
+              let errorMessage
+              try {
+                await req.post()
+              } catch (error) {
+                errorMessage = error.message
+              }
+              assert.strictEqual(errorMessage, `invalid-${field}`)
             })
-            const req = TestHelper.createRequest(`/api/user/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
-            req.account = user.account
-            req.session = user.session
-            req.uploads = {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
-            }
-            const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
-            body[field] = 'invalid'
-            console.log('posting', field, body)
-            req.body = TestHelper.createMultiPart(req, body)
-            let errorMessage
-            try {
-              await req.post()
-            } catch (error) {
-              errorMessage = error.message
-            }
-            assert.strictEqual(errorMessage, `invalid-${field}`)
-          })
+          }
         })
       }
     }

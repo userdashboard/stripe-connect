@@ -362,9 +362,66 @@ module.exports = {
           ownerInfo[property] = req.body[posted]
         }
       }
+      // TODO: these fields are optional but not represented in requirements
+      // so when Stripe updates to have something like an 'optionally_due' array
+      // the manual checks can be removed
+      if (req.body.relationship_title) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.title = req.body.relationship_title
+      }
+      if (req.body.relationship_executive) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.executive = true
+      }
+      if (req.body.relationship_director) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.director = true
+      }
+      if (req.body.relationship_owner) {
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.owner = true
+      }
+      if (req.body.relationship_percent_ownership) {
+        try {
+          const percent = parseFloat(req.body.relationship_percent_ownership, 10)
+          if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+            throw new Error('invalid-relationship_percent_ownership')
+          }
+        } catch (s) {
+          throw new Error('invalid-relationship_percent_ownership')
+        }
+        ownerInfo.relationship = ownerInfo.relationship || {}
+        ownerInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
+      }
       if (req.body.address_line2) {
         ownerInfo.address = ownerInfo.address || {}
         ownerInfo.address.line2 = req.body.address_line2
+      }
+      if (req.body.address_country) {
+        if (!connect.countryNameIndex[req.body.address_country]) {
+          throw new Error('invalid-address_country')
+        }
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.country = req.body.address_country
+      }
+      if (req.body.address_state) {
+        const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+        let found
+        for (const state of states) {
+          found = state.value === req.body.address_state
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-address_state')
+        }
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.state = req.body.address_state
+      }
+      if (req.body.address_postal_code) {
+        ownerInfo.address = ownerInfo.address || {}
+        ownerInfo.address.postal_code = req.body.address_postal_code
       }
       if (req.body.verification_document_back) {
         ownerInfo.verification = ownerInfo.verification || {}
@@ -385,26 +442,6 @@ module.exports = {
         ownerInfo.verification = ownerInfo.verification || {}
         ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
         ownerInfo.verification.additional_document.front = req.body.verification_additional_document_front
-      }
-      if (req.body.relationship_percent_ownership) {
-        try {
-          const percent = parseFloat(req.body.relationship_percent_ownership, 10)
-          if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
-            throw new Error('invalid-relationship_percent_ownership')
-          }
-        } catch (s) {
-          throw new Error('invalid-relationship_percent_ownership')
-        }
-        ownerInfo.relationship = ownerInfo.relationship || {}
-        ownerInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
-      }
-      if (req.body.relationship_title) {
-        ownerInfo.relationship = ownerInfo.relationship || {}
-        ownerInfo.relationship.datatitle = req.body.relationship_title
-      }
-      if (req.body.relationship_executive) {
-        ownerInfo.relationship = ownerInfo.relationship || {}
-        ownerInfo.relationship.executive = true
       }
     }
     while (true) {

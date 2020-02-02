@@ -114,8 +114,6 @@ async function submitForm (req, res) {
     if (!req.body[posted]) {
       if (field === 'address.line2' ||
           field === 'relationship.title' ||
-          field === 'relationship.executive' ||
-          field === 'relationship.director' ||
           field === 'relationship.owner' ||
           field === 'verification.document' ||
           field === 'verification.additional_document') {

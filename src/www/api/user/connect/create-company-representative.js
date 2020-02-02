@@ -336,13 +336,12 @@ module.exports = {
           }
         }
       }
+      // TODO: these fields are optional but not represented in requirements
+      // so when Stripe updates to have something like an 'optionally_due' array
+      // the manual checks can be removed
       if (req.body.relationship_title) {
         representativeInfo.relationship = representativeInfo.relationship || {}
         representativeInfo.relationship.title = req.body.relationship_title
-      }
-      if (req.body.relationship_percent_ownership) {
-        representativeInfo.relationship = representativeInfo.relationship || {}
-        representativeInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
       }
       if (req.body.relationship_executive) {
         representativeInfo.relationship = representativeInfo.relationship || {}
@@ -356,25 +355,47 @@ module.exports = {
         representativeInfo.relationship = representativeInfo.relationship || {}
         representativeInfo.relationship.owner = true
       }
-      if (req.body.address_line1) {
-        representativeInfo.address = representativeInfo.address || {}
-        representativeInfo.address.line1 = req.body.address_line1
+      if (req.body.relationship_percent_ownership) {
+        try {
+          const percent = parseFloat(req.body.relationship_percent_ownership, 10)
+          if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+            throw new Error('invalid-relationship_percent_ownership')
+          }
+        } catch (s) {
+          throw new Error('invalid-relationship_percent_ownership')
+        }
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
       }
       if (req.body.address_line2) {
         representativeInfo.address = representativeInfo.address || {}
         representativeInfo.address.line2 = req.body.address_line2
       }
+      if (req.body.address_country) {
+        if (!connect.countryNameIndex[req.body.address_country]) {
+          throw new Error('invalid-address_country')
+        }
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.country = req.body.address_country
+      }
       if (req.body.address_state) {
+        const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+        let found
+        for (const state of states) {
+          found = state.value === req.body.address_state
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-address_state')
+        }
         representativeInfo.address = representativeInfo.address || {}
         representativeInfo.address.state = req.body.address_state
       }
       if (req.body.address_postal_code) {
         representativeInfo.address = representativeInfo.address || {}
         representativeInfo.address.postal_code = req.body.address_postal_code
-      }
-      if (req.body.address_country) {
-        representativeInfo.address = representativeInfo.address || {}
-        representativeInfo.address.country = req.body.address_country
       }
       if (req.body.verification_document_back) {
         representativeInfo.verification = representativeInfo.verification || {}

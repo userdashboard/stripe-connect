@@ -82,6 +82,22 @@ describe('/api/user/connect/update-payment-information', () => {
     })
 
     const testedMissingFields = []
+    const invalidValues = {
+      account_holder_name: false,
+      account_holder_type: 'invalid',
+      routing_number: '111111111',
+      account_number: '111111111',
+      bank_code: false,
+      branch_code: false,
+      clearing_code: false,
+      bsb_number: false,
+      institution_number: false,
+      currency: 'invalid',
+      country: 'invalid',
+      iban: 'invalid',
+      transit_number: false,
+      sort_code: false
+    }
     for (const country of connect.countrySpecs) {
       let payload
       if (TestStripeAccounts.paymentData[country.id].length) {
@@ -124,31 +140,37 @@ describe('/api/user/connect/update-payment-information', () => {
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
 
-          it(`invalid posted ${field}`, async () => {
-            const user = await TestHelper.createUser()
-            await TestHelper.createStripeAccount(user, {
-              country: country.id,
-              type: 'company'
+          if (invalidValues[field] === undefined) {
+            console.log('invalid values missing field', field, __filename)
+          }
+
+          if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
+            it(`invalid posted ${field}`, async () => {
+              const user = await TestHelper.createUser()
+              await TestHelper.createStripeAccount(user, {
+                country: country.id,
+                type: 'company'
+              })
+              const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+              req.account = user.account
+              req.session = user.session
+              req.uploads = {
+                verification_document_back: TestHelper['success_id_scan_back.png'],
+                verification_document_front: TestHelper['success_id_scan_front.png']
+              }
+              const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+              body[field] = 'invalid'
+              console.log('posting', field, body)
+              req.body = body
+              let errorMessage
+              try {
+                await req.post()
+              } catch (error) {
+                errorMessage = error.message
+              }
+              assert.strictEqual(errorMessage, `invalid-${field}`)
             })
-            const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
-            req.account = user.account
-            req.session = user.session
-            req.uploads = {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
-            }
-            const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
-            body[field] = 'invalid'
-            console.log('posting', field, body)
-            req.body = body
-            let errorMessage
-            try {
-              await req.post()
-            } catch (error) {
-              errorMessage = error.message
-            }
-            assert.strictEqual(errorMessage, `invalid-${field}`)
-          })
+          }
         })
       }
     }

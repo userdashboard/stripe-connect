@@ -22,9 +22,19 @@
       <div id="form-container">
         <h2>Relationship to company</h2>
         <div class="pure-control-group">
-          <label><input type="checkbox" id="executive" name="executive" value="true" /> Executive</label>
-          <label><input type="checkbox" id="director" name="director" value="true" /> Director</label>
+          <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" /> Executive</label>
+          <label><input type="checkbox" id="relationship_director" name="relationship_director" value="true" /> Director</label>
+          <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" /> Owner</label>
         </div>
+        <div class="pure-control-group">
+          <label for="relationship_title">Job, role or relationship title</label>
+          <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100" />
+        </div>
+        <div class="pure-control-group">
+          <label for="relationship_percent_ownership">Percent owned (if any)</label>
+          <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4" />
+        </div>
+        <h2>Personal information</h2>
         <div class="pure-g">
           <div class="pure-u-11-24">
             <div class="pure-control-group">

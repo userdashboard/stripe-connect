@@ -284,9 +284,9 @@ module.exports = {
         }
       }
     }
-    const companyRepresentativeInfo = {}
+    const representativeInfo = {}
     if (global.stripeJS === 3) {
-      companyRepresentativeInfo.person_token = req.body.token
+      representativeInfo.person_token = req.body.token
     } else {
       for (const fullField of stripeAccount.requirements.currently_due) {
         if (!fullField.startsWith(person.id)) {
@@ -309,31 +309,31 @@ module.exports = {
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
-          companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
-          companyRepresentativeInfo.business_profile[property] = req.body[posted]
+          representativeInfo.business_profile = representativeInfo.business_profile || {}
+          representativeInfo.business_profile[property] = req.body[posted]
           delete (req.body[posted])
         } else if (field.startsWith('address_kanji.')) {
           const property = field.substring('address_kanji.'.length)
-          companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
-          companyRepresentativeInfo.address_kanji[property] = req.body[posted]
+          representativeInfo.address_kanji = representativeInfo.address_kanji || {}
+          representativeInfo.address_kanji[property] = req.body[posted]
         } else if (field.startsWith('address_kana.')) {
           const property = field.substring('address_kana.'.length)
-          companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
-          companyRepresentativeInfo.address_kana[property] = req.body[posted]
+          representativeInfo.address_kana = representativeInfo.address_kana || {}
+          representativeInfo.address_kana[property] = req.body[posted]
         } else if (field.startsWith('address.')) {
           const property = field.substring('address.'.length)
-          companyRepresentativeInfo.address = companyRepresentativeInfo.address || {}
-          companyRepresentativeInfo.address[property] = req.body[posted]
+          representativeInfo.address = representativeInfo.address || {}
+          representativeInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
           const property = field.substring('verification.document'.length)
-          companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-          companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
-          companyRepresentativeInfo.verification.document[property] = req.body[posted]
+          representativeInfo.verification = representativeInfo.verification || {}
+          representativeInfo.verification.document = representativeInfo.verification.document || {}
+          representativeInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
           const property = field.substring('verification.additional_document'.length)
-          companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-          companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
-          companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
+          representativeInfo.verification = representativeInfo.verification || {}
+          representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+          representativeInfo.verification.additional_document[property] = req.body[posted]
         }
       }
       for (const fullField of stripeAccount.requirements.eventually_due) {
@@ -357,55 +357,50 @@ module.exports = {
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
-          companyRepresentativeInfo.business_profile = companyRepresentativeInfo.business_profile || {}
-          companyRepresentativeInfo.business_profile[property] = req.body[posted]
+          representativeInfo.business_profile = representativeInfo.business_profile || {}
+          representativeInfo.business_profile[property] = req.body[posted]
           delete (req.body[posted])
         } else if (field.startsWith('address_kanji.')) {
           const property = field.substring('address_kanji.'.length)
-          companyRepresentativeInfo.address_kanji = companyRepresentativeInfo.address_kanji || {}
-          companyRepresentativeInfo.address_kanji[property] = req.body[posted]
+          representativeInfo.address_kanji = representativeInfo.address_kanji || {}
+          representativeInfo.address_kanji[property] = req.body[posted]
         } else if (field.startsWith('address_kana.')) {
           const property = field.substring('address_kana.'.length)
-          companyRepresentativeInfo.address_kana = companyRepresentativeInfo.address_kana || {}
-          companyRepresentativeInfo.address_kana[property] = req.body[posted]
+          representativeInfo.address_kana = representativeInfo.address_kana || {}
+          representativeInfo.address_kana[property] = req.body[posted]
         } else if (field.startsWith('address.')) {
           const property = field.substring('address.'.length)
-          companyRepresentativeInfo.address[property] = req.body[posted]
+          representativeInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
           const property = field.substring('verification.document'.length)
-          companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-          companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
-          companyRepresentativeInfo.verification.document[property] = req.body[posted]
+          representativeInfo.verification = representativeInfo.verification || {}
+          representativeInfo.verification.document = representativeInfo.verification.document || {}
+          representativeInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
           const property = field.substring('verification.additional_document'.length)
-          companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-          companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
-          companyRepresentativeInfo.verification.additional_document[property] = req.body[posted]
+          representativeInfo.verification = representativeInfo.verification || {}
+          representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+          representativeInfo.verification.additional_document[property] = req.body[posted]
         }
       }
-      if (req.body.address_line2) {
-        companyRepresentativeInfo.address = companyRepresentativeInfo.address || {}
-        companyRepresentativeInfo.address.line2 = req.body.address_line2
+      // TODO: these fields are optional but not represented in requirements
+      // so when Stripe updates to have something like an 'optionally_due' array
+      // the manual checks can be removed
+      if (req.body.relationship_title) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.title = req.body.relationship_title
       }
-      if (req.body.verification_document_back && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.document`) > -1) {
-        companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-        companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
-        companyRepresentativeInfo.verification.document.back = req.body.verification_document_back
+      if (req.body.relationship_executive) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.executive = true
       }
-      if (req.body.verification_document_front && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.document`) > -1) {
-        companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-        companyRepresentativeInfo.verification.document = companyRepresentativeInfo.verification.document || {}
-        companyRepresentativeInfo.verification.document.front = req.body.verification_document_front
+      if (req.body.relationship_director) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.director = true
       }
-      if (req.body.verification_additional_document_back && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.additional_document`) > -1) {
-        companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-        companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
-        companyRepresentativeInfo.verification.additional_document.back = req.body.verification_additional_document_back
-      }
-      if (req.body.verification_additional_document_front && stripeAccount.requirements.eventually_due.indexOf(`${person.id}.verification.additional_document`) > -1) {
-        companyRepresentativeInfo.verification = companyRepresentativeInfo.verification || {}
-        companyRepresentativeInfo.verification.additional_document = companyRepresentativeInfo.verification.additional_document || {}
-        companyRepresentativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
+      if (req.body.relationship_owner) {
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.owner = true
       }
       if (req.body.relationship_percent_ownership) {
         try {
@@ -416,28 +411,63 @@ module.exports = {
         } catch (s) {
           throw new Error('invalid-relationship_percent_ownership')
         }
-        companyRepresentativeInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
+        representativeInfo.relationship = representativeInfo.relationship || {}
+        representativeInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
       }
-      if (req.body.relationship_title) {
-        companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
-        companyRepresentativeInfo.relationship.title = req.body.relationship_title
+      if (req.body.address_line2) {
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.line2 = req.body.address_line2
       }
-      if (req.body.relationship_executive) {
-        companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
-        companyRepresentativeInfo.relationship.executive = true
+      if (req.body.address_country) {
+        if (!connect.countryNameIndex[req.body.address_country]) {
+          throw new Error('invalid-address_country')
+        }
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.country = req.body.address_country
       }
-      if (req.body.relationship_director) {
-        companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
-        companyRepresentativeInfo.relationship.director = true
+      if (req.body.address_state) {
+        const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+        let found
+        for (const state of states) {
+          found = state.value === req.body.address_state
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-address_state')
+        }
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.state = req.body.address_state
       }
-      if (req.body.relationship_owner) {
-        companyRepresentativeInfo.relationship = companyRepresentativeInfo.relationship || {}
-        companyRepresentativeInfo.relationship.owner = true
+      if (req.body.address_postal_code) {
+        representativeInfo.address = representativeInfo.address || {}
+        representativeInfo.address.postal_code = req.body.address_postal_code
+      }
+      if (req.body.verification_document_back) {
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.document = representativeInfo.verification.document || {}
+        representativeInfo.verification.document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_document_front) {
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.document = representativeInfo.verification.document || {}
+        representativeInfo.verification.document.front = req.body.verification_document_front
+      }
+      if (req.body.verification_additional_document_back) {
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+        representativeInfo.verification.additional_document.back = req.body.verification_additional_document_back
+      }
+      if (req.body.verification_additional_document_front) {
+        representativeInfo.verification = representativeInfo.verification || {}
+        representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+        representativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
     while (true) {
       try {
-        const companyRepresentativeNow = await stripe.accounts.updatePerson(person.account, person.id, companyRepresentativeInfo, req.stripeKey)
+        const companyRepresentativeNow = await stripe.accounts.updatePerson(person.account, person.id, representativeInfo, req.stripeKey)
         await stripeCache.delete(person.id)
         return companyRepresentativeNow
       } catch (error) {

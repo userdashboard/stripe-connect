@@ -78,6 +78,24 @@ describe('/api/user/connect/create-beneficial-owner', () => {
     })
 
     const testedMissingFields = []
+    const invalidValues = {
+      address_line1: false,
+      address_city: false,
+      address_state: 'invalid',
+      address_country: 'invalid',
+      address_postal_code: 'invalid',
+      dob_day: '32',
+      dob_month: '15',
+      dob_year: '2020',
+      first_name: false,
+      last_name: false,
+      email: false,
+      phone: false,
+      id_number: false,
+      relationship_executive: false,
+      relationship_title: false,
+      ssn_last_4: false
+    }
     for (const country of connect.countrySpecs) {
       const payload = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
       if (payload === false) {
@@ -115,34 +133,37 @@ describe('/api/user/connect/create-beneficial-owner', () => {
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
 
-          it(`invalid posted ${field}`, async () => {
-            const user = await TestHelper.createUser()
-            await TestHelper.createStripeAccount(user, {
-              country: country.id,
-              type: 'company'
+          if (invalidValues[field] === undefined) {
+            console.log('invalid values missing field', field, __filename)
+          }
+
+          if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
+            it(`invalid posted ${field}`, async () => {
+              const user = await TestHelper.createUser()
+              await TestHelper.createStripeAccount(user, {
+                country: country.id,
+                type: 'company'
+              })
+              const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+              req.account = user.account
+              req.session = user.session
+              req.uploads = {
+                verification_document_back: TestHelper['success_id_scan_back.png'],
+                verification_document_front: TestHelper['success_id_scan_front.png']
+              }
+              const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
+              body[field] = invalidValues[field]
+              req.body = TestHelper.createMultiPart(req, body)
+              let errorMessage
+              try {
+                await req.post()
+              } catch (error) {
+                errorMessage = error.message
+              }
+              console.log('testing invalid field', field, 'error', errorMessage)
+              assert.strictEqual(errorMessage, `invalid-${field}`)
             })
-            const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
-            req.account = user.account
-            req.session = user.session
-            req.uploads = {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
-            }
-            const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData[country.id])
-            body[field] = 'an invalid value'
-            if (field.startsWith('dob_')) {
-              body[field] = 'invalid'
-            }
-            req.body = TestHelper.createMultiPart(req, body)
-            let errorMessage
-            try {
-              await req.post()
-            } catch (error) {
-              errorMessage = error.message
-            }
-            console.log('testing invalid field', field, 'error', errorMessage)
-            assert.strictEqual(errorMessage, `invalid-${field}`)
-          })
+          }
         })
       }
     }

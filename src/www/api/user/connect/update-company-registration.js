@@ -231,6 +231,39 @@ module.exports = {
           throw new Error('invalid-address_state')
         }
       }
+      // TODO: these fields are optional but not represented in requirements
+      // so when Stripe updates to have something like an 'optionally_due' array
+      // the manual checks can be removed
+      if (req.body.address_line2) {
+        accountInfo.address = accountInfo.address || {}
+        accountInfo.address.line2 = req.body.address_line2
+      }
+      if (req.body.address_country) {
+        if (!connect.countryNameIndex[req.body.address_country]) {
+          throw new Error('invalid-address_country')
+        }
+        accountInfo.address = accountInfo.address || {}
+        accountInfo.address.country = req.body.address_country
+      }
+      if (req.body.address_state) {
+        const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+        let found
+        for (const state of states) {
+          found = state.value === req.body.address_state
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-address_state')
+        }
+        accountInfo.address = accountInfo.address || {}
+        accountInfo.address.state = req.body.address_state
+      }
+      if (req.body.address_postal_code) {
+        accountInfo.address = accountInfo.address || {}
+        accountInfo.address.postal_code = req.body.address_postal_code
+      }
       // TODO: check this document is required before updating
       // currently Stripe do not correctly report it as required
       // during testing it just goes straight to review without

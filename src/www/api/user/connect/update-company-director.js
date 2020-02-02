@@ -273,9 +273,9 @@ module.exports = {
         }
       }
     }
-    const companyDirectorInfo = {}
+    const directorInfo = {}
     if (global.stripeJS === 3) {
-      companyDirectorInfo.person_token = req.body.token
+      directorInfo.person_token = req.body.token
     } else {
       for (const fullField of stripeAccount.requirements.currently_due) {
         if (!fullField.startsWith(person.id)) {
@@ -298,33 +298,33 @@ module.exports = {
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
-          companyDirectorInfo.business_profile[property] = req.body[posted]
+          directorInfo.business_profile[property] = req.body[posted]
           continue
         }
         if (field.startsWith('address_kanji.')) {
           const property = field.substring('address_kanji.'.length)
-          companyDirectorInfo.address_kanji = companyDirectorInfo.address_kanji || {}
-          companyDirectorInfo.address_kanji[property] = req.body[posted]
+          directorInfo.address_kanji = directorInfo.address_kanji || {}
+          directorInfo.address_kanji[property] = req.body[posted]
         } else if (field.startsWith('address_kana.')) {
           const property = field.substring('address_kana.'.length)
-          companyDirectorInfo.address_kana = companyDirectorInfo.address_kana || {}
-          companyDirectorInfo.address_kana[property] = req.body[posted]
+          directorInfo.address_kana = directorInfo.address_kana || {}
+          directorInfo.address_kana[property] = req.body[posted]
         } else if (field.startsWith('address.')) {
           const property = field.substring('address.'.length)
-          companyDirectorInfo.address[property] = req.body[posted]
+          directorInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
           const property = field.substring('verification.document'.length)
-          companyDirectorInfo.verification = companyDirectorInfo.verification || {}
-          companyDirectorInfo.verification.document = companyDirectorInfo.verification.document || {}
-          companyDirectorInfo.verification.document[property] = req.body[posted]
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.document = directorInfo.verification.document || {}
+          directorInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
           const property = field.substring('verification.additional_document'.length)
-          companyDirectorInfo.verification = companyDirectorInfo.verification || {}
-          companyDirectorInfo.verification.additional_document = companyDirectorInfo.verification.additional_document || {}
-          companyDirectorInfo.verification.additional_document[property] = req.body[posted]
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+          directorInfo.verification.additional_document[property] = req.body[posted]
         } else {
           const property = field.substring(''.length)
-          companyDirectorInfo[property] = req.body[posted]
+          directorInfo[property] = req.body[posted]
         }
       }
       for (const fullField of stripeAccount.requirements.eventually_due) {
@@ -338,39 +338,58 @@ module.exports = {
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
-          companyDirectorInfo.business_profile[property] = req.body[posted]
+          directorInfo.business_profile[property] = req.body[posted]
           continue
         }
         if (field.startsWith('address_kanji.')) {
           const property = field.substring('address_kanji.'.length)
-          companyDirectorInfo.address_kanji = companyDirectorInfo.address_kanji || {}
-          companyDirectorInfo.address_kanji[property] = req.body[posted]
+          directorInfo.address_kanji = directorInfo.address_kanji || {}
+          directorInfo.address_kanji[property] = req.body[posted]
         } else if (field.startsWith('address_kana.')) {
           const property = field.substring('address_kana.'.length)
-          companyDirectorInfo.address_kana = companyDirectorInfo.address_kana || {}
-          companyDirectorInfo.address_kana[property] = req.body[posted]
+          directorInfo.address_kana = directorInfo.address_kana || {}
+          directorInfo.address_kana[property] = req.body[posted]
         } else if (field.startsWith('address.')) {
           const property = field.substring('address.'.length)
-          companyDirectorInfo.address[property] = req.body[posted]
+          directorInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
           const property = field.substring('verification.document'.length)
-          companyDirectorInfo.verification = companyDirectorInfo.verification || {}
-          companyDirectorInfo.verification.document = companyDirectorInfo.verification.document || {}
-          companyDirectorInfo.verification.document[property] = req.body[posted]
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.document = directorInfo.verification.document || {}
+          directorInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
           const property = field.substring('verification.additional_document'.length)
-          companyDirectorInfo.verification = companyDirectorInfo.verification || {}
-          companyDirectorInfo.verification.additional_document = companyDirectorInfo.verification.additional_document || {}
-          companyDirectorInfo.verification.additional_document[property] = req.body[posted]
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+          directorInfo.verification.additional_document[property] = req.body[posted]
         } else {
           const property = field.substring(''.length)
-          companyDirectorInfo[property] = req.body[posted]
+          directorInfo[property] = req.body[posted]
         }
       }
       if (req.body.address_line2) {
-        companyDirectorInfo.address = companyDirectorInfo.address || {}
-        companyDirectorInfo.address.line2 = req.body.address_line2
+        directorInfo.address = directorInfo.address || {}
+        directorInfo.address.line2 = req.body.address_line2
       }
+    }
+    // TODO: these fields are optional but not represented in requirements
+    // so when Stripe updates to have something like an 'optionally_due' array
+    // the manual checks can be removed
+    if (req.body.relationship_title) {
+      directorInfo.relationship = directorInfo.relationship || {}
+      directorInfo.relationship.title = req.body.relationship_title
+    }
+    if (req.body.relationship_executive) {
+      directorInfo.relationship = directorInfo.relationship || {}
+      directorInfo.relationship.executive = true
+    }
+    if (req.body.relationship_director) {
+      directorInfo.relationship = directorInfo.relationship || {}
+      directorInfo.relationship.director = true
+    }
+    if (req.body.relationship_owner) {
+      directorInfo.relationship = directorInfo.relationship || {}
+      directorInfo.relationship.owner = true
     }
     if (req.body.relationship_percent_ownership) {
       try {
@@ -381,17 +400,62 @@ module.exports = {
       } catch (s) {
         throw new Error('invalid-relationship_percent_ownership')
       }
-      companyDirectorInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
+      directorInfo.relationship = directorInfo.relationship || {}
+      directorInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
     }
-    if (req.body.relationship_title) {
-      companyDirectorInfo.relationship_title = req.body.relationship_title
+    if (req.body.address_line2) {
+      directorInfo.address = directorInfo.address || {}
+      directorInfo.address.line2 = req.body.address_line2
     }
-    if (req.body.relationship_executive) {
-      companyDirectorInfo.relationship_executive = true
+    if (req.body.address_country) {
+      if (!connect.countryNameIndex[req.body.address_country]) {
+        throw new Error('invalid-address_country')
+      }
+      directorInfo.address = directorInfo.address || {}
+      directorInfo.address.country = req.body.address_country
+    }
+    if (req.body.address_state) {
+      const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+      let found
+      for (const state of states) {
+        found = state.value === req.body.address_state
+        if (found) {
+          break
+        }
+      }
+      if (!found) {
+        throw new Error('invalid-address_state')
+      }
+      directorInfo.address = directorInfo.address || {}
+      directorInfo.address.state = req.body.address_state
+    }
+    if (req.body.address_postal_code) {
+      directorInfo.address = directorInfo.address || {}
+      directorInfo.address.postal_code = req.body.address_postal_code
+    }
+    if (req.body.verification_document_back) {
+      directorInfo.verification = directorInfo.verification || {}
+      directorInfo.verification.document = directorInfo.verification.document || {}
+      directorInfo.verification.document.back = req.body.verification_document_back
+    }
+    if (req.body.verification_document_front) {
+      directorInfo.verification = directorInfo.verification || {}
+      directorInfo.verification.document = directorInfo.verification.document || {}
+      directorInfo.verification.document.front = req.body.verification_document_front
+    }
+    if (req.body.verification_additional_document_back) {
+      directorInfo.verification = directorInfo.verification || {}
+      directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+      directorInfo.verification.additional_document.back = req.body.verification_additional_document_back
+    }
+    if (req.body.verification_additional_document_front) {
+      directorInfo.verification = directorInfo.verification || {}
+      directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+      directorInfo.verification.additional_document.front = req.body.verification_additional_document_front
     }
     while (true) {
       try {
-        const companyDirectorNow = await stripe.accounts.updatePerson(person.account, person.id, companyDirectorInfo, req.stripeKey)
+        const companyDirectorNow = await stripe.accounts.updatePerson(person.account, person.id, directorInfo, req.stripeKey)
         await stripeCache.delete(person.id)
         return companyDirectorNow
       } catch (error) {

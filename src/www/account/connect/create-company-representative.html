@@ -21,6 +21,20 @@
       <p>New information must be submitted whenever the nominated representative leaves or changes status.</p>
       <div id="message-container"></div>
       <div id="form-container">
+        <h2>Relationship to company</h2>
+        <div class="pure-control-group">
+          <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" /> Executive</label>
+          <label><input type="checkbox" id="relationship_director" name="relationship_director" value="true" /> Director</label>
+          <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" /> Owner</label>
+        </div>
+        <div class="pure-control-group">
+          <label for="relationship_title">Job, role or relationship title</label>
+          <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100" />
+        </div>
+        <div class="pure-control-group">
+          <label for="relationship_percent_ownership">Percent owned (if any)</label>
+          <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4" />
+        </div>
         <h2>Personal information</h2>
         <div id="personal-information-container">
           <div class="pure-g">
@@ -317,5 +331,8 @@
   </template>
   <template id="invalid-dob_year">
     <div class="error message">Error! Invalid or missing date of birth</div>
+  </template>
+  <template id="invalid-relationship_executive">
+    <div class="error message">Error! The company representative must be an executive</div>
   </template>
 </html>

@@ -91,8 +91,16 @@ describe('/api/user/connect/update-company-director', () => {
     })
 
     const testedMissingFields = []
+    const invalidValues = {
+      dob_day: '32',
+      dob_month: '15',
+      dob_year: '2020',
+      first_name: false,
+      last_name: false,
+      email: false
+    }
     for (const country of connect.countrySpecs) {
-      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
       if (payload === false) {
         continue
       }
@@ -111,7 +119,7 @@ describe('/api/user/connect/update-company-director', () => {
               verification_document_back: TestHelper['success_id_scan_back.png'],
               verification_document_front: TestHelper['success_id_scan_front.png']
             }
-            const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+            const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
             delete (body[field])
             console.log('posting', field, body)
             req.body = TestHelper.createMultiPart(req, body)
@@ -124,31 +132,37 @@ describe('/api/user/connect/update-company-director', () => {
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
 
-          it(`invalid posted ${field}`, async () => {
-            const user = await TestHelper.createUser()
-            await TestHelper.createStripeAccount(user, {
-              country: country.id,
-              type: 'company'
+          if (invalidValues[field] === undefined) {
+            console.log('invalid values missing field', field, __filename)
+          }
+
+          if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
+            it(`invalid posted ${field}`, async () => {
+              const user = await TestHelper.createUser()
+              await TestHelper.createStripeAccount(user, {
+                country: country.id,
+                type: 'company'
+              })
+              const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
+              req.account = user.account
+              req.session = user.session
+              req.uploads = {
+                verification_document_back: TestHelper['success_id_scan_back.png'],
+                verification_document_front: TestHelper['success_id_scan_front.png']
+              }
+              const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+              body[field] = 'invalid'
+              console.log('posting', field, body)
+              req.body = TestHelper.createMultiPart(req, body)
+              let errorMessage
+              try {
+                await req.post()
+              } catch (error) {
+                errorMessage = error.message
+              }
+              assert.strictEqual(errorMessage, `invalid-${field}`)
             })
-            const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
-            req.account = user.account
-            req.session = user.session
-            req.uploads = {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
-            }
-            const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-            body[field] = 'invalid'
-            console.log('posting', field, body)
-            req.body = TestHelper.createMultiPart(req, body)
-            let errorMessage
-            try {
-              await req.post()
-            } catch (error) {
-              errorMessage = error.message
-            }
-            assert.strictEqual(errorMessage, `invalid-${field}`)
-          })
+          }
         })
       }
     }
