@@ -290,9 +290,10 @@ describe('/api/user/connect/update-beneficial-owner', () => {
             assert.strictEqual(owner.ssn_last_4, true)
           } else {
             // TODO: Stripe may or may not transform the phone number
-            // by removing hyphones and adding the country dial code
-            // so all test data is using such-transformed numbers, but
-            // Stripe may also remove the country code
+            // by removing hyphons and adding the country dial code
+            // so all test data is using that format, but
+            // Stripe may also remove the country code too so this
+            // can be fixed when they have a consistent transformation
             if (field === 'phone') {
               if (owner[field] === body[field]) {
                 assert.strictEqual(owner[field], body[field])  
