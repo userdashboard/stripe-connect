@@ -362,11 +362,15 @@ module.exports = {
     }
     while (true) {
       try {
+        console.log('updating owner', ownerInfo, req.body)
         const owner = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
         await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${owner.id}`, req.query.stripeid)
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/owners/${req.query.stripeid}`, owner.id)
         return owner
       } catch (error) {
+        if (error.raw && error.raw.param === 'person_token') {
+          throw new Error('invalid-token')
+        }
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }

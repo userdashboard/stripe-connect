@@ -442,6 +442,9 @@ module.exports = {
         await stripeCache.delete(req.query.stripeid)
         return accountNow
       } catch (error) {
+        if (error.raw && error.raw.param === 'account_token') {
+          throw new Error('invalid-token')
+        }
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }

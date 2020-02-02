@@ -426,6 +426,9 @@ module.exports = {
         await stripeCache.delete(person.id)
         return companyOwnerNow
       } catch (error) {
+        if (error.raw && error.raw.param === 'person_token') {
+          throw new Error('invalid-token')
+        }
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }

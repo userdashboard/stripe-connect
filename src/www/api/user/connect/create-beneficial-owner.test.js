@@ -243,7 +243,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
             assert.strictEqual(owner.address[property], body[field])
           } else if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
-            assert.strictEqual(owner.address[property], body[field])
+            assert.strictEqual(owner.dob[property], body[field])
           } else if (field === 'id_number') {
             assert.strictEqual(owner.id_number_provided, true)
           } else if (field === 'ssn_last_4') {

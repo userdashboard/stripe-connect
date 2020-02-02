@@ -364,6 +364,9 @@ module.exports = {
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`, director.id)
         return director
       } catch (error) {
+        if (error.raw && error.raw.param === 'person_token') {
+          throw new Error('invalid-token')
+        }
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue
         }
