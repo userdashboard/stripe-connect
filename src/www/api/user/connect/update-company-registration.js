@@ -192,10 +192,6 @@ module.exports = {
           accountInfo.company[property] = req.body[posted]
         }
       }
-      if (req.body.address_line2) {
-        accountInfo.address = accountInfo.address || {}
-        accountInfo.address.line2 = req.body.address_line2
-      }
       if (req.body.business_profile_mcc) {
         const mccList = connect.getMerchantCategoryCodes(req.language)
         let found = false
@@ -205,31 +201,20 @@ module.exports = {
             break
           }
         }
-        if (!found) {
-          throw new Error('invalid-business_profile_mcc')
-        }
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.business_profile_mcc = req.body.business_profile_mcc
       }
       if (req.body.business_profile_url) {
         if (!req.body.business_profile_url.startsWith('http://') &&
             !req.body.business_profile_url.startsWith('https://')) {
           throw new Error('invalid-business_profile_url')
         }
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.business_profile_url = req.body.business_profile_url
       }
-      if (req.body.address_state) {
-        const states = connect.countryDivisions[stripeAccount.country]
-        if (!states || !states.length) {
-          throw new Error('invalid-address_state')
-        }
-        let found = false
-        for (const state of states) {
-          found = state.value === req.body.address_state
-          if (found) {
-            break
-          }
-        }
-        if (!found) {
-          throw new Error('invalid-address_state')
-        }
+      if (req.body.business_profile_product_description) {
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.business_profile_product_description = req.body.business_profile_product_description
       }
       // TODO: these fields are optional but not represented in requirements
       // so when Stripe updates to have something like an 'optionally_due' array

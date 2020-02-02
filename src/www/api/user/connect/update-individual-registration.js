@@ -195,32 +195,6 @@ module.exports = {
         }
       }
     }
-    if (req.body.address_state) {
-      const states = connect.countryDivisions[stripeAccount.country]
-      let found = false
-      for (const state of states) {
-        found = state.value === req.body.address_state
-        if (found) {
-          break
-        }
-      }
-      if (!found) {
-        throw new Error('invalid-address_state')
-      }
-    }
-    if (req.body.business_profile_mcc) {
-      const mccList = connect.getMerchantCategoryCodes(req.language)
-      let found = false
-      for (const mcc of mccList) {
-        found = mcc.code === req.body.business_profile_mcc
-        if (found) {
-          break
-        }
-      }
-      if (!found) {
-        throw new Error('invalid-business_profile_mcc')
-      }
-    }
     let validateDOB = false
     if (req.body.dob_day) {
       validateDOB = true
@@ -359,6 +333,30 @@ module.exports = {
           accountInfo.individual[property] = req.body[posted]
         }
       }
+    }
+    if (req.body.business_profile_mcc) {
+      const mccList = connect.getMerchantCategoryCodes(req.language)
+      let found = false
+      for (const mcc of mccList) {
+        found = mcc.code === req.body.business_profile_mcc
+        if (found) {
+          break
+        }
+      }
+      accountInfo.business_profile = accountInfo.business_profile || {}
+      accountInfo.business_profile.business_profile_mcc = req.body.business_profile_mcc
+    }
+    if (req.body.business_profile_url) {
+      if (!req.body.business_profile_url.startsWith('http://') &&
+          !req.body.business_profile_url.startsWith('https://')) {
+        throw new Error('invalid-business_profile_url')
+      }
+      accountInfo.business_profile = accountInfo.business_profile || {}
+      accountInfo.business_profile.business_profile_url = req.body.business_profile_url
+    }
+    if (req.body.business_profile_product_description) {
+      accountInfo.business_profile = accountInfo.business_profile || {}
+      accountInfo.business_profile.business_profile_product_description = req.body.business_profile_product_description
     }
     // TODO: these fields are optional but not represented in requirements
     // so when Stripe updates to have something like an 'optionally_due' array

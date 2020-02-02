@@ -75,30 +75,6 @@ module.exports = {
         throw new Error('invalid-dob_day')
       }
     }
-    if (req.body.address_country) {
-      if (!connect.countryNameIndex[req.body.address_country]) {
-        throw new Error('invalid-address_country')
-      }
-    }
-    if (req.body.address_state) {
-      if (!req.body.address_country) {
-        throw new Error('invalid-address_country')
-      }
-      const states = connect.countryDivisions[req.body.address_country]
-      if (!states || !states.length) {
-        throw new Error('invalid-address_state')
-      }
-      let found = false
-      for (const state of states) {
-        found = state.value === req.body.address_state
-        if (found) {
-          break
-        }
-      }
-      if (!found) {
-        throw new Error('invalid-address_state')
-      }
-    }
     if (req.uploads) {
       if (req.uploads.verification_document_front) {
         const frontData = {
