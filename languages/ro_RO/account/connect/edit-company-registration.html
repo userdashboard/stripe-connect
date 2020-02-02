@@ -77,6 +77,20 @@
             <option value="">Select the code for your business</option>
           </select>
         </div>
+        <div id="business_profile_product_description-container" class="pure-control-group">
+          <a name="business_profile_product_description-anchor"></a>
+          <label for="business_profile_product_description">Product description</label>
+          <input required="required" id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50" />
+        </div>
+        <div id="upload-container" class="pure-control-group">
+          <a name="verification_document_front-anchor"></a>
+          <a name="verification_document_back-anchor"></a>
+          <h2>Company registration</h2>
+          <label for="verification_document_front">Front scan/photo</label>
+          <input name="verification_document_front" id="verification_document_front" type="file" />
+          <label for="verification_document_back">Back scan/photo</label>
+          <input name="verification_document_back" id="verification_document_back" type="file" />
+        </div>
         <div id="company-address-container">
           <h2>Company address</h2>
           <div id="address_line1-container" class="pure-control-group">
@@ -108,22 +122,6 @@
                 <a name="address_postal_code-anchor"></a>
                 <label for="address_postal_code">ZIP</label>
                 <input class="full-width" required="required" id="address_postal_code" name="address_postal_code" type="text" maxlength="50" />
-              </div>
-            </div>
-          </div>
-          <div id="address_country-container" class="pure-control-group">
-            <div class="pure-g">
-              <div class="pure-u-16-24">
-                <a name="address_country-anchor"></a>
-                <label for="address_country">Country</label>
-                <select name="address_country" id="address_country">
-                  <option value="">Select country</option>
-                </select>
-              </div>
-              <div class="pure-u-1-24"></div>
-              <div class="pure-u-7-24">
-                <label>&nbsp;</label>
-                <button name="refresh" value="true" class="pure-button">Reload states</button>
               </div>
             </div>
           </div>
@@ -191,9 +189,6 @@
   <template id="mcc-option">
     <option value="${mcc.code}">${mcc.description}</option>
   </template>
-  <template id="country-option">
-    <option value="${country.code}">${country.name}</option>
-  </template>
   <template id="state-option">
     <option value="${option.value}">${option.text}</option>
   </template>
@@ -203,20 +198,29 @@
   <template id="unknown-error">
     <div class="error message">Error! An error occurred creating the registration</div>
   </template>
+  <template id="invalid-token">
+    <div class="error message">Error! An error occurred submitting the form</div>
+  </template>
   <template id="upload-error">
     <div class="error message">Error! An error occurred uploading document images</div>
   </template>
+  <template id="invalid-verification_document_front">
+    <div class="error message">Error! Invalid or missing document front scan or photo</div>
+  </template>
+  <template id="invalid-verification_document_back">
+    <div class="error message">Error! Invalid or missing document back scan or photo</div>
+  </template>
   <template id="invalid-name">
     <div class="error message">Error! Invalid or missing business name</div>
-  </template>
-  <template id="invalid-url">
-    <div class="error message">Error! Invalid or missing business URL</div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message">Error! Invalid or missing business Merchant Category Code</div>
   </template>
   <template id="invalid-business_profile_url">
-    <div class="error message">Error! Invalid or missing business URL</div>
+    <div class="error message">Error! Invalid or missing business URL; or product description</div>
+  </template>
+  <template id="invalid-business_profile_product_description">
+    <div class="error message">Error! Invalid or missing business product description; or URL</div>
   </template>
   <template id="invalid-phone">
     <div class="error message">Error! Invalid or missing company phone number</div>
@@ -229,9 +233,6 @@
   </template>
   <template id="invalid-tax_id">
     <div class="error message">Error! Invalid or missing business tax id</div>
-  </template>
-  <template id="invalid-address_country">
-    <div class="error message">Error! Invalid or missing company address country</div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message">Error! Invalid or missing company address line 1</div>

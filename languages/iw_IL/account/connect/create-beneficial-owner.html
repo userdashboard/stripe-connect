@@ -1,5 +1,5 @@
-<!doctype html>
 <html template="false">
+  <!doctype html>
   <head>
     <title>Add beneficial owner for ${stripeAccount.id}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -21,9 +21,19 @@
       <div id="message-container"></div>
       <h2>Relationship to company</h2>
       <div class="pure-control-group">
-        <label><input type="checkbox" id="executive" name="executive" value="true" /> Executive</label>
-        <label><input type="checkbox" id="director" name="director" value="true" /> Director</label>
+        <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" /> Executive</label>
+        <label><input type="checkbox" id="relationship_director" name="relationship_director" value="true" /> Director</label>
+        <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" /> Owner</label>
       </div>
+      <div class="pure-control-group">
+        <label for="relationship_title">Job, role or relationship title</label>
+        <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100" />
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_percent_ownership">Percent owned (if any)</label>
+        <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4" />
+      </div>
+      <h2>Personal information</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div class="pure-control-group">
@@ -37,6 +47,12 @@
             <label for="last_name">Last name</label>
             <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50" />
           </div>
+        </div>
+      </div>
+      <div id="email-container">
+        <div class="pure-control-group">
+          <label for="email">Contact email</label>
+          <input class="full-width" required="required" id="email" name="email" type="text" maxlength="50" />
         </div>
       </div>
       <div class="pure-g">
@@ -60,11 +76,11 @@
         <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
         <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
       </div>
-      <div id="personal_id_number-container">
+      <div id="id_number-container">
         <div class="pure-control-group">
             <h2>Personal identification</h2>
-          <label for="personal_id_number">Passport or ID number</label>
-          <input class="full-width" required="required" id="personal_id_number" name="personal_id_number" type="text" maxlength="50" />
+          <label for="id_number">Passport or ID number</label>
+          <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50" />
         </div>
       </div>
       <div class="pure-control-group">
@@ -124,7 +140,10 @@
       </div>
     </form>
   </body>
-    <template id="state-option">
+  <template id="invalid-token">
+    <div class="error message">Error! An error occurred submitting the form</div>
+  </template>
+  <template id="state-option">
     <option value="${option.value}">${option.text}</option>
   </template>
   <template id="country-option">
@@ -145,11 +164,17 @@
   <template id="invalid-verification_document_back">
     <div class="error message">Error! Invalid or missing document ID back scan or photo</div>
   </template>
+  <template id="invalid-id_number">
+    <div class="error message">Error! Invalid or missing id number</div>
+  </template>
   <template id="invalid-first_name">
     <div class="error message">Error! Invalid or missing first name</div>
   </template>
   <template id="invalid-last_name">
     <div class="error message">Error! Invalid or missing last name</div>
+  </template>
+  <template id="invalid-email">
+    <div class="error message">Error! Invalid or missing email</div>
   </template>
   <template id="duplicate-name">
     <div class="error message">Error! This owner has already been added</div>

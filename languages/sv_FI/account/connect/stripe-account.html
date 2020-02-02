@@ -19,14 +19,14 @@
         </tr>
         <tr>
           <th>Type</th>
-          <td id="company">Company registration</td>
+          <td id="business">Company registration</td>
           <td id="individual">Individual registration</td>
         </tr>
         <tr>
           <th>Name</th>
           <td id="blank-name">Not yet provided</td>
-                    <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
-                    <td id="business-name">${stripeAccount.company.name || ""}</td>
+          <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+          <td id="business-name">${stripeAccount.company.name || ""}</td>
         </tr>
         <tr>
           <th>Country</th>
@@ -53,12 +53,20 @@
         <a id="update-company-registration-link" class="pure-button" href="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
       </p>
     </div>    
-    <div id="company-representative-container">
+    <div id="representative-container">
       <h2>Company representative</h2>
-      <p>You must submit new representative information if the specified person leaves or no longer represents the company.  New representatives are subject to identify verification.</p>
+      <p>To avoid account disruption submit new representative information if the specified person leaves or no longer represents the company.</p>
+      <table id="representatives-table" class="pure-table pure-table-striped data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+      </table>
       <p class="pure-button-group" role="group" id="registration-options">
-        <a id="start-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/edit-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add representative</a>
-        <a id="update-company-representative-link" class="pure-button" href="/account/connect/edit-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Change representative</a>
+        <a id="add-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+        <a id="update-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/edit-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update representative</a>
       </p>
     </div>
     <div id="owners-container">
@@ -73,7 +81,8 @@
         </thead>
       </table>
       <p class="pure-button-group" role="group" id="owner-options">
-        <a class="pure-button pure-button-primary" href="/account/connect/create-beneficial-owner?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/create-beneficial-owner?stripeid=${stripeAccount.id}&return-url=/account/connect/beneficial-owners%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
       </p>
     </div>
     <div id="directors-container">
@@ -88,7 +97,8 @@
         </thead>
       </table>
       <p class="pure-button-group" role="group" id="director-options">
-        <a class="pure-button pure-button-primary" href="/account/connect/create-company-director?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add company director</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/create-company-director?stripeid=${stripeAccount.id}&return-url=/account/connect/company-directors%3Fstripeid=${stripeAccount.id}">Add company director</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
       </p>
     </div>
     <div id="payment-container">
@@ -108,6 +118,12 @@
       </p>
     </div>
   </body>
+  <template id="representative-row">
+    <tr id="${person.id}">
+      <td><a href="/account/connect/edit-company-representative?stripeid=${person.account}">${person.id}</a></td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+  </template>
   <template id="owner-row">
     <tr id="${person.id}">
       <td><a href="/account/connect/edit-beneficial-owner?personid=${person.id}">${person.id}</a></td>

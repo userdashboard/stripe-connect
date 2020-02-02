@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/public/connect.css" />
     <script id="stripe-v3" src="https://js.stripe.com/v3/"></script>
     <script id="connect-v3" src="/public/connect.js"></script>
-    <script id="handler-v3" src="/public/stripe-v3-edit-individual-registration.js"></script>
+    <script id="handler-v3" src="/public/stripe-v3-edit-individual-registration.js?asdf"></script>
     <script id="client-v3">
       window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
     </script>
@@ -32,16 +32,16 @@
             <div class="pure-u-2-24"></div>
             <div class="pure-u-11-24">
               <div id="last_name-container" class="pure-control-group">
-                <label for="last_name">Last name</label>
+                <label for="last_name"> Last name</label>
                 <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50" />
               </div>
             </div>
           </div>
-          <div class="pure-control-group">
+          <div id="email-container" class="pure-control-group">
             <label for="email">Email address</label>
             <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100" />
-          </div>
-          <div class="pure-control-group">
+          </div id="phone-container">
+          <div id="phone-container" class="pure-control-group">
             <label for="phone">Phone</label>
             <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100" />
           </div>
@@ -94,11 +94,15 @@
         </div>
         <div id="ssn_last_4-container" class="pure-control-group">
           <label for="ssn_last_4">SSN last 4 digits</label>
-          <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100" />
+          <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4" />
         </div>
         <div id="business_profile_url-container" class="pure-control-group">
           <label for="business_profile_url">Website URL</label>
           <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50" />
+        </div>
+        <div id="business_profile_product_description-container" class="pure-control-group">
+          <label for="business_profile_product_description">Product description</label>
+          <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50" />
         </div>
         <div id="business_profile_mcc-container" class="pure-control-group">
           <label for="business_profile_mcc">Merchant category code</label>
@@ -118,11 +122,22 @@
           <label for="id_number">Passport or ID number</label>
           <input required="required" id="id_number" name="id_number" type="text" maxlength="50" />
         </div>
-        <div class="pure-control-group">
+        <div id="upload-container" class="pure-control-group">
+          <a name="verification_document_front-anchor"></a>
+          <a name="verification_document_back-anchor"></a>
           <label for="verification_document_front">Front scan/photo</label>
           <input name="verification_document_front" id="verification_document_front" type="file" />
           <label for="verification_document_back">Back scan/photo</label>
           <input name="verification_document_back" id="verification_document_back" type="file" />
+        </div>
+        <div id="additional-upload-container" class="pure-control-group">
+          <h2>Proof of address</h2>
+          <a name="verification_additional_document_front-anchor"></a>
+          <a name="verification_additional_document_back-anchor"></a>
+          <label for="verification_additional_document_front">Front scan/photo</label>
+          <input name="verification_additional_document_front" id="verification_additional_document_front" type="file" />
+          <label for="verification_additional_document_back">Back scan/photo</label>
+          <input name="verification_additional_document_back" id="verification_additional_document_back" type="file" />
         </div>
         <div id="personal-address-container">
           <h2>Personal address</h2>
@@ -226,11 +241,29 @@
   <template id="upload-error">
     <div class="error message">Error! An error occurred uploading document images</div>
   </template>
+  <template id="invalid-token">
+    <div class="error message">Error! An error occurred submitting the form</div>
+  </template>
   <template id="invalid-business_profile_url">
     <div class="error message">Error! Invalid or missing business URL</div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message">Error! Invalid or missing business Merchant Category Code</div>
+  </template>
+  <template id="invalid-business_profile_product_description">
+    <div class="error message">Error! Invalid or missing business product description</div>
+  </template>
+  <template id="invalid-verification_document_front">
+    <div class="error message">Error! Invalid or missing document front scan or photo</div>
+  </template>
+  <template id="invalid-verification_document_back">
+    <div class="error message">Error! Invalid or missing document back scan or photo</div>
+  </template>
+  <template id="invalid-verification_additional_document_front">
+    <div class="error message">Error! Invalid or missing additional document front scan or photo</div>
+  </template>
+  <template id="invalid-verification_additional_document_back">
+    <div class="error message">Error! Invalid or missing additional document back scan or photo</div>
   </template>
   <template id="invalid-id_number">
     <div class="error message">Error!  Invalid individual or missing personal ID number</div>
