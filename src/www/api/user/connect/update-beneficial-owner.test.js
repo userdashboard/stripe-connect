@@ -289,7 +289,21 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           } else if (field === 'ssn_last_4') {
             assert.strictEqual(owner.ssn_last_4, true)
           } else {
-            assert.strictEqual(owner[field], body[field])
+            // TODO: Stripe may or may not transform the phone number
+            // by removing hyphones and adding the country dial code
+            // so all test data is using such-transformed numbers, but
+            // Stripe may also remove the country code
+            if (field === 'phone') {
+              if (owner[field] === body[field]) {
+                assert.strictEqual(owner[field], body[field])  
+              } else {
+                let withoutCountryCode = body[field]
+                withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
+                assert.strictEqual(owner[field], withoutCountryCode)
+              }
+            } else {
+              assert.strictEqual(owner[field], body[field])
+            }
           }
         })
       }
@@ -311,7 +325,6 @@ describe('/api/user/connect/update-beneficial-owner', () => {
           [field]: TestHelper['success_id_scan_back.png']
         }
         const body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.FR)
-        body[field] = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
         const owner = await req.patch()
         assert.strictEqual(owner[field], body[field])

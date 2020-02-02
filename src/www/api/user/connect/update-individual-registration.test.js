@@ -323,8 +323,36 @@ describe('/api/user/connect/update-individual-registration', () => {
         const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.FR)
         body[field] = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
-        const stripeAccount = await req.patch()
-        assert.strictEqual(stripeAccount[field], body[field])
+        const accountNow = await req.patch()
+        if (field.startsWith('address_')) {
+          const property = field.substring('address_kana'.length)
+          assert.strictEqual(accountNow.company.address_kana[property], body[field])
+        } else if (field.startsWith('address_kanji')) {
+          const property = field.substring('address_kanji'.length)
+          assert.strictEqual(accountNow.company.address_kanji[property], body[field])
+        } else if (field.startsWith('address_')) {
+          const property = field.substring('address_'.length)
+          assert.strictEqual(accountNow.company.address[property], body[field])
+        } else if (field.startsWith('dob_')) {
+          const property = field.substring('dob_'.length)
+          assert.strictEqual(accountNow.company.address[property], body[field])
+        } else {
+          // TODO: Stripe may or may not transform the phone number
+          // by removing hyphones and adding the country dial code
+          // so all test data is using such-transformed numbers, but
+          // Stripe may also remove the country code
+          if (field === 'phone') {
+            if (owner[field] === body[field]) {
+              assert.strictEqual(owner[field], body[field])  
+            } else {
+              let withoutCountryCode = body[field]
+              withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
+              assert.strictEqual(owner[field], withoutCountryCode)
+            }
+          } else {
+            assert.strictEqual(accountNow[field], body[field])
+          }
+        }
       })
     }
   })

@@ -36,21 +36,6 @@ module.exports = {
       }
       const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${req.query.stripeid}`)
       const requirements = JSON.parse(requirementsRaw)
-      for (const field of requirements.currently_due) {
-        const posted = field.split('.').join('_')
-        if (!req.body[posted]) {
-          if (field === 'address.line2' ||
-              field === 'relationship.title' ||
-              field === 'executive' ||
-              field === 'director' ||
-              field === 'verification.document' ||
-              field === 'verification.additional_document' ||
-              field === 'owner') {
-            continue
-          }
-          throw new Error(`invalid-${posted}`)
-        }
-      }
       let validateDOB
       if (req.body.dob_day) {
         validateDOB = true
@@ -193,6 +178,11 @@ module.exports = {
       for (const field of requirements.currently_due) {
         const posted = field.split('.').join('_')
         if (!req.body[posted]) {
+          if (field === 'address.line2' ||
+              field === 'verification.document' ||
+              field === 'verification.additional_document') {
+            continue
+          }
           throw new Error(`invalid-${posted}`)
         }
         if (field.startsWith('address.')) {
@@ -238,44 +228,45 @@ module.exports = {
           continue
         }
         const posted = field.split('.').join('_')
-        if (req.body[posted]) {
-          if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            ownerInfo.address = ownerInfo.address || {}
-            ownerInfo.address[property] = req.body[posted]
+        if (!req.body[posted]) {
+          continue
+        }
+        if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          ownerInfo.address = ownerInfo.address || {}
+          ownerInfo.address[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('verification.document.')) {
+          if (global.stripeJS) {
             continue
-          } else if (field.startsWith('verification.document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.document'.length)
-            ownerInfo.verification = ownerInfo.verification || {}
-            ownerInfo.verification.document = ownerInfo.verification.document || {}
-            ownerInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.additional_document'.length)
-            ownerInfo.verification = ownerInfo.verification || {}
-            ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
-            ownerInfo.verification.additional_document[property] = req.body[posted]
-          } else if (field.startsWith('dob.')) {
-            const property = field.substring('dob.'.length)
-            ownerInfo.dob = ownerInfo.dob || {}
-            ownerInfo.dob[property] = req.body[posted]
-          } else if (field.startsWith('relationship.')) {
-            const property = field.substring('relationship.'.length)
-            ownerInfo.relationship = ownerInfo.relationship || {}
-            ownerInfo.relationship[property] = req.body[posted]
-            continue
-          } else {
-            const property = field
-            if (property === 'executive' || property === 'director') {
-              continue
-            }
-            ownerInfo[property] = req.body[posted]
           }
+          const property = field.substring('verification.document'.length)
+          ownerInfo.verification = ownerInfo.verification || {}
+          ownerInfo.verification.document = ownerInfo.verification.document || {}
+          ownerInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('verification.additional_document'.length)
+          ownerInfo.verification = ownerInfo.verification || {}
+          ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
+          ownerInfo.verification.additional_document[property] = req.body[posted]
+        } else if (field.startsWith('dob.')) {
+          const property = field.substring('dob.'.length)
+          ownerInfo.dob = ownerInfo.dob || {}
+          ownerInfo.dob[property] = req.body[posted]
+        } else if (field.startsWith('relationship.')) {
+          const property = field.substring('relationship.'.length)
+          ownerInfo.relationship = ownerInfo.relationship || {}
+          ownerInfo.relationship[property] = req.body[posted]
+          continue
+        } else {
+          const property = field
+          if (property === 'executive' || property === 'director') {
+            continue
+          }
+          ownerInfo[property] = req.body[posted]
         }
       }
       // TODO: these fields are optional but not represented in requirements
@@ -362,7 +353,6 @@ module.exports = {
     }
     while (true) {
       try {
-        console.log('updating owner', ownerInfo, req.body)
         const owner = await stripe.accounts.createPerson(req.query.stripeid, ownerInfo, req.stripeKey)
         await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${owner.id}`, req.query.stripeid)
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/owners/${req.query.stripeid}`, owner.id)

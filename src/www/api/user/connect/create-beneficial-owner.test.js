@@ -243,13 +243,27 @@ describe('/api/user/connect/create-beneficial-owner', () => {
             assert.strictEqual(owner.address[property], body[field])
           } else if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
-            assert.strictEqual(owner.dob[property].toString(), body[field])
+            assert.strictEqual(owner.dob[property], parseInt(body[field]))
           } else if (field === 'id_number') {
             assert.strictEqual(owner.id_number_provided, true)
           } else if (field === 'ssn_last_4') {
             assert.strictEqual(owner.ssn_last_4, true)
           } else {
-            assert.strictEqual(owner[field], body[field])
+            // TODO: Stripe may or may not transform the phone number
+            // by removing hyphones and adding the country dial code
+            // so all test data is using such-transformed numbers, but
+            // Stripe may also remove the country code
+            if (field === 'phone') {
+              if (owner[field] === body[field]) {
+                assert.strictEqual(owner[field], body[field])  
+              } else {
+                let withoutCountryCode = body[field]
+                withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
+                assert.strictEqual(owner[field], withoutCountryCode)
+              }
+            } else {
+              assert.strictEqual(owner[field], body[field])
+            }
           }
         })
       }
@@ -325,10 +339,6 @@ describe('/api/user/connect/create-beneficial-owner', () => {
       }
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB)
       req.filename = __filename
-      req.screenshots = [
-        { goto: `/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}` },
-        { fill: '#submit-form' }
-      ]
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

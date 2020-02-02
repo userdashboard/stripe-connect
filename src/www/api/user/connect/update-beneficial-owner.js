@@ -261,14 +261,11 @@ module.exports = {
         const posted = field.split('.').join('_')
         if (!req.body[posted]) {
           if (field === 'address.line2' ||
-              field === 'relationship.title' ||
-              field === 'relationship.executive' ||
-              field === 'relationship.director' ||
-              field === 'relationship.owner' ||
               field === 'verification.document' ||
               field === 'verification.additional_document') {
             continue
           }
+          throw new Error(`invalid-${posted}`)
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
@@ -302,7 +299,7 @@ module.exports = {
             field === 'verification.additional_document') {
           continue
         }
-        const posted = field.split('.').join('_').replace(`${person.id}_`, '')
+        const posted = field.split('.').join('_')
         if (!req.body[posted]) {
           continue
         }

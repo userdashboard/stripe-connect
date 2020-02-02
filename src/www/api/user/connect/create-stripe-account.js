@@ -261,6 +261,7 @@ module.exports = {
       try {
         companyRepresentative = await stripe.accounts.createPerson(stripeAccount.id, representativeInfo, req.stripeKey)
         await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${companyRepresentative.id}`, stripeAccount.id)
+        await dashboard.Storage.write(`stripeid:requirements:representative:${stripeAccount.id}`, companyRepresentative.requirements)
         break
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

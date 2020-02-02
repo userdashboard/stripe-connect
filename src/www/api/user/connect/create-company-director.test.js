@@ -152,6 +152,60 @@ describe('/api/user/connect/create-company-director', () => {
         })
       }
     }
+
+    describe('invalid-token', () => {
+      it('missing posted token', async () => {
+        global.stripeJS = 3
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'DE',
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+        req.waitOnSubmit = true
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        req.body = {}
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-token')
+      })
+
+      it('invalid posted token', async () => {
+        global.stripeJS = 3
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'DE',
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
+        req.waitOnSubmit = true
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        req.body = {
+          token: 'invalid'
+        }
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-token')
+      })
+    })
   })
 
   describe('receives', () => {
@@ -180,12 +234,11 @@ describe('/api/user/connect/create-company-director', () => {
             verification_document_front: TestHelper['success_id_scan_front.png']
           }
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
-          delete (body[field])
           req.body = TestHelper.createMultiPart(req, body)
           const director = await req.post()
           if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
-            assert.strictEqual(director.address[property], body[field])
+            assert.strictEqual(director.dob[property], parseInt(body[field]))
           } else {
             assert.strictEqual(director[field], body[field])
           }

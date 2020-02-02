@@ -4,7 +4,10 @@ const TestHelper = require('./test-helper.js')
 
 function createPostData (data, identity) {
   identity = identity || TestHelper.nextIdentity()
-  const body = JSON.parse(JSON.stringify(data))
+  const body = {}
+  for (const field in data) {
+    body[field] = data[field]
+  }
   if (body.business_profile_mcc) {
     const codes = connect.getMerchantCategoryCodes()
     body.business_profile_mcc = codes[Math.floor(Math.random() * codes.length)].code
@@ -646,7 +649,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '1020',
     address_state: '1',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+434567890123',
     tax_id: '00000000000'
   },
   AU: {
@@ -657,7 +660,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '4000',
     address_state: 'QLD',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+614567890123',
     tax_id: '00000000000'
   },
   BE: {
@@ -668,7 +671,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '1020',
     address_state: 'BRU',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+324567890123',
     tax_id: '00000000000'
   },
   CA: {
@@ -679,7 +682,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: 'V5K 0A1',
     address_state: 'BC',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+14567890123',
     tax_id: '00000000000'
   },
   CH: {
@@ -690,7 +693,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '1020',
     address_state: 'BE',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+414567890123',
     tax_id: '00000000000'
   },
   DE: {
@@ -701,7 +704,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '01067',
     address_state: 'BE',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+494567890123',
     tax_id: '00000000000'
   },
   DK: {
@@ -712,7 +715,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '1000',
     address_state: '147',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+454567890123',
     tax_id: '00000000000'
   },
   EE: {
@@ -723,7 +726,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '10128',
     address_state: '37',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+3724567890123',
     tax_id: '00000000000'
   },
   ES: {
@@ -734,7 +737,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '03179',
     address_state: 'AN',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+344567890123',
     tax_id: '00000000000'
   },
   FI: {
@@ -745,7 +748,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '00990',
     address_state: 'AL',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+3584567890123',
     tax_id: '00000000000'
   },
   FR: {
@@ -756,7 +759,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '75001',
     address_state: 'A',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+334567890123',
     tax_id: '00000000000'
   },
   GB: {
@@ -767,7 +770,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: 'EC1A 1AA',
     address_state: 'LND',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+444567890123',
     tax_id: '00000000000'
   },
   GR: {
@@ -778,7 +781,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '104',
     address_state: 'I',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+304567890123',
     tax_id: '00000000000'
   },
   HK: {
@@ -789,7 +792,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '00000',
     address_state: 'HK',
     name: 'Company',
-    phone: '456-789-0234',
+    phone: '+8524567890123',
     tax_id: '00000000000'
   },
   IE: {
@@ -800,7 +803,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: 'Dublin 1',
     address_state: 'D',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+3534567890123',
     tax_id: '00000000000'
   },
   IT: {
@@ -811,7 +814,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '00010',
     address_state: '65',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+394567890123',
     tax_id: '00000000000'
   },
   JP: {
@@ -830,7 +833,7 @@ const companyData = module.exports.companyData = {
     name: 'Company',
     name_kana: 'ﾄｳｷﾖｳﾄ',
     name_kanji: '東京都',
-    phone: '011-271-6677',
+    phone: '+810112716677',
     tax_id: '00000000000'
   },
   LT: {
@@ -841,7 +844,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: 'LT-00000',
     address_state: 'AL',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+3704567890123',
     tax_id: '00000000000'
   },
   LU: {
@@ -852,7 +855,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '1623',
     address_state: 'L',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+3524567890123',
     tax_id: '00000000000'
   },
   LV: {
@@ -863,7 +866,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: 'LV–1073',
     address_state: 'AI',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+3714567890123',
     tax_id: '00000000000'
   },
   MY: {
@@ -874,7 +877,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '50450',
     address_state: 'C',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+604567890123',
     tax_id: '00000000000'
   },
   NL: {
@@ -885,7 +888,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '1071 JA',
     address_state: 'DR',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+314567890123',
     tax_id: '00000000000'
   },
   NO: {
@@ -896,7 +899,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '0001',
     address_state: '02',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+474567890123',
     tax_id: '00000000000'
   },
   NZ: {
@@ -907,7 +910,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '6011',
     address_state: 'N',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+644567890123',
     tax_id: '00000000000'
   },
   PL: {
@@ -918,7 +921,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '32-400',
     address_state: 'KR',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+484567890123',
     tax_id: '00000000000'
   },
   PT: {
@@ -929,7 +932,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '4520',
     address_state: '01',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+3514567890123',
     tax_id: '00000000000'
   },
   SE: {
@@ -940,7 +943,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '00150',
     address_state: 'K',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+464567890123',
     tax_id: '00000000000'
   },
   SG: {
@@ -951,7 +954,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '339696',
     address_state: 'SG',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+654567890123',
     tax_id: '00000000000'
   },
   SI: {
@@ -962,7 +965,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '1210',
     address_state: '07',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+3864567890123',
     tax_id: '00000000000'
   },
   SK: {
@@ -973,7 +976,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '00102',
     address_state: 'BC',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+4214567890123',
     tax_id: '00000000000'
   },
   US: {
@@ -984,7 +987,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '10007',
     address_state: 'NY',
     name: 'Company',
-    phone: '456-789-0123',
+    phone: '+14567890123',
     tax_id: '00000000000'
   }
 }
@@ -997,7 +1000,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+434567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1012,7 +1015,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+614567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1026,7 +1029,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+324567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1053,7 +1056,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+414567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1067,7 +1070,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+494567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1081,7 +1084,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+454567890123',
     first_name: true,
     last_name: true,
     email: true
@@ -1093,7 +1096,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3724567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1107,7 +1110,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+344567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1121,7 +1124,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3584567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1135,7 +1138,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+334567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1149,7 +1152,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+444567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1163,7 +1166,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+304567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1186,7 +1189,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3534567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1200,7 +1203,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+394567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1236,7 +1239,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3704567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1250,7 +1253,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3524567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1264,7 +1267,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3714567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1291,7 +1294,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+314567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1305,7 +1308,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+474567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1319,7 +1322,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+644567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1333,7 +1336,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+484567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1347,7 +1350,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3514567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1361,7 +1364,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+464567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1382,7 +1385,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3864567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1396,7 +1399,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+4214567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1411,7 +1414,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+14567890123',
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     ssn_last_4: '0000',
@@ -1668,7 +1671,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+434567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1683,7 +1686,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+614567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1698,7 +1701,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+324567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1714,7 +1717,7 @@ const individualData = module.exports.individualData = {
     dob_month: '1',
     dob_year: '1950',
     id_number: '000000000',
-    phone: '456-789-0123',
+    phone: '+14567890123',
     first_name: true,
     last_name: true
   },
@@ -1726,7 +1729,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+414567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1741,7 +1744,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+494567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1756,7 +1759,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+454567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1771,7 +1774,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3724567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1786,7 +1789,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+344567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1801,7 +1804,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3584567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1816,7 +1819,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+334567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1831,7 +1834,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+444567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1846,7 +1849,7 @@ const individualData = module.exports.individualData = {
     dob_month: '1',
     dob_year: '1950',
     address_state: 'I',
-    phone: '456-789-0123',
+    phone: '+304567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1862,7 +1865,7 @@ const individualData = module.exports.individualData = {
     dob_month: '1',
     dob_year: '1950',
     id_number: '000000000',
-    phone: '456-789-0123',
+    phone: '+8524567890123',
     first_name: true,
     last_name: true
   },
@@ -1874,7 +1877,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3534567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1889,7 +1892,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+394567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1915,7 +1918,7 @@ const individualData = module.exports.individualData = {
     gender: 'female',
     last_name_kana: 'ﾄｳｷﾖｳﾄ',
     last_name_kanji: '東京都',
-    phone: '+81112345678'
+    phone: '+810112716677'
   },
   LT: {
     address_city: 'Vilnius',
@@ -1925,7 +1928,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3704567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1940,7 +1943,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3524567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1955,7 +1958,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3714567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1970,7 +1973,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+604567890123',
     id_number: '000000000',
     first_name: true,
     last_name: true
@@ -1983,7 +1986,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+314567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -1998,7 +2001,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+474567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -2013,7 +2016,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+644567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -2028,7 +2031,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+484567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -2043,7 +2046,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3514567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -2058,7 +2061,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+464567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -2074,7 +2077,7 @@ const individualData = module.exports.individualData = {
     dob_month: '1',
     dob_year: '1950',
     id_number: '000000000',
-    phone: '456-789-0123',
+    phone: '+654567890123',
     first_name: true,
     last_name: true
   },
@@ -2085,7 +2088,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+3864567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -2099,7 +2102,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+4214567890123',
     first_name: true,
     last_name: true,
     email: true,
@@ -2114,7 +2117,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '456-789-0123',
+    phone: '+14567890123',
     ssn_last_4: '0000',
     first_name: true,
     last_name: true,

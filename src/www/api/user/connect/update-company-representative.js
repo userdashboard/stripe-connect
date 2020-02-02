@@ -293,19 +293,14 @@ module.exports = {
           continue
         }
         const field = fullField.substring(`${person.id}.`.length)
-        if (field === 'address.line2' ||
-            field === 'relationship.title' ||
-            field === 'relationship.executive' ||
-            field === 'relationship.director' ||
-            field === 'relationship.owner') {
-          continue
-        }
         const posted = field.split('.').join('_')
         if (!req.body[posted]) {
-          if (field !== 'verification.document' &&
-              field !== 'verification.additional_document') {
-            throw new Error(`invalid-${posted}`)
+          if (field === 'address.line2' ||
+              field === 'verification.document' ||
+              field === 'verification.additional_document') {
+            continue
           }
+          throw new Error(`invalid-${posted}`)
         }
         if (field.startsWith('business_profile.')) {
           const property = field.substring('business_profile.'.length)
@@ -341,13 +336,6 @@ module.exports = {
           continue
         }
         const field = fullField.substring(`${person.id}.`.length)
-        if (field === 'address.line2' ||
-            field === 'relationship.title' ||
-            field === 'relationship.executive' ||
-            field === 'relationship.director' ||
-            field === 'relationship.owner') {
-          continue
-        }
         if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
           continue
         }

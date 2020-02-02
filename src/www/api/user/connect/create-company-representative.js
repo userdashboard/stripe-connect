@@ -25,6 +25,8 @@ module.exports = {
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
+    const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:representative:${req.query.stripeid}`)
+    const requirements = JSON.parse(requirementsRaw)
     const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
     const representativeInfo = {
       relationship: {
@@ -34,18 +36,10 @@ module.exports = {
     if (global.stripeJS === 3) {
       representativeInfo.person_token = req.body.token
     } else {
-      for (const fullField of stripeAccount.requirements.currently_due) {
-        if (!fullField.startsWith(existingRepresentative.id)) {
-          continue
-        }
-        const field = fullField.substring(`${existingRepresentative.id}.`.length)
+      for (const field of requirements.currently_due) {
         const posted = field.split('.').join('_')
         if (!req.body || !req.body[posted]) {
           if (field === 'address.line2' ||
-              field === 'relationship.title' ||
-              field === 'relationship.executive' ||
-              field === 'relationship.representative' ||
-              field === 'owner' ||
               field === 'verification.document' ||
               field === 'verification.additional_document') {
             continue
@@ -144,7 +138,7 @@ module.exports = {
             if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_front')
           }
         }
-      } else if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.verification.document`) > -1) {
+      } else if (requirements.currently_due.indexOf(`verification.document`) > -1) {
         throw new Error('invalid-verification_document_front')
       }
       if (req.uploads && req.uploads.verification_document_back) {
@@ -189,116 +183,115 @@ module.exports = {
             if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_back')
           }
         }
-      } else if (stripeAccount.requirements.currently_due.indexOf(`${existingRepresentative.id}.verification.document`) > -1) {
+      } else if (requirements.currently_due.indexOf(`verification.document`) > -1) {
         throw new Error('invalid-verification_document_back')
       }
-      for (const fullField of stripeAccount.requirements.currently_due) {
-        if (!fullField.startsWith(existingRepresentative.id)) {
-          continue
-        }
-        const field = fullField.substring(`${existingRepresentative.id}.`.length)
+      for (const field of requirements.currently_due) {
         const posted = field.split('.').join('_')
-        if (req.body[posted]) {
-          if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            representativeInfo.address = representativeInfo.address || {}
-            representativeInfo.address[property] = req.body[posted]
+        if (!req.body[posted]) {
+          if (field === 'address.line2' ||
+              field === 'verification.document.front' ||
+              field === 'verification.document.back') {
             continue
-          } else if (field.startsWith('address_kana.')) {
-            const property = field.substring('address_kana.'.length)
-            representativeInfo.address_kana = representativeInfo.address_kana || {}
-            representativeInfo.address_kana[property] = req.body[posted]
-            continue
-          } else if (field.startsWith('address_kanji.')) {
-            const property = field.substring('address_kanji.'.length)
-            representativeInfo.address_kanji = representativeInfo.address_kanji || {}
-            representativeInfo.address_kanji[property] = req.body[posted]
-            continue
-          } else if (field.startsWith('verification.document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.document'.length)
-            representativeInfo.verification = representativeInfo.verification || {}
-            representativeInfo.verification.document = representativeInfo.verification.document || {}
-            representativeInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.additional_document'.length)
-            representativeInfo.verification = representativeInfo.verification || {}
-            representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
-            representativeInfo.verification.additional_document[property] = req.body[posted]
-          } else if (field.startsWith('dob.')) {
-            const property = field.substring('dob.'.length)
-            representativeInfo.dob = representativeInfo.dob || {}
-            representativeInfo.dob[property] = req.body[posted]
-          } else if (field.startsWith('relationship.')) {
-            const property = field.substring('relationship.'.length)
-            representativeInfo.relationship = representativeInfo.relationship || {}
-            representativeInfo.relationship[property] = req.body[posted]
-            continue
-          } else {
-            const property = field
-            representativeInfo[property] = req.body[posted]
           }
+          throw new Error(`invalid-${posted}`)
+        }
+        if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          representativeInfo.address = representativeInfo.address || {}
+          representativeInfo.address[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('address_kana.')) {
+          const property = field.substring('address_kana.'.length)
+          representativeInfo.address_kana = representativeInfo.address_kana || {}
+          representativeInfo.address_kana[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('address_kanji.')) {
+          const property = field.substring('address_kanji.'.length)
+          representativeInfo.address_kanji = representativeInfo.address_kanji || {}
+          representativeInfo.address_kanji[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('verification.document.')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('verification.document'.length)
+          representativeInfo.verification = representativeInfo.verification || {}
+          representativeInfo.verification.document = representativeInfo.verification.document || {}
+          representativeInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('verification.additional_document'.length)
+          representativeInfo.verification = representativeInfo.verification || {}
+          representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+          representativeInfo.verification.additional_document[property] = req.body[posted]
+        } else if (field.startsWith('dob.')) {
+          const property = field.substring('dob.'.length)
+          representativeInfo.dob = representativeInfo.dob || {}
+          representativeInfo.dob[property] = req.body[posted]
+        } else if (field.startsWith('relationship.')) {
+          const property = field.substring('relationship.'.length)
+          representativeInfo.relationship = representativeInfo.relationship || {}
+          representativeInfo.relationship[property] = req.body[posted]
+          continue
+        } else {
+          const property = field
+          representativeInfo[property] = req.body[posted]
         }
       }
-      for (const fullField of stripeAccount.requirements.eventually_due) {
-        if (!fullField.startsWith(existingRepresentative.id)) {
+      for (const field of requirements.eventually_due) {
+        if (requirements.currently_due.indexOf(field) > -1) {
           continue
         }
-        const field = fullField.substring(`${existingRepresentative.id}.`.length)
-        if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
+        const posted = field.split('.').join('_')
+        if (!req.body[posted]) {
           continue
         }
-        const posted = field.split('.').join('_').replace(`${existingRepresentative.id}_`, '')
-        if (req.body[posted]) {
-          if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            representativeInfo.address = representativeInfo.address || {}
-            representativeInfo.address[property] = req.body[posted]
+        if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          representativeInfo.address = representativeInfo.address || {}
+          representativeInfo.address[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('address_kana.')) {
+          const property = field.substring('address_kana.'.length)
+          representativeInfo.address_kana = representativeInfo.address_kana || {}
+          representativeInfo.address_kana[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('address_kanji.')) {
+          const property = field.substring('address_kanji.'.length)
+          representativeInfo.address_kanji = representativeInfo.address_kanji || {}
+          representativeInfo.address_kanji[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('verification.document.')) {
+          if (global.stripeJS) {
             continue
-          } else if (field.startsWith('address_kana.')) {
-            const property = field.substring('address_kana.'.length)
-            representativeInfo.address_kana = representativeInfo.address_kana || {}
-            representativeInfo.address_kana[property] = req.body[posted]
-            continue
-          } else if (field.startsWith('address_kanji.')) {
-            const property = field.substring('address_kanji.'.length)
-            representativeInfo.address_kanji = representativeInfo.address_kanji || {}
-            representativeInfo.address_kanji[property] = req.body[posted]
-            continue
-          } else if (field.startsWith('verification.document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.document'.length)
-            representativeInfo.verification = representativeInfo.verification || {}
-            representativeInfo.verification.document = representativeInfo.verification.document || {}
-            representativeInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.additional_document'.length)
-            representativeInfo.verification = representativeInfo.verification || {}
-            representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
-            representativeInfo.verification.additional_document[property] = req.body[posted]
-          } else if (field.startsWith('dob.')) {
-            const property = field.substring('dob.'.length)
-            representativeInfo.dob = representativeInfo.dob || {}
-            representativeInfo.dob[property] = req.body[posted]
-          } else if (field.startsWith('relationship.')) {
-            const property = field.substring('relationship.'.length)
-            representativeInfo.relationship = representativeInfo.relationship || {}
-            representativeInfo.relationship[property] = req.body[posted]
-            continue
-          } else {
-            const property = field
-            representativeInfo[property] = req.body[posted]
           }
+          const property = field.substring('verification.document'.length)
+          representativeInfo.verification = representativeInfo.verification || {}
+          representativeInfo.verification.document = representativeInfo.verification.document || {}
+          representativeInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('verification.additional_document'.length)
+          representativeInfo.verification = representativeInfo.verification || {}
+          representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
+          representativeInfo.verification.additional_document[property] = req.body[posted]
+        } else if (field.startsWith('dob.')) {
+          const property = field.substring('dob.'.length)
+          representativeInfo.dob = representativeInfo.dob || {}
+          representativeInfo.dob[property] = req.body[posted]
+        } else if (field.startsWith('relationship.')) {
+          const property = field.substring('relationship.'.length)
+          representativeInfo.relationship = representativeInfo.relationship || {}
+          representativeInfo.relationship[property] = req.body[posted]
+          continue
+        } else {
+          const property = field
+          representativeInfo[property] = req.body[posted]
         }
       }
       // TODO: these fields are optional but not represented in requirements
@@ -383,15 +376,55 @@ module.exports = {
         representativeInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
+    if (!existingRepresentative || !existingRepresentative.id) {
+      while (true) {
+        let newRepresentative
+        try {
+           newRepresentative = await stripe.accounts.createPerson(req.query.stripeid, {
+            relationship: {
+              representative: true
+            }
+          }, req.stripeKey)
+          break
+        } catch (error) {
+          if (error.raw && error.raw.param === 'person_token') {
+            throw new Error('invalid-token')
+          }
+          if (error.raw && error.raw.code === 'lock_timeout') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'rate_limit') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'account_invalid') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'idempotency_key_in_use') {
+            continue
+          }
+          if (error.raw && error.raw.code === 'resource_missing') {
+            continue
+          }
+          if (error.type === 'StripeConnectionError') {
+            continue
+          }
+          if (error.type === 'StripeAPIError') {
+            continue
+          }
+          if (error.message === 'An error occurred with our connection to Stripe.') {
+            continue
+          }
+          if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
+        }
+      }
+      await dashboard.Storage.write(`stripeid:requirements:representative:${stripeAccount.id}`, newRepresentative.requirements)
+      await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${representative.id}`, req.query.stripeid)
+      existingRepresentative = newRepresentative
+    }
     let representative
     while (true) {
       try {
-        if (existingRepresentative) {
-          representative = await stripe.accounts.updatePerson(req.query.stripeid, existingRepresentative.id, representativeInfo, req.stripeKey)
-        } else {
-          representative = await stripe.accounts.createPerson(req.query.stripeid, representativeInfo, req.stripeKey)
-          await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${representative.id}`, req.query.stripeid)
-        }
+        representative = await stripe.accounts.updatePerson(req.query.stripeid, existingRepresentative.id, representativeInfo, req.stripeKey)
         return representative
       } catch (error) {
         if (error.raw && error.raw.param === 'person_token') {

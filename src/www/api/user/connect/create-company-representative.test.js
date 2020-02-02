@@ -84,18 +84,17 @@ describe('/api/user/connect/create-company-representative', () => {
       address_line1: false,
       address_city: false,
       address_state: 'invalid',
-      address_country: 'invalid',
-      address_postal_code: 'invalid',
+      address_postal_code: false,
       address_kana_line1: false,
       address_kana_city: false,
-      address_kana_town: 'invalid',
-      address_kana_state: 'invalid',
-      address_kana_postal_code: 'invalid',
+      address_kana_town: false,
+      address_kana_state: false,
+      address_kana_postal_code: false,
       address_kanji_line1: false,
       address_kanji_city: false,
-      address_kanji_town: 'invalid',
-      address_kanji_state: 'invalid',
-      address_kanji_postal_code: 'invalid',
+      address_kanji_town: false,
+      address_kanji_state: false,
+      address_kanji_postal_code: false,
       dob_day: '32',
       dob_month: '15',
       dob_year: '2020',
@@ -178,6 +177,60 @@ describe('/api/user/connect/create-company-representative', () => {
         })
       }
     }
+
+    describe('invalid-token', () => {
+      it('missing posted token', async () => {
+        global.stripeJS = 3
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'US',
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        req.body = {
+          token: ''
+        }
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, `invalid-token`)
+      })
+
+      it('invalid posted token', async () => {
+        global.stripeJS = 3
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'US',
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.uploads = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        req.body = {
+          token: 'invalid'
+        }
+        let errorMessage
+        try {
+          await req.post()
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, `invalid-token`)
+      })
+    })
   })
 
   describe('receives', () => {
@@ -205,28 +258,41 @@ describe('/api/user/connect/create-company-representative', () => {
             verification_document_back: TestHelper['success_id_scan_back.png'],
             verification_document_front: TestHelper['success_id_scan_front.png']
           }
-          const body = TestStripeAccounts.createPostData(TestStripeAccounts.n[country.id])
-          delete (body[field])
+          const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
           req.body = TestHelper.createMultiPart(req, body)
           const representative = await req.post()
           if (field.startsWith('address_kana')) {
-            const property = field.substring('address_'.length)
+            const property = field.substring('address_kana'.length)
             assert.strictEqual(representative.address_kana[property], body[field])
           } else if (field.startsWith('address_kanji')) {
-            const property = field.substring('address_'.length)
+            const property = field.substring('address_kanji'.length)
             assert.strictEqual(representative.address_kanji[property], body[field])
           } else if (field.startsWith('address_')) {
             const property = field.substring('address_'.length)
             assert.strictEqual(representative.address[property], body[field])
           } else if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
-            assert.strictEqual(representative.address[property], body[field])
+            assert.strictEqual(representative.dob[property], parseInt(body[field]))
           } else if (field === 'id_number') {
             assert.strictEqual(representative.id_number_provided, true)
           } else if (field === 'ssn_last_4') {
-            assert.strictEqual(representative.ssn_last_4, true)
+            assert.strictEqual(representative.ssn_last_4_provided, true)
           } else {
-            assert.strictEqual(representative[field], body[field])
+            // TODO: Stripe may or may not transform the phone number
+            // by removing hyphones and adding the country dial code
+            // so all test data is using such-transformed numbers, but
+            // Stripe may also remove the country code
+            if (field === 'phone') {
+              if (owner[field] === body[field]) {
+                assert.strictEqual(owner[field], body[field])  
+              } else {
+                let withoutCountryCode = body[field]
+                withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
+                assert.strictEqual(owner[field], withoutCountryCode)
+              }
+            } else {
+              assert.strictEqual(representative[field], body[field])
+            }
           }
         })
       }
@@ -239,21 +305,28 @@ describe('/api/user/connect/create-company-representative', () => {
         country: 'US',
         type: 'company'
       })
-      const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
+      req.waitOnSubmit = true
       req.account = user.account
       req.session = user.session
       req.uploads = {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.US, user.profile))
-      let errorMessage
-      try {
-        await req.post()
-      } catch (error) {
-        errorMessage = error.message
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.US, user.profile)
+      await req.post()
+      const req2 = TestHelper.createRequest(`/account/connect/edit-company-representative?stripeid=${user.stripeAccount.id}`)
+      req2.waitOnSubmit = true
+      req2.account = user.account
+      req2.session = user.session
+      req2.uploads = {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      assert.strictEqual(errorMessage, 'invalid-token')
+      req2.body = TestHelper.createMultiPart(req, {})
+      await req2.post()
+      const personNow = await global.api.user.connect.StripeAccount.get(req2)
+      assert.strictEqual(personNow.metadata.token, undefined)
     })
   })
 

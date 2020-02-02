@@ -37,21 +37,6 @@ module.exports = {
       }
       const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:director:${req.query.stripeid}`)
       const requirements = JSON.parse(requirementsRaw)
-      for (const field of requirements.currently_due) {
-        const posted = field.split('.').join('_')
-        if (!req.body[posted]) {
-          if (field === 'address.line2' ||
-              field === 'relationship.title' ||
-              field === 'executive' ||
-              field === 'owner' ||
-              field === 'verification.document.front' ||
-              field === 'verification.document.back' ||
-              field === 'director') {
-            continue
-          }
-          throw new Error(`invalid-${posted}`)
-        }
-      }
       let validateDOB
       if (req.body.dob_day) {
         validateDOB = true
@@ -193,44 +178,50 @@ module.exports = {
       }
       for (const field of requirements.currently_due) {
         const posted = field.split('.').join('_')
-        if (req.body[posted]) {
-          if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            directorInfo.address = directorInfo.address || {}
-            directorInfo.address[property] = req.body[posted]
+        if (!req.body[posted]) {
+          if (field === 'address.line2' ||
+              field === 'verification.document.front' ||
+              field === 'verification.document.back') {
             continue
-          } else if (field.startsWith('verification.document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.document'.length)
-            directorInfo.verification = directorInfo.verification || {}
-            directorInfo.verification.document = directorInfo.verification.document || {}
-            directorInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.additional_document'.length)
-            directorInfo.verification = directorInfo.verification || {}
-            directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
-            directorInfo.verification.additional_document[property] = req.body[posted]
-          } else if (field.startsWith('dob.')) {
-            const property = field.substring('dob.'.length)
-            directorInfo.dob = directorInfo.dob || {}
-            directorInfo.dob[property] = req.body[posted]
-          } else if (field.startsWith('relationship.')) {
-            const property = field.substring('relationship.'.length)
-            directorInfo.relationship = directorInfo.relationship || {}
-            directorInfo.relationship[property] = req.body[posted]
-            continue
-          } else {
-            const property = field
-            if (property === 'executive' || property === 'director') {
-              continue
-            }
-            directorInfo[property] = req.body[posted]
           }
+          throw new Error(`invalid-${posted}`)
+        }
+        if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          directorInfo.address = directorInfo.address || {}
+          directorInfo.address[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('verification.document.')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('verification.document'.length)
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.document = directorInfo.verification.document || {}
+          directorInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('verification.additional_document'.length)
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+          directorInfo.verification.additional_document[property] = req.body[posted]
+        } else if (field.startsWith('dob.')) {
+          const property = field.substring('dob.'.length)
+          directorInfo.dob = directorInfo.dob || {}
+          directorInfo.dob[property] = req.body[posted]
+        } else if (field.startsWith('relationship.')) {
+          const property = field.substring('relationship.'.length)
+          directorInfo.relationship = directorInfo.relationship || {}
+          directorInfo.relationship[property] = req.body[posted]
+          continue
+        } else {
+          const property = field
+          if (property === 'executive' || property === 'director') {
+            continue
+          }
+          directorInfo[property] = req.body[posted]
         }
       }
       for (const field of requirements.eventually_due) {
@@ -238,41 +229,42 @@ module.exports = {
           continue
         }
         const posted = field.split('.').join('_')
-        if (req.body[posted]) {
-          if (field.startsWith('address.')) {
-            const property = field.substring('address.'.length)
-            directorInfo.address = directorInfo.address || {}
-            directorInfo.address[property] = req.body[posted]
+        if (!req.body[posted]) {
+          continue
+        }
+        if (field.startsWith('address.')) {
+          const property = field.substring('address.'.length)
+          directorInfo.address = directorInfo.address || {}
+          directorInfo.address[property] = req.body[posted]
+          continue
+        } else if (field.startsWith('verification.document.')) {
+          if (global.stripeJS) {
             continue
-          } else if (field.startsWith('verification.document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.document'.length)
-            directorInfo.verification = directorInfo.verification || {}
-            directorInfo.verification.document = directorInfo.verification.document || {}
-            directorInfo.verification.document[property] = req.body[posted]
-          } else if (field.startsWith('verification.additional_document.')) {
-            if (global.stripeJS) {
-              continue
-            }
-            const property = field.substring('verification.additional_document'.length)
-            directorInfo.verification = directorInfo.verification || {}
-            directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
-            directorInfo.verification.additional_document[property] = req.body[posted]
-          } else if (field.startsWith('dob.')) {
-            const property = field.substring('dob.'.length)
-            directorInfo.dob = directorInfo.dob || {}
-            directorInfo.dob[property] = req.body[posted]
-          } else if (field.startsWith('relationship.')) {
-            const property = field.substring('relationship.'.length)
-            directorInfo.relationship = directorInfo.relationship || {}
-            directorInfo.relationship[property] = req.body[posted]
-            continue
-          } else {
-            const property = field
-            directorInfo[property] = req.body[posted]
           }
+          const property = field.substring('verification.document'.length)
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.document = directorInfo.verification.document || {}
+          directorInfo.verification.document[property] = req.body[posted]
+        } else if (field.startsWith('verification.additional_document.')) {
+          if (global.stripeJS) {
+            continue
+          }
+          const property = field.substring('verification.additional_document'.length)
+          directorInfo.verification = directorInfo.verification || {}
+          directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
+          directorInfo.verification.additional_document[property] = req.body[posted]
+        } else if (field.startsWith('dob.')) {
+          const property = field.substring('dob.'.length)
+          directorInfo.dob = directorInfo.dob || {}
+          directorInfo.dob[property] = req.body[posted]
+        } else if (field.startsWith('relationship.')) {
+          const property = field.substring('relationship.'.length)
+          directorInfo.relationship = directorInfo.relationship || {}
+          directorInfo.relationship[property] = req.body[posted]
+          continue
+        } else {
+          const property = field
+          directorInfo[property] = req.body[posted]
         }
       }
       // TODO: these fields are optional but not represented in requirements

@@ -304,7 +304,21 @@ describe('/api/user/connect/update-company-registration', () => {
           const property = field.substring('dob_'.length)
           assert.strictEqual(accountNow.company.address[property], body[field])
         } else {
-          assert.strictEqual(accountNow[field], body[field])
+          // TODO: Stripe may or may not transform the phone number
+          // by removing hyphones and adding the country dial code
+          // so all test data is using such-transformed numbers, but
+          // Stripe may also remove the country code
+          if (field === 'phone') {
+            if (owner[field] === body[field]) {
+              assert.strictEqual(owner[field], body[field])  
+            } else {
+              let withoutCountryCode = body[field]
+              withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
+              assert.strictEqual(owner[field], withoutCountryCode)
+            }
+          } else {
+            assert.strictEqual(accountNow[field], body[field])
+          }
         }
       })
     }
