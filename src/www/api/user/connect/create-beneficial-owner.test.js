@@ -324,6 +324,11 @@ describe('/api/user/connect/create-beneficial-owner', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.GB)
+      req.filename = __filename
+      req.screenshots = [
+        { goto: `/account/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
       await req.post()
       const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req2.account = user.account

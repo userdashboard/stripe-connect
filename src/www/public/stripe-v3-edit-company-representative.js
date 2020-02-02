@@ -69,7 +69,7 @@ function updateAccount (e) {
   if (ssnLast4 && ssnLast4.value) {
     companyRepresentative.ssn_last_4 = ssnLast4.value
   }
-  var percent = document.getElementById('percent_ownership')
+  var percent = document.getElementById('relationship_percent_ownership')
   if (percent && percent.value) {
     companyRepresentative.percent_ownership = percent.value
   }
@@ -84,7 +84,7 @@ function updateAccount (e) {
   var owner = document.getElementById('relationship_owner')
   companyRepresentative.relationship.owner = !!owner.checked
   if (owner.checked) {
-    var percentOwned = document.getElementById('percent_ownership')
+    var percentOwned = document.getElementById('relationship_percent_ownership')
     companyRepresentative.relationship.percent_ownership = percentOwned.value || '0'
   }
   var dobDay = document.getElementById('dob_day')

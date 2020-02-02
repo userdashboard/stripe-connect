@@ -54,11 +54,11 @@ function convertOwner (e) {
   if (email && email.value) {
     beneficialOwner.email = email.value
   }
-  var title = document.getElementById('title')
+  var title = document.getElementById('relationship_title')
   if (title && title.value) {
     beneficialOwner.title = title.value
   }
-  var percent = document.getElementById('percent_ownership')
+  var percent = document.getElementById('relationship_percent_ownership')
   if (percent && percent.value) {
     beneficialOwner.percent_ownership = percent.value
   }
@@ -66,11 +66,11 @@ function convertOwner (e) {
   if (idNumber && idNumber.value) {
     beneficialOwner.id_number = idNumber.value
   }
-  var executive = document.getElementById('executive')
+  var executive = document.getElementById('relationship_executive')
   if (executive.checked) {
     beneficialOwner.executive = true
   }
-  var director = document.getElementById('director')
+  var director = document.getElementById('relationship_director')
   if (director.checked) {
     beneficialOwner.director = true
   }
