@@ -1001,6 +1001,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+434567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1016,6 +1017,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+614567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1030,6 +1032,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+324567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1044,6 +1047,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1057,6 +1061,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+414567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1071,6 +1076,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+494567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1085,6 +1091,9 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+454567890123',
+    relationship_representative: true,
+    relationship_executive: 'true',
+    relationship_title: 'SVP of Anything',
     first_name: true,
     last_name: true,
     email: true
@@ -1097,6 +1106,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+3724567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1111,6 +1121,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+344567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1125,6 +1136,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+3584567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1139,6 +1151,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+334567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1153,6 +1166,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+444567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1167,6 +1181,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+304567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1177,6 +1192,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1190,6 +1206,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+3534567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1204,6 +1221,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+394567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1229,6 +1247,7 @@ const representativeData = module.exports.representativeData = {
     gender: 'female',
     last_name_kana: 'ﾄｳｷﾖｳﾄ',
     last_name_kanji: '東京都',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything'
   },
@@ -1240,6 +1259,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+3704567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1254,6 +1274,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+3524567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1268,6 +1289,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+3714567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1281,6 +1303,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     id_number: '000000000',
@@ -1295,6 +1318,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+314567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1309,6 +1333,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+474567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1323,6 +1348,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+644567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1337,6 +1363,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+484567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1351,6 +1378,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+3514567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1365,6 +1393,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+464567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1376,7 +1405,10 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     first_name: true,
-    last_name: true
+    last_name: true,
+    relationship_representative: true,
+    relationship_executive: 'true',
+    relationship_title: 'SVP of Anything'
   },
   SI: {
     address_city: 'Ljubljana',
@@ -1386,6 +1418,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+3864567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1400,6 +1433,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+4214567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
@@ -1415,6 +1449,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+14567890123',
+    relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     ssn_last_4: '0000',
@@ -2137,7 +2172,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   AU: {
     address_city: 'Brisbane',
@@ -2149,7 +2185,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   BE: {
     address_city: 'Brussels',
@@ -2160,7 +2197,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   CA: false,
   CH: {
@@ -2172,7 +2210,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   DE: {
     address_city: 'Berlin',
@@ -2183,7 +2222,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   DK: {
     address_city: 'Copenhagen',
@@ -2194,7 +2234,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   EE: {
     address_city: 'Talin',
@@ -2205,7 +2246,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   ES: {
     address_city: 'Madrid',
@@ -2216,7 +2258,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   FI: {
     address_city: 'Helsinki',
@@ -2227,7 +2270,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   FR: {
     address_city: 'Paris',
@@ -2238,7 +2282,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   GB: {
     address_city: 'London',
@@ -2249,7 +2294,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   GR: {
     address_city: 'Athens',
@@ -2260,7 +2306,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   HK: false,
   IE: {
@@ -2272,7 +2319,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   IT: {
     address_city: 'Rome',
@@ -2283,7 +2331,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   JP: false,
   LT: {
@@ -2295,7 +2344,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   LU: {
     address_city: 'Luxemburg',
@@ -2306,7 +2356,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   LV: {
     address_city: 'Riga',
@@ -2317,7 +2368,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   MY: {
     address_city: 'Kuala Lumpur',
@@ -2329,7 +2381,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     id_number: '000000000',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   NL: {
     address_city: 'Amsterdam',
@@ -2340,7 +2393,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   NO: {
     address_city: 'Oslo',
@@ -2351,7 +2405,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   NZ: {
     address_city: 'Auckland',
@@ -2362,7 +2417,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   PL: {
     address_city: 'Krakow',
@@ -2373,7 +2429,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   PT: {
     address_city: 'Lisbon',
@@ -2384,7 +2441,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   SE: {
     address_city: 'Stockholm',
@@ -2395,7 +2453,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   SG: {
     address_city: 'Singapore',
@@ -2406,7 +2465,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   SI: {
     address_city: 'Ljubljana',
@@ -2417,7 +2477,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   SK: {
     address_city: 'Slovakia',
@@ -2428,7 +2489,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   },
   US: {
     address_city: 'New York',
@@ -2440,7 +2502,8 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_owner: true
   }
 }
 
