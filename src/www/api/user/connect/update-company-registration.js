@@ -119,6 +119,7 @@ module.exports = {
           if (field === 'company.address.line2' ||
               field === 'company.verification.document' ||
               field === 'external_account' ||
+              field.startsWith('relationship.') ||
               field.startsWith('tos_acceptance.') ||
               field.startsWith('person_') ||
             (field === 'business_profile.url' && req.body.business_profile_product_description) ||
