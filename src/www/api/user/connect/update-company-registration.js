@@ -250,15 +250,8 @@ module.exports = {
         accountInfo.company.address = accountInfo.company.address || {}
         accountInfo.company.address.postal_code = req.body.address_postal_code
       }
-      if (req.body.tax_id) {
-        try {
-          const taxID = parseInt(req.body.tax_id, 10)
-          if (!taxID || taxID.toString() !== req.body.tax_id) {
-            throw new Error('invalid-id_number')
-          }
-        } catch (s) {
-          throw new Error('invalid-id_number')
-        }
+      if (req.body.tax_id && !req.body.tax_id.length) {
+        throw new Error('invalid-tax_id')
       }
       // TODO: check this document is required before updating
       // currently Stripe do not correctly report it as required
