@@ -67,7 +67,6 @@ async function renderPage (req, res, messageTemplate) {
 }
 
 async function submitForm (req, res) {
-  console.log(req.url, req.method, req.body)
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }

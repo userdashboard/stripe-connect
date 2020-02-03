@@ -321,6 +321,26 @@ module.exports = {
         ownerInfo.address = ownerInfo.address || {}
         ownerInfo.address.postal_code = req.body.address_postal_code
       }
+      if (req.body.id_number) {
+        try {
+          const idNumber = parseInt(req.body.id_number, 10)
+          if (!idNumber || idNumber.toString() !== req.body.id_number) {
+            throw new Error('invalid-id_number')
+          }
+        } catch (s) {
+          throw new Error('invalid-id_number')
+        }
+      }
+      if (req.body.ssn_last_4) {
+        try {
+          const ssnLast4 = parseInt(req.body.ssn_last_4, 10)
+          if (!ssnLast4 || ssnLast4.toString() !== req.body.ssn_last_4) {
+            throw new Error('invalid-ssn_last_4')
+          }
+        } catch (s) {
+          throw new Error('invalid-ssn_last_4')
+        }
+      }
       if (req.body.verification_document_back) {
         ownerInfo.verification = ownerInfo.verification || {}
         ownerInfo.verification.document = ownerInfo.verification.document || {}
