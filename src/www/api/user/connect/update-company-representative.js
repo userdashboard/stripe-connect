@@ -98,22 +98,6 @@ module.exports = {
           throw new Error('invalid-dob_day')
         }
       }
-      if (req.body.address_state) {
-        const states = connect.countryDivisions[stripeAccount.country]
-        if (!states || !states.length) {
-          throw new Error('invalid-address_state')
-        }
-        let found = false
-        for (const state of states) {
-          found = state.value === req.body.address_state
-          if (found) {
-            break
-          }
-        }
-        if (!found) {
-          throw new Error('invalid-address_state')
-        }
-      }
       if (req.uploads) {
         if (req.uploads.verification_document_front) {
           const frontData = {
@@ -406,14 +390,14 @@ module.exports = {
         representativeInfo.address = representativeInfo.address || {}
         representativeInfo.address.line2 = req.body.address_line2
       }
-      if (req.body.address_country) {
+      if (req.body.address_country && req.body.address_country.length) {
         if (!connect.countryNameIndex[req.body.address_country]) {
           throw new Error('invalid-address_country')
         }
         representativeInfo.address = representativeInfo.address || {}
         representativeInfo.address.country = req.body.address_country
       }
-      if (req.body.address_state) {
+      if (req.body.address_state && req.body.address_state.length) {
         const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
         let found
         for (const state of states) {

@@ -114,11 +114,11 @@ async function submitForm (req, res) {
       return renderPage(req, res, `invalid-${posted}`)
     }
   }
-  if (req.body.address_country && !connect.countryNameIndex[req.body.address_country]) {
+  if (req.body.address_country && req.body.address_country.length && !connect.countryNameIndex[req.body.address_country]) {
     delete (req.body.address_country)
     return renderPage(req, res, 'invalid-address_country')
   }
-  if (req.body.address_state) {
+  if (req.body.address_state && req.body.address_state.length) {
     const states = connect.countryDivisions[req.body.address_country || req.data.stripeAccount.country]
     let found
     for (const state of states) {

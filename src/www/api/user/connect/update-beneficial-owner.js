@@ -370,14 +370,14 @@ module.exports = {
         ownerInfo.address = ownerInfo.address || {}
         ownerInfo.address.line2 = req.body.address_line2
       }
-      if (req.body.address_country) {
+      if (req.body.address_country && req.body.address_country.length) {
         if (!connect.countryNameIndex[req.body.address_country]) {
           throw new Error('invalid-address_country')
         }
         ownerInfo.address = ownerInfo.address || {}
         ownerInfo.address.country = req.body.address_country
       }
-      if (req.body.address_state) {
+      if (req.body.address_state && req.body.address_state.length) {
         const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
         let found
         for (const state of states) {
