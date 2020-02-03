@@ -161,14 +161,9 @@ describe('/api/user/connect/create-company-director', () => {
           country: 'DE',
           type: 'company'
         })
-        const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.waitOnSubmit = true
+        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
         req.body = {}
         let errorMessage
         try {
@@ -186,14 +181,9 @@ describe('/api/user/connect/create-company-director', () => {
           country: 'DE',
           type: 'company'
         })
-        const req = TestHelper.createRequest(`/account/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-        req.waitOnSubmit = true
+        const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
         req.body = {
           token: 'invalid'
         }

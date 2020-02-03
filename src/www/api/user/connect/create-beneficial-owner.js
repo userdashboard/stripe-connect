@@ -194,17 +194,11 @@ module.exports = {
           ownerInfo.address[property] = req.body[posted]
           continue
         } else if (field.startsWith('verification.document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.document'.length)
           ownerInfo.verification = ownerInfo.verification || {}
           ownerInfo.verification.document = ownerInfo.verification.document || {}
           ownerInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.additional_document'.length)
           ownerInfo.verification = ownerInfo.verification || {}
           ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}
@@ -240,17 +234,11 @@ module.exports = {
           ownerInfo.address[property] = req.body[posted]
           continue
         } else if (field.startsWith('verification.document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.document'.length)
           ownerInfo.verification = ownerInfo.verification || {}
           ownerInfo.verification.document = ownerInfo.verification.document || {}
           ownerInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.additional_document'.length)
           ownerInfo.verification = ownerInfo.verification || {}
           ownerInfo.verification.additional_document = ownerInfo.verification.additional_document || {}

@@ -195,17 +195,11 @@ module.exports = {
           directorInfo.address[property] = req.body[posted]
           continue
         } else if (field.startsWith('verification.document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.document'.length)
           directorInfo.verification = directorInfo.verification || {}
           directorInfo.verification.document = directorInfo.verification.document || {}
           directorInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.additional_document'.length)
           directorInfo.verification = directorInfo.verification || {}
           directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
@@ -241,17 +235,11 @@ module.exports = {
           directorInfo.address[property] = req.body[posted]
           continue
         } else if (field.startsWith('verification.document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.document'.length)
           directorInfo.verification = directorInfo.verification || {}
           directorInfo.verification.document = directorInfo.verification.document || {}
           directorInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.additional_document'.length)
           directorInfo.verification = directorInfo.verification || {}
           directorInfo.verification.additional_document = directorInfo.verification.additional_document || {}
@@ -359,6 +347,7 @@ module.exports = {
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/directors/${req.query.stripeid}`, director.id)
         return director
       } catch (error) {
+        console.log(error)
         if (error.raw && error.raw.param === 'person_token') {
           throw new Error('invalid-token')
         }

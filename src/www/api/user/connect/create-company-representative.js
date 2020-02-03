@@ -215,17 +215,11 @@ module.exports = {
           representativeInfo.address_kanji[property] = req.body[posted]
           continue
         } else if (field.startsWith('verification.document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.document'.length)
           representativeInfo.verification = representativeInfo.verification || {}
           representativeInfo.verification.document = representativeInfo.verification.document || {}
           representativeInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.additional_document'.length)
           representativeInfo.verification = representativeInfo.verification || {}
           representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}
@@ -268,17 +262,11 @@ module.exports = {
           representativeInfo.address_kanji[property] = req.body[posted]
           continue
         } else if (field.startsWith('verification.document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.document'.length)
           representativeInfo.verification = representativeInfo.verification || {}
           representativeInfo.verification.document = representativeInfo.verification.document || {}
           representativeInfo.verification.document[property] = req.body[posted]
         } else if (field.startsWith('verification.additional_document.')) {
-          if (global.stripeJS) {
-            continue
-          }
           const property = field.substring('verification.additional_document'.length)
           representativeInfo.verification = representativeInfo.verification || {}
           representativeInfo.verification.additional_document = representativeInfo.verification.additional_document || {}

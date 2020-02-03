@@ -105,45 +105,50 @@ async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
-  for (const fullField of req.data.stripeAccount.requirements.currently_due) {
-    if (!fullField.startsWith(req.data.representative.id)) {
-      continue
-    }
-    const field = fullField.substring(`${req.data.representative.id}.`.length)
-    const posted = field.split('.').join('_')
-    if (!req.body[posted]) {
-      if (field === 'address.line2' ||
-          field === 'relationship.title' ||
-          field === 'relationship.owner' ||
-          field === 'verification.document' ||
-          field === 'verification.additional_document') {
+  if (global.stripeJS === 3 && !req.body.token) {
+    return renderPage(req, res, 'invalid-token')
+  }
+  if (global.stripeJS !== 3) {
+    for (const fullField of req.data.stripeAccount.requirements.currently_due) {
+      if (!fullField.startsWith(req.data.representative.id)) {
         continue
       }
-      return renderPage(req, res, `invalid-${posted}`)
+      const field = fullField.substring(`${req.data.representative.id}.`.length)
+      const posted = field.split('.').join('_')
+      if (!req.body[posted]) {
+        if (field === 'address.line2' ||
+            field === 'relationship.title' ||
+            field === 'relationship.owner' ||
+            field === 'verification.document' ||
+            field === 'verification.additional_document') {
+          continue
+        }
+        return renderPage(req, res, `invalid-${posted}`)
+      }
     }
-  }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.verification.document`) > -1) {
-    if (!req.uploads || (
-      !req.uploads.verification_document_front &&
-        !req.body.verification_document_front)) {
-      return renderPage(req, res, 'invalid-verification_document_front')
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.verification.document`) > -1) {
+      if (!req.uploads || (
+        !req.uploads.verification_document_front &&
+          !req.body.verification_document_front)) {
+        return renderPage(req, res, 'invalid-verification_document_front')
+      }
+      if (!req.uploads || (
+        !req.uploads.verification_document_back &&
+        !req.body.verification_document_back)) {
+        return renderPage(req, res, 'invalid-verification_document_back')
+      }
     }
-    if (!req.uploads || (
-      !req.uploads.verification_document_back &&
-      !req.body.verification_document_back)) {
-      return renderPage(req, res, 'invalid-verification_document_back')
-    }
-  }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.verification.additional.document`) > -1) {
-    if (!req.uploads || (
-      !req.uploads.verification_additional_document_front &&
-      !req.body.verification_additional_document_front)) {
-      return renderPage(req, res, 'invalid-verification_additional_document_front')
-    }
-    if (!req.uploads || (
-      !req.uploads.verification_additional_document_back &&
-      !req.body.verification_additional_document_back)) {
-      return renderPage(req, res, 'invalid-verification_additional_document_back')
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.representative.id}.verification.additional.document`) > -1) {
+      if (!req.uploads || (
+        !req.uploads.verification_additional_document_front &&
+        !req.body.verification_additional_document_front)) {
+        return renderPage(req, res, 'invalid-verification_additional_document_front')
+      }
+      if (!req.uploads || (
+        !req.uploads.verification_additional_document_back &&
+        !req.body.verification_additional_document_back)) {
+        return renderPage(req, res, 'invalid-verification_additional_document_back')
+      }
     }
   }
   try {

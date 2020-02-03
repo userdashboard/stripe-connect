@@ -102,48 +102,50 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${req.query.stripeid}`)
-  const requirements = JSON.parse(requirementsRaw)
-  for (const field of requirements.currently_due) {
-    const posted = field.split('.').join('_')
-    if (!field) {
-      if (field === 'verification.front' ||
-          field === 'verification.back') {
-        continue
-      }
-      return renderPage(req, res, `invalid-${posted}`)
-    }
-  }
-  if (req.body.address_country && req.body.address_country.length && !connect.countryNameIndex[req.body.address_country]) {
-    delete (req.body.address_country)
-    return renderPage(req, res, 'invalid-address_country')
-  }
-  if (req.body.address_state && req.body.address_state.length) {
-    const states = connect.countryDivisions[req.body.address_country || req.data.stripeAccount.country]
-    let found
-    for (const state of states) {
-      found = state.value === req.body.address_state
-      if (found) {
-        break
+  if (global.stripeJS !== 3) {
+    const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${req.query.stripeid}`)
+    const requirements = JSON.parse(requirementsRaw)
+    for (const field of requirements.currently_due) {
+      const posted = field.split('.').join('_')
+      if (!field) {
+        if (field === 'verification.front' ||
+            field === 'verification.back') {
+          continue
+        }
+        return renderPage(req, res, `invalid-${posted}`)
       }
     }
-    if (!found) {
-      return renderPage(req, res, 'invalid-address_state')
+    if (req.body.address_country && req.body.address_country.length && !connect.countryNameIndex[req.body.address_country]) {
+      delete (req.body.address_country)
+      return renderPage(req, res, 'invalid-address_country')
     }
-  }
-  if (req.data && req.data.owners && req.data.owners.length) {
-    for (const owner of req.data.owners) {
-      if (owner.first_name === req.body.first_name &&
-          owner.last_name === req.body.last_name) {
-        return renderPage(req, res, 'duplicate-name')
+    if (req.body.address_state && req.body.address_state.length) {
+      const states = connect.countryDivisions[req.body.address_country || req.data.stripeAccount.country]
+      let found
+      for (const state of states) {
+        found = state.value === req.body.address_state
+        if (found) {
+          break
+        }
+      }
+      if (!found) {
+        return renderPage(req, res, 'invalid-address_state')
       }
     }
-  }
-  if (!req.body.token && (!req.uploads || !req.uploads.verification_document_front)) {
-    return renderPage(req, res, 'invalid-verification_document_front')
-  }
-  if (!req.body.token && (!req.uploads || !req.uploads.verification_document_back)) {
-    return renderPage(req, res, 'invalid-verification_document_back')
+    if (req.data && req.data.owners && req.data.owners.length) {
+      for (const owner of req.data.owners) {
+        if (owner.first_name === req.body.first_name &&
+            owner.last_name === req.body.last_name) {
+          return renderPage(req, res, 'duplicate-name')
+        }
+      }
+    }
+    if (!req.uploads || !req.uploads.verification_document_front) {
+      return renderPage(req, res, 'invalid-verification_document_front')
+    }
+    if (!req.uploads || !req.uploads.verification_document_back) {
+      return renderPage(req, res, 'invalid-verification_document_back')
+    }
   }
   let person
   try {

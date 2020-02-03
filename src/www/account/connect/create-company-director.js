@@ -67,6 +67,7 @@ async function renderPage (req, res, messageTemplate) {
 }
 
 async function submitForm (req, res) {
+  console.log(req.url, req.method, req.body)
   if (!req.body || req.body.refresh === 'true') {
     return renderPage(req, res)
   }
@@ -76,23 +77,25 @@ async function submitForm (req, res) {
   if (global.stripeJS === 3 && !req.body.token) {
     return renderPage(req, res, 'invalid-token')
   }
-  const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:director:${req.query.stripeid}`)
-  const requirements = JSON.parse(requirementsRaw)
-  for (const field of requirements.currently_due) {
-    const posted = field.split('.').join('_')
-    if (!field) {
-      if (field === 'verification.document.front' ||
-          field === 'verification.document.back') {
-        continue
+  if (global.stripeJS !== 3) {
+    const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:director:${req.query.stripeid}`)
+    const requirements = JSON.parse(requirementsRaw)
+    for (const field of requirements.currently_due) {
+      const posted = field.split('.').join('_')
+      if (!field) {
+        if (field === 'verification.document.front' ||
+            field === 'verification.document.back') {
+          continue
+        }
+        return renderPage(req, res, `invalid-${posted}`)
       }
-      return renderPage(req, res, `invalid-${posted}`)
     }
-  }
-  if (req.data && req.data.directors && req.data.directors.length) {
-    for (const director of req.data.directors) {
-      if (director.first_name === req.body.first_name &&
-          director.last_name === req.body.last_name) {
-        return renderPage(req, res, 'duplicate-name')
+    if (req.data && req.data.directors && req.data.directors.length) {
+      for (const director of req.data.directors) {
+        if (director.first_name === req.body.first_name &&
+            director.last_name === req.body.last_name) {
+          return renderPage(req, res, 'duplicate-name')
+        }
       }
     }
   }
