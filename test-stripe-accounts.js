@@ -113,11 +113,6 @@ module.exports = {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
-    await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.document`)
-    for (const posted in representativePostData) {
-      const field = posted.replace('address_', 'address.').replace('relationship_', 'relationship.').replace('dob_', 'dob.').replace('verification_', 'verification.')
-      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.${field}`)
-    }
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
       await TestHelper.updateCompanyRepresentative(user, {}, {
