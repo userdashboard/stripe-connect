@@ -33,12 +33,15 @@ module.exports = {
         representative: true
       }
     }
-    if (!req.body.relationship_representative) {
-      throw new Error('invalid-relationship_representative')
-    }
     if (global.stripeJS === 3) {
       representativeInfo.person_token = req.body.token
     } else {
+      if (!req.body.relationship_representative) {
+        throw new Error('invalid-relationship_representative')
+      }
+      if (req.body.gender && req.body.gender !== 'male' && req.body.gender !== 'female') {
+        throw new Error('invalid-gender')
+      }
       for (const field of requirements.currently_due) {
         const posted = field.split('.').join('_')
         if (!req.body || !req.body[posted]) {
