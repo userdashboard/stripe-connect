@@ -2451,7 +2451,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   AU: {
     dob_day: '1',
@@ -2459,7 +2461,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   BE: {
     dob_day: '1',
@@ -2467,7 +2471,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   CA: false,
   CH: {
@@ -2476,7 +2482,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   DE: {
     dob_day: '1',
@@ -2484,7 +2492,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   DK: {
     dob_day: '1',
@@ -2492,7 +2502,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   EE: {
     dob_day: '1',
@@ -2500,7 +2512,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   ES: {
     dob_day: '1',
@@ -2508,7 +2522,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   FI: {
     dob_day: '1',
@@ -2516,7 +2532,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   FR: {
     dob_day: '1',
@@ -2524,7 +2542,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   GB: {
     dob_day: '1',
@@ -2532,7 +2552,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   GR: {
     dob_day: '1',
@@ -2540,7 +2562,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   HK: false,
   IE: {
@@ -2549,7 +2573,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   IT: {
     dob_day: '1',
@@ -2557,7 +2583,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   JP: false,
   LT: {
@@ -2566,7 +2594,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   LU: {
     dob_day: '1',
@@ -2574,7 +2604,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   LV: {
     dob_day: '1',
@@ -2582,7 +2614,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   MY: false,
   NL: {
@@ -2591,7 +2625,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   NO: {
     dob_day: '1',
@@ -2599,7 +2635,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   NZ: {
     dob_day: '1',
@@ -2607,7 +2645,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   PL: {
     dob_day: '1',
@@ -2615,7 +2655,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   PT: {
     dob_day: '1',
@@ -2623,7 +2665,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   SE: {
     dob_day: '1',
@@ -2631,7 +2675,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   SI: {
     dob_day: '1',
@@ -2639,7 +2685,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   SG: false,
   SK: {
@@ -2648,7 +2696,9 @@ const companyDirectorData = module.exports.companyDirectorData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    email: true
+    email: true,
+    relationship_director: true,
+    relationship_title: 'Director of Stuff'
   },
   US: false
 }
