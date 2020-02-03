@@ -273,6 +273,9 @@ describe('/api/user/connect/create-company-representative', () => {
           } else if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
             assert.strictEqual(representative.dob[property], parseInt(body[field]))
+          } else if (field.startsWith('relationship_')) {
+            const property = field.substring('relationship_'.length)
+            assert.strictEqual(representative.relationship[property], body[field])
           } else if (field === 'id_number') {
             assert.strictEqual(representative.id_number_provided, true)
           } else if (field === 'ssn_last_4') {

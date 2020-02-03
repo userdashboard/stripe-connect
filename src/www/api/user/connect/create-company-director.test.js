@@ -239,6 +239,9 @@ describe('/api/user/connect/create-company-director', () => {
           if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
             assert.strictEqual(director.dob[property], parseInt(body[field]))
+          } else if (field.startsWith('relationship_')) {
+            const property = field.substring('relationship_'.length)
+            assert.strictEqual(director.relationship[property], body[field])
           } else {
             assert.strictEqual(director[field], body[field])
           }
