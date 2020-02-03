@@ -12,14 +12,7 @@ describe('/api/user/connect/update-payment-information', () => {
         const req = TestHelper.createRequest('/api/user/connect/update-payment-information')
         req.account = user.account
         req.session = user.session
-        req.body = {
-          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_holder_type: 'individual',
-          account_number: '00012345',
-          country: 'GB',
-          currency: 'gbp',
-          sort_code: '108800'
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData.US)
         let errorMessage
         try {
           await req.patch(req)
@@ -34,14 +27,7 @@ describe('/api/user/connect/update-payment-information', () => {
         const req = TestHelper.createRequest('/api/user/connect/update-payment-information?stripeid=invalid')
         req.account = user.account
         req.session = user.session
-        req.body = {
-          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_holder_type: 'individual',
-          account_number: '00012345',
-          country: 'GB',
-          currency: 'gbp',
-          sort_code: '108800'
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData.US)
         let errorMessage
         try {
           await req.patch(req)
@@ -63,14 +49,7 @@ describe('/api/user/connect/update-payment-information', () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
         req.account = user2.account
         req.session = user2.session
-        req.body = {
-          account_holder_name: `${user.profile.firstName} ${user.profile.lastName}`,
-          account_holder_type: 'individual',
-          account_number: '00012345',
-          country: 'GB',
-          currency: 'gbp',
-          sort_code: '108800'
-        }
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[user.stripeAccount.country])
         let errorMessage
         try {
           await req.patch(req)
