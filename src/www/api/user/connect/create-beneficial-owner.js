@@ -34,6 +34,9 @@ module.exports = {
       ownerInfo.relationship = {
         owner: true
       }
+      if (!req.body.relationship_owner) {
+        throw new Error('invalid-relationship_owner')
+      }
       const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${req.query.stripeid}`)
       const requirements = JSON.parse(requirementsRaw)
       let validateDOB

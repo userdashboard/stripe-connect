@@ -35,9 +35,11 @@ module.exports = {
       directorInfo.relationship = {
         director: true
       }
+      if (!req.body.relationship_director) {
+        throw new Error('invalid-relationship_director')
+      }
       const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:director:${req.query.stripeid}`)
       const requirements = JSON.parse(requirementsRaw)
-      console.log(requirements, stripeAccount.country)
       let validateDOB
       if (req.body.dob_day) {
         validateDOB = true

@@ -33,6 +33,9 @@ module.exports = {
         representative: true
       }
     }
+    if (!req.body.relationship_representative) {
+      throw new Error('invalid-relationship_representative')
+    }
     if (global.stripeJS === 3) {
       representativeInfo.person_token = req.body.token
     } else {
