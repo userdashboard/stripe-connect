@@ -290,6 +290,13 @@ describe('/api/user/connect/update-company-representative', () => {
           } else if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
             assert.strictEqual(representative.address[property], body[field])
+          } else if (field.startsWith('relationship_')) {
+            const property = field.substring('relationship_'.length)
+            if (body[field] === 'true') {
+              assert.strictEqual(representative.relationship[property], true)
+            } else {
+              assert.strictEqual(representative.relationship[property], body[field])
+            }
           } else if (field === 'id_number') {
             assert.strictEqual(representative.id_number_provided, true)
           } else if (field === 'ssn_last_4') {

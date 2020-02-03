@@ -249,6 +249,13 @@ describe('/api/user/connect/update-company-director', () => {
           if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
             assert.strictEqual(director.address[property], body[field])
+          } else if (field.startsWith('relationship_')) {
+            const property = field.substring('relationship_'.length)
+            if (body[field] === 'true') {
+              assert.strictEqual(director.relationship[property], true)
+            } else {
+              assert.strictEqual(director.relationship[property], body[field])
+            }
           } else {
             assert.strictEqual(director[field], body[field])
           }

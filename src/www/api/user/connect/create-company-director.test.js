@@ -231,7 +231,11 @@ describe('/api/user/connect/create-company-director', () => {
             assert.strictEqual(director.dob[property], parseInt(body[field]))
           } else if (field.startsWith('relationship_')) {
             const property = field.substring('relationship_'.length)
-            assert.strictEqual(director.relationship[property], body[field])
+            if (body[field] === 'true') {
+              assert.strictEqual(director.relationship[property], true)
+            } else {
+              assert.strictEqual(director.relationship[property], body[field])
+            }
           } else {
             assert.strictEqual(director[field], body[field])
           }
