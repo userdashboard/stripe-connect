@@ -326,16 +326,16 @@ describe('/api/user/connect/update-individual-registration', () => {
         const accountNow = await req.patch()
         if (field.startsWith('address_')) {
           const property = field.substring('address_kana'.length)
-          assert.strictEqual(accountNow.company.address_kana[property], body[field])
+          assert.strictEqual(accountNow.individual.address_kana[property], body[field])
         } else if (field.startsWith('address_kanji')) {
           const property = field.substring('address_kanji'.length)
-          assert.strictEqual(accountNow.company.address_kanji[property], body[field])
+          assert.strictEqual(accountNow.individual.address_kanji[property], body[field])
         } else if (field.startsWith('address_')) {
           const property = field.substring('address_'.length)
-          assert.strictEqual(accountNow.company.address[property], body[field])
+          assert.strictEqual(accountNow.individual.address[property], body[field])
         } else if (field.startsWith('dob_')) {
           const property = field.substring('dob_'.length)
-          assert.strictEqual(accountNow.company.address[property], body[field])
+          assert.strictEqual(accountNow.individual.address[property], body[field])
         } else {
           // TODO: Stripe may or may not transform the phone number
           // by removing hyphons and adding the country dial code
@@ -343,12 +343,12 @@ describe('/api/user/connect/update-individual-registration', () => {
           // Stripe may also remove the country code too so this
           // can be fixed when they have a consistent transformation
           if (field === 'phone') {
-            if (owner[field] === body[field]) {
-              assert.strictEqual(owner[field], body[field])  
+            if (accountNow.individual[field] === body[field]) {
+              assert.strictEqual(accountNow.individual[field], body[field])
             } else {
               let withoutCountryCode = body[field]
               withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
-              assert.strictEqual(owner[field], withoutCountryCode)
+              assert.strictEqual(accountNow.individual[field], withoutCountryCode)
             }
           } else {
             assert.strictEqual(accountNow[field], body[field])

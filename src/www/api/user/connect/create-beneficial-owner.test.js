@@ -256,7 +256,7 @@ describe('/api/user/connect/create-beneficial-owner', () => {
             // can be fixed when they have a consistent transformation
             if (field === 'phone') {
               if (owner[field] === body[field]) {
-                assert.strictEqual(owner[field], body[field])  
+                assert.strictEqual(owner[field], body[field])
               } else {
                 let withoutCountryCode = body[field]
                 withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))

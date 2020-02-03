@@ -301,12 +301,12 @@ describe('/api/user/connect/update-company-representative', () => {
             // Stripe may also remove the country code too so this
             // can be fixed when they have a consistent transformation
             if (field === 'phone') {
-              if (owner[field] === body[field]) {
-                assert.strictEqual(owner[field], body[field])  
+              if (representative[field] === body[field]) {
+                assert.strictEqual(representative[field], body[field])
               } else {
                 let withoutCountryCode = body[field]
                 withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
-                assert.strictEqual(owner[field], withoutCountryCode)
+                assert.strictEqual(representative[field], withoutCountryCode)
               }
             } else {
               assert.strictEqual(representative[field], body[field])

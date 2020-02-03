@@ -27,7 +27,7 @@ module.exports = {
     }
     const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:representative:${req.query.stripeid}`)
     const requirements = JSON.parse(requirementsRaw)
-    const existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
+    let existingRepresentative = await global.api.user.connect.CompanyRepresentative.get(req)
     const representativeInfo = {
       relationship: {
         representative: true
@@ -138,7 +138,7 @@ module.exports = {
             if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_front')
           }
         }
-      } else if (requirements.currently_due.indexOf(`verification.document`) > -1) {
+      } else if (requirements.currently_due.indexOf('verification.document') > -1) {
         throw new Error('invalid-verification_document_front')
       }
       if (req.uploads && req.uploads.verification_document_back) {
@@ -183,7 +183,7 @@ module.exports = {
             if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('invalid-verification_document_back')
           }
         }
-      } else if (requirements.currently_due.indexOf(`verification.document`) > -1) {
+      } else if (requirements.currently_due.indexOf('verification.document') > -1) {
         throw new Error('invalid-verification_document_back')
       }
       for (const field of requirements.currently_due) {
@@ -377,10 +377,10 @@ module.exports = {
       }
     }
     if (!existingRepresentative || !existingRepresentative.id) {
+      let newRepresentative
       while (true) {
-        let newRepresentative
         try {
-           newRepresentative = await stripe.accounts.createPerson(req.query.stripeid, {
+          newRepresentative = await stripe.accounts.createPerson(req.query.stripeid, {
             relationship: {
               representative: true
             }
@@ -418,7 +418,7 @@ module.exports = {
         }
       }
       await dashboard.Storage.write(`stripeid:requirements:representative:${stripeAccount.id}`, newRepresentative.requirements)
-      await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${representative.id}`, req.query.stripeid)
+      await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${newRepresentative.id}`, req.query.stripeid)
       existingRepresentative = newRepresentative
     }
     let representative

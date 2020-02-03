@@ -147,7 +147,7 @@ describe('/api/user/connect/create-company-representative', () => {
             }
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-          
+
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
               const user = await TestHelper.createUser()
@@ -202,7 +202,7 @@ describe('/api/user/connect/create-company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, `invalid-token`)
+        assert.strictEqual(errorMessage, 'invalid-token')
       })
 
       it('invalid posted token', async () => {
@@ -228,7 +228,7 @@ describe('/api/user/connect/create-company-representative', () => {
         } catch (error) {
           errorMessage = error.message
         }
-        assert.strictEqual(errorMessage, `invalid-token`)
+        assert.strictEqual(errorMessage, 'invalid-token')
       })
     })
   })
@@ -284,12 +284,12 @@ describe('/api/user/connect/create-company-representative', () => {
             // Stripe may also remove the country code too so this
             // can be fixed when they have a consistent transformation
             if (field === 'phone') {
-              if (owner[field] === body[field]) {
-                assert.strictEqual(owner[field], body[field])  
+              if (representative[field] === body[field]) {
+                assert.strictEqual(representative[field], body[field])
               } else {
                 let withoutCountryCode = body[field]
                 withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
-                assert.strictEqual(owner[field], withoutCountryCode)
+                assert.strictEqual(representative[field], withoutCountryCode)
               }
             } else {
               assert.strictEqual(representative[field], body[field])

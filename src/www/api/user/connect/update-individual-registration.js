@@ -21,7 +21,7 @@ module.exports = {
     req.body = req.body || {}
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
-    }    
+    }
     const accountInfo = {}
     if (global.stripeJS === 3) {
       accountInfo.account_token = req.body.token

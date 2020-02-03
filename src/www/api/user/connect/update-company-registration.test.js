@@ -310,12 +310,12 @@ describe('/api/user/connect/update-company-registration', () => {
           // Stripe may also remove the country code too so this
           // can be fixed when they have a consistent transformation
           if (field === 'phone') {
-            if (owner[field] === body[field]) {
-              assert.strictEqual(owner[field], body[field])  
+            if (accountNow.company[field] === body[field]) {
+              assert.strictEqual(accountNow.company[field], body[field])
             } else {
               let withoutCountryCode = body[field]
               withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
-              assert.strictEqual(owner[field], withoutCountryCode)
+              assert.strictEqual(accountNow.company[field], withoutCountryCode)
             }
           } else {
             assert.strictEqual(accountNow[field], body[field])
