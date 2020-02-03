@@ -2308,6 +2308,7 @@ const beneficialOwnerData = module.exports.beneficialOwnerData = {
   IE: {
     address_city: 'Dublin',
     address_line1: '123 Sesame St',
+    address_state: 'D',
     address_postal_code: 'Dublin 1',
     dob_day: '1',
     dob_month: '1',
