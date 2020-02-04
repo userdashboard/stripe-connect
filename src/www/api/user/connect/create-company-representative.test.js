@@ -266,7 +266,15 @@ describe('/api/user/connect/create-company-representative', () => {
             assert.strictEqual(representative.address_kana[property], body[field])
           } else if (field.startsWith('address_kanji')) {
             const property = field.substring('address_kanji_'.length)
-            assert.strictEqual(representative.address_kanji[property], body[field])
+            if (property === 'postal_code') {
+              // TODO: Stripe rejects the JP-charset １５００００１
+              // and also transforms the plain text 1500001 to
+              // the rejected １５００００１ so when they have a
+              // consistent approach this can be fixed
+              assert.strictEqual(representative.address_kanji[property], '１５００００１')
+            } else {
+              assert.strictEqual(representative.address_kanji[property], body[field])
+            }
           } else if (field.startsWith('address_')) {
             const property = field.substring('address_'.length)
             assert.strictEqual(representative.address[property], body[field])
