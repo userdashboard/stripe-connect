@@ -4,7 +4,7 @@ const connect = require('../../../../index.js')
 const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
-describe('/account/connect/create-company-representative', () => {
+describe.only('/account/connect/create-company-representative', () => {
   describe('CreateCompanyRepresentative#BEFORE', () => {
     it('should reject invalid registration', async () => {
       const user = await TestHelper.createUser()
