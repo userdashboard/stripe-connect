@@ -279,10 +279,10 @@ describe('/api/user/connect/update-company-representative', () => {
           req.body = TestHelper.createMultiPart(req, body)
           const representative = await req.patch()
           if (field.startsWith('address_kana')) {
-            const property = field.substring('address_kana'.length)
+            const property = field.substring('address_kana_'.length)
             assert.strictEqual(representative.address_kana[property], body[field])
           } else if (field.startsWith('address_kanji')) {
-            const property = field.substring('address_kanji'.length)
+            const property = field.substring('address_kanji_'.length)
             assert.strictEqual(representative.address_kanji[property], body[field])
           } else if (field.startsWith('address_')) {
             const property = field.substring('address_'.length)

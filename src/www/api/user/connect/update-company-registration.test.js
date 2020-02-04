@@ -292,10 +292,10 @@ describe('/api/user/connect/update-company-registration', () => {
         req.body = TestHelper.createMultiPart(req, body)
         const accountNow = await req.patch()
         if (field.startsWith('address_')) {
-          const property = field.substring('address_kana'.length)
+          const property = field.substring('address_kana_'.length)
           assert.strictEqual(accountNow.company.address_kana[property], body[field])
         } else if (field.startsWith('address_kanji')) {
-          const property = field.substring('address_kanji'.length)
+          const property = field.substring('address_kanji_'.length)
           assert.strictEqual(accountNow.company.address_kanji[property], body[field])
         } else if (field.startsWith('address_')) {
           const property = field.substring('address_'.length)
