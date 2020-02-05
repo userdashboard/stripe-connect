@@ -985,7 +985,7 @@ const companyData = module.exports.companyData = {
     address_postal_code: '10007',
     address_state: 'NY',
     name: 'Company',
-    phone: '4567890123',
+    phone: '+14567890123',
     tax_id: '00000000000'
   }
 }
@@ -1449,7 +1449,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '4567890123',
+    phone: '+14567890123',
     relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
@@ -2156,7 +2156,7 @@ const individualData = module.exports.individualData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    phone: '4567890123',
+    phone: '+14567890123',
     ssn_last_4: '0000',
     first_name: true,
     last_name: true,
