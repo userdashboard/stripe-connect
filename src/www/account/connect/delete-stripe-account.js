@@ -16,7 +16,10 @@ async function beforeRequest (req) {
       stripeAccount: {
         country: 'US',
         id: '',
-        metadata: {}
+        metadata: {},
+        requirements: {
+          currently_due: []
+        }
       }
     }
     return
