@@ -135,8 +135,6 @@ module.exports = {
           const property = posted.substring('business_profile_'.length)
           accountInfo.business_profile = accountInfo.business_profile || {}
           accountInfo.business_profile[property] = req.body[posted]
-          delete (req.body[posted])
-          continue
         } else if (posted.startsWith('address_kanji_')) {
           const property = posted.substring('address_kanji_'.length)
           accountInfo.company = accountInfo.company || {}
@@ -167,8 +165,6 @@ module.exports = {
           const property = posted.substring('business_profile_'.length)
           accountInfo.business_profile = accountInfo.business_profile || {}
           accountInfo.business_profile[property] = req.body[posted]
-          delete (req.body[posted])
-          continue
         } else if (posted.startsWith('address_kanji_')) {
           const property = posted.substring('address_kanji_'.length)
           accountInfo.company = accountInfo.company || {}
@@ -211,11 +207,11 @@ module.exports = {
           throw new Error('invalid-business_profile_url')
         }
         accountInfo.business_profile = accountInfo.business_profile || {}
-        accountInfo.business_profile.business_profile_url = req.body.business_profile_url
+        accountInfo.business_profile.url = req.body.business_profile_url
       }
       if (req.body.business_profile_product_description) {
         accountInfo.business_profile = accountInfo.business_profile || {}
-        accountInfo.business_profile.business_profile_product_description = req.body.business_profile_product_description
+        accountInfo.business_profile.product_description = req.body.business_profile_product_description
       }
       // TODO: these fields are optional but not represented in requirements
       // so when Stripe updates to have something like an 'optionally_due' array
