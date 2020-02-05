@@ -294,17 +294,16 @@ describe('/api/user/connect/create-company-representative', () => {
             assert.strictEqual(representative.ssn_last_4_provided, true)
           } else {
             // TODO: Stripe may or may not transform the phone number
-            // by removing hyphons and adding the country dial code
-            // so all test data is using that format, but
-            // Stripe may also remove the country code too so this
-            // can be fixed when they have a consistent transformation
+            // by removing hyphons and adding the US/CA +1 country code
+            // even to eg, Austria, but they reject submitting country
+            // codes with the phone number too
             if (field === 'phone') {
               if (representative[field] === body[field]) {
                 assert.strictEqual(representative[field], body[field])
               } else {
                 let withoutCountryCode = body[field]
                 withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
-                assert.strictEqual(representative[field], withoutCountryCode)
+                assert.strictEqual(representative[field], `+1${body[field]}`)
               }
             } else {
               assert.strictEqual(representative[field], body[field])
