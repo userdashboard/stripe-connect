@@ -129,6 +129,7 @@ module.exports = {
           if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
             throw new Error('invalid-business_profile_url')
           }
+          console.log('missing required field', field, req.body, stripeAccount)
           throw new Error(`invalid-${posted}`)
         }
         if (posted.startsWith('business_profile_')) {
@@ -199,7 +200,7 @@ module.exports = {
           throw new Error('invalid-business_profile_mcc')
         }
         accountInfo.business_profile = accountInfo.business_profile || {}
-        accountInfo.business_profile.mcc = req.body.mcc
+        accountInfo.business_profile.mcc = req.body.business_profile_mcc
       }
       if (req.body.business_profile_url) {
         if (!req.body.business_profile_url.startsWith('http://') &&
@@ -266,6 +267,7 @@ module.exports = {
         accountInfo.company.verification.document.front = req.body.verification_document_front
       }
     }
+    console.log('updating account', accountInfo)
     while (true) {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)
