@@ -122,6 +122,15 @@ module.exports = {
         })
         await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
       }
+    } else {
+      // TODO: these fields are required 'eventually' which is
+      // not consistent with all the other countries' reps so
+      // if that changes this 'special update' can be removed
+      await TestHelper.updateCompanyRepresentative(user, {
+        address_city: 'Hong Kong',
+        address_line1: '123 Sesame St',    
+        id_number: '000000000'
+      })
     }
     await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
     if (beneficialOwnerData[country] !== false) {
@@ -1190,8 +1199,6 @@ const representativeData = module.exports.representativeData = {
     email: true
   },
   HK: {
-    address_city: 'Hong Kong',
-    address_line1: '123 Sesame St',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
@@ -1199,8 +1206,7 @@ const representativeData = module.exports.representativeData = {
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
-    last_name: true,
-    id_number: '000000000'
+    last_name: true
   },
   IE: {
     address_city: 'Dublin',
