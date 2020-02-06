@@ -107,20 +107,23 @@ module.exports = {
     })
     const representativePostData = createPostData(representativeData[country], user.profile)
     await TestHelper.createCompanyRepresentative(user, representativePostData)
-    await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
-    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
-    await TestHelper.updateCompanyRepresentative(user, {}, {
-      verification_document_back: TestHelper['success_id_scan_back.png'],
-      verification_document_front: TestHelper['success_id_scan_front.png']
-    })
-    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
+    if (country !== 'HK') {
+      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
+      await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
       await TestHelper.updateCompanyRepresentative(user, {}, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
+      if (country !== 'CA' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+        await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
+        await TestHelper.updateCompanyRepresentative(user, {}, {
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        })
+        await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
+      }
     }
+    await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
@@ -1014,9 +1017,6 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    // TODO: for consistency include country code
-    // as Stripe may add it anyway when submitting,
-    // except AU's country code +61 isn't recognized
     phone: '4567890123',
     relationship_representative: true,
     relationship_executive: 'true',
@@ -1190,6 +1190,8 @@ const representativeData = module.exports.representativeData = {
     email: true
   },
   HK: {
+    address_city: 'Hong Kong',
+    address_line1: '123 Sesame St',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
@@ -1197,7 +1199,8 @@ const representativeData = module.exports.representativeData = {
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything',
     first_name: true,
-    last_name: true
+    last_name: true,
+    id_number: '000000000'
   },
   IE: {
     address_city: 'Dublin',
