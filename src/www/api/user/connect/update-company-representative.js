@@ -342,6 +342,7 @@ module.exports = {
           representativeInfo.address_kana[property] = req.body[posted]
         } else if (field.startsWith('address.')) {
           const property = field.substring('address.'.length)
+          representativeInfo.address = representativeInfo.address || {}
           representativeInfo.address[property] = req.body[posted]
         } else if (field.startsWith('verification.document.')) {
           const property = field.substring('verification.document'.length)
