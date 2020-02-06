@@ -1536,6 +1536,7 @@ const paymentData = module.exports.paymentData = {
   },
   FR: {
     account_holder_name: true,
+    account_holder_type: 'individual',
     country: 'FR',
     currency: 'eur',
     iban: 'FR89370400440532013000'
