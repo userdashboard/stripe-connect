@@ -164,7 +164,7 @@ describe('/api/user/connect/update-individual-registration', () => {
                 verification_document_front: TestHelper['success_id_scan_front.png']
               }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
-              body[field] = 'invalid'
+              body[field] = invalidValues[field]
               req.body = TestHelper.createMultiPart(req, body)
               let errorMessage
               try {
@@ -401,7 +401,7 @@ describe('/api/user/connect/update-individual-registration', () => {
       req2.session = user.session
       req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB, person)
       await req2.post()
-      const stripeAccountNow = await global.api.user.connect.Beneficialget(req2)
+      const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req2)
       assert.notStrictEqual(stripeAccountNow.metadata.token, null)
       assert.notStrictEqual(stripeAccountNow.metadata.token, undefined)
     })

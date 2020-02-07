@@ -267,7 +267,6 @@ module.exports = {
         accountInfo.company.verification.document.front = req.body.verification_document_front
       }
     }
-    console.log('updating account', accountInfo)
     while (true) {
       try {
         const accountNow = await stripe.accounts.update(req.query.stripeid, accountInfo, req.stripeKey)

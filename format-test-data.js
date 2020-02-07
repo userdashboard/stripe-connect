@@ -9,7 +9,7 @@
 
   Example:
 
-  await TestHelper.createCompanyRepresentative(user, {
+  await TestHelper.updatePerson(user, {
     address_city: 'Berlin',
     address_country: 'DE',
     address_line1: 'First Street',

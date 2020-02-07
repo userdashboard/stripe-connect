@@ -48,21 +48,18 @@ for (const event of events) {
 }
 
 module.exports = {
-  createBeneficialOwner,
-  createCompanyDirector,
   createExternalAccount,
   createMultiPart,
   createPayout,
+  createPerson,
   createStripeAccount,
   createStripeRegistration,
-  createCompanyRepresentative,
   submitBeneficialOwners,
   submitCompanyDirectors,
   submitStripeAccount,
   triggerVerification,
-  updateBeneficialOwner,
+  updatePerson,
   updateStripeRegistration,
-  updateCompanyRepresentative,
   waitForAccountRequirement: util.promisify(waitForAccountRequirement),
   waitForPersonRequirement: util.promisify(waitForPersonRequirement),
   waitForPendingFieldsToLeave: util.promisify(waitForPendingFieldsToLeave),
@@ -287,19 +284,6 @@ async function createStripeAccount (user, properties) {
   req.account = user.account
   req.body = properties
   user.stripeAccount = await req.post()
-  global.monitorStripeAccount = user.stripeAccount.id
-  if (req.body.type === 'company') {
-    const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account-company-representative?stripeid=${user.stripeAccount.id}`)
-    req2.stripeKey = stripeKey
-    req2.session = user.session
-    req2.account = user.account
-    while (!user.representative) {
-      try {
-        user.representative = await global.api.user.connect.CompanyRepresentative.get(req2)
-      } catch (error) {
-      }
-    }
-  }
   return user.stripeAccount
 }
 
@@ -320,27 +304,6 @@ async function updateStripeRegistration (user, properties, uploads) {
   req.uploads = uploads || []
   req.body = createMultiPart(req, properties)
   user.stripeAccount = await req.patch()
-  return user.stripeAccount
-}
-
-async function createCompanyRepresentative (user, properties, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/create-company-representative?stripeid=${user.stripeAccount.id}`)
-  req.session = user.session
-  req.account = user.account
-  req.uploads = uploads || {}
-  req.body = createMultiPart(req, properties)
-  user.representative = await req.post()
-  return user.stripeAccount
-}
-
-async function updateCompanyRepresentative (user, properties, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-company-representative?stripeid=${user.stripeAccount.id}`)
-  req.session = user.session
-  req.account = user.account
-  req.uploads = uploads || {}
-  req.body = createMultiPart(req, properties)
-  const representative = await req.patch()
-  user.representative = representative
   return user.stripeAccount
 }
 
@@ -395,56 +358,37 @@ async function createExternalAccount (user, body) {
   }
 }
 
-async function createBeneficialOwner (user, body, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/create-beneficial-owner?stripeid=${user.stripeAccount.id}`)
+async function createPerson (user, body) {
+  const req = TestHelper.createRequest(`/api/user/connect/create-person?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.uploads = uploads
-  req.body = createMultiPart(req, body)
-  user.owner = await req.post()
-  const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${user.owner.id}`)
-  req2.session = user.session
-  req2.account = user.account
-  req2.stripeKey = stripeKey
-  while (true) {
-    try {
-      user.owner = await global.api.user.connect.BeneficialOwner.get(req2)
-      return user.owner
-    } catch (error) {
-    }
-    await wait()
+  req.body = body
+  const person = await req.post()
+  if (body && body.relationship_owner) {
+    user.owner = person
+  } else if (body && body.relationship_director) {
+    user.director = person
+  } else if (body && body.relationship_representative) {
+    user.representative = person
   }
+  return person
 }
 
-async function updateBeneficialOwner (user, body, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-beneficial-owner?personid=${user.owner.id}`)
+async function updatePerson (user, person, body, uploads) {
+  const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${person.id}`)
   req.session = user.session
   req.account = user.account
   req.uploads = uploads
   req.body = createMultiPart(req, body)
-  user.owner = await req.patch()
-  return user.owner
-}
-
-async function createCompanyDirector (user, body, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/create-company-director?stripeid=${user.stripeAccount.id}`)
-  req.session = user.session
-  req.account = user.account
-  req.uploads = uploads
-  req.body = createMultiPart(req, body)
-  user.director = await req.post()
-  const req2 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${user.director.id}`)
-  req2.session = user.session
-  req2.account = user.account
-  req2.stripeKey = stripeKey
-  while (true) {
-    try {
-      user.director = await global.api.user.connect.CompanyDirector.get(req2)
-      return user.director
-    } catch (error) {
-    }
-    await wait()
+  const personNow = await req.patch()
+  if (personNow.relationship.owner) {
+    user.owner = personNow
+  } else if (personNow.relationship.director) {
+    user.director = personNow
+  } else if (personNow.relationship.representative) {
+    user.representative = personNow
   }
+  return personNow
 }
 
 async function createPayout (user) {
@@ -795,97 +739,20 @@ async function waitForAccountRequirement (user, requirement, callback) {
 }
 
 async function waitForPersonRequirement (user, personid, requirement, callback) {
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req = TestHelper.createRequest(`/api/user/connect/person?personid=${personid}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
-  const req2 = TestHelper.createRequest(`/api/user/connect/beneficial-owner?personid=${personid}`)
-  req2.account = user.account
-  req2.session = user.session
-  req2.stripeKey = stripeKey
-  const req3 = TestHelper.createRequest(`/api/user/connect/company-director?personid=${personid}`)
-  req3.account = user.account
-  req3.session = user.session
-  req3.stripeKey = stripeKey
-  const req4 = TestHelper.createRequest(`/api/user/connect/company-representative?personid=${personid}`)
-  req4.account = user.account
-  req4.session = user.session
-  req4.stripeKey = stripeKey
   async function wait () {
     if (global.testEnded) {
       return
     }
-    let stripeAccount
     try {
-      stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      if (!stripeAccount.requirements) {
-        return setTimeout(wait, 100)
-      }
-      for (const field of stripeAccount.requirements.currently_due) {
-        if (field === `${personid}.${requirement}`) {
-          user.stripeAccount = stripeAccount
+      const person = await global.api.user.connect.Person.get(req)
+      if (person && person.requirements) {
+        if (person.requirements.currently_due.indexOf(requirement) > -1 || 
+            person.requirements.eventually_due.indexOf(requirement) > -1) {
           return setTimeout(callback, 10)
-        }
-      }
-      for (const field of stripeAccount.requirements.eventually_due) {
-        if (field === `${personid}.${requirement}`) {
-          user.stripeAccount = stripeAccount
-          return setTimeout(callback, 10)
-        }
-      }
-    } catch (error) {
-      return setTimeout(wait, 10)
-    }
-    try {
-      const person = await global.api.user.connect.BeneficialOwner.get(req2)
-      if (person && person.requirements) {
-        for (const field of person.requirements.currently_due) {
-          if (field === requirement) {
-            user.stripeAccount = stripeAccount
-            return setTimeout(callback, 10)
-          }
-        }
-        for (const field of person.requirements.eventually_due) {
-          if (field === requirement) {
-            user.stripeAccount = stripeAccount
-            return setTimeout(callback, 10)
-          }
-        }
-      }
-    } catch (error) {
-    }
-    try {
-      const person = await global.api.user.connect.CompanyDirector.get(req3)
-      if (person && person.requirements) {
-        for (const field of person.requirements.currently_due) {
-          if (field === requirement) {
-            user.stripeAccount = stripeAccount
-            return setTimeout(callback, 10)
-          }
-        }
-        for (const field of person.requirements.eventually_due) {
-          if (field === requirement) {
-            user.stripeAccount = stripeAccount
-            return setTimeout(callback, 10)
-          }
-        }
-      }
-    } catch (error) {
-    }
-    try {
-      const person = await global.api.user.connect.CompanyRepresentative.get(req4)
-      if (person && person.requirements) {
-        for (const field of person.requirements.currently_due) {
-          if (field === requirement) {
-            user.stripeAccount = stripeAccount
-            return setTimeout(callback, 10)
-          }
-        }
-        for (const field of person.requirements.eventually_due) {
-          if (field === requirement) {
-            user.stripeAccount = stripeAccount
-            return setTimeout(callback, 10)
-          }
         }
       }
     } catch (error) {

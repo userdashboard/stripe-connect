@@ -27,9 +27,14 @@ module.exports = {
     if (stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
       throw new Error('invalid-company-director')
     }
-    const representative = await global.api.user.connect.CompanyRepresentative.get(req)
-    if (!representative) {
-      throw new Error('invalid-representative')
+    req.query.all = true
+    const persons = await global.api.user.connect.Persons.get(req)
+    if (persons && persons.length) {
+      for (const person of persons) {
+        if (person.requirements.currently_due.length) {
+          throw new Error('invalid-registration')
+        }
+      } 
     }
     if (stripeAccount.requirements.currently_due.length) {
       for (const field of stripeAccount.requirements.currently_due) {

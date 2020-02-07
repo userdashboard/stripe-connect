@@ -1,0 +1,61 @@
+<!doctype html>
+<html navbar="/account/connect/navbar-persons.html">
+  <head>
+    <title>Persons for ${stripeAccount.id}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="/public/pure-min.css" />
+    <link rel="stylesheet" href="/public/content.css" />
+    <link rel="stylesheet" href="/public/content-additional.css" />
+    <base target="_top" href="/" />
+  </head>
+  <body>
+    <h1>Persons</h1>
+    <div id="representative-container">
+      <h2>Company representative</h2>
+      <p>If the nominated person's status changes you must create a new representative.</p>
+      <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_representative=true">Create new representative</a></p>
+      <table id="owners-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Start date</th>
+            <th>End date</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div id="owners-container">
+      <h2>Beneficial owners</h2>
+      <p>You must provide documentation for anyone else owning a substantial (25+) percent of the company or in charge of the company, its finances or operations.</p>
+      <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_owner=true">Add owner</a></p>
+      <table id="owners-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div id="directors-container">
+      <h2>Company directors</h2>
+      <p>You must provide documentation for the board of directors.</p>
+      <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_director=true">Add owner</a></p>
+      <table id="owners-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </body>
+  <template id="owner-row">
+    <tr id="${person.id}">
+      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+  </template>
+</html>

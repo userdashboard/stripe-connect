@@ -51,9 +51,9 @@ async function beforeRequest (req) {
   stripeAccount.individual = stripeAccount.individual || {}
   let owners, directors, representative
   if (stripeAccount.business_type === 'company') {
-    owners = await global.api.user.connect.BeneficialOwners.get(req)
-    directors = await global.api.user.connect.CompanyDirectors.get(req)
-    representative = await global.api.user.connect.CompanyRepresentative.get(req)
+    owners = await global.api.user.connect.Persons.get(req)
+    directors = await global.api.user.connect.Persons.get(req)
+    representative = await global.api.user.connect.Person.get(req)
   }
   req.data = { owners, directors, representative, stripeAccount, registrationComplete }
 }

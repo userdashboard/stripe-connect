@@ -105,18 +105,31 @@ module.exports = {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
+    await TestHelper.createPerson(user, {
+      relationship_representative: true,
+      relationship_executive: true,
+      relationship_title: 'SVP Testing',
+      relationship_percent_ownership: 0
+    })
     const representativePostData = createPostData(representativeData[country], user.profile)
-    await TestHelper.createCompanyRepresentative(user, representativePostData)
+    await TestHelper.updatePerson(user, user.representative, representativePostData)
     if (country !== 'HK') {
+      console.log('wait for account requirement')
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
+      console.log('wait for person requirement')
       await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
-      await TestHelper.updateCompanyRepresentative(user, {}, {
+      console.log('update person')
+      await TestHelper.updatePerson(user, user.representative, {}, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       if (country !== 'CA' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+        console.log('wait for account requirement')
         await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
-        await TestHelper.updateCompanyRepresentative(user, {}, {
+        console.log('wait for person requirement')
+        await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.additional_document')
+        console.log('update person')
+        await TestHelper.updatePerson(user, user.representative, {}, {
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -126,7 +139,7 @@ module.exports = {
       // TODO: these fields are required 'eventually' which is
       // not consistent with all the other countries' reps so
       // if that changes this 'special update' can be removed
-      await TestHelper.updateCompanyRepresentative(user, {
+      await TestHelper.updatePerson(user, user.representative, {
         address_city: 'Hong Kong',
         address_line1: '123 Sesame St',    
         id_number: '000000000'
@@ -167,19 +180,12 @@ module.exports = {
       type: 'company'
     })
     if (numOwners && beneficialOwnerData[country] !== false) {
-      const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:owner:${user.stripeAccount.id}`)
-      const requirements = JSON.parse(requirementsRaw)
-      const requireDocument = requirements.currently_due.indexOf('verification.document') > -1 ||
-                              requirements.eventually_due.indexOf('verification.document') > -1
-      let documents
-      if (requireDocument) {
-        documents = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-      }
       for (let i = 0, len = numOwners; i < len; i++) {
-        await TestHelper.createBeneficialOwner(user, createPostData(beneficialOwnerData[country]), documents)
+        await TestHelper.createPerson(user, {
+          relationship_owner: true,
+          relationship_title: 'Shareholder',
+          relationship_percent_ownership: (i + 1)
+        })
       }
     }
     return user
@@ -192,19 +198,12 @@ module.exports = {
       type: 'company'
     })
     if (numDirectors && companyDirectorData[country] !== false) {
-      const requirementsRaw = await dashboard.Storage.read(`stripeid:requirements:director:${user.stripeAccount.id}`)
-      const requirements = JSON.parse(requirementsRaw)
-      const requireDocument = requirements.currently_due.indexOf('verification.document') > -1 ||
-                              requirements.eventually_due.indexOf('verification.document') > -1
-      let documents
-      if (requireDocument) {
-        documents = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-      }
       for (let i = 0, len = numDirectors; i < len; i++) {
-        await TestHelper.createCompanyDirector(user, createPostData(companyDirectorData[country]), documents)
+        await TestHelper.createPerson(user, {
+          relationship_director: true,
+          relationship_title: 'Director',
+          relationship_percent_ownership: '0'
+        })
       }
     }
     return user
@@ -216,6 +215,12 @@ module.exports = {
       country: country,
       type: 'company'
     })
+    await TestHelper.createPerson(user, {
+      relationship_representative: true,
+      relationship_executive: true,
+      relationship_title: 'SVP Testing',
+      relationship_percent_ownership: 0
+    })
     const person = TestHelper.nextIdentity()
     const requireDocument = user.representative.requirements.currently_due.indexOf('verification.document') > -1 ||
                             user.representative.requirements.eventually_due.indexOf('verification.document') > -1
@@ -226,7 +231,7 @@ module.exports = {
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
     }
-    await TestHelper.createCompanyRepresentative(user, createPostData(representativeData[country], person), documents)
+    await TestHelper.updatePerson(user, user.representative, createPostData(representativeData[country], person), documents)
     return user
   },
   createCompanyMissingRepresentative: async (country) => {
@@ -284,7 +289,13 @@ module.exports = {
       representativeUploadData.verification_additional_document_back = TestHelper['success_id_scan_back.png']
       representativeUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
-    await TestHelper.createCompanyRepresentative(user, representativePostData, representativeUploadData)
+    await TestHelper.createPerson(user, {
+      relationship_representative: true,
+      relationship_executive: true,
+      relationship_title: 'SVP Testing',
+      relationship_percent_ownership: 0
+    })
+    await TestHelper.updatePerson(user, user.representative, representativePostData, representativeUploadData)
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
@@ -329,7 +340,13 @@ module.exports = {
       representativeUploadData.verification_additional_document_back = TestHelper['success_id_scan_back.png']
       representativeUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
-    await TestHelper.createCompanyRepresentative(user, representativePostData, representativeUploadData)
+    await TestHelper.createPerson(user, {
+      relationship_representative: true,
+      relationship_executive: true,
+      relationship_title: 'SVP Testing',
+      relationship_percent_ownership: 0
+    })
+    await TestHelper.updatePerson(user, user.representative, representativePostData, representativeUploadData)
     if (companyDirectorData[country] !== false) {
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.waitForVerificationFieldsToLeave(user, 'relatioship.director')
@@ -370,7 +387,13 @@ module.exports = {
       representativeUploadData.verification_additional_document_back = TestHelper['success_id_scan_back.png']
       representativeUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
-    await TestHelper.createCompanyRepresentative(user, representativePostData, representativeUploadData)
+    await TestHelper.createPerson(user, {
+      relationship_representative: true,
+      relationship_executive: true,
+      relationship_title: 'SVP Testing',
+      relationship_percent_ownership: 0
+    })
+    await TestHelper.updatePerson(user, user.representative, representativePostData, representativeUploadData)
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
@@ -499,7 +522,7 @@ module.exports = {
       country: country,
       type: 'company'
     })
-    const companyPostData = createPostData(individualData[country], user.profile)
+    const companyPostData = createPostData(companyData[country], user.profile)
     switch (field) {
       case 'company.address':
         companyPostData.address_line1 = 'address_no_match'
@@ -538,10 +561,16 @@ module.exports = {
         representativePostData.verification_document_front = 'file_identity_document_failure'
         break
     }
-    await TestHelper.createCompanyRepresentative(user, representativePostData)
+    await TestHelper.createPerson(user, {
+      relationship_representative: true,
+      relationship_executive: true,
+      relationship_title: 'SVP Testing',
+      relationship_percent_ownership: 0
+    })
+    await TestHelper.updatePerson(user, user.representative, representativePostData)
     await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
     await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
-    await TestHelper.updateCompanyRepresentative(user, {}, {
+    await TestHelper.updatePerson(user, user.representative, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -552,13 +581,18 @@ module.exports = {
     }
     if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
-      await TestHelper.updateCompanyRepresentative(user, {}, {
+      await TestHelper.updatePerson(user, user.representative, {}, {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       })
       await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
     }
     if (beneficialOwnerData[country] !== false) {
+      await TestHelper.createPerson(user, {
+        relationship_owner: true,
+        relationship_title: 'Shareholder',
+        relationship_percent_ownership: 10
+      })
       const beneficialOwnerPostData = createPostData(beneficialOwnerData[country], user.profile)
       switch (field) {
         case 'owner.address':
@@ -584,11 +618,16 @@ module.exports = {
           beneficialOwnerPostData.verification_document_front = 'file_identity_document_failure'
           break
       }
-      await TestHelper.createBeneficialOwner(user, beneficialOwnerPostData)
+      await TestHelper.updatePerson(user, user.owner, beneficialOwnerPostData)
       await TestHelper.submitBeneficialOwners(user)
       await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
     }
     if (companyDirectorData[country] !== false) {
+      await TestHelper.createPerson(user, {
+        relationship_director: true,
+        relationship_title: 'Shareholder',
+        relationship_percent_ownership: (i + 1)
+      })
       const companyDirectorPostData = createPostData(companyDirectorData[country], user.profile)
       switch (field) {
         case 'director.address':
@@ -614,7 +653,7 @@ module.exports = {
           companyDirectorPostData.verification_document_front = 'file_identity_document_failure'
           break
       }
-      await TestHelper.createCompanyDirector(user, companyDirectorPostData)
+      await TestHelper.updatePerson(user, user.director, companyDirectorPostData)
       await TestHelper.submitCompanyDirectors(user)
       await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
     }

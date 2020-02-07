@@ -14,9 +14,10 @@ module.exports = {
     if (!stripeid) {
       throw new Error('invalid-payoutid')
     }
-    const owned = await dashboard.StorageList.exists(`${req.appid}/account/stripeAccounts/${req.account.accountid}`, stripeid)
-    if (!owned) {
-      throw new Error('invalid-account')
+    req.query.stripeid = stripeid
+    const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+    if (!stripeAccount) {
+      throw new Error('invalid-payoutid')
     }
     const accountKey = {
       api_key: req.stripeKey.api_key,

@@ -120,7 +120,7 @@ describe('/api/user/connect/update-company-registration', () => {
         testedMissingFields.push(field)
         describe(`invalid-${field}`, () => {
           it(`missing posted ${field}`, async () => {
-            const user = await TestStripeAccounts.createIndividualWithFailedrepresentativeField(country.id, 'address')
+            const user = await TestStripeAccounts.createCompanyWithFailedField(country.id, 'address')
             const req = TestHelper.createRequest(`/api/user/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
             req.account = user.account
             req.session = user.session
@@ -155,7 +155,7 @@ describe('/api/user/connect/update-company-registration', () => {
                 verification_document_front: TestHelper['success_id_scan_front.png']
               }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
-              body[field] = 'invalid'
+              body[field] = invalidValues[field]
               req.body = TestHelper.createMultiPart(req, body)
               let errorMessage
               try {
@@ -368,7 +368,7 @@ describe('/api/user/connect/update-company-registration', () => {
       req2.session = user.session
       req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
       await req2.post()
-      const stripeAccount = await global.api.user.connect.Beneficialget(req2)
+      const stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
       assert.notStrictEqual(stripeAccount.metadata.token, null)
       assert.notStrictEqual(stripeAccount.metadata.token, undefined)
     })

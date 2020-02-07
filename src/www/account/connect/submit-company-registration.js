@@ -22,7 +22,7 @@ async function beforeRequest (req) {
   if (stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
     req.error = req.error || 'invalid-company-directors'
   }
-  const representative = await global.api.user.connect.CompanyRepresentative.get(req)
+  const representative = await global.api.user.connect.Person.get(req)
   if (!representative) {
     req.error = req.error || 'invalid-company-representative'
   }
@@ -38,8 +38,8 @@ async function beforeRequest (req) {
   if (!completedPayment) {
     req.error = req.error || 'invalid-payment-details'
   }
-  const owners = await global.api.user.connect.BeneficialOwners.get(req)
-  const directors = await global.api.user.connect.CompanyDirectors.get(req)
+  const owners = await global.api.user.connect.Persons.get(req)
+  const directors = await global.api.user.connect.Persons.get(req)
   req.data = { stripeAccount, owners, directors }
 }
 

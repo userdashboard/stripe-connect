@@ -97,18 +97,7 @@ describe('/api/user/connect/set-company-registration-submitted', () => {
 
     describe('invalid-payment-details', () => {
       it('ineligible registration missing payment details', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'DE',
-          type: 'company'
-        })
-        await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyData.DE, user.profile))
-        await TestHelper.createCompanyRepresentative(user, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.DE, user.profile), {
-          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        })
+        const user = await TestStripeAccounts.createCompanyMissingPaymentDetails('US')
         const req = TestHelper.createRequest(`/api/user/connect/set-company-registration-submitted?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
