@@ -11,17 +11,11 @@ async function beforeRequest (req) {
     throw new Error('invalid-stripeid')
   }
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-  if (stripeAccount.metadata.submitted ||
-    (stripeAccount.company && stripeAccount.company.directors_provided) ||
-    stripeAccount.business_type === 'individual' ||
-    stripeAccount.metadata.accountid !== req.account.accountid) {
+  if (stripeAccount.business_type === 'individual' ||
+      stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  if (stripeAccount.requirements.currently_due.indexOf('relationship.director') === -1) {
-    throw new Error('invalid-stripe-account')
-  }
-  const directors = await global.api.user.connect.Persons.get(req)
-  req.data = { stripeAccount, directors }
+  req.data = { stripeAccount }
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -40,10 +34,10 @@ async function renderPage (req, res, messageTemplate) {
       return dashboard.Response.end(req, res, doc)
     }
   }
-  if (!req.data.stripeAccount.metadata.requiresDirectors) {
+  if (req.data.stripeAccount.metadata.requiresDirectors === 'false') {
     removeElements.push('director-container')
   }
-  if (!req.data.stripeAccount.metadata.requiresOwners) {
+  if (req.data.stripeAccount.metadata.requiresOwners === 'false') {
     removeElements.push('owner-container')
   }
   if (req.body) {
@@ -95,10 +89,10 @@ async function submitForm (req, res) {
       req.body.relationship_owner !== 'true') {
     return renderPage(req, res, 'invalid-selection')
   }
-  if (req.body.relationship_director === 'true' && !req.data.stripeAccount.metadata.requiresDirectors) {
+  if (req.body.relationship_director === 'true' && req.data.stripeAccount.metadata.requiresDirectors === 'false') {
     return renderPage(req, res, 'invalid-director')
   }
-  if (req.body.relationship_owner === 'true' && !req.data.stripeAccount.metadata.requiresOwners) {
+  if (req.body.relationship_owner === 'true' && req.data.stripeAccount.metadata.requiresOwners === 'false') {
     return renderPage(req, res, 'invalid-owner')
   }
   let person
@@ -111,7 +105,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `/account/connect/edit-person?personid=${person.id}`
+      location: `/account/connect/person?personid=${person.id}`
     })
     return res.end()
   }

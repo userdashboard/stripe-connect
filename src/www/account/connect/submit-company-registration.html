@@ -63,7 +63,7 @@
   </body>
   <template id="owner-row">
     <tr id="${person.id}">
-      <td><a href="/account/connect/beneficial-owner?personid=${person.id}">${person.id}</a></td>
+      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
       <td>${person.first_name} ${person.last_name}</td>
     </tr>
   </template>
@@ -79,7 +79,7 @@
   <template id="invalid-company-directors">
     <div class="error message">Error! You must submit the company's directors</div>
   </template>
-  <template id="invalid-beneficial-owners">
+  <template id="invalid-persons">
     <div class="error message">Error! You must submit the company's beneficial owners</div>
   </template>
   <template id="invalid-company-representative">

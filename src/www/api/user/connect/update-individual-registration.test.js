@@ -339,9 +339,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         } else {
           // TODO: Stripe may or may not transform the phone number
           // by removing hyphons and adding the country dial code
-          // so all test data is using that format, but
-          // Stripe may also remove the country code too so this
-          // can be fixed when they have a consistent transformation
+          // but submitting in that format is not allowed too
           if (field === 'phone') {
             if (accountNow.individual[field] === body[field]) {
               assert.strictEqual(accountNow.individual[field], body[field])
@@ -402,6 +400,9 @@ describe('/api/user/connect/update-individual-registration', () => {
       req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB, person)
       await req2.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req2)
+      // TODO: verifying information was submitted by token is not possible
+      // so for now when objects are created/updated without a token they
+      // have a metadata.token = false flag set
       assert.notStrictEqual(stripeAccountNow.metadata.token, null)
       assert.notStrictEqual(stripeAccountNow.metadata.token, undefined)
     })

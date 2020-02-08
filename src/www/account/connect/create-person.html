@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="/public/connect.css?999" />
   </head>
   <body class="entry"> 
-    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-company-representative?stripeid=${stripeAccount.id}">
-      <input type="hidden" name="token" id="token" />
+    <form id="submit-form" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}">
       <h1>Create new person</h1>
       <p>The board of directors, owners and representative must be kept up-to-date as your information changes.</p>
       <div id="message-container"></div>
@@ -18,6 +17,7 @@
         <h2>Relationship to company</h2>
         <div class="pure-control-group">
           <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" /> Representative (must be executive)</label>
+          <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" /> Company executive</label>
           <label id="director-container"><input type="checkbox" id="relationship_director" name="relationship_director" value="true" /> Company director</label>
           <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" /> Beneficial owner</label>
         </div>
@@ -35,9 +35,6 @@
       </div>
     </form>
   </body>
-  <template id="state-option">
-    <option value="${option.value}">${option.text}</option>
-  </template>
   <template id="success">
     <div class="success message">Success! The registration has been updated</div>
   </template>
@@ -49,6 +46,9 @@
   </template>
   <template id="invalid-director">
     <div class="error message">Your Stripe account does not require company director information</div>
+  </template>
+  <template id="invalid-executive">
+    <div class="error message">Company representatives must be executives</div>
   </template>
   <template id="invalid-selection">
     <div class="error message">Either representative, director or owner must be selected</div>

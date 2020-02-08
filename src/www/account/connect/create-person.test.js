@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/create-person', () => {
+describe.only('/account/connect/create-person', () => {
   describe('CreatePerson#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=invalid`)
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -52,80 +52,6 @@ describe('/account/connect/create-person', () => {
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
-  })
-
-  describe('CreatePerson#POST', () => {
-    it('should create representative (screenshots)', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.post()
-      const page = await req.post()
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#account-menu-container' },
-        { click: '/account/connect' },
-        { click: '/account/connect/create-person' },
-        { fill: '#submit-form' }
-      ]
-      const doc = TestHelper.extractDoc(page)
-      const accountsTable = doc.getElementById('stripe-accounts-table')
-      assert.notStrictEqual(accountsTable, undefined)
-      assert.notStrictEqual(accountsTable, null)
-    })
-
-    it('should create director', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.post()
-      const page = await req.post()
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#account-menu-container' },
-        { click: '/account/connect' },
-        { click: '/account/connect/create-person' },
-        { fill: '#submit-form' }
-      ]
-      const doc = TestHelper.extractDoc(page)
-      const accountsTable = doc.getElementById('stripe-accounts-table')
-      assert.notStrictEqual(accountsTable, undefined)
-      assert.notStrictEqual(accountsTable, null)
-    })
-
-    it('should create owner', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
-      })
-      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.post()
-      const page = await req.post()
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#account-menu-container' },
-        { click: '/account/connect' },
-        { click: '/account/connect/create-person' },
-        { fill: '#submit-form' }
-      ]
-      const doc = TestHelper.extractDoc(page)
-      const accountsTable = doc.getElementById('stripe-accounts-table')
-      assert.notStrictEqual(accountsTable, undefined)
-      assert.notStrictEqual(accountsTable, null)
-    })
 
     it('should remove director option', async () => {
       const user = await TestHelper.createUser()
@@ -136,19 +62,10 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      await req.post()
-      const page = await req.post()
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#account-menu-container' },
-        { click: '/account/connect' },
-        { click: '/account/connect/create-person' },
-        { fill: '#submit-form' }
-      ]
+      const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const accountsTable = doc.getElementById('stripe-accounts-table')
-      assert.notStrictEqual(accountsTable, undefined)
-      assert.notStrictEqual(accountsTable, null)
+      const option = doc.getElementById('relationship_director')
+      assert.strictEqual(option, undefined)
     })
 
     it('should remove owner option', async () => {
@@ -160,19 +77,90 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      await req.post()
-      const page = await req.post()
+      const page = await req.get()
+      const doc = TestHelper.extractDoc(page)
+      const option = doc.getElementById('relationship_owner')
+      assert.strictEqual(option, undefined)
+    })
+  })
+
+  describe.only('CreatePerson#POST', () => {
+    it('should create representative (screenshots)', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'GB',
+        type: 'company'
+      })
+      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.waitOnSubmit = true
+      req.body = {
+        relationship_representative: true,
+        relationship_executive: true,
+        relationship_owner: false,
+        relationship_director: false,
+        relationship_title: 'SVP Testing',
+        relationship_percent_ownership: '0'
+      }
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/connect' },
-        { click: '/account/connect/create-person' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },       
+        { click: `/account/connect/create-person?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)      
+      const personsTable = doc.getElementById('persons-table')
+      assert.notStrictEqual(personsTable, undefined)
+      assert.notStrictEqual(personsTable, null)
+    })
+
+    it('should create director', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'GB',
+        type: 'company'
+      })
+      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.waitOnSubmit = true
+      req.body = {
+        relationship_director: true,
+        relationship_title: 'Chairperson',
+        relationship_percent_ownership: '0'
+      }
+      const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      const accountsTable = doc.getElementById('stripe-accounts-table')
-      assert.notStrictEqual(accountsTable, undefined)
-      assert.notStrictEqual(accountsTable, null)
+      const personsTable = doc.getElementById('persons-table')
+      assert.notStrictEqual(personsTable, undefined)
+      assert.notStrictEqual(personsTable, null)
+    })
+
+    it.only('should create owner', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'GB',
+        type: 'company'
+      })
+      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.waitOnSubmit = true
+      req.body = {
+        relationship_owner: true,
+        relationship_title: 'Shareholder',
+        relationship_percent_ownership: '7'
+      }
+      const page = await req.post()
+      const doc = TestHelper.extractDoc(page)
+      console.log(doc.toString())
+      const personsTable = doc.getElementById('persons-table')
+      assert.notStrictEqual(personsTable, undefined)
+      assert.notStrictEqual(personsTable, null)
     })
   })
 })

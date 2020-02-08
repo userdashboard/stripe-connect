@@ -3,11 +3,11 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
-describe('/account/connect/beneficial-owners', () => {
-  describe('BeneficialOwners#BEFORE', () => {
+describe('/account/connect/persons', () => {
+  describe('Persons#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/connect/beneficial-owners?stripeid=invalid')
+      const req = TestHelper.createRequest('/account/connect/persons?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -25,7 +25,7 @@ describe('/account/connect/beneficial-owners', () => {
         country: 'US',
         type: 'individual'
       })
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -39,7 +39,7 @@ describe('/account/connect/beneficial-owners', () => {
 
     it('should bind owners to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 2)
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
@@ -47,17 +47,17 @@ describe('/account/connect/beneficial-owners', () => {
     })
   })
 
-  describe('BeneficialOwners#GET', () => {
+  describe('Persons#GET', () => {
     it('should have row for each owner (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/connect' },
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}` }
+        { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` }
       ]
       req.account = user.account
       req.session = user.session
@@ -67,17 +67,42 @@ describe('/account/connect/beneficial-owners', () => {
       assert.strictEqual(row.tag, 'tr')
     })
 
-    it('should display submitted message with removed owners', async () => {
-      const user = await TestStripeAccounts.createSubmittedCompany('GB')
-      const req = TestHelper.createRequest(`/account/connect/beneficial-owners?stripeid=${user.stripeAccount.id}`)
+    it('should have row for each director (screenshots)', async () => {
+      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
+      const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/connect' },
+        { click: '/account/connect/stripe-accounts' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` }
+      ]
       req.account = user.account
       req.session = user.session
       const page = await req.get()
       const doc = TestHelper.extractDoc(page)
-      const ownersTable = doc.getElementById('owners-table')
-      assert.strictEqual(undefined, ownersTable)
-      const submittedContainer = doc.getElementById('submitted-container')
-      assert.strictEqual(submittedContainer.tag, 'div')
+      const row = doc.getElementById(user.director.id)
+      assert.strictEqual(row.tag, 'tr')
+    })
+
+    it('should have row for each representative (screenshots)', async () => {
+      const user = await TestStripeAccounts.createCompanyWithRepresentative('DE')
+      const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/connect' },
+        { click: '/account/connect/stripe-accounts' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` }
+      ]
+      req.account = user.account
+      req.session = user.session
+      const page = await req.get()
+      const doc = TestHelper.extractDoc(page)
+      const row = doc.getElementById(user.representative.id)
+      assert.strictEqual(row.tag, 'tr')
     })
   })
 })

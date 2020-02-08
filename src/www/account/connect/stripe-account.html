@@ -65,8 +65,8 @@
         </thead>
       </table>
       <p class="pure-button-group" role="group" id="registration-options">
-        <a id="add-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
-        <a id="update-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/edit-company-representative?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update representative</a>
+        <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_representative=true&relationship_executive=true&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+        <a id="update-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update representative</a>
       </p>
     </div>
     <div id="owners-container">
@@ -81,7 +81,7 @@
         </thead>
       </table>
       <p class="pure-button-group" role="group" id="owner-options">
-        <a class="pure-button pure-button-primary" href="/account/connect/create-beneficial-owner?stripeid=${stripeAccount.id}&return-url=/account/connect/beneficial-owners%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_owner=true&return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
         <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
       </p>
     </div>
@@ -97,8 +97,8 @@
         </thead>
       </table>
       <p class="pure-button-group" role="group" id="director-options">
-        <a class="pure-button pure-button-primary" href="/account/connect/create-company-director?stripeid=${stripeAccount.id}&return-url=/account/connect/company-directors%3Fstripeid=${stripeAccount.id}">Add company director</a>
-        <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_director=true&return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add company director</a>
+        <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
       </p>
     </div>
     <div id="payment-container">
@@ -120,20 +120,20 @@
   </body>
   <template id="representative-row">
     <tr id="${person.id}">
-      <td><a href="/account/connect/edit-company-representative?stripeid=${person.account}">${person.id}</a></td>
-      <td>${person.first_name} ${person.last_name}</td>
+      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
+      <td>${person.first_name} ${person.last_name} (representative)</td>
     </tr>
   </template>
   <template id="owner-row">
     <tr id="${person.id}">
-      <td><a href="/account/connect/edit-beneficial-owner?personid=${person.id}">${person.id}</a></td>
-      <td>${person.first_name} ${person.last_name}</td>
+      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
+      <td>${person.first_name} ${person.last_name} (owner)</td>
     </tr>
   </template>
   <template id="director-row">
     <tr id="${person.id}">
-      <td><a href="/account/connect/edit-company-director?personid=${person.id}">${person.id}</a></td>
-      <td>${person.first_name} ${person.last_name}</td>
+      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
+      <td>${person.first_name} ${person.last_name} (diretor)</td>
     </tr>
   </template>
   <template id="payment-information">

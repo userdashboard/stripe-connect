@@ -16,10 +16,10 @@ async function beforeRequest (req) {
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  if (stripeAccount.requirements.currently_due.indexOf('relationship.owner') > -1 && !stripeAccount.company.owners_provided) {
+  if (stripeAccount.metadata.requiresOwners && !stripeAccount.company.owners_provided) {
     req.error = req.error || 'invalid-beneficial-owners'
   }
-  if (stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1 && !stripeAccount.company.directors_provided) {
+  if (stripeAccount.metadata.requiresDirectors && !stripeAccount.company.directors_provided) {
     req.error = req.error || 'invalid-company-directors'
   }
   const representative = await global.api.user.connect.Person.get(req)

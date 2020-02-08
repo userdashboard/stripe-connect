@@ -60,6 +60,10 @@ module.exports = {
       await dashboard.StorageList.remove(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, req.query.personid)
     } catch (error) {
     }
+    try {
+      await dashboard.StorageList.remove(`${req.appid}/persons`, req.query.personid)
+    } catch (error) {
+    }
     return true
   }
 }

@@ -1,4 +1,5 @@
 const dashboard = require('@userdashboard/dashboard')
+const navbar = require('./navbar-person.js')
 
 module.exports = {
   before: beforeRequest,
@@ -12,25 +13,26 @@ async function beforeRequest (req) {
   }
   if (req.query.message === 'success') {
     req.data = {
-      owner: {
+      person: {
         id: '',
         object: 'person'
       }
     }
     return
   }
-  const owner = await global.api.user.connect.Person.get(req)
-  req.query.stripeid = owner.account
+  const person = await global.api.user.connect.Person.get(req)
+  req.query.stripeid = person.account
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-  if (stripeAccount.company && stripeAccount.company.owners_provided) {
+  if (stripeAccount.company && stripeAccount.company.persons_provided) {
     throw new Error('invalid-stripe-account')
   }
-  req.data = { owner, stripeAccount }
+  req.data = { person, stripeAccount }
 }
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  const doc = dashboard.HTML.parse(req.route.html, req.data.owner, 'person')
+  const doc = dashboard.HTML.parse(req.route.html, req.data.person, 'person')
+  await navbar.setup(doc, req.data.person)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {

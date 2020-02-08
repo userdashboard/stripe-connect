@@ -17,29 +17,48 @@ async function beforeRequest (req) {
   if (stripeAccount.business_type !== 'company') {
     throw new Error('invalid-stripe-account')
   }
-  if (!stripeAccount.company.owners_provided &&
-    stripeAccount.requirements.currently_due.indexOf('relationship.owner') === -1) {
-    throw new Error('invalid-stripe-account')
+  let owners, directors, representatives
+  req.query.all = true
+  const persons = await global.api.user.connect.Persons.get(req)
+  if (persons && persons.length) {
+    for (const person of persons) {
+      if (person.relationship.representative) {
+        representatives = representatives || []
+        representatives.push(person)
+      }
+      if (person.relationship.owner) {
+        owners = owners || []
+        owners.push(person)
+      }
+      if (person.relationship.director) {
+        directors = directors || []
+        directors.push(person)
+      }
+    }
   }
-  const owners = await global.api.user.connect.Persons.get(req)
-  req.data = { stripeAccount, owners }
+  req.data = { stripeAccount, owners, directors, representatives }
 }
 
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
   navbar.setup(doc, req.data.stripeAccount)
-  if (req.data.stripeAccount.company.owners_provided) {
+  if (!req.data.owners || !req.data.owners.length) {
     const ownerContainer = doc.getElementById('owners-container')
     ownerContainer.parentNode.removeChild(ownerContainer)
   } else {
-    const submittedContainer = doc.getElementById('submitted-container')
-    submittedContainer.parentNode.removeChild(submittedContainer)
-    if (req.data.owners && req.data.owners.length) {
-      dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
-    } else {
-      const ownersTable = doc.getElementById('owners-table')
-      ownersTable.parentNode.removeChild(ownersTable)
-    }
+    dashboard.HTML.renderTable(doc, req.data.owners, 'person-row', 'owners-table')
+  }
+  if (!req.data.representatives || !req.data.representatives.length) {
+    const ownerContainer = doc.getElementById('owners-container')
+    ownerContainer.parentNode.removeChild(ownerContainer)
+  } else {
+    dashboard.HTML.renderTable(doc, req.data.representatives, 'person-row', 'representatives-table')
+  }
+  if (!req.data.directors || !req.data.directors.length) {
+    const ownerContainer = doc.getElementById('owners-container')
+    ownerContainer.parentNode.removeChild(ownerContainer)
+  } else {
+    dashboard.HTML.renderTable(doc, req.data.directors, 'person-row', 'directors-table')
   }
   return dashboard.Response.end(req, res, doc)
 }

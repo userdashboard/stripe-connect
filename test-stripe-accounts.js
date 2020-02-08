@@ -114,21 +114,15 @@ module.exports = {
     const representativePostData = createPostData(representativeData[country], user.profile)
     await TestHelper.updatePerson(user, user.representative, representativePostData)
     if (country !== 'HK') {
-      console.log('wait for account requirement')
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
-      console.log('wait for person requirement')
       await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
-      console.log('update person')
       await TestHelper.updatePerson(user, user.representative, {}, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
       if (country !== 'CA' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-        console.log('wait for account requirement')
         await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
-        console.log('wait for person requirement')
         await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.additional_document')
-        console.log('update person')
         await TestHelper.updatePerson(user, user.representative, {}, {
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
@@ -1285,7 +1279,7 @@ const representativeData = module.exports.representativeData = {
     address_kana_town: 'ｼﾞﾝｸﾞｳﾏｴ 3-',
     address_kanji_city: '渋谷区',
     address_kanji_line1: '２７－１５',
-    address_kanji_postal_code: '1500001',
+    address_kanji_postal_code: '12345',
     address_kanji_state: '東京都',
     address_kanji_town: '神宮前 ３丁目',
     dob_day: '1',

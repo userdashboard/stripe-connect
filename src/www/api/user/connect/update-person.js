@@ -43,6 +43,9 @@ module.exports = {
     if (global.stripeJS === 3) {
       updateInfo.person_token = req.body.token
     } else {
+      updateInfo.metadata = {
+        token: false
+      }
       let validateDOB = false
       if (req.body.dob_day) {
         validateDOB = true
@@ -449,8 +452,12 @@ module.exports = {
         await stripeCache.delete(person.id)
         return personNow
       } catch (error) {
-        if (error.raw && error.raw.param === 'person_token') {
-          throw new Error('invalid-token')
+        if (error.raw && error.raw.param) {
+          const property = error.raw.param.replace('[', '.').replace(']', '').replace('.', '_')
+          if (property === 'person_token') {
+            throw new Error('invalid-token')
+          }
+          throw new Error(`invalid-${property}`)
         }
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue

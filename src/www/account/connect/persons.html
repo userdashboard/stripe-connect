@@ -14,7 +14,7 @@
       <h2>Company representative</h2>
       <p>If the nominated person's status changes you must create a new representative.</p>
       <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_representative=true">Create new representative</a></p>
-      <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <table id="representatives-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -42,7 +42,7 @@
       <h2>Company directors</h2>
       <p>You must provide documentation for the board of directors.</p>
       <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_director=true">Add owner</a></p>
-      <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <table id="directors-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -52,7 +52,7 @@
       </table>
     </div>
   </body>
-  <template id="owner-row">
+  <template id="person-row">
     <tr id="${person.id}">
       <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
       <td>${person.first_name} ${person.last_name}</td>

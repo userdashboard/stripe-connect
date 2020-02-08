@@ -18,7 +18,7 @@ module.exports = {
       (stripeAccount.company && stripeAccount.company.owners_provided)) {
       throw new Error('invalid-stripe-account')
     }
-    if (stripeAccount.requirements.currently_due.indexOf('relationship.owner') === -1) {
+    if (!stripeAccount.metadata.requiresOwners) {
       throw new Error('invalid-stripe-account')
     }
     const accountInfo = {

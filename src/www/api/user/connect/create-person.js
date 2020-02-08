@@ -1,4 +1,3 @@
-const connect = require('../../../../../index.js')
 const dashboard = require('@userdashboard/dashboard')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
@@ -40,14 +39,23 @@ module.exports = {
       if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
         throw new Error('invalid-relationship_percent_ownership')
       }
+      // TODO: 0% ownership throws an error on Stripe if the person is not 'owner=true'
+      if (percent === 0) {
+        if (req.body.relationship_owner) {
+          throw new Error('invalid-relationship_percent_ownership')
+        }
+        delete (req.body.relationship_percent_ownership)
+      }
     } catch (s) {
       throw new Error('invalid-relationship_percent_ownership')
     }
     const personInfo = {
       relationship: {
-        title: req.body.relationship_title,
-        percent_ownership: req.body.relationship_percent_ownership
+        title: req.body.relationship_title
       }
+    }
+    if (req.body.relationship_percent_ownership) {
+      personInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
     }
     if (req.body.relationship_representative) {
       personInfo.relationship.representative = true
@@ -75,26 +83,9 @@ module.exports = {
         await dashboard.StorageList.add(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, person.id)
         return person
       } catch (error) {
-        if (error.raw && error.raw.param === 'relationship[title]') {
-          throw new Error('invalid-relationship_title')
-        }
-        if (error.raw && error.raw.param === 'relationship[percent_ownership]') {
-          throw new Error('invalid-relationship_percent_ownership')
-        }
-        if (error.raw && error.raw.param === 'relationship[representative]') {
-          throw new Error('invalid-relationship_representative')
-        }
-        if (error.raw && error.raw.param === 'relationship[executive]') {
-          throw new Error('invalid-relationship_executive')
-        }
-        if (error.raw && error.raw.param === 'relationship[director]') {
-          throw new Error('invalid-relationship_director')
-        }
-        if (error.raw && error.raw.param === 'relationship[owner]') {
-          throw new Error('invalid-relationship_owner')
-        }
-        if (error.raw && error.raw.param === 'person_token') {
-          throw new Error('invalid-token')
+        if (error.raw && error.raw.param) {
+          const property = error.raw.param.replace('[', '.').replace(']', '').replace('.', '_')
+          throw new Error(`invalid-${property}`)
         }
         if (error.raw && error.raw.code === 'lock_timeout') {
           continue

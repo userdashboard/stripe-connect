@@ -129,7 +129,6 @@ module.exports = {
           if (field === 'business_profile.product_description' && !req.body.business_profile_url) {
             throw new Error('invalid-business_profile_url')
           }
-          console.log('missing required field', field, req.body, stripeAccount)
           throw new Error(`invalid-${posted}`)
         }
         if (posted.startsWith('business_profile_')) {

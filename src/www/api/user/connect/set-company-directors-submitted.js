@@ -18,7 +18,7 @@ module.exports = {
       (stripeAccount.company && stripeAccount.company.directors_provided)) {
       throw new Error('invalid-stripe-account')
     }
-    if (stripeAccount.requirements.currently_due.indexOf('relationship.director') === -1) {
+    if (!stripeAccount.metadata.requiresDirectors) {
       throw new Error('invalid-stripe-account')
     }
     const accountInfo = {

@@ -1,7 +1,7 @@
-lin<!doctype html>
+l<!doctype html>
 <html template="false">
   <head>
-    <title>Edit person for ${stripeAccount.id}</title>
+    <title>Edit ${person.id}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="/public/pure-min.css" />
     <link rel="stylesheet" href="/public/content.css" />
@@ -9,24 +9,24 @@ lin<!doctype html>
     <link rel="stylesheet" href="/public/connect.css?999" />
     <script id="stripe-v3" src="https://js.stripe.com/v3/"></script>
     <script id="connect-v3" src="/public/connect.js"></script>
-    <script id="handler-v3" src="/public/stripe-v3-edit-company-representative.js"></script>
+    <script id="handler-v3" src="/public/stripe-v3-edit-person.js"></script>
     <script id="client-v3">
-      window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
-      window.isAccountOpener = "${stripeAccount.metadata.submitted ? false : true}"
+      window.stripePublishableKey = "${person.stripePublishableKey}"
+      window.isAccountOpener = "${person.metadata.submitted ? false : true}"
     </script>
   </head>
   <body class="entry"> 
-    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-company-representative?stripeid=${stripeAccount.id}">
+    <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}">
       <input type="hidden" name="token" id="token" />
       <h1>Edit person</h1>
       <div id="message-container"></div>
       <div id="form-container">
         <h2>Relationship to company</h2>
         <div class="pure-control-group">
-          <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" /> Representative (required)</label>
-          <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" /> Executive (required)</label>
-          <label><input type="checkbox" id="relationship_director" name="relationship_director" value="true" /> Director (optional)</label>
-          <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" /> Owner (optional)</label>
+          <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" readonly="readonly" /> Representative</label>
+          <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" readonly="readonly" /> Executive</label>
+          <label><input type="checkbox" id="relationship_director" name="relationship_director" value="true" readonly="readonly" /> Director</label>
+          <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" readonly="readonly" /> Owner</label>
         </div>
         <div class="pure-control-group">
           <label for="relationship_title">Job, role or relationship title</label>
@@ -278,9 +278,6 @@ lin<!doctype html>
   </template>
   <template id="state-option">
     <option value="${option.value}">${option.text}</option>
-  </template>
-  <template id="success">
-    <div class="success message">Success! The representative information has been updated</div>
   </template>
   <template id="unknown-error">
     <div class="error message">Error! An error occurred udpating the information</div>

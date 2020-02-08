@@ -66,7 +66,6 @@ module.exports = {
   waitForVerification: util.promisify(waitForVerification),
   waitForPayoutsEnabled: util.promisify(waitForPayoutsEnabled),
   waitForVerificationFieldsToLeave: util.promisify(waitForVerificationFieldsToLeave),
-  waitForVerificationFieldsToReturn: util.promisify(waitForVerificationFieldsToReturn),
   waitForVerificationFailure: util.promisify(waitForVerificationFailure),
   waitForVerificationStart: util.promisify(waitForVerificationStart),
   waitForPayout: util.promisify(waitForPayout),
@@ -646,43 +645,6 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
   return setTimeout(wait, 100)
 }
 
-async function waitForVerificationFieldsToReturn (user, contains, callback) {
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-  req.account = user.account
-  req.session = user.session
-  req.stripeKey = stripeKey
-  async function wait () {
-    if (global.testEnded) {
-      return
-    }
-    try {
-      const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      for (const field of stripeAccount.requirements.eventually_due) {
-        if (field.indexOf(contains) > -1) {
-          user.stripeAccount = stripeAccount
-          return setTimeout(callback, 10)
-        }
-      }
-      for (const field of stripeAccount.requirements.past_due) {
-        if (field.indexOf(contains) > -1) {
-          user.stripeAccount = stripeAccount
-          return setTimeout(callback, 10)
-        }
-      }
-      for (const field of stripeAccount.requirements.currently_due) {
-        if (field.indexOf(contains) > -1) {
-          user.stripeAccount = stripeAccount
-          return setTimeout(callback, 10)
-        }
-      }
-      return setTimeout(wait, 10)
-    } catch (error) {
-    }
-    return setTimeout(wait, 10)
-  }
-  return setTimeout(wait, 100)
-}
-
 async function waitForVerificationStart (user, callback) {
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
@@ -754,8 +716,9 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
             person.requirements.eventually_due.indexOf(requirement) > -1) {
           return setTimeout(callback, 10)
         }
-      }
+      }    
     } catch (error) {
+      console.log(error)
     }
     return setTimeout(wait, 100)
   }
