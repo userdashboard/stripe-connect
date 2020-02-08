@@ -218,7 +218,7 @@ module.exports = {
       relationship_percent_ownership: 0
     })
     await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.day`)
-    await TestHelper.waitForPersonRequirement(user, user.representative, 'dob.day')
+    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
     const person = TestHelper.nextIdentity()
     const requireDocument = user.representative.requirements.currently_due.indexOf('verification.document') > -1 ||
                             user.representative.requirements.eventually_due.indexOf('verification.document') > -1
