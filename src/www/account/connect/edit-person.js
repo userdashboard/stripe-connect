@@ -185,7 +185,7 @@ async function submitForm (req, res) {
     return dashboard.Response.redirect(req, res, req.query['return-url'])
   } else {
     res.writeHead(302, {
-      location: `person?personid=${req.query.personid}`
+      location: `/account/connect/person?personid=${req.query.personid}`
     })
     return res.end()
   }
