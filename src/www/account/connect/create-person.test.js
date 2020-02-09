@@ -94,7 +94,6 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.waitOnSubmit = true
       req.body = {
         relationship_representative: true,
         relationship_executive: true,
@@ -107,7 +106,8 @@ describe('/account/connect/create-person', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/connect' },
-        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },       
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/create-person?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
@@ -127,7 +127,6 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.waitOnSubmit = true
       req.body = {
         relationship_director: true,
         relationship_title: 'Chairperson',
@@ -149,7 +148,6 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.waitOnSubmit = true
       req.body = {
         relationship_owner: true,
         relationship_title: 'Shareholder',

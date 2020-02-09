@@ -47,8 +47,8 @@ async function renderPage (req, res) {
     dashboard.HTML.renderTable(doc, req.data.owners, 'person-row', 'owners-table')
   }
   if (!req.data.representatives || !req.data.representatives.length) {
-    const ownerContainer = doc.getElementById('owners-container')
-    ownerContainer.parentNode.removeChild(ownerContainer)
+    const representativesTable = doc.getElementById('representatives-table')
+    representativesTable.parentNode.removeChild(representativesTable)
   } else {
     dashboard.HTML.renderTable(doc, req.data.representatives, 'person-row', 'representatives-table')
   }

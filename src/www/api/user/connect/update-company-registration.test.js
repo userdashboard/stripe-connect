@@ -351,7 +351,6 @@ describe('/api/user/connect/update-company-registration', () => {
       })
       const person = TestHelper.nextIdentity()
       const req = TestHelper.createRequest(`/account/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.waitOnSubmit = true
       req.account = user.account
       req.session = user.session
       req.uploads = {
@@ -361,7 +360,6 @@ describe('/api/user/connect/update-company-registration', () => {
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
       await req.post()
       const req2 = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req2.waitOnSubmit = true
       req2.account = user.account
       req2.session = user.session
       req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
