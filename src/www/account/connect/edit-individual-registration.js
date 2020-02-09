@@ -54,8 +54,29 @@ async function renderPage (req, res, messageTemplate) {
       'kana-personal-address-container',
       'kana-personal-information-container',
       'kanji-personal-information-container')
-  } else {
+  } 
+  let requireAddress
+  for (const field of req.data.stripeAccount.requirements.currently_due) {
+    requireAddress = field.startsWith('individual.address')
+    if (requireAddress) {
+      break
+    }
+  }
+  if (!requireAddress) {
     removeElements.push('personal-address-container')
+  } else {
+    if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.address.line1') === -1) {
+      removeElements.push('line1-container', 'line2-container')
+    }
+    if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.address.city') === -1) {
+      removeElements.push('city-container')
+    }
+    if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.address.state') === -1) {
+      removeElements.push('state-container')
+    }
+    if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.address.postal_code') === -1) {
+      removeElements.push('postal_code-container')
+    }
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('business_profile.mcc') > -1) {
     const mccList = connect.getMerchantCategoryCodes(req.language)
@@ -69,8 +90,6 @@ async function renderPage (req, res, messageTemplate) {
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.address.state') > -1) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
-  } else if (removeElements.indexOf('personal-address-container') === -1) {
-    removeElements.push('state-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.phone') === -1) {
     removeElements.push('phone-container')
