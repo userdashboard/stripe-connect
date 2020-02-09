@@ -21,10 +21,10 @@ module.exports = {
     if (!stripeAccount.external_accounts.data.length) {
       throw new Error('invalid-payment-details')
     }
-    if (stripeAccount.metadata.requiresOwners && !stripeAccount.company.owners_provided) {
+    if (stripeAccount.metadata.requiresOwners === 'true' && !stripeAccount.company.owners_provided) {
       throw new Error('invalid-beneficial-owner')
     }
-    if (stripeAccount.metadata.requiresDirectors && !stripeAccount.company.directors_provided) {
+    if (stripeAccount.metadata.requiresDirectors === 'true' && !stripeAccount.company.directors_provided) {
       throw new Error('invalid-company-director')
     }
     req.query.all = true

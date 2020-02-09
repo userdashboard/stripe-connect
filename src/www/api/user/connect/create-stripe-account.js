@@ -22,8 +22,11 @@ module.exports = {
     if (!req.body.country || !connect.countrySpecIndex[req.body.country]) {
       throw new Error('invalid-country')
     }
-    const requiresOwners = req.body.country != 'CA' && req.body.country !== 'JP' 
-    const requiresDirectors = req.body.country !== 'CA' && req.body.country !== 'JP' && req.body.country !== 'HK' && 
+    // TODO: this should be determined through the stripe requirements
+    // however the country specs have out-of-date requirement and the
+    // account requirements don't exist before creating the account
+    const requiresOwners = req.body.country != 'CA' && req.body.country !== 'HK' && req.body.country !== 'JP'
+    const requiresDirectors = req.body.country !== 'CA' && req.body.country !== 'HK' && req.body.country !== 'JP' && 
                               req.body.country !==  'MY' && req.body.country !== 'SG' && req.body.country !== 'US'
     const accountInfo = {
       type: 'custom',
@@ -45,6 +48,7 @@ module.exports = {
         await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
         await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
         await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
+        console.log(stripeAccount.country, stripeAccount.metadata, 'owners', stripeAccount.requirements.currently_due.indexOf('relationship.owner') > -1, 'directors', stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1)
         return stripeAccount
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {
