@@ -15,7 +15,10 @@ async function beforeRequest (req) {
     req.data = {
       person: {
         id: '',
-        object: 'person'
+        object: 'person',
+        requirements: {
+          currently_due: []
+        }
       }
     }
     return
