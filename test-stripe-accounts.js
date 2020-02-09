@@ -109,10 +109,10 @@ module.exports = {
       relationship_representative: true,
       relationship_executive: true,
       relationship_title: 'SVP Testing',
-      relationship_percent_ownership: 0
+      relationship_percent_ownership: '0'
     })
     await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.day`)
-    await TestHelper.waitForPersonRequirement(user, user.representative, 'dob.day')
+    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
     const representativePostData = createPostData(representativeData[country], user.profile)
     await TestHelper.updatePerson(user, user.representative, representativePostData)
     if (country !== 'HK') {
@@ -294,7 +294,7 @@ module.exports = {
       relationship_percent_ownership: 0
     })
     await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.day`)
-    await TestHelper.waitForPersonRequirement(user, user.representative, 'dob.day')
+    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
     await TestHelper.updatePerson(user, user.representative, representativePostData, representativeUploadData)
     if (beneficialOwnerData[country] !== false) {
       await TestHelper.submitBeneficialOwners(user)
@@ -347,7 +347,7 @@ module.exports = {
       relationship_percent_ownership: 0
     })
     await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.day`)
-    await TestHelper.waitForPersonRequirement(user, user.representative, 'dob.day')
+    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
     await TestHelper.updatePerson(user, user.representative, representativePostData, representativeUploadData)
     if (companyDirectorData[country] !== false) {
       await TestHelper.submitCompanyDirectors(user)
