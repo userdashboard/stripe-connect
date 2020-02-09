@@ -1,5 +1,4 @@
 const dashboard = require('@userdashboard/dashboard')
-const navbar = require('./navbar-stripe-account.js')
 
 module.exports = {
   before: beforeRequest,
@@ -41,7 +40,6 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
-  navbar.setup(doc, req.data.stripeAccount)
   if (!req.data.owners || !req.data.owners.length) {
     const ownerContainer = doc.getElementById('owners-container')
     ownerContainer.parentNode.removeChild(ownerContainer)
@@ -55,8 +53,8 @@ async function renderPage (req, res) {
     dashboard.HTML.renderTable(doc, req.data.representatives, 'person-row', 'representatives-table')
   }
   if (!req.data.directors || !req.data.directors.length) {
-    const ownerContainer = doc.getElementById('owners-container')
-    ownerContainer.parentNode.removeChild(ownerContainer)
+    const directorContainer = doc.getElementById('directors-container')
+    directorContainer.parentNode.removeChild(directorContainer)
   } else {
     dashboard.HTML.renderTable(doc, req.data.directors, 'person-row', 'directors-table')
   }

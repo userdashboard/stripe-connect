@@ -338,7 +338,7 @@ module.exports = {
         }
       }
       accountInfo.business_profile = accountInfo.business_profile || {}
-      accountInfo.business_profile.business_profile_mcc = req.body.business_profile_mcc
+      accountInfo.business_profile.mcc = req.body.business_profile_mcc
     }
     if (req.body.business_profile_url) {
       if (!req.body.business_profile_url.startsWith('http://') &&
@@ -346,11 +346,11 @@ module.exports = {
         throw new Error('invalid-business_profile_url')
       }
       accountInfo.business_profile = accountInfo.business_profile || {}
-      accountInfo.business_profile.business_profile_url = req.body.business_profile_url
+      accountInfo.business_profile.url = req.body.business_profile_url
     }
     if (req.body.business_profile_product_description) {
       accountInfo.business_profile = accountInfo.business_profile || {}
-      accountInfo.business_profile.business_profile_product_description = req.body.business_profile_product_description
+      accountInfo.business_profile.product_description = req.body.business_profile_product_description
     }
     // TODO: these fields are optional but not represented in requirements
     // so when Stripe updates to have something like an 'optionally_due' array
@@ -406,12 +406,12 @@ module.exports = {
       if (!found) {
         throw new Error('invalid-address_state')
       }
-      accountInfo.address = accountInfo.address || {}
-      accountInfo.address.state = req.body.address_state
+      accountInfo.individual.address = accountInfo.individual.address || {}
+      accountInfo.individual.address.state = req.body.address_state
     }
     if (req.body.address_postal_code) {
-      accountInfo.address = accountInfo.address || {}
-      accountInfo.address.postal_code = req.body.address_postal_code
+      accountInfo.individual.address = accountInfo.individual.address || {}
+      accountInfo.individual.address.postal_code = req.body.address_postal_code
     }
     if (req.body.gender && req.body.gender !== 'male' && req.body.gender !== 'female') {
       throw new Error('invalid-gender')
@@ -423,24 +423,24 @@ module.exports = {
       throw new Error('invalid-ssn_last_4')
     }
     if (req.body.verification_document_back) {
-      accountInfo.verification = accountInfo.verification || {}
-      accountInfo.verification.document = accountInfo.verification.document || {}
-      accountInfo.verification.document.back = req.body.verification_document_back
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+      accountInfo.individual.verification.document.back = req.body.verification_document_back
     }
     if (req.body.verification_document_front) {
-      accountInfo.verification = accountInfo.verification || {}
-      accountInfo.verification.document = accountInfo.verification.document || {}
-      accountInfo.verification.document.front = req.body.verification_document_front
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+      accountInfo.individual.verification.document.front = req.body.verification_document_front
     }
     if (req.body.verification_additional_document_back) {
-      accountInfo.verification = accountInfo.verification || {}
-      accountInfo.verification.additional_document = accountInfo.verification.additional_document || {}
-      accountInfo.verification.additional_document.back = req.body.verification_additional_document_back
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+      accountInfo.individual.verification.additional_document.back = req.body.verification_additional_document_back
     }
     if (req.body.verification_additional_document_front) {
-      accountInfo.verification = accountInfo.verification || {}
-      accountInfo.verification.additional_document = accountInfo.verification.additional_document || {}
-      accountInfo.verification.additional_document.front = req.body.verification_additional_document_front
+      accountInfo.individual.verification = accountInfo.individual.verification || {}
+      accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+      accountInfo.individual.verification.additional_document.front = req.body.verification_additional_document_front
     }
     while (true) {
       try {

@@ -136,12 +136,12 @@ async function renderPage (req, res) {
   }
   if (req.data.owners && req.data.owners.length) {
     dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
-  } else if (!stripeAccount.metadata.requiresOwners) {
+  } else if (req.data.stripeAccount.metadata.requiresOwners === 'false') {
     removeElements.push('owners-container')
   }
   if (req.data.directors && req.data.directors.length) {
     dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
-  } else if (!stripeAccount.metadata.requiresDirectors) {
+  } else if (req.data.stripeAccount.metadata.requiresDirectors === 'false') {
     removeElements.push('directors-container')
   }
   if (req.data.stripeAccount.metadata.submitted) {

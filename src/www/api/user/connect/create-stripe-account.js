@@ -48,7 +48,6 @@ module.exports = {
         await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
         await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
         await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
-        console.log(stripeAccount.country, stripeAccount.metadata, 'owners', stripeAccount.requirements.currently_due.indexOf('relationship.owner') > -1, 'directors', stripeAccount.requirements.currently_due.indexOf('relationship.director') > -1)
         return stripeAccount
       } catch (error) {
         if (error.raw && error.raw.code === 'lock_timeout') {

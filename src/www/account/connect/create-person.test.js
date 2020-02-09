@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe.only('/account/connect/create-person', () => {
+describe('/account/connect/create-person', () => {
   describe('CreatePerson#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
@@ -84,7 +84,7 @@ describe.only('/account/connect/create-person', () => {
     })
   })
 
-  describe.only('CreatePerson#POST', () => {
+  describe('CreatePerson#POST', () => {
     it('should create representative (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -140,7 +140,7 @@ describe.only('/account/connect/create-person', () => {
       assert.notStrictEqual(personsTable, null)
     })
 
-    it.only('should create owner', async () => {
+    it('should create owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
@@ -157,7 +157,6 @@ describe.only('/account/connect/create-person', () => {
       }
       const page = await req.post()
       const doc = TestHelper.extractDoc(page)
-      console.log(doc.toString())
       const personsTable = doc.getElementById('persons-table')
       assert.notStrictEqual(personsTable, undefined)
       assert.notStrictEqual(personsTable, null)

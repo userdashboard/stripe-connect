@@ -15,10 +15,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res) {
-  console.log('rendering person page', req.data)
   const doc = dashboard.HTML.parse(req.route.html, req.data.person, 'person')
-  console.log(2)
   await navbar.setup(doc, req.data.person)
-  console.log(3, doc.toString())
   return dashboard.Response.end(req, res, doc)
 }

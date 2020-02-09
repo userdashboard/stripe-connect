@@ -89,7 +89,6 @@ module.exports = {
       })
       await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
     }
-    await TestHelper.waitForPayoutsEnabled(user)
     await TestHelper.waitForPendingFieldsToLeave(user)
     return user
   },
