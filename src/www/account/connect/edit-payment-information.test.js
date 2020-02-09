@@ -64,16 +64,13 @@ describe('/account/connect/edit-payment-information', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
+        let body
         if (TestStripeAccounts.paymentData[country.id].length) {
           for (const format of TestStripeAccounts.paymentData[country.id]) {
-            req.body = JSON.parse(JSON.stringify(format))
-            req.body.country = country.id
-            req.body.account_holder_type = 'company'
-            req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
-            const body = JSON.stringify(req.body)
-            const fields = Object.keys(req.body)
+            body = TestStripeAccounts.createPostData(format)            
+            const fields = Object.keys(body)
             for (const field of fields) {
-              req.body = JSON.parse(body)
+              req.body = JSON.parse(JSON.stringify(body))
               req.body[field] = ''
               const page = await req.post()
               const doc = TestHelper.extractDoc(page)
@@ -84,10 +81,10 @@ describe('/account/connect/edit-payment-information', () => {
           }
           return
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
-        const fields = Object.keys(req.body)
+        body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+        const fields = Object.keys(body)
         for (const field of fields) {
-          req.body = JSON.parse(body)
+          req.body = JSON.parse(JSON.stringify(body))
           req.body[field] = ''
           const page = await req.post()
           const doc = TestHelper.extractDoc(page)
