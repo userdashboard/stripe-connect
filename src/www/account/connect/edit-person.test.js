@@ -46,7 +46,7 @@ describe('/account/connect/edit-person', () => {
     }
   })
 
-  describe('EditPerson#POST', () => {
+  describe('EditPerson#POST', async () => {
     const excludeFields = [
       'relationship_representative',
       'relationship_executive',
@@ -66,15 +66,6 @@ describe('/account/connect/edit-person', () => {
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: 0
         })
-        let property = field.replace('address_kana_', 'address_kana.')
-                            .replace('address_kanji_', 'address_kanji.')
-                            .replace('dob_', 'dob.')
-                            .replace('relationship_', 'relationship.')
-        if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
-          property = property.replace('address_', 'address.')
-        }
-        await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
-        await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
@@ -85,6 +76,15 @@ describe('/account/connect/edit-person', () => {
           if (excludeFields.indexOf(field) > -1) {
             continue
           }
+          let property = field.replace('address_kana_', 'address_kana.')
+                              .replace('address_kanji_', 'address_kanji.')
+                              .replace('dob_', 'dob.')
+                              .replace('relationship_', 'relationship.')
+          if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
+          property = property.replace('address_', 'address.')
+          }
+          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
           req.body = JSON.parse(body)
           if (req.body[field]) {
             delete (req.body[field])
