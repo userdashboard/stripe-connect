@@ -22,15 +22,9 @@ module.exports = {
     if (!req.body.country || !connect.countrySpecIndex[req.body.country]) {
       throw new Error('invalid-country')
     }
-    // TODO: not sure if the country spec requirements can be relied upon
-    // as they have been inconsistent in the past and the requirements
-    // are now attached to the Account object, but after the owners and
-    // directors are submitted it is ambiguous if they were required
-    const countrySpec = connect.countrySpecIndex[req.body.country]
-    const requiresOwners = countrySpec.verification_fields.company.additional.indexOf('relationship.owner') > -1 ||
-                           countrySpec.verification_fields.company.minimum.indexOf('relationship.owner') > -1
-    const requiresDirectors = countrySpec.verification_fields.company.additional.indexOf('relationship.director') > -1 ||
-                              countrySpec.verification_fields.company.minimum.indexOf('relationship.director') > -1
+    const requiresOwners = req.body.country != 'CA' && req.body.country !== 'JP' 
+    const requiresDirectors = req.body.country !== 'CA' && req.body.country !== 'JP' && req.body.country !== 'HK' && 
+                              req.body.country !==  'MY' && req.body.country !== 'SG' && req.body.country !== 'US'
     const accountInfo = {
       type: 'custom',
       business_type: req.body.type,

@@ -1,5 +1,4 @@
 const connect = require('./index.js')
-const dashboard = require('@userdashboard/dashboard')
 const TestHelper = require('./test-helper.js')
 
 function createPostData (data, identity) {
