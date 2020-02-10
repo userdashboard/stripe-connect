@@ -142,6 +142,9 @@ module.exports = {
         address_line1: '123 Sesame St',    
         id_number: '000000000'
       })
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.id_number`)
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.address.city`)
+      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.address.line1`)
     }
     await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
     if (beneficialOwnerData[country] !== false) {
