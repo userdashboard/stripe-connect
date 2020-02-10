@@ -19,19 +19,29 @@ describe('/account/connect/person', () => {
       assert.strictEqual(errorMessage, 'invalid-personid')
     })
 
-    it('should bind owner to req', async () => {
+    it('should bind person to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('FR', 1)
+      await TestHelper.createPerson(user, {
+        relationship_owner: true,
+        relationship_title: 'Shareholder',
+        relationship_percent_ownership: 10
+      })
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
-      assert.strictEqual(req.data.owner.id, user.owner.id)
+      assert.strictEqual(req.data.person.id, user.owner.id)
     })
   })
 
   describe('Person#GET', () => {
-    it('should show table for owner (screenshots)', async () => {
+    it('should show table for person (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('GB', 1)
+      await TestHelper.createPerson(user, {
+        relationship_owner: true,
+        relationship_title: 'Shareholder',
+        relationship_percent_ownership: 10
+      })
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session

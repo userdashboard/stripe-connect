@@ -45,6 +45,24 @@ describe('/account/connect/persons', () => {
       await req.route.api.before(req)
       assert.strictEqual(req.data.owners.length, 2)
     })
+
+    it('should bind directors to req', async () => {
+      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 2)
+      const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      await req.route.api.before(req)
+      assert.strictEqual(req.data.directors.length, 2)
+    })
+
+    it('should bind representatives to req', async () => {
+      const user = await TestStripeAccounts.createCompanyWithRepresentative('DE')
+      const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      await req.route.api.before(req)
+      assert.strictEqual(req.data.representatives.length, 1)
+    })
   })
 
   describe('Persons#GET', () => {
