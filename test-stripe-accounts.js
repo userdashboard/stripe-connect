@@ -68,26 +68,26 @@ module.exports = {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country], user.profile))
     }
     await TestHelper.waitForVerificationFieldsToLeave(user, 'external_account')
-    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-    req.session = user.session
-    req.account = user.account
-    req.stripeKey = {
-      api_key: process.env.STRIPE_KEY
-    }
-    await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
-    await TestHelper.updateStripeRegistration(user, {}, {
-      verification_document_back: TestHelper['success_id_scan_back.png'],
-      verification_document_front: TestHelper['success_id_scan_front.png']
-    })
-    await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.document')
-    await TestHelper.waitForPendingFieldsToLeave(user)
-    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-      await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
+    // TODO: US individual requires submitting document front/back
+    // but the Stripe test API is erroneously marking the document
+    // as pending review instead of required, note that the other 
+    // countries legitimately do not require documentation
+    if (country !== 'HK' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+      await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
       await TestHelper.updateStripeRegistration(user, {}, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.document')
+      await TestHelper.waitForPendingFieldsToLeave(user)
+      if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+        await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
+        await TestHelper.updateStripeRegistration(user, {}, {
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_front: TestHelper['success_id_scan_front.png']
+        })
+        await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
+      }
     }
     await TestHelper.waitForPendingFieldsToLeave(user)
     return user
@@ -113,14 +113,18 @@ module.exports = {
     await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
     const representativePostData = createPostData(representativeData[country], user.profile)
     await TestHelper.updatePerson(user, user.representative, representativePostData)
-    if (country !== 'HK') {
+    // TODO: US representative requires submitting document front/back
+    // but the Stripe test API is erroneously marking the document
+    // as pending review instead of required, note that the other 
+    // countries legitimately do not require documentation
+    if (country !== 'HK' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
       await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
       await TestHelper.updatePerson(user, user.representative, {}, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
-      if (country !== 'CA' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+      if (country !== 'CA' && country !== 'JP' && country !== 'US') {
         await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
         await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.additional_document')
         await TestHelper.updatePerson(user, user.representative, {}, {
@@ -129,7 +133,7 @@ module.exports = {
         })
         await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
       }
-    } else {
+    } else if (country === 'HK') {
       // TODO: these fields are required 'eventually' which is
       // not consistent with all the other countries' reps so
       // if that changes this 'special update' can be removed
@@ -1450,11 +1454,14 @@ const representativeData = module.exports.representativeData = {
     email: true
   },
   SG: {
+    address_line1: '123 Park Lane',
+    address_postal_code: '339696',
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
     first_name: true,
     last_name: true,
+    id_number: '000000000',
     relationship_representative: true,
     relationship_executive: 'true',
     relationship_title: 'SVP of Anything'

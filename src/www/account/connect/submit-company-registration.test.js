@@ -37,6 +37,7 @@ describe('/account/connect/submit-company-registration', () => {
       }
       assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
+
     it('should bind Stripe account to req', async () => {
       const user = await TestStripeAccounts.createCompanyReadyForSubmission('DE')
       const req = TestHelper.createRequest(`/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}`)

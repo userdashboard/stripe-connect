@@ -39,7 +39,7 @@ describe('/account/connect/submit-individual-registration', () => {
     })
 
     it('should bind Stripe account to req', async () => {
-      const user = await TestHelper.createIndividualReadyForSubmission('US')
+      const user = await TestStripeAccounts.createIndividualReadyForSubmission('US')
       const req = TestHelper.createRequest(`/account/connect/submit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -75,7 +75,7 @@ describe('/account/connect/submit-individual-registration', () => {
 
     for (const country of connect.countrySpecs) {
       it('should present the form (' + country.id + ')', async () => {
-        const user = await TestHelper.createIndividualReadyForSubmission(country.id)
+        const user = await TestStripeAccounts.createIndividualReadyForSubmission(country.id)
         const req = TestHelper.createRequest(`/account/connect/submit-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
@@ -90,7 +90,7 @@ describe('/account/connect/submit-individual-registration', () => {
   describe('SubmitIndividualRegistration#POST', () => {
     for (const country of connect.countrySpecs) {
       it('should submit registration (' + country.id + ') (screenshots)', async () => {
-        const user = await TestHelper.createIndividualReadyForSubmission(country.id)
+        const user = await TestStripeAccounts.createIndividualReadyForSubmission(country.id)
         const req = TestHelper.createRequest(`/account/connect/submit-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session

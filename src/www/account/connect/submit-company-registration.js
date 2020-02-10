@@ -22,14 +22,24 @@ async function beforeRequest (req) {
   if (stripeAccount.metadata.requiresDirectors === 'true' && !stripeAccount.company.directors_provided) {
     req.error = req.error || 'invalid-company-directors'
   }
-  const representative = await global.api.user.connect.Person.get(req)
-  if (!representative) {
+  req.query.all = true
+  const persons = await global.api.user.connect.Persons.get(req)
+  if (!persons || !persons.length) {
     req.error = req.error || 'invalid-company-representative'
-  }
-  for (const requirement of stripeAccount.requirements.currently_due) {
-    if (requirement.startsWith(representative.id)) {
-      req.error = req.error || 'invalid-company-representative'
-      break
+  } else {
+    for (const person of persons) {
+      if (person.requirements.currently_due.length) {
+        if (person.relationship.representative) {
+          req.error = req.error || 'invalid-company-representative'
+          break
+        } else if (person.relationship.owner) {
+          req.error = req.error || 'invalid-beneficial-owners'
+          break
+        } else {
+          req.error = req.error || 'invalid-company-directors'
+          break
+        }
+      }
     }
   }
   const completedPayment = stripeAccount.external_accounts &&
