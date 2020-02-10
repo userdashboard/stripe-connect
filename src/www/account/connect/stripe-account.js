@@ -49,14 +49,15 @@ async function beforeRequest (req) {
   }
   stripeAccount.company = stripeAccount.company || {}
   stripeAccount.individual = stripeAccount.individual || {}
-  let owners, directors, representative
+  let owners, directors, representatives
   if (stripeAccount.business_type === 'company') {
     req.query.all = true
     const persons = await global.api.user.connect.Persons.get(req)
     if (persons && persons.length) {
       for (const person of persons) {
         if (person.relationship.representative) {
-          representative = representative || person
+          representatives = representatives || []
+          representatives.push(person)
         }
         if (person.relationship.owner) {
           owners = owners || []
@@ -69,7 +70,7 @@ async function beforeRequest (req) {
       }
     }
   }
-  req.data = { owners, directors, representative, stripeAccount, registrationComplete }
+  req.data = { owners, directors, representatives, stripeAccount, registrationComplete }
 }
 
 async function renderPage (req, res) {
@@ -98,13 +99,17 @@ async function renderPage (req, res) {
     } else {
       removeElements.push('business-name')
     }
-    if (req.data.representative) {
-      if (req.data.representative.requirements.currently_due.length === 0) {
-        removeElements.push('update-company-representative-link')
+    if (req.data.representatives && req.data.representatives.length) {
+      dashboard.HTML.renderTable(doc, req.data.representatives, 'person-row', 'representatives-table')
+      for (const person of req.data.representatives) {
+        if (person.requirements.currently_due.length) {
+          removeElements.push(`requires-no-information-${person.id}`)
+        } else {
+          removeElements.push(`requires-information-${person.id}`)
+        }
       }
-      dashboard.HTML.renderTable(doc, [req.data.representative], 'representative-row', 'representatives-table')
     } else {
-      removeElements.push('update-company-representative-link', 'create-company-representative-link', 'representative-container')
+      removeElements.push('representatives-table')
     }
   }
   if (req.data.stripeAccount.metadata.submitted) {
@@ -135,12 +140,26 @@ async function renderPage (req, res) {
     dashboard.HTML.renderTemplate(doc, null, 'no-payment-information', 'payment-information-status')
   }
   if (req.data.owners && req.data.owners.length) {
-    dashboard.HTML.renderTable(doc, req.data.owners, 'owner-row', 'owners-table')
+    dashboard.HTML.renderTable(doc, req.data.owners, 'person-row', 'owners-table')
+    for (const person of req.data.owners) {
+      if (person.requirements.currently_due.length) {
+        removeElements.push(`requires-no-information-${person.id}`)
+      } else {
+        removeElements.push(`requires-information-${person.id}`)
+      }
+    }
   } else if (req.data.stripeAccount.metadata.requiresOwners === 'false') {
     removeElements.push('owners-container')
   }
   if (req.data.directors && req.data.directors.length) {
-    dashboard.HTML.renderTable(doc, req.data.directors, 'director-row', 'directors-table')
+    dashboard.HTML.renderTable(doc, req.data.directors, 'person-row', 'directors-table')
+    for (const person of req.data.directors) {
+      if (person.requirements.currently_due.length) {
+        removeElements.push(`requires-no-information-${person.id}`)
+      } else {
+        removeElements.push(`requires-information-${person.id}`)
+      }
+    }
   } else if (req.data.stripeAccount.metadata.requiresDirectors === 'false') {
     removeElements.push('directors-container')
   }

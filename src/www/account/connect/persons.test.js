@@ -85,17 +85,9 @@ describe('/account/connect/persons', () => {
       assert.strictEqual(row.tag, 'tr')
     })
 
-    it('should have row for each director (screenshots)', async () => {
+    it('should have row for each director', async () => {
       const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#account-menu-container' },
-        { click: '/account/connect' },
-        { click: '/account/connect/stripe-accounts' },
-        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` }
-      ]
       req.account = user.account
       req.session = user.session
       const page = await req.get()
@@ -104,17 +96,9 @@ describe('/account/connect/persons', () => {
       assert.strictEqual(row.tag, 'tr')
     })
 
-    it('should have row for each representative (screenshots)', async () => {
+    it('should have row for each representative', async () => {
       const user = await TestStripeAccounts.createCompanyWithRepresentative('DE')
       const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#account-menu-container' },
-        { click: '/account/connect' },
-        { click: '/account/connect/stripe-accounts' },
-        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` }
-      ]
       req.account = user.account
       req.session = user.session
       const page = await req.get()

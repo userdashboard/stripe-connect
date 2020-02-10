@@ -21,11 +21,6 @@ describe('/account/connect/person', () => {
 
     it('should bind person to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('FR', 1)
-      await TestHelper.createPerson(user, {
-        relationship_owner: true,
-        relationship_title: 'Shareholder',
-        relationship_percent_ownership: 10
-      })
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
@@ -37,11 +32,6 @@ describe('/account/connect/person', () => {
   describe('Person#GET', () => {
     it('should show table for person (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('GB', 1)
-      await TestHelper.createPerson(user, {
-        relationship_owner: true,
-        relationship_title: 'Shareholder',
-        relationship_percent_ownership: 10
-      })
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
@@ -58,6 +48,59 @@ describe('/account/connect/person', () => {
       const doc = TestHelper.extractDoc(page)
       const row = doc.getElementById(user.owner.id)
       assert.strictEqual(row.tag, 'tbody')
+    })
+
+    it('should show person is representative', async () => {
+      const user = await TestStripeAccounts.createCompanyWithRepresentative()
+      const req = TestHelper.createRequest(`/account/connect/person?personid=${user.representative.id}`)
+      req.account = user.account
+      req.session = user.session
+      const page = await req.get()
+      const doc = TestHelper.extractDoc(page)
+      const cell = doc.getElementById('representative')
+      assert.strictEqual(cell.tag, 'td')
+    })
+
+    it('should show person is owner', async () => {
+      const user = await TestStripeAccounts.createCompanyWithOwners('GB', 1)
+      const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
+      req.account = user.account
+      req.session = user.session
+      const page = await req.get()
+      const doc = TestHelper.extractDoc(page)
+      const cell = doc.getElementById('owner')
+      assert.strictEqual(cell.tag, 'td')
+    })
+
+    it('should show person is director', async () => {
+      const user = await TestStripeAccounts.createCompanyWithDirectors('GB', 1)
+      const req = TestHelper.createRequest(`/account/connect/person?personid=${user.director.id}`)
+      req.account = user.account
+      req.session = user.session
+      const page = await req.get()
+      const doc = TestHelper.extractDoc(page)
+      const cell = doc.getElementById('director')
+      assert.strictEqual(cell.tag, 'td')
+    })
+
+    it('should show person requires additional information', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'GB',
+        type: 'company'
+      })
+      await TestHelper.createPerson(user, {
+        relationship_owner: true,
+        relationship_title: 'Shareholder',
+        relationship_percent_ownership: '10'
+      })
+      const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
+      req.account = user.account
+      req.session = user.session
+      const page = await req.get()
+      const doc = TestHelper.extractDoc(page)
+      const row = doc.getElementById('requires-information')
+      assert.strictEqual(row.tag, 'tr')
     })
   })
 })

@@ -98,36 +98,6 @@ describe('/account/connect/stripe-account', () => {
       assert.strictEqual(message.attr.template, 'completed-registration')
     })
 
-    it('should hide registration after submitting registration', async () => {
-      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      // TODO: swap with individual account
-      // the Stripe test api has an error creating fully-activated accounts
-      // so when that gets fixed this code can be changed to speed it up
-      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
-      const registrationContainer = doc.getElementById('registration-container')
-      assert.strictEqual(registrationContainer, undefined)
-    })
-
-    it('should hide company owners after submitting registration', async () => {
-      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      // TODO: swap with individual account
-      // the Stripe test api has an error creating fully-activated accounts
-      // so when that gets fixed this code can be changed to speed it up
-      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
-      const ownersContainer = doc.getElementById('owners-container')
-      assert.strictEqual(ownersContainer, undefined)
-    })
-
     it('should show payment information required', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

@@ -40,23 +40,46 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  const removeElements = []
   if (!req.data.owners || !req.data.owners.length) {
-    const ownerContainer = doc.getElementById('owners-container')
-    ownerContainer.parentNode.removeChild(ownerContainer)
+    removeElements.push('owners-container')
   } else {
     dashboard.HTML.renderTable(doc, req.data.owners, 'person-row', 'owners-table')
+    for (const person of req.data.owners) {
+      if (person.requirements.currently_due.length) {
+        removeElements.push(`requires-no-information-${person.id}`)
+      } else {
+        removeElements.push(`requires-information-${person.id}`)
+      }
+    }
   }
   if (!req.data.representatives || !req.data.representatives.length) {
-    const representativesTable = doc.getElementById('representatives-table')
-    representativesTable.parentNode.removeChild(representativesTable)
+    removeElements.push('representatives-table')
   } else {
     dashboard.HTML.renderTable(doc, req.data.representatives, 'person-row', 'representatives-table')
+    for (const person of req.data.representatives) {
+      if (person.requirements.currently_due.length) {
+        removeElements.push(`requires-no-information-${person.id}`)
+      } else {
+        removeElements.push(`requires-information-${person.id}`)
+      }
+    }
   }
   if (!req.data.directors || !req.data.directors.length) {
-    const directorContainer = doc.getElementById('directors-container')
-    directorContainer.parentNode.removeChild(directorContainer)
+    removeElements.push('directors-container')
   } else {
     dashboard.HTML.renderTable(doc, req.data.directors, 'person-row', 'directors-table')
+    for (const person of req.data.directors) {
+      if (person.requirements.currently_due.length) {
+        removeElements.push(`requires-no-information-${person.id}`)
+      } else {
+        removeElements.push(`requires-information-${person.id}`)
+      }
+    }
+  }
+  for (const id of removeElements) {
+    const element = doc.getElementById(id)
+    element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }

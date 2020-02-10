@@ -61,12 +61,12 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Required information</th>
           </tr>
         </thead>
       </table>
       <p class="pure-button-group" role="group" id="registration-options">
         <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_representative=true&relationship_executive=true&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
-        <a id="update-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update representative</a>
       </p>
     </div>
     <div id="owners-container">
@@ -77,6 +77,7 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Requires</th>
           </tr>
         </thead>
       </table>
@@ -93,6 +94,7 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Requires</th>
           </tr>
         </thead>
       </table>
@@ -118,22 +120,12 @@
       </p>
     </div>
   </body>
-  <template id="representative-row">
+  <template id="person-row">
     <tr id="${person.id}">
       <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
-      <td>${person.first_name} ${person.last_name} (representative)</td>
-    </tr>
-  </template>
-  <template id="owner-row">
-    <tr id="${person.id}">
-      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
-      <td>${person.first_name} ${person.last_name} (owner)</td>
-    </tr>
-  </template>
-  <template id="director-row">
-    <tr id="${person.id}">
-      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
-      <td>${person.first_name} ${person.last_name} (diretor)</td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}"><a class="pure-button" href="/account/connect/edit-person?personid=${person.id}">Add information</a></td>
+      <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
