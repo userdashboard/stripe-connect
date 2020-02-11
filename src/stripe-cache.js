@@ -7,10 +7,6 @@ if (global.maxmimumStripeRetries) {
 stripe.setTelemetryEnabled(false)
 const util = require('util')
 
-const wait = util.promisify((callback) => {
-  return setTimeout(callback, 100)
-})
-
 function retriableError (error) {
   if (global.testEnded) {
     return false
