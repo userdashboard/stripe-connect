@@ -33,3 +33,4 @@ jobs:
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_5 }}
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        LOCALHOST_RUN: true
