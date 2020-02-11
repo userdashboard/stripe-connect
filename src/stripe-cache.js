@@ -29,9 +29,6 @@ function retriableError (error) {
   if (error.raw.code === 'rate_limit') {
     return true
   }
-  if (error.raw.code === 'account_invalid') {
-    return true
-  }
   if (error.raw.code === 'idempotency_key_in_use') {
     return true
   }

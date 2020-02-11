@@ -14,7 +14,12 @@ async function beforeRequest (req) {
   if (req.query.message === 'success') {
     req.data = {
       stripeAccount: {
-        id: req.query.stripeid
+        object: 'account',
+        id: req.query.stripeid,
+        business_profile: {},
+        company: {},
+        individual: {},
+        statusMessage: 'deleted'
       }
     }
     return

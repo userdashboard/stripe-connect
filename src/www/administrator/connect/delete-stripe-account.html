@@ -22,8 +22,8 @@
       <tr id="${stripeAccount.id}">
         <td><a href="/account/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a></td>
         <td id="blank-name">Not yet provided</td>
-                <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
-                <td id="business-name">${stripeAccount.company.name || ""}</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
         <td id="mcc-description"></td>
         <td id="account-status"></td>
       </tr>
@@ -79,5 +79,8 @@
   </template>
   <template id="disabled">
     <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="deleted">
+    <span>Deleted</span>
   </template>
 </html>
