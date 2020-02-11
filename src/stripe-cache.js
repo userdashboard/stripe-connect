@@ -43,6 +43,9 @@ function formatError (error) {
     const property = error.raw.param.replace('[', '.').replace(']', '').replace('.', '_')
     return `invalid-${property}`
   }
+  if (error.raw.code === 'account_invalid') {
+    return 'invalid-stripeid'
+  }
   return 'unknown-error'
 }
 
