@@ -89,6 +89,18 @@ module.exports = {
         await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
       }
     }
+    // TODO: these fields are required 'eventually' which is
+    // not consistent with all the other countries' reps so
+    // if that changes this 'special update' can be removed
+    const eventuallyDue = {
+      address_city: 'Hong Kong',
+      address_line1: '123 Sesame St',
+      id_number: '000000000'
+    }
+    if (country === 'SG') {
+      eventuallyDue.address_postal_code = '339696'
+    }
+    await TestHelper.updateStripeRegistration(user, eventuallyDue)
     await TestHelper.waitForPendingFieldsToLeave(user)
     return user
   },
