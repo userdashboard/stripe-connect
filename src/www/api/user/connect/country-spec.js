@@ -8,7 +8,7 @@ module.exports = {
     if (!req.query || !req.query.country) {
       throw new Error('invalid-country')
     }
-    if (!connect.countrySpecIndex[req.body.country]) {
+    if (!connect.countrySpecIndex[req.query.country]) {
       throw new Error('invalid-country')
     }
     if (cache[req.query.country]) {
