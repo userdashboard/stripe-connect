@@ -14,11 +14,7 @@ module.exports = {
       api_key: req.stripeKey.api_key,
       stripe_account: stripeid
     }
-    let payout
-    try {
-      payout = await stripeCache.retrieve(req.query.payoutid, 'payouts', accountKey)
-    } catch (error) {
-    }
+    const payout = await stripeCache.retrieve(req.query.payoutid, 'payouts', accountKey)
     if (!payout) {
       throw new Error('invalid-payoutid')
     }
