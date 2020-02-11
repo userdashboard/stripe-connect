@@ -136,18 +136,19 @@ module.exports = {
         })
         await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
       }
-    } else if (country === 'HK') {
+    } else if (country === 'HK' || country === 'SG') {
       // TODO: these fields are required 'eventually' which is
       // not consistent with all the other countries' reps so
       // if that changes this 'special update' can be removed
-      await TestHelper.updatePerson(user, user.representative, {
+      const eventuallyDue = {
         address_city: 'Hong Kong',
         address_line1: '123 Sesame St',
         id_number: '000000000'
-      })
-      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.id_number`)
-      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.address.city`)
-      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.address.line1`)
+      }
+      if (country === 'SG') {
+        eventuallyDue.address_postal_code = '339696'
+      }
+      await TestHelper.updatePerson(user, user.representative, eventuallyDue)
     }
     await TestHelper.waitForVerificationFieldsToLeave(user, user.representative.id)
     if (beneficialOwnerData[country] !== false) {
