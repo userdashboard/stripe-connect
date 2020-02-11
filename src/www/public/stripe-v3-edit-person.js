@@ -57,25 +57,25 @@ function updateAccount (e) {
     person.address_kana = {
       line1: addressKanaLine1.value
     }
-    var city = document.getElementById('address_kana_city')
-    if (city && city.value) {
-      person.address_kana.city = city.value
+    var kanaCity = document.getElementById('address_kana_city')
+    if (kanaCity && kanaCity.value) {
+      person.address_kana.city = kanaCity.value
     }
-    var state = document.getElementById('address_kana_state')
-    if (state && state.selectedIndex > 0) {
-      person.address_kana.state = state.value
+    var kanaState = document.getElementById('address_kana_state')
+    if (kanaState && kanaState.selectedIndex > 0) {
+      person.address_kana.state = kanaState.value
     }
-    var addressLine2 = document.getElementById('address_kana_line2')
-    if (addressLine2 && addressLine2.value) {
-      person.address_kana.line2 = addressLine2.value
+    var kanaAddressLine2 = document.getElementById('address_kana_line2')
+    if (kanaAddressLine2 && kanaAddressLine2.value) {
+      person.address_kana.line2 = kanaAddressLine2.value
     }
-    var addressPostalCode = document.getElementById('address_kana_postal_code')
-    if (addressPostalCode && addressPostalCode.value) {
-      person.address_kana.postal_code = addressPostalCode.value
+    var kanaAddressPostalCode = document.getElementById('address_kana_postal_code')
+    if (kanaAddressPostalCode && kanaAddressPostalCode.value) {
+      person.address_kana.postal_code = kanaAddressPostalCode.value
     }
-    var addressCountry = document.getElementById('address_kana_country')
-    if (addressCountry.selectedIndex > 0) {
-      person.address_kana.country = addressCountry.value
+    var kanaAddressCountry = document.getElementById('address_kana_country')
+    if (kanaAddressCountry.selectedIndex > 0) {
+      person.address_kana.country = kanaAddressCountry.value
     }
   }
   var addressKanjiLine1 = document.getElementById('address_kanji_line1')
@@ -83,25 +83,25 @@ function updateAccount (e) {
     person.address_kanji = {
       line1: addressKanjiLine1.value
     }
-    var city = document.getElementById('address_kanji_city')
-    if (city && city.value) {
-      person.address_kanji.city = city.value
+    var kanjiCity = document.getElementById('address_kanji_city')
+    if (kanjiCity && kanjiCity.value) {
+      person.address_kanji.city = kanjiCity.value
     }
-    var state = document.getElementById('address_kanji_state')
-    if (state && state.selectedIndex > 0) {
-      person.address_kanji.state = state.value
+    var kanjiState = document.getElementById('address_kanji_state')
+    if (kanjiState && kanjiState.selectedIndex > 0) {
+      person.address_kanji.state = kanjiState.value
     }
-    var addressLine2 = document.getElementById('address_kanji_line2')
-    if (addressLine2 && addressLine2.value) {
-      person.address_kanji.line2 = addressLine2.value
+    var kanjiAddressLine2 = document.getElementById('address_kanji_line2')
+    if (kanjiAddressLine2 && kanjiAddressLine2.value) {
+      person.address_kanji.line2 = kanjiAddressLine2.value
     }
-    var addressPostalCode = document.getElementById('address_kanji_postal_code')
-    if (addressPostalCode && addressPostalCode.value) {
-      person.address_kanji.postal_code = addressPostalCode.value
+    var kanjiAddressPostalCode = document.getElementById('address_kanji_postal_code')
+    if (kanjiAddressPostalCode && kanjiAddressPostalCode.value) {
+      person.address_kanji.postal_code = kanjiAddressPostalCode.value
     }
-    var addressCountry = document.getElementById('address_kanji_country')
-    if (addressCountry.selectedIndex > 0) {
-      person.address_kanji.country = addressCountry.value
+    var kanjiAddressCountry = document.getElementById('address_kanji_country')
+    if (kanjiAddressCountry.selectedIndex > 0) {
+      person.address_kanji.country = kanjiAddressCountry.value
     }
   }
   var email = document.getElementById('email')
