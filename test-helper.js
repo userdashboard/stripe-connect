@@ -66,6 +66,7 @@ module.exports = {
   waitForVerification: util.promisify(waitForVerification),
   waitForPayoutsEnabled: util.promisify(waitForPayoutsEnabled),
   waitForVerificationFieldsToLeave: util.promisify(waitForVerificationFieldsToLeave),
+  waitForCurrentlyDueFieldsToLeave: util.promisify(waitForCurrentlyDueFieldsToLeave),
   waitForVerificationFailure: util.promisify(waitForVerificationFailure),
   waitForVerificationStart: util.promisify(waitForVerificationStart),
   waitForPayout: util.promisify(waitForPayout),
@@ -610,6 +611,31 @@ async function waitForPendingFieldsToLeave (user, callback) {
   return setTimeout(wait, 100)
 }
 
+async function waitForCurrentlyDueFieldsToLeave (user, contains, callback) {
+  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  req.account = user.account
+  req.session = user.session
+  req.stripeKey = stripeKey
+  async function wait () {
+    if (global.testEnded) {
+      return
+    }
+    try {
+      const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      for (const field of stripeAccount.requirements.currently_due) {
+        if (field.indexOf(contains) > -1) {
+          return setTimeout(wait, 100)
+        }
+      }
+      user.stripeAccount = stripeAccount
+      return setTimeout(callback, 10)
+    } catch (error) {
+    }
+    return setTimeout(wait, 10)
+  }
+  return setTimeout(wait, 100)
+}
+
 async function waitForVerificationFieldsToLeave (user, contains, callback) {
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
@@ -621,6 +647,9 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
     }
     try {
       const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      console.log('waiting', stripeAccount.requirements.currently_due.join(', '))
+      console.log('waiting', stripeAccount.requirements.eventually_due.join(', '))
+
       for (const field of stripeAccount.requirements.eventually_due) {
         if (field.indexOf(contains) > -1) {
           return setTimeout(wait, 100)

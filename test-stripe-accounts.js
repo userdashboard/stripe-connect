@@ -113,6 +113,7 @@ module.exports = {
     await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
     const representativePostData = createPostData(representativeData[country], user.profile)
     await TestHelper.updatePerson(user, user.representative, representativePostData)
+    await TestHelper.waitForCurrentlyDueFieldsToLeave(user, user.representative.id)
     // TODO: US representative requires submitting document front/back
     // but the Stripe test API is erroneously marking the document
     // as pending review instead of required, note that the other 
