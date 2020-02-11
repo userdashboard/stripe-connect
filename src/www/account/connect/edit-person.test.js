@@ -77,11 +77,11 @@ describe('/account/connect/edit-person', () => {
             continue
           }
           let property = field.replace('address_kana_', 'address_kana.')
-                              .replace('address_kanji_', 'address_kanji.')
-                              .replace('dob_', 'dob.')
-                              .replace('relationship_', 'relationship.')
+            .replace('address_kanji_', 'address_kanji.')
+            .replace('dob_', 'dob.')
+            .replace('relationship_', 'relationship.')
           if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
-          property = property.replace('address_', 'address.')
+            property = property.replace('address_', 'address.')
           }
           await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
           await TestHelper.waitForPersonRequirement(user, user.representative.id, property)

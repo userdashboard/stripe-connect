@@ -70,7 +70,7 @@ module.exports = {
     await TestHelper.waitForVerificationFieldsToLeave(user, 'external_account')
     // TODO: US individual requires submitting document front/back
     // but the Stripe test API is erroneously marking the document
-    // as pending review instead of required, note that the other 
+    // as pending review instead of required, note that the other
     // countries legitimately do not require documentation
     if (country !== 'HK' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
@@ -113,10 +113,12 @@ module.exports = {
     await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
     const representativePostData = createPostData(representativeData[country], user.profile)
     await TestHelper.updatePerson(user, user.representative, representativePostData)
-    await TestHelper.waitForCurrentlyDueFieldsToLeave(user, user.representative.id)
+    if (country === 'HK' || country === 'SG') {
+      await TestHelper.waitForCurrentlyDueFieldsToLeave(user, user.representative.id)
+    }
     // TODO: US representative requires submitting document front/back
     // but the Stripe test API is erroneously marking the document
-    // as pending review instead of required, note that the other 
+    // as pending review instead of required, note that the other
     // countries legitimately do not require documentation
     if (country !== 'HK' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
@@ -140,7 +142,7 @@ module.exports = {
       // if that changes this 'special update' can be removed
       await TestHelper.updatePerson(user, user.representative, {
         address_city: 'Hong Kong',
-        address_line1: '123 Sesame St',    
+        address_line1: '123 Sesame St',
         id_number: '000000000'
       })
       await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.id_number`)
@@ -634,7 +636,7 @@ module.exports = {
       await TestHelper.createPerson(user, {
         relationship_director: true,
         relationship_title: 'Shareholder',
-        relationship_percent_ownership: (i + 1)
+        relationship_percent_ownership: '10'
       })
       const companyDirectorPostData = createPostData(companyDirectorData[country], user.profile)
       switch (field) {

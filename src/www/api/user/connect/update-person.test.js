@@ -149,9 +149,9 @@ describe('/api/user/connect/update-person', () => {
               relationship_percent_ownership: 0
             })
             let property = field.replace('address_kana_', 'address_kana.')
-                                .replace('address_kanji_', 'address_kanji.')
-                                .replace('dob_', 'dob.')
-                                .replace('relationship_', 'relationship.')
+              .replace('address_kanji_', 'address_kanji.')
+              .replace('dob_', 'dob.')
+              .replace('relationship_', 'relationship.')
             if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
               property = property.replace('address_', 'address.')
             }
@@ -190,9 +190,9 @@ describe('/api/user/connect/update-person', () => {
                 relationship_percent_ownership: 0
               })
               let property = field.replace('address_kana_', 'address_kana.')
-                                  .replace('address_kanji_', 'address_kanji.')
-                                  .replace('dob_', 'dob.')
-                                  .replace('relationship_', 'relationship.')
+                .replace('address_kanji_', 'address_kanji.')
+                .replace('dob_', 'do b.')
+                .replace('relationship_', 'relationship.')
               if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
                 property = property.replace('address_', 'address.')
               }
@@ -317,9 +317,9 @@ describe('/api/user/connect/update-person', () => {
             relationship_percent_ownership: 0
           })
           let property = field.replace('address_kana_', 'address_kana.')
-                              .replace('address_kanji_', 'address_kanji.')
-                              .replace('dob_', 'dob.')
-                              .replace('relationship_', 'relationship.')
+            .replace('address_kanji_', 'address_kanji.')
+            .replace('dob_', 'dob.')
+            .replace('relationship_', 'relationship.')
           if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
             property = property.replace('address_', 'address.')
           }

@@ -67,7 +67,7 @@ describe('/account/connect/edit-payment-information', () => {
         let body
         if (TestStripeAccounts.paymentData[country.id].length) {
           for (const format of TestStripeAccounts.paymentData[country.id]) {
-            body = TestStripeAccounts.createPostData(format)            
+            body = TestStripeAccounts.createPostData(format)
             const fields = Object.keys(body)
             for (const field of fields) {
               req.body = JSON.parse(JSON.stringify(body))

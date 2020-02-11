@@ -306,7 +306,7 @@ describe('/api/user/connect/create-person', () => {
         relationship_percent_ownership: '0.1'
       }
       const person = await req.post()
-      assert.strictEqual(person.relationship.director, true)    
+      assert.strictEqual(person.relationship.director, true)
     })
 
     it('optional posted relationship_owner', async () => {
@@ -324,7 +324,7 @@ describe('/api/user/connect/create-person', () => {
         relationship_percent_ownership: '0.1'
       }
       const person = await req.post()
-      assert.strictEqual(person.relationship.owner, true)  
+      assert.strictEqual(person.relationship.owner, true)
     })
 
     it('required posted relationship_percent_ownership', async () => {

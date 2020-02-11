@@ -1,9 +1,4 @@
-const stripe = require('stripe')()
-stripe.setApiVersion(global.stripeAPIVersion)
-if (global.maxmimumStripeRetries) {
-  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
-}
-stripe.setTelemetryEnabled(false)
+const stripeCache = require('./src/stripe-cache.js')
 
 module.exports = {
   fakePayout: {
@@ -15,38 +10,9 @@ module.exports = {
         if (!req.query || !req.query.stripeid) {
           throw new Error('invalid-stripeid')
         }
-        let stripeAccount
-        while (true) {
-          try {
-            stripeAccount = await stripe.accounts.retrieve(req.query.stripeid, req.stripeKey)
-            if (!stripeAccount.payouts_enabled) {
-              throw new Error('invalid-stripe-account')
-            }
-            break
-          } catch (error) {
-            if (error.raw && error.raw.code === 'lock_timeout') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'rate_limit') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'account_invalid') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'resource_missing') {
-              continue
-            }
-            if (error.type === 'StripeConnectionError') {
-              continue
-            }
-            if (error.type === 'StripeAPIError') {
-              continue
-            }
-            if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-          }
+        const stripeAccount = await stripeCache.retrieve(req.query.stripeid, 'accounts', req.stripeKey)
+        if (!stripeAccount.payouts_enabled) {
+          throw new Error('invalid-stripe-account')
         }
         req.stripeKey.stripe_account = req.query.stripeid
         const chargeInfo = {
@@ -55,35 +21,7 @@ module.exports = {
           source: 'tok_bypassPending',
           description: 'Test charge'
         }
-        while (true) {
-          try {
-            await stripe.charges.create(chargeInfo, req.stripeKey)
-            break
-          } catch (error) {
-            if (error.raw && error.raw.code === 'lock_timeout') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'rate_limit') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'account_invalid') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'resource_missing') {
-              continue
-            }
-            if (error.type === 'StripeConnectionError') {
-              continue
-            }
-            if (error.type === 'StripeAPIError') {
-              continue
-            }
-            if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-          }
-        }
+        await stripeCache.execute('charges', 'create', chargeInfo, req.stripeKey)
         const payoutInfo = {
           amount: 2000,
           currency: stripeAccount.default_currency,
@@ -94,35 +32,8 @@ module.exports = {
             stripeid: req.query.stripeid
           }
         }
-        while (true) {
-          try {
-            const payout = await stripe.payouts.create(payoutInfo, req.stripeKey)
-            return payout
-          } catch (error) {
-            if (error.raw && error.raw.code === 'lock_timeout') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'rate_limit') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'account_invalid') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-              continue
-            }
-            if (error.raw && error.raw.code === 'resource_missing') {
-              continue
-            }
-            if (error.type === 'StripeConnectionError') {
-              continue
-            }
-            if (error.type === 'StripeAPIError') {
-              continue
-            }
-            if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-          }
-        }
+        const payout = await stripeCache.execute('payouts', 'create', payoutInfo, req.stripeKey)
+        return payout
       }
     }
   }

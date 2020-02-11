@@ -6,7 +6,7 @@ describe('/account/connect/create-person', () => {
   describe('CreatePerson#BEFORE', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=invalid`)
+      const req = TestHelper.createRequest('/account/connect/create-person?stripeid=invalid')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -112,7 +112,7 @@ describe('/account/connect/create-person', () => {
         { fill: '#submit-form' }
       ]
       const page = await req.post()
-      const doc = TestHelper.extractDoc(page)      
+      const doc = TestHelper.extractDoc(page)
       const personsTable = doc.getElementById('persons-table')
       assert.notStrictEqual(personsTable, undefined)
       assert.notStrictEqual(personsTable, null)

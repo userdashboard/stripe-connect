@@ -647,9 +647,6 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
     }
     try {
       const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-      console.log('waiting', stripeAccount.requirements.currently_due.join(', '))
-      console.log('waiting', stripeAccount.requirements.eventually_due.join(', '))
-
       for (const field of stripeAccount.requirements.eventually_due) {
         if (field.indexOf(contains) > -1) {
           return setTimeout(wait, 100)
@@ -741,11 +738,11 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
     try {
       const person = await global.api.user.connect.Person.get(req)
       if (person && person.requirements) {
-        if (person.requirements.currently_due.indexOf(requirement) > -1 || 
+        if (person.requirements.currently_due.indexOf(requirement) > -1 ||
             person.requirements.eventually_due.indexOf(requirement) > -1) {
           return setTimeout(callback, 10)
         }
-      }    
+      }
     } catch (error) {
       console.log(error)
     }

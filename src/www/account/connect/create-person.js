@@ -50,10 +50,8 @@ async function renderPage (req, res, messageTemplate) {
     }
   } else if (req.query.relationship_director) {
     doc.getElementById('relationship_director').setAttribute('checked', true)
-    
   } else if (req.query.relationship_owner) {
     doc.getElementById('relationship_owner').setAttribute('checked', true)
-    
   } else if (req.query.relationship_representative) {
     doc.getElementById('relationship_representative').setAttribute('checked', true)
   }

@@ -1,10 +1,5 @@
 const dashboard = require('@userdashboard/dashboard')
-const stripe = require('stripe')()
-stripe.setApiVersion(global.stripeAPIVersion)
-if (global.maxmimumStripeRetries) {
-  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
-}
-stripe.setTelemetryEnabled(false)
+const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
   post: async (req) => {
@@ -26,8 +21,8 @@ module.exports = {
     }
     // TODO: the 5000 character limit is from Stripe
     // they'll probably change it so monitor this
-    if (!req.body.relationship_title || 
-        !req.body.relationship_title.length || 
+    if (!req.body.relationship_title ||
+        !req.body.relationship_title.length ||
         req.body.relationship_title.length > 5000) {
       throw new Error('invalid-relationship_title')
     }
@@ -75,44 +70,10 @@ module.exports = {
       }
       personInfo.relationship.owner = true
     }
-    while (true) {
-      try {
-        const person = await stripe.accounts.createPerson(req.query.stripeid, personInfo, req.stripeKey)
-        await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${person.id}`, req.query.stripeid)
-        await dashboard.StorageList.add(`${req.appid}/persons`, person.id)
-        await dashboard.StorageList.add(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, person.id)
-        return person
-      } catch (error) {
-        if (error.raw && error.raw.param) {
-          const property = error.raw.param.replace('[', '.').replace(']', '').replace('.', '_')
-          throw new Error(`invalid-${property}`)
-        }
-        if (error.raw && error.raw.code === 'lock_timeout') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'rate_limit') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'account_invalid') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-          continue
-        }
-        if (error.raw && error.raw.code === 'resource_missing') {
-          continue
-        }
-        if (error.type === 'StripeConnectionError') {
-          continue
-        }
-        if (error.type === 'StripeAPIError') {
-          continue
-        }
-        if (error.message === 'An error occurred with our connection to Stripe.') {
-          continue
-        }
-        if (process.env.DEBUG_ERRORS) { console.log(error) } throw new Error('unknown-error')
-      }
-    }
+    const person = await stripeCache.execute('accounts', 'createPerson', req.query.stripeid, personInfo, req.stripeKey)
+    await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${person.id}`, req.query.stripeid)
+    await dashboard.StorageList.add(`${req.appid}/persons`, person.id)
+    await dashboard.StorageList.add(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, person.id)
+    return person
   }
 }

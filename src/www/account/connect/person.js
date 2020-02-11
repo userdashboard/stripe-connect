@@ -26,7 +26,7 @@ async function renderPage (req, res) {
   } else if (req.data.person.relationship.owner) {
     removeElements.push('director', 'representative')
   } else {
-    removeElements.push('owner', 'representative') 
+    removeElements.push('owner', 'representative')
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)

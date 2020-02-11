@@ -54,7 +54,7 @@ async function renderPage (req, res, messageTemplate) {
       'kana-personal-address-container',
       'kana-personal-information-container',
       'kanji-personal-information-container')
-  } 
+  }
   let requireAddress
   for (const field of req.data.stripeAccount.requirements.currently_due) {
     requireAddress = field.startsWith('individual.address')
