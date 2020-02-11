@@ -322,7 +322,6 @@ module.exports = {
         updateInfo.verification.additional_document.front = req.body.verification_additional_document_front
       }
     }
-    console.log('updating person', person.account, person.id, updateInfo)
     const personNow = await stripeCache.execute('accounts', 'updatePerson', person.account, person.id, updateInfo, req.stripeKey)
     await stripeCache.delete(person.id)
     return personNow
