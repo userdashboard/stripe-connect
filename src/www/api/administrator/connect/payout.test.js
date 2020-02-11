@@ -37,7 +37,7 @@ describe('/api/administrator/connect/payout', () => {
   })
 
   describe('returns', () => {
-    it.only('object', async () => {
+    it('object', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       // TODO: swap with individual account

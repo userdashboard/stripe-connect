@@ -1,37 +1,11 @@
-const stripe = require('stripe')()
-stripe.setApiVersion(global.stripeAPIVersion)
-if (global.maxmimumStripeRetries) {
-  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
-}
-stripe.setTelemetryEnabled(false)
+const stripeCache = require('../../../../stripe-cache.js')
 let cache
 
 module.exports = {
   auth: false,
   get: async (req) => {
     if (!cache) {
-      while (true) {
-        try {
-          cache = await stripe.countrySpecs.list({ limit: 100 }, req.stripeKey)
-        } catch (error) {
-          if (error.raw && error.raw.code === 'lock_timeout') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'rate_limit') {
-            continue
-          }
-          if (error.raw && error.raw.code === 'idempotency_key_in_use') {
-            continue
-          }
-          if (error.type === 'StripeConnectionError') {
-            continue
-          }
-          throw error
-        }
-        if (cache) {
-          break
-        }
-      }
+      cache = await stripeCache.execute('countrySpecs', 'list', { limit: 100 }, req.stripeKey)
     }
     req.query = req.query || {}
     if (req.query.all) {
