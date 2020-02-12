@@ -123,7 +123,6 @@ describe('/account/connect/submit-company-registration', () => {
         req.screenshots = [
           { hover: '#account-menu-container' },
           { click: '/account/connect' },
-          { click: '/account/connect/stripe-accounts' },
           { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
           { click: `/account/connect/submit-company-registration?stripeid=${user.stripeAccount.id}` },
           { fill: '#submit-form' }
