@@ -1,4 +1,5 @@
 const dashboard = require('@userdashboard/dashboard')
+const navbar = require('./navbar-persons.js')
 
 module.exports = {
   before: beforeRequest,
@@ -40,6 +41,7 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  navbar.setup(doc, req.data.stripeAccount)
   const removeElements = []
   if (!req.data.owners || !req.data.owners.length) {
     removeElements.push('owners-container')

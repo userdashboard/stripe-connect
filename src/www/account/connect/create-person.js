@@ -1,4 +1,5 @@
 const dashboard = require('@userdashboard/dashboard')
+const navbar = require('./navbar-persons.js')
 
 module.exports = {
   before: beforeRequest,
@@ -23,6 +24,7 @@ async function renderPage (req, res, messageTemplate) {
   const removeElements = []
   req.data.stripeAccount.stripePublishableKey = global.stripePublishableKey
   const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  await navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {

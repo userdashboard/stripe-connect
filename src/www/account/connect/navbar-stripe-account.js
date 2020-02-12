@@ -1,25 +1,34 @@
 module.exports = {
   setup: (doc, stripeAccount) => {
-    const template = doc.getElementById('navbar')
+    const removeElements = []
     if (stripeAccount.metadata.submitted) {
-      const submitCompany = template.getElementById('navbar-submit-company')
-      submitCompany.parentNode.removeChild(submitCompany)
-      const submitIndividual = template.getElementById('navbar-submit-individual')
-      submitIndividual.parentNode.removeChild(submitIndividual)
-      return
-    }
-    if (stripeAccount.business_type === 'individual') {
-      const editCompany = template.getElementById('navbar-edit-company')
-      editCompany.parentNode.removeChild(editCompany)
-      const submitCompany = template.getElementById('navbar-submit-company')
-      submitCompany.parentNode.removeChild(submitCompany)
-      const persons = template.getElementById('navbar-persons')
-      persons.parentNode.removeChild(persons)
+      removeElements.push(
+        'navbar-submit-company-link', 
+        'navbar-submit-individual-link',
+        'navbar-submit-beneficial-owners-link',
+        'navbar-submit-company-directors-link'
+        )
+    } else if (stripeAccount.business_type === 'individual-link') {
+      removeElements.push(
+        'navbar-edit-company-link', 
+        'navbar-submit-company-link',  
+        'navbar-persons-link',
+        'navbar-submit-beneficial-owners-link',
+        'navbar-submit-company-directors-link'
+      )
     } else {
-      const editIndividual = template.getElementById('navbar-edit-individual')
-      editIndividual.parentNode.removeChild(editIndividual)
-      const submitIndividual = template.getElementById('navbar-submit-individual')
-      submitIndividual.parentNode.removeChild(submitIndividual)
+      removeElements.push('navbar-edit-individual-link', 'navbar-submit-individual-link')
+      if (stripeAccount.metadata.requiresOwners !== 'true') {
+        removeElements.push('navbar-submit-beneficial-owners-link')
+      }
+      if (stripeAccount.metadata.requiresDirectors !== 'true') {
+        removeElements.push('navbar-submit-company-directors-link')
+      }
+    }
+    const template = doc.getElementById('navbar')
+    for (const id of removeElements) {
+      const element = template.getElementById(id)
+      element.parentNode.removeChild(element)
     }
   }
 }
