@@ -27,6 +27,9 @@ module.exports = {
       accountInfo.account_token = req.body.token
     } else {
       accountInfo.individual = {}
+      accountInfo.metadata = {
+        token: false
+      }
       let validateDOB = false
       if (req.body.dob_day) {
         validateDOB = true
@@ -203,123 +206,130 @@ module.exports = {
           accountInfo.individual[property] = req.body[posted]
         }
       }
-    }
-    if (req.body.business_profile_mcc) {
-      const mccList = connect.getMerchantCategoryCodes(req.language)
-      let found = false
-      for (const mcc of mccList) {
-        found = mcc.code === req.body.business_profile_mcc
-        if (found) {
-          break
+      if (req.body.business_profile_mcc) {
+        const mccList = connect.getMerchantCategoryCodes(req.language)
+        let found = false
+        for (const mcc of mccList) {
+          found = mcc.code === req.body.business_profile_mcc
+          if (found) {
+            break
+          }
         }
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.mcc = req.body.business_profile_mcc
       }
-      accountInfo.business_profile = accountInfo.business_profile || {}
-      accountInfo.business_profile.mcc = req.body.business_profile_mcc
-    }
-    if (req.body.business_profile_url) {
-      if (!req.body.business_profile_url.startsWith('http://') &&
-          !req.body.business_profile_url.startsWith('https://')) {
-        throw new Error('invalid-business_profile_url')
+      if (req.body.business_profile_url) {
+        if (!req.body.business_profile_url.startsWith('http://') &&
+            !req.body.business_profile_url.startsWith('https://')) {
+          throw new Error('invalid-business_profile_url')
+        }
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.url = req.body.business_profile_url
       }
-      accountInfo.business_profile = accountInfo.business_profile || {}
-      accountInfo.business_profile.url = req.body.business_profile_url
-    }
-    if (req.body.business_profile_product_description) {
-      accountInfo.business_profile = accountInfo.business_profile || {}
-      accountInfo.business_profile.product_description = req.body.business_profile_product_description
-    }
-    // TODO: these fields are optional but not represented in requirements
-    // so when Stripe updates to have something like an 'optionally_due' array
-    // the manual checks can be removed
-    if (req.body.relationship_title) {
-      accountInfo.relationship = accountInfo.relationship || {}
-      accountInfo.relationship.title = req.body.relationship_title
-    }
-    if (req.body.relationship_executive) {
-      accountInfo.relationship = accountInfo.relationship || {}
-      accountInfo.relationship.executive = true
-    }
-    if (req.body.relationship_director) {
-      accountInfo.relationship = accountInfo.relationship || {}
-      accountInfo.relationship.director = true
-    }
-    if (req.body.relationship_owner) {
-      accountInfo.relationship = accountInfo.relationship || {}
-      accountInfo.relationship.owner = true
-    }
-    if (req.body.relationship_percent_ownership) {
-      try {
-        const percent = parseFloat(req.body.relationship_percent_ownership, 10)
-        if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+      if (req.body.business_profile_product_description) {
+        accountInfo.business_profile = accountInfo.business_profile || {}
+        accountInfo.business_profile.product_description = req.body.business_profile_product_description
+      }
+      // TODO: these fields are optional but not represented in requirements
+      // so when Stripe updates to have something like an 'optionally_due' array
+      // the manual checks can be removed
+      if (req.body.relationship_title) {
+        accountInfo.relationship = accountInfo.relationship || {}
+        accountInfo.relationship.title = req.body.relationship_title
+      }
+      if (req.body.relationship_executive) {
+        accountInfo.relationship = accountInfo.relationship || {}
+        accountInfo.relationship.executive = true
+      }
+      if (req.body.relationship_director) {
+        accountInfo.relationship = accountInfo.relationship || {}
+        accountInfo.relationship.director = true
+      }
+      if (req.body.relationship_owner) {
+        accountInfo.relationship = accountInfo.relationship || {}
+        accountInfo.relationship.owner = true
+      }
+      if (req.body.relationship_percent_ownership) {
+        try {
+          const percent = parseFloat(req.body.relationship_percent_ownership, 10)
+          if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+            throw new Error('invalid-relationship_percent_ownership')
+          }
+        } catch (s) {
           throw new Error('invalid-relationship_percent_ownership')
         }
-      } catch (s) {
-        throw new Error('invalid-relationship_percent_ownership')
+        accountInfo.relationship = accountInfo.relationship || {}
+        accountInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
       }
-      accountInfo.relationship = accountInfo.relationship || {}
-      accountInfo.relationship.percent_ownership = req.body.relationship_percent_ownership
-    }
-    if (req.body.address_line2) {
-      accountInfo.address = accountInfo.address || {}
-      accountInfo.address.line2 = req.body.address_line2
-    }
-    if (req.body.address_country && req.body.address_country.length) {
-      if (!connect.countryNameIndex[req.body.address_country]) {
-        throw new Error('invalid-address_country')
+      if (req.body.address_line2) {
+        accountInfo.address = accountInfo.address || {}
+        accountInfo.address.line2 = req.body.address_line2
       }
-      accountInfo.address = accountInfo.address || {}
-      accountInfo.address.country = req.body.address_country
-    }
-    if (req.body.address_state && req.body.address_state.length) {
-      const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
-      let found
-      for (const state of states) {
-        found = state.value === req.body.address_state
-        if (found) {
-          break
+      if (req.body.address_country && req.body.address_country.length) {
+        if (!connect.countryNameIndex[req.body.address_country]) {
+          throw new Error('invalid-address_country')
         }
+        accountInfo.address = accountInfo.address || {}
+        accountInfo.address.country = req.body.address_country
       }
-      if (!found) {
-        throw new Error('invalid-address_state')
+      if (req.body.address_state && req.body.address_state.length) {
+        const states = connect.countryDivisions[req.body.address_country || stripeAccount.country]
+        let found
+        for (const state of states) {
+          found = state.value === req.body.address_state
+          if (found) {
+            break
+          }
+        }
+        if (!found) {
+          throw new Error('invalid-address_state')
+        }
+        accountInfo.individual.address = accountInfo.individual.address || {}
+        accountInfo.individual.address.state = req.body.address_state
       }
-      accountInfo.individual.address = accountInfo.individual.address || {}
-      accountInfo.individual.address.state = req.body.address_state
+      if (req.body.address_postal_code) {
+        accountInfo.individual.address = accountInfo.individual.address || {}
+        accountInfo.individual.address.postal_code = req.body.address_postal_code
+      }
+      if (req.body.gender && req.body.gender !== 'male' && req.body.gender !== 'female') {
+        throw new Error('invalid-gender')
+      }
+      if (req.body.id_number && !req.body.id_number.length) {
+        throw new Error('invalid-id_number')
+      }
+      if (req.body.ssn_last_4 && req.body.ssn_last_4.length !== 4) {
+        throw new Error('invalid-ssn_last_4')
+      }
+      if (req.body.verification_document_back) {
+        accountInfo.individual.verification = accountInfo.individual.verification || {}
+        accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+        accountInfo.individual.verification.document.back = req.body.verification_document_back
+      }
+      if (req.body.verification_document_front) {
+        accountInfo.individual.verification = accountInfo.individual.verification || {}
+        accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
+        accountInfo.individual.verification.document.front = req.body.verification_document_front
+      }
+      if (req.body.verification_additional_document_back) {
+        accountInfo.individual.verification = accountInfo.individual.verification || {}
+        accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+        accountInfo.individual.verification.additional_document.back = req.body.verification_additional_document_back
+      }
+      if (req.body.verification_additional_document_front) {
+        accountInfo.individual.verification = accountInfo.individual.verification || {}
+        accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
+        accountInfo.individual.verification.additional_document.front = req.body.verification_additional_document_front
+      }
     }
-    if (req.body.address_postal_code) {
-      accountInfo.individual.address = accountInfo.individual.address || {}
-      accountInfo.individual.address.postal_code = req.body.address_postal_code
+    try {
+      const stripeAccountNow = await stripeCache.execute('accounts', 'update', req.query.stripeid, accountInfo, req.stripeKey)
+      await stripeCache.delete(req.query.stripeid)
+      return stripeAccountNow
+    } catch (error ){
+      if (error.message && error.message.startsWith('invalid-individual_')) {
+        throw new Error(error.message.replace('individual_', ''))
+      }
+      throw error
     }
-    if (req.body.gender && req.body.gender !== 'male' && req.body.gender !== 'female') {
-      throw new Error('invalid-gender')
-    }
-    if (req.body.id_number && !req.body.id_number.length) {
-      throw new Error('invalid-id_number')
-    }
-    if (req.body.ssn_last_4 && req.body.ssn_last_4.length !== 4) {
-      throw new Error('invalid-ssn_last_4')
-    }
-    if (req.body.verification_document_back) {
-      accountInfo.individual.verification = accountInfo.individual.verification || {}
-      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-      accountInfo.individual.verification.document.back = req.body.verification_document_back
-    }
-    if (req.body.verification_document_front) {
-      accountInfo.individual.verification = accountInfo.individual.verification || {}
-      accountInfo.individual.verification.document = accountInfo.individual.verification.document || {}
-      accountInfo.individual.verification.document.front = req.body.verification_document_front
-    }
-    if (req.body.verification_additional_document_back) {
-      accountInfo.individual.verification = accountInfo.individual.verification || {}
-      accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-      accountInfo.individual.verification.additional_document.back = req.body.verification_additional_document_back
-    }
-    if (req.body.verification_additional_document_front) {
-      accountInfo.individual.verification = accountInfo.individual.verification || {}
-      accountInfo.individual.verification.additional_document = accountInfo.individual.verification.additional_document || {}
-      accountInfo.individual.verification.additional_document.front = req.body.verification_additional_document_front
-    }
-    const stripeAccountNow = await stripeCache.execute('accounts', 'update', req.query.stripeid, accountInfo, req.stripeKey)
-    await stripeCache.delete(req.query.stripeid)
-    return stripeAccountNow
   }
 }

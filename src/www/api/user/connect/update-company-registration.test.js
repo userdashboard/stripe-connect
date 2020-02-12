@@ -4,8 +4,8 @@ const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/user/connect/update-company-registration', () => {
-  describe('exceptions', () => {
+describe('/api/user/connect/update-company-registration', async () => {
+  describe('exceptions', async () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
         const user = await TestHelper.createUser()
@@ -82,7 +82,8 @@ describe('/api/user/connect/update-company-registration', () => {
     })
 
     const testedMissingFields = []
-    // TODO: invalid values marked as 'false' are skipped until they can be verified
+    // TODO: invalid values marked as 'false' are skipped until
+    // a functional erroneous value can be provided
     const invalidValues = {
       address_line1: false,
       address_city: false,
@@ -93,15 +94,15 @@ describe('/api/user/connect/update-company-registration', () => {
       address_kana_city: false,
       address_kana_town: 'invalid',
       address_kana_state: 'invalid',
-      address_kana_postal_code: 'invalid',
+      address_kana_postal_code: false,
       address_kanji_line1: false,
       address_kanji_city: false,
-      address_kanji_town: 'invalid',
+      address_kanji_town: false,
       address_kanji_state: 'invalid',
-      address_kanji_postal_code: 'invalid',
+      address_kanji_postal_code: false,
       business_profile_mcc: 'invalid',
       business_profile_url: 'invalid',
-      tax_id: '1111',
+      tax_id: false,
       phone: 'invalid',
       name: false,
       name_kana: false,
@@ -117,10 +118,14 @@ describe('/api/user/connect/update-company-registration', () => {
           continue
         }
         testedMissingFields.push(field)
-        describe(`invalid-${field}`, () => {
+        describe(`invalid-${field}`, async () => {
           it(`missing posted ${field}`, async () => {
-            const user = await TestStripeAccounts.createCompanyWithFailedField(country.id, 'address')
-            const req = TestHelper.createRequest(`/api/user/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
+            const user = await TestHelper.createUser()
+            await TestHelper.createStripeAccount(user, {
+              country: country.id,
+              type: 'company'
+            })
+            const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
             req.account = user.account
             req.session = user.session
             req.uploads = {
@@ -132,7 +137,7 @@ describe('/api/user/connect/update-company-registration', () => {
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
             try {
-              await req.post()
+              await req.patch()
             } catch (error) {
               errorMessage = error.message
             }
@@ -146,7 +151,7 @@ describe('/api/user/connect/update-company-registration', () => {
                 country: country.id,
                 type: 'company'
               })
-              const req = TestHelper.createRequest(`/api/user/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
+              const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
               req.account = user.account
               req.session = user.session
               req.uploads = {
@@ -158,7 +163,7 @@ describe('/api/user/connect/update-company-registration', () => {
               req.body = TestHelper.createMultiPart(req, body)
               let errorMessage
               try {
-                await req.post()
+                await req.patch()
               } catch (error) {
                 errorMessage = error.message
               }
@@ -223,26 +228,6 @@ describe('/api/user/connect/update-company-registration', () => {
   })
 
   describe('receives', () => {
-    const fieldMaps = {
-      address_line1: 'address',
-      address_city: 'address',
-      address_state: 'address',
-      address_postal_code: 'address',
-      address_country: 'address',
-      address_kana_line1: 'address',
-      address_kana_city: 'address',
-      address_kana_state: 'address',
-      address_kana_postal_code: 'address',
-      address_kana_country: 'address',
-      address_kanji_line1: 'address',
-      address_kanji_city: 'address',
-      address_kanji_state: 'address',
-      address_kanji_postal_code: 'address',
-      address_kanji_country: 'address',
-      tax_id: 'tax_id',
-      verification_document_front: 'document',
-      verification_document_back: 'document'
-    }
     const testedRequiredFields = []
     for (const country of connect.countrySpecs) {
       const payload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
@@ -255,7 +240,11 @@ describe('/api/user/connect/update-company-registration', () => {
         }
         testedRequiredFields.push(field)
         it(`optionally-required posted ${field}`, async () => {
-          const user = await TestStripeAccounts.createIndividualWithFailedRepresentativeField(country.id, fieldMaps[field])
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'company'
+          })
           const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
           req.account = user.account
           req.session = user.session
@@ -265,79 +254,102 @@ describe('/api/user/connect/update-company-registration', () => {
           }
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
           req.body = TestHelper.createMultiPart(req, body)
-          const accountNow = await req.patch()
-          assert.strictEqual(accountNow[field], body[field])
+          const stripeAccountNow = await req.patch()
+          if (field.startsWith('address_kana_')) {
+            const property = field.substring('address_kana_'.length)
+            assert.strictEqual(stripeAccountNow.company.address_kana[property], body[field])
+          } else if (field.startsWith('address_kanji')) {
+            const property = field.substring('address_kanji_'.length)
+            if (field === 'address_kanji_postal_code') {
+              assert.strictEqual(stripeAccountNow.company.address_kanji[property], '１５００００１') 
+            } else {
+              assert.strictEqual(stripeAccountNow.company.address_kanji[property], body[field])
+            }
+          } else if (field.startsWith('address_')) {
+            const property = field.substring('address_'.length)
+            assert.strictEqual(stripeAccountNow.company.address[property], body[field])
+          } else if (field.startsWith('business_profile')) {
+            const property = field.substring('business_profile_'.length)
+            assert.strictEqual(stripeAccountNow.business_profile[property], body[field])
+          } else if (field.startsWith('dob_')) {
+            const property = field.substring('dob_'.length)
+            assert.strictEqual(stripeAccountNow.company.address[property], body[field])
+          } else {
+            // TODO: Stripe may or may not transform the phone number
+            // by removing hyphons and adding the country dial code
+            // but submitting in that format is not allowed too
+            if (field === 'phone') {
+              if (stripeAccountNow.company[field] === body[field]) {
+                assert.strictEqual(stripeAccountNow.company[field], body[field])
+              } else {
+                let withoutCountryCode = body[field]
+                withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
+                assert.strictEqual(stripeAccountNow.company[field], withoutCountryCode)
+              }
+            } else if (field === 'tax_id') {
+              assert.strictEqual(stripeAccountNow.company.tax_id_provided, true)
+            } else {
+              assert.strictEqual(stripeAccountNow.company[field], body[field])
+            }
+          }
         })
       }
     }
 
     const uploadFields = [
       'verification_document_front',
-      'verification_document_back',
-      'verification_additional_document_front',
-      'verification_additional_document_back'
+      'verification_document_back'
     ]
     for (const field of uploadFields) {
       it(`optionally-required posted ${field}`, async () => {
-        const user = await TestStripeAccounts.createIndividualWithFailedRepresentativeField('FR', fieldMaps[field])
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'company'
+        })
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
           [field]: TestHelper['success_id_scan_back.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.FR)
-        body[field] = 'invalid'
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB)
         req.body = TestHelper.createMultiPart(req, body)
-        const accountNow = await req.patch()
-        if (field.startsWith('address_')) {
-          const property = field.substring('address_kana_'.length)
-          assert.strictEqual(accountNow.company.address_kana[property], body[field])
-        } else if (field.startsWith('address_kanji')) {
-          const property = field.substring('address_kanji_'.length)
-          assert.strictEqual(accountNow.company.address_kanji[property], body[field])
-        } else if (field.startsWith('address_')) {
-          const property = field.substring('address_'.length)
-          assert.strictEqual(accountNow.company.address[property], body[field])
-        } else if (field.startsWith('dob_')) {
-          const property = field.substring('dob_'.length)
-          assert.strictEqual(accountNow.company.address[property], body[field])
+        const stripeAccountNow = await req.patch()
+        if (field === 'verification_document_front') {
+          assert.notStrictEqual(stripeAccountNow.company.verification.document.front, null)
+          assert.notStrictEqual(stripeAccountNow.company.verification.document.front, undefined)
         } else {
-          // TODO: Stripe may or may not transform the phone number
-          // by removing hyphons and adding the country dial code
-          // but submitting in that format is not allowed too
-          if (field === 'phone') {
-            if (accountNow.company[field] === body[field]) {
-              assert.strictEqual(accountNow.company[field], body[field])
-            } else {
-              let withoutCountryCode = body[field]
-              withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
-              assert.strictEqual(accountNow.company[field], withoutCountryCode)
-            }
-          } else {
-            assert.strictEqual(accountNow[field], body[field])
-          }
+          assert.notStrictEqual(stripeAccountNow.company.verification.document.back, null)
+          assert.notStrictEqual(stripeAccountNow.company.verification.document.back, undefined)
         }
       })
     }
   })
 
   describe('returns', () => {
-    it('object', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
+    for (const country of connect.countrySpecs) {
+      it('object (' + country.id + ')', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'company'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+        req.uploads = {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        }
+        req.filename = __filename
+        req.saveResponse = true
+        const stripeAccountNow = await req.patch()
+        assert.strictEqual(stripeAccountNow.object, 'account')
+        assert.strictEqual(stripeAccountNow.metadata.token, 'false')
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB)
-      req.filename = __filename
-      req.saveResponse = true
-      const stripeAccount = await req.patch()
-      assert.strictEqual(stripeAccount.object, 'account')
-    })
+    }
   })
 
   describe('configuration', () => {
@@ -345,30 +357,19 @@ describe('/api/user/connect/update-company-registration', () => {
       global.stripeJS = 3
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
-        country: 'GB',
+        country: 'US',
         type: 'company'
       })
-      const person = TestHelper.nextIdentity()
-      const req = TestHelper.createRequest(`/account/connect/create-company-registration?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.uploads = {
-        verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US)
       await req.post()
-      const req2 = TestHelper.createRequest(`/account/connect/edit-company-registration?stripeid=${user.stripeAccount.id}`)
-      req2.account = user.account
-      req2.session = user.session
-      req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB, person)
-      await req2.post()
-      const stripeAccount = await global.api.user.connect.StripeAccount.get(req2)
-      // TODO: verifying information was submitted by token is not possible
-      // so for now when objects are created/updated without a token they
-      // have a metadata.token = false flag set
-      assert.notStrictEqual(stripeAccount.metadata.token, null)
-      assert.notStrictEqual(stripeAccount.metadata.token, undefined)
+      const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
+      // TODO: verifying information was submitted by token is 
+      // not possible so for now when objects are updated 
+      // without a token they have a metadata.token = false flag set
+      assert.strictEqual(stripeAccountNow.metadata.token, undefined)
     })
   })
 })

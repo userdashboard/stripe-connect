@@ -67,10 +67,9 @@ describe('/api/user/connect/update-individual-registration', () => {
           country: 'DE',
           type: 'company'
         })
-        const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
-        req.account = user2.account
-        req.session = user2.session
+        req.account = user.account
+        req.session = user.session
         req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.DE)
         let errorMessage
         try {
@@ -97,9 +96,9 @@ describe('/api/user/connect/update-individual-registration', () => {
       address_kana_postal_code: 'invalid',
       address_kanji_line1: false,
       address_kanji_city: false,
-      address_kanji_town: 'invalid',
-      address_kanji_state: 'invalid',
-      address_kanji_postal_code: 'invalid',
+      address_kanji_town: false,
+      address_kanji_state: false,
+      address_kanji_postal_code: false,
       business_profile_mcc: 'invalid',
       business_profile_url: 'invalid',
       dob_day: '32',
@@ -129,8 +128,12 @@ describe('/api/user/connect/update-individual-registration', () => {
         testedMissingFields.push(field)
         describe(`invalid-${field}`, () => {
           it(`missing posted ${field}`, async () => {
-            const user = await TestStripeAccounts.createIndividualWithFailedstripeAccountField(country.id, 'address')
-            const req = TestHelper.createRequest(`/api/user/connect/create-individual-registration?stripeid=${user.stripeAccount.id}`)
+            const user = await TestHelper.createUser()
+            await TestHelper.createStripeAccount(user, {
+              country: country.id,
+              type: 'individual'
+            })
+            const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
             req.account = user.account
             req.session = user.session
             req.uploads = {
@@ -142,7 +145,7 @@ describe('/api/user/connect/update-individual-registration', () => {
             req.body = TestHelper.createMultiPart(req, body)
             let errorMessage
             try {
-              await req.post()
+              await req.patch()
             } catch (error) {
               errorMessage = error.message
             }
@@ -154,9 +157,9 @@ describe('/api/user/connect/update-individual-registration', () => {
               const user = await TestHelper.createUser()
               await TestHelper.createStripeAccount(user, {
                 country: country.id,
-                type: 'company'
+                type: 'individual'
               })
-              const req = TestHelper.createRequest(`/api/user/connect/create-individual-registration?stripeid=${user.stripeAccount.id}`)
+              const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
               req.account = user.account
               req.session = user.session
               req.uploads = {
@@ -168,7 +171,7 @@ describe('/api/user/connect/update-individual-registration', () => {
               req.body = TestHelper.createMultiPart(req, body)
               let errorMessage
               try {
-                await req.post()
+                await req.patch()
               } catch (error) {
                 errorMessage = error.message
               }
@@ -185,7 +188,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
-          type: 'company'
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -209,7 +212,7 @@ describe('/api/user/connect/update-individual-registration', () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'GB',
-          type: 'company'
+          type: 'individual'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
@@ -233,32 +236,6 @@ describe('/api/user/connect/update-individual-registration', () => {
   })
 
   describe('receives', () => {
-    const fieldMaps = {
-      address_line1: 'address',
-      address_city: 'address',
-      address_state: 'address',
-      address_postal_code: 'address',
-      address_country: 'address',
-      address_kana_line1: 'address',
-      address_kana_city: 'address',
-      address_kana_state: 'address',
-      address_kana_postal_code: 'address',
-      address_kana_country: 'address',
-      address_kanji_line1: 'address',
-      address_kanji_city: 'address',
-      address_kanji_state: 'address',
-      address_kanji_postal_code: 'address',
-      address_kanji_country: 'address',
-      dob_day: 'dob',
-      dob_month: 'dob',
-      dob_year: 'dob',
-      id_number: 'id_number',
-      ssn_last_4: 'ssn_last_4',
-      verification_document_front: 'document',
-      verification_document_back: 'document',
-      verification_additional_document_front: 'additional_document',
-      verification_additional_document_back: 'additional_document'
-    }
     const testedRequiredFields = []
     for (const country of connect.countrySpecs) {
       const payload = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
@@ -271,7 +248,11 @@ describe('/api/user/connect/update-individual-registration', () => {
         }
         testedRequiredFields.push(field)
         it(`optionally-required posted ${field}`, async () => {
-          const user = await TestStripeAccounts.createIndividualWithFailedstripeAccountField(country.id, fieldMaps[field])
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'individual'
+          })
           const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
           req.account = user.account
           req.session = user.session
@@ -284,22 +265,43 @@ describe('/api/user/connect/update-individual-registration', () => {
           const stripeAccount = await req.patch()
           if (field.startsWith('address_kana')) {
             const property = field.substring('address_kana_'.length)
-            assert.strictEqual(stripeAccount.address_kana[property], body[field])
+            assert.strictEqual(stripeAccount.individual.address_kana[property], body[field])
           } else if (field.startsWith('address_kanji')) {
-            const property = field.substring('address_kanji_'.length)
-            assert.strictEqual(stripeAccount.address_kanji[property], body[field])
+            if (field === 'address_kanji_postal_code') {
+              // TODO: Stripe transforms the character set used in this data 
+              // so a direct comparison isn't possible right now
+              assert.strictEqual(stripeAccount.individual.address_kanji.postal_code, '１５００００１')  
+            } else {
+              const property = field.substring('address_kanji_'.length)
+              assert.strictEqual(stripeAccount.individual.address_kanji[property], body[field])
+            }
           } else if (field.startsWith('address_')) {
             const property = field.substring('address_'.length)
-            assert.strictEqual(stripeAccount.address[property], body[field])
+            assert.strictEqual(stripeAccount.individual.address[property], body[field])
           } else if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
-            assert.strictEqual(stripeAccount.address[property], body[field])
+            assert.strictEqual(stripeAccount.individual.dob[property], parseInt(body[field]))
+          } else if (field.startsWith('business_profile')) {
+            const property = field.substring('business_profile_'.length)
+            assert.strictEqual(stripeAccount.business_profile[property], body[field])
           } else if (field === 'id_number') {
-            assert.strictEqual(stripeAccount.id_number_provided, true)
+            assert.strictEqual(stripeAccount.individual.id_number_provided, true)
           } else if (field === 'ssn_last_4') {
-            assert.strictEqual(stripeAccount.ssn_last_4, true)
+            assert.strictEqual(stripeAccount.individual.ssn_last_4_provided, true)
           } else {
-            assert.strictEqual(stripeAccount[field], body[field])
+            // TODO: Stripe may or may not transform the phone number
+            // by removing hyphons and adding the country dial code
+            // but submitting in that format is not allowed too
+            if (field === 'phone') {
+              if (stripeAccount.individual[field] === body[field]) {
+                assert.strictEqual(stripeAccount.individual[field], body[field])
+              } else {
+                let withCountryCode = `+1${body[field]}`
+                assert.strictEqual(stripeAccount.individual[field], withCountryCode)
+              }
+            } else {
+              assert.strictEqual(stripeAccount.individual[field], body[field])
+            }
           }
         })
       }
@@ -313,65 +315,57 @@ describe('/api/user/connect/update-individual-registration', () => {
     ]
     for (const field of uploadFields) {
       it(`optionally-required posted ${field}`, async () => {
-        const user = await TestStripeAccounts.createIndividualWithFailedstripeAccountField('FR', fieldMaps[field])
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'individual'
+        })
         const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
           [field]: TestHelper['success_id_scan_back.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.FR)
+        const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB)
         body[field] = 'invalid'
         req.body = TestHelper.createMultiPart(req, body)
-        const accountNow = await req.patch()
-        if (field.startsWith('address_')) {
-          const property = field.substring('address_kana'.length)
-          assert.strictEqual(accountNow.individual.address_kana[property], body[field])
-        } else if (field.startsWith('address_kanji')) {
-          const property = field.substring('address_kanji'.length)
-          assert.strictEqual(accountNow.individual.address_kanji[property], body[field])
-        } else if (field.startsWith('address_')) {
-          const property = field.substring('address_'.length)
-          assert.strictEqual(accountNow.individual.address[property], body[field])
-        } else if (field.startsWith('dob_')) {
-          const property = field.substring('dob_'.length)
-          assert.strictEqual(accountNow.individual.address[property], body[field])
-        } else {
-          // TODO: Stripe may or may not transform the phone number
-          // by removing hyphons and adding the country dial code
-          // but submitting in that format is not allowed too
-          if (field === 'phone') {
-            if (accountNow.individual[field] === body[field]) {
-              assert.strictEqual(accountNow.individual[field], body[field])
-            } else {
-              let withoutCountryCode = body[field]
-              withoutCountryCode = withoutCountryCode.substring(withoutCountryCode.indexOf('4'))
-              assert.strictEqual(accountNow.individual[field], withoutCountryCode)
-            }
-          } else {
-            assert.strictEqual(accountNow[field], body[field])
-          }
+        const stripeAccount = await req.patch()
+        if (field === 'verification_document_front') {
+          assert.notStrictEqual(stripeAccount.individual.verification.document.front, null)
+          assert.notStrictEqual(stripeAccount.individual.verification.document.front, undefined)
+        } else if (field === 'verification_document_back') {
+          assert.notStrictEqual(stripeAccount.individual.verification.document.back, null)
+          assert.notStrictEqual(stripeAccount.individual.verification.document.back, undefined)
+        } else if (field === 'verification_additional_document_front') {
+          assert.notStrictEqual(stripeAccount.individual.verification.additional_document.front, null)
+          assert.notStrictEqual(stripeAccount.individual.verification.additional_document.front, undefined)
+        } else if (field === 'verification_additional_document_back') {
+          assert.notStrictEqual(stripeAccount.individual.verification.additional_document.back, null)
+          assert.notStrictEqual(stripeAccount.individual.verification.additional_document.back, undefined)
         }
       })
     }
   })
 
   describe('returns', () => {
-    it('object', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'GB',
-        type: 'company'
+    for (const country of connect.countrySpecs) {
+      it('object (' + country.id + ')', async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'individual'
+        })
+        const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
+        req.filename = __filename
+        req.saveResponse = true
+        const stripeAccountNow = await req.patch()
+        assert.strictEqual(stripeAccountNow.metadata.token, 'false')
+        assert.strictEqual(stripeAccountNow.object, 'account')
       })
-      const req = TestHelper.createRequest(`/api/user/connect/update-individual-registration?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      req.body = {}
-      req.filename = __filename
-      req.saveResponse = true
-      const stripeAccountNow = await req.patch()
-      assert.strictEqual(stripeAccountNow.object, 'account')
-    })
+    }
   })
 
   describe('configuration', () => {
@@ -380,29 +374,22 @@ describe('/api/user/connect/update-individual-registration', () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
-        type: 'company'
+        type: 'individual'
       })
-      const person = TestHelper.nextIdentity()
-      const req = TestHelper.createRequest(`/account/connect/create-individual-registration?stripeid=${user.stripeAccount.id}`)
+      const req = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       req.uploads = {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB, person)
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB, user.profile)
       await req.post()
-      const req2 = TestHelper.createRequest(`/account/connect/edit-individual-registration?stripeid=${user.stripeAccount.id}`)
-      req2.account = user.account
-      req2.session = user.session
-      req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB, person)
-      await req2.post()
-      const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req2)
+      const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
       // TODO: verifying information was submitted by token is not possible
       // so for now when objects are created/updated without a token they
       // have a metadata.token = false flag set
-      assert.notStrictEqual(stripeAccountNow.metadata.token, null)
-      assert.notStrictEqual(stripeAccountNow.metadata.token, undefined)
+      assert.strictEqual(stripeAccountNow.metadata.token, undefined)
     })
   })
 })

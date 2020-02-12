@@ -19,14 +19,17 @@ module.exports = {
     if (global.stripeJS === 3) {
       accountInfo.account_token = req.body.token
     } else {
+      accountInfo.metadata = {
+        token: false
+      }
       if (req.uploads) {
         if (req.uploads.verification_document_front) {
           const frontData = {
             purpose: 'identity_document',
             file: {
               type: 'application/octet-stream',
-              name: req.uploads.verification_document_back.name,
-              data: req.uploads.verification_document_back.buffer
+              name: req.uploads.verification_document_front.name,
+              data: req.uploads.verification_document_front.buffer
             }
           }
           const front = await stripeCache.execute('files', 'create', frontData, req.stripeKey)
@@ -198,8 +201,15 @@ module.exports = {
         accountInfo.company.verification.document.front = req.body.verification_document_front
       }
     }
-    const stripeAccountNow = await stripeCache.execute('accounts', 'update', req.query.stripeid, accountInfo, req.stripeKey)
-    await stripeCache.delete(req.query.stripeid)
-    return stripeAccountNow
+    try {
+      const stripeAccountNow = await stripeCache.execute('accounts', 'update', req.query.stripeid, accountInfo, req.stripeKey)
+      await stripeCache.delete(req.query.stripeid)
+      return stripeAccountNow
+    } catch (error ){
+      if (error.message && error.message.startsWith('invalid-company_')) {
+        throw new Error(error.message.replace('company_', ''))
+      }
+      throw error
+    }
   }
 }

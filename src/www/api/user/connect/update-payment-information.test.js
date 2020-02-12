@@ -103,16 +103,16 @@ describe('/api/user/connect/update-payment-information', () => {
             const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
             req.account = user.account
             req.session = user.session
-            req.uploads = {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
+            let body
+            if (TestStripeAccounts.paymentData[country.id].length) {
+              body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
+            } else {
+              body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
             }
-            const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
             delete (body[field])
-            req.body = body
             let errorMessage
             try {
-              await req.post()
+              await req.patch()
             } catch (error) {
               errorMessage = error.message
             }
@@ -129,16 +129,12 @@ describe('/api/user/connect/update-payment-information', () => {
               const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
               req.account = user.account
               req.session = user.session
-              req.uploads = {
-                verification_document_back: TestHelper['success_id_scan_back.png'],
-                verification_document_front: TestHelper['success_id_scan_front.png']
-              }
-              const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
+              const body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
               body[field] = 'invalid'
               req.body = body
               let errorMessage
               try {
-                await req.post()
+                await req.patch()
               } catch (error) {
                 errorMessage = error.message
               }
@@ -168,17 +164,34 @@ describe('/api/user/connect/update-payment-information', () => {
         }
         testedRequiredFields.push(field)
         it(`optionally-required posted ${field}`, async () => {
-          const user = await TestStripeAccounts.createIndividualWithFailedField(country.id, 'payment')
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'company'
+          })
           const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
           req.account = user.account
           req.session = user.session
-          req.uploads = {
-            verification_document_back: TestHelper['success_id_scan_back.png'],
-            verification_document_front: TestHelper['success_id_scan_front.png']
+          if (TestStripeAccounts.paymentData[country.id].length) {
+            req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
+           } else {
+            req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+           }
+          const stripeAccountNow = await req.patch()
+          if (field === 'iban' || field === 'account_number') {
+            assert.strictEqual(stripeAccountNow.external_accounts.data[0].last4, req.body[field].substring(req.body[field].length - 4)) 
+          } else if (field === 'bsb_number' || 
+                     field === 'institution_number' || 
+                     field === 'sort_code' || 
+                     field === 'bank_code' || 
+                     field === 'branch_code' ||
+                     field === 'clearing_code' ||
+                     field === 'transit_number') {
+            const routing = stripeAccountNow.external_accounts.data[0].routing_number.split(' ').join('').split('-').join('')
+            assert.strictEqual(true, routing.indexOf(req.body[field]) > -1)
+          } else {
+            assert.strictEqual(stripeAccountNow.external_accounts.data[0][field], req.body[field])
           }
-          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData[country.id])
-          const accountNow = await req.patch()
-          assert.strictEqual(accountNow.external_accounts.data[0].currency, req.body.curency)
         })
       }
     }
@@ -196,21 +209,25 @@ describe('/api/user/connect/update-payment-information', () => {
         req.account = user.account
         req.session = user.session
         if (TestStripeAccounts.paymentData[country.id].length) {
+          let accounts = 0
           for (const format of TestStripeAccounts.paymentData[country.id]) {
+            accounts++
             req.body = TestStripeAccounts.createPostData(format, user.profile)
             req.body.country = country.id
             req.body.account_holder_type = 'company'
             req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
-            const accountNow = await req.patch()
-            assert.strictEqual(accountNow.object, 'account')
+            const stripeAccountNow = await req.patch()
+            assert.strictEqual(stripeAccountNow.object, 'account')
+            assert.strictEqual(stripeAccountNow.external_accounts.data.length, accounts)
           }
           return
         }
         req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id], user.profile)
         req.filename = __filename
         req.saveResponse = true
-        const accountNow = await req.patch()
-        assert.strictEqual(accountNow.object, 'account')
+        const stripeAccountNow = await req.patch()
+        assert.strictEqual(stripeAccountNow.object, 'account')
+        assert.strictEqual(stripeAccountNow.external_accounts.data.length, 1)
       })
     }
   })

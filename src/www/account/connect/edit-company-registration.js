@@ -72,7 +72,7 @@ async function renderPage (req, res, messageTemplate) {
   } else if (removeElements.indexOf('personal-address-container') === -1) {
     removeElements.push('state-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.verification.document.front') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.verification.document') === -1) {
     removeElements.push('upload-container')
   }
   if (req.method === 'GET') {

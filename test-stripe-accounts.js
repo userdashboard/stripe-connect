@@ -464,248 +464,6 @@ module.exports = {
     }
     await TestHelper.waitForVerificationFieldsToLeave(user, 'external_account')
     return user
-  },
-  createIndividualWithFailedField: async (country, field) => {
-    country = country || 'US'
-    const user = await TestHelper.createUser()
-    await TestHelper.createStripeAccount(user, {
-      country: country,
-      type: 'individual'
-    })
-    const individualPostData = createPostData(individualData[country], user.profile)
-    switch (field) {
-      case 'address':
-        individualPostData.address_line1 = 'address_no_match'
-        break
-      case 'dob':
-        individualPostData.dob_day = '01'
-        individualPostData.dob_month = '01'
-        individualPostData.dob_year = '1900'
-        break
-      case 'id_number':
-        individualPostData.id_number = '111111111'
-        break
-      case 'ssn_last_4':
-        individualPostData.ssn_last_4 = '1111'
-        break
-      case 'document':
-        individualPostData.verification_document_back = 'file_identity_document_failure'
-        individualPostData.verification_document_front = 'file_identity_document_failure'
-        break
-      case 'additional_document':
-        individualPostData.verification_document_back = 'file_identity_document_failure'
-        individualPostData.verification_document_front = 'file_identity_document_failure'
-        break
-    }
-    await TestHelper.createStripeRegistration(user, individualPostData)
-    let paymentPostData
-    if (paymentData[country].length) {
-      paymentPostData = createPostData(paymentData[country][0], user.profile)
-    } else {
-      paymentPostData = createPostData(paymentData[country], user.profile)
-    }
-    if (field === 'payment') {
-      if (!paymentPostData.account_number || !paymentPostData.routing_number) {
-        throw new Error('can only use countries with account_number / routing_number to test payment info errors')
-      }
-      paymentPostData.routing_number = '110000000'
-      paymentPostData.account_number = '000111111116'
-    }
-    await TestHelper.createExternalAccount(user, paymentPostData)
-    await TestHelper.waitForVerificationFieldsToLeave(user, 'external_account')
-    const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
-    req.session = user.session
-    req.account = user.account
-    req.stripeKey = {
-      api_key: process.env.STRIPE_KEY
-    }
-    await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
-    await TestHelper.updateStripeRegistration(user, {}, {
-      verification_document_back: TestHelper['success_id_scan_back.png'],
-      verification_document_front: TestHelper['success_id_scan_front.png']
-    })
-    await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.document')
-    await TestHelper.waitForPendingFieldsToLeave(user)
-    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-      await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
-      await TestHelper.updateStripeRegistration(user, {}, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png']
-      })
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'individual.verification.additional_document')
-    }
-    await TestHelper.waitForPayoutsEnabled(user)
-    await TestHelper.waitForPendingFieldsToLeave(user)
-    return user
-  },
-  createCompanyWithFailedField: async (country, field) => {
-    country = country || 'US'
-    const user = await TestHelper.createUser()
-    await TestHelper.createStripeAccount(user, {
-      country: country,
-      type: 'company'
-    })
-    const companyPostData = createPostData(companyData[country], user.profile)
-    switch (field) {
-      case 'company.address':
-        companyPostData.address_line1 = 'address_no_match'
-        break
-      case 'tax_id':
-        companyPostData.tax_id = '111111111'
-        break
-      case 'document':
-        companyPostData.verification_document_back = 'file_identity_document_failure'
-        companyPostData.verification_document_front = 'file_identity_document_failure'
-        break
-    }
-    await TestHelper.createStripeRegistration(user, companyPostData)
-    const representativePostData = createPostData(representativeData[country], user.profile)
-    switch (field) {
-      case 'representative.address':
-        representativePostData.address_line1 = 'address_no_match'
-        break
-      case 'representative.dob':
-        representativePostData.dob_day = '01'
-        representativePostData.dob_month = '01'
-        representativePostData.dob_year = '1900'
-        break
-      case 'representative.id_number':
-        representativePostData.id_number = '111111111'
-        break
-      case 'representative.ssn_last_4':
-        representativePostData.ssn_last_4 = '1111'
-        break
-      case 'representative.document':
-        representativePostData.verification_document_back = 'file_identity_document_failure'
-        representativePostData.verification_document_front = 'file_identity_document_failure'
-        break
-      case 'representative.additional_document':
-        representativePostData.verification_document_back = 'file_identity_document_failure'
-        representativePostData.verification_document_front = 'file_identity_document_failure'
-        break
-    }
-    await TestHelper.createPerson(user, {
-      relationship_representative: true,
-      relationship_executive: true,
-      relationship_title: 'SVP Testing',
-      relationship_percent_ownership: 0
-    })
-    await TestHelper.updatePerson(user, user.representative, representativePostData)
-    await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.document`)
-    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
-    await TestHelper.updatePerson(user, user.representative, {}, {
-      verification_document_back: TestHelper['success_id_scan_back.png'],
-      verification_document_front: TestHelper['success_id_scan_front.png']
-    })
-    await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.document`)
-    for (const posted in representativePostData) {
-      const field = posted.replace('address_', 'address.').replace('relationship_', 'relationship.').replace('dob_', 'dob.').replace('verification_', 'verification.')
-      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.${field}`)
-    }
-    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
-      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.verification.additional_document`)
-      await TestHelper.updatePerson(user, user.representative, {}, {
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_front: TestHelper['success_id_scan_front.png']
-      })
-      await TestHelper.waitForVerificationFieldsToLeave(user, `${user.representative.id}.verification.additional_document`)
-    }
-    if (beneficialOwnerData[country] !== false) {
-      await TestHelper.createPerson(user, {
-        relationship_owner: true,
-        relationship_title: 'Shareholder',
-        relationship_percent_ownership: 10
-      })
-      const beneficialOwnerPostData = createPostData(beneficialOwnerData[country], user.profile)
-      switch (field) {
-        case 'owner.address':
-          beneficialOwnerPostData.address_line1 = 'address_no_match'
-          break
-        case 'owner.dob':
-          beneficialOwnerPostData.dob_day = '01'
-          beneficialOwnerPostData.dob_month = '01'
-          beneficialOwnerPostData.dob_year = '1900'
-          break
-        case 'owner.id_number':
-          beneficialOwnerPostData.id_number = '111111111'
-          break
-        case 'owner.ssn_last_4':
-          beneficialOwnerPostData.ssn_last_4 = '1111'
-          break
-        case 'owner.document':
-          beneficialOwnerPostData.verification_document_back = 'file_identity_document_failure'
-          beneficialOwnerPostData.verification_document_front = 'file_identity_document_failure'
-          break
-        case 'owner.additional_document':
-          beneficialOwnerPostData.verification_document_back = 'file_identity_document_failure'
-          beneficialOwnerPostData.verification_document_front = 'file_identity_document_failure'
-          break
-      }
-      await TestHelper.updatePerson(user, user.owner, beneficialOwnerPostData)
-      await TestHelper.submitBeneficialOwners(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
-    }
-    if (companyDirectorData[country] !== false) {
-      await TestHelper.createPerson(user, {
-        relationship_director: true,
-        relationship_title: 'Shareholder',
-        relationship_percent_ownership: '10'
-      })
-      const companyDirectorPostData = createPostData(companyDirectorData[country], user.profile)
-      switch (field) {
-        case 'director.address':
-          companyDirectorPostData.address_line1 = 'address_no_match'
-          break
-        case 'director.dob':
-          companyDirectorPostData.dob_day = '01'
-          companyDirectorPostData.dob_month = '01'
-          companyDirectorPostData.dob_year = '1900'
-          break
-        case 'director.id_number':
-          companyDirectorPostData.id_number = '111111111'
-          break
-        case 'director.ssn_last_4':
-          companyDirectorPostData.ssn_last_4 = '1111'
-          break
-        case 'director.document':
-          companyDirectorPostData.verification_document_back = 'file_identity_document_failure'
-          companyDirectorPostData.verification_document_front = 'file_identity_document_failure'
-          break
-        case 'director.additional_document':
-          companyDirectorPostData.verification_document_back = 'file_identity_document_failure'
-          companyDirectorPostData.verification_document_front = 'file_identity_document_failure'
-          break
-      }
-      await TestHelper.updatePerson(user, user.director, companyDirectorPostData)
-      await TestHelper.submitCompanyDirectors(user)
-      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.director')
-    }
-    let paymentPostData
-    if (paymentData[country].length) {
-      paymentPostData = createPostData(paymentData[country][0], user.profile)
-    } else {
-      paymentPostData = createPostData(paymentData[country], user.profile)
-    }
-    if (field === 'payment') {
-      if (!paymentPostData.account_number || !paymentPostData.routing_number) {
-        throw new Error('can only use countries with account_number / routing_number to test payment info errors')
-      }
-      paymentPostData.routing_number = '110000000'
-      paymentPostData.account_number = '000111111116'
-    }
-    await TestHelper.createExternalAccount(user, createPostData(paymentPostData, user.profile))
-    // TODO: fix this when Stripe fixes company.verification.document
-    // the 'company.verification.document' erroneously shows up in the
-    // 'requirements.pending_validation' signifying it is under review, then
-    // it is removed from that, but really it needs to show up in currently_due
-    // and then submit the documents and then it should be pending_validation
-    await TestHelper.updateStripeRegistration(user, {}, {
-      verification_document_back: TestHelper['success_id_scan_back.png'],
-      verification_document_front: TestHelper['success_id_scan_front.png']
-    })
-    await TestHelper.waitForVerificationFieldsToLeave(user, 'company.verification.document')
-    await TestHelper.waitForPendingFieldsToLeave(user)
-    return user
   }
 }
 
@@ -716,7 +474,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Vienna',
     address_line1: '123 Park Lane',
     address_postal_code: '1020',
-    address_state: '1',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -741,7 +498,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Brussels',
     address_line1: '123 Park Lane',
     address_postal_code: '1020',
-    address_state: 'BRU',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -763,7 +519,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Bern',
     address_line1: '123 Park Lane',
     address_postal_code: '1020',
-    address_state: 'BE',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -774,7 +529,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Berlin',
     address_line1: '123 Park Lane',
     address_postal_code: '01067',
-    address_state: 'BE',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -785,7 +539,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Copenhagen',
     address_line1: '123 Park Lane',
     address_postal_code: '1000',
-    address_state: '147',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -796,7 +549,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Talin',
     address_line1: '123 Park Lane',
     address_postal_code: '10128',
-    address_state: '37',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -807,7 +559,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Madrid',
     address_line1: '123 Park Lane',
     address_postal_code: '03179',
-    address_state: 'AN',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -818,7 +569,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Helsinki',
     address_line1: '123 Park Lane',
     address_postal_code: '00990',
-    address_state: 'AL',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -829,7 +579,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Paris',
     address_line1: '123 Park Lane',
     address_postal_code: '75001',
-    address_state: 'A',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -840,7 +589,6 @@ const companyData = module.exports.companyData = {
     address_city: 'London',
     address_line1: '123 Park Lane',
     address_postal_code: 'EC1A 1AA',
-    address_state: 'LND',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -851,7 +599,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Athens',
     address_line1: '123 Park Lane',
     address_postal_code: '104',
-    address_state: 'I',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -861,8 +608,6 @@ const companyData = module.exports.companyData = {
     business_profile_url: true,
     address_city: 'Hong Kong',
     address_line1: '123 Park Lane',
-    address_postal_code: '00000',
-    address_state: 'HK',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -884,7 +629,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Rome',
     address_line1: '123 Park Lane',
     address_postal_code: '00010',
-    address_state: '65',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -914,7 +658,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Vilnius',
     address_line1: '123 Sesame St',
     address_postal_code: 'LT-00000',
-    address_state: 'AL',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -925,7 +668,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Luxemburg',
     address_line1: '123 Park Lane',
     address_postal_code: '1623',
-    address_state: 'L',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -936,7 +678,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Riga',
     address_line1: '123 Sesame St',
     address_postal_code: 'LV–1073',
-    address_state: 'AI',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -947,7 +688,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Kuala Lumpur',
     address_line1: '123 Sesame St',
     address_postal_code: '50450',
-    address_state: 'C',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -958,7 +698,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Amsterdam',
     address_line1: '123 Park Lane',
     address_postal_code: '1071 JA',
-    address_state: 'DR',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -969,7 +708,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Oslo',
     address_line1: '123 Park Lane',
     address_postal_code: '0001',
-    address_state: '02',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -980,7 +718,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Auckland',
     address_line1: '123 Park Lane',
     address_postal_code: '6011',
-    address_state: 'N',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -991,7 +728,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Krakow',
     address_line1: '123 Park Lane',
     address_postal_code: '32-400',
-    address_state: 'KR',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -1002,7 +738,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Lisbon',
     address_line1: '123 Park Lane',
     address_postal_code: '4520',
-    address_state: '01',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -1013,7 +748,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Stockholm',
     address_line1: '123 Park Lane',
     address_postal_code: '00150',
-    address_state: 'K',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -1024,7 +758,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Singapore',
     address_line1: '123 Park Lane',
     address_postal_code: '339696',
-    address_state: 'SG',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -1035,7 +768,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Ljubljana',
     address_line1: '123 Sesame St',
     address_postal_code: '1210',
-    address_state: '07',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'
@@ -1046,7 +778,6 @@ const companyData = module.exports.companyData = {
     address_city: 'Slovakia',
     address_line1: '123 Sesame St',
     address_postal_code: '00102',
-    address_state: 'BC',
     name: 'Company',
     phone: '4567890123',
     tax_id: '00000000000'

@@ -33,6 +33,12 @@ function retriableError (error) {
     return true
   }
   if (error.raw.code === 'resource_missing') {
+    if (error.raw.param === 'account_token') {
+      return false
+    }
+    if (error.raw.param === 'person_token') {
+      return false
+    }
     return true
   }
   return false
@@ -40,7 +46,11 @@ function retriableError (error) {
 
 function formatError (error) {
   if (error.raw && error.raw.param) {
-    const property = error.raw.param.replace('[', '.').replace(']', '').replace('.', '_')
+    if (error.raw.param === 'account_token' ||
+        error.raw.param === 'person_token') {
+      return 'invalid-token'
+    }
+    const property = error.raw.param.split('[').join('_').split(']').join('')
     return `invalid-${property}`
   }
   if (error.raw.code === 'account_invalid') {
