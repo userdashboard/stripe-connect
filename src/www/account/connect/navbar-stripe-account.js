@@ -8,7 +8,8 @@ module.exports = {
         'navbar-submit-beneficial-owners-link',
         'navbar-submit-company-directors-link'
         )
-    } else if (stripeAccount.business_type === 'individual-link') {
+    } 
+    if (stripeAccount.business_type === 'individual') {
       removeElements.push(
         'navbar-edit-company-link', 
         'navbar-submit-company-link',  
