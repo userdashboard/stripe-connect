@@ -4,7 +4,7 @@ const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe.only('/api/user/connect/update-company-registration', () => {
+describe('/api/user/connect/update-company-registration', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
