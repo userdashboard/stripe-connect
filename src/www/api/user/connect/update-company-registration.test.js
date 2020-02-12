@@ -4,7 +4,7 @@ const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/user/connect/update-company-registration', () => {
+describe.only('/api/user/connect/update-company-registration', () => {
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -67,10 +67,9 @@ describe('/api/user/connect/update-company-registration', () => {
           country: 'DE',
           type: 'individual'
         })
-        const user2 = await TestHelper.createUser()
         const req = TestHelper.createRequest(`/api/user/connect/update-company-registration?stripeid=${user.stripeAccount.id}`)
-        req.account = user2.account
-        req.session = user2.session
+        req.account = user.account
+        req.session = user.session
         req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.DE)
         let errorMessage
         try {
