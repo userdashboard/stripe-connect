@@ -24,20 +24,25 @@ async function beforeRequest (req) {
   }
   req.query.all = true
   const persons = await global.api.user.connect.Persons.get(req)
+  const owners = []
+  const directors = []
   if (!persons || !persons.length) {
     req.error = req.error || 'invalid-company-representative'
   } else {
     for (const person of persons) {
-      if (person.requirements.currently_due.length) {
-        if (person.relationship.representative) {
+      if (person.relationship.representative) {
+        if (person.requirements.currently_due.length) {
           req.error = req.error || 'invalid-company-representative'
-          break
-        } else if (person.relationship.owner) {
+        }
+      } else if (person.relationship.owner) {
+        owners.push(person)
+        if (person.requirements.currently_due.length) {
           req.error = req.error || 'invalid-beneficial-owners'
-          break
-        } else {
+        }
+      } else {
+        directors.push(person)
+        if (person.requirements.currently_due.length) {
           req.error = req.error || 'invalid-company-directors'
-          break
         }
       }
     }
@@ -48,8 +53,6 @@ async function beforeRequest (req) {
   if (!completedPayment) {
     req.error = req.error || 'invalid-payment-details'
   }
-  const owners = await global.api.user.connect.Persons.get(req)
-  const directors = await global.api.user.connect.Persons.get(req)
   req.data = { stripeAccount, owners, directors }
 }
 
