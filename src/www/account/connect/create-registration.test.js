@@ -9,8 +9,8 @@ describe('/account/connect/create-registration', () => {
       const req = TestHelper.createRequest('/account/connect/create-registration')
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
@@ -27,7 +27,7 @@ describe('/account/connect/create-registration', () => {
         country: 'AT'
       }
       await req.post()
-      const page = await req.post()
+      const result = await req.post()
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
@@ -35,7 +35,7 @@ describe('/account/connect/create-registration', () => {
         { click: '/account/connect/create-registration' },
         { fill: '#submit-form' }
       ]
-      const doc = TestHelper.extractDoc(page)
+      const doc = TestHelper.extractDoc(result.html)
       const accountsTable = doc.getElementById('stripe-accounts-table')
       assert.notStrictEqual(accountsTable, undefined)
       assert.notStrictEqual(accountsTable, null)

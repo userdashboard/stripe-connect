@@ -79,8 +79,8 @@ describe('/account/connect/persons', () => {
       ]
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.owner.id)
       assert.strictEqual(row.tag, 'tr')
     })
@@ -90,8 +90,8 @@ describe('/account/connect/persons', () => {
       const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.director.id)
       assert.strictEqual(row.tag, 'tr')
     })
@@ -101,8 +101,8 @@ describe('/account/connect/persons', () => {
       const req = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.representative.id)
       assert.strictEqual(row.tag, 'tr')
     })

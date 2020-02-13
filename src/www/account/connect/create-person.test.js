@@ -47,8 +47,8 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
@@ -62,8 +62,8 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const option = doc.getElementById('relationship_director')
       assert.strictEqual(option, undefined)
     })
@@ -77,8 +77,8 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const option = doc.getElementById('relationship_owner')
       assert.strictEqual(option, undefined)
     })
@@ -111,8 +111,8 @@ describe('/account/connect/create-person', () => {
         { click: `/account/connect/create-person?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.post()
+      const doc = TestHelper.extractDoc(result.html)
       const personsTable = doc.getElementById('persons-table')
       assert.notStrictEqual(personsTable, undefined)
       assert.notStrictEqual(personsTable, null)
@@ -132,8 +132,8 @@ describe('/account/connect/create-person', () => {
         relationship_title: 'Chairperson',
         relationship_percent_ownership: '0'
       }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.post()
+      const doc = TestHelper.extractDoc(result.html)
       const personsTable = doc.getElementById('persons-table')
       assert.notStrictEqual(personsTable, undefined)
       assert.notStrictEqual(personsTable, null)
@@ -153,8 +153,8 @@ describe('/account/connect/create-person', () => {
         relationship_title: 'Shareholder',
         relationship_percent_ownership: '7'
       }
-      const page = await req.post()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.post()
+      const doc = TestHelper.extractDoc(result.html)
       const personsTable = doc.getElementById('persons-table')
       assert.notStrictEqual(personsTable, undefined)
       assert.notStrictEqual(personsTable, null)

@@ -48,8 +48,8 @@ describe('/administrator/connect/payouts', () => {
         { click: '/administrator/connect' },
         { click: '/administrator/connect/payouts' }
       ]
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const payout1Row = doc.getElementById(payout1.id)
       const payout2Row = doc.getElementById(payout2.id)
       assert.strictEqual(payout1Row.tag, 'tr')

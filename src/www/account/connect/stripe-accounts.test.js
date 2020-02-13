@@ -34,8 +34,8 @@ describe('/account/connect/stripe-accounts', () => {
         { click: '/account/connect' },
         { click: '/account/connect/stripe-accounts' }
       ]
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.stripeAccount.id)
       assert.strictEqual(row.tag, 'tr')
     })

@@ -268,9 +268,9 @@ describe('/api/user/connect/update-individual-registration', () => {
             assert.strictEqual(stripeAccount.individual.address_kana[property], body[field])
           } else if (field.startsWith('address_kanji')) {
             if (field === 'address_kanji_postal_code') {
-              // TODO: Stripe transforms the character set used in this data 
+              // TODO: Stripe transforms the character set used in this data
               // so a direct comparison isn't possible right now
-              assert.strictEqual(stripeAccount.individual.address_kanji.postal_code, '１５００００１')  
+              assert.strictEqual(stripeAccount.individual.address_kanji.postal_code, '１５００００１')
             } else {
               const property = field.substring('address_kanji_'.length)
               assert.strictEqual(stripeAccount.individual.address_kanji[property], body[field])
@@ -296,7 +296,7 @@ describe('/api/user/connect/update-individual-registration', () => {
               if (stripeAccount.individual[field] === body[field]) {
                 assert.strictEqual(stripeAccount.individual[field], body[field])
               } else {
-                let withCountryCode = `+1${body[field]}`
+                const withCountryCode = `+1${body[field]}`
                 assert.strictEqual(stripeAccount.individual[field], withCountryCode)
               }
             } else {

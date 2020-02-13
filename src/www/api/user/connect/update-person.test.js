@@ -95,13 +95,13 @@ describe('/api/user/connect/update-person', () => {
       address_kanji_line1: false,
       address_kanji_city: false,
       // TODO: submitting an invalid kanji town
-      // doesn't work because Stripe takes the kana 
+      // doesn't work because Stripe takes the kana
       // value and applies that to the kanji field
       // while ignoring the invalid value
       address_kanji_town: false,
       address_kanji_state: 'invalid',
       // TODO: submitting an invalid kanji postal code
-      // doesn't work because Stripe takes the kana 
+      // doesn't work because Stripe takes the kana
       // value and applies that to the kanji field
       // while ignoring the invalid value
       address_kanji_postal_code: false,

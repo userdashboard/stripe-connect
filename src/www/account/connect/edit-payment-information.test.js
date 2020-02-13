@@ -45,8 +45,8 @@ describe('/account/connect/edit-payment-information', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        const page = await req.get()
-        const doc = TestHelper.extractDoc(page)
+        const result = await req.get()
+        const doc = TestHelper.extractDoc(result.html)
         assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
         assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
       })
@@ -72,8 +72,8 @@ describe('/account/connect/edit-payment-information', () => {
             for (const field of fields) {
               req.body = JSON.parse(JSON.stringify(body))
               req.body[field] = ''
-              const page = await req.post()
-              const doc = TestHelper.extractDoc(page)
+              const result = await req.post()
+              const doc = TestHelper.extractDoc(result.html)
               const messageContainer = doc.getElementById('message-container')
               const message = messageContainer.child[0]
               assert.strictEqual(message.attr.template, `invalid-${field}`)
@@ -86,8 +86,8 @@ describe('/account/connect/edit-payment-information', () => {
         for (const field of fields) {
           req.body = JSON.parse(JSON.stringify(body))
           req.body[field] = ''
-          const page = await req.post()
-          const doc = TestHelper.extractDoc(page)
+          const result = await req.post()
+          const doc = TestHelper.extractDoc(result.html)
           const messageContainer = doc.getElementById('message-container')
           const message = messageContainer.child[0]
           assert.strictEqual(message.attr.template, `invalid-${field}`)
@@ -108,8 +108,8 @@ describe('/account/connect/edit-payment-information', () => {
         if (TestStripeAccounts.paymentData[country.id].length) {
           for (const format of TestStripeAccounts.paymentData[country.id]) {
             req.body = TestStripeAccounts.createPostData(format, user.profile)
-            const page = await req.post()
-            const doc = TestHelper.extractDoc(page)
+            const result = await req.post()
+            const doc = TestHelper.extractDoc(result.html)
             const messageContainer = doc.getElementById('message-container')
             const message = messageContainer.child[0]
             assert.strictEqual(message.attr.template, 'success')
@@ -125,8 +125,8 @@ describe('/account/connect/edit-payment-information', () => {
           { click: `/account/connect/edit-payment-information?stripeid=${user.stripeAccount.id}` },
           { fill: '#submit-form' }
         ]
-        const page = await req.post()
-        const doc = TestHelper.extractDoc(page)
+        const result = await req.post()
+        const doc = TestHelper.extractDoc(result.html)
         const messageContainer = doc.getElementById('message-container')
         const message = messageContainer.child[0]
         assert.strictEqual(message.attr.template, 'success')

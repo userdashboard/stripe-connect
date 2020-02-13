@@ -56,8 +56,8 @@ describe('/administrator/connect/payout', () => {
         { click: '/administrator/connect/payouts' },
         { click: `/administrator/connect/payout?payoutid=${user.payout.id}` }
       ]
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.payout.id)
       assert.strictEqual(row.tag, 'tbody')
     })

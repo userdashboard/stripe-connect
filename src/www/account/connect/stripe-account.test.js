@@ -74,8 +74,8 @@ describe('/account/connect/stripe-account', () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` }
       ]
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('account-status')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'unstarted-registration')
@@ -91,8 +91,8 @@ describe('/account/connect/stripe-account', () => {
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('account-status')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'completed-registration')
@@ -111,8 +111,8 @@ describe('/account/connect/stripe-account', () => {
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('payment-information-status')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'no-payment-information')
@@ -139,8 +139,8 @@ describe('/account/connect/stripe-account', () => {
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('payment-information-status')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'payment-information')
@@ -156,8 +156,8 @@ describe('/account/connect/stripe-account', () => {
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('submission-status')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'not-submitted-information')
@@ -172,8 +172,8 @@ describe('/account/connect/stripe-account', () => {
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('submission-status')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'submitted-information')

@@ -261,7 +261,7 @@ describe('/api/user/connect/update-company-registration', async () => {
           } else if (field.startsWith('address_kanji')) {
             const property = field.substring('address_kanji_'.length)
             if (field === 'address_kanji_postal_code') {
-              assert.strictEqual(stripeAccountNow.company.address_kanji[property], '１５００００１') 
+              assert.strictEqual(stripeAccountNow.company.address_kanji[property], '１５００００１')
             } else {
               assert.strictEqual(stripeAccountNow.company.address_kanji[property], body[field])
             }
@@ -366,8 +366,8 @@ describe('/api/user/connect/update-company-registration', async () => {
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.US)
       await req.post()
       const stripeAccountNow = await global.api.user.connect.StripeAccount.get(req)
-      // TODO: verifying information was submitted by token is 
-      // not possible so for now when objects are updated 
+      // TODO: verifying information was submitted by token is
+      // not possible so for now when objects are updated
       // without a token they have a metadata.token = false flag set
       assert.strictEqual(stripeAccountNow.metadata.token, undefined)
     })

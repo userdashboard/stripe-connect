@@ -174,16 +174,16 @@ describe('/api/user/connect/update-payment-information', () => {
           req.session = user.session
           if (TestStripeAccounts.paymentData[country.id].length) {
             req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
-           } else {
+          } else {
             req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
-           }
+          }
           const stripeAccountNow = await req.patch()
           if (field === 'iban' || field === 'account_number') {
-            assert.strictEqual(stripeAccountNow.external_accounts.data[0].last4, req.body[field].substring(req.body[field].length - 4)) 
-          } else if (field === 'bsb_number' || 
-                     field === 'institution_number' || 
-                     field === 'sort_code' || 
-                     field === 'bank_code' || 
+            assert.strictEqual(stripeAccountNow.external_accounts.data[0].last4, req.body[field].substring(req.body[field].length - 4))
+          } else if (field === 'bsb_number' ||
+                     field === 'institution_number' ||
+                     field === 'sort_code' ||
+                     field === 'bank_code' ||
                      field === 'branch_code' ||
                      field === 'clearing_code' ||
                      field === 'transit_number') {

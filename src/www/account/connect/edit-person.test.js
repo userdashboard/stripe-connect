@@ -38,8 +38,8 @@ describe('/account/connect/edit-person', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
-        const page = await req.get()
-        const doc = TestHelper.extractDoc(page)
+        const result = await req.get()
+        const doc = TestHelper.extractDoc(result.html)
         assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
         assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
       })
@@ -89,8 +89,8 @@ describe('/account/connect/edit-person', () => {
           if (req.body[field]) {
             delete (req.body[field])
           }
-          const page = await req.post()
-          const doc = TestHelper.extractDoc(page)
+          const result = await req.post()
+          const doc = TestHelper.extractDoc(result.html)
           const messageContainer = doc.getElementById('message-container')
           const message = messageContainer.child[0]
           assert.strictEqual(message.attr.template, `invalid-${field}`)
@@ -131,8 +131,8 @@ describe('/account/connect/edit-person', () => {
           { click: `/account/connect/edit-person?personid=${user.representative.id}` },
           { fill: '#submit-form' }
         ]
-        const page = await req.post()
-        const doc = TestHelper.extractDoc(page)
+        const result = await req.post()
+        const doc = TestHelper.extractDoc(result.html)
         const row = doc.getElementById(user.representative.id)
         assert.strictEqual(row.tag, 'tbody')
       })

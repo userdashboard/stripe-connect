@@ -44,8 +44,8 @@ describe('/account/connect/person', () => {
         { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/person?personid=${user.owner.id}` }
       ]
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.owner.id)
       assert.strictEqual(row.tag, 'tbody')
     })
@@ -55,8 +55,8 @@ describe('/account/connect/person', () => {
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const cell = doc.getElementById('representative')
       assert.strictEqual(cell.tag, 'td')
     })
@@ -66,8 +66,8 @@ describe('/account/connect/person', () => {
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const cell = doc.getElementById('owner')
       assert.strictEqual(cell.tag, 'td')
     })
@@ -77,8 +77,8 @@ describe('/account/connect/person', () => {
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.director.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const cell = doc.getElementById('director')
       assert.strictEqual(cell.tag, 'td')
     })
@@ -97,8 +97,8 @@ describe('/account/connect/person', () => {
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
       req.account = user.account
       req.session = user.session
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById('requires-information')
       assert.strictEqual(row.tag, 'tr')
     })

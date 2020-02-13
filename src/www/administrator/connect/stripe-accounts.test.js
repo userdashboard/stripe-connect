@@ -36,8 +36,8 @@ describe('/administrator/connect/stripe-accounts', () => {
         { click: '/administrator/connect' },
         { click: '/administrator/connect/stripe-accounts' }
       ]
-      const page = await req.get()
-      const doc = TestHelper.extractDoc(page)
+      const result = await req.get()
+      const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.stripeAccount.id)
       assert.strictEqual(row.tag, 'tr')
     })
