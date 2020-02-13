@@ -20,7 +20,7 @@ jobs:
         npm install mocha puppeteer @userdashboard/dashboard --no-save
     - name: Test (fs)
       run: |
-        node node_modules/mocha/bin/mocha --inline-diffs --full-trace --forbid-only --forbid-pending --async-only --recursive --timeout 120000 --slow 120000 src/www/administrator
+        node node_modules/mocha/bin/mocha --inline-diffs --full-trace --forbid-only --forbid-pending --async-only --recursive --timeout 480000 --slow 480000 src/www/administrator
       env:
         NODE_ENV: testing
         FAST_START: true
