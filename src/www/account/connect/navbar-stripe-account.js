@@ -3,16 +3,16 @@ module.exports = {
     const removeElements = []
     if (stripeAccount.metadata.submitted) {
       removeElements.push(
-        'navbar-submit-company-link', 
+        'navbar-submit-company-link',
         'navbar-submit-individual-link',
         'navbar-submit-beneficial-owners-link',
         'navbar-submit-company-directors-link'
-        )
-    } 
+      )
+    }
     if (stripeAccount.business_type === 'individual') {
       removeElements.push(
-        'navbar-edit-company-link', 
-        'navbar-submit-company-link',  
+        'navbar-edit-company-link',
+        'navbar-submit-company-link',
         'navbar-persons-link',
         'navbar-submit-beneficial-owners-link',
         'navbar-submit-company-directors-link'

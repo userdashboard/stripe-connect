@@ -16,7 +16,7 @@ async function beforeRequest (req) {
       stripeAccount.metadata.accountid !== req.account.accountid) {
     throw new Error('invalid-stripe-account')
   }
-  if (stripeAccount.metadata.requiresOwners !== 'true'){
+  if (stripeAccount.metadata.requiresOwners !== 'true') {
     throw new Error('invalid-stripe-account')
   }
   if (req.query && req.query.message === 'success') {

@@ -325,7 +325,7 @@ module.exports = {
       const stripeAccountNow = await stripeCache.execute('accounts', 'update', req.query.stripeid, accountInfo, req.stripeKey)
       await stripeCache.delete(req.query.stripeid)
       return stripeAccountNow
-    } catch (error ){
+    } catch (error) {
       if (error.message && error.message.startsWith('invalid-individual_')) {
         throw new Error(error.message.replace('individual_', ''))
       }
