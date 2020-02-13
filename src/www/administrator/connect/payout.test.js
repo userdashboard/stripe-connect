@@ -37,7 +37,7 @@ describe('/administrator/connect/payout', () => {
   })
 
   describe('Payout#GET', () => {
-    it.only('should have row for payout (screenshots)', async () => {
+    it('should have row for payout (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       // TODO: swap with individual account
