@@ -130,7 +130,6 @@ describe('/api/user/connect/update-payment-information', () => {
               req.session = user.session
               req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
               req.body[field] = invalidValues[field]
-              req.body = body
               let errorMessage
               try {
                 await req.patch()
