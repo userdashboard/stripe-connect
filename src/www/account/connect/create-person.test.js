@@ -139,7 +139,7 @@ describe('/account/connect/create-person', () => {
       assert.notStrictEqual(personsTable, null)
     })
 
-    it.only('should create owner', async () => {
+    it('should create owner', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'GB',
