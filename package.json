@@ -2,7 +2,7 @@
   "name": "@userdashboard/stripe-connect",
   "version": "1.0.32",
   "scripts": {
-    "test": "mocha --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'"
+    "test": "mocha --exit --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'"
   },
   "repository": {
     "type": "git",
