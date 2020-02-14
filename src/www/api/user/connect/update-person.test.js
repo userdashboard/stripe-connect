@@ -394,7 +394,7 @@ describe('/api/user/connect/update-person', () => {
       it(`optionally-required posted ${field}`, async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
-          country: 'GB',
+          country: 'AT',
           type: 'company'
         })
         await TestHelper.createPerson(user, {
@@ -403,14 +403,17 @@ describe('/api/user/connect/update-person', () => {
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: 0
         })
+        await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+        const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
+        await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+        await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
         const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
         req.uploads = {
           [field]: TestHelper['success_id_scan_back.png']
         }
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.GB)
-        req.body = TestHelper.createMultiPart(req, body)
+        req.body = TestHelper.createMultiPart(req, {})
         const representative = await req.patch()
         if (field.indexOf('additional_document') > -1) {
           if (field === 'verification_additional_document_front') {
