@@ -4,50 +4,33 @@
 
 
 
-  /account/connect/create-person
-    CreatePerson#POST
+  server/bind-ip
+    BindIP#BEFORE
+      ✓ should prioritize ip from header
+      ✓ should bind ip from connection remoteAddress
+      ✓ should bind ip from connection socket
+      ✓ should bind ip from socket remoteAddress
+
+  server/bind-stripekey
+    BindStripeKey#AFTER
 server.receive POST /api/user/create-account
-server.receive POST /api/user/create-session?accountid=account_233e8e6a
-server.receive GET /api/user/account?accountid=account_233e8e6a
-server.receive GET /api/user/profile?profileid=profile_a2370bc6
-server.receive GET /api/user/session?sessionid=session_e5602f6f
-server.receive POST /api/user/connect/create-stripe-account?accountid=account_233e8e6a
-server.receive GET /account/connect/create-person?stripeid=acct_1GC8gRAT5iMDrLgJ
-server.receive GET /public/template.css
-server.receive GET /public/template-additional.css
-server.receive GET /public/administrator.svg
-server.receive GET /public/account.svg
-server.receive GET /public/home.svg
-server.receive GET /public/extended.svg
-server.receive GET /public/pure-min.css
-server.receive GET /public/content.css
-server.receive GET /public/content-additional.css
-server.receive GET /public/connect.css?999
-server.receive POST /account/connect/create-person?stripeid=acct_1GC8gRAT5iMDrLgJ
-server.receive GET /account/connect/person?personid=person_GjbugjKHtbo3oz
-server.receive GET /account/connect/person?personid=person_GjbugjKHtbo3oz
-server.receive POST /webhooks/connect/index-connect-data
-server.receive POST /webhooks/connect/index-connect-data
-server.receive GET /public/template.css
-server.receive GET /public/template-additional.css
-server.receive GET /public/administrator.svg
-server.receive GET /public/account.svg
-server.receive GET /public/home.svg
-server.receive GET /public/extended.svg
-server.receive GET /public/pure-min.css
-server.receive GET /public/content.css
-server.receive GET /public/content-additional.css
-server.receive GET /public/template.css
-server.receive GET /public/template-additional.css
-server.receive GET /public/administrator.svg
-server.receive GET /public/account.svg
-server.receive GET /public/home.svg
-server.receive GET /public/extended.svg
-server.receive GET /public/pure-min.css
-server.receive GET /public/content.css
-server.receive GET /public/content-additional.css
-      ✓ should create owner
+server.receive POST /api/user/create-session?accountid=account_ab00a657
+server.receive GET /api/user/account?accountid=account_ab00a657
+server.receive GET /api/user/profile?profileid=profile_4ca6f20c
+server.receive GET /api/user/session?sessionid=session_481cf77b
+      ✓ should bind stripekey data to req
 
-
-  1 passing (20s)
-
+  /account/connect/create-person
+    CreatePerson#BEFORE
+server.receive POST /api/user/create-account
+server.receive POST /api/user/create-session?accountid=account_b8df042a
+server.receive GET /api/user/account?accountid=account_b8df042a
+server.receive GET /api/user/profile?profileid=profile_c53f183f
+server.receive GET /api/user/session?sessionid=session_5f4300b8
+      ✓ should reject invalid stripeid
+server.receive POST /api/user/create-account
+server.receive POST /api/user/create-session?accountid=account_8972c17b
+server.receive GET /api/user/account?accountid=account_8972c17b
+server.receive GET /api/user/profile?profileid=profile_12fc1437
+server.receive GET /api/user/session?sessionid=session_e4ec3dfa
+server.receive POST /api/user/connect/create-stripe-account?accountid=account_8972c17b
