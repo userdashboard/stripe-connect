@@ -168,11 +168,18 @@ module.exports = {
         stripeData.external_account.account_number = req.body.iban
         break
     }
-    const stripeAccountNow = await stripeCache.execute('accounts', 'update', req.query.stripeid, stripeData, req.stripeKey)
-    const bankAccount = stripeAccountNow.external_accounts.data[0]
-    await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
-    await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
-    await stripeCache.delete(req.query.stripeid)
-    return stripeAccountNow
+    try {
+      const stripeAccountNow = await stripeCache.execute('accounts', 'update', req.query.stripeid, stripeData, req.stripeKey)
+      const bankAccount = stripeAccountNow.external_accounts.data[0]
+      await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
+      await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
+      await stripeCache.delete(req.query.stripeid)
+      return stripeAccountNow
+    } catch (error) {
+      if (error.message && error.message.startsWith('invalid-external_account_')) {
+        throw new Error(error.message.replace('external_account_', ''))
+      }
+      throw error
+    }
   }
 }
