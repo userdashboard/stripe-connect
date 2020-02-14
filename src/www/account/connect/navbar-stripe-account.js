@@ -1,14 +1,6 @@
 module.exports = {
   setup: (doc, stripeAccount) => {
     const removeElements = []
-    if (stripeAccount.metadata.submitted) {
-      removeElements.push(
-        'navbar-submit-company-link',
-        'navbar-submit-individual-link',
-        'navbar-submit-beneficial-owners-link',
-        'navbar-submit-company-directors-link'
-      )
-    }
     if (stripeAccount.business_type === 'individual') {
       removeElements.push(
         'navbar-edit-company-link',
@@ -17,6 +9,11 @@ module.exports = {
         'navbar-submit-beneficial-owners-link',
         'navbar-submit-company-directors-link'
       )
+      if (stripeAccount.metadata.submitted) {
+        removeElements.push(
+          'navbar-submit-individual-link'
+        )
+      }
     } else {
       removeElements.push('navbar-edit-individual-link', 'navbar-submit-individual-link')
       if (stripeAccount.metadata.requiresOwners !== 'true') {
@@ -24,6 +21,13 @@ module.exports = {
       }
       if (stripeAccount.metadata.requiresDirectors !== 'true') {
         removeElements.push('navbar-submit-company-directors-link')
+      }
+      if (stripeAccount.metadata.submitted) {
+        removeElements.push(
+          'navbar-submit-company-link',
+          'navbar-submit-beneficial-owners-link',
+          'navbar-submit-company-directors-link'
+        )
       }
     }
     const template = doc.getElementById('navbar')
