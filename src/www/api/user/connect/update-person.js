@@ -126,7 +126,7 @@ module.exports = {
             }
           }
           const front = await stripeCache.execute('files', 'create', frontData, req.stripeKey)
-          req.body.verification_document_additional_front = front.id
+          req.body.verification_additional_document_front = front.id
         }
         if (req.uploads.verification_additional_document_back) {
           const backData = {
