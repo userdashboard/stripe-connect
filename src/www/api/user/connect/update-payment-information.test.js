@@ -103,13 +103,12 @@ describe('/api/user/connect/update-payment-information', () => {
             const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
             req.account = user.account
             req.session = user.session
-            let body
             if (TestStripeAccounts.paymentData[country.id].length) {
-              body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
+              req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
             } else {
-              body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+              req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
             }
-            delete (body[field])
+            delete (req.body[field])
             let errorMessage
             try {
               await req.patch()
@@ -129,8 +128,8 @@ describe('/api/user/connect/update-payment-information', () => {
               const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
               req.account = user.account
               req.session = user.session
-              const body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
-              body[field] = 'invalid'
+              req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+              req.body[field] = invalidValues[field]
               req.body = body
               let errorMessage
               try {
