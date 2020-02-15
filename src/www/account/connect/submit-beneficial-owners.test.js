@@ -127,11 +127,14 @@ describe('/account/connect/submit-beneficial-owners', () => {
       const ownerBody = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.DE)
       const documents = {
         verification_document_back: TestHelper['success_id_scan_back.png'],
-        verification_document_front: TestHelper['success_id_scan_front.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      await TestHelper.updatePerson(user, user.owner, ownerBody, documents)
+      const additionalDocuments = {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
       }
-      await TestHelper.updatePerson(user, user.owner, ownerBody, documents)
+      await TestHelper.updatePerson(user, user.owner, {}, additionalDocuments)
       const req = TestHelper.createRequest(`/account/connect/submit-beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
