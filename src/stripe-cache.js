@@ -50,7 +50,18 @@ function formatError (error) {
         error.raw.param === 'person_token') {
       return 'invalid-token'
     }
-    const property = error.raw.param.split('[').join('_').split(']').join('')
+    let property = error.raw.param.split('[').join('_').split(']').join('')
+    switch (property) {
+      case 'mcc':
+        property = 'business_profile_mcc'
+        break
+      case 'relationship_title':
+        property = 'relationship_relationship_title'
+        break
+      case 'percent_ownership':
+        property = 'relationship_percent_ownership'
+        break
+    }
     return `invalid-${property}`
   }
   if (error.raw.code === 'account_invalid') {
