@@ -519,6 +519,11 @@ async function waitForPayoutsEnabled (user, callback) {
     }
     try {
       const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
+      if (stripeAccount.requirements.currently_due.length) {
+        throw new Error('account requires fields ' + stripeAccount.requirements.currently_due.join(', '))
+      } else if (stripeAccount.requirements.eventually_due.length) {
+        throw new Error('account requires fields ' + stripeAccount.requirements.eventually_due.join(', '))
+      }
       if (!stripeAccount.payouts_enabled) {
         return setTimeout(wait, 100)
       }
