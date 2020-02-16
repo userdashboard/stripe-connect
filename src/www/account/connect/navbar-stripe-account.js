@@ -16,18 +16,19 @@ module.exports = {
       }
     } else {
       removeElements.push('navbar-edit-individual-link', 'navbar-submit-individual-link')
-      if (stripeAccount.metadata.requiresOwners !== 'true') {
-        removeElements.push('navbar-submit-beneficial-owners-link')
-      }
-      if (stripeAccount.metadata.requiresDirectors !== 'true') {
-        removeElements.push('navbar-submit-company-directors-link')
-      }
       if (stripeAccount.metadata.submitted) {
         removeElements.push(
           'navbar-submit-company-link',
           'navbar-submit-beneficial-owners-link',
           'navbar-submit-company-directors-link'
         )
+      } else {
+        if (stripeAccount.metadata.requiresOwners !== 'true') {
+          removeElements.push('navbar-submit-beneficial-owners-link')
+        }
+        if (stripeAccount.metadata.requiresDirectors !== 'true') {
+          removeElements.push('navbar-submit-company-directors-link')
+        }
       }
     }
     const template = doc.getElementById('navbar')
