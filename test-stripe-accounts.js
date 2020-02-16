@@ -47,7 +47,6 @@ module.exports = {
     country = country || 'US'
     const user = await module.exports.createCompanyReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
-    await TestHelper.waitForVerificationStart(user)
     await TestHelper.waitForPayoutsEnabled(user)
     await TestHelper.waitForPendingFieldsToLeave(user)
     await TestHelper.waitForVerification(user)
