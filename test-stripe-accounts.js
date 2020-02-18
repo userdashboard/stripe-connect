@@ -8,8 +8,7 @@ function createPostData (data, identity) {
     body[field] = data[field]
   }
   if (body.business_profile_mcc) {
-    const codes = connect.getMerchantCategoryCodes()
-    body.business_profile_mcc = codes[Math.floor(Math.random() * codes.length)].code
+    body.business_profile_mcc = allowedMCCs[Math.floor(Math.random() * allowedMCCs.length)].code
   }
   if (body.business_profile_url) {
     body.business_profile_url = 'https://' + (identity.email || identity.contactEmail).split('@')[1]
@@ -28,6 +27,26 @@ function createPostData (data, identity) {
   }
   return body
 }
+
+const allowedMCCs = [
+  { "description": "A/C, Refrigeration Repair", "code": "7623", "object": "mcc"},
+  { "description": "Accounting/Bookkeeping Services", "code": "8931", "object": "mcc"},
+  { "description": "Advertising Services", "code": "7311", "object": "mcc"},
+  { "description": "Agricultural Cooperative", "code": "0763", "object": "mcc"},
+  { "description": "Airlines, Air Carriers", "code": "4511", "object": "mcc"},
+  { "description": "Airports, Flying Fields", "code": "4582", "object": "mcc"},
+  { "description": "Ambulance Services", "code": "4119", "object": "mcc"},
+  { "description": "Amusement Parks/Carnivals", "code": "7996", "object": "mcc"},
+  { "description": "Antique Reproductions", "code": "5937", "object": "mcc"},
+  { "description": "Antique Shops", "code": "5932", "object": "mcc"},
+  { "description": "Aquariums", "code": "7998", "object": "mcc"},
+  { "description": "Architectural/Surveying Services", "code": "8911", "object": "mcc"},
+  { "description": "Art Dealers and Galleries", "code": "5971", "object": "mcc"},
+  { "description": "Artists Supply and Craft Shops", "code": "5970", "object": "mcc"},
+  { "description": "Auto Body Repair Shops", "code": "7531", "object": "mcc"},
+  { "description": "Auto Paint Shops", "code": "7535", "object": "mcc"},
+  { "description": "Auto Service Shops", "code": "7538", "object": "mcc"},
+]
 
 module.exports = {
   createPostData,
