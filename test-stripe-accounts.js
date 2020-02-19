@@ -55,6 +55,8 @@ module.exports = {
     global.webhooks = []
     const user = await module.exports.createIndividualReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'tos_acceptance.date')
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'tos_acceptance.ip')
     await TestHelper.waitForVerificationStart(user)
     await TestHelper.waitForPayoutsEnabled(user)
     await TestHelper.waitForPendingFieldsToLeave(user)
@@ -66,6 +68,8 @@ module.exports = {
     country = country || 'US'
     const user = await module.exports.createCompanyReadyForSubmission(country)
     await TestHelper.submitStripeAccount(user)
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'tos_acceptance.date')
+    await TestHelper.waitForVerificationFieldsToLeave(user, 'tos_acceptance.ip')
     await TestHelper.waitForVerificationStart(user)
     await TestHelper.waitForPayoutsEnabled(user)
     await TestHelper.waitForPendingFieldsToLeave(user)
