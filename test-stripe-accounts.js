@@ -408,6 +408,46 @@ module.exports = {
     })
     return user
   },
+  createCompanyMissingCompanyDetails: async (country) => {
+    country = country || 'US'
+    const user = await TestHelper.createUser()
+    await TestHelper.createStripeAccount(user, {
+      country: country,
+      type: 'company'
+    })
+    if (paymentData[country].length) {
+      await TestHelper.createExternalAccount(user, createPostData(paymentData[country][0], user.profile))
+    } else {
+      await TestHelper.createExternalAccount(user, createPostData(paymentData[country], user.profile))
+    }
+    const representativePostData = createPostData(representativeData[country], user.profile)
+    const representativeUploadData = {
+      verification_document_back: TestHelper['success_id_scan_back.png'],
+      verification_document_front: TestHelper['success_id_scan_front.png']
+    }
+    if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
+      representativeUploadData.verification_additional_document_back = TestHelper['success_id_scan_back.png']
+      representativeUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
+    }
+    await TestHelper.createPerson(user, {
+      relationship_representative: true,
+      relationship_executive: true,
+      relationship_title: 'SVP Testing',
+      relationship_percent_ownership: 0
+    })
+    await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.day`)
+    await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
+    await TestHelper.updatePerson(user, user.representative, representativePostData, representativeUploadData)
+    if (beneficialOwnerData[country] !== false) {
+      await TestHelper.submitBeneficialOwners(user)
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relationship.owner')
+    }
+    if (companyDirectorData[country] !== false) {
+      await TestHelper.submitCompanyDirectors(user)
+      await TestHelper.waitForVerificationFieldsToLeave(user, 'relatioship.director')
+    }
+    return user
+  },
   createCompanyMissingDirectors: async (country) => {
     country = country || 'US'
     const user = await TestHelper.createUser()

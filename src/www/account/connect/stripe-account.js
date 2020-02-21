@@ -116,20 +116,10 @@ async function renderPage (req, res) {
     removeElements.push('registration-container')
   } else if (req.data.registrationComplete) {
     dashboard.HTML.renderTemplate(doc, null, 'completed-registration', 'account-status')
-    removeElements.push('start-individual-registration-link', 'start-company-registration-link')
-    if (req.data.stripeAccount.business_type === 'individual') {
-      removeElements.push('update-company-registration-link')
-    } else {
-      removeElements.push('update-individual-registration-link')
-    }
+    removeElements.push('start-registration-link')
   } else {
     dashboard.HTML.renderTemplate(doc, null, 'unstarted-registration', 'account-status')
-    removeElements.push('update-individual-registration-link', 'update-company-registration-link')
-    if (req.data.stripeAccount.business_type === 'individual') {
-      removeElements.push('start-company-registration-link')
-    } else {
-      removeElements.push('start-individual-registration-link')
-    }
+    removeElements.push('update-registration-link')
   }
   const completedPaymentInformation = req.data.stripeAccount.external_accounts.data.length
   if (completedPaymentInformation) {
@@ -168,15 +158,8 @@ async function renderPage (req, res) {
     removeElements.push('submit-registration-link-container')
   } else {
     dashboard.HTML.renderTemplate(doc, req.data.stripeAccount, 'not-submitted-information', 'submission-status')
-    let registrationLink
-    if (req.data.stripeAccount.business_type === 'individual') {
-      removeElements.push('submit-company-registration-link')
-      registrationLink = doc.getElementById('submit-individual-registration-link')
-    } else {
-      removeElements.push('submit-individual-registration-link')
-      registrationLink = doc.getElementById('submit-company-registration-link')
-    }
     if (!req.data.registrationComplete || !completedPaymentInformation) {
+      const registrationLink = doc.getElementById('submit-registration-link')
       registrationLink.setAttribute('disabled', 'disabled')
     }
   }

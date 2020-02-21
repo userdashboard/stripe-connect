@@ -47,10 +47,8 @@
       <h2>Registration information</h2>
       <div id="account-status"></div>
       <p class="pure-button-group" role="group" id="registration-options">
-        <a id="start-individual-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-individual-registration?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
-        <a id="start-company-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
-        <a id="update-individual-registration-link" class="pure-button" href="/account/connect/edit-individual-registration?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
-        <a id="update-company-registration-link" class="pure-button" href="/account/connect/edit-company-registration?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+        <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+        <a id="update-registration-link" class="pure-button" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
       </p>
     </div>    
     <div id="representative-container">
@@ -115,8 +113,7 @@
       <h2>Submit registration</h2>
       <div id="submission-status"></div>
       <p id="submit-registration-link-container">
-        <a id="submit-individual-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-individual-registration?stripeid=${stripeAccount.id}">Submit registration</a>
-        <a id="submit-company-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-company-registration?stripeid=${stripeAccount.id}">Submit registration</a>
+        <a  id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a>
       </p>
     </div>
   </body>

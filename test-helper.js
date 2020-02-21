@@ -288,7 +288,7 @@ async function createStripeAccount (user, properties) {
 }
 
 async function createStripeRegistration (user, properties, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-${user.stripeAccount.business_type}-registration?stripeid=${user.stripeAccount.id}`)
+  const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   req.uploads = uploads || {}
@@ -298,7 +298,7 @@ async function createStripeRegistration (user, properties, uploads) {
 }
 
 async function updateStripeRegistration (user, properties, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-${user.stripeAccount.business_type}-registration?stripeid=${user.stripeAccount.id}`)
+  const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   req.uploads = uploads || []
@@ -459,7 +459,7 @@ async function submitCompanyDirectors (user) {
 }
 
 async function submitStripeAccount (user) {
-  const req = TestHelper.createRequest(`/api/user/connect/set-${user.stripeAccount.business_type}-registration-submitted?stripeid=${user.stripeAccount.id}`)
+  const req = TestHelper.createRequest(`/api/user/connect/set-stripe-account-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   user.stripeAccount = await req.patch()

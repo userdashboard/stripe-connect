@@ -2,11 +2,11 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/account/connect/create-registration', () => {
+describe('/account/connect/create-stripe-account', () => {
   describe('CreateRegistration#GET', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/connect/create-registration')
+      const req = TestHelper.createRequest('/account/connect/create-stripe-account')
       req.account = user.account
       req.session = user.session
       const result = await req.get()
@@ -19,7 +19,7 @@ describe('/account/connect/create-registration', () => {
   describe('CreateRegistration#POST', () => {
     it('should create Stripe account (screenshots)', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/connect/create-registration')
+      const req = TestHelper.createRequest('/account/connect/create-stripe-account')
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -32,7 +32,7 @@ describe('/account/connect/create-registration', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/connect' },
-        { click: '/account/connect/create-registration' },
+        { click: '/account/connect/create-stripe-account' },
         { fill: '#submit-form' }
       ]
       const doc = TestHelper.extractDoc(result.html)
