@@ -80,12 +80,12 @@ async function renderPage (req, res, messageTemplate) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
   } else if (removeElements.indexOf('personal-address-container') === -1) {
-    removeElements.push('state-container', 'state-container-bridge')
+    removeElements.push('address_state-container', 'address_state-container-bridge')
     if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.address.line1`) === -1) {
-      removeElements.push('line1-container', 'line2-container')
+      removeElements.push('address_line1-container', 'address_line2-container')
     }
     if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.address.city`) === -1) {
-      removeElements.push('city-container')
+      removeElements.push('address_city-container')
     }
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.id_number`) === -1) {

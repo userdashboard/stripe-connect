@@ -57,7 +57,7 @@ l<!doctype html>
           </div>
           <div class="pure-g">
             <div class="pure-u-12-24">
-              <div class="pure-control-group">
+              <div id="email-container" class="pure-control-group">
                 <a name="email-anchor"></a>
                 <label for="email">Email address</label>
                 <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100" />
@@ -65,7 +65,7 @@ l<!doctype html>
             </div>
             <div class="pure-u-1-24"></div>
             <div class="pure-u-11-24">
-              <div class="pure-control-group">
+              <div id="phone-container" class="pure-control-group">
                 <a name="phone-anchor"></a>
                 <label for="phone">Phone</label>
                 <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100" />
@@ -77,7 +77,7 @@ l<!doctype html>
           <h2>Kana Personal information</h2>
           <div class="pure-g">
             <div class="pure-u-12-24">
-              <div class="pure-control-group">
+              <div id="first_name_kana-container" class="pure-control-group">
                 <a name="first_name_kana-anchor"></a>
                 <label for="first_name_kana">First name</label>
                 <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50" />
@@ -85,7 +85,7 @@ l<!doctype html>
             </div>
             <div class="pure-u-1-24"></div>
             <div class="pure-u-11-24">
-              <div class="pure-control-group">
+              <div id="last_name_kana-container" class="pure-control-group">
                 <a name="last_name_kana-anchor"></a>
                 <label for="last_name_kana">Last name</label>
                 <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50" />
@@ -97,7 +97,7 @@ l<!doctype html>
           <h2>Kanji Personal information</h2>
           <div class="pure-g">
             <div class="pure-u-12-24">
-              <div class="pure-control-group">
+              <div id="first_name_kanji-container" class="pure-control-group">
                 <a name="first_name_kanji-anchor"></a>
                 <label for="first_name_kanji">First name</label>
                 <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50" />
@@ -105,7 +105,7 @@ l<!doctype html>
             </div>
             <div class="pure-u-1-24"></div>
             <div class="pure-u-11-24">
-              <div class="pure-control-group">
+              <div id="last_name_kanji-container" class="pure-control-group">
                 <a name="last_name_kanji-anchor"></a>
                 <label for="last_name_kanji">Last name</label>
                 <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50" />
@@ -140,7 +140,7 @@ l<!doctype html>
           <label for="id_number">Passport or ID number</label>
           <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50" />
         </div>
-        <div id="upload-container" class="pure-control-group">
+        <div id="verification_document-container" class="pure-control-group">
           <a name="verification_document_front-anchor"></a>
           <a name="verification_document_back-anchor"></a>
           <label for="verification_document_front">Front scan/photo</label>
@@ -148,7 +148,7 @@ l<!doctype html>
           <label for="verification_document_back">Back scan/photo</label>
           <input name="verification_document_back" id="verification_document_back" type="file" />
         </div>
-        <div id="additional-upload-container" class="pure-control-group">
+        <div id="verification_additional_document-container" class="pure-control-group">
           <h2>Proof of address</h2>
           <a name="verification_additional_document_front-anchor"></a>
           <a name="verification_additional_document_back-anchor"></a>
@@ -176,14 +176,14 @@ l<!doctype html>
           </div>
           <div class="pure-control-group">
             <div class="pure-g">
-              <div id="state-container" class="pure-u-16-24">
+              <div id="address_state-container" class="pure-u-16-24">
                 <a name="verification_document_back-anchor"></a>
                 <label for="address_state">State or province</label>
                 <select id="address_state" name="address_state">
                   <option value="">Select</option>
                 </select>
               </div>
-              <div id="state-container-bridge" class="pure-u-1-24"></div>
+              <div id="address_state-container-bridge" class="pure-u-1-24"></div>
               <div id="address_postal_code-container" class="pure-u-7-24">
                 <a name="verification_document_back-anchor"></a>
                 <label for="address_postal_code">ZIP</label>
@@ -210,56 +210,56 @@ l<!doctype html>
         </div>
         <div id="kana-personal-address-container">
           <h2>Kana personal address</h2>
-          <div class="pure-control-group">
-            <a name="verification_document_back-anchor"></a>
+          <div id="address_kana_line1-container" class="pure-control-group">
+            <a name="address_kana_line1-anchor"></a>
             <label for="address_kana_line1">Line 1</label>
             <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100" />
           </div>
-          <div class="pure-control-group">
+          <div id="address_kana_city-container" class="pure-control-group">
             <label for="address_kana_city">City</label>
-            <a name="verification_document_back-anchor"></a>
+            <a name="address_kana_city-anchor"></a>
             <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100" />
           </div>
-          <div class="pure-control-group">
+          <div id="address_kana_town-container" class="pure-control-group">
             <label for="address_kana_town">Town</label>
-            <a name="verification_document_back-anchor"></a>
+            <a name="address_kana_town-anchor"></a>
             <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100" />
           </div>
-          <div class="pure-control-group">
-            <a name="verification_document_back-anchor"></a>
+          <div id="address_kana_state-container" class="pure-control-group">
+            <a name="address_kana_state-anchor"></a>
             <label for="address_kana_state">State</label>
             <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100" />
           </div>
-          <div class="pure-control-group">
-            <a name="verification_document_back-anchor"></a>
+          <div id="address_kana_postal_code-container" class="pure-control-group">
+            <a name="address_kana_postal_code-anchor"></a>
             <label for="address_kana_postal_code">Postal code</label>
             <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100" />
           </div>
         </div>
         <div id="kanji-personal-address-container">
           <h2>Kanji personal address</h2>
-          <div class="pure-control-group">
-            <a name="verification_document_back-anchor"></a>
+          <div id="address_kanji_line1-container" class="pure-control-group">
+            <a name="address_kanji_line1-anchor"></a>
             <label for="address_kanji_line1">Line 1</label>
             <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100" />
           </div>
-          <div class="pure-control-group">
-            <a name="verification_document_back-anchor"></a>
+          <div id="address_kanji_city-container" class="pure-control-group">
+            <a name="address_kanji_city-anchor"></a>
             <label for="address_kanji_city">City</label>
             <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100" />
           </div>
-          <div class="pure-control-group">
-            <a name="verification_document_back-anchor"></a>
+          <div id="address_kanji_town-container" class="pure-control-group">
+            <a name="address_kanji_town-anchor"></a>
             <label for="address_kanji_town">Town</label>
             <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100" />
           </div>
-          <div class="pure-control-group">
-            <a name="verification_document_back-anchor"></a>
+          <div id="address_kanji_state-container" class="pure-control-group">
+            <a name="address_kanji_state-anchor"></a>
             <label for="address_kanji_state">State</label>
             <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100" />
           </div>
-          <div class="pure-control-group">
-            <a name="verification_document_back-anchor"></a>
+          <div id="address_kanji_postal_code-container" class="pure-control-group">
+            <a name="address_kanji_postal_code-anchor"></a>
             <label for="address_kanji_postal_code">Postal code</label>
             <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100" />
           </div>

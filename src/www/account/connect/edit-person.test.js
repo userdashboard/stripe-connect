@@ -22,60 +22,82 @@ describe('/account/connect/edit-person', () => {
   })
 
   describe('EditPerson#GET', () => {
+    const testedRequiredFields = [
+      'relationship_title',
+      'relationship_director',
+      'relationship_executive',
+      'relationship_representative',
+      'relationship_owner'
+    ]
     for (const country of connect.countrySpecs) {
-      it('should present the form (' + country.id + ')', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: country.id,
-          type: 'company'
+      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+      if (payload === false) {
+        continue
+      }
+      for (const field in payload) {
+        if (testedRequiredFields.indexOf(field) > -1) {
+          continue
+        }
+        testedRequiredFields.push(field)
+        it('should require ' + field, async () => {
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'company'
+          })
+          await TestHelper.createPerson(user, {
+            relationship_representative: true,
+            relationship_executive: true,
+            relationship_title: 'SVP Testing',
+            relationship_percent_ownership: 0
+          })
+          const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+          req.account = user.account
+          req.session = user.session
+          const result = await req.get()
+          const doc = TestHelper.extractDoc(result.html)
+          if (field.startsWith('dob_')) {
+            const elementContainer = doc.getElementById('dob-container')
+            assert.strictEqual(elementContainer.tag, 'div')
+          } else {
+            const elementContainer = doc.getElementById(`${field}-container`)
+            assert.strictEqual(elementContainer.tag, 'div')
+          }
         })
-        await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
-          relationship_title: 'SVP Testing',
-          relationship_percent_ownership: 0
-        })
-        const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
-        req.account = user.account
-        req.session = user.session
-        const result = await req.get()
-        const doc = TestHelper.extractDoc(result.html)
-        assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
-        assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
-      })
+      }
     }
   })
 
   describe('EditPerson#POST', async () => {
-    const excludeFields = [
-      'relationship_representative',
-      'relationship_executive',
+    const testedMissingFields = [
       'relationship_title',
-      'relationship_percent_ownership'
+      'relationship_director',
+      'relationship_executive',
+      'relationship_representative',
+      'relationship_owner'
     ]
     for (const country of connect.countrySpecs) {
-      it('should reject invalid fields (' + country.id + ')', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: country.id,
-          type: 'company'
-        })
-        await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
-          relationship_title: 'SVP Testing',
-          relationship_percent_ownership: 0
-        })
-        const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-        const fields = Object.keys(req.body)
-        const body = JSON.stringify(req.body)
-        for (const field of fields) {
-          if (excludeFields.indexOf(field) > -1) {
-            continue
-          }
+      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+      if (payload === false) {
+        continue
+      }
+      for (const field in payload) {
+        if (testedMissingFields.indexOf(field) > -1) {
+          continue
+        }
+        testedMissingFields.push(field)
+        it('should reject invalid ' + field, async () => {
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'company'
+          })
+          await TestHelper.createPerson(user, {
+            relationship_representative: true,
+            relationship_executive: true,
+            relationship_title: 'SVP Testing',
+            relationship_percent_ownership: 0
+          })
           let property = field.replace('address_kana_', 'address_kana.')
             .replace('address_kanji_', 'address_kanji.')
             .replace('dob_', 'dob.')
@@ -85,57 +107,57 @@ describe('/account/connect/edit-person', () => {
           }
           await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
           await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
-          req.body = JSON.parse(body)
-          if (req.body[field]) {
-            delete (req.body[field])
-          }
+          const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+          req.account = user.account
+          req.session = user.session
+          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+          delete (req.body[field])
           const result = await req.post()
           const doc = TestHelper.extractDoc(result.html)
           const messageContainer = doc.getElementById('message-container')
           const message = messageContainer.child[0]
           assert.strictEqual(message.attr.template, `invalid-${field}`)
-        }
-      })
+        })
+      }
     }
 
-    for (const country of connect.countrySpecs) {
-      it('should update information (' + country.id + ') (screenshots)', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: country.id,
-          type: 'company'
-        })
-        await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
-          relationship_title: 'CEO',
-          relationship_percent_ownership: '100'
-        })
-        await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.year`)
-        await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.year')
-        const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-        req.filename = __filename
-        req.screenshots = [
-          { hover: '#account-menu-container' },
-          { click: '/account/connect' },
-          { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-          { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` },
-          { click: `/account/connect/person?personid=${user.representative.id}` },
-          { click: `/account/connect/edit-person?personid=${user.representative.id}` },
-          { fill: '#submit-form' }
-        ]
-        const result = await req.post()
-        const doc = TestHelper.extractDoc(result.html)
-        const row = doc.getElementById(user.representative.id)
-        assert.strictEqual(row.tag, 'tbody')
+    it('should update person (screenshots)', async () => {
+      const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: country.id,
+        type: 'company'
       })
-    }
+      await TestHelper.createPerson(user, {
+        relationship_representative: true,
+        relationship_executive: true,
+        relationship_title: 'CEO',
+        relationship_percent_ownership: '100'
+      })
+      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.year`)
+      await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.year')
+      const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/connect' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/person?personid=${user.representative.id}` },
+        { click: `/account/connect/edit-person?personid=${user.representative.id}` },
+        { fill: '#submit-form' }
+      ]
+      const result = await req.post()
+      const doc = TestHelper.extractDoc(result.html)
+      const row = doc.getElementById(user.representative.id)
+      assert.strictEqual(row.tag, 'tbody')
+    })
   })
 })
