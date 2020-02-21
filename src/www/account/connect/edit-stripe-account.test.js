@@ -64,7 +64,7 @@ describe('/account/connect/edit-stripe-account', async () => {
           const result = await req.get()
           const doc = TestHelper.extractDoc(result.html)
           if (field.startsWith('dob_')) {
-            const elementContainer = doc.getElementById(`dob-container`)
+            const elementContainer = doc.getElementById('dob-container')
             assert.strictEqual(elementContainer.tag, 'div')  
           } else {
             const elementContainer = doc.getElementById(`${field}-container`)
@@ -72,6 +72,39 @@ describe('/account/connect/edit-stripe-account', async () => {
           }
         })   
       }
+    }
+
+    const uploadFields = [
+      'verification_document',
+      'verification_additional_document'
+    ]
+    for (const field of uploadFields) {
+      it(`should have element for ${field}`, async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'AT',
+          type: 'individual'
+        })
+        if (field === 'verification_additional_document') {
+          await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
+          await TestHelper.waitForAccountRequirement(user, `individual.verification.document`)
+          await TestHelper.updateStripeRegistration(user, null, {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          })
+        } else {
+          await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
+        }
+        const property = field.replace('verification_', 'verification.')
+        await TestHelper.waitForAccountRequirement(user, `individual.${property}`)
+        const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        const result = await req.get()
+        const doc = TestHelper.extractDoc(result.html)
+        const elementContainer = doc.getElementById(`${field}-container`)
+        assert.strictEqual(elementContainer.tag, 'div')
+      })
     }
   })
 
@@ -126,6 +159,65 @@ describe('/account/connect/edit-stripe-account', async () => {
           assert.strictEqual(message.attr.template, `invalid-${field}`)
         })
       }
+    }
+
+    // TODO: company verificaiton document can't be tested
+    // because the Stripe test API erroneously marks it as
+    // under review instead of required, and this form only
+    // supports required fields
+    const uploadFields = [
+      'verification_document_front',
+      'verification_document_back',
+      'verification_additional_document_front',
+      'verification_additional_document_back'
+    ]
+    for (const field of uploadFields) {
+      it(`should reject invalid ${field} (individual)`, async () => {
+        const user = await TestHelper.createUser()
+        if (field.indexOf('additional') > -1) {
+          await TestHelper.createStripeAccount(user, {
+            country: 'GB',
+            type: 'individual'
+          })
+        } else {
+          await TestHelper.createStripeAccount(user, {
+            country: 'GB',
+            type: 'individual'
+          })
+        }
+        if (field.startsWith('verification_additional')) {
+          await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
+          await TestHelper.waitForAccountRequirement(user, `individual.verification.document`)
+          await TestHelper.updateStripeRegistration(user, null, {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          })
+          await TestHelper.waitForAccountRequirement(user, `individual.verification.additional_document`)
+        } else {
+          await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
+          await TestHelper.waitForAccountRequirement(user, `individual.verification.document`)
+        }
+        const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        if (field.startsWith('verification_additional')) {
+          req.uploads = {
+            verification_additional_document_front: TestHelper['success_id_scan_back.png'],
+            verification_additional_document_back: TestHelper['success_id_scan_back.png']
+          }
+        } else {
+          req.uploads = {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          }
+        }
+        delete (req.uploads[field])
+        const result = await req.post()
+        const doc = TestHelper.extractDoc(result.html)
+        const messageContainer = doc.getElementById('message-container')
+        const message = messageContainer.child[0]
+        assert.strictEqual(message.attr.template, `invalid-${field}`)
+      })
     }
 
     it('should update registration (individual) (screenshots)', async () => {

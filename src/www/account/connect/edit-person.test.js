@@ -39,7 +39,7 @@ describe('/account/connect/edit-person', () => {
           continue
         }
         testedRequiredFields.push(field)
-        it('should require ' + field, async () => {
+        it('should have element for ' + field, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -65,6 +65,43 @@ describe('/account/connect/edit-person', () => {
           }
         })
       }
+    }
+
+    const uploadFields = [
+      'verification_document',
+      'verification_additional_document'
+    ]
+    for (const field of uploadFields) {
+      it(`should have element for ${field}`, async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'AT',
+          type: 'company'
+        })
+        await TestHelper.createPerson(user, {
+          relationship_representative: true,
+          relationship_executive: true,
+          relationship_title: 'SVP Testing',
+          relationship_percent_ownership: 0
+        })
+        await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+        if (field === 'verification_additional_document') {
+          await TestHelper.updatePerson(user, user.representative, null, {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          })
+        }
+        const property = field.replace('verification_', 'verification.')
+        await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+        await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
+        const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+        req.account = user.account
+        req.session = user.session
+        const result = await req.get()
+        const doc = TestHelper.extractDoc(result.html)
+        const elementContainer = doc.getElementById(`${field}-container`)
+        assert.strictEqual(elementContainer.tag, 'div')
+      })
     }
   })
 
@@ -119,6 +156,58 @@ describe('/account/connect/edit-person', () => {
           assert.strictEqual(message.attr.template, `invalid-${field}`)
         })
       }
+    }
+
+    const uploadFields = [
+      'verification_document_front',
+      'verification_document_back',
+      'verification_additional_document_front',
+      'verification_additional_document_back'
+    ]
+    for (const field of uploadFields) {
+      it(`should reject invalid ${field}`, async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'AT',
+          type: 'company'
+        })
+        await TestHelper.createPerson(user, {
+          relationship_representative: true,
+          relationship_executive: true,
+          relationship_title: 'SVP Testing',
+          relationship_percent_ownership: 0
+        })
+        await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+        const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+        req.account = user.account
+        req.session = user.session
+        const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
+        if (field.startsWith('verification_additional')) {
+          await TestHelper.updatePerson(user, user.representative, null, {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          })
+          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
+          req.uploads = {
+            verification_additional_document_front: TestHelper['success_id_scan_back.png'],
+            verification_additional_document_back: TestHelper['success_id_scan_back.png']
+          }
+        } else {
+          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)  
+          req.uploads = {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          }
+        }
+        delete (req.uploads[field])
+        const result = await req.post()
+        const doc = TestHelper.extractDoc(result.html)
+        const messageContainer = doc.getElementById('message-container')
+        const message = messageContainer.child[0]
+        assert.strictEqual(message.attr.template, `invalid-${field}`)
+      })
     }
 
     it('should update person (screenshots)', async () => {

@@ -189,11 +189,11 @@ async function submitForm (req, res) {
     }
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.additional_document') > -1) {
-    if (!req.uploads || !req.uploads.verification_document_front) {
-      return renderPage(req, res, 'invalid-verification_document_front')
+    if (!req.uploads || !req.uploads.verification_additional_document_front) {
+      return renderPage(req, res, 'invalid-verification_additional_document_front')
     }
-    if (!req.uploads || !req.uploads.verification_document_back) {
-      return renderPage(req, res, 'invalid-verification_document_back')
+    if (!req.uploads || !req.uploads.verification_additional_document_back) {
+      return renderPage(req, res, 'invalid-verification_additional_document_back')
     }
   }
   try {

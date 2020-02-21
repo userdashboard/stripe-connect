@@ -161,7 +161,7 @@ async function submitForm (req, res) {
       return renderPage(req, res, 'invalid-verification_document_back')
     }
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.verification.additional.document`) > -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.verification.additional_document`) > -1) {
     if (!req.uploads || (
       !req.uploads.verification_additional_document_front &&
       !req.body.verification_additional_document_front)) {
