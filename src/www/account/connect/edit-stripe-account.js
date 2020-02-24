@@ -92,34 +92,34 @@ async function renderPage (req, res, messageTemplate) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`company.phone`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.phone') === -1) {
     removeElements.push('phone-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`company.tax_id`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.tax_id') === -1) {
     removeElements.push('tax_id-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`individual.phone`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.phone') === -1) {
     removeElements.push('phone-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`individual.email`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.email') === -1) {
     removeElements.push('email-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`individual.gender`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.gender') === -1) {
     removeElements.push('gender-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`individual.id_number`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.id_number') === -1) {
     removeElements.push('id_number-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`individual.ssn_last_4`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.ssn_last_4') === -1) {
     removeElements.push('ssn_last_4-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`company.verification.document`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.verification.document') === -1) {
     removeElements.push('verification_document-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`individual.verification.document`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.document') === -1) {
     removeElements.push('verification_document-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`individual.verification.additional_document`) === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.additional_document') === -1) {
     removeElements.push('verification_additional_document-container')
   }
   if (req.body) {

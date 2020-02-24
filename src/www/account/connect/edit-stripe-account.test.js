@@ -30,7 +30,7 @@ describe('/account/connect/edit-stripe-account', async () => {
           continue
         }
         testedRequiredFields.push(field)
-        it('should have element for ' + field , async () => {
+        it('should have element for ' + field, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -52,7 +52,7 @@ describe('/account/connect/edit-stripe-account', async () => {
           continue
         }
         testedRequiredFields.push(field)
-        it('should have element for ' + field , async () => {
+        it('should have element for ' + field, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -65,12 +65,12 @@ describe('/account/connect/edit-stripe-account', async () => {
           const doc = TestHelper.extractDoc(result.html)
           if (field.startsWith('dob_')) {
             const elementContainer = doc.getElementById('dob-container')
-            assert.strictEqual(elementContainer.tag, 'div')  
+            assert.strictEqual(elementContainer.tag, 'div')
           } else {
             const elementContainer = doc.getElementById(`${field}-container`)
-            assert.strictEqual(elementContainer.tag, 'div')        
+            assert.strictEqual(elementContainer.tag, 'div')
           }
-        })   
+        })
       }
     }
 
@@ -87,7 +87,7 @@ describe('/account/connect/edit-stripe-account', async () => {
         })
         if (field === 'verification_additional_document') {
           await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
-          await TestHelper.waitForAccountRequirement(user, `individual.verification.document`)
+          await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
           await TestHelper.updateStripeRegistration(user, null, {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
@@ -117,7 +117,7 @@ describe('/account/connect/edit-stripe-account', async () => {
           continue
         }
         testedMissingFields.push(field)
-        it('should reject invalid ' + field , async () => {
+        it('should reject invalid ' + field, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -141,7 +141,7 @@ describe('/account/connect/edit-stripe-account', async () => {
           continue
         }
         testedMissingFields.push(field)
-        it('should reject invalid ' + field , async () => {
+        it('should reject invalid ' + field, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -187,15 +187,15 @@ describe('/account/connect/edit-stripe-account', async () => {
         }
         if (field.startsWith('verification_additional')) {
           await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
-          await TestHelper.waitForAccountRequirement(user, `individual.verification.document`)
+          await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
           await TestHelper.updateStripeRegistration(user, null, {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
           })
-          await TestHelper.waitForAccountRequirement(user, `individual.verification.additional_document`)
+          await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
         } else {
           await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
-          await TestHelper.waitForAccountRequirement(user, `individual.verification.document`)
+          await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
         }
         const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = user.account

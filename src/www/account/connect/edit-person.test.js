@@ -195,7 +195,7 @@ describe('/account/connect/edit-person', () => {
           }
         } else {
           await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
-          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)  
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
           req.uploads = {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']

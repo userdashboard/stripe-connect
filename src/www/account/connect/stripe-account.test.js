@@ -87,7 +87,7 @@ describe('/account/connect/stripe-account', () => {
         country: 'US',
         type: 'individual'
       })
-      await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
+      await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -104,7 +104,7 @@ describe('/account/connect/stripe-account', () => {
         country: 'US',
         type: 'individual'
       })
-      await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile), {
+      await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -124,7 +124,7 @@ describe('/account/connect/stripe-account', () => {
         country: 'US',
         type: 'individual'
       })
-      await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile), {
+      await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile), {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -152,7 +152,7 @@ describe('/account/connect/stripe-account', () => {
         country: 'US',
         type: 'individual'
       })
-      await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
+      await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
       const req = TestHelper.createRequest(`/account/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session

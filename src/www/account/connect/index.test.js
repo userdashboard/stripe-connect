@@ -11,7 +11,7 @@ describe('/account/connect', () => {
         country: 'US',
         type: 'individual'
       })
-      await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
+      await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
       const req = TestHelper.createRequest('/account/connect')
       req.account = user.account
       req.session = user.session
@@ -27,7 +27,7 @@ describe('/account/connect', () => {
         country: 'US',
         type: 'individual'
       })
-      await TestHelper.createStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
+      await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.US, user.profile))
       const req = TestHelper.createRequest('/account/connect')
       req.account = user.account
       req.session = user.session

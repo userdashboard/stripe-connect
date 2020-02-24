@@ -53,13 +53,12 @@ module.exports = {
   createPayout,
   createPerson,
   createStripeAccount,
-  createStripeRegistration,
   submitBeneficialOwners,
   submitCompanyDirectors,
   submitStripeAccount,
   triggerVerification,
   updatePerson,
-  updateStripeRegistration,
+  updateStripeAccount,
   waitForAccountRequirement: util.promisify(waitForAccountRequirement),
   waitForPersonRequirement: util.promisify(waitForPersonRequirement),
   waitForPendingFieldsToLeave: util.promisify(waitForPendingFieldsToLeave),
@@ -287,17 +286,7 @@ async function createStripeAccount (user, properties) {
   return user.stripeAccount
 }
 
-async function createStripeRegistration (user, properties, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
-  req.session = user.session
-  req.account = user.account
-  req.uploads = uploads || {}
-  req.body = createMultiPart(req, properties)
-  user.stripeAccount = await req.patch()
-  return user.stripeAccount
-}
-
-async function updateStripeRegistration (user, properties, uploads) {
+async function updateStripeAccount (user, properties, uploads) {
   const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
@@ -727,7 +716,7 @@ async function waitForVerificationStart (user, callback) {
 
 async function waitForAccountRequirement (user, requirement, callback) {
   if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForAccountRequirement', requirement )
+    console.log('waitForAccountRequirement', requirement)
   }
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
@@ -779,7 +768,6 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
         }
       }
     } catch (error) {
-      console.log(error)
     }
     return setTimeout(wait, 100)
   }
