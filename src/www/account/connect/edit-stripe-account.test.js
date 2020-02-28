@@ -86,14 +86,14 @@ describe('/account/connect/edit-stripe-account', async () => {
           type: 'individual'
         })
         if (field === 'verification_additional_document') {
-          await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
+          await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
           await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
-          await TestHelper.updateStripeRegistration(user, null, {
+          await TestHelper.updateStripeAccount(user, null, {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
           })
         } else {
-          await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
+          await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
         }
         const property = field.replace('verification_', 'verification.')
         await TestHelper.waitForAccountRequirement(user, `individual.${property}`)
@@ -186,15 +186,15 @@ describe('/account/connect/edit-stripe-account', async () => {
           })
         }
         if (field.startsWith('verification_additional')) {
-          await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
+          await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
           await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
-          await TestHelper.updateStripeRegistration(user, null, {
+          await TestHelper.updateStripeAccount(user, null, {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
           })
           await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
         } else {
-          await TestHelper.updateStripeRegistration(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
+          await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
           await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
         }
         const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)

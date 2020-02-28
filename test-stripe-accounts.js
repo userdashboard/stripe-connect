@@ -84,7 +84,7 @@ module.exports = {
       country: country,
       type: 'individual'
     })
-    await TestHelper.createStripeRegistration(user, createPostData(individualData[country], user.profile))
+    await TestHelper.createStripeAccount(user, createPostData(individualData[country], user.profile))
     if (paymentData[country].length) {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country][0], user.profile))
     } else {
@@ -97,7 +97,7 @@ module.exports = {
     // countries legitimately do not require documentation
     if (country !== 'HK' && country !== 'MY' && country !== 'SG' && country !== 'US') {
       await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
-      await TestHelper.updateStripeRegistration(user, {}, {
+      await TestHelper.updateStripeAccount(user, {}, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       })
@@ -105,7 +105,7 @@ module.exports = {
       await TestHelper.waitForPendingFieldsToLeave(user)
       if (country !== 'CA' && country !== 'HK' && country !== 'JP' && country !== 'MY' && country !== 'SG' && country !== 'US') {
         await TestHelper.waitForAccountRequirement(user, 'individual.verification.additional_document')
-        await TestHelper.updateStripeRegistration(user, {}, {
+        await TestHelper.updateStripeAccount(user, {}, {
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
           verification_additional_document_front: TestHelper['success_id_scan_front.png']
         })
@@ -123,7 +123,7 @@ module.exports = {
     if (country === 'SG') {
       eventuallyDue.address_postal_code = '339696'
     }
-    await TestHelper.updateStripeRegistration(user, eventuallyDue)
+    await TestHelper.updateStripeAccount(user, eventuallyDue)
     await TestHelper.waitForPendingFieldsToLeave(user)
     return user
   },
@@ -134,7 +134,7 @@ module.exports = {
       country: country,
       type: 'company'
     })
-    await TestHelper.createStripeRegistration(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -204,7 +204,7 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
-    await TestHelper.updateStripeRegistration(user, {}, {
+    await TestHelper.updateStripeAccount(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -287,7 +287,7 @@ module.exports = {
       country: country,
       type: 'company'
     })
-    await TestHelper.createStripeRegistration(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -309,7 +309,7 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
-    await TestHelper.updateStripeRegistration(user, {}, {
+    await TestHelper.updateStripeAccount(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -322,7 +322,7 @@ module.exports = {
       country: country,
       type: 'company'
     })
-    await TestHelper.createStripeRegistration(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -357,7 +357,7 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
-    await TestHelper.updateStripeRegistration(user, {}, {
+    await TestHelper.updateStripeAccount(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -375,7 +375,7 @@ module.exports = {
     } else {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country], user.profile))
     }
-    await TestHelper.createStripeRegistration(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -406,7 +406,7 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
-    await TestHelper.updateStripeRegistration(user, {}, {
+    await TestHelper.updateStripeAccount(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -464,7 +464,7 @@ module.exports = {
     } else {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country], user.profile))
     }
-    await TestHelper.createStripeRegistration(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -493,7 +493,7 @@ module.exports = {
     // 'requirements.pending_validation' signifying it is under review, then
     // it is removed from that, but really it needs to show up in currently_due
     // and then submit the documents and then it should be pending_validation
-    await TestHelper.updateStripeRegistration(user, {}, {
+    await TestHelper.updateStripeAccount(user, {}, {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -514,7 +514,7 @@ module.exports = {
       individualUploadData.verification_additional_document_back = TestHelper['success_id_scan_back.png']
       individualUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
-    await TestHelper.createStripeRegistration(user, createPostData(individualData[country], user.profile), individualUploadData)
+    await TestHelper.createStripeAccount(user, createPostData(individualData[country], user.profile), individualUploadData)
     return user
   },
   createIndividualMissingIndividualDetails: async (country) => {
