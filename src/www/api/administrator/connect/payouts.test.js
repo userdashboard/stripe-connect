@@ -32,7 +32,7 @@ describe('/api/administrator/connect/payouts', () => {
     it('optional querystring limit (integer)', async () => {
       const limit = 1
       const administrator = await TestHelper.createOwner()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+      for (let i = 0, len = limit + 1; i < len; i++) {
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       // TODO: swap with individual account
       // the Stripe test api has an error creating fully-activated accounts

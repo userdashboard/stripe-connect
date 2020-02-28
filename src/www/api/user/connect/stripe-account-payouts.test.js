@@ -91,7 +91,7 @@ describe('/api/user/connect/stripe-account-payouts', () => {
       // so when that gets fixed this code can be changed to speed it up
       const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       const payouts = []
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+      for (let i = 0, len = limit + 1; i < len; i++) {
         await TestHelper.createPayout(user)
         await TestHelper.waitForPayout(administrator, user.stripeAccount.id, payouts.length ? payouts[payouts.length - 1] : null)
         payouts.unshift(user.payout.id)

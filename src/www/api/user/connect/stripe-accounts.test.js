@@ -78,7 +78,7 @@ describe('/api/user/connect/stripe-accounts', () => {
     it('optional querystring limit (integer)', async () => {
       const limit = 1
       const user = await TestHelper.createUser()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+      for (let i = 0, len = limit + 1; i < len; i++) {
         await TestHelper.createStripeAccount(user, {
           country: 'US',
           type: 'company'

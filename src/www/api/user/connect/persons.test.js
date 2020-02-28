@@ -82,6 +82,39 @@ describe('/api/user/connect/persons', () => {
     })
   })
 
+  describe('receives', () => {
+    it('optional querystring offset (integer)', async () => {
+      const offset = 1
+      const user = await TestStripeAccounts.createCompanyWithDirectors('FI', global.pageSize + 1)
+      const req = TestHelper.createRequest(`/api/user/connect/persons?stripeid=${user.stripeAccount.id}&offset=${offset}`)
+      req.account = user.account
+      req.session = user.session
+      const personsNow = await req.get()
+      for (let i = 0, len = global.pageSize; i < len; i++) {
+        assert.strictEqual(personsNow[i].id, user.persons[offset + i].id)
+      }
+    })
+
+    it('optional querystring limit (integer)', async () => {
+      const limit = 1
+      const user = await TestStripeAccounts.createCompanyWithDirectors('FI', limit + 1)
+      const req = TestHelper.createRequest(`/api/user/connect/persons?stripeid=${user.stripeAccount.id}&limit=${limit}`)
+      req.account = user.account
+      req.session = user.session
+      const personsNow = await req.get()
+      assert.strictEqual(personsNow.length, limit)
+    })
+
+    it('optional querystring all (boolean)', async () => {
+      global.pageSize = 1
+      const req = TestHelper.createRequest(`/api/user/connect/persons?stripeid=${user.stripeAccount.id}&all=true`)
+      req.account = user.account
+      req.session = user.session
+      const personsNow = await req.get()
+      assert.strictEqual(personsNow.length, global.pageSize + 1)
+    })
+  })
+
   describe('returns', () => {
     it('array', async () => {
       const user = await TestStripeAccounts.createCompanyWithDirectors('FI', 2)

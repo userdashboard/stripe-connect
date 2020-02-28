@@ -31,7 +31,7 @@ describe('/api/administrator/connect/stripe-accounts', () => {
       const limit = 1
       const stripeAccounts = []
       const administrator = await TestHelper.createOwner()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+      for (let i = 0, len = limit + 1; i < len; i++) {
         const user = await TestHelper.createUser()
         const stripeAccount = await TestHelper.createStripeAccount(user, {
           country: 'US',
