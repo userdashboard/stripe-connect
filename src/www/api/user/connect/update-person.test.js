@@ -353,7 +353,7 @@ describe('/api/user/connect/update-person', () => {
             assert.strictEqual(representative.address[property], body[field])
           } else if (field.startsWith('dob_')) {
             const property = field.substring('dob_'.length)
-            assert.strictEqual(representative.dob[property], parseInt(body[field]))
+            assert.strictEqual(representative.dob[property], parseInt(body[field], 10))
           } else if (field.startsWith('relationship_')) {
             const property = field.substring('relationship_'.length)
             if (body[field] === 'true') {
