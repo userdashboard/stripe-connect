@@ -81,7 +81,7 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
       req.account = administrator.account
       req.session = administrator.session      
       const payoutsNow = await req.get()
-      assert.notStrictEqual(payoutsNow.length, global.pageSize + 1)
+      assert.strictEqual(payoutsNow.length, global.pageSize + 1)
     })
   })
 
