@@ -88,7 +88,7 @@ describe('/api/user/connect/payouts', () => {
     it('optional querystring all (boolean)', async () => {
       global.pageSize = 1
       const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      for (let i = 0, len = limit + 1; i < len; i++) {
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPayout(user)
       }
       const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&all=true`)
