@@ -84,7 +84,7 @@ module.exports = {
       country: country,
       type: 'individual'
     })
-    await TestHelper.createStripeAccount(user, createPostData(individualData[country], user.profile))
+    await TestHelper.updateStripeAccount(user, createPostData(individualData[country], user.profile))
     if (paymentData[country].length) {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country][0], user.profile))
     } else {
@@ -134,7 +134,7 @@ module.exports = {
       country: country,
       type: 'company'
     })
-    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.updateStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -287,7 +287,7 @@ module.exports = {
       country: country,
       type: 'company'
     })
-    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.updateStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -322,7 +322,7 @@ module.exports = {
       country: country,
       type: 'company'
     })
-    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.updateStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -375,7 +375,7 @@ module.exports = {
     } else {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country], user.profile))
     }
-    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.updateStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -464,7 +464,7 @@ module.exports = {
     } else {
       await TestHelper.createExternalAccount(user, createPostData(paymentData[country], user.profile))
     }
-    await TestHelper.createStripeAccount(user, createPostData(companyData[country], user.profile), {
+    await TestHelper.updateStripeAccount(user, createPostData(companyData[country], user.profile), {
       verification_document_back: TestHelper['success_id_scan_back.png'],
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
@@ -514,7 +514,7 @@ module.exports = {
       individualUploadData.verification_additional_document_back = TestHelper['success_id_scan_back.png']
       individualUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
-    await TestHelper.createStripeAccount(user, createPostData(individualData[country], user.profile), individualUploadData)
+    await TestHelper.updateStripeAccount(user, createPostData(individualData[country], user.profile), individualUploadData)
     return user
   },
   createIndividualMissingIndividualDetails: async (country) => {
