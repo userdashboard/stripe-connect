@@ -74,7 +74,7 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
       global.pageSize = 1
       const administrator = await TestHelper.createOwner()
       const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      for (let i = 0, len = limit + 1; i < len; i++) {
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPayout(user)
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${user.stripeAccount.id}&all=true`)
