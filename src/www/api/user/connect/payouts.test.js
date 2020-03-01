@@ -95,21 +95,20 @@ describe('/api/user/connect/payouts', () => {
       req.account = user.account
       req.session = user.session      
       const payoutsNow = await req.get()
-      assert.notStrictEqual(payoutsNow.length, global.pageSize + 1)
+      assert.strictEqual(payoutsNow.length, global.pageSize + 1)
     })
   })
 
   describe('returns', () => {
     it('array', async () => {
-      const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       // TODO: swap with individual account
       // the Stripe test api has an error creating fully-activated accounts
       // so when that gets fixed this code can be changed to speed it up
       const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      const payout1 = await TestHelper.createPayout(user)
-      const payout2 = await TestHelper.createPayout(user)
-      const payout3 = await TestHelper.createPayout(user)
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+        await TestHelper.createPayout(user)
+      }
       const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
       req.account = user.account
       req.session = user.session
@@ -117,8 +116,6 @@ describe('/api/user/connect/payouts', () => {
       req.saveResponse = true
       const payouts = await req.get()
       assert.strictEqual(payouts.length, global.pageSize)
-      assert.strictEqual(payouts[0].id, payout3.id)
-      assert.strictEqual(payouts[1].id, payout2.id)
     })
   })
 })

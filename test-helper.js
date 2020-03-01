@@ -384,7 +384,7 @@ async function createPayout (user) {
   const req = TestHelper.createRequest(`/api/fake-payout?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  await req.get()
+  const payout = await req.get()
   const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
   req2.session = user.session
   req2.account = user.account
@@ -395,14 +395,12 @@ async function createPayout (user) {
       await wait()
       continue
     }
-    if (user.payout && user.payout.id === payouts[0].id) {
-      await wait()
-      continue
+    if (payout.id === payouts[0].id) {
+      user.payout = payout
+      return user.payout
     }
-    user.payout = payouts[0]
-    break
+    await wait()
   }
-  return user.payout
 }
 
 async function submitBeneficialOwners (user) {
