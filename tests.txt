@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.34 test /root/workspaces/stripe-connect
+> @userdashboard/stripe-connect@1.0.36 test /root/workspaces/stripe-connect
 > mocha --exit --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'
 
 
@@ -390,30 +390,16 @@
       ✓ should reject invalid stripeid
       ✓ should bind Stripe account to req
     SubmitStripeAccount#GET
-invalid-payment-details
       ✓ should reject registration that hasn't submitted payment details
-invalid-beneficial-owners
       ✓ should reject company that hasn't submitted beneficial owners
-invalid-company-directors
       ✓ should reject company that hasn't submitted company directors
-invalid-company-representative
       ✓ should reject company that hasn't submitted representative information
-invalid-registration
       ✓ should reject company that hasn't submitted information
-invalid-registration
       ✓ should reject individual that hasn't submitted information
-undefined
       ✓ should present the form (individual)
-undefined
       ✓ should present the form (company)
     SubmitStripeAccount#POST
-undefined
-success
-success
       ✓ should submit registration (company) (screenshots)
-undefined
-success
-success
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -520,7 +506,7 @@ success
     returns
       ✓ array
     configuration
-      ✓ environment PAGE_SIZE (316790ms)
+      ✓ environment PAGE_SIZE
 
   /api/administrator/connect/set-stripe-account-rejected
     exceptions
@@ -546,6 +532,10 @@ success
       invalid-stripeid
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
     returns
       ✓ array
     configuration
@@ -688,6 +678,10 @@ success
         ✓ invalid querystring payoutid
       invalid-account
         ✓ ineligible accessing account
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
     returns
       ✓ array
 
@@ -722,6 +716,10 @@ success
         ✓ ineligible accessing account
       invalid-stripe-account
         ✓ ineligible stripe account for individual
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
     returns
       ✓ array
 
@@ -1226,5 +1224,5 @@ success
       ✓ environment STRIPE_JS
 
 
-  798 passing (3h)
+  807 passing (3h)
 
