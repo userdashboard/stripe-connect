@@ -85,19 +85,43 @@ describe('/api/user/connect/persons', () => {
   describe('receives', () => {
     it('optional querystring offset (integer)', async () => {
       const offset = 1
-      const user = await TestStripeAccounts.createCompanyWithDirectors('FI', global.pageSize + 1)
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'DE',
+        type: 'company'
+      })
+      const persons = []
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+        await TestHelper.createPerson(user, {
+          relationship_director: true,
+          relationship_title: 'Director',
+          relationship_percent_ownership: '0'
+        })
+        persons.unshift(user.director.id)
+      }
       const req = TestHelper.createRequest(`/api/user/connect/persons?stripeid=${user.stripeAccount.id}&offset=${offset}`)
       req.account = user.account
       req.session = user.session
       const personsNow = await req.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(personsNow[i].id, user.persons[offset + i].id)
+        assert.strictEqual(personsNow[i].id, persons[offset + i])
       }
     })
 
     it('optional querystring limit (integer)', async () => {
       const limit = 1
-      const user = await TestStripeAccounts.createCompanyWithDirectors('FI', limit + 1)
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'DE',
+        type: 'company'
+      })
+      for (let i = 0, len = limit + 1; i < len; i++) {
+        await TestHelper.createPerson(user, {
+          relationship_director: true,
+          relationship_title: 'Director',
+          relationship_percent_ownership: '0'
+        })
+      }
       const req = TestHelper.createRequest(`/api/user/connect/persons?stripeid=${user.stripeAccount.id}&limit=${limit}`)
       req.account = user.account
       req.session = user.session
@@ -107,6 +131,18 @@ describe('/api/user/connect/persons', () => {
 
     it('optional querystring all (boolean)', async () => {
       global.pageSize = 1
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'DE',
+        type: 'company'
+      })
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+        await TestHelper.createPerson(user, {
+          relationship_director: true,
+          relationship_title: 'Director',
+          relationship_percent_ownership: '0'
+        })
+      }
       const req = TestHelper.createRequest(`/api/user/connect/persons?stripeid=${user.stripeAccount.id}&all=true`)
       req.account = user.account
       req.session = user.session

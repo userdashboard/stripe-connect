@@ -220,14 +220,12 @@ module.exports = {
       type: 'company'
     })
     if (numOwners && beneficialOwnerData[country] !== false) {
-      user.persons = []
       for (let i = 0, len = numOwners; i < len; i++) {
         const person = await TestHelper.createPerson(user, {
           relationship_owner: true,
           relationship_title: 'Shareholder',
           relationship_percent_ownership: (i + 1)
         })
-        user.persons.unshift(person)
       }
     }
     return user
@@ -240,7 +238,6 @@ module.exports = {
       type: 'company'
     })
     if (numDirectors && companyDirectorData[country] !== false) {
-      user.persons = []
       for (let i = 0, len = numDirectors; i < len; i++) {
         await TestHelper.createPerson(user, {
           relationship_director: true,
@@ -264,7 +261,6 @@ module.exports = {
       relationship_title: 'SVP Testing',
       relationship_percent_ownership: 0
     })
-    user.persons = [ user.representative ]
     await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.day`)
     await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.day')
     const person = TestHelper.nextIdentity()
