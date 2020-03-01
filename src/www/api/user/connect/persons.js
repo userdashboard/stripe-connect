@@ -12,16 +12,23 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    const ownerids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`)
-    if (!ownerids || !ownerids.length) {
-      return null
+    let personids
+    if (req.query.all) {
+      personids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`)
+    } else {
+      const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0
+      const limit = req.query.limit ? parseInt(req.query.limit, 10) : global.pageSize
+      personids = await dashboard.StorageList.list(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, offset, limit)
     }
-    const owners = []
-    for (const id of ownerids) {
+    if (!personids || !personids.length) {
+      return
+    }
+    const persons = []
+    for (const id of personids) {
       req.query.personid = id
       const person = await global.api.user.connect.Person.get(req)
-      owners.push(person)
+      persons.push(person)
     }
-    return owners
+    return persons
   }
 }
