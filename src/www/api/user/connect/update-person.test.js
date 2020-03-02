@@ -146,7 +146,7 @@ describe('/api/user/connect/update-person', () => {
               relationship_representative: true,
               relationship_executive: true,
               relationship_title: 'SVP Testing',
-              relationship_percent_ownership: 0
+              relationship_percent_ownership: '0'
             })
             let property = field.replace('address_kana_', 'address_kana.')
               .replace('address_kanji_', 'address_kanji.')
@@ -187,7 +187,7 @@ describe('/api/user/connect/update-person', () => {
                 relationship_representative: true,
                 relationship_executive: true,
                 relationship_title: 'SVP Testing',
-                relationship_percent_ownership: 0
+                relationship_percent_ownership: '0'
               })
               let property = field.replace('address_kana_', 'address_kana.')
                 .replace('address_kanji_', 'address_kanji.')
@@ -233,7 +233,7 @@ describe('/api/user/connect/update-person', () => {
           relationship_representative: true,
           relationship_executive: true,
           relationship_title: 'SVP Testing',
-          relationship_percent_ownership: 0
+          relationship_percent_ownership: '0'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
         req.account = user.account
@@ -263,7 +263,7 @@ describe('/api/user/connect/update-person', () => {
           relationship_representative: true,
           relationship_executive: true,
           relationship_title: 'SVP Testing',
-          relationship_percent_ownership: 0
+          relationship_percent_ownership: '0'
         })
         const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
         req.account = user.account
@@ -314,7 +314,7 @@ describe('/api/user/connect/update-person', () => {
             relationship_representative: true,
             relationship_executive: true,
             relationship_title: 'SVP Testing',
-            relationship_percent_ownership: 0
+            relationship_percent_ownership: '0'
           })
           let property = field.replace('address_kana_', 'address_kana.')
             .replace('address_kanji_', 'address_kanji.')
@@ -401,7 +401,7 @@ describe('/api/user/connect/update-person', () => {
           relationship_representative: true,
           relationship_executive: true,
           relationship_title: 'SVP Testing',
-          relationship_percent_ownership: 0
+          relationship_percent_ownership: '0'
         })
         await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
         const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
@@ -447,7 +447,7 @@ describe('/api/user/connect/update-person', () => {
         relationship_representative: true,
         relationship_executive: true,
         relationship_title: 'SVP Testing',
-        relationship_percent_ownership: 0
+        relationship_percent_ownership: '0'
       })
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.first_name`)
       await TestHelper.waitForPersonRequirement(user, user.representative.id, 'first_name')

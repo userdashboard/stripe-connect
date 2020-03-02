@@ -49,7 +49,7 @@ describe('/account/connect/edit-person', () => {
             relationship_representative: true,
             relationship_executive: true,
             relationship_title: 'SVP Testing',
-            relationship_percent_ownership: 0
+            relationship_percent_ownership: '0'
           })
           const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
           req.account = user.account
@@ -82,7 +82,7 @@ describe('/account/connect/edit-person', () => {
           relationship_representative: true,
           relationship_executive: true,
           relationship_title: 'SVP Testing',
-          relationship_percent_ownership: 0
+          relationship_percent_ownership: '0'
         })
         await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
         if (field === 'verification_additional_document') {
@@ -133,7 +133,7 @@ describe('/account/connect/edit-person', () => {
             relationship_representative: true,
             relationship_executive: true,
             relationship_title: 'SVP Testing',
-            relationship_percent_ownership: 0
+            relationship_percent_ownership: '0'
           })
           let property = field.replace('address_kana_', 'address_kana.')
             .replace('address_kanji_', 'address_kanji.')
@@ -175,7 +175,7 @@ describe('/account/connect/edit-person', () => {
           relationship_representative: true,
           relationship_executive: true,
           relationship_title: 'SVP Testing',
-          relationship_percent_ownership: 0
+          relationship_percent_ownership: '0'
         })
         await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
