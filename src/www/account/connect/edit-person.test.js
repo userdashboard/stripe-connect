@@ -72,7 +72,7 @@ describe('/account/connect/edit-person', () => {
       'verification_additional_document'
     ]
     for (const field of uploadFields) {
-      it(`should have element for ${field}`, async () => {
+      it(`should have element for upload ${field}`, async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'AT',

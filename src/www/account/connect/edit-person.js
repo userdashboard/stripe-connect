@@ -114,10 +114,10 @@ async function renderPage (req, res, messageTemplate) {
     removeElements.push('dob-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.verification.document`) === -1) {
-    removeElements.push('document-container')
+    removeElements.push('verification_document-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.verification.additional_document`) === -1) {
-    removeElements.push('additional-document-container')
+    removeElements.push('verification_additional_document-container')
   }
   if (req.method === 'GET') {
     for (const fullField of req.data.stripeAccount.requirements.currently_due) {
