@@ -1,14 +1,22 @@
 window.uploadDocumentFiles = function (documentFront, documentBack, callback) {
+  if ((!documentFront || !documentFront.files || !documentFront.files.length) &&
+      (!documentBack || !documentBack.files || !documentBack.files.length)) { 
+    return callback()
+  }
   var first = true
   var frontFile, backFile
   function upload () {
     var field = first ? documentFront : documentBack
     if (!field || !field.files || !field.files.length) {
       if (first) {
+        field = documentBack
         first = false
-        return upload()
+        if (!field || !field.files || !field.files.length) {
+          return callback(null, frontFile, backFile)
+        }
+      } else {
+        return callback(null, frontFile, backFile)
       }
-      return callback()
     }
     var data = new window.FormData()
     data.append('file', field.files[0])
@@ -41,6 +49,7 @@ window.uploadDocumentFiles = function (documentFront, documentBack, callback) {
 
 var lastHighlight
 window.renderError = function (templateid) {
+  console.log('render error', templateid)
   var template = document.getElementById(templateid)
   if (!template) {
     throw new Error('unknown template ' + templateid)
@@ -61,6 +70,7 @@ window.renderError = function (templateid) {
   messageContainer.innerHTML = ''
   var node = document.importNode(template.content, true)
   messageContainer.appendChild(node)
+  messageContainer.firstChild.setAttribute('template', templateid)
 }
 
 window.send = function (url, body, headers, method, callback) {
@@ -77,9 +87,7 @@ window.send = function (url, body, headers, method, callback) {
     }
     return callback(null, x.responseText)
   }
-  if (body) {
-    x.send(body)
-  }
+  x.send(body)
   return x
 }
 

@@ -123,7 +123,7 @@ describe('/account/connect/edit-person', () => {
           continue
         }
         testedMissingFields.push(field)
-        it('should reject invalid ' + field, async () => {
+        it(`should reject missing ${field} no stripe.js`, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -155,6 +155,44 @@ describe('/account/connect/edit-person', () => {
           const message = messageContainer.child[0]
           assert.strictEqual(message.attr.template, `invalid-${field}`)
         })
+
+        it(`should reject missing ${field} stripe.js v3`, async () => {
+          global.stripeJS = 3
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'company'
+          })
+          await TestHelper.createPerson(user, {
+            relationship_representative: true,
+            relationship_executive: true,
+            relationship_title: 'SVP Testing',
+            relationship_percent_ownership: '0'
+          })
+          let property = field.replace('address_kana_', 'address_kana.')
+            .replace('address_kanji_', 'address_kanji.')
+            .replace('dob_', 'dob.')
+            .replace('relationship_', 'relationship.')
+          if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
+            property = property.replace('address_', 'address.')
+          }
+          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
+          const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+          req.account = user.account
+          req.session = user.session
+          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+          req.uploads = {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          }
+          delete (req.body[field])
+          const result = await req.post()
+          const doc = TestHelper.extractDoc(result.html)
+          const messageContainer = doc.getElementById('message-container')
+          const message = messageContainer.child[0]
+          assert.strictEqual(message.attr.template, `invalid-${field}`)
+        })
       }
     }
 
@@ -165,7 +203,52 @@ describe('/account/connect/edit-person', () => {
       'verification_additional_document_back'
     ]
     for (const field of uploadFields) {
-      it(`should reject invalid ${field}`, async () => {
+      it(`should reject missing upload ${field} no stripe.js`, async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'AT',
+          type: 'company'
+        })
+        await TestHelper.createPerson(user, {
+          relationship_representative: true,
+          relationship_executive: true,
+          relationship_title: 'SVP Testing',
+          relationship_percent_ownership: '0'
+        })
+        await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+        const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+        req.account = user.account
+        req.session = user.session
+        const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
+        if (field.startsWith('verification_additional')) {
+          await TestHelper.updatePerson(user, user.representative, null, {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          })
+          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
+          req.uploads = {
+            verification_additional_document_front: TestHelper['success_id_scan_back.png'],
+            verification_additional_document_back: TestHelper['success_id_scan_back.png']
+          }
+        } else {
+          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
+          req.uploads = {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          }
+        }
+        delete (req.uploads[field])
+        const result = await req.post()
+        const doc = TestHelper.extractDoc(result.html)
+        const messageContainer = doc.getElementById('message-container')
+        const message = messageContainer.child[0]
+        assert.strictEqual(message.attr.template, `invalid-${field}`)
+      })
+
+      it(`should reject missing upload ${field} stripe.js v3`, async () => {
+        global.stripeJS = 3
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'AT',
@@ -210,7 +293,7 @@ describe('/account/connect/edit-person', () => {
       })
     }
 
-    it('should update person (screenshots)', async () => {
+    it('should update person (screenshots) no stripe.js', async () => {
       const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -243,6 +326,35 @@ describe('/account/connect/edit-person', () => {
         { click: `/account/connect/edit-person?personid=${user.representative.id}` },
         { fill: '#submit-form' }
       ]
+      const result = await req.post()
+      const doc = TestHelper.extractDoc(result.html)
+      const row = doc.getElementById(user.representative.id)
+      assert.strictEqual(row.tag, 'tbody')
+    })
+
+    it('should update person stripe.js v3', async () => {
+      const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: country.id,
+        type: 'company'
+      })
+      await TestHelper.createPerson(user, {
+        relationship_representative: true,
+        relationship_executive: true,
+        relationship_title: 'CEO',
+        relationship_percent_ownership: '100'
+      })
+      await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.year`)
+      await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.year')
+      const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.uploads = {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      }
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
       const result = await req.post()
       const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.representative.id)

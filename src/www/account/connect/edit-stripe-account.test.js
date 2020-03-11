@@ -6,7 +6,7 @@ const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/edit-stripe-account', async () => {
   describe('EditStripeAccount#BEFORE', () => {
-    it('should reject invalid registration', async () => {
+    it('should reject missing registration', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/edit-stripe-account?stripeid=invalid')
       req.account = user.account
@@ -22,7 +22,7 @@ describe('/account/connect/edit-stripe-account', async () => {
   })
 
   describe('EditStripeAccount#GET', async () => {
-    const testedRequiredFields = []
+    let testedRequiredFields = []
     for (const country of connect.countrySpecs) {
       const companyPayload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
       for (const field in companyPayload) {
@@ -30,7 +30,7 @@ describe('/account/connect/edit-stripe-account', async () => {
           continue
         }
         testedRequiredFields.push(field)
-        it('should have element for ' + field, async () => {
+        it('should have element for ${field} (company)', async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -45,14 +45,16 @@ describe('/account/connect/edit-stripe-account', async () => {
           assert.strictEqual(elementContainer.tag, 'div')
         })
       }
-
+    }
+    testedRequiredFields = []
+    for (const country of connect.countrySpecs) {
       const individualPayload = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
       for (const field in individualPayload) {
         if (testedRequiredFields.indexOf(field) > -1) {
           continue
         }
         testedRequiredFields.push(field)
-        it('should have element for ' + field, async () => {
+        it(`should have element for ${field} (individual)`, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -73,43 +75,59 @@ describe('/account/connect/edit-stripe-account', async () => {
         })
       }
     }
-
-    const uploadFields = [
+    const individualFields = [
       'verification_document',
       'verification_additional_document'
     ]
-    for (const field of uploadFields) {
-      it(`should have element for ${field}`, async () => {
+    for (const field of individualFields) {
+      it(`should have upload element for ${field} (individual)`, async () => {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'AT',
           type: 'individual'
         })
-        if (field === 'verification_additional_document') {
-          await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
-          await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
-          await TestHelper.updateStripeAccount(user, null, {
-            verification_document_front: TestHelper['success_id_scan_back.png'],
-            verification_document_back: TestHelper['success_id_scan_back.png']
-          })
-        } else {
-          await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
-        }
         const property = field.replace('verification_', 'verification.')
+        await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.AT))
         await TestHelper.waitForAccountRequirement(user, `individual.${property}`)
         const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
         const result = await req.get()
         const doc = TestHelper.extractDoc(result.html)
-        const elementContainer = doc.getElementById(`${field}-container`)
+        const container = field.indexOf('additiional') > -1 ? 'individual-additional-document-container' : 'individual-document-container'
+        const elementContainer = doc.getElementById(container)
         assert.strictEqual(elementContainer.tag, 'div')
       })
     }
+    // TODO: company verification document can't be tested
+    // because the Stripe test API erroneously marks it as
+    // under review instead of required, and this form only
+    // supports required fields
+    // const companyFields = [
+    //   'verification_document'
+    // ]
+    // for (const field of companyFields) {
+    //   it(`should have upload element for ${field} (company)`, async () => {
+    //     const user = await TestHelper.createUser()
+    //     await TestHelper.createStripeAccount(user, {
+    //       country: 'AT',
+    //       type: 'company'
+    //     })
+    //     const property = field.replace('verification_', 'verification.')
+    //     await TestHelper.waitForAccountRequirement(user, `individual.${property}`)
+    //     const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+    //     req.account = user.account
+    //     req.session = user.session
+    //     const result = await req.get()
+    //     const doc = TestHelper.extractDoc(result.html)
+    //     const elementContainer = doc.getElementById(`${field}-container`)
+    //     assert.strictEqual(elementContainer.tag, 'div')
+    //   })
+    // }
   })
 
   describe('EditStripeAccount#POST', () => {
-    const testedMissingFields = []
+    let testedMissingFields = []
     for (const country of connect.countrySpecs) {
       const companyPayload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
       for (const field in companyPayload) {
@@ -117,7 +135,26 @@ describe('/account/connect/edit-stripe-account', async () => {
           continue
         }
         testedMissingFields.push(field)
-        it('should reject invalid ' + field, async () => {
+        it(`should reject missing ${field} no stripe.js (company)`, async () => {
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'company'
+          })
+          const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+          req.account = user.account
+          req.session = user.session
+          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+          delete (req.body[field])
+          const result = await req.post()
+          const doc = TestHelper.extractDoc(result.html)
+          const messageContainer = doc.getElementById('message-container')
+          const message = messageContainer.child[0]
+          assert.strictEqual(message.attr.template, `invalid-${field}`)
+        })
+
+        it(`should reject missing ${field} stripe.js v3 (company)`, async () => {
+          global.stripeJS = 3
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -135,13 +172,16 @@ describe('/account/connect/edit-stripe-account', async () => {
           assert.strictEqual(message.attr.template, `invalid-${field}`)
         })
       }
+    }
+    testedMissingFields = []
+    for (const country of connect.countrySpecs) {
       const individualPayload = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
       for (const field in individualPayload) {
         if (testedMissingFields.indexOf(field) > -1) {
           continue
         }
         testedMissingFields.push(field)
-        it('should reject invalid ' + field, async () => {
+        it(`should reject missing ${field} no stripe.js (individual)`, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -158,33 +198,46 @@ describe('/account/connect/edit-stripe-account', async () => {
           const message = messageContainer.child[0]
           assert.strictEqual(message.attr.template, `invalid-${field}`)
         })
+
+        it(`should reject missing ${field} stripe.js v3 (individual)`, async () => {
+          global.stripeJS = 3
+          const user = await TestHelper.createUser()
+          await TestHelper.createStripeAccount(user, {
+            country: country.id,
+            type: 'individual'
+          })
+          const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+          req.waitOnClientCallback = true
+          req.account = user.account
+          req.session = user.session
+          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
+          delete (req.body[field])
+          const result = await req.post()
+          const doc = TestHelper.extractDoc(result.html)
+          const messageContainer = doc.getElementById('message-container')
+          const message = messageContainer.child[0]
+          assert.strictEqual(message.attr.template, `invalid-${field}`)
+        })
       }
     }
 
-    // TODO: company verificaiton document can't be tested
+    // TODO: company verification document can't be tested
     // because the Stripe test API erroneously marks it as
     // under review instead of required, and this form only
     // supports required fields
-    const uploadFields = [
+    const individualFields = [
       'verification_document_front',
       'verification_document_back',
       'verification_additional_document_front',
       'verification_additional_document_back'
     ]
-    for (const field of uploadFields) {
-      it(`should reject invalid ${field} (individual)`, async () => {
+    for (const field of individualFields) {
+      it(`should reject missing upload ${field} no stripe.js (individual)`, async () => {
         const user = await TestHelper.createUser()
-        if (field.indexOf('additional') > -1) {
-          await TestHelper.createStripeAccount(user, {
-            country: 'GB',
-            type: 'individual'
-          })
-        } else {
-          await TestHelper.createStripeAccount(user, {
-            country: 'GB',
-            type: 'individual'
-          })
-        }
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'individual'
+        })
         if (field.startsWith('verification_additional')) {
           await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
           await TestHelper.waitForAccountRequirement(user, 'individual.verification.document')
@@ -218,9 +271,92 @@ describe('/account/connect/edit-stripe-account', async () => {
         const message = messageContainer.child[0]
         assert.strictEqual(message.attr.template, `invalid-${field}`)
       })
+
+      it(`should reject missing upload ${field} stripe.js v3 (individual)`, async () => {
+        const user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: 'GB',
+          type: 'individual'
+        })
+        await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB))
+        global.stripeJS = 3
+        const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        req.waitOnClientCallback = true
+        req.uploads = {
+          verification_additional_document_front: TestHelper['success_id_scan_front.png'],
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png']
+        }
+        delete (req.uploads[field])
+        const result = await req.post()
+        const doc = TestHelper.extractDoc(result.html)
+        const messageContainer = doc.getElementById('message-container')
+        const message = messageContainer.child[0]
+        assert.strictEqual(message.attr.template, `invalid-${field}`)
+      })
     }
 
-    it('should update registration (individual) (screenshots)', async () => {
+    // TODO: Stripe's test API erroneously marks the company
+    // document as verifying before it is even submitted so
+    // the exceptions for missing uploads cannot be tested as
+    // the documents must be required to trigger exceptions
+    // const companyFields = [
+    //   'verification_document_front',
+    //   'verification_document_back'
+    // ]
+    // for (const field of companyFields) {
+    //   it(`should reject missing upload ${field} no stripe.js (company)`, async () => {
+    //     const user = await TestHelper.createUser()
+    //     await TestHelper.createStripeAccount(user, {
+    //       country: 'DE',
+    //       type: 'company'
+    //     })
+    //     await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyData.DE))
+    //     await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
+    //     const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+    //     req.account = user.account
+    //     req.session = user.session
+    //     req.uploads = {
+    //       verification_document_front: TestHelper['success_id_scan_back.png'],
+    //       verification_document_back: TestHelper['success_id_scan_back.png']
+    //     }
+    //     delete (req.uploads[field])
+    //     const result = await req.post()
+    //     const doc = TestHelper.extractDoc(result.html)
+    //     const messageContainer = doc.getElementById('message-container')
+    //     const message = messageContainer.child[0]
+    //     assert.strictEqual(message.attr.template, `invalid-${field}`)
+    //   })
+
+    //   it(`should reject missing upload ${field} stripe.js v3 (company)`, async () => {
+    //     const user = await TestHelper.createUser()
+    //     await TestHelper.createStripeAccount(user, {
+    //       country: 'DE',
+    //       type: 'company'
+    //     })
+    //     await TestHelper.updateStripeAccount(user, TestStripeAccounts.createPostData(TestStripeAccounts.companyData.DE))
+    //     await TestHelper.waitForAccountRequirement(user, 'company.verification.document')
+    //     const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+    //     req.account = user.account
+    //     req.session = user.session
+    //     req.waitOnClientCallback = true
+    //     req.uploads = {
+    //       verification_document_front: TestHelper['success_id_scan_back.png'],
+    //       verification_document_back: TestHelper['success_id_scan_back.png']
+    //     }
+    //     delete (req.uploads[field])
+    //     const result = await req.post()
+    //     const doc = TestHelper.extractDoc(result.html)
+    //     const messageContainer = doc.getElementById('message-container')
+    //     const message = messageContainer.child[0]
+    //     assert.strictEqual(message.attr.template, `invalid-${field}`)
+    //   })
+    // }
+
+    it('should update registration no stripe.js (individual) (screenshots)', async () => {
       const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -233,7 +369,9 @@ describe('/account/connect/edit-stripe-account', async () => {
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
       req.uploads = {
         verification_document_front: TestHelper['success_id_scan_back.png'],
-        verification_document_back: TestHelper['success_id_scan_back.png']
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       req.filename = __filename
       req.screenshots = [
@@ -250,7 +388,7 @@ describe('/account/connect/edit-stripe-account', async () => {
       assert.strictEqual(message.attr.template, 'success')
     })
 
-    it('should update registration (company)', async () => {
+    it('should update registration no stripe.js (company)', async () => {
       const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -271,5 +409,65 @@ describe('/account/connect/edit-stripe-account', async () => {
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'success')
     })
+
+    it('should update registration stripe.js v3 (individual) (screenshots)', async () => {
+      global.stripeJS = 3
+      const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: country.id,
+        type: 'individual'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.waitOnClientCallback = true
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
+      req.uploads = {
+        verification_document_front: TestHelper['success_id_scan_back.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_front: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+      }
+      req.filename = __filename
+      req.screenshots = [
+        { hover: '#account-menu-container' },
+        { click: '/account/connect' },
+        { click: '/account/connect/stripe-accounts' },
+        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
+        { click: `/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}` },
+        { fill: '#submit-form' }
+      ]
+      const result = await req.post()
+      const doc = TestHelper.extractDoc(result.html)
+      const messageContainer = doc.getElementById('message-container')
+      const message = messageContainer.child[0]
+      assert.strictEqual(message.attr.template, 'success')
+    })
+
+    it('should update registration stripe.js v3 (company)', async () => {
+      global.stripeJS = 3
+      const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: country.id,
+        type: 'company'
+      })
+      const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.waitOnClientCallback = true
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+      req.uploads = {
+        verification_document_front: TestHelper['success_id_scan_back.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png']
+      }
+      const result = await req.post()
+      const doc = TestHelper.extractDoc(result.html)
+      const messageContainer = doc.getElementById('message-container')
+      const message = messageContainer.child[0]
+      assert.strictEqual(message.attr.template, 'success')
+    })
   })
 })
+

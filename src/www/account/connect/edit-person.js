@@ -59,37 +59,56 @@ async function renderPage (req, res, messageTemplate) {
   if (req.data.stripeAccount.country !== 'JP') {
     removeElements.push(
       'gender-container',
-      'kanji-personal-address-container',
-      'kana-personal-address-container',
-      'kana-personal-information-container',
-      'kanji-personal-information-container')
+      'kanji-address-container',
+      'kana-address-container',
+      'kana-information-container',
+      'kanji-information-container')
   } else {
-    removeElements.push('personal-address-container')
+    removeElements.push('address-container')
   }
   let requiresAddress = false
   for (const requirement of req.data.stripeAccount.requirements.currently_due) {
-    requiresAddress = requirement.startsWith(`${req.data.person.id}.address.`)
+    requiresAddress = requirement.startsWith(`${req.data.person.id}.address`)
     if (requiresAddress) {
       break
     }
   }
-  if (!requiresAddress && removeElements.indexOf('personal-address-container') === -1) {
-    removeElements.push('personal-address-container')
-  }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.address.state`) > -1) {
-    const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
-    dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
-  } else if (removeElements.indexOf('personal-address-container') === -1) {
-    removeElements.push('address_state-container', 'address_state-container-bridge')
+  if (!requiresAddress && removeElements.indexOf('address-container') === -1) {
+    removeElements.push('address-container')
+  } else {
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.address.state`) > -1) {
+      const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
+      dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
+    } else if (removeElements.indexOf('address-container') === -1) {
+      removeElements.push('address_state-container', 'address_state-container-bridge')
+    }
     if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.address.line1`) === -1) {
       removeElements.push('address_line1-container', 'address_line2-container')
     }
     if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.address.city`) === -1) {
       removeElements.push('address_city-container')
     }
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.address.country`) === -1) {
+      removeElements.push('address_country-container')
+    }
+    if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.address.postal_code`) === -1) {
+      removeElements.push('address_postal_code-container')
+    }
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.first_name`) === -1) {
+    removeElements.push('name-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.id_number`) === -1) {
     removeElements.push('id_number-container')
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.ssn_last_4`) === -1) {
+    removeElements.push('ssn_last_4-container')
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.phone`) === -1) {
+    removeElements.push('phone-container')
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.email`) === -1) {
+    removeElements.push('email-container')
   }
   if (req.method === 'GET') {
     for (const fullField of req.data.stripeAccount.requirements.currently_due) {
@@ -118,6 +137,9 @@ async function renderPage (req, res, messageTemplate) {
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
+    if (!element || !element.parentNode) {
+      continue
+    }
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
@@ -136,7 +158,7 @@ async function submitForm (req, res) {
     }
     const field = fullField.substring(`${req.data.person.id}.`.length)
     const posted = field.split('.').join('_')
-    if (!req.body[posted]) {
+    if (!req.body[posted]) { 
       if (field === 'address.line2' ||
           field === 'relationship.title' ||
           field === 'relationship.executive' ||

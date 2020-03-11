@@ -15,9 +15,6 @@ async function beforeRequest (req) {
   if (!stripeAccount) {
     throw new Error('invalid-stripeid')
   }
-  if (stripeAccount.metadata.submitted) {
-    throw new Error('invalid-stripe-account')
-  }
   stripeAccount.stripePublishableKey = global.stripePublishableKey
   req.data = { stripeAccount }
 }
@@ -31,20 +28,17 @@ async function renderPage (req, res, messageTemplate) {
   } else {
     res.setHeader('content-security-policy',
       'default-src * \'unsafe-inline\'; ' +
-    `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
-    `script-src * https://uploads.stripe.com/ https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline' 'unsafe-eval'; ` +
-    'frame-src * https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
-    'connect-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
+    `style-src https://uploads.stripe.com/v1/files https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
+    `script-src * https://uploads.stripe.com/v1/files https://q.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline' 'unsafe-eval'; ` +
+    'frame-src * https://uploads.stripe.com/v1/files https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ' +
+    'connect-src https://uploads.stripe.com/v1/files https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/ \'unsafe-inline\'; ')
   }
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
-    if (messageTemplate === 'success' || req.error) {
+    if (messageTemplate === 'success') {
       removeElements.push('business-profile-container', 'company-container', 'personal-container')
       for (const id of removeElements) {
         const element = doc.getElementById(id)
-        if (!element) {
-          continue
-        }
         element.parentNode.removeChild(element)
       }
       return dashboard.Response.end(req, res, doc)
@@ -52,9 +46,20 @@ async function renderPage (req, res, messageTemplate) {
   }
   if (req.data.stripeAccount.country !== 'JP') {
     removeElements.push(
+      'kana-personal-information-container',
+      'kanji-personal-information-container',
       'kanji-address-container',
       'kana-address-container',
       'JP-company-name-container')
+  } else if (req.data.stripeAccount.business_type === 'company') {
+    removeElements.push('kanji-personal-information-container', 'kana-personal-information-container')
+  } else if (req.data.stripeAccount.business_type === 'individual') {
+    removeElements.push('JP-company-name-container')
+  }
+  if (req.data.stripeAccount.business_type === 'individual') {
+    removeElements.push('company-container')
+  } else {
+    removeElements.push('personal-container')
   }
   let requireAddress = false
   for (const field of req.data.stripeAccount.requirements.currently_due) {
@@ -92,17 +97,24 @@ async function renderPage (req, res, messageTemplate) {
     const personalStates = connect.countryDivisions[req.data.stripeAccount.country]
     dashboard.HTML.renderList(doc, personalStates, 'state-option', 'address_state')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.phone') === -1) {
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.first_name') === -1) {
+    removeElements.push('first_name-container')
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.last_name') === -1) {
+    removeElements.push('last_name-container')
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('company.phone') === -1 &&
+      req.data.stripeAccount.requirements.currently_due.indexOf('individual.phone') === -1) {
     removeElements.push('phone-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('company.tax_id') === -1) {
     removeElements.push('tax_id-container')
   }
-  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.phone') === -1) {
-    removeElements.push('phone-container')
-  }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.email') === -1) {
     removeElements.push('email-container')
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.dob.day') === -1) {
+    removeElements.push('dob-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.gender') === -1) {
     removeElements.push('gender-container')
@@ -114,13 +126,13 @@ async function renderPage (req, res, messageTemplate) {
     removeElements.push('ssn_last_4-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('company.verification.document') === -1) {
-    removeElements.push('verification_document-container')
+    removeElements.push('company-document-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.document') === -1) {
-    removeElements.push('verification_document-container')
+    removeElements.push('individual-document-container')
   }
   if (req.data.stripeAccount.requirements.currently_due.indexOf('individual.verification.additional_document') === -1) {
-    removeElements.push('verification_additional_document-container')
+    removeElements.push('individual-additional-document-container')
   }
   if (req.body) {
     for (const field in req.body) {
@@ -137,6 +149,9 @@ async function renderPage (req, res, messageTemplate) {
   }
   for (const id of removeElements) {
     const element = doc.getElementById(id)
+    if (!element) {
+      continue
+    }
     element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)

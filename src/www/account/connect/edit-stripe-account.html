@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="/public/pure-min.css" />
     <link rel="stylesheet" href="/public/content.css" />
     <link rel="stylesheet" href="/public/content-additional.css" />
-    <link rel="stylesheet" href="/public/connect.css" />
+    <link rel="stylesheet" href="/public/connect/connect.css" />
     <script id="stripe-v3" src="https://js.stripe.com/v3/"></script>
-    <script id="connect-v3" src="/public/connect.js"></script>
-    <script id="handler-v3" src="/public/stripe-v3-edit-individual-registration.js?asdf"></script>
+    <script id="connect-v3" src="/public/connect/connect.js"></script>
+    <script id="handler-v3" src="/public/connect/stripe-v3-edit-stripe-account.js"></script>
     <script id="client-v3">
       window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
     </script>
@@ -46,7 +46,7 @@
           </div>
           <div class="pure-u-1-24"></div>
           <div class="pure-u-11-24">
-            <div id="tax_id-container" class="pure-control-group">
+            <div id ="tax_id-container" class="pure-control-group">
               <a name="tax_id-anchor"></a>
               <label for="tax_id">Tax ID number</label>
               <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50" />
@@ -86,7 +86,7 @@
             </div>
           </div>
         </div>
-        <div id="verification_document-container" class="pure-control-group">
+        <div id="company-verification_document-container" class="pure-control-group">
           <a name="verification_document_front-anchor"></a>
           <a name="verification_document_back-anchor"></a>
           <h2>Company incorporation</h2>
@@ -116,7 +116,7 @@
         <div id="email-container" class="pure-control-group">
           <label for="email">Email address</label>
           <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100" />
-        </div id="phone-container">
+        </div>
         <div id="phone-container" class="pure-control-group">
           <label for="phone">Phone number</label>
           <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100" />
@@ -164,10 +164,6 @@
         <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM" />
         <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY" />
       </div>
-      <div id="phone-container" class="pure-control-group">
-        <label for="phone">Phone number</label>
-        <input required="required" id="phone" name="phone" type="text" maxlength="100" />
-      </div>
       <div id="ssn_last_4-container" class="pure-control-group">
         <label for="ssn_last_4">SSN last 4 digits</label>
         <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4" />
@@ -184,7 +180,7 @@
         <label for="id_number">Passport or ID number</label>
         <input required="required" id="id_number" name="id_number" type="text" maxlength="50" />
       </div>
-      <div id="verification_document-container" class="pure-control-group">
+      <div id="individual-document-container" class="pure-control-group">
         <a name="verification_document_front-anchor"></a>
         <a name="verification_document_back-anchor"></a>
         <label for="verification_document_front">Front scan/photo</label>
@@ -192,7 +188,7 @@
         <label for="verification_document_back">Back scan/photo</label>
         <input name="verification_document_back" id="verification_document_back" type="file" />
       </div>
-      <div id="verification_additional_document-container" class="pure-control-group">
+      <div id="individual-additional-document-container" class="pure-control-group">
         <h2>Proof of address</h2>
         <a name="verification_additional_document_front-anchor"></a>
         <a name="verification_additional_document_back-anchor"></a>
@@ -281,7 +277,7 @@
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary">Update registration</button>
+        <button id="submit-button" class="pure-button pure-button-primary">Update Stripe account</button>
       </div>
     </form>
   </body>
@@ -292,10 +288,13 @@
     <option value="${option.value}">${option.text}</option>
   </template>
   <template id="success">
-    <div class="success message">Success! The registration has been updated</div>
+    <div class="success message">
+      Success! The Stripe account has been updated
+      <a href="/account/connect">Return to account</a>
+    </div>
   </template>
   <template id="unknown-error">
-    <div class="error message">Error! An error occurred creating the registration</div>
+    <div class="error message">Error! An unknown error ocurred</div>
   </template>
   <template id="upload-error">
     <div class="error message">Error! An error occurred uploading document images</div>
