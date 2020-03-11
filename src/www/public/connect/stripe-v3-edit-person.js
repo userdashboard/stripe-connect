@@ -26,6 +26,34 @@ function updatePerson (e) {
     }
     personData.last_name = lastName.value
   }
+  var kanaFirstName = document.getElementById('first_name_kana')
+  if (kanaFirstName) {
+    if (!kanaFirstName.value) { 
+      return window.renderError('invalid-first_name_kana')
+    }
+    personData.first_name_kana = firstNameKana.value
+  }
+  var kanaLastName = document.getElementById('last_name_kana')
+  if (kanaLastName) {
+    if (!kanaLastName.value) {
+      return window.renderError('invalid-last_name_kana')
+    }
+    personData.last_name_kana = kanaLastName.value
+  }
+  var kanjiFirstName = document.getElementById('first_name_kanji')
+  if (kanjiFirstName) {
+    if (!kanjiFirstName.value) { 
+      return window.renderError('invalid-first_name_kanji')
+    }
+    personData.first_name_kanji = kanaFirstName.value
+  }
+  var kanjiLastName = document.getElementById('last_name_kanji')
+  if (kanjiLastName) {
+    if (!kanjiLastName.value) {
+      return window.renderError('invalid-last_name_kanji')
+    }
+    personData.last_name_kanji = lastNameKanji.value
+  }
   var fields = ['address_line1', 'address_city','address_state', 'address_country', 'address_postal_code']
   for (var i = 0, len = fields.length; i < len; i++) {
     var element = document.getElementById(fields[i])
