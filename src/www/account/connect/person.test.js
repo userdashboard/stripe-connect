@@ -90,7 +90,7 @@ describe('/account/connect/person', () => {
         type: 'company'
       })
       await TestHelper.createPerson(user, {
-        relationship_owner: true,
+        relationship_owner: 'true',
         relationship_title: 'Shareholder',
         relationship_percent_ownership: '10'
       })

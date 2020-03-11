@@ -46,8 +46,8 @@ describe('/account/connect/edit-person', () => {
             type: 'company'
           })
           await TestHelper.createPerson(user, {
-            relationship_representative: true,
-            relationship_executive: true,
+            relationship_representative: 'true',
+            relationship_executive: 'true',
             relationship_title: 'SVP Testing',
             relationship_percent_ownership: '0'
           })
@@ -79,8 +79,8 @@ describe('/account/connect/edit-person', () => {
           type: 'company'
         })
         await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
+          relationship_representative: 'true',
+          relationship_executive: 'true',
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
@@ -130,8 +130,8 @@ describe('/account/connect/edit-person', () => {
             type: 'company'
           })
           await TestHelper.createPerson(user, {
-            relationship_representative: true,
-            relationship_executive: true,
+            relationship_representative: 'true',
+            relationship_executive: 'true',
             relationship_title: 'SVP Testing',
             relationship_percent_ownership: '0'
           })
@@ -164,8 +164,8 @@ describe('/account/connect/edit-person', () => {
             type: 'company'
           })
           await TestHelper.createPerson(user, {
-            relationship_representative: true,
-            relationship_executive: true,
+            relationship_representative: 'true',
+            relationship_executive: 'true',
             relationship_title: 'SVP Testing',
             relationship_percent_ownership: '0'
           })
@@ -179,6 +179,7 @@ describe('/account/connect/edit-person', () => {
           await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
           await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
           const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+          req.waitOnClientCallback = true
           req.account = user.account
           req.session = user.session
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
@@ -210,8 +211,8 @@ describe('/account/connect/edit-person', () => {
           type: 'company'
         })
         await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
+          relationship_representative: 'true',
+          relationship_executive: 'true',
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
@@ -219,25 +220,11 @@ describe('/account/connect/edit-person', () => {
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
-        const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
-        if (field.startsWith('verification_additional')) {
-          await TestHelper.updatePerson(user, user.representative, null, {
-            verification_document_front: TestHelper['success_id_scan_back.png'],
-            verification_document_back: TestHelper['success_id_scan_back.png']
-          })
-          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
-          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
-          req.uploads = {
-            verification_additional_document_front: TestHelper['success_id_scan_back.png'],
-            verification_additional_document_back: TestHelper['success_id_scan_back.png']
-          }
-        } else {
-          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
-          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
-          req.uploads = {
-            verification_document_front: TestHelper['success_id_scan_back.png'],
-            verification_document_back: TestHelper['success_id_scan_back.png']
-          }
+        req.uploads = {
+          verification_additional_document_front: TestHelper['success_id_scan_back.png'],
+          verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_back.png'],
+          verification_document_back: TestHelper['success_id_scan_back.png']
         }
         delete (req.uploads[field])
         const result = await req.post()
@@ -248,37 +235,39 @@ describe('/account/connect/edit-person', () => {
       })
 
       it(`should reject missing upload ${field} stripe.js v3`, async () => {
-        global.stripeJS = 3
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'AT',
           type: 'company'
         })
         await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
+          relationship_representative: 'true',
+          relationship_executive: 'true',
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
-        await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
-        const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
-        req.account = user.account
-        req.session = user.session
-        const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
-        if (field.startsWith('verification_additional')) {
+        if (field.indexOf('additional') > -1) {
+          await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
           await TestHelper.updatePerson(user, user.representative, null, {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
-          })
-          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
-          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
+          }) 
+          await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.additional_document')
+        } else {
+          await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+        }
+        global.stripeJS = 3
+        const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
+        req.waitOnClientCallback = true
+        req.account = user.account
+        req.session = user.session
+        if (field.indexOf('additional') > -1) {
           req.uploads = {
             verification_additional_document_front: TestHelper['success_id_scan_back.png'],
-            verification_additional_document_back: TestHelper['success_id_scan_back.png']
-          }
+            verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+           }
         } else {
-          await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
-          await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
           req.uploads = {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
@@ -301,8 +290,8 @@ describe('/account/connect/edit-person', () => {
         type: 'company'
       })
       await TestHelper.createPerson(user, {
-        relationship_representative: true,
-        relationship_executive: true,
+        relationship_representative: 'true',
+        relationship_executive: 'true',
         relationship_title: 'CEO',
         relationship_percent_ownership: '100'
       })
@@ -340,8 +329,8 @@ describe('/account/connect/edit-person', () => {
         type: 'company'
       })
       await TestHelper.createPerson(user, {
-        relationship_representative: true,
-        relationship_executive: true,
+        relationship_representative: 'true',
+        relationship_executive: 'true',
         relationship_title: 'CEO',
         relationship_percent_ownership: '100'
       })

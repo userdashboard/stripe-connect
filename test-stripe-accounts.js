@@ -139,8 +139,8 @@ module.exports = {
       verification_document_front: TestHelper['success_id_scan_front.png']
     })
     await TestHelper.createPerson(user, {
-      relationship_representative: true,
-      relationship_executive: true,
+      relationship_representative: 'true',
+      relationship_executive: 'true',
       relationship_title: 'SVP Testing',
       relationship_percent_ownership: '0'
     })
@@ -256,8 +256,8 @@ module.exports = {
       type: 'company'
     })
     await TestHelper.createPerson(user, {
-      relationship_representative: true,
-      relationship_executive: true,
+      relationship_representative: 'true',
+      relationship_executive: 'true',
       relationship_title: 'SVP Testing',
       relationship_percent_ownership: 0
     })
@@ -332,8 +332,8 @@ module.exports = {
       representativeUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
     await TestHelper.createPerson(user, {
-      relationship_representative: true,
-      relationship_executive: true,
+      relationship_representative: 'true',
+      relationship_executive: 'true',
       relationship_title: 'SVP Testing',
       relationship_percent_ownership: 0
     })
@@ -385,8 +385,8 @@ module.exports = {
       representativeUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
     await TestHelper.createPerson(user, {
-      relationship_representative: true,
-      relationship_executive: true,
+      relationship_representative: 'true',
+      relationship_executive: 'true',
       relationship_title: 'SVP Testing',
       relationship_percent_ownership: 0
     })
@@ -430,8 +430,8 @@ module.exports = {
       representativeUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
     await TestHelper.createPerson(user, {
-      relationship_representative: true,
-      relationship_executive: true,
+      relationship_representative: 'true',
+      relationship_executive: 'true',
       relationship_title: 'SVP Testing',
       relationship_percent_ownership: 0
     })
@@ -474,8 +474,8 @@ module.exports = {
       representativeUploadData.verification_additional_document_front = TestHelper['success_id_scan_front.png']
     }
     await TestHelper.createPerson(user, {
-      relationship_representative: true,
-      relationship_executive: true,
+      relationship_representative: 'true',
+      relationship_executive: 'true',
       relationship_title: 'SVP Testing',
       relationship_percent_ownership: 0
     })
@@ -867,7 +867,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -883,7 +883,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -898,7 +898,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -913,7 +913,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -927,7 +927,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -942,7 +942,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -957,7 +957,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -972,7 +972,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -987,7 +987,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1002,7 +1002,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1017,7 +1017,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1032,7 +1032,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1047,7 +1047,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1058,7 +1058,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1072,7 +1072,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1087,7 +1087,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1113,7 +1113,7 @@ const representativeData = module.exports.representativeData = {
     gender: 'female',
     last_name_kana: 'ﾄｳｷﾖｳﾄ',
     last_name_kanji: '東京都',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests'
   },
@@ -1125,7 +1125,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1140,7 +1140,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1155,7 +1155,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1169,7 +1169,7 @@ const representativeData = module.exports.representativeData = {
     dob_day: '1',
     dob_month: '1',
     dob_year: '1950',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     id_number: '000000000',
@@ -1184,7 +1184,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1199,7 +1199,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1214,7 +1214,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1229,7 +1229,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1244,7 +1244,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1259,7 +1259,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1272,7 +1272,7 @@ const representativeData = module.exports.representativeData = {
     dob_year: '1950',
     first_name: true,
     last_name: true,
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests'
   },
@@ -1284,7 +1284,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1299,7 +1299,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '4567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     first_name: true,
@@ -1315,7 +1315,7 @@ const representativeData = module.exports.representativeData = {
     dob_month: '1',
     dob_year: '1950',
     phone: '+14567890123',
-    relationship_representative: true,
+    relationship_representative: 'true',
     relationship_executive: 'true',
     relationship_title: 'VP Tests',
     ssn_last_4: '0000',

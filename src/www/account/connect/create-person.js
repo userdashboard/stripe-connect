@@ -75,12 +75,13 @@ async function submitForm (req, res) {
     return renderPage(req, res, 'invalid-relationship_title')
   }
   if (req.body.relationship_percent_ownership) {
+    let percent
     try {
-      const percent = parseFloat(req.body.relationship_percent_ownership, 10)
-      if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
-        return renderPage(req, res, 'invalid-relationship_percent_ownership')
-      }
+      percent = parseFloat(req.body.relationship_percent_ownership, 10)
     } catch (s) {
+      return renderPage(req, res, 'invalid-relationship_percent_ownership')
+    }
+    if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
       return renderPage(req, res, 'invalid-relationship_percent_ownership')
     }
   }

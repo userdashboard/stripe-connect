@@ -93,7 +93,7 @@ describe('/api/user/connect/persons', () => {
       const persons = []
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPerson(user, {
-          relationship_director: true,
+          relationship_director: 'true',
           relationship_title: 'Director',
           relationship_percent_ownership: '0'
         })
@@ -117,7 +117,7 @@ describe('/api/user/connect/persons', () => {
       })
       for (let i = 0, len = limit + 1; i < len; i++) {
         await TestHelper.createPerson(user, {
-          relationship_director: true,
+          relationship_director: 'true',
           relationship_title: 'Director',
           relationship_percent_ownership: '0'
         })
@@ -138,7 +138,7 @@ describe('/api/user/connect/persons', () => {
       })
       for (let i = 0, len = global.pageSize + 1; i < len; i++) {
         await TestHelper.createPerson(user, {
-          relationship_director: true,
+          relationship_director: 'true',
           relationship_title: 'Director',
           relationship_percent_ownership: '0'
         })

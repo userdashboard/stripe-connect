@@ -109,7 +109,7 @@ function updatePerson (e) {
   var title = document.getElementById('relationship_title')
   if (title) {
     if (!title.value) {
-      return window.renderError('invalid-email')
+      return window.renderError('invalid-relationship_title')
     }
     personData.relationship = personData.relationship || {}
     personData.relationship.title = title.value
@@ -202,7 +202,7 @@ function updatePerson (e) {
       }
       if (front && front.id) {
         personData.verification = personData.verification || {}
-        personData.verificaiton.additional_document = {
+        personData.verification.additional_document = {
           front: front.id
         }
       } else if (additionalDocumentFront) {
@@ -210,12 +210,12 @@ function updatePerson (e) {
       }
       if (back && back.id) {
         personData.verification = personData.verification || {}
-        personData.verificaiton.additional_document = personData.verificaiton.additional_document || {}
-        personData.verificaiton.additional_document.back = back.id
+        personData.verification.additional_document = personData.verification.additional_document || {}
+        personData.verification.additional_document.back = back.id
       } else if (additionalDocumentBack) {
         return window.renderError('invalid-verification_additional_document_back')
       }
-      return stripe.createToken('person', person).then(function (result) {
+      return stripe.createToken('person', personData).then(function (result) {
         if (!result || result.error) {
           return window.renderError(result.error)
         }

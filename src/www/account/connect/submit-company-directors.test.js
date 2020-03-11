@@ -82,7 +82,7 @@ describe('/account/connect/submit-company-directors', () => {
         type: 'company'
       })
       await TestHelper.createPerson(user, {
-        relationship_director: true,
+        relationship_director: 'true',
         relationship_title: 'Chairperson',
         relationship_percent_ownership: '0'
       })

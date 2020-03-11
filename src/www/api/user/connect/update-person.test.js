@@ -119,10 +119,10 @@ describe('/api/user/connect/update-person', () => {
       phone: false,
       id_number: false,
       relationship_title: false,
-      relationship_director: false,
+      relationship_director: 'false',
       relationship_executive: false,
       relationship_representative: false,
-      relationship_owner: false,
+      relationship_owner: 'false',
       ssn_last_4: 'invalid'
     }
     for (const country of connect.countrySpecs) {
@@ -143,8 +143,8 @@ describe('/api/user/connect/update-person', () => {
               type: 'company'
             })
             await TestHelper.createPerson(user, {
-              relationship_representative: true,
-              relationship_executive: true,
+              relationship_representative: 'true',
+              relationship_executive: 'true',
               relationship_title: 'SVP Testing',
               relationship_percent_ownership: '0'
             })
@@ -184,8 +184,8 @@ describe('/api/user/connect/update-person', () => {
                 type: 'company'
               })
               await TestHelper.createPerson(user, {
-                relationship_representative: true,
-                relationship_executive: true,
+                relationship_representative: 'true',
+                relationship_executive: 'true',
                 relationship_title: 'SVP Testing',
                 relationship_percent_ownership: '0'
               })
@@ -230,8 +230,8 @@ describe('/api/user/connect/update-person', () => {
           type: 'company'
         })
         await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
+          relationship_representative: 'true',
+          relationship_executive: 'true',
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
@@ -260,8 +260,8 @@ describe('/api/user/connect/update-person', () => {
           type: 'company'
         })
         await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
+          relationship_representative: 'true',
+          relationship_executive: 'true',
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
@@ -311,8 +311,8 @@ describe('/api/user/connect/update-person', () => {
             type: 'company'
           })
           await TestHelper.createPerson(user, {
-            relationship_representative: true,
-            relationship_executive: true,
+            relationship_representative: 'true',
+            relationship_executive: 'true',
             relationship_title: 'SVP Testing',
             relationship_percent_ownership: '0'
           })
@@ -398,8 +398,8 @@ describe('/api/user/connect/update-person', () => {
           type: 'company'
         })
         await TestHelper.createPerson(user, {
-          relationship_representative: true,
-          relationship_executive: true,
+          relationship_representative: 'true',
+          relationship_executive: 'true',
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
@@ -444,8 +444,8 @@ describe('/api/user/connect/update-person', () => {
         type: 'company'
       })
       await TestHelper.createPerson(user, {
-        relationship_representative: true,
-        relationship_executive: true,
+        relationship_representative: 'true',
+        relationship_executive: 'true',
         relationship_title: 'SVP Testing',
         relationship_percent_ownership: '0'
       })
@@ -475,8 +475,8 @@ describe('/api/user/connect/update-person', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_representative: true,
-        relationship_executive: true,
+        relationship_representative: 'true',
+        relationship_executive: 'true',
         relationship_title: 'SVP Testing',
         relationship_percent_ownership: '0'
       }

@@ -110,6 +110,15 @@ async function renderPage (req, res, messageTemplate) {
   if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.email`) === -1) {
     removeElements.push('email-container')
   }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.dob.day`) === -1) {
+    removeElements.push('dob-container')
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.verification.document`) === -1) {
+    removeElements.push('document-container')
+  }
+  if (req.data.stripeAccount.requirements.currently_due.indexOf(`${req.data.person.id}.verification.additional_document`) === -1) {
+    removeElements.push('additional-document-container')
+  }
   if (req.method === 'GET') {
     for (const fullField of req.data.stripeAccount.requirements.currently_due) {
       if (!fullField.startsWith(req.data.person.id)) {
@@ -122,6 +131,7 @@ async function renderPage (req, res, messageTemplate) {
         continue
       }
     }
+    doc.getElementById('relationship_title').setAttribute('value', req.data.person.relationship.title)
   } else if (req.body) {
     for (const field in req.body) {
       const element = doc.getElementById(field)

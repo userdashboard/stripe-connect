@@ -29,20 +29,21 @@ module.exports = {
     if (!req.body.relationship_percent_ownership) {
       throw new Error('invalid-relationship_percent_ownership')
     }
+    let percent
     try {
-      const percent = parseFloat(req.body.relationship_percent_ownership, 10)
-      if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
-        throw new Error('invalid-relationship_percent_ownership')
-      }
-      // TODO: 0% ownership throws an error on Stripe if the person is not 'owner=true'
-      if (percent === 0) {
-        if (req.body.relationship_owner) {
-          throw new Error('invalid-relationship_percent_ownership')
-        }
-        delete (req.body.relationship_percent_ownership)
-      }
+      percent = parseFloat(req.body.relationship_percent_ownership, 10)
     } catch (s) {
       throw new Error('invalid-relationship_percent_ownership')
+    }
+    // TODO: 0% ownership throws an error on Stripe if the person is not 'owner=true'
+    if ((!percent && percent !== 0) || percent > 100 || percent < 0) {
+      throw new Error('invalid-relationship_percent_ownership')
+    }
+    if (percent === 0) {
+      if (req.body.relationship_owner) {
+        throw new Error('invalid-relationship_percent_ownership')
+      }
+      delete (req.body.relationship_percent_ownership)
     }
     const personInfo = {
       relationship: {

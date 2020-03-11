@@ -95,12 +95,12 @@ describe('/account/connect/create-person', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_representative: true,
-        relationship_executive: true,
-        relationship_owner: false,
-        relationship_director: false,
+        relationship_representative: 'true',
+        relationship_executive: 'true',
+        relationship_owner: 'false',
+        relationship_director: 'false',
         relationship_title: 'SVP Testing',
-        relationship_percent_ownership: '0'
+        relationship_percent_ownership: '10'
       }
       req.filename = __filename
       req.screenshots = [
@@ -112,10 +112,7 @@ describe('/account/connect/create-person', () => {
         { fill: '#submit-form' }
       ]
       const result = await req.post()
-      const doc = TestHelper.extractDoc(result.html)
-      const personsTable = doc.getElementById('persons-table')
-      assert.notStrictEqual(personsTable, undefined)
-      assert.notStrictEqual(personsTable, null)
+      assert.strictEqual(result.redirect.startsWith('/account/connect/person?personid='), true)
     })
 
     it('should create director', async () => {
@@ -128,7 +125,7 @@ describe('/account/connect/create-person', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_director: true,
+        relationship_director: 'true',
         relationship_title: 'Chairperson',
         relationship_percent_ownership: '0'
       }
@@ -149,7 +146,7 @@ describe('/account/connect/create-person', () => {
       req.account = user.account
       req.session = user.session
       req.body = {
-        relationship_owner: true,
+        relationship_owner: 'true',
         relationship_title: 'Shareholder',
         relationship_percent_ownership: '7'
       }
