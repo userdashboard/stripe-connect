@@ -30,7 +30,7 @@ describe('/account/connect/edit-stripe-account', async () => {
           continue
         }
         testedRequiredFields.push(field)
-        it('should have element for ${field} (company)', async () => {
+        it(`should have element for ${field} (company)`, async () => {
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -207,7 +207,6 @@ describe('/account/connect/edit-stripe-account', async () => {
             type: 'individual'
           })
           const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
-          req.waitOnClientCallback = true
           req.account = user.account
           req.session = user.session
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
@@ -283,7 +282,6 @@ describe('/account/connect/edit-stripe-account', async () => {
         const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.waitOnClientCallback = true
         req.uploads = {
           verification_additional_document_front: TestHelper['success_id_scan_front.png'],
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
@@ -421,7 +419,6 @@ describe('/account/connect/edit-stripe-account', async () => {
       const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.waitOnClientCallback = true
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
       req.uploads = {
         verification_document_front: TestHelper['success_id_scan_back.png'],

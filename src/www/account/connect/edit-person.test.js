@@ -179,7 +179,6 @@ describe('/account/connect/edit-person', () => {
           await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
           await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
           const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
-          req.waitOnClientCallback = true
           req.account = user.account
           req.session = user.session
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
