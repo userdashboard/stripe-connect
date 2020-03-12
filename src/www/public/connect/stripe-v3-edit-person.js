@@ -54,6 +54,15 @@ function updatePerson (e) {
     }
     personData.last_name_kanji = kanjiLastName.value
   }
+  var gender = document.getElementById('gender-container')
+  if (gender) {
+    var female = document.getElementById('female')
+    var male = document.getElementById('male')
+    if (!female.checked && !male.checked) {
+      return window.renderError('invalid-gender')
+    }
+    personData.gender = female.checked ? 'female' : 'male'
+  }
   var fields = ['address_line1', 'address_city','address_state', 'address_country', 'address_postal_code']
   for (var i = 0, len = fields.length; i < len; i++) {
     var element = document.getElementById(fields[i])
