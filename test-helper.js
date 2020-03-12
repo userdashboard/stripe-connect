@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 global.applicationPath = global.applicationPath || __dirname
-global.stripeAPIVersion = '2019-08-14'
+global.stripeAPIVersion = '2020-03-02'
 global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
