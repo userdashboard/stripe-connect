@@ -117,7 +117,7 @@ before(async () => {
       !process.env.PUBLIC_IP) {
     const webhook = await stripe.webhookEndpoints.create({
       connect: true,
-      url: `${process.env.DASHBOARD_SERVER}/webhooks/connect/index-connect-data`,
+      url: `${global.dashboardServer}/webhooks/connect/index-connect-data`,
       enabled_events: eventList
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
