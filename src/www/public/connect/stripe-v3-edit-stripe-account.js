@@ -101,7 +101,7 @@ function updateStripeAccount (e) {
   var ssnLast4 = document.getElementById('ssn_last_4')
   if (ssnLast4) {
     if (!ssnLast4.value || !ssnLast4.value.length) {
-      return window.renderError('invalid-phone')
+      return window.renderError('invalid-ssn_last_4')
     }
     accountData[businessType].ssn_last_4 = ssnLast4.value
   }
