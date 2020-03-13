@@ -3,6 +3,7 @@ window.onload = function () {
   stripe = window.Stripe(window.stripePublishableKey)
   var submit = document.getElementById('submit-form')
   submit.addEventListener('submit', updateStripeAccount)
+  window.loaded = true
 }
 
 function updateStripeAccount (e) {
@@ -67,21 +68,21 @@ function updateStripeAccount (e) {
   if (companyNameKana) {
     if (!companyNameKana.value) {
       return window.renderError('invalid-name_kana')
-    } 
+    }
     accountData[businessType].name_kana = companyNameKana.value
   }
   var companyNameKanji = document.getElementById('name_kanji')
   if (companyNameKanji) {
     if (!companyNameKanji.value) {
       return window.renderError('invalid-name_kanji')
-    } 
+    }
     accountData[businessType].name_kanji = companyNameKanji.value
   }
   var companyTaxID = document.getElementById('tax_id')
   if (companyTaxID) {
     if (!companyTaxID.value) {
       return window.renderError('invalid-tax_id')
-    } 
+    }
     accountData[businessType].tax_id = companyTaxID.value
   }
   var email = document.getElementById('email')
@@ -117,7 +118,7 @@ function updateStripeAccount (e) {
   var idNumber = document.getElementById('id_number')
   if (idNumber) {
     if (!idNumber.value || !idNumber.value.length) {
-      return window.renderError('invalid-id_number') 
+      return window.renderError('invalid-id_number')
     }
     accountData.id_number = idNumber.value
   }
@@ -155,16 +156,17 @@ function updateStripeAccount (e) {
       return window.renderError('invalid-business_profile_mcc')
     }
   }
+  var fields, i, len, property, element
   if (document.getElementById('address-container')) {
     accountData[businessType].address = {}
-    var fields = ['address_line1', 'address_city','address_state', 'address_country', 'address_postal_code']
-    for (var i = 0, len = fields.length; i < len; i++) {
-      var element = document.getElementById(fields[i])
+    fields = ['address_line1', 'address_city', 'address_state', 'address_country', 'address_postal_code']
+    for (i = 0, len = fields.length; i < len; i++) {
+      element = document.getElementById(fields[i])
       if (element) {
         if (!element.value) {
           return window.renderError('invalid-' + fields[i])
         }
-        var property = fields[i].substring('address_'.length)
+        property = fields[i].substring('address_'.length)
         accountData[businessType].address[property] = element.value
       }
     }
@@ -175,28 +177,28 @@ function updateStripeAccount (e) {
   }
   if (document.getElementById('kana-address-container')) {
     accountData[businessType].address_kana = {}
-    var fields = ['address_kana_line1', 'address_kana_city','address_kana_town', 'address_kana_state', 'address_kana_postal_code' ]
-    for (var i = 0, len = fields.length; i < len; i++) {
-      var element = document.getElementById(fields[i])
+    fields = ['address_kana_line1', 'address_kana_city', 'address_kana_town', 'address_kana_state', 'address_kana_postal_code']
+    for (i = 0, len = fields.length; i < len; i++) {
+      element = document.getElementById(fields[i])
       if (element) {
         if (!element.value) {
           return window.renderError('invalid-' + fields[i])
         }
-        var property = fields[i].substring('address_kana'.length)
+        property = fields[i].substring('address_kana'.length)
         accountData[businessType].address_kana[property] = element.value
       }
     }
   }
   if (document.getElementById('kanji-address-container')) {
     accountData[businessType].address_kanji = {}
-    var fields = ['address_kanji_line1', 'address_kanji_city','address_kanji_town', 'address_kanji_state', 'address_kanji_postal_code' ]
-    for (var i = 0, len = fields.length; i < len; i++) {
-      var element = document.getElementById(fields[i])
+    fields = ['address_kanji_line1', 'address_kanji_city', 'address_kanji_town', 'address_kanji_state', 'address_kanji_postal_code']
+    for (i = 0, len = fields.length; i < len; i++) {
+      element = document.getElementById(fields[i])
       if (element) {
         if (!element.value) {
           return window.renderError('invalid-' + fields[i])
         }
-        var property = fields[i].substring('address_kanji'.length)
+        property = fields[i].substring('address_kanji'.length)
         accountData[businessType].address_kanji[property] = element.value
       }
     }
@@ -215,7 +217,7 @@ function updateStripeAccount (e) {
       }
     } else if (documentFront) {
       return window.renderError('invalid-verification_document_front')
-    } 
+    }
     if (back && back.id) {
       accountData[businessType].verification = accountData[businessType].verification || {}
       accountData[businessType].verification.document = accountData[businessType].verification.document || {}
@@ -236,7 +238,7 @@ function updateStripeAccount (e) {
         }
       } else if (additionalDocumentFront) {
         return window.renderError('invalid-verification_additional_document_front')
-      } 
+      }
       if (back && back.id) {
         accountData[businessType].verification = accountData[businessType].verification || {}
         accountData[businessType].verification.additional_document = accountData[businessType].verification.additional_document || {}
@@ -246,7 +248,7 @@ function updateStripeAccount (e) {
       }
       if (!Object.keys(accountData[businessType]).length) {
         var form = document.getElementById('submit-form')
-        return form.submit()      
+        return form.submit()
       }
       return stripe.createToken('account', accountData).then(function (result) {
         if (!result || result.error) {

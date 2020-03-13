@@ -94,6 +94,12 @@ describe('/account/connect/create-person', () => {
       const req = TestHelper.createRequest(`/account/connect/create-person?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
+      req.waitFormComplete = async (page) => {
+        await page.waitForResponse((response) => {
+          const status = response.status()
+          return status === 200
+        })
+      }
       req.body = {
         relationship_representative: 'true',
         relationship_executive: 'true',

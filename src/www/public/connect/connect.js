@@ -1,6 +1,6 @@
 window.uploadDocumentFiles = function (documentFront, documentBack, callback) {
   if ((!documentFront || !documentFront.files || !documentFront.files.length) &&
-      (!documentBack || !documentBack.files || !documentBack.files.length)) { 
+      (!documentBack || !documentBack.files || !documentBack.files.length)) {
     return callback()
   }
   var first = true

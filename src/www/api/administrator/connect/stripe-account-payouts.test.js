@@ -49,7 +49,7 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${user.stripeAccount.id}&offset=${offset}`)
       req.account = administrator.account
-      req.session = administrator.session      
+      req.session = administrator.session
       const payoutsNow = await req.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
         assert.strictEqual(payoutsNow[i].id, payouts[offset + i])
@@ -65,7 +65,7 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${user.stripeAccount.id}&limit=${limit}`)
       req.account = administrator.account
-      req.session = administrator.session      
+      req.session = administrator.session
       const payoutsNow = await req.get()
       assert.strictEqual(payoutsNow.length, limit)
     })
@@ -79,7 +79,7 @@ describe('/api/administrator/connect/stripe-account-payouts', () => {
       }
       const req = TestHelper.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${user.stripeAccount.id}&all=true`)
       req.account = administrator.account
-      req.session = administrator.session      
+      req.session = administrator.session
       const payoutsNow = await req.get()
       assert.strictEqual(payoutsNow.length, global.pageSize + 1)
     })

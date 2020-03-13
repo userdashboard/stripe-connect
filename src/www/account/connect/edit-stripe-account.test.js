@@ -209,6 +209,20 @@ describe('/account/connect/edit-stripe-account', async () => {
           const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
           req.account = user.account
           req.session = user.session
+          req.waitFormLoad = async (page) => {
+            while (true) {
+              const loaded = await page.evaluate(() => {
+                return window.loaded
+              })
+              if (loaded) {
+                break
+              }
+              await page.waitFor(100)
+            }
+          }
+          req.waitFormComplete = async () => {
+            return true
+          }
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
           delete (req.body[field])
           const result = await req.post()
@@ -282,6 +296,29 @@ describe('/account/connect/edit-stripe-account', async () => {
         const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
+        req.waitFormLoad = async (page) => {
+          while (true) {
+            const loaded = await page.evaluate(() => {
+              return window.loaded
+            })
+            if (loaded) {
+              break
+            }
+            await page.waitFor(100)
+          }
+        }
+        req.waitFormComplete = async (page) => {
+          while (true) {
+            const message = await page.evaluate(() => {
+              var container = document.getElementById('message-container')
+              return container.children.length
+            })
+            if (message > 0) {
+              return
+            }
+            await page.waitFor(100)
+          }
+        }
         req.uploads = {
           verification_additional_document_front: TestHelper['success_id_scan_front.png'],
           verification_additional_document_back: TestHelper['success_id_scan_back.png'],
@@ -340,7 +377,6 @@ describe('/account/connect/edit-stripe-account', async () => {
     //     const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
     //     req.account = user.account
     //     req.session = user.session
-    //     req.waitOnClientCallback = true
     //     req.uploads = {
     //       verification_document_front: TestHelper['success_id_scan_back.png'],
     //       verification_document_back: TestHelper['success_id_scan_back.png']
@@ -424,7 +460,7 @@ describe('/account/connect/edit-stripe-account', async () => {
         verification_document_front: TestHelper['success_id_scan_back.png'],
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_back.png'],
-        verification_additional_document_back: TestHelper['success_id_scan_back.png'],
+        verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
       req.filename = __filename
       req.screenshots = [
@@ -435,6 +471,9 @@ describe('/account/connect/edit-stripe-account', async () => {
         { click: `/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}` },
         { fill: '#submit-form' }
       ]
+      req.waitFormComplete = async (page) => {
+        await page.waitForNavigation()
+      }
       const result = await req.post()
       const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('message-container')
@@ -453,7 +492,9 @@ describe('/account/connect/edit-stripe-account', async () => {
       const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.waitOnClientCallback = true
+      req.waitFormComplete = async (page) => {
+        await page.waitForNavigation()
+      }
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
       req.uploads = {
         verification_document_front: TestHelper['success_id_scan_back.png'],
@@ -467,4 +508,3 @@ describe('/account/connect/edit-stripe-account', async () => {
     })
   })
 })
-

@@ -65,7 +65,7 @@ describe('/api/user/connect/payouts', () => {
       }
       const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&offset=${offset}`)
       req.account = user.account
-      req.session = user.session      
+      req.session = user.session
       const payoutsNow = await req.get()
       for (let i = 0, len = global.pageSize; i < len; i++) {
         assert.strictEqual(payoutsNow[i].id, payouts[offset + i])
@@ -80,7 +80,7 @@ describe('/api/user/connect/payouts', () => {
       }
       const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=${limit}`)
       req.account = user.account
-      req.session = user.session      
+      req.session = user.session
       const payoutsNow = await req.get()
       assert.strictEqual(payoutsNow.length, limit)
     })
@@ -93,7 +93,7 @@ describe('/api/user/connect/payouts', () => {
       }
       const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&all=true`)
       req.account = user.account
-      req.session = user.session      
+      req.session = user.session
       const payoutsNow = await req.get()
       assert.strictEqual(payoutsNow.length, global.pageSize + 1)
     })

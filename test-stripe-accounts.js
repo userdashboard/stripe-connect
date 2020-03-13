@@ -221,7 +221,7 @@ module.exports = {
     })
     if (numOwners && beneficialOwnerData[country] !== false) {
       for (let i = 0, len = numOwners; i < len; i++) {
-        const person = await TestHelper.createPerson(user, {
+        await TestHelper.createPerson(user, {
           relationship_owner: true,
           relationship_title: 'Shareholder',
           relationship_percent_ownership: (i + 1)

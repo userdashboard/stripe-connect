@@ -168,7 +168,7 @@ async function submitForm (req, res) {
     }
     const field = fullField.substring(`${req.data.person.id}.`.length)
     const posted = field.split('.').join('_')
-    if (!req.body[posted]) { 
+    if (!req.body[posted]) {
       if (field === 'address.line2' ||
           field === 'relationship.title' ||
           field === 'relationship.executive' ||

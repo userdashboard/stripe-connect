@@ -157,7 +157,6 @@ describe('/account/connect/edit-person', () => {
         })
 
         it(`should reject missing ${field} stripe.js v3`, async () => {
-          global.stripeJS = 3
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -178,10 +177,34 @@ describe('/account/connect/edit-person', () => {
           }
           await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
           await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
+          global.stripeJS = 3
           const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
           req.account = user.account
           req.session = user.session
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+          req.waitFormLoad = async (page) => {
+            while (true) {
+              const loaded = await page.evaluate(() => {
+                return window.loaded
+              })
+              if (loaded) {
+                break
+              }
+              await page.waitFor(100)
+            }
+          }
+          req.waitFormComplete = async (page) => {
+            while (true) {
+              const message = await page.evaluate(() => {
+                var container = document.getElementById('message-container')
+                return container.children.length
+              })
+              if (message > 0) {
+                return
+              }
+              await page.waitFor(100)
+            }
+          }
           req.uploads = {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
@@ -251,21 +274,34 @@ describe('/account/connect/edit-person', () => {
           await TestHelper.updatePerson(user, user.representative, null, {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
-          }) 
+          })
           await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.additional_document')
         } else {
           await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
         }
         global.stripeJS = 3
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
-        req.waitOnClientCallback = true
+        req.waitFormLoad = async (page) => {
+          while (true) {
+            const loaded = await page.evaluate(() => {
+              return window.loaded
+            })
+            if (loaded) {
+              break
+            }
+            await page.waitFor(100)
+          }
+        }
+        req.waitFormComplete = async () => {
+          return true
+        }
         req.account = user.account
         req.session = user.session
         if (field.indexOf('additional') > -1) {
           req.uploads = {
             verification_additional_document_front: TestHelper['success_id_scan_back.png'],
-            verification_additional_document_back: TestHelper['success_id_scan_back.png'],
-           }
+            verification_additional_document_back: TestHelper['success_id_scan_back.png']
+          }
         } else {
           req.uploads = {
             verification_document_front: TestHelper['success_id_scan_back.png'],
@@ -343,6 +379,17 @@ describe('/account/connect/edit-person', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+      req.waitFormLoad = async (page) => {
+        while (true) {
+          const loaded = await page.evaluate(() => {
+            return window.loaded
+          })
+          if (loaded) {
+            break
+          }
+          await page.waitFor(100)
+        }
+      }
       const result = await req.post()
       const doc = TestHelper.extractDoc(result.html)
       const row = doc.getElementById(user.representative.id)

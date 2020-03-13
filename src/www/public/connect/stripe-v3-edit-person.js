@@ -3,6 +3,7 @@ window.onload = function () {
   stripe = window.Stripe(window.stripePublishableKey)
   var submit = document.getElementById('submit-form')
   submit.addEventListener('submit', updatePerson)
+  window.loaded = true
 }
 
 function updatePerson (e) {
@@ -14,7 +15,7 @@ function updatePerson (e) {
   var personData = {}
   var firstName = document.getElementById('first_name')
   if (firstName) {
-    if (!firstName.value) { 
+    if (!firstName.value) {
       return window.renderError('invalid-first_name')
     }
     personData.first_name = firstName.value
@@ -28,7 +29,7 @@ function updatePerson (e) {
   }
   var kanaFirstName = document.getElementById('first_name_kana')
   if (kanaFirstName) {
-    if (!kanaFirstName.value) { 
+    if (!kanaFirstName.value) {
       return window.renderError('invalid-first_name_kana')
     }
     personData.first_name_kana = kanaFirstName.value
@@ -42,7 +43,7 @@ function updatePerson (e) {
   }
   var kanjiFirstName = document.getElementById('first_name_kanji')
   if (kanjiFirstName) {
-    if (!kanjiFirstName.value) { 
+    if (!kanjiFirstName.value) {
       return window.renderError('invalid-first_name_kanji')
     }
     personData.first_name_kanji = kanjiFirstName.value
@@ -63,14 +64,15 @@ function updatePerson (e) {
     }
     personData.gender = female.checked ? 'female' : 'male'
   }
-  var fields = ['address_line1', 'address_city','address_state', 'address_country', 'address_postal_code']
-  for (var i = 0, len = fields.length; i < len; i++) {
-    var element = document.getElementById(fields[i])
+  var fields, i, len, element, property
+  fields = ['address_line1', 'address_city', 'address_state', 'address_country', 'address_postal_code']
+  for (i = 0, len = fields.length; i < len; i++) {
+    element = document.getElementById(fields[i])
     if (element) {
       if (!element.value) {
         return window.renderError('invalid-' + fields[i])
       }
-      var property = fields[i].substring('address_'.length)
+      property = fields[i].substring('address_'.length)
       personData.address = personData.address || {}
       personData.address[property] = element.value
     }
@@ -81,28 +83,28 @@ function updatePerson (e) {
     personData.address.line2 = addressLine2.value
   }
   if (document.getElementById('kana-address-container')) {
-    var fields = ['address_kana_line1', 'address_kana_city','address_kana_town', 'address_kana_state', 'address_kana_postal_code' ]
-    for (var i = 0, len = fields.length; i < len; i++) {
-      var element = document.getElementById(fields[i])
+    fields = ['address_kana_line1', 'address_kana_city', 'address_kana_town', 'address_kana_state', 'address_kana_postal_code']
+    for (i = 0, len = fields.length; i < len; i++) {
+      element = document.getElementById(fields[i])
       if (element) {
         if (!element.value) {
           return window.renderError('invalid-' + fields[i])
         }
-        var property = fields[i].substring('address_kana'.length)
+        property = fields[i].substring('address_kana'.length)
         personData.address_kana = personData.address_kana || {}
         personData.address_kana[property] = element.value
       }
     }
   }
   if (document.getElementById('kanji-address-container')) {
-    var fields = ['address_kanji_line1', 'address_kanji_city','address_kanji_town', 'address_kanji_state', 'address_kanji_postal_code' ]
-    for (var i = 0, len = fields.length; i < len; i++) {
-      var element = document.getElementById(fields[i])
+    fields = ['address_kanji_line1', 'address_kanji_city', 'address_kanji_town', 'address_kanji_state', 'address_kanji_postal_code']
+    for (i = 0, len = fields.length; i < len; i++) {
+      element = document.getElementById(fields[i])
       if (element) {
         if (!element.value) {
           return window.renderError('invalid-' + fields[i])
         }
-        var property = fields[i].substring('address_kanji'.length)
+        property = fields[i].substring('address_kanji'.length)
         personData.address_kanji = personData.address_kanji || {}
         personData.address_kanji[property] = element.value
       }
