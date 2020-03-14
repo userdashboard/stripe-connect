@@ -205,8 +205,8 @@ function updatePerson (e) {
     } else if (documentBack) {
       return window.renderError('invalid-verification_document_back')
     }
-    var additionalDocumentFront = document.getElementById('verification_document_front')
-    var additionalDocumentBack = document.getElementById('verification_document_back')
+    var additionalDocumentFront = document.getElementById('verification_additional_document_front')
+    var additionalDocumentBack = document.getElementById('verification_additional_document_back')
     return window.uploadDocumentFiles(additionalDocumentFront, additionalDocumentBack, function (error, front, back) {
       if (error) {
         return window.renderError(error.message)
