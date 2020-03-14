@@ -292,8 +292,17 @@ describe('/account/connect/edit-person', () => {
             await page.waitFor(100)
           }
         }
-        req.waitFormComplete = async () => {
-          return true
+        req.waitFormComplete = async (page) => {
+          while (true) {
+            const message = await page.evaluate(() => {
+              var container = document.getElementById('message-container')
+              return container.children.length
+            })
+            if (message > 0) {
+              return
+            }
+            await page.waitFor(100)
+          }
         }
         req.account = user.account
         req.session = user.session
