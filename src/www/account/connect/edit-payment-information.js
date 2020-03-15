@@ -43,7 +43,15 @@ async function renderPage (req, res, messageTemplate) {
       }
     }
   }
-  dashboard.HTML.renderList(doc, connect.countrySpecs, 'country-option', 'country')
+  const countries = []
+  for (const country of connect.countrySpecs) {
+    countries.push({
+      object: 'country',
+      code: country.id,
+      name: connect.countryNameIndex[country.id]
+    })
+  }
+  dashboard.HTML.renderList(doc, countries, 'country-option', 'country')
   const currencies = connect.countryCurrencyIndex[req.data.stripeAccount.country]
   dashboard.HTML.renderList(doc, currencies, 'currency-option', 'currency')
   if (req.body) {
@@ -57,7 +65,7 @@ async function renderPage (req, res, messageTemplate) {
           (element.attr.type === 'checkbox' || element.attr.type === 'radio')) {
           element.setAttribute('checked', 'checked')
         } else {
-          element.setAttribute('value', req.body[field] || '')
+          element.setAttribute('value', (req.body[field] || '').split("'").join('&quot;'))
         }
       } else if (element.tag === 'select') {
         dashboard.HTML.setSelectedOptionByValue(doc, field, req.body[field] || '')
