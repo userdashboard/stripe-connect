@@ -141,9 +141,9 @@ async function renderPage (req, res, messageTemplate) {
         continue
       }
       if (element.tag === 'input') {
-        element.setAttribute('value', req.body[field] || '')
+        element.setAttribute('value', (req.body[field] || '').split("'").join('&quot;'))
       } else if (element.tag === 'select') {
-        dashboard.HTML.setSelectedOptionByValue(doc, field, req.body[field] || '')
+        dashboard.HTML.setSelectedOptionByValue(doc, field, (req.body[field] || '').split("'").join('&quot;'))
       }
     }
   }
