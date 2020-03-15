@@ -95,10 +95,16 @@ describe('/account/connect/create-person', () => {
       req.account = user.account
       req.session = user.session
       req.waitFormComplete = async (page) => {
-        await page.waitForResponse((response) => {
-          const status = response.status()
-          return status === 200
-        })
+        while (true) {
+          try {
+            const location = await page.url()
+            if (location.indexOf('/account/connect/person') > -1) {
+              return
+            }
+          } catch (error) {
+          }
+          await page.waitFor(100)
+        }
       }
       req.body = {
         relationship_representative: 'true',

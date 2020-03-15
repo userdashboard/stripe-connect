@@ -220,8 +220,19 @@ describe('/account/connect/edit-stripe-account', async () => {
               await page.waitFor(100)
             }
           }
-          req.waitFormComplete = async () => {
-            return true
+          req.waitFormComplete = async (page) => {
+            while (true) {
+              try {
+                const loaded = await page.evaluate(() => {
+                  return document.getElementById('message-container').children.length
+                })
+                if (loaded) {
+                  break
+                }
+              } catch (error) {
+              }
+              await page.waitFor(100)
+            }
           }
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
           delete (req.body[field])
@@ -472,7 +483,18 @@ describe('/account/connect/edit-stripe-account', async () => {
         { fill: '#submit-form' }
       ]
       req.waitFormComplete = async (page) => {
-        await page.waitForNavigation()
+        while (true) {
+          try {
+            const loaded = await page.evaluate(() => {
+              return document.getElementById('message-container').children.length
+            })
+            if (loaded) {
+              break
+            }
+          } catch (error) {
+          }
+          await page.waitFor(100)
+        }
       }
       const result = await req.post()
       const doc = TestHelper.extractDoc(result.html)
@@ -493,7 +515,18 @@ describe('/account/connect/edit-stripe-account', async () => {
       req.account = user.account
       req.session = user.session
       req.waitFormComplete = async (page) => {
-        await page.waitForNavigation()
+        while (true) {
+          try {
+            const loaded = await page.evaluate(() => {
+              return document.getElementById('message-container').children.length
+            })
+            if (loaded) {
+              break
+            }
+          } catch (error) {
+          }
+          await page.waitFor(100)
+        }
       }
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
       req.uploads = {
