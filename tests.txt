@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.36 test /root/workspaces/stripe-connect
+> @userdashboard/stripe-connect@1.0.38 test /root/workspaces/stripe-connect
 > mocha --exit --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'
 
 
@@ -188,124 +188,281 @@
       ✓ should have element for last_name_kanji
       ✓ should have element for id_number
       ✓ should have element for ssn_last_4
-      ✓ should have element for verification_document
-      ✓ should have element for verification_additional_document
+      ✓ should have element for upload verification_document
+      ✓ should have element for upload verification_additional_document
     EditPerson#POST
-      ✓ should reject invalid address_city
-      ✓ should reject invalid address_line1
-      ✓ should reject invalid address_postal_code
-      ✓ should reject invalid dob_day
-      ✓ should reject invalid dob_month
-      ✓ should reject invalid dob_year
-      ✓ should reject invalid phone
-      ✓ should reject invalid first_name
-      ✓ should reject invalid last_name
-      ✓ should reject invalid email
-      ✓ should reject invalid address_state
-      ✓ should reject invalid address_kana_city
-      ✓ should reject invalid address_kana_line1
-      ✓ should reject invalid address_kana_postal_code
-      ✓ should reject invalid address_kana_state
-      ✓ should reject invalid address_kana_town
-      ✓ should reject invalid address_kanji_city
-      ✓ should reject invalid address_kanji_line1
-      ✓ should reject invalid address_kanji_postal_code
-      ✓ should reject invalid address_kanji_state
-      ✓ should reject invalid address_kanji_town
-      ✓ should reject invalid first_name_kana
-      ✓ should reject invalid first_name_kanji
-      ✓ should reject invalid gender
-      ✓ should reject invalid last_name_kana
-      ✓ should reject invalid last_name_kanji
-      ✓ should reject invalid id_number
-      ✓ should reject invalid ssn_last_4
-      ✓ should reject invalid verification_document_front
-      ✓ should reject invalid verification_document_back
-      ✓ should reject invalid verification_additional_document_front
-      ✓ should reject invalid verification_additional_document_back
-      ✓ should update person (screenshots)
+      ✓ should reject missing address_city no stripe.js
+      ✓ should reject missing address_city stripe.js v3
+      ✓ should reject missing address_line1 no stripe.js
+      ✓ should reject missing address_line1 stripe.js v3
+      ✓ should reject missing address_postal_code no stripe.js
+      ✓ should reject missing address_postal_code stripe.js v3
+      ✓ should reject missing dob_day no stripe.js
+      ✓ should reject missing dob_day stripe.js v3
+      ✓ should reject missing dob_month no stripe.js
+      ✓ should reject missing dob_month stripe.js v3
+      ✓ should reject missing dob_year no stripe.js
+      ✓ should reject missing dob_year stripe.js v3
+      ✓ should reject missing phone no stripe.js
+      ✓ should reject missing phone stripe.js v3
+      ✓ should reject missing first_name no stripe.js
+      ✓ should reject missing first_name stripe.js v3
+      ✓ should reject missing last_name no stripe.js
+      ✓ should reject missing last_name stripe.js v3
+      ✓ should reject missing email no stripe.js
+      ✓ should reject missing email stripe.js v3
+      ✓ should reject missing address_state no stripe.js
+      ✓ should reject missing address_state stripe.js v3
+      ✓ should reject missing address_kana_city no stripe.js
+      ✓ should reject missing address_kana_city stripe.js v3
+      ✓ should reject missing address_kana_line1 no stripe.js
+      ✓ should reject missing address_kana_line1 stripe.js v3
+      ✓ should reject missing address_kana_postal_code no stripe.js
+      ✓ should reject missing address_kana_postal_code stripe.js v3
+      ✓ should reject missing address_kana_state no stripe.js
+      ✓ should reject missing address_kana_state stripe.js v3
+      ✓ should reject missing address_kana_town no stripe.js
+      ✓ should reject missing address_kana_town stripe.js v3
+      ✓ should reject missing address_kanji_city no stripe.js
+      ✓ should reject missing address_kanji_city stripe.js v3
+      ✓ should reject missing address_kanji_line1 no stripe.js
+      ✓ should reject missing address_kanji_line1 stripe.js v3
+      ✓ should reject missing address_kanji_postal_code no stripe.js
+      ✓ should reject missing address_kanji_postal_code stripe.js v3
+      ✓ should reject missing address_kanji_state no stripe.js
+      ✓ should reject missing address_kanji_state stripe.js v3
+      ✓ should reject missing address_kanji_town no stripe.js
+      ✓ should reject missing address_kanji_town stripe.js v3
+      ✓ should reject missing first_name_kana no stripe.js
+      ✓ should reject missing first_name_kana stripe.js v3
+      ✓ should reject missing first_name_kanji no stripe.js
+      ✓ should reject missing first_name_kanji stripe.js v3
+      ✓ should reject missing gender no stripe.js
+      ✓ should reject missing gender stripe.js v3
+      ✓ should reject missing last_name_kana no stripe.js
+      ✓ should reject missing last_name_kana stripe.js v3
+      ✓ should reject missing last_name_kanji no stripe.js
+      ✓ should reject missing last_name_kanji stripe.js v3
+      ✓ should reject missing id_number no stripe.js
+      ✓ should reject missing id_number stripe.js v3
+      ✓ should reject missing ssn_last_4 no stripe.js
+      ✓ should reject missing ssn_last_4 stripe.js v3
+      ✓ should reject missing upload verification_document_front no stripe.js
+      ✓ should reject missing upload verification_document_front stripe.js v3
+      ✓ should reject missing upload verification_document_back no stripe.js
+      ✓ should reject missing upload verification_document_back stripe.js v3
+      ✓ should reject missing upload verification_additional_document_front no stripe.js
+      ✓ should reject missing upload verification_additional_document_front stripe.js v3
+      ✓ should reject missing upload verification_additional_document_back no stripe.js
+      ✓ should reject missing upload verification_additional_document_back stripe.js v3
+      ✓ should update person (screenshots) no stripe.js
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
+http://207.246.72.230:8081/account/connect/person?personid=person_GvCA1884hNrduM
+      ✓ should update person stripe.js v3
 
   /account/connect/edit-stripe-account
     EditStripeAccount#BEFORE
-      ✓ should reject invalid registration
+      ✓ should reject missing registration
     EditStripeAccount#GET
-      ✓ should have element for business_profile_mcc
-      ✓ should have element for business_profile_url
-      ✓ should have element for address_city
-      ✓ should have element for address_line1
-      ✓ should have element for address_postal_code
-      ✓ should have element for name
-      ✓ should have element for phone
-      ✓ should have element for tax_id
-      ✓ should have element for dob_day
-      ✓ should have element for dob_month
-      ✓ should have element for dob_year
-      ✓ should have element for first_name
-      ✓ should have element for last_name
-      ✓ should have element for email
-      ✓ should have element for address_state
-      ✓ should have element for address_kana_city
-      ✓ should have element for address_kana_line1
-      ✓ should have element for address_kana_postal_code
-      ✓ should have element for address_kana_state
-      ✓ should have element for address_kana_town
-      ✓ should have element for address_kanji_city
-      ✓ should have element for address_kanji_line1
-      ✓ should have element for address_kanji_postal_code
-      ✓ should have element for address_kanji_state
-      ✓ should have element for address_kanji_town
-      ✓ should have element for name_kana
-      ✓ should have element for name_kanji
-      ✓ should have element for first_name_kana
-      ✓ should have element for first_name_kanji
-      ✓ should have element for gender
-      ✓ should have element for last_name_kana
-      ✓ should have element for last_name_kanji
-      ✓ should have element for id_number
-      ✓ should have element for ssn_last_4
-      ✓ should have element for verification_document
-      ✓ should have element for verification_additional_document
+      ✓ should have element for business_profile_mcc (company)
+      ✓ should have element for business_profile_url (company)
+      ✓ should have element for address_city (company)
+      ✓ should have element for address_line1 (company)
+      ✓ should have element for address_postal_code (company)
+      ✓ should have element for name (company)
+      ✓ should have element for phone (company)
+      ✓ should have element for tax_id (company)
+      ✓ should have element for address_state (company)
+      ✓ should have element for address_kana_city (company)
+      ✓ should have element for address_kana_line1 (company)
+      ✓ should have element for address_kana_postal_code (company)
+      ✓ should have element for address_kana_state (company)
+      ✓ should have element for address_kana_town (company)
+      ✓ should have element for address_kanji_city (company)
+      ✓ should have element for address_kanji_line1 (company)
+      ✓ should have element for address_kanji_postal_code (company)
+      ✓ should have element for address_kanji_state (company)
+      ✓ should have element for address_kanji_town (company)
+      ✓ should have element for name_kana (company)
+      ✓ should have element for name_kanji (company)
+      ✓ should have element for address_city (individual)
+      ✓ should have element for address_line1 (individual)
+      ✓ should have element for address_postal_code (individual)
+      ✓ should have element for dob_day (individual)
+      ✓ should have element for dob_month (individual)
+      ✓ should have element for dob_year (individual)
+      ✓ should have element for phone (individual)
+      ✓ should have element for first_name (individual)
+      ✓ should have element for last_name (individual)
+      ✓ should have element for email (individual)
+      ✓ should have element for business_profile_mcc (individual)
+      ✓ should have element for business_profile_url (individual)
+      ✓ should have element for address_state (individual)
+      ✓ should have element for address_kana_city (individual)
+      ✓ should have element for address_kana_line1 (individual)
+      ✓ should have element for address_kana_postal_code (individual)
+      ✓ should have element for address_kana_state (individual)
+      ✓ should have element for address_kana_town (individual)
+      ✓ should have element for address_kanji_city (individual)
+      ✓ should have element for address_kanji_line1 (individual)
+      ✓ should have element for address_kanji_postal_code (individual)
+      ✓ should have element for address_kanji_state (individual)
+      ✓ should have element for address_kanji_town (individual)
+      ✓ should have element for first_name_kana (individual)
+      ✓ should have element for first_name_kanji (individual)
+      ✓ should have element for gender (individual)
+      ✓ should have element for last_name_kana (individual)
+      ✓ should have element for last_name_kanji (individual)
+      ✓ should have element for id_number (individual)
+      ✓ should have element for ssn_last_4 (individual)
+      ✓ should have upload element for verification_document (individual)
+      ✓ should have upload element for verification_additional_document (individual)
     EditStripeAccount#POST
-      ✓ should reject invalid business_profile_mcc
-      ✓ should reject invalid business_profile_url
-      ✓ should reject invalid address_city
-      ✓ should reject invalid address_line1
-      ✓ should reject invalid address_postal_code
-      ✓ should reject invalid name
-      ✓ should reject invalid phone
-      ✓ should reject invalid tax_id
-      ✓ should reject invalid dob_day
-      ✓ should reject invalid dob_month
-      ✓ should reject invalid dob_year
-      ✓ should reject invalid first_name
-      ✓ should reject invalid last_name
-      ✓ should reject invalid email
-      ✓ should reject invalid address_state
-      ✓ should reject invalid address_kana_city
-      ✓ should reject invalid address_kana_line1
-      ✓ should reject invalid address_kana_postal_code
-      ✓ should reject invalid address_kana_state
-      ✓ should reject invalid address_kana_town
-      ✓ should reject invalid address_kanji_city
-      ✓ should reject invalid address_kanji_line1
-      ✓ should reject invalid address_kanji_postal_code
-      ✓ should reject invalid address_kanji_state
-      ✓ should reject invalid address_kanji_town
-      ✓ should reject invalid name_kana
-      ✓ should reject invalid name_kanji
-      ✓ should reject invalid first_name_kana
-      ✓ should reject invalid first_name_kanji
-      ✓ should reject invalid gender
-      ✓ should reject invalid last_name_kana
-      ✓ should reject invalid last_name_kanji
-      ✓ should reject invalid id_number
-      ✓ should reject invalid ssn_last_4
-      ✓ should reject invalid verification_document_front (individual)
-      ✓ should reject invalid verification_document_back (individual)
-      ✓ should reject invalid verification_additional_document_front (individual)
-      ✓ should reject invalid verification_additional_document_back (individual)
-      ✓ should update registration (individual) (screenshots)
-      ✓ should update registration (company)
+      ✓ should reject missing business_profile_mcc no stripe.js (company)
+      ✓ should reject missing business_profile_mcc stripe.js v3 (company)
+      ✓ should reject missing business_profile_url no stripe.js (company)
+      ✓ should reject missing business_profile_url stripe.js v3 (company)
+      ✓ should reject missing address_city no stripe.js (company)
+      ✓ should reject missing address_city stripe.js v3 (company)
+      ✓ should reject missing address_line1 no stripe.js (company)
+      ✓ should reject missing address_line1 stripe.js v3 (company)
+      ✓ should reject missing address_postal_code no stripe.js (company)
+      ✓ should reject missing address_postal_code stripe.js v3 (company)
+      ✓ should reject missing name no stripe.js (company)
+      ✓ should reject missing name stripe.js v3 (company)
+      ✓ should reject missing phone no stripe.js (company)
+      ✓ should reject missing phone stripe.js v3 (company)
+      ✓ should reject missing tax_id no stripe.js (company)
+      ✓ should reject missing tax_id stripe.js v3 (company)
+      ✓ should reject missing address_state no stripe.js (company)
+      ✓ should reject missing address_state stripe.js v3 (company)
+      ✓ should reject missing address_kana_city no stripe.js (company)
+      ✓ should reject missing address_kana_city stripe.js v3 (company)
+      ✓ should reject missing address_kana_line1 no stripe.js (company)
+      ✓ should reject missing address_kana_line1 stripe.js v3 (company)
+      ✓ should reject missing address_kana_postal_code no stripe.js (company)
+      ✓ should reject missing address_kana_postal_code stripe.js v3 (company)
+      ✓ should reject missing address_kana_state no stripe.js (company)
+      ✓ should reject missing address_kana_state stripe.js v3 (company)
+      ✓ should reject missing address_kana_town no stripe.js (company)
+      ✓ should reject missing address_kana_town stripe.js v3 (company)
+      ✓ should reject missing address_kanji_city no stripe.js (company)
+      ✓ should reject missing address_kanji_city stripe.js v3 (company)
+      ✓ should reject missing address_kanji_line1 no stripe.js (company)
+      ✓ should reject missing address_kanji_line1 stripe.js v3 (company)
+      ✓ should reject missing address_kanji_postal_code no stripe.js (company)
+      ✓ should reject missing address_kanji_postal_code stripe.js v3 (company)
+      ✓ should reject missing address_kanji_state no stripe.js (company)
+      ✓ should reject missing address_kanji_state stripe.js v3 (company)
+      ✓ should reject missing address_kanji_town no stripe.js (company)
+      ✓ should reject missing address_kanji_town stripe.js v3 (company)
+      ✓ should reject missing name_kana no stripe.js (company)
+      ✓ should reject missing name_kana stripe.js v3 (company)
+      ✓ should reject missing name_kanji no stripe.js (company)
+      ✓ should reject missing name_kanji stripe.js v3 (company)
+      ✓ should reject missing address_city no stripe.js (individual)
+      ✓ should reject missing address_city stripe.js v3 (individual)
+      ✓ should reject missing address_line1 no stripe.js (individual)
+      ✓ should reject missing address_line1 stripe.js v3 (individual)
+      ✓ should reject missing address_postal_code no stripe.js (individual)
+      ✓ should reject missing address_postal_code stripe.js v3 (individual)
+      ✓ should reject missing dob_day no stripe.js (individual)
+      ✓ should reject missing dob_day stripe.js v3 (individual)
+      ✓ should reject missing dob_month no stripe.js (individual)
+      ✓ should reject missing dob_month stripe.js v3 (individual)
+      ✓ should reject missing dob_year no stripe.js (individual)
+      ✓ should reject missing dob_year stripe.js v3 (individual)
+      ✓ should reject missing phone no stripe.js (individual)
+      ✓ should reject missing phone stripe.js v3 (individual)
+      ✓ should reject missing first_name no stripe.js (individual)
+      ✓ should reject missing first_name stripe.js v3 (individual)
+      ✓ should reject missing last_name no stripe.js (individual)
+      ✓ should reject missing last_name stripe.js v3 (individual)
+      ✓ should reject missing email no stripe.js (individual)
+      ✓ should reject missing email stripe.js v3 (individual)
+      ✓ should reject missing business_profile_mcc no stripe.js (individual)
+      ✓ should reject missing business_profile_mcc stripe.js v3 (individual)
+      ✓ should reject missing business_profile_url no stripe.js (individual)
+      ✓ should reject missing business_profile_url stripe.js v3 (individual)
+      ✓ should reject missing address_state no stripe.js (individual)
+      ✓ should reject missing address_state stripe.js v3 (individual)
+      ✓ should reject missing address_kana_city no stripe.js (individual)
+      ✓ should reject missing address_kana_city stripe.js v3 (individual)
+      ✓ should reject missing address_kana_line1 no stripe.js (individual)
+      ✓ should reject missing address_kana_line1 stripe.js v3 (individual)
+      ✓ should reject missing address_kana_postal_code no stripe.js (individual)
+      ✓ should reject missing address_kana_postal_code stripe.js v3 (individual)
+      ✓ should reject missing address_kana_state no stripe.js (individual)
+      ✓ should reject missing address_kana_state stripe.js v3 (individual)
+      ✓ should reject missing address_kana_town no stripe.js (individual)
+      ✓ should reject missing address_kana_town stripe.js v3 (individual)
+      ✓ should reject missing address_kanji_city no stripe.js (individual)
+      ✓ should reject missing address_kanji_city stripe.js v3 (individual)
+      ✓ should reject missing address_kanji_line1 no stripe.js (individual)
+      ✓ should reject missing address_kanji_line1 stripe.js v3 (individual)
+      ✓ should reject missing address_kanji_postal_code no stripe.js (individual)
+      ✓ should reject missing address_kanji_postal_code stripe.js v3 (individual)
+      ✓ should reject missing address_kanji_state no stripe.js (individual)
+      ✓ should reject missing address_kanji_state stripe.js v3 (individual)
+      ✓ should reject missing address_kanji_town no stripe.js (individual)
+      ✓ should reject missing address_kanji_town stripe.js v3 (individual)
+      ✓ should reject missing first_name_kana no stripe.js (individual)
+      ✓ should reject missing first_name_kana stripe.js v3 (individual)
+      ✓ should reject missing first_name_kanji no stripe.js (individual)
+      ✓ should reject missing first_name_kanji stripe.js v3 (individual)
+      ✓ should reject missing gender no stripe.js (individual)
+      ✓ should reject missing gender stripe.js v3 (individual)
+      ✓ should reject missing last_name_kana no stripe.js (individual)
+      ✓ should reject missing last_name_kana stripe.js v3 (individual)
+      ✓ should reject missing last_name_kanji no stripe.js (individual)
+      ✓ should reject missing last_name_kanji stripe.js v3 (individual)
+      ✓ should reject missing id_number no stripe.js (individual)
+      ✓ should reject missing id_number stripe.js v3 (individual)
+      ✓ should reject missing ssn_last_4 no stripe.js (individual)
+      ✓ should reject missing ssn_last_4 stripe.js v3 (individual)
+      ✓ should reject missing upload verification_document_front no stripe.js (individual)
+      ✓ should reject missing upload verification_document_front stripe.js v3 (individual)
+      ✓ should reject missing upload verification_document_back no stripe.js (individual)
+      ✓ should reject missing upload verification_document_back stripe.js v3 (individual)
+      ✓ should reject missing upload verification_additional_document_front no stripe.js (individual)
+      ✓ should reject missing upload verification_additional_document_front stripe.js v3 (individual)
+      ✓ should reject missing upload verification_additional_document_back no stripe.js (individual)
+      ✓ should reject missing upload verification_additional_document_back stripe.js v3 (individual)
+      ✓ should update registration no stripe.js (individual) (screenshots)
+      ✓ should update registration no stripe.js (company)
+      ✓ should update registration stripe.js v3 (individual) (screenshots)
+      ✓ should update registration stripe.js v3 (company)
 
   /account/connect
     Index#BEFORE
@@ -1224,5 +1381,5 @@
       ✓ environment STRIPE_JS
 
 
-  807 passing (3h)
+  931 passing (3h)
 

@@ -5,6 +5,9 @@ global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
 const connect = require('./index.js')
+for (const x in global){ 
+  console.log(x)
+}
 if (process.env.GENERATE_COUNTRY) {
   connect.countrySpecs = [
     connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
@@ -111,17 +114,6 @@ before(async () => {
     await deleteOldWebhooks()
   } catch (error) {
   }
-  if (!process.env.NGROK &&
-      !process.env.LOCAL_TUNNEL &&
-      !process.env.LOCALHOST_RUN &&
-      !process.env.PUBLIC_IP) {
-    const webhook = await stripe.webhookEndpoints.create({
-      connect: true,
-      url: `${global.dashboardServer}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList
-    }, stripeKey)
-    global.connectWebhookEndPointSecret = webhook.secret
-  }
 })
 
 async function deleteOldWebhooks () {
@@ -207,12 +199,8 @@ beforeEach(async () => {
   global.stripeJS = false
   global.maximumStripeRetries = 0
   global.webhooks = []
-  if (process.env.NGROK || process.env.PUBLIC_IP || process.env.LOCAL_TUNNEL || process.env.LOCALHOST_RUN) {
-    try {
-      await deleteOldWebhooks()
-    } catch (error) {
-    }
-  }
+  let newAddress
+  await deleteOldWebhooks()
   if (process.env.NGROK) {
     ngrok.kill()
     tunnel = null
@@ -231,36 +219,21 @@ beforeEach(async () => {
         if (!tunnel) {
           continue
         }
+        newAddress = tunnel
         break
       } catch (error) {
         continue
       }
     }
-    const webhook = await stripe.webhookEndpoints.create({
-      connect: true,
-      url: `${tunnel}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList
-    }, stripeKey)
-    global.connectWebhookEndPointSecret = webhook.secret
   } else if (process.env.PUBLIC_IP) {
     const ip = await publicIP.v4()
-    const webhook = await stripe.webhookEndpoints.create({
-      connect: true,
-      url: `http://${ip}:${process.env.PORT}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList
-    }, stripeKey)
-    global.connectWebhookEndPointSecret = webhook.secret
+    newAddress = `http://${ip}:${process.env.PORT}`
   } else if (process.env.LOCAL_TUNNEL) {
     if (tunnel) {
       tunnel.close()
     }
     tunnel = await localTunnel({ port: process.env.PORT, local_https: false, host: 'http://localtunnel.me' })
-    const webhook = await stripe.webhookEndpoints.create({
-      connect: true,
-      url: `${tunnel.url}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList
-    }, stripeKey)
-    global.connectWebhookEndPointSecret = webhook.secret
+    newAddress = tunnel.url
   } else if (process.env.LOCALHOST_RUN) {
     if (localhostRun) {
       localhostRun.stdin.pause()
@@ -268,13 +241,14 @@ beforeEach(async () => {
     }
     const asyncLocalHostRun = util.promisify(createLocalHostRun)
     const url = await asyncLocalHostRun()
-    const webhook = await stripe.webhookEndpoints.create({
-      connect: true,
-      url: `${url}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList
-    }, stripeKey)
-    global.connectWebhookEndPointSecret = webhook.secret
+    newAddress = url
   }
+  const webhook = await stripe.webhookEndpoints.create({
+    connect: true,
+    url: `${newAddress}/webhooks/connect/index-connect-data`,
+    enabled_events: eventList
+  }, stripeKey)
+  global.connectWebhookEndPointSecret = webhook.secret
 })
 
 async function createStripeAccount (user, properties) {
