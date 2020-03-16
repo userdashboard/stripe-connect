@@ -380,6 +380,7 @@ describe('/account/connect/edit-person', () => {
       })
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.dob.year`)
       await TestHelper.waitForPersonRequirement(user, user.representative.id, 'dob.year')
+      global.stripeJS = 3
       const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
       req.account = user.account
       req.session = user.session
@@ -395,6 +396,19 @@ describe('/account/connect/edit-person', () => {
           })
           if (loaded) {
             break
+          }
+          await page.waitFor(100)
+        }
+      }
+      req.waitFormComplete = async (page) => {
+        while (true) {
+          try {
+            const url = await page.url()
+            console.log(url)
+            if (url.indexOf('edit-person') === -1) {
+              break
+            }
+          } catch (error) {
           }
           await page.waitFor(100)
         }
