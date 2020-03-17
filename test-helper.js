@@ -5,9 +5,6 @@ global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
 const connect = require('./index.js')
-for (const x in global){ 
-  console.log(x)
-}
 if (process.env.GENERATE_COUNTRY) {
   connect.countrySpecs = [
     connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
