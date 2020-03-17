@@ -101,95 +101,12 @@ module.exports.createRequest = (rawURL, method) => {
   return req
 }
 
-let tunnel
-before(async () => {
-  try {
-    await deleteOldStripeAccounts()
-  } catch (error) {
-  }
-  try {
-    await deleteOldWebhooks()
-  } catch (error) {
-  }
-})
-
-async function deleteOldWebhooks () {
-  let webhooks = await stripe.webhookEndpoints.list(stripeKey)
-  while (webhooks.data && webhooks.data.length) {
-    for (const webhook of webhooks.data) {
-      if (webhook === 0) {
-        continue
-      }
-      try {
-        await stripe.webhookEndpoints.del(webhook.id, stripeKey)
-      } catch (error) {
-      }
-    }
-    try {
-      webhooks = await stripe.webhookEndpoints.list(stripeKey)
-    } catch (error) {
-      webhooks = { data: [0] }
-    }
-  }
-}
-
-async function deleteOldStripeAccounts () {
-  let accounts = await stripe.accounts.list(stripeKey)
-  while (accounts.data && accounts.data.length) {
-    for (const account of accounts.data) {
-      try {
-        await stripe.accounts.del(account.id, stripeKey)
-      } catch (error) {
-      }
-    }
-    try {
-      accounts = await stripe.accounts.list(stripeKey)
-    } catch (error) {
-    }
-  }
-}
-
-function createLocalHostRun (callback) {
-  const spawn = require('child_process').spawn
-  localhostRun = spawn('ssh', ['-T', '-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + process.env.PORT, 'ssh.localhost.run'])
-  localhostRun.stdout.on('data', async (log) => {
-    const url = log.toString().split(' ').pop().trim()
-    return callback(null, url)
-  })
-  localhostRun.stderr.on('data', async (log) => {
-    console.log('localhost.run error', log.toString())
-  })
-}
-
-afterEach(async () => {
-  try {
-    await deleteOldStripeAccounts()
-  } catch (error) {
-  }
-})
-
-after(async () => {
-  if (process.env.NGROK) {
-    ngrok.kill()
-  } else if (process.env.LOCAL_TUNNEL) {
-    tunnel.close()
-  } else if (process.env.LOCALHOST_RUN) {
-    localhostRun.stdin.pause()
-    localhostRun.kill()
-  }
-  try {
-    await deleteOldStripeAccounts()
-  } catch (error) {
-  }
-  try {
-    await deleteOldWebhooks()
-  } catch (error) {
-  }
-})
-
 const helperRoutes = require('./test-helper-routes.js')
-
+let tunnel
+let firstRun = false
 beforeEach(async () => {
+  await deleteOldStripeAccounts()
+  await deleteOldWebhooks()
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
@@ -197,9 +114,10 @@ beforeEach(async () => {
   global.maximumStripeRetries = 0
   global.webhooks = []
   let newAddress
-  await deleteOldWebhooks()
   if (process.env.NGROK) {
-    ngrok.kill()
+    if (ngrok) {
+      ngrok.kill()
+    }
     tunnel = null
     while (!tunnel) {
       try {
@@ -239,14 +157,103 @@ beforeEach(async () => {
     const asyncLocalHostRun = util.promisify(createLocalHostRun)
     const url = await asyncLocalHostRun()
     newAddress = url
+  } else if (firstRun) {
+    newAddress = global.dashboardServer
+    firstRun = false
   }
-  const webhook = await stripe.webhookEndpoints.create({
-    connect: true,
-    url: `${newAddress}/webhooks/connect/index-connect-data`,
-    enabled_events: eventList
-  }, stripeKey)
-  global.connectWebhookEndPointSecret = webhook.secret
+  if (newAddress) {
+    const webhook = await stripe.webhookEndpoints.create({
+      connect: true,
+      url: `${newAddress}/webhooks/connect/index-connect-data`,
+      enabled_events: eventList
+    }, stripeKey)
+    global.connectWebhookEndPointSecret = webhook.secret
+  }
 })
+
+afterEach(async () => {
+  await deleteOldStripeAccounts()
+  await deleteOldWebhooks()
+})
+
+after(async () => {
+  if (process.env.NGROK) {
+    if (ngrok) {
+      ngrok.kill()
+    }
+  } else if (process.env.LOCAL_TUNNEL) {
+    if (tunnel) {
+      tunnel.close()
+    }
+  } else if (process.env.LOCALHOST_RUN) {
+    if (localhostRun) {
+      localhostRun.stdin.pause()
+      localhostRun.kill()
+    }
+  }
+})
+
+async function deleteOldWebhooks () {
+  let webhooks
+  while (true) {
+    try {
+      webhooks = await stripe.webhookEndpoints.list(stripeKey)
+      break
+    } catch (error) {
+    }
+  }
+  while (webhooks.data && webhooks.data.length) {
+    for (const webhook of webhooks.data) {
+      if (webhook === 0) {
+        continue
+      }
+      try {
+        await stripe.webhookEndpoints.del(webhook.id, stripeKey)
+      } catch (error) {
+      }
+    }
+    try {
+      webhooks = await stripe.webhookEndpoints.list(stripeKey)
+    } catch (error) {
+      webhooks = { data: [0] }
+    }
+  }
+}
+
+async function deleteOldStripeAccounts () {
+  let accounts
+  while(true) {
+    try {
+      accounts = await stripe.accounts.list(stripeKey)
+      break
+    } catch (error) {
+    }
+  }
+  while (accounts.data && accounts.data.length) {
+    for (const account of accounts.data) {
+      try {
+        await stripe.accounts.del(account.id, stripeKey)
+      } catch (error) {
+      }
+    }
+    try {
+      accounts = await stripe.accounts.list(stripeKey)
+    } catch (error) {
+    }
+  }
+}
+
+function createLocalHostRun (callback) {
+  const spawn = require('child_process').spawn
+  localhostRun = spawn('ssh', ['-T', '-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + process.env.PORT, 'ssh.localhost.run'])
+  localhostRun.stdout.on('data', async (log) => {
+    const url = log.toString().split(' ').pop().trim()
+    return callback(null, url)
+  })
+  localhostRun.stderr.on('data', async (log) => {
+    console.log('localhost.run error', log.toString())
+  })
+}
 
 async function createStripeAccount (user, properties) {
   const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
