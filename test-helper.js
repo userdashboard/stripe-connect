@@ -103,7 +103,7 @@ module.exports.createRequest = (rawURL, method) => {
 
 const helperRoutes = require('./test-helper-routes.js')
 let tunnel
-let firstRun = false
+let firstRun = true
 beforeEach(async () => {
   await deleteOldStripeAccounts()
   await deleteOldWebhooks()
