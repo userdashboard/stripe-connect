@@ -404,7 +404,6 @@ describe('/account/connect/edit-person', () => {
         while (true) {
           try {
             const url = await page.url()
-            console.log(url)
             if (url.indexOf('edit-person') === -1) {
               break
             }
