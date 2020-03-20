@@ -173,7 +173,6 @@ beforeEach(async () => {
 
 afterEach(async () => {
   await deleteOldStripeAccounts()
-  await deleteOldWebhooks()
 })
 
 after(async () => {
