@@ -106,7 +106,6 @@ let tunnel
 let firstRun = true
 beforeEach(async () => {
   await deleteOldStripeAccounts()
-  await deleteOldWebhooks()
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
@@ -162,6 +161,7 @@ beforeEach(async () => {
     firstRun = false
   }
   if (newAddress) {
+    await deleteOldWebhooks()
     const webhook = await stripe.webhookEndpoints.create({
       connect: true,
       url: `${newAddress}/webhooks/connect/index-connect-data`,
