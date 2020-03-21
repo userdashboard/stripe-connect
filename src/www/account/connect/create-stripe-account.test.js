@@ -26,7 +26,6 @@ describe('/account/connect/create-stripe-account', () => {
         type: 'company',
         country: 'AT'
       }
-      await req.post()
       const result = await req.post()
       req.filename = __filename
       req.screenshots = [
