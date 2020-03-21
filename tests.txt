@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.38 test /root/workspaces/stripe-connect
+> @userdashboard/stripe-connect@1.0.40 test /root/workspaces/stripe-connect
 > mocha --exit --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'
 
 
@@ -256,39 +256,6 @@
       ✓ should reject missing upload verification_additional_document_back no stripe.js
       ✓ should reject missing upload verification_additional_document_back stripe.js v3
       ✓ should update person (screenshots) no stripe.js
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/edit-person?personid=person_GvCA1884hNrduM
-http://207.246.72.230:8081/account/connect/person?personid=person_GvCA1884hNrduM
       ✓ should update person stripe.js v3
 
   /account/connect/edit-stripe-account
