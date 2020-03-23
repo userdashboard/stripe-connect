@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.42 test /root/workspaces/stripe-connect
+> @userdashboard/stripe-connect@1.0.43 test /root/workspaces/stripe-connect
 > mocha --exit --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'
 
 
@@ -426,8 +426,8 @@
       ✓ should reject missing upload verification_additional_document_front stripe.js v3 (individual)
       ✓ should reject missing upload verification_additional_document_back no stripe.js (individual)
       ✓ should reject missing upload verification_additional_document_back stripe.js v3 (individual)
-      ✓ should update registration no stripe.js (individual) (screenshots)
-      ✓ should update registration no stripe.js (company)
+      ✓ should update registration no stripe.js (individual)
+      ✓ should update registration no stripe.js
       ✓ should update registration stripe.js v3 (individual) (screenshots)
       ✓ should update registration stripe.js v3 (company)
 
