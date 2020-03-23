@@ -24,7 +24,7 @@ describe('/account/connect/create-stripe-account', () => {
       req.session = user.session
       req.body = {
         type: 'company',
-        country: 'AT'
+        country: process.env.GENERATE_COUNTRY || 'US'
       }
       req.filename = __filename
       req.screenshots = [
