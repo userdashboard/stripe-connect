@@ -401,7 +401,7 @@ describe('/account/connect/edit-stripe-account', async () => {
     //   })
     // }
 
-    it('should update registration no stripe.js (individual) (screenshots)', async () => {
+    it('should update registration no stripe.js (individual)', async () => {
       const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -418,14 +418,6 @@ describe('/account/connect/edit-stripe-account', async () => {
         verification_additional_document_front: TestHelper['success_id_scan_back.png'],
         verification_additional_document_back: TestHelper['success_id_scan_back.png']
       }
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#account-menu-container' },
-        { click: '/account/connect' },
-        { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
-        { click: `/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}` },
-        { fill: '#submit-form' }
-      ]
       const result = await req.post()
       const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('message-container')
@@ -433,7 +425,7 @@ describe('/account/connect/edit-stripe-account', async () => {
       assert.strictEqual(message.attr.template, 'success')
     })
 
-    it('should update registration no stripe.js (company)', async () => {
+    it('should update registration no stripe.js', async () => {
       const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
