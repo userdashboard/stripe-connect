@@ -7,7 +7,7 @@ else
   PACKAGE="${PACKAGE/  /}"
 fi
 bash test.sh > tests.txt || exit 1
-FAST_START=true NODE_ENV=sitemap bash start-dev.sh || exit 1
+FAST_START=true EXIT_ON_START=true NODE_ENV=sitemap bash start-dev.sh || exit 1
 git add . || exit 1
 git commit -m "Version $VERSION " || exit 1
 git push origin master || exit 1
