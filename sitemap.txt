@@ -1,5 +1,5 @@
-@userdashboard/dashboard 1.0.61
-https://stripe-connect-12311.serveo.net
+@userdashboard/dashboard 1.0.145
+http://207.246.72.230:8081
 
 Administrator menu:
 /administrator/connect "Stripe Connect module"
@@ -16,13 +16,13 @@ Special HTML files:
 @userdashboard/dashboard/src/redirect.html
 
 Dashboard modules:
-@userdashboard/stripe-connect (1.0.22)
-@userdashboard/maxmind-geoip (1.0.40)
+@userdashboard/stripe-connect (1.0.46)
+@userdashboard/maxmind-geoip (1.0.48)
 
 Server handlers:
-@userdashboard/maxmind-geoip/src/server/bind-country.js
 /src/server/bind-ip.js
 /src/server/bind-stripekey.js
+@userdashboard/maxmind-geoip/src/server/bind-ip.js
 
 URL ---------------------------------------------------- AUTH - TEMPLATE - HTTP REQUESTS - NODEJS ------------------------- HTML -----------------------
 /                                                        GUEST  FULLSCREEN GET                                              /src/www                    
@@ -30,28 +30,20 @@ URL ---------------------------------------------------- AUTH - TEMPLATE - HTTP 
 /account/change-password                                                   GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/change-username                                                   GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/connect                                                           GET             /src/www                         /src/www                    
-/account/connect/beneficial-owner                                          GET             /src/www                         /src/www                    
-/account/connect/beneficial-owners                                         GET             /src/www                         /src/www                    
-/account/connect/company-director                                          GET             /src/www                         /src/www                    
-/account/connect/company-directors                                         GET             /src/www                         /src/www                    
-/account/connect/create-beneficial-owner                        FULLSCREEN GET POST        /src/www                         /src/www                    
-/account/connect/create-company-director                        FULLSCREEN GET POST        /src/www                         /src/www                    
-/account/connect/create-registration                                       GET POST        /src/www                         /src/www                    
-/account/connect/delete-beneficial-owner                                   GET POST        /src/www                         /src/www                    
-/account/connect/delete-company-director                                   GET POST        /src/www                         /src/www                    
+/account/connect/create-person                                             GET POST        /src/www                         /src/www                    
+/account/connect/create-stripe-account                                     GET POST        /src/www                         /src/www                    
+/account/connect/delete-person                                             GET POST        /src/www                         /src/www                    
 /account/connect/delete-stripe-account                                     GET POST        /src/www                         /src/www                    
-/account/connect/edit-beneficial-owner                          FULLSCREEN GET POST        /src/www                         /src/www                    
-/account/connect/edit-company-director                          FULLSCREEN GET POST        /src/www                         /src/www                    
-/account/connect/edit-company-registration                      FULLSCREEN GET POST        /src/www                         /src/www                    
-/account/connect/edit-individual-registration                   FULLSCREEN GET POST        /src/www                         /src/www                    
 /account/connect/edit-payment-information                                  GET POST        /src/www                         /src/www                    
-/account/connect/resubmit-beneficial-owner-id                              GET                                              /src/www                    
-/account/connect/resubmit-personal-id-scan                                 GET                                              /src/www                    
-/account/connect/resubmit-registration                                     GET                                              /src/www                    
+/account/connect/edit-person                                    FULLSCREEN GET POST        /src/www                         /src/www                    
+/account/connect/edit-stripe-account                            FULLSCREEN GET POST        /src/www                         /src/www                    
+/account/connect/person                                                    GET             /src/www                         /src/www                    
+/account/connect/persons                                                   GET             /src/www                         /src/www                    
 /account/connect/stripe-account                                            GET             /src/www                         /src/www                    
 /account/connect/stripe-accounts                                           GET             /src/www                         /src/www                    
-/account/connect/submit-company-registration                               GET POST        /src/www                         /src/www                    
-/account/connect/submit-individual-registration                            GET POST        /src/www                         /src/www                    
+/account/connect/submit-beneficial-owners                                  GET POST        /src/www                         /src/www                    
+/account/connect/submit-company-directors                                  GET POST        /src/www                         /src/www                    
+/account/connect/submit-stripe-account                                     GET POST        /src/www                         /src/www                    
 /account/create-profile                                                    GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/create-reset-code                                                 GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/delete-account                                                    GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
@@ -146,39 +138,30 @@ URL ---------------------------------------------------- AUTH - TEMPLATE - HTTP 
 /api/administrator/set-account-deleted                                     PATCH           @userdashboard/dashboard                                     
 /api/administrator/set-owner-account                                       PATCH           @userdashboard/dashboard                                     
 /api/user/account                                                          GET             @userdashboard/dashboard                                     
-/api/user/connect/beneficial-owner                                         GET             /src/www                                                     
-/api/user/connect/beneficial-owners                                        GET             /src/www                                                     
-/api/user/connect/beneficial-owners-count                                  GET             /src/www                                                     
-/api/user/connect/company-director                                         GET             /src/www                                                     
-/api/user/connect/company-directors                                        GET             /src/www                                                     
-/api/user/connect/company-directors-count                                  GET             /src/www                                                     
 /api/user/connect/country-spec                                             GET             /src/www                                                     
 /api/user/connect/country-specs                          GUEST             GET             /src/www                                                     
 /api/user/connect/country-specs-count                                      GET             /src/www                                                     
-/api/user/connect/create-beneficial-owner                                  POST            /src/www                                                     
-/api/user/connect/create-company-director                                  POST            /src/www                                                     
+/api/user/connect/create-person                                            POST            /src/www                                                     
 /api/user/connect/create-stripe-account                                    POST            /src/www                                                     
-/api/user/connect/delete-beneficial-owner                                  DELETE          /src/www                                                     
-/api/user/connect/delete-company-director                                  DELETE          /src/www                                                     
+/api/user/connect/delete-person                                            DELETE          /src/www                                                     
 /api/user/connect/delete-stripe-account                                    DELETE          /src/www                                                     
 /api/user/connect/payout                                                   GET             /src/www                                                     
 /api/user/connect/payouts                                                  GET             /src/www                                                     
 /api/user/connect/payouts-count                                            GET             /src/www                                                     
-/api/user/connect/resubmit-required-information                            PATCH           /src/www                                                     
-/api/user/connect/reupload-identity-document                               PATCH           /src/www                                                     
-/api/user/connect/reupload-owner-identity-document                         PATCH           /src/www                                                     
-/api/user/connect/set-company-registration-submitted                       PATCH           /src/www                                                     
-/api/user/connect/set-individual-registration-submitted                    PATCH           /src/www                                                     
+/api/user/connect/person                                                   GET             /src/www                                                     
+/api/user/connect/persons                                                  GET             /src/www                                                     
+/api/user/connect/persons-count                                            GET             /src/www                                                     
+/api/user/connect/set-beneficial-owners-submitted                          PATCH           /src/www                                                     
+/api/user/connect/set-company-directors-submitted                          PATCH           /src/www                                                     
+/api/user/connect/set-stripe-account-submitted                             PATCH           /src/www                                                     
 /api/user/connect/stripe-account                                           GET             /src/www                                                     
 /api/user/connect/stripe-account-payouts                                   GET             /src/www                                                     
 /api/user/connect/stripe-account-payouts-count                             GET             /src/www                                                     
 /api/user/connect/stripe-accounts                                          GET             /src/www                                                     
 /api/user/connect/stripe-accounts-count                                    GET             /src/www                                                     
-/api/user/connect/update-beneficial-owner                                  PATCH           /src/www                                                     
-/api/user/connect/update-company-director                                  PATCH           /src/www                                                     
-/api/user/connect/update-company-registration                              PATCH           /src/www                                                     
-/api/user/connect/update-individual-registration                           PATCH           /src/www                                                     
 /api/user/connect/update-payment-information                               PATCH           /src/www                                                     
+/api/user/connect/update-person                                            PATCH           /src/www                                                     
+/api/user/connect/update-stripe-account                                    PATCH           /src/www                                                     
 /api/user/create-account                                 GUEST             POST            @userdashboard/dashboard                                     
 /api/user/create-profile                                                   POST            @userdashboard/dashboard                                     
 /api/user/create-reset-code                                                POST            @userdashboard/dashboard                                     

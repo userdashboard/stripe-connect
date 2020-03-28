@@ -1,0 +1,599 @@
+@userdashboard/dashboard 1.0.145
+http://207.246.72.230:8081
+
+|----------------------------------------------------------------------------------------------------------------|
+| /api/administrator/connect/account-stripe-accounts                                                             |
+| RECEIVES-------------------------------| RETURNS--| EXCEPTIONS------------------------| CONFIGURATION----------|
+| required querystring accountid         | array    | invalid-accountid                 | environment PAGE_SIZE  |
+| required querystring accountid         |          |  * missing querystring accountid  |                        |
+| optional querystring offset (integer)  |          |  * invalid querystring accountid  |                        |
+| optional querystring limit (integer)   |          | invalid-account                   |                        |
+| optional querystring all (boolean)     |          |  * missing querystring accountid  |                        |
+|----------------------------------------|----------|-----------------------------------|------------------------|
+
+|--------------------------------------------------------------------------------|
+| /api/administrator/connect/account-stripe-accounts-count                       |
+| RECEIVES------------------------| RETURNS--| EXCEPTIONS------------------------|
+| required querystring accountid  | integer  | invalid-accountid                 |
+| required querystring accountid  |          |  * missing querystring accountid  |
+|                                 |          |  * invalid querystring accountid  |
+|                                 |          | invalid-account                   |
+|                                 |          |  * missing querystring accountid  |
+|---------------------------------|----------|-----------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/administrator/connect/delete-stripe-account                             |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring stripeid  | boolean  | invalid-stripeid                 |
+|                                |          |  * missing querystring stripeid  |
+|                                |          |  * invalid querystring stripeid  |
+|--------------------------------|----------|----------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/administrator/connect/payout                                            |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring payoutid  | object   | invalid-payoputid                |
+|                                |          |  * missing querystring payoutid  |
+|                                |          |  * invalid querystring payoutid  |
+|--------------------------------|----------|----------------------------------|
+
+|----------------------------------------------------------------------------|
+| /api/administrator/connect/payouts                                         |
+| RECEIVES-------------------------------| RETURNS--| CONFIGURATION----------|
+| optional querystring offset (integer)  | array    | environment PAGE_SIZE  |
+| optional querystring limit (integer)   |          |                        |
+| optional querystring all (boolean)     |          |                        |
+|----------------------------------------|----------|------------------------|
+
+|-------------------------------------------|
+| /api/administrator/connect/payouts-count  |
+| RETURNS-----------------------------------|
+| integer                                   |
+|-------------------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/administrator/connect/set-stripe-account-rejected                       |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required posted reason         | boolean  | invalid-stripeid                 |
+| required querystring stripeid  |          |  * missing querystring stripeid  |
+|                                |          |  * invalid querystring stripeid  |
+|                                |          | invalid-reason                   |
+|                                |          |  * missing posted reason         |
+|                                |          |  * invalid posted reason         |
+|--------------------------------|----------|----------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/administrator/connect/stripe-account                                    |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring stripeid  | object   | invalid-stripeid                 |
+|                                |          |  * missing querystring stripeid  |
+|                                |          |  * invalid querystring stripeid  |
+|--------------------------------|----------|----------------------------------|
+
+|---------------------------------------------------------------------------------------------------------------|
+| /api/administrator/connect/stripe-account-payouts                                                             |
+| RECEIVES-------------------------------| RETURNS--| EXCEPTIONS-----------------------| CONFIGURATION----------|
+| required querystring stripeid          | array    | invalid-stripeid                 | environment PAGE_SIZE  |
+| optional querystring offset (integer)  |          |  * missing querystring stripeid  |                        |
+| optional querystring limit (integer)   |          |  * invalid querystring stripeid  |                        |
+| optional querystring all (boolean)     |          |                                  |                        |
+|----------------------------------------|----------|----------------------------------|------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/administrator/connect/stripe-account-payouts-count                      |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring stripeid  | integer  | invalid-stripeid                 |
+|                                |          |  * missing querystring stripeid  |
+|                                |          |  * invalid querystring stripeid  |
+|--------------------------------|----------|----------------------------------|
+
+|----------------------------------------------------------------------------|
+| /api/administrator/connect/stripe-accounts                                 |
+| RECEIVES-------------------------------| RETURNS--| CONFIGURATION----------|
+| optional querystring offset (integer)  | array    | environment PAGE_SIZE  |
+| optional querystring limit (integer)   |          |                        |
+| optional querystring all (boolean)     |          |                        |
+|----------------------------------------|----------|------------------------|
+
+|---------------------------------------------------|
+| /api/administrator/connect/stripe-accounts-count  |
+| RETURNS-------------------------------------------|
+| integer                                           |
+|---------------------------------------------------|
+
+|----------------------------------------------------------------------------|
+| /api/user/connect/country-spec                                             |
+| RECEIVES----------------------| RETURNS--| EXCEPTIONS----------------------|
+| required querystring country  | object   | undefined                       |
+|                               |          |  * missing querystring country  |
+|                               |          |  * invalid querystring country  |
+|-------------------------------|----------|---------------------------------|
+
+|----------------------------------------------------------------------------|
+| /api/user/connect/country-specs                                            |
+| RECEIVES-------------------------------| RETURNS--| CONFIGURATION----------|
+| optional querystring offset (integer)  | array    | environment PAGE_SIZE  |
+| optional querystring limit (integer)   |          |                        |
+| optional querystring all (boolean)     |          |                        |
+|----------------------------------------|----------|------------------------|
+
+|----------------------------------------|
+| /api/user/connect/country-specs-count  |
+| RETURNS--------------------------------|
+| integer                                |
+|----------------------------------------|
+
+|--------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/create-person                                                                                          |
+| RECEIVES-------------------------------------------| RETURNS--| EXCEPTIONS-----------------------------------------------|
+| required posted relationship_title                 | object   | invalid-stripeid                                         |
+| required posted relationship_percent_ownership     |          |  * missing querystring stripeid                          |
+| required querystring stripeid                      |          |  * invalid querystring stripeid                          |
+| optional posted relationship_representative        |          | invalid-stripe-account                                   |
+| optionally-required posted relationship_executive  |          |  * ineligible stripe account for individuals             |
+| optional posted relationship_director              |          |  * ineligible stripe account does not require directors  |
+| optional posted relationship_owner                 |          |  * ineligible stripe account does not require owners     |
+| required posted relationship_percent_ownership     |          | invalid-account                                          |
+| required posted relationship_title                 |          |  * ineligible accessing account                          |
+|                                                    |          | invalid-relationship_percent_ownership                   |
+|                                                    |          |  * missing posted relationship_percent_ownership         |
+|                                                    |          |  * invalid posted relationship_percent_ownership         |
+|                                                    |          | invalid-relationship_title                               |
+|                                                    |          |  * missing posted relationship_title                     |
+|                                                    |          |  * invalid posted relationship_title                     |
+|                                                    |          | invalid-relationship_executive                           |
+|                                                    |          |  * invalid representative must be an executive           |
+|----------------------------------------------------|----------|----------------------------------------------------------|
+
+|--------------------------------------------------------------------------------|
+| /api/user/connect/create-stripe-account                                        |
+| RECEIVES------------------------| RETURNS--| EXCEPTIONS------------------------|
+| required posted type            | object   | invalid-accountid                 |
+| required querystring accountid  |          |  * missing querystring accountid  |
+|                                 |          |  * invalid querystring accountid  |
+|                                 |          | invalid-account                   |
+|                                 |          |  * ineligible accessing account   |
+|                                 |          | invalid-type                      |
+|                                 |          |  * missing posted type            |
+|                                 |          |  * invalid posted type            |
+|                                 |          | invalid-country                   |
+|                                 |          |  * invalid posted country         |
+|                                 |          |  * invalid posted country         |
+|---------------------------------|----------|-----------------------------------|
+
+|-------------------------------------------------------------------------------------------------|
+| /api/user/connect/delete-person                                                                 |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS------------------------------------------|
+| required querystring personid  | boolean  | invalid-personid                                    |
+|                                |          |  * missing querystring personid                     |
+|                                |          |  * invalid querystring personid                     |
+|                                |          | invalid-account                                     |
+|                                |          |  * ineligible accessing account                     |
+|                                |          | invalid-person                                      |
+|                                |          |  * ineligible querystring person is representative  |
+|--------------------------------|----------|-----------------------------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/user/connect/delete-stripe-account                                      |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring stripeid  | boolean  | invalid-stripeid                 |
+|                                |          |  * missing querystring stripeid  |
+|                                |          |  * invalid querystring stripeid  |
+|                                |          | invalid-account                  |
+|                                |          |  * ineligible accessing account  |
+|--------------------------------|----------|----------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/user/connect/payout                                                     |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring payoutid  | object   | invalid-payoutid                 |
+|                                |          |  * missing querystring payoutid  |
+|                                |          |  * invalid querystring payoutid  |
+|                                |          | invalid-account                  |
+|                                |          |  * ineligible accessing account  |
+|--------------------------------|----------|----------------------------------|
+
+|--------------------------------------------------------------------------------------|
+| /api/user/connect/payouts                                                            |
+| RECEIVES-------------------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring payoutid          | array    | invalid-payoutid                 |
+| optional querystring offset (integer)  |          |  * missing querystring payoutid  |
+| optional querystring limit (integer)   |          |  * invalid querystring payoutid  |
+| optional querystring all (boolean)     |          | invalid-account                  |
+|                                        |          |  * ineligible accessing account  |
+|----------------------------------------|----------|----------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/user/connect/payouts-count                                              |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring payoutid  | integer  | invalid-payoutid                 |
+|                                |          |  * missing querystring payoutid  |
+|                                |          |  * invalid querystring payoutid  |
+|                                |          | invalid-account                  |
+|                                |          |  * ineligible accessing account  |
+|--------------------------------|----------|----------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/user/connect/person                                                     |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring personid  | object   | invalid-personid                 |
+|                                |          |  * missing querystring personid  |
+|                                |          |  * invalid querystring personid  |
+|                                |          | invalid-account                  |
+|                                |          |  * ineligible accessing account  |
+|--------------------------------|----------|----------------------------------|
+
+|--------------------------------------------------------------------------------------------------|
+| /api/user/connect/persons                                                                        |
+| RECEIVES-------------------------------| RETURNS--| EXCEPTIONS-----------------------------------|
+| required querystring stripeid          | array    | invalid-stripeid                             |
+| optional querystring offset (integer)  |          |  * missing querystring stripeid              |
+| optional querystring limit (integer)   |          |  * invalid querystring stripeid              |
+| optional querystring all (boolean)     |          | invalid-account                              |
+|                                        |          |  * ineligible accessing account              |
+|                                        |          | invalid-stripe-account                       |
+|                                        |          |  * ineligible stripe account for individual  |
+|----------------------------------------|----------|----------------------------------------------|
+
+|------------------------------------------------------------------------------------------|
+| /api/user/connect/persons-count                                                          |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------------------|
+| required querystring stripeid  | integer  | invalid-stripeid                             |
+|                                |          |  * missing querystring stripeid              |
+|                                |          |  * invalid querystring stripeid              |
+|                                |          | invalid-account                              |
+|                                |          |  * ineligible accessing account              |
+|                                |          | invalid-stripe-account                       |
+|                                |          |  * ineligible stripe account for individual  |
+|--------------------------------|----------|----------------------------------------------|
+
+|------------------------------------------------------------------------------------------------|
+| /api/user/connect/set-beneficial-owners-submitted                                              |
+| RECEIVES-----------------------| RETURNS------| EXCEPTIONS-------------------------------------|
+| required querystring stripeid  | object (AT)  | invalid-stripeid                               |
+|                                | object (AU)  |  * missing querystring stripeid                |
+|                                | object (BE)  |  * invalid querystring stripeid                |
+|                                | object (CH)  | invalid-stripe-account                         |
+|                                | object (DE)  |  * ineligible stripe account for individual    |
+|                                | object (DK)  |  * ineligible beneficial owners are submitted  |
+|                                | object (EE)  | invalid-account                                |
+|                                | object (ES)  |  * ineligible accessing account                |
+|                                | object (FI)  |                                                |
+|                                | object (FR)  |                                                |
+|                                | object (GB)  |                                                |
+|                                | object (GR)  |                                                |
+|                                | object (IE)  |                                                |
+|                                | object (IT)  |                                                |
+|                                | object (LT)  |                                                |
+|                                | object (LU)  |                                                |
+|                                | object (LV)  |                                                |
+|                                | object (MY)  |                                                |
+|                                | object (NL)  |                                                |
+|                                | object (NO)  |                                                |
+|                                | object (NZ)  |                                                |
+|                                | object (PL)  |                                                |
+|                                | object (PT)  |                                                |
+|                                | object (SE)  |                                                |
+|                                | object (SG)  |                                                |
+|                                | object (SI)  |                                                |
+|                                | object (SK)  |                                                |
+|                                | object (US)  |                                                |
+|--------------------------------|--------------|------------------------------------------------|
+
+|------------------------------------------------------------------------------------------------|
+| /api/user/connect/set-company-directors-submitted                                              |
+| RECEIVES-----------------------| RETURNS------| EXCEPTIONS-------------------------------------|
+| required querystring stripeid  | object (AT)  | invalid-stripeid                               |
+|                                | object (AU)  |  * missing querystring stripeid                |
+|                                | object (BE)  |  * invalid querystring stripeid                |
+|                                | object (CH)  | invalid-stripe-account                         |
+|                                | object (DE)  |  * ineligible stripe account for individual    |
+|                                | object (DK)  |  * ineligible company directors are submitted  |
+|                                | object (EE)  | invalid-account                                |
+|                                | object (ES)  |  * ineligible accessing account                |
+|                                | object (FI)  |                                                |
+|                                | object (FR)  |                                                |
+|                                | object (GB)  |                                                |
+|                                | object (GR)  |                                                |
+|                                | object (IE)  |                                                |
+|                                | object (IT)  |                                                |
+|                                | object (LT)  |                                                |
+|                                | object (LU)  |                                                |
+|                                | object (LV)  |                                                |
+|                                | object (NL)  |                                                |
+|                                | object (NO)  |                                                |
+|                                | object (NZ)  |                                                |
+|                                | object (PL)  |                                                |
+|                                | object (PT)  |                                                |
+|                                | object (SE)  |                                                |
+|                                | object (SI)  |                                                |
+|                                | object (SK)  |                                                |
+|--------------------------------|--------------|------------------------------------------------|
+
+|---------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/set-stripe-account-submitted                                                                |
+| RECEIVES-----------------------| RETURNS--------------| EXCEPTIONS--------------------------------------------|
+| required querystring stripeid  | object (individual)  | invalid-stripeid                                      |
+|                                | object (company)     |  * missing querystring stripeid                       |
+|                                |                      |  * invalid querystring stripeid                       |
+|                                |                      | invalid-stripe-account                                |
+|                                |                      |  * ineligible stripe account is submitted             |
+|                                |                      | invalid-account                                       |
+|                                |                      |  * ineligible accessing account                       |
+|                                |                      | invalid-payment-details                               |
+|                                |                      |  * ineligible Stripe account missing payment details  |
+|                                |                      | invalid-registration                                  |
+|                                |                      |  * ineligible Stripe account missing information      |
+|                                |                      | invalid-person                                        |
+|                                |                      |  * ineligible company person missing information      |
+|--------------------------------|----------------------|-------------------------------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/user/connect/stripe-account                                             |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring stripeid  | object   | invalid-stripeid                 |
+|                                |          |  * missing querystring stripeid  |
+|                                |          |  * invalid querystring stripeid  |
+|                                |          | invalid-account                  |
+|                                |          |  * ineligible accessing account  |
+|--------------------------------|----------|----------------------------------|
+
+|---------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/stripe-account-payouts                                                                      |
+| RECEIVES-------------------------------| RETURNS--| EXCEPTIONS-----------------------| CONFIGURATION----------|
+| required querystring payoutid          | array    | invalid-payoutid                 | environment PAGE_SIZE  |
+| optional querystring offset (integer)  |          |  * missing querystring payoutid  |                        |
+| optional querystring limit (integer)   |          |  * invalid querystring payoutid  |                        |
+| optional querystring all (boolean)     |          | invalid-account                  |                        |
+|                                        |          |  * ineligible accessing account  |                        |
+|----------------------------------------|----------|----------------------------------|------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/user/connect/stripe-account-payouts-count                               |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring payoutid  | integer  | invalid-payoutid                 |
+|                                |          |  * missing querystring payoutid  |
+|                                |          |  * invalid querystring payoutid  |
+|                                |          | invalid-account                  |
+|                                |          |  * ineligible accessing account  |
+|--------------------------------|----------|----------------------------------|
+
+|---------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/stripe-accounts                                                                             |
+| RECEIVES-------------------------------| RETURNS--| EXCEPTIONS-----------------------| CONFIGURATION----------|
+| required querystring payoutid          | array    | invalid-payoutid                 | environment PAGE_SIZE  |
+| optional querystring offset (integer)  |          |  * missing querystring payoutid  |                        |
+| optional querystring limit (integer)   |          |  * invalid querystring payoutid  |                        |
+| optional querystring all (boolean)     |          | invalid-account                  |                        |
+|                                        |          |  * ineligible accessing account  |                        |
+|----------------------------------------|----------|----------------------------------|------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/user/connect/stripe-accounts-count                                      |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring payoutid  | integer  | invalid-payoutid                 |
+|                                |          |  * missing querystring payoutid  |
+|                                |          |  * invalid querystring payoutid  |
+|                                |          | invalid-account                  |
+|                                |          |  * ineligible accessing account  |
+|--------------------------------|----------|----------------------------------|
+
+|---------------------------------------------------------------------------------------------------------|
+| /api/user/connect/update-payment-information                                                            |
+| RECEIVES----------------------------------------| RETURNS------| EXCEPTIONS-----------------------------|
+| required posted routing_number                  | object (AT)  | invalid-stripeid                       |
+| required posted bank_code                       | object (AU)  |  * missing querystring stripeid        |
+| required posted clearing_code                   | object (BE)  |  * invalid querystring stripeid        |
+| required posted branch_code                     | object (CA)  | invalid-account                        |
+| required posted sort_code                       | object (CH)  |  * ineligible accessing account        |
+| required posted transit_number                  | object (DE)  | invalid-account_holder_name            |
+| required posted institution_number              | object (DK)  |  * missing posted account_holder_name  |
+| required posted bsb_number                      | object (EE)  | invalid-account_holder_type            |
+| required posted account_number                  | object (ES)  |  * missing posted account_holder_type  |
+| required posted iban                            | object (FI)  |  * invalid posted account_holder_type  |
+| required posted currency                        | object (FR)  | invalid-country                        |
+| required posted country                         | object (GB)  |  * missing posted country              |
+| required posted account_holder_type             | object (GR)  |  * invalid posted country              |
+| required posted account_holder_name             | object (HK)  | invalid-currency                       |
+| required querystring stripeid                   | object (IE)  |  * missing posted currency             |
+| optionally-required posted account_holder_name  | object (IT)  |  * invalid posted currency             |
+| optionally-required posted account_holder_type  | object (JP)  | invalid-iban                           |
+| optionally-required posted country              | object (LT)  |  * missing posted iban                 |
+| optionally-required posted currency             | object (LU)  |  * invalid posted iban                 |
+| optionally-required posted iban                 | object (LV)  | invalid-account_number                 |
+| optionally-required posted account_number       | object (MY)  |  * missing posted account_number       |
+| optionally-required posted bsb_number           | object (NL)  |  * invalid posted account_number       |
+| optionally-required posted institution_number   | object (NO)  | invalid-bsb_number                     |
+| optionally-required posted transit_number       | object (NZ)  |  * missing posted bsb_number           |
+| optionally-required posted sort_code            | object (PL)  | invalid-institution_number             |
+| optionally-required posted branch_code          | object (PT)  |  * missing posted institution_number   |
+| optionally-required posted clearing_code        | object (SE)  | invalid-transit_number                 |
+| optionally-required posted bank_code            | object (SG)  |  * missing posted transit_number       |
+| optionally-required posted routing_number       | object (SI)  | invalid-sort_code                      |
+|                                                 | object (SK)  |  * missing posted sort_code            |
+|                                                 | object (US)  | invalid-branch_code                    |
+|                                                 |              |  * missing posted branch_code          |
+|                                                 |              | invalid-clearing_code                  |
+|                                                 |              |  * missing posted clearing_code        |
+|                                                 |              | invalid-bank_code                      |
+|                                                 |              |  * missing posted bank_code            |
+|                                                 |              | invalid-routing_number                 |
+|                                                 |              |  * missing posted routing_number       |
+|                                                 |              |  * invalid posted routing_number       |
+|-------------------------------------------------|--------------|----------------------------------------|
+
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/update-person                                                                                                                                        |
+| RECEIVES-----------------------------------------------------------| RETURNS--| EXCEPTIONS----------------------------------------------------| CONFIGURATION----------|
+| required posted token                                              | object   | invalid-personid                                              | environment STRIPE_JS  |
+| required posted ssn_last_4                                         |          |  * missing querystring personid                               |                        |
+| required posted id_number                                          |          |  * invalid querystring personid                               |                        |
+| required posted last_name_kanji                                    |          | invalid-account                                               |                        |
+| required posted last_name_kana                                     |          |  * ineligible accessing account                               |                        |
+| required posted gender                                             |          | invalid-person                                                |                        |
+| required posted first_name_kanji                                   |          |  * ineligible querystring person has no required information  |                        |
+| required posted first_name_kana                                    |          | invalid-address_city                                          |                        |
+| required posted address_kanji_town                                 |          |  * missing posted address_city                                |                        |
+| required posted address_kanji_state                                |          | invalid-address_line1                                         |                        |
+| required posted address_kanji_postal_code                          |          |  * missing posted address_line1                               |                        |
+| required posted address_kanji_line1                                |          | invalid-address_postal_code                                   |                        |
+| required posted address_kanji_city                                 |          |  * missing posted address_postal_code                         |                        |
+| required posted address_kana_town                                  |          | invalid-dob_day                                               |                        |
+| required posted address_kana_state                                 |          |  * missing posted dob_day                                     |                        |
+| required posted address_kana_postal_code                           |          |  * invalid posted dob_day                                     |                        |
+| required posted address_kana_line1                                 |          | invalid-dob_month                                             |                        |
+| required posted address_kana_city                                  |          |  * missing posted dob_month                                   |                        |
+| required posted address_state                                      |          |  * invalid posted dob_month                                   |                        |
+| required posted email                                              |          | invalid-dob_year                                              |                        |
+| required posted last_name                                          |          |  * missing posted dob_year                                    |                        |
+| required posted first_name                                         |          |  * invalid posted dob_year                                    |                        |
+| required posted phone                                              |          | invalid-phone                                                 |                        |
+| required posted dob_year                                           |          |  * missing posted phone                                       |                        |
+| required posted dob_month                                          |          | invalid-first_name                                            |                        |
+| required posted dob_day                                            |          |  * missing posted first_name                                  |                        |
+| required posted address_postal_code                                |          | invalid-last_name                                             |                        |
+| required posted address_line1                                      |          |  * missing posted last_name                                   |                        |
+| required posted address_city                                       |          | invalid-email                                                 |                        |
+| required querystring personid                                      |          |  * missing posted email                                       |                        |
+| optionally-required posted address_city                            |          | invalid-address_state                                         |                        |
+| optionally-required posted address_line1                           |          |  * missing posted address_state                               |                        |
+| optionally-required posted address_postal_code                     |          |  * invalid posted address_state                               |                        |
+| optionally-required posted dob_day                                 |          | invalid-address_kana_city                                     |                        |
+| optionally-required posted dob_month                               |          |  * missing posted address_kana_city                           |                        |
+| optionally-required posted dob_year                                |          | invalid-address_kana_line1                                    |                        |
+| optionally-required posted phone                                   |          |  * missing posted address_kana_line1                          |                        |
+| optionally-required posted first_name                              |          | invalid-address_kana_postal_code                              |                        |
+| optionally-required posted last_name                               |          |  * missing posted address_kana_postal_code                    |                        |
+| optionally-required posted email                                   |          |  * invalid posted address_kana_postal_code                    |                        |
+| optionally-required posted address_state                           |          | invalid-address_kana_state                                    |                        |
+| optionally-required posted address_kana_city                       |          |  * missing posted address_kana_state                          |                        |
+| optionally-required posted address_kana_line1                      |          |  * invalid posted address_kana_state                          |                        |
+| optionally-required posted address_kana_postal_code                |          | invalid-address_kana_town                                     |                        |
+| optionally-required posted address_kana_state                      |          |  * missing posted address_kana_town                           |                        |
+| optionally-required posted address_kana_town                       |          |  * invalid posted address_kana_town                           |                        |
+| optionally-required posted address_kanji_city                      |          | invalid-address_kanji_city                                    |                        |
+| optionally-required posted address_kanji_line1                     |          |  * missing posted address_kanji_city                          |                        |
+| optionally-required posted address_kanji_postal_code               |          | invalid-address_kanji_line1                                   |                        |
+| optionally-required posted address_kanji_state                     |          |  * missing posted address_kanji_line1                         |                        |
+| optionally-required posted address_kanji_town                      |          | invalid-address_kanji_postal_code                             |                        |
+| optionally-required posted first_name_kana                         |          |  * missing posted address_kanji_postal_code                   |                        |
+| optionally-required posted first_name_kanji                        |          | invalid-address_kanji_state                                   |                        |
+| optionally-required posted gender                                  |          |  * missing posted address_kanji_state                         |                        |
+| optionally-required posted last_name_kana                          |          |  * invalid posted address_kanji_state                         |                        |
+| optionally-required posted last_name_kanji                         |          | invalid-address_kanji_town                                    |                        |
+| optionally-required posted id_number                               |          |  * missing posted address_kanji_town                          |                        |
+| optionally-required posted ssn_last_4                              |          | invalid-first_name_kana                                       |                        |
+| optionally-required posted verification_document_front             |          |  * missing posted first_name_kana                             |                        |
+| optionally-required posted verification_document_back              |          | invalid-first_name_kanji                                      |                        |
+| optionally-required posted verification_additional_document_front  |          |  * missing posted first_name_kanji                            |                        |
+| optionally-required posted verification_additional_document_back   |          | invalid-gender                                                |                        |
+|                                                                    |          |  * missing posted gender                                      |                        |
+|                                                                    |          |  * invalid posted gender                                      |                        |
+|                                                                    |          | invalid-last_name_kana                                        |                        |
+|                                                                    |          |  * missing posted last_name_kana                              |                        |
+|                                                                    |          | invalid-last_name_kanji                                       |                        |
+|                                                                    |          |  * missing posted last_name_kanji                             |                        |
+|                                                                    |          | invalid-id_number                                             |                        |
+|                                                                    |          |  * missing posted id_number                                   |                        |
+|                                                                    |          | invalid-ssn_last_4                                            |                        |
+|                                                                    |          |  * missing posted ssn_last_4                                  |                        |
+|                                                                    |          |  * invalid posted ssn_last_4                                  |                        |
+|                                                                    |          | invalid-token                                                 |                        |
+|                                                                    |          |  * missing posted token                                       |                        |
+|                                                                    |          |  * invalid posted token                                       |                        |
+|--------------------------------------------------------------------|----------|---------------------------------------------------------------|------------------------|
+
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/update-stripe-account                                                                                                                           |
+| RECEIVES-----------------------------------------------------------| RETURNS--------------| EXCEPTIONS-----------------------------------| CONFIGURATION----------|
+| required posted token                                              | object (company)     | invalid-stripeid                             | environment STRIPE_JS  |
+| required posted ssn_last_4                                         | object (individual)  |  * missing querystring stripeid              |                        |
+| required posted id_number                                          |                      |  * invalid querystring stripeid              |                        |
+| required posted last_name_kanji                                    |                      | invalid-account                              |                        |
+| required posted last_name_kana                                     |                      |  * ineligible accessing account              |                        |
+| required posted gender                                             |                      | invalid-business_profile_mcc                 |                        |
+| required posted first_name_kanji                                   |                      |  * missing posted business_profile_mcc       |                        |
+| required posted first_name_kana                                    |                      |  * invalid posted business_profile_mcc       |                        |
+| required posted name_kanji                                         |                      | invalid-business_profile_url                 |                        |
+| required posted name_kana                                          |                      |  * missing posted business_profile_url       |                        |
+| required posted address_kanji_town                                 |                      |  * invalid posted business_profile_url       |                        |
+| required posted address_kanji_state                                |                      | invalid-address_city                         |                        |
+| required posted address_kanji_postal_code                          |                      |  * missing posted address_city               |                        |
+| required posted address_kanji_line1                                |                      | invalid-address_line1                        |                        |
+| required posted address_kanji_city                                 |                      |  * missing posted address_line1              |                        |
+| required posted address_kana_town                                  |                      | invalid-address_postal_code                  |                        |
+| required posted address_kana_state                                 |                      |  * missing posted address_postal_code        |                        |
+| required posted address_kana_postal_code                           |                      |  * invalid posted address_postal_code        |                        |
+| required posted address_kana_line1                                 |                      | invalid-name                                 |                        |
+| required posted address_kana_city                                  |                      |  * missing posted name                       |                        |
+| required posted address_state                                      |                      | invalid-phone                                |                        |
+| required posted email                                              |                      |  * missing posted phone                      |                        |
+| required posted last_name                                          |                      |  * invalid posted phone                      |                        |
+| required posted first_name                                         |                      | invalid-tax_id                               |                        |
+| required posted dob_year                                           |                      |  * missing posted tax_id                     |                        |
+| required posted dob_month                                          |                      | invalid-dob_day                              |                        |
+| required posted dob_day                                            |                      |  * missing posted dob_day                    |                        |
+| required posted tax_id                                             |                      |  * invalid posted dob_day                    |                        |
+| required posted phone                                              |                      | invalid-dob_month                            |                        |
+| required posted name                                               |                      |  * missing posted dob_month                  |                        |
+| required posted address_postal_code                                |                      |  * invalid posted dob_month                  |                        |
+| required posted address_line1                                      |                      | invalid-dob_year                             |                        |
+| required posted address_city                                       |                      |  * missing posted dob_year                   |                        |
+| required posted business_profile_url                               |                      |  * invalid posted dob_year                   |                        |
+| required posted business_profile_mcc                               |                      | invalid-first_name                           |                        |
+| required querystring stripeid                                      |                      |  * missing posted first_name                 |                        |
+| optionally-required posted business_profile_mcc                    |                      | invalid-last_name                            |                        |
+| optionally-required posted business_profile_url                    |                      |  * missing posted last_name                  |                        |
+| optionally-required posted address_city                            |                      | invalid-email                                |                        |
+| optionally-required posted address_line1                           |                      |  * missing posted email                      |                        |
+| optionally-required posted address_postal_code                     |                      | invalid-address_state                        |                        |
+| optionally-required posted name                                    |                      |  * missing posted address_state              |                        |
+| optionally-required posted phone                                   |                      |  * invalid posted address_state              |                        |
+| optionally-required posted tax_id                                  |                      | invalid-address_kana_city                    |                        |
+| optionally-required posted dob_day                                 |                      |  * missing posted address_kana_city          |                        |
+| optionally-required posted dob_month                               |                      | invalid-address_kana_line1                   |                        |
+| optionally-required posted dob_year                                |                      |  * missing posted address_kana_line1         |                        |
+| optionally-required posted first_name                              |                      | invalid-address_kana_postal_code             |                        |
+| optionally-required posted last_name                               |                      |  * missing posted address_kana_postal_code   |                        |
+| optionally-required posted email                                   |                      | invalid-address_kana_state                   |                        |
+| optionally-required posted address_state                           |                      |  * missing posted address_kana_state         |                        |
+| optionally-required posted address_kana_city                       |                      |  * invalid posted address_kana_state         |                        |
+| optionally-required posted address_kana_line1                      |                      | invalid-address_kana_town                    |                        |
+| optionally-required posted address_kana_postal_code                |                      |  * missing posted address_kana_town          |                        |
+| optionally-required posted address_kana_state                      |                      |  * invalid posted address_kana_town          |                        |
+| optionally-required posted address_kana_town                       |                      | invalid-address_kanji_city                   |                        |
+| optionally-required posted address_kanji_city                      |                      |  * missing posted address_kanji_city         |                        |
+| optionally-required posted address_kanji_line1                     |                      | invalid-address_kanji_line1                  |                        |
+| optionally-required posted address_kanji_postal_code               |                      |  * missing posted address_kanji_line1        |                        |
+| optionally-required posted address_kanji_state                     |                      | invalid-address_kanji_postal_code            |                        |
+| optionally-required posted address_kanji_town                      |                      |  * missing posted address_kanji_postal_code  |                        |
+| optionally-required posted name_kana                               |                      | invalid-address_kanji_state                  |                        |
+| optionally-required posted name_kanji                              |                      |  * missing posted address_kanji_state        |                        |
+| optionally-required posted first_name_kana                         |                      |  * invalid posted address_kanji_state        |                        |
+| optionally-required posted first_name_kanji                        |                      | invalid-address_kanji_town                   |                        |
+| optionally-required posted gender                                  |                      |  * missing posted address_kanji_town         |                        |
+| optionally-required posted last_name_kana                          |                      | invalid-name_kana                            |                        |
+| optionally-required posted last_name_kanji                         |                      |  * missing posted name_kana                  |                        |
+| optionally-required posted id_number                               |                      | invalid-name_kanji                           |                        |
+| optionally-required posted ssn_last_4                              |                      |  * missing posted name_kanji                 |                        |
+| optionally-required posted verification_document_front             |                      | invalid-first_name_kana                      |                        |
+| optionally-required posted verification_document_back              |                      |  * missing posted first_name_kana            |                        |
+| optionally-required posted verification_additional_document_front  |                      | invalid-first_name_kanji                     |                        |
+| optionally-required posted verification_additional_document_back   |                      |  * missing posted first_name_kanji           |                        |
+|                                                                    |                      | invalid-gender                               |                        |
+|                                                                    |                      |  * missing posted gender                     |                        |
+|                                                                    |                      |  * invalid posted gender                     |                        |
+|                                                                    |                      | invalid-last_name_kana                       |                        |
+|                                                                    |                      |  * missing posted last_name_kana             |                        |
+|                                                                    |                      | invalid-last_name_kanji                      |                        |
+|                                                                    |                      |  * missing posted last_name_kanji            |                        |
+|                                                                    |                      | invalid-id_number                            |                        |
+|                                                                    |                      |  * missing posted id_number                  |                        |
+|                                                                    |                      |  * invalid posted id_number                  |                        |
+|                                                                    |                      | invalid-ssn_last_4                           |                        |
+|                                                                    |                      |  * missing posted ssn_last_4                 |                        |
+|                                                                    |                      |  * invalid posted ssn_last_4                 |                        |
+|                                                                    |                      | invalid-token                                |                        |
+|                                                                    |                      |  * missing posted token                      |                        |
+|                                                                    |                      |  * invalid posted token                      |                        |
+|--------------------------------------------------------------------|----------------------|----------------------------------------------|------------------------|
