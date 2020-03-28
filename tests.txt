@@ -1,5 +1,25 @@
 
-> @userdashboard/stripe-connect@1.0.43 test /root/workspaces/stripe-connect
+> puppeteer@2.1.1 install /root/workspaces/stripe-connect/node_modules/puppeteer
+> node install.js
+
+Chromium downloaded to /root/workspaces/stripe-connect/node_modules/puppeteer/.local-chromium/linux-722234
+
+> ngrok@3.2.7 postinstall /root/workspaces/stripe-connect/node_modules/ngrok
+> node ./postinstall.js
+
+ngrok - cached download found at /root/.ngrok/aHR0cHM6Ly9iaW4uZXF1aW5veC5pby9jLzRWbUR6QTdpYUhiL25ncm9rLXN0YWJsZS1saW51eC1hbWQ2NC56aXA=.zip
+ngrok - unpacking binary
+ngrok - binary unpacked to /root/workspaces/stripe-connect/node_modules/ngrok/bin/ngrok
++ localtunnel@2.0.0
++ public-ip@4.0.0
++ puppeteer@2.1.1
++ ngrok@3.2.7
++ @userdashboard/dashboard@1.0.145
+added 214 packages from 228 contributors and audited 6 packages in 17.224s
+found 0 vulnerabilities
+
+
+> @userdashboard/stripe-connect@1.0.44 test /root/workspaces/stripe-connect
 > mocha --exit --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'
 
 
