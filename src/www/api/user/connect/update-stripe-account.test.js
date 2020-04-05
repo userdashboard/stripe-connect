@@ -112,13 +112,12 @@ describe('/api/user/connect/update-stripe-account', async () => {
             const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
             req.account = user.account
             req.session = user.session
-            req.uploads = {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
-            }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
             delete (body[field])
-            req.body = TestHelper.createMultiPart(req, body)
+            req.body = TestHelper.createMultiPart(req, body, {
+              verification_document_back: TestHelper['success_id_scan_back.png'],
+              verification_document_front: TestHelper['success_id_scan_front.png']
+            })
             let errorMessage
             try {
               await req.patch()
@@ -138,13 +137,12 @@ describe('/api/user/connect/update-stripe-account', async () => {
               const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
               req.account = user.account
               req.session = user.session
-              req.uploads = {
-                verification_document_back: TestHelper['success_id_scan_back.png'],
-                verification_document_front: TestHelper['success_id_scan_front.png']
-              }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
               body[field] = invalidCompanyValues[field]
-              req.body = TestHelper.createMultiPart(req, body)
+              req.body = TestHelper.createMultiPart(req, body, {
+                verification_document_back: TestHelper['success_id_scan_back.png'],
+                verification_document_front: TestHelper['success_id_scan_front.png']
+              })
               let errorMessage
               try {
                 await req.patch()
@@ -172,13 +170,12 @@ describe('/api/user/connect/update-stripe-account', async () => {
             const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
             req.account = user.account
             req.session = user.session
-            req.uploads = {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
-            }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
             delete (body[field])
-            req.body = TestHelper.createMultiPart(req, body)
+            req.body = TestHelper.createMultiPart(req, body, {
+              verification_document_back: TestHelper['success_id_scan_back.png'],
+              verification_document_front: TestHelper['success_id_scan_front.png']
+            })
             let errorMessage
             try {
               await req.patch()
@@ -198,13 +195,12 @@ describe('/api/user/connect/update-stripe-account', async () => {
               const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
               req.account = user.account
               req.session = user.session
-              req.uploads = {
-                verification_document_back: TestHelper['success_id_scan_back.png'],
-                verification_document_front: TestHelper['success_id_scan_front.png']
-              }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
               body[field] = invalidIndividualValues[field]
-              req.body = TestHelper.createMultiPart(req, body)
+              req.body = TestHelper.createMultiPart(req, body, {
+                verification_document_back: TestHelper['success_id_scan_back.png'],
+                verification_document_front: TestHelper['success_id_scan_front.png']
+              })
               let errorMessage
               try {
                 await req.patch()
@@ -229,11 +225,10 @@ describe('/api/user/connect/update-stripe-account', async () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.uploads = {
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB), {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB))
+        })
         let errorMessage
         try {
           await req.patch()
@@ -253,13 +248,12 @@ describe('/api/user/connect/update-stripe-account', async () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
         const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB)
         body.token = 'invalid'
-        req.body = TestHelper.createMultiPart(req, body)
+        req.body = TestHelper.createMultiPart(req, body, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
         let errorMessage
         try {
           await req.patch()
@@ -289,12 +283,11 @@ describe('/api/user/connect/update-stripe-account', async () => {
           const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
           req.account = user.account
           req.session = user.session
-          req.uploads = {
+          const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
+          req.body = TestHelper.createMultiPart(req, body, {
             verification_document_back: TestHelper['success_id_scan_back.png'],
             verification_document_front: TestHelper['success_id_scan_front.png']
-          }
-          const body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
-          req.body = TestHelper.createMultiPart(req, body)
+          })
           const stripeAccountNow = await req.patch()
           if (field.startsWith('address_kana_')) {
             const property = field.substring('address_kana_'.length)
@@ -347,14 +340,13 @@ describe('/api/user/connect/update-stripe-account', async () => {
           const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
           req.account = user.account
           req.session = user.session
-          req.uploads = {
+          const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
+          req.body = TestHelper.createMultiPart(req, body, {
             verification_document_back: TestHelper['success_id_scan_back.png'],
             verification_document_front: TestHelper['success_id_scan_front.png'],
             verification_additionaldocument_back: TestHelper['success_id_scan_back.png'],
             verification_additional_document_front: TestHelper['success_id_scan_front.png']
-          }
-          const body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData[country.id])
-          req.body = TestHelper.createMultiPart(req, body)
+          })
           const stripeAccountNow = await req.patch()
           if (field.startsWith('address_kana_')) {
             const property = field.substring('address_kana_'.length)
@@ -424,16 +416,15 @@ describe('/api/user/connect/update-stripe-account', async () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.uploads = {
-          [field]: TestHelper['success_id_scan_back.png']
-        }
         let body
         if (user.stripeAccount.business_type === 'company') {
           body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData.GB)
         } else {
           body = TestStripeAccounts.createPostData(TestStripeAccounts.individualData.GB)
         }
-        req.body = TestHelper.createMultiPart(req, body)
+        req.body = TestHelper.createMultiPart(req, body, {
+          [field]: TestHelper['success_id_scan_back.png']
+        })
         const stripeAccountNow = await req.patch()
         if (field === 'verification_document_front') {
           assert.notStrictEqual(stripeAccountNow.company.verification.document.front, null)

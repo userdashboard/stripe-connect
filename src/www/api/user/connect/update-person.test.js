@@ -160,13 +160,12 @@ describe('/api/user/connect/update-person', () => {
             const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
             req.account = user.account
             req.session = user.session
-            req.uploads = {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
-            }
             const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
             delete (body[field])
-            req.body = TestHelper.createMultiPart(req, body)
+            req.body = TestHelper.createMultiPart(req, body, {
+              verification_document_back: TestHelper['success_id_scan_back.png'],
+              verification_document_front: TestHelper['success_id_scan_front.png']
+            })
             let errorMessage
             try {
               await req.patch()
@@ -201,13 +200,12 @@ describe('/api/user/connect/update-person', () => {
               const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
               req.account = user.account
               req.session = user.session
-              req.uploads = {
-                verification_document_back: TestHelper['success_id_scan_back.png'],
-                verification_document_front: TestHelper['success_id_scan_front.png']
-              }
               const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
               body[field] = invalidValues[field]
-              req.body = TestHelper.createMultiPart(req, body)
+              req.body = TestHelper.createMultiPart(req, body, {
+                verification_document_back: TestHelper['success_id_scan_back.png'],
+                verification_document_front: TestHelper['success_id_scan_front.png']
+              })
               let errorMessage
               try {
                 await req.patch()
@@ -238,11 +236,10 @@ describe('/api/user/connect/update-person', () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
-        req.uploads = {
+        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.GB), {
           verification_document_back: TestHelper['success_id_scan_back.png'],
           verification_document_front: TestHelper['success_id_scan_front.png']
-        }
-        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.GB))
+        })
         let errorMessage
         try {
           await req.patch()
@@ -268,13 +265,12 @@ describe('/api/user/connect/update-person', () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
-        req.uploads = {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        }
         const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.GB)
         body.token = 'invalid'
-        req.body = TestHelper.createMultiPart(req, body)
+        req.body = TestHelper.createMultiPart(req, body, {
+          verification_document_back: TestHelper['success_id_scan_back.png'],
+          verification_document_front: TestHelper['success_id_scan_front.png']
+        })
         let errorMessage
         try {
           await req.patch()
@@ -328,12 +324,11 @@ describe('/api/user/connect/update-person', () => {
           const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
           req.account = user.account
           req.session = user.session
-          req.uploads = {
+          const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+          req.body = TestHelper.createMultiPart(req, body, {
             verification_document_back: TestHelper['success_id_scan_back.png'],
             verification_document_front: TestHelper['success_id_scan_front.png']
-          }
-          const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-          req.body = TestHelper.createMultiPart(req, body)
+          })
           const representative = await req.patch()
           if (field.startsWith('address_kana')) {
             const property = field.substring('address_kana_'.length)
@@ -410,10 +405,9 @@ describe('/api/user/connect/update-person', () => {
         const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
-        req.uploads = {
+        req.body = TestHelper.createMultiPart(req, {}, {
           [field]: TestHelper['success_id_scan_back.png']
-        }
-        req.body = TestHelper.createMultiPart(req, {})
+        })
         const representative = await req.patch()
         if (field.indexOf('additional_document') > -1) {
           if (field === 'verification_additional_document_front') {

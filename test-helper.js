@@ -49,7 +49,6 @@ for (const event of events) {
 
 module.exports = {
   createExternalAccount,
-  createMultiPart,
   createPayout,
   createPerson,
   createStripeAccount,
@@ -254,52 +253,22 @@ function createLocalHostRun (callback) {
   })
 }
 
-async function createStripeAccount (user, properties) {
+async function createStripeAccount (user, body) {
   const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
   req.session = user.session
   req.account = user.account
-  req.body = properties
+  req.body = body
   user.stripeAccount = await req.post()
   return user.stripeAccount
 }
 
-async function updateStripeAccount (user, properties, uploads) {
+async function updateStripeAccount (user, body, uploads) {
   const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
-  req.uploads = uploads || []
-  req.body = createMultiPart(req, properties)
+  req.body = TestHelper.createMultiPart(req, body, uploads)
   user.stripeAccount = await req.patch()
   return user.stripeAccount
-}
-
-function createMultiPart (req, body) {
-  const boundary = '-----------------test' + global.testNumber
-  const delimiter = `\r\n--${boundary}`
-  const closeDelimiter = delimiter + '--'
-  const buffers = []
-  if (req.uploads) {
-    for (const field in req.uploads) {
-      const filename = req.uploads[field].filename
-      const type = filename.endsWith('.png') ? 'image/png' : 'image/jpeg'
-      const segment = [
-        delimiter,
-        `Content-Disposition: form-data; name="${field}"; filename="${filename}"`,
-        `Content-Type: ${type}`,
-        '\r\n'
-      ]
-      buffers.push(Buffer.from(segment.join('\r\n')), fs.readFileSync(req.uploads[field].path), Buffer.from('\r\n'))
-    }
-  }
-  for (const field in body) {
-    buffers.push(Buffer.from(`${delimiter}\r\nContent-Disposition: form-data; name="${field}"\r\n\r\n${body[field]}`))
-  }
-  buffers.push(Buffer.from(closeDelimiter))
-  const multipartBody = Buffer.concat(buffers)
-  req.headers = req.headers || {}
-  req.headers['Content-Type'] = `multipart/form-data; boundary=${boundary}`
-  req.headers['Content-Length'] = multipartBody.length
-  return multipartBody
 }
 
 async function createExternalAccount (user, body) {
@@ -344,8 +313,7 @@ async function updatePerson (user, person, body, uploads) {
   const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${person.id}`)
   req.session = user.session
   req.account = user.account
-  req.uploads = uploads
-  req.body = createMultiPart(req, body)
+  req.body = TestHelper.createMultiPart(req, body, uploads)
   const personNow = await req.patch()
   if (personNow.relationship.owner) {
     user.owner = personNow
