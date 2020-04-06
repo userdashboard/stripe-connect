@@ -472,22 +472,22 @@ describe('/account/connect/edit-stripe-account', async () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}` },
-        { fill: '#submit-form' }
-      ]
-      req.waitFormComplete = async (page) => {
-        while (true) {
-          try {
-            const loaded = await page.evaluate(() => {
-              return document.getElementById('message-container').children.length
-            })
-            if (loaded) {
-              break
+        { fill: '#submit-form', waitFormComplete: async (page) => {
+            while (true) {
+              try {
+                const loaded = await page.evaluate(() => {
+                  return document.getElementById('message-container').children.length
+                })
+                if (loaded) {
+                  break
+                }
+              } catch (error) {
+              }
+              await page.waitFor(100)
             }
-          } catch (error) {
-          }
-          await page.waitFor(100)
-        }
-      }
+          } 
+       }
+      ]
       const result = await req.post()
       const doc = TestHelper.extractDoc(result.html)
       const messageContainer = doc.getElementById('message-container')
