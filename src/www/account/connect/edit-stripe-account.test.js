@@ -209,7 +209,7 @@ describe('/account/connect/edit-stripe-account', async () => {
           const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
           req.account = user.account
           req.session = user.session
-          req.waitFormLoad = async (page) => {
+          req.waitBefore = async (page) => {
             while (true) {
               const loaded = await page.evaluate(() => {
                 return window.loaded
@@ -220,7 +220,7 @@ describe('/account/connect/edit-stripe-account', async () => {
               await page.waitFor(100)
             }
           }
-          req.waitFormComplete = async (page) => {
+          req.waitAfter = async (page) => {
             while (true) {
               try {
                 const loaded = await page.evaluate(() => {
@@ -307,7 +307,7 @@ describe('/account/connect/edit-stripe-account', async () => {
         const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
         req.account = user.account
         req.session = user.session
-        req.waitFormLoad = async (page) => {
+        req.waitBefore = async (page) => {
           while (true) {
             const loaded = await page.evaluate(() => {
               return window.loaded
@@ -318,7 +318,7 @@ describe('/account/connect/edit-stripe-account', async () => {
             await page.waitFor(100)
           }
         }
-        req.waitFormComplete = async (page) => {
+        req.waitAfter = async (page) => {
           while (true) {
             const message = await page.evaluate(() => {
               var container = document.getElementById('message-container')
@@ -506,7 +506,7 @@ describe('/account/connect/edit-stripe-account', async () => {
       const req = TestHelper.createRequest(`/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
-      req.waitFormComplete = async (page) => {
+      req.waitAfter = async (page) => {
         while (true) {
           try {
             const loaded = await page.evaluate(() => {

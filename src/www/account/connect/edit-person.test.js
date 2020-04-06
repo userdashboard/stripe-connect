@@ -182,7 +182,7 @@ describe('/account/connect/edit-person', () => {
           req.account = user.account
           req.session = user.session
           req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-          req.waitFormLoad = async (page) => {
+          req.waitBefore = async (page) => {
             while (true) {
               const loaded = await page.evaluate(() => {
                 return window.loaded
@@ -193,7 +193,7 @@ describe('/account/connect/edit-person', () => {
               await page.waitFor(100)
             }
           }
-          req.waitFormComplete = async (page) => {
+          req.waitAfter = async (page) => {
             while (true) {
               const message = await page.evaluate(() => {
                 var container = document.getElementById('message-container')
@@ -281,7 +281,7 @@ describe('/account/connect/edit-person', () => {
         }
         global.stripeJS = 3
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
-        req.waitFormLoad = async (page) => {
+        req.waitBefore = async (page) => {
           while (true) {
             const loaded = await page.evaluate(() => {
               return window.loaded
@@ -292,7 +292,7 @@ describe('/account/connect/edit-person', () => {
             await page.waitFor(100)
           }
         }
-        req.waitFormComplete = async (page) => {
+        req.waitAfter = async (page) => {
           while (true) {
             const message = await page.evaluate(() => {
               var container = document.getElementById('message-container')
@@ -389,7 +389,7 @@ describe('/account/connect/edit-person', () => {
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-      req.waitFormLoad = async (page) => {
+      req.waitBefore = async (page) => {
         while (true) {
           const loaded = await page.evaluate(() => {
             return window.loaded
@@ -400,7 +400,7 @@ describe('/account/connect/edit-person', () => {
           await page.waitFor(100)
         }
       }
-      req.waitFormComplete = async (page) => {
+      req.waitAfter = async (page) => {
         while (true) {
           try {
             const url = await page.url()
