@@ -472,7 +472,7 @@ describe('/account/connect/edit-stripe-account', async () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}` },
-        { fill: '#submit-form', waitFormComplete: async (page) => {
+        { fill: '#submit-form', waitAfter: async (page) => {
             while (true) {
               try {
                 const loaded = await page.evaluate(() => {
