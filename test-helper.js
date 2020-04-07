@@ -41,7 +41,11 @@ const wait = util.promisify((callback) => {
   return setTimeout(callback, 100)
 })
 
-const events = fs.readdirSync(`${__dirname}/src/www/webhooks/connect/stripe-webhooks`)
+let eventFolderPath = `${__dirname}/src/www/webhooks/connect/stripe-webhooks`
+if (!fs.existsSync(eventFolderPath)) {
+  eventFolderPath = `${__dirname}/node_modules/@userdashboard/stripe-connect/src/www/webhooks/connect/stripe-webhooks`
+}
+const events = fs.readdirSync(eventFolderPath)
 const eventList = []
 for (const event of events) {
   eventList.push(event.substring(0, event.indexOf('.js')))
