@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.145
+@userdashboard/dashboard 1.0.156
 http://207.246.72.230:8081
 
 Administrator menu:
@@ -16,7 +16,7 @@ Special HTML files:
 @userdashboard/dashboard/src/redirect.html
 
 Dashboard modules:
-@userdashboard/stripe-connect (1.0.46)
+@userdashboard/stripe-connect (1.0.48)
 @userdashboard/maxmind-geoip (1.0.48)
 
 Server handlers:
@@ -65,7 +65,7 @@ URL ---------------------------------------------------- AUTH - TEMPLATE - HTTP 
 /account/sessions                                                          GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/set-default-profile                                               GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/signin                                          GUEST  FULLSCREEN GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
-/account/signout                                                FULLSCREEN GET             @userdashboard/dashboard         @userdashboard/dashboard    
+/account/signout                                         GUEST  FULLSCREEN GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/signout-complete                                GUEST  FULLSCREEN GET                                              @userdashboard/dashboard    
 /account/verify                                          GUEST  FULLSCREEN GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /administrator                                                             GET                                              @userdashboard/dashboard    
