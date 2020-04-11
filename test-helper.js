@@ -127,10 +127,14 @@ beforeEach(async () => {
           port: process.env.PORT,
           auth: process.env.NGROK_AUTH,
           onStatusChange: status => {
-            console.log('ngrok status', status)
+            if (process.env.DEBUG_NGROK) {
+              console.log('ngrok status', status)
+            }
           },
           onLogEvent: data => {
-            console.log('ngrok log event', data)
+            if (process.env.DEBUG_NGROK) {
+              console.log('ngrok log event', data)
+            }
           }
         })
         if (!tunnel) {
@@ -253,7 +257,9 @@ function createLocalHostRun (callback) {
     return callback(null, url)
   })
   localhostRun.stderr.on('data', async (log) => {
-    console.log('localhost.run error', log.toString())
+    if (process.env.DEBUG_LOCALHOST_RUN) {
+      console.log('localhost.run error', log.toString())
+    }
   })
 }
 
