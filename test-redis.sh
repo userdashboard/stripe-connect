@@ -8,7 +8,7 @@ if [ ! -z "$1" ]; then
 fi
 NODE_ENV=testing \
 STORAGE_ENGINE="@userdashboard/storage-redis" \
-REDIS_URL=redis://localhost:6379 \
+REDIS_URL=redis://localhost:6379/4 \
 SILENT_START=true \
 GENERATE_SITEMAP_TXT=false \
 GENERATE_API_TXT=false \
