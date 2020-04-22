@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ ! -d node_modules/puppeteer ] || [ ! -d node_modules/@userdashboard/dashboard ] || [ ! -d node_modules/@userdashboard/storage-s3 ]; then
-  npm install @userdashboard/dashboard @userdashboard/storage-s3 puppeteer@2.1.1 --no-save
+  npm install public-ip localtunnel ngrok @userdashboard/dashboard @userdashboard/storage-s3 puppeteer@2.1.1 --no-save
 fi
 PARAMS=""
 if [ ! -z "$1" ]; then
@@ -14,8 +14,8 @@ ACCESS_KEY_ID="$DASHBOARD_ACCESS_KEY_ID" \
 SILENT_START=true \
 GENERATE_SITEMAP_TXT=false \
 GENERATE_API_TXT=false \
-DASHBOARD_SERVER="$CONNECT_DASHBOARD_SERVER" \
-DOMAIN="$CONNECT_DOMAIN" \
+DASHBOARD_SERVER="http://localhost" \
+DOMAIN="localhost" \
 STRIPE_KEY="$CONNECT_STRIPE_KEY" \
 STRIPE_PUBLISHABLE_KEY="$CONNECT_STRIPE_PUBLISHABLE_KEY" \
 STRIPE_JS="false" \
