@@ -228,7 +228,7 @@ async function deleteOldWebhooks () {
 
 async function deleteOldStripeAccounts () {
   let accounts
-  while(true) {
+  while (true) {
     try {
       accounts = await stripe.accounts.list(stripeKey)
       break
@@ -251,7 +251,7 @@ async function deleteOldStripeAccounts () {
 
 function createLocalHostRun (callback) {
   const spawn = require('child_process').spawn
-  localhostRun = spawn('ssh', ['-T', '-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + process.env.PORT, 'ssh.localhost.run'])
+  localhostRun = spawn('ssh', ['-T', '-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + global.port, 'ssh.localhost.run'])
   localhostRun.stdout.on('data', async (log) => {
     const url = log.toString().split(' ').pop().trim()
     return callback(null, url)
