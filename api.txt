@@ -1,5 +1,5 @@
-@userdashboard/dashboard 1.0.156
-http://207.246.72.230:8081
+@userdashboard/dashboard 1.0.164
+https://stripe-connect-12311.serveo.net
 
 |----------------------------------------------------------------------------------------------------------------|
 | /api/administrator/connect/account-stripe-accounts                                                             |

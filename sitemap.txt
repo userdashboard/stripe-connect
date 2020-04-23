@@ -1,5 +1,5 @@
-@userdashboard/dashboard 1.0.156
-http://207.246.72.230:8081
+@userdashboard/dashboard 1.0.164
+https://stripe-connect-12311.serveo.net
 
 Administrator menu:
 /administrator/connect "Stripe Connect module"
@@ -16,7 +16,7 @@ Special HTML files:
 @userdashboard/dashboard/src/redirect.html
 
 Dashboard modules:
-@userdashboard/stripe-connect (1.0.48)
+@userdashboard/stripe-connect (1.0.50)
 @userdashboard/maxmind-geoip (1.0.48)
 
 Server handlers:
@@ -60,7 +60,6 @@ URL ---------------------------------------------------- AUTH - TEMPLATE - HTTP 
 /account/reset-code                                                        GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/reset-codes                                                       GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/restore-account                                 GUEST  FULLSCREEN GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
-/account/select-language                                                   GET                                              @userdashboard/dashboard    
 /account/session                                                           GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/sessions                                                          GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/set-default-profile                                               GET POST        @userdashboard/dashboard         @userdashboard/dashboard    

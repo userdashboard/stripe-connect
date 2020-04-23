@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.48 test /root/workspaces/stripe-connect
+> @userdashboard/stripe-connect@1.0.50 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
 > mocha --exit --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'
 
 
