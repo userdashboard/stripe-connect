@@ -146,13 +146,32 @@ describe('/account/connect/submit-beneficial-owners', () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/submit-beneficial-owners?stripeid=${user.stripeAccount.id}` },
-        { fill: '#submit-form' }
+        {
+          fill: '#submit-form',
+          waitAfter: async (page) => {
+            while (true) {
+              try {
+                const frame = await page.frames().find(f => f.name() === 'application-iframe')
+                if (frame) {
+                  const loaded = await frame.evaluate(() => {
+                    var accountTable = document.getElementById('stripe-accounts-table')
+                    return accountTable && accountTable.children.length
+                  })
+                  if (loaded) {
+                    break
+                  }
+                }
+              } catch (error) {
+              }
+              await page.waitFor(100)
+            }
+          }
+        }
       ]
       const result = await req.post()
       const doc = TestHelper.extractDoc(result.html)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const accountTable = doc.getElementById(user.stripeAccount.id)
+      assert.strictEqual(accountTable.tag, 'tbody')
     })
 
     it('should submit without owners', async () => {
