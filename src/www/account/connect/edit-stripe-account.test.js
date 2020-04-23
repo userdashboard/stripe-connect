@@ -472,27 +472,32 @@ describe('/account/connect/edit-stripe-account', async () => {
         { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/edit-stripe-account?stripeid=${user.stripeAccount.id}` },
-        { fill: '#submit-form', waitAfter: async (page) => {
+        {
+          fill: '#submit-form',
+          waitAfter: async (page) => {
             while (true) {
               try {
-                const loaded = await page.evaluate(() => {
-                  return document.getElementById('message-container').children.length
-                })
-                if (loaded) {
-                  break
+                const frame = await page.frames().find(f => f.name() === 'application-iframe')
+                if (frame) {
+                  const loaded = await frame.evaluate(() => {
+                    var accountTable = document.getElementById('stripe-accounts-table')
+                    return accountTable && accountTable.children.length
+                  })
+                  if (loaded) {
+                    break
+                  }
                 }
               } catch (error) {
               }
               await page.waitFor(100)
             }
-          } 
-       }
+          }
+        }
       ]
       const result = await req.post()
       const doc = TestHelper.extractDoc(result.html)
-      const messageContainer = doc.getElementById('message-container')
-      const message = messageContainer.child[0]
-      assert.strictEqual(message.attr.template, 'success')
+      const accountTable = doc.getElementById(user.stripeAccount.id)
+      assert.strictEqual(accountTable.tag, 'tbody')
     })
 
     it('should update registration stripe.js v3 (company)', async () => {
