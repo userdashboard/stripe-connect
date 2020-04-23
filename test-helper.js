@@ -124,7 +124,7 @@ beforeEach(async () => {
     while (!tunnel) {
       try {
         tunnel = await ngrok.connect({
-          port: process.env.PORT,
+          port: global.port,
           auth: process.env.NGROK_AUTH,
           onStatusChange: status => {
             if (process.env.DEBUG_NGROK) {
@@ -148,12 +148,12 @@ beforeEach(async () => {
     }
   } else if (process.env.PUBLIC_IP) {
     const ip = await publicIP.v4()
-    newAddress = `http://${ip}:${process.env.PORT}`
+    newAddress = `http://${ip}:${global.port}`
   } else if (process.env.LOCAL_TUNNEL) {
     if (tunnel) {
       tunnel.close()
     }
-    tunnel = await localTunnel({ port: process.env.PORT, local_https: false, host: 'http://localtunnel.me' })
+    tunnel = await localTunnel({ port: global.port, local_https: false, host: 'http://localtunnel.me' })
     newAddress = tunnel.url
   } else if (process.env.LOCALHOST_RUN) {
     if (localhostRun) {
