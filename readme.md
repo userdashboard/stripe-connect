@@ -1,5 +1,5 @@
 # Stripe Connect module for Dashboard
-![StandardJS](https://github.com/userdashboard/stripe-connect/workflows/standardjs/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-user-ui/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-administrator-ui/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-user-api/badge.svg) ![Test suite](https://github.com/userdashboard/stripe-connect/workflows/test-administrator-api/badge.svg)
+![Test suite status](https://github.com/userdashboard/stripe-connect/workflows/test-and-publish/badge.svg?branch=master)
 
 Dashboard bundles everything a web app needs, all the "boilerplate" like signing in and changing passwords, into a parallel server so you can write a much smaller web app.
 
