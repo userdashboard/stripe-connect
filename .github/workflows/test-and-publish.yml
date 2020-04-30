@@ -17,18 +17,16 @@ jobs:
     - name: Setup dependencies
       run: |
         sudo apt-get install -y redis-server
-        npm install mocha ngrok puppeteer@2.1.1 @userdashboard/storage-redis --no-save
+        npm install mocha ngrok puppeteer@2.1.1 @userdashboard/storage-redis @userdashboard/dashboard --no-save
         git config --global user.name "${{ secrets.NAME }}"
         git config --global user.email "${{ secrets.EMAIL }}"
-        npm install standard -g
+        npm install -g standard
     - name: Lint (standard.js)
-      run: |
-        standard src
+      run: standard src
     - name: Increase NPM version
       run: npm version patch
     - name: Test (redis)
-      run: |
-        npm test > tests.txt
+      run: npm test > tests.txt
       env:
         NODE_ENV: testing
         FAST_START: true
