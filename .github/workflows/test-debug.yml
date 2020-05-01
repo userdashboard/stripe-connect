@@ -17,7 +17,7 @@ jobs:
     - name: Setup dependencies
       run: |
         sudo apt-get install -y redis-server
-        npm install mocha ngrok puppeteer@2.1.1 @userdashboard/storage-redis --no-save
+        npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-redis --no-save
     - name: Test unencrypted Redis storage
       run: npm test
       env:
