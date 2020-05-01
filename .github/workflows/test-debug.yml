@@ -1,0 +1,64 @@
+name: test-redis
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Setup dependencies
+      run: |
+        sudo apt-get install -y redis-server
+        npm install mocha ngrok puppeteer@2.1.1 @userdashboard/storage-redis --no-save
+    - name: Test unencrypted Redis storage
+      run: npm test
+      env:
+        NODE_ENV: testing
+        FAST_START: true
+        DASHBOARD_SERVER: "http://localhost:9000"
+        DOMAIN: "localhost"
+        STORAGE_ENGINE: "@userdashboard/storage-redis"
+        REDIS_URL: "redis://localhost:6379"
+        GENERATE_SITEMAP_TXT: false
+        GENERATE_API_TXT: false
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_8 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_7 }}
+        STRIPE_JS: false
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        NGROK: true
+        DEBUG_ERRORS: true
+        DEBUG_NGROK: true
+        DEBUG_PUPPETEER: true
+        DEBUG_WEBHOOKS: true
+        DEBUG_REQUESTS: true
+    - name: Test encrypted Redis storage
+      run: npm test
+      env:
+        NODE_ENV: testing
+        FAST_START: true
+        DASHBOARD_SERVER: "http://localhost:9000"
+        DOMAIN: "localhost"
+        STORAGE_ENGINE: "@userdashboard/storage-redis"
+        REDIS_URL: "redis://localhost:6379"
+        GENERATE_SITEMAP_TXT: false
+        GENERATE_API_TXT: false
+        ENCRYPTION_SECRET: "12345678901234567890123456789012"
+        ENCRYPTION_SECRET_IV: "1234123412341234"
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_8 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_7 }}
+        STRIPE_JS: false
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        NGROK: true
+        DEBUG_ERRORS: true
+        DEBUG_NGROK: true
+        DEBUG_PUPPETEER: true
+        DEBUG_WEBHOOKS: true
+        DEBUG_REQUESTS: true
