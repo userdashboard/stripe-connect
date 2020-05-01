@@ -84,12 +84,13 @@ describe('/account/connect/edit-person', () => {
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
-        await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
         if (field === 'verification_additional_document') {
-          await TestHelper.updatePerson(user, user.representative, null, {
+          await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT), {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
           })
+        } else {
+          await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
         }
         const property = field.replace('verification_', 'verification.')
         await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
