@@ -10,15 +10,14 @@ jobs:
         node-version: [12.x]
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
     - name: Setup MongoDB
       run: sudo apt-get install -y mongodb
-    - name: Setup dependencies
+    - name: Install dependencies
       run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-mongodb --no-save
-    - name: Test without encryption
+    - name: Test unencrypted MongoDB storage
       run: npm test
       env:
         NODE_ENV: "testing"
@@ -35,7 +34,7 @@ jobs:
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
-    - name: Test with encryption
+    - name: Test encrypted MongoDB storage
       run: npm test
       env:
         NODE_ENV: "testing"

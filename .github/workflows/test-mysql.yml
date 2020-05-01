@@ -19,13 +19,12 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Setup dependencies
+    - name: Install dependencies
       run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-mysql --no-save
-    - name: Test without encryption
+    - name: Test unencrypted MySQL storage
       run: npm test
       env:
         NODE_ENV: testing
@@ -41,7 +40,7 @@ jobs:
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
-    - name: Test with encryption
+    - name: Test encrypted MySQL storage
       run: npm test
       env:
         NODE_ENV: testing

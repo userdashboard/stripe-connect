@@ -10,11 +10,10 @@ jobs:
         node-version: [12.x]
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Setup dependencies
+    - name: Install dependencies
       run: |
         sudo apt-get install -y redis-server
         npm install mocha ngrok puppeteer@2.1.1 @userdashboard/storage-redis @userdashboard/dashboard --no-save
