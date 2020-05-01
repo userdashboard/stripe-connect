@@ -1,4 +1,4 @@
-name: test-debug
+name: test-redis
 
 on: [push]
 
@@ -30,15 +30,10 @@ jobs:
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_8 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_7 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_8 }}
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
-        DEBUG_ERRORS: true
-        DEBUG_NGROK: true
-        DEBUG_PUPPETEER: true
-        DEBUG_WEBHOOKS: true
-        DEBUG_REQUESTS: true
     - name: Test encrypted Redis storage
       run: npm test
       env:
@@ -50,15 +45,10 @@ jobs:
         REDIS_URL: "redis://localhost:6379"
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
-        ENCRYPTION_SECRET: "12345678901234567890123456789012"
-        ENCRYPTION_SECRET_IV: "1234123412341234"
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_8 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_7 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_8 }}
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
-        DEBUG_ERRORS: true
-        DEBUG_NGROK: true
-        DEBUG_PUPPETEER: true
-        DEBUG_WEBHOOKS: true
-        DEBUG_REQUESTS: true
+        ENCRYPTION_SECRET: "12345678901234567890123456789012"
+        ENCRYPTION_SECRET_IV: "1234123412341234"

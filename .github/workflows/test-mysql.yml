@@ -1,0 +1,61 @@
+name: test-mysql
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: dashboard
+        ports:
+            - '8888:3306'
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Setup dependencies
+      run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-mysql --no-save
+    - name: Test without encryption
+      run: npm test
+      env:
+        NODE_ENV: testing
+        FAST_START: "true"
+        DASHBOARD_SERVER: "http://localhost:9000"
+        DOMAIN: "localhost"
+        STORAGE_ENGINE: "@userdashboard/storage-mysql"
+        DATABASE_URL: "mysql://root:password@127.0.0.1:8888/dashboard"
+        GENERATE_SITEMAP_TXT: "false"
+        GENERATE_API_TXT: "false"
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_4 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_4 }}
+        STRIPE_JS: false
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        NGROK: true
+    - name: Test with encryption
+      run: npm test
+      env:
+        NODE_ENV: testing
+        FAST_START: true
+        DASHBOARD_SERVER: "http://localhost:9000"
+        DOMAIN: "localhost"
+        STORAGE_ENGINE: "@userdashboard/storage-mysql"
+        DATABASE_URL: "mysql://root:password@127.0.0.1:8888/dashboard"
+        GENERATE_SITEMAP_TXT: "false"
+        GENERATE_API_TXT: "false"
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_4 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_4 }}
+        STRIPE_JS: false
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        NGROK: true
+        ENCRYPTION_SECRET: "12345678901234567890123456789012"
+        ENCRYPTION_SECRET_IV: "1234123412341234"
