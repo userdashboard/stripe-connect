@@ -239,7 +239,17 @@ describe('/account/connect/edit-person', () => {
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
-        await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+        if (field.startsWith('verification_additional_document')) {
+          await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT), {
+            verification_document_front: TestHelper['success_id_scan_back.png'],
+            verification_document_back: TestHelper['success_id_scan_back.png']
+          })
+        } else {
+          await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+        }
+        const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
+        await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+        await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
@@ -269,17 +279,17 @@ describe('/account/connect/edit-person', () => {
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
         })
-        if (field.indexOf('additional') > -1) {
-          await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
-          await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.document')
-          await TestHelper.updatePerson(user, user.representative, null, {
+        if (field.startsWith('verification_additional_document')) {
+          await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT), {
             verification_document_front: TestHelper['success_id_scan_back.png'],
             verification_document_back: TestHelper['success_id_scan_back.png']
           })
-          await TestHelper.waitForPersonRequirement(user, user.representative.id, 'verification.additional_document')
         } else {
           await TestHelper.updatePerson(user, user.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
         }
+        const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
+        await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
+        await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
         global.stripeJS = 3
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
         req.waitBefore = async (page) => {
