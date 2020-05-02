@@ -100,17 +100,19 @@ describe('/account/connect/submit-beneficial-owners', () => {
 
     it('should present the form with completed owners', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
-      const ownerBody = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.DE)
-      const documents = {
+      await TestHelper.updatePerson(user, user.owner, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.DE))
+      await TestHelper.waitForAccountRequirement(user, `${user.owner.id}.verification.document`)
+      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.document')
+      await TestHelper.updatePerson(user, user.owner, null, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      await TestHelper.updatePerson(user, user.owner, ownerBody, documents)
-      const additionalDocuments = {
+      })
+      await TestHelper.waitForAccountRequirement(user, `${user.owner.id}.verification.additional_document`)
+      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.additional_document')
+      await TestHelper.updatePerson(user, user.owner, null, {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
-      }
-      await TestHelper.updatePerson(user, user.owner, {}, additionalDocuments)
+      })
       const req = TestHelper.createRequest(`/account/connect/submit-beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
@@ -124,17 +126,19 @@ describe('/account/connect/submit-beneficial-owners', () => {
   describe('SubmitBeneficialOwners#POST', () => {
     it('should submit owners (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
-      const ownerBody = TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.DE)
-      const documents = {
+      await TestHelper.updatePerson(user, user.owner, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.DE))
+      await TestHelper.waitForAccountRequirement(user, `${user.owner.id}.verification.document`)
+      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.document')
+      await TestHelper.updatePerson(user, user.owner, null, {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
-      }
-      await TestHelper.updatePerson(user, user.owner, ownerBody, documents)
-      const additionalDocuments = {
+      })
+      await TestHelper.waitForAccountRequirement(user, `${user.owner.id}.verification.additional_document`)
+      await TestHelper.waitForPersonRequirement(user, user.owner.id, 'verification.additional_document')
+      await TestHelper.updatePerson(user, user.owner, null, {
         verification_additional_document_back: TestHelper['success_id_scan_back.png'],
         verification_additional_document_front: TestHelper['success_id_scan_front.png']
-      }
-      await TestHelper.updatePerson(user, user.owner, {}, additionalDocuments)
+      })
       const req = TestHelper.createRequest(`/account/connect/submit-beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
