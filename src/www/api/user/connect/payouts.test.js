@@ -53,7 +53,8 @@ describe('/api/user/connect/payouts', () => {
     })
   })
 
-  describe('receives', () => {
+  describe('receives', function () {
+    this.retries(2)
     it('optional querystring offset (integer)', async () => {
       const offset = 1
       global.delayDiskWrites = true
@@ -99,8 +100,31 @@ describe('/api/user/connect/payouts', () => {
     })
   })
 
-  describe('returns', () => {
+  describe('returns', function () {
+    this.retries(2)
     it('array', async () => {
+      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
+      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
+        await TestHelper.createPayout(user)
+      }
+      const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
+      req.account = user.account
+      req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
+      const payouts = await req.get()
+      assert.strictEqual(payouts.length, global.pageSize)
+    })
+  })
+
+  describe('configuration', function () {
+    this.retries(2)
+    it('environment PAGE_SIZE', async () => {
+      global.pageSize = 3
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       // TODO: swap with individual account
       // the Stripe test api has an error creating fully-activated accounts

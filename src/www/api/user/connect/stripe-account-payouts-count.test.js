@@ -57,7 +57,8 @@ describe('/api/user/connect/stripe-account-payouts-count', () => {
     })
   })
 
-  describe('returns', () => {
+  describe('returns', function () {
+    this.retries(2)
     it('integer', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')

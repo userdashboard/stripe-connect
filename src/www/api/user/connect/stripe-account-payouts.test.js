@@ -57,7 +57,8 @@ describe('/api/user/connect/stripe-account-payouts', () => {
     })
   })
 
-  describe('receives', () => {
+  describe('receives', function () {
+    this.retries(2)
     it('optional querystring offset (integer)', async () => {
       const offset = 1
       global.delayDiskWrites = true
@@ -124,7 +125,8 @@ describe('/api/user/connect/stripe-account-payouts', () => {
     })
   })
 
-  describe('returns', () => {
+  describe('returns', function () {
+    this.retries(2)
     it('array', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
@@ -146,7 +148,8 @@ describe('/api/user/connect/stripe-account-payouts', () => {
     })
   })
 
-  describe('configuration', () => {
+  describe('configuration', function () {
+    this.retries(2)
     it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
       const administrator = await TestHelper.createOwner()
