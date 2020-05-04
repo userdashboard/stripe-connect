@@ -15,20 +15,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-redis --no-save
-    - name: Test unencrypted file-system storage
-      run: npm test
-      env:
-        NODE_ENV: testing
-        FAST_START: true
-        DASHBOARD_SERVER: "http://localhost:9000"
-        DOMAIN: "localhost"
-        GENERATE_SITEMAP_TXT: false
-        GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_2 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_2 }}
-        STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
-        NGROK: true
     - name: Test encrypted file-system storage
       run: npm test
       env:

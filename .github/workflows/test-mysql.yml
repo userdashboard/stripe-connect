@@ -24,22 +24,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-mysql --no-save
-    - name: Test unencrypted MySQL storage
-      run: npm test
-      env:
-        NODE_ENV: testing
-        FAST_START: "true"
-        DASHBOARD_SERVER: "http://localhost:9000"
-        DOMAIN: "localhost"
-        STORAGE_ENGINE: "@userdashboard/storage-mysql"
-        DATABASE_URL: "mysql://root:password@127.0.0.1:8888/dashboard"
-        GENERATE_SITEMAP_TXT: "false"
-        GENERATE_API_TXT: "false"
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_4 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_4 }}
-        STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
-        NGROK: true
     - name: Test encrypted MySQL storage
       run: npm test
       env:

@@ -27,22 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-postgresql --no-save
-    - name: Test unencrypted PostgreSQL storage
-      run: npm test
-      env:
-        NODE_ENV: testing
-        FAST_START: true
-        DASHBOARD_SERVER: "http://localhost:9000"
-        DOMAIN: "localhost"
-        STORAGE_ENGINE: "@userdashboard/storage-postgresql"
-        DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
-        GENERATE_SITEMAP_TXT: false
-        GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_6 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_6 }}
-        STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
-        NGROK: true
     - name: Test encrypted PostgreSQL storage
       run: npm test
       env:

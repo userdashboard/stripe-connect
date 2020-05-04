@@ -17,23 +17,6 @@ jobs:
       run: sudo apt-get install -y mongodb
     - name: Install dependencies
       run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-mongodb --no-save
-    - name: Test unencrypted MongoDB storage
-      run: npm test
-      env:
-        NODE_ENV: "testing"
-        FAST_START: "true"
-        DASHBOARD_SERVER: "http://localhost:9000"
-        DOMAIN: "localhost"
-        STORAGE_ENGINE: "@userdashboard/storage-mongodb"
-        MONGODB_URL: "mongodb://localhost:27017"
-        MONGODB_DATABASE: "dashboard"
-        GENERATE_SITEMAP_TXT: "false"
-        GENERATE_API_TXT: "false"
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_3 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_3 }}
-        STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
-        NGROK: true
     - name: Test encrypted MongoDB storage
       run: npm test
       env:

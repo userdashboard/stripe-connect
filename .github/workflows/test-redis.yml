@@ -17,22 +17,6 @@ jobs:
       run: |
         sudo apt-get install -y redis-server
         npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-redis --no-save
-    - name: Test unencrypted Redis storage
-      run: npm test
-      env:
-        NODE_ENV: testing
-        FAST_START: true
-        DASHBOARD_SERVER: "http://localhost:9000"
-        DOMAIN: "localhost"
-        STORAGE_ENGINE: "@userdashboard/storage-redis"
-        REDIS_URL: "redis://localhost:6379"
-        GENERATE_SITEMAP_TXT: false
-        GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_8 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_8 }}
-        STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
-        NGROK: true
     - name: Test encrypted Redis storage
       run: npm test
       env:

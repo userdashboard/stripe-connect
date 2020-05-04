@@ -22,25 +22,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-s3 --no-save
-    - name: Test unencrypted S3-compatible storage
-      run: npm test
-      env:
-        NODE_ENV: testing
-        FAST_START: true
-        DASHBOARD_SERVER: "http://localhost:9000"
-        DOMAIN: "localhost"
-        STORAGE_ENGINE: "@userdashboard/storage-s3"
-        S3_ENDPOINT: "http://localhost:4566"
-        S3_BUCKET_NAME: "testing"
-        SECRET_ACCESS_KEY: "using-mock-aws-s3"
-        ACCESS_KEY_ID: "using-mock-aws-s3"
-        GENERATE_SITEMAP_TXT: false
-        GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_9 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_9 }}
-        STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
-        NGROK: true
     - name: Test encrypted S3-compatible storage
       run: npm test
       env:
