@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/administrator/connect/payout', () => {
-  describe('Payout#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid payoutid', async () => {
       const administrator = await TestHelper.createOwner()
       const req = TestHelper.createRequest('/administrator/connect/payout?payoutid=invalid')
@@ -19,7 +19,7 @@ describe('/administrator/connect/payout', () => {
       assert.strictEqual(errorMessage, 'invalid-payoutid')
     })
 
-    it('should bind payout to req', async () => {
+    it('should bind data to req', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       // TODO: swap with individual account
@@ -36,7 +36,7 @@ describe('/administrator/connect/payout', () => {
     })
   })
 
-  describe('Payout#GET', () => {
+  describe('view', () => {
     it('should have row for payout (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')

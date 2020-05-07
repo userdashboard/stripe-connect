@@ -3,8 +3,8 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/administrator/connect/reject-stripe-account', () => {
-  describe('RejectStripeAccount#BEFORE', () => {
-    it('should bind Stripe account to req', async () => {
+  describe('before', () => {
+    it('should bind data to req', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -19,7 +19,7 @@ describe('/administrator/connect/reject-stripe-account', () => {
     })
   })
 
-  describe('RejectStripeAccount#GET', () => {
+  describe('view', () => {
     it('should present the form', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
@@ -53,7 +53,7 @@ describe('/administrator/connect/reject-stripe-account', () => {
     })
   })
 
-  describe('RejectStripeAccount#POST', () => {
+  describe('submit', () => {
     it('should update the Stripe account as rejected (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()

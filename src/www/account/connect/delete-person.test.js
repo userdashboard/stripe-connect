@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/delete-person', () => {
-  describe('DeletePerson#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/delete-person?personid=invalid')
@@ -34,7 +34,7 @@ describe('/account/connect/delete-person', () => {
       assert.strictEqual(errorMessage, 'invalid-account')
     })
 
-    it('should bind person to req', async () => {
+    it('should bind data to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/delete-person?personid=${user.owner.id}`)
       req.account = user.account
@@ -44,7 +44,7 @@ describe('/account/connect/delete-person', () => {
     })
   })
 
-  describe('DeletePerson#GET', () => {
+  describe('view', () => {
     it('should present the form', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/delete-person?personid=${user.owner.id}`)
@@ -68,7 +68,7 @@ describe('/account/connect/delete-person', () => {
     })
   })
 
-  describe('DeletePerson#POST', () => {
+  describe('submit', () => {
     it('should delete owner (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/delete-person?personid=${user.owner.id}`)

@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/administrator/connect/stripe-account', () => {
-  describe('StripeAccount#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
@@ -23,7 +23,7 @@ describe('/administrator/connect/stripe-account', () => {
       assert.strictEqual(errorMessage, 'invalid-stripeid')
     })
 
-    it('should bind Stripe account to req', async () => {
+    it('should bind data to req', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -38,7 +38,7 @@ describe('/administrator/connect/stripe-account', () => {
     })
   })
 
-  describe('StripeAccount#GET', () => {
+  describe('view', () => {
     it('should have row for Stripe account (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()

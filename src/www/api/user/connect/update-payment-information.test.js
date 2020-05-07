@@ -3,8 +3,87 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
+const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/update-payment-information', () => {
+  const testedMissingFields = []
+  // TODO: invalid values marked as 'false' are skipped until they can be verified
+  const invalidValues = {
+    account_holder_name: false,
+    account_holder_type: 'invalid',
+    routing_number: '111111111',
+    account_number: '111111111',
+    bank_code: false,
+    branch_code: false,
+    clearing_code: false,
+    bsb_number: false,
+    institution_number: false,
+    currency: 'invalid',
+    country: 'invalid',
+    iban: 'invalid',
+    transit_number: false,
+    sort_code: false
+  }
+  const errorMessages = {}
+  const invalidMessages = {}
+  const submitResponses = {}
+  before(async () => {
+    await DashboardTestHelper.setupBeforeEach()
+    await TestHelper.setupBeforeEach()
+    for (const country of connect.countrySpecs) {
+      let payload
+      if (TestStripeAccounts.paymentData[country.id].length) {
+        payload = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])[0]
+      } else {
+        payload = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+      }
+      if (payload === false) {
+        continue
+      }
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: country.id,
+        type: 'company'
+      })
+      errorMessages[country.id] = {}
+      for (const field in payload) {
+        if (testedMissingFields.indexOf(field) > -1) {
+          continue
+        }
+        testedMissingFields.push(field)
+        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+        req.account = user.account
+        req.session = user.session
+        if (TestStripeAccounts.paymentData[country.id].length) {
+          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
+        } else {
+          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+        }
+        delete (req.body[field])
+        try {
+          await req.patch()
+        } catch (error) {
+          errorMessages[country.id][field] = error.message
+        }
+        req.body[field] = invalidValues[field]
+        try {
+          await req.patch()
+        } catch (error) {
+          invalidMessages[country.id][field] = error.message
+        }
+      }
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      if (TestStripeAccounts.paymentData[country.id].length) {
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
+      } else {
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+      }
+      submitResponses[country.id] = await req.patch()
+    }
+  })
+
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
@@ -60,24 +139,6 @@ describe('/api/user/connect/update-payment-information', () => {
       })
     })
 
-    const testedMissingFields = []
-    // TODO: invalid values marked as 'false' are skipped until they can be verified
-    const invalidValues = {
-      account_holder_name: false,
-      account_holder_type: 'invalid',
-      routing_number: '111111111',
-      account_number: '111111111',
-      bank_code: false,
-      branch_code: false,
-      clearing_code: false,
-      bsb_number: false,
-      institution_number: false,
-      currency: 'invalid',
-      country: 'invalid',
-      iban: 'invalid',
-      transit_number: false,
-      sort_code: false
-    }
     for (const country of connect.countrySpecs) {
       let payload
       if (TestStripeAccounts.paymentData[country.id].length) {
@@ -95,47 +156,12 @@ describe('/api/user/connect/update-payment-information', () => {
         testedMissingFields.push(field)
         describe(`invalid-${field}`, () => {
           it(`missing posted ${field}`, async () => {
-            const user = await TestHelper.createUser()
-            await TestHelper.createStripeAccount(user, {
-              country: country.id,
-              type: 'company'
-            })
-            const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
-            req.account = user.account
-            req.session = user.session
-            if (TestStripeAccounts.paymentData[country.id].length) {
-              req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
-            } else {
-              req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
-            }
-            delete (req.body[field])
-            let errorMessage
-            try {
-              await req.patch()
-            } catch (error) {
-              errorMessage = error.message
-            }
+            const errorMessage = errorMessages[country.id][field]
             assert.strictEqual(errorMessage, `invalid-${field}`)
           })
-
           if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
             it(`invalid posted ${field}`, async () => {
-              const user = await TestHelper.createUser()
-              await TestHelper.createStripeAccount(user, {
-                country: country.id,
-                type: 'company'
-              })
-              const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
-              req.account = user.account
-              req.session = user.session
-              req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
-              req.body[field] = invalidValues[field]
-              let errorMessage
-              try {
-                await req.patch()
-              } catch (error) {
-                errorMessage = error.message
-              }
+              const errorMessage = invalidMessages[country.id][field]
               assert.strictEqual(errorMessage, `invalid-${field}`)
             })
           }
@@ -162,22 +188,9 @@ describe('/api/user/connect/update-payment-information', () => {
         }
         testedRequiredFields.push(field)
         it(`optionally-required posted ${field}`, async () => {
-          const user = await TestHelper.createUser()
-          await TestHelper.createStripeAccount(user, {
-            country: country.id,
-            type: 'company'
-          })
-          const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
-          req.account = user.account
-          req.session = user.session
-          if (TestStripeAccounts.paymentData[country.id].length) {
-            req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
-          } else {
-            req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
-          }
-          const stripeAccountNow = await req.patch()
+          const stripeAccountNow = submitResponses[country.id]
           if (field === 'iban' || field === 'account_number') {
-            assert.strictEqual(stripeAccountNow.external_accounts.data[0].last4, req.body[field].substring(req.body[field].length - 4))
+            assert.strictEqual(stripeAccountNow.external_accounts.data[0].last4, payload[field].substring(payload[field].length - 4))
           } else if (field === 'bsb_number' ||
                      field === 'institution_number' ||
                      field === 'sort_code' ||
@@ -186,9 +199,9 @@ describe('/api/user/connect/update-payment-information', () => {
                      field === 'clearing_code' ||
                      field === 'transit_number') {
             const routing = stripeAccountNow.external_accounts.data[0].routing_number.split(' ').join('').split('-').join('')
-            assert.strictEqual(true, routing.indexOf(req.body[field]) > -1)
+            assert.strictEqual(true, routing.indexOf(payload[field]) > -1)
           } else {
-            assert.strictEqual(stripeAccountNow.external_accounts.data[0][field], req.body[field])
+            assert.strictEqual(stripeAccountNow.external_accounts.data[0][field], payload[field])
           }
         })
       }

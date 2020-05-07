@@ -2,58 +2,75 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
+const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
-describe('/administrator/connect/payouts', () => {
-  describe('Payouts#BEFORE', () => {
-    it('should bind payouts to req', async () => {
-      const administrator = await TestHelper.createOwner()
-      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      // TODO: swap with individual account
-      // the Stripe test api has an error creating fully-activated accounts
-      // so when that gets fixed this code can be changed to speed it up
+describe('/administrator/connect/payouts', function () {
+  const cachedResponses = {}
+  const cachedPayouts = []
+  before(async () => {
+    this.retries(2)
+    await DashboardTestHelper.setupBeforeEach()
+    await TestHelper.setupBeforeEach()
+    global.delayDiskWrites = true
+    const administrator = await TestHelper.createOwner()
+    for (let i = 0, len = global.pageSize + 2; i < len; i++) {
       const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      const payout1 = await TestHelper.createPayout(user)
-      await TestHelper.waitForPayout(administrator, user.stripeAccount.id, null)
-      const user2 = await TestStripeAccounts.createSubmittedCompany('NZ')
-      const payout2 = await TestHelper.createPayout(user2)
-      await TestHelper.waitForPayout(administrator, user2.stripeAccount.id, null)
-      const req = TestHelper.createRequest('/administrator/connect/payouts')
-      req.account = administrator.account
-      req.session = administrator.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.payouts[0].id, payout2.id)
-      assert.strictEqual(req.data.payouts[1].id, payout1.id)
+      await TestHelper.createPayout(user)
+      cachedPayouts.unshift(user.payout.id)
+    }
+    const req1 = TestHelper.createRequest('/administrator/connect/payouts')
+    req1.account = administrator.account
+    req1.session = administrator.session
+    req1.filename = __filename
+    req1.screenshots = [
+      { hover: '#administrator-menu-container' },
+      { click: '/administrator/connect' },
+      { click: '/administrator/connect/payouts' }
+    ]
+    await req1.route.api.before(req1)
+    cachedResponses.before = req1.data
+    cachedResponses.returns = await req1.get()
+    global.pageSize = 3
+    cachedResponses.pageSize = await req1.get()
+    const req2 = TestHelper.createRequest('/administrator/connect/payouts?offset=1')
+    req2.account = administrator.account
+    req2.session = administrator.session
+    cachedResponses.offset = await req2.get()
+  })
+  describe('before', () => {
+    it('should bind data to req', async () => {
+      const data = cachedResponses.before
+      assert.strictEqual(data.stripeAccounts.length, global.pageSize)
+      assert.strictEqual(data.stripeAccounts[0], cachedPayouts[0])
+      assert.strictEqual(data.stripeAccounts[1], cachedPayouts[1])
     })
   })
 
-  describe('Payouts#GET', () => {
-    it('should have row for each payout (screenshots)', async () => {
-      const administrator = await TestHelper.createOwner()
-      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      // TODO: swap with individual account
-      // the Stripe test api has an error creating fully-activated accounts
-      // so when that gets fixed this code can be changed to speed it up
-      const user1 = await TestStripeAccounts.createSubmittedCompany('NZ')
-      const payout1 = await TestHelper.createPayout(user1)
-      await TestHelper.waitForPayout(administrator, user1.stripeAccount.id, null)
-      const user2 = await TestStripeAccounts.createSubmittedCompany('GB')
-      const payout2 = await TestHelper.createPayout(user2)
-      await TestHelper.waitForPayout(administrator, user2.stripeAccount.id, null)
-      const req = TestHelper.createRequest('/administrator/connect/payouts')
-      req.account = administrator.account
-      req.session = administrator.session
-      req.filename = __filename
-      req.screenshots = [
-        { hover: '#administrator-menu-container' },
-        { click: '/administrator/connect' },
-        { click: '/administrator/connect/payouts' }
-      ]
-      const result = await req.get()
+  describe('view', () => {
+    it('should use default page size (screenshots)', async () => {
+      const result = cachedResponses.returns
       const doc = TestHelper.extractDoc(result.html)
-      const payout1Row = doc.getElementById(payout1.id)
-      const payout2Row = doc.getElementById(payout2.id)
-      assert.strictEqual(payout1Row.tag, 'tr')
-      assert.strictEqual(payout2Row.tag, 'tr')
+      const table = doc.getElementById('stripe-accounts-table')
+      const rows = table.getElementsByTagName('tr')
+      assert.strictEqual(rows.length, global.pageSize + 1)
+    })
+
+    it('should change page size', async () => {
+      global.pageSize = 3
+      const result = cachedResponses.pageSize
+      const doc = TestHelper.extractDoc(result.html)
+      const table = doc.getElementById('stripe-accounts-table')
+      const rows = table.getElementsByTagName('tr')
+      assert.strictEqual(rows.length, global.pageSize + 1)
+    })
+
+    it('should change offset', async () => {
+      const offset = 1
+      const result = cachedResponses.offset
+      const doc = TestHelper.extractDoc(result.html)
+      for (let i = 0, len = global.pageSize; i < len; i++) {
+        assert.strictEqual(doc.getElementById(cachedPayouts[offset + i]).tag, 'tr')
+      }
     })
   })
 })

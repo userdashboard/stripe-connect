@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/edit-stripe-account', async () => {
-  describe('EditStripeAccount#BEFORE', () => {
+  describe('before', () => {
     it('should reject missing registration', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/edit-stripe-account?stripeid=invalid')
@@ -21,7 +21,7 @@ describe('/account/connect/edit-stripe-account', async () => {
     })
   })
 
-  describe('EditStripeAccount#GET', async () => {
+  describe('view', async () => {
     let testedRequiredFields = []
     for (const country of connect.countrySpecs) {
       const companyPayload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
@@ -126,7 +126,7 @@ describe('/account/connect/edit-stripe-account', async () => {
     // }
   })
 
-  describe('EditStripeAccount#POST', () => {
+  describe('submit', () => {
     let testedMissingFields = []
     for (const country of connect.countrySpecs) {
       const companyPayload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
@@ -247,7 +247,7 @@ describe('/account/connect/edit-stripe-account', async () => {
 
     // TODO: company verification document can't be tested
     // because the Stripe test API erroneously marks it as
-    // under review instead of required prior to submission 
+    // under review instead of required prior to submission
     // and this form only supports fields specified in the
     // account requirements
     const individualFields = [

@@ -3,8 +3,8 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/administrator/connect/delete-stripe-account', () => {
-  describe('DeleteStripeAccount#BEFORE', () => {
-    it('should bind Stripe account to req', async () => {
+  describe('before', () => {
+    it('should bind data to req', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -19,7 +19,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
     })
   })
 
-  describe('DeleteStripeAccount#GET', () => {
+  describe('view', () => {
     it('should present the form', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
@@ -53,7 +53,7 @@ describe('/administrator/connect/delete-stripe-account', () => {
     })
   })
 
-  describe('DeleteStripeAccount#POST', () => {
+  describe('submit', () => {
     it('should delete Stripe account (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()

@@ -2,8 +2,50 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
+const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
-describe('/api/user/connect/payouts', () => {
+describe('/api/user/connect/payouts', function () {
+  const cachedResponses = {}
+  const cachedPayouts = []
+  before(async () => {
+    this.retries(2)
+    await DashboardTestHelper.setupBeforeEach()
+    await TestHelper.setupBeforeEach()
+    global.delayDiskWrites = true
+    const user = await TestStripeAccounts.createSubmittedCompany('NZ')
+    for (let i = 0, len = global.pageSize + 2; i < len; i++) {
+      await TestHelper.createPayout(user)
+      cachedPayouts.unshift(user.payout.id)
+      if (i === 2) {
+        await TestStripeAccounts.createSubmittedCompany('NZ', user)
+      }
+    }
+    const req1 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
+    req1.account = user.account
+    req1.session = user.session
+    await req1.route.api.before(req1)
+    cachedResponses.before = req1.data
+    cachedResponses.returns = await req1.get()
+    global.pageSize = 3
+    cachedResponses.pageSize = await req1.get()
+    const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&stripeid=${user.stripeAccount.id}`)
+    req2.account = user.account
+    req2.session = user.session
+    cachedResponses.stripeid = await req2.get()
+    const req3 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&offset=1`)
+    req3.account = user.account
+    req3.session = user.session
+    cachedResponses.offset = await req3.get()
+    const req4 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
+    req4.account = user.account
+    req4.session = user.session
+    cachedResponses.limit = await req4.get()
+    const req5 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&all=true`)
+    req5.account = user.account
+    req5.session = user.session
+    cachedResponses.all = await req5.get()
+  })
+
   describe('exceptions', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {
@@ -54,91 +96,42 @@ describe('/api/user/connect/payouts', () => {
   })
 
   describe('receives', function () {
-    this.retries(2)
     it('optional querystring offset (integer)', async () => {
       const offset = 1
-      global.delayDiskWrites = true
-      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      const payouts = []
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        const payout = await TestHelper.createPayout(user)
-        payouts.unshift(payout.id)
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&offset=${offset}`)
-      req.account = user.account
-      req.session = user.session
-      const payoutsNow = await req.get()
+      const payoutsNow = cachedResponses.offset
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(payoutsNow[i].id, payouts[offset + i])
+        assert.strictEqual(payoutsNow[i].id, cachedPayouts[offset + i])
       }
     })
 
     it('optional querystring limit (integer)', async () => {
       const limit = 1
-      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      for (let i = 0, len = limit + 1; i < len; i++) {
-        await TestHelper.createPayout(user)
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=${limit}`)
-      req.account = user.account
-      req.session = user.session
-      const payoutsNow = await req.get()
+      const payoutsNow = cachedResponses.limit
       assert.strictEqual(payoutsNow.length, limit)
     })
 
     it('optional querystring all (boolean)', async () => {
-      global.pageSize = 1
-      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createPayout(user)
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&all=true`)
-      req.account = user.account
-      req.session = user.session
-      const payoutsNow = await req.get()
-      assert.strictEqual(payoutsNow.length, global.pageSize + 1)
+      const payoutsNow = cachedResponses.all
+      assert.strictEqual(payoutsNow.length, cachedPayouts.length)
+    })
+
+    it('optional querystring stripeid (boolean)', async () => {
+      const payoutsNow = cachedResponses.stripeid
+      assert.strictEqual(payoutsNow.length, cachedPayouts.length - 3)
     })
   })
 
   describe('returns', function () {
-    this.retries(2)
     it('array', async () => {
-      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      // TODO: swap with individual account
-      // the Stripe test api has an error creating fully-activated accounts
-      // so when that gets fixed this code can be changed to speed it up
-      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createPayout(user)
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
-      req.account = user.account
-      req.session = user.session
-      req.filename = __filename
-      req.saveResponse = true
-      const payouts = await req.get()
+      const payouts = cachedResponses.returns
       assert.strictEqual(payouts.length, global.pageSize)
     })
   })
 
   describe('configuration', function () {
-    this.retries(2)
     it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
-      // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
-      // TODO: swap with individual account
-      // the Stripe test api has an error creating fully-activated accounts
-      // so when that gets fixed this code can be changed to speed it up
-      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createPayout(user)
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
-      req.account = user.account
-      req.session = user.session
-      req.filename = __filename
-      req.saveResponse = true
-      const payouts = await req.get()
+      const payouts = cachedResponses.pageSize
       assert.strictEqual(payouts.length, global.pageSize)
     })
   })

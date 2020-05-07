@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/submit-beneficial-owners', () => {
-  describe('SubmitBeneficialOwners#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/submit-beneficial-owners?stripeid=invalid')
@@ -55,26 +55,18 @@ describe('/account/connect/submit-beneficial-owners', () => {
       assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
 
-    it('should bind Stripe account to req', async () => {
-      const user = await TestStripeAccounts.createCompanyWithOwners('DE', 0)
-      const req = TestHelper.createRequest(`/account/connect/submit-beneficial-owners?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.stripeAccount.id, user.stripeAccount.id)
-    })
-
-    it('should bind owners to req', async () => {
+    it('should bind data to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 2)
       const req = TestHelper.createRequest(`/account/connect/submit-beneficial-owners?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
+      assert.strictEqual(req.data.stripeAccount.id, user.stripeAccount.id)
       assert.strictEqual(req.data.owners.length, 2)
     })
   })
 
-  describe('SubmitBeneficialOwners#GET', () => {
+  describe('view', () => {
     it('should reject if an owner requires information', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/submit-beneficial-owners?stripeid=${user.stripeAccount.id}`)
@@ -123,7 +115,7 @@ describe('/account/connect/submit-beneficial-owners', () => {
     })
   })
 
-  describe('SubmitBeneficialOwners#POST', () => {
+  describe('submit', () => {
     it('should submit owners (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
       await TestHelper.updatePerson(user, user.owner, TestStripeAccounts.createPostData(TestStripeAccounts.beneficialOwnerData.DE))

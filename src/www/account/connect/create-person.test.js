@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/create-person', () => {
-  describe('CreatePerson#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/create-person?stripeid=invalid')
@@ -37,7 +37,7 @@ describe('/account/connect/create-person', () => {
     })
   })
 
-  describe('CreatePerson#GET', () => {
+  describe('view', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -84,7 +84,7 @@ describe('/account/connect/create-person', () => {
     })
   })
 
-  describe('CreatePerson#POST', () => {
+  describe('submit', () => {
     it('should create representative (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

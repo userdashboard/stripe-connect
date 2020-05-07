@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/stripe-account', () => {
-  describe('StripeAccount#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
@@ -43,7 +43,7 @@ describe('/account/connect/stripe-account', () => {
       assert.strictEqual(errorMessage, 'invalid-account')
     })
 
-    it('should bind Stripe account to req', async () => {
+    it('should bind data to req', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -57,7 +57,7 @@ describe('/account/connect/stripe-account', () => {
     })
   })
 
-  describe('StripeAccount#GET', () => {
+  describe('view', () => {
     it('should show registration unstarted (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

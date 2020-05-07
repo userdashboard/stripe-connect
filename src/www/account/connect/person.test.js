@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/person', () => {
-  describe('Person#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/person?personid=invalid')
@@ -19,7 +19,7 @@ describe('/account/connect/person', () => {
       assert.strictEqual(errorMessage, 'invalid-personid')
     })
 
-    it('should bind person to req', async () => {
+    it('should bind data to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('FR', 1)
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)
       req.account = user.account
@@ -29,7 +29,7 @@ describe('/account/connect/person', () => {
     })
   })
 
-  describe('Person#GET', () => {
+  describe('view', () => {
     it('should show table for person (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('GB', 1)
       const req = TestHelper.createRequest(`/account/connect/person?personid=${user.owner.id}`)

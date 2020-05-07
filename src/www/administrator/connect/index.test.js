@@ -3,8 +3,8 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/administrator/connect', () => {
-  describe('Index#BEFORE', () => {
-    it('should bind Stripe accounts to req', async () => {
+  describe('before', () => {
+    it('should bind data to req', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -19,7 +19,7 @@ describe('/administrator/connect', () => {
     })
   })
 
-  describe('Index#GET', () => {
+  describe('view', () => {
     it('should have row for each Stripe account (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const user = await TestHelper.createUser()

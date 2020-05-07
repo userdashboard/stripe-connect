@@ -2,11 +2,48 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
+const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
-describe('/api/user/connect/stripe-accounts', () => {
+describe('/api/user/connect/stripe-accounts', function () {
+  const cachedResponses = {}
+  const cachedStripeAccounts = []
+  before(async () => {
+    this.retries(2)
+    await DashboardTestHelper.setupBeforeEach()
+    await TestHelper.setupBeforeEach()
+    global.delayDiskWrites = true
+    const user = await TestHelper.createUser()
+    for (let i = 0, len = global.pageSize + 2; i < len; i++) {
+      await TestHelper.createStripeAccount(user, {
+        country: 'US',
+        type: 'company'
+      })
+      cachedStripeAccounts.unshift(user.stripeAccount.id)
+    }
+    const req1 = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
+    req1.account = user.account
+    req1.session = user.session
+    await req1.route.api.before(req1)
+    cachedResponses.before = req1.data
+    cachedResponses.returns = await req1.get()
+    global.pageSize = 3
+    cachedResponses.pageSize = await req1.get()
+    const req2 = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}&offset=1`)
+    req2.account = user.account
+    req2.session = user.session
+    cachedResponses.offset = await req2.get()
+    const req3 = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}&limit=1`)
+    req3.account = user.account
+    req3.session = user.session
+    cachedResponses.limit = await req3.get()
+    const req4 = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}&all=true`)
+    req4.account = user.account
+    req4.session = user.session
+    cachedResponses.all = await req4.get()
+  })
   describe('exceptions', () => {
-    describe('invalid-payoutid', () => {
-      it('missing querystring payoutid', async () => {
+    describe('invalid-accountid', () => {
+      it('missing querystring accountid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/stripe-accounts')
         req.account = user.account
@@ -20,7 +57,7 @@ describe('/api/user/connect/stripe-accounts', () => {
         assert.strictEqual(errorMessage, 'invalid-accountid')
       })
 
-      it('invalid querystring payoutid', async () => {
+      it('invalid querystring accountid', async () => {
         const user = await TestHelper.createUser()
         const req = TestHelper.createRequest('/api/user/connect/stripe-accounts?accountid=invalid')
         req.account = user.account
@@ -53,97 +90,39 @@ describe('/api/user/connect/stripe-accounts', () => {
     })
   })
 
-  describe('receives', () => {
+  describe('receives', function () {
     it('optional querystring offset (integer)', async () => {
       const offset = 1
-      global.delayDiskWrites = true
-      const stripeAccounts = []
-      const user = await TestHelper.createUser()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        stripeAccounts.unshift(user.stripeAccount.id)
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}&offset=${offset}`)
-      req.account = user.account
-      req.session = user.session
-      const stripeAccountsNow = await req.get()
+      const stripeAccountsNow = cachedResponses.offset
       for (let i = 0, len = global.pageSize; i < len; i++) {
-        assert.strictEqual(stripeAccountsNow[i].id, stripeAccounts[offset + i])
+        assert.strictEqual(stripeAccountsNow[i].id, cachedStripeAccounts[offset + i])
       }
     })
 
     it('optional querystring limit (integer)', async () => {
       const limit = 1
-      const user = await TestHelper.createUser()
-      for (let i = 0, len = limit + 1; i < len; i++) {
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}&limit=${limit}`)
-      req.account = user.account
-      req.session = user.session
-      const stripeAccountsNow = await req.get()
+      const stripeAccountsNow = cachedResponses.limit
       assert.strictEqual(stripeAccountsNow.length, limit)
     })
 
     it('optional querystring all (boolean)', async () => {
-      const user = await TestHelper.createUser()
-      const stripeAccounts = []
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-        stripeAccounts.unshift(user.stripeAccount.id)
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}&all=true`)
-      req.account = user.account
-      req.session = user.session
-      const stripeAccountsNow = await req.get()
-      assert.strictEqual(stripeAccountsNow.length, stripeAccounts.length)
+      const stripeAccountsNow = cachedResponses.all
+      assert.strictEqual(stripeAccountsNow.length, cachedStripeAccounts.length)
     })
   })
 
-  describe('returns', () => {
+  describe('returns', function () {
     it('array', async () => {
-      const user = await TestHelper.createUser()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
-      req.account = user.account
-      req.session = user.session
-      req.filename = __filename
-      req.saveResponse = true
-      const stripeAccounts = await req.get()
-      assert.strictEqual(stripeAccounts.length, global.pageSize)
+      const accounts = cachedResponses.returns
+      assert.strictEqual(accounts.length, global.pageSize)
     })
   })
 
-  describe('configuration', () => {
+  describe('configuration', function () {
     it('environment PAGE_SIZE', async () => {
       global.pageSize = 3
-      const user = await TestHelper.createUser()
-      for (let i = 0, len = global.pageSize + 1; i < len; i++) {
-        await TestHelper.createStripeAccount(user, {
-          country: 'US',
-          type: 'company'
-        })
-      }
-      const req = TestHelper.createRequest(`/api/user/connect/stripe-accounts?accountid=${user.account.accountid}`)
-      req.account = user.account
-      req.session = user.session
-
-      const stripeAccounts = await req.get()
-      assert.strictEqual(stripeAccounts.length, global.pageSize)
+      const accounts = cachedResponses.pageSize
+      assert.strictEqual(accounts.length, global.pageSize)
     })
   })
 })

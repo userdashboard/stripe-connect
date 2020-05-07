@@ -9,6 +9,16 @@ module.exports = {
     if (!account) {
       throw new Error('invalid-account')
     }
-    return dashboard.StorageList.count(`${req.appid}/account/payouts/${req.query.accountid}`)
+    let index
+    if (req.query.stripeid) {
+      const owned = await dashboard.StorageList.exists(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, req.query.stripeid)
+      if (!owned) {
+        throw new Error('invalid-stripeid')
+      }
+      index = `${req.appid}/stripeAccount/payouts/${req.query.stripeid}`
+    } else {
+      index = `${req.appid}/account/payouts/${req.query.accountid}`
+    }
+    return dashboard.StorageList.count(index)
   }
 }

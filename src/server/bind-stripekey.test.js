@@ -5,7 +5,7 @@ const TestHelper = require('../../test-helper.js')
 
 describe('server/bind-stripekey', () => {
   describe('BindStripeKey#AFTER', () => {
-    it('should bind stripekey data to req', async () => {
+    it('should bind data to req', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/change-username')
       delete (req.stripeKey)

@@ -9,13 +9,23 @@ module.exports = {
     if (!account) {
       throw new Error('invalid-account')
     }
+    let index
+    if (req.query.stripeid) {
+      const owned = await dashboard.StorageList.exists(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, req.query.stripeid)
+      if (!owned) {
+        throw new Error('invalid-stripeid')
+      }
+      index = `${req.appid}/stripeAccount/payouts/${req.query.stripeid}`
+    } else {
+      index = `${req.appid}/account/payouts/${req.query.accountid}`
+    }
     let payoutids
     if (req.query.all) {
-      payoutids = await dashboard.StorageList.listAll(`${req.appid}/account/payouts/${req.query.accountid}`)
+      payoutids = await dashboard.StorageList.listAll(index)
     } else {
       const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0
       const limit = req.query.limit ? parseInt(req.query.limit, 10) : global.pageSize
-      payoutids = await dashboard.StorageList.list(`${req.appid}/account/payouts/${req.query.accountid}`, offset, limit)
+      payoutids = await dashboard.StorageList.list(index, offset, limit)
     }
     if (!payoutids || !payoutids.length) {
       return

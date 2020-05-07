@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/delete-stripe-account', () => {
-  describe('DeleteStripeAccount#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/delete-stripe-account?stripeid=invalid')
@@ -37,7 +37,7 @@ describe('/account/connect/delete-stripe-account', () => {
       assert.strictEqual(errorMessage, 'invalid-account')
     })
 
-    it('should bind Stripe account to req', async () => {
+    it('should bind data to req', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -51,7 +51,7 @@ describe('/account/connect/delete-stripe-account', () => {
     })
   })
 
-  describe('DeleteStripeAccount#GET', () => {
+  describe('view', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -83,7 +83,7 @@ describe('/account/connect/delete-stripe-account', () => {
     })
   })
 
-  describe('DeleteStripeAccount#POST', () => {
+  describe('submit', () => {
     it('should delete Stripe account (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

@@ -3,7 +3,7 @@ const assert = require('assert')
 const BindIP = require('./bind-ip.js')
 
 describe('server/bind-ip', () => {
-  describe('BindIP#BEFORE', () => {
+  describe('before', () => {
     it('should prioritize ip from header', async () => {
       const req = {
         headers: {

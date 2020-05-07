@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/create-stripe-account', () => {
-  describe('CreateStripeAccount#GET', () => {
+  describe('view', () => {
     it('should present the form', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/create-stripe-account')
@@ -16,7 +16,7 @@ describe('/account/connect/create-stripe-account', () => {
     })
   })
 
-  describe('CreateStripeAccount#POST', () => {
+  describe('submit', () => {
     it('should create Stripe account (screenshots)', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/create-stripe-account')

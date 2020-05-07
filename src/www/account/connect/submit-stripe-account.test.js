@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/submit-stripe-account', () => {
-  describe('SubmitStripeAccount#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/submit-stripe-account?stripeid=invalid')
@@ -20,7 +20,7 @@ describe('/account/connect/submit-stripe-account', () => {
       assert.strictEqual(errorMessage, 'invalid-stripeid')
     })
 
-    it('should bind Stripe account to req', async () => {
+    it('should bind data to req', async () => {
       const user = await TestStripeAccounts.createCompanyReadyForSubmission('DE')
       const req = TestHelper.createRequest(`/account/connect/submit-stripe-account?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
@@ -30,7 +30,7 @@ describe('/account/connect/submit-stripe-account', () => {
     })
   })
 
-  describe('SubmitStripeAccount#GET', () => {
+  describe('view', () => {
     it('should reject registration that hasn\'t submitted payment details', async () => {
       const user = await TestStripeAccounts.createCompanyMissingPaymentDetails()
       const req = TestHelper.createRequest(`/account/connect/submit-stripe-account?stripeid=${user.stripeAccount.id}`)
@@ -128,7 +128,7 @@ describe('/account/connect/submit-stripe-account', () => {
     })
   })
 
-  describe('SubmitStripeAccount#POST', () => {
+  describe('submit', () => {
     it('should submit registration (company) (screenshots)', async () => {
       const country = connect.countrySpecs[Math.floor(Math.random() * connect.countrySpecs.length)]
       const user = await TestStripeAccounts.createCompanyReadyForSubmission(country.id)

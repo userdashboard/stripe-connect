@@ -4,8 +4,8 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect', () => {
-  describe('Index#BEFORE', () => {
-    it('should bind Stripe accounts to req', async () => {
+  describe('before', () => {
+    it('should bind data to req', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
@@ -20,7 +20,7 @@ describe('/account/connect', () => {
     })
   })
 
-  describe('Index#GET', () => {
+  describe('view', () => {
     it('should have row for each Stripe account (screenshots)', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {

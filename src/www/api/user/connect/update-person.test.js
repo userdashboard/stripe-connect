@@ -3,8 +3,46 @@ const assert = require('assert')
 const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
+const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/update-person', () => {
+  const updateResponses = {}
+  const fields = [
+    'address_city',
+    'address_line1',
+    'address_postal_code',
+    'dob_day',
+    'dob_month',
+    'dob_year',
+    'phone',
+    'first_name',
+    'last_name',
+    'email',
+    'address_state',
+    'address_kana_city',
+    'address_kana_line1',
+    'address_kana_postal_code',
+    'address_kana_state',
+    'address_kana_town',
+    'address_kanji_city',
+    'address_kanji_line1',
+    'address_kanji_postal_code',
+    'address_kanji_state',
+    'address_kanji_town',
+    'first_name_kana',
+    'first_name_kanji',
+    'gender',
+    'last_name_kana',
+    'last_name_kanji',
+    'id_number',
+    'ssn_last_4'
+  ]
+  const uploadFields = [
+    'verification_document_front',
+    'verification_document_back',
+    'verification_additional_document_front',
+    'verification_additional_document_back'
+  ]
   describe('exceptions', () => {
     describe('invalid-personid', () => {
       it('missing querystring personid', async () => {
@@ -125,182 +163,21 @@ describe('/api/user/connect/update-person', () => {
       relationship_owner: 'false',
       ssn_last_4: 'invalid'
     }
-    for (const country of connect.countrySpecs) {
-      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-      if (payload === false) {
-        continue
-      }
-      for (const field in payload) {
-        if (testedMissingFields.indexOf(field) > -1) {
+    const missingMessages = {}
+    const errorMessages = {}
+    before(async () => {
+      await DashboardTestHelper.setupBeforeEach()
+      await TestHelper.setupBeforeEach()
+      for (const country of connect.countrySpecs) {
+        const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+        if (payload === false) {
           continue
         }
-        testedMissingFields.push(field)
-        describe(`invalid-${field}`, async () => {
-          it(`missing posted ${field}`, async () => {
-            const user = await TestHelper.createUser()
-            await TestHelper.createStripeAccount(user, {
-              country: country.id,
-              type: 'company'
-            })
-            await TestHelper.createPerson(user, {
-              relationship_representative: 'true',
-              relationship_executive: 'true',
-              relationship_title: 'SVP Testing',
-              relationship_percent_ownership: '0'
-            })
-            let property = field.replace('address_kana_', 'address_kana.')
-              .replace('address_kanji_', 'address_kanji.')
-              .replace('dob_', 'dob.')
-              .replace('relationship_', 'relationship.')
-            if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
-              property = property.replace('address_', 'address.')
-            }
-            await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
-            await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
-            const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
-            req.account = user.account
-            req.session = user.session
-            const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-            delete (body[field])
-            req.body = TestHelper.createMultiPart(req, body, {
-              verification_document_back: TestHelper['success_id_scan_back.png'],
-              verification_document_front: TestHelper['success_id_scan_front.png']
-            })
-            let errorMessage
-            try {
-              await req.patch()
-            } catch (error) {
-              errorMessage = error.message
-            }
-            assert.strictEqual(errorMessage, `invalid-${field}`)
-          })
-
-          if (invalidValues[field] !== undefined && invalidValues[field] !== false) {
-            it(`invalid posted ${field}`, async () => {
-              const user = await TestHelper.createUser()
-              await TestHelper.createStripeAccount(user, {
-                country: country.id,
-                type: 'company'
-              })
-              await TestHelper.createPerson(user, {
-                relationship_representative: 'true',
-                relationship_executive: 'true',
-                relationship_title: 'SVP Testing',
-                relationship_percent_ownership: '0'
-              })
-              let property = field.replace('address_kana_', 'address_kana.')
-                .replace('address_kanji_', 'address_kanji.')
-                .replace('dob_', 'dob.')
-                .replace('relationship_', 'relationship.')
-              if (property.indexOf('address_') > -1 && property.indexOf('_ka') === -1) {
-                property = property.replace('address_', 'address.')
-              }
-              await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
-              await TestHelper.waitForPersonRequirement(user, user.representative.id, property)
-              const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
-              req.account = user.account
-              req.session = user.session
-              const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-              body[field] = invalidValues[field]
-              req.body = TestHelper.createMultiPart(req, body, {
-                verification_document_back: TestHelper['success_id_scan_back.png'],
-                verification_document_front: TestHelper['success_id_scan_front.png']
-              })
-              let errorMessage
-              try {
-                await req.patch()
-              } catch (error) {
-                errorMessage = error.message
-              }
-              assert.strictEqual(errorMessage, `invalid-${field}`)
-            })
+        for (const field in payload) {
+          if (testedMissingFields.indexOf(field) > -1) {
+            continue
           }
-        })
-      }
-    }
-
-    describe('invalid-token', () => {
-      it('missing posted token', async () => {
-        global.stripeJS = 3
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'GB',
-          type: 'company'
-        })
-        await TestHelper.createPerson(user, {
-          relationship_representative: 'true',
-          relationship_executive: 'true',
-          relationship_title: 'SVP Testing',
-          relationship_percent_ownership: '0'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.GB), {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        })
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-token')
-      })
-
-      it('invalid posted token', async () => {
-        global.stripeJS = 3
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: 'GB',
-          type: 'company'
-        })
-        await TestHelper.createPerson(user, {
-          relationship_representative: 'true',
-          relationship_executive: 'true',
-          relationship_title: 'SVP Testing',
-          relationship_percent_ownership: '0'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
-        req.account = user.account
-        req.session = user.session
-        const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.GB)
-        body.token = 'invalid'
-        req.body = TestHelper.createMultiPart(req, body, {
-          verification_document_back: TestHelper['success_id_scan_back.png'],
-          verification_document_front: TestHelper['success_id_scan_front.png']
-        })
-        let errorMessage
-        try {
-          await req.patch()
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-token')
-      })
-    })
-  })
-
-  describe('receives', async () => {
-    const testedRequiredFields = [
-      'relationship_title',
-      'relationship_director',
-      'relationship_executive',
-      'relationship_representative',
-      'relationship_owner'
-    ]
-    for (const country of connect.countrySpecs) {
-      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
-      if (payload === false) {
-        continue
-      }
-      for (const field in payload) {
-        if (testedRequiredFields.indexOf(field) > -1) {
-          continue
-        }
-        testedRequiredFields.push(field)
-        it(`optionally-required posted ${field}`, async () => {
+          testedMissingFields.push(field)
           const user = await TestHelper.createUser()
           await TestHelper.createStripeAccount(user, {
             country: country.id,
@@ -325,68 +202,94 @@ describe('/api/user/connect/update-person', () => {
           req.account = user.account
           req.session = user.session
           const body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+          const fieldWas = body[field]
+          delete (body[field])
           req.body = TestHelper.createMultiPart(req, body, {
             verification_document_back: TestHelper['success_id_scan_back.png'],
             verification_document_front: TestHelper['success_id_scan_front.png']
           })
-          const representative = await req.patch()
-          if (field.startsWith('address_kana')) {
-            const property = field.substring('address_kana_'.length)
-            assert.strictEqual(representative.address_kana[property], body[field])
-          } else if (field.startsWith('address_kanji')) {
-            const property = field.substring('address_kanji_'.length)
-            // TODO: Stripe applies the submitted kana postal code value
-            // and when it returns it is transformed from 1500001 to
-            // １５００００１ with a different charset so this is just wrong
-            if (property === 'postal_code') {
-              assert.strictEqual(representative.address_kanji[property], '１５００００１')
-            } else {
-              assert.strictEqual(representative.address_kanji[property], body[field])
-            }
-          } else if (field.startsWith('address_')) {
-            const property = field.substring('address_'.length)
-            assert.strictEqual(representative.address[property], body[field])
-          } else if (field.startsWith('dob_')) {
-            const property = field.substring('dob_'.length)
-            assert.strictEqual(representative.dob[property], parseInt(body[field], 10))
-          } else if (field.startsWith('relationship_')) {
-            const property = field.substring('relationship_'.length)
-            if (body[field] === 'true') {
-              assert.strictEqual(representative.relationship[property], true)
-            } else {
-              assert.strictEqual(representative.relationship[property], body[field])
-            }
-          } else if (field === 'id_number') {
-            assert.strictEqual(representative.id_number_provided, true)
-          } else if (field === 'ssn_last_4') {
-            assert.strictEqual(representative.ssn_last_4_provided, true)
-          } else {
-            // TODO: Stripe may or may not transform the phone number
-            // by removing hyphons and adding the country dial code
-            // but submitting in that format is not allowed too
-            if (field === 'phone') {
-              if (representative[field] === body[field]) {
-                assert.strictEqual(representative[field], body[field])
-              } else {
-                const withCountryCode = `+1${body[field]}`
-                assert.strictEqual(representative[field], withCountryCode)
-              }
-            } else {
-              assert.strictEqual(representative[field], body[field])
-            }
+          try {
+            await req.patch()
+          } catch (error) {
+            errorMessages[field] = error.message
           }
-        })
+          body[field] = invalidValues[field]
+          req.body = TestHelper.createMultiPart(req, body, {
+            verification_document_back: TestHelper['success_id_scan_back.png'],
+            verification_document_front: TestHelper['success_id_scan_front.png']
+          })
+          try {
+            await req.patch()
+          } catch (error) {
+            errorMessages[field] = error.message
+          }
+          body[field] = fieldWas
+          req.body = TestHelper.createMultiPart(req, body, {
+            verification_document_back: TestHelper['success_id_scan_back.png'],
+            verification_document_front: TestHelper['success_id_scan_front.png']
+          })
+          updateResponses[field] = await req.patch()
+        }
       }
-    }
-
-    const uploadFields = [
-      'verification_document_front',
-      'verification_document_back',
-      'verification_additional_document_front',
-      'verification_additional_document_back'
-    ]
-    for (const field of uploadFields) {
-      it(`optionally-required posted ${field}`, async () => {
+      global.stripeJS = 3
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'GB',
+        type: 'company'
+      })
+      await TestHelper.createPerson(user, {
+        relationship_representative: 'true',
+        relationship_executive: 'true',
+        relationship_title: 'SVP Testing',
+        relationship_percent_ownership: '0'
+      })
+      const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${user.representative.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = TestHelper.createMultiPart(req, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.GB), {
+        verification_document_back: TestHelper['success_id_scan_back.png'],
+        verification_document_front: TestHelper['success_id_scan_front.png']
+      })
+      try {
+        await req.patch()
+      } catch (error) {
+        missingMessages['invalid-token'] = error.message
+      }
+      req.body.token = 'invalid'
+      try {
+        await req.patch()
+      } catch (error) {
+        errorMessages['invalid-token'] = error.message
+      }
+      // upload fields
+      const uploader1 = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(uploader1, {
+        country: 'AT',
+        type: 'company'
+      })
+      await TestHelper.createPerson(uploader1, {
+        relationship_representative: 'true',
+        relationship_executive: 'true',
+        relationship_title: 'SVP Testing',
+        relationship_percent_ownership: '0'
+      })
+      await TestHelper.updatePerson(uploader1, uploader1.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT))
+      const uploader2 = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(uploader1, {
+        country: 'AT',
+        type: 'company'
+      })
+      await TestHelper.createPerson(uploader2, {
+        relationship_representative: 'true',
+        relationship_executive: 'true',
+        relationship_title: 'SVP Testing',
+        relationship_percent_ownership: '0'
+      })
+      await TestHelper.updatePerson(uploader2, uploader2.representative, TestStripeAccounts.createPostData(TestStripeAccounts.representativeData.AT), {
+        verification_document_front: TestHelper['success_id_scan_back.png'],
+        verification_document_back: TestHelper['success_id_scan_back.png']
+      })
+      for (const field of uploadFields) {
         const user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: 'AT',
@@ -408,7 +311,107 @@ describe('/api/user/connect/update-person', () => {
         req.body = TestHelper.createMultiPart(req, {}, {
           [field]: TestHelper['success_id_scan_back.png']
         })
-        const representative = await req.patch()
+        updateResponses[field] = await req.patch()
+      }
+    })
+    for (const field of fields) {
+      describe(`invalid-${field}`, async () => {
+        it(`missing posted ${field}`, async () => {
+          const errorMessage = missingMessages[field]
+          assert.strictEqual(errorMessage, `invalid-${field}`)
+        })
+
+        it(`invalid posted ${field}`, async () => {
+          const errorMessage = errorMessages[field]
+          assert.strictEqual(errorMessage, `invalid-${field}`)
+        })
+      })
+    }
+
+    describe('invalid-token', () => {
+      it('missing posted token', async () => {
+        const errorMessage = missingMessages['invalid-token']
+        assert.strictEqual(errorMessage, 'invalid-token')
+      })
+
+      it('invalid posted token', async () => {
+        const errorMessage = errorMessages['invalid-token']
+        assert.strictEqual(errorMessage, 'invalid-token')
+      })
+    })
+  })
+
+  describe('receives', async () => {
+    const testedRequiredFields = [
+      'relationship_title',
+      'relationship_director',
+      'relationship_executive',
+      'relationship_representative',
+      'relationship_owner'
+    ]
+    for (const country of connect.countrySpecs) {
+      const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
+      if (payload === false) {
+        continue
+      }
+      for (const field in payload) {
+        if (testedRequiredFields.indexOf(field) > -1) {
+          continue
+        }
+        testedRequiredFields.push(field)
+        it(`optionally-required posted ${field}`, async () => {
+          const representative = updateResponses[field]
+          if (field.startsWith('address_kana')) {
+            const property = field.substring('address_kana_'.length)
+            assert.strictEqual(representative.address_kana[property], payload[field])
+          } else if (field.startsWith('address_kanji')) {
+            const property = field.substring('address_kanji_'.length)
+            // TODO: Stripe applies the submitted kana postal code value
+            // and when it returns it is transformed from 1500001 to
+            // １５００００１ with a different charset so this is just wrong
+            if (property === 'postal_code') {
+              assert.strictEqual(representative.address_kanji[property], '１５００００１')
+            } else {
+              assert.strictEqual(representative.address_kanji[property], payload[field])
+            }
+          } else if (field.startsWith('address_')) {
+            const property = field.substring('address_'.length)
+            assert.strictEqual(representative.address[property], payload[field])
+          } else if (field.startsWith('dob_')) {
+            const property = field.substring('dob_'.length)
+            assert.strictEqual(representative.dob[property], parseInt(payload[field], 10))
+          } else if (field.startsWith('relationship_')) {
+            const property = field.substring('relationship_'.length)
+            if (payload[field] === 'true') {
+              assert.strictEqual(representative.relationship[property], true)
+            } else {
+              assert.strictEqual(representative.relationship[property], payload[field])
+            }
+          } else if (field === 'id_number') {
+            assert.strictEqual(representative.id_number_provided, true)
+          } else if (field === 'ssn_last_4') {
+            assert.strictEqual(representative.ssn_last_4_provided, true)
+          } else {
+            // TODO: Stripe may or may not transform the phone number
+            // by removing hyphons and adding the country dial code
+            // but submitting in that format is not allowed too
+            if (field === 'phone') {
+              if (representative[field] === payload[field]) {
+                assert.strictEqual(representative[field], payload[field])
+              } else {
+                const withCountryCode = `+1${payload[field]}`
+                assert.strictEqual(representative[field], withCountryCode)
+              }
+            } else {
+              assert.strictEqual(representative[field], payload[field])
+            }
+          }
+        })
+      }
+    }
+    for (const field of uploadFields) {
+      it(`optionally-required posted ${field}`, async () => {
+        const representative = updateResponses[field]
         if (field.indexOf('additional_document') > -1) {
           if (field === 'verification_additional_document_front') {
             assert.notStrictEqual(representative.verification.additional_document.front, undefined)

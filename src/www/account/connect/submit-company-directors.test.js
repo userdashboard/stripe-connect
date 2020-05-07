@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/submit-company-directors', () => {
-  describe('SubmitCompanyDirectors#BEFORE', () => {
+  describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/submit-company-directors?stripeid=invalid')
@@ -55,26 +55,18 @@ describe('/account/connect/submit-company-directors', () => {
       assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
 
-    it('should bind Stripe account to req', async () => {
-      const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 0)
-      const req = TestHelper.createRequest(`/account/connect/submit-company-directors?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      await req.route.api.before(req)
-      assert.strictEqual(req.data.stripeAccount.id, user.stripeAccount.id)
-    })
-
-    it('should bind directors to req', async () => {
+    it('should bind data to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 2)
       const req = TestHelper.createRequest(`/account/connect/submit-company-directors?stripeid=${user.stripeAccount.id}`)
       req.account = user.account
       req.session = user.session
       await req.route.api.before(req)
+      assert.strictEqual(req.data.stripeAccount.id, user.stripeAccount.id)
       assert.strictEqual(req.data.directors.length, 2)
     })
   })
 
-  describe('SubmitCompanyDirectors#GET', () => {
+  describe('view', () => {
     it('should reject if a director requires information', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -125,7 +117,7 @@ describe('/account/connect/submit-company-directors', () => {
     })
   })
 
-  describe('SubmitCompanyDirectors#POST', () => {
+  describe('submit', () => {
     it('should submit directors (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithDirectors('DE', 1)
       const directorBody = TestStripeAccounts.createPostData(TestStripeAccounts.companyDirectorData.DE)
