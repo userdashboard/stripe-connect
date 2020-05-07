@@ -415,7 +415,6 @@ describe('/account/connect/edit-person', () => {
           const result = rejectMissingUploadResults[field]
           const doc = TestHelper.extractDoc(result.html)
           const messageContainer = doc.getElementById('message-container')
-          console.log(messageContainer.toString())
           const message = messageContainer.child[0]
           assert.strictEqual(message.attr.template, `invalid-${field}`)
         })
@@ -424,7 +423,6 @@ describe('/account/connect/edit-person', () => {
           const result = rejectMissingUploadResultsStripeV3[field]
           const doc = TestHelper.extractDoc(result.html)
           const messageContainer = doc.getElementById('message-container')
-          console.log(messageContainer.toString())
           const message = messageContainer.child[0]
           assert.strictEqual(message.attr.template, `invalid-${field}`)
         })
