@@ -50,10 +50,10 @@ const allowedMCCs = [
 
 module.exports = {
   createPostData,
-  createSubmittedIndividual: async (country) => {
+  createSubmittedIndividual: async (country, existingUser) => {
     country = country || 'US'
     global.webhooks = []
-    const user = await module.exports.createIndividualReadyForSubmission(country)
+    const user = await module.exports.createIndividualReadyForSubmission(country, existingUser)
     await TestHelper.submitStripeAccount(user)
     await TestHelper.waitForVerificationFieldsToLeave(user, 'tos_acceptance.date')
     await TestHelper.waitForVerificationFieldsToLeave(user, 'tos_acceptance.ip')
@@ -64,9 +64,9 @@ module.exports = {
     await TestHelper.waitForPayoutsEnabled(user)
     return user
   },
-  createSubmittedCompany: async (country) => {
+  createSubmittedCompany: async (country, existingUser) => {
     country = country || 'US'
-    const user = await module.exports.createCompanyReadyForSubmission(country)
+    const user = await module.exports.createCompanyReadyForSubmission(country, existingUser)
     await TestHelper.submitStripeAccount(user)
     await TestHelper.waitForVerificationFieldsToLeave(user, 'tos_acceptance.date')
     await TestHelper.waitForVerificationFieldsToLeave(user, 'tos_acceptance.ip')
@@ -77,9 +77,9 @@ module.exports = {
     await TestHelper.waitForPayoutsEnabled(user)
     return user
   },
-  createIndividualReadyForSubmission: async (country) => {
+  createIndividualReadyForSubmission: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'individual'
@@ -127,9 +127,9 @@ module.exports = {
     await TestHelper.waitForPendingFieldsToLeave(user)
     return user
   },
-  createCompanyReadyForSubmission: async (country) => {
+  createCompanyReadyForSubmission: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -212,9 +212,9 @@ module.exports = {
     await TestHelper.waitForPendingFieldsToLeave(user)
     return user
   },
-  createCompanyWithOwners: async (country, numOwners) => {
+  createCompanyWithOwners: async (country, numOwners, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -230,9 +230,9 @@ module.exports = {
     }
     return user
   },
-  createCompanyWithDirectors: async (country, numDirectors) => {
+  createCompanyWithDirectors: async (country, numDirectors, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -248,9 +248,9 @@ module.exports = {
     }
     return user
   },
-  createCompanyWithRepresentative: async (country) => {
+  createCompanyWithRepresentative: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -276,9 +276,9 @@ module.exports = {
     await TestHelper.updatePerson(user, user.representative, createPostData(representativeData[country], person), documents)
     return user
   },
-  createCompanyMissingRepresentative: async (country) => {
+  createCompanyMissingRepresentative: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -311,9 +311,9 @@ module.exports = {
     })
     return user
   },
-  createCompanyMissingPaymentDetails: async (country) => {
+  createCompanyMissingPaymentDetails: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -359,9 +359,9 @@ module.exports = {
     })
     return user
   },
-  createCompanyMissingOwners: async (country) => {
+  createCompanyMissingOwners: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -408,9 +408,9 @@ module.exports = {
     })
     return user
   },
-  createCompanyMissingCompanyDetails: async (country) => {
+  createCompanyMissingCompanyDetails: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -448,9 +448,9 @@ module.exports = {
     }
     return user
   },
-  createCompanyMissingDirectors: async (country) => {
+  createCompanyMissingDirectors: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'company'
@@ -495,9 +495,9 @@ module.exports = {
     })
     return user
   },
-  createIndividualMissingPaymentDetails: async (country) => {
+  createIndividualMissingPaymentDetails: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'individual'
@@ -513,9 +513,9 @@ module.exports = {
     await TestHelper.updateStripeAccount(user, createPostData(individualData[country], user.profile), individualUploadData)
     return user
   },
-  createIndividualMissingIndividualDetails: async (country) => {
+  createIndividualMissingIndividualDetails: async (country, existingUser) => {
     country = country || 'US'
-    const user = await TestHelper.createUser()
+    const user = existingUser || await TestHelper.createUser()
     await TestHelper.createStripeAccount(user, {
       country: country,
       type: 'individual'
