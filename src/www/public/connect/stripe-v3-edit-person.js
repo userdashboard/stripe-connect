@@ -186,7 +186,6 @@ function updatePerson (e) {
   var documentFront = document.getElementById('verification_document_front')
   var documentBack = document.getElementById('verification_document_back')
   return window.uploadDocumentFiles(documentFront, documentBack, function (error, front, back) {
-    console.log('one', JSON.stringify(error), JSON.stringify(front), JSON.stringify(back))
     if (error) {
       return window.renderError(error.message)
     }
@@ -209,7 +208,6 @@ function updatePerson (e) {
     var additionalDocumentFront = document.getElementById('verification_additional_document_front')
     var additionalDocumentBack = document.getElementById('verification_additional_document_back')
     return window.uploadDocumentFiles(additionalDocumentFront, additionalDocumentBack, function (error, front, back) {
-      console.log('two', JSON.stringify(error), JSON.stringify(front), JSON.stringify(back))
       if (error) {
         return window.renderError(error.message)
       }

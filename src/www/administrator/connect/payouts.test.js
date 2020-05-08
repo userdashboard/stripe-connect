@@ -5,10 +5,10 @@ const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/administrator/connect/payouts', function () {
+  this.retries(2)
   const cachedResponses = {}
   const cachedPayouts = []
   before(async () => {
-    this.retries(2)
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
     global.delayDiskWrites = true
@@ -47,7 +47,7 @@ describe('/administrator/connect/payouts', function () {
   })
 
   describe('view', () => {
-    it('should use default page size (screenshots)', async () => {
+    it('should return one page (screenshots)', async () => {
       const result = cachedResponses.returns
       const doc = TestHelper.extractDoc(result.html)
       const table = doc.getElementById('stripe-accounts-table')

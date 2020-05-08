@@ -5,10 +5,10 @@ const TestHelper = require('../../../../../test-helper.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/persons', function () {
+  this.retries(2)
   const cachedResponses = {}
   const cachedPersons = []
   before(async () => {
-    this.retries(2)
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
     global.delayDiskWrites = true

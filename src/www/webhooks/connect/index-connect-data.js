@@ -36,6 +36,9 @@ module.exports = {
     if (!stripeEvent) {
       return res.end()
     }
+    if (process.env.DEBUG_WEBHOOKS) {
+      console.log('  [webhook]', stripeEvent.type, stripeEvent.data && stripeEvent.data.object ? stripeEvent.data.object.id : '')
+    }
     if (stripeEvent.data.account) {
       await stripeCache.delete(stripeEvent.data.account)
     }

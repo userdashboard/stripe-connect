@@ -5,10 +5,10 @@ const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/payouts', function () {
+  this.retries(2)
   const cachedResponses = {}
   const cachedPayouts = []
   before(async () => {
-    this.retries(2)
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
     global.delayDiskWrites = true
