@@ -154,7 +154,7 @@ const stripeCache = module.exports = {
     if (global.testEnded) {
       return
     }
-    const string = await dashboard.Storage.read(`stripe/${id}`)
+    const string = await connect.Storage.read(`stripe/${id}`)
     if (string) {
       return JSON.parse(string)
     }
@@ -164,13 +164,13 @@ const stripeCache = module.exports = {
     if (global.testEnded) {
       return
     }
-    const string = await dashboard.Storage.read(`stripe/${personid}`)
+    const string = await connect.Storage.read(`stripe/${personid}`)
     if (string) {
       return JSON.parse(string)
     }
     const object = await stripeCache.execute('accounts', 'retrievePerson', stripeid, personid, stripeKey)
     const cached = JSON.stringify(object)
-    await dashboard.Storage.write(`stripe/${personid}`, cached)
+    await connect.Storage.write(`stripe/${personid}`, cached)
     return object
   },
   update: async (object) => {
@@ -178,7 +178,7 @@ const stripeCache = module.exports = {
       return
     }
     const cached = JSON.stringify(object)
-    await dashboard.Storage.write(`stripe/${object.id}`, cached)
+    await connect.Storage.write(`stripe/${object.id}`, cached)
   },
   delete: async (id) => {
     if (global.testEnded) {
@@ -188,7 +188,7 @@ const stripeCache = module.exports = {
       throw new Error('invalid-id', id)
     }
     try {
-      await dashboard.Storage.deleteFile(`stripe/${id}`)
+      await connect.Storage.delete(`stripe/${id}`)
     } catch (error) {
     }
   }

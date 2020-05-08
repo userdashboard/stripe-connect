@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 
 module.exports = {
   get: async (req) => {
@@ -14,11 +14,11 @@ module.exports = {
     }
     let personids
     if (req.query.all) {
-      personids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`)
+      personids = await connect.StorageList.listAll(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`)
     } else {
       const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0
       const limit = req.query.limit ? parseInt(req.query.limit, 10) : global.pageSize
-      personids = await dashboard.StorageList.list(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, offset, limit)
+      personids = await connect.StorageList.list(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, offset, limit)
     }
     if (!personids || !personids.length) {
       return

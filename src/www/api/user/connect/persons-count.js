@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 
 module.exports = {
   get: async (req) => {
@@ -12,7 +12,7 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    const ownerids = await dashboard.StorageList.listAll(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`)
+    const ownerids = await connect.StorageList.listAll(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`)
     if (!ownerids) {
       return 0
     }

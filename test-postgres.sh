@@ -8,7 +8,7 @@ if [ ! -z "$1" ]; then
 fi
 
 NODE_ENV=testing \
-STORAGE_ENGINE="@userdashboard/storage-postgresql" \
+STORAGE="@userdashboard/storage-postgresql" \
 DATABASE_URL=postgres://postgres:docker@localhost:5432/postgres \
 SILENT_START=true \
 GENERATE_SITEMAP_TXT=false \

@@ -7,7 +7,7 @@ if [ ! -z "$1" ]; then
   PARAMS="$PARAMS -- --grep $1"
 fi
 NODE_ENV=testing \
-STORAGE_ENGINE="@userdashboard/storage-s3" \
+STORAGE="@userdashboard/storage-s3" \
 S3_BUCKET_NAME="$DASHBOARD_S3_BUCKET_NAME" \
 SECRET_ACCESS_KEY="$DASHBOARD_SECRET_ACCESS_KEY" \
 ACCESS_KEY_ID="$DASHBOARD_ACCESS_KEY_ID" \

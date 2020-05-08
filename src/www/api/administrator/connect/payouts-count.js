@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 
 module.exports = {
   get: async (req) => {
@@ -11,6 +11,6 @@ module.exports = {
     } else {
       index = `${req.appid}/payouts`
     }
-    return dashboard.StorageList.count(index)
+    return connect.StorageList.count(index)
   }
 }

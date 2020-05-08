@@ -29,7 +29,7 @@ jobs:
         FAST_START: true
         DASHBOARD_SERVER: "http://localhost:9000"
         DOMAIN: "localhost"
-        STORAGE_ENGINE: "@userdashboard/storage-s3"
+        STORAGE: "@userdashboard/storage-s3"
         S3_ENDPOINT: "http://localhost:4566"
         S3_BUCKET_NAME: "testing"
         SECRET_ACCESS_KEY: "using-mock-aws-s3"

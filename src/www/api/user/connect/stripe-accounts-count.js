@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 
 module.exports = {
   get: async (req) => {
@@ -9,6 +9,6 @@ module.exports = {
     if (!account) {
       throw new Error('invalid-account')
     }
-    return dashboard.StorageList.count(`${req.appid}/account/stripeAccounts/${req.query.accountid}`)
+    return connect.StorageList.count(`${req.appid}/account/stripeAccounts/${req.query.accountid}`)
   }
 }

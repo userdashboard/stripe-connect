@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -6,11 +6,11 @@ module.exports = {
     if (!req.query || !req.query.personid) {
       throw new Error('invalid-personid')
     }
-    const exists = await dashboard.StorageList.exists(`${req.appid}/persons`, req.query.personid)
+    const exists = await connect.StorageList.exists(`${req.appid}/persons`, req.query.personid)
     if (!exists) {
       throw new Error('invalid-personid')
     }
-    const stripeid = await dashboard.Storage.read(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
+    const stripeid = await connect.Storage.read(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
     if (!stripeid) {
       throw new Error('invalid-personid')
     }

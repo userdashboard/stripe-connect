@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -16,15 +16,15 @@ module.exports = {
     await stripeCache.execute('accounts', 'deletePerson', person.account, req.query.personid, req.stripeKey)
     await stripeCache.delete(req.query.personid)
     try {
-      await dashboard.Storage.deleteFile(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
+      await connect.Storage.delete(`${req.appid}/map/personid/stripeid/${req.query.personid}`)
     } catch (error) {
     }
     try {
-      await dashboard.StorageList.remove(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, req.query.personid)
+      await connect.StorageList.remove(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, req.query.personid)
     } catch (error) {
     }
     try {
-      await dashboard.StorageList.remove(`${req.appid}/persons`, req.query.personid)
+      await connect.StorageList.remove(`${req.appid}/persons`, req.query.personid)
     } catch (error) {
     }
     return true

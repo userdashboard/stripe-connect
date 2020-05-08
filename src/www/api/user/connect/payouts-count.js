@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 
 module.exports = {
   get: async (req) => {
@@ -11,7 +11,7 @@ module.exports = {
     }
     let index
     if (req.query.stripeid) {
-      const owned = await dashboard.StorageList.exists(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, req.query.stripeid)
+      const owned = await connect.StorageList.exists(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, req.query.stripeid)
       if (!owned) {
         throw new Error('invalid-stripeid')
       }
@@ -19,6 +19,6 @@ module.exports = {
     } else {
       index = `${req.appid}/account/payouts/${req.query.accountid}`
     }
-    return dashboard.StorageList.count(index)
+    return connect.StorageList.count(index)
   }
 }

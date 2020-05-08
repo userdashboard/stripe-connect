@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
     if (!req.query || !req.query.payoutid) {
       throw new Error('invalid-payoutid')
     }
-    const stripeid = await dashboard.Storage.read(`${req.appid}/map/payoutid/stripeid/${req.query.payoutid}`)
+    const stripeid = await connect.Storage.read(`${req.appid}/map/payoutid/stripeid/${req.query.payoutid}`)
     if (!stripeid) {
       throw new Error('invalid-payoutid')
     }

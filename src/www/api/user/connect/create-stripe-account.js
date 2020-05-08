@@ -1,5 +1,4 @@
 const connect = require('../../../../../index.js')
-const dashboard = require('@userdashboard/dashboard')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -37,9 +36,9 @@ module.exports = {
       }
     }
     const stripeAccount = await stripeCache.execute('accounts', 'create', accountInfo, req.stripeKey)
-    await dashboard.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
-    await dashboard.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
-    await dashboard.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
+    await connect.StorageList.add(`${req.appid}/stripeAccounts`, stripeAccount.id)
+    await connect.StorageList.add(`${req.appid}/account/stripeAccounts/${req.query.accountid}`, stripeAccount.id)
+    await connect.Storage.write(`${req.appid}/map/stripeid/accountid/${stripeAccount.id}`, req.query.accountid)
     return stripeAccount
   }
 }

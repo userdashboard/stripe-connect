@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -6,11 +6,11 @@ module.exports = {
     if (!req.query || !req.query.stripeid) {
       throw new Error('invalid-stripeid')
     }
-    const exists = await dashboard.StorageList.exists(`${req.appid}/stripeAccounts`, req.query.stripeid)
+    const exists = await connect.StorageList.exists(`${req.appid}/stripeAccounts`, req.query.stripeid)
     if (!exists) {
       throw new Error('invalid-stripeid')
     }
-    const owned = await dashboard.StorageList.exists(`${req.appid}/account/stripeAccounts/${req.account.accountid}`, req.query.stripeid)
+    const owned = await connect.StorageList.exists(`${req.appid}/account/stripeAccounts/${req.account.accountid}`, req.query.stripeid)
     if (!owned) {
       throw new Error('invalid-account')
     }

@@ -66,5 +66,23 @@ module.exports = {
   euCountries: ['AT', 'BE', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'IE', 'IT', 'LU', 'LT', 'LV', 'NL', 'NO', 'PL', 'PT', 'SE', 'SI', 'SK'],
   getMerchantCategoryCodes: (language) => {
     return merchantCategoryCodes[language || global.language] || merchantCategoryCodes.en
+  },
+  setup: async () => {
+    if (process.env.CONNECT_STORAGE) {
+      const Storage = require('./src/storage.js')
+      const storage = await Storage.setup('CONNECT')
+      const StorageList = require('./src/storage-list.js')
+      const storageList = await StorageList.setup(storage, 'CONNECT')
+      const StorageObject = require('./src/storage-object.js')
+      const storageObject = await StorageObject.setup(storage, 'CONNECT')
+      module.exports.Storage = storage
+      module.exports.StorageList = storageList
+      module.exports.StorageObject = storageObject
+    } else {
+      const dashboard = require('@userdashboard')
+      module.exports.Storage = dashboard.Storage
+      module.exports.StorageList = dashboard.StorageList
+      module.exports.StorageObject = dashboard.StorageObject
+    }
   }
 }

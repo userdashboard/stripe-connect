@@ -31,7 +31,7 @@ jobs:
         FAST_START: true
         DASHBOARD_SERVER: "http://localhost:9000"
         DOMAIN: "localhost"
-        STORAGE_ENGINE: "@userdashboard/storage-mysql"
+        STORAGE: "@userdashboard/storage-mysql"
         DATABASE_URL: "mysql://root:password@127.0.0.1:8888/dashboard"
         GENERATE_SITEMAP_TXT: "false"
         GENERATE_API_TXT: "false"

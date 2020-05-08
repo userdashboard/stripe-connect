@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const connect = require('../../../../../index.js')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -72,9 +72,9 @@ module.exports = {
       personInfo.relationship.owner = true
     }
     const person = await stripeCache.execute('accounts', 'createPerson', req.query.stripeid, personInfo, req.stripeKey)
-    await dashboard.Storage.write(`${req.appid}/map/personid/stripeid/${person.id}`, req.query.stripeid)
-    await dashboard.StorageList.add(`${req.appid}/persons`, person.id)
-    await dashboard.StorageList.add(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, person.id)
+    await connect.Storage.write(`${req.appid}/map/personid/stripeid/${person.id}`, req.query.stripeid)
+    await connect.StorageList.add(`${req.appid}/persons`, person.id)
+    await connect.StorageList.add(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, person.id)
     return person
   }
 }

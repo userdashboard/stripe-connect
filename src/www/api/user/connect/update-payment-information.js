@@ -1,5 +1,4 @@
 const connect = require('../../../../../index.js')
-const dashboard = require('@userdashboard/dashboard')
 const stripeCache = require('../../../../stripe-cache.js')
 
 module.exports = {
@@ -171,8 +170,8 @@ module.exports = {
     try {
       const stripeAccountNow = await stripeCache.execute('accounts', 'update', req.query.stripeid, stripeData, req.stripeKey)
       const bankAccount = stripeAccountNow.external_accounts.data[0]
-      await dashboard.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
-      await dashboard.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
+      await connect.StorageList.add(`${req.appid}/stripeAccount/bankAccounts/${req.query.stripeid}`, bankAccount.id)
+      await connect.Storage.write(`${req.appid}/map/bankAccount/stripeid/${bankAccount.id}`, req.query.stripeid)
       await stripeCache.delete(req.query.stripeid)
       return stripeAccountNow
     } catch (error) {

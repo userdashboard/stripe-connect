@@ -36,9 +36,9 @@ jobs:
         FAST_START: true
         DASHBOARD_SERVER: "http://localhost:9000"
         DOMAIN: "localhost"
-        STORAGE_ENGINE: "@userdashboard/storage-postgresql"
+        STORAGE: "@userdashboard/storage-postgresql"
         DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
-        STORAGE_CACHE: "@userdashboard/storage-cache-redis"
+        CACHE: "@userdashboard/storage-cache-redis"
         CACHE_REDIS_URL: "redis://localhost:6379"
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
