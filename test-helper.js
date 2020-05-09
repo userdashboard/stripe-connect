@@ -4,12 +4,6 @@ global.stripeAPIVersion = '2020-03-02'
 global.maximumStripeRetries = 0
 global.connectWebhookEndPointSecret = true
 
-const connect = require('./index.js')
-if (process.env.GENERATE_COUNTRY) {
-  connect.countrySpecs = [
-    connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
-  ]
-}
 const fs = require('fs')
 const util = require('util')
 let ngrok, publicIP, localTunnel, localhostRun
@@ -111,6 +105,14 @@ let tunnel
 
 // direct webhook access is set up before the tests a single time
 async function setupBefore () {
+  const connect = require('./index.js')
+  connect.setup()
+  if (process.env.GENERATE_COUNTRY) {
+    connect.countrySpecs = [
+      connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
+    ]
+  }
+
   let newAddress
   if (process.env.NGROK) {
     return

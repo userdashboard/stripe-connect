@@ -79,7 +79,7 @@ module.exports = {
       module.exports.StorageList = storageList
       module.exports.StorageObject = storageObject
     } else {
-      const dashboard = require('@userdashboard')
+      const dashboard = require('@userdashboard/dashboard')
       module.exports.Storage = dashboard.Storage
       module.exports.StorageList = dashboard.StorageList
       module.exports.StorageObject = dashboard.StorageObject
