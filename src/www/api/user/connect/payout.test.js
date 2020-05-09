@@ -36,7 +36,7 @@ describe('/api/user/connect/payout', () => {
     })
 
     describe('invalid-account', function () {
-      this.retries(2)
+      this.retries(5)
       it('ineligible accessing account', async () => {
         const administrator = await TestHelper.createOwner()
         // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
@@ -62,7 +62,7 @@ describe('/api/user/connect/payout', () => {
   })
 
   describe('returns', function () {
-    this.retries(2)
+    this.retries(5)
     it('object', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')

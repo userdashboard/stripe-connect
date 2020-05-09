@@ -4,7 +4,8 @@ const TestHelper = require('../../../../test-helper.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/account/connect/persons', function () {
-  this.retries(2)
+  this.retries(5)
+  this.timeout(360000)
   const cachedResponses = {}
   const cachedPersons = []
   let cachedRepresentative

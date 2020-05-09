@@ -5,7 +5,8 @@ const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/administrator/connect/payouts', function () {
-  this.retries(2)
+  this.retries(5)
+  this.timeout(360000)
   const cachedResponses = {}
   const cachedPayouts = []
   before(async () => {

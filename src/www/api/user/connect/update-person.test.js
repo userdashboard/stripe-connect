@@ -5,7 +5,7 @@ const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 // const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
-describe.only('/api/user/connect/update-person', function () {
+describe('/api/user/connect/update-person', function () {
   // TODO: requirements do not correctly show up in
   // the Stripe account.requirements or person.requirements
 
