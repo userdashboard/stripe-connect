@@ -44,7 +44,7 @@ describe('/account/connect/persons', function () {
       cachedOwners.unshift(user.owner.id)
       cachedPersons.unshift(user.owner.id)
     }
-    const req1 = TestHelper.createRequest('/account/connect/stripe-accounts')
+    const req1 = TestHelper.createRequest('/account/connect/persons')
     req1.account = user.account
     req1.session = user.session
     req1.filename = __filename
@@ -58,12 +58,6 @@ describe('/account/connect/persons', function () {
     await req1.route.api.before(req1)
     cachedResponses.before = req1.data
     cachedResponses.returns = await req1.get()
-    global.pageSize = 3
-    cachedResponses.pageSize = await req1.get()
-    const req2 = TestHelper.createRequest('/account/connect/stripe-accounts?offset=1')
-    req2.account = user.account
-    req2.session = user.session
-    cachedResponses.offset = await req2.get()
   })
   describe('exceptions', () => {
     it('should reject invalid stripeid', async () => {
