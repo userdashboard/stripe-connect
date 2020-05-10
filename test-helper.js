@@ -463,11 +463,11 @@ async function waitForPayout (administrator, stripeid, previousid, callback) {
     if (global.testEnded) {
       return
     }
-    const req = module.exports.createRequest(`/api/administrator/connect/stripe-account-payouts?stripeid=${stripeid}&limit=1`)
+    const req = module.exports.createRequest(`/api/administrator/connect/payouts?stripeid=${stripeid}&limit=1`)
     req.account = administrator.account
     req.session = administrator.session
     req.stripeKey = stripeKey
-    const itemids = await global.api.administrator.connect.StripeAccountPayouts.get(req)
+    const itemids = await global.api.administrator.connect.Payouts.get(req)
     if (!itemids || !itemids.length) {
       return setTimeout(wait, 100)
     }
