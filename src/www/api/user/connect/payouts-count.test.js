@@ -54,7 +54,7 @@ describe('/api/user/connect/payouts-count', () => {
   })
 
   describe('returns', function () {
-    this.retries(5)
+    this.retries(10)
     it('integer', async () => {
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       // TODO: swap with individual account

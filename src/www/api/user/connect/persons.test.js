@@ -5,7 +5,7 @@ const TestHelper = require('../../../../../test-helper.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/persons', function () {
-  this.retries(5)
+  this.retries(10)
   this.timeout(360000)
   const cachedResponses = {}
   const cachedPersons = []
@@ -32,14 +32,14 @@ describe('/api/user/connect/persons', function () {
         relationship_title: 'SVP Testing',
         relationship_percent_ownership: 0
       })
-      cachedPersons.unshift(user.person.id)
+      cachedPersons.unshift(user.director.id)
       await TestHelper.createPerson(user, {
         relationship_owner: 'true',
         relationship_executive: 'true',
         relationship_title: 'SVP Testing',
         relationship_percent_ownership: 0
       })
-      cachedPersons.unshift(user.person.id)
+      cachedPersons.unshift(user.owner.id)
     }
     const req1 = TestHelper.createRequest(`/api/user/connect/persons?stripeid=${user.stripeAccount.id}`)
     req1.account = user.account

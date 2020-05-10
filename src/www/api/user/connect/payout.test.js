@@ -3,7 +3,9 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/user/connect/payout', () => {
+describe('/api/user/connect/payout', function () {
+  this.retries(10)
+  this.timeout(360000)
   describe('exceptions', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {
@@ -36,7 +38,7 @@ describe('/api/user/connect/payout', () => {
     })
 
     describe('invalid-account', function () {
-      this.retries(5)
+      this.retries(10)
       it('ineligible accessing account', async () => {
         const administrator = await TestHelper.createOwner()
         // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
@@ -62,7 +64,7 @@ describe('/api/user/connect/payout', () => {
   })
 
   describe('returns', function () {
-    this.retries(5)
+    this.retries(10)
     it('object', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')

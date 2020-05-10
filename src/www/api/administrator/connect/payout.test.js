@@ -3,7 +3,9 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/administrator/connect/payout', () => {
+describe('/api/administrator/connect/payout', function () {
+  this.retries(10)
+  this.timeout(360000)
   describe('exceptions', () => {
     describe('invalid-payoputid', () => {
       it('missing querystring payoutid', async () => {

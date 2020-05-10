@@ -5,7 +5,7 @@ const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/payouts', function () {
-  this.retries(5)
+  this.retries(10)
   this.timeout(360000)
   const cachedResponses = {}
   const cachedPayouts = []
@@ -24,8 +24,6 @@ describe('/api/user/connect/payouts', function () {
     const req1 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}`)
     req1.account = user.account
     req1.session = user.session
-    await req1.route.api.before(req1)
-    cachedResponses.before = req1.data
     cachedResponses.returns = await req1.get()
     global.pageSize = 3
     cachedResponses.pageSize = await req1.get()

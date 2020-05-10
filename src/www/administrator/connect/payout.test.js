@@ -3,7 +3,9 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
-describe('/administrator/connect/payout', () => {
+describe('/administrator/connect/payout', function () {
+  this.retries(10)
+  this.timeout(360000)
   describe('before', () => {
     it('should reject invalid payoutid', async () => {
       const administrator = await TestHelper.createOwner()

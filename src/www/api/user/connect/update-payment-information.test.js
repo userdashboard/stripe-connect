@@ -5,7 +5,9 @@ const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
-describe('/api/user/connect/update-payment-information', () => {
+describe('/api/user/connect/update-payment-information', function () {
+  this.retries(10)
+  this.timeout(360000)
   const testedMissingFields = []
   // TODO: invalid values marked as 'false' are skipped until they can be verified
   const invalidValues = {

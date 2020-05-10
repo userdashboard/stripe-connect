@@ -3,7 +3,9 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/administrator/connect/payouts-count', () => {
+describe('/api/administrator/connect/payouts-count', function () {
+  this.retries(10)
+  this.timeout(360000)
   describe('returns', () => {
     it('integer', async () => {
       const administrator = await TestHelper.createOwner()

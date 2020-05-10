@@ -7,7 +7,7 @@ describe('/api/administrator/connect/stripe-account', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
         const administrator = await TestHelper.createOwner()
-        const req = TestHelper.createRequest('/api/administrator/connect/stripe-account-payouts-count')
+        const req = TestHelper.createRequest('/api/administrator/connect/stripe-account')
         req.account = administrator.account
         req.session = administrator.session
         let errorMessage
@@ -21,7 +21,7 @@ describe('/api/administrator/connect/stripe-account', () => {
 
       it('invalid querystring stripeid', async () => {
         const administrator = await TestHelper.createOwner()
-        const req = TestHelper.createRequest('/api/administrator/connect/stripe-account-payouts-count?stripeid=invalid')
+        const req = TestHelper.createRequest('/api/administrator/connect/stripe-account?stripeid=invalid')
         req.account = administrator.account
         req.session = administrator.session
         let errorMessage

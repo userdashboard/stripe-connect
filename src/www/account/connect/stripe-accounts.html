@@ -70,11 +70,7 @@
       </div>
     </div>
   </body>
-  <ul id="page-links" class="pagination"></ul>
 </body>
-<template id="page-link">
-  <li><a href="/account/connect/stripe-accounts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a></li>
-</template>
   <template id="stripe-account-row">
     <tr id="${account.id}">
       <td><a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a></td>

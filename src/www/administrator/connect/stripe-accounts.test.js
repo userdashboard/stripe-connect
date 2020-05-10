@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/administrator/connect/stripe-accounts', function () {
-  this.retries(5)
+  this.retries(10)
   this.timeout(360000)
   const cachedResponses = {}
   const cachedStripeAccounts = []
@@ -44,8 +44,8 @@ describe('/administrator/connect/stripe-accounts', function () {
     it('should bind data to req', async () => {
       const data = cachedResponses.before
       assert.strictEqual(data.stripeAccounts.length, global.pageSize)
-      assert.strictEqual(data.stripeAccounts[0], cachedStripeAccounts[0])
-      assert.strictEqual(data.stripeAccounts[1], cachedStripeAccounts[1])
+      assert.strictEqual(data.stripeAccounts[0].id, cachedStripeAccounts[0])
+      assert.strictEqual(data.stripeAccounts[1].id, cachedStripeAccounts[1])
     })
   })
 

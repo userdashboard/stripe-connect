@@ -5,7 +5,7 @@ const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/administrator/connect/payouts', function () {
-  this.retries(5)
+  this.retries(10)
   this.timeout(360000)
   const cachedResponses = {}
   const cachedPayouts = []
@@ -42,8 +42,8 @@ describe('/administrator/connect/payouts', function () {
     it('should bind data to req', async () => {
       const data = cachedResponses.before
       assert.strictEqual(data.stripeAccounts.length, global.pageSize)
-      assert.strictEqual(data.stripeAccounts[0], cachedPayouts[0])
-      assert.strictEqual(data.stripeAccounts[1], cachedPayouts[1])
+      assert.strictEqual(data.stripeAccounts[0].id, cachedPayouts[0])
+      assert.strictEqual(data.stripeAccounts[1].id, cachedPayouts[1])
     })
   })
 
@@ -51,7 +51,7 @@ describe('/administrator/connect/payouts', function () {
     it('should return one page (screenshots)', async () => {
       const result = cachedResponses.returns
       const doc = TestHelper.extractDoc(result.html)
-      const table = doc.getElementById('stripe-accounts-table')
+      const table = doc.getElementById('payouts-table')
       const rows = table.getElementsByTagName('tr')
       assert.strictEqual(rows.length, global.pageSize + 1)
     })
@@ -60,7 +60,7 @@ describe('/administrator/connect/payouts', function () {
       global.pageSize = 3
       const result = cachedResponses.pageSize
       const doc = TestHelper.extractDoc(result.html)
-      const table = doc.getElementById('stripe-accounts-table')
+      const table = doc.getElementById('payouts-table')
       const rows = table.getElementsByTagName('tr')
       assert.strictEqual(rows.length, global.pageSize + 1)
     })
