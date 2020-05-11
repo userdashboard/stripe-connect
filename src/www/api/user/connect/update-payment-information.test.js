@@ -50,7 +50,7 @@ describe('/api/user/connect/update-payment-information', function () {
       })
       errorMessages[country.id] = {}
       invalidMessages[country.id] = {}
-      submitIdentities[country.id] = user.identity
+      submitIdentities[country.id] = user.profile
       for (const field in payload) {
         if (testedMissingFields.indexOf(field) > -1) {
           continue
@@ -60,9 +60,9 @@ describe('/api/user/connect/update-payment-information', function () {
         req.account = user.account
         req.session = user.session
         if (TestStripeAccounts.paymentData[country.id].length) {
-          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0], user.identity)
+          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0], user.profile)
         } else {
-          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id], user.identity)
+          req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id], user.profile)
         }
         delete (req.body[field])
         try {
