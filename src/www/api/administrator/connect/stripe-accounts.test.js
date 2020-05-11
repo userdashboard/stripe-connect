@@ -27,6 +27,7 @@ describe('/api/administrator/connect/stripe-accounts', function () {
       country: 'US',
       type: 'individual'
     })
+    cachedStripeAccounts.unshift(user.stripeAccount.id)
     await TestHelper.createStripeAccount(user, {
       country: 'US',
       type: 'company'

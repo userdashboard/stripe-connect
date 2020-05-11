@@ -44,7 +44,7 @@ describe('/account/connect/persons', function () {
       cachedOwners.unshift(user.owner.id)
       cachedPersons.unshift(user.owner.id)
     }
-    const req1 = TestHelper.createRequest('/account/connect/persons')
+    const req1 = TestHelper.createRequest(`/account/connect/persons?stripeid=${user.stripeAccount.id}`)
     req1.account = user.account
     req1.session = user.session
     req1.filename = __filename

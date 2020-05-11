@@ -81,9 +81,9 @@ describe('/api/user/connect/update-payment-information', function () {
       req.account = user.account
       req.session = user.session
       if (TestStripeAccounts.paymentData[country.id].length) {
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0])
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id][0], user.profile)
       } else {
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id], user.profile)
       }
       submitResponses[country.id] = await req.patch()
     }
