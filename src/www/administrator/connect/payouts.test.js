@@ -41,9 +41,9 @@ describe('/administrator/connect/payouts', function () {
   describe('before', () => {
     it('should bind data to req', async () => {
       const data = cachedResponses.before
-      assert.strictEqual(data.stripeAccounts.length, global.pageSize)
-      assert.strictEqual(data.stripeAccounts[0].id, cachedPayouts[0])
-      assert.strictEqual(data.stripeAccounts[1].id, cachedPayouts[1])
+      assert.strictEqual(data.payouts.length, global.pageSize)
+      assert.strictEqual(data.payouts[0].id, cachedPayouts[0])
+      assert.strictEqual(data.payouts[1].id, cachedPayouts[1])
     })
   })
 

@@ -44,8 +44,6 @@ describe('/api/user/connect/persons', function () {
     const req1 = TestHelper.createRequest(`/api/user/connect/persons?stripeid=${user.stripeAccount.id}`)
     req1.account = user.account
     req1.session = user.session
-    await req1.route.api.before(req1)
-    cachedResponses.before = req1.data
     cachedResponses.returns = await req1.get()
     global.pageSize = 3
     cachedResponses.pageSize = await req1.get()

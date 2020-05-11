@@ -370,7 +370,7 @@ async function createPayout (user) {
   req.session = user.session
   req.account = user.account
   const payout = await req.get()
-  const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&limit=1`)
+  const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&stripeid=${user.stripeAccount.id}&limit=1`)
   req2.session = user.session
   req2.account = user.account
   req2.stripeKey = stripeKey

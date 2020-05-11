@@ -5,6 +5,10 @@ module.exports = {
     req.query = req.query || {}
     let index
     if (req.query.stripeid) {
+      const stripeAccount = await global.api.administrator.connect.StripeAccount.get(req)
+      if (!stripeAccount) {
+        throw new Error('invalid-stripeid')
+      }
       index = `${req.appid}/stripeAccount/payouts/${req.query.stripeid}`
     } else if (req.query.accountid) {
       index = `${req.appid}/account/payouts/${req.query.accountid}`

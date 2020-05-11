@@ -21,21 +21,14 @@ describe('/api/administrator/connect/payouts', function () {
       await TestHelper.createPayout(user)
       cachedPayouts.unshift(user.payout.id)
     }
-    const user = await TestHelper.createUser()
-    await TestHelper.createStripeAccount(user, {
-      country: 'US',
-      type: 'individual'
-    })
+    const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
-    await TestHelper.createStripeAccount(user, {
-      country: 'US',
-      type: 'company'
-    })
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
+    user = await TestStripeAccounts.createSubmittedIndividual('NZ', user)
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
