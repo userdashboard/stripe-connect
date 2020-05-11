@@ -59,6 +59,7 @@ describe('/account/connect/edit-person', function () {
   ]
   before(async () => {
     await DashboardTestHelper.setupBeforeEach()
+    await TestHelper.setupBeforeEach()
     const users = {}
     for (const country of connect.countrySpecs) {
       if (process.env.DEBUG_ERRORS) {
