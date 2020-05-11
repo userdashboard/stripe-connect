@@ -24,14 +24,14 @@ describe('/account/connect/persons', function () {
       relationship_representative: 'true',
       relationship_executive: 'true',
       relationship_title: 'SVP Testing',
-      relationship_percent_ownership: 0
+      relationship_percent_ownership: '0'
     })
     for (let i = 0, len = 2; i < len; i++) {
       await TestHelper.createPerson(user, {
         relationship_director: 'true',
         relationship_executive: 'true',
         relationship_title: 'SVP Testing',
-        relationship_percent_ownership: 0
+        relationship_percent_ownership: '0'
       })
       cachedDirectors.unshift(user.director.id)
       cachedPersons.unshift(user.director.id)
@@ -39,7 +39,7 @@ describe('/account/connect/persons', function () {
         relationship_owner: 'true',
         relationship_executive: 'true',
         relationship_title: 'SVP Testing',
-        relationship_percent_ownership: 0
+        relationship_percent_ownership: '11'
       })
       cachedOwners.unshift(user.owner.id)
       cachedPersons.unshift(user.owner.id)

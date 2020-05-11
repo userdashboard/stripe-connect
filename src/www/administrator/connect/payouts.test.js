@@ -6,7 +6,7 @@ const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/administrator/connect/payouts', function () {
   this.retries(10)
-  this.timeout(360000)
+  this.timeout(480000)
   const cachedResponses = {}
   const cachedPayouts = []
   before(async () => {

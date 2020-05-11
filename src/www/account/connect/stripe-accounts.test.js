@@ -41,7 +41,7 @@ describe('/account/connect/stripe-accounts', function () {
   describe('before', () => {
     it('should bind data to req', async () => {
       const data = cachedResponses.before
-      assert.strictEqual(data.stripeAccounts.length, global.pageSize)
+      assert.strictEqual(data.stripeAccounts.length, cachedStripeAccounts.length)
       assert.strictEqual(data.stripeAccounts[0].id, cachedStripeAccounts[0])
       assert.strictEqual(data.stripeAccounts[1].id, cachedStripeAccounts[1])
     })
@@ -53,7 +53,7 @@ describe('/account/connect/stripe-accounts', function () {
       const doc = TestHelper.extractDoc(result.html)
       const companyTable = doc.getElementById('company-accounts-table')
       const companyRows = companyTable.getElementsByTagName('tr')
-      assert.strictEqual(companyRows.length, global.pageSize + 1)
+      assert.strictEqual(companyRows.length, global.pageSize + 2 + 1)
       const individualTable = doc.getElementById('individual-accounts-table')
       const individualRows = individualTable.getElementsByTagName('tr')
       assert.strictEqual(individualRows.length, 1 + 1)

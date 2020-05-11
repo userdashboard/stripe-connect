@@ -6,7 +6,7 @@ const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/administrator/connect/payouts', function () {
   this.retries(10)
-  this.timeout(360000)
+  this.timeout(480000)
   const cachedResponses = {}
   const cachedPayouts = []
   const accountPayouts = []
@@ -42,8 +42,6 @@ describe('/api/administrator/connect/payouts', function () {
     const req1 = TestHelper.createRequest('/api/administrator/connect/payouts')
     req1.account = administrator.account
     req1.session = administrator.session
-    await req1.route.api.before(req1)
-    cachedResponses.before = req1.data
     cachedResponses.returns = await req1.get()
     global.pageSize = 3
     cachedResponses.pageSize = await req1.get()
