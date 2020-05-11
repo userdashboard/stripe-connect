@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/delete-person', () => {
-  describe('before', () => {
+  describe('exceptions', () => {
     it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/delete-person?personid=invalid')
@@ -33,7 +33,9 @@ describe('/account/connect/delete-person', () => {
       }
       assert.strictEqual(errorMessage, 'invalid-account')
     })
+  })
 
+  describe('before', () => {
     it('should bind data to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/delete-person?personid=${user.owner.id}`)
@@ -54,17 +56,6 @@ describe('/account/connect/delete-person', () => {
       const doc = TestHelper.extractDoc(result.html)
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
-    })
-
-    it('should present the person table', async () => {
-      const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
-      const req = TestHelper.createRequest(`/account/connect/delete-person?personid=${user.owner.id}`)
-      req.account = user.account
-      req.session = user.session
-      const result = await req.get()
-      const doc = TestHelper.extractDoc(result.html)
-      const row = doc.getElementById(user.owner.id)
-      assert.strictEqual(row.tag, 'tr')
     })
   })
 

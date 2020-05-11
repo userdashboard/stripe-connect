@@ -4,7 +4,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/submit-beneficial-owners', () => {
-  describe('before', () => {
+  describe('exceptions', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/submit-beneficial-owners?stripeid=invalid')
@@ -54,7 +54,9 @@ describe('/account/connect/submit-beneficial-owners', () => {
       }
       assert.strictEqual(errorMessage, 'invalid-stripe-account')
     })
+  })
 
+  describe('before', () => {
     it('should bind data to req', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 2)
       const req = TestHelper.createRequest(`/account/connect/submit-beneficial-owners?stripeid=${user.stripeAccount.id}`)

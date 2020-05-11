@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/submit-stripe-account', () => {
-  describe('before', () => {
+  describe('exceptions', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/submit-stripe-account?stripeid=invalid')
@@ -19,7 +19,9 @@ describe('/account/connect/submit-stripe-account', () => {
       }
       assert.strictEqual(errorMessage, 'invalid-stripeid')
     })
+  })
 
+  describe('before', () => {
     it('should bind data to req', async () => {
       const user = await TestStripeAccounts.createCompanyReadyForSubmission('DE')
       const req = TestHelper.createRequest(`/account/connect/submit-stripe-account?stripeid=${user.stripeAccount.id}`)

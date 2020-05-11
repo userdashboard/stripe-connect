@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/connect/delete-stripe-account', () => {
-  describe('before', () => {
+  describe('exceptions', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/delete-stripe-account?stripeid=invalid')
@@ -36,7 +36,9 @@ describe('/account/connect/delete-stripe-account', () => {
       }
       assert.strictEqual(errorMessage, 'invalid-account')
     })
+  })
 
+  describe('before', () => {
     it('should bind data to req', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
@@ -65,21 +67,6 @@ describe('/account/connect/delete-stripe-account', () => {
       const doc = TestHelper.extractDoc(result.html)
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
-    })
-
-    it('should present the Stripe account table', async () => {
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'individual'
-      })
-      const req = TestHelper.createRequest(`/account/connect/delete-stripe-account?stripeid=${user.stripeAccount.id}`)
-      req.account = user.account
-      req.session = user.session
-      const result = await req.get()
-      const doc = TestHelper.extractDoc(result.html)
-      const tbody = doc.getElementById(user.stripeAccount.id)
-      assert.strictEqual(tbody.tag, 'tbody')
     })
   })
 

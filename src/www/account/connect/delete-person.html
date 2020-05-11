@@ -12,20 +12,6 @@
     <h1>Delete ${person.id}</h1>
     <p>The owner information will be deleted immediately and cannot be recovered.</p>
     <div id="message-container"></div>
-    <table id="persons-table" class="pure-table object-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr id="${person.id}">
-          <td>${person.id}</td>
-          <td>${person.first_name} ${person.last_name}</td>
-        </tr>
-      </thead>
-    </table>
     <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}">
       <button id="submit-button" class="pure-button pure-button-primary">Delete</button>
     </form>

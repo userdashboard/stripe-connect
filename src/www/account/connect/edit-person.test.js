@@ -255,7 +255,7 @@ describe('/account/connect/edit-person', function () {
     }
   })
 
-  describe('init', () => {
+  describe('exceptions', () => {
     it('should reject invalid person', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/edit-person?personid=invalid')

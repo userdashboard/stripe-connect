@@ -67,7 +67,7 @@ describe('/account/connect/edit-payment-information', function () {
       }
     }
   })
-  describe('init', () => {
+  describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/connect/edit-payment-information?stripeid=invalid')
@@ -108,36 +108,6 @@ describe('/account/connect/edit-payment-information', function () {
   })
 
   describe('submit', async () => {
-    for (const country of connect.countrySpecs) {
-      it('reject invalid fields (' + country.id + ')', async () => {
-        let body
-        if (TestStripeAccounts.paymentData[country.id].length) {
-          for (const i in TestStripeAccounts.paymentData[country.id]) {
-            const format = TestStripeAccounts.paymentData[country.id][i]
-            body = TestStripeAccounts.createPostData(format)
-            const fields = Object.keys(body)
-            for (const field of fields) {
-              const result = errorResponses[country.id][i][field]
-              const doc = TestHelper.extractDoc(result.html)
-              const messageContainer = doc.getElementById('message-container')
-              const message = messageContainer.child[0]
-              assert.strictEqual(message.attr.template, `invalid-${field}`)
-            }
-          }
-          return
-        }
-        body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
-        const fields = Object.keys(body)
-        for (const field of fields) {
-          const result = errorResponses[country.id][field]
-          const doc = TestHelper.extractDoc(result.html)
-          const messageContainer = doc.getElementById('message-container')
-          const message = messageContainer.child[0]
-          assert.strictEqual(message.attr.template, `invalid-${field}`)
-        }
-      })
-    }
-
     for (const country of connect.countrySpecs) {
       it('submit payment information (' + country.id + ')', async () => {
         if (TestStripeAccounts.paymentData[country.id].length) {
@@ -182,5 +152,37 @@ describe('/account/connect/edit-payment-information', function () {
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'success')
     })
+  })
+
+  describe('errors', async () => {
+    for (const country of connect.countrySpecs) {
+      it('reject invalid fields (' + country.id + ')', async () => {
+        let body
+        if (TestStripeAccounts.paymentData[country.id].length) {
+          for (const i in TestStripeAccounts.paymentData[country.id]) {
+            const format = TestStripeAccounts.paymentData[country.id][i]
+            body = TestStripeAccounts.createPostData(format)
+            const fields = Object.keys(body)
+            for (const field of fields) {
+              const result = errorResponses[country.id][i][field]
+              const doc = TestHelper.extractDoc(result.html)
+              const messageContainer = doc.getElementById('message-container')
+              const message = messageContainer.child[0]
+              assert.strictEqual(message.attr.template, `invalid-${field}`)
+            }
+          }
+          return
+        }
+        body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id])
+        const fields = Object.keys(body)
+        for (const field of fields) {
+          const result = errorResponses[country.id][field]
+          const doc = TestHelper.extractDoc(result.html)
+          const messageContainer = doc.getElementById('message-container')
+          const message = messageContainer.child[0]
+          assert.strictEqual(message.attr.template, `invalid-${field}`)
+        }
+      })
+    }
   })
 })

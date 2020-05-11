@@ -35,22 +35,6 @@ describe('/administrator/connect/reject-stripe-account', () => {
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
     })
-
-    it('should present the Stripe account table', async () => {
-      const administrator = await TestHelper.createOwner()
-      const user = await TestHelper.createUser()
-      await TestHelper.createStripeAccount(user, {
-        country: 'US',
-        type: 'individual'
-      })
-      const req = TestHelper.createRequest(`/administrator/connect/reject-stripe-account?stripeid=${user.stripeAccount.id}`)
-      req.account = administrator.account
-      req.session = administrator.session
-      const result = await req.get()
-      const doc = TestHelper.extractDoc(result.html)
-      const row = doc.getElementById(user.stripeAccount.id)
-      assert.strictEqual(row.tag, 'tr')
-    })
   })
 
   describe('submit', () => {
