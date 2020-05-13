@@ -69,11 +69,11 @@ module.exports = {
   },
   setup: async () => {
     if (process.env.CONNECT_STORAGE) {
-      const Storage = require('./src/storage.js')
+      const Storage = require('@userdashboard/dashboard/src/storage.js')
       const storage = await Storage.setup('CONNECT')
-      const StorageList = require('./src/storage-list.js')
+      const StorageList = require('@userdashboard/dashboard/src/storage-list.js')
       const storageList = await StorageList.setup(storage, 'CONNECT')
-      const StorageObject = require('./src/storage-object.js')
+      const StorageObject = require('@userdashboard/dashboard/src/storage-object.js')
       const storageObject = await StorageObject.setup(storage, 'CONNECT')
       module.exports.Storage = storage
       module.exports.StorageList = storageList
