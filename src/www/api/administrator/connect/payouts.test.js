@@ -22,6 +22,7 @@ describe('/api/administrator/connect/payouts', function () {
       cachedPayouts.unshift(user.payout.id)
     }
     let user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+    const stripeid = user.stripeAccount.id
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
@@ -54,7 +55,7 @@ describe('/api/administrator/connect/payouts', function () {
     req5.account = administrator.account
     req5.session = administrator.session
     cachedResponses.accountid = await req5.get()
-    const req6 = TestHelper.createRequest(`/api/administrator/connect/payouts?stripeid=${user.stripeAccount.id}&all=true`)
+    const req6 = TestHelper.createRequest(`/api/administrator/connect/payouts?stripeid=${stripeid}&all=true`)
     req6.account = administrator.account
     req6.session = administrator.session
     cachedResponses.stripeid = await req6.get()
