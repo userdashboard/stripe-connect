@@ -26,12 +26,15 @@ describe('/api/administrator/connect/payouts', function () {
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
+    stripeAccountPayouts.unshift(user.payout.id)
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
+    stripeAccountPayouts.unshift(user.payout.id)
     user = await TestStripeAccounts.createSubmittedIndividual('NZ', user)
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
+    accountPayouts.unshift(user.payout.id)
     const req1 = TestHelper.createRequest('/api/administrator/connect/payouts')
     req1.account = administrator.account
     req1.session = administrator.session
