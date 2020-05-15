@@ -5,7 +5,7 @@ const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/administrator/connect/payouts-count', function () {
   this.retries(10)
-  this.timeout(360000)
+  this.timeout(960000)
   describe('returns', () => {
     it('integer', async () => {
       const administrator = await TestHelper.createOwner()

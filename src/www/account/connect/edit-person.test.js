@@ -62,45 +62,34 @@ describe('/account/connect/edit-person', function () {
     await TestHelper.setupBeforeEach()
     const users = {}
     for (const country of connect.countrySpecs) {
-      if (process.env.DEBUG_ERRORS) {
-        console.log('country', country.id)
-      }
       const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
       if (payload === false) {
         continue
       }
+      let user = users[country.id]
+      if (!user) {
+
+        user = await TestHelper.createUser()
+        await TestHelper.createStripeAccount(user, {
+          country: country.id,
+          type: 'company'
+        })
+        await TestHelper.createPerson(user, {
+          relationship_representative: 'true',
+          relationship_executive: 'true',
+          relationship_title: 'SVP Testing',
+          relationship_percent_ownership: '0'
+        })
+        users[country.id] = user
+      }
       for (const field in payload) {
-        if (process.env.DEBUG_ERRORS) {
-          console.log(' -> ', field)
-        }
         if (testedRequiredFields.indexOf(field) > -1) {
           continue
         }
         testedRequiredFields.push(field)
-        let user = users[country.id]
-        if (!user) {
-          if (process.env.DEBUG_ERRORS) {
-            console.log('create new user', country.id)
-          }
-          user = await TestHelper.createUser()
-          await TestHelper.createStripeAccount(user, {
-            country: country.id,
-            type: 'company'
-          })
-          await TestHelper.createPerson(user, {
-            relationship_representative: 'true',
-            relationship_executive: 'true',
-            relationship_title: 'SVP Testing',
-            relationship_percent_ownership: '0'
-          })
-          users[country.id] = user
-        }
         const req = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
         req.account = user.account
         req.session = user.session
-        if (process.env.DEBUG_ERRORS) {
-          console.log('    + ', 'element')
-        }
         hasElementResults[field] = await req.get()
         // without stripe.js
         const req2 = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
@@ -108,9 +97,6 @@ describe('/account/connect/edit-person', function () {
         req2.session = user.session
         req2.body = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])
         delete (req2.body[field])
-        if (process.env.DEBUG_ERRORS) {
-          console.log('    + ', 'missing')
-        }
         rejectMissingResults[field] = await req2.post()
         // with stripe.js version 3
         const req3 = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
@@ -145,16 +131,10 @@ describe('/account/connect/edit-person', function () {
           verification_document_back: TestHelper['success_id_scan_back.png']
         }
         delete (req3.body[field])
-        if (process.env.DEBUG_ERRORS) {
-          console.log('    + ', 'missing v3')
-        }
         global.stripeJS = 3
         rejectMissingResultsStripeV3[field] = await req3.post()
         global.stripeJS = false
       }
-    }
-    if (process.env.DEBUG_ERRORS) {
-      console.log('preparing uploads')
     }
     // upload fields
     const uploader1 = await TestHelper.createUser()
@@ -185,9 +165,6 @@ describe('/account/connect/edit-person', function () {
       verification_document_back: TestHelper['success_id_scan_back.png']
     })
     for (const field of uploadFields) {
-      if (process.env.DEBUG_ERRORS) {
-        console.log('uploads', field)
-      }
       const user = field.startsWith('verification_additional') ? uploader2 : uploader1
       const property = field.replace('verification_', 'verification.').replace('_front', '').replace('_back', '')
       await TestHelper.waitForAccountRequirement(user, `${user.representative.id}.${property}`)
@@ -204,9 +181,6 @@ describe('/account/connect/edit-person', function () {
         verification_document_back: TestHelper['success_id_scan_back.png']
       }
       delete (req.uploads[field])
-      if (process.env.DEBUG_ERRORS) {
-        console.log('    + ', 'missing')
-      }
       rejectMissingUploadResults[field] = await req.post()
       // with stripe.js v3
       const req2 = TestHelper.createRequest(`/account/connect/edit-person?personid=${user.representative.id}`)
@@ -247,9 +221,6 @@ describe('/account/connect/edit-person', function () {
         }
       }
       delete (req2.uploads[field])
-      if (process.env.DEBUG_ERRORS) {
-        console.log('    + ', 'missing v3')
-      }
       global.stripeJS = 3
       rejectMissingUploadResultsStripeV3[field] = await req2.post()
       global.stripeJS = false
