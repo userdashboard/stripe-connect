@@ -21,7 +21,7 @@ describe('/api/administrator/connect/payouts', function () {
       await TestHelper.createPayout(user)
       cachedPayouts.unshift(user.payout.id)
     }
-    const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+    let user = await TestStripeAccounts.createSubmittedIndividual('NZ')
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
