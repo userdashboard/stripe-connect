@@ -6,7 +6,7 @@ const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/administrator/connect/payouts', function () {
   this.retries(10)
-  this.timeout(960000)
+  this.timeout(30 * 60 * 1000)
   const cachedResponses = {}
   const cachedPayouts = []
   const accountPayouts = []
@@ -32,7 +32,6 @@ describe('/api/administrator/connect/payouts', function () {
     user = await TestStripeAccounts.createSubmittedIndividual('NZ', user)
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
-    accountPayouts.unshift(user.payout.id)
     const req1 = TestHelper.createRequest('/api/administrator/connect/payouts')
     req1.account = administrator.account
     req1.session = administrator.session

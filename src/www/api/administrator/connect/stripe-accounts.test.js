@@ -6,7 +6,7 @@ const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/administrator/connect/stripe-accounts', function () {
   this.retries(10)
-  this.timeout(960000)
+  this.timeout(30 * 60 * 1000)
   const cachedResponses = {}
   const cachedStripeAccounts = []
   before(async () => {
