@@ -34,42 +34,10 @@ async function renderPage (req, res, messageTemplate) {
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
-      const stripeAccountsTable = doc.getElementById('stripe-accounts-table')
-      stripeAccountsTable.parentNode.removeChild(stripeAccountsTable)
       const submitForm = doc.getElementById('submit-form')
       submitForm.parentNode.removeChild(submitForm)
       return dashboard.Response.end(req, res, doc)
     }
-  }
-
-  dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, 'account-status')
-  const mccCodes = connect.getMerchantCategoryCodes(req.language)
-  const mccDescription = doc.getElementById('mcc-description')
-  for (const code of mccCodes) {
-    if (code.code === req.data.stripeAccount.business_profile.mcc) {
-      mccDescription.innerHTML = code.description
-      break
-    }
-  }
-  const removeElements = []
-  if (req.data.stripeAccount.business_type === 'individual') {
-    removeElements.push('business-name')
-    if (req.data.stripeAccount.individual.first_name) {
-      removeElements.push('blank-name')
-    } else {
-      removeElements.push('individual-name')
-    }
-  } else {
-    removeElements.push('individual-name')
-    if (req.data.stripeAccount.company.name) {
-      removeElements.push('blank-name')
-    } else {
-      removeElements.push('business-name')
-    }
-  }
-  for (const id of removeElements) {
-    const element = doc.getElementById(id)
-    element.parentNode.removeChild(element)
   }
   return dashboard.Response.end(req, res, doc)
 }
