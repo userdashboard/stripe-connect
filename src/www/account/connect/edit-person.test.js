@@ -60,6 +60,7 @@ describe('/account/connect/edit-person', function () {
   before(async () => {
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
+    await TestHelper.setupWebhook()
     const users = {}
     for (const country of connect.countrySpecs) {
       const payload = TestStripeAccounts.createPostData(TestStripeAccounts.representativeData[country.id])

@@ -50,6 +50,7 @@ module.exports = {
   createPayout,
   createPerson,
   createStripeAccount,
+  setupWebhook,
   submitBeneficialOwners,
   submitCompanyDirectors,
   submitStripeAccount,
@@ -101,9 +102,7 @@ module.exports.createRequest = (rawURL, method) => {
 module.exports.setupBeforeEach = setupBeforeEach
 
 const helperRoutes = require('./test-helper-routes.js')
-let tunnel
 
-// direct webhook access is set up before the tests a single time
 async function setupBefore () {
   const connect = require('./index.js')
   connect.setup()
@@ -112,39 +111,23 @@ async function setupBefore () {
       connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
     ]
   }
-
-  let newAddress
-  if (process.env.NGROK) {
-    return
-  } else if (process.env.PUBLIC_IP) {
-    const ip = await publicIP.v4()
-    newAddress = `http://${ip}:${global.port}`
-  } else if (process.env.LOCAL_TUNNEL) {
-    return
-  } else if (process.env.LOCALHOST_RUN) {
-    return
-  } else {
-    newAddress = global.dashboardServer
-  }
-  if (newAddress) {
-    await deleteOldWebhooks()
-    const webhook = await stripe.webhookEndpoints.create({
-      url: `${newAddress}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList,
-      connect: true
-    }, stripeKey)
-    global.connectWebhookEndPointSecret = webhook.secret
-  }
 }
 
 async function setupBeforeEach () {
-  await deleteOldStripeAccounts()
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
   global.stripeJS = false
   global.maximumStripeRetries = 0
   global.webhooks = []
+}
+
+let webhook, tunnel, data
+
+async function setupWebhook () {
+  if (webhook) {
+    return
+  }
   let newAddress
   if (process.env.NGROK) {
     if (ngrok) {
@@ -193,13 +176,15 @@ async function setupBeforeEach () {
     const asyncLocalHostRun = util.promisify(createLocalHostRun)
     const url = await asyncLocalHostRun()
     newAddress = url
+  } else {
+    newAddress = global.dashboardServer
   }
   if (newAddress) {
     await deleteOldWebhooks()
-    const webhook = await stripe.webhookEndpoints.create({
-      connect: true,
+    webhook = await stripe.webhookEndpoints.create({
       url: `${newAddress}/webhooks/connect/index-connect-data`,
-      enabled_events: eventList
+      enabled_events: eventList,
+      connect: true
     }, stripeKey)
     global.connectWebhookEndPointSecret = webhook.secret
   }
@@ -209,7 +194,14 @@ beforeEach(setupBeforeEach)
 before(setupBefore)
 
 afterEach(async () => {
-  await deleteOldStripeAccounts()
+  if (data) {
+    await deleteOldStripeAccounts()
+    data = false
+  }
+  if (webhook) {
+    await deleteOldWebhooks()
+    webhook = null
+  }
 })
 
 after(async () => {
@@ -294,6 +286,7 @@ function createLocalHostRun (callback) {
 }
 
 async function createStripeAccount (user, body) {
+  data = true
   const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
   req.session = user.session
   req.account = user.account

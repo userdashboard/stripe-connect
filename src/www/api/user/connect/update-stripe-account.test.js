@@ -31,6 +31,7 @@ describe('/api/user/connect/update-stripe-account', function () {
   before(async () => {
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
+    await TestHelper.setupWebhook()
     const individuals = {}
     const companies = {}
     for (const country of connect.countrySpecs) {
