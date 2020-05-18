@@ -501,8 +501,6 @@ describe('/api/user/connect/update-stripe-account', function () {
         verification_document_back: TestHelper['success_id_scan_back.png'],
         verification_document_front: TestHelper['success_id_scan_front.png']
       }
-      req.filename = __filename
-      req.saveResponse = true
       const stripeAccountNow = await req.patch()
       assert.strictEqual(stripeAccountNow.object, 'account')
       assert.strictEqual(stripeAccountNow.metadata.token, 'false')

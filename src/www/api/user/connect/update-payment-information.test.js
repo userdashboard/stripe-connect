@@ -87,7 +87,6 @@ describe('/api/user/connect/update-payment-information', function () {
       }
       submitResponses[country.id] = await req.patch()
     }
-    console.log(submitIdentities)
   })
 
   describe('exceptions', () => {
@@ -217,37 +216,21 @@ describe('/api/user/connect/update-payment-information', function () {
   })
 
   describe('returns', () => {
-    for (const country of connect.countrySpecs) {
-      it('object (' + country.id + ')', async () => {
-        const user = await TestHelper.createUser()
-        await TestHelper.createStripeAccount(user, {
-          country: country.id,
-          type: 'individual'
-        })
-        const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        if (TestStripeAccounts.paymentData[country.id].length) {
-          let accounts = 0
-          for (const format of TestStripeAccounts.paymentData[country.id]) {
-            accounts++
-            req.body = TestStripeAccounts.createPostData(format, user.profile)
-            req.body.country = country.id
-            req.body.account_holder_type = 'company'
-            req.body.account_holder_name = `${user.profile.firstName} ${user.profile.lastName}`
-            const stripeAccountNow = await req.patch()
-            assert.strictEqual(stripeAccountNow.object, 'account')
-            assert.strictEqual(stripeAccountNow.external_accounts.data.length, accounts)
-          }
-          return
-        }
-        req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData[country.id], user.profile)
-        req.filename = __filename
-        req.saveResponse = true
-        const stripeAccountNow = await req.patch()
-        assert.strictEqual(stripeAccountNow.object, 'account')
-        assert.strictEqual(stripeAccountNow.external_accounts.data.length, 1)
+      it('object', async () => {
+      const user = await TestHelper.createUser()
+      await TestHelper.createStripeAccount(user, {
+        country: 'US',
+        type: 'individual'
       })
-    }
+      const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.body = TestStripeAccounts.createPostData(TestStripeAccounts.paymentData.US, user.profile)
+      req.filename = __filename
+      req.saveResponse = true
+      const stripeAccountNow = await req.patch()
+      assert.strictEqual(stripeAccountNow.object, 'account')
+      assert.strictEqual(stripeAccountNow.external_accounts.data.length, 1)
+    })
   })
 })

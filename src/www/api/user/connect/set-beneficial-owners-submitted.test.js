@@ -98,18 +98,15 @@ describe('/api/user/connect/set-beneficial-owners-submitted', () => {
   })
 
   describe('returns', () => {
-    for (const country of connect.countrySpecs) {
-      if (TestStripeAccounts.beneficialOwnerData[country.id] === false) {
-        continue
-      }
-      it('object (' + country.id + ')', async () => {
-        const user = await TestStripeAccounts.createCompanyWithOwners(country.id, 1)
-        const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
-        req.account = user.account
-        req.session = user.session
-        const accountNow = await req.patch()
-        assert.strictEqual(accountNow.company.owners_provided, true)
-      })
-    }
+    it('object', async () => {
+      const user = await TestStripeAccounts.createCompanyWithOwners('US', 1)
+      const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
+      req.account = user.account
+      req.session = user.session
+      req.filename = __filename
+      req.saveResponse = true
+      const accountNow = await req.patch()
+      assert.strictEqual(accountNow.company.owners_provided, true)
+    })
   })
 })
