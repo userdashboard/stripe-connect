@@ -1,11 +1,11 @@
 
-> @userdashboard/stripe-connect@1.0.50 test /home/benlowry/SynologyDrive/workspaces/dashboard/stripe-connect
-> mocha --exit --inline-diffs --full-trace --bail --async-only --recursive --timeout 600000 --slow 600000 './src{,!(public)/**}/*.test.js'
+> @userdashboard/stripe-connect@1.0.53 test /home/benlowry/SynologyDrive/workspaces/userdashboard/stripe-connect
+> mocha --retries 2 --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './src{,!(public)/**}/*.test.js'
 
 
 
   server/bind-ip
-    BindIP#BEFORE
+    before
       ✓ should prioritize ip from header
       ✓ should bind ip from connection remoteAddress
       ✓ should bind ip from connection socket
@@ -13,54 +13,54 @@
 
   server/bind-stripekey
     BindStripeKey#AFTER
-      ✓ should bind stripekey data to req
+      ✓ should bind data to req
 
   /account/connect/create-person
-    CreatePerson#BEFORE
+    exceptions
       ✓ should reject invalid stripeid
       ✓ should reject individual registration
-    CreatePerson#GET
+    view
       ✓ should present the form
       ✓ should remove director option
       ✓ should remove owner option
-    CreatePerson#POST
+    submit
       ✓ should create representative (screenshots)
       ✓ should create director
       ✓ should create owner
 
   /account/connect/create-stripe-account
-    CreateStripeAccount#GET
+    view
       ✓ should present the form
-    CreateStripeAccount#POST
+    submit
       ✓ should create Stripe account (screenshots)
 
   /account/connect/delete-person
-    DeletePerson#BEFORE
+    exceptions
       ✓ should reject invalid personid
       ✓ should require own Stripe account
-      ✓ should bind person to req
-    DeletePerson#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should present the form
-      ✓ should present the person table
-    DeletePerson#POST
+    submit
       ✓ should delete owner (screenshots)
 
   /account/connect/delete-stripe-account
-    DeleteStripeAccount#BEFORE
+    exceptions
       ✓ should reject invalid stripeid
       ✓ should require own Stripe account
-      ✓ should bind Stripe account to req
-    DeleteStripeAccount#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should present the form
-      ✓ should present the Stripe account table
-    DeleteStripeAccount#POST
+    submit
       ✓ should delete Stripe account (screenshots)
 
   /account/connect/edit-payment-information
-    EditPaymentInformation#BEFORE
+    before
       ✓ should reject invalid stripeid
       ✓ should bind Stripe account to req
-    EditPaymentInformation#GET
+    view
       ✓ should present the form (AT)
       ✓ should present the form (AU)
       ✓ should present the form (BE)
@@ -92,7 +92,40 @@
       ✓ should present the form (SI)
       ✓ should present the form (SK)
       ✓ should present the form (US)
-    EditPaymentInformation#POST
+    submit
+      ✓ submit payment information (AT)
+      ✓ submit payment information (AU)
+      ✓ submit payment information (BE)
+      ✓ submit payment information (CA)
+      ✓ submit payment information (CH)
+      ✓ submit payment information (DE)
+      ✓ submit payment information (DK)
+      ✓ submit payment information (EE)
+      ✓ submit payment information (ES)
+      ✓ submit payment information (FI)
+      ✓ submit payment information (FR)
+      ✓ submit payment information (GB)
+      ✓ submit payment information (GR)
+      ✓ submit payment information (HK)
+      ✓ submit payment information (IE)
+      ✓ submit payment information (IT)
+      ✓ submit payment information (JP)
+      ✓ submit payment information (LT)
+      ✓ submit payment information (LU)
+      ✓ submit payment information (LV)
+      ✓ submit payment information (MY)
+      ✓ submit payment information (NL)
+      ✓ submit payment information (NO)
+      ✓ submit payment information (NZ)
+      ✓ submit payment information (PL)
+      ✓ submit payment information (PT)
+      ✓ submit payment information (SE)
+      ✓ submit payment information (SG)
+      ✓ submit payment information (SI)
+      ✓ submit payment information (SK)
+      ✓ submit payment information (US)
+      ✓ submit payment information (screenshots)
+    errors
       ✓ reject invalid fields (AT)
       ✓ reject invalid fields (AU)
       ✓ reject invalid fields (BE)
@@ -124,42 +157,11 @@
       ✓ reject invalid fields (SI)
       ✓ reject invalid fields (SK)
       ✓ reject invalid fields (US)
-      ✓ submit payment information (AT) (screenshots)
-      ✓ submit payment information (AU) (screenshots)
-      ✓ submit payment information (BE) (screenshots)
-      ✓ submit payment information (CA) (screenshots)
-      ✓ submit payment information (CH) (screenshots)
-      ✓ submit payment information (DE) (screenshots)
-      ✓ submit payment information (DK) (screenshots)
-      ✓ submit payment information (EE) (screenshots)
-      ✓ submit payment information (ES) (screenshots)
-      ✓ submit payment information (FI) (screenshots)
-      ✓ submit payment information (FR) (screenshots)
-      ✓ submit payment information (GB) (screenshots)
-      ✓ submit payment information (GR) (screenshots)
-      ✓ submit payment information (HK) (screenshots)
-      ✓ submit payment information (IE) (screenshots)
-      ✓ submit payment information (IT) (screenshots)
-      ✓ submit payment information (JP) (screenshots)
-      ✓ submit payment information (LT) (screenshots)
-      ✓ submit payment information (LU) (screenshots)
-      ✓ submit payment information (LV) (screenshots)
-      ✓ submit payment information (MY) (screenshots)
-      ✓ submit payment information (NL) (screenshots)
-      ✓ submit payment information (NO) (screenshots)
-      ✓ submit payment information (NZ) (screenshots)
-      ✓ submit payment information (PL) (screenshots)
-      ✓ submit payment information (PT) (screenshots)
-      ✓ submit payment information (SE) (screenshots)
-      ✓ submit payment information (SG) (screenshots)
-      ✓ submit payment information (SI) (screenshots)
-      ✓ submit payment information (SK) (screenshots)
-      ✓ submit payment information (US) (screenshots)
 
   /account/connect/edit-person
-    EditPerson#BEFORE
+    exceptions
       ✓ should reject invalid person
-    EditPerson#GET
+    view
       ✓ should have element for address_city
       ✓ should have element for address_line1
       ✓ should have element for address_postal_code
@@ -188,80 +190,115 @@
       ✓ should have element for last_name_kanji
       ✓ should have element for id_number
       ✓ should have element for ssn_last_4
-      ✓ should have element for upload verification_document
-      ✓ should have element for upload verification_additional_document
-    EditPerson#POST
-      ✓ should reject missing address_city no stripe.js
-      ✓ should reject missing address_city stripe.js v3
-      ✓ should reject missing address_line1 no stripe.js
-      ✓ should reject missing address_line1 stripe.js v3
-      ✓ should reject missing address_postal_code no stripe.js
-      ✓ should reject missing address_postal_code stripe.js v3
-      ✓ should reject missing dob_day no stripe.js
-      ✓ should reject missing dob_day stripe.js v3
-      ✓ should reject missing dob_month no stripe.js
-      ✓ should reject missing dob_month stripe.js v3
-      ✓ should reject missing dob_year no stripe.js
-      ✓ should reject missing dob_year stripe.js v3
-      ✓ should reject missing phone no stripe.js
-      ✓ should reject missing phone stripe.js v3
-      ✓ should reject missing first_name no stripe.js
-      ✓ should reject missing first_name stripe.js v3
-      ✓ should reject missing last_name no stripe.js
-      ✓ should reject missing last_name stripe.js v3
-      ✓ should reject missing email no stripe.js
-      ✓ should reject missing email stripe.js v3
-      ✓ should reject missing address_state no stripe.js
-      ✓ should reject missing address_state stripe.js v3
-      ✓ should reject missing address_kana_city no stripe.js
-      ✓ should reject missing address_kana_city stripe.js v3
-      ✓ should reject missing address_kana_line1 no stripe.js
-      ✓ should reject missing address_kana_line1 stripe.js v3
-      ✓ should reject missing address_kana_postal_code no stripe.js
-      ✓ should reject missing address_kana_postal_code stripe.js v3
-      ✓ should reject missing address_kana_state no stripe.js
-      ✓ should reject missing address_kana_state stripe.js v3
-      ✓ should reject missing address_kana_town no stripe.js
-      ✓ should reject missing address_kana_town stripe.js v3
-      ✓ should reject missing address_kanji_city no stripe.js
-      ✓ should reject missing address_kanji_city stripe.js v3
-      ✓ should reject missing address_kanji_line1 no stripe.js
-      ✓ should reject missing address_kanji_line1 stripe.js v3
-      ✓ should reject missing address_kanji_postal_code no stripe.js
-      ✓ should reject missing address_kanji_postal_code stripe.js v3
-      ✓ should reject missing address_kanji_state no stripe.js
-      ✓ should reject missing address_kanji_state stripe.js v3
-      ✓ should reject missing address_kanji_town no stripe.js
-      ✓ should reject missing address_kanji_town stripe.js v3
-      ✓ should reject missing first_name_kana no stripe.js
-      ✓ should reject missing first_name_kana stripe.js v3
-      ✓ should reject missing first_name_kanji no stripe.js
-      ✓ should reject missing first_name_kanji stripe.js v3
-      ✓ should reject missing gender no stripe.js
-      ✓ should reject missing gender stripe.js v3
-      ✓ should reject missing last_name_kana no stripe.js
-      ✓ should reject missing last_name_kana stripe.js v3
-      ✓ should reject missing last_name_kanji no stripe.js
-      ✓ should reject missing last_name_kanji stripe.js v3
-      ✓ should reject missing id_number no stripe.js
-      ✓ should reject missing id_number stripe.js v3
-      ✓ should reject missing ssn_last_4 no stripe.js
-      ✓ should reject missing ssn_last_4 stripe.js v3
-      ✓ should reject missing upload verification_document_front no stripe.js
-      ✓ should reject missing upload verification_document_front stripe.js v3
-      ✓ should reject missing upload verification_document_back no stripe.js
-      ✓ should reject missing upload verification_document_back stripe.js v3
-      ✓ should reject missing upload verification_additional_document_front no stripe.js
-      ✓ should reject missing upload verification_additional_document_front stripe.js v3
-      ✓ should reject missing upload verification_additional_document_back no stripe.js
-      ✓ should reject missing upload verification_additional_document_back stripe.js v3
+      ✓ should have element for upload verification_document_front
+      ✓ should have element for upload verification_document_back
+      ✓ should have element for upload verification_additional_document_front
+      ✓ should have element for upload verification_additional_document_back
+    submit
       ✓ should update person (screenshots) no stripe.js
       ✓ should update person stripe.js v3
+    errors
+      invalid-address_city
+        ✓ missing address_city no stripe.js
+        ✓ missing address_city stripe.js v3
+      invalid-address_line1
+        ✓ missing address_line1 no stripe.js
+        ✓ missing address_line1 stripe.js v3
+      invalid-address_postal_code
+        ✓ missing address_postal_code no stripe.js
+        ✓ missing address_postal_code stripe.js v3
+      invalid-dob_day
+        ✓ missing dob_day no stripe.js
+        ✓ missing dob_day stripe.js v3
+      invalid-dob_month
+        ✓ missing dob_month no stripe.js
+        ✓ missing dob_month stripe.js v3
+      invalid-dob_year
+        ✓ missing dob_year no stripe.js
+        ✓ missing dob_year stripe.js v3
+      invalid-phone
+        ✓ missing phone no stripe.js
+        ✓ missing phone stripe.js v3
+      invalid-first_name
+        ✓ missing first_name no stripe.js
+        ✓ missing first_name stripe.js v3
+      invalid-last_name
+        ✓ missing last_name no stripe.js
+        ✓ missing last_name stripe.js v3
+      invalid-email
+        ✓ missing email no stripe.js
+        ✓ missing email stripe.js v3
+      invalid-address_state
+        ✓ missing address_state no stripe.js
+        ✓ missing address_state stripe.js v3
+      invalid-address_kana_city
+        ✓ missing address_kana_city no stripe.js
+        ✓ missing address_kana_city stripe.js v3
+      invalid-address_kana_line1
+        ✓ missing address_kana_line1 no stripe.js
+        ✓ missing address_kana_line1 stripe.js v3
+      invalid-address_kana_postal_code
+        ✓ missing address_kana_postal_code no stripe.js
+        ✓ missing address_kana_postal_code stripe.js v3
+      invalid-address_kana_state
+        ✓ missing address_kana_state no stripe.js
+        ✓ missing address_kana_state stripe.js v3
+      invalid-address_kana_town
+        ✓ missing address_kana_town no stripe.js
+        ✓ missing address_kana_town stripe.js v3
+      invalid-address_kanji_city
+        ✓ missing address_kanji_city no stripe.js
+        ✓ missing address_kanji_city stripe.js v3
+      invalid-address_kanji_line1
+        ✓ missing address_kanji_line1 no stripe.js
+        ✓ missing address_kanji_line1 stripe.js v3
+      invalid-address_kanji_postal_code
+        ✓ missing address_kanji_postal_code no stripe.js
+        ✓ missing address_kanji_postal_code stripe.js v3
+      invalid-address_kanji_state
+        ✓ missing address_kanji_state no stripe.js
+        ✓ missing address_kanji_state stripe.js v3
+      invalid-address_kanji_town
+        ✓ missing address_kanji_town no stripe.js
+        ✓ missing address_kanji_town stripe.js v3
+      invalid-first_name_kana
+        ✓ missing first_name_kana no stripe.js
+        ✓ missing first_name_kana stripe.js v3
+      invalid-first_name_kanji
+        ✓ missing first_name_kanji no stripe.js
+        ✓ missing first_name_kanji stripe.js v3
+      invalid-gender
+        ✓ missing gender no stripe.js
+        ✓ missing gender stripe.js v3
+      invalid-last_name_kana
+        ✓ missing last_name_kana no stripe.js
+        ✓ missing last_name_kana stripe.js v3
+      invalid-last_name_kanji
+        ✓ missing last_name_kanji no stripe.js
+        ✓ missing last_name_kanji stripe.js v3
+      invalid-id_number
+        ✓ missing id_number no stripe.js
+        ✓ missing id_number stripe.js v3
+      invalid-ssn_last_4
+        ✓ missing ssn_last_4 no stripe.js
+        ✓ missing ssn_last_4 stripe.js v3
+      invalid-verification_document_front
+        ✓ missing upload verification_document_front no stripe.js
+        ✓ missing upload verification_document_front stripe.js v3
+      invalid-verification_document_back
+        ✓ missing upload verification_document_back no stripe.js
+        ✓ missing upload verification_document_back stripe.js v3
+      invalid-verification_additional_document_front
+        ✓ missing upload verification_additional_document_front no stripe.js
+        ✓ missing upload verification_additional_document_front stripe.js v3
+      invalid-verification_additional_document_back
+        ✓ missing upload verification_additional_document_back no stripe.js
+        ✓ missing upload verification_additional_document_back stripe.js v3
 
   /account/connect/edit-stripe-account
-    EditStripeAccount#BEFORE
-      ✓ should reject missing registration
-    EditStripeAccount#GET
+    exceptions
+      ✓ should reject invalid Stripe account
+    view
       ✓ should have element for business_profile_mcc (company)
       ✓ should have element for business_profile_url (company)
       ✓ should have element for address_city (company)
@@ -313,9 +350,12 @@
       ✓ should have element for last_name_kanji (individual)
       ✓ should have element for id_number (individual)
       ✓ should have element for ssn_last_4 (individual)
-      ✓ should have upload element for verification_document (individual)
-      ✓ should have upload element for verification_additional_document (individual)
-    EditStripeAccount#POST
+    submit
+      ✓ should update registration no stripe.js (individual)
+      ✓ should update registration stripe.js v3 (individual) (screenshots)
+      ✓ should update registration no stripe.js (company)
+      ✓ should update registration stripe.js v3 (company)
+    errors
       ✓ should reject missing business_profile_mcc no stripe.js (company)
       ✓ should reject missing business_profile_mcc stripe.js v3 (company)
       ✓ should reject missing business_profile_url no stripe.js (company)
@@ -418,30 +458,18 @@
       ✓ should reject missing id_number stripe.js v3 (individual)
       ✓ should reject missing ssn_last_4 no stripe.js (individual)
       ✓ should reject missing ssn_last_4 stripe.js v3 (individual)
-      ✓ should reject missing upload verification_document_front no stripe.js (individual)
-      ✓ should reject missing upload verification_document_front stripe.js v3 (individual)
-      ✓ should reject missing upload verification_document_back no stripe.js (individual)
-      ✓ should reject missing upload verification_document_back stripe.js v3 (individual)
-      ✓ should reject missing upload verification_additional_document_front no stripe.js (individual)
-      ✓ should reject missing upload verification_additional_document_front stripe.js v3 (individual)
-      ✓ should reject missing upload verification_additional_document_back no stripe.js (individual)
-      ✓ should reject missing upload verification_additional_document_back stripe.js v3 (individual)
-      ✓ should update registration no stripe.js (individual)
-      ✓ should update registration no stripe.js
-      ✓ should update registration stripe.js v3 (individual) (screenshots)
-      ✓ should update registration stripe.js v3 (company)
 
   /account/connect
-    Index#BEFORE
-      ✓ should bind Stripe accounts to req
-    Index#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should have row for each Stripe account (screenshots)
 
   /account/connect/person
-    Person#BEFORE
+    before
       ✓ should reject invalid personid
-      ✓ should bind person to req
-    Person#GET
+      ✓ should bind data to req
+    view
       ✓ should show table for person (screenshots)
       ✓ should show person is representative
       ✓ should show person is owner
@@ -449,71 +477,71 @@
       ✓ should show person requires additional information
 
   /account/connect/persons
-    Persons#BEFORE
+    exceptions
       ✓ should reject invalid stripeid
       ✓ should reject individual registration
-      ✓ should bind owners to req
-      ✓ should bind directors to req
-      ✓ should bind representatives to req
-    Persons#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should have row for each owner (screenshots)
       ✓ should have row for each director
       ✓ should have row for each representative
 
   /account/connect/stripe-account
-    StripeAccount#BEFORE
+    before
       ✓ should reject invalid stripeid
       ✓ should reject other account's stripeid
-      ✓ should bind Stripe account to req
-    StripeAccount#GET
+      ✓ should bind data to req
+    view
       ✓ should show registration unstarted (screenshots)
       ✓ should show registration completed
       ✓ should show payment information required
       ✓ should show payment information created
       ✓ should show ready to submit
-      ✓ should show registration is submitted
+      ✓ should show registration is submitted (121537ms)
 
   /account/connect/stripe-accounts
-    StripeAccounts#BEFORE
-      ✓ should bind Stripe accounts to req
-    StripeAccounts#GET
-      ✓ should have row for each Stripe account (screenshots)
+    before
+      ✓ should bind data to req
+    view
+      ✓ should return one page (screenshots)
 
   /account/connect/submit-beneficial-owners
-    SubmitBeneficialOwners#BEFORE
+    exceptions
       ✓ should reject invalid stripeid
       ✓ should reject individual registration
       ✓ should reject Stripe account that doesn't require owners
-      ✓ should bind Stripe account to req
-      ✓ should bind owners to req
-    SubmitBeneficialOwners#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should reject if an owner requires information
       ✓ should present the form without owners
       ✓ should present the form with completed owners
-    SubmitBeneficialOwners#POST
+    submit
       ✓ should submit owners (screenshots)
       ✓ should submit without owners
 
   /account/connect/submit-company-directors
-    SubmitCompanyDirectors#BEFORE
+    exceptions
       ✓ should reject invalid stripeid
       ✓ should reject individual registration
       ✓ should reject Stripe account that doesn't require directors
-      ✓ should bind Stripe account to req
-      ✓ should bind directors to req
-    SubmitCompanyDirectors#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should reject if a director requires information
       ✓ should present the form without directors
       ✓ should present the form with directors
-    SubmitCompanyDirectors#POST
+    submit
       ✓ should submit directors (screenshots)
       ✓ should submit without directors
 
   /account/connect/submit-stripe-account
-    SubmitStripeAccount#BEFORE
+    exceptions
       ✓ should reject invalid stripeid
-      ✓ should bind Stripe account to req
-    SubmitStripeAccount#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should reject registration that hasn't submitted payment details
       ✓ should reject company that hasn't submitted beneficial owners
       ✓ should reject company that hasn't submitted company directors
@@ -522,85 +550,62 @@
       ✓ should reject individual that hasn't submitted information
       ✓ should present the form (individual)
       ✓ should present the form (company)
-    SubmitStripeAccount#POST
-      ✓ should submit registration (company) (screenshots)
+    submit
+      ✓ should submit registration (company) (screenshots) (136487ms)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
-    DeleteStripeAccount#BEFORE
-      ✓ should bind Stripe account to req
-    DeleteStripeAccount#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should present the form
       ✓ should present the Stripe account table
-    DeleteStripeAccount#POST
+    submit
       ✓ should delete Stripe account (screenshots)
 
   /administrator/connect
-    Index#BEFORE
-      ✓ should bind Stripe accounts to req
-    Index#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should have row for each Stripe account (screenshots)
 
   /administrator/connect/payout
-    Payout#BEFORE
+    before
       ✓ should reject invalid payoutid
-      ✓ should bind payout to req
-    Payout#GET
-      ✓ should have row for payout (screenshots)
+      ✓ should bind data to req
+    view
+      ✓ should have row for payout (screenshots) (128159ms)
 
   /administrator/connect/payouts
-    Payouts#BEFORE
-      ✓ should bind payouts to req
-    Payouts#GET
-      ✓ should have row for each payout (screenshots)
+    before
+      ✓ should bind data to req
+    view
+      ✓ should return one page (screenshots)
+      ✓ should change page size
+      ✓ should change offset
 
   /administrator/connect/reject-stripe-account
-    RejectStripeAccount#BEFORE
-      ✓ should bind Stripe account to req
-    RejectStripeAccount#GET
+    before
+      ✓ should bind data to req
+    view
       ✓ should present the form
-      ✓ should present the Stripe account table
-    RejectStripeAccount#POST
+    submit
       ✓ should update the Stripe account as rejected (screenshots)
 
   /administrator/connect/stripe-account
-    StripeAccount#BEFORE
+    before
       ✓ should reject invalid stripeid
-      ✓ should bind Stripe account to req
-    StripeAccount#GET
+      ✓ should bind data to req
+    view
       ✓ should have row for Stripe account (screenshots)
 
   /administrator/connect/stripe-accounts
-    StripeAccounts#BEFORE
-      ✓ should bind Stripe accounts to req
-    StripeAccounts#GET
-      ✓ should have row for each Stripe account (screenshots)
-
-  /api/administrator/connect/account-stripe-accounts-count
-    exceptions
-      invalid-accountid
-        ✓ missing querystring accountid
-        ✓ invalid querystring accountid
-      invalid-account
-        ✓ missing querystring accountid
-    returns
-      ✓ integer
-
-  /api/administrator/connect/account-stripe-accounts
-    exceptions
-      invalid-accountid
-        ✓ missing querystring accountid
-        ✓ invalid querystring accountid
-      invalid-account
-        ✓ missing querystring accountid
-    receives
-      ✓ optional querystring offset (integer)
-      ✓ optional querystring limit (integer)
-      ✓ optional querystring all (boolean)
-    returns
-      ✓ array
-    configuration
-      ✓ environment PAGE_SIZE
+    before
+      ✓ should bind data to req
+    view
+      ✓ should return one page (screenshots)
+      ✓ should change page size
+      ✓ should change offset
 
   /api/administrator/connect/delete-stripe-account
     exceptions
@@ -616,17 +621,19 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
     returns
-      ✓ object
+      ✓ object (126937ms)
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer
+      ✓ integer (372080ms)
 
   /api/administrator/connect/payouts
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
       ✓ optional querystring all (boolean)
+      ✓ optional querystring accountid (string)
+      ✓ optional querystring stripeid (string)
     returns
       ✓ array
     configuration
@@ -643,28 +650,6 @@
     returns
       ✓ boolean
 
-  /api/administrator/connect/stripe-account-payouts-count
-    exceptions
-      invalid-stripeid
-        ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid
-    returns
-      ✓ integer
-
-  /api/administrator/connect/stripe-account-payouts
-    exceptions
-      invalid-stripeid
-        ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid
-    receives
-      ✓ optional querystring offset (integer)
-      ✓ optional querystring limit (integer)
-      ✓ optional querystring all (boolean)
-    returns
-      ✓ array
-    configuration
-      ✓ environment PAGE_SIZE
-
   /api/administrator/connect/stripe-account
     exceptions
       invalid-stripeid
@@ -678,10 +663,14 @@
       ✓ integer
 
   /api/administrator/connect/stripe-accounts
+    exceptions
+      invalid-accountid
+        ✓ invalid querystring accountid
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
       ✓ optional querystring all (boolean)
+      ✓ optional querystring accountid (string)
     returns
       ✓ array
     configuration
@@ -781,9 +770,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account
+        ✓ ineligible accessing account (129939ms)
     returns
-      ✓ object
+      ✓ object (120002ms)
 
   /api/user/connect/payouts-count
     exceptions
@@ -793,7 +782,7 @@
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ integer
+      ✓ integer (128959ms)
 
   /api/user/connect/payouts
     exceptions
@@ -806,8 +795,11 @@
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
       ✓ optional querystring all (boolean)
+      ✓ optional querystring stripeid (boolean)
     returns
       ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
 
   /api/user/connect/person
     exceptions
@@ -846,6 +838,8 @@
       ✓ optional querystring all (boolean)
     returns
       ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
 
   /api/user/connect/set-beneficial-owners-submitted
     exceptions
@@ -858,34 +852,7 @@
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ object (AT)
-      ✓ object (AU)
-      ✓ object (BE)
-      ✓ object (CH)
-      ✓ object (DE)
-      ✓ object (DK)
-      ✓ object (EE)
-      ✓ object (ES)
-      ✓ object (FI)
-      ✓ object (FR)
-      ✓ object (GB)
-      ✓ object (GR)
-      ✓ object (IE)
-      ✓ object (IT)
-      ✓ object (LT)
-      ✓ object (LU)
-      ✓ object (LV)
-      ✓ object (MY)
-      ✓ object (NL)
-      ✓ object (NO)
-      ✓ object (NZ)
-      ✓ object (PL)
-      ✓ object (PT)
-      ✓ object (SE)
-      ✓ object (SG)
-      ✓ object (SI)
-      ✓ object (SK)
-      ✓ object (US)
+      ✓ object
 
   /api/user/connect/set-company-directors-submitted
     exceptions
@@ -898,31 +865,7 @@
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ object (AT)
-      ✓ object (AU)
-      ✓ object (BE)
-      ✓ object (CH)
-      ✓ object (DE)
-      ✓ object (DK)
-      ✓ object (EE)
-      ✓ object (ES)
-      ✓ object (FI)
-      ✓ object (FR)
-      ✓ object (GB)
-      ✓ object (GR)
-      ✓ object (IE)
-      ✓ object (IT)
-      ✓ object (LT)
-      ✓ object (LU)
-      ✓ object (LV)
-      ✓ object (NL)
-      ✓ object (NO)
-      ✓ object (NZ)
-      ✓ object (PL)
-      ✓ object (PT)
-      ✓ object (SE)
-      ✓ object (SI)
-      ✓ object (SK)
+      ✓ object
 
   /api/user/connect/set-stripe-account-submitted
     exceptions
@@ -930,7 +873,7 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account is submitted
+        ✓ ineligible stripe account is submitted (127837ms)
       invalid-account
         ✓ ineligible accessing account
       invalid-payment-details
@@ -942,32 +885,6 @@
     returns
       ✓ object (individual)
       ✓ object (company)
-
-  /api/user/connect/stripe-account-payouts-count
-    exceptions
-      invalid-payoutid
-        ✓ missing querystring payoutid
-        ✓ invalid querystring payoutid
-      invalid-account
-        ✓ ineligible accessing account
-    returns
-      ✓ integer
-
-  /api/user/connect/stripe-account-payouts
-    exceptions
-      invalid-payoutid
-        ✓ missing querystring payoutid
-        ✓ invalid querystring payoutid
-      invalid-account
-        ✓ ineligible accessing account
-    receives
-      ✓ optional querystring offset (integer)
-      ✓ optional querystring limit (integer)
-      ✓ optional querystring all (boolean)
-    returns
-      ✓ array
-    configuration
-      ✓ environment PAGE_SIZE
 
   /api/user/connect/stripe-account
     exceptions
@@ -991,9 +908,9 @@
 
   /api/user/connect/stripe-accounts
     exceptions
-      invalid-payoutid
-        ✓ missing querystring payoutid
-        ✓ invalid querystring payoutid
+      invalid-accountid
+        ✓ missing querystring accountid
+        ✓ invalid querystring accountid
       invalid-account
         ✓ ineligible accessing account
     receives
@@ -1062,37 +979,7 @@
       ✓ optionally-required posted bank_code
       ✓ optionally-required posted routing_number
     returns
-      ✓ object (AT)
-      ✓ object (AU)
-      ✓ object (BE)
-      ✓ object (CA)
-      ✓ object (CH)
-      ✓ object (DE)
-      ✓ object (DK)
-      ✓ object (EE)
-      ✓ object (ES)
-      ✓ object (FI)
-      ✓ object (FR)
-      ✓ object (GB)
-      ✓ object (GR)
-      ✓ object (HK)
-      ✓ object (IE)
-      ✓ object (IT)
-      ✓ object (JP)
-      ✓ object (LT)
-      ✓ object (LU)
-      ✓ object (LV)
-      ✓ object (MY)
-      ✓ object (NL)
-      ✓ object (NO)
-      ✓ object (NZ)
-      ✓ object (PL)
-      ✓ object (PT)
-      ✓ object (SE)
-      ✓ object (SG)
-      ✓ object (SI)
-      ✓ object (SK)
-      ✓ object (US)
+      ✓ object
 
   /api/user/connect/update-person
     exceptions
@@ -1102,109 +989,7 @@
       invalid-account
         ✓ ineligible accessing account
       invalid-person
-        ✓ ineligible querystring person has no required information
-      invalid-address_city
-        ✓ missing posted address_city
-      invalid-address_line1
-        ✓ missing posted address_line1
-      invalid-address_postal_code
-        ✓ missing posted address_postal_code
-      invalid-dob_day
-        ✓ missing posted dob_day
-        ✓ invalid posted dob_day
-      invalid-dob_month
-        ✓ missing posted dob_month
-        ✓ invalid posted dob_month
-      invalid-dob_year
-        ✓ missing posted dob_year
-        ✓ invalid posted dob_year
-      invalid-phone
-        ✓ missing posted phone
-      invalid-first_name
-        ✓ missing posted first_name
-      invalid-last_name
-        ✓ missing posted last_name
-      invalid-email
-        ✓ missing posted email
-      invalid-address_state
-        ✓ missing posted address_state
-        ✓ invalid posted address_state
-      invalid-address_kana_city
-        ✓ missing posted address_kana_city
-      invalid-address_kana_line1
-        ✓ missing posted address_kana_line1
-      invalid-address_kana_postal_code
-        ✓ missing posted address_kana_postal_code
-        ✓ invalid posted address_kana_postal_code
-      invalid-address_kana_state
-        ✓ missing posted address_kana_state
-        ✓ invalid posted address_kana_state
-      invalid-address_kana_town
-        ✓ missing posted address_kana_town
-        ✓ invalid posted address_kana_town
-      invalid-address_kanji_city
-        ✓ missing posted address_kanji_city
-      invalid-address_kanji_line1
-        ✓ missing posted address_kanji_line1
-      invalid-address_kanji_postal_code
-        ✓ missing posted address_kanji_postal_code
-      invalid-address_kanji_state
-        ✓ missing posted address_kanji_state
-        ✓ invalid posted address_kanji_state
-      invalid-address_kanji_town
-        ✓ missing posted address_kanji_town
-      invalid-first_name_kana
-        ✓ missing posted first_name_kana
-      invalid-first_name_kanji
-        ✓ missing posted first_name_kanji
-      invalid-gender
-        ✓ missing posted gender
-        ✓ invalid posted gender
-      invalid-last_name_kana
-        ✓ missing posted last_name_kana
-      invalid-last_name_kanji
-        ✓ missing posted last_name_kanji
-      invalid-id_number
-        ✓ missing posted id_number
-      invalid-ssn_last_4
-        ✓ missing posted ssn_last_4
-        ✓ invalid posted ssn_last_4
-      invalid-token
-        ✓ missing posted token
-        ✓ invalid posted token
-    receives
-      ✓ optionally-required posted address_city
-      ✓ optionally-required posted address_line1
-      ✓ optionally-required posted address_postal_code
-      ✓ optionally-required posted dob_day
-      ✓ optionally-required posted dob_month
-      ✓ optionally-required posted dob_year
-      ✓ optionally-required posted phone
-      ✓ optionally-required posted first_name
-      ✓ optionally-required posted last_name
-      ✓ optionally-required posted email
-      ✓ optionally-required posted address_state
-      ✓ optionally-required posted address_kana_city
-      ✓ optionally-required posted address_kana_line1
-      ✓ optionally-required posted address_kana_postal_code
-      ✓ optionally-required posted address_kana_state
-      ✓ optionally-required posted address_kana_town
-      ✓ optionally-required posted address_kanji_city
-      ✓ optionally-required posted address_kanji_line1
-      ✓ optionally-required posted address_kanji_postal_code
-      ✓ optionally-required posted address_kanji_state
-      ✓ optionally-required posted address_kanji_town
-      ✓ optionally-required posted first_name_kana
-      ✓ optionally-required posted first_name_kanji
-      ✓ optionally-required posted gender
-      ✓ optionally-required posted last_name_kana
-      ✓ optionally-required posted last_name_kanji
-      ✓ optionally-required posted id_number
-      ✓ optionally-required posted ssn_last_4
-      ✓ optionally-required posted verification_document_front
-      ✓ optionally-required posted verification_document_back
-      ✓ optionally-required posted verification_additional_document_front
-      ✓ optionally-required posted verification_additional_document_back
+        ✓ ineligible querystring person has no required information (132040ms)
     returns
       ✓ object
     configuration
@@ -1218,129 +1003,115 @@
       invalid-account
         ✓ ineligible accessing account
       invalid-business_profile_mcc
-        ✓ missing posted business_profile_mcc
-        ✓ invalid posted business_profile_mcc
+        ✓ missing posted business_profile_mcc (company)
       invalid-business_profile_url
-        ✓ missing posted business_profile_url
-        ✓ invalid posted business_profile_url
+        ✓ missing posted business_profile_url (company)
       invalid-address_city
-        ✓ missing posted address_city
+        ✓ missing posted address_city (company)
       invalid-address_line1
-        ✓ missing posted address_line1
+        ✓ missing posted address_line1 (company)
       invalid-address_postal_code
-        ✓ missing posted address_postal_code
-        ✓ invalid posted address_postal_code
+        ✓ missing posted address_postal_code (company)
       invalid-name
-        ✓ missing posted name
+        ✓ missing posted name (company)
       invalid-phone
-        ✓ missing posted phone
-        ✓ invalid posted phone
+        ✓ missing posted phone (company)
       invalid-tax_id
-        ✓ missing posted tax_id
-      invalid-dob_day
-        ✓ missing posted dob_day
-        ✓ invalid posted dob_day
-      invalid-dob_month
-        ✓ missing posted dob_month
-        ✓ invalid posted dob_month
-      invalid-dob_year
-        ✓ missing posted dob_year
-        ✓ invalid posted dob_year
-      invalid-first_name
-        ✓ missing posted first_name
-      invalid-last_name
-        ✓ missing posted last_name
-      invalid-email
-        ✓ missing posted email
+        ✓ missing posted tax_id (company)
       invalid-address_state
-        ✓ missing posted address_state
-        ✓ invalid posted address_state
+        ✓ missing posted address_state (company)
       invalid-address_kana_city
-        ✓ missing posted address_kana_city
+        ✓ missing posted address_kana_city (company)
       invalid-address_kana_line1
-        ✓ missing posted address_kana_line1
+        ✓ missing posted address_kana_line1 (company)
       invalid-address_kana_postal_code
-        ✓ missing posted address_kana_postal_code
+        ✓ missing posted address_kana_postal_code (company)
       invalid-address_kana_state
-        ✓ missing posted address_kana_state
-        ✓ invalid posted address_kana_state
+        ✓ missing posted address_kana_state (company)
       invalid-address_kana_town
-        ✓ missing posted address_kana_town
-        ✓ invalid posted address_kana_town
+        ✓ missing posted address_kana_town (company)
       invalid-address_kanji_city
-        ✓ missing posted address_kanji_city
+        ✓ missing posted address_kanji_city (company)
       invalid-address_kanji_line1
-        ✓ missing posted address_kanji_line1
+        ✓ missing posted address_kanji_line1 (company)
       invalid-address_kanji_postal_code
-        ✓ missing posted address_kanji_postal_code
+        ✓ missing posted address_kanji_postal_code (company)
       invalid-address_kanji_state
-        ✓ missing posted address_kanji_state
-        ✓ invalid posted address_kanji_state
+        ✓ missing posted address_kanji_state (company)
       invalid-address_kanji_town
-        ✓ missing posted address_kanji_town
+        ✓ missing posted address_kanji_town (company)
       invalid-name_kana
-        ✓ missing posted name_kana
+        ✓ missing posted name_kana (company)
       invalid-name_kanji
-        ✓ missing posted name_kanji
+        ✓ missing posted name_kanji (company)
+      invalid-address_city
+        ✓ missing posted address_city (individual)
+      invalid-address_line1
+        ✓ missing posted address_line1 (individual)
+      invalid-address_postal_code
+        ✓ missing posted address_postal_code (individual)
+      invalid-dob_day
+        ✓ missing posted dob_day (individual)
+      invalid-dob_month
+        ✓ missing posted dob_month (individual)
+      invalid-dob_year
+        ✓ missing posted dob_year (individual)
+      invalid-phone
+        ✓ missing posted phone (individual)
+      invalid-first_name
+        ✓ missing posted first_name (individual)
+      invalid-last_name
+        ✓ missing posted last_name (individual)
+      invalid-email
+        ✓ missing posted email (individual)
+      invalid-business_profile_mcc
+        ✓ missing posted business_profile_mcc (individual)
+      invalid-business_profile_url
+        ✓ missing posted business_profile_url (individual)
+      invalid-address_state
+        ✓ missing posted address_state (individual)
+      invalid-address_kana_city
+        ✓ missing posted address_kana_city (individual)
+      invalid-address_kana_line1
+        ✓ missing posted address_kana_line1 (individual)
+      invalid-address_kana_postal_code
+        ✓ missing posted address_kana_postal_code (individual)
+      invalid-address_kana_state
+        ✓ missing posted address_kana_state (individual)
+      invalid-address_kana_town
+        ✓ missing posted address_kana_town (individual)
+      invalid-address_kanji_city
+        ✓ missing posted address_kanji_city (individual)
+      invalid-address_kanji_line1
+        ✓ missing posted address_kanji_line1 (individual)
+      invalid-address_kanji_postal_code
+        ✓ missing posted address_kanji_postal_code (individual)
+      invalid-address_kanji_state
+        ✓ missing posted address_kanji_state (individual)
+      invalid-address_kanji_town
+        ✓ missing posted address_kanji_town (individual)
       invalid-first_name_kana
-        ✓ missing posted first_name_kana
+        ✓ missing posted first_name_kana (individual)
       invalid-first_name_kanji
-        ✓ missing posted first_name_kanji
+        ✓ missing posted first_name_kanji (individual)
       invalid-gender
-        ✓ missing posted gender
-        ✓ invalid posted gender
+        ✓ missing posted gender (individual)
       invalid-last_name_kana
-        ✓ missing posted last_name_kana
+        ✓ missing posted last_name_kana (individual)
       invalid-last_name_kanji
-        ✓ missing posted last_name_kanji
+        ✓ missing posted last_name_kanji (individual)
       invalid-id_number
-        ✓ missing posted id_number
-        ✓ invalid posted id_number
+        ✓ missing posted id_number (individual)
       invalid-ssn_last_4
-        ✓ missing posted ssn_last_4
-        ✓ invalid posted ssn_last_4
+        ✓ missing posted ssn_last_4 (individual)
       invalid-token
         ✓ missing posted token
         ✓ invalid posted token
     receives
-      ✓ optionally-required posted business_profile_mcc
-      ✓ optionally-required posted business_profile_url
-      ✓ optionally-required posted address_city
-      ✓ optionally-required posted address_line1
-      ✓ optionally-required posted address_postal_code
-      ✓ optionally-required posted name
-      ✓ optionally-required posted phone
-      ✓ optionally-required posted tax_id
-      ✓ optionally-required posted dob_day
-      ✓ optionally-required posted dob_month
-      ✓ optionally-required posted dob_year
-      ✓ optionally-required posted first_name
-      ✓ optionally-required posted last_name
-      ✓ optionally-required posted email
-      ✓ optionally-required posted address_state
-      ✓ optionally-required posted address_kana_city
-      ✓ optionally-required posted address_kana_line1
-      ✓ optionally-required posted address_kana_postal_code
-      ✓ optionally-required posted address_kana_state
-      ✓ optionally-required posted address_kana_town
-      ✓ optionally-required posted address_kanji_city
-      ✓ optionally-required posted address_kanji_line1
-      ✓ optionally-required posted address_kanji_postal_code
-      ✓ optionally-required posted address_kanji_state
-      ✓ optionally-required posted address_kanji_town
-      ✓ optionally-required posted name_kana
-      ✓ optionally-required posted name_kanji
-      ✓ optionally-required posted first_name_kana
-      ✓ optionally-required posted first_name_kanji
-      ✓ optionally-required posted gender
-      ✓ optionally-required posted last_name_kana
-      ✓ optionally-required posted last_name_kanji
-      ✓ optionally-required posted id_number
-      ✓ optionally-required posted ssn_last_4
-      ✓ optionally-required posted verification_document_front
-      ✓ optionally-required posted verification_document_back
-      ✓ optionally-required posted verification_additional_document_front
-      ✓ optionally-required posted verification_additional_document_back
+      ✓ optionally-required patched verification_document_front
+      ✓ optionally-required patched verification_document_back
+      ✓ optionally-required patched verification_additional_document_front
+      ✓ optionally-required patched verification_additional_document_back
     returns
       ✓ object (company)
       ✓ object (individual)
@@ -1348,5 +1119,5 @@
       ✓ environment STRIPE_JS
 
 
-  931 passing (3h)
+  710 passing (3h)
 
