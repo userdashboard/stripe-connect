@@ -127,6 +127,7 @@ async function setupBeforeEach () {
   global.stripeJS = false
   global.maximumStripeRetries = 0
   global.webhooks = []
+  await setupWebhook()
 }
 
 let webhook, tunnel, data
@@ -205,13 +206,17 @@ afterEach(async () => {
     await deleteOldStripeAccounts()
     data = false
   }
-  if (webhook) {
+  if (!process.env.PUBLIC_IP && !process.env.TEST_SUITE_REUSABLE_WEBHOOK) {
     await deleteOldWebhooks()
     webhook = null
   }
 })
 
 after(async () => {
+  if (webhook) {
+    await deleteOldWebhooks()
+    webhook = null
+  }
   if (process.env.NGROK) {
     if (ngrok) {
       ngrok.kill()
