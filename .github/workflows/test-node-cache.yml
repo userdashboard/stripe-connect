@@ -39,6 +39,7 @@ jobs:
         CACHE: "node"
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
+        TEST_SUITE_REUSABLE_WEBHOOK: true
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_5 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_5 }}
         STRIPE_JS: false

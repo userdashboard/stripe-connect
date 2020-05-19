@@ -45,6 +45,7 @@ jobs:
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_7 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_7 }}
         STRIPE_JS: false
+        TEST_SUITE_REUSABLE_WEBHOOK: true
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
         ENCRYPTION_SECRET: "12345678901234567890123456789012"

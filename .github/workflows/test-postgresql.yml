@@ -38,6 +38,7 @@ jobs:
         DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
+        TEST_SUITE_REUSABLE_WEBHOOK: true
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_6 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_6 }}
         STRIPE_JS: false

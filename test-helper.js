@@ -111,6 +111,13 @@ async function setupBefore () {
       connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
     ]
   }
+  // TODO: when third-party forwarders like ngrok are used there can be
+  // too many requests per minute from accumulated events so the webhooks
+  // may be created and destroyed for each test or once and reused
+  if (process.env.PUBLIC_IP || process.env.TEST_SUITE_REUSABLE_WEBHOOK) {
+    await deleteOldWebhooks()
+    await setupWebhook()
+  } 
 }
 
 async function setupBeforeEach () {

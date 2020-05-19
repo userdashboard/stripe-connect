@@ -40,6 +40,7 @@ jobs:
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
+        TEST_SUITE_REUSABLE_WEBHOOK: true
     - name: Generate supporting texts
       run: node main.js
       env:
@@ -53,6 +54,7 @@ jobs:
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
+        TEST_SUITE_REUSABLE_WEBHOOK: true
     - name: Publish to Github
       uses: stefanzweifel/git-auto-commit-action@v4.1.6
       with:
