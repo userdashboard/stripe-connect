@@ -16,6 +16,7 @@ async function beforeRequest (req) {
       person: {
         id: '',
         object: 'person',
+        relationship: {},
         requirements: {
           currently_due: []
         }
