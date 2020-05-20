@@ -60,7 +60,7 @@ describe('/account/connect/delete-person', function () {
   })
 
   describe('submit', () => {
-    it('should delete owner (screenshots)', async () => {
+    it('should delete person (screenshots)', async () => {
       const user = await TestStripeAccounts.createCompanyWithOwners('DE', 1)
       const req = TestHelper.createRequest(`/account/connect/delete-person?personid=${user.owner.id}`)
       req.account = user.account
@@ -69,6 +69,7 @@ describe('/account/connect/delete-person', function () {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/connect' },
+        { click: `/account/connect/stripe-accounts` },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/person?personid=${user.owner.id}` },
