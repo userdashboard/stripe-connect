@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
-describe.only('/account/connect/edit-stripe-account', function () {
+describe('/account/connect/edit-stripe-account', function () {
   this.retries(4)
   this.timeout(60 * 60 * 1000)
   const hasIndividualElementResults = {}
