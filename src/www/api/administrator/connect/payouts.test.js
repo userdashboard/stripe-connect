@@ -19,11 +19,14 @@ describe('/api/administrator/connect/payouts', function () {
     global.delayDiskWrites = true
     const administrator = await TestHelper.createOwner()
     for (let i = 0, len = global.pageSize + 2; i < len; i++) {
-      const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+      // TODO: swap with individual account
+      // the Stripe test api has an error creating fully-activated accounts
+      // so when that gets fixed this code can be changed to speed it up
+      const user = await TestStripeAccounts.createSubmittedCompany('NZ')
       await TestHelper.createPayout(user)
       cachedPayouts.unshift(user.payout.id)
     }
-    let user = await TestStripeAccounts.createSubmittedIndividual('NZ')
+    let user = await TestStripeAccounts.createSubmittedCompany('NZ')
     const stripeid = user.stripeAccount.id
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
@@ -33,7 +36,7 @@ describe('/api/administrator/connect/payouts', function () {
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
     stripeAccountPayouts.unshift(user.payout.id)
-    user = await TestStripeAccounts.createSubmittedIndividual('NZ', user)
+    user = await TestStripeAccounts.createSubmittedCompany('NZ', user)
     await TestHelper.createPayout(user)
     cachedPayouts.unshift(user.payout.id)
     accountPayouts.unshift(user.payout.id)
