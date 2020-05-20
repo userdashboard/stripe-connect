@@ -58,7 +58,7 @@ describe('/account/connect/edit-person', function () {
     'verification_additional_document_back'
   ]
   after(TestHelper.deleteOldWebhooks)
-  before(async () => {
+  async function beforeSetup () {
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
     await TestHelper.setupWebhook()
@@ -227,7 +227,7 @@ describe('/account/connect/edit-person', function () {
       rejectMissingUploadResultsStripeV3[field] = await req2.post()
       global.stripeJS = false
     }
-  })
+  }
 
   describe('exceptions', () => {
     it('should reject invalid person', async () => {
@@ -246,6 +246,7 @@ describe('/account/connect/edit-person', function () {
   })
 
   describe('view', async () => {
+    before(beforeSetup)
     for (const field of fields) {
       it('should have element for ' + field, async () => {
         const result = hasElementResults[field]
@@ -366,6 +367,7 @@ describe('/account/connect/edit-person', function () {
   })
 
   describe('errors', () => {
+    before(beforeSetup)
     for (const field of fields) {
       describe(`invalid-${field}`, () => {
         it(`missing ${field} no stripe.js`, async () => {

@@ -5,7 +5,7 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
-describe('/account/connect/edit-stripe-account', function () {
+describe.only('/account/connect/edit-stripe-account', function () {
   this.retries(4)
   this.timeout(60 * 60 * 1000)
   const hasIndividualElementResults = {}
@@ -29,7 +29,7 @@ describe('/account/connect/edit-stripe-account', function () {
   //   'verification_additional_document_back'
   // ]
   after(TestHelper.deleteOldWebhooks)
-  before(async () => {
+  async function setupBefore () {
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
     await TestHelper.setupWebhook()
@@ -237,7 +237,7 @@ describe('/account/connect/edit-stripe-account', function () {
     //   rejectIndividualMissingResultsStripeV3[field] = await req2.post()
     //   global.stripeJS = false
     // }
-  })
+  }
   describe('exceptions', () => {
     it('should reject invalid Stripe account', async () => {
       const user = await TestHelper.createUser()
@@ -255,6 +255,7 @@ describe('/account/connect/edit-stripe-account', function () {
   })
 
   describe('view', async () => {
+    before(setupBefore)
     const testedCompanyRequiredFields = []
     for (const country of connect.countrySpecs) {
       const companyPayload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
@@ -461,6 +462,7 @@ describe('/account/connect/edit-stripe-account', function () {
   })
 
   describe('errors', () => {
+    before(setupBefore)
     let testedMissingFields = []
     for (const country of connect.countrySpecs) {
       const companyPayload = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])
