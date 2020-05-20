@@ -5,7 +5,7 @@ const TestHelper = require('../../../../../test-helper.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/persons', function () {
-  this.retries(10)
+  this.retries(4)
   this.timeout(30 * 60 * 1000)
   const cachedResponses = {}
   const cachedPersons = []

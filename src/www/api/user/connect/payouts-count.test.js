@@ -4,6 +4,8 @@ const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/payouts-count', function () {
+  this.retries(4)
+  this.timeout(5 * 60 * 1000)
   after(TestHelper.deleteOldWebhooks)
   before(TestHelper.setupWebhook)
   describe('exceptions', () => {
@@ -56,7 +58,6 @@ describe('/api/user/connect/payouts-count', function () {
   })
 
   describe('returns', function () {
-    this.retries(10)
     it('integer', async () => {
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
       // TODO: swap with individual account

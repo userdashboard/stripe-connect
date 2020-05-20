@@ -4,7 +4,7 @@ const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/payout', function () {
-  this.retries(10)
+  this.retries(4)
   this.timeout(30 * 60 * 1000)
   after(TestHelper.deleteOldWebhooks)
   before(TestHelper.setupWebhook)
@@ -40,7 +40,6 @@ describe('/api/user/connect/payout', function () {
     })
 
     describe('invalid-account', function () {
-      this.retries(10)
       it('ineligible accessing account', async () => {
         const administrator = await TestHelper.createOwner()
         // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')
@@ -66,7 +65,6 @@ describe('/api/user/connect/payout', function () {
   })
 
   describe('returns', function () {
-    this.retries(10)
     it('object', async () => {
       const administrator = await TestHelper.createOwner()
       // const user = await TestStripeAccounts.createSubmittedIndividual('NZ')

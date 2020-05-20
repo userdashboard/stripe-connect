@@ -6,7 +6,7 @@ const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/update-payment-information', function () {
-  this.retries(0)
+  this.retries(4)
   this.timeout(15 * 60 * 1000)
   // TODO: invalid values marked as 'false' are skipped until they can be verified
   const invalidValues = {
