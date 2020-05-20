@@ -11,9 +11,11 @@ describe('/api/administrator/connect/payouts', function () {
   const cachedPayouts = []
   const accountPayouts = []
   const stripeAccountPayouts = []
+  after(TestHelper.deleteOldWebhooks)
   before(async () => {
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
+    await TestHelper.setupWebhook()
     global.delayDiskWrites = true
     const administrator = await TestHelper.createOwner()
     for (let i = 0, len = global.pageSize + 2; i < len; i++) {

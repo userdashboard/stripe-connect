@@ -7,11 +7,13 @@ const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 describe('/administrator/connect/payouts', function () {
   this.retries(10)
   this.timeout(60 * 60 * 1000)
+  after(TestHelper.deleteOldWebhooks)
   const cachedResponses = {}
   const cachedPayouts = []
   before(async () => {
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
+    await TestHelper.setupWebhook()
     global.delayDiskWrites = true
     const administrator = await TestHelper.createOwner()
     for (let i = 0, len = global.pageSize + 2; i < len; i++) {

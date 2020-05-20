@@ -6,6 +6,8 @@ const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 describe('/api/user/connect/payout', function () {
   this.retries(10)
   this.timeout(30 * 60 * 1000)
+  after(TestHelper.deleteOldWebhooks)
+  before(TestHelper.setupWebhook)
   describe('exceptions', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {

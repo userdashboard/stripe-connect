@@ -6,6 +6,8 @@ const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 // const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/update-person', function () {
+  after(TestHelper.deleteOldWebhooks)
+  before(TestHelper.setupWebhook)
   // TODO: requirements do not correctly show up in
   // the Stripe account.requirements or person.requirements
 

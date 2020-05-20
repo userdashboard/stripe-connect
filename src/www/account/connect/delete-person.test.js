@@ -3,7 +3,7 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
-describe('/account/connect/delete-person', () => {
+describe('/account/connect/delete-person', function () {
   describe('exceptions', () => {
     it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()

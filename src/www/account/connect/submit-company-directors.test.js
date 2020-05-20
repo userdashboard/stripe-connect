@@ -3,7 +3,9 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
-describe('/account/connect/submit-company-directors', () => {
+describe('/account/connect/submit-company-directors', function () {
+  after(TestHelper.deleteOldWebhooks)
+  before(TestHelper.setupWebhook)
   describe('exceptions', () => {
     it('should reject invalid stripeid', async () => {
       const user = await TestHelper.createUser()

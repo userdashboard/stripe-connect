@@ -50,6 +50,7 @@ module.exports = {
   createPayout,
   createPerson,
   createStripeAccount,
+  deleteOldWebhooks,
   setupWebhook,
   submitBeneficialOwners,
   submitCompanyDirectors,
@@ -114,10 +115,7 @@ async function setupBefore () {
   // TODO: when third-party forwarders like ngrok are used there can be
   // too many requests per minute from accumulated events so the webhooks
   // may be created and destroyed for each test or once and reused
-  if (process.env.PUBLIC_IP || process.env.TEST_SUITE_REUSABLE_WEBHOOK) {
-    await deleteOldWebhooks()
-    await setupWebhook()
-  } 
+  await deleteOldWebhooks()
 }
 
 async function setupBeforeEach () {
@@ -127,7 +125,6 @@ async function setupBeforeEach () {
   global.stripeJS = false
   global.maximumStripeRetries = 0
   global.webhooks = []
-  await setupWebhook()
 }
 
 let webhook, tunnel, data
@@ -188,7 +185,6 @@ async function setupWebhook () {
     newAddress = global.dashboardServer
   }
   if (newAddress) {
-    await deleteOldWebhooks()
     webhook = await stripe.webhookEndpoints.create({
       url: `${newAddress}/webhooks/connect/index-connect-data`,
       enabled_events: eventList,
@@ -205,10 +201,6 @@ afterEach(async () => {
   if (data) {
     await deleteOldStripeAccounts()
     data = false
-  }
-  if (!process.env.PUBLIC_IP && !process.env.TEST_SUITE_REUSABLE_WEBHOOK) {
-    await deleteOldWebhooks()
-    webhook = null
   }
 })
 
@@ -234,6 +226,7 @@ after(async () => {
 })
 
 async function deleteOldWebhooks () {
+  webhook = null
   let webhooks
   while (true) {
     try {

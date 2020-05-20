@@ -6,6 +6,8 @@ const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 describe('/administrator/connect/payout', function () {
   this.retries(10)
   this.timeout(30 * 60 * 1000)
+  after(TestHelper.deleteOldWebhooks)
+  before(TestHelper.setupWebhook)
   describe('before', () => {
     it('should reject invalid payoutid', async () => {
       const administrator = await TestHelper.createOwner()

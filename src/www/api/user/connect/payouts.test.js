@@ -9,9 +9,11 @@ describe('/api/user/connect/payouts', function () {
   this.timeout(60 * 60 * 1000)
   const cachedResponses = {}
   const cachedPayouts = []
+  after(TestHelper.deleteOldWebhooks)
   before(async () => {
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()
+    await TestHelper.setupWebhook()
     global.delayDiskWrites = true
     const user = await TestStripeAccounts.createSubmittedCompany('NZ')
     for (let i = 0, len = global.pageSize + 2; i < len; i++) {

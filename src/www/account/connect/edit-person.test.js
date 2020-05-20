@@ -57,6 +57,7 @@ describe('/account/connect/edit-person', function () {
     'verification_additional_document_front',
     'verification_additional_document_back'
   ]
+  after(TestHelper.deleteOldWebhooks)
   before(async () => {
     await DashboardTestHelper.setupBeforeEach()
     await TestHelper.setupBeforeEach()

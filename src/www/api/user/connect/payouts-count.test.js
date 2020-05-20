@@ -3,7 +3,9 @@ const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/user/connect/payouts-count', () => {
+describe('/api/user/connect/payouts-count', function () {
+  after(TestHelper.deleteOldWebhooks)
+  before(TestHelper.setupWebhook)
   describe('exceptions', () => {
     describe('invalid-payoutid', () => {
       it('missing querystring payoutid', async () => {

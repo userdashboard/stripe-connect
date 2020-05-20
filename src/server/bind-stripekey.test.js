@@ -4,7 +4,7 @@ const BindStripeKey = require('./bind-stripekey.js')
 const TestHelper = require('../../test-helper.js')
 
 describe('server/bind-stripekey', () => {
-  describe('BindStripeKey#AFTER', () => {
+  describe('after', () => {
     it('should bind data to req', async () => {
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/change-username')

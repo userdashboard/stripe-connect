@@ -4,7 +4,9 @@ const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
-describe('/api/user/connect/set-company-directors-submitted', () => {
+describe('/api/user/connect/set-company-directors-submitted', function () {
+  after(TestHelper.deleteOldWebhooks)
+  before(TestHelper.setupWebhook)
   describe('exceptions', () => {
     describe('invalid-stripeid', () => {
       it('missing querystring stripeid', async () => {
