@@ -2,7 +2,9 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/administrator/connect/reject-stripe-account', () => {
+describe('/administrator/connect/reject-stripe-account', function () {
+  this.retries(4)
+  this.timeout(10 * 60 * 1000)
   describe('before', () => {
     it('should bind data to req', async () => {
       const administrator = await TestHelper.createOwner()

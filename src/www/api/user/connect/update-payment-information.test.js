@@ -7,7 +7,7 @@ const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/api/user/connect/update-payment-information', function () {
   this.retries(4)
-  this.timeout(15 * 60 * 1000)
+  this.timeout(30 * 60 * 1000)
   // TODO: invalid values marked as 'false' are skipped until they can be verified
   const invalidValues = {
     account_holder_name: false,
