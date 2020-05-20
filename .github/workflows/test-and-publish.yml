@@ -35,8 +35,8 @@ jobs:
         REDIS_URL: "redis://localhost:6379"
         GENERATE_SITEMAP_TXT: false
         GENERATE_API_TXT: false
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_8 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_8 }}
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_1 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_1 }}
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
@@ -49,8 +49,8 @@ jobs:
         FAST_START: true
         DASHBOARD_SERVER: "http://localhost:9000"
         DOMAIN: "localhost"
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_8 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_8 }}
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_1 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_1 }}
         STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
