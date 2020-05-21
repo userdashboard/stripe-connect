@@ -1,6 +1,6 @@
 
-> @userdashboard/stripe-connect@1.0.53 test /home/benlowry/SynologyDrive/workspaces/userdashboard/stripe-connect
-> mocha --retries 2 --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './src{,!(public)/**}/*.test.js'
+> @userdashboard/stripe-connect@1.0.54 test /home/runner/work/stripe-connect/stripe-connect
+> mocha --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './src{,!(public)/**}/*.test.js'
 
 
 
@@ -12,7 +12,7 @@
       ✓ should bind ip from socket remoteAddress
 
   server/bind-stripekey
-    BindStripeKey#AFTER
+    after
       ✓ should bind data to req
 
   /account/connect/create-person
@@ -43,7 +43,7 @@
     view
       ✓ should present the form
     submit
-      ✓ should delete owner (screenshots)
+      ✓ should delete person (screenshots)
 
   /account/connect/delete-stripe-account
     exceptions
@@ -498,7 +498,7 @@
       ✓ should show payment information required
       ✓ should show payment information created
       ✓ should show ready to submit
-      ✓ should show registration is submitted (121537ms)
+      ✓ should show registration is submitted
 
   /account/connect/stripe-accounts
     before
@@ -518,7 +518,7 @@
       ✓ should present the form without owners
       ✓ should present the form with completed owners
     submit
-      ✓ should submit owners (screenshots)
+      ✓ should submit owners (screenshots) (120210ms)
       ✓ should submit without owners
 
   /account/connect/submit-company-directors
@@ -549,9 +549,9 @@
       ✓ should reject company that hasn't submitted information
       ✓ should reject individual that hasn't submitted information
       ✓ should present the form (individual)
-      ✓ should present the form (company)
+      ✓ should present the form (company) (120232ms)
     submit
-      ✓ should submit registration (company) (screenshots) (136487ms)
+      ✓ should submit registration (company) (screenshots) (136381ms)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -574,7 +574,7 @@
       ✓ should reject invalid payoutid
       ✓ should bind data to req
     view
-      ✓ should have row for payout (screenshots) (128159ms)
+      ✓ should have row for payout (screenshots) (130253ms)
 
   /administrator/connect/payouts
     before
@@ -621,11 +621,11 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
     returns
-      ✓ object (126937ms)
+      ✓ object
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (372080ms)
+      ✓ integer (345929ms)
 
   /api/administrator/connect/payouts
     receives
@@ -770,9 +770,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (129939ms)
+        ✓ ineligible accessing account
     returns
-      ✓ object (120002ms)
+      ✓ object (121544ms)
 
   /api/user/connect/payouts-count
     exceptions
@@ -782,7 +782,7 @@
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ integer (128959ms)
+      ✓ integer
 
   /api/user/connect/payouts
     exceptions
@@ -873,7 +873,7 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account is submitted (127837ms)
+        ✓ ineligible stripe account is submitted
       invalid-account
         ✓ ineligible accessing account
       invalid-payment-details
@@ -989,7 +989,7 @@
       invalid-account
         ✓ ineligible accessing account
       invalid-person
-        ✓ ineligible querystring person has no required information (132040ms)
+        ✓ ineligible querystring person has no required information (140249ms)
     returns
       ✓ object
     configuration
