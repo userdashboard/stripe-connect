@@ -1,1 +1,0 @@
-autossh -M 0 -o ServerAliveInterval=60  -R $CONNECT_DOMAIN:80:localhost:$CONNECT_DASHBOARD_SERVER_PORT serveo.net
