@@ -8,14 +8,11 @@ const properties = [
   { camelCase: 'stripePublishableKey', raw: 'STRIPE_PUBLISHABLE_KEY', description: 'The `pk_test_xxx` key from Stripe', value: 'pk_test_xxx', valueDescription: 'String', noDefaultValue: true },
 ]
 
+const stripeKey = process.env.STRIPE_KEY
+const stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY
+const webhookSecret = process.env.CONNECT_WEBHOOK_ENDPOINT_SECRET
+
 describe('index', () => {
-  let stripeKey, stripePublishableKey, webhookSecret
-  before(() => {
-    stripeKey = process.env.STRIPE_KEY
-    stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY
-    webhookSecret = process.env.CONNECT_WEBHOOK_ENDPOINT_SECRET
-    global.connectWebhookEndPointSecret = false
-  })
   afterEach(() => {
     process.env.STRIPE_KEY = stripeKey
     process.env.STRIPE_PUBLISHABLE_KEY = stripePublishableKey
