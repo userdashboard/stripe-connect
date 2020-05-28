@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: npm install mocha ngrok puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-postgresql --no-save
+      run: npm install mocha ngrok faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-postgresql --no-save
     - name: Test encrypted PostgreSQL storage
       run: npm test
       env:

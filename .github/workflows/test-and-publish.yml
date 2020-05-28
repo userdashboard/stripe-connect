@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install -y redis-server
-        npm install mocha ngrok puppeteer@2.1.1 @userdashboard/storage-redis @userdashboard/dashboard --no-save
+        npm install mocha ngrok faker puppeteer@2.1.1 @userdashboard/storage-redis @userdashboard/dashboard --no-save
         git config --global user.name "${{ secrets.NAME }}"
         git config --global user.email "${{ secrets.EMAIL }}"
         npm install -g standard
