@@ -56,6 +56,11 @@ describe('index', () => {
           delete (require.cache[require.resolve('./index.js')])
         })
       })
+      process.env.CONNECT_WEBHOOK_ENDPOINT_SECRET = webhookSecret
+      process.env.STRIPE_KEY = stripeKey
+      process.env.STRIPE_PUBLISHABLE_KEY = stripePublishableKey
+      delete (require.cache[require.resolve('./index.js')])
+      require('./index.js').setup(global.applicationPath)
     })
   }
 })
