@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.189
+@userdashboard/dashboard 1.0.190
 http://localhost:9000
 
 |------------------------------------------------|
@@ -418,7 +418,7 @@ http://localhost:9000
 |  * should present the form (individual)                                    |
 |  * should present the form (company)                                       |
 | submit                                                                     |
-|  * should submit registration (company) (screenshots) (133453ms)           |
+|  * should submit registration (company) (screenshots) (137421ms)           |
 |  * should submit registration (individual)                                 |
 |----------------------------------------------------------------------------|
 
@@ -451,7 +451,7 @@ http://localhost:9000
 |-------------------------------------------|
 | /api/administrator/connect/payouts-count  |
 | RETURNS-----------------------------------|
-| integer (354101ms)                        |
+| integer (365581ms)                        |
 |-------------------------------------------|
 
 |------------------------------------------------------------------------------|
@@ -570,15 +570,15 @@ http://localhost:9000
 |                                |          |  * ineligible accessing account  |
 |--------------------------------|----------|----------------------------------|
 
-|-----------------------------------------------------------------------------------------|
-| /api/user/connect/payout                                                                |
-| RECEIVES-----------------------| RETURNS--| EXCEPTIONS----------------------------------|
-| required querystring payoutid  | object   | invalid-payoutid                            |
-|                                |          |  * missing querystring payoutid             |
-|                                |          |  * invalid querystring payoutid             |
-|                                |          | invalid-account                             |
-|                                |          |  * ineligible accessing account (127618ms)  |
-|--------------------------------|----------|---------------------------------------------|
+|----------------------------------------------------------------------------------------|
+| /api/user/connect/payout                                                               |
+| RECEIVES-----------------------| RETURNS------------| EXCEPTIONS-----------------------|
+| required querystring payoutid  | object (120710ms)  | invalid-payoutid                 |
+|                                |                    |  * missing querystring payoutid  |
+|                                |                    |  * invalid querystring payoutid  |
+|                                |                    | invalid-account                  |
+|                                |                    |  * ineligible accessing account  |
+|--------------------------------|--------------------|----------------------------------|
 
 |-----------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/payouts                                                                                       |
@@ -590,15 +590,15 @@ http://localhost:9000
 | optional querystring stripeid (boolean)  |          |  * ineligible accessing account  |                        |
 |------------------------------------------|----------|----------------------------------|------------------------|
 
-|-----------------------------------------------------------------------------------------|
-| /api/user/connect/payouts-count                                                         |
-| RECEIVES-----------------------| RETURNS-------------| EXCEPTIONS-----------------------|
-| required querystring payoutid  | integer (124474ms)  | invalid-payoutid                 |
-|                                |                     |  * missing querystring payoutid  |
-|                                |                     |  * invalid querystring payoutid  |
-|                                |                     | invalid-account                  |
-|                                |                     |  * ineligible accessing account  |
-|--------------------------------|---------------------|----------------------------------|
+|------------------------------------------------------------------------------|
+| /api/user/connect/payouts-count                                              |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring payoutid  | integer  | invalid-payoutid                 |
+|                                |          |  * missing querystring payoutid  |
+|                                |          |  * invalid querystring payoutid  |
+|                                |          | invalid-account                  |
+|                                |          |  * ineligible accessing account  |
+|--------------------------------|----------|----------------------------------|
 
 |------------------------------------------------------------------------------|
 | /api/user/connect/person                                                     |

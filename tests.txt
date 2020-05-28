@@ -1,8 +1,27 @@
 
-> @userdashboard/stripe-connect@1.0.55 test /home/runner/work/stripe-connect/stripe-connect
-> mocha --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './src{,!(public)/**}/*.test.js'
+> @userdashboard/stripe-connect@1.0.56 test /home/runner/work/stripe-connect/stripe-connect
+> mocha --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './{,!(public|node_modules)/**}/*.test.js'
 
 
+
+  index
+    STRIPE_JS
+      Use client-side stripe.js in browser
+        ✓ default unset
+        ✓ Integer
+    MAXIMUM_STRIPE_RETRIES
+      Retry Stripe web requests
+        ✓ default 0
+        ✓ Integer
+    CONNECT_WEBHOOK_ENDPOINT_SECRET
+      Secret provided by Stripe to sign webhooks
+        ✓ String
+    STRIPE_KEY
+      The `sk_test_xxx` key from Stripe
+        ✓ String
+    STRIPE_PUBLISHABLE_KEY
+      The `pk_test_xxx` key from Stripe
+        ✓ String
 
   server/bind-ip
     before
@@ -551,7 +570,7 @@
       ✓ should present the form (individual)
       ✓ should present the form (company)
     submit
-      ✓ should submit registration (company) (screenshots) (133453ms)
+      ✓ should submit registration (company) (screenshots) (137421ms)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -574,7 +593,7 @@
       ✓ should reject invalid payoutid
       ✓ should bind data to req
     view
-      ✓ should have row for payout (screenshots) (135122ms)
+      ✓ should have row for payout (screenshots) (137046ms)
 
   /administrator/connect/payouts
     before
@@ -625,7 +644,7 @@
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (354101ms)
+      ✓ integer (365581ms)
 
   /api/administrator/connect/payouts
     receives
@@ -770,9 +789,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (127618ms)
+        ✓ ineligible accessing account
     returns
-      ✓ object
+      ✓ object (120710ms)
 
   /api/user/connect/payouts-count
     exceptions
@@ -782,7 +801,7 @@
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ integer (124474ms)
+      ✓ integer
 
   /api/user/connect/payouts
     exceptions
@@ -1119,5 +1138,5 @@
       ✓ environment STRIPE_JS
 
 
-  710 passing (3h)
+  717 passing (3h)
 
