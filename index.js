@@ -9,7 +9,10 @@ global.stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY
 if (global.stripeJS > 0 && !global.stripePublishableKey) {
   throw new Error('invalid-stripe-publishable-key')
 }
-
+global.stripeKey = process.env.STRIPE_KEY
+if (!global.stripeKey) {
+  throw new Error('invalid-stripe-key')
+}
 const packageJSON = require('./package.json')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)

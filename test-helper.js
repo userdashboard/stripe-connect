@@ -2,7 +2,6 @@
 global.applicationPath = global.applicationPath || __dirname
 global.stripeAPIVersion = '2020-03-02'
 global.maximumStripeRetries = 0
-global.connectWebhookEndPointSecret = true
 
 const fs = require('fs')
 const util = require('util')
@@ -102,8 +101,6 @@ module.exports.createRequest = (rawURL, method) => {
 
 module.exports.setupBeforeEach = setupBeforeEach
 
-const helperRoutes = require('./test-helper-routes.js')
-
 async function setupBefore () {
   const connect = require('./index.js')
   connect.setup()
@@ -112,13 +109,11 @@ async function setupBefore () {
       connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
     ]
   }
-  // TODO: when third-party forwarders like ngrok are used there can be
-  // too many requests per minute from accumulated events so the webhooks
-  // may be created and destroyed for each test or once and reused
   await deleteOldWebhooks()
 }
 
-async function setupBeforeEach () {
+async function setupBeforeEach() {
+  const helperRoutes = require('./test-helper-routes.js')
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
