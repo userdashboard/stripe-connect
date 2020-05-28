@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.186
+@userdashboard/dashboard 1.0.189
 http://localhost:9000
 
 Administrator menu:
@@ -16,7 +16,7 @@ Special HTML files:
 @userdashboard/dashboard/src/redirect.html
 
 Dashboard modules:
-@userdashboard/stripe-connect (1.0.54)
+@userdashboard/stripe-connect (1.0.55)
 @userdashboard/maxmind-geoip (1.0.48)
 
 Server handlers:

@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.54 test /home/runner/work/stripe-connect/stripe-connect
+> @userdashboard/stripe-connect@1.0.55 test /home/runner/work/stripe-connect/stripe-connect
 > mocha --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './src{,!(public)/**}/*.test.js'
 
 
@@ -518,7 +518,7 @@
       ✓ should present the form without owners
       ✓ should present the form with completed owners
     submit
-      ✓ should submit owners (screenshots) (120210ms)
+      ✓ should submit owners (screenshots)
       ✓ should submit without owners
 
   /account/connect/submit-company-directors
@@ -549,9 +549,9 @@
       ✓ should reject company that hasn't submitted information
       ✓ should reject individual that hasn't submitted information
       ✓ should present the form (individual)
-      ✓ should present the form (company) (120232ms)
+      ✓ should present the form (company)
     submit
-      ✓ should submit registration (company) (screenshots) (136381ms)
+      ✓ should submit registration (company) (screenshots) (133453ms)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -574,7 +574,7 @@
       ✓ should reject invalid payoutid
       ✓ should bind data to req
     view
-      ✓ should have row for payout (screenshots) (130253ms)
+      ✓ should have row for payout (screenshots) (135122ms)
 
   /administrator/connect/payouts
     before
@@ -625,7 +625,7 @@
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (345929ms)
+      ✓ integer (354101ms)
 
   /api/administrator/connect/payouts
     receives
@@ -770,9 +770,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account
+        ✓ ineligible accessing account (127618ms)
     returns
-      ✓ object (121544ms)
+      ✓ object
 
   /api/user/connect/payouts-count
     exceptions
@@ -782,7 +782,7 @@
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ integer
+      ✓ integer (124474ms)
 
   /api/user/connect/payouts
     exceptions
@@ -989,7 +989,7 @@
       invalid-account
         ✓ ineligible accessing account
       invalid-person
-        ✓ ineligible querystring person has no required information (140249ms)
+        ✓ ineligible querystring person has no required information
     returns
       ✓ object
     configuration
