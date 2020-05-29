@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.56 test /home/runner/work/stripe-connect/stripe-connect
+> @userdashboard/stripe-connect@1.0.57 test /home/runner/work/stripe-connect/stripe-connect
 > mocha --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './{,!(public|node_modules)/**}/*.test.js'
 
 
@@ -570,7 +570,7 @@
       ✓ should present the form (individual)
       ✓ should present the form (company)
     submit
-      ✓ should submit registration (company) (screenshots) (137421ms)
+      ✓ should submit registration (company) (screenshots) (145303ms)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -593,7 +593,7 @@
       ✓ should reject invalid payoutid
       ✓ should bind data to req
     view
-      ✓ should have row for payout (screenshots) (137046ms)
+      ✓ should have row for payout (screenshots) (133969ms)
 
   /administrator/connect/payouts
     before
@@ -644,7 +644,7 @@
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (365581ms)
+      ✓ integer (337163ms)
 
   /api/administrator/connect/payouts
     receives
@@ -791,7 +791,7 @@
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ object (120710ms)
+      ✓ object
 
   /api/user/connect/payouts-count
     exceptions
@@ -801,7 +801,7 @@
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ integer
+      ✓ integer (120542ms)
 
   /api/user/connect/payouts
     exceptions
@@ -1008,7 +1008,7 @@
       invalid-account
         ✓ ineligible accessing account
       invalid-person
-        ✓ ineligible querystring person has no required information
+        ✓ ineligible querystring person has no required information (126894ms)
     returns
       ✓ object
     configuration
