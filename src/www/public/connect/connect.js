@@ -49,7 +49,6 @@ window.uploadDocumentFiles = function (documentFront, documentBack, callback) {
 
 var lastHighlight
 window.renderError = function (templateid) {
-  console.log('rendering error', templateid)
   var template = document.getElementById(templateid)
   if (!template) {
     throw new Error('unknown template ' + templateid)

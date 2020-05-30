@@ -6,6 +6,7 @@ if (global.maxmimumStripeRetries) {
   stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 }
 stripe.setTelemetryEnabled(false)
+const Log = require('@userdashboard/src/log.js')('stripe-connect')
 const stripeCache = require('../../../stripe-cache.js')
 const webhookPath = path.join(__dirname, '.')
 const supportedWebhooks = {}
@@ -36,9 +37,6 @@ module.exports = {
     if (!stripeEvent) {
       return res.end()
     }
-    if (process.env.DEBUG_WEBHOOKS) {
-      console.log('  [webhook]', stripeEvent.type, stripeEvent.data && stripeEvent.data.object ? stripeEvent.data.object.id : '')
-    }
     if (stripeEvent.data.account) {
       await stripeCache.delete(stripeEvent.data.account)
     }
@@ -52,9 +50,7 @@ module.exports = {
         await supportedWebhooks[stripeEvent.type](stripeEvent, req)
       } catch (error) {
         res.statusCode = 500
-        if (process.env.DEBUG_ERRORS) {
-          console.log('connect webhook error', JSON.stringify(error, null, '  '))
-        }
+        Log.error('connect webhook error', JSON.stringify(error, null, '  '))
       }
     }
     if (global.testNumber) {

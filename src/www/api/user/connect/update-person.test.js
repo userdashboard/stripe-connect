@@ -117,7 +117,6 @@ describe('/api/user/connect/update-person', function () {
   //       if (testedMissingFields.indexOf(field) > -1) {
   //         continue
   //       }
-  //       console.log(country.id, field)
   //       testedMissingFields.push(field)
   //       let user = users[country.id]
   //       if (!user) {

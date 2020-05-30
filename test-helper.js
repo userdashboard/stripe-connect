@@ -4,6 +4,7 @@ global.stripeAPIVersion = '2020-03-02'
 global.maximumStripeRetries = 0
 
 const fs = require('fs')
+const Log = require('@userdashboard/src/log.js')('stripe-connect')
 const util = require('util')
 let ngrok, publicIP, localTunnel, localhostRun
 if (process.env.NGROK) {
@@ -138,17 +139,7 @@ async function setupWebhook () {
       try {
         tunnel = await ngrok.connect({
           port: global.port,
-          auth: process.env.NGROK_AUTH,
-          onStatusChange: status => {
-            if (process.env.DEBUG_NGROK) {
-              console.log('ngrok status', status)
-            }
-          },
-          onLogEvent: data => {
-            if (process.env.DEBUG_NGROK) {
-              console.log('ngrok log event', data)
-            }
-          }
+          auth: process.env.NGROK_AUTH
         })
         if (!tunnel) {
           continue
@@ -274,14 +265,12 @@ async function deleteOldStripeAccounts () {
 function createLocalHostRun (callback) {
   const spawn = require('child_process').spawn
   localhostRun = spawn('ssh', ['-T', '-o', 'StrictHostKeyChecking=no', '-R', '80:localhost:' + global.port, 'ssh.localhost.run'])
-  localhostRun.stdout.on('data', async (log) => {
+  localhostRun.stdout.once('data', async (log) => {
     const url = log.toString().split(' ').pop().trim()
     return callback(null, url)
   })
-  localhostRun.stderr.on('data', async (log) => {
-    if (process.env.DEBUG_LOCALHOST_RUN) {
-      console.log('localhost.run error', log.toString())
-    }
+  localhostRun.stderr.on('error', async (log) => {
+    Log.error('localhost.run error', log.toString())
   })
 }
 
@@ -445,9 +434,7 @@ async function submitStripeAccount (user) {
 }
 
 async function waitForPayout (administrator, stripeid, previousid, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForPayout')
-  }
+  Log.info('waitForPayout')
   callback = callback || previousid
   if (callback === previousid) {
     previousid = null
@@ -475,9 +462,7 @@ async function waitForPayout (administrator, stripeid, previousid, callback) {
 }
 
 async function waitForPayoutsEnabled (user, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForPayoutsEnabled')
-  }
+  Log.info('waitForPayoutsEnabled')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForPayoutsEnabled`)
   req.account = user.account
   req.session = user.session
@@ -507,9 +492,7 @@ async function waitForPayoutsEnabled (user, callback) {
 }
 
 async function waitForVerification (user, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForVerification')
-  }
+  Log.info('waitForVerification')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerification`)
   req.account = user.account
   req.session = user.session
@@ -538,9 +521,7 @@ async function waitForVerification (user, callback) {
 }
 
 async function waitForVerificationFailure (user, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForVerificationFailure')
-  }
+  Log.info('waitForVerificationFailure')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerificationFailure`)
   req.account = user.account
   req.session = user.session
@@ -571,9 +552,7 @@ async function waitForVerificationFailure (user, callback) {
 }
 
 async function waitForPendingFieldsToLeave (user, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForPendingFieldsToLeave')
-  }
+  consQole.info('waitForPendingFieldsToLeave')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -597,9 +576,7 @@ async function waitForPendingFieldsToLeave (user, callback) {
 }
 
 async function waitForCurrentlyDueFieldsToLeave (user, contains, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForCurrentlyDueFieldsToLeave', contains)
-  }
+  Log.info('waitForCurrentlyDueFieldsToLeave', contains)
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -625,9 +602,7 @@ async function waitForCurrentlyDueFieldsToLeave (user, contains, callback) {
 }
 
 async function waitForVerificationFieldsToLeave (user, contains, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForVerificationFieldsToLeave')
-  }
+  Log.info('waitForVerificationFieldsToLeave')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -663,9 +638,7 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
 }
 
 async function waitForVerificationStart (user, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForVerificationStart')
-  }
+  Log.info('waitForVerificationStart')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -691,9 +664,7 @@ async function waitForVerificationStart (user, callback) {
 }
 
 async function waitForAccountRequirement (user, requirement, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForAccountRequirement', requirement)
-  }
+  Log.info('waitForAccountRequirement', requirement)
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
@@ -724,9 +695,7 @@ async function waitForAccountRequirement (user, requirement, callback) {
 }
 
 async function waitForPersonRequirement (user, personid, requirement, callback) {
-  if (process.env.DEBUG_WEBHOOKS) {
-    console.log('waitForPersonRequirement', personid, requirement)
-  }
+  Log.info('waitForPersonRequirement', personid, requirement)
   const req = TestHelper.createRequest(`/api/user/connect/person?personid=${personid}`)
   req.account = user.account
   req.session = user.session

@@ -67,7 +67,6 @@ function formatError (error) {
   if (error.raw.code === 'account_invalid') {
     return 'invalid-stripeid'
   }
-  console.log('format missing', JSON.stringify(error, null, '  '))
   return 'unknown-error'
 }
 
