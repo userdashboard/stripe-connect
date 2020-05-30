@@ -113,7 +113,7 @@ async function setupBefore () {
   await deleteOldWebhooks()
 }
 
-async function setupBeforeEach() {
+async function setupBeforeEach () {
   const helperRoutes = require('./test-helper-routes.js')
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
@@ -552,7 +552,7 @@ async function waitForVerificationFailure (user, callback) {
 }
 
 async function waitForPendingFieldsToLeave (user, callback) {
-  consQole.info('waitForPendingFieldsToLeave')
+  Log.info('waitForPendingFieldsToLeave')
   const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session

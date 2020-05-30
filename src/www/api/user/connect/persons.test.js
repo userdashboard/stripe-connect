@@ -22,7 +22,7 @@ describe('/api/user/connect/persons', function () {
       relationship_representative: 'true',
       relationship_executive: 'true',
       relationship_title: 'SVP Testing',
-      relationship_percent_ownership:'0'
+      relationship_percent_ownership: '0'
     })
     cachedPersons.unshift(user.representative.id)
     for (let i = 0, len = 2; i < len; i++) {

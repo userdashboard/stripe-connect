@@ -71,7 +71,7 @@ describe('/account/connect/delete-person', function () {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account/connect' },
-        { click: `/account/connect/stripe-accounts` },
+        { click: '/account/connect/stripe-accounts' },
         { click: `/account/connect/stripe-account?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/persons?stripeid=${user.stripeAccount.id}` },
         { click: `/account/connect/person?personid=${user.owner.id}` },

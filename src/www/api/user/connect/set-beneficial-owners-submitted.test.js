@@ -1,6 +1,5 @@
 /* eslint-env mocha */
 const assert = require('assert')
-const connect = require('../../../../../index.js')
 const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 

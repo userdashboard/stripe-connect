@@ -70,7 +70,6 @@ describe('/account/connect/edit-person', function () {
       }
       let user = users[country.id]
       if (!user) {
-
         user = await TestHelper.createUser()
         await TestHelper.createStripeAccount(user, {
           country: country.id,

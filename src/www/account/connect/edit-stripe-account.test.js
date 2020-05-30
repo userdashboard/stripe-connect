@@ -14,7 +14,7 @@ describe('/account/connect/edit-stripe-account', function () {
   const rejectIndividualMissingResultsStripeV3 = {}
   const rejectCompanyMissingResults = {}
   const rejectCompanyMissingResultsStripeV3 = {}
-  const testedIndividualRequiredFields = []  
+  const testedIndividualRequiredFields = []
   const testedCompanyRequiredFields = [
     'relationship_title',
     'relationship_director',

@@ -206,7 +206,7 @@ describe('/api/user/connect/update-payment-information', function () {
             const routing = stripeAccountNow.external_accounts.data[0].routing_number.split(' ').join('').split('-').join('')
             assert.strictEqual(true, routing.indexOf(payload[field]) > -1)
           } else if (field === 'account_holder_name') {
-            assert.strictEqual(stripeAccountNow.external_accounts.data[0][field], submitIdentities[country.id].firstName + ' ' +  submitIdentities[country.id].lastName)
+            assert.strictEqual(stripeAccountNow.external_accounts.data[0][field], submitIdentities[country.id].firstName + ' ' + submitIdentities[country.id].lastName)
           } else {
             assert.strictEqual(stripeAccountNow.external_accounts.data[0][field], payload[field])
           }
@@ -216,7 +216,7 @@ describe('/api/user/connect/update-payment-information', function () {
   })
 
   describe('returns', () => {
-      it('object', async () => {
+    it('object', async () => {
       const user = await TestHelper.createUser()
       await TestHelper.createStripeAccount(user, {
         country: 'US',
