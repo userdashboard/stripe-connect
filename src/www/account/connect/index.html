@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-navbar="/account/connect/navbar.html">
-
 <head>
   <title translate="yes">Stripe Connect accounts</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -10,11 +9,9 @@
   <link rel="stylesheet" href="/public/connect/connect.css">
   <base target="_top" href="/">
 </head>
-
 <body>
   <h1 translate="yes">Stripe Connect accounts</h1>
-  <p translate="yes">Become a vendor by verifying your personal identity and company information through <a
-      href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p translate="yes">Become a vendor by verifying your personal identity and company information through <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
@@ -23,8 +20,8 @@
           <li translate="yes">Verified personal information</li>
           <li translate="yes">Resident of a supported country</li>
           <li translate="yes">Bank account in a supported country</li>
-        </ol><a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual"
-          class="pure-button pure-button-primary" translate="yes">Start individual registration</a>
+        </ol>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Start individual registration</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
@@ -34,8 +31,8 @@
           <li translate="yes">Verified personal information</li>
           <li translate="yes">Business registered in a supported country</li>
           <li translate="yes">Bank account in a supported country</li>
-        </ol><a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary"
-          translate="yes">Start company registration</a>
+        </ol>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Start company registration</a>
       </div>
     </div>
   </div>
@@ -78,28 +75,22 @@
       <span translate="yes">Disabled by Stripe</span>
     </template>
     <template id="verified-requires-fields">
-      <span>Requires <a href="/account/connect/resubmit-registration?stripeid=${account.id}"
-          translate="yes">resubmitting with
-          additional information</a></span>
+      <span>Requires <a href="/account/connect/resubmit-registration?stripeid=${account.id}" translate="yes">resubmitting with additional information</a></span>
     </template>
     <template id="pending-submission">
       <span translate="yes">Pending submission</span>
     </template>
     <template id="rejected.fraud">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
     </template>
     <template id="rejected.terms">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
     </template>
     <template id="rejected.listed">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
     </template>
     <template id="rejected.other">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
     </template>
     <template id="fields_needed">
       <span translate="yes">More information is required</span>
@@ -111,8 +102,7 @@
       <span translate="yes">Under review by Stripe</span>
     </template>
     <template id="disabled">
-      <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+      <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
     </template>
     <template id="requirements.past_due">
       <span translate="yes">Requires additional information</span>
@@ -133,5 +123,4 @@
     </table>
   </template>
 </body>
-
 </html>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-navbar="/account/connect/navbar-stripe-account.html">
-
 <head>
   <title translate="yes">Submit directors for ${stripeAccount.id}</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -11,7 +10,6 @@
   <script id="stripe-js-v2"></script>
   <script id="stripe-js-v3"></script>
 </head>
-
 <body>
   <h1 translate="yes">Submit directors for ${stripeAccount.id}</h1>
   <p translate="yes">When you have finished adding the company's directors, if any, submit them for review.</p>
@@ -28,8 +26,7 @@
       </thead>
     </table>
   </div>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
-    action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
       <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Submit directors</button>
     </div>
@@ -57,14 +54,11 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button"
-            href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}">Add
-            information</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}">Add information</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>
     </table>
   </template>
 </body>
-
 </html>

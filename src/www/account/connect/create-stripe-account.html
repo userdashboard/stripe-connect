@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-navbar="/account/connect/navbar.html">
-
 <head>
   <title translate="yes">Create registration</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -9,23 +8,19 @@
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
-
 <body>
   <h1 translate="yes">Create registration</h1>
   <p translate="yes">A completed registration allows you to receive revenue payouts through Stripe Connect.</p>
   <div id="message-container"></div>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
-    action="/account/connect/create-stripe-account" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
       <label for="individual" translate="yes">Account type</label>
       <div class="pure-checkbox">
-        <label><input id="individual" type="radio" name="type" value="individual"> Individual</label> <label><input
-            id="company" type="radio" name="type" value="company"> Company</label>
+        <label><input id="individual" type="radio" name="type" value="individual"> Individual</label> <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Country of residence / incorporation</label> <select name="country"
-        id="country">
+      <label for="country" translate="yes">Country of residence / incorporation</label> <select name="country" id="country">
         <option value="" translate="yes">
           Select country
         </option>
@@ -35,11 +30,10 @@
       <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Start registration</button>
     </div>
   </form>
-  <template id="country-option">
-    <option value="${country_spec.id}">
-      ${country_spec.name}
-    </option>
-  </template>
+  <template id="country-option"></template>
+  <option value="${country_spec.id}">
+    ${country_spec.name}
+  </option>
   <template id="unknown-error">
     <div class="error message" translate="yes">
       Error! An error occurred creating the registration
@@ -51,5 +45,4 @@
     </div>
   </template>
 </body>
-
 </html>

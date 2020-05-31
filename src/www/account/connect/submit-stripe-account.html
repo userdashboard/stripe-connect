@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-navbar="/account/connect/navbar-stripe-account.html">
-
 <head>
   <title translate="yes">Submit ${stripeAccount.id}</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -11,12 +10,9 @@
   <script id="stripe-js-v2"></script>
   <script id="stripe-js-v3"></script>
 </head>
-
 <body>
   <h1 translate="yes">Submit ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">Stripe Connect</a> verification
-    process by
-    submitting your completed registration.</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">Stripe Connect</a> verification process by submitting your completed registration.</p>
   <div id="message-container"></div>
   <div id="owners-container">
     <h2 translate="yes">Beneficial owners</h2>
@@ -40,8 +36,7 @@
       </thead>
     </table>
   </div>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
-    action="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
@@ -51,15 +46,13 @@
           <input checked disabled type="checkbox"> I am authorized to represent this business
         </div>
         <div id="company-owners-option" class="pure-control-group">
-          <input checked disabled type="checkbox"> I have submitted, or there are no, relevant beneficial owners
-          information
+          <input checked disabled type="checkbox"> I have submitted, or there are no, relevant beneficial owners information
         </div>
         <div id="company-directors-option" class="pure-control-group">
           <input checked disabled type="checkbox"> I have submitted, or there are no, relevant company directors names
         </div>
         <div class="pure-control-group">
-          <input checked disabled type="checkbox"> I accept the Stripe Connect <a
-            href="https://stripe.com/us/connect-account/legal">terms and conditions</a>
+          <input checked disabled type="checkbox"> I accept the Stripe Connect <a href="https://stripe.com/us/connect-account/legal">terms and conditions</a>
         </div>
       </div>
     </div>
@@ -68,55 +61,56 @@
     </div>
   </form>
   <template id="owner-row">
-    <tr id="${person.id}">
-      <td>
-        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
-      </td>
-      <td>${person.first_name} ${person.last_name}</td>
-    </tr>
-  </template>
-  <template id="director-row">
-    <tr id="${person.id}">
-      <td>
-        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
-      </td>
-      <td>${person.first_name} ${person.last_name}</td>
-    </tr>
-  </template>
-  <template id="invalid-registration">
-    <div class="error message" translate="yes">
-      The registration has incomplete registration information
-    </div>
-  </template>
-  <template id="invalid-company-directors">
-    <div class="error message" translate="yes">
-      Error! You must submit the company's directors
-    </div>
-  </template>
-  <template id="invalid-beneficial-owners">
-    <div class="error message" translate="yes">
-      Error! You must submit the company's beneficial owners
-    </div>
-  </template>
-  <template id="invalid-company-representative">
-    <div class="error message" translate="yes">
-      Error! You must submit the company representative's information
-    </div>
-  </template>
-  <template id="invalid-payment-details">
-    <div class="error message" translate="yes">
-      Error! The registration has incomplete payment information
-    </div>
-  </template>
-  <template id="success">
-    <div class="success message" translate="yes">
-      Success! The registration has been submitted
-    </div>
-  </template>
-  <template id="unknown-error">
-    <div class="error message" translate="yes">
-      Error! An error occurred submitting the registration
-    </div>
+    <template id="director-row"></template>
+    <template id="invalid-registration">
+      <div class="error message" translate="yes">
+        The registration has incomplete registration information
+      </div>
+    </template>
+    <template id="invalid-company-directors">
+      <div class="error message" translate="yes">
+        Error! You must submit the company's directors
+      </div>
+    </template>
+    <template id="invalid-beneficial-owners">
+      <div class="error message" translate="yes">
+        Error! You must submit the company's beneficial owners
+      </div>
+    </template>
+    <template id="invalid-company-representative">
+      <div class="error message" translate="yes">
+        Error! You must submit the company representative's information
+      </div>
+    </template>
+    <template id="invalid-payment-details">
+      <div class="error message" translate="yes">
+        Error! The registration has incomplete payment information
+      </div>
+    </template>
+    <template id="success">
+      <div class="success message" translate="yes">
+        Success! The registration has been submitted
+      </div>
+    </template>
+    <template id="unknown-error">
+      <div class="error message" translate="yes">
+        Error! An error occurred submitting the registration
+      </div>
+    </template>
+    <table>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+      </tr>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+      </tr>
+    </table>
   </template>
 </body>
 </html>

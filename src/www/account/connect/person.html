@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-navbar="/account/connect/navbar-person.html">
-
 <head>
   <title translate="yes">Person ${person.id}</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -9,7 +8,6 @@
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
-
 <body>
   <h1 translate="yes">Person ${person.id}</h1>
   <p translate="yes">Additional information may have been submitted that is not displayed.</p>
@@ -37,12 +35,10 @@
         <th translate="yes">Required information</th>
         <td>
           Additional information is required about this person
-          <p class="pure-button-group"><a class="pure-button pure-button-primary"
-              href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>
+          <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>
         </td>
       </tr>
     </tbody>
   </table>
 </body>
-
 </html>

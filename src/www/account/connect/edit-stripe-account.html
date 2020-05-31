@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-template="false">
-
 <head>
   <title translate="yes">Edit ${stripeAccount.id}</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -15,27 +14,20 @@
     window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
   </script>
 </head>
-
 <body class="entry">
-  <form id="submit-form" enctype="multipart/form-data" method="post"
-    class="pure-form pure-form-stacked entry-form connect-form"
-    action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+  <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
     <h1 translate="yes">Edit ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">Website URL</label> <input required="required"
-          id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
+        <label for="business_profile_url" translate="yes">Website URL</label> <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
-        <label for="business_profile_product_description" translate="yes">Product description</label> <input
-          id="business_profile_product_description" name="business_profile_product_description" type="text"
-          maxlength="50">
+        <label for="business_profile_product_description" translate="yes">Product description</label> <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
-        <label for="business_profile_mcc" translate="yes">Merchant category code</label> <select
-          id="business_profile_mcc" name="business_profile_mcc">
+        <label for="business_profile_mcc" translate="yes">Merchant category code</label> <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
             Select the code for your business
           </option>
@@ -46,56 +38,44 @@
       <div class="pure-g">
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
-            <a name="nname-anchor" id="nname-anchor"></a> <label for="name" translate="yes">Business name</label> <input
-              required="required" id="name" name="name" type="text" maxlength="50">
+            <a name="nname-anchor" id="nname-anchor"></a> <label for="name" translate="yes">Business name</label> <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-11-24">
           <div id="tax_id-container" class="pure-control-group">
-            <a name="tax_id-anchor" id="tax_id-anchor"></a> <label for="tax_id" translate="yes">Tax ID number</label>
-            <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
+            <a name="tax_id-anchor" id="tax_id-anchor"></a> <label for="tax_id" translate="yes">Tax ID number</label> <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
       </div>
       <div id="JP-company-name-container" class="pure-g">
         <div class="pure-u-1-2">
           <div id="name_kana-container" class="pure-control-group">
-            <a name="name_kana-anchor" id="name_kana-anchor"></a> <label for="name_kana" translate="yes">Kana business
-              name</label> <input required="required" id="name_kana" name="name_kana" type="text" maxlength="50">
+            <a name="name_kana-anchor" id="name_kana-anchor"></a> <label for="name_kana" translate="yes">Kana business name</label> <input required="required" id="name_kana" name="name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-2">
           <div id="name_kanji-container" class="pure-control-group">
-            <a name="name_kanji-anchor" id="name_kanji-anchor"></a> <label for="name_kanji" translate="yes">Kanji
-              business name</label> <input required="required" id="name_kanji" name="name_kanji" type="text"
-              maxlength="50">
+            <a name="name_kanji-anchor" id="name_kanji-anchor"></a> <label for="name_kanji" translate="yes">Kanji business name</label> <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
           </div>
         </div>
       </div>
       <div class="pure-g">
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
-            <a name="business_profile_url-anchor" id="business_profile_url-anchor"></a> <label
-              for="business_profile_url" translate="yes">Website URL</label> <input required="required"
-              id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
+            <a name="business_profile_url-anchor" id="business_profile_url-anchor"></a> <label for="business_profile_url" translate="yes">Website URL</label> <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-11-24">
           <div id="phone-container" class="pure-control-group">
-            <a name="phone-anchor" id="phone-anchor"></a> <label for="phone" translate="yes">Phone number</label> <input
-              required="required" id="phone" name="phone" type="text" maxlength="50">
+            <a name="phone-anchor" id="phone-anchor"></a> <label for="phone" translate="yes">Phone number</label> <input required="required" id="phone" name="phone" type="text" maxlength="50">
           </div>
         </div>
       </div>
       <div id="company-verification_document-container" class="pure-control-group">
-        <a name="verification_document_front-anchor" id="verification_document_front-anchor"></a> <a
-          name="verification_document_back-anchor" id="verification_document_back-anchor"></a>
-        <h2 translate="yes">Company incorporation</h2><label for="verification_document_front" translate="yes">Front scan/photo</label>
-        <input name="verification_document_front" id="verification_document_front" type="file"> <label
-          for="verification_document_back" translate="yes">Back scan/photo</label> <input
-          name="verification_document_back" id="verification_document_back" type="file">
+        <a name="verification_document_front-anchor" id="verification_document_front-anchor"></a> <a name="verification_document_back-anchor" id="verification_document_back-anchor"></a>
+        <h2 translate="yes">Company incorporation</h2><label for="verification_document_front" translate="yes">Front scan/photo</label> <input name="verification_document_front" id="verification_document_front" type="file"> <label for="verification_document_back" translate="yes">Back scan/photo</label> <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
@@ -103,25 +83,21 @@
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
-            <label for="first_name" translate="yes">First name</label> <input class="full-width" required="required"
-              id="first_name" name="first_name" type="text" maxlength="50">
+            <label for="first_name" translate="yes">First name</label> <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name-container" class="pure-control-group">
-            <label for="last_name" translate="yes">Last name</label> <input class="full-width" required="required"
-              id="last_name" name="last_name" type="text" maxlength="50">
+            <label for="last_name" translate="yes">Last name</label> <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
           </div>
         </div>
       </div>
       <div id="email-container" class="pure-control-group">
-        <label for="email" translate="yes">Email address</label> <input class="full-width" required="required"
-          id="email" name="email" type="text" maxlength="100">
+        <label for="email" translate="yes">Email address</label> <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
       </div>
       <div id="phone-container" class="pure-control-group">
-        <label for="phone" translate="yes">Phone number</label> <input class="full-width" required="required" id="phone"
-          name="phone" type="text" maxlength="100">
+        <label for="phone" translate="yes">Phone number</label> <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100">
       </div>
     </div>
     <div id="kana-personal-information-container">
@@ -129,15 +105,13 @@
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
-            <label for="first_name_kana" translate="yes">First name</label> <input required="required"
-              id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
+            <label for="first_name_kana" translate="yes">First name</label> <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kana-container" class="pure-control-group">
-            <label for="last_name_kana" translate="yes">Last name</label> <input required="required" id="last_name_kana"
-              name="last_name_kana" type="text" maxlength="50">
+            <label for="last_name_kana" translate="yes">Last name</label> <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
           </div>
         </div>
       </div>
@@ -147,77 +121,53 @@
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
-            <label for="first_name_kanji" translate="yes">First name</label> <input required="required"
-              id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
+            <label for="first_name_kanji" translate="yes">First name</label> <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kanji-container" class="pure-control-group">
-            <label for="last_name_kanji" translate="yes">Last name</label> <input required="required"
-              id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
+            <label for="last_name_kanji" translate="yes">Last name</label> <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
           </div>
         </div>
       </div>
     </div>
     <div id="dob-container" class="pure-control-group">
-      <label for="dob_day" translate="yes">Date of birth</label> <input class="adjacent" required="required"
-        id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD"> <input class="adjacent"
-        required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM"> <input
-        class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4"
-        placeholder="YYYY">
+      <label for="dob_day" translate="yes">Date of birth</label> <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD"> <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM"> <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
     </div>
     <div id="ssn_last_4-container" class="pure-control-group">
-      <label for="ssn_last_4" translate="yes">SSN last 4 digits</label> <input required="required" id="ssn_last_4"
-        name="ssn_last_4" type="text" maxlength="4">
+      <label for="ssn_last_4" translate="yes">SSN last 4 digits</label> <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
       <label for="gender" translate="yes">Gender</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female"> Female</label> <label><input id="male"
-            type="radio" name="gender" value="male"> Male</label>
+        <label><input id="female" type="radio" name="gender" value="female"> Female</label> <label><input id="male" type="radio" name="gender" value="male"> Male</label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
-      <h2 translate="yes">Personal identification</h2><label for="id_number" translate="yes">Passport or ID number</label> <input
-        required="required" id="id_number" name="id_number" type="text" maxlength="50">
+      <h2 translate="yes">Personal identification</h2><label for="id_number" translate="yes">Passport or ID number</label> <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
-      <a name="verification_document_front-anchor" id="verification_document_front-anchor"></a> <a
-        name="verification_document_back-anchor" id="verification_document_back-anchor"></a> <label
-        for="verification_document_front" translate="yes">Front scan/photo</label> <input
-        name="verification_document_front" id="verification_document_front" type="file"> <label
-        for="verification_document_back" translate="yes">Back scan/photo</label> <input
-        name="verification_document_back" id="verification_document_back" type="file">
+      <a name="verification_document_front-anchor" id="verification_document_front-anchor"></a> <a name="verification_document_back-anchor" id="verification_document_back-anchor"></a> <label for="verification_document_front" translate="yes">Front scan/photo</label> <input name="verification_document_front" id="verification_document_front" type="file"> <label for="verification_document_back" translate="yes">Back scan/photo</label> <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
-      <h2 translate="yes">Proof of address</h2><a name="verification_additional_document_front-anchor"
-        id="verification_additional_document_front-anchor"></a> <a name="verification_additional_document_back-anchor"
-        id="verification_additional_document_back-anchor"></a> <label for="verification_additional_document_front"
-        translate="yes">Front scan/photo</label> <input name="verification_additional_document_front"
-        id="verification_additional_document_front" type="file"> <label for="verification_additional_document_back"
-        translate="yes">Back scan/photo</label> <input name="verification_additional_document_back"
-        id="verification_additional_document_back" type="file">
+      <h2 translate="yes">Proof of address</h2><a name="verification_additional_document_front-anchor" id="verification_additional_document_front-anchor"></a> <a name="verification_additional_document_back-anchor" id="verification_additional_document_back-anchor"></a> <label for="verification_additional_document_front" translate="yes">Front scan/photo</label> <input name="verification_additional_document_front" id="verification_additional_document_front" type="file"> <label for="verification_additional_document_back" translate="yes">Back scan/photo</label> <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
       <h2 translate="yes">Address</h2>
       <div id="address_line1-container" class="pure-control-group">
-        <label for="address_line1" translate="yes">Line 1</label> <input class="full-width" required="required"
-          id="address_line1" name="address_line1" type="text" maxlength="100">
+        <label for="address_line1" translate="yes">Line 1</label> <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
       </div>
       <div id="address_line2-container" class="pure-control-group">
-        <label for="address_line2" translate="yes">Line 2</label> <input class="full-width" required="required"
-          id="address_line2" name="address_line2" type="text" maxlength="100">
+        <label for="address_line2" translate="yes">Line 2</label> <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
-        <label for="address_city" translate="yes">City</label> <input class="full-width" required="required"
-          id="address_city" name="address_city" type="text" maxlength="100">
+        <label for="address_city" translate="yes">City</label> <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
         <div class="pure-g">
           <div id="address_state-container" class="pure-u-17-24">
-            <label for="address_state" translate="yes">State or province</label> <select id="address_state"
-              name="address_state">
+            <label for="address_state" translate="yes">State or province</label> <select id="address_state" name="address_state">
               <option value="" translate="yes">
                 Select state
               </option>
@@ -226,8 +176,7 @@
           <div id="address_state-container-bridge" class="pure-u-1-24"></div>
           <div id="address_postal_code-container" class="pure-u-6-24">
             <div class="pure-control-group">
-              <label for="address_postal_code" translate="yes">ZIP</label> <input class="full-width" required="required"
-                id="address_postal_code" name="address_postal_code" type="text" maxlength="50">
+              <label for="address_postal_code" translate="yes">ZIP</label> <input class="full-width" required="required" id="address_postal_code" name="address_postal_code" type="text" maxlength="50">
             </div>
           </div>
         </div>
@@ -236,64 +185,51 @@
     <div id="kana-address-container">
       <h2 translate="yes">Kana address</h2>
       <div id="address_kana_line1-container" class="pure-control-group">
-        <label for="address_kana_line1" translate="yes">Line 1</label> <input class="full-width" required="required"
-          id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
+        <label for="address_kana_line1" translate="yes">Line 1</label> <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
-        <label for="address_kana_city" translate="yes">City</label> <input class="full-width" required="required"
-          id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
+        <label for="address_kana_city" translate="yes">City</label> <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
-        <label for="address_kana_town" translate="yes">Town</label> <input class="full-width" required="required"
-          id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
+        <label for="address_kana_town" translate="yes">Town</label> <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
-        <label for="address_kana_state" translate="yes">State</label> <input class="full-width" required="required"
-          id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
+        <label for="address_kana_state" translate="yes">State</label> <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
-        <label for="address_kana_postal_code" translate="yes">Postal code</label> <input class="full-width"
-          required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
+        <label for="address_kana_postal_code" translate="yes">Postal code</label> <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="kanji-address-container">
       <h2 translate="yes">Kanji address</h2>
       <div id="address_kanji_line1-container" class="pure-control-group">
-        <label for="address_kanji_line1" translate="yes">Line 1</label> <input class="full-width" required="required"
-          id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
+        <label for="address_kanji_line1" translate="yes">Line 1</label> <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
-        <label for="address_kanji_city" translate="yes">City</label> <input class="full-width" required="required"
-          id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
+        <label for="address_kanji_city" translate="yes">City</label> <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
-        <label for="address_kanji_town" translate="yes">Town</label> <input class="full-width" required="required"
-          id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
+        <label for="address_kanji_town" translate="yes">Town</label> <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
-        <label for="address_kanji_state" translate="yes">State</label> <input class="full-width" required="required"
-          id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
+        <label for="address_kanji_state" translate="yes">State</label> <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
-        <label for="address_kanji_postal_code" translate="yes">Postal code</label> <input class="full-width"
-          required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text"
-          maxlength="100">
+        <label for="address_kanji_postal_code" translate="yes">Postal code</label> <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
       <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Update Stripe account</button>
     </div>
   </form>
-  <template id="mcc-option">
-    <option value="${mcc.code}">
-      ${mcc.description}
-    </option>
-  </template>
-  <template id="state-option">
-    <option value="${option.value}">
-      ${option.text}
-    </option>
-  </template>
+  <template id="mcc-option"></template>
+  <option value="${mcc.code}">
+    ${mcc.description}
+  </option>
+  <template id="state-option"></template>
+  <option value="${option.value}">
+    ${option.text}
+  </option>
   <template id="success">
     <div class="success message" translate="yes">
       Success! The Stripe account has been updated <a href="/account/connect" translate="yes">Return to account</a>
@@ -520,5 +456,4 @@
     </div>
   </template>
 </body>
-
 </html>

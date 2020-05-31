@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-navbar="/account/connect/navbar-person.html">
-
 <head>
   <title translate="yes">Delete ${person.id}</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -9,13 +8,11 @@
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
-
 <body>
   <h1 translate="yes">Delete ${person.id}</h1>
   <p translate="yes">The owner information will be deleted immediately and cannot be recovered.</p>
   <div id="message-container"></div>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
-    action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Delete</button>
   </form>
   <template id="success">
@@ -29,5 +26,4 @@
     </div>
   </template>
 </body>
-
 </html>

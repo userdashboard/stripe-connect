@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-navbar="/administrator/connect/navbar-stripe-account.html">
-
 <head>
   <title translate="yes">Delete ${stripeAccount.id}</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -9,7 +8,6 @@
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
-
 <body>
   <h1 translate="yes">Delete ${stripeAccount.id}</h1>
   <div id="message-container"></div>
@@ -26,15 +24,13 @@
         <a href="/account/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a>
       </td>
       <td id="blank-name">Not yet provided</td>
-      <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}
-      </td>
+      <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
       <td id="business-name">${stripeAccount.company.name || ""}</td>
       <td id="mcc-description"></td>
       <td id="account-status"></td>
     </tr>
   </table>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
-    action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Delete</button>
   </form>
   <template id="success">
@@ -66,20 +62,16 @@
     <span translate="yes">Pending submission</span>
   </template>
   <template id="rejected.fraud">
-    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">More information is required</span>
@@ -91,12 +83,10 @@
     <span translate="yes">Under review by Stripe</span>
   </template>
   <template id="disabled">
-    <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
-        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
     <span translate="yes">Deleted</span>
   </template>
 </body>
-
 </html>
