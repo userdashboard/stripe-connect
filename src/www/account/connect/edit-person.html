@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-template="false">
   <head>
     <meta charset="utf-8" /> 
     <title translate="yes">Edit ${person.id}</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="/public/pure-min.css">
     <link rel="stylesheet" href="/public/content.css">
     <link rel="stylesheet" href="/public/content-additional.css">
@@ -16,6 +15,7 @@
       window.isAccountOpener = "${person.metadata.submitted ? false : true}"
     </script>
   </head>
+  <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
     <h1 translate="yes">Edit person</h1>
@@ -23,10 +23,10 @@
     <div id="form-container">
       <h2 translate="yes">Relationship to company</h2>
       <div class="pure-control-group">
-        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" readonly="readonly"> Representative</label>
-        <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" readonly="readonly"> Executive</label>
-        <label><input type="checkbox" id="relationship_director" name="relationship_director" value="true" readonly="readonly"> Director</label>
-        <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" readonly="readonly"> Owner</label>
+        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" disabled="disabled"> Representative</label>
+        <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" disabled="disabled"> Executive</label>
+        <label><input type="checkbox" id="relationship_director" name="relationship_director" value="true" disabled="disabled"> Director</label>
+        <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
         <label for="relationship_title" translate="yes">Job, role or relationship title</label>
@@ -160,24 +160,24 @@
       <div id="address-container">
         <h2 translate="yes">Personal address</h2>
         <div id="address_line1-container" class="pure-control-group">
-          <a name="verification_document_back-anchor" id="verification_document_back-anchor"></a>
+          <a name="address_line1-anchor" id="address_line1-anchor"></a>
           <label for="address_line1" translate="yes">Line 1</label>
          <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
         </div>
         <div id="address_line2-container" class="pure-control-group">
-          <a name="verification_document_back-anchor" id="verification_document_back-anchor"></a>
+          <a name="address_line2-anchor" id="address_line2-anchor"></a>
           <label for="address_line2" translate="yes">Line 2</label>
          <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
         </div>
         <div id="address_city-container" class="pure-control-group">
-          <a name="verification_document_back-anchor" id="verification_document_back-anchor"></a>
+          <a name="address_city-anchor" id="address_city-anchor"></a>
           <label for="address_city" translate="yes">City</label>
           <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
         </div>
         <div class="pure-control-group">
           <div class="pure-g">
             <div id="address_state-container" class="pure-u-16-24">
-              <a name="verification_document_back-anchor" id="verification_document_back-anchor"></a>
+              <a name="address_state-anchor" id="address_state-anchor"></a>
               <label for="address_state" translate="yes">State or province</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
@@ -187,7 +187,7 @@
             </div>
             <div id="address_state-container-bridge" class="pure-u-1-24"></div>
             <div id="address_postal_code-container" class="pure-u-7-24">
-              <a name="verification_document_back-anchor" id="verification_document_back-anchor"></a>
+              <a name="address_postal_code-anchor" id="address_postal_code-anchor"></a>
               <label for="address_postal_code" translate="yes">ZIP</label>
               <input class="full-width" required="required" id="address_postal_code" name="address_postal_code" type="text" maxlength="50">
             </div>
@@ -195,8 +195,8 @@
         </div>
         <div id="address_country-container">
           <div class="pure-g">
-            <div id="address_country-container" class="pure-u-16-24">
-              <a name="verification_document_back-anchor" id="verification_document_back-anchor"></a>
+            <div class="pure-u-16-24">
+              <a name="address_country-anchor" id="address_country-anchor"></a>
               <label for="address_country" translate="yes">Country</label>
               <select name="address_country" id="address_country">
                 <option value="" translate="yes">
@@ -205,7 +205,7 @@
               </select>
             </div>
             <div class="pure-u-1-24"></div>
-            <div id="address_postal_code-container" class="pure-u-7-24">
+            <div class="pure-u-7-24">
               <label>&nbsp;</label>
               <button name="refresh" value="true" class="pure-button">Reload states</button>
             </div>
@@ -466,16 +466,6 @@
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
       Error! Invalid or missing Kanji personal address postal code
-    </div>
-  </template>
-  <template id="invalid-address_kanji_state">
-    <div class="error message" translate="yes">
-      Error! Invalid or missing Kanji personal address state
-    </div>
-  </template>
-  <template id="invalid-address_kanji_line1">
-    <div class="error message" translate="yes">
-      Error! Invalid or missing Kanji personal address line 1
     </div>
   </template>
 </body>
