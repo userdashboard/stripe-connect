@@ -62,56 +62,67 @@
     </div>
   </form>
   <template id="owner-row">
-    <template id="director-row"></template>
-    <template id="invalid-registration">
-      <div class="error message" translate="yes">
-        The registration has incomplete registration information
-      </div>
-    </template>
-    <template id="invalid-company-directors">
-      <div class="error message" translate="yes">
-        Error! You must submit the company's directors
-      </div>
-    </template>
-    <template id="invalid-beneficial-owners">
-      <div class="error message" translate="yes">
-        Error! You must submit the company's beneficial owners
-      </div>
-    </template>
-    <template id="invalid-company-representative">
-      <div class="error message" translate="yes">
-        Error! You must submit the company representative's information
-      </div>
-    </template>
-    <template id="invalid-payment-details">
-      <div class="error message" translate="yes">
-        Error! The registration has incomplete payment information
-      </div>
-    </template>
-    <template id="success">
-      <div class="success message" translate="yes">
-        Success! The registration has been submitted
-      </div>
-    </template>
-    <template id="unknown-error">
-      <div class="error message" translate="yes">
-        Error! An error occurred submitting the registration
-      </div>
-    </template>
-    <table>
-      <tr id="${person.id}">
-        <td>
-          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
-        </td>
-        <td>${person.first_name} ${person.last_name}</td>
-      </tr>
-      <tr id="${person.id}">
-        <td>
-          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
-        </td>
-        <td>${person.first_name} ${person.last_name}</td>
-      </tr>
-    </table>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+  </template>
+  <template id="director-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+  </template>
+  <template id="invalid-registration">
+    <div class="error message" translate="yes">
+      The registration has incomplete registration information
+    </div>
+  </template>
+  <template id="invalid-company-directors">
+    <div class="error message" translate="yes">
+      Error! You must submit the company's directors
+    </div>
+  </template>
+  <template id="invalid-beneficial-owners">
+    <div class="error message" translate="yes">
+      Error! You must submit the company's beneficial owners
+    </div>
+  </template>
+  <template id="invalid-company-representative">
+    <div class="error message" translate="yes">
+      Error! You must submit the company representative's information
+    </div>
+  </template>
+  <template id="invalid-payment-details">
+    <div class="error message" translate="yes">
+      Error! The registration has incomplete payment information
+    </div>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Success! The registration has been submitted
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Error! An error occurred submitting the registration
+    </div>
   </template>
 </body>
 </html>

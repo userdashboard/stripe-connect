@@ -223,14 +223,16 @@
       <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Save payment information</button>
     </div>
   </form>
-  <template id="country-option"></template>
-  <option value="${country.code}">
-    ${country.name}
-  </option>
-  <template id="currency-option"></template>
-  <option value="${currency.currency}">
-    ${currency.name}
-  </option>
+  <template id="country-option">
+    <option value="${country.code}">
+      ${country.name}
+    </option>
+  </template>
+  <template id="currency-option">
+    <option value="${currency.currency}">
+      ${currency.name}
+    </option>
+  </template>
   <template id="success">
     <div class="success message" translate="yes">
       Success! The payment information has been updated

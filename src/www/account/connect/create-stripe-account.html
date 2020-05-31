@@ -31,10 +31,11 @@
       <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Start registration</button>
     </div>
   </form>
-  <template id="country-option"></template>
-  <option value="${country_spec.id}">
-    ${country_spec.name}
-  </option>
+  <template id="country-option">
+    <option value="${country_spec.id}">
+      ${country_spec.name}
+    </option>
+  </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
       Error! An error occurred creating the registration

@@ -33,33 +33,31 @@
     </div>
   </form>
   <template id="person-row">
-    <template id="invalid-company-directors">
-      <div class="error message" translate="yes">
-        Error! There are directors still requiring information
-      </div>
-    </template>
-    <template id="success">
-      <div class="success message" translate="yes">
-        Success! The company's directors has been submitted
-      </div>
-    </template>
-    <template id="unknown-error">
-      <div class="error message" translate="yes">
-        Error! An error occurred submitting the directors
-      </div>
-    </template>
-    <table>
-      <tr id="${person.id}">
-        <td>
-          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
-        </td>
-        <td>${person.first_name} ${person.last_name}</td>
-        <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}">Add information</a>
-        </td>
-        <td id="requires-no-information-${person.id}">-</td>
-      </tr>
-    </table>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}">Add information</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="invalid-company-directors">
+    <div class="error message" translate="yes">
+      Error! There are directors still requiring information
+    </div>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Success! The company's directors has been submitted
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Error! An error occurred submitting the directors
+    </div>
   </template>
 </body>
 </html>

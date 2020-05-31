@@ -25,59 +25,57 @@
     </table>
   </div>
   <template id="stripe-account-row">
-    <template id="not-submitted">
-      <span translate="yes">Not submitted yet</span>
-    </template>
-    <template id="verified">
-      <span translate="yes">Registration has been accepted</span>
-    </template>
-    <template id="verified-requires-fields">
-      <span translate="yes">Requires additional information</span>
-    </template>
-    <template id="requirements.past_due">
-      <span translate="yes">Requires additional information</span>
-    </template>
-    <template id="pending-submission">
-      <span translate="yes">Pending submission</span>
-    </template>
-    <template id="rejected.fraud">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
-    </template>
-    <template id="rejected.terms_of_service">
-      <span translate="yes">Rejected for terms of service violation</span>
-    </template>
-    <template id="rejected.listed">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
-    </template>
-    <template id="rejected.other">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
-    </template>
-    <template id="requirements.pending_verification">
-      <span translate="yes">Pending verification</span>
-    </template>
-    <template id="fields_needed">
-      <span translate="yes">More information is required</span>
-    </template>
-    <template id="listed">
-      <span translate="yes">Under review by Stripe</span>
-    </template>
-    <template id="under-review">
-      <span translate="yes">Under review by Stripe</span>
-    </template>
-    <template id="disabled">
-      <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
-    </template>
-    <table>
-      <tr id="${account.id}">
-        <td>
-          <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
-        </td>
-        <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
-        <td id="business-name-${account.id}">${account.company.name || ""}</td>
-        <td id="account-status-${account.id}"></td>
-        <td>${account.createdFormatted}</td>
-      </tr>
-    </table>
+    <tr id="${account.id}">
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+    </tr>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Not submitted yet</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Registration has been accepted</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Requires additional information</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Requires additional information</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Pending submission</span>
+  </template>
+  <template id="rejected.fraud">
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms_of_service">
+    <span translate="yes">Rejected for terms of service violation</span>
+  </template>
+  <template id="rejected.listed">
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.pending_verification">
+    <span translate="yes">Pending verification</span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">More information is required</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Under review by Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Under review by Stripe</span>
+  </template>
+  <template id="disabled">
+    <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

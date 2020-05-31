@@ -101,75 +101,73 @@
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
   <template id="person-row">
-    <template id="payment-information">
-      <p translate="yes">Funds are paid to account ${bank_account.bank_name}.</p>
-    </template>
-    <template id="no-payment-information">
-      <p translate="yes">Banking details must be provided to receive funds.</p>
-    </template>
-    <template id="not-submitted-information">
-      <p translate="yes">The registration has not been submitted.</p>
-    </template>
-    <template id="submitted-information">
-      <p translate="yes">The registration was submitted on ${account.dateFormatted}.</p>
-    </template>
-    <template id="unstarted-registration">
-      <p translate="yes">The registration information has not been provided.</p>
-    </template>
-    <template id="completed-registration">
-      <p translate="yes">The registration information has been provided.</p>
-    </template>
-    <template id="not-submitted">
-      <span translate="yes">Not submitted yet</span>
-    </template>
-    <template id="verified">
-      <span translate="yes">Registration has been accepted</span>
-    </template>
-    <template id="verified-requires-fields">
-      <span translate="yes">Requires additional information</span>
-    </template>
-    <template id="pending-submission">
-      <span translate="yes">Pending submission</span>
-    </template>
-    <template id="rejected.fraud">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-    </template>
-    <template id="rejected.terms">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-    </template>
-    <template id="rejected.listed">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-    </template>
-    <template id="rejected.other">
-      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-    </template>
-    <template id="fields_needed">
-      <span>More information is required.</span>
-    </template>
-    <template id="listed">
-      <span translate="yes">Under review by Stripe</span>
-    </template>
-    <template id="under-review">
-      <span translate="yes">Under review by Stripe</span>
-    </template>
-    <template id="disabled">
-      <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-    </template>
-    <template id="requirements.past_due">
-      <span translate="yes">Requires additional information</span>
-    </template>
-    <table>
-      <tr id="${person.id}">
-        <td>
-          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
-        </td>
-        <td>${person.first_name} ${person.last_name}</td>
-        <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}">Add information</a>
-        </td>
-        <td id="requires-no-information-${person.id}">-</td>
-      </tr>
-    </table>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}">Add information</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">Funds are paid to account ${bank_account.bank_name}.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">Banking details must be provided to receive funds.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">The registration has not been submitted.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">The registration was submitted on ${account.dateFormatted}.</p>
+  </template>
+  <template id="unstarted-registration">
+    <p translate="yes">The registration information has not been provided.</p>
+  </template>
+  <template id="completed-registration">
+    <p translate="yes">The registration information has been provided.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Not submitted yet</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Registration has been accepted</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Requires additional information</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Pending submission</span>
+  </template>
+  <template id="rejected.fraud">
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span>More information is required.</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Under review by Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Under review by Stripe</span>
+  </template>
+  <template id="disabled">
+    <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Requires additional information</span>
   </template>
 </body>
 </html>

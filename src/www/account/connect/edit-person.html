@@ -201,14 +201,16 @@
       Error! An error occurred submitting the form
     </div>
   </template>
-  <template id="country-option"></template>
-  <option value="${country.code}">
-    ${country.name}
-  </option>
-  <template id="state-option"></template>
-  <option value="${option.value}">
-    ${option.text}
-  </option>
+  <template id="country-option">
+    <option value="${country.code}">
+      ${country.name}
+    </option>
+  </template>
+  <template id="state-option">
+    <option value="${option.value}">
+      ${option.text}
+    </option>
+  </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
       Error! An error occurred udpating the information

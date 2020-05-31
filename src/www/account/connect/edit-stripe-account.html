@@ -223,14 +223,16 @@
       <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Update Stripe account</button>
     </div>
   </form>
-  <template id="mcc-option"></template>
-  <option value="${mcc.code}">
-    ${mcc.description}
-  </option>
-  <template id="state-option"></template>
-  <option value="${option.value}">
-    ${option.text}
-  </option>
+  <template id="mcc-option">
+    <option value="${option.value}">
+      ${option.text}
+    </option>
+  </template>
+  <template id="state-option">
+    <option value="${option.value}">
+      ${option.text}
+    </option>
+  </template>
   <template id="success">
     <div class="success message" translate="yes">
       Success! The Stripe account has been updated <a href="/account/connect" translate="yes">Return to account</a>
