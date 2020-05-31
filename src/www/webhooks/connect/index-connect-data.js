@@ -6,7 +6,7 @@ if (global.maxmimumStripeRetries) {
   stripe.setMaxNetworkRetries(global.maximumStripeRetries)
 }
 stripe.setTelemetryEnabled(false)
-const Log = require('@userdashboard/src/log.js')('stripe-connect')
+const Log = require('@userdashboard/dashboard/src/log.js')('stripe-connect')
 const stripeCache = require('../../../stripe-cache.js')
 const webhookPath = path.join(__dirname, '.')
 const supportedWebhooks = {}

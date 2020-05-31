@@ -4,7 +4,7 @@ global.stripeAPIVersion = '2020-03-02'
 global.maximumStripeRetries = 0
 
 const fs = require('fs')
-const Log = require('@userdashboard/src/log.js')('stripe-connect')
+const Log = require('@userdashboard/dashboard/src/log.js')('stripe-connect')
 const util = require('util')
 let ngrok, publicIP, localTunnel, localhostRun
 if (process.env.NGROK) {
