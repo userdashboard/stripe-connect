@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">પટ્ટી ખાતાઓ</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">પટ્ટી ખાતાઓ</h1>
+  <div id="message-container"></div>
+  <div id="no-stripe-accounts">
+    <p translate="yes">હજુ સુધી કોઈ પટ્ટી ખાતા બનાવવામાં આવ્યા નથી.</p>
+  </div>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th translate="yes">ID</th>
+        <th translate="yes">પ્રકાર</th>
+        <th translate="yes">નામ</th>
+        <th translate="yes">સ્થિતિ</th>
+        <th translate="yes">બનાવેલ છે</th>
+        <th translate="yes">સબમિટ થયેલ છે</th>
+      </tr>
+    </thead>
+  </table>
+  <ul id="page-links" class="pagination"></ul>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td>${account.business_type}</td>
+      <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td id="mcc-description-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td>${account.metadata.submittedFormatted}</td>
+    </tr>
+  </template>
+  <template id="page-link">
+    <li>
+      <a href="/administrator/connect/stripe-accounts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a>
+    </li>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">ખાતા x ને ભંડોળ ચૂકવવામાં આવે છે</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">ભંડોળ મેળવવા માટે બેન્કિંગ વિગતો આપવી જોઈએ.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">રજિસ્ટ્રેશન જમા કરાવવામાં આવ્યું નથી.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">રજિસ્ટ્રેશન પર જમા કરવામાં આવ્યું ${account.dateFormatted}.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">હજુ જમા થયેલ નથી</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">નોંધણી સ્વીકારી લેવામાં આવી છે</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">પટ્ટી દ્દારા નિષ્ક્રિય થયેલ</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">વધારાની જાણકારીની જરૂર છે</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">બાકી રહેલી રજૂઆત</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">વધારાની જાણકારીની જરૂર છે</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">પટ્ટી દ્દારા નકારાઈ છે, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">પટ્ટી દ્દારા નકારાઈ છે, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">પટ્ટી દ્દારા નકારાઈ છે, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">પટ્ટી દ્દારા નકારાઈ છે, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">વધુ માહિતીની જરૂર છે</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">પટ્ટી દ્વારા સમીક્ષા હેઠળ</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">પટ્ટી દ્વારા સમીક્ષા હેઠળ</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">પટ્ટી દ્દારા નિષ્ક્રિય થયેલ, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

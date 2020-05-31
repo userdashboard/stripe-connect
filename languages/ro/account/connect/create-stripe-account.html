@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Creareînregistrare</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Creareînregistrare</h1>
+  <p translate="yes">O înregistrare finalizată vă permite să primiți plăți de venituri prin Stripe Connect.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
+    <div class="pure-control-group">
+      <label for="individual" translate="yes">Tip de cont</label>
+      <div class="pure-checkbox">
+        <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
+        <label><input id="company" type="radio" name="type" value="company"> Company</label>
+      </div>
+    </div>
+    <div class="pure-control-group">
+      <label for="country" translate="yes">Țara de reședință/constituirea</label>
+      <select name="country" id="country">
+        <option value="" translate="yes">
+          Selectați țara
+        </option>
+      </select>
+    </div>
+    <div class="pure-controls">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Începe înregistrarea</button>
+    </div>
+  </form>
+  <template id="country-option">
+    <option value="${country_spec.id}">
+      ${country_spec.name}
+    </option>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Eroare! Eroare la crearea înregistrării
+    </div>
+  </template>
+  <template id="invalid-country">
+    <div class="error message" translate="yes">
+      Eroare! Țară nevalidă sau lipsă
+    </div>
+  </template>
+</body>
+</html>

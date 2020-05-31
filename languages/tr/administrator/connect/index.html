@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Bağlantı yönetimi</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Bağlantı yönetimi</h1>
+  <div id="registrations-container">
+    <h2 translate="yes">Son kayıtlar</h2>
+    <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">Kimliği</th>
+          <th translate="yes">Adı</th>
+          <th translate="yes">Durum</th>
+          <th translate="yes">Oluşturulan</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+    </tr>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Henüz gönderilmedi</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Kayıt kabul edildi</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Ek bilgi gerektirir</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Ek bilgi gerektirir</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Bekleyen gönderim</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms_of_service">
+    <span translate="yes">Hizmet ihlali koşulları nedeniyle reddedildi</span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.pending_verification">
+    <span translate="yes">Bekleyen doğrulama</span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Daha fazla bilgi gereklidir</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Stripe tarafından gözden geçiriliyor</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Stripe tarafından gözden geçiriliyor</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe tarafından devre dışı bırakılmış, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

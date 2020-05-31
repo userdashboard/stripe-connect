@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ಹೊಸ ವ್ಯಕ್ತಿಯನ್ನು ಸೃಷ್ಟಿಸಿ ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+</head>
+<body class="entry">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
+    <h1 translate="yes">ಹೊಸ ವ್ಯಕ್ತಿಯನ್ನು ಸೃಷ್ಟಿಸಿ</h1>
+    <p translate="yes">ನಿಮ್ಮ ಮಾಹಿತಿ ಬದಲಾದಂತೆ ನಿರ್ದೇಶಕ, ಮಾಲೀಕರ ಮತ್ತು ಪ್ರತಿನಿಧಿಯ ಮಂಡಳಿಯನ್ನು ಅಪ್-ಡೇಟ್ ಮಾಡಿ ಇಡಬೇಕಾಗುತ್ತದೆ.</p>
+    <div id="message-container"></div>
+    <div id="form-container">
+      <h2 translate="yes">ಕಂಪನಿಗೆ ಸಂಬಂಧ</h2>
+      <div class="pure-control-group">
+        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
+        <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
+        <label id="director-container"><input type="checkbox" id="relationship_director" name="relationship_director" value="true"> Company director</label>
+        <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_title" translate="yes">ಉದ್ಯೋಗ, ಪಾತ್ರ ಅಥವಾ ಸಂಬಂಧದ ಶೀರ್ಷಿಕೆ</label>
+        <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_percent_ownership" translate="yes">ಪ್ರತಿಶತ ಒಡೆತನ (ಬೇಕಿದ್ದರೆ)</label>
+        <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
+      </div>
+      <div id="submit-container" class="pure-controls">
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">ನವೀಕರಣ ನೋಂದಣಿ</button>
+      </div>
+    </div>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      ಯಶಸ್ಸು! ನೋಂದಣಿಯನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      ದೋಷ! ಒಂದು ದೋಷವು ನೋಂದಣಿಯನ್ನು ಸೃಷ್ಟಿಸುತ್ತಿತ್ತು
+    </div>
+  </template>
+  <template id="invalid-owner">
+    <div class="error message" translate="yes">
+      ನಿಮ್ಮ ಸ್ಟ್ರೈಪ್ ಅಕೌಂಟ್ ಗೆ ಪ್ರಯೋಜನಕಾರಿ ಮಾಲೀಕನ ಮಾಹಿತಿಯ ಅಗತ್ಯವಿರುವುದಿಲ್ಲ
+    </div>
+  </template>
+  <template id="invalid-director">
+    <div class="error message" translate="yes">
+      ನಿಮ್ಮ ಸ್ಟ್ರೈಪ್ ಅಕೌಂಟ್ ಗೆ ಕಂಪೆನಿ ನಿರ್ದೇಶಕ ಮಾಹಿತಿಯ ಅಗತ್ಯವಿರುವುದಿಲ್ಲ
+    </div>
+  </template>
+  <template id="invalid-executive">
+    <div class="error message" translate="yes">
+      ಕಂಪನಿ ಪ್ರತಿನಿಧಿಗಳು ಕಾರ್ಯನಿರ್ವಾಹಕರನ್ನು ಹೊಂದಿರಬೇಕು
+    </div>
+  </template>
+  <template id="invalid-selection">
+    <div class="error message" translate="yes">
+      ಒಂದೋ ಪ್ರತಿನಿಧಿ, ನಿರ್ದೇಶಕ ಅಥವಾ ಮಾಲೀಕನನ್ನು ಆಯ್ಕೆ ಮಾಡಲೇಬೇಕು
+    </div>
+  </template>
+  <template id="invalid-relationship_percent_ownership">
+    <div class="error message" translate="yes">
+      ದೋಷ! ಅಮಾನ್ಯಗೊಂಡ ಅಥವಾ ಕಾಣದ ಪ್ರತಿಶತ ಮಾಲೀಕತ್ವ (0 ಆಗಿದ್ದರೆ ಯಾವುದೂ ಇಲ್ಲ)
+    </div>
+  </template>
+  <template id="invalid-relationship_title">
+    <div class="error message" translate="yes">
+      ದೋಷ! ಅಮಾನ್ಯವಾದ ಅಥವಾ ಕಾಣದ ಸಂಬಂಧದ ಶೀರ್ಷಿಕೆ
+    </div>
+  </template>
+</body>
+</html>

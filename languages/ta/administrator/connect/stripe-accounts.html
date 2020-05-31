@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">கோடு கணக்குகள்</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">கோடு கணக்குகள்</h1>
+  <div id="message-container"></div>
+  <div id="no-stripe-accounts">
+    <p translate="yes">இதுவரை எந்த வரியற்ற கணக்குகளும் உருவாக்கப்படவில்லை.</p>
+  </div>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th translate="yes">Id</th>
+        <th translate="yes">மாதிப் படிவம்</th>
+        <th translate="yes">பெயர்</th>
+        <th translate="yes">சமுதாயப் படிநிலை</th>
+        <th translate="yes">உருவாக்க</th>
+        <th translate="yes">தாக்கல்</th>
+      </tr>
+    </thead>
+  </table>
+  <ul id="page-links" class="pagination"></ul>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td>${account.business_type}</td>
+      <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td id="mcc-description-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td>${account.metadata.submittedFormatted}</td>
+    </tr>
+  </template>
+  <template id="page-link">
+    <li>
+      <a href="/administrator/connect/stripe-accounts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a>
+    </li>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">நிதி ஒ கணக்கிற்கு வழங்கப்படுகிறது.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">நிதி பெறுவதற்காக வங்கி விவரங்கள் வழங்கப்பட வேண்டும்.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">பதிவு சமர்ப்பிக்கப்படவில்லை.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">குறித்த பதிவு சமர்ப்பிக்கப்பட்ட ${account.dateFormatted}.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">இதுவரை சமர்ப்பிக்கப்படவில்லை</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">பதிவு ஏற்கப்பட்டுள்ளது</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Stripe ஆல் முடக்கப்பட்டது</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">கூடுதல் தகவல் தேவைப்படுகிறது</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">நிலுவையில் உள்ள சமர்ப்பிப்பு</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">கூடுதல் தகவல் தேவைப்படுகிறது</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">ஸ்டிரெப்பினால் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">ஸ்டிரெப்பினால் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">ஸ்டிரெப்பினால் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">ஸ்டிரெப்பினால் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">மேலும் தகவல் தேவைப்படுகிறது</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">ஸ்ட்ரூப் மூலம் விமர்சனம்</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">ஸ்ட்ரூப் மூலம் விமர்சனம்</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">ஸ்டிரெப்பினால் முடக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

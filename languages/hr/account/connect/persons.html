@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Osobe za osobe koje ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Osobe</h1>
+  <div id="representative-container">
+    <h2 translate="yes">Predstavnik tvrtke</h2>
+    <p translate="yes">Ako se promijeni status nominirane osobe, morate stvoriti novog predstavnika.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Stvaranje novog predstavnika</a></p>
+    <table id="representatives-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">Id</th>
+          <th translate="yes">Ime</th>
+          <th translate="yes">Zahtijeva</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Stvarni vlasnici</h2>
+    <p translate="yes">Morate dostaviti dokumentaciju za bilo koga tko posjeduje znatan (25+) posto tvrtke ili zadužen za tvrtku, njegove financije ili operacije.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Dodaj vlasnika</a></p>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">Id</th>
+          <th translate="yes">Ime</th>
+          <th translate="yes">Zahtijeva</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Direktori tvrtke</h2>
+    <p translate="yes">Morate dostaviti dokumentaciju za upravni odbor.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Dodaj vlasnika</a></p>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">Id</th>
+          <th translate="yes">Ime</th>
+          <th translate="yes">Zahtijeva</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="person-row">
+    <table>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+        <td id="requires-information-${person.id}">
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}">Add information</a>
+        </td>
+        <td id="requires-no-information-${person.id}">-</td>
+      </tr>
+    </table>
+  </template>
+</body>
+</html>

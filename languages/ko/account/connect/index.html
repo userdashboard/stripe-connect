@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">스트라이프 연결 계정</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">스트라이프 연결 계정</h1>
+  <p translate="yes">Become a vendor by verifying your personal identity and company information through <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <div class="pure-g requirements-wrapper">
+    <div class="pure-u-1-2 requirements-container">
+      <div class="requirements">
+        <h2 translate="yes">개별 요구 사항</h2>
+        <ol>
+          <li translate="yes">확인된 개인정보</li>
+          <li translate="yes">지원되는 국가의 거주자</li>
+          <li translate="yes">지원되는 국가의 은행 계좌</li>
+        </ol>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">개별 등록 시작</a>
+      </div>
+    </div>
+    <div class="pure-u-1-2 requirements-container">
+      <div class="requirements">
+        <h2 translate="yes">비즈니스 요구 사항</h2>
+        <ol>
+          <li translate="yes">확인된 개인정보</li>
+          <li translate="yes">지원되는 국가에 등록된 비즈니스</li>
+          <li translate="yes">지원되는 국가의 은행 계좌</li>
+        </ol>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">회사 등록 시작</a>
+      </div>
+    </div>
+  </div>
+  <div id="individual-container">
+    <h2 translate="yes">개인 등록</h2>
+    <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">자료</th>
+          <th translate="yes">이름</th>
+          <th translate="yes">상태</th>
+          <th translate="yes">만든</th>
+          <th translate="yes">제출</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="company-container">
+    <h2 translate="yes">회사 등록</h2>
+    <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">자료</th>
+          <th translate="yes">이름</th>
+          <th translate="yes">상태</th>
+          <th translate="yes">만든</th>
+          <th translate="yes">제출</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td id="blank-name-${account.id}" translate="yes">아직 제공되지 않음</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
+      <td id="business-name-${account.id}">${account.company.name}</td>
+      <td id="account-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td id="submitted-${account.id}">${account.submittedFormatted}</td>
+      <td id="not-submitted-${account.id}" translate="yes">아니요</td>
+    </tr>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">아직 제출되지 않음</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">등록이 수락되었습니다.</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">스트라이프에 의해 비활성화됨</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">추가 정보로 다시 제출 필요</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">보류 중인 제출</span>
+  </template>
+  <template id="rejected.fraud">
+    <span>
+      <span translate="yes">스트라이프에 의해 비활성화, 일반적인 이유를 참조하십시오</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="rejected.terms">
+    <span>
+      <span translate="yes">스트라이프에 의해 비활성화, 일반적인 이유를 참조하십시오</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="rejected.listed">
+    <span>
+      <span translate="yes">스트라이프에 의해 비활성화, 일반적인 이유를 참조하십시오</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="rejected.other">
+    <span>
+      <span translate="yes">스트라이프에 의해 비활성화, 일반적인 이유를 참조하십시오</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">더 많은 정보가 필요합니다.</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">스트라이프에 의해 검토 중</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">스트라이프에 의해 검토 중</span>
+  </template>
+  <template id="disabled">
+    <span>
+      <span translate="yes">스트라이프에 의해 비활성화, 일반적인 이유를 참조하십시오</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">추가 정보가 필요합니다.</span>
+  </template>
+</body>
+</html>

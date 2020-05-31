@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ดู ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">ดู ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <table id="stripe-accounts-table" class="pure-table data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th translate="yes">Id</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">เอ็มซีซี</th>
+        <td id="mcc-description"></td>
+      </tr>
+      <tr>
+        <th translate="yes">ชื่อ</th>
+        <td id="blank-name" translated="yes">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">สถานะ</th>
+        <td id="account-status"></td>
+      </tr>
+      <tr>
+        <th translate="yes">สร้าง</th>
+        <td>${stripeAccount.createdFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">ส่ง</th>
+        <td>${stripeAccount.metadata.submittedFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
+  <template id="not-submitted">
+    <span translate="yes">ยังไม่ได้ส่ง</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">การลงทะเบียนได้รับการยอมรับ</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">ปิดการใช้งานโดยแถบ</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">ต้องการข้อมูลเพิ่มเติม</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">ต้องการข้อมูลเพิ่มเติม</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">รอดําเนินการส่ง</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">ต้องการข้อมูลเพิ่มเติม</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">ถูกปฏิเสธโดย Stripe ดู</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">ถูกปฏิเสธโดย Stripe ดู</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">ถูกปฏิเสธโดย Stripe ดู</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">ถูกปฏิเสธโดย Stripe ดู</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">ต้องการข้อมูลเพิ่มเติม</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">ภายใต้ การตรวจทาน โดย Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">ภายใต้ การตรวจทาน โดย Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">ปิดใช้งานโดย Stripe ดู</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Konta rozłożone</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Konta rozłożone</h1>
+  <div id="message-container"></div>
+  <div id="no-stripe-accounts">
+    <p translate="yes">Nie utworzono jeszcze żadnych kont Stripe.</p>
+  </div>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th translate="yes">Identyfikator</th>
+        <th translate="yes">Typu</th>
+        <th translate="yes">Nazwa</th>
+        <th translate="yes">Stan</th>
+        <th translate="yes">Utworzone</th>
+        <th translate="yes">Przekazywane</th>
+      </tr>
+    </thead>
+  </table>
+  <ul id="page-links" class="pagination"></ul>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td>${account.business_type}</td>
+      <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td id="mcc-description-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td>${account.metadata.submittedFormatted}</td>
+    </tr>
+  </template>
+  <template id="page-link">
+    <li>
+      <a href="/administrator/connect/stripe-accounts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a>
+    </li>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">Środki są wypłacane na konto x</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">Dane bankowe muszą być podane, aby otrzymać środki.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">Rejestracja nie została przedłożona.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">Rejestracja została złożona na ${account.dateFormatted}.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Nie zostały jeszcze przesłane</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Rejestracja została zaakceptowana</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Wyłączone przez Stripe</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Wymaga dodatkowych informacji</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Oczekujące na złożenie wniosku</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Wymaga dodatkowych informacji</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Więcej informacji jest wymaganych</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Przegląd przez Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Przegląd przez Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Wyłączone przez Stripe, zobacz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

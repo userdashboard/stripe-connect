@@ -71,23 +71,6 @@
           </div>
         </div>
       </div>
-      <div class="pure-g">
-        <div class="pure-u-12-24">
-          <div id="business_profile_url-container" class="pure-control-group">
-            <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">Website URL</label>
-            <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
-          </div>
-        </div>
-        <div class="pure-u-1-24"></div>
-        <div class="pure-u-11-24">
-          <div id="phone-container" class="pure-control-group">
-            <a id="phone-anchor"></a>
-            <label for="phone" translate="yes">Phone number</label>
-            <input required="required" id="phone" name="phone" type="text" maxlength="50">
-          </div>
-        </div>
-      </div>
       <div id="company-verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
@@ -284,8 +267,8 @@
     </div>
   </form>
   <template id="mcc-option">
-    <option value="${option.value}">
-      ${option.text}
+    <option value="${mcc.value}">
+      ${mcc.text}
     </option>
   </template>
   <template id="state-option">
@@ -506,16 +489,6 @@
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
       Error! Invalid or missing Kanji personal address postal code
-    </div>
-  </template>
-  <template id="invalid-address_kanji_state">
-    <div class="error message" translate="yes">
-      Error! Invalid or missing Kanji personal address state
-    </div>
-  </template>
-  <template id="invalid-address_kanji_line1">
-    <div class="error message" translate="yes">
-      Error! Invalid or missing Kanji personal address line 1
     </div>
   </template>
 </body>

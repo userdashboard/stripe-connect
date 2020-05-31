@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-person.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">삭제 ${person.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">삭제 ${person.id}</h1>
+  <p translate="yes">소유자 정보는 즉시 삭제되며 복구할 수 없습니다.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">삭제</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      성공! 회사 소유자가 삭제되었습니다.
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      오류! 회사 소유자를 삭제하는 오류로 인해 발생했습니다.
+    </div>
+  </template>
+</body>
+</html>

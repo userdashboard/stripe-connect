@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Vytvořit novou osobu pro ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+</head>
+<body class="entry">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
+    <h1 translate="yes">Vytvořit novou osobu</h1>
+    <p translate="yes">Představenstvo, vlastníci a zástupci musí být průběžně aktualizováni, jakmile se vaše informace změní.</p>
+    <div id="message-container"></div>
+    <div id="form-container">
+      <h2 translate="yes">Vztah ke společnosti</h2>
+      <div class="pure-control-group">
+        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
+        <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
+        <label id="director-container"><input type="checkbox" id="relationship_director" name="relationship_director" value="true"> Company director</label>
+        <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_title" translate="yes">Název úlohy, role nebo vztahu</label>
+        <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_percent_ownership" translate="yes">Procento vlastněné (pokud existuje)</label>
+        <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
+      </div>
+      <div id="submit-container" class="pure-controls">
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Aktualizovat registraci</button>
+      </div>
+    </div>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Úspěch! Registrace byla aktualizována
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Chyba! Při vytváření registrace došlo k chybě.
+    </div>
+  </template>
+  <template id="invalid-owner">
+    <div class="error message" translate="yes">
+      Váš účet Stripe nevyžaduje informace o skutečném vlastníkovi.
+    </div>
+  </template>
+  <template id="invalid-director">
+    <div class="error message" translate="yes">
+      Váš účet Stripe nevyžaduje informace o řediteli společnosti
+    </div>
+  </template>
+  <template id="invalid-executive">
+    <div class="error message" translate="yes">
+      Zástupci společnosti musí být vedoucí pracovníci
+    </div>
+  </template>
+  <template id="invalid-selection">
+    <div class="error message" translate="yes">
+      Zástupce, ředitel nebo vlastník musí být vybráni
+    </div>
+  </template>
+  <template id="invalid-relationship_percent_ownership">
+    <div class="error message" translate="yes">
+      Chyba! Neplatné nebo chybějící procento vlastnictví (0, pokud žádné)
+    </div>
+  </template>
+  <template id="invalid-relationship_title">
+    <div class="error message" translate="yes">
+      Chyba! Neplatný nebo chybějící název vztahu
+    </div>
+  </template>
+</body>
+</html>

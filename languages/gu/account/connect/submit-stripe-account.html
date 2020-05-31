@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">મોકલો ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+  <script id="stripe-js-v2"></script>
+  <script id="stripe-js-v3"></script>
+</head>
+<body>
+  <h1 translate="yes">મોકલો ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">પટ્ટી જોડાણ</a> તમારું પૂર્ણ થયેલરજિસ્ટ્રેશન સબમિટ કરીને ચકાસણી પ્રક્રિયા.</p>
+  <div id="message-container"></div>
+  <div id="owners-container">
+    <h2 translate="yes">લાભદાયક માલિકો</h2>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">નામ</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">કંપની ના ડિરેક્ટર્સ</h2>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">નામ</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="pure-control-group">
+          <input checked disabled type="checkbox"> I have provided complete and accurate information
+        </div>
+        <div id="company-representative-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I am authorized to represent this business
+        </div>
+        <div id="company-owners-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I have submitted, or there are no, relevant beneficial owners information
+        </div>
+        <div id="company-directors-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I have submitted, or there are no, relevant company directors names
+        </div>
+        <div class="pure-control-group">
+          <input checked disabled type="checkbox"> I accept the Stripe Connect <a href="https://stripe.com/us/connect-account/legal">terms and conditions</a>
+        </div>
+      </div>
+    </div>
+    <div class="pure-controls spaced-buttons">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">નોંધણી સબમિટ કરો</button>
+    </div>
+  </form>
+  <template id="owner-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+  </template>
+  <template id="director-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+  </template>
+  <template id="invalid-registration">
+    <div class="error message" translate="yes">
+      નોંધણી માં અધૂરી નોંધણી જાણકારી છે
+    </div>
+  </template>
+  <template id="invalid-company-directors">
+    <div class="error message" translate="yes">
+      ભૂલ! તમારે કંપનીના ડિરેક્ટરોને સબમિટ કરવા પડશે
+    </div>
+  </template>
+  <template id="invalid-beneficial-owners">
+    <div class="error message" translate="yes">
+      ભૂલ! તમારે કંપનીના લાભદાયક માલિકોને જમા કરાવવા ના પડે
+    </div>
+  </template>
+  <template id="invalid-company-representative">
+    <div class="error message" translate="yes">
+      ભૂલ! તમારે કંપનીના પ્રતિનિધિની માહિતી સબમિટ કરવી જ પડશે
+    </div>
+  </template>
+  <template id="invalid-payment-details">
+    <div class="error message" translate="yes">
+      ભૂલ! નોંધણી માં ચૂકવણીની અધૂરી માહિતી છે
+    </div>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      સફળતા! રજિસ્ટ્રેશન જમા કરાવી દેવામાં આવ્યું છે
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      ભૂલ! નોંધણી સબમિટ કરવામાં ભૂલ ઉદ્ભવી
+    </div>
+  </template>
+</body>
+</html>

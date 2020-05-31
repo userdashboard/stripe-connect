@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Vaata ${payout.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Vaata ${payout.id}</h1>
+  <div id="message-container"></div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <tbody id="${payout.id}">
+      <tr>
+        <th translate="yes">Id</th>
+        <td>${payout.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Summa</th>
+        <td>${payout.amountFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Stripe konto</th>
+        <td>
+          <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+        </td>
+      </tr>
+      <tr>
+        <th translate="yes">Olek</th>
+        <td id="status-${payout.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Kirjeldus</th>
+        <td>${payout.description}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Loodud</th>
+        <td>${payout.createdFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">Pangakontot ei leitud</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">Kehtetu valuuta</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">Sobimatu kontonumber</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">Ebapiisavad rahalised vahendid</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">Pank keeldus ülekandest</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">Pangakonto deebet puudub</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">Ei saanud töödelda</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">Panga omandiõigus muutus</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">Pangakonto on piiratud</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">Pangakonto on külmutatud</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">Pangakonto on suletud</span>
+  </template>
+</body>
+</html>

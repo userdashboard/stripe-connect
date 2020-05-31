@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Rejte ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Rejte ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Rezon reje</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Chwazi rezon
+        </option>
+        <option value="fraud" translate="yes">
+          Fwod
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Tem vyolasyon sevis
+        </option>
+        <option value="other" translate="yes">
+          Lot
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Rejte</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Sikse! Kont galon la te rejte
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Ere! Kont lan dwe gen yon balans/bin/sh anvan rejte
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Ere! Yon ere owoulo nan wouj rejte kont lan galon
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Pa soumet ko ou</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Enskripsyon te aksepte</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Andikape pa galon</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Mande plis enfomasyon</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Mande plis enfomasyon</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Annatant soumet</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Rejte pa galon, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Rejte pa galon, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Rejte pa galon, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Rejte pa galon, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Gen plis enfomasyon ki nesese</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Anba revizyon pa galon</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Anba revizyon pa galon</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Andikape pa galon, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Vise ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Vise ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <table id="stripe-accounts-table" class="pure-table data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th translate="yes">Id</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Mcc</th>
+        <td id="mcc-description"></td>
+      </tr>
+      <tr>
+        <th translate="yes">navn</th>
+        <td id="blank-name" translated="yes">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Status</th>
+        <td id="account-status"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Opprettet</th>
+        <td>${stripeAccount.createdFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Sendt inn</th>
+        <td>${stripeAccount.metadata.submittedFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
+  <template id="not-submitted">
+    <span translate="yes">Ikke sendt inn ennå</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Registrering er akseptert</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Deaktivert av Stripe</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Krever tilleggsinformasjon</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Krever tilleggsinformasjon</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Ventende innsending</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Krever tilleggsinformasjon</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Avvist av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Avvist av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Avvist av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Avvist av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Mer informasjon er nødvendig</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Under gjennomgang av Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Under gjennomgang av Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Deaktivert av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>
