@@ -14,17 +14,18 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Rejection reason</label> <select id="reason" name="reason">
-        <option>
+      <label for="reason" translate="yes">Rejection reason</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
           Select reason
         </option>
-        <option value="fraud">
+        <option value="fraud" translate="yes">
           Fraud
         </option>
-        <option value="terms_of_service">
+        <option value="terms_of_service" translate="yes">
           Terms of service violation
         </option>
-        <option value="other">
+        <option value="other" translate="yes">
           Other
         </option>
       </select>
