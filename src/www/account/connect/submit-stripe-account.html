@@ -1,97 +1,122 @@
-<!doctype html>
-<html navbar="/account/connect/navbar-stripe-account.html">
-  <head>
-    <title>Submit ${stripeAccount.id}</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" href="/public/pure-min.css" />
-    <link rel="stylesheet" href="/public/content.css" />
-    <link rel="stylesheet" href="/public/content-additional.css" />
-    <base target="_top" href="/" />
-    <script id="stripe-js-v2"></script>
-    <script id="stripe-js-v3"></script>    
-  </head>
-  <body>
-    <h1>Submit ${stripeAccount.id}</h1>
-    <p>Complete your <a href="https://stripe.com/connect">Stripe Connect</a> verification process by submitting your completed registration.</p>
-    <div id="message-container"></div>
-    <div id="owners-container">
-      <h2>Beneficial owners</h2>
-      <table id="owners-table" class="pure-table pure-table-striped list-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-    <div id="directors-container">
-      <h2>Company directors</h2>
-      <table id="directors-table" class="pure-table pure-table-striped list-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-    <form id="submit-form" method="POST" class="pure-form pure-form-stacked" action="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">
-      <div class="pure-g">
-        <div class="pure-u-1-1">
-          <div class="pure-control-group">
-            <input checked disabled type="checkbox" /> I have provided complete and accurate information
-          </div>
-          <div id="company-representative-option" class="pure-control-group">
-            <input checked disabled type="checkbox" /> I am authorized to represent this business
-          </div>
-          <div id="company-owners-option" class="pure-control-group">
-            <input checked disabled type="checkbox" /> I have submitted, or there are no, relevant beneficial owners information
-          </div>
-          <div id="company-directors-option" class="pure-control-group">
-            <input checked disabled type="checkbox" /> I have submitted, or there are no, relevant company directors names
-          </div>
-          <div class="pure-control-group">
-            <input checked disabled type="checkbox" /> I accept the Stripe Connect <a href="https://stripe.com/us/connect-account/legal">terms and conditions</a>
-          </div>
+<!DOCTYPE html>
+<html data-navbar="/account/connect/navbar-stripe-account.html">
+
+<head>
+  <title translate="yes">Submit ${stripeAccount.id}</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+  <script id="stripe-js-v2"></script>
+  <script id="stripe-js-v3"></script>
+</head>
+
+<body>
+  <h1 translate="yes">Submit ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">Stripe Connect</a> verification
+    process by
+    submitting your completed registration.</p>
+  <div id="message-container"></div>
+  <div id="owners-container">
+    <h2 translate="yes">Beneficial owners</h2>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">Name</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Company directors</h2>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">Name</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
+    action="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="pure-control-group">
+          <input checked disabled type="checkbox"> I have provided complete and accurate information
+        </div>
+        <div id="company-representative-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I am authorized to represent this business
+        </div>
+        <div id="company-owners-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I have submitted, or there are no, relevant beneficial owners
+          information
+        </div>
+        <div id="company-directors-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I have submitted, or there are no, relevant company directors names
+        </div>
+        <div class="pure-control-group">
+          <input checked disabled type="checkbox"> I accept the Stripe Connect <a
+            href="https://stripe.com/us/connect-account/legal">terms and conditions</a>
         </div>
       </div>
-      <div class="pure-controls spaced-buttons">
-        <button id="submit-button" class="pure-button pure-button-primary">Submit registration</button>
-      </div>
-    </form>
-  </body>
+    </div>
+    <div class="pure-controls spaced-buttons">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Submit registration</button>
+    </div>
+  </form>
   <template id="owner-row">
     <tr id="${person.id}">
-      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
       <td>${person.first_name} ${person.last_name}</td>
     </tr>
   </template>
   <template id="director-row">
     <tr id="${person.id}">
-      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
       <td>${person.first_name} ${person.last_name}</td>
     </tr>
   </template>
   <template id="invalid-registration">
-    <div class="error message">The registration has incomplete registration information</div>
+    <div class="error message" translate="yes">
+      The registration has incomplete registration information
+    </div>
   </template>
   <template id="invalid-company-directors">
-    <div class="error message">Error! You must submit the company's directors</div>
+    <div class="error message" translate="yes">
+      Error! You must submit the company's directors
+    </div>
   </template>
   <template id="invalid-beneficial-owners">
-    <div class="error message">Error! You must submit the company's beneficial owners</div>
+    <div class="error message" translate="yes">
+      Error! You must submit the company's beneficial owners
+    </div>
   </template>
   <template id="invalid-company-representative">
-    <div class="error message">Error! You must submit the company representative's information</div>
+    <div class="error message" translate="yes">
+      Error! You must submit the company representative's information
+    </div>
   </template>
   <template id="invalid-payment-details">
-    <div class="error message">Error! The registration has incomplete payment information</div>
+    <div class="error message" translate="yes">
+      Error! The registration has incomplete payment information
+    </div>
   </template>
   <template id="success">
-    <div class="success message">Success! The registration has been submitted</div>
+    <div class="success message" translate="yes">
+      Success! The registration has been submitted
+    </div>
   </template>
   <template id="unknown-error">
-    <div class="error message">Error! An error occurred submitting the registration</div>
+    <div class="error message" translate="yes">
+      Error! An error occurred submitting the registration
+    </div>
   </template>
+</body>
 </html>

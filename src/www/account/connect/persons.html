@@ -1,64 +1,79 @@
-<!doctype html>
-<html navbar="/account/connect/navbar-persons.html">
-  <head>
-    <title>Persons for ${stripeAccount.id}</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" href="/public/pure-min.css" />
-    <link rel="stylesheet" href="/public/content.css" />
-    <link rel="stylesheet" href="/public/content-additional.css" />
-    <base target="_top" href="/" />
-  </head>
-  <body>
-    <h1>Persons</h1>
-    <div id="representative-container">
-      <h2>Company representative</h2>
-      <p>If the nominated person's status changes you must create a new representative.</p>
-      <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_representative=true">Create new representative</a></p>
-      <table id="representatives-table" class="pure-table pure-table-striped list-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Requires</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-    <div id="owners-container">
-      <h2>Beneficial owners</h2>
-      <p>You must provide documentation for anyone else owning a substantial (25+) percent of the company or in charge of the company, its finances or operations.</p>
-      <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_owner=true">Add owner</a></p>
-      <table id="owners-table" class="pure-table pure-table-striped list-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Requires</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-    <div id="directors-container">
-      <h2>Company directors</h2>
-      <p>You must provide documentation for the board of directors.</p>
-      <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_director=true">Add owner</a></p>
-      <table id="directors-table" class="pure-table pure-table-striped list-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Requires</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-  </body>
+<!DOCTYPE html>
+<html data-navbar="/account/connect/navbar-persons.html">
+
+<head>
+  <title translate="yes">Persons for ${stripeAccount.id}</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+
+<body>
+  <h1 translate="yes">Persons</h1>
+  <div id="representative-container">
+    <h2 translate="yes">Company representative</h2>
+    <p translate="yes">If the nominated person's status changes you must create a new representative.</p>
+    <p translate="yes"><a class="pure-button pure-button-primary"
+        href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true">Create
+        new representative</a></p>
+    <table id="representatives-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">Name</th>
+          <th translate="yes">Requires</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Beneficial owners</h2>
+    <p translate="yes">You must provide documentation for anyone else owning a substantial (25+) percent of the company
+      or in charge of the company, its finances or operations.</p>
+    <p translate="yes"><a class="pure-button pure-button-primary"
+        href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true">Add owner</a></p>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">Name</th>
+          <th translate="yes">Requires</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Company directors</h2>
+    <p translate="yes">You must provide documentation for the board of directors.</p>
+    <p translate="yes"><a class="pure-button pure-button-primary"
+        href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true">Add owner</a>
+    </p>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">Name</th>
+          <th translate="yes">Requires</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
   <template id="person-row">
-    <tr id="${person.id}">
-      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
-      <td>${person.first_name} ${person.last_name}</td>
-      <td id="requires-information-${person.id}"><a class="pure-button" href="/account/connect/edit-person?personid=${person.id}">Add information</a></td>
-      <td id="requires-no-information-${person.id}">-</td>
-    </tr>
+    <table>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+        <td id="requires-information-${person.id}">
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}">Add information</a>
+        </td>
+        <td id="requires-no-information-${person.id}">-</td>
+      </tr>
+    </table>
   </template>
+</body>
+
 </html>

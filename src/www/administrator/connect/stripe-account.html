@@ -1,90 +1,99 @@
-<!doctype html>
-<html navbar="/administrator/connect/navbar-stripe-account.html">
+<!DOCTYPE html>
+<html data-navbar="/administrator/connect/navbar-stripe-account.html">
+
 <head>
-    <title>View ${stripeAccount.id}</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" href="/public/pure-min.css" />
-    <link rel="stylesheet" href="/public/content.css" />
-    <link rel="stylesheet" href="/public/content-additional.css" />
-    <base target="_top" href="/" />
-  </head>
-  <body>
-    <h1>View ${stripeAccount.id}</h1>
-    <div id="message-container"></div>
-    <table id="stripe-accounts-table" class="pure-table data-table">
-      <tbody id="${stripeAccount.id}">
-        <tr>
-          <th>ID</th>
-          <td>${stripeAccount.id}</td>
-        </tr>
-        <tr>
-          <th>MCC</th>
-          <td id="mcc-description"></td>
-        </tr>
-        <tr>
-          <th>Name</th>
-          <td id="blank-name">Not yet provided</td>
-          <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
-          <td id="business-name">${stripeAccount.company.name || ""}</td>
-        </tr>
-        <tr>
-          <th>Status</th>
-          <td id="account-status"></td>
-        </tr>
-        <tr>
-          <th>Created</th>
-          <td>${stripeAccount.createdFormatted}</td>
-        </tr>
-        <tr>
-          <th>Submitted</th>
-          <td>${stripeAccount.metadata.submittedFormatted}</td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
+  <title translate="yes">View ${stripeAccount.id}</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+
+<body>
+  <h1 translate="yes">View ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <table id="stripe-accounts-table" class="pure-table data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th translate="yes">ID</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">MCC</th>
+        <td id="mcc-description"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Name</th>
+        <td id="blank-name">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name ||
+          ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Status</th>
+        <td id="account-status"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Created</th>
+        <td>${stripeAccount.createdFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Submitted</th>
+        <td>${stripeAccount.metadata.submittedFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
   <template id="not-submitted">
-    <span>Not submitted yet</span>
+    <span translate="yes">Not submitted yet</span>
   </template>
   <template id="verified">
-    <span>Registration has been accepted</span>
+    <span translate="yes">Registration has been accepted</span>
   </template>
   <template id="verified">
-    <span>Disabled by Stripe</span>
-  </template>
-<template id="requirements.past_due">
-  <span>Requires additional information</span>
-</template>
-  <template id="verified-requires-fields">
-    <span>Requires additional information</span>
-  </template>
-  <template id="pending-submission">
-    <span>Pending submission</span>
+    <span translate="yes">Disabled by Stripe</span>
   </template>
   <template id="requirements.past_due">
-    <span>Requires additional information</span>
+    <span translate="yes">Requires additional information</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Requires additional information</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Pending submission</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Requires additional information</span>
   </template>
   <template id="rejected.fraud">
-    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span>More information is required</span>
+    <span translate="yes">More information is required</span>
   </template>
   <template id="listed">
-    <span>Under review by Stripe</span>
+    <span translate="yes">Under review by Stripe</span>
   </template>
   <template id="under-review">
-    <span>Under review by Stripe</span>
+    <span translate="yes">Under review by Stripe</span>
   </template>
   <template id="disabled">
-    <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
+</body>
+
 </html>

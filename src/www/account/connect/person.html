@@ -1,46 +1,48 @@
-<!doctype html>
-  <html navbar="/account/connect/navbar-person.html">
-  <head>
-    <title>Person ${person.id}</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" href="/public/pure-min.css" />
-    <link rel="stylesheet" href="/public/content.css" />
-    <link rel="stylesheet" href="/public/content-additional.css" />
-    <base target="_top" href="/" />
-  </head>
-  <body>
-    <h1>Person ${person.id}</h1>
-    <p>Additional information may have been submitted that is not displayed.</p>
-    <table id="persons-table" class="pure-table pure-table-striped data-table">
-      <tbody id="${person.id}">
-        <tr>
-          <th>ID</th>
-          <td>${person.id}</td>
-        </tr>
-        <tr>
-          <th>Role</th>
-          <td id="owner">Beneficial owner</td>
-          <td id="director">Company director</td>
-          <td id="representative">Company representative</td>
-        </tr>
-        <tr>
-          <th>Relationship</th>
-          <td>${person.relationship.title}</td>
-        </tr>
-        <tr>
-          <th>Name</th>
-          <td>${person.first_name} ${person.last_name}</td>
-        </tr>
-        <tr id="requires-information">
-          <th>Required information</th>
-          <td>
-            Additional information is required about this person
-            <p class="pure-button-group">
-              <a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a>
-            </p>
-          </td>
-        </tr>
-      </body>
-    </table>
-  </body>
+<!DOCTYPE html>
+<html data-navbar="/account/connect/navbar-person.html">
+
+<head>
+  <title translate="yes">Person ${person.id}</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+
+<body>
+  <h1 translate="yes">Person ${person.id}</h1>
+  <p translate="yes">Additional information may have been submitted that is not displayed.</p>
+  <table id="persons-table" class="pure-table pure-table-striped data-table">
+    <tbody id="${person.id}">
+      <tr>
+        <th translate="yes">ID</th>
+        <td>${person.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Role</th>
+        <td id="owner">Beneficial owner</td>
+        <td id="director">Company director</td>
+        <td id="representative">Company representative</td>
+      </tr>
+      <tr>
+        <th translate="yes">Relationship</th>
+        <td>${person.relationship.title}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Name</th>
+        <td>${person.first_name} ${person.last_name}</td>
+      </tr>
+      <tr id="requires-information">
+        <th translate="yes">Required information</th>
+        <td>
+          Additional information is required about this person
+          <p class="pure-button-group"><a class="pure-button pure-button-primary"
+              href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
 </html>

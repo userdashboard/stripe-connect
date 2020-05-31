@@ -1,184 +1,206 @@
-<!doctype html>
-<html navbar="/account/connect/navbar-stripe-account.html">
-  <head>
-    <title>View ${stripeAccount.id}</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" href="/public/pure-min.css" />
-    <link rel="stylesheet" href="/public/content.css" />
-    <link rel="stylesheet" href="/public/content-additional.css" />
-    <base target="_top" href="/" />
-  </head>
-  <body>
-    <h1>View ${stripeAccount.id}</h1>
-    <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
-      <tbody id="${stripeAccount.id}">
+<!DOCTYPE html>
+<html data-navbar="/account/connect/navbar-stripe-account.html">
+
+<head>
+  <title translate="yes">View ${stripeAccount.id}</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+
+<body>
+  <h1 translate="yes">View ${stripeAccount.id}</h1>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th translate="yes">ID</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Type</th>
+        <td id="business">Company registration</td>
+        <td id="individual">Individual registration</td>
+      </tr>
+      <tr>
+        <th translate="yes">Name</th>
+        <td id="blank-name">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name ||
+          ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Country</th>
+        <td>${stripeAccount.country}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Status</th>
+        <td id="account-status-${stripeAccount.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Submitted</th>
+        <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
+        <td id="not-submitted2">Not submitted yet</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="registration-container">
+    <h2 translate="yes">Registration information</h2>
+    <div id="account-status"></div>
+    <p class="pure-button-group" role="group" id="registration-options"><a id="start-registration-link"
+        class="pure-button pure-button-primary"
+        href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start
+        registration</a> <a id="update-registration-link" class="pure-button"
+        href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update
+        registration</a></p>
+  </div>
+  <div id="representative-container">
+    <h2 translate="yes">Company representative</h2>
+    <p translate="yes">To avoid account disruption submit new representative information if the specified person leaves
+      or no longer represents the company.</p>
+    <table id="representatives-table" class="pure-table pure-table-striped data-table">
+      <thead>
         <tr>
-          <th>ID</th>
-          <td>${stripeAccount.id}</td>
+          <th translate="yes">ID</th>
+          <th translate="yes">Name</th>
+          <th translate="yes">Required information</th>
         </tr>
-        <tr>
-          <th>Type</th>
-          <td id="business">Company registration</td>
-          <td id="individual">Individual registration</td>
-        </tr>
-        <tr>
-          <th>Name</th>
-          <td id="blank-name">Not yet provided</td>
-          <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
-          <td id="business-name">${stripeAccount.company.name || ""}</td>
-        </tr>
-        <tr>
-          <th>Country</th>
-          <td>${stripeAccount.country}</td>
-        </tr>
-        <tr>
-          <th>Status</th>
-          <td id="account-status-${stripeAccount.id}"></td>
-        </tr>
-        <tr>
-          <th>Submitted</th>
-          <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-          <td id="not-submitted2">Not submitted yet</td>
-        </tr>
-      </tbody>
+      </thead>
     </table>
-    <div id="registration-container">
-      <h2>Registration information</h2>
-      <div id="account-status"></div>
-      <p class="pure-button-group" role="group" id="registration-options">
-        <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
-        <a id="update-registration-link" class="pure-button" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
-      </p>
-    </div>    
-    <div id="representative-container">
-      <h2>Company representative</h2>
-      <p>To avoid account disruption submit new representative information if the specified person leaves or no longer represents the company.</p>
-      <table id="representatives-table" class="pure-table pure-table-striped data-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Required information</th>
-          </tr>
-        </thead>
-      </table>
-      <p class="pure-button-group" role="group" id="registration-options">
-        <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_representative=true&relationship_executive=true&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
-      </p>
-    </div>
-    <div id="owners-container">
-      <h2>Other beneficial owners information</h2>
-      <p>You must provide documentation for anyone else owning a substantial (25+) percent of the company or in charge of the company, finances or operations.</p>
-      <table id="owners-table" class="pure-table pure-table-striped data-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Requires</th>
-          </tr>
-        </thead>
-      </table>
-      <p class="pure-button-group" role="group" id="owner-options">
-        <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_owner=true&return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
-        <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
-      </p>
-    </div>
-    <div id="directors-container">
-      <h2>Company directors information</h2>
-      <p>You must provide full names of your company's governing board and/or people responsible for maintaining regulatory compliance.</p>
-      <table id="directors-table" class="pure-table pure-table-striped data-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Requires</th>
-          </tr>
-        </thead>
-      </table>
-      <p class="pure-button-group" role="group" id="director-options">
-        <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&relationship_director=true&return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add company director</a>
-        <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
-      </p>
-    </div>
-    <div id="payment-container">
-      <h2>Payment information</h2>
-      <div id="payment-information-status"></div>
-      <p id="payment-options">
-        <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
-        <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a>
-      </p>
-    </div>
-    <div id="submission-container">
-      <h2>Submit registration</h2>
-      <div id="submission-status"></div>
-      <p id="submit-registration-link-container">
-        <a  id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a>
-      </p>
-    </div>
-  </body>
+    <p class="pure-button-group" role="group" id="registration-options"><a id="create-company-representative-link"
+        class="pure-button pure-button-primary"
+        href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true&amp;relationship_executive=true&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add
+        new representative</a></p>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Other beneficial owners information</h2>
+    <p translate="yes">You must provide documentation for anyone else owning a substantial (25+) percent of the company
+      or in charge of the company, finances or operations.</p>
+    <table id="owners-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">Name</th>
+          <th translate="yes">Requires</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="owner-options"><a class="pure-button pure-button-primary"
+        href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true&amp;return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add
+        beneficial owner</a> <a class="pure-button pure-button-primary"
+        href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit
+        completed</a></p>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Company directors information</h2>
+    <p translate="yes">You must provide full names of your company's governing board and/or people responsible for
+      maintaining regulatory compliance.</p>
+    <table id="directors-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th translate="yes">ID</th>
+          <th translate="yes">Name</th>
+          <th translate="yes">Requires</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="director-options"><a class="pure-button pure-button-primary"
+        href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true&amp;return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add
+        company director</a> <a class="pure-button pure-button-primary"
+        href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit
+        completed</a></p>
+  </div>
+  <div id="payment-container">
+    <h2 translate="yes">Payment information</h2>
+    <div id="payment-information-status"></div>
+    <p id="payment-options"><a id="setup-payment" class="pure-button pure-button-primary"
+        href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a> <a
+        id="update-payment" class="pure-button"
+        href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a></p>
+  </div>
+  <div id="submission-container">
+    <h2 translate="yes">Submit registration</h2>
+    <div id="submission-status"></div>
+    <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary"
+        href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
+  </div>
   <template id="person-row">
-    <tr id="${person.id}">
-      <td><a href="/account/connect/person?personid=${person.id}">${person.id}</a></td>
-      <td>${person.first_name} ${person.last_name}</td>
-      <td id="requires-information-${person.id}"><a class="pure-button" href="/account/connect/edit-person?personid=${person.id}">Add information</a></td>
-      <td id="requires-no-information-${person.id}">-</td>
-    </tr>
+    <template id="payment-information">
+      <p translate="yes">Funds are paid to account ${bank_account.bank_name}.</p>
+    </template>
+    <template id="no-payment-information">
+      <p translate="yes">Banking details must be provided to receive funds.</p>
+    </template>
+    <template id="not-submitted-information">
+      <p translate="yes">The registration has not been submitted.</p>
+    </template>
+    <template id="submitted-information">
+      <p translate="yes">The registration was submitted on ${account.dateFormatted}.</p>
+    </template>
+    <template id="unstarted-registration">
+      <p translate="yes">The registration information has not been provided.</p>
+    </template>
+    <template id="completed-registration">
+      <p translate="yes">The registration information has been provided.</p>
+    </template>
+    <template id="not-submitted">
+      <span translate="yes">Not submitted yet</span>
+    </template>
+    <template id="verified">
+      <span translate="yes">Registration has been accepted</span>
+    </template>
+    <template id="verified-requires-fields">
+      <span translate="yes">Requires additional information</span>
+    </template>
+    <template id="pending-submission">
+      <span translate="yes">Pending submission</span>
+    </template>
+    <template id="rejected.fraud">
+      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+    </template>
+    <template id="rejected.terms">
+      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+    </template>
+    <template id="rejected.listed">
+      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+    </template>
+    <template id="rejected.other">
+      <span>Rejected by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+    </template>
+    <template id="fields_needed">
+      <span>More information is required.</span>
+    </template>
+    <template id="listed">
+      <span translate="yes">Under review by Stripe</span>
+    </template>
+    <template id="under-review">
+      <span translate="yes">Under review by Stripe</span>
+    </template>
+    <template id="disabled">
+      <span>Disabled by <a href="https://support.stripe.com/email" translate="yes">Stripe</a>, see <a
+          href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
+    </template>
+    <template id="requirements.past_due">
+      <span translate="yes">Requires additional information</span>
+    </template>
+    <table>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+        <td id="requires-information-${person.id}">
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}">Add information</a>
+        </td>
+        <td id="requires-no-information-${person.id}">-</td>
+      </tr>
+    </table>
   </template>
-  <template id="payment-information">
-    <p>Funds are paid to account ${bank_account.bank_name}.</p>
-  </template>
-  <template id="no-payment-information">
-    <p>Banking details must be provided to receive funds.</p>
-  </template>
-  <template id="not-submitted-information">
-    <p>The registration has not been submitted.</p>
-  </template>
-  <template id="submitted-information">
-    <p>The registration was submitted on ${account.dateFormatted}.</p>
-  </template>
-  <template id="unstarted-registration">
-    <p>The registration information has not been provided.</p>
-  </template>
-  <template id="completed-registration">
-    <p>The registration information has been provided.</p>
-  </template>
-  <template id="not-submitted">
-    <span>Not submitted yet</span>
-  </template>
-  <template id="verified">
-    <span>Registration has been accepted</span>
-  </template>
-  <template id="verified-requires-fields">
-    <span>Requires additional information</span>
-  </template>
-  <template id="pending-submission">
-    <span>Pending submission</span>
-  </template>
-  <template id="rejected.fraud">
-    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-  </template>
-  <template id="rejected.terms">
-    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-  </template>
-  <template id="rejected.listed">
-    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-  </template>
-  <template id="rejected.other">
-    <span>Rejected by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-  </template>
-  <template id="fields_needed">
-    <span>More information is required.</span>
-  </template>
-  <template id="listed">
-    <span>Under review by Stripe</span>
-  </template>
-  <template id="under-review">
-    <span>Under review by Stripe</span>
-  </template>
-  <template id="disabled">
-    <span>Disabled by <a href="https://support.stripe.com/email">Stripe</a>, see <a href="https://stripe.com/blog/why-some-companyes-arent-allowed">common reasons</a></span>
-  </template>
-  <template id="requirements.past_due">
-    <span>Requires additional information</span>
-  </template>
+</body>
+
 </html>

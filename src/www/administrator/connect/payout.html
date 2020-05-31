@@ -1,82 +1,87 @@
-<!doctype html>
-<html navbar="/administrator/connect/navbar-payout.html">
-  <head>
-    <title>View ${payout.id}</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" href="/public/pure-min.css" />
-    <link rel="stylesheet" href="/public/content.css" />
-    <link rel="stylesheet" href="/public/content-additional.css" />
-    <base target="_top" href="/" />
-  </head>
-  <body>
-    <h1>View ${payout.id}</h1>
-    <div id="message-container"></div>
-    <table id="payouts-table" class="pure-table pure-table-striped list-table">
-      <tbody id="${payout.id}">
-        <tr>
-          <th>ID</th>
-          <td>${payout.id}</td>
-        </tr>
-        <tr>
-          <th>Amount</th>
-          <td>${payout.amountFormatted}</td>
-        </tr>
-        <tr>
-          <th>Stripe account</th>
-          <td><a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a></td>
-        </tr>
-        <tr>
-          <th>Status</th>
-          <td id="status-${payout.id}"></td>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <td>${payout.description}</td>
-        </tr>
-        <tr>
-          <th>Created</th>
-          <td>${payout.createdFormatted}</td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
+<!DOCTYPE html>
+<html data-navbar="/administrator/connect/navbar-payout.html">
+
+<head>
+  <title translate="yes">View ${payout.id}</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+
+<body>
+  <h1 translate="yes">View ${payout.id}</h1>
+  <div id="message-container"></div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <tbody id="${payout.id}">
+      <tr>
+        <th translate="yes">ID</th>
+        <td>${payout.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Amount</th>
+        <td>${payout.amountFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Stripe account</th>
+        <td>
+          <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+        </td>
+      </tr>
+      <tr>
+        <th translate="yes">Status</th>
+        <td id="status-${payout.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Description</th>
+        <td>${payout.description}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Created</th>
+        <td>${payout.createdFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
   <template id="unsupported_card">
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span>No bank account found</span>
+    <span translate="yes">No bank account found</span>
   </template>
   <template id="invalid_currency">
-    <span>Invalid currency</span>
+    <span translate="yes">Invalid currency</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span>Invalid account number</span>
+    <span translate="yes">Invalid account number</span>
   </template>
   <template id="insufficient_funds">
-    <span>Insufficient funds</span>
+    <span translate="yes">Insufficient funds</span>
   </template>
   <template id="declined">
-    <span>Bank declined transfer</span>
+    <span translate="yes">Bank declined transfer</span>
   </template>
   <template id="debit_not_authorized">
-    <span>No bank account debit</span>
+    <span translate="yes">No bank account debit</span>
   </template>
   <template id="could_not_process">
-    <span>Could not process</span>
+    <span translate="yes">Could not process</span>
   </template>
   <template id="bank_ownership_changed">
-    <span>Bank ownership changed</span>
+    <span translate="yes">Bank ownership changed</span>
   </template>
   <template id="bank_account_restricted">
-    <span>Bank account restricted</span>
+    <span translate="yes">Bank account restricted</span>
   </template>
   <template id="account_frozen">
-    <span>Bank account frozen</span>
+    <span translate="yes">Bank account frozen</span>
   </template>
   <template id="account_closed">
-    <span>Bank account closed</span>
+    <span translate="yes">Bank account closed</span>
   </template>
+</body>
+
 </html>
