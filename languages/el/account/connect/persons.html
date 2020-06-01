@@ -2,52 +2,52 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Πρόσωπα για ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined</h1>
+  <h1 translate="yes">Άτομα</h1>
   <div id="representative-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Εκπρόσωπος εταιρείας</h2>
+    <p translate="yes">Εάν αλλάξει η κατάσταση του υποψήφιου ατόμου, πρέπει να δημιουργήσετε έναν νέο αντιπρόσωπο.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Δημιουργία νέου αντιπροσώπου</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Αναγνωριστικό</th>
+          <th translate="yes">Όνομα</th>
+          <th translate="yes">Απαιτεί</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Πραγματικοί δικαιούχοι</h2>
+    <p translate="yes">Πρέπει να παρέχετε τεκμηρίωση σε οποιονδήποτε άλλο κατέχει ένα σημαντικό (25+) τοις εκατό της εταιρείας ή υπεύθυνο ς της εταιρείας, των οικονομικών ή των δραστηριοτήτων της.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Προσθήκη κατόχου</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Αναγνωριστικό</th>
+          <th translate="yes">Όνομα</th>
+          <th translate="yes">Απαιτεί</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Διευθυντές εταιρειών</h2>
+    <p translate="yes">Πρέπει να προσκομίσετε τεκμηρίωση στο διοικητικό συμβούλιο.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Προσθήκη κατόχου</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Αναγνωριστικό</th>
+          <th translate="yes">Όνομα</th>
+          <th translate="yes">Απαιτεί</th>
         </tr>
       </thead>
     </table>

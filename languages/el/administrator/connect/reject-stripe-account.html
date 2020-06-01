@@ -2,90 +2,90 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Απορρίψει ${stripeAccount.id}</title>
+  <title translate="yes">${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Απορρίψει ${stripeAccount.id}</h1>
+  <h1 translate="yes">undefined${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Λόγος απόρριψης</label>
+      <label for="reason" translate="yes">undefined</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          Επιλογή αιτιολογίας
+          undefined
         </option>
         <option value="fraud" translate="yes">
-          Απάτης
+          undefined
         </option>
         <option value="terms_of_service" translate="yes">
-          Παραβίαση όρων υπηρεσίας
+          undefined
         </option>
         <option value="other" translate="yes">
-          Άλλα
+          undefined
         </option>
       </select>
-    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Απορρίψει</button>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Επιτυχία! Ο λογαριασμός Stripe απορρίφθηκε
+      undefined
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Σφάλμα! Ο λογαριασμός πρέπει να έχει υπόλοιπο /bin/sh πριν από την απόρριψη
+      undefined
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Σφάλμα! Σφάλμα κατά την απόρριψη του λογαριασμού Stripe
+      undefined
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Δεν έχει υποβληθεί ακόμα</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="verified">
-    <span translate="yes">Η εγγραφή έγινε δεκτή</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="verified">
-    <span translate="yes">Απενεργοποιημένη ανά λωρίδα</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Απαιτεί πρόσθετες πληροφορίες</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Απαιτεί πρόσθετες πληροφορίες</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Εκκρεμεί υποβολή</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Απορρίφθηκε από τη Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Απορρίφθηκε από τη Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Απορρίφθηκε από τη Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Απορρίφθηκε από τη Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Απαιτούνται περισσότερες πληροφορίες</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="listed">
-    <span translate="yes">Υπό εξέταση από τη Stripe</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Υπό εξέταση από τη Stripe</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Απενεργοποιημένο από τη Λωρίδα, ανατρέξτε στο θέμα</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

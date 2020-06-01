@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Отправить ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">undefined</a> undefined</p>
+  <h1 translate="yes">Отправить ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">Полоса Подключиться</a> процесс проверки, представив завершенную регистрацию.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Бенефициарные владельцы</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Имя</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Директора компаний</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Имя</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Отправить регистрацию</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      undefined
+      Регистрация имеет неполную регистрационную информацию
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      undefined
+      Ошибка! Вы должны представить директоров компании
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      undefined
+      Ошибка! Вы должны представить бенефициарных владельцев компании
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      undefined
+      Ошибка! Вы должны представить информацию представителя компании
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      undefined
+      Ошибка! Регистрация имеет неполную платежную информацию
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      undefined
+      Успех! Регистрация была подана
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      undefined
+      Ошибка! Произошла ошибка при регистрации
     </div>
   </template>
 </body>

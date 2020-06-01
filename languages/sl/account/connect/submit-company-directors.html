@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Pošljite direktorje za ${stripeAccount.id}</title>
+  <title translate="yes">${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Pošljite direktorje za ${stripeAccount.id}</h1>
-  <p translate="yes">Ko ste končali z dodajanjem direktorjev družbe, če sploh, jih predloži v pregled.</p>
+  <h1 translate="yes">undefined${stripeAccount.id}</h1>
+  <p translate="yes">undefined</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">Direktorji podjetij</h2>
+    <h2 translate="yes">undefined</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">Id</th>
-          <th translate="yes">ime</th>
-          <th translate="yes">Zahteva</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Pošlji direktorje</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Napaka! Direktorji še vedno zahtevajo informacije
+      undefined
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspeh! Direktorji družbe so bili predloženi v
+      undefined
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Napaka! Prišlo je do napake pri predložitvi direktorjev
+      undefined
     </div>
   </template>
 </body>

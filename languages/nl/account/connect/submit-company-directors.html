@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Stuur bestuurders indienen voor ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
-  <p translate="yes">undefined</p>
+  <h1 translate="yes">Stuur bestuurders indienen voor ${stripeAccount.id}</h1>
+  <p translate="yes">Wanneer u klaar bent met het toevoegen van de directeuren van het bedrijf, indien van toepassing, legt u ze voor beoordeling.</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Bedrijfsleiders</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Naam</th>
+          <th translate="yes">Vereist</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Bestuurders indienen</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      undefined
+      Fout! Er zijn nog steeds bestuurders die informatie nodig hebben
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      undefined
+      Succes! De bestuurders van het bedrijf zijn
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      undefined
+      Fout! Er is een fout opgetreden bij het indienen van de bestuurders
     </div>
   </template>
 </body>

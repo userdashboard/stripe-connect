@@ -2,52 +2,52 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Osoby pro ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined</h1>
+  <h1 translate="yes">Osob</h1>
   <div id="representative-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Zástupce společnosti</h2>
+    <p translate="yes">Pokud se stav nominované osoby změní, musíte vytvořit nového zástupce.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Vytvořit nového zástupce</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Jméno</th>
+          <th translate="yes">Vyžaduje</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Skuteční vlastníci</h2>
+    <p translate="yes">Musíte poskytnout dokumentaci pro každého, kdo vlastní podstatné (25 +) procent společnosti nebo má na starosti společnost, její finance nebo operace.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Přidat vlastníka</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Jméno</th>
+          <th translate="yes">Vyžaduje</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Ředitelé společností</h2>
+    <p translate="yes">Musíte poskytnout dokumentaci pro představenstvo.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Přidat vlastníka</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Jméno</th>
+          <th translate="yes">Vyžaduje</th>
         </tr>
       </thead>
     </table>

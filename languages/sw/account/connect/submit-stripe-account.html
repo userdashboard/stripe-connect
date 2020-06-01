@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Wasilisha ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">undefined</a> undefined</p>
+  <h1 translate="yes">Wasilisha ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">Milia</a> wa ukaguzi kwa kuwasilisha usajili wako.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Wamiliki wa manufaa</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Jina</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Wakurugenzi wa kampuni</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Jina</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Wasilisha usajili</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      undefined
+      Usajili huo una taarifa kamili ya usajili
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      undefined
+      Kosa! Lazima uwasilishe wakurugenzi wa kampuni
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      undefined
+      Kosa! Lazima uwasilishe wamiliki wa manufaa wa kampuni
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      undefined
+      Kosa! Lazima uwasilishe taarifa ya mwakilishi wa kampuni
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      undefined
+      Kosa! Usajili una taarifa kamili ya malipo
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      undefined
+      Mafanikio! Usajili umewasilishwa
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      undefined
+      Kosa! Kosa limetokea kuwasilisha usajili
     </div>
   </template>
 </body>

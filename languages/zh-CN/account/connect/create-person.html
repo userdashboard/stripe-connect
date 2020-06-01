@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">为${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,11 +10,11 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">undefined</h1>
-    <p translate="yes">undefined</p>
+    <h1 translate="yes">创建新人员</h1>
+    <p translate="yes">随着您的信息的变化，董事会、所有者和代表必须随时了解最新情况。</p>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">undefined</h2>
+      <h2 translate="yes">与公司的关系</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
         <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
@@ -22,56 +22,56 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">undefined</label>
+        <label for="relationship_title" translate="yes">工作、角色或关系标题</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">undefined</label>
+        <label for="relationship_percent_ownership" translate="yes">拥有百分比（如果有）</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">更新注册</button>
       </div>
     </div>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      undefined
+      成功！注册已更新
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      undefined
+      错误！创建注册时出错
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      undefined
+      您的条纹帐户不需要有益的所有者信息
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      undefined
+      您的条纹帐户不需要公司董事信息
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      undefined
+      公司代表必须是高管
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      undefined
+      必须选择代表、董事或所有者
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      undefined
+      错误！无效或缺少百分比所有权（0，如果没有）
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      undefined
+      错误！无效或缺少关系标题
     </div>
   </template>
 </body>

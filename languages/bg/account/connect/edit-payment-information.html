@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Информация за плащане за ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,21 +27,21 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
-  <p translate="yes">undefined</p>
+  <h1 translate="yes">Информация за плащане за ${stripeAccount.id}</h1>
+  <p translate="yes">Актуализирайте банковата сметка, която ще ви изплаща приходи.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">undefined</label>
+      <label for="country" translate="yes">Държава на банката</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          undefined
+          Изберете
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">undefined</label>
+      <label translate="yes">Тип на акаунта</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,223 +52,223 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">undefined</label>
+          <label for="currency" translate="yes">Валута на сметката</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              undefined
+              Изберете
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">undefined</label>
+      <label for="account-holder-name" translate="yes">Име на титуляра на сметката</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
       <div class="pure-control-group">
-        <label for="bsb_number" translate="yes">undefined</label>
+        <label for="bsb_number" translate="yes">НОМЕР НА BSB</label>
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">undefined</label>
+        <label for="account_number" translate="yes">Номер на сметката</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div id="AT-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="BE-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">undefined</label>
+        <label for="transit_number" translate="yes">Номер на транзит</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="institution_number" translate="yes">undefined</label>
+        <label for="institution_number" translate="yes">Номер на институцията</label>
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">undefined</label>
+        <label for="account_number" translate="yes">Номер на сметката</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div id="CH-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="DE-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="DK-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="EE-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="ES-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="FI-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="FR-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="GB-container">
       <div class="pure-control-group">
-        <label for="iban" translate="yes">undefined</label>
+        <label for="iban" translate="yes">Iban</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
-      <h2 translate="yes">undefined</h2>
+      <h2 translate="yes">Алтернативен формат</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">undefined</label>
+          <label for="sort_code" translate="yes">Код на сортиране</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">undefined</label>
+          <label for="account_number" translate="yes">Номер на сметката</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
     </div>
     <div id="GR-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">undefined</label>
+        <label for="clearing_code" translate="yes">Код за изчистване</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">undefined</label>
+        <label for="branch_code" translate="yes">Код на клон</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">undefined</label>
+        <label for="account_number" translate="yes">Номер на сметката</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div id="IE-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="IT-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">undefined</label>
+        <label for="bank_code" translate="yes">Код на банка</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">undefined</label>
+        <label for="branch_code" translate="yes">Код на клон</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">undefined</label>
+        <label for="account_number" translate="yes">Номер на сметката</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div id="LT-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="LU-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="LV-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">undefined</label>
+        <label for="routing_number" translate="yes">Номер на маршрутизиране</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">undefined</label>
+        <label for="account_number" translate="yes">Номер на сметката</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div id="NL-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">undefined</label>
+        <label for="routing_number" translate="yes">Номер на маршрутизиране</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">undefined</label>
+        <label for="account_number" translate="yes">Номер на сметката</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div id="NO-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="PL-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="PT-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">undefined</label>
+        <label for="bank_code" translate="yes">Код на банка</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">undefined</label>
+        <label for="branch_code" translate="yes">Код на клон</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">undefined</label>
+        <label for="account_number" translate="yes">Номер на сметката</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div id="SE-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="SI-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="SK-container" class="pure-control-group">
-      <label for="iban" translate="yes">undefined</label>
+      <label for="iban" translate="yes">Iban</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">undefined</label>
+        <label for="routing_number" translate="yes">Номер на маршрутизиране</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">undefined</label>
+        <label for="account_number" translate="yes">Номер на сметката</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Запазване на информация за плащане</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      undefined
+      Успех! Информацията за плащането е актуализирана
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Възникна грешка при актуализиране на информацията за плащане
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалидна или липсваща държава на банка
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалидна или липсваща валута на акаунта
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ тип на акаунта
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ номер на акаунт
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ BSB номер
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ номер на банков код
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ код на сортиране
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ номер на институция
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ номер на транзит
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ номер на кода за изчистване
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ код на клон
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалидно име на собственика или липсващ акаунт
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсваЩ IBAN номер
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      undefined
+      Грешка! Невалиден или липсващ номер на транзит
     </div>
   </template>
 </body>

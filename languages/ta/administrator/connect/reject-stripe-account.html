@@ -2,90 +2,90 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">விலக்கிவைக்கபட்டவர் ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
+  <h1 translate="yes">விலக்கிவைக்கபட்டவர் ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">undefined</label>
+      <label for="reason" translate="yes">நிராகரிப்பு காரணம்</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          undefined
+          காரணத்தை தேர்ந்தெடு
         </option>
         <option value="fraud" translate="yes">
-          undefined
+          ஏமாற்றுக் குற்றம்
         </option>
         <option value="terms_of_service" translate="yes">
-          undefined
+          சேவை மீறல் விதிமுறைகள்
         </option>
         <option value="other" translate="yes">
-          undefined
+          மற்ற
         </option>
       </select>
-    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">விலக்கிவைக்கபட்டவர்</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      undefined
+      வெற்றி! ஸ்டிரூப் கணக்கு நிராகரிக்கப்பட்டது
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      undefined
+      தவறு! கணக்கினை நிராகரிக்கும் முன்/பை/sh சமநிலை பெற்றிருக்க வேண்டும்.
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      undefined
+      தவறு! Stripe கணக்கை நிராகரிக்கும் பிழை ocurred
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">undefined</span>
+    <span translate="yes">இதுவரை சமர்ப்பிக்கப்படவில்லை</span>
   </template>
   <template id="verified">
-    <span translate="yes">undefined</span>
+    <span translate="yes">பதிவு ஏற்கப்பட்டுள்ளது</span>
   </template>
   <template id="verified">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Stripe ஆல் முடக்கப்பட்டது</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">undefined</span>
+    <span translate="yes">கூடுதல் தகவல் தேவைப்படுகிறது</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">undefined</span>
+    <span translate="yes">கூடுதல் தகவல் தேவைப்படுகிறது</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">undefined</span>
+    <span translate="yes">நிலுவையில் உள்ள சமர்ப்பிப்பு</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ஸ்டிரெப்பினால் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ஸ்டிரெப்பினால் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ஸ்டிரெப்பினால் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ஸ்டிரெப்பினால் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">மேலும் தகவல் தேவைப்படுகிறது</span>
   </template>
   <template id="listed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ஸ்ட்ரூப் மூலம் விமர்சனம்</span>
   </template>
   <template id="under-review">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ஸ்ட்ரூப் மூலம் விமர்சனம்</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ஸ்டிரெப்பினால் முடக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

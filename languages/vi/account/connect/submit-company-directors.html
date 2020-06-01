@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Gửi Giám đốc cho ${stripeAccount.id}</title>
+  <title translate="yes">${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Gửi Giám đốc cho ${stripeAccount.id}</h1>
-  <p translate="yes">Khi bạn đã hoàn thành việc thêm các giám đốc của công ty, nếu có, gửi chúng để đánh giá.</p>
+  <h1 translate="yes">undefined${stripeAccount.id}</h1>
+  <p translate="yes">undefined</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">Giám đốc công ty</h2>
+    <h2 translate="yes">undefined</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">Id</th>
-          <th translate="yes">Tên</th>
-          <th translate="yes">Đòi hỏi</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Gửi Giám đốc</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Lỗi! Có những giám đốc vẫn còn yêu cầu thông tin
+      undefined
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Success! Giám đốc của công ty đã được gửi
+      undefined
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Lỗi! Lỗi xảy ra khi gửi Giám đốc
+      undefined
     </div>
   </template>
 </body>

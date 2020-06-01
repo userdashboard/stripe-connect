@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Gyflwyno perchnogion ar gyfer ${stripeAccount.id}</title>
+  <title translate="yes">${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Gyflwyno perchnogion ar gyfer ${stripeAccount.id}</h1>
-  <p translate="yes">Ar ôl i chi orffen ychwanegu'r holl berchenogion eraill, os oes rhai, dylech eu cyflwyno i'w hadolygu.</p>
+  <h1 translate="yes">undefined${stripeAccount.id}</h1>
+  <p translate="yes">undefined</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Perchnogion buddiol</h2>
+    <h2 translate="yes">undefined</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">Id</th>
-          <th translate="yes">Enw</th>
-          <th translate="yes">Angen</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Gyflwyno perchnogion</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Gwall! Mae perchenogion yn dal i fod angen gwybodaeth.
+      undefined
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Llwyddiant! Mae perchenogion y cwmni wedi cael eu cyflwyno
+      undefined
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Gwall! Mae gwall wedi digwydd wrth gyflwyno'r perchenogion
+      undefined
     </div>
   </template>
 </body>

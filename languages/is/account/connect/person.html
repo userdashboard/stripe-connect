@@ -2,37 +2,37 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Manneskja ${person.id}</title>
+  <title translate="yes">${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Manneskja ${person.id}</h1>
-  <p translate="yes">Viðbótarupplýsingar gætu hafa verið sendar sem ekki eru birtar.</p>
+  <h1 translate="yes">undefined${person.id}</h1>
+  <p translate="yes">undefined</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
-        <th translate="yes">Kenni</th>
+        <th translate="yes">undefined</th>
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Hlutverk</th>
+        <th translate="yes">undefined</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Tengsl</th>
+        <th translate="yes">undefined</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">Heiti</th>
+        <th translate="yes">undefined</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Nauðsynlegar upplýsingar</th>
+        <th translate="yes">undefined</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

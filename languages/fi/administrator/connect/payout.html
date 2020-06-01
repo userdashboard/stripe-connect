@@ -2,41 +2,41 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${payout.id}</title>
+  <title translate="yes">Katso ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined${payout.id}</h1>
+  <h1 translate="yes">Katso ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Id</th>
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Summa</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Raita-tili</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Tila</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Kuvaus</th>
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Luotu</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,40 +45,40 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pankkitiliä ei löytynyt</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Virheellinen valuutta</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Virheellinen tilinumero</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Riittämättömät varat</span>
   </template>
   <template id="declined">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pankki kieltäytyi siirrosta</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Ei pankkitilidebet-veloituksen</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Ei voitu käsitellä</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pankin omistusmuuttui</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pankkitili rajoitettu</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pankkitili jäädytetty</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pankkitili suljettu</span>
   </template>
 </body>
 </html>

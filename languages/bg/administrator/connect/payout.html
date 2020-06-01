@@ -2,41 +2,41 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Разгледай ${payout.id}</title>
+  <title translate="yes">${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Разгледай ${payout.id}</h1>
+  <h1 translate="yes">undefined${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
       <tr>
-        <th translate="yes">Id</th>
+        <th translate="yes">undefined</th>
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Сума</th>
+        <th translate="yes">undefined</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Сметка на иви</th>
+        <th translate="yes">undefined</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
       </tr>
       <tr>
-        <th translate="yes">Статут</th>
+        <th translate="yes">undefined</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Описание</th>
+        <th translate="yes">undefined</th>
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">Създаден</th>
+        <th translate="yes">undefined</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,40 +45,40 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Не е намерена банкова сметка</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Невалидна валута</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Невалиден номер на акаунт</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Недостатъчни средства</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="declined">
-    <span translate="yes">Отклонена банка</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Няма дебит на банкова сметка</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Грешка при обработка</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Промяна в собствеността на банката</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Банкова сметка с ограничена</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Банкова сметка замразена</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Банкова сметка закрита</span>
+    <span translate="yes">undefined</span>
   </template>
 </body>
 </html>

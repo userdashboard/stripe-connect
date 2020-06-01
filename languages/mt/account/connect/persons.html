@@ -2,52 +2,52 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Persuni għal ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined</h1>
+  <h1 translate="yes">Persuni</h1>
   <div id="representative-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Rappre żentant tal-kumpanija</h2>
+    <p translate="yes">Jekk il-bidliet fl-istatus tal-persuna nnominata trid toħloq rappreżentant ġdid.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Toħloq rappreżentant ġdid</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">ID</th>
+          <th translate="yes">Isem</th>
+          <th translate="yes">Jeħtieġ</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Sidien benefiċjarji</h2>
+    <p translate="yes">Għandek tipprovdi dokumentazzjoni għal kull min għandu l-pussess ta ' xi ħadd sostanzjali (25 +) fil-mija tal-kumpanija jew inkarigat mill-kumpanija, il-finanzi jew l-operazzjonijiet tagħha.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Żid sid</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">ID</th>
+          <th translate="yes">Isem</th>
+          <th translate="yes">Jeħtieġ</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">Diretturi tal-kumpanija</h2>
+    <p translate="yes">Għandek tipprovdi d-dokumentazzjoni għall-Bord tad-Diretturi.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Żid sid</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">ID</th>
+          <th translate="yes">Isem</th>
+          <th translate="yes">Jeħtieġ</th>
         </tr>
       </thead>
     </table>

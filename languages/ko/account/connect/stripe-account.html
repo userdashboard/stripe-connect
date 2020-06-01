@@ -2,48 +2,48 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">보기 ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
+  <h1 translate="yes">보기 ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">자료</th>
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">형식</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">이름</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">국가</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">상태</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">제출</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2">undefined</td>
+        <td id="not-submitted2">아직 제출되지 않음</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">등록 정보</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">회사 대표</h2>
+    <p translate="yes">계정 중단을 방지하기 위해 지정된 사람이 회사를 떠나거나 더 이상 회사를 대표하지 않는 경우 새 대표 정보를 제출하십시오.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">자료</th>
+          <th translate="yes">이름</th>
+          <th translate="yes">필수 정보</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">기타 유익한 소유자 정보</h2>
+    <p translate="yes">귀하는 회사의 25%를 소유하거나 회사, 재정 또는 운영을 담당하는 다른 사람을 위한 문서를 제공해야 합니다.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">자료</th>
+          <th translate="yes">이름</th>
+          <th translate="yes">필요</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">회사 이사 정보</h2>
+    <p translate="yes">규정 준수를 유지할 책임이 있는 회사의 관리 이사회 및/또는 사람들의 전체 이름을 제공해야 합니다.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">자료</th>
+          <th translate="yes">이름</th>
+          <th translate="yes">필요</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">결제 정보</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">등록 제출</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -126,61 +126,61 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">undefined${bank_account.bank_name}.</p>
+    <p translate="yes">기금은 계좌로 지급됩니다. ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">자금을 받으려면 은행 정보를 제공해야 합니다.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">등록이 제출되지 않았습니다.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">undefined${account.dateFormatted}.</p>
+    <p translate="yes">등록은 ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">undefined</p>
+    <p translate="yes">등록 정보가 제공되지 않았습니다.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">undefined</p>
+    <p translate="yes">등록 정보가 제공되었습니다.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Not submitted yet</span>
   </template>
   <template id="verified">
-    <span translate="yes">undefined</span>
+    <span translate="yes">등록이 수락되었습니다.</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">undefined</span>
+    <span translate="yes">추가 정보가 필요합니다.</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">undefined</span>
+    <span translate="yes">보류 중인 제출</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">스트라이프에 의해 거부됨, 참조</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">스트라이프에 의해 거부됨, 참조</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">스트라이프에 의해 거부됨, 참조</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">스트라이프에 의해 거부됨, 참조</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">스트라이프에 의해 검토 중</span>
   </template>
   <template id="under-review">
-    <span translate="yes">undefined</span>
+    <span translate="yes">스트라이프에 의해 검토 중</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">스트라이프에 의해 거부됨, 참조</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">undefined</span>
+    <span translate="yes">추가 정보가 필요합니다.</span>
   </template>
 </body>
 </html>

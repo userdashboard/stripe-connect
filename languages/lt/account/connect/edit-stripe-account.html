@@ -15,7 +15,7 @@
   </script>
 </head>
 <body class="entry">
-  <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+  <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
     <h1 translate="yes">Redaguoti ${stripeAccount.id}</h1>
     <div id="message-container"></div>
@@ -48,7 +48,7 @@
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-11-24">
-          <div id="tax_id-container" class="pure-control-group">
+          <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
             <label for="tax_id" translate="yes">Mokesčių ID numeris</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
@@ -68,6 +68,23 @@
             <a id="name_kanji-anchor"></a>
             <label for="name_kanji" translate="yes">Kandži įmonės pavadinimas</label>
             <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
+          </div>
+        </div>
+      </div>
+      <div class="pure-g">
+        <div class="pure-u-12-24">
+          <div id="business_profile_url-container" class="pure-control-group">
+            <a id="business_profile_url-anchor"></a>
+            <label for="business_profile_url" translate="yes">Svetainės URL</label>
+            <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
+          </div>
+        </div>
+        <div class="pure-u-1-24"></div>
+        <div class="pure-u-11-24">
+          <div id="phone-container" class="pure-control-group">
+            <a id="phone-anchor"></a>
+            <label for="phone" translate="yes">Telefono numeris</label>
+            <input required="required" id="phone" name="phone" type="text" maxlength="50">
           </div>
         </div>
       </div>
@@ -156,8 +173,8 @@
     <div id="gender-container" class="pure-control-group">
       <label for="gender" translate="yes">Lyčių</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female"> Female</label>
-        <label><input id="male" type="radio" name="gender" value="male"> Male</label>
+        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Moterų</span></label>
+        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Vyrų</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
@@ -267,18 +284,15 @@
     </div>
   </form>
   <template id="mcc-option">
-    <option value="${mcc.value}">
-      ${mcc.text}
-    </option>
+    <option value="${mcc.code}">${mcc.description}</option>
   </template>
   <template id="state-option">
-    <option value="${option.value}">
-      ${option.text}
-    </option>
+    <option value="${option.value}">${option.text}</option>
   </template>
   <template id="success">
-    <div class="success message" translate="yes">
-      Sėkmės! Stripe sąskaita buvo atnaujinta <a href="/account/connect" translate="yes">Grįžti į sąskaitą</a>
+    <div class="success message">
+      <span translate="yes">Sėkmės! Stripe sąskaita buvo atnaujinta</span>
+      <a href="/account/connect" translate="yes">Grįžti į sąskaitą</a>
     </div>
   </template>
   <template id="unknown-error">

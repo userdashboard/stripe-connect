@@ -2,48 +2,48 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Mwoneko ${stripeAccount.id}</title>
+  <title translate="yes">${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Mwoneko ${stripeAccount.id}</h1>
+  <h1 translate="yes">undefined${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
-        <th translate="yes">Id</th>
+        <th translate="yes">undefined</th>
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Aina</th>
+        <th translate="yes">undefined</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Jina</th>
+        <th translate="yes">undefined</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Nchi</th>
+        <th translate="yes">undefined</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Hali</th>
+        <th translate="yes">undefined</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Kuwasilishwa</th>
+        <th translate="yes">undefined</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2">Haijatowasilishwa bado</td>
+        <td id="not-submitted2">undefined</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Taarifa ya usajili</h2>
+    <h2 translate="yes">undefined</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Mwakilishi wa kampuni</h2>
-    <p translate="yes">Ili kuepuka uharibifu wa akaunti kuwasilisha taarifa mpya ya mwakilishi ikiwa mtu maalum anaondoka au hawakilishi tena kampuni.</p>
+    <h2 translate="yes">undefined</h2>
+    <p translate="yes">undefined</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">Id</th>
-          <th translate="yes">Jina</th>
-          <th translate="yes">Taarifa inayotakiwa</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Habari za wamiliki wengine wenye manufaa</h2>
-    <p translate="yes">Lazima utoe nyaraka kwa mtu yeyote mwingine kumiliki (25 +) asilimia ya kampuni au kwa malipo ya kampuni, fedha au shughuli.</p>
+    <h2 translate="yes">undefined</h2>
+    <p translate="yes">undefined</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">Id</th>
-          <th translate="yes">Jina</th>
-          <th translate="yes">Inahitaji</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Habari za wakurugenzi wa kampuni</h2>
-    <p translate="yes">Lazima utoe majina kamili ya Bodi ya uongozi ya kampuni yako na/au watu wanaohusika na kudumisha makubaliano ya udhibiti.</p>
+    <h2 translate="yes">undefined</h2>
+    <p translate="yes">undefined</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">Id</th>
-          <th translate="yes">Jina</th>
-          <th translate="yes">Inahitaji</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
+          <th translate="yes">undefined</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Taarifa ya malipo</h2>
+    <h2 translate="yes">undefined</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Wasilisha usajili</h2>
+    <h2 translate="yes">undefined</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -126,61 +126,61 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Fedha ni kulipwa kwa akaunti ${bank_account.bank_name}.</p>
+    <p translate="yes">undefined${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Maelezo ya benki lazima kutolewa ili kupokea fedha.</p>
+    <p translate="yes">undefined</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Usajili huo bado umewasilishwa.</p>
+    <p translate="yes">undefined</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Usajili huo uliwasilishwa kwa ${account.dateFormatted}.</p>
+    <p translate="yes">undefined${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Maelezo ya usajili hayatolewi.</p>
+    <p translate="yes">undefined</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Taarifa ya usajili imetolewa.</p>
+    <p translate="yes">undefined</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Not submitted yet</span>
   </template>
   <template id="verified">
-    <span translate="yes">Usajili umekubaliwa</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Inahitaji taarifa ya ziada</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Inasubiri kuwasilisha</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Imekataliwa na milia, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Imekataliwa na milia, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Imekataliwa na milia, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Imekataliwa na milia, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Chini ya mapitio na Milia</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Chini ya mapitio na Milia</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Imekataliwa na milia, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Inahitaji taarifa ya ziada</span>
+    <span translate="yes">undefined</span>
   </template>
 </body>
 </html>

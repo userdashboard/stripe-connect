@@ -2,21 +2,21 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Usunąć ${stripeAccount.id}</title>
+  <title translate="yes">${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Usunąć ${stripeAccount.id}</h1>
+  <h1 translate="yes">undefined${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
-        <th translate="yes">Identyfikator</th>
-        <th translate="yes">Nazwa</th>
-        <th translate="yes">Stan</th>
+        <th translate="yes">undefined</th>
+        <th translate="yes">undefined</th>
+        <th translate="yes">undefined</th>
       </tr>
     </thead>
     <tr id="${stripeAccount.id}">
@@ -31,62 +31,62 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Usunąć</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Sukces! Konto Stripe zostało usunięte
+      undefined
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Błąd! Wystąpił błąd podczas usuwania konta Stripe
+      undefined
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nie zostały jeszcze przesłane</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="verified">
-    <span translate="yes">Rejestracja została zaakceptowana</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="verified">
-    <span translate="yes">Wyłączone przez Stripe</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Wymaga dodatkowych informacji</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Oczekujące na złożenie wniosku</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Oczekujące na złożenie wniosku</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Więcej informacji jest wymaganych</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="listed">
-    <span translate="yes">Przegląd przez Stripe</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Przegląd przez Stripe</span>
+    <span translate="yes">undefined</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Wyłączone przez Stripe, zobacz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
-    <span translate="yes">Usunięte</span>
+    <span translate="yes">undefined</span>
   </template>
 </body>
 </html>

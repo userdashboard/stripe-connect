@@ -2,48 +2,48 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Prohlédni ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
+  <h1 translate="yes">Prohlédni ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Id</th>
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Typ</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Jméno</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Země</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Stav</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Předloženy</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2">undefined</td>
+        <td id="not-submitted2">Dosud neodloží</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Registrační informace</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">Zástupce společnosti</h2>
+    <p translate="yes">Aby se zabránilo narušení účtu, předložte nové reprezentativní informace, pokud zadaná osoba opustí nebo již nezastupuje společnost.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Jméno</th>
+          <th translate="yes">Požadované informace</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">Další informace o skutečných majitelích</h2>
+    <p translate="yes">Musíte poskytnout dokumentaci pro každého, kdo vlastní podstatné (25 +) procent společnosti nebo má na starosti společnost, finance nebo operace.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Jméno</th>
+          <th translate="yes">Vyžaduje</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">Informace o ředitelích společností</h2>
+    <p translate="yes">Musíte uvést úplná jména správní rady vaší společnosti a/nebo osoby odpovědné za dodržování předpisů.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">Jméno</th>
+          <th translate="yes">Vyžaduje</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Informace o platbě</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Odeslat registraci</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -126,61 +126,61 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">undefined${bank_account.bank_name}.</p>
+    <p translate="yes">Prostředky jsou vypláceny na účet ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">Bankovní údaje musí být poskytnuty pro příjem finančních prostředků.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">Registrace nebyla odeslána.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">undefined${account.dateFormatted}.</p>
+    <p translate="yes">Registrace byla předložena dne ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">undefined</p>
+    <p translate="yes">Registrační informace nebyly poskytnuty.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">undefined</p>
+    <p translate="yes">Byly poskytnuty registrační informace.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Not submitted yet</span>
   </template>
   <template id="verified">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Registrace byla přijata</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Vyžaduje další informace</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Čeká na odeslání</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pod hodnocením Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pod hodnocením Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Vyžaduje další informace</span>
   </template>
 </body>
 </html>

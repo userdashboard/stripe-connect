@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes"></title>
+  <title translate="yes">ಸ್ಟ್ರೈಪ್ ಖಾತೆಗಳು</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined</h1>
+  <h1 translate="yes">ಸ್ಟ್ರೈಪ್ ಖಾತೆಗಳು</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">undefined</p>
+    <p translate="yes">ಇನ್ನೂ ಯಾವುದೇ ಸ್ಟ್ರೈಪ್ ಖಾತೆಗಳನ್ನು ರಚಿಸಿದ್ದೇವೆ.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
-        <th translate="yes">undefined</th>
-        <th translate="yes">undefined</th>
-        <th translate="yes">undefined</th>
-        <th translate="yes">undefined</th>
-        <th translate="yes">undefined</th>
-        <th translate="yes">undefined</th>
+        <th translate="yes">ಐಡಿ</th>
+        <th translate="yes">ಮಾದರಿಯ</th>
+        <th translate="yes">ಹೆಸರು</th>
+        <th translate="yes">ಸ್ಥಾನಮಾನ</th>
+        <th translate="yes">ಸೃಷ್ಟಿಸಿದೆ</th>
+        <th translate="yes">ಸಲ್ಲಿಸಿದ</th>
       </tr>
     </thead>
   </table>
@@ -48,58 +48,58 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">X ಖಾತೆಗೆ ಹಣವನ್ನು ಪಾವತಿಸುವುದು</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">ಹಣಕಾಸು ಸ್ವೀಕರಿಸಲು ಬ್ಯಾಂಕಿಂಗ್ ವಿವರ ಒದಗಿಸಬೇಕು.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">ನೋಂದಣಿ ಸಲ್ಲಿಸಿಲ್ಲ.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">undefined${account.dateFormatted}.</p>
+    <p translate="yes">ನೋಂದಣಿ ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ಇನ್ನೂ ಸಲ್ಲಿಸಿಲ್ಲ</span>
   </template>
   <template id="verified">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ನೋಂದಣಿ ಸ್ವೀಕರಿಸಲಾಗಿದೆ</span>
   </template>
   <template id="verified">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ಸ್ಟ್ರೈಪ್ ಮೂಲಕ ವಿಕಲಚೇತನ.</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ಬಾಕಿ ಮನವಿ</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ಸ್ಟ್ರೈಪ್ ನಿಂದ ತಿರಸ್ಕೃತ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ಸ್ಟ್ರೈಪ್ ನಿಂದ ತಿರಸ್ಕೃತ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ಸ್ಟ್ರೈಪ್ ನಿಂದ ತಿರಸ್ಕೃತ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ಸ್ಟ್ರೈಪ್ ನಿಂದ ತಿರಸ್ಕೃತ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ಅಗತ್ಯ</span>
   </template>
   <template id="listed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ಸ್ಟ್ರೈಪ್ ಮೂಲಕ ಪರಿಶೀಲನೆ</span>
   </template>
   <template id="under-review">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ಸ್ಟ್ರೈಪ್ ಮೂಲಕ ಪರಿಶೀಲನೆ</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ಸ್ಟ್ರೈಪ್ ಮೂಲಕ ನಿಷ್ಕ್ರಿಯತೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

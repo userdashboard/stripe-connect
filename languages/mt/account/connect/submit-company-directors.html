@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">Jibgħat Diretturi għall ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
-  <p translate="yes">undefined</p>
+  <h1 translate="yes">Jibgħat Diretturi għall ${stripeAccount.id}</h1>
+  <p translate="yes">Meta tkun lestejt iż-żieda tad-Diretturi tal-kumpanija, jekk ikun hemm, tissottomettihom għal reviżjoni.</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">Diretturi tal-kumpanija</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">ID</th>
+          <th translate="yes">Isem</th>
+          <th translate="yes">Jeħtieġ</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Jissottomettu Diretturi</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      undefined
+      Żball! Hemm Diretturi li għad jeħtieġu informazzjoni
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      undefined
+      Suċċess! Id-diretturi tal-kumpanija ġew sottomessi
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      undefined
+      Żball! Sar żball fil-pre żentazzjoni tad-Diretturi
     </div>
   </template>
 </body>

@@ -2,41 +2,41 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${payout.id}</title>
+  <title translate="yes">Lihat ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined${payout.id}</h1>
+  <h1 translate="yes">Lihat ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Id</th>
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Jumlah</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Akaun jalur</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Status</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Keterangan</th>
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Dicipta</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,40 +45,40 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Tiada akaun bank dijumpai</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Mata Wang tidak sah</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Nombor akaun tidak sah</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Dana tidak mencukupi</span>
   </template>
   <template id="declined">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Bank menolak Pindahan</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Tiada Debit Akaun Bank</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Tidak dapat memproses</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Pemilikan Bank berubah</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Akaun bank terhad</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Akaun bank dibekukan</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">Akaun bank ditutup</span>
   </template>
 </body>
 </html>

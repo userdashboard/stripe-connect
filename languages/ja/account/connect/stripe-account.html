@@ -2,48 +2,48 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">ビュー${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
+  <h1 translate="yes">ビュー${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">Id</th>
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">型</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">名前</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">国</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">ステータス</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">undefined</th>
+        <th translate="yes">提出</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2">undefined</td>
+        <td id="not-submitted2">まだ提出されていません</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">登録情報</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">会社代表</h2>
+    <p translate="yes">アカウントの中断を避けるために、指定された人物が退職した場合、または会社を代表しなくなった場合に、新しい代表者情報を提出します。</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">名前</th>
+          <th translate="yes">必要な情報</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">その他の有益な所有者情報</h2>
+    <p translate="yes">会社の相当な割合 (25+) を所有している、または会社、財務、または業務を担当している他の人に対して、ドキュメントを提供する必要があります。</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">名前</th>
+          <th translate="yes">必要</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
+    <h2 translate="yes">会社役員情報</h2>
+    <p translate="yes">会社の管理委員会の氏名や、法令遵守を維持する責任者を指定する必要があります。</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">名前</th>
+          <th translate="yes">必要</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">支払い情報</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">登録を送信する</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -126,61 +126,61 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">undefined${bank_account.bank_name}.</p>
+    <p translate="yes">資金は口座に支払われます${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">銀行の詳細は、資金を受け取るために提供する必要があります。</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">undefined</p>
+    <p translate="yes">登録は送信されていません。</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">undefined${account.dateFormatted}.</p>
+    <p translate="yes">登録はに提出されました${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">undefined</p>
+    <p translate="yes">登録情報が提供されていません。</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">undefined</p>
+    <p translate="yes">登録情報が提供されました。</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Not submitted yet</span>
   </template>
   <template id="verified">
-    <span translate="yes">undefined</span>
+    <span translate="yes">登録が受け付けられました</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">undefined</span>
+    <span translate="yes">追加情報が必要</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">undefined</span>
+    <span translate="yes">保留中の提出</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ストライプによって拒否された、</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ストライプによって拒否された、</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ストライプによって拒否された、</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ストライプによって拒否された、</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ストライプによるレビュー中</span>
   </template>
   <template id="under-review">
-    <span translate="yes">undefined</span>
+    <span translate="yes">ストライプによるレビュー中</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">undefined</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">ストライプによって拒否された、</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">undefined</span>
+    <span translate="yes">追加情報が必要</span>
   </template>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">전송 ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">undefined${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">undefined</a> undefined</p>
+  <h1 translate="yes">전송 ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect" translate="yes">스트라이프 커넥트</a> 완료된 등록을 제출하여 확인 절차를 진행할 수 있습니다.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">유익한 소유자</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">자료</th>
+          <th translate="yes">이름</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
+    <h2 translate="yes">회사 이사</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">자료</th>
+          <th translate="yes">이름</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">undefined</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">등록 제출</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      undefined
+      등록에 불완전한 등록 정보가 있습니다.
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      undefined
+      오류! 회사의 이사를 제출해야 합니다.
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      undefined
+      오류! 회사의 유익한 소유자를 제출해야 합니다.
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      undefined
+      오류! 회사 담당자의 정보를 제출해야 합니다.
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      undefined
+      오류! 등록에 불완전한 지불 정보가 있습니다.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      undefined
+      성공! 등록이 제출되었습니다.
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      undefined
+      오류! 등록을 제출하는 오류가 발생했습니다.
     </div>
   </template>
 </body>

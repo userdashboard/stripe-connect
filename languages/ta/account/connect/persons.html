@@ -2,52 +2,52 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">${stripeAccount.id}</title>
+  <title translate="yes">பேருக்கு ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">undefined</h1>
+  <h1 translate="yes">பேர்</h1>
   <div id="representative-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">நிறுவன பிரதிநிதி</h2>
+    <p translate="yes">நியமன நபரின் நிலை மாறினால் நீங்கள் ஒரு புதிய பிரதிநிதியை உருவாக்க வேண்டும்.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">புதிய பிரதிநிதி உருவாக்கு</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">பெயர்</th>
+          <th translate="yes">தேவைப்படுகிறது</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">நன்மை தரும் உரிமையாளர்கள்</h2>
+    <p translate="yes">ஒரு கணிசமான (25 +) அல்லது நிறுவனத்தின் பொறுப்பில் அல்லது நிறுவனம், அதன் நிதிகள் அல்லது செயல்பாடுகளைச் செய்யும் வேறு எவருக்கும் ஆவணப்படுத்தல் வழங்க வேண்டும்.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">உரிமையாளரை சேர்</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">பெயர்</th>
+          <th translate="yes">தேவைப்படுகிறது</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">undefined</h2>
-    <p translate="yes">undefined</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">undefined</a></p>
+    <h2 translate="yes">நிறுவன இயக்குநர்கள்</h2>
+    <p translate="yes">பணிப்பாளர் சபைக்கான ஆவணங்களை நீங்கள் வழங்க வேண்டும்.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">உரிமையாளரை சேர்</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
-          <th translate="yes">undefined</th>
+          <th translate="yes">Id</th>
+          <th translate="yes">பெயர்</th>
+          <th translate="yes">தேவைப்படுகிறது</th>
         </tr>
       </thead>
     </table>
