@@ -43,45 +43,34 @@ Dashboard and official modules are completely API-driven and you can access the 
 
 You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/stripe-connect-api).
 
-    const stripeAccounts = await proxy(`/api/user/connect/stripe-accounts?accountid=${accountid}&all=true`, accountid, sessionid)
-
-    const proxy = util.promisify((path, accountid, sessionid, callback) => {
-        let hashText
-        if (accountid) {
-            hashText = `${process.env.APPLICATION_SERVER_TOKEN}/${accountid}/${sessionid}`
-        } else {
-            hashText = process.env.APPLICATION_SERVER_TOKEN
-        }
-        const salt = bcrypt.genSaltSync(4)
-        const token = bcrypt.hashSync(hashText, salt)
         const requestOptions = {
             host: 'dashboard.example.com',
-            path: path,
+            path: `/api/user/connect/stripe-accounts?accountid=${accountid}`,
             port: '443',
             method: 'GET',
             headers: {
                 'x-application-server': 'application.example.com',
-                'x-dashboard-token': token
+                'x-application-server-token': process.env.APPLICATION_SERVER_TOKEN
             }
         }
         if (accountid) {
             requestOptions.headers['x-accountid'] = accountid
             requestOptions.headers['x-sessionid'] = sessionid
         }
-        const proxyRequest = require('https').request(requestOptions, (proxyResponse) => {
-            let body = ''
-            proxyResponse.on('data', (chunk) => {
-                body += chunk
-            })
-            return proxyResponse.on('end', () => {
-                return callback(null, JSON.parse(body))
-            })
-        })
-        proxyRequest.on('error', (error) => {
-            return callback(error)
-        })
-        return proxyRequest.end()
-      })
-    }
+        const stripeAccounts = await proxy(requestOptions)
 
-
+        function proxy = util.promisify((requestOptions, callback) => {
+          const proxyRequest = require('https').request(requestOptions, (proxyResponse) => {
+              let body = ''
+              proxyResponse.on('data', (chunk) => {
+                  body += chunk
+              })
+              return proxyResponse.on('end', () => {
+                  return callback(null, JSON.parse(body))
+              })
+          })
+          proxyRequest.on('error', (error) => {
+              return callback(error)
+          })
+          return proxyRequest.end()
+        })
