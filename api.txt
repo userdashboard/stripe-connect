@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.190
+@userdashboard/dashboard 1.0.197
 http://localhost:9000
 
 |------------------------------------------------|
@@ -407,7 +407,7 @@ http://localhost:9000
 | undefined                                                                  |
 |  * should reject invalid stripeid                                          |
 | before                                                                     |
-|  * should bind data to req                                                 |
+|  * should bind data to req (130107ms)                                      |
 | view                                                                       |
 |  * should reject registration that hasn't submitted payment details        |
 |  * should reject company that hasn't submitted beneficial owners           |
@@ -416,9 +416,9 @@ http://localhost:9000
 |  * should reject company that hasn't submitted information                 |
 |  * should reject individual that hasn't submitted information              |
 |  * should present the form (individual)                                    |
-|  * should present the form (company)                                       |
+|  * should present the form (company) (127801ms)                            |
 | submit                                                                     |
-|  * should submit registration (company) (screenshots) (145303ms)           |
+|  * should submit registration (company) (screenshots) (130921ms)           |
 |  * should submit registration (individual)                                 |
 |----------------------------------------------------------------------------|
 
@@ -430,13 +430,13 @@ http://localhost:9000
 |                                |          |  * invalid querystring stripeid  |
 |--------------------------------|----------|----------------------------------|
 
-|------------------------------------------------------------------------------|
-| /api/administrator/connect/payout                                            |
-| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
-| required querystring payoutid  | object   | invalid-payoputid                |
-|                                |          |  * missing querystring payoutid  |
-|                                |          |  * invalid querystring payoutid  |
-|--------------------------------|----------|----------------------------------|
+|----------------------------------------------------------------------------------------|
+| /api/administrator/connect/payout                                                      |
+| RECEIVES-----------------------| RETURNS------------| EXCEPTIONS-----------------------|
+| required querystring payoutid  | object (139241ms)  | invalid-payoputid                |
+|                                |                    |  * missing querystring payoutid  |
+|                                |                    |  * invalid querystring payoutid  |
+|--------------------------------|--------------------|----------------------------------|
 
 |------------------------------------------------------------------------------|
 | /api/administrator/connect/payouts                                           |
@@ -451,7 +451,7 @@ http://localhost:9000
 |-------------------------------------------|
 | /api/administrator/connect/payouts-count  |
 | RETURNS-----------------------------------|
-| integer (337163ms)                        |
+| integer (363031ms)                        |
 |-------------------------------------------|
 
 |------------------------------------------------------------------------------|
@@ -570,15 +570,15 @@ http://localhost:9000
 |                                |          |  * ineligible accessing account  |
 |--------------------------------|----------|----------------------------------|
 
-|------------------------------------------------------------------------------|
-| /api/user/connect/payout                                                     |
-| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
-| required querystring payoutid  | object   | invalid-payoutid                 |
-|                                |          |  * missing querystring payoutid  |
-|                                |          |  * invalid querystring payoutid  |
-|                                |          | invalid-account                  |
-|                                |          |  * ineligible accessing account  |
-|--------------------------------|----------|----------------------------------|
+|---------------------------------------------------------------------------------------------------|
+| /api/user/connect/payout                                                                          |
+| RECEIVES-----------------------| RETURNS------------| EXCEPTIONS----------------------------------|
+| required querystring payoutid  | object (145349ms)  | invalid-payoutid                            |
+|                                |                    |  * missing querystring payoutid             |
+|                                |                    |  * invalid querystring payoutid             |
+|                                |                    | invalid-account                             |
+|                                |                    |  * ineligible accessing account (138474ms)  |
+|--------------------------------|--------------------|---------------------------------------------|
 
 |-----------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/payouts                                                                                       |
@@ -593,7 +593,7 @@ http://localhost:9000
 |-----------------------------------------------------------------------------------------|
 | /api/user/connect/payouts-count                                                         |
 | RECEIVES-----------------------| RETURNS-------------| EXCEPTIONS-----------------------|
-| required querystring payoutid  | integer (120542ms)  | invalid-payoutid                 |
+| required querystring payoutid  | integer (199807ms)  | invalid-payoutid                 |
 |                                |                     |  * missing querystring payoutid  |
 |                                |                     |  * invalid querystring payoutid  |
 |                                |                     | invalid-account                  |
@@ -667,7 +667,7 @@ http://localhost:9000
 |                                | object (company)     |  * missing querystring stripeid                       |
 |                                |                      |  * invalid querystring stripeid                       |
 |                                |                      | invalid-stripe-account                                |
-|                                |                      |  * ineligible stripe account is submitted             |
+|                                |                      |  * ineligible stripe account is submitted (124595ms)  |
 |                                |                      | invalid-account                                       |
 |                                |                      |  * ineligible accessing account                       |
 |                                |                      | invalid-payment-details                               |
@@ -752,17 +752,17 @@ http://localhost:9000
 |                                                 |          |  * invalid posted routing_number       |
 |-------------------------------------------------|----------|----------------------------------------|
 
-|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| /api/user/connect/update-person                                                                                                               |
-| RECEIVES-----------------------| RETURNS--| EXCEPTIONS---------------------------------------------------------------| CONFIGURATION----------|
-| required querystring personid  | object   | invalid-personid                                                         | environment STRIPE_JS  |
-|                                |          |  * missing querystring personid                                          |                        |
-|                                |          |  * invalid querystring personid                                          |                        |
-|                                |          | invalid-account                                                          |                        |
-|                                |          |  * ineligible accessing account                                          |                        |
-|                                |          | invalid-person                                                           |                        |
-|                                |          |  * ineligible querystring person has no required information (126894ms)  |                        |
-|--------------------------------|----------|--------------------------------------------------------------------------|------------------------|
+|------------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/update-person                                                                                                    |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS----------------------------------------------------| CONFIGURATION----------|
+| required querystring personid  | object   | invalid-personid                                              | environment STRIPE_JS  |
+|                                |          |  * missing querystring personid                               |                        |
+|                                |          |  * invalid querystring personid                               |                        |
+|                                |          | invalid-account                                               |                        |
+|                                |          |  * ineligible accessing account                               |                        |
+|                                |          | invalid-person                                                |                        |
+|                                |          |  * ineligible querystring person has no required information  |                        |
+|--------------------------------|----------|---------------------------------------------------------------|------------------------|
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/update-stripe-account                                                                                                                                         |
