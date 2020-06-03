@@ -34,7 +34,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res) {
-  const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount', req.language)
   dashboard.HTML.renderTemplate(doc, null, req.data.stripeAccount.statusMessage, 'account-status')
   const mccCodes = connect.getMerchantCategoryCodes(req.language)
   const mccDescription = doc.getElementById('mcc-description')

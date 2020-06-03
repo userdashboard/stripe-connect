@@ -23,7 +23,7 @@ async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || req.query.message
   const removeElements = []
   req.data.stripeAccount.stripePublishableKey = global.stripePublishableKey
-  const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount')
+  const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount', req.language)
   await navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')

@@ -30,7 +30,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res) {
-  const doc = dashboard.HTML.parse(req.route.html)
+  const doc = dashboard.HTML.parse(req.route.html, null, null, req.language)
   if (req.data && req.data.stripeAccounts && req.data.stripeAccounts.length) {
     dashboard.HTML.renderTable(doc, req.data.stripeAccounts, 'stripe-account-row', 'stripe-accounts-table')
     for (const stripeAccount of req.data.stripeAccounts) {
