@@ -1,14 +1,13 @@
-@userdashboard/dashboard 1.0.197
+@userdashboard/dashboard 1.0.202
 http://localhost:9000
 
 Administrator menu:
-/administrator/connect "Stripe Connect module"
+stripe-connect/src/www/administrator/connect "Stripe Connect <span translate="yes">module</span>"
 /administrator "Dashboard administration"
 
 Account menu:
-/account/connect "Stripe Connect accounts"
+stripe-connect/src/www/account/connect "Stripe Connect <span translate="yes">accounts</span>"
 /account "My account"
-/account/signout "Sign out"
 
 Special HTML files:
 @userdashboard/dashboard/src/template.html
@@ -16,7 +15,7 @@ Special HTML files:
 @userdashboard/dashboard/src/redirect.html
 
 Dashboard modules:
-@userdashboard/stripe-connect (1.0.58)
+@userdashboard/stripe-connect (1.0.59)
 @userdashboard/maxmind-geoip (1.0.58)
 
 Server handlers:
