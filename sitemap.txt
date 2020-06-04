@@ -15,7 +15,7 @@ Special HTML files:
 @userdashboard/dashboard/src/redirect.html
 
 Dashboard modules:
-@userdashboard/stripe-connect (1.0.59)
+@userdashboard/stripe-connect (1.0.60)
 @userdashboard/maxmind-geoip (1.0.58)
 
 Server handlers:
