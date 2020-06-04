@@ -6,7 +6,6 @@ const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/account/connect/edit-payment-information', function () {
-  this.retries(4)
   this.timeout(40 * 60 * 1000)
   const hasFormResponses = {}
   const errorResponses = {}

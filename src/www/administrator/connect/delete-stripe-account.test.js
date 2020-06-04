@@ -3,7 +3,6 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/administrator/connect/delete-stripe-account', function () {
-  this.retries(4)
   this.timeout(10 * 60 * 1000)
   describe('before', () => {
     it('should bind data to req', async () => {
