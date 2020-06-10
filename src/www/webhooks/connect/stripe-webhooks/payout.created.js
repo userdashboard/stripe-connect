@@ -11,8 +11,10 @@ module.exports = async (stripeEvent, req) => {
     return
   }
   await connect.Storage.write(`${req.appid}/map/payoutid/stripeid/${payout.id}`, stripeEvent.account)
-  await connect.StorageList.add(`${req.appid}/payouts`, payout.id)
-  await connect.StorageList.add(`${req.appid}/bankAccount/payouts/${payout.destination}`, payout.id)
-  await connect.StorageList.add(`${req.appid}/account/payouts/${accountid}`, payout.id)
-  await connect.StorageList.add(`${req.appid}/stripeAccount/payouts/${stripeEvent.account}`, payout.id)
+  await connect.StorageList.addMany({
+    [`${req.appid}/payouts`]: payout.id,
+    [`${req.appid}/bankAccount/payouts/${payout.destination}`]: payout.id,
+    [`${req.appid}/account/payouts/${accountid}`]: payout.id,
+    [`${req.appid}/stripeAccount/payouts/${stripeEvent.account}`]: payout.id
+  })
 }

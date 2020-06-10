@@ -73,8 +73,10 @@ module.exports = {
     }
     const person = await stripeCache.execute('accounts', 'createPerson', req.query.stripeid, personInfo, req.stripeKey)
     await connect.Storage.write(`${req.appid}/map/personid/stripeid/${person.id}`, req.query.stripeid)
-    await connect.StorageList.add(`${req.appid}/persons`, person.id)
-    await connect.StorageList.add(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, person.id)
+    await connect.StorageList.addMany({
+      [`${req.appid}/persons`]: person.id,
+      [`${req.appid}/stripeAccount/persons/${req.query.stripeid}`]: person.id
+    }
     return person
   }
 }
