@@ -76,7 +76,7 @@ module.exports = {
     await connect.StorageList.addMany({
       [`${req.appid}/persons`]: person.id,
       [`${req.appid}/stripeAccount/persons/${req.query.stripeid}`]: person.id
-    }
+    })
     return person
   }
 }
