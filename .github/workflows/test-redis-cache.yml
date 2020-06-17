@@ -33,7 +33,7 @@ jobs:
         mkdir /tmp/project
         cd /tmp/project
         npm init -y
-        npm install faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/stripe-connect @userdashboard/storage-redis-cache
+        npm install ngrok faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/stripe-connect @userdashboard/storage-redis-cache
         npm install -g mocha
         rm node_modules/@userdashboard/stripe-connect/*.js
         rm -rf node_modules/@userdashboard/stripe-connect/src

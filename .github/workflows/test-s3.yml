@@ -20,13 +20,13 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-   - name: Set up as module
+    - name: Set up as module
       run: |
         HERE=`pwd`
         mkdir /tmp/project
         cd /tmp/project
         npm init -y
-        npm install faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/stripe-connect @userdashboard/storage-s3
+        npm install ngrok faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/stripe-connect @userdashboard/storage-s3
         npm install -g mocha
         rm node_modules/@userdashboard/stripe-connect/*.js
         rm -rf node_modules/@userdashboard/stripe-connect/src
