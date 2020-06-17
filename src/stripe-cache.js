@@ -1,4 +1,5 @@
 const connect = require('../index.js')
+const Log = require('@userdashboard/dashboard/src/log.js')('stripe-connect')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 if (global.maxmimumStripeRetries) {
@@ -45,6 +46,7 @@ function retriableError (error) {
 }
 
 function formatError (error) {
+  Log.error('stripe cache error', error)
   if (error.raw && error.raw.param) {
     if (error.raw.param === 'account_token' ||
         error.raw.param === 'person_token') {
