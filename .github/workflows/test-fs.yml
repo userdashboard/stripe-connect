@@ -13,10 +13,24 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
-      run: npm install mocha ngrok faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/storage-redis --no-save
+    - name: Set up as module
+      run: |
+        HERE=`pwd`
+        mkdir /tmp/project
+        cd /tmp/project
+        npm init -y
+        npm install faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/stripe-connect
+        npm install -g mocha
+        rm node_modules/@userdashboard/stripe-connect/*.js
+        rm -rf node_modules/@userdashboard/stripe-connect/src
+        cp $HERE/*.js node_modules/@userdashboard/stripe-connect
+        cp -R $HERE/src/ node_modules/@userdashboard/stripe-connect/src/
+        echo "global.applicationPath = __dirname" > main.js
+        PACKAGE=`cat package.json`
+        PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
+        echo $PACKAGE > package.json
     - name: Test encrypted file-system storage
-      run: npm test
+      run: cd /tmp/project && mocha --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js"
       env:
         NODE_ENV: testing
         FAST_START: true
