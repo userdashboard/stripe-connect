@@ -94,7 +94,7 @@ const TestHelper = require('@userdashboard/dashboard/test-helper.js')
 for (const x in TestHelper) {
   module.exports[x] = TestHelper[x]
 }
-module.exports.createRequest = (rawURL, method) => {
+const createRequest = module.exports.createRequest = (rawURL, method) => {
   const req = TestHelper.createRequest(rawURL, method)
   req.stripeKey = stripeKey
   return req
@@ -276,7 +276,7 @@ function createLocalHostRun (callback) {
 
 async function createStripeAccount (user, body) {
   data = true
-  const req = TestHelper.createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
+  const req = createRequest(`/api/user/connect/create-stripe-account?accountid=${user.account.accountid}`)
   req.session = user.session
   req.account = user.account
   req.body = body
@@ -285,7 +285,7 @@ async function createStripeAccount (user, body) {
 }
 
 async function updateStripeAccount (user, body, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/update-stripe-account?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   req.body = TestHelper.createMultiPart(req, body, uploads)
@@ -294,12 +294,12 @@ async function updateStripeAccount (user, body, uploads) {
 }
 
 async function createExternalAccount (user, body) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/update-payment-information?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   req.body = body
   user.stripeAccount = await req.patch()
-  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req2 = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req2.session = user.session
   req2.account = user.account
   req2.stripeKey = stripeKey
@@ -316,7 +316,7 @@ async function createExternalAccount (user, body) {
 }
 
 async function createPerson (user, body) {
-  const req = TestHelper.createRequest(`/api/user/connect/create-person?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/create-person?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   req.body = body
@@ -332,7 +332,7 @@ async function createPerson (user, body) {
 }
 
 async function updatePerson (user, person, body, uploads) {
-  const req = TestHelper.createRequest(`/api/user/connect/update-person?personid=${person.id}`)
+  const req = createRequest(`/api/user/connect/update-person?personid=${person.id}`)
   req.session = user.session
   req.account = user.account
   req.body = TestHelper.createMultiPart(req, body, uploads)
@@ -348,11 +348,11 @@ async function updatePerson (user, person, body, uploads) {
 }
 
 async function createPayout (user) {
-  const req = TestHelper.createRequest(`/api/fake-payout?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/fake-payout?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   const payout = await req.get()
-  const req2 = TestHelper.createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&stripeid=${user.stripeAccount.id}&limit=1`)
+  const req2 = createRequest(`/api/user/connect/payouts?accountid=${user.account.accountid}&stripeid=${user.stripeAccount.id}&limit=1`)
   req2.session = user.session
   req2.account = user.account
   req2.stripeKey = stripeKey
@@ -371,11 +371,11 @@ async function createPayout (user) {
 }
 
 async function submitBeneficialOwners (user) {
-  const req = TestHelper.createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/set-beneficial-owners-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   user.stripeAccount = await req.patch()
-  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req2 = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req2.session = user.session
   req2.account = user.account
   req2.stripeKey = stripeKey
@@ -392,11 +392,11 @@ async function submitBeneficialOwners (user) {
 }
 
 async function submitCompanyDirectors (user) {
-  const req = TestHelper.createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/set-company-directors-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   user.stripeAccount = await req.patch()
-  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req2 = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req2.session = user.session
   req2.account = user.account
   req2.stripeKey = stripeKey
@@ -413,11 +413,11 @@ async function submitCompanyDirectors (user) {
 }
 
 async function submitStripeAccount (user) {
-  const req = TestHelper.createRequest(`/api/user/connect/set-stripe-account-submitted?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/set-stripe-account-submitted?stripeid=${user.stripeAccount.id}`)
   req.session = user.session
   req.account = user.account
   user.stripeAccount = await req.patch()
-  const req2 = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req2 = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req2.session = user.session
   req2.account = user.account
   req2.stripeKey = stripeKey
@@ -463,7 +463,7 @@ async function waitForPayout (administrator, stripeid, previousid, callback) {
 
 async function waitForPayoutsEnabled (user, callback) {
   Log.info('waitForPayoutsEnabled')
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForPayoutsEnabled`)
+  const req = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForPayoutsEnabled`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
@@ -493,7 +493,7 @@ async function waitForPayoutsEnabled (user, callback) {
 
 async function waitForVerification (user, callback) {
   Log.info('waitForVerification')
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerification`)
+  const req = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerification`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
@@ -522,7 +522,7 @@ async function waitForVerification (user, callback) {
 
 async function waitForVerificationFailure (user, callback) {
   Log.info('waitForVerificationFailure')
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerificationFailure`)
+  const req = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}&from=waitForVerificationFailure`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
@@ -553,7 +553,7 @@ async function waitForVerificationFailure (user, callback) {
 
 async function waitForPendingFieldsToLeave (user, callback) {
   Log.info('waitForPendingFieldsToLeave')
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
@@ -577,7 +577,7 @@ async function waitForPendingFieldsToLeave (user, callback) {
 
 async function waitForCurrentlyDueFieldsToLeave (user, contains, callback) {
   Log.info('waitForCurrentlyDueFieldsToLeave', contains)
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
@@ -603,7 +603,7 @@ async function waitForCurrentlyDueFieldsToLeave (user, contains, callback) {
 
 async function waitForVerificationFieldsToLeave (user, contains, callback) {
   Log.info('waitForVerificationFieldsToLeave')
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
@@ -639,7 +639,7 @@ async function waitForVerificationFieldsToLeave (user, contains, callback) {
 
 async function waitForVerificationStart (user, callback) {
   Log.info('waitForVerificationStart')
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
@@ -665,7 +665,7 @@ async function waitForVerificationStart (user, callback) {
 
 async function waitForAccountRequirement (user, requirement, callback) {
   Log.info('waitForAccountRequirement', requirement)
-  const req = TestHelper.createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
+  const req = createRequest(`/api/user/connect/stripe-account?stripeid=${user.stripeAccount.id}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
@@ -696,7 +696,7 @@ async function waitForAccountRequirement (user, requirement, callback) {
 
 async function waitForPersonRequirement (user, personid, requirement, callback) {
   Log.info('waitForPersonRequirement', personid, requirement)
-  const req = TestHelper.createRequest(`/api/user/connect/person?personid=${personid}`)
+  const req = createRequest(`/api/user/connect/person?personid=${personid}`)
   req.account = user.account
   req.session = user.session
   req.stripeKey = stripeKey
