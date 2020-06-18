@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.62 test /home/runner/work/stripe-connect/stripe-connect
+> @userdashboard/stripe-connect@1.0.63 test /home/runner/work/stripe-connect/stripe-connect
 > mocha --retries 2 --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './{,!(public|node_modules)/**}/*.test.js'
 
 
@@ -518,7 +518,7 @@ Setting up with Dashboard as module
       ✓ should show payment information required
       ✓ should show payment information created
       ✓ should show ready to submit
-      ✓ should show registration is submitted (120388ms)
+      ✓ should show registration is submitted
 
   /account/connect/stripe-accounts
     before
@@ -571,7 +571,7 @@ Setting up with Dashboard as module
       ✓ should present the form (individual)
       ✓ should present the form (company)
     submit
-      ✓ should submit registration (company) (screenshots) (120103ms)
+      ✓ should submit registration (company) (screenshots)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -594,7 +594,7 @@ Setting up with Dashboard as module
       ✓ should reject invalid payoutid
       ✓ should bind data to req
     view
-      ✓ should have row for payout (screenshots)
+      ✓ should have row for payout (screenshots) (130853ms)
 
   /administrator/connect/payouts
     before
@@ -641,11 +641,11 @@ Setting up with Dashboard as module
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
     returns
-      ✓ object (134125ms)
+      ✓ object
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (347297ms)
+      ✓ integer (350836ms)
 
   /api/administrator/connect/payouts
     receives
@@ -790,7 +790,7 @@ Setting up with Dashboard as module
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account
+        ✓ ineligible accessing account (125747ms)
     returns
       ✓ object
 
@@ -802,7 +802,7 @@ Setting up with Dashboard as module
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ integer (126352ms)
+      ✓ integer (136005ms)
 
   /api/user/connect/payouts
     exceptions
@@ -904,7 +904,7 @@ Setting up with Dashboard as module
         ✓ ineligible company person missing information
     returns
       ✓ object (individual)
-      ✓ object (company) (131426ms)
+      ✓ object (company) (120918ms)
 
   /api/user/connect/stripe-account
     exceptions
@@ -1009,7 +1009,7 @@ Setting up with Dashboard as module
       invalid-account
         ✓ ineligible accessing account
       invalid-person
-        ✓ ineligible querystring person has no required information (124689ms)
+        ✓ ineligible querystring person has no required information
     returns
       ✓ object
     configuration
