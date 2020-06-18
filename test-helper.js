@@ -104,7 +104,6 @@ module.exports.setupBeforeEach = setupBeforeEach
 
 async function setupBefore () {
   const connect = require('./index.js')
-  connect.setup()
   if (process.env.GENERATE_COUNTRY) {
     connect.countrySpecs = [
       connect.countrySpecIndex[process.env.GENERATE_COUNTRY]

@@ -21,13 +21,10 @@
   "dashboard": {
     "title": "Dashboard",
     "modules": [
-      "@userdashboard/stripe-connect",
       "@userdashboard/maxmind-geoip"
     ],
     "server": [
-      "/src/server/bind-ip.js",
-      "/src/server/bind-stripekey.js",
-      "/node_modules/@userdashboard/maxmind-geoip/src/server/bind-ip.js"
+      "/src/server/bind-stripekey.js"
     ]
   }
 }
