@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.63 test /home/runner/work/stripe-connect/stripe-connect
+> @userdashboard/stripe-connect@1.0.64 test /home/runner/work/stripe-connect/stripe-connect
 > mocha --retries 2 --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './{,!(public|node_modules)/**}/*.test.js'
 
 
@@ -23,13 +23,6 @@ Setting up with Dashboard as module
     STRIPE_PUBLISHABLE_KEY
       The `pk_test_xxx` key from Stripe
         ✓ String
-
-  server/bind-ip
-    before
-      ✓ should prioritize ip from header
-      ✓ should bind ip from connection remoteAddress
-      ✓ should bind ip from connection socket
-      ✓ should bind ip from socket remoteAddress
 
   server/bind-stripekey
     after
@@ -560,7 +553,7 @@ Setting up with Dashboard as module
     exceptions
       ✓ should reject invalid stripeid
     before
-      ✓ should bind data to req
+      ✓ should bind data to req (121359ms)
     view
       ✓ should reject registration that hasn't submitted payment details
       ✓ should reject company that hasn't submitted beneficial owners
@@ -571,7 +564,7 @@ Setting up with Dashboard as module
       ✓ should present the form (individual)
       ✓ should present the form (company)
     submit
-      ✓ should submit registration (company) (screenshots)
+      ✓ should submit registration (company) (screenshots) (124521ms)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -594,7 +587,7 @@ Setting up with Dashboard as module
       ✓ should reject invalid payoutid
       ✓ should bind data to req
     view
-      ✓ should have row for payout (screenshots) (130853ms)
+      ✓ should have row for payout (screenshots)
 
   /administrator/connect/payouts
     before
@@ -641,11 +634,11 @@ Setting up with Dashboard as module
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
     returns
-      ✓ object
+      ✓ object (121588ms)
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (350836ms)
+      ✓ integer (363083ms)
 
   /api/administrator/connect/payouts
     receives
@@ -790,9 +783,9 @@ Setting up with Dashboard as module
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (125747ms)
+        ✓ ineligible accessing account (135052ms)
     returns
-      ✓ object
+      ✓ object (123712ms)
 
   /api/user/connect/payouts-count
     exceptions
@@ -802,7 +795,7 @@ Setting up with Dashboard as module
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ integer (136005ms)
+      ✓ integer (132746ms)
 
   /api/user/connect/payouts
     exceptions
@@ -904,7 +897,7 @@ Setting up with Dashboard as module
         ✓ ineligible company person missing information
     returns
       ✓ object (individual)
-      ✓ object (company) (120918ms)
+      ✓ object (company)
 
   /api/user/connect/stripe-account
     exceptions
@@ -1009,7 +1002,7 @@ Setting up with Dashboard as module
       invalid-account
         ✓ ineligible accessing account
       invalid-person
-        ✓ ineligible querystring person has no required information
+        ✓ ineligible querystring person has no required information (133291ms)
     returns
       ✓ object
     configuration
@@ -1139,5 +1132,5 @@ Setting up with Dashboard as module
       ✓ environment STRIPE_JS
 
 
-  717 passing (2h)
+  713 passing (2h)
 

@@ -18,9 +18,7 @@ Dashboard modules:
 @userdashboard/maxmind-geoip (1.0.58)
 
 Server handlers:
-/src/server/bind-ip.js
 /src/server/bind-stripekey.js
-@userdashboard/maxmind-geoip/src/server/bind-ip.js
 
 URL -------------------------------------------------- AUTH - TEMPLATE - HTTP REQUESTS - NODEJS ------------------------- HTML -----------------------
 /                                                      GUEST  FULLSCREEN GET                                              /src/www                    
