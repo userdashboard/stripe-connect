@@ -36,6 +36,10 @@ jobs:
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
         echo $PACKAGE > package.json
+        aws --endpoint-url=http://localhost:4566 s3 mb s3://testing
+      env:
+        AWS_SECRET_ACCESS_KEY: "using-mock-aws-s3"
+        AWS_ACCESS_KEY_ID: "using-mock-aws-s3"
     - name: Test encrypted S3-compatible storage
       run: cd /tmp/project && mocha --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js"
       env:
