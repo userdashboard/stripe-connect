@@ -1,10 +1,9 @@
 
-> @userdashboard/stripe-connect@1.0.64 test /home/runner/work/stripe-connect/stripe-connect
+> @userdashboard/stripe-connect@1.0.65 test /home/runner/work/stripe-connect/stripe-connect
 > mocha --retries 2 --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './{,!(public|node_modules)/**}/*.test.js'
 
 
 
-Setting up with Dashboard as module
   index
     STRIPE_JS
       Use client-side stripe.js in browser
@@ -511,7 +510,7 @@ Setting up with Dashboard as module
       ✓ should show payment information required
       ✓ should show payment information created
       ✓ should show ready to submit
-      ✓ should show registration is submitted
+      ✓ should show registration is submitted (127569ms)
 
   /account/connect/stripe-accounts
     before
@@ -553,7 +552,7 @@ Setting up with Dashboard as module
     exceptions
       ✓ should reject invalid stripeid
     before
-      ✓ should bind data to req (121359ms)
+      ✓ should bind data to req (129698ms)
     view
       ✓ should reject registration that hasn't submitted payment details
       ✓ should reject company that hasn't submitted beneficial owners
@@ -562,9 +561,9 @@ Setting up with Dashboard as module
       ✓ should reject company that hasn't submitted information
       ✓ should reject individual that hasn't submitted information
       ✓ should present the form (individual)
-      ✓ should present the form (company)
+      ✓ should present the form (company) (159567ms)
     submit
-      ✓ should submit registration (company) (screenshots) (124521ms)
+      ✓ should submit registration (company) (screenshots) (146279ms)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -585,9 +584,9 @@ Setting up with Dashboard as module
   /administrator/connect/payout
     before
       ✓ should reject invalid payoutid
-      ✓ should bind data to req
+      ✓ should bind data to req (126234ms)
     view
-      ✓ should have row for payout (screenshots)
+      ✓ should have row for payout (screenshots) (132650ms)
 
   /administrator/connect/payouts
     before
@@ -634,11 +633,11 @@ Setting up with Dashboard as module
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
     returns
-      ✓ object (121588ms)
+      ✓ object (125499ms)
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (363083ms)
+      ✓ integer (378117ms)
 
   /api/administrator/connect/payouts
     receives
@@ -783,9 +782,9 @@ Setting up with Dashboard as module
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (135052ms)
+        ✓ ineligible accessing account
     returns
-      ✓ object (123712ms)
+      ✓ object (124269ms)
 
   /api/user/connect/payouts-count
     exceptions
@@ -795,7 +794,7 @@ Setting up with Dashboard as module
       invalid-account
         ✓ ineligible accessing account
     returns
-      ✓ integer (132746ms)
+      ✓ integer (145104ms)
 
   /api/user/connect/payouts
     exceptions
@@ -886,7 +885,7 @@ Setting up with Dashboard as module
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account is submitted
+        ✓ ineligible stripe account is submitted (138425ms)
       invalid-account
         ✓ ineligible accessing account
       invalid-payment-details
@@ -897,7 +896,7 @@ Setting up with Dashboard as module
         ✓ ineligible company person missing information
     returns
       ✓ object (individual)
-      ✓ object (company)
+      ✓ object (company) (124438ms)
 
   /api/user/connect/stripe-account
     exceptions
@@ -1002,7 +1001,7 @@ Setting up with Dashboard as module
       invalid-account
         ✓ ineligible accessing account
       invalid-person
-        ✓ ineligible querystring person has no required information (133291ms)
+        ✓ ineligible querystring person has no required information (139746ms)
     returns
       ✓ object
     configuration
