@@ -41,9 +41,8 @@ jobs:
         AWS_SECRET_ACCESS_KEY: "using-mock-aws-s3"
         AWS_ACCESS_KEY_ID: "using-mock-aws-s3"
     - name: Test encrypted S3-compatible storage
-      run: |
-        cd /tmp/project 
-        mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js"
+      run: mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js"
+      working-directory: "/tmp/project"
       env:
         NODE_ENV: testing
         FAST_START: true

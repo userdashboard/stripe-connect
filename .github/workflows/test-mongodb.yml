@@ -32,9 +32,8 @@ jobs:
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
         echo $PACKAGE > package.json
     - name: Test encrypted MongoDB storage
-      run: |
-        cd /tmp/project 
-        mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js"
+      run: mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js"
+      working-directory: "/tmp/project"
       env:
         NODE_ENV: "testing"
         FAST_START: "true"
