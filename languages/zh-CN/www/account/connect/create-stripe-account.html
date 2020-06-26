@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">创建注册</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">创建注册</h1>
+  <p translate="yes">已完成的注册允许您通过一个Stripe Connect。</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
+    <div class="pure-control-group">
+      <label for="individual" translate="yes">帐户类型</label>
+      <div class="pure-checkbox">
+        <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
+        <label><input id="company" type="radio" name="type" value="company"> Company</label>
+      </div>
+    </div>
+    <div class="pure-control-group">
+      <label for="country" translate="yes">居住国/公司</label>
+      <select name="country" id="country">
+        <option value="" translate="yes">
+          选择国家/地区
+        </option>
+      </select>
+    </div>
+    <div class="pure-controls">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">开始注册</button>
+    </div>
+  </form>
+  <template id="country-option">
+    <option value="${country_spec.id}">
+      ${country_spec.name}
+    </option>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      错误！创建注册时出错
+    </div>
+  </template>
+  <template id="invalid-country">
+    <div class="error message" translate="yes">
+      错误！无效或缺失的国家/地区
+    </div>
+  </template>
+</body>
+</html>

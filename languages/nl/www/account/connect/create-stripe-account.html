@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Registratie maken</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Registratie maken</h1>
+  <p translate="yes">Met een voltooide registratie u inkomstenontvangsten ontvangen via Stripe Connect.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
+    <div class="pure-control-group">
+      <label for="individual" translate="yes">Accounttype</label>
+      <div class="pure-checkbox">
+        <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
+        <label><input id="company" type="radio" name="type" value="company"> Company</label>
+      </div>
+    </div>
+    <div class="pure-control-group">
+      <label for="country" translate="yes">Land van verblijf/oprichting</label>
+      <select name="country" id="country">
+        <option value="" translate="yes">
+          Land selecteren
+        </option>
+      </select>
+    </div>
+    <div class="pure-controls">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Registratie starten</button>
+    </div>
+  </form>
+  <template id="country-option">
+    <option value="${country_spec.id}">
+      ${country_spec.name}
+    </option>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Fout! Er is een fout opgetreden bij het maken van de registratie
+    </div>
+  </template>
+  <template id="invalid-country">
+    <div class="error message" translate="yes">
+      Fout! Ongeldig of vermist land
+    </div>
+  </template>
+</body>
+</html>

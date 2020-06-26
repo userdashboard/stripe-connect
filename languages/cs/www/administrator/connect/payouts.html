@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Payouts</title>
+  <title translate="yes">Výplaty</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Payouts</h1>
+  <h1 translate="yes">Výplaty</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">No payouts have occurred yet.</p>
+    <p translate="yes">Zatím nedošlo k žádným výplatám.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th >ID</th>
-        <th translate="yes">Amount</th>
-        <th translate="yes">Stripe account</th>
+        <th translate="yes">Částka</th>
+        <th translate="yes">Stripe účet</th>
         <th translate="yes">Stav</th>
-        <th translate="yes">Description</th>
-        <th translate="yes">Created</th>
+        <th translate="yes">Popis</th>
+        <th translate="yes">Vytvořen</th>
       </tr>
     </thead>
   </table>
@@ -50,40 +50,40 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">No bank account found</span>
+    <span translate="yes">Nebyl nalezen žádný bankovní účet.</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Invalid currency</span>
+    <span translate="yes">Neplatná měna</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Invalid account number</span>
+    <span translate="yes">Neplatné číslo účtu</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Insufficient funds</span>
+    <span translate="yes">Nedostatek finančních prostředků</span>
   </template>
   <template id="declined">
-    <span translate="yes">Bank declined transfer</span>
+    <span translate="yes">Banka odmítla převod</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">No bank account debit</span>
+    <span translate="yes">Žádný bankovní účet má dáti</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Could not process</span>
+    <span translate="yes">Nelze zpracovat.</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Bank ownership changed</span>
+    <span translate="yes">Změnilo se vlastnictví banky</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Bank account restricted</span>
+    <span translate="yes">Omezený bankovní účet</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Bank account frozen</span>
+    <span translate="yes">Bankovní účet zmrazený</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Bank account closed</span>
+    <span translate="yes">Bankovní účet uzavřen</span>
   </template>
 </body>
 </html>

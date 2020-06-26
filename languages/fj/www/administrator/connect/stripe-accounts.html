@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe accounts</title>
+  <title translate="yes">Stripe akaude</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe accounts</h1>
+  <h1 translate="yes">Stripe akaude</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">No Stripe accounts have been created yet.</p>
+    <p translate="yes">Sega ni dua na akaude Stripe sa tauyavutaki oti.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th >ID</th>
-        <th translate="yes">Type</th>
-        <th translate="yes">Name</th>
+        <th translate="yes">Mataqali</th>
+        <th translate="yes">Yaca</th>
         <th translate="yes">Ituvaki</th>
-        <th translate="yes">Created</th>
-        <th translate="yes">Submitted</th>
+        <th translate="yes">Buli</th>
+        <th translate="yes">Vakau</th>
       </tr>
     </thead>
   </table>
@@ -48,58 +48,58 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Funds are paid to account x</p>
+    <p translate="yes">Na ilavo e saumi ki na itukutuku x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Banking details must be provided to receive funds.</p>
+    <p translate="yes">Na veiqaravi matailalai me na vakarautaki me ciqomi kina na ilavo.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">The registration has not been submitted.</p>
+    <p translate="yes">E se bera ni vakau na volayaca.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">The registration was submitted on ${account.dateFormatted}.</p>
+    <p translate="yes">A vakau na volayaca ena ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Not submitted yet</span>
+    <span translate="yes">Se bera ni vakau</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registration has been accepted</span>
+    <span translate="yes">Sa ciqomi na volayaca</span>
   </template>
   <template id="verified">
-    <span translate="yes">Disabled by Stripe</span>
+    <span translate="yes">Yavala mai vei Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Requires additional information</span>
+    <span translate="yes">Gadrevi eso tale na itukutuku</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pending submission</span>
+    <span translate="yes">Vakau vakawawa</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Requires additional information</span>
+    <span translate="yes">Gadrevi eso tale na itukutuku</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Cata o Stripe, raica</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Cata o Stripe, raica</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Cata o Stripe, raica</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Cata o Stripe, raica</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">More information is required</span>
+    <span translate="yes">E gadrevi e vuqa tale na itukutuku</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Ni raicilesu mai na Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Ni raicilesu mai na Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Disabled by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Yavala mai vei Stripe, raica</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

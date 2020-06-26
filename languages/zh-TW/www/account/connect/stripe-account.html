@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">View ${stripeAccount.id}</title>
+  <title translate="yes">檢視 ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">View ${stripeAccount.id}</h1>
+  <h1 translate="yes">檢視 ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,18 +17,18 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Type</th>
+        <th translate="yes">類型</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Name</th>
+        <th translate="yes">名稱</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Country</th>
+        <th translate="yes">國家</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
@@ -36,14 +36,14 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Submitted</th>
+        <th translate="yes">提交</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
         <td id="not-submitted2">Not submitted yet</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Registration information</h2>
+    <h2 translate="yes">註冊資訊</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Company representative</h2>
-    <p translate="yes">To avoid account disruption submit new representative information if the specified person leaves or no longer represents the company.</p>
+    <h2 translate="yes">公司代表</h2>
+    <p translate="yes">為了避免帳戶中斷,如果指定人員離開或不再代表公司,請提交新的代表資訊。</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th >ID</th>
-          <th translate="yes">Name</th>
-          <th translate="yes">Required information</th>
+          <th translate="yes">名稱</th>
+          <th translate="yes">所需資訊</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Other beneficial owners information</h2>
-    <p translate="yes">You must provide documentation for anyone else owning a substantial (25+) percent of the company or in charge of the company, finances or operations.</p>
+    <h2 translate="yes">其他受益所有人資訊</h2>
+    <p translate="yes">您必須為擁有公司大量(25%以上)%或負責公司、財務或運營的任何其他人提供檔。</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th >ID</th>
-          <th translate="yes">Name</th>
-          <th translate="yes">Requires</th>
+          <th translate="yes">名稱</th>
+          <th translate="yes">需要</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Company directors information</h2>
-    <p translate="yes">You must provide full names of your company's governing board and/or people responsible for maintaining regulatory compliance.</p>
+    <h2 translate="yes">公司董事資訊</h2>
+    <p translate="yes">您必須提供公司董事會和/或負責維護法規遵從的人的全名。</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th >ID</th>
-          <th translate="yes">Name</th>
-          <th translate="yes">Requires</th>
+          <th translate="yes">名稱</th>
+          <th translate="yes">需要</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Payment information</h2>
+    <h2 translate="yes">付款資訊</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Submit registration</h2>
+    <h2 translate="yes">提交註冊</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,67 +120,67 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Add information</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">新增資訊</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Funds are paid to account ${bank_account.bank_name}.</p>
+    <p translate="yes">資金支付給帳戶 ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Banking details must be provided to receive funds.</p>
+    <p translate="yes">必須提供銀行詳細資訊才能收到資金。</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">The registration has not been submitted.</p>
+    <p translate="yes">尚未提交註冊。</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">The registration was submitted on ${account.dateFormatted}.</p>
+    <p translate="yes">註冊提交於 ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">The registration information has not been provided.</p>
+    <p translate="yes">尚未提供註冊資訊。</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">The registration information has been provided.</p>
+    <p translate="yes">已提供註冊資訊。</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Not submitted yet</span>
+    <span translate="yes">尚未提交</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registration has been accepted</span>
+    <span translate="yes">已接受註冊</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Requires additional information</span>
+    <span translate="yes">需要其他資訊</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pending submission</span>
+    <span translate="yes">待提交</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">由Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">由Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Requires additional information</span>
+    <span translate="yes">需要其他資訊</span>
   </template>
 </body>
 </html>

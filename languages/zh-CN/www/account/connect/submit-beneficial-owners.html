@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">提交所有者 ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+  <script id="stripe-js-v2"></script>
+  <script id="stripe-js-v3"></script>
+</head>
+<body>
+  <h1 translate="yes">提交所有者 ${stripeAccount.id}</h1>
+  <p translate="yes">添加完所有其他所有者（如果有）后，请提交它们进行审核。</p>
+  <div id="message-container"></div>
+  <div id="owners-container">
+    <h2 translate="yes">受益所有人</h2>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">名字</th>
+          <th translate="yes">需要</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-controls spaced-buttons">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">提交所有者</button>
+    </div>
+  </form>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">添加信息</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr> 
+  </template>
+  <template id="invalid-beneficial-owners">
+    <div class="error message" translate="yes">
+      错误！有些所有者仍然需要信息。
+    </div>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      成功！公司所有者已提交
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      错误！提交所有者时出错
+    </div>
+  </template>
+</body>
+</html>

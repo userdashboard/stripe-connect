@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Izbrisati ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Izbrisati ${stripeAccount.id}</h1>
+  <p translate="yes">Stripe račun će biti izbrisan odmah i ne može se oporaviti.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Izbrisati</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Uspjeh! Stripe račun je izbrisan
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Greška! Greška pri suzbisanju Stripe računa
+    </div>
+  </template>
+</body>
+</html>

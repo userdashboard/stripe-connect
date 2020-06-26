@@ -2,20 +2,20 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Delete ${stripeAccount.id}</title>
+  <title translate="yes">Odstranit ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Delete ${stripeAccount.id}</h1>
+  <h1 translate="yes">Odstranit ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th >ID</th>
-        <th translate="yes">Name</th>
+        <th translate="yes">Jméno</th>
         <th translate="yes">Stav</th>
       </tr>
     </thead>
@@ -31,62 +31,62 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Delete</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Odstranit</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Success! The Stripe account has been deleted
+      Úspěch! Účet Stripe byl odstraněn.
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Error! An error ocurred deleting the Stripe account
+      Chyba! Při odstraňování Stripe účtu došlo k chybě.
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Not submitted yet</span>
+    <span translate="yes">Dosud neodloží</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registration has been accepted</span>
+    <span translate="yes">Registrace byla přijata</span>
   </template>
   <template id="verified">
-    <span translate="yes">Disabled by Stripe</span>
+    <span translate="yes">Zakázáno podle Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Requires additional information</span>
+    <span translate="yes">Vyžaduje další informace</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pending submission</span>
+    <span translate="yes">Čeká na odeslání</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Pending submission</span>
+    <span translate="yes">Čeká na odeslání</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Rejected by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">More information is required</span>
+    <span translate="yes">Je vyžadováno více informací</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Přezkoumávány Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Přezkoumávány Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Disabled by Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Zakázáno Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
-    <span translate="yes">Deleted</span>
+    <span translate="yes">Odstraněny</span>
   </template>
 </body>
 </html>

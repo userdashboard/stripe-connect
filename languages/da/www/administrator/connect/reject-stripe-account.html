@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Afvise ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Afvise ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Årsag til afvisning</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Vælg årsag
+        </option>
+        <option value="fraud" translate="yes">
+          Svig
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Overtrædelse af servicevilkår
+        </option>
+        <option value="other" translate="yes">
+          Andre
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Afvise</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Succes! Den Stripe konto er blevet afvist
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Fejl! Kontoen skal have en /bin/sh-saldo, før der afvises
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Fejl! Der opstod en fejl under afvisning af Stripe-kontoen
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Ikke indsendt endnu</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Registrering er blevet accepteret</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Deaktiveret af Stripe</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Kræver yderligere oplysninger</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Kræver yderligere oplysninger</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Afventer indsendelse</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Afvist af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Afvist af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Afvist af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Afvist af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Der kræves flere oplysninger</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Under revision af Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Under revision af Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Deaktiveret af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

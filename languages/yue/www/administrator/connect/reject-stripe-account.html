@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">拒絕 ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">拒絕 ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">拒絕原因</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          選擇原因
+        </option>
+        <option value="fraud" translate="yes">
+          欺詐
+        </option>
+        <option value="terms_of_service" translate="yes">
+          違反服務條款
+        </option>
+        <option value="other" translate="yes">
+          其他
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">拒絕</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      成功! Stripe帳戶食檸檬
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      錯誤! 在拒絕之前,帳戶必須具有/bin/sh餘額
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      錯誤! 拒絕帳戶Stripe錯誤
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">尚未提交</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">已接受註冊</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">按Stripe</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">需要其他信息</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">需要其他信息</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">待提交</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">被Stripe,請參閱</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">需要更多信息</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">正在由Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">正在由Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">按Stripe禁用,請參見</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

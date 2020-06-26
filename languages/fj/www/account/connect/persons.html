@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Tamata me ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Tamata</h1>
+  <div id="representative-container">
+    <h2 translate="yes">Mata ni kabani</h2>
+    <p translate="yes">Kevaka e veisautaka na ituvaki ni tamata na mai e dodonu mo cakava e dua na mata vou.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Tauyavutaka e dua na mata vou</a></p>
+    <table id="representatives-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">Yaca</th>
+          <th translate="yes">Gadrevi kina</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Itaukei ni ka yaga</h2>
+    <p translate="yes">E dodonu mo vakarautaka e dua tale na itukutuku me baleta e dua tale na taukena e levu (25 +) na pasede ni kabani se na kena cicivaki na kabani, na kena ilavo se cakacaka.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Kuria na kena itaukei</a></p>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">Yaca</th>
+          <th translate="yes">Gadrevi kina</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Dairekita ni kabani</h2>
+    <p translate="yes">Sa dodonu mo vakarautaka na ivolatukutuku me baleta na matabose ni dairekita.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Kuria na kena itaukei</a></p>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">Yaca</th>
+          <th translate="yes">Gadrevi kina</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="person-row">
+    <table>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+        <td id="requires-information-${person.id}">
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Vakuria na itukutuku</a>
+        </td>
+        <td id="requires-no-information-${person.id}">-</td>
+      </tr>
+    </table>
+  </template>
+</body>
+</html>
