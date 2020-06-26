@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Teena ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Teena ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Mafuaaga teena</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Filifili le mafuaaga
+        </option>
+        <option value="fraud" translate="yes">
+          Taufaasese
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Tuutuuga o le solia o auaunaga
+        </option>
+        <option value="other" translate="yes">
+          Isi
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Teena</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Manuia! Ua teena le Faitotoa a le Stripe
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Mea sese! O le tala e tatau ona i ai se paleni/bin/sh a o lei teenaina
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Mea sese! O se mea sese ocurred le teenaina o le tala Stripe
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">E lei auina atu</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Ua taliaina le lesitala</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Taofia e Stripe</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Manaomia ni faamatalaga faaopoopo</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Manaomia ni faamatalaga faaopoopo</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Auina atu o loo faatalitali</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">E tele nisi faamatalaga e manaomia</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">I lalo o le iloiloga a Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">I lalo o le iloiloga a Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Taofia e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

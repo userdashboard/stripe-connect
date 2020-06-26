@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ഇതിനായി പുതിയ വ്യക്തി സൃഷ്ടിക്കുക ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+</head>
+<body class="entry">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
+    <h1 translate="yes">പുതിയ വ്യക്തി സൃഷ്ടിക്കുക</h1>
+    <p translate="yes">നിങ്ങളുടെ വിവരങ്ങൾ മാറുമ്പോൾ ഡയറക്ടർ ബോർഡ്, ഉടമ, പ്രതിനിധി എന്നിവ യെ കാലികമായി നിലനിർത്തണം.</p>
+    <div id="message-container"></div>
+    <div id="form-container">
+      <h2 translate="yes">കമ്പനിയുമായുള്ള ബന്ധം</h2>
+      <div class="pure-control-group">
+        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
+        <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
+        <label id="director-container"><input type="checkbox" id="relationship_director" name="relationship_director" value="true"> Company director</label>
+        <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_title" translate="yes">ജോലി, പങ്ക് അല്ലെങ്കിൽ റിലേഷൻഷിപ്പ് തലക്കെട്ട്</label>
+        <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_percent_ownership" translate="yes">ശതമാനം ഉടമസ്ഥത (എന്തെങ്കിലും ഉണ്ടെങ്കിൽ)</label>
+        <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
+      </div>
+      <div id="submit-container" class="pure-controls">
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">രജിസ്ട്രേഷൻ പുതുക്കുക</button>
+      </div>
+    </div>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      വിജയം! രജിസ്ട്രേഷൻ പുതുക്കിയിരിക്കുന്നു
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      തെറ്റ്! രജിസ്ട്രേഷൻ സൃഷ്ടിക്കുന്നതിൽ പിശക് സംഭവിച്ചു
+    </div>
+  </template>
+  <template id="invalid-owner">
+    <div class="error message" translate="yes">
+      നിങ്ങളുടെ Stripe അക്കൗണ്ടിന് പ്രയോജനകരമായ ഉടമയുടെ വിവരങ്ങൾ ആവശ്യമില്ല
+    </div>
+  </template>
+  <template id="invalid-director">
+    <div class="error message" translate="yes">
+      നിങ്ങളുടെ Stripe അക്കൗണ്ടിൽ കമ്പനി ഡയറക്ടർ വിവരങ്ങൾ ആവശ്യമില്ല
+    </div>
+  </template>
+  <template id="invalid-executive">
+    <div class="error message" translate="yes">
+      കമ്പനി പ്രതിനിധികൾ എക്സിക്യൂട്ടീവുകൾ ആയിരിക്കണം
+    </div>
+  </template>
+  <template id="invalid-selection">
+    <div class="error message" translate="yes">
+      ഒന്നുകിൽ പ്രതിനിധി, ഡയറക്ടർ അല്ലെങ്കിൽ ഉടമ തിരഞ്ഞെടുക്കണം
+    </div>
+  </template>
+  <template id="invalid-relationship_percent_ownership">
+    <div class="error message" translate="yes">
+      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ശതമാനം ഉടമസ്ഥാവകാശം (0 ഇല്ലെങ്കിൽ)
+    </div>
+  </template>
+  <template id="invalid-relationship_title">
+    <div class="error message" translate="yes">
+      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ബന്ധത്തിന്റെ തലക്കെട്ട്
+    </div>
+  </template>
+</body>
+</html>

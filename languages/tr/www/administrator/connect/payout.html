@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Görüntüle ${payout.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Görüntüle ${payout.id}</h1>
+  <div id="message-container"></div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <tbody id="${payout.id}">
+      <tr>
+        <th >ID</th>
+        <td>${payout.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Tutar</th>
+        <td>${payout.amountFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Stripe hesabı</th>
+        <td>
+          <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+        </td>
+      </tr>
+      <tr>
+        <th translate="yes">Durum</th>
+        <td id="status-${payout.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Açıklama</th>
+        <td>${payout.description}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Oluşturulan</th>
+        <td>${payout.createdFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">Banka hesabı bulunamadı</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">Geçersiz para birimi</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">Geçersiz hesap numarası</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">Yetersiz fonlar</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">Banka transferi reddetti</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">Banka hesabı borçlandırması yok</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">İşleme edilemedi</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">Banka mülkiyeti değişti</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">Banka hesabı kısıtlandı</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">Banka hesabı dondurulmuş</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">Banka hesabı kapatıldı</span>
+  </template>
+</body>
+</html>

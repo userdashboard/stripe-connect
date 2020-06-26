@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ഇതിനായി ഡയറക്ടർമാരെ സമർപ്പിക്കുക ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+  <script id="stripe-js-v2"></script>
+  <script id="stripe-js-v3"></script>
+</head>
+<body>
+  <h1 translate="yes">ഇതിനായി ഡയറക്ടർമാരെ സമർപ്പിക്കുക ${stripeAccount.id}</h1>
+  <p translate="yes">കമ്പനിയുടെ ഡയറക്ടർമാരെ ചേർക്കുന്നത് നിങ്ങൾ പൂർത്തിയാക്കിയശേഷം, അവ അവലോകനത്തിനായി സമർപ്പിക്കുക.</p>
+  <div id="message-container"></div>
+  <div id="directors-container">
+    <h2 translate="yes">കമ്പനി ഡയറക്ടർമാർ</h2>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">പേരു്</th>
+          <th translate="yes">ആവശ്യ</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-controls spaced-buttons">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">ഡയറക്ടർമാരെ സമർപ്പിക്കുക</button>
+    </div>
+  </form>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}" translate="yes">വിവരങ്ങൾ ചേർക്കുക</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="invalid-company-directors">
+    <div class="error message" translate="yes">
+      തെറ്റ്! ഇപ്പോഴും വിവരങ്ങൾ ആവശ്യമുള്ള ഡയറക്ടർമാർ ഉണ്ട്
+    </div>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      വിജയം! കമ്പനിയുടെ ഡയറക്ടർമാർ സമർപ്പിച്ചിട്ടുണ്ട്
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      തെറ്റ്! ഡയറക്ടർമാരെ സമർപ്പിക്കുന്നതിൽ പിശക് സംഭവിച്ചു
+    </div>
+  </template>
+</body>
+</html>

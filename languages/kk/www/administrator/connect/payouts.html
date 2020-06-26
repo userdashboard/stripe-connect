@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Төлем</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Төлем</h1>
+  <div id="message-container"></div>
+  <div id="no-payouts">
+    <p translate="yes">Әзірге ешқандай төлем болған жоқ.</p>
+  </div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th >ID</th>
+        <th translate="yes">Сома</th>
+        <th translate="yes">Stripe тіркелгі</th>
+        <th translate="yes">Күй</th>
+        <th translate="yes">Сипаттама</th>
+        <th translate="yes">Құрылып қалар</th>
+      </tr>
+    </thead>
+  </table>
+  <ul id="page-links" class="pagination"></ul>
+  <template id="page-link">
+    <li>
+      <a href="/administrator/connect/payouts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a>
+    </li>
+  </template>
+  <template id="payout-row">
+    <tr id="${payout.id}">
+      <td>
+        <a href="/administrator/connect/payout?payoutid=${payout.id}">${payout.id}</a>
+      </td>
+      <td>${payout.amountFormatted}</td>
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+      </td>
+      <td id="status-${payout.id}"></td>
+      <td>${payout.description}</td>
+      <td>${payout.createdFormatted}</td>
+    </tr>
+  </template>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">Банк шоты табылмады</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">Дұрыс емес валюта</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">Тіркелгінөмірі дұрыс емес</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">Қаражаттың жеткіліксіздігі</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">Банк трансфертті төмендетті</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">Банк шоты бойынша дебеттің No</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">Процесс болмады</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">Банктің меншік құқығы өзгерді</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">Банк шотын шектеу</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">Банк шоты ның тозы</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">Банк шоты жабылды</span>
+  </template>
+</body>
+</html>

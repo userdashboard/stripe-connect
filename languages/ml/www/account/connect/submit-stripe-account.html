@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">സമർപ്പിക്കുക ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+  <script id="stripe-js-v2"></script>
+  <script id="stripe-js-v3"></script>
+</head>
+<body>
+  <h1 translate="yes">സമർപ്പിക്കുക ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> നിങ്ങളുടെ പൂർത്തിയാക്കിയ രജിസ്ട്രേഷൻ സമർപ്പിച്ച് പരിശോധിച്ചുറപ്പിക്കൽ പ്രക്രിയ.</p>
+  <div id="message-container"></div>
+  <div id="owners-container">
+    <h2 translate="yes">ഗുണമുള്ള ഉടമകൾ</h2>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">പേരു്</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">കമ്പനി ഡയറക്ടർമാർ</h2>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">പേരു്</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="pure-control-group">
+          <input checked disabled type="checkbox"> I have provided complete and accurate information
+        </div>
+        <div id="company-representative-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I am authorized to represent this business
+        </div>
+        <div id="company-owners-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I have submitted, or there are no, relevant beneficial owners information
+        </div>
+        <div id="company-directors-option" class="pure-control-group">
+          <input checked disabled type="checkbox"> I have submitted, or there are no, relevant company directors names
+        </div>
+        <div class="pure-control-group">
+          <input checked disabled type="checkbox"> I accept the Stripe Connect <a href="https://stripe.com/us/connect-account/legal">terms and conditions</a>
+        </div>
+      </div>
+    </div>
+    <div class="pure-controls spaced-buttons">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">രജിസ്ട്രേഷൻ സമർപ്പിക്കുക</button>
+    </div>
+  </form>
+  <template id="owner-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+  </template>
+  <template id="director-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+    </tr>
+  </template>
+  <template id="invalid-registration">
+    <div class="error message" translate="yes">
+      രജിസ്ട്രേഷൻ അപൂർണ്ണ രജിസ്ട്രേഷൻ വിവരങ്ങൾ ഉണ്ട്
+    </div>
+  </template>
+  <template id="invalid-company-directors">
+    <div class="error message" translate="yes">
+      തെറ്റ്! നിങ്ങൾ കമ്പനിയുടെ ഡയറക്ടർമാർ സമർപ്പിക്കണം
+    </div>
+  </template>
+  <template id="invalid-beneficial-owners">
+    <div class="error message" translate="yes">
+      തെറ്റ്! കമ്പനിയുടെ ഗുണകരഉടമകൾ നിങ്ങൾ സമർപ്പിക്കണം
+    </div>
+  </template>
+  <template id="invalid-company-representative">
+    <div class="error message" translate="yes">
+      തെറ്റ്! നിങ്ങൾ കമ്പനി പ്രതിനിധിയുടെ വിവരങ്ങൾ സമർപ്പിക്കണം
+    </div>
+  </template>
+  <template id="invalid-payment-details">
+    <div class="error message" translate="yes">
+      തെറ്റ്! രജിസ്ട്രേഷൻ അപൂർണ്ണമായ പേയ് മെന്റ് വിവരങ്ങൾ ഉണ്ട്
+    </div>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      വിജയം! രജിസ്ട്രേഷൻ സമർപ്പിച്ചിട്ടുണ്ട്
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      തെറ്റ്! രജിസ്ട്രേഷൻ സമർപ്പിക്കുന്നതിൽ ഒരു പിശക് സംഭവിച്ചു
+    </div>
+  </template>
+</body>
+</html>

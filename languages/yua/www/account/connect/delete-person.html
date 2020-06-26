@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-person.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Tselik ${person.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Tselik ${person.id}</h1>
+  <p translate="yes">Le a'alajil t'aan le propietario ku eliminará inmediatamente yéetel ma' u ma' táan recuperar.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tselik</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Éxito! Le propietario u empresa u sido eliminado
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Ba'alo'! U ts'o'ok producido jump'éel ba'alo' ti' le tselik le propietario le empresa
+    </div>
+  </template>
+</body>
+</html>

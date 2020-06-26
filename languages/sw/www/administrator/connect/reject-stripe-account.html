@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Kataa ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Kataa ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Sababu ya kukataliwa</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Teua sababu
+        </option>
+        <option value="fraud" translate="yes">
+          Udanganyifu
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Masharti ya ukiukaji wa huduma
+        </option>
+        <option value="other" translate="yes">
+          Nyingine
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Kataa</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Mafanikio! Akaunti ya Stripe Imekataliwa
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Kosa! Akaunti lazima iwe na salio/bin/Sh kabla ya kukataa
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Kosa! Kosa la ulitolekea kukataa akaunti ya Stripe
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Haijatowasilishwa bado</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Usajili umekubaliwa</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Imezuiwa na Stripe</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Inahitaji taarifa ya ziada</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Inahitaji taarifa ya ziada</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Inasubiri kuwasilisha</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Imekataliwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Imekataliwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Imekataliwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Imekataliwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Taarifa zaidi inahitajika</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Chini ya ukaguzi na Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Chini ya ukaguzi na Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Imezuiwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

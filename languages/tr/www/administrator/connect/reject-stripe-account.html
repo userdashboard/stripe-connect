@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Reddetmek ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Reddetmek ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Ret nedeni</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Nedeni seçin
+        </option>
+        <option value="fraud" translate="yes">
+          Dolandırıcı -lık
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Hizmet ihlali şartları
+        </option>
+        <option value="other" translate="yes">
+          Diğer
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Reddetmek</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Başarı! Stripe hesabı reddedildi
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Hata! Hesabın reddi önce bir /bin/sh bakiyesi olmalıdır
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Hata! Stripe hesabı reddeden bir hata
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Henüz gönderilmedi</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Kayıt kabul edildi</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Stripe tarafından devre dışı bırakılmış</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Ek bilgi gerektirir</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Ek bilgi gerektirir</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Bekleyen gönderim</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Daha fazla bilgi gereklidir</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Stripe tarafından gözden geçiriliyor</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Stripe tarafından gözden geçiriliyor</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe tarafından devre dışı bırakılmış, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

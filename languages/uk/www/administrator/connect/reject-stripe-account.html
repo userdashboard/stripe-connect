@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Відхилити ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Відхилити ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Відхилення причина</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Виберіть причину
+        </option>
+        <option value="fraud" translate="yes">
+          Шахрайство
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Умови порушення послуг
+        </option>
+        <option value="other" translate="yes">
+          Інші
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Відхилити</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Успіху! Обліковий запис Stripe відхилено.
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Помилка! Обліковий запис має мати баланс/BEB/sh, перш ніж відкинути
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Помилка! Сталася помилка під час відхилення облікового запису Stripe
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Ще не надіслано</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Реєстрація була прийнята</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Відключено Stripe</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Вимагає додаткової інформації</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Вимагає додаткової інформації</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Відкладене надсилання</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Відхилено Stripe, див.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Відхилено Stripe, див.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Відхилено Stripe, див.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Відхилено Stripe, див.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Потрібна додаткова інформація</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">У розділі огляд Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">У розділі огляд Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Відключено Stripe, див.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

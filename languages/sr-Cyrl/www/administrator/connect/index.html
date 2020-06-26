@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Connect администрација</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Connect администрација</h1>
+  <div id="registrations-container">
+    <h2 translate="yes">Недавне регистрације</h2>
+    <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">Име</th>
+          <th translate="yes">Статус</th>
+          <th translate="yes">Креирали</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+    </tr>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Још није поднета</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Регистрација је прихваћена</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Захтева додатне информације</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Захтева додатне информације</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Прослеђивање на чекању</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Одбијена од стране Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms_of_service">
+    <span translate="yes">Одбијено за услове кршења услуга</span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Одбијена од стране Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Одбијена од стране Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.pending_verification">
+    <span translate="yes">Потврда о текућем провери</span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Потребно је више информација</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">У прегледу Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">У прегледу Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Онемогућено Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Stripe reikninga</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Stripe reikninga</h1>
+  <p><span translate="yes">Gerast söluaðili með því að sannreyna persónuauðkenni og upplýsingar um fyrirtæki í gegnum</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <div id="no-stripe-accounts">
+    <p translate="yes">Engir Stripe reikningar hafa verið stofnaðir enn.</p>
+  </div>
+  <div class="pure-g requirements-wrapper">
+    <div class="pure-u-1-2 requirements-container">
+      <div class="requirements">
+        <h2 translate="yes">Einstaklingsbundnar kröfur</h2>
+        <ol>
+          <li translate="yes">Staðfestar persónulegar upplýsingar</li>
+          <li translate="yes">Búsettur á studdu landi</li>
+          <li translate="yes">Bankareikningur í studdu landi</li>
+        </ol>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Hefja einstaklingsskráningu</a>
+      </div>
+    </div>
+    <div class="pure-u-1-2 requirements-container">
+      <div class="requirements">
+        <h2 translate="yes">Viðskiptakröfur</h2>
+        <ol>
+          <li translate="yes">Staðfestar persónulegar upplýsingar</li>
+          <li translate="yes">Fyrirtæki skráð í studdu landi</li>
+          <li translate="yes">Bankareikningur í studdu landi</li>
+        </ol>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Hefja fyrirtækjaskráningu</a>
+      </div>
+    </div>
+  </div>
+  <div id="registrations-container">
+    <div id="individual-container">
+      <h2 translate="yes">Einstaklingsskráning</h2>
+      <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th >ID</th>
+            <th translate="yes">Heiti</th>
+            <th translate="yes">Stöðu</th>
+            <th translate="yes">Stofnuð</th>
+            <th translate="yes">Sent</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div id="company-container">
+      <h2 translate="yes">Skráningar fyrirtækja</h2>
+      <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th >ID</th>
+            <th translate="yes">Nafn fyrirtækja</th>
+            <th translate="yes">Stöðu</th>
+            <th translate="yes">Stofnuð</th>
+            <th translate="yes">Sent</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td id="submitted-${account.id}">${account.submittedFormatted}</td>
+      <td id="not-submitted-${account.id}">No</td>
+    </tr>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Ekki skilað inn enn</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Skráning hefur verið samþykkt</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Óvirkt með Stripe</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Krefst frekari upplýsinga</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Uppgjöf í bið</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Hafnað af Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Hafnað af Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Hafnað af Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Hafnað af Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Frekari upplýsinga er krafist</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Undir yfirfara eftir Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Undir yfirfara eftir Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Óvirk með Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Krefst frekari upplýsinga</span>
+  </template>
+</body>
+</html>

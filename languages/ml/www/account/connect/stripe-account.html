@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">കാണുക ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">കാണുക ${stripeAccount.id}</h1>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th >ID</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">തരം</th>
+        <td id="business" translated="yes">Company registration</td>
+        <td id="individual" translated="yes">Individual registration</td>
+      </tr>
+      <tr>
+        <th translate="yes">പേരു്</th>
+        <td id="blank-name" translated="yes">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">രാജ്യം</th>
+        <td>${stripeAccount.country}</td>
+      </tr>
+      <tr>
+        <th translate="yes">നില</th>
+        <td id="account-status-${stripeAccount.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">സമര് പ്പിച്ച</th>
+        <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
+        <td id="not-submitted2">Not submitted yet</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="registration-container">
+    <h2 translate="yes">രജിസ്ട്രേഷൻ വിവരങ്ങൾ</h2>
+    <div id="account-status"></div>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+      <a id="update-registration-link" class="pure-button" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+    </p>
+  </div>
+  <div id="representative-container">
+    <h2 translate="yes">കമ്പനി പ്രതിനിധി</h2>
+    <p translate="yes">അക്കൗണ്ട് തടസം ഒഴിവാക്കാൻ നിർദ്ദിഷ്ട വ്യക്തി കമ്പനി വിട്ടോ അല്ലെങ്കിൽ ഇനി പ്രതിനിധിആക്കുകയോ ചെയ്യുന്ന പക്ഷം പുതിയ പ്രതിനിധി വിവരങ്ങൾ സമർപ്പിക്കുക.</p>
+    <table id="representatives-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">പേരു്</th>
+          <th translate="yes">ആവശ്യമായ വിവരങ്ങൾ</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true&amp;relationship_executive=true&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+    </p>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">മറ്റ് പ്രയോജനമുള്ള ഉടമകളുടെ വിവരങ്ങൾ</h2>
+    <p translate="yes">കമ്പനിയുടെ ഗണ്യമായ (25+) ശതമാനം അല്ലെങ്കിൽ കമ്പനിയുടെ യോ ധനകാര്യത്തിന്റെയോ പ്രവർത്തനങ്ങളുടെയോ ചുമതലവഹിക്കുന്ന മറ്റാർക്കെങ്കിലും നിങ്ങൾ ഡോക്യുമെന്റേഷൻ നൽകണം.</p>
+    <table id="owners-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">പേരു്</th>
+          <th translate="yes">ആവശ്യ</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="owner-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true&amp;return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">കമ്പനി ഡയറക്ടർമാരുടെ വിവരങ്ങൾ</h2>
+    <p translate="yes">നിങ്ങളുടെ കമ്പനിയുടെ ഭരണസമിതിയുടെ ഒപ്പം/അല്ലെങ്കിൽ റെഗുലേറ്ററി അനുവർത്തനം പരിപാലിക്കുന്നതിന് ഉത്തരവാദിത്തമുള്ള ആളുകളുടെ മുഴുവൻ പേരുകളും നിങ്ങൾ നൽകണം.</p>
+    <table id="directors-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th >ID</th>
+          <th translate="yes">പേരു്</th>
+          <th translate="yes">ആവശ്യ</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="director-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true&amp;return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add company director</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="payment-container">
+    <h2 translate="yes">പേയ് മെന്റ് വിവരങ്ങൾ</h2>
+    <div id="payment-information-status"></div>
+    <p id="payment-options">
+      <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
+      <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a>
+    </p>
+  </div>
+  <div id="submission-container">
+    <h2 translate="yes">രജിസ്ട്രേഷൻ സമർപ്പിക്കുക</h2>
+    <div id="submission-status"></div>
+    <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
+  </div>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">വിവരങ്ങൾ ചേർക്കുക</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">അക്കൗണ്ടിലേക്ക് പണം അടയ്ക്കപ്പെടുന്നു ${bank_account.bank_name}.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">പണം സ്വീകരിക്കുന്നതിന് ബാങ്കിംഗ് വിശദാംശങ്ങൾ നൽകണം.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">രജിസ്ട്രേഷൻ സമർപ്പിച്ചിട്ടില്ല.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">രജിസ് ട്രേഷന് ഓണ് ചെയ്തു ${account.dateFormatted}.</p>
+  </template>
+  <template id="unstarted-registration">
+    <p translate="yes">രജിസ്ട്രേഷൻ വിവരങ്ങൾ നൽകിയിട്ടില്ല.</p>
+  </template>
+  <template id="completed-registration">
+    <p translate="yes">രജിസ്ട്രേഷൻ വിവരങ്ങൾ നൽകിയിട്ടുണ്ട്.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">ഇതുവരെ സമർപ്പിച്ചിട്ടില്ല</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">രജിസ്ട്രേഷൻ സ്വീകരിച്ചു</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">സമർപ്പിക്കൽ ബാക്കി</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span>More information is required.</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Under review by Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Under review by Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
+  </template>
+</body>
+</html>

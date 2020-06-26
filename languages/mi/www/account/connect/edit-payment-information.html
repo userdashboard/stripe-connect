@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Mōhiohio utu mō ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+  <style>
+    form {
+      max-width: 40rem
+    }
+
+    .country {
+      margin-bottom: 1rem
+    }
+
+    .country select,
+    .country button {
+      display: inline-block
+    }
+
+    .country button {
+      margin-left: 1rem
+    }
+  </style>
+</head>
+<body>
+  <h1 translate="yes">Mōhiohio utu mō ${stripeAccount.id}</h1>
+  <p translate="yes">Whakahōu i te pūkete pēke ka whiwhi i tō moni puta payouts.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="country pure-control-group">
+      <label for="country" translate="yes">Whenua o te pēke</label>
+      <select class="country" name="country" id="country">
+        <option value="" translate="yes">
+          Kōwhiria
+        </option>
+      </select>
+      <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
+    </div>
+    <div class="pure-control-group">
+      <label translate="yes">Momo pūkete</label>
+      <div class="pure-checkbox">
+        <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
+      </div>
+      <div class="pure-checkbox">
+        <label><input id="company" type="radio" name="account_holder_type" value="company"> Company</label>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="pure-control-group">
+          <label for="currency" translate="yes">Moni pūkete</label>
+          <select class="currency" name="currency" id="currency">
+            <option value="" translate="yes">
+              Kōwhiria
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="pure-control-group">
+      <label for="account-holder-name" translate="yes">Ingoa o te purama pūkete</label>
+      <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
+    </div>
+    <div id="AU-container">
+      <div class="pure-control-group">
+        <label for="bsb_number" translate="yes">Tau BSB</label>
+        <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Tau pūkete</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="AT-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="BE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="CA-container">
+      <div class="pure-control-group">
+        <label for="transit_number" translate="yes">Tau raweketia haerenga</label>
+        <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="institution_number" translate="yes">Tau pūtahitanga</label>
+        <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Tau pūkete</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="CH-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="DE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="DK-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="EE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="ES-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="FI-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="FR-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="GB-container">
+      <div class="pure-control-group">
+        <label for="iban" >IBAN</label>
+        <input required="required" id="iban" name="iban" type="text" maxlength="50">
+      </div>
+      <h2 translate="yes">Hōputu whirinoa</h2>
+      <div class="pure-g">
+        <div class="pure-u-8-24 pure-control-group">
+          <label for="sort_code" translate="yes">Kōmaka waehere</label>
+          <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
+        </div>
+        <div class="pure-u-1-24"></div>
+        <div class="pure-u-15-24 pure-control-group">
+          <label for="account_number" translate="yes">Tau pūkete</label>
+          <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+        </div>
+      </div>
+    </div>
+    <div id="GR-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="HK-container">
+      <div class="pure-control-group">
+        <label for="clearing_code" translate="yes">Kei te ūkui waehere</label>
+        <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="branch_code" translate="yes">Waehere peka</label>
+        <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Tau pūkete</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="IE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="IT-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="JP-container">
+      <div class="pure-control-group">
+        <label for="bank_code" translate="yes">Waehere pēke</label>
+        <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="branch_code" translate="yes">Waehere peka</label>
+        <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Tau pūkete</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="LT-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="LU-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="LV-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="MY-container" class="pure-control-group">
+      <div class="pure-control-group">
+        <label for="routing_number" translate="yes">Tau ararere</label>
+        <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Tau pūkete</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="NL-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="NZ-container" class="pure-control-group">
+      <div class="pure-control-group">
+        <label for="routing_number" translate="yes">Tau ararere</label>
+        <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Tau pūkete</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="NO-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="PL-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="PT-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="SG-container">
+      <div class="pure-control-group">
+        <label for="bank_code" translate="yes">Waehere pēke</label>
+        <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="branch_code" translate="yes">Waehere peka</label>
+        <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Tau pūkete</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="SE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="SI-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="SK-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="US-container">
+      <div class="pure-control-group">
+        <label for="routing_number" translate="yes">Tau ararere</label>
+        <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Tau pūkete</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div class="pure-controls">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tiaki mōhiohio utu</button>
+    </div>
+  </form>
+  <template id="country-option">
+    <option value="${country.code}">
+      ${country.name}
+    </option>
+  </template>
+  <template id="currency-option">
+    <option value="${currency.currency}">
+      ${currency.name}
+    </option>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Angitu! Kua whakahōungia te mōhiohio utu
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Hē! I hapa te ocurred whakahōu i te mōhiohio utu
+    </div>
+  </template>
+  <template id="invalid-country">
+    <div class="error message" translate="yes">
+      Hē! He muhu te whenua o te pēke
+    </div>
+  </template>
+  <template id="invalid-currency">
+    <div class="error message" translate="yes">
+      Hē! Kua muhu, he moni ngaro rānei o te pūkete
+    </div>
+  </template>
+  <template id="invalid-account_holder_type">
+    <div class="error message" translate="yes">
+      Hē! Momo pūkete muhu, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-account_number">
+    <div class="error message" translate="yes">
+      Hē! Tau pūkete muhu, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-bsb_number">
+    <div class="error message" translate="yes">
+      Hē! Tau BSB muhu, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-bank_code">
+    <div class="error message" translate="yes">
+      Hē! Tau Waehere Pēke, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-sort_code">
+    <div class="error message" translate="yes">
+      Hē! Waehere Kōmaka muhu, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-institution_number">
+    <div class="error message" translate="yes">
+      Hē! Tau Pūtahitanga muhu, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-routing_number">
+    <div class="error message" translate="yes">
+      Hē! Tau Raweketia haerenga muhu, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-clearing_code">
+    <div class="error message" translate="yes">
+      Hē! Kua muhu, kua ngaro rānei te tau Waehere kua Whakawātea
+    </div>
+  </template>
+  <template id="invalid-branch_code">
+    <div class="error message" translate="yes">
+      Hē! Kua muhu, tau Waehere Peka rānei
+    </div>
+  </template>
+  <template id="invalid-account_holder_name">
+    <div class="error message" translate="yes">
+      Hē! Ingoa purama pūkete muhu, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-iban">
+    <div class="error message" translate="yes">
+      Hē! Tau IBAN muhu, ngaro rānei
+    </div>
+  </template>
+  <template id="invalid-transit_number">
+    <div class="error message" translate="yes">
+      Hē! Tau raweketia haerenga muhu, ngaro rānei
+    </div>
+  </template>
+</body>
+</html>

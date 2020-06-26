@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Одбаци ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Одбаци ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Разлог одбијања</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Избор разлога
+        </option>
+        <option value="fraud" translate="yes">
+          Превара
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Услови кршења услуга
+        </option>
+        <option value="other" translate="yes">
+          Други
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Одбаци</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Успех! Stripe налог је одбијен
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Грешка! Рачун мора имати/Бин/Сх салдо пре одбацивања
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Грешка! Грешка приликом одбацивања Stripe налога
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Још није поднета</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Регистрација је прихваћена</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Онемогућио Stripe</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Захтева додатне информације</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Захтева додатне информације</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Прослеђивање на чекању</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Одбијена од стране Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Одбијена од стране Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Одбијена од стране Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Одбијена од стране Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Потребно је више информација</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">У прегледу Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">У прегледу Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Онемогућено Stripe, погледајте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

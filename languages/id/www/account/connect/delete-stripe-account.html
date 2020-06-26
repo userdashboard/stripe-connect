@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Menghapus ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Menghapus ${stripeAccount.id}</h1>
+  <p translate="yes">Akun Stripe akan segera dihapus dan tidak dapat dipulihkan.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Menghapus</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Sukses! Akun Stripe telah dihapus
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Kesalahan! Galat yang dipicu menghapus akun Stripe
+    </div>
+  </template>
+</body>
+</html>

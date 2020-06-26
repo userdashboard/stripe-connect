@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">പേഔട്ടുകൾ</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">പേഔട്ടുകൾ</h1>
+  <div id="message-container"></div>
+  <div id="no-payouts">
+    <p translate="yes">ഇതുവരെ പണം നല് കാനായിട്ടില്ല.</p>
+  </div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th >ID</th>
+        <th translate="yes">à ́à μà</th>
+        <th translate="yes">Stripe അക്കൗണ്ട്</th>
+        <th translate="yes">നില</th>
+        <th translate="yes">വിവരണം</th>
+        <th translate="yes">സൃഷ്ടിക്കപ്പെട്ടത്</th>
+      </tr>
+    </thead>
+  </table>
+  <ul id="page-links" class="pagination"></ul>
+  <template id="page-link">
+    <li>
+      <a href="/administrator/connect/payouts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a>
+    </li>
+  </template>
+  <template id="payout-row">
+    <tr id="${payout.id}">
+      <td>
+        <a href="/administrator/connect/payout?payoutid=${payout.id}">${payout.id}</a>
+      </td>
+      <td>${payout.amountFormatted}</td>
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+      </td>
+      <td id="status-${payout.id}"></td>
+      <td>${payout.description}</td>
+      <td>${payout.createdFormatted}</td>
+    </tr>
+  </template>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">ബാങ്ക് അക്കൗണ്ട് ലഭ്യമല്ല</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">അസാധുവായ കറൻസി</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">അസാധുവായ അക്കൗണ്ട് നമ്പർ</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">മതിയായ ഫണ്ട് ലഭ്യമല്ല</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">ബാങ്ക് ട്രാൻസ്ഫർ നിരസിച്ചു</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">ബാങ്ക് അക്കൗണ്ട് ഡെബിറ്റ് ഇല്ല</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">പ്രോസസ്സ് ചെയ്യാൻ കഴിഞ്ഞില്ല</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">ബാങ്ക് ഉടമസ്ഥാവകാശം മാറി</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">ബാങ്ക് അക്കൗണ്ട് പരിമിതപ്പെടുത്തി</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">ബാങ്ക് അക്കൗണ്ട് മരവിപ്പിച്ചു</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">ബാങ്ക് അക്കൗണ്ട് ക്ലോസ് ചെയ്തു</span>
+  </template>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Stripe ಖಾತೆಗಳು</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Stripe ಖಾತೆಗಳು</h1>
+  <div id="message-container"></div>
+  <div id="no-stripe-accounts">
+    <p translate="yes">ಇದುವರೆಗೂ ಯಾವುದೇ Stripe ಖಾತೆಗಳನ್ನು ರಚಿಸಿಲ್ಲ.</p>
+  </div>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th >ID</th>
+        <th translate="yes">ಪ್ರಕಾರ</th>
+        <th translate="yes">ಹೆಸರು</th>
+        <th translate="yes">ಸ್ಥಿತಿ</th>
+        <th translate="yes">ರಚಿಸಲಾಗಿದೆ</th>
+        <th translate="yes">Submitted by sy</th>
+      </tr>
+    </thead>
+  </table>
+  <ul id="page-links" class="pagination"></ul>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td>${account.business_type}</td>
+      <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td id="mcc-description-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td>${account.metadata.submittedFormatted}</td>
+    </tr>
+  </template>
+  <template id="page-link">
+    <li>
+      <a href="/administrator/connect/stripe-accounts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a>
+    </li>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">ಖಾತೆಗೆ ಹಣ ಸಂದಾಯವಾಗಿದೆ.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">ಹಣ ಪಡೆಯಲು ಬ್ಯಾಂಕಿಂಗ್ ವಿವರಗಳನ್ನು ಒದಗಿಸಬೇಕು.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">ನೋಂದಣಿ ಸಲ್ಲಿಕೆಯಾಗಿಲ್ಲ.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">ಈ ಕುರಿತು ನೋಂದಣಿ ಯನ್ನು ಸಲ್ಲಿಸಲಾಗಿದೆ. ${account.dateFormatted}.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">ಇನ್ನೂ ಸಲ್ಲಿಸಿಲ್ಲ</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">ನೋಂದಣಿ ಯನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Stripe ನಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">ಸಲ್ಲಿಕೆ ಬಾಕಿ</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe ನಿಂದ ತಿರಸ್ಕರಿಸಲಾಗಿದೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Stripe ನಿಂದ ತಿರಸ್ಕರಿಸಲಾಗಿದೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe ನಿಂದ ತಿರಸ್ಕರಿಸಲಾಗಿದೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe ನಿಂದ ತಿರಸ್ಕರಿಸಲಾಗಿದೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Stripe ಪರಿಶೀಲನೆ</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Stripe ಪರಿಶೀಲನೆ</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe ನಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>
