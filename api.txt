@@ -407,7 +407,7 @@ http://localhost:9000
 | undefined                                                                  |
 |  * should reject invalid stripeid                                          |
 | before                                                                     |
-|  * should bind data to req (129698ms)                                      |
+|  * should bind data to req (126942ms)                                      |
 | view                                                                       |
 |  * should reject registration that hasn't submitted payment details        |
 |  * should reject company that hasn't submitted beneficial owners           |
@@ -416,9 +416,9 @@ http://localhost:9000
 |  * should reject company that hasn't submitted information                 |
 |  * should reject individual that hasn't submitted information              |
 |  * should present the form (individual)                                    |
-|  * should present the form (company) (159567ms)                            |
+|  * should present the form (company)                                       |
 | submit                                                                     |
-|  * should submit registration (company) (screenshots) (146279ms)           |
+|  * should submit registration (company) (screenshots) (126141ms)           |
 |  * should submit registration (individual)                                 |
 |----------------------------------------------------------------------------|
 
@@ -430,13 +430,13 @@ http://localhost:9000
 |                                |          |  * invalid querystring stripeid  |
 |--------------------------------|----------|----------------------------------|
 
-|----------------------------------------------------------------------------------------|
-| /api/administrator/connect/payout                                                      |
-| RECEIVES-----------------------| RETURNS------------| EXCEPTIONS-----------------------|
-| required querystring payoutid  | object (125499ms)  | invalid-payoputid                |
-|                                |                    |  * missing querystring payoutid  |
-|                                |                    |  * invalid querystring payoutid  |
-|--------------------------------|--------------------|----------------------------------|
+|------------------------------------------------------------------------------|
+| /api/administrator/connect/payout                                            |
+| RECEIVES-----------------------| RETURNS--| EXCEPTIONS-----------------------|
+| required querystring payoutid  | object   | invalid-payoputid                |
+|                                |          |  * missing querystring payoutid  |
+|                                |          |  * invalid querystring payoutid  |
+|--------------------------------|----------|----------------------------------|
 
 |------------------------------------------------------------------------------|
 | /api/administrator/connect/payouts                                           |
@@ -451,7 +451,7 @@ http://localhost:9000
 |-------------------------------------------|
 | /api/administrator/connect/payouts-count  |
 | RETURNS-----------------------------------|
-| integer (378117ms)                        |
+| integer (368270ms)                        |
 |-------------------------------------------|
 
 |------------------------------------------------------------------------------|
@@ -573,7 +573,7 @@ http://localhost:9000
 |----------------------------------------------------------------------------------------|
 | /api/user/connect/payout                                                               |
 | RECEIVES-----------------------| RETURNS------------| EXCEPTIONS-----------------------|
-| required querystring payoutid  | object (124269ms)  | invalid-payoutid                 |
+| required querystring payoutid  | object (120939ms)  | invalid-payoutid                 |
 |                                |                    |  * missing querystring payoutid  |
 |                                |                    |  * invalid querystring payoutid  |
 |                                |                    | invalid-account                  |
@@ -593,7 +593,7 @@ http://localhost:9000
 |-----------------------------------------------------------------------------------------|
 | /api/user/connect/payouts-count                                                         |
 | RECEIVES-----------------------| RETURNS-------------| EXCEPTIONS-----------------------|
-| required querystring payoutid  | integer (145104ms)  | invalid-payoutid                 |
+| required querystring payoutid  | integer (125726ms)  | invalid-payoutid                 |
 |                                |                     |  * missing querystring payoutid  |
 |                                |                     |  * invalid querystring payoutid  |
 |                                |                     | invalid-account                  |
@@ -664,10 +664,10 @@ http://localhost:9000
 | /api/user/connect/set-stripe-account-submitted                                                                        |
 | RECEIVES-----------------------| RETURNS----------------------| EXCEPTIONS--------------------------------------------|
 | required querystring stripeid  | object (individual)          | invalid-stripeid                                      |
-|                                | object (company) (124438ms)  |  * missing querystring stripeid                       |
+|                                | object (company) (121289ms)  |  * missing querystring stripeid                       |
 |                                |                              |  * invalid querystring stripeid                       |
 |                                |                              | invalid-stripe-account                                |
-|                                |                              |  * ineligible stripe account is submitted (138425ms)  |
+|                                |                              |  * ineligible stripe account is submitted (124667ms)  |
 |                                |                              | invalid-account                                       |
 |                                |                              |  * ineligible accessing account                       |
 |                                |                              | invalid-payment-details                               |
@@ -761,7 +761,7 @@ http://localhost:9000
 |                                |          | invalid-account                                                          |                        |
 |                                |          |  * ineligible accessing account                                          |                        |
 |                                |          | invalid-person                                                           |                        |
-|                                |          |  * ineligible querystring person has no required information (139746ms)  |                        |
+|                                |          |  * ineligible querystring person has no required information (125209ms)  |                        |
 |--------------------------------|----------|--------------------------------------------------------------------------|------------------------|
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
