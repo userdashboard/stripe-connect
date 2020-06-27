@@ -1,5 +1,5 @@
 
-> @userdashboard/stripe-connect@1.0.68 test /home/runner/work/stripe-connect/stripe-connect
+> @userdashboard/stripe-connect@1.0.69 test /home/runner/work/stripe-connect/stripe-connect
 > mocha --retries 2 --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './{,!(public|node_modules)/**}/*.test.js'
 
 
@@ -552,7 +552,7 @@
     exceptions
       ✓ should reject invalid stripeid
     before
-      ✓ should bind data to req (125419ms)
+      ✓ should bind data to req (125328ms)
     view
       ✓ should reject registration that hasn't submitted payment details
       ✓ should reject company that hasn't submitted beneficial owners
@@ -561,9 +561,9 @@
       ✓ should reject company that hasn't submitted information
       ✓ should reject individual that hasn't submitted information
       ✓ should present the form (individual)
-      ✓ should present the form (company)
+      ✓ should present the form (company) (124571ms)
     submit
-      ✓ should submit registration (company) (screenshots) (137176ms)
+      ✓ should submit registration (company) (screenshots) (135139ms)
       ✓ should submit registration (individual)
 
   /administrator/connect/delete-stripe-account
@@ -633,11 +633,11 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
     returns
-      ✓ object (146956ms)
+      ✓ object
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (235681ms)
+      ✓ integer (210542ms)
 
   /api/administrator/connect/payouts
     receives
@@ -896,7 +896,7 @@
         ✓ ineligible company person missing information
     returns
       ✓ object (individual)
-      ✓ object (company)
+      ✓ object (company) (134997ms)
 
   /api/user/connect/stripe-account
     exceptions
@@ -1001,7 +1001,7 @@
       invalid-account
         ✓ ineligible accessing account
       invalid-person
-        ✓ ineligible querystring person has no required information (130587ms)
+        ✓ ineligible querystring person has no required information (131599ms)
     returns
       ✓ object
     configuration
