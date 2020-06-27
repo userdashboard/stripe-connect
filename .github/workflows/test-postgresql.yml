@@ -3,7 +3,7 @@ name: test-postgresql
 on: [push]
 
 jobs:
-  build:
+  test-postgresql:
     runs-on: ubuntu-latest
     strategy:
       matrix:

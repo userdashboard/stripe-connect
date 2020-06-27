@@ -3,7 +3,7 @@ name: test-redis
 on: [push]
 
 jobs:
-  build:
+  test-redis:
     runs-on: ubuntu-latest
     strategy:
       matrix:

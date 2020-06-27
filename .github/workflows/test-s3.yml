@@ -3,7 +3,7 @@ name: test-s3
 on: [push]
 
 jobs:
-  build:
+  test-s3:
     runs-on: ubuntu-latest
     strategy:
       matrix:

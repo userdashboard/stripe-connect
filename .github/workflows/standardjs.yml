@@ -3,7 +3,7 @@ name: standardjs
 on: [push]
 
 jobs:
-  build:
+  standardjs:
     runs-on: ubuntu-latest
     strategy:
       matrix:

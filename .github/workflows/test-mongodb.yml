@@ -3,7 +3,7 @@ name: test-mongodb
 on: [push]
 
 jobs:
-  build:
+  test-mongodb:
     runs-on: ubuntu-latest
     strategy:
       matrix:

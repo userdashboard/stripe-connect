@@ -3,7 +3,7 @@ name: test-fs
 on: [push]
 
 jobs:
-  build:
+  test-fs:
     runs-on: ubuntu-latest
     strategy:
       matrix:

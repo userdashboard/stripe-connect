@@ -3,7 +3,7 @@ name: test-node-cache
 on: [push]
 
 jobs:
-  build:
+  test-node-cache:
     runs-on: ubuntu-latest
     strategy:
       matrix:

@@ -3,7 +3,7 @@ name: test-mysql
 on: [push]
 
 jobs:
-  build:
+  test-mysql:
     runs-on: ubuntu-latest
     strategy:
       matrix:
