@@ -13,10 +13,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install Redis
-      run: sudo apt-get install -y redis-server
     - name: Set up as module
       run: |
+        sudo apt-get install -y redis-server
         HERE=`pwd`
         mkdir /tmp/project
         cd /tmp/project

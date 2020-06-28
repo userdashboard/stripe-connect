@@ -13,19 +13,31 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
+    - name: Set up as module
       run: |
-        sudo apt-get install -y redis-server
         git config --global user.name "${{ secrets.NAME }}"
         git config --global user.email "${{ secrets.EMAIL }}"
         npm version patch
-        npm install
-        npm install mocha ngrok faker puppeteer@2.1.1 @userdashboard/storage-redis @userdashboard/dashboard --no-save
-        npm install -g standard
+        sudo apt-get install -y redis-server
+        HERE=`pwd`
+        mkdir /tmp/project
+        cd /tmp/project
+        npm init -y
+        npm install ngrok faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/stripe-connect @userdashboard/storage-redis
+        npm install -g mocha
+        rm node_modules/@userdashboard/stripe-connect/*.js
+        rm -rf node_modules/@userdashboard/stripe-connect/src
+        cp $HERE/*.js node_modules/@userdashboard/stripe-connect
+        cp -R $HERE/src/ node_modules/@userdashboard/stripe-connect/src/
+        echo "global.applicationPath = __dirname" > main.js
+        PACKAGE=`cat package.json`
+        PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
+        echo $PACKAGE > package.json
+        set -o pipefail
     - name: Lint (standard.js)
       run: standard src
     - name: Test (redis)
-      run: npm test | tee tests.txt ; test ${PIPESTATUS[0]} -eq 0
+      run: mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js" | tee $HERE/tests.txt
       env:
         NODE_ENV: testing
         FAST_START: true
