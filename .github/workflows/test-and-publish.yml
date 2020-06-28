@@ -19,12 +19,12 @@ jobs:
         git config --global user.email "${{ secrets.EMAIL }}"
         npm version patch
         sudo apt-get install -y redis-server
-        HERE=`pwd`
+        export HERE=`pwd`
         mkdir /tmp/project
         cd /tmp/project
         npm init -y
         npm install ngrok faker puppeteer@2.1.1 @userdashboard/dashboard @userdashboard/stripe-connect @userdashboard/storage-redis
-        npm install -g mocha
+        npm install -g mocha standard
         rm node_modules/@userdashboard/stripe-connect/*.js
         rm -rf node_modules/@userdashboard/stripe-connect/src
         cp $HERE/*.js node_modules/@userdashboard/stripe-connect
@@ -38,6 +38,7 @@ jobs:
       run: standard src
     - name: Test (redis)
       run: mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js" | tee $HERE/tests.txt
+      working-directory: '/tmp/project'
       env:
         NODE_ENV: testing
         FAST_START: true
