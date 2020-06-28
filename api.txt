@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.227
+@userdashboard/dashboard 1.0.229
 http://localhost:9000
 
 |------------------------------------------------|
@@ -407,7 +407,7 @@ http://localhost:9000
 | undefined                                                                  |
 |  * should reject invalid stripeid                                          |
 | before                                                                     |
-|  * should bind data to req (125328ms)                                      |
+|  * should bind data to req (123989ms)                                      |
 | view                                                                       |
 |  * should reject registration that hasn't submitted payment details        |
 |  * should reject company that hasn't submitted beneficial owners           |
@@ -416,9 +416,9 @@ http://localhost:9000
 |  * should reject company that hasn't submitted information                 |
 |  * should reject individual that hasn't submitted information              |
 |  * should present the form (individual)                                    |
-|  * should present the form (company) (124571ms)                            |
+|  * should present the form (company) (123432ms)                            |
 | submit                                                                     |
-|  * should submit registration (company) (screenshots) (135139ms)           |
+|  * should submit registration (company) (screenshots) (134294ms)           |
 |  * should submit registration (individual)                                 |
 |----------------------------------------------------------------------------|
 
@@ -451,7 +451,7 @@ http://localhost:9000
 |-------------------------------------------|
 | /api/administrator/connect/payouts-count  |
 | RETURNS-----------------------------------|
-| integer (210542ms)                        |
+| integer (244584ms)                        |
 |-------------------------------------------|
 
 |------------------------------------------------------------------------------|
@@ -664,7 +664,7 @@ http://localhost:9000
 | /api/user/connect/set-stripe-account-submitted                                                                        |
 | RECEIVES-----------------------| RETURNS----------------------| EXCEPTIONS--------------------------------------------|
 | required querystring stripeid  | object (individual)          | invalid-stripeid                                      |
-|                                | object (company) (134997ms)  |  * missing querystring stripeid                       |
+|                                | object (company) (127152ms)  |  * missing querystring stripeid                       |
 |                                |                              |  * invalid querystring stripeid                       |
 |                                |                              | invalid-stripe-account                                |
 |                                |                              |  * ineligible stripe account is submitted             |
@@ -761,7 +761,7 @@ http://localhost:9000
 |                                |          | invalid-account                                                          |                        |
 |                                |          |  * ineligible accessing account                                          |                        |
 |                                |          | invalid-person                                                           |                        |
-|                                |          |  * ineligible querystring person has no required information (131599ms)  |                        |
+|                                |          |  * ineligible querystring person has no required information (132891ms)  |                        |
 |--------------------------------|----------|--------------------------------------------------------------------------|------------------------|
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
