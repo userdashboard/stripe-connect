@@ -18,6 +18,7 @@ jobs:
         git config --global user.name "${{ secrets.NAME }}"
         git config --global user.email "${{ secrets.EMAIL }}"
         npm install
+        npm install @userdashboard/dashboard --no-save
         npm version patch
         sudo apt-get install -y redis-server
         mkdir /tmp/project
