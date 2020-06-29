@@ -37,7 +37,7 @@ jobs:
     - name: Lint (standard.js)
       run: standard src
     - name: Test (redis)
-      run: mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js" | tee $HERE/tests.txt
+      run: mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/**/{,!(public)}/*.test.js" | tee $HERE/tests.txt || exit 1
       working-directory: '/tmp/project'
       env:
         NODE_ENV: testing
