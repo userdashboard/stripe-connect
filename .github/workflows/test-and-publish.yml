@@ -34,7 +34,6 @@ jobs:
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
         echo $PACKAGE > package.json
-        set -o pipefail
     - name: Lint (standard.js)
       run: standard src
     - name: Test (redis)
@@ -62,6 +61,7 @@ jobs:
         TEST_SUITE_REUSABLE_WEBHOOK: true
     - name: Generate supporting texts
       run: node main.js
+      working-directory: /home/runner/work/stripe-connect/stripe-connect/
       env:
         NODE_ENV: sitemap
         EXIT_ON_START: true
