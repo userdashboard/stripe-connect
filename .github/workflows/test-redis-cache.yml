@@ -25,8 +25,10 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install Redis
-      run: sudo apt-get install -y redis-server
+    - uses: zhulik/redis-action@1.1.0
+      with:
+        redis version: '5'
+        number of databases: 1
     - name: Set up as module
       run: |
         HERE=`pwd`
