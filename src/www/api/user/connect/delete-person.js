@@ -20,7 +20,7 @@ module.exports = {
     } catch (error) {
     }
     try {
-      await connect.StorageList.remove(`${req.appid}/stripeAccount/persons/${req.query.stripeid}`, req.query.personid)
+      await connect.StorageList.remove(`${req.appid}/stripeAccount/persons/${person.account}`, req.query.personid)
     } catch (error) {
     }
     try {
