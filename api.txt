@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.274
+@userdashboard/dashboard 1.0.278
 http://localhost:9000
 
 |----------------------------------------------------------|
@@ -6,15 +6,15 @@ http://localhost:9000
 | EXCEPTIONS-----------------------------------------------|
 | undefined                                                |
 |  * should reject invalid stripeid                        |
-|  * should reject individual registration (1839ms)        |
+|  * should reject individual registration (2008ms)        |
 | view                                                     |
-|  * should present the form (2906ms)                      |
-|  * should remove director option (2549ms)                |
-|  * should remove owner option (2203ms)                   |
+|  * should present the form (2747ms)                      |
+|  * should remove director option (2299ms)                |
+|  * should remove owner option (2017ms)                   |
 | submit                                                   |
-|  * should create representative (screenshots) (13131ms)  |
-|  * should create director (7312ms)                       |
-|  * should create owner (8461ms)                          |
+|  * should create representative (screenshots) (13402ms)  |
+|  * should create director (7080ms)                       |
+|  * should create owner (7885ms)                          |
 |----------------------------------------------------------|
 
 |--------------------------------------------------|
@@ -22,13 +22,13 @@ http://localhost:9000
 | EXCEPTIONS---------------------------------------|
 | undefined                                        |
 |  * should reject invalid personid                |
-|  * should require own Stripe account (4323ms)    |
+|  * should require own Stripe account (4439ms)    |
 | before                                           |
-|  * should bind data to req (6087ms)              |
+|  * should bind data to req (5646ms)              |
 | view                                             |
-|  * should present the form (6406ms)              |
+|  * should present the form (6228ms)              |
 | submit                                           |
-|  * should delete person (screenshots) (19028ms)  |
+|  * should delete person (screenshots) (19035ms)  |
 |--------------------------------------------------|
 
 |---------------------------------------------------------|
@@ -36,13 +36,13 @@ http://localhost:9000
 | EXCEPTIONS----------------------------------------------|
 | undefined                                               |
 |  * should reject invalid stripeid                       |
-|  * should require own Stripe account (1904ms)           |
+|  * should require own Stripe account (1517ms)           |
 | before                                                  |
-|  * should bind data to req (2161ms)                     |
+|  * should bind data to req (1592ms)                     |
 | view                                                    |
-|  * should present the form (2424ms)                     |
+|  * should present the form (2557ms)                     |
 | submit                                                  |
-|  * should delete Stripe account (screenshots) (6867ms)  |
+|  * should delete Stripe account (screenshots) (6980ms)  |
 |---------------------------------------------------------|
 
 |--------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -84,8 +84,8 @@ http://localhost:9000
 | required address_kana_town no stripe.js                              |  * should have element for upload verification_additional_document_front  |
 | required address_kana_state stripe.js v3                             |  * should have element for upload verification_additional_document_back   |
 | required address_kana_state no stripe.js                             | submit                                                                    |
-| required address_kana_postal_code stripe.js v3                       |  * should update person (screenshots) no stripe.js (30343ms)              |
-| required address_kana_postal_code no stripe.js                       |  * should update person stripe.js v3 (22847ms)                            |
+| required address_kana_postal_code stripe.js v3                       |  * should update person (screenshots) no stripe.js (32803ms)              |
+| required address_kana_postal_code no stripe.js                       |  * should update person stripe.js v3 (19857ms)                            |
 | required address_kana_line1 stripe.js v3                             | invalid-address_city                                                      |
 | required address_kana_line1 no stripe.js                             |  * missing address_city no stripe.js                                      |
 | required address_kana_city stripe.js v3                              |  * missing address_city stripe.js v3                                      |
@@ -198,11 +198,11 @@ http://localhost:9000
 |  * should have element for name (company)                                        |
 |  * should have element for phone (company)                                       |
 |  * should have element for tax_id (company)                                      |
-|  * should have element for address_state (company)                               |
+|  * should have element for address_state (company) (90ms)                        |
 |  * should have element for address_kana_city (company)                           |
 |  * should have element for address_kana_line1 (company)                          |
 |  * should have element for address_kana_postal_code (company)                    |
-|  * should have element for address_kana_state (company) (41ms)                   |
+|  * should have element for address_kana_state (company)                          |
 |  * should have element for address_kana_town (company)                           |
 |  * should have element for address_kanji_city (company)                          |
 |  * should have element for address_kanji_line1 (company)                         |
@@ -242,10 +242,10 @@ http://localhost:9000
 |  * should have element for id_number (individual)                                |
 |  * should have element for ssn_last_4 (individual)                               |
 | submit                                                                           |
-|  * should update registration no stripe.js (individual) (13242ms)                |
-|  * should update registration stripe.js v3 (individual) (screenshots) (19194ms)  |
-|  * should update registration no stripe.js (company) (13671ms)                   |
-|  * should update registration stripe.js v3 (company) (15010ms)                   |
+|  * should update registration no stripe.js (individual) (12379ms)                |
+|  * should update registration stripe.js v3 (individual) (screenshots) (18589ms)  |
+|  * should update registration no stripe.js (company) (14964ms)                   |
+|  * should update registration stripe.js v3 (company) (15904ms)                   |
 | errors                                                                           |
 |  * should reject missing business_profile_mcc no stripe.js (company)             |
 |  * should reject missing business_profile_mcc stripe.js v3 (company)             |
@@ -254,9 +254,9 @@ http://localhost:9000
 |  * should reject missing address_city no stripe.js (company)                     |
 |  * should reject missing address_city stripe.js v3 (company)                     |
 |  * should reject missing address_line1 no stripe.js (company)                    |
-|  * should reject missing address_line1 stripe.js v3 (company)                    |
-|  * should reject missing address_postal_code no stripe.js (company)              |
-|  * should reject missing address_postal_code stripe.js v3 (company)              |
+|  * should reject missing address_line1 stripe.js v3 (company) (40ms)             |
+|  * should reject missing address_postal_code no stripe.js (company) (51ms)       |
+|  * should reject missing address_postal_code stripe.js v3 (company) (65ms)       |
 |  * should reject missing name no stripe.js (company)                             |
 |  * should reject missing name stripe.js v3 (company)                             |
 |  * should reject missing phone no stripe.js (company)                            |
@@ -305,16 +305,16 @@ http://localhost:9000
 |  * should reject missing phone stripe.js v3 (individual)                         |
 |  * should reject missing first_name no stripe.js (individual)                    |
 |  * should reject missing first_name stripe.js v3 (individual)                    |
-|  * should reject missing last_name no stripe.js (individual) (56ms)              |
+|  * should reject missing last_name no stripe.js (individual)                     |
 |  * should reject missing last_name stripe.js v3 (individual)                     |
 |  * should reject missing email no stripe.js (individual)                         |
 |  * should reject missing email stripe.js v3 (individual)                         |
 |  * should reject missing business_profile_mcc no stripe.js (individual)          |
 |  * should reject missing business_profile_mcc stripe.js v3 (individual)          |
 |  * should reject missing business_profile_url no stripe.js (individual)          |
-|  * should reject missing business_profile_url stripe.js v3 (individual)          |
-|  * should reject missing address_state no stripe.js (individual)                 |
-|  * should reject missing address_state stripe.js v3 (individual)                 |
+|  * should reject missing business_profile_url stripe.js v3 (individual) (40ms)   |
+|  * should reject missing address_state no stripe.js (individual) (56ms)          |
+|  * should reject missing address_state stripe.js v3 (individual) (41ms)          |
 |  * should reject missing address_kana_city no stripe.js (individual)             |
 |  * should reject missing address_kana_city stripe.js v3 (individual)             |
 |  * should reject missing address_kana_line1 no stripe.js (individual)            |
@@ -355,8 +355,8 @@ http://localhost:9000
 | /account/connect/persons                           |
 | EXCEPTIONS-----------------------------------------|
 | undefined                                          |
-|  * should reject invalid stripeid                  |
-|  * should reject individual registration (1999ms)  |
+|  * should reject invalid stripeid (69ms)           |
+|  * should reject individual registration (1913ms)  |
 | before                                             |
 |  * should bind data to req                         |
 | view                                               |
@@ -370,16 +370,16 @@ http://localhost:9000
 | EXCEPTIONS------------------------------------------------------------|
 | undefined                                                             |
 |  * should reject invalid stripeid                                     |
-|  * should reject individual registration (2123ms)                     |
-|  * should reject Stripe account that doesn't require owners (1914ms)  |
+|  * should reject individual registration (1791ms)                     |
+|  * should reject Stripe account that doesn't require owners (2138ms)  |
 | before                                                                |
-|  * should bind data to req (11510ms)                                  |
+|  * should bind data to req (10949ms)                                  |
 | view                                                                  |
-|  * should reject if an owner requires information (6852ms)            |
-|  * should present the form without owners (3140ms)                    |
-|  * should present the form with completed owners (93618ms)            |
+|  * should reject if an owner requires information (6813ms)            |
+|  * should present the form without owners (3143ms)                    |
+|  * should present the form with completed owners (96044ms)            |
 | submit                                                                |
-|  * should submit owners (screenshots) (113062ms)                      |
+|  * should submit owners (screenshots) (111962ms)                      |
 |  * should submit without owners (6861ms)                              |
 |-----------------------------------------------------------------------|
 
@@ -388,17 +388,17 @@ http://localhost:9000
 | EXCEPTIONS---------------------------------------------------------------|
 | undefined                                                                |
 |  * should reject invalid stripeid                                        |
-|  * should reject individual registration (2057ms)                        |
-|  * should reject Stripe account that doesn't require directors (1830ms)  |
+|  * should reject individual registration (1817ms)                        |
+|  * should reject Stripe account that doesn't require directors (2261ms)  |
 | before                                                                   |
-|  * should bind data to req (8575ms)                                      |
+|  * should bind data to req (8713ms)                                      |
 | view                                                                     |
-|  * should reject if a director requires information (6135ms)             |
-|  * should present the form without directors (3132ms)                    |
-|  * should present the form with directors (10267ms)                      |
+|  * should reject if a director requires information (6238ms)             |
+|  * should present the form without directors (3089ms)                    |
+|  * should present the form with directors (10855ms)                      |
 | submit                                                                   |
-|  * should submit directors (screenshots) (21353ms)                       |
-|  * should submit without directors (6992ms)                              |
+|  * should submit directors (screenshots) (20364ms)                       |
+|  * should submit without directors (7637ms)                              |
 |--------------------------------------------------------------------------|
 
 |--------------------------------------------------------------------------------------|
@@ -407,19 +407,19 @@ http://localhost:9000
 | undefined                                                                            |
 |  * should reject invalid stripeid                                                    |
 | before                                                                               |
-|  * should bind data to req (125007ms)                                                |
+|  * should bind data to req (126984ms)                                                |
 | view                                                                                 |
-|  * should reject registration that hasn't submitted payment details (28115ms)        |
-|  * should reject company that hasn't submitted beneficial owners (24796ms)           |
-|  * should reject company that hasn't submitted company directors (38800ms)           |
-|  * should reject company that hasn't submitted representative information (16088ms)  |
-|  * should reject company that hasn't submitted information (18936ms)                 |
-|  * should reject individual that hasn't submitted information (4963ms)               |
-|  * should present the form (individual) (70015ms)                                    |
-|  * should present the form (company) (91050ms)                                       |
+|  * should reject registration that hasn't submitted payment details (44338ms)        |
+|  * should reject company that hasn't submitted beneficial owners (23841ms)           |
+|  * should reject company that hasn't submitted company directors (38807ms)           |
+|  * should reject company that hasn't submitted representative information (16083ms)  |
+|  * should reject company that hasn't submitted information (13837ms)                 |
+|  * should reject individual that hasn't submitted information (6513ms)               |
+|  * should present the form (individual) (94048ms)                                    |
+|  * should present the form (company) (138499ms)                                      |
 | submit                                                                               |
-|  * should submit registration (company) (screenshots) (145061ms)                     |
-|  * should submit registration (individual) (100454ms)                                |
+|  * should submit registration (company) (screenshots) (126092ms)                     |
+|  * should submit registration (individual) (101124ms)                                |
 |--------------------------------------------------------------------------------------|
 
 |--------------------------------------------------|
@@ -428,11 +428,11 @@ http://localhost:9000
 | before                                           |
 |  * invalid-profileid                             |
 |  * invalid-profile                               |
-|  * invalid-account (47ms)                        |
+|  * invalid-account (64ms)                        |
 | view                                             |
-|  * should present the form (459ms)               |
+|  * should present the form (517ms)               |
 | submit                                           |
-|  * should delete profile (screenshots) (3801ms)  |
+|  * should delete profile (screenshots) (3894ms)  |
 |--------------------------------------------------|
 
 |-----------------------------------------------------|
@@ -440,11 +440,11 @@ http://localhost:9000
 | EXCEPTIONS------------------------------------------|
 | before                                              |
 |  * invalid-reset-codeid                             |
-|  * invalid-account                                  |
+|  * invalid-account (39ms)                           |
 | view                                                |
-|  * should present the form (464ms)                  |
+|  * should present the form (489ms)                  |
 | submit                                              |
-|  * should delete reset code (screenshots) (3062ms)  |
+|  * should delete reset code (screenshots) (3099ms)  |
 |-----------------------------------------------------|
 
 |-------------------------------------------------------|
@@ -453,9 +453,9 @@ http://localhost:9000
 | undefined                                             |
 |  * should require language enabled                    |
 | view                                                  |
-|  * should present the form (572ms)                    |
+|  * should present the form (515ms)                    |
 | submit                                                |
-|  * should change the language (screenshots) (2234ms)  |
+|  * should change the language (screenshots) (2304ms)  |
 |-------------------------------------------------------|
 
 |------------------------------------------------------|
@@ -464,20 +464,20 @@ http://localhost:9000
 | undefined                                            |
 |  * should reject invalid accountid                   |
 | before                                               |
-|  * should bind data to req (39ms)                    |
+|  * should bind data to req (58ms)                    |
 | view                                                 |
-|  * should present the form (483ms)                   |
+|  * should present the form (507ms)                   |
 | submit                                               |
-|  * should immediately delete (screenshots) (3337ms)  |
+|  * should immediately delete (screenshots) (3430ms)  |
 |------------------------------------------------------|
 
-|------------------------------------------------------------------|
-| /api/administrator/account                                       |
-| RETURNS--| REDACTS-------| EXCEPTIONS----------------------------|
-| object   | usernameHash  | invalid-accountid                     |
-|          | passwordHash  |  * unspecified querystring accountid  |
-|          | sessionKey    |  * invalid querystring accountid      |
-|----------|---------------|---------------------------------------|
+|------------------------------------------------------------------------|
+| /api/administrator/account                                             |
+| RETURNS--------| REDACTS-------| EXCEPTIONS----------------------------|
+| object (39ms)  | usernameHash  | invalid-accountid                     |
+|                | passwordHash  |  * unspecified querystring accountid  |
+|                | sessionKey    |  * invalid querystring accountid      |
+|----------------|---------------|---------------------------------------|
 
 |--------------------------------------------------------------------------------------------|
 | /api/administrator/accounts                                                                |
@@ -490,7 +490,7 @@ http://localhost:9000
 |------------------------------------|
 | /api/administrator/accounts-count  |
 | RETURNS----------------------------|
-| integer (68ms)                     |
+| integer (76ms)                     |
 |------------------------------------|
 
 |--------------------------------------------------------------------------------------------|
@@ -504,21 +504,21 @@ http://localhost:9000
 |--------------------------------------------------|
 | /api/administrator/administrator-accounts-count  |
 | RETURNS------------------------------------------|
-| integer                                          |
+| integer (46ms)                                   |
 |--------------------------------------------------|
 
 |-----------------------------------------------------------------------------------------------|
 | /api/administrator/connect/delete-stripe-account                                              |
 | RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS-------------------------------|
-| required querystring stripeid  | boolean (3328ms)  | invalid-stripeid                         |
+| required querystring stripeid  | boolean (3209ms)  | invalid-stripeid                         |
 |                                |                   |  * missing querystring stripeid          |
-|                                |                   |  * invalid querystring stripeid (137ms)  |
+|                                |                   |  * invalid querystring stripeid (184ms)  |
 |--------------------------------|-------------------|------------------------------------------|
 
 |---------------------------------------------------------------------------------------|
 | /api/administrator/connect/payout                                                     |
 | RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS-----------------------|
-| required querystring payoutid  | object (92120ms)  | invalid-payoputid                |
+| required querystring payoutid  | object (80017ms)  | invalid-payoputid                |
 |                                |                   |  * missing querystring payoutid  |
 |                                |                   |  * invalid querystring payoutid  |
 |--------------------------------|-------------------|----------------------------------|
@@ -536,15 +536,15 @@ http://localhost:9000
 |-------------------------------------------|
 | /api/administrator/connect/payouts-count  |
 | RETURNS-----------------------------------|
-| integer (463125ms)                        |
+| integer (322034ms)                        |
 |-------------------------------------------|
 
 |-----------------------------------------------------------------------------------------------|
 | /api/administrator/connect/set-stripe-account-rejected                                        |
 | RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS-------------------------------|
-| required posted reason         | boolean (3432ms)  | invalid-stripeid                         |
+| required posted reason         | boolean (2843ms)  | invalid-stripeid                         |
 | required querystring stripeid  |                   |  * missing querystring stripeid          |
-|                                |                   |  * invalid querystring stripeid (222ms)  |
+|                                |                   |  * invalid querystring stripeid (192ms)  |
 |                                |                   | invalid-reason                           |
 |                                |                   |  * missing posted reason                 |
 |                                |                   |  * invalid posted reason                 |
@@ -553,9 +553,9 @@ http://localhost:9000
 |----------------------------------------------------------------------------------------------|
 | /api/administrator/connect/stripe-account                                                    |
 | RECEIVES-----------------------| RETURNS----------| EXCEPTIONS-------------------------------|
-| required querystring stripeid  | object (2014ms)  | invalid-stripeid                         |
+| required querystring stripeid  | object (2098ms)  | invalid-stripeid                         |
 |                                |                  |  * missing querystring stripeid          |
-|                                |                  |  * invalid querystring stripeid (128ms)  |
+|                                |                  |  * invalid querystring stripeid (132ms)  |
 |--------------------------------|------------------|------------------------------------------|
 
 |------------------------------------------------------------------------------------------------------------------|
@@ -570,43 +570,43 @@ http://localhost:9000
 |---------------------------------------------------|
 | /api/administrator/connect/stripe-accounts-count  |
 | RETURNS-------------------------------------------|
-| integer (4477ms)                                  |
+| integer (4576ms)                                  |
 |---------------------------------------------------|
 
 |---------------------------------------------------------------------------------------------------------------------------------|
 | /api/administrator/create-reset-code                                                                                            |
-| RECEIVES---------------------| RETURNS--| EXCEPTIONS-----------------------------------| CONFIGURATION--------------------------|
-| required posted secret-code  | object   | invalid-accountid                            | environment MINIMUM_RESET_CODE_LENGTH  |
-|                              |          |  * unspecified querystring accountid         | environment MAXIMUM_RESET_CODE_LENGTH  |
-|                              |          |  * invalid querystring accountid             |                                        |
-|                              |          | invalid-secret-code                          |                                        |
-|                              |          |  * missing posted secret-code                |                                        |
-|                              |          | invalid-secret-code-length                   |                                        |
-|                              |          |  * invalid posted secret-code length (66ms)  |                                        |
-|------------------------------|----------|----------------------------------------------|----------------------------------------|
+| RECEIVES---------------------| RETURNS--| EXCEPTIONS----------------------------| CONFIGURATION---------------------------------|
+| required posted secret-code  | object   | invalid-accountid                     | environment MINIMUM_RESET_CODE_LENGTH         |
+|                              |          |  * unspecified querystring accountid  | environment MAXIMUM_RESET_CODE_LENGTH (41ms)  |
+|                              |          |  * invalid querystring accountid      |                                               |
+|                              |          | invalid-secret-code                   |                                               |
+|                              |          |  * missing posted secret-code         |                                               |
+|                              |          | invalid-secret-code-length            |                                               |
+|                              |          |  * invalid posted secret-code length  |                                               |
+|------------------------------|----------|---------------------------------------|-----------------------------------------------|
 
-|--------------------------------------------------------------------------------|
-| /api/administrator/delete-account                                              |
-| RECEIVES------------------------| RETURNS--| EXCEPTIONS------------------------|
-| required querystring accountid  | boolean  | invalid-accountid                 |
-|                                 |          |  * missing querystring accountid  |
-|                                 |          |  * invalid querystring accountid  |
-|                                 |          | receieves                         |
-|                                 |          |  * querystring accountid          |
-|---------------------------------|----------|-----------------------------------|
+|---------------------------------------------------------------------------------------|
+| /api/administrator/delete-account                                                     |
+| RECEIVES------------------------| RETURNS---------| EXCEPTIONS------------------------|
+| required querystring accountid  | boolean (61ms)  | invalid-accountid                 |
+|                                 |                 |  * missing querystring accountid  |
+|                                 |                 |  * invalid querystring accountid  |
+|                                 |                 | receieves                         |
+|                                 |                 |  * querystring accountid (39ms)   |
+|---------------------------------|-----------------|-----------------------------------|
 
-|----------------------------------------------------------------------------------------------------------------------|
-| /api/administrator/deleted-accounts                                                                                  |
-| RECEIVES--------------------------------------| RETURNS-------| REDACTS--------------| CONFIGURATION-----------------|
-| optional querystring offset (integer) (64ms)  | array (47ms)  | usernameHash (40ms)  | environment PAGE_SIZE (80ms)  |
-| optional querystring limit (integer) (48ms)   |               | passwordHash         |                               |
-| optional querystring all (boolean) (70ms)     |               | sessionKey           |                               |
-|-----------------------------------------------|---------------|----------------------|-------------------------------|
+|-----------------------------------------------------------------------------------------------------------------------|
+| /api/administrator/deleted-accounts                                                                                   |
+| RECEIVES--------------------------------------| RETURNS-------| REDACTS--------------| CONFIGURATION------------------|
+| optional querystring offset (integer) (75ms)  | array (65ms)  | usernameHash (39ms)  | environment PAGE_SIZE (109ms)  |
+| optional querystring limit (integer) (61ms)   |               | passwordHash (38ms)  |                                |
+| optional querystring all (boolean) (83ms)     |               | sessionKey           |                                |
+|-----------------------------------------------|---------------|----------------------|--------------------------------|
 
 |--------------------------------------------|
 | /api/administrator/deleted-accounts-count  |
 | RETURNS------------------------------------|
-| querystring accountid (63ms)               |
+| querystring accountid (88ms)               |
 |--------------------------------------------|
 
 |--------------------------------------------------------------------------------|
@@ -629,27 +629,27 @@ http://localhost:9000
 |------------------------------------|
 | /api/administrator/profiles-count  |
 | RETURNS----------------------------|
-| integer (71ms)                     |
+| integer (73ms)                     |
 |------------------------------------|
 
-|---------------------------------------------------------------------------------------------|
-| /api/administrator/reset-account-administrator                                              |
-| RECEIVES------------------------| RETURNS--| EXCEPTIONS-------------------------------------|
-| required querystring accountid  | object   | invalid-accountid                              |
-|                                 |          |  * missing querystring accountid               |
-|                                 |          |  * invalid querystring accountid               |
-|                                 |          | invalid-account                                |
-|                                 |          |  * accessing account is not owner              |
-|                                 |          |  * querystring accountid is not administrator  |
-|---------------------------------|----------|------------------------------------------------|
+|----------------------------------------------------------------------------------------------------|
+| /api/administrator/reset-account-administrator                                                     |
+| RECEIVES------------------------| RETURNS--| EXCEPTIONS--------------------------------------------|
+| required querystring accountid  | object   | invalid-accountid                                     |
+|                                 |          |  * missing querystring accountid                      |
+|                                 |          |  * invalid querystring accountid                      |
+|                                 |          | invalid-account                                       |
+|                                 |          |  * accessing account is not owner                     |
+|                                 |          |  * querystring accountid is not administrator (40ms)  |
+|---------------------------------|----------|-------------------------------------------------------|
 
-|--------------------------------------------------------------------------------------------|
-| /api/administrator/reset-code                                                              |
-| RECEIVES---------------------| RETURNS--| REDACTS---------| EXCEPTIONS---------------------|
-| required querystring codeid  | object   | secretCodeHash  | invalid-reset-codeid           |
-|                              |          |                 |  * missing querystring codeid  |
-|                              |          |                 |  * invalid querystring codeid  |
-|------------------------------|----------|-----------------|--------------------------------|
+|---------------------------------------------------------------------------------------------------------|
+| /api/administrator/reset-code                                                                           |
+| RECEIVES---------------------| RETURNS--------| REDACTS----------------| EXCEPTIONS---------------------|
+| required querystring codeid  | object (44ms)  | secretCodeHash (39ms)  | invalid-reset-codeid           |
+|                              |                |                        |  * missing querystring codeid  |
+|                              |                |                        |  * invalid querystring codeid  |
+|------------------------------|----------------|------------------------|--------------------------------|
 
 |------------------------------------------------------------------------------------------------|
 | /api/administrator/reset-codes                                                                 |
@@ -663,7 +663,7 @@ http://localhost:9000
 |---------------------------------------|
 | /api/administrator/reset-codes-count  |
 | RETURNS-------------------------------|
-| integer (64ms)                        |
+| integer (92ms)                        |
 |---------------------------------------|
 
 |--------------------------------------------------------------------------------------------|
@@ -698,7 +698,7 @@ http://localhost:9000
 |------------------------------------|
 | /api/administrator/sessions-count  |
 | RETURNS----------------------------|
-| integer (57ms)                     |
+| integer (67ms)                     |
 |------------------------------------|
 
 |------------------------------------------------------------------------|
@@ -713,31 +713,31 @@ http://localhost:9000
 |          |  * querystring accountid is not administrator               |
 |----------|-------------------------------------------------------------|
 
-|----------------------------------------------------------------------------------------------|
-| /api/administrator/set-account-deleted                                                       |
-| RETURNS--| EXCEPTIONS--------------------------------------------| CONFIGURATION-------------|
-| object   | invalid-accountid                                     | environment DELETE_DELAY  |
-|          |  * unspecified querystring accountid                  |                           |
-|          |  * invalid querystring accountid                      |                           |
-|          | invalid-account                                       |                           |
-|          |  * ineligible querystring account is already deleted  |                           |
-|          |  * querystring accountid is deleted                   |                           |
-|----------|-------------------------------------------------------|---------------------------|
+|----------------------------------------------------------------------------------------------------|
+| /api/administrator/set-account-deleted                                                             |
+| RETURNS--------| EXCEPTIONS--------------------------------------------| CONFIGURATION-------------|
+| object (39ms)  | invalid-accountid                                     | environment DELETE_DELAY  |
+|                |  * unspecified querystring accountid                  |                           |
+|                |  * invalid querystring accountid                      |                           |
+|                | invalid-account                                       |                           |
+|                |  * ineligible querystring account is already deleted  |                           |
+|                |  * querystring accountid is deleted                   |                           |
+|----------------|-------------------------------------------------------|---------------------------|
 
-|--------------------------------------------------------------------------------------------------|
-| /api/administrator/set-owner-account                                                             |
-| RECEIVES------------------------| RETURNS--| EXCEPTIONS------------------------------------------|
-| required querystring accountid  | object   | invalid-accountid                                   |
-|                                 |          |  * missing querystring accountid                    |
-|                                 |          |  * invalid querystring accountid                    |
-|                                 |          | invalid-account                                     |
-|                                 |          |  * ineligible accessing account (46ms)              |
-|                                 |          |  * ineligible querystring account is already owner  |
-|                                 |          | requires                                            |
-|                                 |          |  * accessing account is owner (46ms)                |
-|                                 |          |  * querystring account is not owner                 |
-|                                 |          |  * querystring account is not deleted               |
-|---------------------------------|----------|-----------------------------------------------------|
+|--------------------------------------------------------------------------------------------------------|
+| /api/administrator/set-owner-account                                                                   |
+| RECEIVES------------------------| RETURNS--------| EXCEPTIONS------------------------------------------|
+| required querystring accountid  | object (41ms)  | invalid-accountid                                   |
+|                                 |                |  * missing querystring accountid                    |
+|                                 |                |  * invalid querystring accountid                    |
+|                                 |                | invalid-account                                     |
+|                                 |                |  * ineligible accessing account (52ms)              |
+|                                 |                |  * ineligible querystring account is already owner  |
+|                                 |                | requires                                            |
+|                                 |                |  * accessing account is owner (63ms)                |
+|                                 |                |  * querystring account is not owner                 |
+|                                 |                |  * querystring account is not deleted               |
+|---------------------------------|----------------|-----------------------------------------------------|
 
 |------------------------------------------------------------------------------------------------|
 | /api/user/account                                                                              |
@@ -752,7 +752,7 @@ http://localhost:9000
 |-----------------------------------------------------------------------------------|
 | /api/user/connect/country-spec                                                    |
 | RECEIVES----------------------| RETURNS---------| EXCEPTIONS----------------------|
-| required querystring country  | object (185ms)  | undefined                       |
+| required querystring country  | object (208ms)  | undefined                       |
 |                               |                 |  * missing querystring country  |
 |                               |                 |  * invalid querystring country  |
 |-------------------------------|-----------------|---------------------------------|
@@ -760,7 +760,7 @@ http://localhost:9000
 |-------------------------------------------------------------------------------------|
 | /api/user/connect/country-specs                                                     |
 | RECEIVES----------------------------------------| RETURNS--| CONFIGURATION----------|
-| optional querystring offset (integer) (2508ms)  | array    | environment PAGE_SIZE  |
+| optional querystring offset (integer) (2164ms)  | array    | environment PAGE_SIZE  |
 | optional querystring limit (integer)            |          |                        |
 | optional querystring all (boolean)              |          |                        |
 |-------------------------------------------------|----------|------------------------|
@@ -768,185 +768,185 @@ http://localhost:9000
 |----------------------------------------|
 | /api/user/connect/country-specs-count  |
 | RETURNS--------------------------------|
-| integer (2582ms)                       |
+| integer (4573ms)                       |
 |----------------------------------------|
 
 |----------------------------------------------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/create-person                                                                                                                    |
 | RECEIVES----------------------------------------------------| RETURNS----------| EXCEPTIONS--------------------------------------------------------|
-| required posted relationship_title (1948ms)                 | object (5866ms)  | invalid-stripeid                                                  |
-| required posted relationship_percent_ownership (1953ms)     |                  |  * missing querystring stripeid                                   |
+| required posted relationship_title (1858ms)                 | object (3399ms)  | invalid-stripeid                                                  |
+| required posted relationship_percent_ownership (1747ms)     |                  |  * missing querystring stripeid                                   |
 | required querystring stripeid                               |                  |  * invalid querystring stripeid                                   |
-| optional posted relationship_representative (3664ms)        |                  | invalid-stripe-account                                            |
-| optionally-required posted relationship_executive (5639ms)  |                  |  * ineligible stripe account for individuals (2164ms)             |
-| optional posted relationship_director (4544ms)              |                  |  * ineligible stripe account does not require directors (2078ms)  |
-| optional posted relationship_owner (6795ms)                 |                  |  * ineligible stripe account does not require owners (1829ms)     |
-| required posted relationship_percent_ownership (4347ms)     |                  | invalid-account                                                   |
-| required posted relationship_title (4234ms)                 |                  |  * ineligible accessing account (1603ms)                          |
+| optional posted relationship_representative (3165ms)        |                  | invalid-stripe-account                                            |
+| optionally-required posted relationship_executive (3022ms)  |                  |  * ineligible stripe account for individuals (1603ms)             |
+| optional posted relationship_director (4234ms)              |                  |  * ineligible stripe account does not require directors (1995ms)  |
+| optional posted relationship_owner (4108ms)                 |                  |  * ineligible stripe account does not require owners (1759ms)     |
+| required posted relationship_percent_ownership (4198ms)     |                  | invalid-account                                                   |
+| required posted relationship_title (5151ms)                 |                  |  * ineligible accessing account (1410ms)                          |
 |                                                             |                  | invalid-relationship_percent_ownership                            |
-|                                                             |                  |  * missing posted relationship_percent_ownership (1953ms)         |
-|                                                             |                  |  * invalid posted relationship_percent_ownership (2581ms)         |
+|                                                             |                  |  * missing posted relationship_percent_ownership (1747ms)         |
+|                                                             |                  |  * invalid posted relationship_percent_ownership (1713ms)         |
 |                                                             |                  | invalid-relationship_title                                        |
-|                                                             |                  |  * missing posted relationship_title (1948ms)                     |
-|                                                             |                  |  * invalid posted relationship_title (4216ms)                     |
+|                                                             |                  |  * missing posted relationship_title (1858ms)                     |
+|                                                             |                  |  * invalid posted relationship_title (2092ms)                     |
 |                                                             |                  | invalid-relationship_executive                                    |
-|                                                             |                  |  * invalid representative must be an executive (2134ms)           |
+|                                                             |                  |  * invalid representative must be an executive (2179ms)           |
 |-------------------------------------------------------------|------------------|-------------------------------------------------------------------|
 
-|----------------------------------------------------------------------------------------|
-| /api/user/connect/create-stripe-account                                                |
-| RECEIVES------------------------| RETURNS----------| EXCEPTIONS------------------------|
-| required posted type            | object (1717ms)  | invalid-accountid                 |
-| required querystring accountid  |                  |  * missing querystring accountid  |
-|                                 |                  |  * invalid querystring accountid  |
-|                                 |                  | invalid-account                   |
-|                                 |                  |  * ineligible accessing account   |
-|                                 |                  | invalid-type                      |
-|                                 |                  |  * missing posted type            |
-|                                 |                  |  * invalid posted type            |
-|                                 |                  | invalid-country                   |
-|                                 |                  |  * invalid posted country         |
-|                                 |                  |  * invalid posted country         |
-|---------------------------------|------------------|-----------------------------------|
+|----------------------------------------------------------------------------------------------|
+| /api/user/connect/create-stripe-account                                                      |
+| RECEIVES------------------------| RETURNS----------| EXCEPTIONS------------------------------|
+| required posted type            | object (1120ms)  | invalid-accountid                       |
+| required querystring accountid  |                  |  * missing querystring accountid        |
+|                                 |                  |  * invalid querystring accountid        |
+|                                 |                  | invalid-account                         |
+|                                 |                  |  * ineligible accessing account (41ms)  |
+|                                 |                  | invalid-type                            |
+|                                 |                  |  * missing posted type                  |
+|                                 |                  |  * invalid posted type                  |
+|                                 |                  | invalid-country                         |
+|                                 |                  |  * invalid posted country               |
+|                                 |                  |  * invalid posted country               |
+|---------------------------------|------------------|-----------------------------------------|
 
 |--------------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/delete-person                                                                                    |
 | RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS----------------------------------------------------|
-| required querystring personid  | boolean (6277ms)  | invalid-personid                                              |
+| required querystring personid  | boolean (5779ms)  | invalid-personid                                              |
 |                                |                   |  * missing querystring personid                               |
 |                                |                   |  * invalid querystring personid                               |
 |                                |                   | invalid-account                                               |
-|                                |                   |  * ineligible accessing account (4132ms)                      |
+|                                |                   |  * ineligible accessing account (4081ms)                      |
 |                                |                   | invalid-person                                                |
-|                                |                   |  * ineligible querystring person is representative (11461ms)  |
+|                                |                   |  * ineligible querystring person is representative (10208ms)  |
 |--------------------------------|-------------------|---------------------------------------------------------------|
 
 |------------------------------------------------------------------------------------------------|
 | /api/user/connect/delete-stripe-account                                                        |
 | RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS--------------------------------|
-| required querystring stripeid  | boolean (4653ms)  | invalid-stripeid                          |
+| required querystring stripeid  | boolean (2809ms)  | invalid-stripeid                          |
 |                                |                   |  * missing querystring stripeid           |
 |                                |                   |  * invalid querystring stripeid           |
 |                                |                   | invalid-account                           |
-|                                |                   |  * ineligible accessing account (1712ms)  |
+|                                |                   |  * ineligible accessing account (1776ms)  |
 |--------------------------------|-------------------|-------------------------------------------|
 
 |-------------------------------------------------------------------------------------------------|
 | /api/user/connect/payout                                                                        |
 | RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS---------------------------------|
-| required querystring payoutid  | object (77219ms)  | invalid-payoutid                           |
+| required querystring payoutid  | object (74443ms)  | invalid-payoutid                           |
 |                                |                   |  * missing querystring payoutid            |
 |                                |                   |  * invalid querystring payoutid            |
 |                                |                   | invalid-account                            |
-|                                |                   |  * ineligible accessing account (71749ms)  |
+|                                |                   |  * ineligible accessing account (78667ms)  |
 |--------------------------------|-------------------|--------------------------------------------|
 
-|-----------------------------------------------------------------------------------------------------------------|
-| /api/user/connect/payouts                                                                                       |
-| RECEIVES---------------------------------| RETURNS--| EXCEPTIONS-----------------------| CONFIGURATION----------|
-| required querystring payoutid            | array    | invalid-payoutid                 | environment PAGE_SIZE  |
-| optional querystring offset (integer)    |          |  * missing querystring payoutid  |                        |
-| optional querystring limit (integer)     |          |  * invalid querystring payoutid  |                        |
-| optional querystring all (boolean)       |          | invalid-account                  |                        |
-| optional querystring stripeid (boolean)  |          |  * ineligible accessing account  |                        |
-|------------------------------------------|----------|----------------------------------|------------------------|
+|------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/payouts                                                                                              |
+| RECEIVES---------------------------------| RETURNS--| EXCEPTIONS------------------------------| CONFIGURATION----------|
+| required querystring payoutid            | array    | invalid-payoutid                        | environment PAGE_SIZE  |
+| optional querystring offset (integer)    |          |  * missing querystring payoutid         |                        |
+| optional querystring limit (integer)     |          |  * invalid querystring payoutid         |                        |
+| optional querystring all (boolean)       |          | invalid-account                         |                        |
+| optional querystring stripeid (boolean)  |          |  * ineligible accessing account (43ms)  |                        |
+|------------------------------------------|----------|-----------------------------------------|------------------------|
 
-|------------------------------------------------------------------------------------------|
-| /api/user/connect/payouts-count                                                          |
-| RECEIVES-----------------------| RETURNS--------------| EXCEPTIONS-----------------------|
-| required querystring payoutid  | integer (1249336ms)  | invalid-payoutid                 |
-|                                |                      |  * missing querystring payoutid  |
-|                                |                      |  * invalid querystring payoutid  |
-|                                |                      | invalid-account                  |
-|                                |                      |  * ineligible accessing account  |
-|--------------------------------|----------------------|----------------------------------|
+|-----------------------------------------------------------------------------------------------|
+| /api/user/connect/payouts-count                                                               |
+| RECEIVES-----------------------| RETURNS------------| EXCEPTIONS------------------------------|
+| required querystring payoutid  | integer (83666ms)  | invalid-payoutid                        |
+|                                |                    |  * missing querystring payoutid         |
+|                                |                    |  * invalid querystring payoutid         |
+|                                |                    | invalid-account                         |
+|                                |                    |  * ineligible accessing account (50ms)  |
+|--------------------------------|--------------------|-----------------------------------------|
 
-|-------------------------------------------------------------------------------------------------|
-| /api/user/connect/person                                                                        |
-| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS---------------------------------|
-| required querystring personid  | object (10495ms)  | invalid-personid                           |
-|                                |                   |  * missing querystring personid            |
-|                                |                   |  * invalid querystring personid            |
-|                                |                   | invalid-account                            |
-|                                |                   |  * ineligible accessing account (10163ms)  |
-|--------------------------------|-------------------|--------------------------------------------|
+|------------------------------------------------------------------------------------------------|
+| /api/user/connect/person                                                                       |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS--------------------------------|
+| required querystring personid  | object (10661ms)  | invalid-personid                          |
+|                                |                   |  * missing querystring personid           |
+|                                |                   |  * invalid querystring personid           |
+|                                |                   | invalid-account                           |
+|                                |                   |  * ineligible accessing account (9616ms)  |
+|--------------------------------|-------------------|-------------------------------------------|
 
 |-------------------------------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/persons                                                                                                           |
 | RECEIVES--------------------------------| RETURNS--| EXCEPTIONS--------------------------------------------| CONFIGURATION----------|
-| required querystring stripeid (1523ms)  | array    | invalid-stripeid                                      | environment PAGE_SIZE  |
-| optional querystring offset (integer)   |          |  * missing querystring stripeid (1523ms)              |                        |
+| required querystring stripeid (1550ms)  | array    | invalid-stripeid                                      | environment PAGE_SIZE  |
+| optional querystring offset (integer)   |          |  * missing querystring stripeid (1550ms)              |                        |
 | optional querystring limit (integer)    |          |  * invalid querystring stripeid                       |                        |
 | optional querystring all (boolean)      |          | invalid-account                                       |                        |
-|                                         |          |  * ineligible accessing account (1343ms)              |                        |
+|                                         |          |  * ineligible accessing account (1576ms)              |                        |
 |                                         |          | invalid-stripe-account                                |                        |
-|                                         |          |  * ineligible stripe account for individual (1799ms)  |                        |
+|                                         |          |  * ineligible stripe account for individual (1588ms)  |                        |
 |-----------------------------------------|----------|-------------------------------------------------------|------------------------|
 
 |---------------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/persons-count                                                                                     |
 | RECEIVES--------------------------------| RETURNS-----------| EXCEPTIONS--------------------------------------------|
-| required querystring stripeid (1625ms)  | integer (8678ms)  | invalid-stripeid                                      |
-|                                         |                   |  * missing querystring stripeid (1625ms)              |
+| required querystring stripeid (1506ms)  | integer (7755ms)  | invalid-stripeid                                      |
+|                                         |                   |  * missing querystring stripeid (1506ms)              |
 |                                         |                   |  * invalid querystring stripeid                       |
 |                                         |                   | invalid-account                                       |
-|                                         |                   |  * ineligible accessing account (1820ms)              |
+|                                         |                   |  * ineligible accessing account (1852ms)              |
 |                                         |                   | invalid-stripe-account                                |
-|                                         |                   |  * ineligible stripe account for individual (2029ms)  |
+|                                         |                   |  * ineligible stripe account for individual (1796ms)  |
 |-----------------------------------------|-------------------|-------------------------------------------------------|
 
 |-------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/set-beneficial-owners-submitted                                                           |
 | RECEIVES-----------------------| RETURNS----------| EXCEPTIONS----------------------------------------------|
-| required querystring stripeid  | object (5488ms)  | invalid-stripeid                                        |
+| required querystring stripeid  | object (5283ms)  | invalid-stripeid                                        |
 |                                |                  |  * missing querystring stripeid                         |
 |                                |                  |  * invalid querystring stripeid                         |
 |                                |                  | invalid-stripe-account                                  |
-|                                |                  |  * ineligible stripe account for individual (3727ms)    |
-|                                |                  |  * ineligible beneficial owners are submitted (5642ms)  |
+|                                |                  |  * ineligible stripe account for individual (1793ms)    |
+|                                |                  |  * ineligible beneficial owners are submitted (3689ms)  |
 |                                |                  | invalid-account                                         |
-|                                |                  |  * ineligible accessing account (2003ms)                |
+|                                |                  |  * ineligible accessing account (1968ms)                |
 |--------------------------------|------------------|---------------------------------------------------------|
 
 |-------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/set-company-directors-submitted                                                           |
 | RECEIVES-----------------------| RETURNS----------| EXCEPTIONS----------------------------------------------|
-| required querystring stripeid  | object (3381ms)  | invalid-stripeid                                        |
+| required querystring stripeid  | object (2901ms)  | invalid-stripeid                                        |
 |                                |                  |  * missing querystring stripeid                         |
 |                                |                  |  * invalid querystring stripeid                         |
 |                                |                  | invalid-stripe-account                                  |
-|                                |                  |  * ineligible stripe account for individual (2240ms)    |
-|                                |                  |  * ineligible company directors are submitted (4528ms)  |
+|                                |                  |  * ineligible stripe account for individual (1731ms)    |
+|                                |                  |  * ineligible company directors are submitted (4477ms)  |
 |                                |                  | invalid-account                                         |
-|                                |                  |  * ineligible accessing account (1878ms)                |
+|                                |                  |  * ineligible accessing account (2797ms)                |
 |--------------------------------|------------------|---------------------------------------------------------|
 
 |-----------------------------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/set-stripe-account-submitted                                                                                    |
 | RECEIVES-----------------------| RETURNS------------------------| EXCEPTIONS------------------------------------------------------|
-| required querystring stripeid  | object (individual) (89875ms)  | invalid-stripeid                                                |
-|                                | object (company) (84160ms)     |  * missing querystring stripeid                                 |
+| required querystring stripeid  | object (individual) (92223ms)  | invalid-stripeid                                                |
+|                                | object (company) (126489ms)    |  * missing querystring stripeid                                 |
 |                                |                                |  * invalid querystring stripeid                                 |
 |                                |                                | invalid-stripe-account                                          |
-|                                |                                |  * ineligible stripe account is submitted (76779ms)             |
+|                                |                                |  * ineligible stripe account is submitted (72960ms)             |
 |                                |                                | invalid-account                                                 |
-|                                |                                |  * ineligible accessing account (1902ms)                        |
+|                                |                                |  * ineligible accessing account (1806ms)                        |
 |                                |                                | invalid-payment-details                                         |
-|                                |                                |  * ineligible Stripe account missing payment details (45150ms)  |
+|                                |                                |  * ineligible Stripe account missing payment details (32952ms)  |
 |                                |                                | invalid-registration                                            |
-|                                |                                |  * ineligible Stripe account missing information (4071ms)       |
+|                                |                                |  * ineligible Stripe account missing information (3744ms)       |
 |                                |                                | invalid-person                                                  |
-|                                |                                |  * ineligible company person missing information (21390ms)      |
+|                                |                                |  * ineligible company person missing information (31995ms)      |
 |--------------------------------|--------------------------------|-----------------------------------------------------------------|
 
 |-----------------------------------------------------------------------------------------------|
 | /api/user/connect/stripe-account                                                              |
 | RECEIVES-----------------------| RETURNS----------| EXCEPTIONS--------------------------------|
-| required querystring stripeid  | object (1822ms)  | invalid-stripeid                          |
+| required querystring stripeid  | object (1888ms)  | invalid-stripeid                          |
 |                                |                  |  * missing querystring stripeid           |
 |                                |                  |  * invalid querystring stripeid           |
 |                                |                  | invalid-account                           |
-|                                |                  |  * ineligible accessing account (1808ms)  |
+|                                |                  |  * ineligible accessing account (1598ms)  |
 |--------------------------------|------------------|-------------------------------------------|
 
 |----------------------------------------------------------------------------------------------------------------------|
@@ -956,27 +956,27 @@ http://localhost:9000
 | optional querystring offset (integer)  |          |  * missing querystring accountid        |                        |
 | optional querystring limit (integer)   |          |  * invalid querystring accountid        |                        |
 | optional querystring all (boolean)     |          | invalid-account                         |                        |
-|                                        |          |  * ineligible accessing account (42ms)  |                        |
+|                                        |          |  * ineligible accessing account (43ms)  |                        |
 |----------------------------------------|----------|-----------------------------------------|------------------------|
 
-|---------------------------------------------------------------------------------------|
-| /api/user/connect/stripe-accounts-count                                               |
-| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS-----------------------|
-| required querystring payoutid  | integer (3979ms)  | invalid-payoutid                 |
-|                                |                   |  * missing querystring payoutid  |
-|                                |                   |  * invalid querystring payoutid  |
-|                                |                   | invalid-account                  |
-|                                |                   |  * ineligible accessing account  |
-|--------------------------------|-------------------|----------------------------------|
+|----------------------------------------------------------------------------------------------|
+| /api/user/connect/stripe-accounts-count                                                      |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS------------------------------|
+| required querystring payoutid  | integer (3950ms)  | invalid-payoutid                        |
+|                                |                   |  * missing querystring payoutid         |
+|                                |                   |  * invalid querystring payoutid         |
+|                                |                   | invalid-account                         |
+|                                |                   |  * ineligible accessing account (39ms)  |
+|--------------------------------|-------------------|-----------------------------------------|
 
 |----------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/update-payment-information                                                                   |
 | RECEIVES----------------------------------------| RETURNS----------| EXCEPTIONS--------------------------------|
-| required posted routing_number                  | object (2923ms)  | invalid-stripeid                          |
+| required posted routing_number                  | object (3036ms)  | invalid-stripeid                          |
 | required posted bank_code                       |                  |  * missing querystring stripeid           |
 | required posted clearing_code                   |                  |  * invalid querystring stripeid           |
 | required posted branch_code                     |                  | invalid-account                           |
-| required posted sort_code                       |                  |  * ineligible accessing account (1532ms)  |
+| required posted sort_code                       |                  |  * ineligible accessing account (1776ms)  |
 | required posted transit_number                  |                  | invalid-account_holder_name               |
 | required posted institution_number              |                  |  * missing posted account_holder_name     |
 | required posted bsb_number                      |                  | invalid-account_holder_type               |
@@ -1013,26 +1013,26 @@ http://localhost:9000
 |                                                 |                  |  * invalid posted routing_number          |
 |-------------------------------------------------|------------------|-------------------------------------------|
 
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| /api/user/connect/update-person                                                                                                                                  |
-| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS---------------------------------------------------------------| CONFIGURATION--------------------|
-| required querystring personid  | object (13683ms)  | invalid-personid                                                         | environment STRIPE_JS (22817ms)  |
-|                                |                   |  * missing querystring personid                                          |                                  |
-|                                |                   |  * invalid querystring personid                                          |                                  |
-|                                |                   | invalid-account                                                          |                                  |
-|                                |                   |  * ineligible accessing account (12115ms)                                |                                  |
-|                                |                   | invalid-person                                                           |                                  |
-|                                |                   |  * ineligible querystring person has no required information (191025ms)  |                                  |
-|--------------------------------|-------------------|--------------------------------------------------------------------------|----------------------------------|
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/update-person                                                                                                                                 |
+| RECEIVES-----------------------| RETURNS----------| EXCEPTIONS---------------------------------------------------------------| CONFIGURATION--------------------|
+| required querystring personid  | object (9136ms)  | invalid-personid                                                         | environment STRIPE_JS (20613ms)  |
+|                                |                  |  * missing querystring personid                                          |                                  |
+|                                |                  |  * invalid querystring personid                                          |                                  |
+|                                |                  | invalid-account                                                          |                                  |
+|                                |                  |  * ineligible accessing account (10538ms)                                |                                  |
+|                                |                  | invalid-person                                                           |                                  |
+|                                |                  |  * ineligible querystring person has no required information (132909ms)  |                                  |
+|--------------------------------|------------------|--------------------------------------------------------------------------|----------------------------------|
 
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | /api/user/connect/update-stripe-account                                                                                                                                                                     |
 | RECEIVES---------------------------------------------------------------------| RETURNS-----------------------| EXCEPTIONS------------------------------------------------| CONFIGURATION--------------------|
-| required posted token (2012ms)                                               | object (company) (4014ms)     | invalid-stripeid                                          | environment STRIPE_JS (12934ms)  |
-| required posted ssn_last_4 (individual)                                      | object (individual) (3809ms)  |  * missing querystring stripeid                           |                                  |
+| required posted token (1830ms)                                               | object (company) (5718ms)     | invalid-stripeid                                          | environment STRIPE_JS (13226ms)  |
+| required posted ssn_last_4 (individual)                                      | object (individual) (3801ms)  |  * missing querystring stripeid                           |                                  |
 | required posted id_number (individual)                                       |                               |  * invalid querystring stripeid                           |                                  |
 | required posted last_name_kanji (individual)                                 |                               | invalid-account                                           |                                  |
-| required posted last_name_kana (individual)                                  |                               |  * ineligible accessing account (1546ms)                  |                                  |
+| required posted last_name_kana (individual)                                  |                               |  * ineligible accessing account (1836ms)                  |                                  |
 | required posted gender (individual)                                          |                               | invalid-business_profile_mcc                              |                                  |
 | required posted first_name_kanji (individual)                                |                               |  * missing posted business_profile_mcc (company)          |                                  |
 | required posted first_name_kana (individual)                                 |                               |  * missing posted business_profile_mcc (individual)       |                                  |
@@ -1081,10 +1081,10 @@ http://localhost:9000
 | required posted business_profile_mcc (individual)                            |                               |  * missing posted address_kanji_line1 (individual)        |                                  |
 | required posted business_profile_mcc (company)                               |                               | invalid-address_kanji_postal_code                         |                                  |
 | required querystring stripeid                                                |                               |  * missing posted address_kanji_postal_code (company)     |                                  |
-| optionally-required patched verification_document_front (4567ms)             |                               |  * missing posted address_kanji_postal_code (individual)  |                                  |
-| optionally-required patched verification_document_back (4739ms)              |                               | invalid-address_kanji_state                               |                                  |
-| optionally-required patched verification_additional_document_front (3894ms)  |                               |  * missing posted address_kanji_state (company)           |                                  |
-| optionally-required patched verification_additional_document_back (4265ms)   |                               |  * missing posted address_kanji_state (individual)        |                                  |
+| optionally-required patched verification_document_front (4184ms)             |                               |  * missing posted address_kanji_postal_code (individual)  |                                  |
+| optionally-required patched verification_document_back (4722ms)              |                               | invalid-address_kanji_state                               |                                  |
+| optionally-required patched verification_additional_document_front (3885ms)  |                               |  * missing posted address_kanji_state (company)           |                                  |
+| optionally-required patched verification_additional_document_back (4309ms)   |                               |  * missing posted address_kanji_state (individual)        |                                  |
 |                                                                              |                               | invalid-address_kanji_town                                |                                  |
 |                                                                              |                               |  * missing posted address_kanji_town (company)            |                                  |
 |                                                                              |                               |  * missing posted address_kanji_town (individual)         |                                  |
@@ -1119,8 +1119,8 @@ http://localhost:9000
 |                                                                              |                               | invalid-ssn_last_4                                        |                                  |
 |                                                                              |                               |  * missing posted ssn_last_4 (individual)                 |                                  |
 |                                                                              |                               | invalid-token                                             |                                  |
-|                                                                              |                               |  * missing posted token (2012ms)                          |                                  |
-|                                                                              |                               |  * invalid posted token (2954ms)                          |                                  |
+|                                                                              |                               |  * missing posted token (1830ms)                          |                                  |
+|                                                                              |                               |  * invalid posted token (2749ms)                          |                                  |
 |------------------------------------------------------------------------------|-------------------------------|-----------------------------------------------------------|----------------------------------|
 
 |---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1131,7 +1131,7 @@ http://localhost:9000
 | required posted occupation                |          | invalid-username-length           | environment MINIMUM_PASSWORD_LENGTH              |
 | required posted location                  |          |  * posted username too short      | environment MAXIMUM_PASSWORD_LENGTH              |
 | required posted display-email             |          |  * posted username too long       | environment REQUIRE_PROFILE                      |
-| required posted contact-email             |          | invalid-password                  | environment USER_PROFILE_FIELDS (48ms)           |
+| required posted contact-email             |          | invalid-password                  | environment USER_PROFILE_FIELDS (58ms)           |
 | required posted company-name              |          |  * missing posted password        | environment MINIMUM_PROFILE_FIRST_NAME_LENGTH    |
 | required posted display-name              |          | invalid-password-length           | environment MAXIMUM_PROFILE_FIRST_NAME_LENGTH    |
 | required posted last-name                 |          |  * posted password too short      | environment MINIMUM_PROFILE_LAST_NAME_LENGTH     |
@@ -1140,7 +1140,7 @@ http://localhost:9000
 | required posted username                  |          |  * missing posted first-name      | environment MAXIMUM_PROFILE_DISPLAY_NAME_LENGTH  |
 | optionally-required posted first-name     |          | invalid-first-name-length         | environment MINIMUM_PROFILE_COMPANY_NAME_LENGTH  |
 | optionally-required posted last-name      |          |  * posted first-name too short    | environment MAXIMUM_PROFILE_COMPANY_NAME_LENGTH  |
-| optionally-required posted display-name   |          |  * posted first-name too long     | override req.userProfileFields (41ms)            |
+| optionally-required posted display-name   |          |  * posted first-name too long     | override req.userProfileFields (56ms)            |
 | optionally-required posted company-name   |          | invalid-last-name                 |                                                  |
 | optionally-required posted contact-email  |          |  * missing posted last-name       |                                                  |
 | optionally-required posted display-email  |          | invalid-last-name-length          |                                                  |
@@ -1170,7 +1170,7 @@ http://localhost:9000
 |---------------------------------------------------------------------------------------------------------------------------------------------|
 | /api/user/create-profile                                                                                                                    |
 | RECEIVES----------------------------------| RETURNS--| EXCEPTIONS------------------------| CONFIGURATION------------------------------------|
-| required posted dob                       | object   | invalid-accountid                 | environment USER_PROFILE_FIELDS (45ms)           |
+| required posted dob                       | object   | invalid-accountid                 | environment USER_PROFILE_FIELDS (51ms)           |
 | required posted phone                     |          |  * missing querystring accountid  | environment MINIMUM_PROFILE_FIRST_NAME_LENGTH    |
 | required posted occupation                |          |  * invalid querystring accountid  | environment MAXIMUM_PROFILE_FIRST_NAME_LENGTH    |
 | required posted location                  |          |  * ineligible accessing account   | environment MINIMUM_PROFILE_LAST_NAME_LENGTH     |
@@ -1179,7 +1179,7 @@ http://localhost:9000
 | required posted display-name              |          | invalid-first-name-length         | environment MAXIMUM_PROFILE_DISPLAY_NAME_LENGTH  |
 | required posted last-name                 |          |  * posted first-name too short    | environment MINIMUM_PROFILE_COMPANY_NAME_LENGTH  |
 | required posted first-name                |          |  * posted first-name too long     | environment MAXIMUM_PROFILE_COMPANY_NAME_LENGTH  |
-| required querystring accountid            |          | invalid-last-name                 | override req.userProfileFields                   |
+| required querystring accountid            |          | invalid-last-name                 | override req.userProfileFields (38ms)            |
 | optionally-required posted first-name     |          |  * missing posted last-name       |                                                  |
 | optionally-required posted last-name      |          | invalid-last-name-length          |                                                  |
 | optionally-required posted display-name   |          |  * posted last-name too short     |                                                  |
@@ -1260,15 +1260,15 @@ http://localhost:9000
 |                          |          |  * invalid querystring ip  |
 |--------------------------|----------|----------------------------|
 
-|-----------------------------------------------------------------------------------|
-| /api/user/profile                                                                 |
-| RECEIVES------------------------| RETURNS--| EXCEPTIONS---------------------------|
-| required querystring profileid  | object   | invalid-profileid                    |
-|                                 |          |  * missing querystring profileid     |
-|                                 |          |  * invalid querystring profileid     |
-|                                 |          | invalid-account                      |
-|                                 |          |  * ineligible querystring profileid  |
-|---------------------------------|----------|--------------------------------------|
+|------------------------------------------------------------------------------------------|
+| /api/user/profile                                                                        |
+| RECEIVES------------------------| RETURNS--| EXCEPTIONS----------------------------------|
+| required querystring profileid  | object   | invalid-profileid                           |
+|                                 |          |  * missing querystring profileid            |
+|                                 |          |  * invalid querystring profileid            |
+|                                 |          | invalid-account                             |
+|                                 |          |  * ineligible querystring profileid (43ms)  |
+|---------------------------------|----------|---------------------------------------------|
 
 |----------------------------------------------------------------------------------------------------------------------|
 | /api/user/profiles                                                                                                   |
@@ -1277,7 +1277,7 @@ http://localhost:9000
 | optional querystring offset (integer)  |          |  * missing querystring accountid        |                        |
 | optional querystring limit (integer)   |          |  * invalid querystring accountid        |                        |
 | optional querystring all (boolean)     |          | invalid-account                         |                        |
-|                                        |          |  * ineligible accessing account (43ms)  |                        |
+|                                        |          |  * ineligible accessing account (53ms)  |                        |
 |----------------------------------------|----------|-----------------------------------------|------------------------|
 
 |--------------------------------------------------------------------------------|
@@ -1347,25 +1347,25 @@ http://localhost:9000
 |                                 |          |  * ineligible accessing account   |
 |---------------------------------|----------|-----------------------------------|
 
-|--------------------------------------------------------------------------------|
-| /api/user/reset-session-key                                                    |
-| RECEIVES------------------------| RETURNS--| EXCEPTIONS------------------------|
-| required querystring accountid  | boolean  | invalid-accountid                 |
-|                                 |          |  * missing querystring accountid  |
-|                                 |          |  * invalid querystring accountid  |
-|                                 |          | invalid-account                   |
-|                                 |          |  * ineligible accessing account   |
-|---------------------------------|----------|-----------------------------------|
+|--------------------------------------------------------------------------------------|
+| /api/user/reset-session-key                                                          |
+| RECEIVES------------------------| RETURNS--| EXCEPTIONS------------------------------|
+| required querystring accountid  | boolean  | invalid-accountid                       |
+|                                 |          |  * missing querystring accountid        |
+|                                 |          |  * invalid querystring accountid        |
+|                                 |          | invalid-account                         |
+|                                 |          |  * ineligible accessing account (38ms)  |
+|---------------------------------|----------|-----------------------------------------|
 
-|------------------------------------------------------------------------------------------------|
-| /api/user/session                                                                              |
-| RECEIVES------------------------| RETURNS--| REDACTS----| EXCEPTIONS---------------------------|
-| required querystring sessionid  | object   | tokenHash  | invalid-sessionid                    |
-|                                 |          |            |  * missing querystring sessionid     |
-|                                 |          |            |  * invalid querystring sessionid     |
-|                                 |          |            | invalid-account                      |
-|                                 |          |            |  * ineligible querystring sessionid  |
-|---------------------------------|----------|------------|--------------------------------------|
+|-------------------------------------------------------------------------------------------------------|
+| /api/user/session                                                                                     |
+| RECEIVES------------------------| RETURNS--| REDACTS----| EXCEPTIONS----------------------------------|
+| required querystring sessionid  | object   | tokenHash  | invalid-sessionid                           |
+|                                 |          |            |  * missing querystring sessionid            |
+|                                 |          |            |  * invalid querystring sessionid            |
+|                                 |          |            | invalid-account                             |
+|                                 |          |            |  * ineligible querystring sessionid (41ms)  |
+|---------------------------------|----------|------------|---------------------------------------------|
 
 |----------------------------------------------------------------------------------------------------------------|
 | /api/user/sessions                                                                                             |
@@ -1487,7 +1487,7 @@ http://localhost:9000
 |------------------------------------------------------------------------------------------------------------------------------------------------|
 | /api/user/update-profile                                                                                                                       |
 | RECEIVES----------------------------------| RETURNS--| EXCEPTIONS---------------------------| CONFIGURATION------------------------------------|
-| required posted dob                       | object   | invalid-profileid                    | environment USER_PROFILE_FIELDS                  |
+| required posted dob                       | object   | invalid-profileid                    | environment USER_PROFILE_FIELDS (43ms)           |
 | required posted phone                     |          |  * missing querystring profileid     | environment MINIMUM_PROFILE_FIRST_NAME_LENGTH    |
 | required posted occupation                |          |  * invalid querystring profileid     | environment MAXIMUM_PROFILE_FIRST_NAME_LENGTH    |
 | required posted location                  |          |  * ineligible querystring profileid  | environment MINIMUM_PROFILE_LAST_NAME_LENGTH     |
