@@ -17,7 +17,7 @@
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
-        <th >ID</th>
+        <th>ID</th>
         <th translate="yes">Typ</th>
         <th translate="yes">Jméno</th>
         <th translate="yes">Stav</th>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
