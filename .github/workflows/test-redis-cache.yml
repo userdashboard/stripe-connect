@@ -39,8 +39,10 @@ jobs:
         npm install -g mocha
         rm node_modules/@userdashboard/stripe-connect/*.js
         rm -rf node_modules/@userdashboard/stripe-connect/src
-        cp $HERE/*.js node_modules/@userdashboard/stripe-connect
-        cp -R $HERE/src/ node_modules/@userdashboard/stripe-connect/src/
+        rm -rf node_modules/@userdashboard/stripe-connect/languages
+        cp /home/runner/work/stripe-connect/stripe-connect/*.js node_modules/@userdashboard/stripe-connect
+        cp -R /home/runner/work/stripe-connect/stripe-connect/src/ node_modules/@userdashboard/stripe-connect/src/
+        cp -R /home/runner/work/stripe-connect/stripe-connect/languages/ node_modules/@userdashboard/stripe-connect/languages/
         echo "global.applicationPath = __dirname" > main.js
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
