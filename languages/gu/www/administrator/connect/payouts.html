@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ચૂકવણી</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">ચૂકવણી</h1>
+  <div id="message-container"></div>
+  <div id="no-payouts">
+    <p translate="yes">હજુ સુધી કોઈ ચૂકવણી થઈ નથી.</p>
+  </div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th >ID</th>
+        <th translate="yes">રકમ</th>
+        <th translate="yes">Stripe ખાતુ</th>
+        <th translate="yes">સ્થિતિ</th>
+        <th translate="yes">વર્ણન</th>
+        <th translate="yes">બનાવેલ છે</th>
+      </tr>
+    </thead>
+  </table>
+  <ul id="page-links" class="pagination"></ul>
+  <template id="page-link">
+    <li>
+      <a href="/administrator/connect/payouts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a>
+    </li>
+  </template>
+  <template id="payout-row">
+    <tr id="${payout.id}">
+      <td>
+        <a href="/administrator/connect/payout?payoutid=${payout.id}">${payout.id}</a>
+      </td>
+      <td>${payout.amountFormatted}</td>
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+      </td>
+      <td id="status-${payout.id}"></td>
+      <td>${payout.description}</td>
+      <td>${payout.createdFormatted}</td>
+    </tr>
+  </template>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">બેંક ખાતું મળ્યું નથી</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">અયોગ્ય ચલણ</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">અયોગ્ય ખાતા નંબર</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">અપૂરતું ભંડોળ</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">બેન્કે ટ્રાન્સફર કરવાની ના પાડી</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">બેંક ખાતાનું ડેબિટ નથી</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">પ્રક્રિયા કરી શક્યા નહિં</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">બેંકની માલિકી બદલાઈ</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">બેંક ખાતું મર્યાદિત</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">બેંક એકાઉન્ટ થીજી ગયું</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">બેંક ખાતું બંધ</span>
+  </template>
+</body>
+</html>
