@@ -33,6 +33,7 @@ jobs:
         cp /home/runner/work/stripe-connect/stripe-connect/*.js node_modules/@userdashboard/stripe-connect
         cp -R /home/runner/work/stripe-connect/stripe-connect/src/ node_modules/@userdashboard/stripe-connect/src/
         echo "global.applicationPath = __dirname" > main.js
+        echo "require('@userdashboard/stripe-connect/test-helper.js')" >> main.js
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
         echo $PACKAGE > package.json
